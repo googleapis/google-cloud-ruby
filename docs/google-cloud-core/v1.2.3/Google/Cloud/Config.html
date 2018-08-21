@@ -1,0 +1,2133 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Config - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Config";
+  relpath = '../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span>
+     &raquo; 
+    <span class="title">Config</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Config
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">BasicObject</span>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/config.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Configuration mechanism for Google Cloud libraries. A Config object
+contains a list of predefined keys, some of which are values and others
+of which are subconfigurations, i.e. categories. Field access is
+generally validated to ensure that the field is defined, and when a
+a value is set, it is validated for the correct type. Warnings are
+printed when a validation fails.</p>
+
+<p>You generally access fields and subconfigs by calling accessor methods.
+Methods meant for &quot;administration&quot; such as adding options, are named
+with a trailing &quot;!&quot; or &quot;?&quot; so they don&#39;t pollute the method namespace.
+It is also possible to access a field using the <code>[]</code> operator.</p>
+
+<p>Note that config objects inherit from <code>BasicObject</code>. This means it does
+not define many methods you might expect to find in most Ruby objects.
+For example, <code>to_s</code>, <code>inspect</code>, <code>is_a?</code>, <code>instance_variable_get</code>, and so
+forth.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/config</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_create'><span class='object_link'><a href="#create-class_method" title="Google::Cloud::Config.create (method)">create</a></span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='op'>|</span>
+  <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_add_field!'>add_field!</span> <span class='symbol'>:opt1</span><span class='comma'>,</span> <span class='int'>10</span>
+  <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_add_field!'>add_field!</span> <span class='symbol'>:opt2</span><span class='comma'>,</span> <span class='symbol'>:one</span><span class='comma'>,</span> <span class='label'>enum:</span> <span class='lbracket'>[</span><span class='symbol'>:one</span><span class='comma'>,</span> <span class='symbol'>:two</span><span class='comma'>,</span> <span class='symbol'>:three</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_add_field!'>add_field!</span> <span class='symbol'>:opt3</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hi</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>match:</span> <span class='lbracket'>[</span><span class='const'>String</span><span class='comma'>,</span> <span class='const'>Symbol</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_add_field!'>add_field!</span> <span class='symbol'>:opt4</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hi</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>match:</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^[a-z]+$</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='label'>allow_nil:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_add_config!'>add_config!</span> <span class='symbol'>:sub</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_c2'>c2</span><span class='op'>|</span>
+    <span class='id identifier rubyid_c2'>c2</span><span class='period'>.</span><span class='id identifier rubyid_add_field!'>add_field!</span> <span class='symbol'>:opt5</span><span class='comma'>,</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt1'>opt1</span>             <span class='comment'>#=&gt; 10
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt1'>opt1</span> <span class='op'>=</span> <span class='int'>20</span>        <span class='comment'>#=&gt; 20
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt1'>opt1</span>             <span class='comment'>#=&gt; 20
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt1'>opt1</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hi</span><span class='tstring_end'>&quot;</span></span>      <span class='comment'>#=&gt; &quot;hi&quot; (but prints a warning)
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt1'>opt1</span> <span class='op'>=</span> <span class='kw'>nil</span>       <span class='comment'>#=&gt; nil (but prints a warning)
+</span>
+<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt2'>opt2</span>             <span class='comment'>#=&gt; :one
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt2'>opt2</span> <span class='op'>=</span> <span class='symbol'>:two</span>      <span class='comment'>#=&gt; :two
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt2'>opt2</span>             <span class='comment'>#=&gt; :two
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt2'>opt2</span> <span class='op'>=</span> <span class='symbol'>:four</span>     <span class='comment'>#=&gt; :four (but prints a warning)
+</span>
+<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt3'>opt3</span>             <span class='comment'>#=&gt; &quot;hi&quot;
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt3'>opt3</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hiho</span><span class='tstring_end'>&quot;</span></span>    <span class='comment'>#=&gt; &quot;hiho&quot;
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt3'>opt3</span>             <span class='comment'>#=&gt; &quot;hiho&quot;
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt3'>opt3</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>HI</span><span class='tstring_end'>&quot;</span></span>      <span class='comment'>#=&gt; &quot;HI&quot; (but prints a warning)
+</span>
+<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt4'>opt4</span>             <span class='comment'>#=&gt; &quot;yo&quot;
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt4'>opt4</span> <span class='op'>=</span> <span class='symbol'>:yo</span>       <span class='comment'>#=&gt; :yo (Strings and Symbols allowed)
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt4'>opt4</span>             <span class='comment'>#=&gt; :yo
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt4'>opt4</span> <span class='op'>=</span> <span class='float'>3.14</span>      <span class='comment'>#=&gt; 3.14 (but prints a warning)
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt4'>opt4</span> <span class='op'>=</span> <span class='kw'>nil</span>       <span class='comment'>#=&gt; nil (no warning: nil allowed)
+</span>
+<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span>              <span class='comment'>#=&gt; &lt;Google::Cloud::Config&gt;
+</span>
+<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_opt5'>opt5</span>         <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_opt5'>opt5</span> <span class='op'>=</span> <span class='kw'>true</span>  <span class='comment'>#=&gt; true  (true and false allowed)
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_opt5'>opt5</span>         <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_opt5'>opt5</span> <span class='op'>=</span> <span class='kw'>nil</span>   <span class='comment'>#=&gt; nil (but prints a warning)
+</span>
+<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt9'>opt9</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hi</span><span class='tstring_end'>&quot;</span></span>      <span class='comment'>#=&gt; &quot;hi&quot; (warning about unknown key)
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_opt9'>opt9</span>             <span class='comment'>#=&gt; &quot;hi&quot; (no warning: key now known)
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_opt9'>opt9</span>         <span class='comment'>#=&gt; nil (warning about unknown key)</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#config%3F-class_method" title="config? (class method)">.<strong>config?</strong>(obj)  &#x21d2; boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines if the given object is a config.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-class_method" title="create (class method)">.<strong>create</strong>(show_warnings: true) {|config| ... } &#x21d2; Config </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Constructs a Config object.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#[]-instance_method" title="#[] (instance method)">#<strong>[]</strong>(key)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the option or subconfig with the given name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#[]=-instance_method" title="#[]= (instance method)">#<strong>[]=</strong>(key, value)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Assign an option with the given name to the given value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_alias!-instance_method" title="#add_alias! (instance method)">#<strong>add_alias!</strong>(key, to_key)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Cause a key to be an alias of another key.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_config!-instance_method" title="#add_config! (instance method)">#<strong>add_config!</strong>(key, config = nil, &amp;block)  &#x21d2; Config </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Add a subconfiguration field to this configuration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_field!-instance_method" title="#add_field! (instance method)">#<strong>add_field!</strong>(key, initial = nil, opts = {}, &amp;block)  &#x21d2; Config </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Add a value field to this configuration.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alias%3F-instance_method" title="#alias? (instance method)">#<strong>alias?</strong>(key)  &#x21d2; Symbol<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the given key has been explicitly added as an alias.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#aliases!-instance_method" title="#aliases! (instance method)">#<strong>aliases!</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return a list of alias names.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete!-instance_method" title="#delete! (instance method)">#<strong>delete!</strong>(key = nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Remove the given key from the configuration, deleting any validation and value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#field%3F-instance_method" title="#field? (instance method)">#<strong>field?</strong>(key)  &#x21d2; boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the given key has been explicitly added as a field name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fields!-instance_method" title="#fields! (instance method)">#<strong>fields!</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return a list of explicitly added field names.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset!-instance_method" title="#reset! (instance method)">#<strong>reset!</strong>(key = nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Restore the original default value of the given key.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#subconfig%3F-instance_method" title="#subconfig? (instance method)">#<strong>subconfig?</strong>(key)  &#x21d2; boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the given key has been explicitly added as a subconfig name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#subconfigs!-instance_method" title="#subconfigs! (instance method)">#<strong>subconfigs!</strong>  &#x21d2; Array&lt;Symbol&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return a list of explicitly added subconfig names.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_h!-instance_method" title="#to_h! (instance method)">#<strong>to_h!</strong>  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a nested hash representation of this configuration state, including subconfigs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s!-instance_method" title="#to_s! (instance method)">#<strong>to_s!</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a string representation of this configuration state, including subconfigs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_set%3F-instance_method" title="#value_set? (instance method)">#<strong>value_set?</strong>(key)  &#x21d2; boolean </a>
+    
+
+    
+      (also: #option?)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the given key has been set in this object.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="method_missing_details" class="method_details_list">
+  <h2>Dynamic Method Handling</h2>
+  <p class="notice this">
+    This class handles dynamic methods through the <tt>method_missing</tt> method
+    
+  </p>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="method_missing-instance_method">
+  
+    #<strong>method_missing</strong>(name, *args)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Dynamic methods accessed as keys.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+458
+459
+460
+461
+462
+463
+464
+465
+466</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 458</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span>
+  <span class='id identifier rubyid_name_str'>name_str</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='kw'>super</span> <span class='kw'>unless</span> <span class='id identifier rubyid_name_str'>name_str</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^[a-zA-Z]\w*=?$</span><span class='regexp_end'>/</span></span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_name_str'>name_str</span><span class='period'>.</span><span class='id identifier rubyid_chomp!'>chomp!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>self</span><span class='lbracket'>[</span><span class='id identifier rubyid_name_str'>name_str</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+  <span class='kw'>else</span>
+    <span class='kw'>self</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="config?-class_method">
+  
+    .<strong>config?</strong>(obj)  &#x21d2; <tt>boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines if the given object is a config. Useful because Config
+does not define the <code>is_a?</code> method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_config?'>config?</span> <span class='id identifier rubyid_obj'>obj</span>
+  <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span> <span class='symbol'>:===</span><span class='comma'>,</span> <span class='id identifier rubyid_obj'>obj</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create-class_method">
+  
+    .<strong>create</strong>(show_warnings: true) {|config| ... } &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Constructs a Config object. If a block is given, yields <code>self</code> to the
+block, which makes it convenient to initialize the structure by making
+calls to <code>add_field!</code> and <code>add_config!</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>show_warnings</span>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to print warnings when a
+validation fails. Defaults to <code>true</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>config</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The constructed Config object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+92
+93
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 92</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span> <span class='label'>show_warnings:</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='id identifier rubyid_new'>new</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>show_warnings:</span> <span class='id identifier rubyid_show_warnings'>show_warnings</span>
+  <span class='kw'>yield</span> <span class='id identifier rubyid_config'>config</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='id identifier rubyid_config'>config</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="[]-instance_method">
+  
+    #<strong>[]</strong>(key)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the option or subconfig with the given name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The option or subconfig name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The option value or subconfig object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+309
+310
+311
+312
+313
+314
+315
+316
+317</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 309</span>
+
+<span class='kw'>def</span> <span class='op'>[]</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_resolve_key!'>resolve_key!</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='kw'>unless</span> <span class='ivar'>@validators</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span> <span class='id identifier rubyid_key'>key</span>
+    <span class='id identifier rubyid_warn!'>warn!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Key </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'> does not exist. Returning nil.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='ivar'>@values</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></span><span class='op'>::</span><span class='const'>DeferredValue</span> <span class='op'>===</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="[]=-instance_method">
+  
+    #<strong>[]=</strong>(key, value)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Assign an option with the given name to the given value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The option name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The new option value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+297
+298
+299
+300
+301</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 297</span>
+
+<span class='kw'>def</span> <span class='op'>[]=</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_resolve_key!'>resolve_key!</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='id identifier rubyid_validate_value!'>validate_value!</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='ivar'>@values</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_alias!-instance_method">
+  
+    #<strong>add_alias!</strong>(key, to_key)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Cause a key to be an alias of another key. The two keys will refer to
+the same field.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+235
+236
+237
+238
+239
+240
+241</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 235</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_alias!'>add_alias!</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_to_key'>to_key</span>
+  <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_validate_new_key!'>validate_new_key!</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='ivar'>@defaults</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_to_key'>to_key</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_config!-instance_method">
+  
+    #<strong>add_config!</strong>(key, config = nil, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Add a subconfiguration field to this configuration.</p>
+
+<p>You must provide a key, which becomes the method name that you use to
+navigate to the subconfig. Names may comprise only letters, numerals,
+and underscores, and must begin with a letter.</p>
+
+<p>If you provide a block, the subconfig object is passed to the block,
+so you can easily add fields to the subconfig.</p>
+
+<p>You may also pass in a config object that already exists. This will
+&quot;attach&quot; that configuration in this location.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of the subconfig</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>config</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>A config object to attach here. If not provided,
+creates a new config.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>self for chaining</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 218</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_config!'>add_config!</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_validate_new_key!'>validate_new_key!</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'><span class='object_link'><a href="#create-class_method" title="Google::Cloud::Config.create (method)">create</a></span></span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_block'>block</span>
+    <span class='kw'>yield</span> <span class='id identifier rubyid_config'>config</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@values</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span>
+  <span class='ivar'>@defaults</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span>
+  <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>SUBCONFIG</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_field!-instance_method">
+  
+    #<strong>add_field!</strong>(key, initial = nil, opts = {}, &amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Add a value field to this configuration.</p>
+
+<p>You must provide a key, which becomes the field name in this config.
+Field names may comprise only letters, numerals, and underscores, and
+must begin with a letter. This will create accessor methods for the
+new configuration key.</p>
+
+<p>You may pass an initial value (which defaults to nil if not provided).</p>
+
+<p>You may also specify how values are validated. Validation is defined
+as follows:</p>
+
+<ul>
+<li>  If you provide a block or a <code>:validator</code> option, it is used as the
+validator. A proposed value is passed to the proc, which should
+return <code>true</code> or <code>false</code> to indicate whether the value is valid.</li>
+<li>  If you provide a <code>:match</code> option, it is compared to the proposed
+value using the <code>===</code> operator. You may, for example, provide a
+class, a regular expression, or a range. If you pass an array,
+the value is accepted if <em>any</em> of the elements match.</li>
+<li>  If you provide an <code>:enum</code> option, it should be an <code>Enumerable</code>.
+A proposed value is valid if it is included.</li>
+<li>  Otherwise if you do not provide any of the above options, then a
+default validation strategy is inferred from the initial value:
+
+<ul>
+<li>  If the initial is <code>true</code> or <code>false</code>, then either boolean value
+is considered valid. This is the same as <code>enum: [true, false]</code>.</li>
+<li>  If the initial is <code>nil</code>, then any object is considered valid.</li>
+<li>  Otherwise, any object of the same class as the initial value is
+considered valid. This is effectively the same as
+<code>match: initial.class</code>.</li>
+</ul></li>
+<li>  You may also provide the <code>:allow_nil</code> option, which, if set to
+true, alters any of the above validators to allow <code>nil</code> values.</li>
+</ul>
+
+<p>In many cases, you may find that the default validation behavior
+(interpreted from the initial value) is sufficient. If you want to
+accept any value, use <code>match: Object</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of the option</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>initial</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Initial value (defaults to nil)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>opts</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Validation options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>self for chaining</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 188</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_field!'>add_field!</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_initial'>initial</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_validate_new_key!'>validate_new_key!</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:validator</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_block'>block</span> <span class='kw'>if</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_validator'>validator</span> <span class='op'>=</span> <span class='id identifier rubyid_resolve_validator!'>resolve_validator!</span> <span class='id identifier rubyid_initial'>initial</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span>
+  <span class='id identifier rubyid_validate_value!'>validate_value!</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_validator'>validator</span><span class='comma'>,</span> <span class='id identifier rubyid_initial'>initial</span>
+  <span class='ivar'>@values</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_initial'>initial</span>
+  <span class='ivar'>@defaults</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_initial'>initial</span>
+  <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_validator'>validator</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="alias?-instance_method">
+  
+    #<strong>alias?</strong>(key)  &#x21d2; <tt>Symbol</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the given key has been explicitly added as an alias.
+If so, return the target, otherwise return nil.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The key to check for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The alias target, or nil if not an alias.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+359
+360
+361
+362</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 359</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_alias?'>alias?</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='id identifier rubyid_target'>target</span> <span class='op'>=</span> <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_target'>target</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Symbol</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_target'>target</span> <span class='op'>:</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="aliases!-instance_method">
+  
+    #<strong>aliases!</strong>  &#x21d2; <tt>Array&lt;Symbol&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return a list of alias names.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of alias names as symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+387
+388
+389</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 387</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_aliases!'>aliases!</span>
+  <span class='ivar'>@validators</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_find_all'>find_all</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span> <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='op'>::</span><span class='const'>Symbol</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete!-instance_method">
+  
+    #<strong>delete!</strong>(key = nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Remove the given key from the configuration, deleting any validation
+and value. If the key is omitted, delete all keys. If the key is an
+alias, deletes the alias but leaves the original.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>The key to delete. If omitted or <code>nil</code>,
+delete all fields and subconfigs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 278</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete!'>delete!</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+    <span class='ivar'>@defaults</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+    <span class='ivar'>@validators</span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_key'>key</span>
+    <span class='ivar'>@defaults</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_key'>key</span>
+    <span class='ivar'>@validators</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="field?-instance_method">
+  
+    #<strong>field?</strong>(key)  &#x21d2; <tt>boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the given key has been explicitly added as a field name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The key to check for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+338
+339
+340</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 338</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_field?'>field?</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='op'>::</span><span class='const'>Proc</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fields!-instance_method">
+  
+    #<strong>fields!</strong>  &#x21d2; <tt>Array&lt;Symbol&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return a list of explicitly added field names.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of field names as symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+369
+370
+371</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 369</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_fields!'>fields!</span>
+  <span class='ivar'>@validators</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_find_all'>find_all</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span> <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='op'>::</span><span class='const'>Proc</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset!-instance_method">
+  
+    #<strong>reset!</strong>(key = nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Restore the original default value of the given key.
+If the key is omitted, restore the original defaults for all keys,
+and all keys of subconfigs, recursively.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>The key to reset. If omitted or <code>nil</code>,
+recursively reset all fields and subconfigs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 251</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reset!'>reset!</span> <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_each_key'>each_key</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span> <span class='id identifier rubyid_reset!'>reset!</span> <span class='id identifier rubyid_k'>k</span> <span class='rbrace'>}</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+    <span class='kw'>if</span> <span class='ivar'>@defaults</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span> <span class='id identifier rubyid_key'>key</span>
+      <span class='ivar'>@values</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='ivar'>@defaults</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+      <span class='ivar'>@values</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_reset!'>reset!</span> <span class='kw'>if</span> <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='const'>SUBCONFIG</span>
+    <span class='kw'>elsif</span> <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span> <span class='id identifier rubyid_key'>key</span>
+      <span class='id identifier rubyid_warn!'>warn!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Key </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'> has not been added, but has a value.</span><span class='tstring_end'>&quot;</span></span> \
+            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> Removing the value.</span><span class='tstring_end'>&quot;</span></span>
+      <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_key'>key</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_warn!'>warn!</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Key </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'> does not exist. Nothing to reset.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="subconfig?-instance_method">
+  
+    #<strong>subconfig?</strong>(key)  &#x21d2; <tt>boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the given key has been explicitly added as a subconfig name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The key to check for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+348
+349
+350</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 348</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_subconfig?'>subconfig?</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='const'>SUBCONFIG</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="subconfigs!-instance_method">
+  
+    #<strong>subconfigs!</strong>  &#x21d2; <tt>Array&lt;Symbol&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return a list of explicitly added subconfig names.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of subconfig names as symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+378
+379
+380</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 378</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_subconfigs!'>subconfigs!</span>
+  <span class='ivar'>@validators</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_find_all'>find_all</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span> <span class='ivar'>@validators</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='const'>SUBCONFIG</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_h!-instance_method">
+  
+    #<strong>to_h!</strong>  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a nested hash representation of this configuration state,
+including subconfigs. Only explicitly added fields and subconfigs are
+included.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+413
+414
+415
+416
+417
+418
+419
+420</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 413</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_h!'>to_h!</span>
+  <span class='id identifier rubyid_h'>h</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@validators</span><span class='period'>.</span><span class='id identifier rubyid_each_key'>each_key</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span>
+    <span class='id identifier rubyid_v'>v</span> <span class='op'>=</span> <span class='ivar'>@values</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_config?'><span class='object_link'><a href="#config%3F-class_method" title="Google::Cloud::Config.config? (method)">config?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_to_h!'>to_h!</span> <span class='op'>:</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_h'>h</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_s!-instance_method">
+  
+    #<strong>to_s!</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a string representation of this configuration state, including
+subconfigs. Only explicitly added fields and subconfigs are included.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+397
+398
+399
+400
+401
+402
+403
+404</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 397</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s!'>to_s!</span>
+  <span class='id identifier rubyid_elems'>elems</span> <span class='op'>=</span> <span class='ivar'>@validators</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span>
+    <span class='id identifier rubyid_v'>v</span> <span class='op'>=</span> <span class='ivar'>@values</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_vstr'>vstr</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_config?'><span class='object_link'><a href="#config%3F-class_method" title="Google::Cloud::Config.config? (method)">config?</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_to_s!'>to_s!</span> <span class='op'>:</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_k'>k</span><span class='embexpr_end'>}</span><span class='tstring_content'>=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_vstr'>vstr</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;Config:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_elems'>elems</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='embexpr_end'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value_set?-instance_method">
+  
+    #<strong>value_set?</strong>(key)  &#x21d2; <tt>boolean</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='option?-instance_method'>option?</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the given key has been set in this object. Returns true if the
+key has been added as a normal field, subconfig, or alias, or if it has
+not been added explicitly but still has a value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>key</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The key to check for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+327
+328
+329</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/config.rb', line 327</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_value_set?'>value_set?</span> <span class='id identifier rubyid_key'>key</span>
+  <span class='ivar'>@values</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span> <span class='id identifier rubyid_resolve_key!'>resolve_key!</span> <span class='id identifier rubyid_key'>key</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
