@@ -444,8 +444,9 @@
       "name": "google-cloud-redis",
       "defaultService": "google/cloud/redis",
       "versions": [
-        "v0.1.0",
-        "master"
+        "v0.2.0",
+        "master",
+        "v0.1.0"
       ]
     },
     {
