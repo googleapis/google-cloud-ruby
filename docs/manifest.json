@@ -404,8 +404,9 @@
       "name": "google-cloud-os_login",
       "defaultService": "google/cloud/oslogin",
       "versions": [
-        "v0.2.0",
+        "v0.2.1",
         "master",
+        "v0.2.0",
         "v0.1.0"
       ]
     },
