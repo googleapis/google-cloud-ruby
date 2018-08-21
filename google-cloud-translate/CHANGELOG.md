@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.1 / 2018-08-21
+
+* Update documentation.
+
 ### 1.2.0 / 2018-02-27
 
 * Support Shared Configuration.
