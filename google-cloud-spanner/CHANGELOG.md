@@ -1,5 +1,9 @@
 # Release History
 
+### 1.6.1 / 2018-08-21
+
+* Update documentation.
+
 ### 1.6.0 / 2018-06-28
 
 * Add Session labels
