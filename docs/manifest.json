@@ -497,8 +497,9 @@
       "name": "google-cloud-speech",
       "defaultService": "google/cloud/speech",
       "versions": [
-        "v0.30.0",
+        "v0.30.1",
         "master",
+        "v0.30.0",
         "v0.29.0",
         "v0.28.0",
         "v0.27.0",
