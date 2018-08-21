@@ -1,0 +1,1751 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Bigquery::External::DataSource - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigquery::External::DataSource";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../External.html" title="Google::Cloud::Bigquery::External (module)">External</a></span></span>
+     &raquo; 
+    <span class="title">DataSource</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Bigquery::External::DataSource
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Bigquery::External::DataSource</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigquery/external.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>DataSource</h1>
+
+<p>External::DataSource and its subclasses represents an external data
+source that can be queried from directly, even though the data is not
+stored in BigQuery. Instead of loading or streaming the data, this
+object references the external data source.</p>
+
+<p>The AVRO and Datastore Backup formats use <span class='object_link'><a href="" title="Google::Cloud::Bigquery::External::DataSource (class)">DataSource</a></span>. See
+<span class='object_link'><a href="CsvSource.html" title="Google::Cloud::Bigquery::External::CsvSource (class)">CsvSource</a></span>, <span class='object_link'><a href="JsonSource.html" title="Google::Cloud::Bigquery::External::JsonSource (class)">JsonSource</a></span>,
+<span class='object_link'><a href="SheetsSource.html" title="Google::Cloud::Bigquery::External::SheetsSource (class)">SheetsSource</a></span>, <span class='object_link'><a href="BigtableSource.html" title="Google::Cloud::Bigquery::External::BigtableSource (class)">BigtableSource</a></span> for the other
+formats.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_avro_url'>avro_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.avro</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_avro_table'>avro_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_avro_url'>avro_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_avro'>avro</span><span class='op'>|</span>
+  <span class='id identifier rubyid_avro'>avro</span><span class='period'>.</span><span class='id identifier rubyid_autodetect'>autodetect</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM my_ext_table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                      <span class='label'>external:</span> <span class='lbrace'>{</span> <span class='label'>my_ext_table:</span> <span class='id identifier rubyid_avro_table'>avro_table</span> <span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="BigtableSource.html" title="Google::Cloud::Bigquery::External::BigtableSource (class)">BigtableSource</a></span>, <span class='object_link'><a href="CsvSource.html" title="Google::Cloud::Bigquery::External::CsvSource (class)">CsvSource</a></span>, <span class='object_link'><a href="JsonSource.html" title="Google::Cloud::Bigquery::External::JsonSource (class)">JsonSource</a></span>, <span class='object_link'><a href="SheetsSource.html" title="Google::Cloud::Bigquery::External::SheetsSource (class)">SheetsSource</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#autodetect-instance_method" title="#autodetect (instance method)">#<strong>autodetect</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Indicates if the schema and format options are detected automatically.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#autodetect=-instance_method" title="#autodetect= (instance method)">#<strong>autodetect=</strong>(new_autodetect)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set whether to detect schema and format options automatically.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#avro%3F-instance_method" title="#avro? (instance method)">#<strong>avro?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the data format is &quot;AVRO&quot;.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#backup%3F-instance_method" title="#backup? (instance method)">#<strong>backup?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the data format is &quot;DATASTORE_BACKUP&quot;.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bigtable%3F-instance_method" title="#bigtable? (instance method)">#<strong>bigtable?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the data format is &quot;BIGTABLE&quot;.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compression-instance_method" title="#compression (instance method)">#<strong>compression</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The compression type of the data source.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compression=-instance_method" title="#compression= (instance method)">#<strong>compression=</strong>(new_compression)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the compression type of the data source.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#csv%3F-instance_method" title="#csv? (instance method)">#<strong>csv?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the data format is &quot;CSV&quot;.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#format-instance_method" title="#format (instance method)">#<strong>format</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The data format.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ignore_unknown-instance_method" title="#ignore_unknown (instance method)">#<strong>ignore_unknown</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Indicates if BigQuery should allow extra values that are not represented in the table schema.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ignore_unknown=-instance_method" title="#ignore_unknown= (instance method)">#<strong>ignore_unknown=</strong>(new_ignore_unknown)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set whether BigQuery should allow extra values that are not represented in the table schema.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#json%3F-instance_method" title="#json? (instance method)">#<strong>json?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the data format is &quot;NEWLINE_DELIMITED_JSON&quot;.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_bad_records-instance_method" title="#max_bad_records (instance method)">#<strong>max_bad_records</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum number of bad records that BigQuery can ignore when reading data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_bad_records=-instance_method" title="#max_bad_records= (instance method)">#<strong>max_bad_records=</strong>(new_max_bad_records)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the maximum number of bad records that BigQuery can ignore when reading data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sheets%3F-instance_method" title="#sheets? (instance method)">#<strong>sheets?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the data format is &quot;GOOGLE_SHEETS&quot;.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#urls-instance_method" title="#urls (instance method)">#<strong>urls</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The fully-qualified URIs that point to your data in Google Cloud.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="autodetect-instance_method">
+  
+    #<strong>autodetect</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Indicates if the schema and format options are detected
+automatically.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_csv'>csv</span><span class='op'>|</span>
+  <span class='id identifier rubyid_csv'>csv</span><span class='period'>.</span><span class='id identifier rubyid_autodetect'>autodetect</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_autodetect'>autodetect</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352
+353
+354</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 352</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_autodetect'>autodetect</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_autodetect'>autodetect</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="autodetect=-instance_method">
+  
+    #<strong>autodetect=</strong>(new_autodetect)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set whether to detect schema and format options automatically. Any
+option specified explicitly will be honored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_csv'>csv</span><span class='op'>|</span>
+  <span class='id identifier rubyid_csv'>csv</span><span class='period'>.</span><span class='id identifier rubyid_autodetect'>autodetect</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_autodetect'>autodetect</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_autodetect</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>New autodetect value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+374
+375
+376
+377</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 374</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_autodetect='>autodetect=</span> <span class='id identifier rubyid_new_autodetect'>new_autodetect</span>
+  <span class='id identifier rubyid_frozen_check!'>frozen_check!</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_autodetect'>autodetect</span> <span class='op'>=</span> <span class='id identifier rubyid_new_autodetect'>new_autodetect</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="avro?-instance_method">
+  
+    #<strong>avro?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the data format is &quot;AVRO&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_avro_url'>avro_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.avro</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_avro_table'>avro_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_avro_url'>avro_url</span>
+
+<span class='id identifier rubyid_avro_table'>avro_table</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span> <span class='comment'>#=&gt; &quot;AVRO&quot;
+</span><span class='id identifier rubyid_avro_table'>avro_table</span><span class='period'>.</span><span class='id identifier rubyid_avro?'>avro?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+263
+264
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 263</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_avro?'>avro?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AVRO</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="backup?-instance_method">
+  
+    #<strong>backup?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the data format is &quot;DATASTORE_BACKUP&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_backup_url'>backup_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.backup_info</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_backup_table'>backup_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_backup_url'>backup_url</span>
+
+<span class='id identifier rubyid_backup_table'>backup_table</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span> <span class='comment'>#=&gt; &quot;DATASTORE_BACKUP&quot;
+</span><span class='id identifier rubyid_backup_table'>backup_table</span><span class='period'>.</span><span class='id identifier rubyid_backup?'>backup?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+283
+284
+285</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 283</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_backup?'>backup?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DATASTORE_BACKUP</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bigtable?-instance_method">
+  
+    #<strong>bigtable?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the data format is &quot;BIGTABLE&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://googleapis.com/bigtable/projects/...</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_bigtable_url'>bigtable_url</span>
+
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span> <span class='comment'>#=&gt; &quot;BIGTABLE&quot;
+</span><span class='id identifier rubyid_bigtable_table'>bigtable_table</span><span class='period'>.</span><span class='id identifier rubyid_bigtable?'>bigtable?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+303
+304
+305</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 303</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_bigtable?'>bigtable?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>BIGTABLE</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="compression-instance_method">
+  
+    #<strong>compression</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The compression type of the data source. Possible values include
+<code>&quot;GZIP&quot;</code> and <code>nil</code>. The default value is <code>nil</code>. This setting is
+ignored for Google Cloud Bigtable, Google Cloud Datastore backups
+and Avro formats. Optional.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_csv'>csv</span><span class='op'>|</span>
+  <span class='id identifier rubyid_csv'>csv</span><span class='period'>.</span><span class='id identifier rubyid_compression'>compression</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GZIP</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_compression'>compression</span> <span class='comment'>#=&gt; &quot;GZIP&quot;</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+398
+399
+400</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 398</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_compression'>compression</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_compression'>compression</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="compression=-instance_method">
+  
+    #<strong>compression=</strong>(new_compression)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the compression type of the data source. Possible values include
+<code>&quot;GZIP&quot;</code> and <code>nil</code>. The default value is <code>nil</code>. This setting is
+ignored for Google Cloud Bigtable, Google Cloud Datastore backups
+and Avro formats. Optional.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_csv'>csv</span><span class='op'>|</span>
+  <span class='id identifier rubyid_csv'>csv</span><span class='period'>.</span><span class='id identifier rubyid_compression'>compression</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GZIP</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_compression'>compression</span> <span class='comment'>#=&gt; &quot;GZIP&quot;</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_compression</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>New compression value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+422
+423
+424
+425</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 422</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_compression='>compression=</span> <span class='id identifier rubyid_new_compression'>new_compression</span>
+  <span class='id identifier rubyid_frozen_check!'>frozen_check!</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_compression'>compression</span> <span class='op'>=</span> <span class='id identifier rubyid_new_compression'>new_compression</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="csv?-instance_method">
+  
+    #<strong>csv?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the data format is &quot;CSV&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span> <span class='comment'>#=&gt; &quot;CSV&quot;
+</span><span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_csv?'>csv?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+203
+204
+205</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 203</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_csv?'>csv?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CSV</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="format-instance_method">
+  
+    #<strong>format</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The data format. For CSV files, specify &quot;CSV&quot;. For Google sheets,
+specify &quot;GOOGLE_SHEETS&quot;. For newline-delimited JSON, specify
+&quot;NEWLINE_DELIMITED_JSON&quot;. For Avro files, specify &quot;AVRO&quot;. For Google
+Cloud Datastore backups, specify &quot;DATASTORE_BACKUP&quot;. [Beta] For
+Google Cloud Bigtable, specify &quot;BIGTABLE&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span> <span class='comment'>#=&gt; &quot;CSV&quot;</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 183</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_format'>format</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ignore_unknown-instance_method">
+  
+    #<strong>ignore_unknown</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Indicates if BigQuery should allow extra values that are not
+represented in the table schema. If <code>true</code>, the extra values are
+ignored. If <code>false</code>, records with extra columns are treated as bad
+records, and if there are too many bad records, an invalid error is
+returned in the job result. The default value is <code>false</code>.</p>
+
+<p>BigQuery treats trailing columns as an extra in <code>CSV</code>, named values
+that don&#39;t match any column names in <code>JSON</code>. This setting is ignored
+for Google Cloud Bigtable, Google Cloud Datastore backups and Avro
+formats. Optional.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_csv'>csv</span><span class='op'>|</span>
+  <span class='id identifier rubyid_csv'>csv</span><span class='period'>.</span><span class='id identifier rubyid_ignore_unknown'>ignore_unknown</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_ignore_unknown'>ignore_unknown</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+453
+454
+455</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 453</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ignore_unknown'>ignore_unknown</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_ignore_unknown_values'>ignore_unknown_values</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ignore_unknown=-instance_method">
+  
+    #<strong>ignore_unknown=</strong>(new_ignore_unknown)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set whether BigQuery should allow extra values that are not
+represented in the table schema. If <code>true</code>, the extra values are
+ignored. If <code>false</code>, records with extra columns are treated as bad
+records, and if there are too many bad records, an invalid error is
+returned in the job result. The default value is <code>false</code>.</p>
+
+<p>BigQuery treats trailing columns as an extra in <code>CSV</code>, named values
+that don&#39;t match any column names in <code>JSON</code>. This setting is ignored
+for Google Cloud Bigtable, Google Cloud Datastore backups and Avro
+formats. Optional.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_csv'>csv</span><span class='op'>|</span>
+  <span class='id identifier rubyid_csv'>csv</span><span class='period'>.</span><span class='id identifier rubyid_ignore_unknown'>ignore_unknown</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_ignore_unknown'>ignore_unknown</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_ignore_unknown</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>New ignore_unknown value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+483
+484
+485
+486</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 483</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ignore_unknown='>ignore_unknown=</span> <span class='id identifier rubyid_new_ignore_unknown'>new_ignore_unknown</span>
+  <span class='id identifier rubyid_frozen_check!'>frozen_check!</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_ignore_unknown_values'>ignore_unknown_values</span> <span class='op'>=</span> <span class='id identifier rubyid_new_ignore_unknown'>new_ignore_unknown</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="json?-instance_method">
+  
+    #<strong>json?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the data format is &quot;NEWLINE_DELIMITED_JSON&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_json_url'>json_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_json_table'>json_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_json_url'>json_url</span>
+
+<span class='id identifier rubyid_json_table'>json_table</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span> <span class='comment'>#=&gt; &quot;NEWLINE_DELIMITED_JSON&quot;
+</span><span class='id identifier rubyid_json_table'>json_table</span><span class='period'>.</span><span class='id identifier rubyid_json?'>json?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+223
+224
+225</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 223</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_json?'>json?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>NEWLINE_DELIMITED_JSON</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_bad_records-instance_method">
+  
+    #<strong>max_bad_records</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The maximum number of bad records that BigQuery can ignore when
+reading data. If the number of bad records exceeds this value, an
+invalid error is returned in the job result. The default value is 0,
+which requires that all records are valid. This setting is ignored
+for Google Cloud Bigtable, Google Cloud Datastore backups and Avro
+formats.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_csv'>csv</span><span class='op'>|</span>
+  <span class='id identifier rubyid_csv'>csv</span><span class='period'>.</span><span class='id identifier rubyid_max_bad_records'>max_bad_records</span> <span class='op'>=</span> <span class='int'>10</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_max_bad_records'>max_bad_records</span> <span class='comment'>#=&gt; 10</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+510
+511
+512</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 510</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_bad_records'>max_bad_records</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_max_bad_records'>max_bad_records</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_bad_records=-instance_method">
+  
+    #<strong>max_bad_records=</strong>(new_max_bad_records)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the maximum number of bad records that BigQuery can ignore when
+reading data. If the number of bad records exceeds this value, an
+invalid error is returned in the job result. The default value is 0,
+which requires that all records are valid. This setting is ignored
+for Google Cloud Bigtable, Google Cloud Datastore backups and Avro
+formats.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_csv'>csv</span><span class='op'>|</span>
+  <span class='id identifier rubyid_csv'>csv</span><span class='period'>.</span><span class='id identifier rubyid_max_bad_records'>max_bad_records</span> <span class='op'>=</span> <span class='int'>10</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_max_bad_records'>max_bad_records</span> <span class='comment'>#=&gt; 10</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_max_bad_records</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>New max_bad_records value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+536
+537
+538
+539</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 536</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_bad_records='>max_bad_records=</span> <span class='id identifier rubyid_new_max_bad_records'>new_max_bad_records</span>
+  <span class='id identifier rubyid_frozen_check!'>frozen_check!</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_max_bad_records'>max_bad_records</span> <span class='op'>=</span> <span class='id identifier rubyid_new_max_bad_records'>new_max_bad_records</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sheets?-instance_method">
+  
+    #<strong>sheets?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the data format is &quot;GOOGLE_SHEETS&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sheets_url'>sheets_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://docs.google.com/spreadsheets/d/1234567980</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_sheets_table'>sheets_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_sheets_url'>sheets_url</span>
+
+<span class='id identifier rubyid_sheets_table'>sheets_table</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span> <span class='comment'>#=&gt; &quot;GOOGLE_SHEETS&quot;
+</span><span class='id identifier rubyid_sheets_table'>sheets_table</span><span class='period'>.</span><span class='id identifier rubyid_sheets?'>sheets?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+243
+244
+245</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 243</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sheets?'>sheets?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GOOGLE_SHEETS</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="urls-instance_method">
+  
+    #<strong>urls</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The fully-qualified URIs that point to your data in Google Cloud.
+For Google Cloud Storage URIs: Each URI can contain one &#39;<em>&#39; wildcard
+character and it must come after the &#39;bucket&#39; name. Size limits
+related to load jobs apply to external data sources. For Google
+Cloud Bigtable URIs: Exactly one URI can be specified and it has be
+a fully specified and valid HTTPS URL for a Google Cloud Bigtable
+table. For Google Cloud Datastore backups, exactly one URI can be
+specified, and it must end with &#39;.backup_info&#39;. Also, the &#39;</em>&#39;
+wildcard character is not allowed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_csv_url'>csv_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket/path/to/data.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_csv_table'>csv_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_csv_url'>csv_url</span>
+
+<span class='id identifier rubyid_csv_table'>csv_table</span><span class='period'>.</span><span class='id identifier rubyid_urls'>urls</span> <span class='comment'>#=&gt; [&quot;gs://bucket/path/to/data.csv&quot;]</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+330
+331
+332</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 330</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_urls'>urls</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_source_uris'>source_uris</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
