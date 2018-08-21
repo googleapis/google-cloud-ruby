@@ -35,8 +35,9 @@ module Google
         ##
         # @private Creates a field value object representing changes made to
         # fields in document data.
-        def initialize type
+        def initialize type, values = nil
           @type = type
+          @values = values
         end
 
         ##
@@ -60,6 +61,33 @@ module Google
         #
         def type
           @type
+        end
+
+        ##
+        # The values to change to an individual field in document data,
+        # depending on the type of change.
+        #
+        # @return [Array<Object>] The values.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   array_union = Google::Cloud::Firestore::FieldValue.array_union(
+        #     1, 2, 3
+        #   )
+        #   array_union.type #=> :array_union
+        #   array_union.values #=> [1, 2, 3]
+        #
+        #   nyc_ref.update({ name: "New York City",
+        #                    lucky_numbers: array_union })
+        #
+        def values
+          @values
         end
 
         ##
@@ -106,6 +134,72 @@ module Google
         #
         def self.server_time
           new :server_time
+        end
+
+        ##
+        # Creates a sentinel value to indicate the union of the given values
+        # with an array.
+        #
+        # @param [Object] values The values to add from the array. Required.
+        #
+        # @return [FieldValue] The array union field value object.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   array_union = Google::Cloud::Firestore::FieldValue.array_union(
+        #     1, 2, 3
+        #   )
+        #   array_union.type #=> :array_union
+        #   array_union.values #=> [1, 2, 3]
+        #
+        #   nyc_ref.update({ name: "New York City",
+        #                    lucky_numbers: array_union })
+        #
+        def self.array_union *values
+          # We can flatten the values because arrays don't support sub-arrays
+          values.flatten!
+          raise ArgumentError, "values must be provided" if values.nil?
+
+          new :array_union, values
+        end
+
+        ##
+        # Creates a sentinel value to indicate the removal of the given values
+        # with an array.
+        #
+        # @param [Object] values The values to remove from the array. Required.
+        #
+        # @return [FieldValue] The array delete field value object.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   array_delete = Google::Cloud::Firestore::FieldValue.array_delete(
+        #     7, 8, 9
+        #   )
+        #   array_delete.type #=> :array_delete
+        #   array_delete.values #=> [7, 8, 9]
+        #
+        #   nyc_ref.update({ name: "New York City",
+        #                    lucky_numbers: array_delete })
+        #
+        def self.array_delete *values
+          # We can flatten the values because arrays don't support sub-arrays
+          values.flatten!
+          raise ArgumentError, "values must be provided" if values.nil?
+
+          new :array_delete, values
         end
       end
     end

@@ -302,6 +302,56 @@ module Google
           FieldValue.server_time
         end
 
+        ##
+        # Creates a sentinel value to indicate the union of the given values
+        # with an array.
+        #
+        # @param [Object] values The values to add from the array. Required.
+        #
+        # @return [FieldValue] The array union field value object.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   array_union = firestore.field_array_union 1, 2, 3
+        #
+        #   nyc_ref.update({ name: "New York City",
+        #                    lucky_numbers: array_union })
+        #
+        def field_array_union *values
+          FieldValue.array_union(*values)
+        end
+
+        ##
+        # Creates a sentinel value to indicate the removal of the given values
+        # with an array.
+        #
+        # @param [Object] values The values to remove from the array. Required.
+        #
+        # @return [FieldValue] The array delete field value object.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   array_delete = firestore.field_array_delete 7, 8, 9
+        #
+        #   nyc_ref.update({ name: "New York City",
+        #                    lucky_numbers: array_delete })
+        #
+        def field_array_delete *values
+          FieldValue.array_delete(*values)
+        end
+
         # @!endgroup
 
         # @!group Operations

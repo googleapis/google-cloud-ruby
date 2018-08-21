@@ -624,4 +624,412 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
       error.message.must_equal "cannot nest server_time under arrays"
     end
   end
+
+  describe :field_array_union do
+    let(:field_array_union) { Google::Cloud::Firestore::FieldValue.array_union 1, 2, 3 }
+
+    it "ARRAY_UNION alone" do
+      data = { a: field_array_union }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "a",
+                append_missing_elements: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 1),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 2),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 3)
+                  ]
+                )
+              )
+            ]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "ARRAY_UNION with data" do
+      data = { a: 1, b: field_array_union }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a"]),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                append_missing_elements: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 1),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 2),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 3)
+                  ]
+                )
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "ARRAY_UNION with dotted field" do
+      data = { "a.b.c" => field_array_union }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "a.b.c",
+                append_missing_elements: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 1),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 2),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 3)
+                  ]
+                )
+              )
+            ]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "multiple ARRAY_UNION fields" do
+      data = { a: 1, b: field_array_union, c: { d: field_array_union } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a", "c"]),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                append_missing_elements: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 1),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 2),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 3)
+                  ]
+                )
+              ),
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "c.d",
+                append_missing_elements: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 1),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 2),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 3)
+                  ]
+                )
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "nested ARRAY_UNION field" do
+      data = { a: 1, b: { c: field_array_union } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a", "b"]),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b.c",
+                append_missing_elements: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 1),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 2),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 3)
+                  ]
+                )
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "ARRAY_UNION cannot be anywhere inside an array value" do
+      data = { a: [1, { b: field_array_union }] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest array_union under arrays"
+    end
+
+    it "ARRAY_UNION cannot be in an array value" do
+      data = { a: [1, 2, field_array_union] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest array_union under arrays"
+    end
+  end
+
+  describe :field_array_delete do
+    let(:field_array_delete) { Google::Cloud::Firestore::FieldValue.array_delete 7, 8, 9 }
+
+    it "ARRAY_DELETE alone" do
+      data = { a: field_array_delete }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "a",
+                remove_all_from_array: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 7),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 8),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 9)
+                  ]
+                )
+              )
+            ]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "ARRAY_DELETE with data" do
+      data = { a: 1, b: field_array_delete }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a"]),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                remove_all_from_array: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 7),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 8),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 9)
+                  ]
+                )
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "ARRAY_DELETE with dotted field" do
+      data = { "a.b.c" => field_array_delete }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "a.b.c",
+                remove_all_from_array: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 7),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 8),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 9)
+                  ]
+                )
+              )
+            ]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "multiple ARRAY_DELETE fields" do
+      data = { a: 1, b: field_array_delete, c: { d: field_array_delete } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a", "c"]),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b",
+                remove_all_from_array: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 7),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 8),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 9)
+                  ]
+                )
+              ),
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "c.d",
+                remove_all_from_array: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 7),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 8),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 9)
+                  ]
+                )
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "nested ARRAY_DELETE field" do
+      data = { a: 1, b: { c: field_array_delete } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a", "b"]),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        ),
+        Google::Firestore::V1beta1::Write.new(
+          transform: Google::Firestore::V1beta1::DocumentTransform.new(
+            document: "projects/projectID/databases/(default)/documents/C/d",
+            field_transforms: [
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: "b.c",
+                remove_all_from_array: Google::Firestore::V1beta1::ArrayValue.new(
+                  values: [
+                    Google::Firestore::V1beta1::Value.new(integer_value: 7),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 8),
+                    Google::Firestore::V1beta1::Value.new(integer_value: 9)
+                  ]
+                )
+              )
+            ]
+          )
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "ARRAY_DELETE cannot be anywhere inside an array value" do
+      data = { a: [1, { b: field_array_delete }] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest array_delete under arrays"
+    end
+
+    it "ARRAY_DELETE cannot be in an array value" do
+      data = { a: [1, 2, field_array_delete] }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.writes_for_update document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "cannot nest array_delete under arrays"
+    end
+  end
 end
