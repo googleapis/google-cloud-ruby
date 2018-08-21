@@ -1,0 +1,1 @@
+{"id":"google/container/v1/cluster/status","name":"Status","title":["Google","Container","V1","Cluster","Status"],"description":"<p>The current status of the cluster.</p>","source":"google-cloud-container/lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb#L532","resources":[],"examples":[],"methods":[]}
