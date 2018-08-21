@@ -1,5 +1,12 @@
 # Release History
 
+### 0.29.0 / 2018-08-21
+
+* Move Credentials location:
+  * Add Google::Cloud::Monitoring::V3::Credentials
+  * Remove Google::Cloud::Monitoring::Credentials
+* Update documentation.
+
 ### 0.28.0 / 2018-04-19
 
 * Refresh generated client and documentation for updated V3 Monitoring API.
