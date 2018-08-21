@@ -32,6 +32,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
+* [Cloud Asset](#cloud-asset-alpha) (Alpha)
 * [Cloud Bigtable](#cloud-bigtable-alpha) (Alpha)
 * [Container Engine](#container-engine-alpha) (Alpha)
 * [Cloud Dataproc](#cloud-dataproc-alpha) (Alpha)
@@ -67,6 +68,18 @@ In general, the google-cloud-ruby library uses [Service Account](https://cloud.g
 General instructions, environment variables, and configuration options are covered in the general [Authentication guide](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/guides/authentication) for the `google-cloud` umbrella package. Specific instructions and environment variables for each individual service are linked from the README documents listed below for each service.
 
 The preview examples below demonstrate how to provide the **Project ID** and **Credentials JSON file path** directly in code.
+
+### Cloud Asset API (Alpha)
+
+- [google-cloud-asset README](google-cloud-asset/README.md)
+- [google-cloud-asset API documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-asset/latest)
+- [google-cloud-asset on RubyGems](https://rubygems.org/gems/google-cloud-asset/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-asset
+```
 
 ### BigQuery (GA)
 
@@ -742,6 +755,10 @@ file.copy backup, file.name
 ```
 
 ### Cloud Tasks API (Alpha)
+
+- [google-cloud-tasks README](google-cloud-tasks/README.md)
+- [google-cloud-tasks API documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-tasks/latest)
+- [google-cloud-tasks on RubyGems](https://rubygems.org/gems/google-cloud-tasks/)
 
 #### Quick Start
 
