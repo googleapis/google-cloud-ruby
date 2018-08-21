@@ -1,0 +1,1161 @@
+---
+layout: yard_main
+title: "Class: Google::Privacy::Dlp::V2::InspectConfig - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Privacy::Dlp::V2::InspectConfig";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Privacy.html" title="Google::Privacy (module)">Privacy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dlp.html" title="Google::Privacy::Dlp (module)">Dlp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Privacy::Dlp::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">InspectConfig</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Privacy::Dlp::V2::InspectConfig
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Privacy::Dlp::V2::InspectConfig</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Configuration description of the scanning process.
+When used with redactContent only info_types and min_likelihood are currently
+used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">FindingLimits</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#content_options-instance_method" title="#content_options (instance method)">#<strong>content_options</strong>  &#x21d2; Array&lt;Google::Privacy::Dlp::V2::ContentOption&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of options defining data content to scan.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#custom_info_types-instance_method" title="#custom_info_types (instance method)">#<strong>custom_info_types</strong>  &#x21d2; Array&lt;Google::Privacy::Dlp::V2::CustomInfoType&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>CustomInfoTypes provided by the user.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exclude_info_types-instance_method" title="#exclude_info_types (instance method)">#<strong>exclude_info_types</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When true, excludes type information of the findings.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_quote-instance_method" title="#include_quote (instance method)">#<strong>include_quote</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When true, a contextual quote from the data that triggered a finding is included in the response; see Finding.quote.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#info_types-instance_method" title="#info_types (instance method)">#<strong>info_types</strong>  &#x21d2; Array&lt;Google::Privacy::Dlp::V2::InfoType&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Restricts what info_types to look for.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#limits-instance_method" title="#limits (instance method)">#<strong>limits</strong>  &#x21d2; Google::Privacy::Dlp::V2::InspectConfig::FindingLimits </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_likelihood-instance_method" title="#min_likelihood (instance method)">#<strong>min_likelihood</strong>  &#x21d2; Google::Privacy::Dlp::V2::Likelihood </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Only returns findings equal or above this threshold.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="content_options=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="content_options-instance_method">
+  
+    #<strong>content_options</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="ContentOption.html" title="Google::Privacy::Dlp::V2::ContentOption (module)">Google::Privacy::Dlp::V2::ContentOption</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns List of options defining data content to scan.
+If empty, text, images, and other content will be included.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ContentOption.html" title="Google::Privacy::Dlp::V2::ContentOption (module)">Google::Privacy::Dlp::V2::ContentOption</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of options defining data content to scan.
+If empty, text, images, and other content will be included.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 58</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::InspectConfig (class)">InspectConfig</a></span></span>
+  <span class='comment'># @!attribute [rw] max_findings_per_item
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned for each item scanned.
+</span>  <span class='comment'>#     When set within +InspectDataSourceRequest+,
+</span>  <span class='comment'>#     the maximum returned is 1000 regardless if this is set higher.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, this field is ignored.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_request
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned per request/job.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, the maximum returned is 1000
+</span>  <span class='comment'>#     regardless if this is set higher.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_info_type
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit&gt;]
+</span>  <span class='comment'>#     Configuration of findings limit given for specified infoTypes.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">FindingLimits</a></span></span>
+    <span class='comment'># Max findings configuration per infoType, per content item or long
+</span>    <span class='comment'># running DlpJob.
+</span>    <span class='comment'># @!attribute [rw] info_type
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>    <span class='comment'>#     Type of information the findings limit applies to. Only one limit per
+</span>    <span class='comment'>#     info_type should be provided. If InfoTypeLimit does not have an
+</span>    <span class='comment'>#     info_type, the DLP API applies the limit against all info_types that
+</span>    <span class='comment'>#     are found but not specified in another InfoTypeLimit.
+</span>    <span class='comment'># @!attribute [rw] max_findings
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Max findings limit for the given infoType.
+</span>    <span class='kw'>class</span> <span class='const'>InfoTypeLimit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="custom_info_types=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="custom_info_types-instance_method">
+  
+    #<strong>custom_info_types</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="CustomInfoType.html" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">Google::Privacy::Dlp::V2::CustomInfoType</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns CustomInfoTypes provided by the user. See
+<a href="https://cloud.google.com/dlp/docs/creating-custom-infotypes">https://cloud.google.com/dlp/docs/creating-custom-infotypes</a> to learn more.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="CustomInfoType.html" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">Google::Privacy::Dlp::V2::CustomInfoType</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>CustomInfoTypes provided by the user. See
+<a href="https://cloud.google.com/dlp/docs/creating-custom-infotypes">https://cloud.google.com/dlp/docs/creating-custom-infotypes</a> to learn more.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 58</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::InspectConfig (class)">InspectConfig</a></span></span>
+  <span class='comment'># @!attribute [rw] max_findings_per_item
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned for each item scanned.
+</span>  <span class='comment'>#     When set within +InspectDataSourceRequest+,
+</span>  <span class='comment'>#     the maximum returned is 1000 regardless if this is set higher.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, this field is ignored.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_request
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned per request/job.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, the maximum returned is 1000
+</span>  <span class='comment'>#     regardless if this is set higher.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_info_type
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit&gt;]
+</span>  <span class='comment'>#     Configuration of findings limit given for specified infoTypes.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">FindingLimits</a></span></span>
+    <span class='comment'># Max findings configuration per infoType, per content item or long
+</span>    <span class='comment'># running DlpJob.
+</span>    <span class='comment'># @!attribute [rw] info_type
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>    <span class='comment'>#     Type of information the findings limit applies to. Only one limit per
+</span>    <span class='comment'>#     info_type should be provided. If InfoTypeLimit does not have an
+</span>    <span class='comment'>#     info_type, the DLP API applies the limit against all info_types that
+</span>    <span class='comment'>#     are found but not specified in another InfoTypeLimit.
+</span>    <span class='comment'># @!attribute [rw] max_findings
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Max findings limit for the given infoType.
+</span>    <span class='kw'>class</span> <span class='const'>InfoTypeLimit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="exclude_info_types=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="exclude_info_types-instance_method">
+  
+    #<strong>exclude_info_types</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns When true, excludes type information of the findings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>When true, excludes type information of the findings.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 58</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::InspectConfig (class)">InspectConfig</a></span></span>
+  <span class='comment'># @!attribute [rw] max_findings_per_item
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned for each item scanned.
+</span>  <span class='comment'>#     When set within +InspectDataSourceRequest+,
+</span>  <span class='comment'>#     the maximum returned is 1000 regardless if this is set higher.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, this field is ignored.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_request
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned per request/job.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, the maximum returned is 1000
+</span>  <span class='comment'>#     regardless if this is set higher.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_info_type
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit&gt;]
+</span>  <span class='comment'>#     Configuration of findings limit given for specified infoTypes.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">FindingLimits</a></span></span>
+    <span class='comment'># Max findings configuration per infoType, per content item or long
+</span>    <span class='comment'># running DlpJob.
+</span>    <span class='comment'># @!attribute [rw] info_type
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>    <span class='comment'>#     Type of information the findings limit applies to. Only one limit per
+</span>    <span class='comment'>#     info_type should be provided. If InfoTypeLimit does not have an
+</span>    <span class='comment'>#     info_type, the DLP API applies the limit against all info_types that
+</span>    <span class='comment'>#     are found but not specified in another InfoTypeLimit.
+</span>    <span class='comment'># @!attribute [rw] max_findings
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Max findings limit for the given infoType.
+</span>    <span class='kw'>class</span> <span class='const'>InfoTypeLimit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="include_quote=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="include_quote-instance_method">
+  
+    #<strong>include_quote</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns When true, a contextual quote from the data that triggered a finding is
+included in the response; see Finding.quote.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>When true, a contextual quote from the data that triggered a finding is
+included in the response; see Finding.quote.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 58</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::InspectConfig (class)">InspectConfig</a></span></span>
+  <span class='comment'># @!attribute [rw] max_findings_per_item
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned for each item scanned.
+</span>  <span class='comment'>#     When set within +InspectDataSourceRequest+,
+</span>  <span class='comment'>#     the maximum returned is 1000 regardless if this is set higher.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, this field is ignored.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_request
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned per request/job.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, the maximum returned is 1000
+</span>  <span class='comment'>#     regardless if this is set higher.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_info_type
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit&gt;]
+</span>  <span class='comment'>#     Configuration of findings limit given for specified infoTypes.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">FindingLimits</a></span></span>
+    <span class='comment'># Max findings configuration per infoType, per content item or long
+</span>    <span class='comment'># running DlpJob.
+</span>    <span class='comment'># @!attribute [rw] info_type
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>    <span class='comment'>#     Type of information the findings limit applies to. Only one limit per
+</span>    <span class='comment'>#     info_type should be provided. If InfoTypeLimit does not have an
+</span>    <span class='comment'>#     info_type, the DLP API applies the limit against all info_types that
+</span>    <span class='comment'>#     are found but not specified in another InfoTypeLimit.
+</span>    <span class='comment'># @!attribute [rw] max_findings
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Max findings limit for the given infoType.
+</span>    <span class='kw'>class</span> <span class='const'>InfoTypeLimit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="info_types=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="info_types-instance_method">
+  
+    #<strong>info_types</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="InfoType.html" title="Google::Privacy::Dlp::V2::InfoType (class)">Google::Privacy::Dlp::V2::InfoType</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Restricts what info_types to look for. The values must correspond to
+InfoType values returned by ListInfoTypes or listed at
+<a href="https://cloud.google.com/dlp/docs/infotypes-reference">https://cloud.google.com/dlp/docs/infotypes-reference</a>.</p>
+
+<p>When no InfoTypes or CustomInfoTypes are specified in a request, the
+system may automatically choose what detectors to run. By default this may
+be all types, but may change over time as detectors are updated.</p>
+
+<p>The special InfoType name &quot;ALL_BASIC&quot; can be used to trigger all detectors,
+but may change over time as new InfoTypes are added. If you need precise
+control and predictability as to what detectors are run you should specify
+specific InfoTypes listed in the reference.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="InfoType.html" title="Google::Privacy::Dlp::V2::InfoType (class)">Google::Privacy::Dlp::V2::InfoType</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Restricts what info_types to look for. The values must correspond to
+InfoType values returned by ListInfoTypes or listed at
+<a href="https://cloud.google.com/dlp/docs/infotypes-reference">https://cloud.google.com/dlp/docs/infotypes-reference</a>.</p>
+
+<p>When no InfoTypes or CustomInfoTypes are specified in a request, the
+system may automatically choose what detectors to run. By default this may
+be all types, but may change over time as detectors are updated.</p>
+
+<p>The special InfoType name &quot;ALL_BASIC&quot; can be used to trigger all detectors,
+but may change over time as new InfoTypes are added. If you need precise
+control and predictability as to what detectors are run you should specify
+specific InfoTypes listed in the reference.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 58</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::InspectConfig (class)">InspectConfig</a></span></span>
+  <span class='comment'># @!attribute [rw] max_findings_per_item
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned for each item scanned.
+</span>  <span class='comment'>#     When set within +InspectDataSourceRequest+,
+</span>  <span class='comment'>#     the maximum returned is 1000 regardless if this is set higher.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, this field is ignored.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_request
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned per request/job.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, the maximum returned is 1000
+</span>  <span class='comment'>#     regardless if this is set higher.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_info_type
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit&gt;]
+</span>  <span class='comment'>#     Configuration of findings limit given for specified infoTypes.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">FindingLimits</a></span></span>
+    <span class='comment'># Max findings configuration per infoType, per content item or long
+</span>    <span class='comment'># running DlpJob.
+</span>    <span class='comment'># @!attribute [rw] info_type
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>    <span class='comment'>#     Type of information the findings limit applies to. Only one limit per
+</span>    <span class='comment'>#     info_type should be provided. If InfoTypeLimit does not have an
+</span>    <span class='comment'>#     info_type, the DLP API applies the limit against all info_types that
+</span>    <span class='comment'>#     are found but not specified in another InfoTypeLimit.
+</span>    <span class='comment'># @!attribute [rw] max_findings
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Max findings limit for the given infoType.
+</span>    <span class='kw'>class</span> <span class='const'>InfoTypeLimit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="limits=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="limits-instance_method">
+  
+    #<strong>limits</strong>  &#x21d2; <tt><span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">Google::Privacy::Dlp::V2::InspectConfig::FindingLimits</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">Google::Privacy::Dlp::V2::InspectConfig::FindingLimits</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 58</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::InspectConfig (class)">InspectConfig</a></span></span>
+  <span class='comment'># @!attribute [rw] max_findings_per_item
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned for each item scanned.
+</span>  <span class='comment'>#     When set within +InspectDataSourceRequest+,
+</span>  <span class='comment'>#     the maximum returned is 1000 regardless if this is set higher.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, this field is ignored.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_request
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned per request/job.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, the maximum returned is 1000
+</span>  <span class='comment'>#     regardless if this is set higher.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_info_type
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit&gt;]
+</span>  <span class='comment'>#     Configuration of findings limit given for specified infoTypes.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">FindingLimits</a></span></span>
+    <span class='comment'># Max findings configuration per infoType, per content item or long
+</span>    <span class='comment'># running DlpJob.
+</span>    <span class='comment'># @!attribute [rw] info_type
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>    <span class='comment'>#     Type of information the findings limit applies to. Only one limit per
+</span>    <span class='comment'>#     info_type should be provided. If InfoTypeLimit does not have an
+</span>    <span class='comment'>#     info_type, the DLP API applies the limit against all info_types that
+</span>    <span class='comment'>#     are found but not specified in another InfoTypeLimit.
+</span>    <span class='comment'># @!attribute [rw] max_findings
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Max findings limit for the given infoType.
+</span>    <span class='kw'>class</span> <span class='const'>InfoTypeLimit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="min_likelihood=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="min_likelihood-instance_method">
+  
+    #<strong>min_likelihood</strong>  &#x21d2; <tt><span class='object_link'><a href="Likelihood.html" title="Google::Privacy::Dlp::V2::Likelihood (module)">Google::Privacy::Dlp::V2::Likelihood</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Only returns findings equal or above this threshold. The default is
+POSSIBLE.
+See <a href="https://cloud.google.com/dlp/docs/likelihood">https://cloud.google.com/dlp/docs/likelihood</a> to learn more.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Likelihood.html" title="Google::Privacy::Dlp::V2::Likelihood (module)">Google::Privacy::Dlp::V2::Likelihood</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Only returns findings equal or above this threshold. The default is
+POSSIBLE.
+See <a href="https://cloud.google.com/dlp/docs/likelihood">https://cloud.google.com/dlp/docs/likelihood</a> to learn more.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 58</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::InspectConfig (class)">InspectConfig</a></span></span>
+  <span class='comment'># @!attribute [rw] max_findings_per_item
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned for each item scanned.
+</span>  <span class='comment'>#     When set within +InspectDataSourceRequest+,
+</span>  <span class='comment'>#     the maximum returned is 1000 regardless if this is set higher.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, this field is ignored.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_request
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Max number of findings that will be returned per request/job.
+</span>  <span class='comment'>#     When set within +InspectContentRequest+, the maximum returned is 1000
+</span>  <span class='comment'>#     regardless if this is set higher.
+</span>  <span class='comment'># @!attribute [rw] max_findings_per_info_type
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit&gt;]
+</span>  <span class='comment'>#     Configuration of findings limit given for specified infoTypes.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="InspectConfig/FindingLimits.html" title="Google::Privacy::Dlp::V2::InspectConfig::FindingLimits (class)">FindingLimits</a></span></span>
+    <span class='comment'># Max findings configuration per infoType, per content item or long
+</span>    <span class='comment'># running DlpJob.
+</span>    <span class='comment'># @!attribute [rw] info_type
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>    <span class='comment'>#     Type of information the findings limit applies to. Only one limit per
+</span>    <span class='comment'>#     info_type should be provided. If InfoTypeLimit does not have an
+</span>    <span class='comment'>#     info_type, the DLP API applies the limit against all info_types that
+</span>    <span class='comment'>#     are found but not specified in another InfoTypeLimit.
+</span>    <span class='comment'># @!attribute [rw] max_findings
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Max findings limit for the given infoType.
+</span>    <span class='kw'>class</span> <span class='const'>InfoTypeLimit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
