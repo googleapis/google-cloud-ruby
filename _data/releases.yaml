@@ -133,6 +133,7 @@ google-cloud-dlp:
 - v0.2.0
 - v0.1.0
 google-cloud-dns:
+- v0.29.1
 - v0.29.0
 - v0.28.0
 - v0.27.0
