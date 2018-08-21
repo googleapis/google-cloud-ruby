@@ -245,8 +245,9 @@
       "name": "google-cloud-dns",
       "defaultService": "google/cloud/dns",
       "versions": [
-        "v0.29.0",
+        "v0.29.1",
         "master",
+        "v0.29.0",
         "v0.28.0",
         "v0.27.0",
         "v0.26.0",
