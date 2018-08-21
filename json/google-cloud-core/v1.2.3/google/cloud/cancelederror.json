@@ -1,0 +1,1 @@
+{"id":"google/cloud/cancelederror","name":"CanceledError","title":["Google","Cloud","CanceledError"],"description":"<p>Canceled indicates the operation was cancelled (typically by the caller).</p>","source":"google-cloud-core/lib/google/cloud/errors.rb#L181","resources":[],"examples":[],"methods":[]}
