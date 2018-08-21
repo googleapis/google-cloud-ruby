@@ -315,8 +315,9 @@
       "name": "google-cloud-kms",
       "defaultService": "google/cloud/kms",
       "versions": [
-        "v0.2.0",
+        "v0.2.1",
         "master",
+        "v0.2.0",
         "v0.1.0"
       ]
     },
