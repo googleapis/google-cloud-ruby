@@ -136,8 +136,9 @@
       "name": "google-cloud-container",
       "defaultService": "google/cloud/container",
       "versions": [
-        "v0.1.0",
-        "master"
+        "v0.2.0",
+        "master",
+        "v0.1.0"
       ]
     },
     {
@@ -161,8 +162,9 @@
       "name": "google-cloud-dataproc",
       "defaultService": "google/cloud/dataproc",
       "versions": [
-        "v0.1.0",
-        "master"
+        "v0.2.0",
+        "master",
+        "v0.1.0"
       ]
     },
     {
