@@ -322,9 +322,9 @@ module Stackdriver
       ##
       # @private Set cleanup options.
       #
-      # @param [Hash] *kwargs Hash of cleanup options. :timeout is the cleanup
-      #   wait timeout. :wait_interval is the cleanup wait interval. :force for
-      #   forcefully terminate actor when all other options fail.
+      # @param [Hash] kwargs Hash of cleanup options. `:timeout` is the cleanup
+      #   wait timeout. `:wait_interval` is the cleanup wait interval. `:force`
+      #   for forcefully terminate actor when all other options fail.
       def set_cleanup_options **kwargs
         @cleanup_options.merge! kwargs
       end
