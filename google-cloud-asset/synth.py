@@ -37,10 +37,33 @@ s.copy(v1beta1_library / 'LICENSE')
 s.copy(v1beta1_library / '.gitignore')
 s.copy(v1beta1_library / '.rubocop.yml')
 s.copy(v1beta1_library / '.yardopts')
-s.copy(v1beta1_library / 'google-cloud-tasks.gemspec', merge=merge_gemspec)
+s.copy(v1beta1_library / 'google-cloud-asset.gemspec', merge=merge_gemspec)
 
 # https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
-    'google-cloud-tasks.gemspec',
+    'google-cloud-asset.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> ([\\d\\.]+)"\n\n',
     '\n  gem.add_dependency "google-gax", "~> \\1"\n  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"\n\n')
+
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^\n#\\$\\\\])\\{([\\w,]+|\\.+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+
+
+s.replace(
+    'lib/google/cloud/asset/v1beta1/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)
+
+
+# https://github.com/googleapis/gapic-generator/issues/2232
+s.replace(
+    'lib/google/cloud/asset/v1beta1/asset_service_client.rb',
+    '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
+    '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
