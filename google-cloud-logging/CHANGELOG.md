@@ -1,5 +1,9 @@
 # Release History
 
+### 1.5.2 / 2018-08-21
+
+* Update documentation.
+
 ### 1.5.1 / 2018-07-05
 
 * Fix bug in List classes by propagating arguments needed for pagination calls.
