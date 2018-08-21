@@ -677,7 +677,7 @@ span.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -735,7 +735,7 @@ span.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -754,7 +754,7 @@ span.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -778,7 +778,7 @@ span.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -996,7 +996,7 @@ was active. If set, allows implementation to detect missing child spans.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -1054,7 +1054,7 @@ was active. If set, allows implementation to detect missing child spans.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -1073,7 +1073,7 @@ was active. If set, allows implementation to detect missing child spans.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -1097,7 +1097,7 @@ was active. If set, allows implementation to detect missing child spans.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1325,7 +1325,7 @@ This makes it easier to correlate spans in different traces.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -1383,7 +1383,7 @@ This makes it easier to correlate spans in different traces.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -1402,7 +1402,7 @@ This makes it easier to correlate spans in different traces.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -1426,7 +1426,7 @@ This makes it easier to correlate spans in different traces.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1646,7 +1646,7 @@ is the time when the server application handler stops running.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -1704,7 +1704,7 @@ is the time when the server application handler stops running.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -1723,7 +1723,7 @@ is the time when the server application handler stops running.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -1747,7 +1747,7 @@ is the time when the server application handler stops running.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1759,7 +1759,7 @@ is the time when the server application handler stops running.</p>
       <div class="method_details ">
   <h3 class="signature " id="links-instance_method">
   
-    #<strong>links</strong>  &#x21d2; <tt><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Google::Devtools::Cloudtrace::V2::Span::Links</a></span></tt> 
+    #<strong>links</strong>  &#x21d2; <tt><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Google::Devtools::Cloudtrace::V2::Span::Links</a></span></tt> 
   
 
   
@@ -1780,7 +1780,7 @@ is the time when the server application handler stops running.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Google::Devtools::Cloudtrace::V2::Span::Links</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Google::Devtools::Cloudtrace::V2::Span::Links</a></span></tt>)</span>
       
       
       
@@ -1963,7 +1963,7 @@ is the time when the server application handler stops running.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -2021,7 +2021,7 @@ is the time when the server application handler stops running.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -2040,7 +2040,7 @@ is the time when the server application handler stops running.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -2064,7 +2064,7 @@ is the time when the server application handler stops running.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2298,7 +2298,7 @@ is a 16-character hexadecimal encoding of an 8-byte array.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -2356,7 +2356,7 @@ is a 16-character hexadecimal encoding of an 8-byte array.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -2375,7 +2375,7 @@ is a 16-character hexadecimal encoding of an 8-byte array.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -2399,7 +2399,7 @@ is a 16-character hexadecimal encoding of an 8-byte array.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2617,7 +2617,7 @@ then this field must be empty.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -2675,7 +2675,7 @@ then this field must be empty.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -2694,7 +2694,7 @@ then this field must be empty.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -2718,7 +2718,7 @@ then this field must be empty.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2940,7 +2940,7 @@ information.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -2998,7 +2998,7 @@ information.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -3017,7 +3017,7 @@ information.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -3041,7 +3041,7 @@ information.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3257,7 +3257,7 @@ information.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -3315,7 +3315,7 @@ information.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -3334,7 +3334,7 @@ information.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -3358,7 +3358,7 @@ information.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3574,7 +3574,7 @@ information.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -3632,7 +3632,7 @@ information.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -3651,7 +3651,7 @@ information.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -3675,7 +3675,7 @@ information.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3895,7 +3895,7 @@ is the time when the server&#39;s application handler starts running.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -3953,7 +3953,7 @@ is the time when the server&#39;s application handler starts running.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -3972,7 +3972,7 @@ is the time when the server&#39;s application handler starts running.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -3996,7 +3996,7 @@ is the time when the server&#39;s application handler starts running.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -4212,7 +4212,7 @@ is the time when the server&#39;s application handler starts running.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -4270,7 +4270,7 @@ is the time when the server&#39;s application handler starts running.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -4289,7 +4289,7 @@ is the time when the server&#39;s application handler starts running.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -4313,7 +4313,7 @@ is the time when the server&#39;s application handler starts running.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -4325,7 +4325,7 @@ is the time when the server&#39;s application handler starts running.</p>
       <div class="method_details ">
   <h3 class="signature " id="time_events-instance_method">
   
-    #<strong>time_events</strong>  &#x21d2; <tt><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">Google::Devtools::Cloudtrace::V2::Span::TimeEvents</a></span></tt> 
+    #<strong>time_events</strong>  &#x21d2; <tt><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">Google::Devtools::Cloudtrace::V2::Span::TimeEvents</a></span></tt> 
   
 
   
@@ -4347,7 +4347,7 @@ events per span.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">Google::Devtools::Cloudtrace::V2::Span::TimeEvents</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">Google::Devtools::Cloudtrace::V2::Span::TimeEvents</a></span></tt>)</span>
       
       
       
@@ -4531,7 +4531,7 @@ events per span.</p>
 </span>  <span class='comment'># @!attribute [rw] message_event
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::TimeEvent::MessageEvent]
 </span>  <span class='comment'>#     An event describing a message sent/received between Spans.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvent-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (constant)">TimeEvent</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvent.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvent (class)">TimeEvent</a></span></span>
     <span class='comment'># Text annotation with a set of attributes.
 </span>    <span class='comment'># @!attribute [rw] description
 </span>    <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
@@ -4589,7 +4589,7 @@ events per span.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped message events in all the included time events.
 </span>  <span class='comment'>#     If the value is 0, then no message events were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#TimeEvents-constant" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (constant)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/TimeEvents.html" title="Google::Devtools::Cloudtrace::V2::Span::TimeEvents (class)">TimeEvents</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A pointer from the current span to another span in the same trace or in a
 </span>  <span class='comment'># different trace. For example, this can be used in batching operations,
@@ -4608,7 +4608,7 @@ events per span.</p>
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::Span::Attributes]
 </span>  <span class='comment'>#     A set of attributes on the link. You have have up to  32 attributes per
 </span>  <span class='comment'>#     link.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Link-constant" title="Google::Devtools::Cloudtrace::V2::Span::Link (constant)">Link</a></span></span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Link.html" title="Google::Devtools::Cloudtrace::V2::Span::Link (class)">Link</a></span></span>
     <span class='comment'># The relationship of the current span relative to the linked span: child,
 </span>    <span class='comment'># parent, or unspecified.
 </span>    <span class='kw'>module</span> <span class='const'>Type</span>
@@ -4632,7 +4632,7 @@ events per span.</p>
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The number of dropped links after the maximum size was enforced. If
 </span>  <span class='comment'>#     this value is 0, then no links were dropped.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="#Links-constant" title="Google::Devtools::Cloudtrace::V2::Span::Links (constant)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Span/Links.html" title="Google::Devtools::Cloudtrace::V2::Span::Links (class)">Links</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
