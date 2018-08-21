@@ -1,6 +1,6 @@
 --no-private
 --title=Stackdriver Trace
---exclude lib/google/devtools/cloudtrace/v1
+--exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
 

@@ -1,6 +1,6 @@
 --no-private
 --title=Google Cloud Firestore API
---exclude lib/google/firestore/v1beta1
+--exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
 

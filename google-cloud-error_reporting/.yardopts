@@ -1,6 +1,6 @@
 --no-private
 --title=Stackdriver Error Reporting
---exclude lib/google/devtools/clouderrorreporting/v1beta1
+--exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
 
