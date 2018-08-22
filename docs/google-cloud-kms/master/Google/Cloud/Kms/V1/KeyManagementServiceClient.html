@@ -3424,7 +3424,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format +projects/*/locations/*+.
 </span>  <span class='comment'># @param key_ring_id [String]
 </span>  <span class='comment'>#   Required. It must be unique within a location and match the regular
-</span>  <span class='comment'>#   expression +[a-zA-Z0-9_-]{1,63}+
+</span>  <span class='comment'>#   expression +[a-zA-Z0-9_-]\\{1,63}+
 </span>  <span class='comment'># @param key_ring [Google::Cloud::Kms::V1::KeyRing | Hash]
 </span>  <span class='comment'>#   A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
 </span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Kms::V1::KeyRing`
@@ -3474,7 +3474,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#   {Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
 </span>  <span class='comment'># @param crypto_key_id [String]
 </span>  <span class='comment'>#   Required. It must be unique within a KeyRing and match the regular
-</span>  <span class='comment'>#   expression +[a-zA-Z0-9_-]{1,63}+
+</span>  <span class='comment'>#   expression +[a-zA-Z0-9_-]\\{1,63}+
 </span>  <span class='comment'># @param crypto_key [Google::Cloud::Kms::V1::CryptoKey | Hash]
 </span>  <span class='comment'>#   A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
 </span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKey`
@@ -3867,7 +3867,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being specified.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param policy [Google::Iam::V1::Policy | Hash]
 </span>  <span class='comment'>#   REQUIRED: The complete policy to be applied to the +resource+. The size of
 </span>  <span class='comment'>#   the policy is limited to a few 10s of KB. An empty policy is a
@@ -3913,7 +3913,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3947,7 +3947,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy detail is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param permissions [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The set of permissions to check for the +resource+. Permissions with
 </span>  <span class='comment'>#   wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more
@@ -5936,7 +5936,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format +projects/*/locations/*+.
 </span>  <span class='comment'># @param key_ring_id [String]
 </span>  <span class='comment'>#   Required. It must be unique within a location and match the regular
-</span>  <span class='comment'>#   expression +[a-zA-Z0-9_-]{1,63}+
+</span>  <span class='comment'>#   expression +[a-zA-Z0-9_-]\\{1,63}+
 </span>  <span class='comment'># @param key_ring [Google::Cloud::Kms::V1::KeyRing | Hash]
 </span>  <span class='comment'>#   A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
 </span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Kms::V1::KeyRing`
@@ -5986,7 +5986,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#   {Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
 </span>  <span class='comment'># @param crypto_key_id [String]
 </span>  <span class='comment'>#   Required. It must be unique within a KeyRing and match the regular
-</span>  <span class='comment'>#   expression +[a-zA-Z0-9_-]{1,63}+
+</span>  <span class='comment'>#   expression +[a-zA-Z0-9_-]\\{1,63}+
 </span>  <span class='comment'># @param crypto_key [Google::Cloud::Kms::V1::CryptoKey | Hash]
 </span>  <span class='comment'>#   A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
 </span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKey`
@@ -6379,7 +6379,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being specified.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param policy [Google::Iam::V1::Policy | Hash]
 </span>  <span class='comment'>#   REQUIRED: The complete policy to be applied to the +resource+. The size of
 </span>  <span class='comment'>#   the policy is limited to a few 10s of KB. An empty policy is a
@@ -6425,7 +6425,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -6459,7 +6459,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy detail is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param permissions [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The set of permissions to check for the +resource+. Permissions with
 </span>  <span class='comment'>#   wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more
@@ -7115,7 +7115,7 @@ custom error handling.</p>
       
         &mdash;
         <div class='inline'><p>Required. It must be unique within a KeyRing and match the regular
-expression +[a-zA-Z0-9_-]1,63+</p>
+expression +[a-zA-Z0-9_-]{1,63}+</p>
 </div>
       
     </li>
@@ -7540,7 +7540,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. It must be unique within a location and match the regular
-expression +[a-zA-Z0-9_-]1,63+</p>
+expression +[a-zA-Z0-9_-]{1,63}+</p>
 </div>
       
     </li>
@@ -8716,7 +8716,7 @@ set.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
@@ -9901,7 +9901,7 @@ existing policy.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
@@ -10106,7 +10106,7 @@ permissions, not a NOT_FOUND error.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
