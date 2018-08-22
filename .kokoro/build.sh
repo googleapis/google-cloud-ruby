@@ -33,25 +33,13 @@ GEMSPECS=($(git ls-files -- */*.gemspec | cut -d/ -f1))
 UPDATED_GEMS=()
 
 for i in "${GEMSPECS[@]}"; do
-    for j in "${CHANGED_DIRS[@]}"; do
-        if [ $i -eq $j ]; then
-            UPDATED_GEMS += $i
-        fi
-    done
-done
-
-for i in "${CHANGED_DIRS[@]}"; do
-    if [ UPDATED_GEMS[$1] -eq "false" ]; then
-        UPDATED_GEMS = "true"
+  for j in "${CHANGED_DIRS[@]}"; do
+    if [ "$i" = "$j" ]; then
+      UPDATED_GEMS+=($i)
     fi
+  done
 done
 
-containsElement () {
-  local e match="$1"
-  shift
-  for e; do [[ "$e" == "$match" ]] && return 0; done
-  return 1
-}
 
 # Capture failures
 EXIT_STATUS=0 # everything passed
@@ -64,18 +52,16 @@ export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 
 case $JOB_TYPE in
 presubmit)
-  if [[ ! -n $(grep -x "$PACKAGE" ~/target_packages) ]]; then
+  if [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
     echo "$PACKAGE was not modified, returning."
     exit;
   fi
   cd $PACKAGE
-  bundle update
-  bundle exec rake ci:acceptance
-  (bundle update && bundle exec rake circleci:build) || set_failed_status
+  (bundle update && bundle exec rake ci) || set_failed_status
   ;;
 continuous)
-  bundle exec rake ci:acceptance
-  (bundle update && bundle exec rake circleci:post) || set_failed_status
+  cd $PACKAGE
+  (bundle update && bundle exec rake ci:acceptance) || set_failed_status
   ;;
 release)
   (bundle update && bundle exec rake circleci:release) || set_failed_status
@@ -85,13 +71,3 @@ release)
 esac
 
 exit $EXIT_STATUS
-
-
-
-
-
-  if [[ ! -n $(grep -x google-cloud-trace $GEMSPECS) ]]; then
-    echo "was not modified, returning."
-  else
-    echo "it was modified"
-  fi
