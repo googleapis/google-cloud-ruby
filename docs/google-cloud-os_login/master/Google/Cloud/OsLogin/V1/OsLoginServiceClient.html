@@ -1520,7 +1520,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   A reference to the POSIX account to update. POSIX accounts are identified
 </span>  <span class='comment'>#   by the project ID they are associated with. A reference to the POSIX
-</span>  <span class='comment'>#   account is in format +users/{user}/projects/{project}+.
+</span>  <span class='comment'>#   account is in format +users/\\{user}/projects/\\{project}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -1552,7 +1552,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The fingerprint of the public key to update. Public keys are identified by
 </span>  <span class='comment'>#   their SHA-256 fingerprint. The fingerprint of the public key is in format
-</span>  <span class='comment'>#   +users/{user}/sshPublicKeys/{fingerprint}+.
+</span>  <span class='comment'>#   +users/\\{user}/sshPublicKeys/\\{fingerprint}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -1583,7 +1583,7 @@ custom error handling.</p>
 </span>  <span class='comment'># on Google Compute Engine.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   The unique ID for the user in format +users/{user}+.
+</span>  <span class='comment'>#   The unique ID for the user in format +users/\\{user}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -1615,7 +1615,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The fingerprint of the public key to retrieve. Public keys are identified
 </span>  <span class='comment'>#   by their SHA-256 fingerprint. The fingerprint of the public key is in
-</span>  <span class='comment'>#   format +users/{user}/sshPublicKeys/{fingerprint}+.
+</span>  <span class='comment'>#   format +users/\\{user}/sshPublicKeys/\\{fingerprint}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -1647,7 +1647,7 @@ custom error handling.</p>
 </span>  <span class='comment'># login profile.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   The unique ID for the user in format +users/{user}+.
+</span>  <span class='comment'>#   The unique ID for the user in format +users/\\{user}+.
 </span>  <span class='comment'># @param ssh_public_key [Google::Cloud::Oslogin::Common::SshPublicKey | Hash]
 </span>  <span class='comment'>#   The SSH public key and expiration time.
 </span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Oslogin::Common::SshPublicKey`
@@ -1693,7 +1693,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The fingerprint of the public key to update. Public keys are identified by
 </span>  <span class='comment'>#   their SHA-256 fingerprint. The fingerprint of the public key is in format
-</span>  <span class='comment'>#   +users/{user}/sshPublicKeys/{fingerprint}+.
+</span>  <span class='comment'>#   +users/\\{user}/sshPublicKeys/\\{fingerprint}+.
 </span>  <span class='comment'># @param ssh_public_key [Google::Cloud::Oslogin::Common::SshPublicKey | Hash]
 </span>  <span class='comment'>#   The SSH public key and expiration time.
 </span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Oslogin::Common::SshPublicKey`
@@ -2039,7 +2039,7 @@ custom error handling.</p>
         &mdash;
         <div class='inline'><p>A reference to the POSIX account to update. POSIX accounts are identified
 by the project ID they are associated with. A reference to the POSIX
-account is in format +users/user/projects/project+.</p>
+account is in format +users/{user}/projects/{project}+.</p>
 </div>
       
     </li>
@@ -2208,7 +2208,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>The fingerprint of the public key to update. Public keys are identified by
 their SHA-256 fingerprint. The fingerprint of the public key is in format
-+users/user/sshPublicKeys/fingerprint+.</p>
++users/{user}/sshPublicKeys/{fingerprint}+.</p>
 </div>
       
     </li>
@@ -2376,7 +2376,7 @@ on Google Compute Engine.</p>
       
       
         &mdash;
-        <div class='inline'><p>The unique ID for the user in format +users/user+.</p>
+        <div class='inline'><p>The unique ID for the user in format +users/{user}+.</p>
 </div>
       
     </li>
@@ -2552,7 +2552,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>The fingerprint of the public key to retrieve. Public keys are identified
 by their SHA-256 fingerprint. The fingerprint of the public key is in
-format +users/user/sshPublicKeys/fingerprint+.</p>
+format +users/{user}/sshPublicKeys/{fingerprint}+.</p>
 </div>
       
     </li>
@@ -2731,7 +2731,7 @@ login profile.</p>
       
       
         &mdash;
-        <div class='inline'><p>The unique ID for the user in format +users/user+.</p>
+        <div class='inline'><p>The unique ID for the user in format +users/{user}+.</p>
 </div>
       
     </li>
@@ -2951,7 +2951,7 @@ supports patch semantics.</p>
         &mdash;
         <div class='inline'><p>The fingerprint of the public key to update. Public keys are identified by
 their SHA-256 fingerprint. The fingerprint of the public key is in format
-+users/user/sshPublicKeys/fingerprint+.</p>
++users/{user}/sshPublicKeys/{fingerprint}+.</p>
 </div>
       
     </li>
