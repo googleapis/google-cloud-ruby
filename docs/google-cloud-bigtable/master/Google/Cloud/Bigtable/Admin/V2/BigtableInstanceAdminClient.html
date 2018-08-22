@@ -3437,9 +3437,9 @@ custom error handling.</p>
 </span>  <span class='comment'>#   metrics.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   * Label keys must be between 1 and 63 characters long and must conform to
-</span>  <span class='comment'>#     the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+.
+</span>  <span class='comment'>#     the regular expression: +[\p\\{Ll}\p\\{Lo}][\p\\{Ll}\p\\{Lo}\p\\{N}_-]\\{0,62}+.
 </span>  <span class='comment'>#   * Label values must be between 0 and 63 characters long and must conform to
-</span>  <span class='comment'>#     the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.
+</span>  <span class='comment'>#     the regular expression: +[\p\\{Ll}\p\\{Lo}\p\\{N}_-]\\{0,63}+.
 </span>  <span class='comment'>#   * No more than 64 labels can be associated with a given resource.
 </span>  <span class='comment'>#   * Keys and values must both be under 128 bytes.
 </span>  <span class='comment'># @param state [Google::Bigtable::Admin::V2::Instance::State]
@@ -4118,7 +4118,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -4151,7 +4151,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being specified.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param policy [Google::Iam::V1::Policy | Hash]
 </span>  <span class='comment'>#   REQUIRED: The complete policy to be applied to the +resource+. The size of
 </span>  <span class='comment'>#   the policy is limited to a few 10s of KB. An empty policy is a
@@ -4195,7 +4195,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy detail is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param permissions [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The set of permissions to check for the +resource+. Permissions with
 </span>  <span class='comment'>#   wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more
@@ -6324,7 +6324,7 @@ policy if an instance exists but does not have a policy set.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
@@ -7464,7 +7464,7 @@ existing policy.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
@@ -7667,7 +7667,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
@@ -8407,9 +8407,9 @@ metrics.</p>
 
 <ul>
 <li>Label keys must be between 1 and 63 characters long and must conform to
-the regular expression: +[\pLl\pLo][\pLl\pLo\pN_-]0,62+.</li>
+the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+.</li>
 <li>Label values must be between 0 and 63 characters long and must conform to
-the regular expression: +[\pLl\pLo\pN_-]0,63+.</li>
+the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.</li>
 <li>No more than 64 labels can be associated with a given resource.</li>
 <li>Keys and values must both be under 128 bytes.</li>
 </ul>
