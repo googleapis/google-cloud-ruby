@@ -29,12 +29,29 @@ bundle update
 # See https://github.com/GoogleCloudPlatform/google-cloud-python/blob/master/.kokoro/build.sh for alt implementation
 CHANGED_DIRS="$(git --no-pager diff --name-only HEAD $(git merge-base HEAD master) | grep "/" | cut -d/ -f1 | sort | uniq || true)"
 
-GEMSPECS=($(git ls-files -- */*.gemspec))
-CHANGED_GEMS=()
-for i in "${CHANGED_DIRS[@]}"; do
-do
-   echo "$i"
+GEMSPECS=($(git ls-files -- */*.gemspec | cut -d/ -f1))
+UPDATED_GEMS=()
+
+for i in "${GEMSPECS[@]}"; do
+    for j in "${CHANGED_DIRS[@]}"; do
+        if [ $i -eq $j ]; then
+            UPDATED_GEMS += $i
+        fi
+    done
 done
+
+for i in "${CHANGED_DIRS[@]}"; do
+    if [ UPDATED_GEMS[$1] -eq "false" ]; then
+        UPDATED_GEMS = "true"
+    fi
+done
+
+containsElement () {
+  local e match="$1"
+  shift
+  for e; do [[ "$e" == "$match" ]] && return 0; done
+  return 1
+}
 
 # Capture failures
 EXIT_STATUS=0 # everything passed
