@@ -1,7 +1,3 @@
-/*
- THIS FILE SHOULD EVENTUALLY BE REMOVED.
- */
-
 #footer {
   text-align: center;
   padding-bottom: 80px;
@@ -22,16 +18,6 @@
     padding: 10px;
 }
 
-/*
- Override YARD styles to fix what we changed
- */
-
-#full_list ul {
-    /* Fix spacing issues around nested side links. */
-    /* This is an area where normalize conflicts with YARD's expectations. */
-    margin: 0;
-}
-
 .nav-wrap, #main {
      padding-top: 50px;
 }
@@ -46,15 +32,6 @@
 
 #main #header #menu {
     margin-right: 50px
-}
-
-/*
- Override YARD styles for nav iframe
- */
-
-/* Ensure all items show since we drop it down */
-#full_list {
-    margin-bottom: 70px;
 }
 
 @media only screen and (min-width: 50em) {

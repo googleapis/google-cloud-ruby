@@ -1,11 +1,5 @@
 ---
 ---
-// THIS FILE SHOULD EVENTUALLY BE REMOVED.
-
-{% capture header %}
-{% include header.html %}
-{% endcapture %}
-
 $(document).ready(function() {
   var gem = location.pathname.split('/')[3];
   var version = location.pathname.split('/')[4];
@@ -20,5 +14,5 @@ $(document).ready(function() {
   }
 
   // Add gem links to breadcrumb
-  $('#main #header #menu').prepend('<a href="/google-cloud-ruby/docs">Google Cloud gems</a> » <span class="title"><a href="/google-cloud-ruby/docs/' + gem + '">' + gem + '</a> <small>(' + version + ')</small></span><br>')
+  $('#main #header #menu').prepend('<a href="/google-cloud-ruby/docs">Google Cloud gems</a> » <span class="title"><a href="/google-cloud-ruby/docs/' + gem + '">' + gem + '</a> <small>(' + version + ')</small></span> » ')
 });

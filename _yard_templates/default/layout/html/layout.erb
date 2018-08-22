@@ -3,14 +3,14 @@ layout: yard_main
 title: "<%= @page_title %><% if options.title && @page_title != options.title %> - <%= options.title %><% end %>"
 css: <% stylesheets.each do |stylesheet| %>
   - /docs/<%= stylesheet %><% end %>
-  - /css/docs.css
+  - /css/yard-main.css
 js: <% javascripts.each do |javascript| %>
   - /docs/<%= javascript %><% end %>
-  - /js/docs.js
+  - /js/yard-main.js
 ---
 <%= erb :script_setup %>
 
-<div class="nav_wrap">
+<div class="nav-wrap">
   <iframe id="nav" src="<%= @nav_url %>?1"></iframe>
   <div id="resizer"></div>
 </div>

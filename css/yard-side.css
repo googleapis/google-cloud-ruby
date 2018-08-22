@@ -1,0 +1,21 @@
+#full_list {
+    margin-bottom: 70px;
+}
+
+#full_list ul {
+    margin: 0;
+}
+
+.nav-wrap, #main {
+     padding-top: 50px;
+}
+
+#search {
+    top: 50px;
+}
+
+@media only screen and (min-width: 50em) {
+    #search {
+        top: 80px;
+    }
+}
