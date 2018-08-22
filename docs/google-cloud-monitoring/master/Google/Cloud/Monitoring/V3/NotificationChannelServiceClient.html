@@ -1769,7 +1769,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The channel type for which to execute the request. The format is
-</span>  <span class='comment'>#   +projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}+.
+</span>  <span class='comment'>#   +projects/[PROJECT_ID]/notificationChannelDescriptors/\\{channel_type}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -2916,7 +2916,7 @@ are expected / permitted for a notification channel of the given type.</p>
       
         &mdash;
         <div class='inline'><p>The channel type for which to execute the request. The format is
-+projects/[PROJECT_ID]/notificationChannelDescriptors/channel_type+.</p>
++projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}+.</p>
 </div>
       
     </li>

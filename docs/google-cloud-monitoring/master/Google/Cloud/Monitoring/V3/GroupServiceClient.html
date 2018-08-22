@@ -1577,19 +1577,19 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The project whose groups are to be listed. The format is
-</span>  <span class='comment'>#   +&quot;projects/{project_id_or_number}&quot;+.
+</span>  <span class='comment'>#   +&quot;projects/\\{project_id_or_number}&quot;+.
 </span>  <span class='comment'># @param children_of_group [String]
-</span>  <span class='comment'>#   A group name: +&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.
+</span>  <span class='comment'>#   A group name: +&quot;projects/\\{project_id_or_number}/groups/\\{group_id}&quot;+.
 </span>  <span class='comment'>#   Returns groups whose +parentName+ field contains the group
 </span>  <span class='comment'>#   name.  If no groups have this parent, the results are empty.
 </span>  <span class='comment'># @param ancestors_of_group [String]
-</span>  <span class='comment'>#   A group name: +&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.
+</span>  <span class='comment'>#   A group name: +&quot;projects/\\{project_id_or_number}/groups/\\{group_id}&quot;+.
 </span>  <span class='comment'>#   Returns groups that are ancestors of the specified group.
 </span>  <span class='comment'>#   The groups are returned in order, starting with the immediate parent and
 </span>  <span class='comment'>#   ending with the most distant ancestor.  If the specified group has no
 </span>  <span class='comment'>#   immediate parent, the results are empty.
 </span>  <span class='comment'># @param descendants_of_group [String]
-</span>  <span class='comment'>#   A group name: +&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.
+</span>  <span class='comment'>#   A group name: +&quot;projects/\\{project_id_or_number}/groups/\\{group_id}&quot;+.
 </span>  <span class='comment'>#   Returns the descendants of the specified group.  This is a superset of
 </span>  <span class='comment'>#   the results returned by the +childrenOfGroup+ filter, and includes
 </span>  <span class='comment'>#   children-of-children, and so forth.
@@ -1653,7 +1653,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The group to retrieve. The format is
-</span>  <span class='comment'>#   +&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.
+</span>  <span class='comment'>#   +&quot;projects/\\{project_id_or_number}/groups/\\{group_id}&quot;+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -1684,7 +1684,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The project in which to create the group. The format is
-</span>  <span class='comment'>#   +&quot;projects/{project_id_or_number}&quot;+.
+</span>  <span class='comment'>#   +&quot;projects/\\{project_id_or_number}&quot;+.
 </span>  <span class='comment'># @param group [Google::Monitoring::V3::Group | Hash]
 </span>  <span class='comment'>#   A group definition. It is an error to define the +name+ field because
 </span>  <span class='comment'>#   the system assigns the name.
@@ -1769,7 +1769,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The group to delete. The format is
-</span>  <span class='comment'>#   +&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.
+</span>  <span class='comment'>#   +&quot;projects/\\{project_id_or_number}/groups/\\{group_id}&quot;+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -1800,7 +1800,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The group whose members are listed. The format is
-</span>  <span class='comment'>#   +&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.
+</span>  <span class='comment'>#   +&quot;projects/\\{project_id_or_number}/groups/\\{group_id}&quot;+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -2091,7 +2091,7 @@ custom error handling.</p>
       
         &mdash;
         <div class='inline'><p>The project in which to create the group. The format is
-+&quot;projects/project_id_or_number&quot;+.</p>
++&quot;projects/{project_id_or_number}&quot;+.</p>
 </div>
       
     </li>
@@ -2307,7 +2307,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The group to delete. The format is
-+&quot;projects/project_id_or_number/groups/group_id&quot;+.</p>
++&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.</p>
 </div>
       
     </li>
@@ -2475,7 +2475,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The group to retrieve. The format is
-+&quot;projects/project_id_or_number/groups/group_id&quot;+.</p>
++&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.</p>
 </div>
       
     </li>
@@ -2662,7 +2662,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The group whose members are listed. The format is
-+&quot;projects/project_id_or_number/groups/group_id&quot;+.</p>
++&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.</p>
 </div>
       
     </li>
@@ -2929,7 +2929,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The project whose groups are to be listed. The format is
-+&quot;projects/project_id_or_number&quot;+.</p>
++&quot;projects/{project_id_or_number}&quot;+.</p>
 </div>
       
     </li>
@@ -2944,7 +2944,7 @@ object.</p>
       
       
         &mdash;
-        <div class='inline'><p>A group name: +&quot;projects/project_id_or_number/groups/group_id&quot;+.
+        <div class='inline'><p>A group name: +&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.
 Returns groups whose +parentName+ field contains the group
 name.  If no groups have this parent, the results are empty.</p>
 </div>
@@ -2961,7 +2961,7 @@ name.  If no groups have this parent, the results are empty.</p>
       
       
         &mdash;
-        <div class='inline'><p>A group name: +&quot;projects/project_id_or_number/groups/group_id&quot;+.
+        <div class='inline'><p>A group name: +&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.
 Returns groups that are ancestors of the specified group.
 The groups are returned in order, starting with the immediate parent and
 ending with the most distant ancestor.  If the specified group has no
@@ -2980,7 +2980,7 @@ immediate parent, the results are empty.</p>
       
       
         &mdash;
-        <div class='inline'><p>A group name: +&quot;projects/project_id_or_number/groups/group_id&quot;+.
+        <div class='inline'><p>A group name: +&quot;projects/{project_id_or_number}/groups/{group_id}&quot;+.
 Returns the descendants of the specified group.  This is a superset of
 the results returned by the +childrenOfGroup+ filter, and includes
 children-of-children, and so forth.</p>
