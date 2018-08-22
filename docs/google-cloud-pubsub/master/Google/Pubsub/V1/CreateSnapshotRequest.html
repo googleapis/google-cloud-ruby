@@ -266,7 +266,7 @@ It is not subject to any SLA or deprecation policy.</p>
 If the name is not provided in the request, the server will assign a random
 name for this snapshot on the same project as the subscription.
 Note that for REST API requests, you must specify a name.
-Format is +projects/project/snapshots/snap+.</p>
+Format is +projects/{project}/snapshots/{snap}+.</p>
 
 
   </div>
@@ -288,7 +288,7 @@ Format is +projects/project/snapshots/snap+.</p>
 If the name is not provided in the request, the server will assign a random
 name for this snapshot on the same project as the subscription.
 Note that for REST API requests, you must specify a name.
-Format is +projects/project/snapshots/snap+.</p>
+Format is +projects/{project}/snapshots/{snap}+.</p>
 </div>
       
     </li>
@@ -333,7 +333,7 @@ Specifically, the created snapshot is guaranteed to retain:
      +CreateSnapshot+ request; as well as:
  (b) Any messages published to the subscription&#39;s topic following the
      successful completion of the CreateSnapshot request.
-Format is +projects/project/subscriptions/sub+.</p>
+Format is +projects/{project}/subscriptions/{sub}+.</p>
 
 
   </div>
@@ -359,7 +359,7 @@ Specifically, the created snapshot is guaranteed to retain:
      +CreateSnapshot+ request; as well as:
  (b) Any messages published to the subscription&#39;s topic following the
      successful completion of the CreateSnapshot request.
-Format is +projects/project/subscriptions/sub+.</p>
+Format is +projects/{project}/subscriptions/{sub}+.</p>
 </div>
       
     </li>

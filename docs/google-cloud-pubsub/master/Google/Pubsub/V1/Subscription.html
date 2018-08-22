@@ -528,7 +528,7 @@ use. It is not subject to any SLA or deprecation policy.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The name of the subscription. It must have the format
-+&quot;projects/project/subscriptions/subscription&quot;+. +subscription+ must
++&quot;projects/{project}/subscriptions/{subscription}&quot;+. +{subscription}+ must
 start with a letter, and contain only letters (+[A-Za-z]+), numbers
 (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
 plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
@@ -551,7 +551,7 @@ in length, and it must not start with +&quot;goog&quot;+</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription. It must have the format
-+&quot;projects/project/subscriptions/subscription&quot;+. +subscription+ must
++&quot;projects/{project}/subscriptions/{subscription}&quot;+. +{subscription}+ must
 start with a letter, and contain only letters (+[A-Za-z]+), numbers
 (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
 plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
@@ -719,7 +719,7 @@ use. It is not subject to any SLA or deprecation policy.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The name of the topic from which this subscription is receiving messages.
-Format is +projects/project/topics/<span class='object_link'><a href="#topic-instance_method" title="Google::Pubsub::V1::Subscription#topic (method)">#topic</a></span>+.
+Format is +projects/{project}/topics/{topic}+.
 The value of this field will be +<em>deleted-topic</em>+ if the topic has been
 deleted.</p>
 
@@ -740,7 +740,7 @@ deleted.</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic from which this subscription is receiving messages.
-Format is +projects/project/topics/<span class='object_link'><a href="#topic-instance_method" title="Google::Pubsub::V1::Subscription#topic (method)">#topic</a></span>+.
+Format is +projects/{project}/topics/{topic}+.
 The value of this field will be +<em>deleted-topic</em>+ if the topic has been
 deleted.</p>
 </div>

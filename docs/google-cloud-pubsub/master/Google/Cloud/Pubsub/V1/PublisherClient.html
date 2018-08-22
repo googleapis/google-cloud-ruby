@@ -1974,7 +1974,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The name of the topic. It must have the format
-</span>  <span class='comment'>#   +&quot;projects/{project}/topics/{topic}&quot;+. +{topic}+ must start with a letter,
+</span>  <span class='comment'>#   +&quot;projects/\\{project}/topics/\\{topic}&quot;+. +\\{topic}+ must start with a letter,
 </span>  <span class='comment'>#   and contain only letters (+[A-Za-z]+), numbers (+[0-9]+), dashes (+-+),
 </span>  <span class='comment'>#   underscores (+_+), periods (+.+), tildes (+~+), plus (+++) or percent
 </span>  <span class='comment'>#   signs (+%+). It must be between 3 and 255 characters in length, and it
@@ -2074,7 +2074,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   The messages in the request will be published on this topic.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'># @param messages [Array&lt;Google::Pubsub::V1::PubsubMessage | Hash&gt;]
 </span>  <span class='comment'>#   The messages to publish.
 </span>  <span class='comment'>#   A hash of the same form as `Google::Pubsub::V1::PubsubMessage`
@@ -2114,7 +2114,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   The name of the topic to get.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -2145,7 +2145,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param project [String]
 </span>  <span class='comment'>#   The name of the cloud project that topics belong to.
-</span>  <span class='comment'>#   Format is +projects/{project}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -2200,7 +2200,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   The name of the topic that subscriptions are attached to.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -2259,7 +2259,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   Name of the topic to delete.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -2292,7 +2292,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being specified.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param policy [Google::Iam::V1::Policy | Hash]
 </span>  <span class='comment'>#   REQUIRED: The complete policy to be applied to the +resource+. The size of
 </span>  <span class='comment'>#   the policy is limited to a few 10s of KB. An empty policy is a
@@ -2338,7 +2338,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -2372,7 +2372,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy detail is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param permissions [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The set of permissions to check for the +resource+. Permissions with
 </span>  <span class='comment'>#   wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more
@@ -3396,7 +3396,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The name of the topic. It must have the format
-</span>  <span class='comment'>#   +&quot;projects/{project}/topics/{topic}&quot;+. +{topic}+ must start with a letter,
+</span>  <span class='comment'>#   +&quot;projects/\\{project}/topics/\\{topic}&quot;+. +\\{topic}+ must start with a letter,
 </span>  <span class='comment'>#   and contain only letters (+[A-Za-z]+), numbers (+[0-9]+), dashes (+-+),
 </span>  <span class='comment'>#   underscores (+_+), periods (+.+), tildes (+~+), plus (+++) or percent
 </span>  <span class='comment'>#   signs (+%+). It must be between 3 and 255 characters in length, and it
@@ -3496,7 +3496,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   The messages in the request will be published on this topic.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'># @param messages [Array&lt;Google::Pubsub::V1::PubsubMessage | Hash&gt;]
 </span>  <span class='comment'>#   The messages to publish.
 </span>  <span class='comment'>#   A hash of the same form as `Google::Pubsub::V1::PubsubMessage`
@@ -3536,7 +3536,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   The name of the topic to get.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3567,7 +3567,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param project [String]
 </span>  <span class='comment'>#   The name of the cloud project that topics belong to.
-</span>  <span class='comment'>#   Format is +projects/{project}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -3622,7 +3622,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   The name of the topic that subscriptions are attached to.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -3681,7 +3681,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   Name of the topic to delete.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3714,7 +3714,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being specified.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param policy [Google::Iam::V1::Policy | Hash]
 </span>  <span class='comment'>#   REQUIRED: The complete policy to be applied to the +resource+. The size of
 </span>  <span class='comment'>#   the policy is limited to a few 10s of KB. An empty policy is a
@@ -3760,7 +3760,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3794,7 +3794,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy detail is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param permissions [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The set of permissions to check for the +resource+. Permissions with
 </span>  <span class='comment'>#   wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more
@@ -4050,7 +4050,7 @@ custom error handling.</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic. It must have the format
-+&quot;projects/project/topics/topic&quot;+. +topic+ must start with a letter,
++&quot;projects/{project}/topics/{topic}&quot;+. +{topic}+ must start with a letter,
 and contain only letters (+[A-Za-z]+), numbers (+[0-9]+), dashes (+-+),
 underscores (+_+), periods (+.+), tildes (+~+), plus (+++) or percent
 signs (+%+). It must be between 3 and 255 characters in length, and it
@@ -4278,7 +4278,7 @@ not deleted, but their +topic+ field is set to +<em>deleted-topic</em>+.</p>
       
         &mdash;
         <div class='inline'><p>Name of the topic to delete.
-Format is +projects/project/topics/topic+.</p>
+Format is +projects/{project}/topics/{topic}+.</p>
 </div>
       
     </li>
@@ -4449,7 +4449,7 @@ set.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
@@ -4624,7 +4624,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic to get.
-Format is +projects/project/topics/topic+.</p>
+Format is +projects/{project}/topics/{topic}+.</p>
 </div>
       
     </li>
@@ -4811,7 +4811,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic that subscriptions are attached to.
-Format is +projects/project/topics/topic+.</p>
+Format is +projects/{project}/topics/{topic}+.</p>
 </div>
       
     </li>
@@ -5028,7 +5028,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The name of the cloud project that topics belong to.
-Format is +projects/project+.</p>
+Format is +projects/{project}+.</p>
 </div>
       
     </li>
@@ -5238,7 +5238,7 @@ does not exist. The message payload must not be empty; it must contain
       
         &mdash;
         <div class='inline'><p>The messages in the request will be published on this topic.
-Format is +projects/project/topics/topic+.</p>
+Format is +projects/{project}/topics/{topic}+.</p>
 </div>
       
     </li>
@@ -5439,7 +5439,7 @@ existing policy.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
@@ -5644,7 +5644,7 @@ permissions, not a NOT_FOUND error.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>

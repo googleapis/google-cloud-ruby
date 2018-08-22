@@ -2886,14 +2886,14 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The name of the subscription. It must have the format
-</span>  <span class='comment'>#   +&quot;projects/{project}/subscriptions/{subscription}&quot;+. +{subscription}+ must
+</span>  <span class='comment'>#   +&quot;projects/\\{project}/subscriptions/\\{subscription}&quot;+. +\\{subscription}+ must
 </span>  <span class='comment'>#   start with a letter, and contain only letters (+[A-Za-z]+), numbers
 </span>  <span class='comment'>#   (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
 </span>  <span class='comment'>#   plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
 </span>  <span class='comment'>#   in length, and it must not start with +&quot;goog&quot;+
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   The name of the topic from which this subscription is receiving messages.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'>#   The value of this field will be +_deleted-topic_+ if the topic has been
 </span>  <span class='comment'>#   deleted.
 </span>  <span class='comment'># @param push_config [Google::Pubsub::V1::PushConfig | Hash]
@@ -2988,7 +2988,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The name of the subscription to get.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3063,7 +3063,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param project [String]
 </span>  <span class='comment'>#   The name of the cloud project that subscriptions belong to.
-</span>  <span class='comment'>#   Format is +projects/{project}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -3122,7 +3122,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The subscription to delete.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3157,7 +3157,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The name of the subscription.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param ack_ids [Array&lt;String&gt;]
 </span>  <span class='comment'>#   List of acknowledgment IDs.
 </span>  <span class='comment'># @param ack_deadline_seconds [Integer]
@@ -3214,7 +3214,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The subscription whose message is being acknowledged.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param ack_ids [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The acknowledgment ID for the messages being acknowledged that was returned
 </span>  <span class='comment'>#   by the Pub/Sub system in the +Pull+ response. Must not be empty.
@@ -3256,7 +3256,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The subscription from which messages should be pulled.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param max_messages [Integer]
 </span>  <span class='comment'>#   The maximum number of messages returned for this request. The Pub/Sub
 </span>  <span class='comment'>#   system may return fewer than the number specified.
@@ -3353,7 +3353,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The name of the subscription.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param push_config [Google::Pubsub::V1::PushConfig | Hash]
 </span>  <span class='comment'>#   The push configuration for future deliveries.
 </span>  <span class='comment'>#
@@ -3401,7 +3401,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param project [String]
 </span>  <span class='comment'>#   The name of the cloud project that snapshots belong to.
-</span>  <span class='comment'>#   Format is +projects/{project}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -3473,7 +3473,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#   If the name is not provided in the request, the server will assign a random
 </span>  <span class='comment'>#   name for this snapshot on the same project as the subscription.
 </span>  <span class='comment'>#   Note that for REST API requests, you must specify a name.
-</span>  <span class='comment'>#   Format is +projects/{project}/snapshots/{snap}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/snapshots/\\{snap}+.
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The subscription whose backlog the snapshot retains.
 </span>  <span class='comment'>#   Specifically, the created snapshot is guaranteed to retain:
@@ -3483,7 +3483,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#        +CreateSnapshot+ request; as well as:
 </span>  <span class='comment'>#    (b) Any messages published to the subscription&#39;s topic following the
 </span>  <span class='comment'>#        successful completion of the CreateSnapshot request.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param labels [Hash{String =&gt; String}]
 </span>  <span class='comment'>#   User labels.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
@@ -3576,7 +3576,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param snapshot [String]
 </span>  <span class='comment'>#   The name of the snapshot to delete.
-</span>  <span class='comment'>#   Format is +projects/{project}/snapshots/{snap}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/snapshots/\\{snap}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3628,7 +3628,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param snapshot [String]
 </span>  <span class='comment'>#   The snapshot to seek to. The snapshot&#39;s topic must be the same as that of
 </span>  <span class='comment'>#   the provided subscription.
-</span>  <span class='comment'>#   Format is +projects/{project}/snapshots/{snap}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/snapshots/\\{snap}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3665,7 +3665,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being specified.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param policy [Google::Iam::V1::Policy | Hash]
 </span>  <span class='comment'>#   REQUIRED: The complete policy to be applied to the +resource+. The size of
 </span>  <span class='comment'>#   the policy is limited to a few 10s of KB. An empty policy is a
@@ -3711,7 +3711,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3745,7 +3745,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy detail is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param permissions [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The set of permissions to check for the +resource+. Permissions with
 </span>  <span class='comment'>#   wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more
@@ -5372,14 +5372,14 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The name of the subscription. It must have the format
-</span>  <span class='comment'>#   +&quot;projects/{project}/subscriptions/{subscription}&quot;+. +{subscription}+ must
+</span>  <span class='comment'>#   +&quot;projects/\\{project}/subscriptions/\\{subscription}&quot;+. +\\{subscription}+ must
 </span>  <span class='comment'>#   start with a letter, and contain only letters (+[A-Za-z]+), numbers
 </span>  <span class='comment'>#   (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
 </span>  <span class='comment'>#   plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
 </span>  <span class='comment'>#   in length, and it must not start with +&quot;goog&quot;+
 </span>  <span class='comment'># @param topic [String]
 </span>  <span class='comment'>#   The name of the topic from which this subscription is receiving messages.
-</span>  <span class='comment'>#   Format is +projects/{project}/topics/{topic}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/topics/\\{topic}+.
 </span>  <span class='comment'>#   The value of this field will be +_deleted-topic_+ if the topic has been
 </span>  <span class='comment'>#   deleted.
 </span>  <span class='comment'># @param push_config [Google::Pubsub::V1::PushConfig | Hash]
@@ -5474,7 +5474,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The name of the subscription to get.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -5549,7 +5549,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param project [String]
 </span>  <span class='comment'>#   The name of the cloud project that subscriptions belong to.
-</span>  <span class='comment'>#   Format is +projects/{project}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -5608,7 +5608,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The subscription to delete.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -5643,7 +5643,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The name of the subscription.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param ack_ids [Array&lt;String&gt;]
 </span>  <span class='comment'>#   List of acknowledgment IDs.
 </span>  <span class='comment'># @param ack_deadline_seconds [Integer]
@@ -5700,7 +5700,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The subscription whose message is being acknowledged.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param ack_ids [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The acknowledgment ID for the messages being acknowledged that was returned
 </span>  <span class='comment'>#   by the Pub/Sub system in the +Pull+ response. Must not be empty.
@@ -5742,7 +5742,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The subscription from which messages should be pulled.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param max_messages [Integer]
 </span>  <span class='comment'>#   The maximum number of messages returned for this request. The Pub/Sub
 </span>  <span class='comment'>#   system may return fewer than the number specified.
@@ -5839,7 +5839,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The name of the subscription.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param push_config [Google::Pubsub::V1::PushConfig | Hash]
 </span>  <span class='comment'>#   The push configuration for future deliveries.
 </span>  <span class='comment'>#
@@ -5887,7 +5887,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param project [String]
 </span>  <span class='comment'>#   The name of the cloud project that snapshots belong to.
-</span>  <span class='comment'>#   Format is +projects/{project}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -5959,7 +5959,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#   If the name is not provided in the request, the server will assign a random
 </span>  <span class='comment'>#   name for this snapshot on the same project as the subscription.
 </span>  <span class='comment'>#   Note that for REST API requests, you must specify a name.
-</span>  <span class='comment'>#   Format is +projects/{project}/snapshots/{snap}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/snapshots/\\{snap}+.
 </span>  <span class='comment'># @param subscription [String]
 </span>  <span class='comment'>#   The subscription whose backlog the snapshot retains.
 </span>  <span class='comment'>#   Specifically, the created snapshot is guaranteed to retain:
@@ -5969,7 +5969,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#        +CreateSnapshot+ request; as well as:
 </span>  <span class='comment'>#    (b) Any messages published to the subscription&#39;s topic following the
 </span>  <span class='comment'>#        successful completion of the CreateSnapshot request.
-</span>  <span class='comment'>#   Format is +projects/{project}/subscriptions/{sub}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/subscriptions/\\{sub}+.
 </span>  <span class='comment'># @param labels [Hash{String =&gt; String}]
 </span>  <span class='comment'>#   User labels.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
@@ -6062,7 +6062,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param snapshot [String]
 </span>  <span class='comment'>#   The name of the snapshot to delete.
-</span>  <span class='comment'>#   Format is +projects/{project}/snapshots/{snap}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/snapshots/\\{snap}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -6114,7 +6114,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param snapshot [String]
 </span>  <span class='comment'>#   The snapshot to seek to. The snapshot&#39;s topic must be the same as that of
 </span>  <span class='comment'>#   the provided subscription.
-</span>  <span class='comment'>#   Format is +projects/{project}/snapshots/{snap}+.
+</span>  <span class='comment'>#   Format is +projects/\\{project}/snapshots/\\{snap}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -6151,7 +6151,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being specified.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param policy [Google::Iam::V1::Policy | Hash]
 </span>  <span class='comment'>#   REQUIRED: The complete policy to be applied to the +resource+. The size of
 </span>  <span class='comment'>#   the policy is limited to a few 10s of KB. An empty policy is a
@@ -6197,7 +6197,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -6231,7 +6231,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param resource [String]
 </span>  <span class='comment'>#   REQUIRED: The resource for which the policy detail is being requested.
 </span>  <span class='comment'>#   +resource+ is usually specified as a path. For example, a Project
-</span>  <span class='comment'>#   resource is specified as +projects/{project}+.
+</span>  <span class='comment'>#   resource is specified as +projects/\\{project}+.
 </span>  <span class='comment'># @param permissions [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The set of permissions to check for the +resource+. Permissions with
 </span>  <span class='comment'>#   wildcards (such as &#39;*&#39; or &#39;storage.*&#39;) are not allowed. For more
@@ -6665,7 +6665,7 @@ than once will not result in an error.</p>
       
         &mdash;
         <div class='inline'><p>The subscription whose message is being acknowledged.
-Format is +projects/project/subscriptions/sub+.</p>
+Format is +projects/{project}/subscriptions/{sub}+.</p>
 </div>
       
     </li>
@@ -6871,7 +6871,7 @@ requests, you must specify a name in the request.</p>
 If the name is not provided in the request, the server will assign a random
 name for this snapshot on the same project as the subscription.
 Note that for REST API requests, you must specify a name.
-Format is +projects/project/snapshots/snap+.</p>
+Format is +projects/{project}/snapshots/{snap}+.</p>
 </div>
       
     </li>
@@ -6894,7 +6894,7 @@ Specifically, the created snapshot is guaranteed to retain:
      +CreateSnapshot+ request; as well as:
  (b) Any messages published to the subscription&#39;s topic following the
      successful completion of the CreateSnapshot request.
-Format is +projects/project/subscriptions/sub+.</p>
+Format is +projects/{project}/subscriptions/{sub}+.</p>
 </div>
       
     </li>
@@ -7103,7 +7103,7 @@ Note that for REST API requests, you must specify a name in the request.</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription. It must have the format
-+&quot;projects/project/subscriptions/subscription&quot;+. +subscription+ must
++&quot;projects/{project}/subscriptions/{subscription}&quot;+. +{subscription}+ must
 start with a letter, and contain only letters (+[A-Za-z]+), numbers
 (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
 plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
@@ -7123,7 +7123,7 @@ in length, and it must not start with +&quot;goog&quot;+</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic from which this subscription is receiving messages.
-Format is +projects/project/topics/topic+.
+Format is +projects/{project}/topics/{topic}+.
 The value of this field will be +<em>deleted-topic</em>+ if the topic has been
 deleted.</p>
 </div>
@@ -7445,7 +7445,7 @@ snapshot or its subscription, unless the same subscription is specified.</p>
       
         &mdash;
         <div class='inline'><p>The name of the snapshot to delete.
-Format is +projects/project/snapshots/snap+.</p>
+Format is +projects/{project}/snapshots/{snap}+.</p>
 </div>
       
     </li>
@@ -7617,7 +7617,7 @@ subscription or its topic unless the same topic is specified.</p>
       
         &mdash;
         <div class='inline'><p>The subscription to delete.
-Format is +projects/project/subscriptions/sub+.</p>
+Format is +projects/{project}/subscriptions/{sub}+.</p>
 </div>
       
     </li>
@@ -7788,7 +7788,7 @@ set.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
@@ -7963,7 +7963,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription to get.
-Format is +projects/project/subscriptions/sub+.</p>
+Format is +projects/{project}/subscriptions/{sub}+.</p>
 </div>
       
     </li>
@@ -8153,7 +8153,7 @@ use. It is not subject to any SLA or deprecation policy.</p>
       
         &mdash;
         <div class='inline'><p>The name of the cloud project that snapshots belong to.
-Format is +projects/project+.</p>
+Format is +projects/{project}+.</p>
 </div>
       
     </li>
@@ -8370,7 +8370,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The name of the cloud project that subscriptions belong to.
-Format is +projects/project+.</p>
+Format is +projects/{project}+.</p>
 </div>
       
     </li>
@@ -8585,7 +8585,7 @@ subscription-level +ackDeadlineSeconds+ used for subsequent messages.</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription.
-Format is +projects/project/subscriptions/sub+.</p>
+Format is +projects/{project}/subscriptions/{sub}+.</p>
 </div>
       
     </li>
@@ -8805,7 +8805,7 @@ continuously through the call regardless of changes to the +PushConfig+.</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription.
-Format is +projects/project/subscriptions/sub+.</p>
+Format is +projects/{project}/subscriptions/{sub}+.</p>
 </div>
       
     </li>
@@ -9005,7 +9005,7 @@ subscription.</p>
       
         &mdash;
         <div class='inline'><p>The subscription from which messages should be pulled.
-Format is +projects/project/subscriptions/sub+.</p>
+Format is +projects/{project}/subscriptions/{sub}+.</p>
 </div>
       
     </li>
@@ -9271,7 +9271,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>The snapshot to seek to. The snapshot&#39;s topic must be the same as that of
 the provided subscription.
-Format is +projects/project/snapshots/snap+.</p>
+Format is +projects/{project}/snapshots/{snap}+.</p>
 </div>
       
     </li>
@@ -9459,7 +9459,7 @@ existing policy.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
@@ -9813,7 +9813,7 @@ permissions, not a NOT_FOUND error.</p>
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
 +resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/project+.</p>
+resource is specified as +projects/{project}+.</p>
 </div>
       
     </li>
