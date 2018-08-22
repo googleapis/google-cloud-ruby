@@ -2416,7 +2416,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The resource name of the Document to get. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
 </span>  <span class='comment'># @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
 </span>  <span class='comment'>#   The fields to return. If not set, returns all fields.
 </span>  <span class='comment'>#
@@ -2467,8 +2467,8 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   The parent resource name. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents+ or
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
 </span>  <span class='comment'>#   For example:
 </span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents+ or
 </span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
@@ -2568,8 +2568,8 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   The parent resource. For example:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents+ or
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}+
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/chatrooms/\\{chatroom_id}+
 </span>  <span class='comment'># @param collection_id [String]
 </span>  <span class='comment'>#   The collection ID, relative to +parent+, to list. For example: +chatrooms+.
 </span>  <span class='comment'># @param document_id [String]
@@ -2700,7 +2700,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The resource name of the Document to delete. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
 </span>  <span class='comment'># @param current_document [Google::Firestore::V1beta1::Precondition | Hash]
 </span>  <span class='comment'>#   An optional precondition on the document.
 </span>  <span class='comment'>#   The request will fail if this is set and not met by the target document.
@@ -2741,10 +2741,10 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param database [String]
 </span>  <span class='comment'>#   The database name. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}+.
 </span>  <span class='comment'># @param documents [Array&lt;String&gt;]
 </span>  <span class='comment'>#   The names of the documents to retrieve. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
 </span>  <span class='comment'>#   The request will fail if any of the document is not a child resource of the
 </span>  <span class='comment'>#   given +database+. Duplicate names will be elided.
 </span>  <span class='comment'># @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
@@ -2811,7 +2811,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param database [String]
 </span>  <span class='comment'>#   The database name. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}+.
 </span>  <span class='comment'># @param options_ [Google::Firestore::V1beta1::TransactionOptions | Hash]
 </span>  <span class='comment'>#   The options for the transaction.
 </span>  <span class='comment'>#   Defaults to a read-write transaction.
@@ -2849,7 +2849,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param database [String]
 </span>  <span class='comment'>#   The database name. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}+.
 </span>  <span class='comment'># @param writes [Array&lt;Google::Firestore::V1beta1::Write | Hash&gt;]
 </span>  <span class='comment'>#   The writes to apply.
 </span>  <span class='comment'>#
@@ -2895,7 +2895,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param database [String]
 </span>  <span class='comment'>#   The database name. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}+.
 </span>  <span class='comment'># @param transaction [String]
 </span>  <span class='comment'>#   The transaction to roll back.
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
@@ -2933,8 +2933,8 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   The parent resource name. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents+ or
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
 </span>  <span class='comment'>#   For example:
 </span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents+ or
 </span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
@@ -3064,7 +3064,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   The parent document. In the format:
-</span>  <span class='comment'>#   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
 </span>  <span class='comment'>#   For example:
 </span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
 </span>  <span class='comment'># @param page_size [Integer]
@@ -3565,7 +3565,7 @@ same order that they were requested.</p>
       
         &mdash;
         <div class='inline'><p>The database name. In the format:
-+projects/project_id/databases/database_id+.</p>
++projects/{project_id}/databases/{database_id}+.</p>
 </div>
       
     </li>
@@ -3581,7 +3581,7 @@ same order that they were requested.</p>
       
         &mdash;
         <div class='inline'><p>The names of the documents to retrieve. In the format:
-+projects/project_id/databases/database_id/documents/document_path+.
++projects/{project_id}/databases/{database_id}/documents/{document_path}+.
 The request will fail if any of the document is not a child resource of the
 given +database+. Duplicate names will be elided.</p>
 </div>
@@ -3810,7 +3810,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The database name. In the format:
-+projects/project_id/databases/database_id+.</p>
++projects/{project_id}/databases/{database_id}+.</p>
 </div>
       
     </li>
@@ -4010,7 +4010,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The database name. In the format:
-+projects/project_id/databases/database_id+.</p>
++projects/{project_id}/databases/{database_id}+.</p>
 </div>
       
     </li>
@@ -4236,8 +4236,8 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The parent resource. For example:
-+projects/project_id/databases/database_id/documents+ or
-+projects/project_id/databases/database_id/documents/chatrooms/chatroom_id+</p>
++projects/{project_id}/databases/{database_id}/documents+ or
++projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}+</p>
 </div>
       
     </li>
@@ -4497,7 +4497,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The resource name of the Document to delete. In the format:
-+projects/project_id/databases/database_id/documents/document_path+.</p>
++projects/{project_id}/databases/{database_id}/documents/{document_path}+.</p>
 </div>
       
     </li>
@@ -4687,7 +4687,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The resource name of the Document to get. In the format:
-+projects/project_id/databases/database_id/documents/document_path+.</p>
++projects/{project_id}/databases/{database_id}/documents/{document_path}+.</p>
 </div>
       
     </li>
@@ -4939,7 +4939,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The parent document. In the format:
-+projects/project_id/databases/database_id/documents/document_path+.
++projects/{project_id}/databases/{database_id}/documents/{document_path}+.
 For example:
 +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+</p>
 </div>
@@ -5161,8 +5161,8 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The parent resource name. In the format:
-+projects/project_id/databases/database_id/documents+ or
-+projects/project_id/databases/database_id/documents/document_path+.
++projects/{project_id}/databases/{database_id}/documents+ or
++projects/{project_id}/databases/{database_id}/documents/{document_path}+.
 For example:
 +projects/my-project/databases/my-database/documents+ or
 +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+</p>
@@ -5642,7 +5642,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The database name. In the format:
-+projects/project_id/databases/database_id+.</p>
++projects/{project_id}/databases/{database_id}+.</p>
 </div>
       
     </li>
@@ -5831,8 +5831,8 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The parent resource name. In the format:
-+projects/project_id/databases/database_id/documents+ or
-+projects/project_id/databases/database_id/documents/document_path+.
++projects/{project_id}/databases/{database_id}/documents+ or
++projects/{project_id}/databases/{database_id}/documents/{document_path}+.
 For example:
 +projects/my-project/databases/my-database/documents+ or
 +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+</p>
