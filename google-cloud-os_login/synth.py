@@ -82,9 +82,6 @@ def escape_braces(match):
         if count == 0:
             return content
 s.replace(
-    [
-      'lib/google/cloud/os_login/v1/**/*.rb',
-      'lib/google/cloud/os_login/v1beta/**/*.rb'
-    ],
+    'lib/google/cloud/**/*.rb',
     '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
     escape_braces)
