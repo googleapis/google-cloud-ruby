@@ -121,7 +121,7 @@ module Google
       end
     end
 
-    # Update the supported and recommended version trhesholds according to the
+    # Update the supported and recommended version thresholds according to the
     # MRI support schedule: supported means non-EOL, and recommended means in
     # normal (rather than security) maintenance. Generally, this means updating
     # these at the end of March each year, if the previous year patterns hold.
