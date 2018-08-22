@@ -28,7 +28,7 @@ module Google
           #   @return [String]
           #     The resource name of the transfer config.
           #     Transfer config names have the form
-          #     +projects/{project_id}/transferConfigs/{config_id}+.
+          #     +projects/\\{project_id}/transferConfigs/\\{config_id}+.
           #     Where +config_id+ is usually a uuid, even though it is not
           #     guaranteed or required. The name is ignored when creating a transfer
           #     config.
@@ -97,7 +97,7 @@ module Google
           #   @return [String]
           #     The resource name of the transfer run.
           #     Transfer run names have the form
-          #     +projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}+.
+          #     +projects/\\{project_id}/locations/\\{location}/transferConfigs/\\{config_id}/runs/\\{run_id}+.
           #     The name is ignored when creating a transfer run.
           # @!attribute [rw] schedule_time
           #   @return [Google::Protobuf::Timestamp]

@@ -335,7 +335,7 @@ module Google
           #
           # @param name [String]
           #   The resource name of the Document to get. In the format:
-          #   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
           # @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
           #   The fields to return. If not set, returns all fields.
           #
@@ -386,8 +386,8 @@ module Google
           #
           # @param parent [String]
           #   The parent resource name. In the format:
-          #   +projects/{project_id}/databases/{database_id}/documents+ or
-          #   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
           #   For example:
           #   +projects/my-project/databases/my-database/documents+ or
           #   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
@@ -487,8 +487,8 @@ module Google
           #
           # @param parent [String]
           #   The parent resource. For example:
-          #   +projects/{project_id}/databases/{database_id}/documents+ or
-          #   +projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}+
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents/chatrooms/\\{chatroom_id}+
           # @param collection_id [String]
           #   The collection ID, relative to +parent+, to list. For example: +chatrooms+.
           # @param document_id [String]
@@ -619,7 +619,7 @@ module Google
           #
           # @param name [String]
           #   The resource name of the Document to delete. In the format:
-          #   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
           # @param current_document [Google::Firestore::V1beta1::Precondition | Hash]
           #   An optional precondition on the document.
           #   The request will fail if this is set and not met by the target document.
@@ -660,10 +660,10 @@ module Google
           #
           # @param database [String]
           #   The database name. In the format:
-          #   +projects/{project_id}/databases/{database_id}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}+.
           # @param documents [Array<String>]
           #   The names of the documents to retrieve. In the format:
-          #   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
           #   The request will fail if any of the document is not a child resource of the
           #   given +database+. Duplicate names will be elided.
           # @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
@@ -730,7 +730,7 @@ module Google
           #
           # @param database [String]
           #   The database name. In the format:
-          #   +projects/{project_id}/databases/{database_id}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}+.
           # @param options_ [Google::Firestore::V1beta1::TransactionOptions | Hash]
           #   The options for the transaction.
           #   Defaults to a read-write transaction.
@@ -768,7 +768,7 @@ module Google
           #
           # @param database [String]
           #   The database name. In the format:
-          #   +projects/{project_id}/databases/{database_id}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}+.
           # @param writes [Array<Google::Firestore::V1beta1::Write | Hash>]
           #   The writes to apply.
           #
@@ -814,7 +814,7 @@ module Google
           #
           # @param database [String]
           #   The database name. In the format:
-          #   +projects/{project_id}/databases/{database_id}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}+.
           # @param transaction [String]
           #   The transaction to roll back.
           # @param options [Google::Gax::CallOptions]
@@ -852,8 +852,8 @@ module Google
           #
           # @param parent [String]
           #   The parent resource name. In the format:
-          #   +projects/{project_id}/databases/{database_id}/documents+ or
-          #   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
           #   For example:
           #   +projects/my-project/databases/my-database/documents+ or
           #   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
@@ -983,7 +983,7 @@ module Google
           #
           # @param parent [String]
           #   The parent document. In the format:
-          #   +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
           #   For example:
           #   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
           # @param page_size [Integer]

@@ -19,7 +19,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
-      #     +"projects/{project_id_or_number}"+.
+      #     +"projects/\\{project_id_or_number}"+.
       # @!attribute [rw] filter
       #   @return [String]
       #     An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
@@ -55,8 +55,8 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The monitored resource descriptor to get.  The format is
-      #     +"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"+.
-      #     The +{resource_type}+ is a predefined type, such as
+      #     +"projects/\\{project_id_or_number}/monitoredResourceDescriptors/\\{resource_type}"+.
+      #     The +\\{resource_type}+ is a predefined type, such as
       #     +cloudsql_database+.
       class GetMonitoredResourceDescriptorRequest; end
 
@@ -64,7 +64,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
-      #     +"projects/{project_id_or_number}"+.
+      #     +"projects/\\{project_id_or_number}"+.
       # @!attribute [rw] filter
       #   @return [String]
       #     If this field is empty, all custom and
@@ -101,8 +101,8 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The metric descriptor on which to execute the request. The format is
-      #     +"projects/{project_id_or_number}/metricDescriptors/{metric_id}"+.
-      #     An example value of +{metric_id}+ is
+      #     +"projects/\\{project_id_or_number}/metricDescriptors/\\{metric_id}"+.
+      #     An example value of +\\{metric_id}+ is
       #     +"compute.googleapis.com/instance/disk/read_bytes_count"+.
       class GetMetricDescriptorRequest; end
 
@@ -110,7 +110,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
-      #     +"projects/{project_id_or_number}"+.
+      #     +"projects/\\{project_id_or_number}"+.
       # @!attribute [rw] metric_descriptor
       #   @return [Google::Api::MetricDescriptor]
       #     The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
@@ -121,8 +121,8 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The metric descriptor on which to execute the request. The format is
-      #     +"projects/{project_id_or_number}/metricDescriptors/{metric_id}"+.
-      #     An example of +{metric_id}+ is:
+      #     +"projects/\\{project_id_or_number}/metricDescriptors/\\{metric_id}"+.
+      #     An example of +\\{metric_id}+ is:
       #     +"custom.googleapis.com/my_test_metric"+.
       class DeleteMetricDescriptorRequest; end
 
@@ -130,7 +130,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
-      #     "projects/{project_id_or_number}".
+      #     "projects/\\{project_id_or_number}".
       # @!attribute [rw] filter
       #   @return [String]
       #     A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
@@ -201,7 +201,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
-      #     +"projects/{project_id_or_number}"+.
+      #     +"projects/\\{project_id_or_number}"+.
       # @!attribute [rw] time_series
       #   @return [Array<Google::Monitoring::V3::TimeSeries>]
       #     The new data to be added to a list of time series.

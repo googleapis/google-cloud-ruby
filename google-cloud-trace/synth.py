@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import logging
 import os
+import re
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -65,3 +66,19 @@ s.replace(
     ],
     '\\{% dynamic print site_values.console_name %\\}',
     'Google Cloud Platform Console')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^\n#\\$\\\\])\\{([\\w,]+|\\.+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    [
+      'lib/google/cloud/trace/v1/**/*.rb',
+      'lib/google/cloud/trace/v2/**/*.rb'
+    ],
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)

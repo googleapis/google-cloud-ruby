@@ -72,3 +72,16 @@ s.replace(
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/os-login\n',
     '[Product Documentation]: https://cloud.google.com/compute/docs/oslogin/rest/\n')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)

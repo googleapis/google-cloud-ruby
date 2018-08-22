@@ -256,19 +256,19 @@ module Google
           #
           # @param name [String]
           #   The project whose groups are to be listed. The format is
-          #   +"projects/{project_id_or_number}"+.
+          #   +"projects/\\{project_id_or_number}"+.
           # @param children_of_group [String]
-          #   A group name: +"projects/{project_id_or_number}/groups/{group_id}"+.
+          #   A group name: +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
           #   Returns groups whose +parentName+ field contains the group
           #   name.  If no groups have this parent, the results are empty.
           # @param ancestors_of_group [String]
-          #   A group name: +"projects/{project_id_or_number}/groups/{group_id}"+.
+          #   A group name: +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
           #   Returns groups that are ancestors of the specified group.
           #   The groups are returned in order, starting with the immediate parent and
           #   ending with the most distant ancestor.  If the specified group has no
           #   immediate parent, the results are empty.
           # @param descendants_of_group [String]
-          #   A group name: +"projects/{project_id_or_number}/groups/{group_id}"+.
+          #   A group name: +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
           #   Returns the descendants of the specified group.  This is a superset of
           #   the results returned by the +childrenOfGroup+ filter, and includes
           #   children-of-children, and so forth.
@@ -332,7 +332,7 @@ module Google
           #
           # @param name [String]
           #   The group to retrieve. The format is
-          #   +"projects/{project_id_or_number}/groups/{group_id}"+.
+          #   +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -363,7 +363,7 @@ module Google
           #
           # @param name [String]
           #   The project in which to create the group. The format is
-          #   +"projects/{project_id_or_number}"+.
+          #   +"projects/\\{project_id_or_number}"+.
           # @param group [Google::Monitoring::V3::Group | Hash]
           #   A group definition. It is an error to define the +name+ field because
           #   the system assigns the name.
@@ -448,7 +448,7 @@ module Google
           #
           # @param name [String]
           #   The group to delete. The format is
-          #   +"projects/{project_id_or_number}/groups/{group_id}"+.
+          #   +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -479,7 +479,7 @@ module Google
           #
           # @param name [String]
           #   The group whose members are listed. The format is
-          #   +"projects/{project_id_or_number}/groups/{group_id}"+.
+          #   +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this

@@ -41,3 +41,16 @@ s.replace(
     'google-cloud-tasks.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> ([\\d\\.]+)"\n\n',
     '\n  gem.add_dependency "google-gax", "~> \\1"\n  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"\n\n')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^\n#\\$\\\\])\\{([\\w,]+|\\.+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)
