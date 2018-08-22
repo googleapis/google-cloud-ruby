@@ -24,88 +24,12 @@ require "stackdriver/core"
 module Google
   module Cloud
     ##
-    # # ErrorReporting
+    # # Error Reporting
     #
     # Stackdriver Error Reporting counts, analyzes and aggregates the crashes in
-    # your running cloud services. The Stackdriver Error Reporting
-    # Instrumentation client provides
-    # [a simple way to report errors](#how-to-report-errors) from your
-    # application.
+    # your running cloud services.
     #
-    # For general information about Stackdriver Error Reporting, read
-    # [Stackdriver Error Reporting
-    # Documentation](https://cloud.google.com/error-reporting/docs/).
-    #
-    # The goal of google-cloud is to provide an API that is comfortable to
-    # Rubyists. Your authentication credentials are detected automatically in
-    # Google Cloud Platform environments such as Google Compute Engine, Google
-    # App Engine and Google Kubernetes Engine. In other environments you can
-    # configure authentication easily, either directly in your code or via
-    # environment variables. Read more about the options for connecting in the
-    # [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
-    #
-    # ## Enabling Logging
-    #
-    # To enable logging for this library, set the logger for the underlying
-    # [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The
-    # logger that you set may be a Ruby stdlib
-    # [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html)
-    # as shown below, or a
-    # [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
-    # that will write logs to [Stackdriver
-    # Logging](https://cloud.google.com/logging/). See
-    # [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
-    # and the gRPC
-    # [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb)
-    # for additional information.
-    #
-    # Configuring a Ruby stdlib logger:
-    #
-    # ```ruby
-    # require "logger"
-    #
-    # module MyLogger
-    #   LOGGER = Logger.new $stderr, level: Logger::WARN
-    #   def logger
-    #     LOGGER
-    #   end
-    # end
-    #
-    # # Define a gRPC module-level logger method before grpc/logconfig.rb loads.
-    # module GRPC
-    #   extend MyLogger
-    # end
-    # ```
-    #
-    # ## How to report errors
-    #
-    # You can easily report exceptions from your applications to Stackdriver
-    # Error Reporting service:
-    #
-    # ```ruby
-    # require "google/cloud/error_reporting"
-    #
-    # # Configure Stackdriver ErrorReporting instrumentation
-    # Google::Cloud::ErrorReporting.configure do |config|
-    #   config.project_id = "my-project"
-    #   config.keyfile = "/path/to/keyfile.json"
-    # end
-    #
-    # # Insert a Rack Middleware to report unhanded exceptions
-    # use Google::Cloud::ErrorReporting::Middleware
-    #
-    # # Or explicitly submit exceptions
-    # begin
-    #   fail "Boom!"
-    # rescue => exception
-    #   Google::Cloud::ErrorReporting.report exception
-    # end
-    # ```
-    #
-    # See the [Instrumentation
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation)
-    # for more examples.
+    # See {file:OVERVIEW.md Error Reporting Overview}.
     #
     module ErrorReporting
       ##

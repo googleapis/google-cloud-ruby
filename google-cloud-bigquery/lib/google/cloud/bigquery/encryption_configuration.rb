@@ -21,8 +21,7 @@ module Google
       # # Encryption Configuration
       #
       # A builder for BigQuery table encryption configurations, passed to block
-      # arguments to {Dataset#create_table} and
-      # {Table#encryption_configuration}.
+      # arguments to {Dataset#create_table} and {Table#encryption}.
       #
       # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
       #   Protecting Data with Cloud KMS Keys

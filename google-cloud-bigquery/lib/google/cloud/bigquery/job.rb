@@ -275,7 +275,9 @@ module Google
         # provided when the job is created, and used to organize and group jobs.
         #
         # The returned hash is frozen and changes are not allowed. Use
-        # {#labels=} to replace the entire hash.
+        # {CopyJob::Updater#labels=} or {ExtractJob::Updater#labels=} or
+        # {LoadJob::Updater#labels=} or {QueryJob::Updater#labels=} to replace
+        # the entire hash.
         #
         # @return [Hash] The job labels.
         #
