@@ -2465,7 +2465,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The field will contain name of the resource requested, for example:
-</span>  <span class='comment'>#   +projects/{project_id}/dataSources/{data_source_id}+
+</span>  <span class='comment'>#   +projects/\\{project_id}/dataSources/\\{data_source_id}+
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -2497,7 +2497,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   The BigQuery project id for which data sources should be returned.
-</span>  <span class='comment'>#   Must be in the form: +projects/{project_id}+
+</span>  <span class='comment'>#   Must be in the form: +projects/\\{project_id}+
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -2552,7 +2552,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   The BigQuery project id where the transfer configuration should be created.
-</span>  <span class='comment'>#   Must be in the format /projects/{project_id}/locations/{location_id}
+</span>  <span class='comment'>#   Must be in the format /projects/\\{project_id}/locations/\\{location_id}
 </span>  <span class='comment'>#   If specified location and location of the destination bigquery dataset
 </span>  <span class='comment'>#   do not match - the request will fail.
 </span>  <span class='comment'># @param transfer_config [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig | Hash]
@@ -2677,7 +2677,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The field will contain name of the resource requested, for example:
-</span>  <span class='comment'>#   +projects/{project_id}/transferConfigs/{config_id}+
+</span>  <span class='comment'>#   +projects/\\{project_id}/transferConfigs/\\{config_id}+
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -2708,7 +2708,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The field will contain name of the resource requested, for example:
-</span>  <span class='comment'>#   +projects/{project_id}/transferConfigs/{config_id}+
+</span>  <span class='comment'>#   +projects/\\{project_id}/transferConfigs/\\{config_id}+
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -2739,7 +2739,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   The BigQuery project id for which data sources
-</span>  <span class='comment'>#   should be returned: +projects/{project_id}+.
+</span>  <span class='comment'>#   should be returned: +projects/\\{project_id}+.
 </span>  <span class='comment'># @param data_source_ids [Array&lt;String&gt;]
 </span>  <span class='comment'>#   When specified, only configurations of requested data sources are returned.
 </span>  <span class='comment'># @param page_size [Integer]
@@ -2801,7 +2801,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   Transfer configuration name in the form:
-</span>  <span class='comment'>#   +projects/{project_id}/transferConfigs/{config_id}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/transferConfigs/\\{config_id}+.
 </span>  <span class='comment'># @param start_time [Google::Protobuf::Timestamp | Hash]
 </span>  <span class='comment'>#   Start time of the range of transfer runs. For example,
 </span>  <span class='comment'>#   +&quot;2017-05-25T00:00:00+00:00&quot;+.
@@ -2852,7 +2852,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The field will contain name of the resource requested, for example:
-</span>  <span class='comment'>#   +projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}+
+</span>  <span class='comment'>#   +projects/\\{project_id}/transferConfigs/\\{config_id}/runs/\\{run_id}+
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -2883,7 +2883,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The field will contain name of the resource requested, for example:
-</span>  <span class='comment'>#   +projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}+
+</span>  <span class='comment'>#   +projects/\\{project_id}/transferConfigs/\\{config_id}/runs/\\{run_id}+
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -2915,7 +2915,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   Name of transfer configuration for which transfer runs should be retrieved.
 </span>  <span class='comment'>#   Format of transfer configuration resource name is:
-</span>  <span class='comment'>#   +projects/{project_id}/transferConfigs/{config_id}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/transferConfigs/\\{config_id}+.
 </span>  <span class='comment'># @param states [Array&lt;Google::Cloud::Bigquery::Datatransfer::V1::TransferState&gt;]
 </span>  <span class='comment'>#   When specified, only transfer runs with requested states are returned.
 </span>  <span class='comment'># @param page_size [Integer]
@@ -2978,7 +2978,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param parent [String]
 </span>  <span class='comment'>#   Transfer run name in the form:
-</span>  <span class='comment'>#   +projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}+.
+</span>  <span class='comment'>#   +projects/\\{project_id}/transferConfigs/\\{config_Id}/runs/\\{run_id}+.
 </span>  <span class='comment'># @param page_size [Integer]
 </span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
 </span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
@@ -3043,7 +3043,7 @@ custom error handling.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'># @param name [String]
 </span>  <span class='comment'>#   The data source in the form:
-</span>  <span class='comment'>#   +projects/{project_id}/dataSources/{data_source_id}+
+</span>  <span class='comment'>#   +projects/\\{project_id}/dataSources/\\{data_source_id}+
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
@@ -3476,7 +3476,7 @@ create a transfer config.</p>
       
         &mdash;
         <div class='inline'><p>The data source in the form:
-+projects/project_id/dataSources/data_source_id+</p>
++projects/{project_id}/dataSources/{data_source_id}+</p>
 </div>
       
     </li>
@@ -3654,7 +3654,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The BigQuery project id where the transfer configuration should be created.
-Must be in the format /projects/project_id/locations/location_id
+Must be in the format /projects/{project_id}/locations/{location_id}
 If specified location and location of the destination bigquery dataset
 do not match - the request will fail.</p>
 </div>
@@ -3889,7 +3889,7 @@ including any associated transfer runs and logs.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/project_id/transferConfigs/config_id+</p>
++projects/{project_id}/transferConfigs/{config_id}+</p>
 </div>
       
     </li>
@@ -4057,7 +4057,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/project_id/transferConfigs/config_id/runs/run_id+</p>
++projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}+</p>
 </div>
       
     </li>
@@ -4226,7 +4226,7 @@ which can be used for UI rendering.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/project_id/dataSources/data_source_id+</p>
++projects/{project_id}/dataSources/{data_source_id}+</p>
 </div>
       
     </li>
@@ -4401,7 +4401,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/project_id/transferConfigs/config_id+</p>
++projects/{project_id}/transferConfigs/{config_id}+</p>
 </div>
       
     </li>
@@ -4576,7 +4576,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/project_id/transferConfigs/config_id/runs/run_id+</p>
++projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}+</p>
 </div>
       
     </li>
@@ -4764,7 +4764,7 @@ which can be used for UI rendering.</p>
       
         &mdash;
         <div class='inline'><p>The BigQuery project id for which data sources should be returned.
-Must be in the form: +projects/project_id+</p>
+Must be in the form: +projects/{project_id}+</p>
 </div>
       
     </li>
@@ -4981,7 +4981,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The BigQuery project id for which data sources
-should be returned: +projects/project_id+.</p>
+should be returned: +projects/{project_id}+.</p>
 </div>
       
     </li>
@@ -5217,7 +5217,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Transfer run name in the form:
-+projects/project_id/transferConfigs/config_Id/runs/run_id+.</p>
++projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}+.</p>
 </div>
       
     </li>
@@ -5455,7 +5455,7 @@ object.</p>
         &mdash;
         <div class='inline'><p>Name of transfer configuration for which transfer runs should be retrieved.
 Format of transfer configuration resource name is:
-+projects/project_id/transferConfigs/config_id+.</p>
++projects/{project_id}/transferConfigs/{config_id}+.</p>
 </div>
       
     </li>
@@ -5707,7 +5707,7 @@ Note that runs are created per UTC time in the time range.</p>
       
         &mdash;
         <div class='inline'><p>Transfer configuration name in the form:
-+projects/project_id/transferConfigs/config_id+.</p>
++projects/{project_id}/transferConfigs/{config_id}+.</p>
 </div>
       
     </li>
