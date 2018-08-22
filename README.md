@@ -544,7 +544,7 @@ $ gem install google-cloud-os_login
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
 - [google-cloud-pubsub API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest)
-- [google-cloud-pubsub on RubyGems](https://rubygems.org/gems/[google-cloud-pubsub)
+- [google-cloud-pubsub on RubyGems](https://rubygems.org/gems/google-cloud-pubsub)
 - [Google Cloud Pub/Sub documentation](https://cloud.google.com/pubsub/docs)
 
 #### Quick Start
