@@ -422,7 +422,7 @@ end
 
 - [google-cloud-firestore README](google-cloud-firestore/README.md)
 - [google-cloud-firestore API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-firestore/latest)
-- [google-cloud-firestore on RubyGems](https://rubygems.org/gems/[google-cloud-firestore)
+- [google-cloud-firestore on RubyGems](https://rubygems.org/gems/google-cloud-firestore)
 - [Google Cloud Firestore documentation](https://cloud.google.com/firestore/docs)
 
 #### Quick Start
