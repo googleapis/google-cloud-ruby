@@ -121,22 +121,23 @@ module Google
       end
     end
 
-    # In June, 2018, set supported version to 2.3 and recommended to 2.4.
-    # Thereafter, follow the MRI support schedule: supported means non-EOL,
-    # and recommended means in normal (rather than security) maintenance.
+    # Update the supported and recommended version trhesholds according to the
+    # MRI support schedule: supported means non-EOL, and recommended means in
+    # normal (rather than security) maintenance. Generally, this means updating
+    # these at the end of March each year, if the previous year patterns hold.
     # See https://www.ruby-lang.org/en/downloads/branches/
 
     ##
     # Minimum "supported" Ruby version (non-EOL)
     # @private
     #
-    SUPPORTED_VERSION_THRESHOLD = "2.0".freeze
+    SUPPORTED_VERSION_THRESHOLD = "2.3".freeze
 
     ##
     # Minimum "recommended" Ruby version (normal maintenance)
     # @private
     #
-    RECOMMENDED_VERSION_THRESHOLD = "2.3".freeze
+    RECOMMENDED_VERSION_THRESHOLD = "2.4".freeze
 
     ##
     # Check Ruby version and emit a warning if it is old
