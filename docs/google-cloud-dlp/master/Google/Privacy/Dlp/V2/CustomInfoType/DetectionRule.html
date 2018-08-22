@@ -286,7 +286,7 @@ for the +surrogate_type+ custom info type.</p>
 </span>  <span class='comment'>#     The total length of the window cannot exceed 1000 characters. Note that
 </span>  <span class='comment'>#     the finding itself will be included in the window, so that hotwords may
 </span>  <span class='comment'>#     be used to match substrings of the finding itself. For example, the
-</span>  <span class='comment'>#     certainty of a phone number regex &quot;\(\d{3}\) \d{3}-\d{4}&quot; could be
+</span>  <span class='comment'>#     certainty of a phone number regex &quot;\(\d\\{3}\) \d\\{3}-\d\\{4}&quot; could be
 </span>  <span class='comment'>#     adjusted upwards if the area code is known to be the local area code of
 </span>  <span class='comment'>#     a company office using the hotword regex &quot;\(xxx\)&quot;, where &quot;xxx&quot;
 </span>  <span class='comment'>#     is the area code in question.
