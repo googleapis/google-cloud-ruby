@@ -1,1 +1,0 @@
-{"id":"google/iam/v1/bindingdelta/action","name":"Action","title":["Google","Iam","V1","BindingDelta","Action"],"description":"<p>The type of action performed on a Binding in a policy.</p>","source":"google-cloud-spanner/lib/google/cloud/spanner/admin/database/v1/doc/google/iam/v1/policy.rb#L126","resources":[],"examples":[],"methods":[]}
