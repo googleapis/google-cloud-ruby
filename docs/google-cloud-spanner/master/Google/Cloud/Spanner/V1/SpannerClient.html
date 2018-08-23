@@ -184,38 +184,6 @@ this service.</p>
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#spanner_stub-instance_method" title="#spanner_stub (instance method)">#<strong>spanner_stub</strong>  &#x21d2; Google::Spanner::V1::Spanner::Stub </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -748,7 +716,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-141
 142
 143
 144
@@ -887,10 +854,11 @@ custom error handling.</p>
 277
 278
 279
-280</pre>
+280
+281</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1039,2421 +1007,6 @@ custom error handling.</p>
   
 </div>
 
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="spanner_stub-instance_method">
-  
-    #<strong>spanner_stub</strong>  &#x21d2; <tt>Google::Spanner::V1::Spanner::Stub</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Google::Spanner::V1::Spanner::Stub</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408
-409
-410
-411
-412
-413
-414
-415
-416
-417
-418
-419
-420
-421
-422
-423
-424
-425
-426
-427
-428
-429
-430
-431
-432
-433
-434
-435
-436
-437
-438
-439
-440
-441
-442
-443
-444
-445
-446
-447
-448
-449
-450
-451
-452
-453
-454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
-465
-466
-467
-468
-469
-470
-471
-472
-473
-474
-475
-476
-477
-478
-479
-480
-481
-482
-483
-484
-485
-486
-487
-488
-489
-490
-491
-492
-493
-494
-495
-496
-497
-498
-499
-500
-501
-502
-503
-504
-505
-506
-507
-508
-509
-510
-511
-512
-513
-514
-515
-516
-517
-518
-519
-520
-521
-522
-523
-524
-525
-526
-527
-528
-529
-530
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556
-557
-558
-559
-560
-561
-562
-563
-564
-565
-566
-567
-568
-569
-570
-571
-572
-573
-574
-575
-576
-577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629
-630
-631
-632
-633
-634
-635
-636
-637
-638
-639
-640
-641
-642
-643
-644
-645
-646
-647
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720
-721
-722
-723
-724
-725
-726
-727
-728
-729
-730
-731
-732
-733
-734
-735
-736
-737
-738
-739
-740
-741
-742
-743
-744
-745
-746
-747
-748
-749
-750
-751
-752
-753
-754
-755
-756
-757
-758
-759
-760
-761
-762
-763
-764
-765
-766
-767
-768
-769
-770
-771
-772
-773
-774
-775
-776
-777
-778
-779
-780
-781
-782
-783
-784
-785
-786
-787
-788
-789
-790
-791
-792
-793
-794
-795
-796
-797
-798
-799
-800
-801
-802
-803
-804
-805
-806
-807
-808
-809
-810
-811
-812
-813
-814
-815
-816
-817
-818
-819
-820
-821
-822
-823
-824
-825
-826
-827
-828
-829
-830
-831
-832
-833
-834
-835
-836
-837
-838
-839
-840
-841
-842
-843
-844
-845
-846
-847
-848
-849
-850
-851
-852
-853
-854
-855
-856
-857
-858
-859
-860
-861
-862
-863
-864
-865
-866
-867
-868
-869
-870
-871
-872
-873
-874
-875
-876
-877
-878
-879
-880
-881
-882
-883
-884
-885
-886
-887
-888
-889
-890
-891
-892
-893
-894
-895
-896
-897
-898
-899
-900
-901
-902
-903
-904
-905
-906
-907
-908
-909
-910
-911
-912
-913
-914
-915
-916
-917
-918
-919
-920
-921
-922
-923
-924
-925
-926
-927
-928
-929
-930
-931
-932
-933
-934
-935
-936
-937
-938
-939
-940
-941
-942
-943
-944
-945
-946
-947
-948
-949
-950
-951
-952
-953
-954
-955
-956
-957
-958
-959
-960
-961
-962
-963
-964
-965
-966
-967
-968
-969
-970
-971
-972
-973
-974
-975
-976
-977
-978
-979
-980
-981
-982
-983
-984
-985
-986
-987
-988
-989
-990
-991
-992
-993
-994
-995
-996
-997
-998
-999
-1000
-1001
-1002
-1003
-1004
-1005
-1006
-1007
-1008
-1009
-1010
-1011
-1012
-1013
-1014
-1015
-1016
-1017
-1018
-1019
-1020
-1021
-1022
-1023
-1024
-1025
-1026
-1027
-1028
-1029
-1030
-1031
-1032
-1033
-1034
-1035
-1036
-1037
-1038
-1039
-1040
-1041
-1042
-1043
-1044
-1045
-1046
-1047
-1048
-1049
-1050
-1051
-1052
-1053
-1054
-1055
-1056
-1057
-1058
-1059
-1060
-1061
-1062
-1063
-1064
-1065
-1066
-1067
-1068
-1069
-1070
-1071
-1072
-1073
-1074
-1075
-1076
-1077
-1078
-1079
-1080
-1081
-1082
-1083
-1084
-1085
-1086
-1087
-1088
-1089
-1090
-1091
-1092
-1093
-1094
-1095
-1096
-1097
-1098
-1099
-1100
-1101
-1102
-1103
-1104
-1105
-1106
-1107
-1108
-1109
-1110
-1111
-1112
-1113
-1114
-1115
-1116
-1117
-1118
-1119
-1120
-1121
-1122
-1123
-1124
-1125
-1126
-1127
-1128
-1129
-1130
-1131
-1132
-1133
-1134
-1135
-1136
-1137
-1138
-1139
-1140
-1141
-1142
-1143
-1144
-1145
-1146
-1147
-1148
-1149
-1150
-1151
-1152
-1153
-1154
-1155
-1156
-1157
-1158
-1159
-1160
-1161
-1162
-1163
-1164
-1165
-1166
-1167
-1168
-1169
-1170
-1171
-1172
-1173
-1174
-1175
-1176
-1177
-1178
-1179
-1180
-1181
-1182
-1183
-1184
-1185
-1186
-1187
-1188
-1189
-1190
-1191
-1192
-1193
-1194
-1195
-1196
-1197
-1198
-1199
-1200
-1201
-1202
-1203
-1204
-1205
-1206
-1207
-1208
-1209
-1210
-1211
-1212
-1213
-1214
-1215
-1216
-1217
-1218
-1219
-1220
-1221</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 41</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span>
-  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:spanner_stub</span>
-
-  <span class='comment'># The default address of the service.
-</span>  <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>spanner.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='comment'># The default port of the service.
-</span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Spanner::V1::SpannerClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
-
-  <span class='comment'># The default set of gRPC interceptors.
-</span>  <span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Spanner::V1::SpannerClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-
-  <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Spanner::V1::SpannerClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
-
-  <span class='const'>PAGE_DESCRIPTORS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_sessions</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sessions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PAGE_DESCRIPTORS</span>
-
-  <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
-</span>  <span class='comment'># this service.
-</span>  <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Spanner::V1::SpannerClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/spanner.data</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-
-  <span class='const'>DATABASE_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/instances/{instance}/databases/{database}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:DATABASE_PATH_TEMPLATE</span>
-
-  <span class='const'>SESSION_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/instances/{instance}/databases/{database}/sessions/{session}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:SESSION_PATH_TEMPLATE</span>
-
-  <span class='comment'># Returns a fully-qualified database resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param instance [String]
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_database_path'>database_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span>
-    <span class='const'>DATABASE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;instance&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;database&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_database'>database</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Returns a fully-qualified session resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param instance [String]
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_session_path'>session_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span> <span class='id identifier rubyid_session'>session</span>
-    <span class='const'>SESSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;instance&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;database&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;session&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_session'>session</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-</span>  <span class='comment'>#   Provides the means for authenticating requests made by the client. This parameter can
-</span>  <span class='comment'>#   be many types.
-</span>  <span class='comment'>#   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-</span>  <span class='comment'>#   authenticating requests made by this client.
-</span>  <span class='comment'>#   A `String` will be treated as the path to the keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `GRPC::Core::Channel` will be used to make calls through.
-</span>  <span class='comment'>#   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-</span>  <span class='comment'>#   should already be composed with a `GRPC::Core::CallCredentials` object.
-</span>  <span class='comment'>#   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-</span>  <span class='comment'>#   metadata for requests, generally, to give OAuth credentials.
-</span>  <span class='comment'># @param scopes [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The OAuth scopes for this service. This parameter is ignored if
-</span>  <span class='comment'>#   an updater_proc is supplied.
-</span>  <span class='comment'># @param client_config [Hash]
-</span>  <span class='comment'>#   A Hash for call options for each method. See
-</span>  <span class='comment'>#   Google::Gax#construct_settings for the structure of
-</span>  <span class='comment'>#   this data. Falls back to the default config if not specified
-</span>  <span class='comment'>#   or the specified config is missing data points.
-</span>  <span class='comment'># @param timeout [Numeric]
-</span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
-</span>  <span class='comment'># @param metadata [Hash]
-</span>  <span class='comment'>#   Default metadata to be sent with each request. This can be overridden on a per call basis.
-</span>  <span class='comment'># @param exception_transformer [Proc]
-</span>  <span class='comment'>#   An optional proc that intercepts any exceptions raised during an API call to inject
-</span>  <span class='comment'>#   custom error handling.
-</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
-      <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Spanner::V1::SpannerClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
-      <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
-      <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Spanner::V1::SpannerClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
-      <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
-    <span class='comment'># These require statements are intentionally placed here to initialize
-</span>    <span class='comment'># the gRPC module only when it&#39;s required.
-</span>    <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
-</span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/spanner/v1/spanner_services_pb</span><span class='tstring_end'>&quot;</span></span>
-
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Spanner::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
-
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Spanner::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>ChannelCredentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Proc</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-spanner</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
-
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-    <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>spanner_client_config.json</span><span class='tstring_end'>&quot;</span></span>
-    <span class='rparen'>)</span>
-    <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
-        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.spanner.v1.Spanner</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-        <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
-        <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
-        <span class='label'>page_descriptors:</span> <span class='const'>PAGE_DESCRIPTORS</span><span class='comma'>,</span>
-        <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-        <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
-      <span class='rparen'>)</span>
-    <span class='kw'>end</span>
-
-    <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>    <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-    <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
-    <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
-    <span class='ivar'>@spanner_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
-      <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
-      <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
-      <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
-      <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
-      <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>Spanner</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
-    <span class='rparen'>)</span>
-
-    <span class='ivar'>@create_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_session</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_session</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@get_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_session</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_session</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@list_sessions</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_sessions</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_sessions</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@delete_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_session</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_session</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@execute_sql</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:execute_sql</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>execute_sql</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@execute_streaming_sql</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:execute_streaming_sql</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>execute_streaming_sql</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@read</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:read</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>read</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@streaming_read</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:streaming_read</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>streaming_read</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@begin_transaction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:begin_transaction</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>begin_transaction</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@commit</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:commit</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>commit</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@rollback</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:rollback</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rollback</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@partition_query</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:partition_query</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>partition_query</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@partition_read</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@spanner_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:partition_read</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>partition_read</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Service calls
-</span>
-  <span class='comment'># Creates a new session. A session can be used to perform
-</span>  <span class='comment'># transactions that read and/or modify data in a Cloud Spanner database.
-</span>  <span class='comment'># Sessions are meant to be reused for many consecutive
-</span>  <span class='comment'># transactions.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Sessions can only execute one transaction at a time. To execute
-</span>  <span class='comment'># multiple concurrent read-write/write-only transactions, create
-</span>  <span class='comment'># multiple sessions. Note that standalone reads and queries use a
-</span>  <span class='comment'># transaction internally, and count toward the one transaction
-</span>  <span class='comment'># limit.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Cloud Spanner limits the number of sessions that can exist at any given
-</span>  <span class='comment'># time; thus, it is a good idea to delete idle and/or unneeded sessions.
-</span>  <span class='comment'># Aside from explicit deletes, Cloud Spanner can delete sessions for which no
-</span>  <span class='comment'># operations are sent for more than an hour. If a session is deleted,
-</span>  <span class='comment'># requests to it return +NOT_FOUND+.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Idle sessions can be kept alive by sending a trivial SQL query
-</span>  <span class='comment'># periodically, e.g., +&quot;SELECT 1&quot;+.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'>#   Required. The database in which the new session is created.
-</span>  <span class='comment'># @param session [Google::Spanner::V1::Session | Hash]
-</span>  <span class='comment'>#   The session to create.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::Session`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Spanner::V1::Session]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Spanner::V1::Session]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;)
-</span>  <span class='comment'>#   response = spanner_client.create_session(formatted_database)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_create_session'>create_session</span> \
-      <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='label'>session:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>database:</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/CreateSessionRequest.html" title="Google::Spanner::V1::CreateSessionRequest (class)">CreateSessionRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@create_session</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Gets a session. Returns +NOT_FOUND+ if the session does not exist.
-</span>  <span class='comment'># This is mainly useful for determining whether a session is still
-</span>  <span class='comment'># alive.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   Required. The name of the session to retrieve.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Spanner::V1::Session]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Spanner::V1::Session]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#   response = spanner_client.get_session(formatted_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_get_session'>get_session</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/GetSessionRequest.html" title="Google::Spanner::V1::GetSessionRequest (class)">GetSessionRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@get_session</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Lists all sessions in a given database.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'>#   Required. The database in which to list sessions.
-</span>  <span class='comment'># @param page_size [Integer]
-</span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
-</span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
-</span>  <span class='comment'>#   parameter does not affect the return value. If page streaming is
-</span>  <span class='comment'>#   performed per-page, this determines the maximum number of
-</span>  <span class='comment'>#   resources in a page.
-</span>  <span class='comment'># @param filter [String]
-</span>  <span class='comment'>#   An expression for filtering the results of the request. Filter rules are
-</span>  <span class='comment'>#   case insensitive. The fields eligible for filtering are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   * +labels.key+ where key is the name of a label
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Some examples of using filters are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   * +labels.env:*+ --&gt; The session has the label &quot;env&quot;.
-</span>  <span class='comment'>#     * +labels.env:dev+ --&gt; The session has the label &quot;env&quot; and the value of
-</span>  <span class='comment'>#       the label contains the string &quot;dev&quot;.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Gax::PagedEnumerable&lt;Google::Spanner::V1::Session&gt;]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;Google::Spanner::V1::Session&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Spanner::V1::Session instances.
-</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
-</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
-</span>  <span class='comment'>#   object.
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Iterate over all results.
-</span>  <span class='comment'>#   spanner_client.list_sessions(formatted_database).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Or iterate over results one page at a time.
-</span>  <span class='comment'>#   spanner_client.list_sessions(formatted_database).each_page do |page|
-</span>  <span class='comment'>#     # Process each page at a time.
-</span>  <span class='comment'>#     page.each do |element|
-</span>  <span class='comment'>#       # Process element.
-</span>  <span class='comment'>#     end
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_list_sessions'>list_sessions</span> \
-      <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>database:</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='comma'>,</span>
-      <span class='label'>filter:</span> <span class='id identifier rubyid_filter'>filter</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/ListSessionsRequest.html" title="Google::Spanner::V1::ListSessionsRequest (class)">ListSessionsRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@list_sessions</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Ends a session, releasing server resources associated with it.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   Required. The name of the session to delete.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result []
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#   spanner_client.delete_session(formatted_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_delete_session'>delete_session</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/DeleteSessionRequest.html" title="Google::Spanner::V1::DeleteSessionRequest (class)">DeleteSessionRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@delete_session</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>nil</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Executes an SQL query, returning all rows in a single reply. This
-</span>  <span class='comment'># method cannot be used to return a result set larger than 10 MiB;
-</span>  <span class='comment'># if the query yields more data than that, the query fails with
-</span>  <span class='comment'># a +FAILED_PRECONDITION+ error.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Queries inside read-write transactions might return +ABORTED+. If
-</span>  <span class='comment'># this occurs, the application should restart the transaction from
-</span>  <span class='comment'># the beginning. See {Google::Spanner::V1::Transaction Transaction} for more details.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Larger result sets can be fetched in streaming fashion by calling
-</span>  <span class='comment'># {Google::Spanner::V1::Spanner::ExecuteStreamingSql ExecuteStreamingSql} instead.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'>#   Required. The session in which the SQL query should be performed.
-</span>  <span class='comment'># @param sql [String]
-</span>  <span class='comment'>#   Required. The SQL query string.
-</span>  <span class='comment'># @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
-</span>  <span class='comment'>#   The transaction to use. If none is provided, the default is a
-</span>  <span class='comment'>#   temporary read-only transaction with strong concurrency.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param params [Google::Protobuf::Struct | Hash]
-</span>  <span class='comment'>#   The SQL query string can contain parameter placeholders. A parameter
-</span>  <span class='comment'>#   placeholder consists of +&#39;@&#39;+ followed by the parameter
-</span>  <span class='comment'>#   name. Parameter names consist of any combination of letters,
-</span>  <span class='comment'>#   numbers, and underscores.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Parameters can appear anywhere that a literal value is expected.  The same
-</span>  <span class='comment'>#   parameter name can be used more than once, for example:
-</span>  <span class='comment'>#     +&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;+
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   It is an error to execute an SQL query with unbound parameters.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Parameter values are specified using +params+, which is a JSON
-</span>  <span class='comment'>#   object whose keys are parameter names, and whose values are the
-</span>  <span class='comment'>#   corresponding parameter values.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Struct`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param param_types [Hash{String =&gt; Google::Spanner::V1::Type | Hash}]
-</span>  <span class='comment'>#   It is not always possible for Cloud Spanner to infer the right SQL type
-</span>  <span class='comment'>#   from a JSON value.  For example, values of type +BYTES+ and values
-</span>  <span class='comment'>#   of type +STRING+ both appear in {Google::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   In these cases, +param_types+ can be used to specify the exact
-</span>  <span class='comment'>#   SQL type for some or all of the SQL query parameters. See the
-</span>  <span class='comment'>#   definition of {Google::Spanner::V1::Type Type} for more information
-</span>  <span class='comment'>#   about SQL types.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::Type`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param resume_token [String]
-</span>  <span class='comment'>#   If this request is resuming a previously interrupted SQL query
-</span>  <span class='comment'>#   execution, +resume_token+ should be copied from the last
-</span>  <span class='comment'>#   {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
-</span>  <span class='comment'>#   enables the new SQL query execution to resume where the last one left
-</span>  <span class='comment'>#   off. The rest of the request parameters must exactly match the
-</span>  <span class='comment'>#   request that yielded this token.
-</span>  <span class='comment'># @param query_mode [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
-</span>  <span class='comment'>#   Used to control the amount of debugging information returned in
-</span>  <span class='comment'>#   {Google::Spanner::V1::ResultSetStats ResultSetStats}. If {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
-</span>  <span class='comment'>#   be set to {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
-</span>  <span class='comment'># @param partition_token [String]
-</span>  <span class='comment'>#   If present, results will be restricted to the specified partition
-</span>  <span class='comment'>#   previously created using PartitionQuery().  There must be an exact
-</span>  <span class='comment'>#   match for the values of fields common to this message and the
-</span>  <span class='comment'>#   PartitionQueryRequest message used to create this partition_token.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Spanner::V1::ResultSet]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Spanner::V1::ResultSet]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +sql+:
-</span>  <span class='comment'>#   sql = &#39;&#39;
-</span>  <span class='comment'>#   response = spanner_client.execute_sql(formatted_session, sql)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_execute_sql'>execute_sql</span> \
-      <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>param_types:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>resume_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>query_mode:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>partition_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='label'>sql:</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>params:</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
-      <span class='label'>param_types:</span> <span class='id identifier rubyid_param_types'>param_types</span><span class='comma'>,</span>
-      <span class='label'>resume_token:</span> <span class='id identifier rubyid_resume_token'>resume_token</span><span class='comma'>,</span>
-      <span class='label'>query_mode:</span> <span class='id identifier rubyid_query_mode'>query_mode</span><span class='comma'>,</span>
-      <span class='label'>partition_token:</span> <span class='id identifier rubyid_partition_token'>partition_token</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@execute_sql</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Like {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql}, except returns the result
-</span>  <span class='comment'># set as a stream. Unlike {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql}, there
-</span>  <span class='comment'># is no limit on the size of the returned result set. However, no
-</span>  <span class='comment'># individual row in the result set can exceed 100 MiB, and no
-</span>  <span class='comment'># column value can exceed 10 MiB.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'>#   Required. The session in which the SQL query should be performed.
-</span>  <span class='comment'># @param sql [String]
-</span>  <span class='comment'>#   Required. The SQL query string.
-</span>  <span class='comment'># @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
-</span>  <span class='comment'>#   The transaction to use. If none is provided, the default is a
-</span>  <span class='comment'>#   temporary read-only transaction with strong concurrency.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param params [Google::Protobuf::Struct | Hash]
-</span>  <span class='comment'>#   The SQL query string can contain parameter placeholders. A parameter
-</span>  <span class='comment'>#   placeholder consists of +&#39;@&#39;+ followed by the parameter
-</span>  <span class='comment'>#   name. Parameter names consist of any combination of letters,
-</span>  <span class='comment'>#   numbers, and underscores.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Parameters can appear anywhere that a literal value is expected.  The same
-</span>  <span class='comment'>#   parameter name can be used more than once, for example:
-</span>  <span class='comment'>#     +&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;+
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   It is an error to execute an SQL query with unbound parameters.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Parameter values are specified using +params+, which is a JSON
-</span>  <span class='comment'>#   object whose keys are parameter names, and whose values are the
-</span>  <span class='comment'>#   corresponding parameter values.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Struct`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param param_types [Hash{String =&gt; Google::Spanner::V1::Type | Hash}]
-</span>  <span class='comment'>#   It is not always possible for Cloud Spanner to infer the right SQL type
-</span>  <span class='comment'>#   from a JSON value.  For example, values of type +BYTES+ and values
-</span>  <span class='comment'>#   of type +STRING+ both appear in {Google::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   In these cases, +param_types+ can be used to specify the exact
-</span>  <span class='comment'>#   SQL type for some or all of the SQL query parameters. See the
-</span>  <span class='comment'>#   definition of {Google::Spanner::V1::Type Type} for more information
-</span>  <span class='comment'>#   about SQL types.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::Type`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param resume_token [String]
-</span>  <span class='comment'>#   If this request is resuming a previously interrupted SQL query
-</span>  <span class='comment'>#   execution, +resume_token+ should be copied from the last
-</span>  <span class='comment'>#   {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
-</span>  <span class='comment'>#   enables the new SQL query execution to resume where the last one left
-</span>  <span class='comment'>#   off. The rest of the request parameters must exactly match the
-</span>  <span class='comment'>#   request that yielded this token.
-</span>  <span class='comment'># @param query_mode [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
-</span>  <span class='comment'>#   Used to control the amount of debugging information returned in
-</span>  <span class='comment'>#   {Google::Spanner::V1::ResultSetStats ResultSetStats}. If {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
-</span>  <span class='comment'>#   be set to {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
-</span>  <span class='comment'># @param partition_token [String]
-</span>  <span class='comment'>#   If present, results will be restricted to the specified partition
-</span>  <span class='comment'>#   previously created using PartitionQuery().  There must be an exact
-</span>  <span class='comment'>#   match for the values of fields common to this message and the
-</span>  <span class='comment'>#   PartitionQueryRequest message used to create this partition_token.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @return [Enumerable&lt;Google::Spanner::V1::PartialResultSet&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Spanner::V1::PartialResultSet instances.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +sql+:
-</span>  <span class='comment'>#   sql = &#39;&#39;
-</span>  <span class='comment'>#   spanner_client.execute_streaming_sql(formatted_session, sql).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_execute_streaming_sql'>execute_streaming_sql</span> \
-      <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>param_types:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>resume_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>query_mode:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>partition_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='label'>sql:</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>params:</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
-      <span class='label'>param_types:</span> <span class='id identifier rubyid_param_types'>param_types</span><span class='comma'>,</span>
-      <span class='label'>resume_token:</span> <span class='id identifier rubyid_resume_token'>resume_token</span><span class='comma'>,</span>
-      <span class='label'>query_mode:</span> <span class='id identifier rubyid_query_mode'>query_mode</span><span class='comma'>,</span>
-      <span class='label'>partition_token:</span> <span class='id identifier rubyid_partition_token'>partition_token</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@execute_streaming_sql</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Reads rows from the database using key lookups and scans, as a
-</span>  <span class='comment'># simple key/value style alternative to
-</span>  <span class='comment'># {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql}.  This method cannot be used to
-</span>  <span class='comment'># return a result set larger than 10 MiB; if the read matches more
-</span>  <span class='comment'># data than that, the read fails with a +FAILED_PRECONDITION+
-</span>  <span class='comment'># error.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Reads inside read-write transactions might return +ABORTED+. If
-</span>  <span class='comment'># this occurs, the application should restart the transaction from
-</span>  <span class='comment'># the beginning. See {Google::Spanner::V1::Transaction Transaction} for more details.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Larger result sets can be yielded in streaming fashion by calling
-</span>  <span class='comment'># {Google::Spanner::V1::Spanner::StreamingRead StreamingRead} instead.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'>#   Required. The session in which the read should be performed.
-</span>  <span class='comment'># @param table [String]
-</span>  <span class='comment'>#   Required. The name of the table in the database to be read.
-</span>  <span class='comment'># @param columns [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The columns of {Google::Spanner::V1::ReadRequest#table table} to be returned for each row matching
-</span>  <span class='comment'>#   this request.
-</span>  <span class='comment'># @param key_set [Google::Spanner::V1::KeySet | Hash]
-</span>  <span class='comment'>#   Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
-</span>  <span class='comment'>#   primary keys of the rows in {Google::Spanner::V1::ReadRequest#table table} to be yielded, unless {Google::Spanner::V1::ReadRequest#index index}
-</span>  <span class='comment'>#   is present. If {Google::Spanner::V1::ReadRequest#index index} is present, then {Google::Spanner::V1::ReadRequest#key_set key_set} instead names
-</span>  <span class='comment'>#   index keys in {Google::Spanner::V1::ReadRequest#index index}.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is empty, rows are yielded
-</span>  <span class='comment'>#   in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty) or index key order
-</span>  <span class='comment'>#   (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).  If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is not
-</span>  <span class='comment'>#   empty, rows will be yielded in an unspecified order.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   It is not an error for the +key_set+ to name rows that do not
-</span>  <span class='comment'>#   exist in the database. Read yields nothing for nonexistent rows.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::KeySet`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
-</span>  <span class='comment'>#   The transaction to use. If none is provided, the default is a
-</span>  <span class='comment'>#   temporary read-only transaction with strong concurrency.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param index [String]
-</span>  <span class='comment'>#   If non-empty, the name of an index on {Google::Spanner::V1::ReadRequest#table table}. This index is
-</span>  <span class='comment'>#   used instead of the table primary key when interpreting {Google::Spanner::V1::ReadRequest#key_set key_set}
-</span>  <span class='comment'>#   and sorting result rows. See {Google::Spanner::V1::ReadRequest#key_set key_set} for further information.
-</span>  <span class='comment'># @param limit [Integer]
-</span>  <span class='comment'>#   If greater than zero, only the first +limit+ rows are yielded. If +limit+
-</span>  <span class='comment'>#   is zero, the default is no limit. A limit cannot be specified if
-</span>  <span class='comment'>#   +partition_token+ is set.
-</span>  <span class='comment'># @param resume_token [String]
-</span>  <span class='comment'>#   If this request is resuming a previously interrupted read,
-</span>  <span class='comment'>#   +resume_token+ should be copied from the last
-</span>  <span class='comment'>#   {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
-</span>  <span class='comment'>#   enables the new read to resume where the last read left off. The
-</span>  <span class='comment'>#   rest of the request parameters must exactly match the request
-</span>  <span class='comment'>#   that yielded this token.
-</span>  <span class='comment'># @param partition_token [String]
-</span>  <span class='comment'>#   If present, results will be restricted to the specified partition
-</span>  <span class='comment'>#   previously created using PartitionRead().    There must be an exact
-</span>  <span class='comment'>#   match for the values of fields common to this message and the
-</span>  <span class='comment'>#   PartitionReadRequest message used to create this partition_token.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Spanner::V1::ResultSet]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Spanner::V1::ResultSet]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +table+:
-</span>  <span class='comment'>#   table = &#39;&#39;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +columns+:
-</span>  <span class='comment'>#   columns = []
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +key_set+:
-</span>  <span class='comment'>#   key_set = {}
-</span>  <span class='comment'>#   response = spanner_client.read(formatted_session, table, columns, key_set)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span> \
-      <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_key_set'>key_set</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>index:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>resume_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>partition_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='label'>table:</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span>
-      <span class='label'>columns:</span> <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span>
-      <span class='label'>key_set:</span> <span class='id identifier rubyid_key_set'>key_set</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>index:</span> <span class='id identifier rubyid_index'>index</span><span class='comma'>,</span>
-      <span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span><span class='comma'>,</span>
-      <span class='label'>resume_token:</span> <span class='id identifier rubyid_resume_token'>resume_token</span><span class='comma'>,</span>
-      <span class='label'>partition_token:</span> <span class='id identifier rubyid_partition_token'>partition_token</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html" title="Google::Spanner::V1::ReadRequest (class)">ReadRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@read</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Like {Google::Spanner::V1::Spanner::Read Read}, except returns the result set as a
-</span>  <span class='comment'># stream. Unlike {Google::Spanner::V1::Spanner::Read Read}, there is no limit on the
-</span>  <span class='comment'># size of the returned result set. However, no individual row in
-</span>  <span class='comment'># the result set can exceed 100 MiB, and no column value can exceed
-</span>  <span class='comment'># 10 MiB.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'>#   Required. The session in which the read should be performed.
-</span>  <span class='comment'># @param table [String]
-</span>  <span class='comment'>#   Required. The name of the table in the database to be read.
-</span>  <span class='comment'># @param columns [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The columns of {Google::Spanner::V1::ReadRequest#table table} to be returned for each row matching
-</span>  <span class='comment'>#   this request.
-</span>  <span class='comment'># @param key_set [Google::Spanner::V1::KeySet | Hash]
-</span>  <span class='comment'>#   Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
-</span>  <span class='comment'>#   primary keys of the rows in {Google::Spanner::V1::ReadRequest#table table} to be yielded, unless {Google::Spanner::V1::ReadRequest#index index}
-</span>  <span class='comment'>#   is present. If {Google::Spanner::V1::ReadRequest#index index} is present, then {Google::Spanner::V1::ReadRequest#key_set key_set} instead names
-</span>  <span class='comment'>#   index keys in {Google::Spanner::V1::ReadRequest#index index}.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is empty, rows are yielded
-</span>  <span class='comment'>#   in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty) or index key order
-</span>  <span class='comment'>#   (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).  If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is not
-</span>  <span class='comment'>#   empty, rows will be yielded in an unspecified order.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   It is not an error for the +key_set+ to name rows that do not
-</span>  <span class='comment'>#   exist in the database. Read yields nothing for nonexistent rows.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::KeySet`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
-</span>  <span class='comment'>#   The transaction to use. If none is provided, the default is a
-</span>  <span class='comment'>#   temporary read-only transaction with strong concurrency.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param index [String]
-</span>  <span class='comment'>#   If non-empty, the name of an index on {Google::Spanner::V1::ReadRequest#table table}. This index is
-</span>  <span class='comment'>#   used instead of the table primary key when interpreting {Google::Spanner::V1::ReadRequest#key_set key_set}
-</span>  <span class='comment'>#   and sorting result rows. See {Google::Spanner::V1::ReadRequest#key_set key_set} for further information.
-</span>  <span class='comment'># @param limit [Integer]
-</span>  <span class='comment'>#   If greater than zero, only the first +limit+ rows are yielded. If +limit+
-</span>  <span class='comment'>#   is zero, the default is no limit. A limit cannot be specified if
-</span>  <span class='comment'>#   +partition_token+ is set.
-</span>  <span class='comment'># @param resume_token [String]
-</span>  <span class='comment'>#   If this request is resuming a previously interrupted read,
-</span>  <span class='comment'>#   +resume_token+ should be copied from the last
-</span>  <span class='comment'>#   {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
-</span>  <span class='comment'>#   enables the new read to resume where the last read left off. The
-</span>  <span class='comment'>#   rest of the request parameters must exactly match the request
-</span>  <span class='comment'>#   that yielded this token.
-</span>  <span class='comment'># @param partition_token [String]
-</span>  <span class='comment'>#   If present, results will be restricted to the specified partition
-</span>  <span class='comment'>#   previously created using PartitionRead().    There must be an exact
-</span>  <span class='comment'>#   match for the values of fields common to this message and the
-</span>  <span class='comment'>#   PartitionReadRequest message used to create this partition_token.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @return [Enumerable&lt;Google::Spanner::V1::PartialResultSet&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Spanner::V1::PartialResultSet instances.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +table+:
-</span>  <span class='comment'>#   table = &#39;&#39;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +columns+:
-</span>  <span class='comment'>#   columns = []
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +key_set+:
-</span>  <span class='comment'>#   key_set = {}
-</span>  <span class='comment'>#   spanner_client.streaming_read(formatted_session, table, columns, key_set).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_streaming_read'>streaming_read</span> \
-      <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_key_set'>key_set</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>index:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>resume_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>partition_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='label'>table:</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span>
-      <span class='label'>columns:</span> <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span>
-      <span class='label'>key_set:</span> <span class='id identifier rubyid_key_set'>key_set</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>index:</span> <span class='id identifier rubyid_index'>index</span><span class='comma'>,</span>
-      <span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span><span class='comma'>,</span>
-      <span class='label'>resume_token:</span> <span class='id identifier rubyid_resume_token'>resume_token</span><span class='comma'>,</span>
-      <span class='label'>partition_token:</span> <span class='id identifier rubyid_partition_token'>partition_token</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html" title="Google::Spanner::V1::ReadRequest (class)">ReadRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@streaming_read</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Begins a new transaction. This step can often be skipped:
-</span>  <span class='comment'># {Google::Spanner::V1::Spanner::Read Read}, {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql} and
-</span>  <span class='comment'># {Google::Spanner::V1::Spanner::Commit Commit} can begin a new transaction as a
-</span>  <span class='comment'># side-effect.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'>#   Required. The session in which the transaction runs.
-</span>  <span class='comment'># @param options_ [Google::Spanner::V1::TransactionOptions | Hash]
-</span>  <span class='comment'>#   Required. Options for the new transaction.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::TransactionOptions`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Spanner::V1::Transaction]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Spanner::V1::Transaction]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +options_+:
-</span>  <span class='comment'>#   options_ = {}
-</span>  <span class='comment'>#   response = spanner_client.begin_transaction(formatted_session, options_)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
-      <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_options_'>options_</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='id identifier rubyid_options_'>options_</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/BeginTransactionRequest.html" title="Google::Spanner::V1::BeginTransactionRequest (class)">BeginTransactionRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@begin_transaction</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Commits a transaction. The request includes the mutations to be
-</span>  <span class='comment'># applied to rows in the database.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># +Commit+ might return an +ABORTED+ error. This can occur at any time;
-</span>  <span class='comment'># commonly, the cause is conflicts with concurrent
-</span>  <span class='comment'># transactions. However, it can also happen for a variety of other
-</span>  <span class='comment'># reasons. If +Commit+ returns +ABORTED+, the caller should re-attempt
-</span>  <span class='comment'># the transaction from the beginning, re-using the same session.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'>#   Required. The session in which the transaction to be committed is running.
-</span>  <span class='comment'># @param mutations [Array&lt;Google::Spanner::V1::Mutation | Hash&gt;]
-</span>  <span class='comment'>#   The mutations to be executed when this transaction commits. All
-</span>  <span class='comment'>#   mutations are applied atomically, in the order they appear in
-</span>  <span class='comment'>#   this list.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::Mutation`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param transaction_id [String]
-</span>  <span class='comment'>#   Commit a previously-started transaction.
-</span>  <span class='comment'># @param single_use_transaction [Google::Spanner::V1::TransactionOptions | Hash]
-</span>  <span class='comment'>#   Execute mutations in a temporary transaction. Note that unlike
-</span>  <span class='comment'>#   commit of a previously-started transaction, commit with a
-</span>  <span class='comment'>#   temporary transaction is non-idempotent. That is, if the
-</span>  <span class='comment'>#   +CommitRequest+ is sent to Cloud Spanner more than once (for
-</span>  <span class='comment'>#   instance, due to retries in the application, or in the
-</span>  <span class='comment'>#   transport library), it is possible that the mutations are
-</span>  <span class='comment'>#   executed more than once. If this is undesirable, use
-</span>  <span class='comment'>#   {Google::Spanner::V1::Spanner::BeginTransaction BeginTransaction} and
-</span>  <span class='comment'>#   {Google::Spanner::V1::Spanner::Commit Commit} instead.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::TransactionOptions`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Spanner::V1::CommitResponse]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Spanner::V1::CommitResponse]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +mutations+:
-</span>  <span class='comment'>#   mutations = []
-</span>  <span class='comment'>#   response = spanner_client.commit(formatted_session, mutations)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
-      <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_mutations'>mutations</span><span class='comma'>,</span>
-      <span class='label'>transaction_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>single_use_transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='label'>mutations:</span> <span class='id identifier rubyid_mutations'>mutations</span><span class='comma'>,</span>
-      <span class='label'>transaction_id:</span> <span class='id identifier rubyid_transaction_id'>transaction_id</span><span class='comma'>,</span>
-      <span class='label'>single_use_transaction:</span> <span class='id identifier rubyid_single_use_transaction'>single_use_transaction</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/CommitRequest.html" title="Google::Spanner::V1::CommitRequest (class)">CommitRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@commit</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Rolls back a transaction, releasing any locks it holds. It is a good
-</span>  <span class='comment'># idea to call this for any transaction that includes one or more
-</span>  <span class='comment'># {Google::Spanner::V1::Spanner::Read Read} or {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql} requests and
-</span>  <span class='comment'># ultimately decides not to commit.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># +Rollback+ returns +OK+ if it successfully aborts the transaction, the
-</span>  <span class='comment'># transaction was already aborted, or the transaction is not
-</span>  <span class='comment'># found. +Rollback+ never returns +ABORTED+.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'>#   Required. The session in which the transaction to roll back is running.
-</span>  <span class='comment'># @param transaction_id [String]
-</span>  <span class='comment'>#   Required. The transaction to roll back.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result []
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +transaction_id+:
-</span>  <span class='comment'>#   transaction_id = &#39;&#39;
-</span>  <span class='comment'>#   spanner_client.rollback(formatted_session, transaction_id)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
-      <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_transaction_id'>transaction_id</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='label'>transaction_id:</span> <span class='id identifier rubyid_transaction_id'>transaction_id</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/RollbackRequest.html" title="Google::Spanner::V1::RollbackRequest (class)">RollbackRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@rollback</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>nil</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Creates a set of partition tokens that can be used to execute a query
-</span>  <span class='comment'># operation in parallel.  Each of the returned partition tokens can be used
-</span>  <span class='comment'># by {Google::Spanner::V1::Spanner::ExecuteStreamingSql ExecuteStreamingSql} to specify a subset
-</span>  <span class='comment'># of the query result to read.  The same session and read-only transaction
-</span>  <span class='comment'># must be used by the PartitionQueryRequest used to create the
-</span>  <span class='comment'># partition tokens and the ExecuteSqlRequests that use the partition tokens.
-</span>  <span class='comment'># Partition tokens become invalid when the session used to create them
-</span>  <span class='comment'># is deleted or begins a new transaction.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'>#   Required. The session used to create the partitions.
-</span>  <span class='comment'># @param sql [String]
-</span>  <span class='comment'>#   The query request to generate partitions for. The request will fail if
-</span>  <span class='comment'>#   the query is not root partitionable. The query plan of a root
-</span>  <span class='comment'>#   partitionable query has a single distributed union operator. A distributed
-</span>  <span class='comment'>#   union operator conceptually divides one or more tables into multiple
-</span>  <span class='comment'>#   splits, remotely evaluates a subquery independently on each split, and
-</span>  <span class='comment'>#   then unions all results.
-</span>  <span class='comment'># @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
-</span>  <span class='comment'>#   Read only snapshot transactions are supported, read/write and single use
-</span>  <span class='comment'>#   transactions are not.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param params [Google::Protobuf::Struct | Hash]
-</span>  <span class='comment'>#   The SQL query string can contain parameter placeholders. A parameter
-</span>  <span class='comment'>#   placeholder consists of +&#39;@&#39;+ followed by the parameter
-</span>  <span class='comment'>#   name. Parameter names consist of any combination of letters,
-</span>  <span class='comment'>#   numbers, and underscores.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Parameters can appear anywhere that a literal value is expected.  The same
-</span>  <span class='comment'>#   parameter name can be used more than once, for example:
-</span>  <span class='comment'>#     +&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;+
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   It is an error to execute an SQL query with unbound parameters.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Parameter values are specified using +params+, which is a JSON
-</span>  <span class='comment'>#   object whose keys are parameter names, and whose values are the
-</span>  <span class='comment'>#   corresponding parameter values.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Struct`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param param_types [Hash{String =&gt; Google::Spanner::V1::Type | Hash}]
-</span>  <span class='comment'>#   It is not always possible for Cloud Spanner to infer the right SQL type
-</span>  <span class='comment'>#   from a JSON value.  For example, values of type +BYTES+ and values
-</span>  <span class='comment'>#   of type +STRING+ both appear in {Google::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   In these cases, +param_types+ can be used to specify the exact
-</span>  <span class='comment'>#   SQL type for some or all of the SQL query parameters. See the
-</span>  <span class='comment'>#   definition of {Google::Spanner::V1::Type Type} for more information
-</span>  <span class='comment'>#   about SQL types.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::Type`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param partition_options [Google::Spanner::V1::PartitionOptions | Hash]
-</span>  <span class='comment'>#   Additional options that affect how many partitions are created.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::PartitionOptions`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Spanner::V1::PartitionResponse]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Spanner::V1::PartitionResponse]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +sql+:
-</span>  <span class='comment'>#   sql = &#39;&#39;
-</span>  <span class='comment'>#   response = spanner_client.partition_query(formatted_session, sql)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_partition_query'>partition_query</span> \
-      <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>param_types:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>partition_options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='label'>sql:</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>params:</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
-      <span class='label'>param_types:</span> <span class='id identifier rubyid_param_types'>param_types</span><span class='comma'>,</span>
-      <span class='label'>partition_options:</span> <span class='id identifier rubyid_partition_options'>partition_options</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/PartitionQueryRequest.html" title="Google::Spanner::V1::PartitionQueryRequest (class)">PartitionQueryRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@partition_query</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Creates a set of partition tokens that can be used to execute a read
-</span>  <span class='comment'># operation in parallel.  Each of the returned partition tokens can be used
-</span>  <span class='comment'># by {Google::Spanner::V1::Spanner::StreamingRead StreamingRead} to specify a subset of the read
-</span>  <span class='comment'># result to read.  The same session and read-only transaction must be used by
-</span>  <span class='comment'># the PartitionReadRequest used to create the partition tokens and the
-</span>  <span class='comment'># ReadRequests that use the partition tokens.
-</span>  <span class='comment'># Partition tokens become invalid when the session used to create them
-</span>  <span class='comment'># is deleted or begins a new transaction.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param session [String]
-</span>  <span class='comment'>#   Required. The session used to create the partitions.
-</span>  <span class='comment'># @param table [String]
-</span>  <span class='comment'>#   Required. The name of the table in the database to be read.
-</span>  <span class='comment'># @param key_set [Google::Spanner::V1::KeySet | Hash]
-</span>  <span class='comment'>#   Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
-</span>  <span class='comment'>#   primary keys of the rows in {Google::Spanner::V1::PartitionReadRequest#table table} to be yielded, unless {Google::Spanner::V1::PartitionReadRequest#index index}
-</span>  <span class='comment'>#   is present. If {Google::Spanner::V1::PartitionReadRequest#index index} is present, then {Google::Spanner::V1::PartitionReadRequest#key_set key_set} instead names
-</span>  <span class='comment'>#   index keys in {Google::Spanner::V1::PartitionReadRequest#index index}.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   It is not an error for the +key_set+ to name rows that do not
-</span>  <span class='comment'>#   exist in the database. Read yields nothing for nonexistent rows.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::KeySet`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
-</span>  <span class='comment'>#   Read only snapshot transactions are supported, read/write and single use
-</span>  <span class='comment'>#   transactions are not.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param index [String]
-</span>  <span class='comment'>#   If non-empty, the name of an index on {Google::Spanner::V1::PartitionReadRequest#table table}. This index is
-</span>  <span class='comment'>#   used instead of the table primary key when interpreting {Google::Spanner::V1::PartitionReadRequest#key_set key_set}
-</span>  <span class='comment'>#   and sorting result rows. See {Google::Spanner::V1::PartitionReadRequest#key_set key_set} for further information.
-</span>  <span class='comment'># @param columns [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The columns of {Google::Spanner::V1::PartitionReadRequest#table table} to be returned for each row matching
-</span>  <span class='comment'>#   this request.
-</span>  <span class='comment'># @param partition_options [Google::Spanner::V1::PartitionOptions | Hash]
-</span>  <span class='comment'>#   Additional options that affect how many partitions are created.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Spanner::V1::PartitionOptions`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Spanner::V1::PartitionResponse]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Spanner::V1::PartitionResponse]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/spanner&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   spanner_client = Google::Cloud::Spanner.new(version: :v1)
-</span>  <span class='comment'>#   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[DATABASE]&quot;, &quot;[SESSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +table+:
-</span>  <span class='comment'>#   table = &#39;&#39;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +key_set+:
-</span>  <span class='comment'>#   key_set = {}
-</span>  <span class='comment'>#   response = spanner_client.partition_read(formatted_session, table, key_set)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_partition_read'>partition_read</span> \
-      <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_key_set'>key_set</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>index:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>columns:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>partition_options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
-      <span class='label'>table:</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span>
-      <span class='label'>key_set:</span> <span class='id identifier rubyid_key_set'>key_set</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>index:</span> <span class='id identifier rubyid_index'>index</span><span class='comma'>,</span>
-      <span class='label'>columns:</span> <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span>
-      <span class='label'>partition_options:</span> <span class='id identifier rubyid_partition_options'>partition_options</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html" title="Google::Spanner::V1::PartitionReadRequest (class)">PartitionReadRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@partition_read</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
 
   <div id="class_method_details" class="method_details_list">
     <h2>Class Method Details</h2>
@@ -3534,16 +1087,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-89
 90
 91
 92
 93
 94
-95</pre>
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_database_path'>database_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span>
   <span class='const'>DATABASE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -3643,17 +1196,17 @@ custom error handling.</p>
       <pre class="lines">
 
 
-103
 104
 105
 106
 107
 108
 109
-110</pre>
+110
+111</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_session_path'>session_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span> <span class='id identifier rubyid_session'>session</span>
   <span class='const'>SESSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -3842,7 +1395,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-922
 923
 924
 925
@@ -3853,10 +1405,11 @@ retries, etc.</p>
 930
 931
 932
-933</pre>
+933
+934</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 922</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 923</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4089,7 +1642,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-984
 985
 986
 987
@@ -4104,10 +1656,11 @@ retries, etc.</p>
 996
 997
 998
-999</pre>
+999
+1000</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 984</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 985</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4310,7 +1863,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-325
 326
 327
 328
@@ -4321,10 +1873,11 @@ retries, etc.</p>
 333
 334
 335
-336</pre>
+336
+337</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 325</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 326</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_session'>create_session</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -4479,7 +2032,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-455
 456
 457
 458
@@ -4489,10 +2041,11 @@ retries, etc.</p>
 462
 463
 464
-465</pre>
+465
+466</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 455</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 456</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_session'>delete_session</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4810,7 +2363,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-550
 551
 552
 553
@@ -4833,10 +2385,11 @@ retries, etc.</p>
 570
 571
 572
-573</pre>
+573
+574</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 550</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 551</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_sql'>execute_sql</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -5124,7 +2677,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-653
 654
 655
 656
@@ -5146,10 +2698,11 @@ retries, etc.</p>
 672
 673
 674
-675</pre>
+675
+676</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 653</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 654</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_streaming_sql'>execute_streaming_sql</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -5326,7 +2879,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-359
 360
 361
 362
@@ -5335,10 +2887,11 @@ retries, etc.</p>
 365
 366
 367
-368</pre>
+368
+369</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 359</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 360</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_session'>get_session</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5569,7 +3122,6 @@ object.</p>
       <pre class="lines">
 
 
-422
 423
 424
 425
@@ -5582,10 +3134,11 @@ object.</p>
 432
 433
 434
-435</pre>
+435
+436</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 422</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 423</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_sessions'>list_sessions</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -5870,7 +3423,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1118
 1119
 1120
 1121
@@ -5889,10 +3441,11 @@ retries, etc.</p>
 1134
 1135
 1136
-1137</pre>
+1137
+1138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1118</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_query'>partition_query</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -6183,7 +3736,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1199
 1200
 1201
 1202
@@ -6204,10 +3756,11 @@ retries, etc.</p>
 1217
 1218
 1219
-1220</pre>
+1220
+1221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1199</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1200</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_read'>partition_read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -6551,7 +4104,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-762
 763
 764
 765
@@ -6576,10 +4128,11 @@ retries, etc.</p>
 784
 785
 786
-787</pre>
+787
+788</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 762</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 763</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -6773,7 +4326,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1031
 1032
 1033
 1034
@@ -6785,10 +4337,11 @@ retries, etc.</p>
 1040
 1041
 1042
-1043</pre>
+1043
+1044</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1031</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1032</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -7078,7 +4631,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-867
 868
 869
 870
@@ -7102,10 +4654,11 @@ retries, etc.</p>
 888
 889
 890
-891</pre>
+891
+892</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 867</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 868</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_read'>streaming_read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
