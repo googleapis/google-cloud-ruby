@@ -77,6 +77,10 @@ namespace :test do
       end
     end
 
+    # Increase the time limit from the default of 0.05 secs because coverage
+    # may run slowly.
+    ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"] ||= "0.3"
+
     header "Running tests and coverage report"
     Rake::Task["test"].invoke
   end
