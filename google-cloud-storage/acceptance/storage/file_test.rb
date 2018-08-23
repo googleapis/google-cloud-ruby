@@ -355,24 +355,25 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should upload and partially download text" do
     inmemory = StringIO.new "Hello world!"
-    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt"
 
     downloaded = uploaded.download range: 3..6
     downloaded.must_be_kind_of StringIO
 
+    downloaded.rewind
+    downloaded_partial = downloaded.read
+
     partial_download_custom_error_msg = lambda do
       download_io = StringIO.new
-      uploaded.download download_io
+      uploaded.download download_io, verify: :none
       download_io.rewind
       puts "*"*42
       puts "The full downloaded file contents are: #{download_io.read.inspect}"
       puts "*"*42
 
-      "Another partial download failure"
+      "Another partial download failure - #{"lo w".inspect} != #{downloaded_partial.inspect}"
     end
-
-    downloaded.rewind
-    assert_equal "lo w", downloaded.read, partial_download_custom_error_msg
+    assert_equal "lo w", downloaded_partial, partial_download_custom_error_msg
 
     uploaded.delete
   end
