@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ require "google/cloud/spanner/admin/database/v1/database_admin_client"
 require "google/spanner/admin/database/v1/spanner_database_admin_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockDatabaseAdminCredentials < Google::Cloud::Spanner::Admin::Database::Credentials
+class MockDatabaseAdminCredentials_v1 < Google::Cloud::Spanner::Admin::Database::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
   describe 'list_databases' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#list_databases."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#list_databases."
 
     it 'invokes list_databases without error' do
       # Create request parameters
@@ -88,13 +88,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_databases, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_databases, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("list_databases")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_databases")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -119,13 +119,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_databases, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_databases, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("list_databases")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_databases")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -141,7 +141,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
   end
 
   describe 'create_database' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#create_database."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#create_database."
 
     it 'invokes create_database without error' do
       # Create request parameters
@@ -167,13 +167,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(create_statement, request.create_statement)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_database, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_database, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("create_database")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("create_database")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -207,13 +207,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(create_statement, request.create_statement)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_database, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_database, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("create_database")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("create_database")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -238,13 +238,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(create_statement, request.create_statement)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_database, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_database, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("create_database")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("create_database")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -260,7 +260,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
   end
 
   describe 'get_database' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#get_database."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#get_database."
 
     it 'invokes get_database without error' do
       # Create request parameters
@@ -277,13 +277,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_database, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_database, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("get_database")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("get_database")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -291,6 +291,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_database(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -305,13 +312,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_database, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_database, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("get_database")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("get_database")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -327,7 +334,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
   end
 
   describe 'update_database_ddl' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#update_database_ddl."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#update_database_ddl."
 
     it 'invokes update_database_ddl without error' do
       # Create request parameters
@@ -352,13 +359,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(statements, request.statements)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_database_ddl, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_database_ddl, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("update_database_ddl")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("update_database_ddl")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -392,13 +399,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(statements, request.statements)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_database_ddl, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_database_ddl, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("update_database_ddl")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("update_database_ddl")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -423,13 +430,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(statements, request.statements)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_database_ddl, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_database_ddl, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("update_database_ddl")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("update_database_ddl")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -445,7 +452,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
   end
 
   describe 'drop_database' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#drop_database."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#drop_database."
 
     it 'invokes drop_database without error' do
       # Create request parameters
@@ -457,13 +464,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_database, request.database)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:drop_database, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:drop_database, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("drop_database")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("drop_database")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -471,6 +478,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.drop_database(formatted_database) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -485,13 +499,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_database, request.database)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:drop_database, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:drop_database, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("drop_database")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("drop_database")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -507,7 +521,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
   end
 
   describe 'get_database_ddl' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#get_database_ddl."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#get_database_ddl."
 
     it 'invokes get_database_ddl without error' do
       # Create request parameters
@@ -523,13 +537,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_database, request.database)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_database_ddl, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_database_ddl, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("get_database_ddl")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("get_database_ddl")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -537,6 +551,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_database_ddl(formatted_database) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -551,13 +572,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_database, request.database)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_database_ddl, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_database_ddl, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("get_database_ddl")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("get_database_ddl")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -573,7 +594,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
   end
 
   describe 'set_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#set_iam_policy."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#set_iam_policy."
 
     it 'invokes set_iam_policy without error' do
       # Create request parameters
@@ -593,13 +614,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("set_iam_policy")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("set_iam_policy")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -607,6 +628,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_iam_policy(formatted_resource, policy) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -623,13 +651,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("set_iam_policy")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("set_iam_policy")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -645,7 +673,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
   end
 
   describe 'get_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#get_iam_policy."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#get_iam_policy."
 
     it 'invokes get_iam_policy without error' do
       # Create request parameters
@@ -663,13 +691,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("get_iam_policy")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("get_iam_policy")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -677,6 +705,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_iam_policy(formatted_resource) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -691,13 +726,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(formatted_resource, request.resource)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("get_iam_policy")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("get_iam_policy")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -713,7 +748,7 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
   end
 
   describe 'test_iam_permissions' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#test_iam_permissions."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#test_iam_permissions."
 
     it 'invokes test_iam_permissions without error' do
       # Create request parameters
@@ -731,13 +766,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(permissions, request.permissions)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("test_iam_permissions")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("test_iam_permissions")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method
@@ -745,6 +780,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.test_iam_permissions(formatted_resource, permissions) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -761,13 +803,13 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
         assert_equal(permissions, request.permissions)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDatabaseAdminCredentials.new("test_iam_permissions")
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("test_iam_permissions")
 
       Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Database::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
 
           # Call method

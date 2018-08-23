@@ -4,7 +4,6 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/api/auth_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/longrunning/operations_pb'
