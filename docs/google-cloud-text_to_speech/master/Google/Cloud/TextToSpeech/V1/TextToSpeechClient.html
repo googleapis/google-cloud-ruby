@@ -180,38 +180,6 @@ this service.</p>
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#text_to_speech_stub-instance_method" title="#text_to_speech_stub (instance method)">#<strong>text_to_speech_stub</strong>  &#x21d2; Google::Cloud::Texttospeech::V1::TextToSpeech::Stub </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -436,7 +404,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-88
 89
 90
 91
@@ -519,10 +486,11 @@ custom error handling.</p>
 168
 169
 170
-171</pre>
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/text_to_speech_client.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/text_to_speech_client.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -614,513 +582,6 @@ custom error handling.</p>
 </div>
   
 </div>
-
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="text_to_speech_stub-instance_method">
-  
-    #<strong>text_to_speech_stub</strong>  &#x21d2; <tt>Google::Cloud::Texttospeech::V1::TextToSpeech::Stub</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Google::Cloud::Texttospeech::V1::TextToSpeech::Stub</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/text_to_speech_client.rb', line 38</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::TextToSpeech::V1::TextToSpeechClient (class)">TextToSpeechClient</a></span></span>
-  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:text_to_speech_stub</span>
-
-  <span class='comment'># The default address of the service.
-</span>  <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::TextToSpeech::V1::TextToSpeechClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>texttospeech.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='comment'># The default port of the service.
-</span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::TextToSpeech::V1::TextToSpeechClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
-
-  <span class='comment'># The default set of gRPC interceptors.
-</span>  <span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::TextToSpeech::V1::TextToSpeechClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-
-  <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::TextToSpeech::V1::TextToSpeechClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
-
-  <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
-</span>  <span class='comment'># this service.
-</span>  <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::TextToSpeech::V1::TextToSpeechClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-
-  <span class='comment'># @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-</span>  <span class='comment'>#   Provides the means for authenticating requests made by the client. This parameter can
-</span>  <span class='comment'>#   be many types.
-</span>  <span class='comment'>#   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-</span>  <span class='comment'>#   authenticating requests made by this client.
-</span>  <span class='comment'>#   A `String` will be treated as the path to the keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `GRPC::Core::Channel` will be used to make calls through.
-</span>  <span class='comment'>#   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-</span>  <span class='comment'>#   should already be composed with a `GRPC::Core::CallCredentials` object.
-</span>  <span class='comment'>#   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-</span>  <span class='comment'>#   metadata for requests, generally, to give OAuth credentials.
-</span>  <span class='comment'># @param scopes [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The OAuth scopes for this service. This parameter is ignored if
-</span>  <span class='comment'>#   an updater_proc is supplied.
-</span>  <span class='comment'># @param client_config [Hash]
-</span>  <span class='comment'>#   A Hash for call options for each method. See
-</span>  <span class='comment'>#   Google::Gax#construct_settings for the structure of
-</span>  <span class='comment'>#   this data. Falls back to the default config if not specified
-</span>  <span class='comment'>#   or the specified config is missing data points.
-</span>  <span class='comment'># @param timeout [Numeric]
-</span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
-</span>  <span class='comment'># @param metadata [Hash]
-</span>  <span class='comment'>#   Default metadata to be sent with each request. This can be overridden on a per call basis.
-</span>  <span class='comment'># @param exception_transformer [Proc]
-</span>  <span class='comment'>#   An optional proc that intercepts any exceptions raised during an API call to inject
-</span>  <span class='comment'>#   custom error handling.
-</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
-      <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::TextToSpeech::V1::TextToSpeechClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
-      <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
-      <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::TextToSpeech::V1::TextToSpeechClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
-      <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
-    <span class='comment'># These require statements are intentionally placed here to initialize
-</span>    <span class='comment'># the gRPC module only when it&#39;s required.
-</span>    <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
-</span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/texttospeech/v1/cloud_tts_services_pb</span><span class='tstring_end'>&quot;</span></span>
-
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../TextToSpeech.html" title="Google::Cloud::TextToSpeech (module)">TextToSpeech</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::TextToSpeech::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::TextToSpeech::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
-
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../TextToSpeech.html" title="Google::Cloud::TextToSpeech (module)">TextToSpeech</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::TextToSpeech::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::TextToSpeech::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::TextToSpeech::V1.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>ChannelCredentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Proc</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-text_to_speech</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
-
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-    <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>text_to_speech_client_config.json</span><span class='tstring_end'>&quot;</span></span>
-    <span class='rparen'>)</span>
-    <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
-        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.cloud.texttospeech.v1.TextToSpeech</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-        <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
-        <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
-        <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-        <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
-      <span class='rparen'>)</span>
-    <span class='kw'>end</span>
-
-    <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>    <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-    <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
-    <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
-    <span class='ivar'>@text_to_speech_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
-      <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
-      <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
-      <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
-      <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
-      <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Texttospeech.html" title="Google::Cloud::Texttospeech (module)">Texttospeech</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Texttospeech/V1.html" title="Google::Cloud::Texttospeech::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>TextToSpeech</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
-    <span class='rparen'>)</span>
-
-    <span class='ivar'>@list_voices</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@text_to_speech_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_voices</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_voices</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@synthesize_speech</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@text_to_speech_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:synthesize_speech</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>synthesize_speech</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Service calls
-</span>
-  <span class='comment'># Returns a list of {Google::Cloud::Texttospeech::V1::Voice Voice}
-</span>  <span class='comment'># supported for synthesis.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param language_code [String]
-</span>  <span class='comment'>#   Optional (but recommended)
-</span>  <span class='comment'>#   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If
-</span>  <span class='comment'>#   specified, the ListVoices call will only return voices that can be used to
-</span>  <span class='comment'>#   synthesize this language_code. E.g. when specifying &quot;en-NZ&quot;, you will get
-</span>  <span class='comment'>#   supported &quot;en-*&quot; voices; when specifying &quot;no&quot;, you will get supported
-</span>  <span class='comment'>#   &quot;no-*&quot; (Norwegian) and &quot;nb-*&quot; (Norwegian Bokmal) voices; specifying &quot;zh&quot;
-</span>  <span class='comment'>#   will also get supported &quot;cmn-*&quot; voices; specifying &quot;zh-hk&quot; will also get
-</span>  <span class='comment'>#   supported &quot;yue-*&quot; voices.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Cloud::Texttospeech::V1::ListVoicesResponse]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Cloud::Texttospeech::V1::ListVoicesResponse]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/text_to_speech&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   text_to_speech_client = Google::Cloud::TextToSpeech.new(version: :v1)
-</span>  <span class='comment'>#   response = text_to_speech_client.list_voices
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_list_voices'>list_voices</span> \
-      <span class='label'>language_code:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>language_code:</span> <span class='id identifier rubyid_language_code'>language_code</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Texttospeech.html" title="Google::Cloud::Texttospeech (module)">Texttospeech</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Texttospeech/V1.html" title="Google::Cloud::Texttospeech::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Texttospeech/V1/ListVoicesRequest.html" title="Google::Cloud::Texttospeech::V1::ListVoicesRequest (class)">ListVoicesRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@list_voices</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Synthesizes speech synchronously: receive results after all text input
-</span>  <span class='comment'># has been processed.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param input [Google::Cloud::Texttospeech::V1::SynthesisInput | Hash]
-</span>  <span class='comment'>#   Required. The Synthesizer requires either plain text or SSML as input.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Texttospeech::V1::SynthesisInput`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param voice [Google::Cloud::Texttospeech::V1::VoiceSelectionParams | Hash]
-</span>  <span class='comment'>#   Required. The desired voice of the synthesized audio.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Texttospeech::V1::VoiceSelectionParams`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param audio_config [Google::Cloud::Texttospeech::V1::AudioConfig | Hash]
-</span>  <span class='comment'>#   Required. The configuration of the synthesized audio.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Texttospeech::V1::AudioConfig`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Cloud::Texttospeech::V1::SynthesizeSpeechResponse]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Cloud::Texttospeech::V1::SynthesizeSpeechResponse]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/text_to_speech&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   text_to_speech_client = Google::Cloud::TextToSpeech.new(version: :v1)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +input+:
-</span>  <span class='comment'>#   input = {}
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +voice+:
-</span>  <span class='comment'>#   voice = {}
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +audio_config+:
-</span>  <span class='comment'>#   audio_config = {}
-</span>  <span class='comment'>#   response = text_to_speech_client.synthesize_speech(input, voice, audio_config)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_synthesize_speech'>synthesize_speech</span> \
-      <span class='id identifier rubyid_input'>input</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_voice'>voice</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_audio_config'>audio_config</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>input:</span> <span class='id identifier rubyid_input'>input</span><span class='comma'>,</span>
-      <span class='label'>voice:</span> <span class='id identifier rubyid_voice'>voice</span><span class='comma'>,</span>
-      <span class='label'>audio_config:</span> <span class='id identifier rubyid_audio_config'>audio_config</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Texttospeech.html" title="Google::Cloud::Texttospeech (module)">Texttospeech</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Texttospeech/V1.html" title="Google::Cloud::Texttospeech::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Texttospeech/V1/SynthesizeSpeechRequest.html" title="Google::Cloud::Texttospeech::V1::SynthesizeSpeechRequest (class)">SynthesizeSpeechRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@synthesize_speech</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 
   <div id="instance_method_details" class="method_details_list">
@@ -1279,7 +740,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-201
 202
 203
 204
@@ -1288,10 +748,11 @@ retries, etc.</p>
 207
 208
 209
-210</pre>
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/text_to_speech_client.rb', line 201</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/text_to_speech_client.rb', line 202</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_voices'>list_voices</span> \
     <span class='label'>language_code:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1498,7 +959,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-250
 251
 252
 253
@@ -1511,10 +971,11 @@ retries, etc.</p>
 260
 261
 262
-263</pre>
+263
+264</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/text_to_speech_client.rb', line 250</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/text_to_speech_client.rb', line 251</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_synthesize_speech'>synthesize_speech</span> \
     <span class='id identifier rubyid_input'>input</span><span class='comma'>,</span>
