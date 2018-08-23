@@ -37,6 +37,7 @@ module Google
         # @!attribute [r] language_service_stub
         #   @return [Google::Cloud::Language::V1::LanguageService::Stub]
         class LanguageServiceClient
+          # @private
           attr_reader :language_service_stub
 
           # The default address of the service.

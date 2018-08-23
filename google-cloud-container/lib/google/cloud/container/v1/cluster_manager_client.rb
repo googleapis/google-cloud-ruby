@@ -36,6 +36,7 @@ module Google
         # @!attribute [r] cluster_manager_stub
         #   @return [Google::Container::V1::ClusterManager::Stub]
         class ClusterManagerClient
+          # @private
           attr_reader :cluster_manager_stub
 
           # The default address of the service.

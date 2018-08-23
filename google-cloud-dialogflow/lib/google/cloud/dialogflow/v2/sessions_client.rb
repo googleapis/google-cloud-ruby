@@ -39,6 +39,7 @@ module Google
         # @!attribute [r] sessions_stub
         #   @return [Google::Cloud::Dialogflow::V2::Sessions::Stub]
         class SessionsClient
+          # @private
           attr_reader :sessions_stub
 
           # The default address of the service.

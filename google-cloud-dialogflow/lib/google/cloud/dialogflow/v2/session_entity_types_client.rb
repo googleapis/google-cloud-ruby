@@ -47,6 +47,7 @@ module Google
         # @!attribute [r] session_entity_types_stub
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub]
         class SessionEntityTypesClient
+          # @private
           attr_reader :session_entity_types_stub
 
           # The default address of the service.

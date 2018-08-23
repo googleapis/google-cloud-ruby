@@ -68,6 +68,7 @@ module Google
         # @!attribute [r] intents_stub
         #   @return [Google::Cloud::Dialogflow::V2::Intents::Stub]
         class IntentsClient
+          # @private
           attr_reader :intents_stub
 
           # The default address of the service.

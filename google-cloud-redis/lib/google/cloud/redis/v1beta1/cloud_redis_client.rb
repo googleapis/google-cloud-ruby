@@ -52,6 +52,7 @@ module Google
         # @!attribute [r] cloud_redis_stub
         #   @return [Google::Cloud::Redis::V1beta1::CloudRedis::Stub]
         class CloudRedisClient
+          # @private
           attr_reader :cloud_redis_stub
 
           # The default address of the service.

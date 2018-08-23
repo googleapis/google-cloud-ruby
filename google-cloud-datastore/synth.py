@@ -43,3 +43,9 @@ s.replace(
     'lib/google/cloud/datastore/v1/credentials.rb',
     'SCOPE = \[[^\]]+\]\.freeze',
     'SCOPE = ["https://www.googleapis.com/auth/datastore"].freeze')
+
+# https://github.com/googleapis/gapic-generator/issues/2243
+s.replace(
+    'lib/google/cloud/datastore/v1/*_client.rb',
+    '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
+    '\\1\\2# @private\n\\2\\3')

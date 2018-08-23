@@ -37,6 +37,7 @@ module Google
         # @!attribute [r] cloud_tasks_stub
         #   @return [Google::Cloud::Tasks::V2beta2::CloudTasks::Stub]
         class CloudTasksClient
+          # @private
           attr_reader :cloud_tasks_stub
 
           # The default address of the service.

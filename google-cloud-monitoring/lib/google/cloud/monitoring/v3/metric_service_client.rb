@@ -37,6 +37,7 @@ module Google
         # @!attribute [r] metric_service_stub
         #   @return [Google::Monitoring::V3::MetricService::Stub]
         class MetricServiceClient
+          # @private
           attr_reader :metric_service_stub
 
           # The default address of the service.

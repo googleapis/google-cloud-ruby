@@ -83,3 +83,9 @@ s.replace(
     'lib/google/cloud/**/*.rb',
     '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
     escape_braces)
+
+# https://github.com/googleapis/gapic-generator/issues/2243
+s.replace(
+    'lib/google/cloud/bigquery/data_transfer/*/*_client.rb',
+    '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
+    '\\1\\2# @private\n\\2\\3')

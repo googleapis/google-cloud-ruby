@@ -51,6 +51,7 @@ module Google
         # @!attribute [r] firestore_stub
         #   @return [Google::Firestore::V1beta1::Firestore::Stub]
         class FirestoreClient
+          # @private
           attr_reader :firestore_stub
 
           # The default address of the service.

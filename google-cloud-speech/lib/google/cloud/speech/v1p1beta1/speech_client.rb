@@ -38,6 +38,7 @@ module Google
         # @!attribute [r] speech_stub
         #   @return [Google::Cloud::Speech::V1p1beta1::Speech::Stub]
         class SpeechClient
+          # @private
           attr_reader :speech_stub
 
           # The default address of the service.

@@ -36,6 +36,7 @@ module Google
         # @!attribute [r] report_errors_service_stub
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorsService::Stub]
         class ReportErrorsServiceClient
+          # @private
           attr_reader :report_errors_service_stub
 
           # The default address of the service.

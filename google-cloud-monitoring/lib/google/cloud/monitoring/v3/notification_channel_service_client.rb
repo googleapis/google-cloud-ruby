@@ -37,6 +37,7 @@ module Google
         # @!attribute [r] notification_channel_service_stub
         #   @return [Google::Monitoring::V3::NotificationChannelService::Stub]
         class NotificationChannelServiceClient
+          # @private
           attr_reader :notification_channel_service_stub
 
           # The default address of the service.
