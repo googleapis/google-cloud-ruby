@@ -71,6 +71,9 @@ module Google
 
             # Run web detection.
             WEB_DETECTION = 10
+
+            # Run localizer for object detection.
+            OBJECT_LOCALIZATION = 19
           end
         end
 
@@ -366,6 +369,26 @@ module Google
         #     fields, such a score or string that qualifies the entity.
         class EntityAnnotation; end
 
+        # Set of detected objects with bounding boxes.
+        # @!attribute [rw] mid
+        #   @return [String]
+        #     Object ID that should align with EntityAnnotation mid.
+        # @!attribute [rw] language_code
+        #   @return [String]
+        #     The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+        #     information, see
+        #     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Object name, expressed in its +language_code+ language.
+        # @!attribute [rw] score
+        #   @return [Float]
+        #     Score of the result. Range [0, 1].
+        # @!attribute [rw] bounding_poly
+        #   @return [Google::Cloud::Vision::V1::BoundingPoly]
+        #     Image region to which this object belongs. This must be populated.
+        class LocalizedObjectAnnotation; end
+
         # Set of features pertaining to the image, computed by computer vision
         # methods over safe-search verticals (for example, adult, spoof, medical,
         # violence).
@@ -524,6 +547,10 @@ module Google
         # @!attribute [rw] label_annotations
         #   @return [Array<Google::Cloud::Vision::V1::EntityAnnotation>]
         #     If present, label detection has completed successfully.
+        # @!attribute [rw] localized_object_annotations
+        #   @return [Array<Google::Cloud::Vision::V1::LocalizedObjectAnnotation>]
+        #     If present, localized object detection has completed successfully.
+        #     This will be sorted descending by confidence score.
         # @!attribute [rw] text_annotations
         #   @return [Array<Google::Cloud::Vision::V1::EntityAnnotation>]
         #     If present, text (OCR) detection has completed successfully.
