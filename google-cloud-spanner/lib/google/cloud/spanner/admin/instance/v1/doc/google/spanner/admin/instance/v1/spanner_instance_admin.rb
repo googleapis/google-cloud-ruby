@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,17 +16,6 @@ module Google
   module Spanner
     module Admin
       module Instance
-        ##
-        # # Cloud Spanner Instance Admin API Contents
-        #
-        # | Class | Description |
-        # | ----- | ----------- |
-        # | [InstanceAdminClient][] |  |
-        # | [Data Types][] | Data types for Google::Cloud::Spanner::Admin::Instance::V1 |
-        #
-        # [InstanceAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner-admin-instance/latest/google/spanner/admin/instance/v1/instanceadminclient
-        # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner-admin-instance/latest/google/spanner/admin/instance/v1/datatypes
-        #
         module V1
           # A possible configuration for a Cloud Spanner instance. Configurations
           # define the geographic placement of nodes and their replication.

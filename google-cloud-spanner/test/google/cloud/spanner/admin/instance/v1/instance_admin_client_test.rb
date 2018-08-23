@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
 require "google/spanner/admin/instance/v1/spanner_instance_admin_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockInstanceAdminCredentials < Google::Cloud::Spanner::Admin::Instance::Credentials
+class MockInstanceAdminCredentials_v1 < Google::Cloud::Spanner::Admin::Instance::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
   describe 'list_instance_configs' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#list_instance_configs."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#list_instance_configs."
 
     it 'invokes list_instance_configs without error' do
       # Create request parameters
@@ -88,13 +88,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_instance_configs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_instance_configs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("list_instance_configs")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("list_instance_configs")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -119,13 +119,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_instance_configs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_instance_configs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("list_instance_configs")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("list_instance_configs")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -141,7 +141,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
   end
 
   describe 'get_instance_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#get_instance_config."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#get_instance_config."
 
     it 'invokes get_instance_config without error' do
       # Create request parameters
@@ -159,13 +159,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_instance_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_instance_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("get_instance_config")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("get_instance_config")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -173,6 +173,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_instance_config(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -187,13 +194,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_instance_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_instance_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("get_instance_config")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("get_instance_config")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -209,7 +216,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
   end
 
   describe 'list_instances' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#list_instances."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#list_instances."
 
     it 'invokes list_instances without error' do
       # Create request parameters
@@ -228,13 +235,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_instances, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("list_instances")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("list_instances")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -259,13 +266,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_instances, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("list_instances")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("list_instances")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -281,7 +288,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
   end
 
   describe 'get_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#get_instance."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#get_instance."
 
     it 'invokes get_instance without error' do
       # Create request parameters
@@ -306,13 +313,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("get_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("get_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -320,6 +327,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_instance(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -334,13 +348,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("get_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("get_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -356,7 +370,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
   end
 
   describe 'create_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#create_instance."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#create_instance."
 
     it 'invokes create_instance without error' do
       # Create request parameters
@@ -392,13 +406,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("create_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("create_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -438,13 +452,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("create_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("create_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -475,13 +489,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("create_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("create_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -501,7 +515,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
   end
 
   describe 'update_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#update_instance."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#update_instance."
 
     it 'invokes update_instance without error' do
       # Create request parameters
@@ -535,13 +549,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("update_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("update_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -575,13 +589,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("update_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("update_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -606,13 +620,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("update_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("update_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -628,7 +642,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
   end
 
   describe 'delete_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#delete_instance."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#delete_instance."
 
     it 'invokes delete_instance without error' do
       # Create request parameters
@@ -640,13 +654,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("delete_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("delete_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -654,6 +668,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_instance(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -668,13 +689,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("delete_instance")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("delete_instance")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -690,7 +711,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
   end
 
   describe 'set_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#set_iam_policy."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#set_iam_policy."
 
     it 'invokes set_iam_policy without error' do
       # Create request parameters
@@ -710,13 +731,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("set_iam_policy")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("set_iam_policy")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -724,6 +745,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_iam_policy(formatted_resource, policy) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -740,13 +768,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("set_iam_policy")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("set_iam_policy")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -762,7 +790,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
   end
 
   describe 'get_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#get_iam_policy."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#get_iam_policy."
 
     it 'invokes get_iam_policy without error' do
       # Create request parameters
@@ -780,13 +808,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("get_iam_policy")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("get_iam_policy")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -794,6 +822,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_iam_policy(formatted_resource) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -808,13 +843,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_resource, request.resource)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("get_iam_policy")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("get_iam_policy")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -830,7 +865,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
   end
 
   describe 'test_iam_permissions' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#test_iam_permissions."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient#test_iam_permissions."
 
     it 'invokes test_iam_permissions without error' do
       # Create request parameters
@@ -848,13 +883,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(permissions, request.permissions)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("test_iam_permissions")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("test_iam_permissions")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method
@@ -862,6 +897,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.test_iam_permissions(formatted_resource, permissions) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -878,13 +920,13 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(permissions, request.permissions)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockInstanceAdminCredentials.new("test_iam_permissions")
+      mock_credentials = MockInstanceAdminCredentials_v1.new("test_iam_permissions")
 
       Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Spanner::Admin::Instance::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Spanner::Admin::Instance::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
 
           # Call method

@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -121,19 +121,7 @@ module Google
       #     A single identity requesting access for a Cloud Platform resource.
       #     Follows the same format of Binding.members.
       #     Required
-      class BindingDelta
-        # The type of action performed on a Binding in a policy.
-        module Action
-          # Unspecified.
-          ACTION_UNSPECIFIED = 0
-
-          # Addition of a Binding.
-          ADD = 1
-
-          # Removal of a Binding.
-          REMOVE = 2
-        end
-      end
+      class BindingDelta; end
     end
   end
 end

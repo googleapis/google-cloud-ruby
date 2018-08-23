@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,17 +16,6 @@ module Google
   module Spanner
     module Admin
       module Database
-        ##
-        # # Cloud Spanner Database Admin API Contents
-        #
-        # | Class | Description |
-        # | ----- | ----------- |
-        # | [DatabaseAdminClient][] |  |
-        # | [Data Types][] | Data types for Google::Cloud::Spanner::Admin::Database::V1 |
-        #
-        # [DatabaseAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner-admin-database/latest/google/spanner/admin/database/v1/databaseadminclient
-        # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner-admin-database/latest/google/spanner/admin/database/v1/datatypes
-        #
         module V1
           # A Cloud Spanner database.
           # @!attribute [rw] name
