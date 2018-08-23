@@ -185,38 +185,6 @@ this service.</p>
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#config_service_v2_stub-instance_method" title="#config_service_v2_stub (instance method)">#<strong>config_service_v2_stub</strong>  &#x21d2; Google::Logging::V2::ConfigServiceV2::Stub </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -703,7 +671,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-155
 156
 157
 158
@@ -827,10 +794,11 @@ custom error handling.</p>
 276
 277
 278
-279</pre>
+279
+280</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 156</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -964,1603 +932,6 @@ custom error handling.</p>
   
 </div>
 
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="config_service_v2_stub-instance_method">
-  
-    #<strong>config_service_v2_stub</strong>  &#x21d2; <tt>Google::Logging::V2::ConfigServiceV2::Stub</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Google::Logging::V2::ConfigServiceV2::Stub</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408
-409
-410
-411
-412
-413
-414
-415
-416
-417
-418
-419
-420
-421
-422
-423
-424
-425
-426
-427
-428
-429
-430
-431
-432
-433
-434
-435
-436
-437
-438
-439
-440
-441
-442
-443
-444
-445
-446
-447
-448
-449
-450
-451
-452
-453
-454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
-465
-466
-467
-468
-469
-470
-471
-472
-473
-474
-475
-476
-477
-478
-479
-480
-481
-482
-483
-484
-485
-486
-487
-488
-489
-490
-491
-492
-493
-494
-495
-496
-497
-498
-499
-500
-501
-502
-503
-504
-505
-506
-507
-508
-509
-510
-511
-512
-513
-514
-515
-516
-517
-518
-519
-520
-521
-522
-523
-524
-525
-526
-527
-528
-529
-530
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556
-557
-558
-559
-560
-561
-562
-563
-564
-565
-566
-567
-568
-569
-570
-571
-572
-573
-574
-575
-576
-577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629
-630
-631
-632
-633
-634
-635
-636
-637
-638
-639
-640
-641
-642
-643
-644
-645
-646
-647
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720
-721
-722
-723
-724
-725
-726
-727
-728
-729
-730
-731
-732
-733
-734
-735
-736
-737
-738
-739
-740
-741
-742
-743
-744
-745
-746
-747
-748
-749
-750
-751
-752
-753
-754
-755
-756
-757
-758
-759
-760
-761
-762
-763
-764
-765
-766
-767
-768
-769
-770
-771
-772
-773
-774
-775
-776
-777
-778
-779
-780
-781
-782
-783
-784
-785
-786
-787
-788
-789
-790
-791
-792
-793
-794
-795
-796
-797
-798
-799
-800
-801
-802
-803
-804
-805
-806
-807
-808
-809
-810</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 39</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::ConfigServiceV2Client (class)">ConfigServiceV2Client</a></span></span>
-  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:config_service_v2_stub</span>
-
-  <span class='comment'># The default address of the service.
-</span>  <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Logging::V2::ConfigServiceV2Client::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>logging.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='comment'># The default port of the service.
-</span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Logging::V2::ConfigServiceV2Client::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
-
-  <span class='comment'># The default set of gRPC interceptors.
-</span>  <span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Logging::V2::ConfigServiceV2Client::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-
-  <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Logging::V2::ConfigServiceV2Client::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
-
-  <span class='const'>PAGE_DESCRIPTORS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_sinks</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sinks</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_exclusions</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>exclusions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PAGE_DESCRIPTORS</span>
-
-  <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
-</span>  <span class='comment'># this service.
-</span>  <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Logging::V2::ConfigServiceV2Client::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform.read-only</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/logging.admin</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/logging.read</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/logging.write</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-
-  <span class='const'>PROJECT_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PROJECT_PATH_TEMPLATE</span>
-
-  <span class='const'>SINK_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/sinks/{sink}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:SINK_PATH_TEMPLATE</span>
-
-  <span class='const'>EXCLUSION_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/exclusions/{exclusion}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:EXCLUSION_PATH_TEMPLATE</span>
-
-  <span class='comment'># Returns a fully-qualified project resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
-    <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Returns a fully-qualified sink resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param sink [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sink_path'>sink_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_sink'>sink</span>
-    <span class='const'>SINK_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;sink&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_sink'>sink</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Returns a fully-qualified exclusion resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param exclusion [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_exclusion_path'>exclusion_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
-    <span class='const'>EXCLUSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;exclusion&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-</span>  <span class='comment'>#   Provides the means for authenticating requests made by the client. This parameter can
-</span>  <span class='comment'>#   be many types.
-</span>  <span class='comment'>#   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-</span>  <span class='comment'>#   authenticating requests made by this client.
-</span>  <span class='comment'>#   A `String` will be treated as the path to the keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `GRPC::Core::Channel` will be used to make calls through.
-</span>  <span class='comment'>#   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-</span>  <span class='comment'>#   should already be composed with a `GRPC::Core::CallCredentials` object.
-</span>  <span class='comment'>#   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-</span>  <span class='comment'>#   metadata for requests, generally, to give OAuth credentials.
-</span>  <span class='comment'># @param scopes [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The OAuth scopes for this service. This parameter is ignored if
-</span>  <span class='comment'>#   an updater_proc is supplied.
-</span>  <span class='comment'># @param client_config [Hash]
-</span>  <span class='comment'>#   A Hash for call options for each method. See
-</span>  <span class='comment'>#   Google::Gax#construct_settings for the structure of
-</span>  <span class='comment'>#   this data. Falls back to the default config if not specified
-</span>  <span class='comment'>#   or the specified config is missing data points.
-</span>  <span class='comment'># @param timeout [Numeric]
-</span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
-</span>  <span class='comment'># @param metadata [Hash]
-</span>  <span class='comment'>#   Default metadata to be sent with each request. This can be overridden on a per call basis.
-</span>  <span class='comment'># @param exception_transformer [Proc]
-</span>  <span class='comment'>#   An optional proc that intercepts any exceptions raised during an API call to inject
-</span>  <span class='comment'>#   custom error handling.
-</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
-      <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Logging::V2::ConfigServiceV2Client::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
-      <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
-      <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Logging::V2::ConfigServiceV2Client::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
-      <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
-    <span class='comment'># These require statements are intentionally placed here to initialize
-</span>    <span class='comment'># the gRPC module only when it&#39;s required.
-</span>    <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
-</span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/logging/v2/logging_config_services_pb</span><span class='tstring_end'>&quot;</span></span>
-
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Logging::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
-
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Logging::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>ChannelCredentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Proc</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-logging</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
-
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-    <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config_service_v2_client_config.json</span><span class='tstring_end'>&quot;</span></span>
-    <span class='rparen'>)</span>
-    <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
-        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.logging.v2.ConfigServiceV2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-        <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
-        <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
-        <span class='label'>page_descriptors:</span> <span class='const'>PAGE_DESCRIPTORS</span><span class='comma'>,</span>
-        <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-        <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
-      <span class='rparen'>)</span>
-    <span class='kw'>end</span>
-
-    <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>    <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-    <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
-    <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
-    <span class='ivar'>@config_service_v2_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
-      <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
-      <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
-      <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
-      <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
-      <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'>ConfigServiceV2</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
-    <span class='rparen'>)</span>
-
-    <span class='ivar'>@list_sinks</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_sinks</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_sinks</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@get_sink</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_sink</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_sink</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@create_sink</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_sink</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_sink</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@update_sink</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_sink</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_sink</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@delete_sink</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_sink</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_sink</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@list_exclusions</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_exclusions</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_exclusions</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@get_exclusion</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_exclusion</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_exclusion</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@create_exclusion</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_exclusion</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_exclusion</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@update_exclusion</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_exclusion</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_exclusion</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@delete_exclusion</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@config_service_v2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_exclusion</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_exclusion</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Service calls
-</span>
-  <span class='comment'># Lists sinks.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   Required. The parent resource whose sinks are to be listed:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]&quot;
-</span>  <span class='comment'># @param page_size [Integer]
-</span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
-</span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
-</span>  <span class='comment'>#   parameter does not affect the return value. If page streaming is
-</span>  <span class='comment'>#   performed per-page, this determines the maximum number of
-</span>  <span class='comment'>#   resources in a page.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Gax::PagedEnumerable&lt;Google::Logging::V2::LogSink&gt;]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;Google::Logging::V2::LogSink&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Logging::V2::LogSink instances.
-</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
-</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
-</span>  <span class='comment'>#   object.
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path(&quot;[PROJECT]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Iterate over all results.
-</span>  <span class='comment'>#   config_service_v2_client.list_sinks(formatted_parent).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Or iterate over results one page at a time.
-</span>  <span class='comment'>#   config_service_v2_client.list_sinks(formatted_parent).each_page do |page|
-</span>  <span class='comment'>#     # Process each page at a time.
-</span>  <span class='comment'>#     page.each do |element|
-</span>  <span class='comment'>#       # Process element.
-</span>  <span class='comment'>#     end
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_list_sinks'>list_sinks</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/ListSinksRequest.html" title="Google::Logging::V2::ListSinksRequest (class)">ListSinksRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@list_sinks</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Gets a sink.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param sink_name [String]
-</span>  <span class='comment'>#   Required. The resource name of the sink:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Example: +&quot;projects/my-project-id/sinks/my-sink-id&quot;+.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Logging::V2::LogSink]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Logging::V2::LogSink]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path(&quot;[PROJECT]&quot;, &quot;[SINK]&quot;)
-</span>  <span class='comment'>#   response = config_service_v2_client.get_sink(formatted_sink_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_get_sink'>get_sink</span> \
-      <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>sink_name:</span> <span class='id identifier rubyid_sink_name'>sink_name</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/GetSinkRequest.html" title="Google::Logging::V2::GetSinkRequest (class)">GetSinkRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@get_sink</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Creates a sink that exports specified log entries to a destination.  The
-</span>  <span class='comment'># export of newly-ingested log entries begins immediately, unless the sink&#39;s
-</span>  <span class='comment'># +writer_identity+ is not permitted to write to the destination.  A sink can
-</span>  <span class='comment'># export log entries only from the resource owning the sink.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   Required. The resource in which to create the sink:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Examples: +&quot;projects/my-logging-project&quot;+, +&quot;organizations/123456789&quot;+.
-</span>  <span class='comment'># @param sink [Google::Logging::V2::LogSink | Hash]
-</span>  <span class='comment'>#   Required. The new sink, whose +name+ parameter is a sink identifier that
-</span>  <span class='comment'>#   is not already in use.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Logging::V2::LogSink`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param unique_writer_identity [true, false]
-</span>  <span class='comment'>#   Optional. Determines the kind of IAM identity returned as +writer_identity+
-</span>  <span class='comment'>#   in the new sink.  If this value is omitted or set to false, and if the
-</span>  <span class='comment'>#   sink&#39;s parent is a project, then the value returned as +writer_identity+ is
-</span>  <span class='comment'>#   the same group or service account used by Stackdriver Logging before the
-</span>  <span class='comment'>#   addition of writer identities to this API. The sink&#39;s destination must be
-</span>  <span class='comment'>#   in the same project as the sink itself.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   If this field is set to true, or if the sink is owned by a non-project
-</span>  <span class='comment'>#   resource such as an organization, then the value of +writer_identity+ will
-</span>  <span class='comment'>#   be a unique service account used only for exports from the new sink.  For
-</span>  <span class='comment'>#   more information, see +writer_identity+ in {Google::Logging::V2::LogSink LogSink}.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Logging::V2::LogSink]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Logging::V2::LogSink]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path(&quot;[PROJECT]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +sink+:
-</span>  <span class='comment'>#   sink = {}
-</span>  <span class='comment'>#   response = config_service_v2_client.create_sink(formatted_parent, sink)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_create_sink'>create_sink</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_sink'>sink</span><span class='comma'>,</span>
-      <span class='label'>unique_writer_identity:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>sink:</span> <span class='id identifier rubyid_sink'>sink</span><span class='comma'>,</span>
-      <span class='label'>unique_writer_identity:</span> <span class='id identifier rubyid_unique_writer_identity'>unique_writer_identity</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/CreateSinkRequest.html" title="Google::Logging::V2::CreateSinkRequest (class)">CreateSinkRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@create_sink</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Updates a sink.  This method replaces the following fields in the existing
-</span>  <span class='comment'># sink with values from the new sink: +destination+, and +filter+.
-</span>  <span class='comment'># The updated sink might also have a new +writer_identity+; see the
-</span>  <span class='comment'># +unique_writer_identity+ field.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param sink_name [String]
-</span>  <span class='comment'>#   Required. The full resource name of the sink to update, including the
-</span>  <span class='comment'>#   parent resource and the sink identifier:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Example: +&quot;projects/my-project-id/sinks/my-sink-id&quot;+.
-</span>  <span class='comment'># @param sink [Google::Logging::V2::LogSink | Hash]
-</span>  <span class='comment'>#   Required. The updated sink, whose name is the same identifier that appears
-</span>  <span class='comment'>#   as part of +sink_name+.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Logging::V2::LogSink`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param unique_writer_identity [true, false]
-</span>  <span class='comment'>#   Optional. See
-</span>  <span class='comment'>#   [sinks.create](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create)
-</span>  <span class='comment'>#   for a description of this field.  When updating a sink, the effect of this
-</span>  <span class='comment'>#   field on the value of +writer_identity+ in the updated sink depends on both
-</span>  <span class='comment'>#   the old and new values of this field:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   * If the old and new values of this field are both false or both true,
-</span>  <span class='comment'>#     then there is no change to the sink&#39;s +writer_identity+.
-</span>  <span class='comment'>#   * If the old value is false and the new value is true, then
-</span>  <span class='comment'>#     +writer_identity+ is changed to a unique service account.
-</span>  <span class='comment'>#   * It is an error if the old value is true and the new value is
-</span>  <span class='comment'>#     set to false or defaulted to false.
-</span>  <span class='comment'># @param update_mask [Google::Protobuf::FieldMask | Hash]
-</span>  <span class='comment'>#   Optional. Field mask that specifies the fields in +sink+ that need
-</span>  <span class='comment'>#   an update. A sink field will be overwritten if, and only if, it is
-</span>  <span class='comment'>#   in the update mask.  +name+ and output only fields cannot be updated.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   An empty updateMask is temporarily treated as using the following mask
-</span>  <span class='comment'>#   for backwards compatibility purposes:
-</span>  <span class='comment'>#     destination,filter,includeChildren
-</span>  <span class='comment'>#   At some point in the future, behavior will be removed and specifying an
-</span>  <span class='comment'>#   empty updateMask will be an error.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   For a detailed +FieldMask+ definition, see
-</span>  <span class='comment'>#   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Example: +updateMask=filter+.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::FieldMask`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Logging::V2::LogSink]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Logging::V2::LogSink]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path(&quot;[PROJECT]&quot;, &quot;[SINK]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +sink+:
-</span>  <span class='comment'>#   sink = {}
-</span>  <span class='comment'>#   response = config_service_v2_client.update_sink(formatted_sink_name, sink)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_update_sink'>update_sink</span> \
-      <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_sink'>sink</span><span class='comma'>,</span>
-      <span class='label'>unique_writer_identity:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>update_mask:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>sink_name:</span> <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
-      <span class='label'>sink:</span> <span class='id identifier rubyid_sink'>sink</span><span class='comma'>,</span>
-      <span class='label'>unique_writer_identity:</span> <span class='id identifier rubyid_unique_writer_identity'>unique_writer_identity</span><span class='comma'>,</span>
-      <span class='label'>update_mask:</span> <span class='id identifier rubyid_update_mask'>update_mask</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/UpdateSinkRequest.html" title="Google::Logging::V2::UpdateSinkRequest (class)">UpdateSinkRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@update_sink</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Deletes a sink. If the sink has a unique +writer_identity+, then that
-</span>  <span class='comment'># service account is also deleted.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param sink_name [String]
-</span>  <span class='comment'>#   Required. The full resource name of the sink to delete, including the
-</span>  <span class='comment'>#   parent resource and the sink identifier:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]/sinks/[SINK_ID]&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Example: +&quot;projects/my-project-id/sinks/my-sink-id&quot;+.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result []
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path(&quot;[PROJECT]&quot;, &quot;[SINK]&quot;)
-</span>  <span class='comment'>#   config_service_v2_client.delete_sink(formatted_sink_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_delete_sink'>delete_sink</span> \
-      <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>sink_name:</span> <span class='id identifier rubyid_sink_name'>sink_name</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/DeleteSinkRequest.html" title="Google::Logging::V2::DeleteSinkRequest (class)">DeleteSinkRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@delete_sink</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>nil</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Lists all the exclusions in a parent resource.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   Required. The parent resource whose exclusions are to be listed.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]&quot;
-</span>  <span class='comment'># @param page_size [Integer]
-</span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
-</span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
-</span>  <span class='comment'>#   parameter does not affect the return value. If page streaming is
-</span>  <span class='comment'>#   performed per-page, this determines the maximum number of
-</span>  <span class='comment'>#   resources in a page.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Gax::PagedEnumerable&lt;Google::Logging::V2::LogExclusion&gt;]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;Google::Logging::V2::LogExclusion&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Logging::V2::LogExclusion instances.
-</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
-</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
-</span>  <span class='comment'>#   object.
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path(&quot;[PROJECT]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Iterate over all results.
-</span>  <span class='comment'>#   config_service_v2_client.list_exclusions(formatted_parent).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Or iterate over results one page at a time.
-</span>  <span class='comment'>#   config_service_v2_client.list_exclusions(formatted_parent).each_page do |page|
-</span>  <span class='comment'>#     # Process each page at a time.
-</span>  <span class='comment'>#     page.each do |element|
-</span>  <span class='comment'>#       # Process element.
-</span>  <span class='comment'>#     end
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_list_exclusions'>list_exclusions</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/ListExclusionsRequest.html" title="Google::Logging::V2::ListExclusionsRequest (class)">ListExclusionsRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@list_exclusions</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Gets the description of an exclusion.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   Required. The resource name of an existing exclusion:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Example: +&quot;projects/my-project-id/exclusions/my-exclusion-id&quot;+.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Logging::V2::LogExclusion]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Logging::V2::LogExclusion]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path(&quot;[PROJECT]&quot;, &quot;[EXCLUSION]&quot;)
-</span>  <span class='comment'>#   response = config_service_v2_client.get_exclusion(formatted_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_get_exclusion'>get_exclusion</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/GetExclusionRequest.html" title="Google::Logging::V2::GetExclusionRequest (class)">GetExclusionRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@get_exclusion</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Creates a new exclusion in a specified parent resource.
-</span>  <span class='comment'># Only log entries belonging to that resource can be excluded.
-</span>  <span class='comment'># You can have up to 10 exclusions in a resource.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   Required. The parent resource in which to create the exclusion:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Examples: +&quot;projects/my-logging-project&quot;+, +&quot;organizations/123456789&quot;+.
-</span>  <span class='comment'># @param exclusion [Google::Logging::V2::LogExclusion | Hash]
-</span>  <span class='comment'>#   Required. The new exclusion, whose +name+ parameter is an exclusion name
-</span>  <span class='comment'>#   that is not already used in the parent resource.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Logging::V2::LogExclusion`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Logging::V2::LogExclusion]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Logging::V2::LogExclusion]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path(&quot;[PROJECT]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +exclusion+:
-</span>  <span class='comment'>#   exclusion = {}
-</span>  <span class='comment'>#   response = config_service_v2_client.create_exclusion(formatted_parent, exclusion)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_create_exclusion'>create_exclusion</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_exclusion'>exclusion</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>exclusion:</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/CreateExclusionRequest.html" title="Google::Logging::V2::CreateExclusionRequest (class)">CreateExclusionRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@create_exclusion</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Changes one or more properties of an existing exclusion.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   Required. The resource name of the exclusion to update:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Example: +&quot;projects/my-project-id/exclusions/my-exclusion-id&quot;+.
-</span>  <span class='comment'># @param exclusion [Google::Logging::V2::LogExclusion | Hash]
-</span>  <span class='comment'>#   Required. New values for the existing exclusion. Only the fields specified
-</span>  <span class='comment'>#   in +update_mask+ are relevant.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Logging::V2::LogExclusion`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param update_mask [Google::Protobuf::FieldMask | Hash]
-</span>  <span class='comment'>#   Required. A nonempty list of fields to change in the existing exclusion.
-</span>  <span class='comment'>#   New values for the fields are taken from the corresponding fields in the
-</span>  <span class='comment'>#   {Google::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
-</span>  <span class='comment'>#   +update_mask+ are not changed and are ignored in the request.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   For example, to change the filter and description of an exclusion,
-</span>  <span class='comment'>#   specify an +update_mask+ of +&quot;filter,description&quot;+.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::FieldMask`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Logging::V2::LogExclusion]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Logging::V2::LogExclusion]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path(&quot;[PROJECT]&quot;, &quot;[EXCLUSION]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +exclusion+:
-</span>  <span class='comment'>#   exclusion = {}
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +update_mask+:
-</span>  <span class='comment'>#   update_mask = {}
-</span>  <span class='comment'>#   response = config_service_v2_client.update_exclusion(formatted_name, exclusion, update_mask)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_update_exclusion'>update_exclusion</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_exclusion'>exclusion</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_update_mask'>update_mask</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>exclusion:</span> <span class='id identifier rubyid_exclusion'>exclusion</span><span class='comma'>,</span>
-      <span class='label'>update_mask:</span> <span class='id identifier rubyid_update_mask'>update_mask</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/UpdateExclusionRequest.html" title="Google::Logging::V2::UpdateExclusionRequest (class)">UpdateExclusionRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@update_exclusion</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Deletes an exclusion.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   Required. The resource name of an existing exclusion to delete:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       &quot;projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#       &quot;organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#       &quot;billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#       &quot;folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Example: +&quot;projects/my-project-id/exclusions/my-exclusion-id&quot;+.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result []
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/logging/v2&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path(&quot;[PROJECT]&quot;, &quot;[EXCLUSION]&quot;)
-</span>  <span class='comment'>#   config_service_v2_client.delete_exclusion(formatted_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_delete_exclusion'>delete_exclusion</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging.html" title="Google::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2.html" title="Google::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Logging/V2/DeleteExclusionRequest.html" title="Google::Logging::V2::DeleteExclusionRequest (class)">DeleteExclusionRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@delete_exclusion</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>nil</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
 
   <div id="class_method_details" class="method_details_list">
     <h2>Class Method Details</h2>
@@ -2630,15 +1001,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-119
 120
 121
 122
 123
-124</pre>
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 119</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 120</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_exclusion_path'>exclusion_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_exclusion'>exclusion</span>
   <span class='const'>EXCLUSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2704,14 +1075,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-98
 99
 100
 101
-102</pre>
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2787,15 +1158,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-108
 109
 110
 111
 112
-113</pre>
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sink_path'>sink_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_sink'>sink</span>
   <span class='const'>SINK_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2990,7 +1361,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-699
 700
 701
 702
@@ -3001,10 +1371,11 @@ retries, etc.</p>
 707
 708
 709
-710</pre>
+710
+711</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 699</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 700</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_exclusion'>create_exclusion</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3225,7 +1596,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-428
 429
 430
 431
@@ -3238,10 +1608,11 @@ retries, etc.</p>
 438
 439
 440
-441</pre>
+441
+442</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 428</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 429</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_sink'>create_sink</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3406,7 +1777,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-799
 800
 801
 802
@@ -3416,10 +1786,11 @@ retries, etc.</p>
 806
 807
 808
-809</pre>
+809
+810</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 799</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 800</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_exclusion'>delete_exclusion</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3583,7 +1954,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-555
 556
 557
 558
@@ -3593,10 +1963,11 @@ retries, etc.</p>
 562
 563
 564
-565</pre>
+565
+566</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 555</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 556</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_sink'>delete_sink</span> \
     <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
@@ -3767,7 +2138,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-652
 653
 654
 655
@@ -3776,10 +2146,11 @@ retries, etc.</p>
 658
 659
 660
-661</pre>
+661
+662</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 652</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 653</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_exclusion'>get_exclusion</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3949,7 +2320,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-368
 369
 370
 371
@@ -3958,10 +2328,11 @@ retries, etc.</p>
 374
 375
 376
-377</pre>
+377
+378</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 368</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 369</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_sink'>get_sink</span> \
     <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
@@ -4167,7 +2538,6 @@ object.</p>
       <pre class="lines">
 
 
-613
 614
 615
 616
@@ -4178,10 +2548,11 @@ object.</p>
 621
 622
 623
-624</pre>
+624
+625</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 613</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 614</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_exclusions'>list_exclusions</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4389,7 +2760,6 @@ object.</p>
       <pre class="lines">
 
 
-329
 330
 331
 332
@@ -4400,10 +2770,11 @@ object.</p>
 337
 338
 339
-340</pre>
+340
+341</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 329</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 330</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_sinks'>list_sinks</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4622,7 +2993,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-759
 760
 761
 762
@@ -4635,10 +3005,11 @@ retries, etc.</p>
 769
 770
 771
-772</pre>
+772
+773</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 759</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 760</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_exclusion'>update_exclusion</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4895,7 +3266,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-511
 512
 513
 514
@@ -4910,10 +3280,11 @@ retries, etc.</p>
 523
 524
 525
-526</pre>
+526
+527</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 511</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/config_service_v2_client.rb', line 512</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_sink'>update_sink</span> \
     <span class='id identifier rubyid_sink_name'>sink_name</span><span class='comma'>,</span>
