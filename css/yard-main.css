@@ -18,7 +18,7 @@
     padding: 10px;
 }
 
-.nav-wrap, #main {
+#main {
      padding-top: 50px;
 }
 
@@ -36,7 +36,7 @@
 
 @media only screen and (min-width: 50em) {
 
-    .nav-wrap, #main {
+    #main {
          padding-top: 70px;
     }
 
