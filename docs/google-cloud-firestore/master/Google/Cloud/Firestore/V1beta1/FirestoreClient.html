@@ -198,38 +198,6 @@ this service.</p>
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#firestore_stub-instance_method" title="#firestore_stub (instance method)">#<strong>firestore_stub</strong>  &#x21d2; Google::Firestore::V1beta1::Firestore::Stub </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -808,7 +776,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-191
 192
 193
 194
@@ -947,10 +914,11 @@ custom error handling.</p>
 327
 328
 329
-330</pre>
+330
+331</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 191</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 192</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1099,2031 +1067,6 @@ custom error handling.</p>
   
 </div>
 
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="firestore_stub-instance_method">
-  
-    #<strong>firestore_stub</strong>  &#x21d2; <tt>Google::Firestore::V1beta1::Firestore::Stub</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Google::Firestore::V1beta1::Firestore::Stub</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408
-409
-410
-411
-412
-413
-414
-415
-416
-417
-418
-419
-420
-421
-422
-423
-424
-425
-426
-427
-428
-429
-430
-431
-432
-433
-434
-435
-436
-437
-438
-439
-440
-441
-442
-443
-444
-445
-446
-447
-448
-449
-450
-451
-452
-453
-454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
-465
-466
-467
-468
-469
-470
-471
-472
-473
-474
-475
-476
-477
-478
-479
-480
-481
-482
-483
-484
-485
-486
-487
-488
-489
-490
-491
-492
-493
-494
-495
-496
-497
-498
-499
-500
-501
-502
-503
-504
-505
-506
-507
-508
-509
-510
-511
-512
-513
-514
-515
-516
-517
-518
-519
-520
-521
-522
-523
-524
-525
-526
-527
-528
-529
-530
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556
-557
-558
-559
-560
-561
-562
-563
-564
-565
-566
-567
-568
-569
-570
-571
-572
-573
-574
-575
-576
-577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601
-602
-603
-604
-605
-606
-607
-608
-609
-610
-611
-612
-613
-614
-615
-616
-617
-618
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629
-630
-631
-632
-633
-634
-635
-636
-637
-638
-639
-640
-641
-642
-643
-644
-645
-646
-647
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720
-721
-722
-723
-724
-725
-726
-727
-728
-729
-730
-731
-732
-733
-734
-735
-736
-737
-738
-739
-740
-741
-742
-743
-744
-745
-746
-747
-748
-749
-750
-751
-752
-753
-754
-755
-756
-757
-758
-759
-760
-761
-762
-763
-764
-765
-766
-767
-768
-769
-770
-771
-772
-773
-774
-775
-776
-777
-778
-779
-780
-781
-782
-783
-784
-785
-786
-787
-788
-789
-790
-791
-792
-793
-794
-795
-796
-797
-798
-799
-800
-801
-802
-803
-804
-805
-806
-807
-808
-809
-810
-811
-812
-813
-814
-815
-816
-817
-818
-819
-820
-821
-822
-823
-824
-825
-826
-827
-828
-829
-830
-831
-832
-833
-834
-835
-836
-837
-838
-839
-840
-841
-842
-843
-844
-845
-846
-847
-848
-849
-850
-851
-852
-853
-854
-855
-856
-857
-858
-859
-860
-861
-862
-863
-864
-865
-866
-867
-868
-869
-870
-871
-872
-873
-874
-875
-876
-877
-878
-879
-880
-881
-882
-883
-884
-885
-886
-887
-888
-889
-890
-891
-892
-893
-894
-895
-896
-897
-898
-899
-900
-901
-902
-903
-904
-905
-906
-907
-908
-909
-910
-911
-912
-913
-914
-915
-916
-917
-918
-919
-920
-921
-922
-923
-924
-925
-926
-927
-928
-929
-930
-931
-932
-933
-934
-935
-936
-937
-938
-939
-940
-941
-942
-943
-944
-945
-946
-947
-948
-949
-950
-951
-952
-953
-954
-955
-956
-957
-958
-959
-960
-961
-962
-963
-964
-965
-966
-967
-968
-969
-970
-971
-972
-973
-974
-975
-976
-977
-978
-979
-980
-981
-982
-983
-984
-985
-986
-987
-988
-989
-990
-991
-992
-993
-994
-995
-996
-997
-998
-999
-1000
-1001
-1002
-1003
-1004
-1005
-1006
-1007
-1008
-1009
-1010
-1011
-1012
-1013
-1014
-1015
-1016
-1017
-1018
-1019
-1020
-1021
-1022
-1023
-1024
-1025
-1026
-1027
-1028
-1029
-1030
-1031
-1032
-1033
-1034
-1035
-1036
-1037
-1038</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 53</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore::V1beta1::FirestoreClient (class)">FirestoreClient</a></span></span>
-  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:firestore_stub</span>
-
-  <span class='comment'># The default address of the service.
-</span>  <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Firestore::V1beta1::FirestoreClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>firestore.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='comment'># The default port of the service.
-</span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Firestore::V1beta1::FirestoreClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
-
-  <span class='comment'># The default set of gRPC interceptors.
-</span>  <span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Firestore::V1beta1::FirestoreClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-
-  <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Firestore::V1beta1::FirestoreClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
-
-  <span class='const'>PAGE_DESCRIPTORS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_documents</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>documents</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_collection_ids</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>collection_ids</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PAGE_DESCRIPTORS</span>
-
-  <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
-</span>  <span class='comment'># this service.
-</span>  <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Firestore::V1beta1::FirestoreClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/datastore</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-
-  <span class='const'>DATABASE_ROOT_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/databases/{database}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:DATABASE_ROOT_PATH_TEMPLATE</span>
-
-  <span class='const'>DOCUMENT_ROOT_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/databases/{database}/documents</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:DOCUMENT_ROOT_PATH_TEMPLATE</span>
-
-  <span class='const'>DOCUMENT_PATH_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/databases/{database}/documents/{document_path=**}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:DOCUMENT_PATH_PATH_TEMPLATE</span>
-
-  <span class='const'>ANY_PATH_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/databases/{database}/documents/{document}/{any_path=**}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:ANY_PATH_PATH_TEMPLATE</span>
-
-  <span class='comment'># Returns a fully-qualified database_root resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_database_root_path'>database_root_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span>
-    <span class='const'>DATABASE_ROOT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;database&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_database'>database</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Returns a fully-qualified document_root resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_document_root_path'>document_root_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span>
-    <span class='const'>DOCUMENT_ROOT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;database&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_database'>database</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Returns a fully-qualified document_path resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'># @param document_path [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_document_path_path'>document_path_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span> <span class='id identifier rubyid_document_path'>document_path</span>
-    <span class='const'>DOCUMENT_PATH_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;database&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;document_path&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_document_path'>document_path</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Returns a fully-qualified any_path resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'># @param document [String]
-</span>  <span class='comment'># @param any_path [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_any_path_path'>any_path_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span> <span class='id identifier rubyid_any_path'>any_path</span>
-    <span class='const'>ANY_PATH_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;database&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;document&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;any_path&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_any_path'>any_path</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-</span>  <span class='comment'>#   Provides the means for authenticating requests made by the client. This parameter can
-</span>  <span class='comment'>#   be many types.
-</span>  <span class='comment'>#   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-</span>  <span class='comment'>#   authenticating requests made by this client.
-</span>  <span class='comment'>#   A `String` will be treated as the path to the keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `GRPC::Core::Channel` will be used to make calls through.
-</span>  <span class='comment'>#   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-</span>  <span class='comment'>#   should already be composed with a `GRPC::Core::CallCredentials` object.
-</span>  <span class='comment'>#   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-</span>  <span class='comment'>#   metadata for requests, generally, to give OAuth credentials.
-</span>  <span class='comment'># @param scopes [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The OAuth scopes for this service. This parameter is ignored if
-</span>  <span class='comment'>#   an updater_proc is supplied.
-</span>  <span class='comment'># @param client_config [Hash]
-</span>  <span class='comment'>#   A Hash for call options for each method. See
-</span>  <span class='comment'>#   Google::Gax#construct_settings for the structure of
-</span>  <span class='comment'>#   this data. Falls back to the default config if not specified
-</span>  <span class='comment'>#   or the specified config is missing data points.
-</span>  <span class='comment'># @param timeout [Numeric]
-</span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
-</span>  <span class='comment'># @param metadata [Hash]
-</span>  <span class='comment'>#   Default metadata to be sent with each request. This can be overridden on a per call basis.
-</span>  <span class='comment'># @param exception_transformer [Proc]
-</span>  <span class='comment'>#   An optional proc that intercepts any exceptions raised during an API call to inject
-</span>  <span class='comment'>#   custom error handling.
-</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
-      <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Firestore::V1beta1::FirestoreClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
-      <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
-      <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Firestore::V1beta1::FirestoreClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
-      <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
-    <span class='comment'># These require statements are intentionally placed here to initialize
-</span>    <span class='comment'># the gRPC module only when it&#39;s required.
-</span>    <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
-</span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/firestore/v1beta1/firestore_services_pb</span><span class='tstring_end'>&quot;</span></span>
-
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Firestore::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
-
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Firestore::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta1.html#new-class_method" title="Google::Cloud::Firestore::V1beta1.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>ChannelCredentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Proc</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-firestore</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
-
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-    <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>firestore_client_config.json</span><span class='tstring_end'>&quot;</span></span>
-    <span class='rparen'>)</span>
-    <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
-        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.firestore.v1beta1.Firestore</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-        <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
-        <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
-        <span class='label'>page_descriptors:</span> <span class='const'>PAGE_DESCRIPTORS</span><span class='comma'>,</span>
-        <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-        <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
-      <span class='rparen'>)</span>
-    <span class='kw'>end</span>
-
-    <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>    <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-    <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
-    <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
-    <span class='ivar'>@firestore_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
-      <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
-      <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
-      <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
-      <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
-      <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'>Firestore</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
-    <span class='rparen'>)</span>
-
-    <span class='ivar'>@get_document</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_document</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_document</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@list_documents</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_documents</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_documents</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@create_document</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_document</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_document</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@update_document</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_document</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_document</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@delete_document</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_document</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_document</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@batch_get_documents</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:batch_get_documents</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>batch_get_documents</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@begin_transaction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:begin_transaction</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>begin_transaction</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@commit</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:commit</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>commit</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@rollback</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:rollback</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rollback</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@run_query</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:run_query</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>run_query</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@write</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:write</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>write</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@listen</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:listen</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>listen</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@list_collection_ids</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@firestore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_collection_ids</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_collection_ids</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Service calls
-</span>
-  <span class='comment'># Gets a single document.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   The resource name of the Document to get. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
-</span>  <span class='comment'># @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
-</span>  <span class='comment'>#   The fields to return. If not set, returns all fields.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   If the document has a field that is not present in this mask, that field
-</span>  <span class='comment'>#   will not be returned in the response.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::DocumentMask`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param transaction [String]
-</span>  <span class='comment'>#   Reads the document in a transaction.
-</span>  <span class='comment'># @param read_time [Google::Protobuf::Timestamp | Hash]
-</span>  <span class='comment'>#   Reads the version of the document at the given time.
-</span>  <span class='comment'>#   This may not be older than 60 seconds.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Timestamp`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Firestore::V1beta1::Document]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Firestore::V1beta1::Document]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;, &quot;[DOCUMENT]&quot;, &quot;[ANY_PATH]&quot;)
-</span>  <span class='comment'>#   response = firestore_client.get_document(formatted_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_get_document'>get_document</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='id identifier rubyid_mask'>mask</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='id identifier rubyid_read_time'>read_time</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/GetDocumentRequest.html" title="Google::Firestore::V1beta1::GetDocumentRequest (class)">GetDocumentRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@get_document</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Lists documents.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   The parent resource name. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
-</span>  <span class='comment'>#   For example:
-</span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents+ or
-</span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
-</span>  <span class='comment'># @param collection_id [String]
-</span>  <span class='comment'>#   The collection ID, relative to +parent+, to list. For example: +chatrooms+
-</span>  <span class='comment'>#   or +messages+.
-</span>  <span class='comment'># @param page_size [Integer]
-</span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
-</span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
-</span>  <span class='comment'>#   parameter does not affect the return value. If page streaming is
-</span>  <span class='comment'>#   performed per-page, this determines the maximum number of
-</span>  <span class='comment'>#   resources in a page.
-</span>  <span class='comment'># @param order_by [String]
-</span>  <span class='comment'>#   The order to sort results by. For example: +priority desc, name+.
-</span>  <span class='comment'># @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
-</span>  <span class='comment'>#   The fields to return. If not set, returns all fields.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   If a document has a field that is not present in this mask, that field
-</span>  <span class='comment'>#   will not be returned in the response.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::DocumentMask`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param transaction [String]
-</span>  <span class='comment'>#   Reads documents in a transaction.
-</span>  <span class='comment'># @param read_time [Google::Protobuf::Timestamp | Hash]
-</span>  <span class='comment'>#   Reads documents as they were at the given time.
-</span>  <span class='comment'>#   This may not be older than 60 seconds.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Timestamp`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param show_missing [true, false]
-</span>  <span class='comment'>#   If the list should show missing documents. A missing document is a
-</span>  <span class='comment'>#   document that does not exist but has sub-documents. These documents will
-</span>  <span class='comment'>#   be returned with a key but will not have fields, {Google::Firestore::V1beta1::Document#create_time Document#create_time},
-</span>  <span class='comment'>#   or {Google::Firestore::V1beta1::Document#update_time Document#update_time} set.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Requests with +show_missing+ may not specify +where+ or
-</span>  <span class='comment'>#   +order_by+.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Gax::PagedEnumerable&lt;Google::Firestore::V1beta1::Document&gt;]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;Google::Firestore::V1beta1::Document&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Firestore::V1beta1::Document instances.
-</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
-</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
-</span>  <span class='comment'>#   object.
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;, &quot;[DOCUMENT]&quot;, &quot;[ANY_PATH]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +collection_id+:
-</span>  <span class='comment'>#   collection_id = &#39;&#39;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Iterate over all results.
-</span>  <span class='comment'>#   firestore_client.list_documents(formatted_parent, collection_id).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Or iterate over results one page at a time.
-</span>  <span class='comment'>#   firestore_client.list_documents(formatted_parent, collection_id).each_page do |page|
-</span>  <span class='comment'>#     # Process each page at a time.
-</span>  <span class='comment'>#     page.each do |element|
-</span>  <span class='comment'>#       # Process element.
-</span>  <span class='comment'>#     end
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_list_documents'>list_documents</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_collection_id'>collection_id</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>order_by:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>show_missing:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>collection_id:</span> <span class='id identifier rubyid_collection_id'>collection_id</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='comma'>,</span>
-      <span class='label'>order_by:</span> <span class='id identifier rubyid_order_by'>order_by</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='id identifier rubyid_mask'>mask</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='id identifier rubyid_read_time'>read_time</span><span class='comma'>,</span>
-      <span class='label'>show_missing:</span> <span class='id identifier rubyid_show_missing'>show_missing</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/ListDocumentsRequest.html" title="Google::Firestore::V1beta1::ListDocumentsRequest (class)">ListDocumentsRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@list_documents</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Creates a new document.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   The parent resource. For example:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/chatrooms/\\{chatroom_id}+
-</span>  <span class='comment'># @param collection_id [String]
-</span>  <span class='comment'>#   The collection ID, relative to +parent+, to list. For example: +chatrooms+.
-</span>  <span class='comment'># @param document_id [String]
-</span>  <span class='comment'>#   The client-assigned document ID to use for this document.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Optional. If not specified, an ID will be assigned by the service.
-</span>  <span class='comment'># @param document [Google::Firestore::V1beta1::Document | Hash]
-</span>  <span class='comment'>#   The document to create. +name+ must not be set.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::Document`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
-</span>  <span class='comment'>#   The fields to return. If not set, returns all fields.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   If the document has a field that is not present in this mask, that field
-</span>  <span class='comment'>#   will not be returned in the response.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::DocumentMask`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Firestore::V1beta1::Document]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Firestore::V1beta1::Document]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;, &quot;[DOCUMENT]&quot;, &quot;[ANY_PATH]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +collection_id+:
-</span>  <span class='comment'>#   collection_id = &#39;&#39;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +document_id+:
-</span>  <span class='comment'>#   document_id = &#39;&#39;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +document+:
-</span>  <span class='comment'>#   document = {}
-</span>  <span class='comment'>#   response = firestore_client.create_document(formatted_parent, collection_id, document_id, document)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_create_document'>create_document</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_collection_id'>collection_id</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_document_id'>document_id</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>collection_id:</span> <span class='id identifier rubyid_collection_id'>collection_id</span><span class='comma'>,</span>
-      <span class='label'>document_id:</span> <span class='id identifier rubyid_document_id'>document_id</span><span class='comma'>,</span>
-      <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='id identifier rubyid_mask'>mask</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/CreateDocumentRequest.html" title="Google::Firestore::V1beta1::CreateDocumentRequest (class)">CreateDocumentRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@create_document</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Updates or inserts a document.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param document [Google::Firestore::V1beta1::Document | Hash]
-</span>  <span class='comment'>#   The updated document.
-</span>  <span class='comment'>#   Creates the document if it does not already exist.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::Document`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param update_mask [Google::Firestore::V1beta1::DocumentMask | Hash]
-</span>  <span class='comment'>#   The fields to update.
-</span>  <span class='comment'>#   None of the field paths in the mask may contain a reserved name.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   If the document exists on the server and has fields not referenced in the
-</span>  <span class='comment'>#   mask, they are left unchanged.
-</span>  <span class='comment'>#   Fields referenced in the mask, but not present in the input document, are
-</span>  <span class='comment'>#   deleted from the document on the server.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::DocumentMask`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
-</span>  <span class='comment'>#   The fields to return. If not set, returns all fields.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   If the document has a field that is not present in this mask, that field
-</span>  <span class='comment'>#   will not be returned in the response.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::DocumentMask`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param current_document [Google::Firestore::V1beta1::Precondition | Hash]
-</span>  <span class='comment'>#   An optional precondition on the document.
-</span>  <span class='comment'>#   The request will fail if this is set and not met by the target document.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::Precondition`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Firestore::V1beta1::Document]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Firestore::V1beta1::Document]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +document+:
-</span>  <span class='comment'>#   document = {}
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +update_mask+:
-</span>  <span class='comment'>#   update_mask = {}
-</span>  <span class='comment'>#   response = firestore_client.update_document(document, update_mask)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_update_document'>update_document</span> \
-      <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_update_mask'>update_mask</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>current_document:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
-      <span class='label'>update_mask:</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='id identifier rubyid_mask'>mask</span><span class='comma'>,</span>
-      <span class='label'>current_document:</span> <span class='id identifier rubyid_current_document'>current_document</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/UpdateDocumentRequest.html" title="Google::Firestore::V1beta1::UpdateDocumentRequest (class)">UpdateDocumentRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@update_document</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Deletes a document.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   The resource name of the Document to delete. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
-</span>  <span class='comment'># @param current_document [Google::Firestore::V1beta1::Precondition | Hash]
-</span>  <span class='comment'>#   An optional precondition on the document.
-</span>  <span class='comment'>#   The request will fail if this is set and not met by the target document.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::Precondition`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result []
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;, &quot;[DOCUMENT]&quot;, &quot;[ANY_PATH]&quot;)
-</span>  <span class='comment'>#   firestore_client.delete_document(formatted_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_delete_document'>delete_document</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>current_document:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>current_document:</span> <span class='id identifier rubyid_current_document'>current_document</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/DeleteDocumentRequest.html" title="Google::Firestore::V1beta1::DeleteDocumentRequest (class)">DeleteDocumentRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@delete_document</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>nil</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Gets multiple documents.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># Documents returned by this method are not guaranteed to be returned in the
-</span>  <span class='comment'># same order that they were requested.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'>#   The database name. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}+.
-</span>  <span class='comment'># @param documents [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The names of the documents to retrieve. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
-</span>  <span class='comment'>#   The request will fail if any of the document is not a child resource of the
-</span>  <span class='comment'>#   given +database+. Duplicate names will be elided.
-</span>  <span class='comment'># @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
-</span>  <span class='comment'>#   The fields to return. If not set, returns all fields.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   If a document has a field that is not present in this mask, that field will
-</span>  <span class='comment'>#   not be returned in the response.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::DocumentMask`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param transaction [String]
-</span>  <span class='comment'>#   Reads documents in a transaction.
-</span>  <span class='comment'># @param new_transaction [Google::Firestore::V1beta1::TransactionOptions | Hash]
-</span>  <span class='comment'>#   Starts a new transaction and reads the documents.
-</span>  <span class='comment'>#   Defaults to a read-only transaction.
-</span>  <span class='comment'>#   The new transaction ID will be returned as the first response in the
-</span>  <span class='comment'>#   stream.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::TransactionOptions`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param read_time [Google::Protobuf::Timestamp | Hash]
-</span>  <span class='comment'>#   Reads documents as they were at the given time.
-</span>  <span class='comment'>#   This may not be older than 60 seconds.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Timestamp`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @return [Enumerable&lt;Google::Firestore::V1beta1::BatchGetDocumentsResponse&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Firestore::V1beta1::BatchGetDocumentsResponse instances.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +documents+:
-</span>  <span class='comment'>#   documents = []
-</span>  <span class='comment'>#   firestore_client.batch_get_documents(formatted_database, documents).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_batch_get_documents'>batch_get_documents</span> \
-      <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_documents'>documents</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>new_transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>database:</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='label'>documents:</span> <span class='id identifier rubyid_documents'>documents</span><span class='comma'>,</span>
-      <span class='label'>mask:</span> <span class='id identifier rubyid_mask'>mask</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>new_transaction:</span> <span class='id identifier rubyid_new_transaction'>new_transaction</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='id identifier rubyid_read_time'>read_time</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/BatchGetDocumentsRequest.html" title="Google::Firestore::V1beta1::BatchGetDocumentsRequest (class)">BatchGetDocumentsRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@batch_get_documents</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Starts a new transaction.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'>#   The database name. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}+.
-</span>  <span class='comment'># @param options_ [Google::Firestore::V1beta1::TransactionOptions | Hash]
-</span>  <span class='comment'>#   The options for the transaction.
-</span>  <span class='comment'>#   Defaults to a read-write transaction.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::TransactionOptions`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Firestore::V1beta1::BeginTransactionResponse]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Firestore::V1beta1::BeginTransactionResponse]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;)
-</span>  <span class='comment'>#   response = firestore_client.begin_transaction(formatted_database)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
-      <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='label'>options_:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>database:</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='id identifier rubyid_options_'>options_</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/BeginTransactionRequest.html" title="Google::Firestore::V1beta1::BeginTransactionRequest (class)">BeginTransactionRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@begin_transaction</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Commits a transaction, while optionally updating documents.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'>#   The database name. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}+.
-</span>  <span class='comment'># @param writes [Array&lt;Google::Firestore::V1beta1::Write | Hash&gt;]
-</span>  <span class='comment'>#   The writes to apply.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Always executed atomically and in order.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::Write`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param transaction [String]
-</span>  <span class='comment'>#   If set, applies all writes in this transaction, and commits it.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Firestore::V1beta1::CommitResponse]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Firestore::V1beta1::CommitResponse]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +writes+:
-</span>  <span class='comment'>#   writes = []
-</span>  <span class='comment'>#   response = firestore_client.commit(formatted_database, writes)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
-      <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_writes'>writes</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>database:</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='label'>writes:</span> <span class='id identifier rubyid_writes'>writes</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/CommitRequest.html" title="Google::Firestore::V1beta1::CommitRequest (class)">CommitRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@commit</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Rolls back a transaction.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param database [String]
-</span>  <span class='comment'>#   The database name. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}+.
-</span>  <span class='comment'># @param transaction [String]
-</span>  <span class='comment'>#   The transaction to roll back.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result []
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +transaction+:
-</span>  <span class='comment'>#   transaction = &#39;&#39;
-</span>  <span class='comment'>#   firestore_client.rollback(formatted_database, transaction)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
-      <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>database:</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/RollbackRequest.html" title="Google::Firestore::V1beta1::RollbackRequest (class)">RollbackRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@rollback</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>nil</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Runs a query.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   The parent resource name. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
-</span>  <span class='comment'>#   For example:
-</span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents+ or
-</span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
-</span>  <span class='comment'># @param structured_query [Google::Firestore::V1beta1::StructuredQuery | Hash]
-</span>  <span class='comment'>#   A structured query.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::StructuredQuery`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param transaction [String]
-</span>  <span class='comment'>#   Reads documents in a transaction.
-</span>  <span class='comment'># @param new_transaction [Google::Firestore::V1beta1::TransactionOptions | Hash]
-</span>  <span class='comment'>#   Starts a new transaction and reads the documents.
-</span>  <span class='comment'>#   Defaults to a read-only transaction.
-</span>  <span class='comment'>#   The new transaction ID will be returned as the first response in the
-</span>  <span class='comment'>#   stream.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Firestore::V1beta1::TransactionOptions`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param read_time [Google::Protobuf::Timestamp | Hash]
-</span>  <span class='comment'>#   Reads documents as they were at the given time.
-</span>  <span class='comment'>#   This may not be older than 60 seconds.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Timestamp`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @return [Enumerable&lt;Google::Firestore::V1beta1::RunQueryResponse&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Firestore::V1beta1::RunQueryResponse instances.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;, &quot;[DOCUMENT]&quot;, &quot;[ANY_PATH]&quot;)
-</span>  <span class='comment'>#   firestore_client.run_query(formatted_parent).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_run_query'>run_query</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>structured_query:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>new_transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>structured_query:</span> <span class='id identifier rubyid_structured_query'>structured_query</span><span class='comma'>,</span>
-      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
-      <span class='label'>new_transaction:</span> <span class='id identifier rubyid_new_transaction'>new_transaction</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='id identifier rubyid_read_time'>read_time</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/RunQueryRequest.html" title="Google::Firestore::V1beta1::RunQueryRequest (class)">RunQueryRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@run_query</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Streams batches of document updates and deletes, in order.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param reqs [Enumerable&lt;Google::Firestore::V1beta1::WriteRequest&gt;]
-</span>  <span class='comment'>#   The input requests.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @return [Enumerable&lt;Google::Firestore::V1beta1::WriteResponse&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Firestore::V1beta1::WriteResponse instances.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @note
-</span>  <span class='comment'>#   EXPERIMENTAL:
-</span>  <span class='comment'>#     Streaming requests are still undergoing review.
-</span>  <span class='comment'>#     This method interface might change in the future.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;)
-</span>  <span class='comment'>#   request = { database: formatted_database }
-</span>  <span class='comment'>#   requests = [request]
-</span>  <span class='comment'>#   firestore_client.write(requests).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_write'>write</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/WriteRequest.html" title="Google::Firestore::V1beta1::WriteRequest (class)">WriteRequest</a></span></span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
-    <span class='ivar'>@write</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_request_protos'>request_protos</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Listens to changes.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param reqs [Enumerable&lt;Google::Firestore::V1beta1::ListenRequest&gt;]
-</span>  <span class='comment'>#   The input requests.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @return [Enumerable&lt;Google::Firestore::V1beta1::ListenResponse&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Firestore::V1beta1::ListenResponse instances.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @note
-</span>  <span class='comment'>#   EXPERIMENTAL:
-</span>  <span class='comment'>#     Streaming requests are still undergoing review.
-</span>  <span class='comment'>#     This method interface might change in the future.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;)
-</span>  <span class='comment'>#   request = { database: formatted_database }
-</span>  <span class='comment'>#   requests = [request]
-</span>  <span class='comment'>#   firestore_client.listen(requests).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_listen'>listen</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/ListenRequest.html" title="Google::Firestore::V1beta1::ListenRequest (class)">ListenRequest</a></span></span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
-    <span class='ivar'>@listen</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_request_protos'>request_protos</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Lists all the collection IDs underneath a document.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   The parent document. In the format:
-</span>  <span class='comment'>#   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
-</span>  <span class='comment'>#   For example:
-</span>  <span class='comment'>#   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
-</span>  <span class='comment'># @param page_size [Integer]
-</span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
-</span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
-</span>  <span class='comment'>#   parameter does not affect the return value. If page streaming is
-</span>  <span class='comment'>#   performed per-page, this determines the maximum number of
-</span>  <span class='comment'>#   resources in a page.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Gax::PagedEnumerable&lt;String&gt;]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;String&gt;]
-</span>  <span class='comment'>#   An enumerable of String instances.
-</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
-</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
-</span>  <span class='comment'>#   object.
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/firestore/v1beta1&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   firestore_client = Google::Cloud::Firestore::V1beta1.new
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path(&quot;[PROJECT]&quot;, &quot;[DATABASE]&quot;, &quot;[DOCUMENT]&quot;, &quot;[ANY_PATH]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Iterate over all results.
-</span>  <span class='comment'>#   firestore_client.list_collection_ids(formatted_parent).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Or iterate over results one page at a time.
-</span>  <span class='comment'>#   firestore_client.list_collection_ids(formatted_parent).each_page do |page|
-</span>  <span class='comment'>#     # Process each page at a time.
-</span>  <span class='comment'>#     page.each do |element|
-</span>  <span class='comment'>#       # Process element.
-</span>  <span class='comment'>#     end
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_list_collection_ids'>list_collection_ids</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Firestore/V1beta1/ListCollectionIdsRequest.html" title="Google::Firestore::V1beta1::ListCollectionIdsRequest (class)">ListCollectionIdsRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@list_collection_ids</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
 
   <div id="class_method_details" class="method_details_list">
     <h2>Class Method Details</h2>
@@ -3215,17 +1158,17 @@ custom error handling.</p>
       <pre class="lines">
 
 
-153
 154
 155
 156
 157
 158
 159
-160</pre>
+160
+161</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 153</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_any_path_path'>any_path_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span> <span class='id identifier rubyid_any_path'>any_path</span>
   <span class='const'>ANY_PATH_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -3304,15 +1247,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-116
 117
 118
 119
 120
-121</pre>
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 117</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_database_root_path'>database_root_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span>
   <span class='const'>DATABASE_ROOT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -3400,16 +1343,16 @@ custom error handling.</p>
       <pre class="lines">
 
 
-139
 140
 141
 142
 143
 144
-145</pre>
+145
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_document_path_path'>document_path_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span> <span class='id identifier rubyid_document_path'>document_path</span>
   <span class='const'>DOCUMENT_PATH_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -3487,15 +1430,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-127
 128
 129
 130
 131
-132</pre>
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_document_root_path'>document_root_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span>
   <span class='const'>DOCUMENT_ROOT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -3720,7 +1663,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-709
 710
 711
 712
@@ -3738,10 +1680,11 @@ retries, etc.</p>
 724
 725
 726
-727</pre>
+727
+728</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 709</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 710</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_get_documents'>batch_get_documents</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -3931,7 +1874,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-754
 755
 756
 757
@@ -3942,10 +1884,11 @@ retries, etc.</p>
 762
 763
 764
-765</pre>
+765
+766</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 754</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 755</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -4147,7 +2090,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-798
 799
 800
 801
@@ -4160,10 +2102,11 @@ retries, etc.</p>
 808
 809
 810
-811</pre>
+811
+812</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 798</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 799</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -4409,7 +2352,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-533
 534
 535
 536
@@ -4426,10 +2368,11 @@ retries, etc.</p>
 547
 548
 549
-550</pre>
+550
+551</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 533</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 534</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_document'>create_document</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4609,7 +2552,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-642
 643
 644
 645
@@ -4621,10 +2563,11 @@ retries, etc.</p>
 651
 652
 653
-654</pre>
+654
+655</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 642</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 643</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_document'>delete_document</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4843,7 +2786,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-368
 369
 370
 371
@@ -4858,10 +2800,11 @@ retries, etc.</p>
 380
 381
 382
-383</pre>
+383
+384</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 368</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 369</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_document'>get_document</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5070,7 +3013,6 @@ object.</p>
       <pre class="lines">
 
 
-1026
 1027
 1028
 1029
@@ -5081,10 +3023,11 @@ object.</p>
 1034
 1035
 1036
-1037</pre>
+1037
+1038</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 1026</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 1027</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_collection_ids'>list_collection_ids</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5399,7 +3342,6 @@ object.</p>
       <pre class="lines">
 
 
-461
 462
 463
 464
@@ -5422,10 +3364,11 @@ object.</p>
 481
 482
 483
-484</pre>
+484
+485</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 461</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 462</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_documents'>list_documents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -5575,15 +3518,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-975
 976
 977
 978
 979
-980</pre>
+980
+981</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 975</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 976</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_listen'>listen</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
@@ -5751,7 +3694,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-837
 838
 839
 840
@@ -5763,10 +3705,11 @@ retries, etc.</p>
 846
 847
 848
-849</pre>
+849
+850</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 837</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 838</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -5969,7 +3912,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-894
 895
 896
 897
@@ -5985,10 +3927,11 @@ retries, etc.</p>
 907
 908
 909
-910</pre>
+910
+911</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 894</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 895</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run_query'>run_query</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -6226,7 +4169,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-601
 602
 603
 604
@@ -6241,10 +4183,11 @@ retries, etc.</p>
 613
 614
 615
-616</pre>
+616
+617</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 601</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 602</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_document'>update_document</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
@@ -6386,15 +4329,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-940
 941
 942
 943
 944
-945</pre>
+945
+946</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 940</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/firestore_client.rb', line 941</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_write'>write</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
