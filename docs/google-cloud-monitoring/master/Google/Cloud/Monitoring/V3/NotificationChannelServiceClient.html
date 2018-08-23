@@ -184,38 +184,6 @@ this service.</p>
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#notification_channel_service_stub-instance_method" title="#notification_channel_service_stub (instance method)">#<strong>notification_channel_service_stub</strong>  &#x21d2; Google::Monitoring::V3::NotificationChannelService::Stub </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -633,7 +601,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-154
 155
 156
 157
@@ -742,10 +709,11 @@ custom error handling.</p>
 260
 261
 262
-263</pre>
+263
+264</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -864,1185 +832,6 @@ custom error handling.</p>
   
 </div>
 
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="notification_channel_service_stub-instance_method">
-  
-    #<strong>notification_channel_service_stub</strong>  &#x21d2; <tt>Google::Monitoring::V3::NotificationChannelService::Stub</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Google::Monitoring::V3::NotificationChannelService::Stub</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408
-409
-410
-411
-412
-413
-414
-415
-416
-417
-418
-419
-420
-421
-422
-423
-424
-425
-426
-427
-428
-429
-430
-431
-432
-433
-434
-435
-436
-437
-438
-439
-440
-441
-442
-443
-444
-445
-446
-447
-448
-449
-450
-451
-452
-453
-454
-455
-456
-457
-458
-459
-460
-461
-462
-463
-464
-465
-466
-467
-468
-469
-470
-471
-472
-473
-474
-475
-476
-477
-478
-479
-480
-481
-482
-483
-484
-485
-486
-487
-488
-489
-490
-491
-492
-493
-494
-495
-496
-497
-498
-499
-500
-501
-502
-503
-504
-505
-506
-507
-508
-509
-510
-511
-512
-513
-514
-515
-516
-517
-518
-519
-520
-521
-522
-523
-524
-525
-526
-527
-528
-529
-530
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556
-557
-558
-559
-560
-561
-562
-563
-564
-565
-566
-567
-568
-569
-570
-571
-572
-573
-574
-575
-576
-577
-578
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599
-600
-601</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 39</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient (class)">NotificationChannelServiceClient</a></span></span>
-  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:notification_channel_service_stub</span>
-
-  <span class='comment'># The default address of the service.
-</span>  <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>monitoring.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='comment'># The default port of the service.
-</span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
-
-  <span class='comment'># The default set of gRPC interceptors.
-</span>  <span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-
-  <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
-
-  <span class='const'>PAGE_DESCRIPTORS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_notification_channel_descriptors</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>channel_descriptors</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_notification_channels</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>notification_channels</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PAGE_DESCRIPTORS</span>
-
-  <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
-</span>  <span class='comment'># this service.
-</span>  <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/monitoring</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/monitoring.read</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/monitoring.write</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-
-  <span class='const'>PROJECT_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PROJECT_PATH_TEMPLATE</span>
-
-  <span class='const'>NOTIFICATION_CHANNEL_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/notificationChannels/{notification_channel}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:NOTIFICATION_CHANNEL_PATH_TEMPLATE</span>
-
-  <span class='const'>NOTIFICATION_CHANNEL_DESCRIPTOR_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}/notificationChannelDescriptors/{channel_descriptor}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:NOTIFICATION_CHANNEL_DESCRIPTOR_PATH_TEMPLATE</span>
-
-  <span class='comment'># Returns a fully-qualified project resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
-    <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Returns a fully-qualified notification_channel resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param notification_channel [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_notification_channel_path'>notification_channel_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_notification_channel'>notification_channel</span>
-    <span class='const'>NOTIFICATION_CHANNEL_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;notification_channel&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_notification_channel'>notification_channel</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Returns a fully-qualified notification_channel_descriptor resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @param channel_descriptor [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_notification_channel_descriptor_path'>notification_channel_descriptor_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_channel_descriptor'>channel_descriptor</span>
-    <span class='const'>NOTIFICATION_CHANNEL_DESCRIPTOR_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
-      <span class='symbol'>:&quot;channel_descriptor&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_channel_descriptor'>channel_descriptor</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-</span>  <span class='comment'>#   Provides the means for authenticating requests made by the client. This parameter can
-</span>  <span class='comment'>#   be many types.
-</span>  <span class='comment'>#   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-</span>  <span class='comment'>#   authenticating requests made by this client.
-</span>  <span class='comment'>#   A `String` will be treated as the path to the keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `GRPC::Core::Channel` will be used to make calls through.
-</span>  <span class='comment'>#   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-</span>  <span class='comment'>#   should already be composed with a `GRPC::Core::CallCredentials` object.
-</span>  <span class='comment'>#   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-</span>  <span class='comment'>#   metadata for requests, generally, to give OAuth credentials.
-</span>  <span class='comment'># @param scopes [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The OAuth scopes for this service. This parameter is ignored if
-</span>  <span class='comment'>#   an updater_proc is supplied.
-</span>  <span class='comment'># @param client_config [Hash]
-</span>  <span class='comment'>#   A Hash for call options for each method. See
-</span>  <span class='comment'>#   Google::Gax#construct_settings for the structure of
-</span>  <span class='comment'>#   this data. Falls back to the default config if not specified
-</span>  <span class='comment'>#   or the specified config is missing data points.
-</span>  <span class='comment'># @param timeout [Numeric]
-</span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
-</span>  <span class='comment'># @param metadata [Hash]
-</span>  <span class='comment'>#   Default metadata to be sent with each request. This can be overridden on a per call basis.
-</span>  <span class='comment'># @param exception_transformer [Proc]
-</span>  <span class='comment'>#   An optional proc that intercepts any exceptions raised during an API call to inject
-</span>  <span class='comment'>#   custom error handling.
-</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
-      <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
-      <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
-      <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
-      <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
-    <span class='comment'># These require statements are intentionally placed here to initialize
-</span>    <span class='comment'># the gRPC module only when it&#39;s required.
-</span>    <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
-</span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/monitoring/v3/notification_service_services_pb</span><span class='tstring_end'>&quot;</span></span>
-
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V3.html" title="Google::Cloud::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Monitoring::V3::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
-
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V3.html" title="Google::Cloud::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Monitoring::V3::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>ChannelCredentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Proc</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-monitoring</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
-
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-    <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>notification_channel_service_client_config.json</span><span class='tstring_end'>&quot;</span></span>
-    <span class='rparen'>)</span>
-    <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
-        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.monitoring.v3.NotificationChannelService</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-        <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
-        <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
-        <span class='label'>page_descriptors:</span> <span class='const'>PAGE_DESCRIPTORS</span><span class='comma'>,</span>
-        <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-        <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
-      <span class='rparen'>)</span>
-    <span class='kw'>end</span>
-
-    <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>    <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-    <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
-    <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
-    <span class='ivar'>@notification_channel_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
-      <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
-      <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
-      <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
-      <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
-      <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'>NotificationChannelService</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
-    <span class='rparen'>)</span>
-
-    <span class='ivar'>@list_notification_channel_descriptors</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@notification_channel_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_notification_channel_descriptors</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_notification_channel_descriptors</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@get_notification_channel_descriptor</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@notification_channel_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_notification_channel_descriptor</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_notification_channel_descriptor</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@list_notification_channels</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@notification_channel_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_notification_channels</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_notification_channels</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@get_notification_channel</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@notification_channel_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_notification_channel</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_notification_channel</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@create_notification_channel</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@notification_channel_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:create_notification_channel</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>create_notification_channel</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@update_notification_channel</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@notification_channel_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_notification_channel</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_notification_channel</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@delete_notification_channel</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@notification_channel_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_notification_channel</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_notification_channel</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Service calls
-</span>
-  <span class='comment'># Lists the descriptors for supported channel types. The use of descriptors
-</span>  <span class='comment'># makes it possible for new channel types to be dynamically added.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   The REST resource name of the parent from which to retrieve
-</span>  <span class='comment'>#   the notification channel descriptors. The expected syntax is:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       projects/[PROJECT_ID]
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Note that this names the parent container in which to look for the
-</span>  <span class='comment'>#   descriptors; to retrieve a single descriptor by name, use the
-</span>  <span class='comment'>#   {Google::Monitoring::V3::NotificationChannelService::GetNotificationChannelDescriptor GetNotificationChannelDescriptor}
-</span>  <span class='comment'>#   operation, instead.
-</span>  <span class='comment'># @param page_size [Integer]
-</span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
-</span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
-</span>  <span class='comment'>#   parameter does not affect the return value. If page streaming is
-</span>  <span class='comment'>#   performed per-page, this determines the maximum number of
-</span>  <span class='comment'>#   resources in a page.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Gax::PagedEnumerable&lt;Google::Monitoring::V3::NotificationChannelDescriptor&gt;]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;Google::Monitoring::V3::NotificationChannelDescriptor&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Monitoring::V3::NotificationChannelDescriptor instances.
-</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
-</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
-</span>  <span class='comment'>#   object.
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/monitoring&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path(&quot;[PROJECT]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Iterate over all results.
-</span>  <span class='comment'>#   notification_channel_service_client.list_notification_channel_descriptors(formatted_name).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Or iterate over results one page at a time.
-</span>  <span class='comment'>#   notification_channel_service_client.list_notification_channel_descriptors(formatted_name).each_page do |page|
-</span>  <span class='comment'>#     # Process each page at a time.
-</span>  <span class='comment'>#     page.each do |element|
-</span>  <span class='comment'>#       # Process element.
-</span>  <span class='comment'>#     end
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_list_notification_channel_descriptors'>list_notification_channel_descriptors</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3/ListNotificationChannelDescriptorsRequest.html" title="Google::Monitoring::V3::ListNotificationChannelDescriptorsRequest (class)">ListNotificationChannelDescriptorsRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@list_notification_channel_descriptors</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Gets a single channel descriptor. The descriptor indicates which fields
-</span>  <span class='comment'># are expected / permitted for a notification channel of the given type.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   The channel type for which to execute the request. The format is
-</span>  <span class='comment'>#   +projects/[PROJECT_ID]/notificationChannelDescriptors/\\{channel_type}+.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Monitoring::V3::NotificationChannelDescriptor]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Monitoring::V3::NotificationChannelDescriptor]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/monitoring&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_descriptor_path(&quot;[PROJECT]&quot;, &quot;[CHANNEL_DESCRIPTOR]&quot;)
-</span>  <span class='comment'>#   response = notification_channel_service_client.get_notification_channel_descriptor(formatted_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_get_notification_channel_descriptor'>get_notification_channel_descriptor</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3/GetNotificationChannelDescriptorRequest.html" title="Google::Monitoring::V3::GetNotificationChannelDescriptorRequest (class)">GetNotificationChannelDescriptorRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@get_notification_channel_descriptor</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Lists the notification channels that have been created for the project.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   The project on which to execute the request. The format is
-</span>  <span class='comment'>#   +projects/[PROJECT_ID]+. That is, this names the container
-</span>  <span class='comment'>#   in which to look for the notification channels; it does not name a
-</span>  <span class='comment'>#   specific channel. To query a specific channel by REST resource name, use
-</span>  <span class='comment'>#   the
-</span>  <span class='comment'>#   {Google::Monitoring::V3::NotificationChannelService::GetNotificationChannel +GetNotificationChannel+} operation.
-</span>  <span class='comment'># @param filter [String]
-</span>  <span class='comment'>#   If provided, this field specifies the criteria that must be met by
-</span>  <span class='comment'>#   notification channels to be included in the response.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   For more details, see [sorting and
-</span>  <span class='comment'>#   filtering](/monitoring/api/v3/sorting-and-filtering).
-</span>  <span class='comment'># @param order_by [String]
-</span>  <span class='comment'>#   A comma-separated list of fields by which to sort the result. Supports
-</span>  <span class='comment'>#   the same set of fields as in +filter+. Entries can be prefixed with
-</span>  <span class='comment'>#   a minus sign to sort in descending rather than ascending order.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   For more details, see [sorting and
-</span>  <span class='comment'>#   filtering](/monitoring/api/v3/sorting-and-filtering).
-</span>  <span class='comment'># @param page_size [Integer]
-</span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
-</span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
-</span>  <span class='comment'>#   parameter does not affect the return value. If page streaming is
-</span>  <span class='comment'>#   performed per-page, this determines the maximum number of
-</span>  <span class='comment'>#   resources in a page.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Gax::PagedEnumerable&lt;Google::Monitoring::V3::NotificationChannel&gt;]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;Google::Monitoring::V3::NotificationChannel&gt;]
-</span>  <span class='comment'>#   An enumerable of Google::Monitoring::V3::NotificationChannel instances.
-</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
-</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
-</span>  <span class='comment'>#   object.
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/monitoring&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path(&quot;[PROJECT]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Iterate over all results.
-</span>  <span class='comment'>#   notification_channel_service_client.list_notification_channels(formatted_name).each do |element|
-</span>  <span class='comment'>#     # Process element.
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Or iterate over results one page at a time.
-</span>  <span class='comment'>#   notification_channel_service_client.list_notification_channels(formatted_name).each_page do |page|
-</span>  <span class='comment'>#     # Process each page at a time.
-</span>  <span class='comment'>#     page.each do |element|
-</span>  <span class='comment'>#       # Process element.
-</span>  <span class='comment'>#     end
-</span>  <span class='comment'>#   end
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_list_notification_channels'>list_notification_channels</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>order_by:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>filter:</span> <span class='id identifier rubyid_filter'>filter</span><span class='comma'>,</span>
-      <span class='label'>order_by:</span> <span class='id identifier rubyid_order_by'>order_by</span><span class='comma'>,</span>
-      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3/ListNotificationChannelsRequest.html" title="Google::Monitoring::V3::ListNotificationChannelsRequest (class)">ListNotificationChannelsRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@list_notification_channels</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Gets a single notification channel. The channel includes the relevant
-</span>  <span class='comment'># configuration details with which the channel was created. However, the
-</span>  <span class='comment'># response may truncate or omit passwords, API keys, or other private key
-</span>  <span class='comment'># matter and thus the response may not be 100% identical to the information
-</span>  <span class='comment'># that was supplied in the call to the create method.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   The channel for which to execute the request. The format is
-</span>  <span class='comment'>#   +projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]+.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Monitoring::V3::NotificationChannel]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Monitoring::V3::NotificationChannel]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/monitoring&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path(&quot;[PROJECT]&quot;, &quot;[NOTIFICATION_CHANNEL]&quot;)
-</span>  <span class='comment'>#   response = notification_channel_service_client.get_notification_channel(formatted_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_get_notification_channel'>get_notification_channel</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3/GetNotificationChannelRequest.html" title="Google::Monitoring::V3::GetNotificationChannelRequest (class)">GetNotificationChannelRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@get_notification_channel</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Creates a new notification channel, representing a single notification
-</span>  <span class='comment'># endpoint such as an email address, SMS number, or pagerduty service.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   The project on which to execute the request. The format is:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       projects/[PROJECT_ID]
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   Note that this names the container into which the channel will be
-</span>  <span class='comment'>#   written. This does not name the newly created channel. The resulting
-</span>  <span class='comment'>#   channel&#39;s name will have a normalized version of this field as a prefix,
-</span>  <span class='comment'>#   but will add +/notificationChannels/[CHANNEL_ID]+ to identify the channel.
-</span>  <span class='comment'># @param notification_channel [Google::Monitoring::V3::NotificationChannel | Hash]
-</span>  <span class='comment'>#   The definition of the +NotificationChannel+ to create.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Monitoring::V3::NotificationChannel`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Monitoring::V3::NotificationChannel]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Monitoring::V3::NotificationChannel]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/monitoring&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path(&quot;[PROJECT]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +notification_channel+:
-</span>  <span class='comment'>#   notification_channel = {}
-</span>  <span class='comment'>#   response = notification_channel_service_client.create_notification_channel(formatted_name, notification_channel)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_create_notification_channel'>create_notification_channel</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_notification_channel'>notification_channel</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>notification_channel:</span> <span class='id identifier rubyid_notification_channel'>notification_channel</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3/CreateNotificationChannelRequest.html" title="Google::Monitoring::V3::CreateNotificationChannelRequest (class)">CreateNotificationChannelRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@create_notification_channel</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Updates a notification channel. Fields not specified in the field mask
-</span>  <span class='comment'># remain unchanged.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param notification_channel [Google::Monitoring::V3::NotificationChannel | Hash]
-</span>  <span class='comment'>#   A description of the changes to be applied to the specified
-</span>  <span class='comment'>#   notification channel. The description must provide a definition for
-</span>  <span class='comment'>#   fields to be updated; the names of these fields should also be
-</span>  <span class='comment'>#   included in the +update_mask+.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Monitoring::V3::NotificationChannel`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param update_mask [Google::Protobuf::FieldMask | Hash]
-</span>  <span class='comment'>#   The fields to update.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::FieldMask`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Monitoring::V3::NotificationChannel]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Monitoring::V3::NotificationChannel]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/monitoring&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +notification_channel+:
-</span>  <span class='comment'>#   notification_channel = {}
-</span>  <span class='comment'>#   response = notification_channel_service_client.update_notification_channel(notification_channel)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_update_notification_channel'>update_notification_channel</span> \
-      <span class='id identifier rubyid_notification_channel'>notification_channel</span><span class='comma'>,</span>
-      <span class='label'>update_mask:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>notification_channel:</span> <span class='id identifier rubyid_notification_channel'>notification_channel</span><span class='comma'>,</span>
-      <span class='label'>update_mask:</span> <span class='id identifier rubyid_update_mask'>update_mask</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3/UpdateNotificationChannelRequest.html" title="Google::Monitoring::V3::UpdateNotificationChannelRequest (class)">UpdateNotificationChannelRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@update_notification_channel</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Deletes a notification channel.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param name [String]
-</span>  <span class='comment'>#   The channel for which to execute the request. The format is
-</span>  <span class='comment'>#   +projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]+.
-</span>  <span class='comment'># @param force [true, false]
-</span>  <span class='comment'>#   If true, the notification channel will be deleted regardless of its
-</span>  <span class='comment'>#   use in alert policies (the policies will be updated to remove the
-</span>  <span class='comment'>#   channel). If false, channels that are still referenced by an existing
-</span>  <span class='comment'>#   alerting policy will fail to be deleted in a delete operation.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result []
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/monitoring&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
-</span>  <span class='comment'>#   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path(&quot;[PROJECT]&quot;, &quot;[NOTIFICATION_CHANNEL]&quot;)
-</span>  <span class='comment'>#   notification_channel_service_client.delete_notification_channel(formatted_name)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_delete_notification_channel'>delete_notification_channel</span> \
-      <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>force:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
-      <span class='label'>force:</span> <span class='id identifier rubyid_force'>force</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Monitoring/V3/DeleteNotificationChannelRequest.html" title="Google::Monitoring::V3::DeleteNotificationChannelRequest (class)">DeleteNotificationChannelRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@delete_notification_channel</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-    <span class='kw'>nil</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
 
   <div id="class_method_details" class="method_details_list">
     <h2>Class Method Details</h2>
@@ -2112,15 +901,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-118
 119
 120
 121
 122
-123</pre>
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_notification_channel_descriptor_path'>notification_channel_descriptor_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_channel_descriptor'>channel_descriptor</span>
   <span class='const'>NOTIFICATION_CHANNEL_DESCRIPTOR_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2197,15 +986,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-107
 108
 109
 110
 111
-112</pre>
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_notification_channel_path'>notification_channel_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_notification_channel'>notification_channel</span>
   <span class='const'>NOTIFICATION_CHANNEL_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2271,14 +1060,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-97
 98
 99
 100
-101</pre>
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2470,7 +1259,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-507
 508
 509
 510
@@ -2481,10 +1269,11 @@ retries, etc.</p>
 515
 516
 517
-518</pre>
+518
+519</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 507</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 508</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_notification_channel'>create_notification_channel</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2658,7 +1447,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-588
 589
 590
 591
@@ -2670,10 +1458,11 @@ retries, etc.</p>
 597
 598
 599
-600</pre>
+600
+601</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 588</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 589</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_notification_channel'>delete_notification_channel</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2843,7 +1632,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-462
 463
 464
 465
@@ -2852,10 +1640,11 @@ retries, etc.</p>
 468
 469
 470
-471</pre>
+471
+472</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 462</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 463</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_notification_channel'>get_notification_channel</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3019,7 +1808,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-351
 352
 353
 354
@@ -3028,10 +1816,11 @@ retries, etc.</p>
 357
 358
 359
-360</pre>
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 351</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 352</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_notification_channel_descriptor'>get_notification_channel_descriptor</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3241,7 +2030,6 @@ object.</p>
       <pre class="lines">
 
 
-317
 318
 319
 320
@@ -3252,10 +2040,11 @@ object.</p>
 325
 326
 327
-328</pre>
+328
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 317</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 318</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_notification_channel_descriptors'>list_notification_channel_descriptors</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3501,7 +2290,6 @@ object.</p>
       <pre class="lines">
 
 
-421
 422
 423
 424
@@ -3516,10 +2304,11 @@ object.</p>
 433
 434
 435
-436</pre>
+436
+437</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 421</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 422</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_notification_channels'>list_notification_channels</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3712,7 +2501,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-551
 552
 553
 554
@@ -3723,10 +2511,11 @@ retries, etc.</p>
 559
 560
 561
-562</pre>
+562
+563</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 551</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/notification_channel_service_client.rb', line 552</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_notification_channel'>update_notification_channel</span> \
     <span class='id identifier rubyid_notification_channel'>notification_channel</span><span class='comma'>,</span>
