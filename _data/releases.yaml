@@ -347,6 +347,7 @@ google-cloud-text_to_speech:
 - v0.1.1
 - v0.1.0
 google-cloud-trace:
+- v0.33.2
 - v0.33.1
 - v0.33.0
 - v0.31.0
