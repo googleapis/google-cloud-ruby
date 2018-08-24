@@ -193,12 +193,14 @@ module Google
     # @private
     #
     def self.auto_load_gems
-      original_verbosity = $VERBOSE
-      $VERBOSE = nil
+      previously_loaded_files = Array(caller).map do |backtrace_line|
+        backtrace_line.split(":").first
+      end.uniq
 
-      auto_load_files.each { |auto_load_file| require auto_load_file }
-
-      $VERBOSE = original_verbosity
+      auto_load_files.each do |auto_load_file|
+        next if previously_loaded_files.include? auto_load_file
+        require auto_load_file
+      end
     end
 
     ##
