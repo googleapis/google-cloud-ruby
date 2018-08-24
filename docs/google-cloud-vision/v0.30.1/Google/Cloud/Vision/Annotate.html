@@ -1,0 +1,522 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Vision::Annotate - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Vision::Annotate";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span>
+     &raquo; 
+    <span class="title">Annotate</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Vision::Annotate
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Vision::Annotate</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/vision/annotate.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Annotate</h1>
+
+<p>Accumulates configuration for an image annotation request. Users
+describe the type of Google Cloud Vision API tasks to perform over
+images by configuring features such as <code>faces</code>, <code>landmarks</code>, <code>text</code>,
+etc. This configuration captures the Cloud Vision API vertical to
+operate on and the number of top-scoring results to return.</p>
+
+<p>See <span class='object_link'><a href="Project.html#annotate-instance_method" title="Google::Cloud::Vision::Project#annotate (method)">Project#annotate</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_face_image'>face_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_landmark_image'>landmark_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/landmark.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_annotations'>annotations</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_annotate'>annotate</span><span class='op'>|</span>
+   <span class='id identifier rubyid_annotate'>annotate</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_face_image'>face_image</span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>true</span>
+   <span class='id identifier rubyid_annotate'>annotate</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_landmark_image'>landmark_image</span><span class='comma'>,</span> <span class='label'>landmarks:</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 4
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_landmarks'>landmarks</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#annotate-instance_method" title="#annotate (instance method)">#<strong>annotate</strong>(*images, faces: false, landmarks: false, logos: false, labels: false, text: false, document: false, safe_search: false, properties: false, crop_hints: false, web: false)  &#x21d2; Annotation<sup>+</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Performs detection of Cloud Vision <a href="https://cloud.google.com/vision/reference/rest/v1/images/annotate#Feature">features</a> on the given images.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="annotate-instance_method">
+  
+    #<strong>annotate</strong>(*images, faces: false, landmarks: false, logos: false, labels: false, text: false, document: false, safe_search: false, properties: false, crop_hints: false, web: false)  &#x21d2; <tt><span class='object_link'><a href="Annotation.html" title="Google::Cloud::Vision::Annotation (class)">Annotation</a></span></tt><sup>+</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Performs detection of Cloud Vision
+<a href="https://cloud.google.com/vision/reference/rest/v1/images/annotate#Feature">features</a>
+on the given images. If no options for features are provided, <strong>all</strong>
+image detection features will be performed, with a default of <code>100</code>
+results for faces, landmarks, logos, and labels. If any feature option
+is provided, only the specified feature detections will be performed.
+Please review <a href="https://cloud.google.com/vision/docs/pricing">Pricing</a>
+before use, as a separate charge is incurred for each feature
+performed on an image.</p>
+
+<p>Cloud Vision sets upper limits on file size as well as on the total
+combined size of all images in a request. Reducing your file size can
+significantly improve throughput; however, be careful not to reduce
+image quality in the process. See <a href="https://cloud.google.com/vision/docs/best-practices#image_sizing">Best Practices - Image
+Sizing</a>
+for current file size limits.</p>
+
+<p>See <span class='object_link'><a href="Project.html#annotate-instance_method" title="Google::Cloud::Vision::Project#annotate (method)">Project#annotate</a></span> for requests that do not involve multiple
+feature configurations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_face_image'>face_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_landmark_image'>landmark_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/landmark.jpg</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_text_image'>text_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/text.png</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_annotations'>annotations</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_annotate'>annotate</span><span class='op'>|</span>
+   <span class='id identifier rubyid_annotate'>annotate</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_face_image'>face_image</span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>true</span>
+   <span class='id identifier rubyid_annotate'>annotate</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_landmark_image'>landmark_image</span><span class='comma'>,</span> <span class='label'>landmarks:</span> <span class='kw'>true</span>
+   <span class='id identifier rubyid_annotate'>annotate</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_text_image'>text_image</span><span class='comma'>,</span> <span class='label'>text:</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 4
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_landmarks'>landmarks</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>images</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Image.html" title="Google::Cloud::Vision::Image (class)">Image</a></span></tt>, <tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The image or images to annotate. This
+can be an <span class='object_link'><a href="Image.html" title="Google::Cloud::Vision::Image (class)">Image</a></span> instance, or any other type that converts to an
+<span class='object_link'><a href="Image.html" title="Google::Cloud::Vision::Image (class)">Image</a></span>. See <span class='object_link'>#image</span> for details.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>faces</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the facial
+detection feature. The maximum number of results is configured in
+<span class='object_link'><a href="../Vision.html#default_max_faces-class_method" title="Google::Cloud::Vision.default_max_faces (method)">Google::Cloud::Vision.default_max_faces</a></span>, or may be provided here.
+Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>landmarks</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the landmark
+detection feature. The maximum number of results is configured in
+<span class='object_link'><a href="../Vision.html#default_max_landmarks-class_method" title="Google::Cloud::Vision.default_max_landmarks (method)">Google::Cloud::Vision.default_max_landmarks</a></span>, or may be provided
+here. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logos</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the logo detection
+feature. The maximum number of results is configured in
+<span class='object_link'><a href="../Vision.html#default_max_logos-class_method" title="Google::Cloud::Vision.default_max_logos (method)">Google::Cloud::Vision.default_max_logos</a></span>, or may be provided here.
+Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the label
+detection feature. The maximum number of results is configured in
+<span class='object_link'><a href="../Vision.html#default_max_labels-class_method" title="Google::Cloud::Vision.default_max_labels (method)">Google::Cloud::Vision.default_max_labels</a></span>, or may be provided here.
+Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the text detection feature
+(OCR for shorter documents with sparse text). Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>document</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the document text
+detection feature (OCR for longer documents with dense text).
+Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>safe_search</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the safe search
+feature. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>properties</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the image properties
+feature (currently, the image&#39;s dominant colors.) Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>crop_hints</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the crop hints
+feature. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>web</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the web annotation
+feature. Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Annotation.html" title="Google::Cloud::Vision::Annotation (class)">Annotation</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="Annotation.html" title="Google::Cloud::Vision::Annotation (class)">Annotation</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The results for all image
+detections, returned as a single <span class='object_link'><a href="Annotation.html" title="Google::Cloud::Vision::Annotation (class)">Google::Cloud::Vision::Annotation</a></span> instance for one
+image, or as an array of <span class='object_link'><a href="Annotation.html" title="Google::Cloud::Vision::Annotation (class)">Google::Cloud::Vision::Annotation</a></span> instances, one per image, for
+multiple images.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/vision/docs/requests-and-responses" target="_parent" title="Cloud Vision API Requests and Responses">Cloud Vision API Requests and Responses</a></li>
+    
+      <li><a href="https://cloud.google.com/vision/reference/rest/v1/images/annotate#AnnotateImageRequest" target="_parent" title="AnnotateImageRequest">AnnotateImageRequest</a></li>
+    
+      <li><a href="https://cloud.google.com/vision/docs/pricing" target="_parent" title="Cloud Vision Pricing">Cloud Vision Pricing</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+145
+146
+147
+148
+149
+150
+151</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotate.rb', line 145</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_annotate'>annotate</span> <span class='op'>*</span><span class='id identifier rubyid_images'>images</span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>landmarks:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>logos:</span> <span class='kw'>false</span><span class='comma'>,</span>
+             <span class='label'>labels:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>text:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>document:</span> <span class='kw'>false</span><span class='comma'>,</span>
+             <span class='label'>safe_search:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>properties:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>crop_hints:</span> <span class='kw'>false</span><span class='comma'>,</span>
+             <span class='label'>web:</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_add_requests'>add_requests</span><span class='lparen'>(</span><span class='id identifier rubyid_images'>images</span><span class='comma'>,</span> <span class='id identifier rubyid_faces'>faces</span><span class='comma'>,</span> <span class='id identifier rubyid_landmarks'>landmarks</span><span class='comma'>,</span> <span class='id identifier rubyid_logos'>logos</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
+               <span class='id identifier rubyid_safe_search'>safe_search</span><span class='comma'>,</span> <span class='id identifier rubyid_properties'>properties</span><span class='comma'>,</span> <span class='id identifier rubyid_crop_hints'>crop_hints</span><span class='comma'>,</span> <span class='id identifier rubyid_web'>web</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
