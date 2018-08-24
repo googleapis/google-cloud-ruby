@@ -900,13 +900,14 @@ namespace :kokoro do
   task :builds do
     gems.each do |gem|
       ruby_versions.each do |version|
-        File.open("./.kokoro/presubmit/#{gem}-ruby-#{version}.cfg", 'w') do |f| 
+        File.open("./.kokoro/presubmit/ruby-#{version}/#{gem}.cfg", 'w') do |f| 
           f.write(kokoro_config(gem, version))
         end
-        File.open("./.kokoro/continuous/#{gem}-ruby-#{version}.cfg", 'w') do |f| 
+        File.open("./.kokoro/continuous/ruby-#{version}/#{gem}.cfg", 'w') do |f| 
           f.write(kokoro_config(gem, version))
         end
       end
+
     end
   end
 end
