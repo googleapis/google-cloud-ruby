@@ -1,0 +1,2490 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (E)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::ErrorReporting::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">ErrorStatsServiceClient</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/error_reporting/v1beta1/error_stats_service_client.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>An API for retrieving and managing error statistics as well as data for
+individual events.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="SERVICE_ADDRESS-constant" class="">SERVICE_ADDRESS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default address of the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>clouderrorreporting.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="DEFAULT_SERVICE_PORT-constant" class="">DEFAULT_SERVICE_PORT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default port of the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>443</span></pre></dd>
+      
+        <dt id="GRPC_INTERCEPTORS-constant" class="">GRPC_INTERCEPTORS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default set of gRPC interceptors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="DEFAULT_TIMEOUT-constant" class="">DEFAULT_TIMEOUT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span></pre></dd>
+      
+        <dt id="ALL_SCOPES-constant" class="">ALL_SCOPES =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The scopes needed to make gRPC calls to all of the methods defined in
+this service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error_stats_service_stub-instance_method" title="#error_stats_service_stub (instance method)">#<strong>error_stats_service_stub</strong>  &#x21d2; Google::Devtools::Clouderrorreporting::V1beta1::ErrorStatsService::Stub </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_path-class_method" title="project_path (class method)">.<strong>project_path</strong>(project)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a fully-qualified project resource name string.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_events-instance_method" title="#delete_events (instance method)">#<strong>delete_events</strong>(project_name, options: nil) {|result, operation| ... } &#x21d2; Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deletes all error events of a given project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; ErrorStatsServiceClient </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A new instance of ErrorStatsServiceClient.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_events-instance_method" title="#list_events (instance method)">#<strong>list_events</strong>(project_name, group_id, service_filter: nil, time_range: nil, page_size: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Lists the specified events.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_group_stats-instance_method" title="#list_group_stats (instance method)">#<strong>list_group_stats</strong>(project_name, time_range, group_id: nil, service_filter: nil, timed_count_duration: nil, alignment: nil, alignment_time: nil, order: nil, page_size: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Lists the specified groups.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient (class)">ErrorStatsServiceClient</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new instance of ErrorStatsServiceClient</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>credentials</span>
+      
+      
+        <span class='type'>(<tt>Google::Auth::Credentials</tt>, <tt>String</tt>, <tt>Hash</tt>, <tt>GRPC::Core::Channel</tt>, <tt>GRPC::Core::ChannelCredentials</tt>, <tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Provides the means for authenticating requests made by the client. This parameter can
+be many types.
+A <code>Google::Auth::Credentials</code> uses a the properties of its represented keyfile for
+authenticating requests made by this client.
+A <code>String</code> will be treated as the path to the keyfile to be used for the construction of
+credentials for this client.
+A <code>Hash</code> will be treated as the contents of a keyfile to be used for the construction of
+credentials for this client.
+A <code>GRPC::Core::Channel</code> will be used to make calls through.
+A <code>GRPC::Core::ChannelCredentials</code> for the setting up the RPC client. The channel credentials
+should already be composed with a <code>GRPC::Core::CallCredentials</code> object.
+A <code>Proc</code> will be used as an updater_proc for the Grpc channel. The proc transforms the
+metadata for requests, generally, to give OAuth credentials.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scopes</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth scopes for this service. This parameter is ignored if
+an updater_proc is supplied.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Hash for call options for each method. See
+Google::Gax#construct_settings for the structure of
+this data. Falls back to the default config if not specified
+or the specified config is missing data points.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The default timeout, in seconds, for calls made through this client.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>metadata</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default metadata to be sent with each request. This can be overridden on a per call basis.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>exception_transformer</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An optional proc that intercepts any exceptions raised during an API call to inject
+custom error handling.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/error_stats_service_client.rb', line 117</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
+    <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
+    <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+    <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='comment'># These require statements are intentionally placed here to initialize
+</span>  <span class='comment'># the gRPC module only when it&#39;s required.
+</span>  <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
+</span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/devtools/clouderrorreporting/v1beta1/error_stats_service_services_pb</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::ErrorReporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::ErrorReporting::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::ErrorReporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::ErrorReporting::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>ChannelCredentials</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Proc</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-error_reporting</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error_stats_service_client_config.json</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.devtools.clouderrorreporting.v1beta1.ErrorStatsService</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+      <span class='label'>page_descriptors:</span> <span class='const'>PAGE_DESCRIPTORS</span><span class='comma'>,</span>
+      <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
+      <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Allow overriding the service path/port in subclasses.
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+  <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
+  <span class='ivar'>@error_stats_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
+    <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
+    <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
+    <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+    <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'>ErrorStatsService</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+
+  <span class='ivar'>@list_group_stats</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@error_stats_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_group_stats</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_group_stats</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@list_events</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@error_stats_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_events</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_events</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@delete_events</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@error_stats_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_events</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_events</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="error_stats_service_stub-instance_method">
+  
+    #<strong>error_stats_service_stub</strong>  &#x21d2; <tt>Google::Devtools::Clouderrorreporting::V1beta1::ErrorStatsService::Stub</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Devtools::Clouderrorreporting::V1beta1::ErrorStatsService::Stub</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/error_stats_service_client.rb', line 39</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient (class)">ErrorStatsServiceClient</a></span></span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:error_stats_service_stub</span>
+
+  <span class='comment'># The default address of the service.
+</span>  <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>clouderrorreporting.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='comment'># The default port of the service.
+</span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
+
+  <span class='comment'># The default set of gRPC interceptors.
+</span>  <span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+
+  <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
+
+  <span class='const'>PAGE_DESCRIPTORS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_group_stats</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error_group_stats</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_events</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error_events</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PAGE_DESCRIPTORS</span>
+
+  <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
+</span>  <span class='comment'># this service.
+</span>  <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+
+  <span class='const'>PROJECT_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PROJECT_PATH_TEMPLATE</span>
+
+  <span class='comment'># Returns a fully-qualified project resource name string.
+</span>  <span class='comment'># @param project [String]
+</span>  <span class='comment'># @return [String]
+</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
+    <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+</span>  <span class='comment'>#   Provides the means for authenticating requests made by the client. This parameter can
+</span>  <span class='comment'>#   be many types.
+</span>  <span class='comment'>#   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+</span>  <span class='comment'>#   authenticating requests made by this client.
+</span>  <span class='comment'>#   A `String` will be treated as the path to the keyfile to be used for the construction of
+</span>  <span class='comment'>#   credentials for this client.
+</span>  <span class='comment'>#   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+</span>  <span class='comment'>#   credentials for this client.
+</span>  <span class='comment'>#   A `GRPC::Core::Channel` will be used to make calls through.
+</span>  <span class='comment'>#   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+</span>  <span class='comment'>#   should already be composed with a `GRPC::Core::CallCredentials` object.
+</span>  <span class='comment'>#   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+</span>  <span class='comment'>#   metadata for requests, generally, to give OAuth credentials.
+</span>  <span class='comment'># @param scopes [Array&lt;String&gt;]
+</span>  <span class='comment'>#   The OAuth scopes for this service. This parameter is ignored if
+</span>  <span class='comment'>#   an updater_proc is supplied.
+</span>  <span class='comment'># @param client_config [Hash]
+</span>  <span class='comment'>#   A Hash for call options for each method. See
+</span>  <span class='comment'>#   Google::Gax#construct_settings for the structure of
+</span>  <span class='comment'>#   this data. Falls back to the default config if not specified
+</span>  <span class='comment'>#   or the specified config is missing data points.
+</span>  <span class='comment'># @param timeout [Numeric]
+</span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
+</span>  <span class='comment'># @param metadata [Hash]
+</span>  <span class='comment'>#   Default metadata to be sent with each request. This can be overridden on a per call basis.
+</span>  <span class='comment'># @param exception_transformer [Proc]
+</span>  <span class='comment'>#   An optional proc that intercepts any exceptions raised during an API call to inject
+</span>  <span class='comment'>#   custom error handling.
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
+      <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
+      <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
+      <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+      <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='comment'># These require statements are intentionally placed here to initialize
+</span>    <span class='comment'># the gRPC module only when it&#39;s required.
+</span>    <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
+</span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/devtools/clouderrorreporting/v1beta1/error_stats_service_services_pb</span><span class='tstring_end'>&quot;</span></span>
+
+    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::ErrorReporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::ErrorReporting::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+
+    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::ErrorReporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::ErrorReporting::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>ChannelCredentials</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Proc</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-error_reporting</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+    <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error_stats_service_client_config.json</span><span class='tstring_end'>&quot;</span></span>
+    <span class='rparen'>)</span>
+    <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
+      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
+        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.devtools.clouderrorreporting.v1beta1.ErrorStatsService</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+        <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+        <span class='label'>page_descriptors:</span> <span class='const'>PAGE_DESCRIPTORS</span><span class='comma'>,</span>
+        <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
+        <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
+      <span class='rparen'>)</span>
+    <span class='kw'>end</span>
+
+    <span class='comment'># Allow overriding the service path/port in subclasses.
+</span>    <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+    <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+    <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
+    <span class='ivar'>@error_stats_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
+      <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
+      <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
+      <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
+      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+      <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'>ErrorStatsService</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+
+    <span class='ivar'>@list_group_stats</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@error_stats_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_group_stats</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_group_stats</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='rparen'>)</span>
+    <span class='ivar'>@list_events</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@error_stats_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_events</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_events</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='rparen'>)</span>
+    <span class='ivar'>@delete_events</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@error_stats_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:delete_events</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_events</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Service calls
+</span>
+  <span class='comment'># Lists the specified groups.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_name [String]
+</span>  <span class='comment'>#   [Required] The resource name of the Google Cloud Platform project. Written
+</span>  <span class='comment'>#   as &lt;code&gt;projects/&lt;/code&gt; plus the
+</span>  <span class='comment'>#   &lt;a href=&quot;https://support.google.com/cloud/answer/6158840&quot;&gt;Google Cloud
+</span>  <span class='comment'>#   Platform project ID&lt;/a&gt;.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   Example: &lt;code&gt;projects/my-project-123&lt;/code&gt;.
+</span>  <span class='comment'># @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange | Hash]
+</span>  <span class='comment'>#   [Optional] List data for the given time range.
+</span>  <span class='comment'>#   If not set a default time range is used. The field time_range_begin
+</span>  <span class='comment'>#   in the response will specify the beginning of this time range.
+</span>  <span class='comment'>#   Only &lt;code&gt;ErrorGroupStats&lt;/code&gt; with a non-zero count in the given time
+</span>  <span class='comment'>#   range are returned, unless the request contains an explicit group_id list.
+</span>  <span class='comment'>#   If a group_id list is given, also &lt;code&gt;ErrorGroupStats&lt;/code&gt; with zero
+</span>  <span class='comment'>#   occurrences are returned.
+</span>  <span class='comment'>#   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange`
+</span>  <span class='comment'>#   can also be provided.
+</span>  <span class='comment'># @param group_id [Array&lt;String&gt;]
+</span>  <span class='comment'>#   [Optional] List all &lt;code&gt;ErrorGroupStats&lt;/code&gt; with these IDs.
+</span>  <span class='comment'># @param service_filter [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter | Hash]
+</span>  <span class='comment'>#   [Optional] List only &lt;code&gt;ErrorGroupStats&lt;/code&gt; which belong to a service
+</span>  <span class='comment'>#   context that matches the filter.
+</span>  <span class='comment'>#   Data for all service contexts is returned if this field is not specified.
+</span>  <span class='comment'>#   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter`
+</span>  <span class='comment'>#   can also be provided.
+</span>  <span class='comment'># @param timed_count_duration [Google::Protobuf::Duration | Hash]
+</span>  <span class='comment'>#   [Optional] The preferred duration for a single returned +TimedCount+.
+</span>  <span class='comment'>#   If not set, no timed counts are returned.
+</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Duration`
+</span>  <span class='comment'>#   can also be provided.
+</span>  <span class='comment'># @param alignment [Google::Devtools::Clouderrorreporting::V1beta1::TimedCountAlignment]
+</span>  <span class='comment'>#   [Optional] The alignment of the timed counts to be returned.
+</span>  <span class='comment'>#   Default is +ALIGNMENT_EQUAL_AT_END+.
+</span>  <span class='comment'># @param alignment_time [Google::Protobuf::Timestamp | Hash]
+</span>  <span class='comment'>#   [Optional] Time where the timed counts shall be aligned if rounded
+</span>  <span class='comment'>#   alignment is chosen. Default is 00:00 UTC.
+</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Timestamp`
+</span>  <span class='comment'>#   can also be provided.
+</span>  <span class='comment'># @param order [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupOrder]
+</span>  <span class='comment'>#   [Optional] The sort order in which the results are returned.
+</span>  <span class='comment'>#   Default is +COUNT_DESC+.
+</span>  <span class='comment'># @param page_size [Integer]
+</span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
+</span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
+</span>  <span class='comment'>#   parameter does not affect the return value. If page streaming is
+</span>  <span class='comment'>#   performed per-page, this determines the maximum number of
+</span>  <span class='comment'>#   resources in a page.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Gax::PagedEnumerable&lt;Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats&gt;]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
+</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats&gt;]
+</span>  <span class='comment'>#   An enumerable of Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats instances.
+</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
+</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
+</span>  <span class='comment'>#   object.
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/error_reporting&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   error_stats_service_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
+</span>  <span class='comment'>#   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path(&quot;[PROJECT]&quot;)
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +time_range+:
+</span>  <span class='comment'>#   time_range = {}
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # Iterate over all results.
+</span>  <span class='comment'>#   error_stats_service_client.list_group_stats(formatted_project_name, time_range).each do |element|
+</span>  <span class='comment'>#     # Process element.
+</span>  <span class='comment'>#   end
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # Or iterate over results one page at a time.
+</span>  <span class='comment'>#   error_stats_service_client.list_group_stats(formatted_project_name, time_range).each_page do |page|
+</span>  <span class='comment'>#     # Process each page at a time.
+</span>  <span class='comment'>#     page.each do |element|
+</span>  <span class='comment'>#       # Process element.
+</span>  <span class='comment'>#     end
+</span>  <span class='comment'>#   end
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_list_group_stats'>list_group_stats</span> \
+      <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_time_range'>time_range</span><span class='comma'>,</span>
+      <span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>service_filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>timed_count_duration:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>alignment:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>alignment_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>order:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+      <span class='label'>project_name:</span> <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+      <span class='label'>time_range:</span> <span class='id identifier rubyid_time_range'>time_range</span><span class='comma'>,</span>
+      <span class='label'>group_id:</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='comma'>,</span>
+      <span class='label'>service_filter:</span> <span class='id identifier rubyid_service_filter'>service_filter</span><span class='comma'>,</span>
+      <span class='label'>timed_count_duration:</span> <span class='id identifier rubyid_timed_count_duration'>timed_count_duration</span><span class='comma'>,</span>
+      <span class='label'>alignment:</span> <span class='id identifier rubyid_alignment'>alignment</span><span class='comma'>,</span>
+      <span class='label'>alignment_time:</span> <span class='id identifier rubyid_alignment_time'>alignment_time</span><span class='comma'>,</span>
+      <span class='label'>order:</span> <span class='id identifier rubyid_order'>order</span><span class='comma'>,</span>
+      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ListGroupStatsRequest.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ListGroupStatsRequest (class)">ListGroupStatsRequest</a></span></span><span class='rparen'>)</span>
+    <span class='ivar'>@list_group_stats</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Lists the specified events.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_name [String]
+</span>  <span class='comment'>#   [Required] The resource name of the Google Cloud Platform project. Written
+</span>  <span class='comment'>#   as +projects/+ plus the
+</span>  <span class='comment'>#   [Google Cloud Platform project
+</span>  <span class='comment'>#   ID](https://support.google.com/cloud/answer/6158840).
+</span>  <span class='comment'>#   Example: +projects/my-project-123+.
+</span>  <span class='comment'># @param group_id [String]
+</span>  <span class='comment'>#   [Required] The group for which events shall be returned.
+</span>  <span class='comment'># @param service_filter [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter | Hash]
+</span>  <span class='comment'>#   [Optional] List only ErrorGroups which belong to a service context that
+</span>  <span class='comment'>#   matches the filter.
+</span>  <span class='comment'>#   Data for all service contexts is returned if this field is not specified.
+</span>  <span class='comment'>#   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter`
+</span>  <span class='comment'>#   can also be provided.
+</span>  <span class='comment'># @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange | Hash]
+</span>  <span class='comment'>#   [Optional] List only data for the given time range.
+</span>  <span class='comment'>#   If not set a default time range is used. The field time_range_begin
+</span>  <span class='comment'>#   in the response will specify the beginning of this time range.
+</span>  <span class='comment'>#   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange`
+</span>  <span class='comment'>#   can also be provided.
+</span>  <span class='comment'># @param page_size [Integer]
+</span>  <span class='comment'>#   The maximum number of resources contained in the underlying API
+</span>  <span class='comment'>#   response. If page streaming is performed per-resource, this
+</span>  <span class='comment'>#   parameter does not affect the return value. If page streaming is
+</span>  <span class='comment'>#   performed per-page, this determines the maximum number of
+</span>  <span class='comment'>#   resources in a page.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Gax::PagedEnumerable&lt;Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent&gt;]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
+</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent&gt;]
+</span>  <span class='comment'>#   An enumerable of Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent instances.
+</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
+</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
+</span>  <span class='comment'>#   object.
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/error_reporting&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   error_stats_service_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
+</span>  <span class='comment'>#   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path(&quot;[PROJECT]&quot;)
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +group_id+:
+</span>  <span class='comment'>#   group_id = &#39;&#39;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # Iterate over all results.
+</span>  <span class='comment'>#   error_stats_service_client.list_events(formatted_project_name, group_id).each do |element|
+</span>  <span class='comment'>#     # Process element.
+</span>  <span class='comment'>#   end
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # Or iterate over results one page at a time.
+</span>  <span class='comment'>#   error_stats_service_client.list_events(formatted_project_name, group_id).each_page do |page|
+</span>  <span class='comment'>#     # Process each page at a time.
+</span>  <span class='comment'>#     page.each do |element|
+</span>  <span class='comment'>#       # Process element.
+</span>  <span class='comment'>#     end
+</span>  <span class='comment'>#   end
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_list_events'>list_events</span> \
+      <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_group_id'>group_id</span><span class='comma'>,</span>
+      <span class='label'>service_filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>time_range:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+      <span class='label'>project_name:</span> <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+      <span class='label'>group_id:</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='comma'>,</span>
+      <span class='label'>service_filter:</span> <span class='id identifier rubyid_service_filter'>service_filter</span><span class='comma'>,</span>
+      <span class='label'>time_range:</span> <span class='id identifier rubyid_time_range'>time_range</span><span class='comma'>,</span>
+      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ListEventsRequest.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ListEventsRequest (class)">ListEventsRequest</a></span></span><span class='rparen'>)</span>
+    <span class='ivar'>@list_events</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Deletes all error events of a given project.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_name [String]
+</span>  <span class='comment'>#   [Required] The resource name of the Google Cloud Platform project. Written
+</span>  <span class='comment'>#   as +projects/+ plus the
+</span>  <span class='comment'>#   [Google Cloud Platform project
+</span>  <span class='comment'>#   ID](https://support.google.com/cloud/answer/6158840).
+</span>  <span class='comment'>#   Example: +projects/my-project-123+.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
+</span>  <span class='comment'># @return [Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse]
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/error_reporting&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   error_stats_service_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
+</span>  <span class='comment'>#   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path(&quot;[PROJECT]&quot;)
+</span>  <span class='comment'>#   response = error_stats_service_client.delete_events(formatted_project_name)
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_delete_events'>delete_events</span> \
+      <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+      <span class='label'>project_name:</span> <span class='id identifier rubyid_project_name'>project_name</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/DeleteEventsRequest.html" title="Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsRequest (class)">DeleteEventsRequest</a></span></span><span class='rparen'>)</span>
+    <span class='ivar'>@delete_events</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="project_path-class_method">
+  
+    .<strong>project_path</strong>(project)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a fully-qualified project resource name string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/error_stats_service_client.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
+    <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="delete_events-instance_method">
+  
+    #<strong>delete_events</strong>(project_name, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/DeleteEventsResponse.html" title="Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse (class)">Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deletes all error events of a given project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_error_stats_service_client'>error_stats_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'>ErrorStats</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::ErrorReporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient (class)">ErrorStatsServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_error_stats_service_client'>error_stats_service_client</span><span class='period'>.</span><span class='id identifier rubyid_delete_events'>delete_events</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Required] The resource name of the Google Cloud Platform project. Written
+as +projects/+ plus the
+<a href="https://support.google.com/cloud/answer/6158840">Google Cloud Platform project
+ID</a>.
+Example: +projects/my-project-123+.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/DeleteEventsResponse.html" title="Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse (class)">Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/DeleteEventsResponse.html" title="Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse (class)">Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/error_stats_service_client.rb', line 424</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_events'>delete_events</span> \
+    <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>project_name:</span> <span class='id identifier rubyid_project_name'>project_name</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/DeleteEventsRequest.html" title="Google::Devtools::Clouderrorreporting::V1beta1::DeleteEventsRequest (class)">DeleteEventsRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@delete_events</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_events-instance_method">
+  
+    #<strong>list_events</strong>(project_name, group_id, service_filter: nil, time_range: nil, page_size: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ErrorEvent.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent (class)">Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Lists the specified events.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_error_stats_service_client'>error_stats_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'>ErrorStats</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::ErrorReporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient (class)">ErrorStatsServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize +group_id+:
+</span><span class='id identifier rubyid_group_id'>group_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='comment'># Iterate over all results.
+</span><span class='id identifier rubyid_error_stats_service_client'>error_stats_service_client</span><span class='period'>.</span><span class='id identifier rubyid_list_events'>list_events</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span><span class='comma'>,</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
+  <span class='comment'># Process element.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Or iterate over results one page at a time.
+</span><span class='id identifier rubyid_error_stats_service_client'>error_stats_service_client</span><span class='period'>.</span><span class='id identifier rubyid_list_events'>list_events</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span><span class='comma'>,</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each_page'>each_page</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page'>page</span><span class='op'>|</span>
+  <span class='comment'># Process each page at a time.
+</span>  <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
+    <span class='comment'># Process element.
+</span>  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Required] The resource name of the Google Cloud Platform project. Written
+as +projects/+ plus the
+<a href="https://support.google.com/cloud/answer/6158840">Google Cloud Platform project
+ID</a>.
+Example: +projects/my-project-123+.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>group_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Required] The group for which events shall be returned.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_filter</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ServiceContextFilter.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter (class)">Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Optional] List only ErrorGroups which belong to a service context that
+matches the filter.
+Data for all service contexts is returned if this field is not specified.
+A hash of the same form as <code>Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>time_range</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/QueryTimeRange.html" title="Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange (class)">Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Optional] List only data for the given time range.
+If not set a default time range is used. The field time_range_begin
+in the response will specify the beginning of this time range.
+A hash of the same form as <code>Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The maximum number of resources contained in the underlying API
+response. If page streaming is performed per-resource, this
+parameter does not affect the return value. If page streaming is
+performed per-page, this determines the maximum number of
+resources in a page.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ErrorEvent.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent (class)">Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ErrorEvent.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent (class)">Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An enumerable of Google::Devtools::Clouderrorreporting::V1beta1::ErrorEvent instances.
+See Google::Gax::PagedEnumerable documentation for other
+operations such as per-page iteration or access to the response
+object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/error_stats_service_client.rb', line 382</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_list_events'>list_events</span> \
+    <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_group_id'>group_id</span><span class='comma'>,</span>
+    <span class='label'>service_filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>time_range:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>project_name:</span> <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+    <span class='label'>group_id:</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='comma'>,</span>
+    <span class='label'>service_filter:</span> <span class='id identifier rubyid_service_filter'>service_filter</span><span class='comma'>,</span>
+    <span class='label'>time_range:</span> <span class='id identifier rubyid_time_range'>time_range</span><span class='comma'>,</span>
+    <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ListEventsRequest.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ListEventsRequest (class)">ListEventsRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@list_events</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_group_stats-instance_method">
+  
+    #<strong>list_group_stats</strong>(project_name, time_range, group_id: nil, service_filter: nil, timed_count_duration: nil, alignment: nil, alignment_time: nil, order: nil, page_size: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ErrorGroupStats.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats (class)">Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Lists the specified groups.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_error_stats_service_client'>error_stats_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'>ErrorStats</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::ErrorReporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient (class)">ErrorStatsServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize +time_range+:
+</span><span class='id identifier rubyid_time_range'>time_range</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+<span class='comment'># Iterate over all results.
+</span><span class='id identifier rubyid_error_stats_service_client'>error_stats_service_client</span><span class='period'>.</span><span class='id identifier rubyid_list_group_stats'>list_group_stats</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span><span class='comma'>,</span> <span class='id identifier rubyid_time_range'>time_range</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
+  <span class='comment'># Process element.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Or iterate over results one page at a time.
+</span><span class='id identifier rubyid_error_stats_service_client'>error_stats_service_client</span><span class='period'>.</span><span class='id identifier rubyid_list_group_stats'>list_group_stats</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span><span class='comma'>,</span> <span class='id identifier rubyid_time_range'>time_range</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each_page'>each_page</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page'>page</span><span class='op'>|</span>
+  <span class='comment'># Process each page at a time.
+</span>  <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
+    <span class='comment'># Process element.
+</span>  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Required] The resource name of the Google Cloud Platform project. Written
+as <code>projects/</code> plus the
+<a href="https://support.google.com/cloud/answer/6158840">Google Cloud
+Platform project ID</a>.</p>
+
+<p>Example: <code>projects/my-project-123</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>time_range</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/QueryTimeRange.html" title="Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange (class)">Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Optional] List data for the given time range.
+If not set a default time range is used. The field time_range_begin
+in the response will specify the beginning of this time range.
+Only <code>ErrorGroupStats</code> with a non-zero count in the given time
+range are returned, unless the request contains an explicit group_id list.
+If a group_id list is given, also <code>ErrorGroupStats</code> with zero
+occurrences are returned.
+A hash of the same form as <code>Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>group_id</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Optional] List all <code>ErrorGroupStats</code> with these IDs.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_filter</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ServiceContextFilter.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter (class)">Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Optional] List only <code>ErrorGroupStats</code> which belong to a service
+context that matches the filter.
+Data for all service contexts is returned if this field is not specified.
+A hash of the same form as <code>Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timed_count_duration</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Optional] The preferred duration for a single returned +TimedCount+.
+If not set, no timed counts are returned.
+A hash of the same form as <code>Google::Protobuf::Duration</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alignment</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/TimedCountAlignment.html" title="Google::Devtools::Clouderrorreporting::V1beta1::TimedCountAlignment (module)">Google::Devtools::Clouderrorreporting::V1beta1::TimedCountAlignment</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Optional] The alignment of the timed counts to be returned.
+Default is +ALIGNMENT_EQUAL_AT_END+.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alignment_time</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Optional] Time where the timed counts shall be aligned if rounded
+alignment is chosen. Default is 00:00 UTC.
+A hash of the same form as <code>Google::Protobuf::Timestamp</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>order</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ErrorGroupOrder.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupOrder (module)">Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupOrder</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Optional] The sort order in which the results are returned.
+Default is +COUNT_DESC+.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The maximum number of resources contained in the underlying API
+response. If page streaming is performed per-resource, this
+parameter does not affect the return value. If page streaming is
+performed per-page, this determines the maximum number of
+resources in a page.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ErrorGroupStats.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats (class)">Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ErrorGroupStats.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats (class)">Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An enumerable of Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupStats instances.
+See Google::Gax::PagedEnumerable documentation for other
+operations such as per-page iteration or access to the response
+object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting/v1beta1/error_stats_service_client.rb', line 293</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_list_group_stats'>list_group_stats</span> \
+    <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_time_range'>time_range</span><span class='comma'>,</span>
+    <span class='label'>group_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>service_filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>timed_count_duration:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>alignment:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>alignment_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>order:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>project_name:</span> <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span>
+    <span class='label'>time_range:</span> <span class='id identifier rubyid_time_range'>time_range</span><span class='comma'>,</span>
+    <span class='label'>group_id:</span> <span class='id identifier rubyid_group_id'>group_id</span><span class='comma'>,</span>
+    <span class='label'>service_filter:</span> <span class='id identifier rubyid_service_filter'>service_filter</span><span class='comma'>,</span>
+    <span class='label'>timed_count_duration:</span> <span class='id identifier rubyid_timed_count_duration'>timed_count_duration</span><span class='comma'>,</span>
+    <span class='label'>alignment:</span> <span class='id identifier rubyid_alignment'>alignment</span><span class='comma'>,</span>
+    <span class='label'>alignment_time:</span> <span class='id identifier rubyid_alignment_time'>alignment_time</span><span class='comma'>,</span>
+    <span class='label'>order:</span> <span class='id identifier rubyid_order'>order</span><span class='comma'>,</span>
+    <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting.html" title="Google::Devtools::Clouderrorreporting (module)">Clouderrorreporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1.html" title="Google::Devtools::Clouderrorreporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouderrorreporting/V1beta1/ListGroupStatsRequest.html" title="Google::Devtools::Clouderrorreporting::V1beta1::ListGroupStatsRequest (class)">ListGroupStatsRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@list_group_stats</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
