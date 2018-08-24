@@ -887,24 +887,32 @@ module Google
         ##
         # @private
         FILTER_OPS = {
-          "<"   => :LESS_THAN,
-          "lt"  => :LESS_THAN,
-          "<="  => :LESS_THAN_OR_EQUAL,
-          "lte" => :LESS_THAN_OR_EQUAL,
-          ">"   => :GREATER_THAN,
-          "gt"  => :GREATER_THAN,
-          ">="  => :GREATER_THAN_OR_EQUAL,
-          "gte" => :GREATER_THAN_OR_EQUAL,
-          "="   => :EQUAL,
-          "=="  => :EQUAL,
-          "eq"  => :EQUAL,
-          "eql" => :EQUAL,
-          "is"  => :EQUAL
+          "<"              => :LESS_THAN,
+          "lt"             => :LESS_THAN,
+          "<="             => :LESS_THAN_OR_EQUAL,
+          "lte"            => :LESS_THAN_OR_EQUAL,
+          ">"              => :GREATER_THAN,
+          "gt"             => :GREATER_THAN,
+          ">="             => :GREATER_THAN_OR_EQUAL,
+          "gte"            => :GREATER_THAN_OR_EQUAL,
+          "="              => :EQUAL,
+          "=="             => :EQUAL,
+          "eq"             => :EQUAL,
+          "eql"            => :EQUAL,
+          "is"             => :EQUAL,
+          "array_contains" => :ARRAY_CONTAINS,
+          "array-contains" => :ARRAY_CONTAINS,
+          "contains"       => :ARRAY_CONTAINS,
+          "contains?"      => :ARRAY_CONTAINS,
+          "includes"       => :ARRAY_CONTAINS,
+          "includes?"      => :ARRAY_CONTAINS,
+          "has"            => :ARRAY_CONTAINS
         }.freeze
         ##
         # @private
         EQUALITY_FILTERS = [
-          :EQUAL
+          :EQUAL,
+          :ARRAY_CONTAINS
         ].freeze
         ##
         # @private
