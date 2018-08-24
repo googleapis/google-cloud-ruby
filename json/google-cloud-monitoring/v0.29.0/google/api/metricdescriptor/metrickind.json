@@ -1,0 +1,1 @@
+{"id":"google/api/metricdescriptor/metrickind","name":"MetricKind","title":["Google","Api","MetricDescriptor","MetricKind"],"description":"<p>The kind of measurement. It describes how the data is reported.</p>","source":"google-cloud-monitoring/lib/google/cloud/monitoring/v3/doc/google/api/metric.rb#L126","resources":[],"examples":[],"methods":[]}

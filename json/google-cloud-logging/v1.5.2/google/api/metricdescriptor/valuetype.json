@@ -1,0 +1,1 @@
+{"id":"google/api/metricdescriptor/valuetype","name":"ValueType","title":["Google","Api","MetricDescriptor","ValueType"],"description":"<p>The value type of a metric.</p>","source":"google-cloud-logging/lib/google/cloud/logging/v2/doc/google/api/metric.rb#L145","resources":[],"examples":[],"methods":[]}
