@@ -910,17 +910,17 @@ module Google
         }.freeze
         ##
         # @private
-        EQUALITY_FILTERS = [
-          :EQUAL,
-          :ARRAY_CONTAINS
+        EQUALITY_FILTERS = %i[
+          EQUAL
+          ARRAY_CONTAINS
         ].freeze
         ##
         # @private
-        INEQUALITY_FILTERS = [
-          :LESS_THAN,
-          :LESS_THAN_OR_EQUAL,
-          :GREATER_THAN,
-          :GREATER_THAN_OR_EQUAL
+        INEQUALITY_FILTERS = %i[
+          LESS_THAN
+          LESS_THAN_OR_EQUAL
+          GREATER_THAN
+          GREATER_THAN_OR_EQUAL
         ].freeze
         ##
         # @private
