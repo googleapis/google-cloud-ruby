@@ -903,6 +903,19 @@ module Google
         }.freeze
         ##
         # @private
+        EQUALITY_FILTERS = [
+          :EQUAL
+        ].freeze
+        ##
+        # @private
+        INEQUALITY_FILTERS = [
+          :LESS_THAN,
+          :LESS_THAN_OR_EQUAL,
+          :GREATER_THAN,
+          :GREATER_THAN_OR_EQUAL
+        ].freeze
+        ##
+        # @private
         UNARY_NIL_VALUES = [nil, :null, :nil].freeze
         ##
         # @private
@@ -1048,7 +1061,7 @@ module Google
                     end
           ineq_filters = filters.select do |filter|
             if filter.filter_type == :field_filter
-              filter.field_filter.op != :EQUAL
+              INEQUALITY_FILTERS.include? filter.field_filter.op
             end
           end
           ineq_filters.map { |filter| filter.field_filter.field.field_path }
