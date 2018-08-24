@@ -1,0 +1,652 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Language::V1::AnnotateTextResponse - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Language::V1::AnnotateTextResponse";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">AnnotateTextResponse</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Language::V1::AnnotateTextResponse
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Language::V1::AnnotateTextResponse</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The text annotations response message.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#categories-instance_method" title="#categories (instance method)">#<strong>categories</strong>  &#x21d2; Array&lt;Google::Cloud::Language::V1::ClassificationCategory&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Categories identified in the input document.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#document_sentiment-instance_method" title="#document_sentiment (instance method)">#<strong>document_sentiment</strong>  &#x21d2; Google::Cloud::Language::V1::Sentiment </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The overall sentiment for the document.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#entities-instance_method" title="#entities (instance method)">#<strong>entities</strong>  &#x21d2; Array&lt;Google::Cloud::Language::V1::Entity&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Entities, along with their semantic information, in the input document.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#language-instance_method" title="#language (instance method)">#<strong>language</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The language of the text, which will be the same as the language specified in the request or, if not specified, the automatically-detected language.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sentences-instance_method" title="#sentences (instance method)">#<strong>sentences</strong>  &#x21d2; Array&lt;Google::Cloud::Language::V1::Sentence&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sentences in the input document.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tokens-instance_method" title="#tokens (instance method)">#<strong>tokens</strong>  &#x21d2; Array&lt;Google::Cloud::Language::V1::Token&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Tokens, along with their syntactic information, in the input document.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="categories=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="categories-instance_method">
+  
+    #<strong>categories</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="ClassificationCategory.html" title="Google::Cloud::Language::V1::ClassificationCategory (class)">Google::Cloud::Language::V1::ClassificationCategory</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Categories identified in the input document.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ClassificationCategory.html" title="Google::Cloud::Language::V1::ClassificationCategory (class)">Google::Cloud::Language::V1::ClassificationCategory</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Categories identified in the input document.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+962</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 962</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::AnnotateTextResponse (class)">AnnotateTextResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="document_sentiment=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="document_sentiment-instance_method">
+  
+    #<strong>document_sentiment</strong>  &#x21d2; <tt><span class='object_link'><a href="Sentiment.html" title="Google::Cloud::Language::V1::Sentiment (class)">Google::Cloud::Language::V1::Sentiment</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The overall sentiment for the document. Populated if the user enables
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_document_sentiment-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_document_sentiment (method)">AnnotateTextRequest::Features#extract_document_sentiment</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Sentiment.html" title="Google::Cloud::Language::V1::Sentiment (class)">Google::Cloud::Language::V1::Sentiment</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The overall sentiment for the document. Populated if the user enables
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_document_sentiment-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_document_sentiment (method)">AnnotateTextRequest::Features#extract_document_sentiment</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+962</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 962</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::AnnotateTextResponse (class)">AnnotateTextResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="entities=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="entities-instance_method">
+  
+    #<strong>entities</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Entity.html" title="Google::Cloud::Language::V1::Entity (class)">Google::Cloud::Language::V1::Entity</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Entities, along with their semantic information, in the input document.
+Populated if the user enables
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_entities-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entities (method)">AnnotateTextRequest::Features#extract_entities</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Entity.html" title="Google::Cloud::Language::V1::Entity (class)">Google::Cloud::Language::V1::Entity</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Entities, along with their semantic information, in the input document.
+Populated if the user enables
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_entities-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entities (method)">AnnotateTextRequest::Features#extract_entities</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+962</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 962</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::AnnotateTextResponse (class)">AnnotateTextResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="language=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="language-instance_method">
+  
+    #<strong>language</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The language of the text, which will be the same as the language specified
+in the request or, if not specified, the automatically-detected language.
+See <span class='object_link'><a href="Document.html#language-instance_method" title="Google::Cloud::Language::V1::Document#language (method)">Document#language</a></span> field for more details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The language of the text, which will be the same as the language specified
+in the request or, if not specified, the automatically-detected language.
+See <span class='object_link'><a href="Document.html#language-instance_method" title="Google::Cloud::Language::V1::Document#language (method)">Document#language</a></span> field for more details.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+962</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 962</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::AnnotateTextResponse (class)">AnnotateTextResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="sentences=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="sentences-instance_method">
+  
+    #<strong>sentences</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Sentence.html" title="Google::Cloud::Language::V1::Sentence (class)">Google::Cloud::Language::V1::Sentence</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Sentences in the input document. Populated if the user enables
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_syntax-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_syntax (method)">AnnotateTextRequest::Features#extract_syntax</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Sentence.html" title="Google::Cloud::Language::V1::Sentence (class)">Google::Cloud::Language::V1::Sentence</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Sentences in the input document. Populated if the user enables
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_syntax-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_syntax (method)">AnnotateTextRequest::Features#extract_syntax</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+962</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 962</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::AnnotateTextResponse (class)">AnnotateTextResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="tokens=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tokens-instance_method">
+  
+    #<strong>tokens</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Token.html" title="Google::Cloud::Language::V1::Token (class)">Google::Cloud::Language::V1::Token</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Tokens, along with their syntactic information, in the input document.
+Populated if the user enables
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_syntax-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_syntax (method)">AnnotateTextRequest::Features#extract_syntax</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Token.html" title="Google::Cloud::Language::V1::Token (class)">Google::Cloud::Language::V1::Token</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Tokens, along with their syntactic information, in the input document.
+Populated if the user enables
+<span class='object_link'><a href="AnnotateTextRequest/Features.html#extract_syntax-instance_method" title="Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_syntax (method)">AnnotateTextRequest::Features#extract_syntax</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+962</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 962</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::AnnotateTextResponse (class)">AnnotateTextResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
