@@ -701,18 +701,18 @@ task :release, :tag do |t, args|
     begin
       ::Gems.push(File.new path_to_be_pushed)
       puts "Successfully built and pushed #{package} for version #{version}"
-
-      # jsondoc:package needs jsondoc to have been run prior
-      Rake::Task["bundleupdate"].invoke
-      Rake::Task["jsondoc"].invoke
-      Rake::Task["jsondoc:package"].invoke tag
-      Rake::Task["docs:publish_tag"].invoke tag
     rescue => e
       puts "Error while releasing #{package} version #{version}: #{e.message}"
     end
   else
     fail "Cannot build #{package} for version #{version}"
   end
+  
+  # jsondoc:package needs jsondoc to have been run prior
+  Rake::Task["bundleupdate"].invoke
+  Rake::Task["jsondoc"].invoke
+  Rake::Task["jsondoc:package"].invoke tag
+  Rake::Task["docs:publish_tag"].invoke tag
 end
 
 desc "Run all integration tests"
