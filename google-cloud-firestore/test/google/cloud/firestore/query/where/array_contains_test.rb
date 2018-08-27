@@ -17,21 +17,6 @@ require "helper"
 describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firestore do
   let(:query) { Google::Cloud::Firestore::Query.start nil, "#{firestore.path}/documents", firestore }
 
-  it "using array_contains" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "foo"),
-          op: :ARRAY_CONTAINS,
-          value: Google::Firestore::V1beta1::Value.new(integer_value: 42)
-        )
-      )
-    )
-
-    generated_query = query.where(:foo, :array_contains, 42).query
-    generated_query.must_equal expected_query
-  end
-
   it "using array-contains" do
     expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
       where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
@@ -47,7 +32,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
     generated_query.must_equal expected_query
   end
 
-  it "using contains" do
+  it "using array_contains" do
     expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
       where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
         field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
@@ -58,11 +43,11 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
       )
     )
 
-    generated_query = query.where(:foo, :contains, 42).query
+    generated_query = query.where(:foo, :array_contains, 42).query
     generated_query.must_equal expected_query
   end
 
-  it "using contains?" do
+  it "using include" do
     expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
       where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
         field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
@@ -73,11 +58,11 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
       )
     )
 
-    generated_query = query.where(:foo, :contains?, 42).query
+    generated_query = query.where(:foo, :include, 42).query
     generated_query.must_equal expected_query
   end
 
-  it "using includes" do
+  it "using include?" do
     expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
       where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
         field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
@@ -88,22 +73,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
       )
     )
 
-    generated_query = query.where(:foo, :includes, 42).query
-    generated_query.must_equal expected_query
-  end
-
-  it "using includes?" do
-    expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
-      where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-        field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
-          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "foo"),
-          op: :ARRAY_CONTAINS,
-          value: Google::Firestore::V1beta1::Value.new(integer_value: 42)
-        )
-      )
-    )
-
-    generated_query = query.where(:foo, :includes?, 42).query
+    generated_query = query.where(:foo, :include?, 42).query
     generated_query.must_equal expected_query
   end
 

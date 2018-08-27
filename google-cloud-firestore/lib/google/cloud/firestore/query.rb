@@ -902,10 +902,8 @@ module Google
           "is"             => :EQUAL,
           "array_contains" => :ARRAY_CONTAINS,
           "array-contains" => :ARRAY_CONTAINS,
-          "contains"       => :ARRAY_CONTAINS,
-          "contains?"      => :ARRAY_CONTAINS,
-          "includes"       => :ARRAY_CONTAINS,
-          "includes?"      => :ARRAY_CONTAINS,
+          "include"        => :ARRAY_CONTAINS,
+          "include?"       => :ARRAY_CONTAINS,
           "has"            => :ARRAY_CONTAINS
         }.freeze
         ##
