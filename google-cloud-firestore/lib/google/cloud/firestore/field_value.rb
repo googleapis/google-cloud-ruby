@@ -140,7 +140,7 @@ module Google
         # Creates a sentinel value to indicate the union of the given values
         # with an array.
         #
-        # @param [Object] values The values to add from the array. Required.
+        # @param [Object] values The values to add to the array. Required.
         #
         # @return [FieldValue] The array union field value object.
         #
