@@ -212,6 +212,7 @@ module Google
         #   * greater than: `>`, `gt`
         #   * greater than or equal: `>=`, `gte`
         #   * equal: `=`, `==`, `eq`, `eql`, `is`
+        #   * array contains: `array-contains`, `array_contains`
         # @param [Object] value A value the field is compared to.
         #
         # @return [Query] New query with `where` called on it.
