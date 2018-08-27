@@ -64,6 +64,7 @@ module Google
         end
 
         ##
+        # @private
         # The values to change to an individual field in document data,
         # depending on the type of change.
         #
@@ -155,8 +156,6 @@ module Google
         #   array_union = Google::Cloud::Firestore::FieldValue.array_union(
         #     1, 2, 3
         #   )
-        #   array_union.type #=> :array_union
-        #   array_union.values #=> [1, 2, 3]
         #
         #   nyc_ref.update({ name: "New York City",
         #                    lucky_numbers: array_union })
@@ -188,8 +187,6 @@ module Google
         #   array_delete = Google::Cloud::Firestore::FieldValue.array_delete(
         #     7, 8, 9
         #   )
-        #   array_delete.type #=> :array_delete
-        #   array_delete.values #=> [7, 8, 9]
         #
         #   nyc_ref.update({ name: "New York City",
         #                    lucky_numbers: array_delete })
