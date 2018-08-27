@@ -164,6 +164,8 @@ module Google
           # We can flatten the values because arrays don't support sub-arrays
           values.flatten!
           raise ArgumentError, "values must be provided" if values.nil?
+          # verify the values are the correct types
+          Convert.raw_to_value values
 
           new :array_union, values
         end
@@ -195,6 +197,8 @@ module Google
           # We can flatten the values because arrays don't support sub-arrays
           values.flatten!
           raise ArgumentError, "values must be provided" if values.nil?
+          # verify the values are the correct types
+          Convert.raw_to_value values
 
           new :array_delete, values
         end
