@@ -2,9 +2,6 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "gcloud-jsondoc",
-    git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
-    branch: "gcloud-jsondoc"
 gem "google-cloud", path: "../google-cloud"
 gem "google-cloud-bigquery", path: "../google-cloud-bigquery"
 gem "google-cloud-bigquery-data_transfer",

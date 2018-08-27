@@ -64,36 +64,6 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-text_to_speech .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Cloud::Texttospeech::V1::DataTypes",
-        modules: [
-          {
-            title: "Google::Cloud::Texttospeech::V1",
-            include: ["google/cloud/texttospeech/v1"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-text_to_speech",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-text_to_speech gem does not have doctest tests."
@@ -104,8 +74,6 @@ task :ci do
   header "BUILDING google-cloud-text_to_speech"
   header "google-cloud-text_to_speech rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-text_to_speech jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-text_to_speech doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-text_to_speech test", "*"

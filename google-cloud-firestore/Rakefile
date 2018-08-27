@@ -156,44 +156,6 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-firestore .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Cloud::Firestore::V1beta1::DataTypes",
-        modules: [
-          {
-            title: "Google::Firestore::V1beta1",
-            include: ["google/firestore/v1beta1"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-firestore",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run yard-doctest example tests."
 task doctest: :yard do
   sh "bundle exec yard doctest"
@@ -204,8 +166,6 @@ task :ci do
   header "BUILDING google-cloud-firestore"
   header "google-cloud-firestore rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-firestore jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-firestore doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-firestore test", "*"

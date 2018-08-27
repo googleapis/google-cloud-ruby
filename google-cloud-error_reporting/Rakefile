@@ -133,47 +133,11 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-error_reporting .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Devtools::Clouderrorreporting::V1beta1::DataTypes",
-        modules: [
-          {
-            title: "Google::Devtools::Clouderrorreporting::V1beta1",
-            include: ["google/devtools/clouderrorreporting/v1beta1"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-error_reporting",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/instrumentation.md", "docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-error_reporting"
   header "google-cloud-error_reporting rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-error_reporting jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-error_reporting doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-error_reporting test", "*"

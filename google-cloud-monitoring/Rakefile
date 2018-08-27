@@ -115,44 +115,6 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-monitoring .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Monitoring::V3::DataTypes",
-        modules: [
-          {
-            title: "Google::Monitoring::V3",
-            include: ["google/cloud/monitoring/v3"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-monitoring",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-monitoring gem does not have doctest tests."
@@ -163,8 +125,6 @@ task :ci do
   header "BUILDING google-cloud-monitoring"
   header "google-cloud-monitoring rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-monitoring jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-monitoring doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-monitoring test", "*"

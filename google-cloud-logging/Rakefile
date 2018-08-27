@@ -161,55 +161,11 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-logging .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Logging::V2::DataTypes",
-        modules: [
-          {
-            title: "Google::Logging::V2",
-            include: ["google/logging/v2"]
-          },
-          {
-            title: "Google::Logging::Type",
-            include: ["google/logging/type"]
-          },
-          {
-            title: "Google::Api",
-            include: ["google/api"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-logging",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/authentication.md", "docs/instrumentation.md", "docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-logging"
   header "google-cloud-logging rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-logging jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-logging doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-logging test", "*"
