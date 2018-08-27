@@ -212,6 +212,7 @@ module Google
         #   * greater than: `>`, `gt`
         #   * greater than or equal: `>=`, `gte`
         #   * equal: `=`, `==`, `eq`, `eql`, `is`
+        #   * array contains: `array-contains`, `array_contains`
         # @param [Object] value A value the field is compared to.
         #
         # @return [Query] New query with `where` called on it.
@@ -887,20 +888,39 @@ module Google
         ##
         # @private
         FILTER_OPS = {
-          "<"   => :LESS_THAN,
-          "lt"  => :LESS_THAN,
-          "<="  => :LESS_THAN_OR_EQUAL,
-          "lte" => :LESS_THAN_OR_EQUAL,
-          ">"   => :GREATER_THAN,
-          "gt"  => :GREATER_THAN,
-          ">="  => :GREATER_THAN_OR_EQUAL,
-          "gte" => :GREATER_THAN_OR_EQUAL,
-          "="   => :EQUAL,
-          "=="  => :EQUAL,
-          "eq"  => :EQUAL,
-          "eql" => :EQUAL,
-          "is"  => :EQUAL
+          "<"              => :LESS_THAN,
+          "lt"             => :LESS_THAN,
+          "<="             => :LESS_THAN_OR_EQUAL,
+          "lte"            => :LESS_THAN_OR_EQUAL,
+          ">"              => :GREATER_THAN,
+          "gt"             => :GREATER_THAN,
+          ">="             => :GREATER_THAN_OR_EQUAL,
+          "gte"            => :GREATER_THAN_OR_EQUAL,
+          "="              => :EQUAL,
+          "=="             => :EQUAL,
+          "eq"             => :EQUAL,
+          "eql"            => :EQUAL,
+          "is"             => :EQUAL,
+          "array_contains" => :ARRAY_CONTAINS,
+          "array-contains" => :ARRAY_CONTAINS,
+          "include"        => :ARRAY_CONTAINS,
+          "include?"       => :ARRAY_CONTAINS,
+          "has"            => :ARRAY_CONTAINS
         }.freeze
+        ##
+        # @private
+        EQUALITY_FILTERS = %i[
+          EQUAL
+          ARRAY_CONTAINS
+        ].freeze
+        ##
+        # @private
+        INEQUALITY_FILTERS = %i[
+          LESS_THAN
+          LESS_THAN_OR_EQUAL
+          GREATER_THAN
+          GREATER_THAN_OR_EQUAL
+        ].freeze
         ##
         # @private
         UNARY_NIL_VALUES = [nil, :null, :nil].freeze
@@ -1048,7 +1068,7 @@ module Google
                     end
           ineq_filters = filters.select do |filter|
             if filter.filter_type == :field_filter
-              filter.field_filter.op != :EQUAL
+              INEQUALITY_FILTERS.include? filter.field_filter.op
             end
           end
           ineq_filters.map { |filter| filter.field_filter.field.field_path }
