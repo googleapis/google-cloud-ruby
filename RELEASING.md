@@ -143,7 +143,7 @@ green, you may create a release as follows:
 
 20. Click `Publish release`.
 
-20. Repeat steps 1 through 21 if you are releasing multiple gems.
+21. Repeat steps 1 through 20 if you are releasing multiple gems.
 
 22. If you updated `google-cloud/google-cloud.gemspec` for a version change to
     any gem, repeat steps 1 through 21 for the `google-cloud` gem.
