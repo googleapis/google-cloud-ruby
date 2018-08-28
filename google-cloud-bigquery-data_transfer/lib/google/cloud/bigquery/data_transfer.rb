@@ -37,6 +37,11 @@ module Google
       # 3. [Enable the BigQuery Data Transfer API.](https://console.cloud.google.com/apis/library/bigquerydatatransfer.googleapis.com)
       # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
       #
+      # ### Installation
+      # ```
+      # $ gem install google-cloud-bigquery-data_transfer
+      # ```
+      #
       # ### Preview
       # #### DataTransferServiceClient
       # ```rb

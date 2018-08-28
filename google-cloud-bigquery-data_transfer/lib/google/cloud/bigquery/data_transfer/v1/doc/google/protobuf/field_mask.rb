@@ -215,6 +215,12 @@ module Google
     #
     # Note that oneof type names ("test_oneof" in this case) cannot be used in
     # paths.
+    #
+    # == Field Mask Verification
+    #
+    # The implementation of any API method which has a FieldMask type field in the
+    # request should verify the included field paths, and return an
+    # +INVALID_ARGUMENT+ error if any path is duplicated or unmappable.
     # @!attribute [rw] paths
     #   @return [Array<String>]
     #     The set of field mask paths.
