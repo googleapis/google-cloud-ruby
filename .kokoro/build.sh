@@ -55,7 +55,7 @@ case $JOB_TYPE in
 presubmit)
   if [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
     echo "$PACKAGE was not modified, returning."
-    # exit;
+    exit;
   fi
   cd $PACKAGE
   for version in "${RUBY_VERSIONS[@]}"; do
