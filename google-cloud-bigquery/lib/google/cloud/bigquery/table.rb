@@ -1505,6 +1505,7 @@ module Google
         #   * `csv` - CSV
         #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
         #   * `datastore_backup` - Cloud Datastore backup
         # @param [String] create Specifies whether the job is allowed to create
@@ -1714,6 +1715,7 @@ module Google
         #   * `csv` - CSV
         #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
         #   * `datastore_backup` - Cloud Datastore backup
         # @param [String] create Specifies whether the job is allowed to create

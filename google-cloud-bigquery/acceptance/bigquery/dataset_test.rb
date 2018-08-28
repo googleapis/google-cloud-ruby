@@ -48,6 +48,10 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   let(:table_avro_id) { "dataset_table_avro" }
   let(:table_avro) { dataset.table table_avro_id }
 
+  let(:table_orc_id) { "dataset_table_orc" }
+  let(:table_orc) { dataset.table table_orc_id }
+  let(:local_orc_file) { "acceptance/data/us-states.orc" }
+
   let(:table_parquet_id) { "dataset_table_parquet" }
   let(:table_parquet) { dataset.table table_parquet_id }
   let(:local_parquet_file) { "acceptance/data/us-states.parquet" }
@@ -286,6 +290,18 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     result.must_equal true
     table_avro.reload!
     table_avro.encryption.must_equal encrypt_config
+  end
+
+  it "imports data from a local ORC file and creates a new table without a schema with load" do
+    result = dataset.load table_orc_id, local_orc_file
+    result.must_equal true
+  end
+
+  it "imports data from GCS ORC file and creates a new table with load" do
+    result = dataset.load(
+        table_orc_id,
+        "gs://cloud-samples-data/bigquery/us-states/us-states.orc")
+    result.must_equal true
   end
 
   it "imports data from a local Parquet file and creates a new table without a schema with load" do
