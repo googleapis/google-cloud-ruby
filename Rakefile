@@ -939,7 +939,7 @@ def kokoro_config gem, ruby_version = nil
   if ruby_version
     lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-#{ruby_version}-stretch\""
   else
-    lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-multi-stretch\""
+    lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-multi-ubuntu\""
   end
   lines << "}\n"
   lines << '# Tell the trampoline which build file to use.'
