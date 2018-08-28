@@ -932,14 +932,14 @@ end
 
 def kokoro_config gem, ruby_version = nil
   lines = []
-  lines << ""
-  lines << ''
-  lines << ''
+  lines << "# Format: //devtools/kokoro/config/proto/build.proto\n"
+  lines << '# Configure the docker image for kokoro-trampoline.'
+  lines << 'env_vars: {'
   lines << '    key: "TRAMPOLINE_IMAGE"'
   if ruby_version
     lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-#{ruby_version}-stretch\""
   else
-    lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-multi-ubuntu\""
+    lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-multi-stretch\""
   end
   lines << "}\n"
   lines << '# Tell the trampoline which build file to use.'
