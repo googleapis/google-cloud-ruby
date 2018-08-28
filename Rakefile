@@ -676,34 +676,6 @@ def run_task_if_exists task_name, params = ""
   end
 end
 
-def gh_pages_path gh_pages_dir
-  tmp_dir = ENV["GCLOUD_TMP_DIR"] || "#{Dir.home}/tmp"
-  Pathname.new(tmp_dir) + gh_pages_dir
-end
-
-def git_repo
-  @git_repo ||= git_repository
-end
-
-def git_repository
-  if ENV["GH_OAUTH_TOKEN"]
-    "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
-  else
-    "git@github.com:GoogleCloudPlatform/google-cloud-ruby.git"
-  end
-end
-
-def manifest_versions
-  @manifest_versions ||= read_docs_manifest_versions
-end
-
-def read_docs_manifest_versions
-  manifest = JSON.parse File.read("docs/manifest.json")
-  manifest["modules"].each_with_object({}) do |gem, memo|
-    memo[gem["name"]] = gem["versions"].first
-  end
-end
-
 def extract_args args, *keys
   vals = keys.map do |key|
     fail "Missing required parameter '#{key}'." unless args[key]
@@ -711,14 +683,5 @@ def extract_args args, *keys
   end
   vals.length > 1 ? vals : vals.first
 end
-
-def stackdriver_gems
-  ["google-cloud-logging",
-   "google-cloud-error_reporting",
-   "google-cloud-monitoring",
-   "google-cloud-trace",
-   "google-cloud-debugger"]
-end
-
 
 task :default => :test
