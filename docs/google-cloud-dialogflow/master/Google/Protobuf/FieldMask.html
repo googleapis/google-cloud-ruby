@@ -303,6 +303,12 @@ following message:</p>
 <p>Note that oneof type names (&quot;test_oneof&quot; in this case) cannot be used in
 paths.</p>
 
+<p>== Field Mask Verification</p>
+
+<p>The implementation of any API method which has a FieldMask type field in the
+request should verify the included field paths, and return an
++INVALID_ARGUMENT+ error if any path is duplicated or unmappable.</p>
+
 
   </div>
 </div>
@@ -395,10 +401,10 @@ paths.</p>
       <pre class="lines">
 
 
-221</pre>
+227</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/protobuf/field_mask.rb', line 221</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/protobuf/field_mask.rb', line 227</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Protobuf::FieldMask (class)">FieldMask</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
