@@ -286,11 +286,6 @@ is used.</p>
       <pre class="lines">
 
 
-321
-322
-323
-324
-325
 326
 327
 328
@@ -298,10 +293,15 @@ is used.</p>
 330
 331
 332
-333</pre>
+333
+334
+335
+336
+337
+338</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring.rb', line 321</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring.rb', line 326</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v3</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../Monitoring.html#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Monitoring::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>
