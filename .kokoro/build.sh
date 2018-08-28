@@ -31,6 +31,7 @@ CHANGED_DIRS="$(git --no-pager diff --name-only HEAD $(git merge-base HEAD maste
 
 GEMSPECS=($(git ls-files -- */*.gemspec | cut -d/ -f1))
 UPDATED_GEMS=()
+RUBY_VERSIONS=("2.3.7" "2.4.4" "2.5.1")
 
 for i in "${GEMSPECS[@]}"; do
   for j in "${CHANGED_DIRS[@]}"; do
@@ -57,7 +58,10 @@ presubmit)
     exit;
   fi
   cd $PACKAGE
-  (bundle update && bundle exec rake ci) || set_failed_status
+  for version in "${RUBY_VERSIONS[@]}"; do
+    rbenv global "$version"
+    (bundle update && bundle exec rake ci) || set_failed_status
+  done
   ;;
 continuous)
   cd $PACKAGE

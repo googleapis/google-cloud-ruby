@@ -894,36 +894,50 @@ task :compile do
   end
 end
 
+# Used for kokoro
+# ====================================================================================================================================
 namespace :kokoro do
   ruby_versions = ['2.3', '2.4', '2.5']
-  desc "Generate presubmit and continuous configs"
+  
+  desc "Generate presubmit configs for kokoro"
   task :builds do
-    gems.each do |gem|
-      ruby_versions.each do |version|
-        File.open("./.kokoro/presubmit/ruby-#{version}/#{gem}.cfg", 'w') do |f| 
-          f.write(kokoro_config(gem, version))
-        end
-        File.open("./.kokoro/continuous/ruby-#{version}/#{gem}.cfg", 'w') do |f| 
-          f.write(kokoro_config(gem, version))
-        end
-      end
-
-    end
+    generate_kokoro_configs ruby_versions
   end
 end
 
-def kokoro_config(package, version)
+def generate_kokoro_configs ruby_versions
+  gems.each do |gem|
+    #  generate the presubmi configs
+    File.open("./.kokoro/presubmit/#{gem}.cfg", 'w') do |f| 
+      f.write(kokoro_config(gem))
+    end
+
+    # generate the continuous configs
+    ruby_versions.each do |ruby_version|
+      File.open("./.kokoro/continuous/#{gem}-ruby-#{ruby_version}.cfg", 'w') do |f| 
+        f.write(kokoro_config(gem, ruby_version))
+      end
+    end
+
+  end
+end
+
+def kokoro_config gem, ruby_version = nil
   lines = []
   lines << "# Format: //devtools/kokoro/config/proto/build.proto\n"
   lines << '# Configure the docker image for kokoro-trampoline.'
   lines << 'env_vars: {'
   lines << '    key: "TRAMPOLINE_IMAGE"'
-  lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-#{version}-stretch\""
+  if ruby_version
+    lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-#{ruby_version}-stretch\""
+  else
+    lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-multi-stretch\""
+  end
   lines << "}\n"
   lines << '# Tell the trampoline which build file to use.'
   lines << 'env_vars: {'
   lines << '    key: "PACKAGE"'
-  lines << "    value: \"#{package}\""
+  lines << "    value: \"#{gem}\""
   lines << '}'
   lines.join("\n")
 end
@@ -931,6 +945,8 @@ end
 def gems
   `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
 end
+
+# ====================================================================================================================================
 
 def valid_gems
   gems.select { |gem|
