@@ -1,6 +1,7 @@
 require "bundler/setup"
 require "open3"
 require "json"
+require "erb"
 
 task :bundleupdate do
   valid_gems.each do |gem|
@@ -903,8 +904,6 @@ task :compile do
   end
 end
 
-# Used for kokoro
-# ====================================================================================================================================
 namespace :kokoro do
   ruby_versions = ['2.3', '2.4', '2.5']
   
@@ -933,9 +932,9 @@ end
 
 def kokoro_config gem, ruby_version = nil
   lines = []
-  lines << "# Format: //devtools/kokoro/config/proto/build.proto\n"
-  lines << '# Configure the docker image for kokoro-trampoline.'
-  lines << 'env_vars: {'
+  lines << ""
+  lines << ''
+  lines << ''
   lines << '    key: "TRAMPOLINE_IMAGE"'
   if ruby_version
     lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-#{ruby_version}-stretch\""
@@ -954,8 +953,6 @@ end
 def gems
   `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
 end
-
-# ====================================================================================================================================
 
 def valid_gems
   gems.select { |gem|
