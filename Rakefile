@@ -903,6 +903,40 @@ task :compile do
   end
 end
 
+namespace :kokoro do
+  ruby_versions = ['2.3', '2.4', '2.5']
+  desc "Generate presubmit and continuous configs"
+  task :builds do
+    gems.each do |gem|
+      ruby_versions.each do |version|
+        File.open("./.kokoro/presubmit/ruby-#{version}/#{gem}.cfg", 'w') do |f| 
+          f.write(kokoro_config(gem, version))
+        end
+        File.open("./.kokoro/continuous/ruby-#{version}/#{gem}.cfg", 'w') do |f| 
+          f.write(kokoro_config(gem, version))
+        end
+      end
+
+    end
+  end
+end
+
+def kokoro_config(package, version)
+  lines = []
+  lines << "# Format: //devtools/kokoro/config/proto/build.proto\n"
+  lines << '# Configure the docker image for kokoro-trampoline.'
+  lines << 'env_vars: {'
+  lines << '    key: "TRAMPOLINE_IMAGE"'
+  lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-#{version}-stretch\""
+  lines << "}\n"
+  lines << '# Tell the trampoline which build file to use.'
+  lines << 'env_vars: {'
+  lines << '    key: "PACKAGE"'
+  lines << "    value: \"#{package}\""
+  lines << '}'
+  lines.join("\n")
+end
+
 def gems
   `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
 end
