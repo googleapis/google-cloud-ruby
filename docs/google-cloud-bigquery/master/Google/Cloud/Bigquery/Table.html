@@ -2812,14 +2812,14 @@ identifying the result set.</p>
       <pre class="lines">
 
 
-2020
-2021
 2022
 2023
-2024</pre>
+2024
+2025
+2026</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2020</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2022</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3236,8 +3236,6 @@ service, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2067
-2068
 2069
 2070
 2071
@@ -3245,10 +3243,12 @@ service, <code>false</code> otherwise.</p>
 2073
 2074
 2075
-2076</pre>
+2076
+2077
+2078</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2067</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2069</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span>
   <span class='comment'># Always true if we have a gapi object
@@ -4502,8 +4502,6 @@ false, which treats unknown values as errors.</p>
       <pre class="lines">
 
 
-1930
-1931
 1932
 1933
 1934
@@ -4516,10 +4514,12 @@ false, which treats unknown values as errors.</p>
 1941
 1942
 1943
-1944</pre>
+1944
+1945
+1946</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 1930</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 1932</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert'>insert</span> <span class='id identifier rubyid_rows'>rows</span><span class='comma'>,</span> <span class='label'>insert_ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>skip_invalid:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>ignore_unknown:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_rows'>rows</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_rows'>rows</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Hash</span>
@@ -4702,8 +4702,6 @@ asynchronous insert</p>
       <pre class="lines">
 
 
-1993
-1994
 1995
 1996
 1997
@@ -4711,10 +4709,12 @@ asynchronous insert</p>
 1999
 2000
 2001
-2002</pre>
+2002
+2003
+2004</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 1993</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 1995</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_async'>insert_async</span> <span class='label'>skip_invalid:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>ignore_unknown:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                  <span class='label'>max_bytes:</span> <span class='int'>10000000</span><span class='comma'>,</span> <span class='label'>max_rows:</span> <span class='int'>500</span><span class='comma'>,</span> <span class='label'>interval:</span> <span class='int'>10</span><span class='comma'>,</span>
@@ -5031,6 +5031,7 @@ those, containing data to load into the table.</p>
 <li><code>csv</code> - CSV</li>
 <li><code>json</code> - <a href="http://jsonlines.org/">Newline-delimited JSON</a></li>
 <li><code>avro</code> - <a href="http://avro.apache.org/">Avro</a></li>
+<li><code>orc</code> - <a href="https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc">ORC</a></li>
 <li><code>parquet</code> - <a href="https://parquet.apache.org/">Parquet</a></li>
 <li><code>datastore_backup</code> - Cloud Datastore backup</li>
 </ul>
@@ -5370,8 +5371,6 @@ updater to modify the load job and its schema.</p>
       <pre class="lines">
 
 
-1856
-1857
 1858
 1859
 1860
@@ -5389,10 +5388,12 @@ updater to modify the load job and its schema.</p>
 1872
 1873
 1874
-1875</pre>
+1875
+1876
+1877</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 1856</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 1858</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_load'>load</span> <span class='id identifier rubyid_files'>files</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span>
          <span class='label'>projection_fields:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>jagged_rows:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>quoted_newlines:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -5541,6 +5542,7 @@ those, containing data to load into the table.</p>
 <li><code>csv</code> - CSV</li>
 <li><code>json</code> - <a href="http://jsonlines.org/">Newline-delimited JSON</a></li>
 <li><code>avro</code> - <a href="http://avro.apache.org/">Avro</a></li>
+<li><code>orc</code> - <a href="https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc">ORC</a></li>
 <li><code>parquet</code> - <a href="https://parquet.apache.org/">Parquet</a></li>
 <li><code>datastore_backup</code> - Cloud Datastore backup</li>
 </ul>
@@ -5936,7 +5938,6 @@ list must have a different key.</p>
       <pre class="lines">
 
 
-1662
 1663
 1664
 1665
@@ -5965,10 +5966,11 @@ list must have a different key.</p>
 1688
 1689
 1690
-1691</pre>
+1691
+1692</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 1662</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 1663</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_load_job'>load_job</span> <span class='id identifier rubyid_files'>files</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>projection_fields:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>jagged_rows:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -6834,12 +6836,12 @@ object, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2097
-2098
-2099</pre>
+2099
+2100
+2101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2097</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2099</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reference?'>reference?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -6914,14 +6916,14 @@ table.</p>
       <pre class="lines">
 
 
-2044
-2045
 2046
 2047
-2048</pre>
+2048
+2049
+2050</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2044</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2046</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -6994,12 +6996,12 @@ representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2120
-2121
-2122</pre>
+2122
+2123
+2124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2122</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource?'>resource?</span>
   <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -7068,12 +7070,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2169
-2170
-2171</pre>
+2171
+2172
+2173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2169</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_full?'>resource_full?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Apis</span><span class='op'>::</span><span class='const'>BigqueryV2</span><span class='op'>::</span><span class='const'>Table</span>
@@ -7149,12 +7151,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2148
-2149
-2150</pre>
+2150
+2151
+2152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2148</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2150</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_partial?'>resource_partial?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Apis</span><span class='op'>::</span><span class='const'>BigqueryV2</span><span class='op'>::</span><span class='const'>TableList</span><span class='op'>::</span><span class='const'>Table</span>

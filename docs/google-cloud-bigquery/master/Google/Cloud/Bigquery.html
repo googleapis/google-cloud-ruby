@@ -431,9 +431,10 @@ the <a href="https://console.developers.google.com">Google Developers Console</a
 
 <p>In addition to CSV, data can be imported from files that are formatted as
 <a href="http://jsonlines.org/">Newline-delimited JSON</a>,
-<a href="http://avro.apache.org/">Avro</a>, <a href="https://parquet.apache.org/">Parquet</a>
-or from a Google Cloud Datastore backup.
-It can also be &quot;streamed&quot; into BigQuery.</p>
+<a href="http://avro.apache.org/">Avro</a>,
+<a href="https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc">ORC</a>,
+<a href="https://parquet.apache.org/">Parquet</a> or from a Google Cloud Datastore
+backup. It can also be &quot;streamed&quot; into BigQuery.</p>
 
 <h3>Streaming records</h3>
 
@@ -785,14 +786,14 @@ Google::Cloud::Bigquery library uses.</p>
       <pre class="lines">
 
 
-596
 597
 598
 599
-600</pre>
+600
+601</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery.rb', line 596</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery.rb', line 597</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -995,7 +996,6 @@ Deprecated.</p>
       <pre class="lines">
 
 
-554
 555
 556
 557
@@ -1015,10 +1015,11 @@ Deprecated.</p>
 571
 572
 573
-574</pre>
+574
+575</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery.rb', line 554</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery.rb', line 555</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>retries:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>
