@@ -67,16 +67,12 @@ green, you may create a release as follows:
 8. Edit the gem's `version.rb` file, if present, or the `version` setting in its
    `.gemspec` file, changing the value to your new version number.
 
-9. Edit (or add if new) the gem's entry in `docs/manifest.json`, adding your new
-   version number to the head of the list, and moving `"master"` to be just
-   below it.
+9. If your package is new, ensure that it has been added to the [top-level
+   `Gemfile`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/Gemfile).
+   Follow the steps in [Adding a new gem to
+   meta-packages](#adding-a-new-gem-to-meta-packages), below.
 
-10. If your package is new, ensure that it has been added to the [top-level
-    `Gemfile`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/Gemfile).
-    Follow the steps in [Adding a new gem to
-    meta-packages](#adding-a-new-gem-to-meta-packages), below.
-
-11. If the [semver](http://semver.org/) version change for your package requires
+10. If the [semver](http://semver.org/) version change for your package requires
     an increase in the requirement for your package in
     `google-cloud/google-cloud.gemspec` and/or
     `stackdriver/stackdriver.gemspec`, replace the old version requirement with
@@ -87,11 +83,11 @@ green, you may create a release as follows:
     `stackdriver` gems must remain compatible so the two can co-exist in the
     same bundle.
 
-12. If your package is new, ensure that a nav link and a main entry including
+11. If your package is new, ensure that a nav link and a main entry including
     code example have been added to the [top-level
     README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/README.md).
 
-13. In the root directory of the project, test that all the version dependencies
+12. In the root directory of the project, test that all the version dependencies
     are correct.
 
     ```sh
@@ -99,43 +95,43 @@ green, you may create a release as follows:
     $ bundle exec rake ci[yes]
     ```
 
-14. Commit your changes. Copy and paste the significant points from your
+13. Commit your changes. Copy and paste the significant points from your
     `CHANGELOG.md` edit as the description in your commit message.
 
     ```sh
     $ git commit -am "Release <gem> <version> ..."
     ```
 
-15. Tag the version.
+14. Tag the version.
 
     ```sh
     $ git tag <gem>/v<version>
     ```
 
-16. Push the tag. This will trigger a build job on [Circle
+15. Push the tag. This will trigger a build job on [Circle
     CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby).
 
     ```sh
     $ git push <remote> <gem>/v<version>
     ```
 
-17. Wait until the [Circle CI
+16. Wait until the [Circle CI
     build](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) has
     passed for the tag.
 
-18. Confirm that the new version is displayed on the [google-cloud-ruby gh-pages
-    doc site](http://googlecloudplatform.github.io/google-cloud-ruby/), both in
-    the packages pulldown and the version switcher.
+17. Confirm that the new version is displayed on the [google-cloud-ruby gh-pages
+    doc
+    site](https://http://googlecloudplatform.github.io/google-cloud-ruby/docs/).
 
-   If the gh-pages doc site has not been updated, inspect the build logs to
-   confirm that the release task completed successfully, and that the docs build
-   succeeded. This can still fail even on a green build because it is an "after"
-   action in the build.
+    If the gh-pages doc site has not been updated, inspect the build logs to
+    confirm that the release task completed successfully, and that the docs
+    build succeeded. This can still fail even on a green build because it is an
+    "after" action in the build.
 
-19. Confirm that the gem for the new version is available on
+18. Confirm that the gem for the new version is available on
     [RubyGems.org](https://rubygems.org/gems/google-cloud).
 
-20. On the [google-cloud-ruby releases
+19. On the [google-cloud-ruby releases
     page](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases),
     click [Draft a new
     release](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/new).
@@ -145,17 +141,17 @@ green, you may create a release as follows:
     [v0.18.0](https://github.com/GoogleCloudPlatform/google-cloud-node/releases/tag/v0.18.0)
     for an example with all the bells and whistles.
 
-21. Click `Publish release`.
+20. Click `Publish release`.
 
-22. Repeat steps 1 through 21 if you are releasing multiple gems.
+20. Repeat steps 1 through 21 if you are releasing multiple gems.
 
-23. If you updated `google-cloud/google-cloud.gemspec` for a version change to
+22. If you updated `google-cloud/google-cloud.gemspec` for a version change to
     any gem, repeat steps 1 through 21 for the `google-cloud` gem.
 
-24. If you updated `stackdriver/stackdriver.gemspec` for a version change to any
+23. If you updated `stackdriver/stackdriver.gemspec` for a version change to any
     gem, repeat steps 1 through 21 for the `stackdriver` gem.
 
-25. Wait until the last tag build job has successfully completed on Circle CI.
+24. Wait until the last tag build job has successfully completed on Circle CI.
     Then push your commits to the master branch. This will trigger another
     [Circle CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby)
     build on master branch.
@@ -164,7 +160,7 @@ green, you may create a release as follows:
     $ git push <remote> master
     ```
 
-26. After the Circle CI master branch build has successfully completed, confirm
+25. After the Circle CI master branch build has successfully completed, confirm
     that Kokoro and [Travis CI (Mac OS
     X)](https://travis-ci.org/GoogleCloudPlatform/google-cloud-ruby) and
     [Appveyor CI
@@ -177,7 +173,7 @@ High fives all around!
 
 There are extra steps required to add a new package to the `google-cloud` and/or
 `stackdriver` meta-package gems. These instructions are for the `google-cloud`
-gem. (The `stackdriver` gem does not require the documentation steps.)
+gem.
 
 1. Add the gem to
    [`google-cloud/Gemfile`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/google-cloud/Gemfile).
@@ -185,8 +181,3 @@ gem. (The `stackdriver` gem does not require the documentation steps.)
    [`google-cloud/google-cloud.gemspec`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/google-cloud/google-cloud.gemspec).
 3. Add the gem to
    [`gcloud/Gemfile`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/gcloud/Gemfile).
-4. Copy the JSON fragment from the gem's `docs/toc.json` to correct alphabetical
-   location in
-   [`google-cloud/docs/toc.json`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/google-cloud/docs/toc.json).
-5. Add the gem to the [`google-cloud` whitelist in the top-level
-   `Rakefile`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/Rakefile#L290-L317).
