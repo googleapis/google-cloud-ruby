@@ -55,7 +55,7 @@ green, you may create a release as follows:
 
 6. Review the commits in the changes output, making notes of significant
    changes. (For examples of what a significant change is, browse the changes in
-   the gem's `CHANGELOG.md`.
+   the gem's `CHANGELOG.md`.)
 
 7. Edit the gem's `CHANGELOG.md`. Using your notes from the previous step, write
    bullet-point lists of the major and minor changes. You can also add examples,
