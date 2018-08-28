@@ -43,6 +43,11 @@ module Google
       # 3. [Enable the Stackdriver Monitoring API.](https://console.cloud.google.com/apis/library/monitoring.googleapis.com)
       # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
       #
+      # ### Installation
+      # ```
+      # $ gem install google-cloud-monitoring
+      # ```
+      #
       # ### Preview
       # #### MetricServiceClient
       # ```rb

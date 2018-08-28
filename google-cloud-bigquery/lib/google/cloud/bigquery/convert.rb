@@ -323,6 +323,7 @@ module Google
             "json" => "NEWLINE_DELIMITED_JSON",
             "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
             "avro" => "AVRO",
+            "orc" => "ORC",
             "parquet" => "PARQUET",
             "datastore" => "DATASTORE_BACKUP",
             "backup" => "DATASTORE_BACKUP",
@@ -354,6 +355,7 @@ module Google
           return "CSV" if path.end_with? ".csv"
           return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
           return "AVRO" if path.end_with? ".avro"
+          return "ORC" if path.end_with? ".orc"
           return "PARQUET" if path.end_with? ".parquet"
           return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
           nil

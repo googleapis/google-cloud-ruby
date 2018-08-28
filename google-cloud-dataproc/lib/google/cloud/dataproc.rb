@@ -35,6 +35,11 @@ module Google
     # 3. [Enable the Google Cloud Dataproc API.](https://console.cloud.google.com/apis/library/dataproc.googleapis.com)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
+    # ### Installation
+    # ```
+    # $ gem install google-cloud-dataproc
+    # ```
+    #
     # ### Preview
     # #### ClusterControllerClient
     # ```rb

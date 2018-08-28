@@ -40,6 +40,10 @@ describe Google::Cloud::Bigquery::LoadJob::Updater do
     job_gapi = updater.to_gapi
     job_gapi.configuration.load.source_format.must_equal "AVRO"
 
+    updater.format = "orc"
+    job_gapi = updater.to_gapi
+    job_gapi.configuration.load.source_format.must_equal "ORC"
+
     updater.format = "parquet"
     job_gapi = updater.to_gapi
     job_gapi.configuration.load.source_format.must_equal "PARQUET"

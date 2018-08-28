@@ -35,6 +35,11 @@ module Google
     # 3. [Enable the Google Cloud Speech API.](https://console.cloud.google.com/apis/library/speech.googleapis.com)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
+    # ### Installation
+    # ```
+    # $ gem install google-cloud-speech
+    # ```
+    #
     # ### Migration Guide
     #
     # The 0.30.0 release introduced breaking changes relative to the previous

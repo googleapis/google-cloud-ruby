@@ -177,6 +177,31 @@ describe "Document", :firestore_acceptance do
     })
   end
 
+  it "can manipulate arrays" do
+    doc_ref = root_col.doc
+
+    doc_ref.set({ list: [1, 2, 3] })
+
+    doc_snp = doc_ref.get
+    doc_snp.data.must_equal({
+      list: [1, 2, 3],
+    })
+
+    doc_ref.update({ list: firestore.field_array_union(42) })
+
+    doc_snp = doc_ref.get
+    doc_snp.data.must_equal({
+      list: [1, 2, 3, 42],
+    })
+
+    doc_ref.update({ list: firestore.field_array_delete(42) })
+
+    doc_snp = doc_ref.get
+    doc_snp.data.must_equal({
+      list: [1, 2, 3],
+    })
+  end
+
   it "enforces that updated document exists" do
     doc_ref = root_col.doc
 

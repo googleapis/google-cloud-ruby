@@ -36,6 +36,11 @@ module Google
     # 3. [Enable the Google Cloud Memorystore for Redis API.](https://console.cloud.google.com/apis/library/redis.googleapis.com)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
+    # ### Installation
+    # ```
+    # $ gem install google-cloud-redis
+    # ```
+    #
     # ### Next Steps
     # - Read the [Google Cloud Memorystore for Redis API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.

@@ -26,7 +26,7 @@ describe Google::Cloud::Firestore::Convert, :remove_field_value_from do
 
     hash, paths = Google::Cloud::Firestore::Convert.remove_field_value_from orig, :hello
     hash.must_equal({ "foo" => "FOO" })
-    paths.map(&:formatted_string).must_equal ["bar"]
+    paths.keys.map(&:formatted_string).must_equal ["bar"]
   end
 
   it "finds dotted paths belonging to the top-level nodes" do
@@ -34,7 +34,7 @@ describe Google::Cloud::Firestore::Convert, :remove_field_value_from do
 
     hash, paths = Google::Cloud::Firestore::Convert.remove_field_value_from orig, :hello
     hash.must_equal({ "hello" => :world })
-    paths.map(&:formatted_string).must_equal ["`foo.bar`", "baz.baf"]
+    paths.keys.map(&:formatted_string).must_equal ["`foo.bar`", "baz.baf"]
   end
   it "does not find paths belonging to an array" do
     orig = ["FOO", hello_field_value]
@@ -49,7 +49,7 @@ describe Google::Cloud::Firestore::Convert, :remove_field_value_from do
 
     hash, paths = Google::Cloud::Firestore::Convert.remove_field_value_from orig, :hello
     hash.must_equal({ "foo" => "FOO" })
-    paths.map(&:formatted_string).must_equal ["bar.baz"]
+    paths.keys.map(&:formatted_string).must_equal ["bar.baz"]
   end
 
   it "finds paths belonging to a deeply nested hash" do
@@ -57,7 +57,7 @@ describe Google::Cloud::Firestore::Convert, :remove_field_value_from do
 
     hash, paths = Google::Cloud::Firestore::Convert.remove_field_value_from orig, :hello
     hash.must_equal({ })
-    paths.map(&:formatted_string).must_equal ["foo.bar.baz.bif"]
+    paths.keys.map(&:formatted_string).must_equal ["foo.bar.baz.bif"]
   end
 
   it "does not find paths belonging to a hash nested under an array" do

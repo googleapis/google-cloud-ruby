@@ -138,6 +138,23 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     mock.verify
   end
 
+  it "can specify a storage file and derive ORC format" do
+    special_file = storage_file "data.orc"
+    special_url = special_file.to_gs_url
+
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_reference, special_url
+    job_gapi.configuration.load.source_format = "ORC"
+    mock.expect :insert_job, load_job_resp_gapi(special_url),
+                [project, job_gapi]
+    dataset.service.mocked_service = mock
+
+    job = dataset.load_job table_id, special_file
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+    mock.verify
+  end
+
   it "can specify a storage file and derive Parquet format" do
     special_file = storage_file "data.parquet"
     special_url = special_file.to_gs_url

@@ -35,6 +35,11 @@ module Google
     # 3. [Enable the Cloud Video Intelligence API.](https://console.cloud.google.com/apis/library/videointelligence.googleapis.com)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
+    # ### Installation
+    # ```
+    # $ gem install google-cloud-video_intelligence
+    # ```
+    #
     # ### Preview
     # #### VideoIntelligenceServiceClient
     # ```rb

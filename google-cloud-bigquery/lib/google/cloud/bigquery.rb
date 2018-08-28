@@ -331,9 +331,10 @@ module Google
     #
     # In addition to CSV, data can be imported from files that are formatted as
     # [Newline-delimited JSON](http://jsonlines.org/),
-    # [Avro](http://avro.apache.org/), [Parquet](https://parquet.apache.org/)
-    # or from a Google Cloud Datastore backup.
-    # It can also be "streamed" into BigQuery.
+    # [Avro](http://avro.apache.org/),
+    # [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc),
+    # [Parquet](https://parquet.apache.org/) or from a Google Cloud Datastore
+    # backup. It can also be "streamed" into BigQuery.
     #
     # ### Streaming records
     #

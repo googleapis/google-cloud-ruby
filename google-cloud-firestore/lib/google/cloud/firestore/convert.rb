@@ -153,9 +153,9 @@ module Google
             end
             raise ArgumentError, "data is required" unless data.is_a? Hash
 
-            data, server_time_paths = remove_field_value_from data, :server_time
+            data, field_paths_and_values = remove_field_value_from data
 
-            if data.any? || server_time_paths.empty?
+            if data.any? || field_paths_and_values.empty?
               write = Google::Firestore::V1beta1::Write.new(
                 update: Google::Firestore::V1beta1::Document.new(
                   name: doc_path,
@@ -166,8 +166,8 @@ module Google
               writes << write
             end
 
-            if server_time_paths.any?
-              transform_write = transform_write doc_path, server_time_paths
+            if field_paths_and_values.any?
+              transform_write = transform_write doc_path, field_paths_and_values
 
               if data.empty?
                 transform_write.current_document = \
@@ -205,7 +205,7 @@ module Google
               raise ArgumentError, "DELETE not allowed on set"
             end
 
-            data, server_time_paths = remove_field_value_from data, :server_time
+            data, field_paths_and_values = remove_field_value_from data
 
             writes << Google::Firestore::V1beta1::Write.new(
               update: Google::Firestore::V1beta1::Document.new(
@@ -213,8 +213,8 @@ module Google
                 fields: hash_to_fields(data))
             )
 
-            if server_time_paths.any?
-              writes << transform_write(doc_path, server_time_paths)
+            if field_paths_and_values.any?
+              writes << transform_write(doc_path, field_paths_and_values)
             end
 
             writes
@@ -242,15 +242,15 @@ module Google
             all_valid_check = all_valid_check.include? false
             raise ArgumentError, "all fields must be in data" if all_valid_check
 
-            data, delete_paths = remove_field_value_from data, :delete
-            data, server_time_paths = remove_field_value_from data, :server_time
+            data, delete_field_paths_and_values = remove_field_value_from data, :delete
+            data, field_paths_and_values = remove_field_value_from data
 
-            delete_valid_check = delete_paths.map do |delete_path|
-              if field_paths.include?(delete_path)
+            delete_valid_check = delete_field_paths_and_values.keys.map do |delete_field_path|
+              if field_paths.include? delete_field_path
                 true
               else
                 found_in_field_paths = field_paths.select do |fp|
-                  fp.formatted_string.start_with? "#{delete_path.formatted_string}."
+                  fp.formatted_string.start_with? "#{delete_field_path.formatted_string}."
                 end
                 found_in_field_paths.any?
               end
@@ -258,26 +258,26 @@ module Google
             delete_valid_check = delete_valid_check.include? false
             raise ArgumentError, "deleted field not included in merge" if delete_valid_check
 
-            server_time_paths.select! do |server_time_path|
+            field_paths_and_values.select! do |server_time_path|
               field_paths.any? do |field_path|
                 server_time_path.formatted_string.start_with? field_path.formatted_string
               end
             end
 
             # Choose only the data there are field paths for
-            field_paths -= delete_paths
-            field_paths -= server_time_paths
+            field_paths -= delete_field_paths_and_values.keys
+            field_paths -= field_paths_and_values.keys
             data = select_by_field_paths data, field_paths
             # Restore delete paths
-            field_paths += delete_paths
+            field_paths += delete_field_paths_and_values.keys
 
             if data.empty? && !allow_empty
-              if server_time_paths.empty? && delete_paths.empty?
+              if field_paths_and_values.empty? && delete_field_paths_and_values.empty?
                 raise ArgumentError, "data required for set with merge"
               end
             end
 
-            if data.any? || field_paths.any? || (allow_empty && server_time_paths.empty?)
+            if data.any? || field_paths.any? || (allow_empty && field_paths_and_values.empty?)
               writes << Google::Firestore::V1beta1::Write.new(
                 update: Google::Firestore::V1beta1::Document.new(
                   name: doc_path,
@@ -287,8 +287,8 @@ module Google
               )
             end
 
-            if server_time_paths.any?
-              writes << transform_write(doc_path, server_time_paths)
+            if field_paths_and_values.any?
+              writes << transform_write(doc_path, field_paths_and_values)
             end
 
             writes
@@ -312,29 +312,29 @@ module Google
               value.is_a?(FieldValue) && value.type == :delete
             end
 
-            root_server_time_paths, new_data_pairs = new_data_pairs.partition do |field_path, value|
-              value.is_a?(FieldValue) && value.type == :server_time
+            root_field_paths_and_values, new_data_pairs = new_data_pairs.partition do |field_path, value|
+              value.is_a? FieldValue
             end
 
             data = build_hash_from_field_paths_and_values new_data_pairs
             field_paths = new_data_pairs.map(&:first)
 
             delete_paths.map!(&:first)
-            root_server_time_paths.map!(&:first)
+            root_field_paths_and_values = Hash[root_field_paths_and_values]
 
             data, nested_deletes = remove_field_value_from data, :delete
             raise ArgumentError, "DELETE cannot be nested" if nested_deletes.any?
 
-            data, nested_server_time_paths = remove_field_value_from data, :server_time
+            data, nested_field_paths_and_values  = remove_field_value_from data
 
-            server_time_paths = root_server_time_paths + nested_server_time_paths
+            field_paths_and_values = root_field_paths_and_values.merge nested_field_paths_and_values
 
             field_paths = (field_paths + delete_paths).uniq
             field_paths.each do |field_path|
               raise ArgumentError, "empty paths not allowed" if field_path.fields.empty?
             end
 
-            if data.empty? && delete_paths.empty? && server_time_paths.empty?
+            if data.empty? && delete_paths.empty? && field_paths_and_values.empty?
               raise ArgumentError, "data is required"
             end
 
@@ -356,8 +356,8 @@ module Google
               writes << write
             end
 
-            if server_time_paths.any?
-              transform_write = transform_write doc_path, server_time_paths
+            if field_paths_and_values.any?
+              transform_write = transform_write doc_path, field_paths_and_values
               if data.empty?
                 transform_write.current_document = \
                   Google::Firestore::V1beta1::Precondition.new(exists: true)
@@ -387,32 +387,34 @@ module Google
             write
           end
 
-          def is_field_value_nested obj, field_value_type
-            return true if obj.is_a?(FieldValue) && obj.type == field_value_type
+          def is_field_value_nested obj, field_value_type = nil
+            return obj if obj.is_a?(FieldValue) && (field_value_type.nil? || obj.type == field_value_type)
 
             if obj.is_a? Array
-              obj.each { |o| val = is_field_value_nested o, field_value_type; return true if val }
+              obj.each { |o| val = is_field_value_nested o, field_value_type; return val if val }
             elsif obj.is_a? Hash
-              obj.each { |_k, v| val = is_field_value_nested v, field_value_type; return true if val }
+              obj.each { |_k, v| val = is_field_value_nested v, field_value_type; return val if val }
             end
-            false
+            nil
           end
 
-          def remove_field_value_from obj, field_value_type
+          def remove_field_value_from obj, field_value_type = nil
             return [nil, []] unless obj.is_a? Hash
 
             paths = []
             new_pairs = obj.map do |key, value|
-              if value.is_a?(FieldValue) && value.type == field_value_type
-                paths << [key]
+              if value.is_a?(FieldValue) && (field_value_type.nil? || value.type == field_value_type)
+                paths << [FieldPath.new(*key), value]
                 nil # will be removed by calling compact
               else
                 if value.is_a? Hash
                   unless value.empty?
                     nested_hash, nested_paths = remove_field_value_from value, field_value_type
                     if nested_paths.any?
-                      nested_paths.each do |nested_path|
-                        paths << (([key] + nested_path.fields).flatten)
+                      nested_paths.each do |nested_field_path, nested_field_value|
+                        updated_field_paths = ([key] + nested_field_path.fields).flatten
+                        updated_field_path = FieldPath.new *updated_field_paths
+                        paths << [updated_field_path, nested_field_value]
                       end
                     end
                     if nested_hash.empty?
@@ -425,8 +427,9 @@ module Google
                   end
                 else
                   if value.is_a? Array
-                    if is_field_value_nested value, field_value_type
-                      raise ArgumentError, "cannot nest #{field_value_type} under arrays"
+                    nested_field_value = is_field_value_nested value, field_value_type
+                    if nested_field_value
+                      raise ArgumentError, "cannot nest #{nested_field_value.type} under arrays"
                     end
                   end
 
@@ -435,10 +438,8 @@ module Google
               end
             end
 
-            paths.map! { |path| FieldPath.new *path }
-
-            # return a new hash and paths
-            [Hash[new_pairs.compact], paths]
+            # return new data hash and field path/values hash
+            [Hash[new_pairs.compact], Hash[paths]]
           end
 
           def identify_leaf_nodes hash
@@ -578,12 +579,9 @@ module Google
             "`#{str}`"
           end
 
-          def transform_write doc_path, paths, server_value: :REQUEST_TIME
-            field_transforms = paths.map do |path|
-              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
-                field_path: path.formatted_string,
-                set_to_server_value: server_value
-              )
+          def transform_write doc_path, paths
+            field_transforms = paths.map do |field_path, field_value|
+              to_field_transform field_path, field_value
             end
 
             Google::Firestore::V1beta1::Write.new(
@@ -592,6 +590,27 @@ module Google
                 field_transforms: field_transforms
               )
             )
+          end
+
+          def to_field_transform field_path, field_value
+            if field_value.type == :server_time
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: field_path.formatted_string,
+                set_to_server_value: :REQUEST_TIME
+              )
+            elsif field_value.type == :array_union
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: field_path.formatted_string,
+                append_missing_elements: raw_to_value(Array(field_value.values)).array_value
+              )
+            elsif field_value.type == :array_delete
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: field_path.formatted_string,
+                remove_all_from_array: raw_to_value(Array(field_value.values)).array_value
+              )
+            else
+              raise ArgumentError, "unknown field transform #{field_value.type}"
+            end
           end
         end
         # rubocop:enable all
