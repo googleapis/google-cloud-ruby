@@ -916,38 +916,20 @@ end
 def generate_kokoro_configs ruby_versions
   gems.each do |gem|
     #  generate the presubmi configs
-    File.open("./.kokoro/presubmit/#{gem}.cfg", 'w') do |f| 
-      f.write(kokoro_config(gem))
+    File.open("./.kokoro/presubmit/#{gem}.cfg", 'w') do |f|
+      config = ERB.new(File.read('./.kokoro/templates/presubmit.cfg.erb'))
+      f.write(config.result(binding))
     end
 
     # generate the continuous configs
     ruby_versions.each do |ruby_version|
       File.open("./.kokoro/continuous/#{gem}-ruby-#{ruby_version}.cfg", 'w') do |f| 
-        f.write(kokoro_config(gem, ruby_version))
+        config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
+        f.write(config.result(binding))
       end
     end
 
   end
-end
-
-def kokoro_config gem, ruby_version = nil
-  lines = []
-  lines << "# Format: //devtools/kokoro/config/proto/build.proto\n"
-  lines << '# Configure the docker image for kokoro-trampoline.'
-  lines << 'env_vars: {'
-  lines << '    key: "TRAMPOLINE_IMAGE"'
-  if ruby_version
-    lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-#{ruby_version}-stretch\""
-  else
-    lines << "    value: \"gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-multi-ubuntu\""
-  end
-  lines << "}\n"
-  lines << '# Tell the trampoline which build file to use.'
-  lines << 'env_vars: {'
-  lines << '    key: "PACKAGE"'
-  lines << "    value: \"#{gem}\""
-  lines << '}'
-  lines.join("\n")
 end
 
 def gems
