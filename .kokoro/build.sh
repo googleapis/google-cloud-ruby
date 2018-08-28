@@ -57,6 +57,7 @@ presubmit)
   #   echo "$PACKAGE was not modified, returning."
   #   exit;
   # fi
+  
   cd $PACKAGE
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
