@@ -36,6 +36,11 @@ module Google
     # 3. [Enable the Google Cloud Key Management Service (KMS) API.](https://console.cloud.google.com/apis/library/cloudkms.googleapis.com)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
+    # ### Installation
+    # ```
+    # $ gem install google-cloud-kms
+    # ```
+    #
     # ### Next Steps
     # - Read the [Google Cloud Key Management Service (KMS) API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
