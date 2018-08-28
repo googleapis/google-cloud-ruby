@@ -53,10 +53,10 @@ export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 
 case $JOB_TYPE in
 presubmit)
-  # if [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
-  #   echo "$PACKAGE was not modified, returning."
-  #   exit;
-  # fi
+  if [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
+    echo "$PACKAGE was not modified, returning."
+    # exit;
+  fi
   cd $PACKAGE
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
