@@ -23,8 +23,6 @@ echo $JOB_TYPE
 # https://github.com/bundler/bundler/issues/6154
 export BUNDLE_GEMFILE=
 
-bundle update
-
 # CHANGED_DIRS is the list of top-level directories that changed. CHANGED_DIRS will be empty when run on master.
 # See https://github.com/GoogleCloudPlatform/google-cloud-python/blob/master/.kokoro/build.sh for alt implementation
 CHANGED_DIRS="$(git --no-pager diff --name-only HEAD $(git merge-base HEAD master) | grep "/" | cut -d/ -f1 | sort | uniq || true)"
@@ -57,6 +55,7 @@ presubmit)
     echo "$PACKAGE was not modified, returning."
     exit;
   fi
+  bundle update
   cd $PACKAGE
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
@@ -67,10 +66,12 @@ presubmit)
   done
   ;;
 continuous)
+  bundle update
   cd $PACKAGE
   (bundle update && bundle exec rake ci:acceptance) || set_failed_status
   ;;
 release)
+  bundle update
   (bundle update && bundle exec rake circleci:release) || set_failed_status
   ;;
 *)
