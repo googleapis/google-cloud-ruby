@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import logging
 import os
+import re
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -43,7 +44,7 @@ s.copy(v2_admin_library / 'lib/google/cloud/bigtable/admin.rb')
 s.copy(v2_admin_library / 'lib/google/bigtable/admin/v2')
 s.copy(v2_admin_library / 'test/google/cloud/bigtable/admin/v2')
 
-# PERMANENT: We don't want the generated overview.rb filesbecause we have our
+# PERMANENT: We don't want the generated overview.rb files because we have our
 # own toplevel docs for the handwritten layer.
 os.remove('lib/google/cloud/bigtable/v2/doc/overview.rb')
 os.remove('lib/google/cloud/bigtable/admin/v2/doc/overview.rb')
@@ -91,3 +92,25 @@ s.replace(
     ],
     '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
     '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/bigtable/admin/v2/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)
+
+# https://github.com/googleapis/gapic-generator/issues/2243
+s.replace(
+    [
+      'lib/google/cloud/bigtable/v2/*_client.rb',
+      'lib/google/cloud/bigtable/admin/v2/*_client.rb'
+    ],
+    '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
+    '\\1\\2# @private\n\\2\\3')

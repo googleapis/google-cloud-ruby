@@ -37,6 +37,7 @@ module Google
         # @!attribute [r] metric_service_stub
         #   @return [Google::Monitoring::V3::MetricService::Stub]
         class MetricServiceClient
+          # @private
           attr_reader :metric_service_stub
 
           # The default address of the service.
@@ -277,7 +278,7 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   +"projects/{project_id_or_number}"+.
+          #   +"projects/\\{project_id_or_number}"+.
           # @param filter [String]
           #   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
           #   the descriptors to be returned.  The filter can reference
@@ -342,8 +343,8 @@ module Google
           #
           # @param name [String]
           #   The monitored resource descriptor to get.  The format is
-          #   +"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"+.
-          #   The +{resource_type}+ is a predefined type, such as
+          #   +"projects/\\{project_id_or_number}/monitoredResourceDescriptors/\\{resource_type}"+.
+          #   The +\\{resource_type}+ is a predefined type, such as
           #   +cloudsql_database+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -375,7 +376,7 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   +"projects/{project_id_or_number}"+.
+          #   +"projects/\\{project_id_or_number}"+.
           # @param filter [String]
           #   If this field is empty, all custom and
           #   system-defined metric descriptors are returned.
@@ -441,8 +442,8 @@ module Google
           #
           # @param name [String]
           #   The metric descriptor on which to execute the request. The format is
-          #   +"projects/{project_id_or_number}/metricDescriptors/{metric_id}"+.
-          #   An example value of +{metric_id}+ is
+          #   +"projects/\\{project_id_or_number}/metricDescriptors/\\{metric_id}"+.
+          #   An example value of +\\{metric_id}+ is
           #   +"compute.googleapis.com/instance/disk/read_bytes_count"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -476,7 +477,7 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   +"projects/{project_id_or_number}"+.
+          #   +"projects/\\{project_id_or_number}"+.
           # @param metric_descriptor [Google::Api::MetricDescriptor | Hash]
           #   The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
           #   descriptor.
@@ -518,8 +519,8 @@ module Google
           #
           # @param name [String]
           #   The metric descriptor on which to execute the request. The format is
-          #   +"projects/{project_id_or_number}/metricDescriptors/{metric_id}"+.
-          #   An example of +{metric_id}+ is:
+          #   +"projects/\\{project_id_or_number}/metricDescriptors/\\{metric_id}"+.
+          #   An example of +\\{metric_id}+ is:
           #   +"custom.googleapis.com/my_test_metric"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -551,7 +552,7 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   "projects/{project_id_or_number}".
+          #   "projects/\\{project_id_or_number}".
           # @param filter [String]
           #   A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
           #   series should be returned.  The filter must specify a single metric type,
@@ -653,7 +654,7 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   +"projects/{project_id_or_number}"+.
+          #   +"projects/\\{project_id_or_number}"+.
           # @param time_series [Array<Google::Monitoring::V3::TimeSeries | Hash>]
           #   The new data to be added to a list of time series.
           #   Adds at most one data point to each of several time series.  The new data

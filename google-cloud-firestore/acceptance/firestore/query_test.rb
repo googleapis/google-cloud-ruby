@@ -39,6 +39,14 @@ describe "Query", :firestore_acceptance do
     result_snp[:foo].must_equal "bar"
   end
 
+  it "has where method with array_contains " do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: ["bar", "baz", "bif"]})
+
+    result_snp = rand_query_col.where(:foo, :array_contains, :bif).get.first
+    result_snp[:foo].must_equal ["bar", "baz", "bif"]
+  end
+
   it "supports NaN" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     doc_ref = rand_query_col.add({foo: Float::NAN})

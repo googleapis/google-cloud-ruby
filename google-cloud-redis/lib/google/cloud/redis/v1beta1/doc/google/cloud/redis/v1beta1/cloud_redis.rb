@@ -21,7 +21,7 @@ module Google
         #   @return [String]
         #     Required. Unique name of the resource in this scope including project and
         #     location using the form:
-        #         +projects/{project_id}/locations/{location_id}/instances/{instance_id}+
+        #         +projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
         #
         #     Note: Redis instances are managed and addressed at regional level so
         #     location_id here refers to a GCP region; however, users get to choose which
@@ -144,7 +144,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the instance location using the form:
-        #         +projects/{project_id}/locations/{location_id}+
+        #         +projects/\\{project_id}/locations/\\{location_id}+
         #     where +location_id+ refers to a GCP region
         # @!attribute [rw] page_size
         #   @return [Integer]
@@ -171,7 +171,7 @@ module Google
         #     available to the project are queried, and the results aggregated.
         #     If in such an aggregated query a location is unavailable, a dummy Redis
         #     entry is included in the response with the "name" field set to a value of
-        #     the form projects/{project_id}/locations/{location_id}/instances/- and the
+        #     the form projects/\\{project_id}/locations/\\{location_id}/instances/- and the
         #     "status" field set to ERROR and "status_message" field set to "location not
         #     available for ListInstances".
         # @!attribute [rw] next_page_token
@@ -184,7 +184,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. Redis instance resource name using the form:
-        #         +projects/{project_id}/locations/{location_id}/instances/{instance_id}+
+        #         +projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
         #     where +location_id+ refers to a GCP region
         class GetInstanceRequest; end
 
@@ -192,7 +192,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the instance location using the form:
-        #         +projects/{project_id}/locations/{location_id}+
+        #         +projects/\\{project_id}/locations/\\{location_id}+
         #     where +location_id+ refers to a GCP region
         # @!attribute [rw] instance_id
         #   @return [String]
@@ -229,7 +229,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. Redis instance resource name using the form:
-        #         +projects/{project_id}/locations/{location_id}/instances/{instance_id}+
+        #         +projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
         #     where +location_id+ refers to a GCP region
         class DeleteInstanceRequest; end
 

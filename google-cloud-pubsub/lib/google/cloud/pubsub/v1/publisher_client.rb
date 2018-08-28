@@ -40,6 +40,7 @@ module Google
         # @!attribute [r] publisher_stub
         #   @return [Google::Pubsub::V1::Publisher::Stub]
         class PublisherClient
+          # @private
           attr_reader :iam_policy_stub, :publisher_stub
 
           # The default address of the service.
@@ -291,7 +292,7 @@ module Google
           #
           # @param name [String]
           #   The name of the topic. It must have the format
-          #   +"projects/{project}/topics/{topic}"+. +{topic}+ must start with a letter,
+          #   +"projects/\\{project}/topics/\\{topic}"+. +\\{topic}+ must start with a letter,
           #   and contain only letters (+[A-Za-z]+), numbers (+[0-9]+), dashes (+-+),
           #   underscores (+_+), periods (+.+), tildes (+~+), plus (+++) or percent
           #   signs (+%+). It must be between 3 and 255 characters in length, and it
@@ -391,7 +392,7 @@ module Google
           #
           # @param topic [String]
           #   The messages in the request will be published on this topic.
-          #   Format is +projects/{project}/topics/{topic}+.
+          #   Format is +projects/\\{project}/topics/\\{topic}+.
           # @param messages [Array<Google::Pubsub::V1::PubsubMessage | Hash>]
           #   The messages to publish.
           #   A hash of the same form as `Google::Pubsub::V1::PubsubMessage`
@@ -431,7 +432,7 @@ module Google
           #
           # @param topic [String]
           #   The name of the topic to get.
-          #   Format is +projects/{project}/topics/{topic}+.
+          #   Format is +projects/\\{project}/topics/\\{topic}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -462,7 +463,7 @@ module Google
           #
           # @param project [String]
           #   The name of the cloud project that topics belong to.
-          #   Format is +projects/{project}+.
+          #   Format is +projects/\\{project}+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -517,7 +518,7 @@ module Google
           #
           # @param topic [String]
           #   The name of the topic that subscriptions are attached to.
-          #   Format is +projects/{project}/topics/{topic}+.
+          #   Format is +projects/\\{project}/topics/\\{topic}+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -576,7 +577,7 @@ module Google
           #
           # @param topic [String]
           #   Name of the topic to delete.
-          #   Format is +projects/{project}/topics/{topic}+.
+          #   Format is +projects/\\{project}/topics/\\{topic}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -609,7 +610,7 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
           #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/{project}+.
+          #   resource is specified as +projects/\\{project}+.
           # @param policy [Google::Iam::V1::Policy | Hash]
           #   REQUIRED: The complete policy to be applied to the +resource+. The size of
           #   the policy is limited to a few 10s of KB. An empty policy is a
@@ -655,7 +656,7 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
           #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/{project}+.
+          #   resource is specified as +projects/\\{project}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -689,7 +690,7 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.
           #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/{project}+.
+          #   resource is specified as +projects/\\{project}+.
           # @param permissions [Array<String>]
           #   The set of permissions to check for the +resource+. Permissions with
           #   wildcards (such as '*' or 'storage.*') are not allowed. For more

@@ -30,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :IMAGE_PROPERTIES, 7
     value :CROP_HINTS, 9
     value :WEB_DETECTION, 10
+    value :OBJECT_LOCALIZATION, 19
   end
   add_message "google.cloud.vision.v1.ImageSource" do
     optional :gcs_image_uri, :string, 1
@@ -116,6 +117,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :locations, :message, 8, "google.cloud.vision.v1.LocationInfo"
     repeated :properties, :message, 9, "google.cloud.vision.v1.Property"
   end
+  add_message "google.cloud.vision.v1.LocalizedObjectAnnotation" do
+    optional :mid, :string, 1
+    optional :language_code, :string, 2
+    optional :name, :string, 3
+    optional :score, :float, 4
+    optional :bounding_poly, :message, 5, "google.cloud.vision.v1.BoundingPoly"
+  end
   add_message "google.cloud.vision.v1.SafeSearchAnnotation" do
     optional :adult, :enum, 1, "google.cloud.vision.v1.Likelihood"
     optional :spoof, :enum, 2, "google.cloud.vision.v1.Likelihood"
@@ -172,6 +180,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :landmark_annotations, :message, 2, "google.cloud.vision.v1.EntityAnnotation"
     repeated :logo_annotations, :message, 3, "google.cloud.vision.v1.EntityAnnotation"
     repeated :label_annotations, :message, 4, "google.cloud.vision.v1.EntityAnnotation"
+    repeated :localized_object_annotations, :message, 22, "google.cloud.vision.v1.LocalizedObjectAnnotation"
     repeated :text_annotations, :message, 5, "google.cloud.vision.v1.EntityAnnotation"
     optional :full_text_annotation, :message, 12, "google.cloud.vision.v1.TextAnnotation"
     optional :safe_search_annotation, :message, 6, "google.cloud.vision.v1.SafeSearchAnnotation"
@@ -256,6 +265,7 @@ module Google
         LocationInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.LocationInfo").msgclass
         Property = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.Property").msgclass
         EntityAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.EntityAnnotation").msgclass
+        LocalizedObjectAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.LocalizedObjectAnnotation").msgclass
         SafeSearchAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.SafeSearchAnnotation").msgclass
         LatLongRect = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.LatLongRect").msgclass
         ColorInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ColorInfo").msgclass

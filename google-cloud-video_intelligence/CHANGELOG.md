@@ -1,5 +1,12 @@
 # Release History
 
+### 1.1.0 / 2018-08-21
+
+* Deprecate Google::Cloud::VideoIntelligence::Credentials.
+  * Use Google::Cloud::VideoIntelligence::V1::Credentials instead.
+* Update dependencies.
+* Update documentation.
+
 ### 1.0.0 / 2017-12-19
 
 * Remove deprecated constructor arguments.

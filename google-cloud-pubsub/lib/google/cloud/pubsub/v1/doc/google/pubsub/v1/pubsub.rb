@@ -29,7 +29,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name of the topic. It must have the format
-      #     +"projects/{project}/topics/{topic}"+. +{topic}+ must start with a letter,
+      #     +"projects/\\{project}/topics/\\{topic}"+. +\\{topic}+ must start with a letter,
       #     and contain only letters (+[A-Za-z]+), numbers (+[0-9]+), dashes (+-+),
       #     underscores (+_+), periods (+.+), tildes (+~+), plus (+++) or percent
       #     signs (+%+). It must be between 3 and 255 characters in length, and it
@@ -72,7 +72,7 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic to get.
-      #     Format is +projects/{project}/topics/{topic}+.
+      #     Format is +projects/\\{project}/topics/\\{topic}+.
       class GetTopicRequest; end
 
       # Request for the UpdateTopic method.
@@ -92,7 +92,7 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     The messages in the request will be published on this topic.
-      #     Format is +projects/{project}/topics/{topic}+.
+      #     Format is +projects/\\{project}/topics/\\{topic}+.
       # @!attribute [rw] messages
       #   @return [Array<Google::Pubsub::V1::PubsubMessage>]
       #     The messages to publish.
@@ -110,7 +110,7 @@ module Google
       # @!attribute [rw] project
       #   @return [String]
       #     The name of the cloud project that topics belong to.
-      #     Format is +projects/{project}+.
+      #     Format is +projects/\\{project}+.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of topics to return.
@@ -135,7 +135,7 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic that subscriptions are attached to.
-      #     Format is +projects/{project}/topics/{topic}+.
+      #     Format is +projects/\\{project}/topics/\\{topic}+.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of subscription names to return.
@@ -164,7 +164,7 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic that snapshots are attached to.
-      #     Format is +projects/{project}/topics/{topic}+.
+      #     Format is +projects/\\{project}/topics/\\{topic}+.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of snapshot names to return.
@@ -193,14 +193,14 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     Name of the topic to delete.
-      #     Format is +projects/{project}/topics/{topic}+.
+      #     Format is +projects/\\{project}/topics/\\{topic}+.
       class DeleteTopicRequest; end
 
       # A subscription resource.
       # @!attribute [rw] name
       #   @return [String]
       #     The name of the subscription. It must have the format
-      #     +"projects/{project}/subscriptions/{subscription}"+. +{subscription}+ must
+      #     +"projects/\\{project}/subscriptions/\\{subscription}"+. +\\{subscription}+ must
       #     start with a letter, and contain only letters (+[A-Za-z]+), numbers
       #     (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
       #     plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
@@ -208,7 +208,7 @@ module Google
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic from which this subscription is receiving messages.
-      #     Format is +projects/{project}/topics/{topic}+.
+      #     Format is +projects/\\{project}/topics/\\{topic}+.
       #     The value of this field will be +_deleted-topic_+ if the topic has been
       #     deleted.
       # @!attribute [rw] push_config
@@ -306,7 +306,7 @@ module Google
       # @!attribute [rw] subscription
       #   @return [String]
       #     The name of the subscription to get.
-      #     Format is +projects/{project}/subscriptions/{sub}+.
+      #     Format is +projects/\\{project}/subscriptions/\\{sub}+.
       class GetSubscriptionRequest; end
 
       # Request for the UpdateSubscription method.
@@ -323,7 +323,7 @@ module Google
       # @!attribute [rw] project
       #   @return [String]
       #     The name of the cloud project that subscriptions belong to.
-      #     Format is +projects/{project}+.
+      #     Format is +projects/\\{project}+.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of subscriptions to return.
@@ -349,14 +349,14 @@ module Google
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription to delete.
-      #     Format is +projects/{project}/subscriptions/{sub}+.
+      #     Format is +projects/\\{project}/subscriptions/\\{sub}+.
       class DeleteSubscriptionRequest; end
 
       # Request for the ModifyPushConfig method.
       # @!attribute [rw] subscription
       #   @return [String]
       #     The name of the subscription.
-      #     Format is +projects/{project}/subscriptions/{sub}+.
+      #     Format is +projects/\\{project}/subscriptions/\\{sub}+.
       # @!attribute [rw] push_config
       #   @return [Google::Pubsub::V1::PushConfig]
       #     The push configuration for future deliveries.
@@ -371,7 +371,7 @@ module Google
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription from which messages should be pulled.
-      #     Format is +projects/{project}/subscriptions/{sub}+.
+      #     Format is +projects/\\{project}/subscriptions/\\{sub}+.
       # @!attribute [rw] return_immediately
       #   @return [true, false]
       #     If this field set to true, the system will respond immediately even if
@@ -399,7 +399,7 @@ module Google
       # @!attribute [rw] subscription
       #   @return [String]
       #     The name of the subscription.
-      #     Format is +projects/{project}/subscriptions/{sub}+.
+      #     Format is +projects/\\{project}/subscriptions/\\{sub}+.
       # @!attribute [rw] ack_ids
       #   @return [Array<String>]
       #     List of acknowledgment IDs.
@@ -418,7 +418,7 @@ module Google
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription whose message is being acknowledged.
-      #     Format is +projects/{project}/subscriptions/{sub}+.
+      #     Format is +projects/\\{project}/subscriptions/\\{sub}+.
       # @!attribute [rw] ack_ids
       #   @return [Array<String>]
       #     The acknowledgment ID for the messages being acknowledged that was returned
@@ -433,7 +433,7 @@ module Google
       #     The subscription for which to initialize the new stream. This must be
       #     provided in the first request on the stream, and must not be set in
       #     subsequent requests from client to server.
-      #     Format is +projects/{project}/subscriptions/{sub}+.
+      #     Format is +projects/\\{project}/subscriptions/\\{sub}+.
       # @!attribute [rw] ack_ids
       #   @return [Array<String>]
       #     List of acknowledgement IDs for acknowledging previously received messages
@@ -486,7 +486,7 @@ module Google
       #     If the name is not provided in the request, the server will assign a random
       #     name for this snapshot on the same project as the subscription.
       #     Note that for REST API requests, you must specify a name.
-      #     Format is +projects/{project}/snapshots/{snap}+.
+      #     Format is +projects/\\{project}/snapshots/\\{snap}+.
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription whose backlog the snapshot retains.
@@ -497,7 +497,7 @@ module Google
       #          +CreateSnapshot+ request; as well as:
       #      (b) Any messages published to the subscription's topic following the
       #          successful completion of the CreateSnapshot request.
-      #     Format is +projects/{project}/subscriptions/{sub}+.
+      #     Format is +projects/\\{project}/subscriptions/\\{sub}+.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
       #     User labels.
@@ -550,7 +550,7 @@ module Google
       # @!attribute [rw] snapshot
       #   @return [String]
       #     The name of the snapshot to get.
-      #     Format is +projects/{project}/snapshots/{snap}+.
+      #     Format is +projects/\\{project}/snapshots/\\{snap}+.
       class GetSnapshotRequest; end
 
       # Request for the +ListSnapshots+ method.<br><br>
@@ -560,7 +560,7 @@ module Google
       # @!attribute [rw] project
       #   @return [String]
       #     The name of the cloud project that snapshots belong to.
-      #     Format is +projects/{project}+.
+      #     Format is +projects/\\{project}+.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of snapshots to return.
@@ -591,7 +591,7 @@ module Google
       # @!attribute [rw] snapshot
       #   @return [String]
       #     The name of the snapshot to delete.
-      #     Format is +projects/{project}/snapshots/{snap}+.
+      #     Format is +projects/\\{project}/snapshots/\\{snap}+.
       class DeleteSnapshotRequest; end
 
       # Request for the +Seek+ method.<br><br>
@@ -618,7 +618,7 @@ module Google
       #   @return [String]
       #     The snapshot to seek to. The snapshot's topic must be the same as that of
       #     the provided subscription.
-      #     Format is +projects/{project}/snapshots/{snap}+.
+      #     Format is +projects/\\{project}/snapshots/\\{snap}+.
       class SeekRequest; end
 
       class SeekResponse; end

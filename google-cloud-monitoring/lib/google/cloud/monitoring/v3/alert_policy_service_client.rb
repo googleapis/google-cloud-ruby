@@ -44,6 +44,7 @@ module Google
         # @!attribute [r] alert_policy_service_stub
         #   @return [Google::Monitoring::V3::AlertPolicyService::Stub]
         class AlertPolicyServiceClient
+          # @private
           attr_reader :alert_policy_service_stub
 
           # The default address of the service.

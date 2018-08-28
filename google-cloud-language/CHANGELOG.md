@@ -1,5 +1,13 @@
 # Release History
 
+### 0.31.0 / 2018-08-21
+
+* Move Credentials location:
+  * Add Google::Cloud::Language::V1::Credentials
+  * Remove Google::Cloud::Language::Credentials
+* Update dependencies.
+* Update documentation.
+
 ### 0.30.0 / 2017-12-19
 
 * Update generated files and documentation.

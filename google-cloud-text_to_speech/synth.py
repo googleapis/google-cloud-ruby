@@ -47,3 +47,9 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-text_to_speech.gemspec', merge=merge_gemspec)
+
+# https://github.com/googleapis/gapic-generator/issues/2243
+s.replace(
+    'lib/google/cloud/text_to_speech/*/*_client.rb',
+    '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
+    '\\1\\2# @private\n\\2\\3')

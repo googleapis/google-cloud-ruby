@@ -135,7 +135,7 @@ module Google
         # @!attribute [rw] key_ring_id
         #   @return [String]
         #     Required. It must be unique within a location and match the regular
-        #     expression +[a-zA-Z0-9_-]{1,63}+
+        #     expression +[a-zA-Z0-9_-]\\{1,63}+
         # @!attribute [rw] key_ring
         #   @return [Google::Cloud::Kms::V1::KeyRing]
         #     A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
@@ -149,7 +149,7 @@ module Google
         # @!attribute [rw] crypto_key_id
         #   @return [String]
         #     Required. It must be unique within a KeyRing and match the regular
-        #     expression +[a-zA-Z0-9_-]{1,63}+
+        #     expression +[a-zA-Z0-9_-]\\{1,63}+
         # @!attribute [rw] crypto_key
         #   @return [Google::Cloud::Kms::V1::CryptoKey]
         #     A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.

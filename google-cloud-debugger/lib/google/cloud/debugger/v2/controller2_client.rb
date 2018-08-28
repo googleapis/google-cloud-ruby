@@ -55,6 +55,7 @@ module Google
         # @!attribute [r] controller2_stub
         #   @return [Google::Devtools::Clouddebugger::V2::Controller2::Stub]
         class Controller2Client
+          # @private
           attr_reader :controller2_stub
 
           # The default address of the service.

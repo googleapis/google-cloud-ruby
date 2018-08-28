@@ -37,6 +37,7 @@ module Google
         # @!attribute [r] config_service_v2_stub
         #   @return [Google::Logging::V2::ConfigServiceV2::Stub]
         class ConfigServiceV2Client
+          # @private
           attr_reader :config_service_v2_stub
 
           # The default address of the service.

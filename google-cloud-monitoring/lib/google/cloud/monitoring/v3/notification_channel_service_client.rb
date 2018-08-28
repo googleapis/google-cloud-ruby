@@ -37,6 +37,7 @@ module Google
         # @!attribute [r] notification_channel_service_stub
         #   @return [Google::Monitoring::V3::NotificationChannelService::Stub]
         class NotificationChannelServiceClient
+          # @private
           attr_reader :notification_channel_service_stub
 
           # The default address of the service.
@@ -332,7 +333,7 @@ module Google
           #
           # @param name [String]
           #   The channel type for which to execute the request. The format is
-          #   +projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}+.
+          #   +projects/[PROJECT_ID]/notificationChannelDescriptors/\\{channel_type}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

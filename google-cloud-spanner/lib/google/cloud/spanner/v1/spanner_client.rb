@@ -39,6 +39,7 @@ module Google
         # @!attribute [r] spanner_stub
         #   @return [Google::Spanner::V1::Spanner::Stub]
         class SpannerClient
+          # @private
           attr_reader :spanner_stub
 
           # The default address of the service.
@@ -316,9 +317,9 @@ module Google
           # @return [Google::Spanner::V1::Session]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
           #   response = spanner_client.create_session(formatted_database)
 
@@ -350,9 +351,9 @@ module Google
           # @return [Google::Spanner::V1::Session]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_name = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   response = spanner_client.get_session(formatted_name)
 
@@ -401,9 +402,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_database = Google::Cloud::Spanner::V1::SpannerClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
           #
           #   # Iterate over all results.
@@ -446,9 +447,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_name = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #   spanner_client.delete_session(formatted_name)
 
@@ -538,9 +539,9 @@ module Google
           # @return [Google::Spanner::V1::ResultSet]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #
           #   # TODO: Initialize +sql+:
@@ -639,9 +640,9 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #
           #   # TODO: Initialize +sql+:
@@ -744,9 +745,9 @@ module Google
           # @return [Google::Spanner::V1::ResultSet]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #
           #   # TODO: Initialize +table+:
@@ -847,9 +848,9 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #
           #   # TODO: Initialize +table+:
@@ -910,9 +911,9 @@ module Google
           # @return [Google::Spanner::V1::Transaction]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #
           #   # TODO: Initialize +options_+:
@@ -972,9 +973,9 @@ module Google
           # @return [Google::Spanner::V1::CommitResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #
           #   # TODO: Initialize +mutations+:
@@ -1019,9 +1020,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #
           #   # TODO: Initialize +transaction_id+:
@@ -1106,9 +1107,9 @@ module Google
           # @return [Google::Spanner::V1::PartitionResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #
           #   # TODO: Initialize +sql+:
@@ -1184,9 +1185,9 @@ module Google
           # @return [Google::Spanner::V1::PartitionResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/spanner"
+          #   require "google/cloud/spanner/v1"
           #
-          #   spanner_client = Google::Cloud::Spanner.new(version: :v1)
+          #   spanner_client = Google::Cloud::Spanner::V1::SpannerClient.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
           #
           #   # TODO: Initialize +table+:

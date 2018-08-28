@@ -41,6 +41,7 @@ module Google
           # @!attribute [r] bigtable_instance_admin_stub
           #   @return [Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub]
           class BigtableInstanceAdminClient
+            # @private
             attr_reader :bigtable_instance_admin_stub
 
             # The default address of the service.
@@ -616,9 +617,9 @@ module Google
             #   metrics.
             #
             #   * Label keys must be between 1 and 63 characters long and must conform to
-            #     the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+.
+            #     the regular expression: +[\p\\{Ll}\p\\{Lo}][\p\\{Ll}\p\\{Lo}\p\\{N}_-]\\{0,62}+.
             #   * Label values must be between 0 and 63 characters long and must conform to
-            #     the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.
+            #     the regular expression: +[\p\\{Ll}\p\\{Lo}\p\\{N}_-]\\{0,63}+.
             #   * No more than 64 labels can be associated with a given resource.
             #   * Keys and values must both be under 128 bytes.
             # @param state [Google::Bigtable::Admin::V2::Instance::State]
@@ -1297,7 +1298,7 @@ module Google
             # @param resource [String]
             #   REQUIRED: The resource for which the policy is being requested.
             #   +resource+ is usually specified as a path. For example, a Project
-            #   resource is specified as +projects/{project}+.
+            #   resource is specified as +projects/\\{project}+.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1330,7 +1331,7 @@ module Google
             # @param resource [String]
             #   REQUIRED: The resource for which the policy is being specified.
             #   +resource+ is usually specified as a path. For example, a Project
-            #   resource is specified as +projects/{project}+.
+            #   resource is specified as +projects/\\{project}+.
             # @param policy [Google::Iam::V1::Policy | Hash]
             #   REQUIRED: The complete policy to be applied to the +resource+. The size of
             #   the policy is limited to a few 10s of KB. An empty policy is a
@@ -1374,7 +1375,7 @@ module Google
             # @param resource [String]
             #   REQUIRED: The resource for which the policy detail is being requested.
             #   +resource+ is usually specified as a path. For example, a Project
-            #   resource is specified as +projects/{project}+.
+            #   resource is specified as +projects/\\{project}+.
             # @param permissions [Array<String>]
             #   The set of permissions to check for the +resource+. Permissions with
             #   wildcards (such as '*' or 'storage.*') are not allowed. For more

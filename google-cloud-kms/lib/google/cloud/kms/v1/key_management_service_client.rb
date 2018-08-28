@@ -46,6 +46,7 @@ module Google
         # @!attribute [r] iam_policy_stub
         #   @return [Google::Iam::V1::IAMPolicy::Stub]
         class KeyManagementServiceClient
+          # @private
           attr_reader :key_management_service_stub, :iam_policy_stub
 
           # The default address of the service.
@@ -717,7 +718,7 @@ module Google
           #   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format +projects/*/locations/*+.
           # @param key_ring_id [String]
           #   Required. It must be unique within a location and match the regular
-          #   expression +[a-zA-Z0-9_-]{1,63}+
+          #   expression +[a-zA-Z0-9_-]\\{1,63}+
           # @param key_ring [Google::Cloud::Kms::V1::KeyRing | Hash]
           #   A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::KeyRing`
@@ -767,7 +768,7 @@ module Google
           #   {Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
           # @param crypto_key_id [String]
           #   Required. It must be unique within a KeyRing and match the regular
-          #   expression +[a-zA-Z0-9_-]{1,63}+
+          #   expression +[a-zA-Z0-9_-]\\{1,63}+
           # @param crypto_key [Google::Cloud::Kms::V1::CryptoKey | Hash]
           #   A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKey`
@@ -1160,7 +1161,7 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
           #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/{project}+.
+          #   resource is specified as +projects/\\{project}+.
           # @param policy [Google::Iam::V1::Policy | Hash]
           #   REQUIRED: The complete policy to be applied to the +resource+. The size of
           #   the policy is limited to a few 10s of KB. An empty policy is a
@@ -1206,7 +1207,7 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
           #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/{project}+.
+          #   resource is specified as +projects/\\{project}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1240,7 +1241,7 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.
           #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/{project}+.
+          #   resource is specified as +projects/\\{project}+.
           # @param permissions [Array<String>]
           #   The set of permissions to check for the +resource+. Permissions with
           #   wildcards (such as '*' or 'storage.*') are not allowed. For more

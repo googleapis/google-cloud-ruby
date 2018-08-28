@@ -39,6 +39,7 @@ module Google
         # @!attribute [r] cluster_controller_stub
         #   @return [Google::Cloud::Dataproc::V1::ClusterController::Stub]
         class ClusterControllerClient
+          # @private
           attr_reader :cluster_controller_stub
 
           # The default address of the service.
@@ -563,7 +564,7 @@ module Google
             @get_cluster.call(req, options, &block)
           end
 
-          # Lists all regions/{region}/clusters in a project.
+          # Lists all regions/\\{region}/clusters in a project.
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the cluster

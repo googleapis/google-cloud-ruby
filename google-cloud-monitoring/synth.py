@@ -46,3 +46,22 @@ s.replace(
     'google-cloud-monitoring.gemspec',
     '\n  gem\\.add_dependency "google-gax", "~> ([\\d\\.]+)"',
     '\n  gem.add_dependency "google-gax", "~> \\1"\n  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.2"')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)
+
+# https://github.com/googleapis/gapic-generator/issues/2243
+s.replace(
+    'lib/google/cloud/monitoring/*/*_client.rb',
+    '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
+    '\\1\\2# @private\n\\2\\3')

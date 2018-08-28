@@ -19,7 +19,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The resource name of the Document to get. In the format:
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       # @!attribute [rw] mask
       #   @return [Google::Firestore::V1beta1::DocumentMask]
       #     The fields to return. If not set, returns all fields.
@@ -39,8 +39,8 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent resource name. In the format:
-      #     +projects/{project_id}/databases/{database_id}/documents+ or
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       #     For example:
       #     +projects/my-project/databases/my-database/documents+ or
       #     +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
@@ -94,8 +94,8 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent resource. For example:
-      #     +projects/{project_id}/databases/{database_id}/documents+ or
-      #     +projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}+
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/chatrooms/\\{chatroom_id}+
       # @!attribute [rw] collection_id
       #   @return [String]
       #     The collection ID, relative to +parent+, to list. For example: +chatrooms+.
@@ -145,7 +145,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The resource name of the Document to delete. In the format:
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       # @!attribute [rw] current_document
       #   @return [Google::Firestore::V1beta1::Precondition]
       #     An optional precondition on the document.
@@ -156,11 +156,11 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/{project_id}/databases/{database_id}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}+.
       # @!attribute [rw] documents
       #   @return [Array<String>]
       #     The names of the documents to retrieve. In the format:
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       #     The request will fail if any of the document is not a child resource of the
       #     given +database+. Duplicate names will be elided.
       # @!attribute [rw] mask
@@ -191,7 +191,7 @@ module Google
       # @!attribute [rw] missing
       #   @return [String]
       #     A document name that was requested but does not exist. In the format:
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The transaction that was started as part of this request.
@@ -209,7 +209,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/{project_id}/databases/{database_id}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}+.
       # @!attribute [rw] options
       #   @return [Google::Firestore::V1beta1::TransactionOptions]
       #     The options for the transaction.
@@ -226,7 +226,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/{project_id}/databases/{database_id}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}+.
       # @!attribute [rw] writes
       #   @return [Array<Google::Firestore::V1beta1::Write>]
       #     The writes to apply.
@@ -253,7 +253,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/{project_id}/databases/{database_id}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}+.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The transaction to roll back.
@@ -263,8 +263,8 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent resource name. In the format:
-      #     +projects/{project_id}/databases/{database_id}/documents+ or
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       #     For example:
       #     +projects/my-project/databases/my-database/documents+ or
       #     +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
@@ -325,7 +325,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/{project_id}/databases/{database_id}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}+.
       #     This is only required in the first message.
       # @!attribute [rw] stream_id
       #   @return [String]
@@ -387,7 +387,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/{project_id}/databases/{database_id}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}+.
       # @!attribute [rw] add_target
       #   @return [Google::Firestore::V1beta1::Target]
       #     A target to add to this stream.
@@ -457,7 +457,7 @@ module Google
         # @!attribute [rw] documents
         #   @return [Array<String>]
         #     The names of the documents to retrieve. In the format:
-        #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+        #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
         #     The request will fail if any of the document is not a child resource of
         #     the given +database+. Duplicate names will be elided.
         class DocumentsTarget; end
@@ -466,8 +466,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     The parent resource name. In the format:
-        #     +projects/{project_id}/databases/{database_id}/documents+ or
-        #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+        #     +projects/\\{project_id}/databases/\\{database_id}/documents+ or
+        #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
         #     For example:
         #     +projects/my-project/databases/my-database/documents+ or
         #     +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
@@ -548,7 +548,7 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent document. In the format:
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       #     For example:
       #     +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
       # @!attribute [rw] page_size

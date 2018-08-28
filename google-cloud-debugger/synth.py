@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import logging
 import os
+import re
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -68,3 +69,22 @@ s.replace(
 s.replace(
     'lib/google/cloud/debugger/v2.rb',
     '/debugger\\.googleapis\\.com', '/clouddebugger.googleapis.com')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/debugger/v2/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)
+
+# https://github.com/googleapis/gapic-generator/issues/2243
+s.replace(
+    'lib/google/cloud/debugger/v2/*_client.rb',
+    '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
+    '\\1\\2# @private\n\\2\\3')

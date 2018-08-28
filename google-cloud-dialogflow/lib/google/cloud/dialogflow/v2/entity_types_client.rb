@@ -64,6 +64,7 @@ module Google
         # @!attribute [r] entity_types_stub
         #   @return [Google::Cloud::Dialogflow::V2::EntityTypes::Stub]
         class EntityTypesClient
+          # @private
           attr_reader :entity_types_stub
 
           # The default address of the service.

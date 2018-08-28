@@ -77,6 +77,10 @@ namespace :test do
       end
     end
 
+    # Increase the time limit from the default of 0.05 secs because coverage
+    # may run slowly.
+    ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"] ||= "0.3"
+
     header "Running tests and coverage report"
     Rake::Task["test"].invoke
   end
@@ -693,21 +697,26 @@ task :release, :tag do |t, args|
   end
 
   path_to_be_pushed = "#{package}/pkg/#{package}-#{version}.gem"
+  gem_was_published = nil
   if File.file? path_to_be_pushed
     begin
       ::Gems.push(File.new path_to_be_pushed)
+      gem_was_published = true
       puts "Successfully built and pushed #{package} for version #{version}"
-
-      # jsondoc:package needs jsondoc to have been run prior
-      Rake::Task["bundleupdate"].invoke
-      Rake::Task["jsondoc"].invoke
-      Rake::Task["jsondoc:package"].invoke tag
-      Rake::Task["docs:publish_tag"].invoke tag
     rescue => e
+      gem_was_published = false
       puts "Error while releasing #{package} version #{version}: #{e.message}"
     end
   else
     fail "Cannot build #{package} for version #{version}"
+  end
+
+  if gem_was_published
+    # jsondoc:package needs jsondoc to have been run prior
+    Rake::Task["bundleupdate"].invoke
+    Rake::Task["jsondoc"].invoke
+    Rake::Task["jsondoc:package"].invoke tag
+    Rake::Task["docs:publish_tag"].invoke tag
   end
 end
 

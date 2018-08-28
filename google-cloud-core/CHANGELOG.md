@@ -1,5 +1,10 @@
 # Release History
 
+### 1.2.3 / 2018-08-21
+
+* Update (deprecated) Credentials authentication URLs.
+* Update documentation.
+
 ### 1.2.2 / 2018-07-05
 
 * Disable warnings while auto-loading gems to avoid circular require warnings.

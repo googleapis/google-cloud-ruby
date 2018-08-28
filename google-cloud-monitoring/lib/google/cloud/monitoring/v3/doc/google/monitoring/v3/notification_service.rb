@@ -56,7 +56,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The channel type for which to execute the request. The format is
-      #     +projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}+.
+      #     +projects/[PROJECT_ID]/notificationChannelDescriptors/\\{channel_type}+.
       class GetNotificationChannelDescriptorRequest; end
 
       # The +CreateNotificationChannel+ request.

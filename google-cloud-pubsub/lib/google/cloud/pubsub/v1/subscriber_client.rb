@@ -41,6 +41,7 @@ module Google
         # @!attribute [r] subscriber_stub
         #   @return [Google::Pubsub::V1::Subscriber::Stub]
         class SubscriberClient
+          # @private
           attr_reader :iam_policy_stub, :subscriber_stub
 
           # The default address of the service.
@@ -363,14 +364,14 @@ module Google
           #
           # @param name [String]
           #   The name of the subscription. It must have the format
-          #   +"projects/{project}/subscriptions/{subscription}"+. +{subscription}+ must
+          #   +"projects/\\{project}/subscriptions/\\{subscription}"+. +\\{subscription}+ must
           #   start with a letter, and contain only letters (+[A-Za-z]+), numbers
           #   (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
           #   plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
           #   in length, and it must not start with +"goog"+
           # @param topic [String]
           #   The name of the topic from which this subscription is receiving messages.
-          #   Format is +projects/{project}/topics/{topic}+.
+          #   Format is +projects/\\{project}/topics/\\{topic}+.
           #   The value of this field will be +_deleted-topic_+ if the topic has been
           #   deleted.
           # @param push_config [Google::Pubsub::V1::PushConfig | Hash]
@@ -465,7 +466,7 @@ module Google
           #
           # @param subscription [String]
           #   The name of the subscription to get.
-          #   Format is +projects/{project}/subscriptions/{sub}+.
+          #   Format is +projects/\\{project}/subscriptions/\\{sub}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -540,7 +541,7 @@ module Google
           #
           # @param project [String]
           #   The name of the cloud project that subscriptions belong to.
-          #   Format is +projects/{project}+.
+          #   Format is +projects/\\{project}+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -599,7 +600,7 @@ module Google
           #
           # @param subscription [String]
           #   The subscription to delete.
-          #   Format is +projects/{project}/subscriptions/{sub}+.
+          #   Format is +projects/\\{project}/subscriptions/\\{sub}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -634,7 +635,7 @@ module Google
           #
           # @param subscription [String]
           #   The name of the subscription.
-          #   Format is +projects/{project}/subscriptions/{sub}+.
+          #   Format is +projects/\\{project}/subscriptions/\\{sub}+.
           # @param ack_ids [Array<String>]
           #   List of acknowledgment IDs.
           # @param ack_deadline_seconds [Integer]
@@ -691,7 +692,7 @@ module Google
           #
           # @param subscription [String]
           #   The subscription whose message is being acknowledged.
-          #   Format is +projects/{project}/subscriptions/{sub}+.
+          #   Format is +projects/\\{project}/subscriptions/\\{sub}+.
           # @param ack_ids [Array<String>]
           #   The acknowledgment ID for the messages being acknowledged that was returned
           #   by the Pub/Sub system in the +Pull+ response. Must not be empty.
@@ -733,7 +734,7 @@ module Google
           #
           # @param subscription [String]
           #   The subscription from which messages should be pulled.
-          #   Format is +projects/{project}/subscriptions/{sub}+.
+          #   Format is +projects/\\{project}/subscriptions/\\{sub}+.
           # @param max_messages [Integer]
           #   The maximum number of messages returned for this request. The Pub/Sub
           #   system may return fewer than the number specified.
@@ -830,7 +831,7 @@ module Google
           #
           # @param subscription [String]
           #   The name of the subscription.
-          #   Format is +projects/{project}/subscriptions/{sub}+.
+          #   Format is +projects/\\{project}/subscriptions/\\{sub}+.
           # @param push_config [Google::Pubsub::V1::PushConfig | Hash]
           #   The push configuration for future deliveries.
           #
@@ -878,7 +879,7 @@ module Google
           #
           # @param project [String]
           #   The name of the cloud project that snapshots belong to.
-          #   Format is +projects/{project}+.
+          #   Format is +projects/\\{project}+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -950,7 +951,7 @@ module Google
           #   If the name is not provided in the request, the server will assign a random
           #   name for this snapshot on the same project as the subscription.
           #   Note that for REST API requests, you must specify a name.
-          #   Format is +projects/{project}/snapshots/{snap}+.
+          #   Format is +projects/\\{project}/snapshots/\\{snap}+.
           # @param subscription [String]
           #   The subscription whose backlog the snapshot retains.
           #   Specifically, the created snapshot is guaranteed to retain:
@@ -960,7 +961,7 @@ module Google
           #        +CreateSnapshot+ request; as well as:
           #    (b) Any messages published to the subscription's topic following the
           #        successful completion of the CreateSnapshot request.
-          #   Format is +projects/{project}/subscriptions/{sub}+.
+          #   Format is +projects/\\{project}/subscriptions/\\{sub}+.
           # @param labels [Hash{String => String}]
           #   User labels.
           # @param options [Google::Gax::CallOptions]
@@ -1053,7 +1054,7 @@ module Google
           #
           # @param snapshot [String]
           #   The name of the snapshot to delete.
-          #   Format is +projects/{project}/snapshots/{snap}+.
+          #   Format is +projects/\\{project}/snapshots/\\{snap}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1105,7 +1106,7 @@ module Google
           # @param snapshot [String]
           #   The snapshot to seek to. The snapshot's topic must be the same as that of
           #   the provided subscription.
-          #   Format is +projects/{project}/snapshots/{snap}+.
+          #   Format is +projects/\\{project}/snapshots/\\{snap}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1142,7 +1143,7 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
           #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/{project}+.
+          #   resource is specified as +projects/\\{project}+.
           # @param policy [Google::Iam::V1::Policy | Hash]
           #   REQUIRED: The complete policy to be applied to the +resource+. The size of
           #   the policy is limited to a few 10s of KB. An empty policy is a
@@ -1188,7 +1189,7 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
           #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/{project}+.
+          #   resource is specified as +projects/\\{project}+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1222,7 +1223,7 @@ module Google
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.
           #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/{project}+.
+          #   resource is specified as +projects/\\{project}+.
           # @param permissions [Array<String>]
           #   The set of permissions to check for the +resource+. Permissions with
           #   wildcards (such as '*' or 'storage.*') are not allowed. For more

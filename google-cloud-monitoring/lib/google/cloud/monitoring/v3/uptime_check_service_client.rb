@@ -43,6 +43,7 @@ module Google
         # @!attribute [r] uptime_check_service_stub
         #   @return [Google::Monitoring::V3::UptimeCheckService::Stub]
         class UptimeCheckServiceClient
+          # @private
           attr_reader :uptime_check_service_stub
 
           # The default address of the service.

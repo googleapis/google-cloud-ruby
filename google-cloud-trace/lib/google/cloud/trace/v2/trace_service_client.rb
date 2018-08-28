@@ -40,6 +40,7 @@ module Google
         # @!attribute [r] trace_service_stub
         #   @return [Google::Devtools::Cloudtrace::V2::TraceService::Stub]
         class TraceServiceClient
+          # @private
           attr_reader :trace_service_stub
 
           # The default address of the service.

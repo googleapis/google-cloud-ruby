@@ -40,6 +40,7 @@ module Google
         # @!attribute [r] image_annotator_stub
         #   @return [Google::Cloud::Vision::V1::ImageAnnotator::Stub]
         class ImageAnnotatorClient
+          # @private
           attr_reader :image_annotator_stub
 
           # The default address of the service.

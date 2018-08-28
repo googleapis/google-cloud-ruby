@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "googleauth"
+require "google/cloud/trace/v1/credentials"
 
 module Google
   module Cloud
@@ -37,20 +37,7 @@ module Google
       #
       #   trace.project_id #=> "my-project"
       #
-      class Credentials < Google::Auth::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/cloud-platform"].freeze
-        PATH_ENV_VARS = %w[TRACE_CREDENTIALS
-                           TRACE_KEYFILE
-                           GOOGLE_CLOUD_CREDENTIALS
-                           GOOGLE_CLOUD_KEYFILE
-                           GCLOUD_KEYFILE].freeze
-        JSON_ENV_VARS = %w[TRACE_CREDENTIALS_JSON
-                           TRACE_KEYFILE_JSON
-                           GOOGLE_CLOUD_CREDENTIALS_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON].freeze
-        DEFAULT_PATHS = \
-          ["~/.config/gcloud/application_default_credentials.json"].freeze
+      class Credentials < Google::Cloud::Trace::V1::Credentials
       end
     end
   end

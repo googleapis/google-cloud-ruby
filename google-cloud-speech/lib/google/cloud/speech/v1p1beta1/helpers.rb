@@ -86,6 +86,48 @@ module Google
               end
             )
           end
+
+          ##
+          # Gets the latest state of a long-running operation. Clients can use
+          # this method to poll the operation result at intervals as recommended
+          # by the API service.
+          #
+          # @param name [String]
+          #   The name of the operation resource.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/speech"
+          #
+          #   speech_client = Google::Cloud::Speech.new version: :v1p1beta1
+          #
+          #   op = speech_client.get_operation "-"
+          #
+          #   # Process error operations.
+          #   log_error op.error if op.error?
+          #
+          #   if op.done?
+          #     # Process completed operations.
+          #     log_finished op.response, op.metadata
+          #   else
+          #     # Process pending operations.
+          #     log_pending op.name, op.metadata
+          #   end
+          #
+          def get_operation name, options: nil
+            proto_op = @operations_client.get_operation name, options: options
+
+            Google::Gax::Operation.new(
+              proto_op,
+              @operations_client,
+              Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeResponse,
+              Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeMetadata,
+              call_options: options
+            )
+          end
         end
       end
     end

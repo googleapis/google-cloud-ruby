@@ -106,7 +106,7 @@ module Google
     #
     #     * +Annotation+ is just a comment if it follows a +UNIT+ and is
     #       equivalent to +1+ if it is used alone. For examples,
-    #       +{requests}/s == 1/s+, +By{transmitted}/s == By/s+.
+    #       +\\{requests}/s == 1/s+, +By\\{transmitted}/s == By/s+.
     #     * +NAME+ is a sequence of non-blank printable ASCII characters not
     #       containing '{' or '}'.
     #     * +1+ represents dimensionless value 1, such as in +1/s+.

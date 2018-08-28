@@ -70,3 +70,22 @@ s.replace(
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/bigquerydatatransfer\n',
     '[Product Documentation]: https://cloud.google.com/bigquery/transfer/\n')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^\n#\\$\\\\])\\{([\\w,]+|\\.+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)
+
+# https://github.com/googleapis/gapic-generator/issues/2243
+s.replace(
+    'lib/google/cloud/bigquery/data_transfer/*/*_client.rb',
+    '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
+    '\\1\\2# @private\n\\2\\3')

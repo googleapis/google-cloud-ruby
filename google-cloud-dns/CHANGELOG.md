@@ -1,5 +1,10 @@
 # Release History
 
+### 0.29.1 / 2018-08-21
+
+* Reduce memory usage.
+* Update documentation.
+
 ### 0.29.0 / 2018-06-22
 
 * Updated dependencies.

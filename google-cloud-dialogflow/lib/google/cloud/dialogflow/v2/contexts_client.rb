@@ -52,6 +52,7 @@ module Google
         # @!attribute [r] contexts_stub
         #   @return [Google::Cloud::Dialogflow::V2::Contexts::Stub]
         class ContextsClient
+          # @private
           attr_reader :contexts_stub
 
           # The default address of the service.

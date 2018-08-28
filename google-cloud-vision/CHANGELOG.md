@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.1 / 2018-08-21
+
+* Update documentation.
+
 ### 0.30.0 / 2018-07-20
 
 * Add async_batch_annotate_files method to Google::Cloud::Vision::Project

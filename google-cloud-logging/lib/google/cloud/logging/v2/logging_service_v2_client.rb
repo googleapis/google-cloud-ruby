@@ -36,6 +36,7 @@ module Google
         # @!attribute [r] logging_service_v2_stub
         #   @return [Google::Logging::V2::LoggingServiceV2::Stub]
         class LoggingServiceV2Client
+          # @private
           attr_reader :logging_service_v2_stub
 
           # The default address of the service.

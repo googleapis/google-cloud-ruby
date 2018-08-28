@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.2 / 2018-08-21
+
+* Update documentation.
+
 ### 0.30.1 / 2018-07-05
 
 * Fix undefined method for nil error when error object has empty backtrace.

@@ -1,5 +1,9 @@
 # Release History
 
+### 1.7.1 / 2018-08-21
+
+* Update documentation.
+
 ### 1.7.0 / 2018-06-29
 
 * Add #schema_update_options to LoadJob and #schema_update_options= to LoadJob::Updater.

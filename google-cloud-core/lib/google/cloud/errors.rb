@@ -46,7 +46,7 @@ module Google
       # This is typically present on errors originating from calls to an API
       # over HTTP/REST.
       #
-      # @returns [Object, nil]
+      # @return [Object, nil]
       def status_code
         return nil unless cause && cause.respond_to?(:status_code)
         cause.status_code
@@ -59,7 +59,7 @@ module Google
       # This is typically present on errors originating from calls to an API
       # over HTTP/REST.
       #
-      # @returns [Object, nil]
+      # @return [Object, nil]
       def body
         return nil unless cause && cause.respond_to?(:body)
         cause.body
@@ -72,7 +72,7 @@ module Google
       # This is typically present on errors originating from calls to an API
       # over HTTP/REST.
       #
-      # @returns [Object, nil]
+      # @return [Object, nil]
       def header
         return nil unless cause && cause.respond_to?(:header)
         cause.header
@@ -85,7 +85,7 @@ module Google
       # This is typically present on errors originating from calls to an API
       # over gRPC.
       #
-      # @returns [Object, nil]
+      # @return [Object, nil]
       def code
         return nil unless cause && cause.respond_to?(:code)
         cause.code
@@ -98,7 +98,7 @@ module Google
       # This is typically present on errors originating from calls to an API
       # over gRPC.
       #
-      # @returns [Object, nil]
+      # @return [Object, nil]
       def details
         return nil unless cause && cause.respond_to?(:details)
         cause.details
@@ -111,7 +111,7 @@ module Google
       # This is typically present on errors originating from calls to an API
       # over gRPC.
       #
-      # @returns [Object, nil]
+      # @return [Object, nil]
       def metadata
         return nil unless cause && cause.respond_to?(:metadata)
         cause.metadata
@@ -124,7 +124,7 @@ module Google
       # This is typically present on errors originating from calls to an API
       # over gRPC.
       #
-      # @returns [Object, nil]
+      # @return [Object, nil]
       def status_details
         return nil unless cause && cause.respond_to?(:status_details)
         cause.status_details

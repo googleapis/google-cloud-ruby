@@ -38,6 +38,7 @@ module Google
         # @!attribute [r] video_intelligence_service_stub
         #   @return [Google::Cloud::Videointelligence::V1::VideoIntelligenceService::Stub]
         class VideoIntelligenceServiceClient
+          # @private
           attr_reader :video_intelligence_service_stub
 
           # The default address of the service.
