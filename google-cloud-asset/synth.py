@@ -67,3 +67,13 @@ s.replace(
     'lib/google/cloud/asset/v1beta1/asset_service_client.rb',
     '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
     '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
+
+# https://github.com/googleapis/gapic-generator/issues/2278
+s.replace(
+    'Rakefile',
+    '\ndesc[^\n]+\ntask :jsondoc [^\n]+\n+(  [^\n]+\n+)*end\n',
+    '')
+s.replace(
+    'Rakefile',
+    '\n\\s*header "google-cloud-\\S+ jsondoc", "\\*"\n\\s*sh "bundle exec rake jsondoc"\n',
+    '\n')
