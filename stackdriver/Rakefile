@@ -69,14 +69,16 @@ task :console do
 
   require "google/cloud"
   Bundler.require # load all the gems defined in the Gemfile
-  def gcloud; @gcloud ||= Google::Cloud.new; end
+  def gcloud
+    @gcloud ||= Google::Cloud.new
+  end
 
   ARGV.clear
   IRB.start
 end
 
 desc "Generates JSON output from stackdriver .yardoc"
-task :jsondoc => :yard do
+task jsondoc: :yard do
   require "rubygems"
   require "gcloud/jsondoc"
 
@@ -94,6 +96,7 @@ YARD::Rake::YardocTask.new
 desc "Run the CI build"
 task :ci do
   header "BUILDING stackdriver"
+  sh "bundle exec rake debugger_c"
   header "stackdriver rubocop", "*"
   sh "bundle exec rake rubocop"
   header "stackdriver jsondoc", "*"
@@ -116,7 +119,20 @@ namespace :ci do
   end
 end
 
-task :default => :test
+task default: :test
+
+desc "Compiles c extension for google-cloud-debugger"
+task :debugger_c do
+  header "compiling google-cloud-debugger", "*"
+  debugger_directory = Dir.getwd.split("/")[0...-1]
+  debugger_directory << "google-cloud-debugger"
+  Dir.chdir(debugger_directory.join("/")) do
+    Bundler.with_clean_env do
+      sh "bundle update"
+      sh "bundle exec rake compile"
+    end
+  end
+end
 
 def header str, token = "#"
   line_length = str.length + 8
