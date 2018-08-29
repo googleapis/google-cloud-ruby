@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/devtools/cloudtrace/v2/tracing_pb'
 

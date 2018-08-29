@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/cloud/speech/v1p1beta1/cloud_speech_pb'
 

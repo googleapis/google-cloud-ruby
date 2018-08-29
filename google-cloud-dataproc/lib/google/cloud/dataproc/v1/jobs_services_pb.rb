@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/cloud/dataproc/v1/jobs_pb'
 

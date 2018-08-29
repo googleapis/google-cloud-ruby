@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/logging/v2/logging_pb'
 

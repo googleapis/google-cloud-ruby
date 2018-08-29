@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Google
   module Protobuf
     # A Timestamp represents a point in time independent of any time zone

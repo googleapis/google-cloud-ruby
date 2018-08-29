@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/dlp/v2/dlp_service_client"
 
 module Google

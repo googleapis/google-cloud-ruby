@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/cloud/redis/v1beta1/cloud_redis_pb'
 

@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/spanner/admin/instance/v1/instance_admin_client"
 require "google/spanner/admin/instance/v1/spanner_instance_admin_pb"
 

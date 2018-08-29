@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Google
   module Rpc
     # The +Status+ type defines a logical error model that is suitable for different

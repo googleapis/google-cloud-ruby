@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/cloud/dialogflow/v2/session_entity_type_pb'
 

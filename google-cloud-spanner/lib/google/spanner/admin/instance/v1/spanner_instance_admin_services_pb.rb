@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/spanner/admin/instance/v1/spanner_instance_admin_pb'
 

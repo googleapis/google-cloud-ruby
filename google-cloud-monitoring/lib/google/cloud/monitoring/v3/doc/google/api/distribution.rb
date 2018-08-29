@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Google
   module Api
     # Distribution contains summary statistics for a population of values and,

@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Google
   module Type
     # An object representing a latitude/longitude pair. This is expressed as a pair

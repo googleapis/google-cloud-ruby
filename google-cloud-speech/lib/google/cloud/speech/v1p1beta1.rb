@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/speech/v1p1beta1/speech_client"
 require "google/cloud/speech/v1p1beta1/helpers"
 

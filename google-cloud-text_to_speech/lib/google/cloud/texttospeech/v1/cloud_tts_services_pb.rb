@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/cloud/texttospeech/v1/cloud_tts_pb'
 

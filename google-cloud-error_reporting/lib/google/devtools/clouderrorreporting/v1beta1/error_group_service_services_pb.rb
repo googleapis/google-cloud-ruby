@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/devtools/clouderrorreporting/v1beta1/error_group_service_pb'
 

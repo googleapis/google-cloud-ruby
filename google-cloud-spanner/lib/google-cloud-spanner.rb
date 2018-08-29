@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 ##
 # This file is here to be autorequired by bundler, so that the
 # Google::Cloud.spanner and Google::Cloud#spanner methods can be available, but

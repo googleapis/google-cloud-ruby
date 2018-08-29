@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/cloud/videointelligence/v1beta2/video_intelligence_pb'
 

@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Google
   module Api
     # An object that describes the schema of a {Google::Api::MonitoredResource MonitoredResource} object using a

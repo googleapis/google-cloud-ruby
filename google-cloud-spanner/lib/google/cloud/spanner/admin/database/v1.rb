@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/spanner/admin/database/v1/database_admin_client"
 require "google/spanner/admin/database/v1/spanner_database_admin_pb"
 
