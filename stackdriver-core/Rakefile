@@ -62,25 +62,11 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from stackdriver-core .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry, "stackdriver-core"
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING stackdriver-core"
   header "stackdriver-core rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "stackdriver-core jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "stackdriver-core doctest", "*"
   sh "bundle exec rake doctest"
   header "stackdriver-core test", "*"

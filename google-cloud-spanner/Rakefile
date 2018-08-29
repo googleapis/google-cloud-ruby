@@ -136,63 +136,11 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-spanner .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Spanner::V1::DataTypes",
-        modules: [
-          {
-            title: "Google::Spanner::V1",
-            include: ["google/spanner/v1"]
-          },
-          {
-            title: "Google::Spanner::Admin::Instance::V1",
-            include: ["google/spanner/admin/instance/v1"]
-          },
-          {
-            title: "Google::Spanner::Admin::Database::V1",
-            include: ["google/spanner/admin/database/v1"]
-          },
-          {
-            title: "Google::Iam::V1",
-            include: ["google/iam/v1"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-spanner",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-spanner"
   header "google-cloud-spanner rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-spanner jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-spanner doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-spanner test", "*"

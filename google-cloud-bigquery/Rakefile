@@ -156,25 +156,11 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-bigquery .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry, "google-cloud-bigquery"
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-bigquery"
   header "google-cloud-bigquery rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-bigquery jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-bigquery doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-bigquery test", "*"

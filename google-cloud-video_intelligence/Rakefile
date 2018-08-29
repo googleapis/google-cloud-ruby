@@ -114,80 +114,6 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-video_intelligence .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Cloud::VideoIntelligence::V1beta1::DataTypes",
-        modules: [
-          {
-            title: "Google::Cloud::Videointelligence::V1beta1",
-            include: ["google/cloud/videointelligence/v1beta1/"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
-          }
-        ]
-      },
-      {
-        type: "toc",
-        title: "Google::Cloud::VideoIntelligence::V1beta2::DataTypes",
-        modules: [
-          {
-            title: "Google::Cloud::Videointelligence::V1beta2",
-            include: ["google/cloud/videointelligence/v1beta2/"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
-          }
-        ]
-      },
-      {
-        type: "toc",
-        title: "Google::Cloud::VideoIntelligence::V1::DataTypes",
-        modules: [
-          {
-            title: "Google::Cloud::Videointelligence::V1",
-            include: ["google/cloud/videointelligence/v1/"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-video_intelligence",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-video_intelligence gem does not have doctest tests."
@@ -198,8 +124,6 @@ task :ci do
   header "BUILDING google-cloud-video_intelligence"
   header "google-cloud-video_intelligence rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-video_intelligence jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-video_intelligence doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-video_intelligence test", "*"
