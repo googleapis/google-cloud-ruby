@@ -115,8 +115,8 @@ module Google
         # @param [Rack Application] app Rack application
         # @param [Google::Cloud::Trace::Service, AsyncReporter] service
         #   The service object to update traces. Optional if running on GCE.
-        # @param [Hash] *kwargs Hash of configuration settings. Used for
-        #   backward API compatibility. See the [Configuration
+        # @param [Hash] kwargs Hash of configuration settings. Used for backward
+        #   API compatibility. See the [Configuration
         #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
         #   for the prefered way to set configuration parameters.
         #

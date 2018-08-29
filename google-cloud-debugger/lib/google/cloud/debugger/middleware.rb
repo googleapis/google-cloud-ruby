@@ -97,8 +97,8 @@ module Google
         # @param [Google::Cloud::Debugger::Project] debugger A debugger to be
         #   used by this middleware. If not given, will construct a new one
         #   using the other parameters.
-        # @param [Hash] *kwargs Hash of configuration settings. Used for
-        #   backward API compatibility. See the [Configuration
+        # @param [Hash] kwargs Hash of configuration settings. Used for backward
+        #   API compatibility. See the [Configuration
         #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
         #   for the prefered way to set configuration parameters.
         #

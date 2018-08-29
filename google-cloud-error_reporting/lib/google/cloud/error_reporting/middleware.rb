@@ -37,8 +37,8 @@ module Google
         # @param [Google::Cloud::ErrorReporting::Project] error_reporting A
         #   Google::Cloud::ErrorReporting::Project client for reporting
         #   exceptions
-        # @param [Hash] *kwargs Hash of configuration settings. Used for
-        #   backward API compatibility. See the [Configuration
+        # @param [Hash] kwargs Hash of configuration settings. Used for backward
+        #   API compatibility. See the [Configuration
         #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
         #   for the prefered way to set configuration parameters.
         #

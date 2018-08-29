@@ -64,7 +64,7 @@ module Google
         RequestInfo = ::Struct.new :trace_id, :log_name, :env
 
         ##
-        # The Google Cloud writer object that calls to {#write_entries} are made
+        # The Google Cloud writer object that calls to `#write_entries` are made
         # on. Either an AsyncWriter or Project object.
         attr_reader :writer
 
@@ -131,7 +131,7 @@ module Google
         #   entries. Generally, to create a logger that blocks on transmitting
         #   log entries, pass the Project; otherwise, to create a logger that
         #   transmits log entries in the background, pass an AsyncWriter. You
-        #   may also pass any other object that responds to #write_entries.
+        #   may also pass any other object that responds to `#write_entries`.
         # @param [String] log_name A log resource name to be associated with the
         #   written log entries.
         # @param [Google::Cloud::Logging::Resource] resource The monitored

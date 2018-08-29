@@ -43,7 +43,7 @@ module Google
         #   to track Stackdriver request trace ID. It also properly sets
         #   env["rack.logger"] to this assigned logger for accessing. If not
         #   specified, a default logger with be used.
-        # @param [Hash] *kwargs Hash of configuration settings. Used for
+        # @param [Hash] kwargs Hash of configuration settings. Used for
         #   backward API compatibility. See the [Configuration
         #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
         #   for the prefered way to set configuration parameters.
