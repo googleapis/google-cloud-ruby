@@ -1,6 +1,7 @@
 require "bundler/setup"
 require "open3"
 require "json"
+require "erb"
 
 task :bundleupdate do
   valid_gems.each do |gem|
@@ -616,6 +617,34 @@ task :compile do
         sh "bundle exec rake compile"
       end
     end
+  end
+end
+
+namespace :kokoro do
+  ruby_versions = ['2.3', '2.4', '2.5']
+  
+  desc "Generate presubmit configs for kokoro"
+  task :builds do
+    generate_kokoro_configs ruby_versions
+  end
+end
+
+def generate_kokoro_configs ruby_versions
+  gems.each do |gem|
+    #  generate the presubmi configs
+    File.open("./.kokoro/presubmit/#{gem}.cfg", 'w') do |f|
+      config = ERB.new(File.read('./.kokoro/templates/presubmit.cfg.erb'))
+      f.write(config.result(binding))
+    end
+
+    # generate the continuous configs
+    ruby_versions.each do |ruby_version|
+      File.open("./.kokoro/continuous/#{gem}-ruby-#{ruby_version}.cfg", 'w') do |f| 
+        config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
+        f.write(config.result(binding))
+      end
+    end
+
   end
 end
 
