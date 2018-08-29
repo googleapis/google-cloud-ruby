@@ -111,44 +111,6 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-bigquery-data_transfer .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Cloud::Bigquery::Datatransfer::V1::DataTypes",
-        modules: [
-          {
-            title: "Google::Cloud::Bigquery::Datatransfer::V1",
-            include: ["google/cloud/bigquery/data_transfer/v1"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-bigquery-data_transfer",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-bigquery-data_transfer gem does not have doctest tests."
@@ -159,8 +121,6 @@ task :ci do
   header "BUILDING google-cloud-bigquery-data_transfer"
   header "google-cloud-bigquery-data_transfer rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-bigquery-data_transfer jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-bigquery-data_transfer doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-bigquery-data_transfer test", "*"

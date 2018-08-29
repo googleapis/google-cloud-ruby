@@ -2,9 +2,6 @@ source "http://rubygems.org"
 
 gemspec
 
-gem "gcloud-jsondoc",
-    git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
-    branch: "gcloud-jsondoc"
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
 

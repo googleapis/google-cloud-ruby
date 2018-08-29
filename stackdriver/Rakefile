@@ -77,18 +77,6 @@ task :console do
   IRB.start
 end
 
-desc "Generates JSON output from stackdriver .yardoc"
-task jsondoc: :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry, "stackdriver"
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/configuration.md", "docs/toc.json"], "jsondoc", verbose: true
-end
-
 require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
@@ -99,8 +87,6 @@ task :ci do
   sh "bundle exec rake debugger_c"
   header "stackdriver rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "stackdriver jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "stackdriver doctest", "*"
   sh "bundle exec rake doctest"
   header "stackdriver test", "*"
