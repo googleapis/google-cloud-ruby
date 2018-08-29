@@ -63,25 +63,11 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from gcloud .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-  generator = Gcloud::Jsondoc::Generator.new registry, "gcloud"
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING gcloud"
   header "gcloud rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "gcloud jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "gcloud doctest", "*"
   sh "bundle exec rake doctest"
   header "gcloud test", "*"

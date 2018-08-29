@@ -103,47 +103,11 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-datastore .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Datastore::V1::DataTypes",
-        modules: [
-          {
-            title: "Google::Datastore::V1",
-            include: ["google/datastore/v1"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-datastore",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-datastore"
   header "google-cloud-datastore rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-datastore jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-datastore doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-datastore test", "*"

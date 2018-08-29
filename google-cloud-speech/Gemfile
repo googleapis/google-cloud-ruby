@@ -2,8 +2,4 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "gcloud-jsondoc",
-    git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
-    branch: "gcloud-jsondoc"
-
 gem "rake", "~> 12.3"

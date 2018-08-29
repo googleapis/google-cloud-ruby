@@ -64,44 +64,6 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-dialogflow .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Cloud::Dialogflow::V2::DataTypes",
-        modules: [
-          {
-            title: "Google::Cloud::Dialogflow::V2",
-            include: ["google/cloud/dialogflow/v2"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-dialogflow",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-dialogflow gem does not have doctest tests."
@@ -112,8 +74,6 @@ task :ci do
   header "BUILDING google-cloud-dialogflow"
   header "google-cloud-dialogflow rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-dialogflow jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-dialogflow doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-dialogflow test", "*"

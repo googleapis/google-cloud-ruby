@@ -148,52 +148,6 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
-desc "Generates JSON output from google-cloud-bigtable .yardoc"
-task :jsondoc => :yard do
-  require "rubygems"
-  require "gcloud/jsondoc"
-
-  registry = YARD::Registry.load! ".yardoc"
-
-  toc_config = {
-    documents: [
-      {
-        type: "toc",
-        title: "Google::Bigtable::V2::DataTypes",
-        modules: [
-          {
-            title: "Google::Bigtable::V2",
-            include: ["google/cloud/bigtable/v2"]
-          },
-          {
-            title: "Google::Bigtable::Admin::V2",
-            include: ["google/bigtable/admin/v2"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
-          },
-          {
-            title: "Google::Iam::V1",
-            include: ["google/iam/v1"]
-          }
-        ]
-      }
-    ]
-  }
-
-  generator = Gcloud::Jsondoc::Generator.new registry,
-                                             "google-cloud-bigtable",
-                                             generate: toc_config
-  rm_rf "jsondoc", verbose: true
-  generator.write_to "jsondoc"
-  cp ["docs/toc.json"], "jsondoc", verbose: true
-end
-
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-bigtable gem does not have doctest tests."
@@ -204,8 +158,6 @@ task :ci do
   header "BUILDING google-cloud-bigtable"
   header "google-cloud-bigtable rubocop", "*"
   sh "bundle exec rake rubocop"
-  header "google-cloud-bigtable jsondoc", "*"
-  sh "bundle exec rake jsondoc"
   header "google-cloud-bigtable doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-bigtable test", "*"
