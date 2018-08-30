@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "googleauth"
 
 module Google
@@ -22,13 +23,13 @@ module Google
           SCOPE = [
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
-          PATH_ENV_VARS = %w(CLOUDASSET_CREDENTIALS
-                             CLOUDASSET_KEYFILE
+          PATH_ENV_VARS = %w(ASSET_CREDENTIALS
+                             ASSET_KEYFILE
                              GOOGLE_CLOUD_CREDENTIALS
                              GOOGLE_CLOUD_KEYFILE
                              GCLOUD_KEYFILE)
-          JSON_ENV_VARS = %w(CLOUDASSET_CREDENTIALS_JSON
-                             CLOUDASSET_KEYFILE_JSON
+          JSON_ENV_VARS = %w(ASSET_CREDENTIALS_JSON
+                             ASSET_KEYFILE_JSON
                              GOOGLE_CLOUD_CREDENTIALS_JSON
                              GOOGLE_CLOUD_KEYFILE_JSON
                              GCLOUD_KEYFILE_JSON)

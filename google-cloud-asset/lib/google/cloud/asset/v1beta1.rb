@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/asset/v1beta1/asset_service_client"
 
 module Google
@@ -32,8 +33,13 @@ module Google
       #
       # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
       # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-      # 3. [Enable the Cloud Asset API.](https://console.cloud.google.com/apis/library/cloudasset.googleapis.com)
+      # 3. [Enable the Cloud Asset API.](https://console.cloud.google.com/apis/library/asset.googleapis.com)
       # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+      #
+      # ### Installation
+      # ```
+      # $ gem install google-cloud-asset
+      # ```
       #
       # ### Next Steps
       # - Read the [Cloud Asset API Product documentation][Product Documentation]
@@ -41,7 +47,7 @@ module Google
       # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
       #   to see the full list of Cloud APIs that we cover.
       #
-      # [Product Documentation]: https://cloud.google.com/cloudasset
+      # [Product Documentation]: https://cloud.google.com/asset
       #
       # ## Enabling Logging
       #

@@ -11,7 +11,7 @@ steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Cloud Asset API.](https://console.cloud.google.com/apis/library/cloudasset.googleapis.com)
+3. [Enable the Cloud Asset API.](https://console.cloud.google.com/apis/library/asset.googleapis.com)
 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
 
 ### Installation
@@ -28,7 +28,7 @@ $ gem install google-cloud-asset
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-asset/latest/google/cloud/asset/v1beta1
-[Product Documentation]: https://cloud.google.com/cloudasset
+[Product Documentation]: https://cloud.google.com/asset
 
 ## Enabling Logging
 

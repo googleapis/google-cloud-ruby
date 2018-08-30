@@ -19,6 +19,7 @@
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
 
+
 require "json"
 require "pathname"
 
@@ -38,6 +39,7 @@ module Google
         # @!attribute [r] asset_service_stub
         #   @return [Google::Cloud::Asset::V1beta1::AssetService::Stub]
         class AssetServiceClient
+          # @private
           attr_reader :asset_service_stub
 
           # The default address of the service.
@@ -212,9 +214,6 @@ module Google
           #   Required. The relative name of the root asset. It can only be an
           #   organization number (e.g. "organizations/123") or a project number
           #   (e.g. "projects/12345").
-          # @param content_types [Array<Google::Cloud::Asset::V1beta1::ContentType>]
-          #   A list of asset content types. If specified, only matching content will be
-          #   returned. Otherwise, no content but the asset name will be returned.
           # @param output_config [Google::Cloud::Asset::V1beta1::OutputConfig | Hash]
           #   Required. Output configuration indicating where the results will be output
           #   to. All results will be in newline delimited JSON format.
@@ -230,6 +229,9 @@ module Google
           # @param asset_types [Array<String>]
           #   A list of asset types to take a snapshot for. Example:
           #   "google.compute.disk". If specified, only matching assets will be returned.
+          # @param content_types [Array<Google::Cloud::Asset::V1beta1::ContentType>]
+          #   A list of asset content types. If specified, only matching content will be
+          #   returned. Otherwise, no content but the asset name will be returned.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -241,14 +243,11 @@ module Google
           #   asset_service_client = Google::Cloud::Asset.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +content_types+:
-          #   content_types = []
-          #
           #   # TODO: Initialize +output_config+:
           #   output_config = {}
           #
           #   # Register a callback during the method call.
-          #   operation = asset_service_client.export_assets(formatted_parent, content_types, output_config) do |op|
+          #   operation = asset_service_client.export_assets(formatted_parent, output_config) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -276,17 +275,17 @@ module Google
 
           def export_assets \
               parent,
-              content_types,
               output_config,
               read_time: nil,
               asset_types: nil,
+              content_types: nil,
               options: nil
             req = {
               parent: parent,
-              content_types: content_types,
               output_config: output_config,
               read_time: read_time,
-              asset_types: asset_types
+              asset_types: asset_types,
+              content_types: content_types
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Asset::V1beta1::ExportAssetsRequest)
             operation = Google::Gax::Operation.new(
@@ -310,13 +309,6 @@ module Google
           #   Required. The relative name of the root asset. It can only be an
           #   organization ID (e.g. "organizations/123") or a project ID
           #   (e.g. "projects/12345").
-          # @param asset_names [Array<String>]
-          #   A list of the full names of the assets. See:
-          #   https://cloud.google.com/apis/design/resource_names#full_resource_name
-          #   Example:
-          #   "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1".
-          #
-          #   The request becomes a no-op if the asset name list is empty.
           # @param content_type [Google::Cloud::Asset::V1beta1::ContentType]
           #   Required. The content type.
           # @param read_time_window [Google::Cloud::Asset::V1beta1::TimeWindow | Hash]
@@ -325,6 +317,13 @@ module Google
           #   read_time_window.
           #   A hash of the same form as `Google::Cloud::Asset::V1beta1::TimeWindow`
           #   can also be provided.
+          # @param asset_names [Array<String>]
+          #   A list of the full names of the assets. See:
+          #   https://cloud.google.com/apis/design/resource_names#full_resource_name
+          #   Example:
+          #   "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1".
+          #
+          #   The request becomes a no-op if the asset name list is empty.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -339,28 +338,25 @@ module Google
           #   asset_service_client = Google::Cloud::Asset.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +asset_names+:
-          #   asset_names = []
-          #
           #   # TODO: Initialize +content_type+:
           #   content_type = :CONTENT_TYPE_UNSPECIFIED
           #
           #   # TODO: Initialize +read_time_window+:
           #   read_time_window = {}
-          #   response = asset_service_client.batch_get_assets_history(formatted_parent, asset_names, content_type, read_time_window)
+          #   response = asset_service_client.batch_get_assets_history(formatted_parent, content_type, read_time_window)
 
           def batch_get_assets_history \
               parent,
-              asset_names,
               content_type,
               read_time_window,
+              asset_names: nil,
               options: nil,
               &block
             req = {
               parent: parent,
-              asset_names: asset_names,
               content_type: content_type,
-              read_time_window: read_time_window
+              read_time_window: read_time_window,
+              asset_names: asset_names
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest)
             @batch_get_assets_history.call(req, options, &block)
