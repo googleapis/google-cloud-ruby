@@ -439,7 +439,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-109
 110
 111
 112
@@ -522,10 +521,11 @@ custom error handling.</p>
 189
 190
 191
-192</pre>
+192
+193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -687,15 +687,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-73
 74
 75
 76
 77
-78</pre>
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_session_path'>session_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_session'>session</span>
   <span class='const'>SESSION_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -927,7 +927,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-244
 245
 246
 247
@@ -942,10 +941,11 @@ retries, etc.</p>
 256
 257
 258
-259</pre>
+259
+260</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_detect_intent'>detect_intent</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -1094,15 +1094,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-296
 297
 298
 299
 300
-301</pre>
+301
+302</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 296</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/sessions_client.rb', line 297</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_detect_intent'>streaming_detect_intent</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
