@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/cloud/bigquery/datatransfer/v1/datatransfer_pb'
 

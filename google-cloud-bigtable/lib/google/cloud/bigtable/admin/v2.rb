@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/bigtable/admin/v2/bigtable_instance_admin_client"
 require "google/cloud/bigtable/admin/v2/bigtable_table_admin_client"
 require "google/bigtable/admin/v2/bigtable_instance_admin_pb"

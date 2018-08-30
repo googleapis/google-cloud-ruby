@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/video_intelligence/v1beta2/video_intelligence_service_client"
 require "google/cloud/videointelligence/v1beta2/video_intelligence_pb"
 require "google/rpc/status_pb"

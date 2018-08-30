@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/bigquery/data_transfer/v1/data_transfer_service_client"
 
 module Google

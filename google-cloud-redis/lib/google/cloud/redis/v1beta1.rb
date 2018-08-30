@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/redis/v1beta1/cloud_redis_client"
 require "google/cloud/redis/v1beta1/cloud_redis_pb"
 

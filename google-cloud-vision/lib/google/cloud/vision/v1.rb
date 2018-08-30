@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/vision/v1/image_annotator_client"
 require "google/cloud/vision/v1/image_annotator_pb"
 

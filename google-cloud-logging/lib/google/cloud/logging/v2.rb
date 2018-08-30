@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/logging/v2/config_service_v2_client"
 require "google/cloud/logging/v2/logging_service_v2_client"
 require "google/cloud/logging/v2/metrics_service_v2_client"

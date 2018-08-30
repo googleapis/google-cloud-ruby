@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 module Google
   module Type
     # Represents a whole calendar date, e.g. date of birth. The time of day and

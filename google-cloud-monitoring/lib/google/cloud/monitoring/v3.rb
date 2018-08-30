@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/monitoring/v3/alert_policy_service_client"
 require "google/cloud/monitoring/v3/group_service_client"
 require "google/cloud/monitoring/v3/metric_service_client"

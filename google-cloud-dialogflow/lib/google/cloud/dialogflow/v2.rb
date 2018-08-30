@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/dialogflow/v2/agents_client"
 require "google/cloud/dialogflow/v2/contexts_client"
 require "google/cloud/dialogflow/v2/entity_types_client"

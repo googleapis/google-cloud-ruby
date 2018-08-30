@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/privacy/dlp/v2/dlp_pb'
 

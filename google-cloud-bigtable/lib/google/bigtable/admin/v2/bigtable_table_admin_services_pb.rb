@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/bigtable/admin/v2/bigtable_table_admin_pb'
 
