@@ -305,14 +305,14 @@ Default is DEFAULT_PATH_BLACKLIST.</p>
       <pre class="lines">
 
 
-52
 53
 54
 55
-56</pre>
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/time_sampler.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/time_sampler.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='label'>qps:</span> <span class='float'>0.1</span><span class='comma'>,</span> <span class='label'>path_blacklist:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_PATH_BLACKLIST-constant" title="Google::Cloud::Trace::TimeSampler::DEFAULT_PATH_BLACKLIST (constant)">DEFAULT_PATH_BLACKLIST</a></span></span>
   <span class='ivar'>@delay_secs</span> <span class='op'>=</span> <span class='float'>1.0</span> <span class='op'>/</span> <span class='id identifier rubyid_qps'>qps</span>
@@ -369,12 +369,12 @@ Default is DEFAULT_PATH_BLACKLIST.</p>
       <pre class="lines">
 
 
-65
 66
-67</pre>
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/time_sampler.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/time_sampler.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
   <span class='ivar'>@default</span>
@@ -452,7 +452,6 @@ should be taken at this time.</p>
       <pre class="lines">
 
 
-76
 77
 78
 79
@@ -465,10 +464,11 @@ should be taken at this time.</p>
 86
 87
 88
-89</pre>
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/time_sampler.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/time_sampler.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span> <span class='id identifier rubyid_env'>env</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_path_blacklisted?'>path_blacklisted?</span> <span class='id identifier rubyid_env'>env</span>
