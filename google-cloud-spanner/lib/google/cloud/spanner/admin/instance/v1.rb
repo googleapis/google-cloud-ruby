@@ -40,7 +40,7 @@ module Google
           #
           # ### Installation
           # ```
-          # $ gem install google-cloud-spanner-admin-instance
+          # $ gem install google-cloud-spanner
           # ```
           #
           # ### Next Steps

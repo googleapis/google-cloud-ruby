@@ -39,7 +39,7 @@ module Google
         #
         # ### Installation
         # ```
-        # $ gem install google-cloud-spanner-admin-database
+        # $ gem install google-cloud-spanner
         # ```
         #
         # ### Next Steps
