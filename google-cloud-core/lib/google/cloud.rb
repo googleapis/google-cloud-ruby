@@ -194,10 +194,11 @@ module Google
     #
     def self.auto_load_gems
       previously_loaded_files = Array(caller).map do |backtrace_line|
-        backtrace_line.split(":").first
+        File.realpath backtrace_line.split(":").first
       end.uniq
 
       auto_load_files.each do |auto_load_file|
+        auto_load_file = File.realpath auto_load_file
         next if previously_loaded_files.include? auto_load_file
         require auto_load_file
       end
