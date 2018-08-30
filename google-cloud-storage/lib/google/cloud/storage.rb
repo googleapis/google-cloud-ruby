@@ -594,14 +594,14 @@ module Google
     # require "google/cloud/storage"
     #
     # pubsub = Google::Cloud::Pubsub.new
+    # storage = Google::Cloud::Storage.new
+    #
     # topic = pubsub.create_topic "my-topic"
     # topic.policy do |p|
     #   p.add "roles/pubsub.publisher",
-    #         "serviceAccount:my-project" \
-    #         "@gs-project-accounts.iam.gserviceaccount.com"
+    #         "serviceAccount:#{storage.service_account_email}"
     # end
     #
-    # storage = Google::Cloud::Storage.new
     # bucket = storage.bucket "my-bucket"
     #
     # notification = bucket.create_notification topic.name
