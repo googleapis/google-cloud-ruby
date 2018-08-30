@@ -51,6 +51,9 @@ function set_failed_status {
 # Setup service account credentials.
 export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 
+# Set other environment variables
+sh ${KOKORO_GFILE_DIR}/env_vars.sh
+
 case $JOB_TYPE in
 presubmit)
   cd $PACKAGE
@@ -68,12 +71,24 @@ continuous)
     echo "=========================================================================="
     echo "$PACKAGE was not modified, skipping acceptance tests."
     echo "=========================================================================="
-    (bundle update && bundle exec rake ci) || set_failed_status
+    for version in "${RUBY_VERSIONS[@]}"; do
+      rbenv global "$version"
+      echo "================================================="
+      echo "============= Using Ruby - $version ============="
+      echo "================================================="
+      (bundle update && bundle exec rake ci) || set_failed_status
+    done
   else
-    echo "=========================================================================="
-    echo "$PACKAGE was modified, running acceptance tests."
-    echo "=========================================================================="
-    (bundle update && bundle exec rake ci:acceptance) || set_failed_status
+      echo "=========================================================================="
+      echo "$PACKAGE was modified, running acceptance tests."
+      echo "=========================================================================="
+    for version in "${RUBY_VERSIONS[@]}"; do
+      rbenv global "$version"
+      echo "================================================="
+      echo "============= Using Ruby - $version ============="
+      echo "================================================="
+      (bundle update && bundle exec rake ci:acceptance) || set_failed_status
+    done
   fi
   ;;
 release)
