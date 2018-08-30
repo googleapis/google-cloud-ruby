@@ -17,3 +17,6 @@ Style/MethodDefParentheses:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-monitoring.rb"
+
+Layout/EmptyLines: # for the extra line between copyright and code
+  Enabled: false
