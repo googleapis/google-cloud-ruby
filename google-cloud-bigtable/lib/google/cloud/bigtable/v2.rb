@@ -36,6 +36,11 @@ module Google
       # 3. [Enable the Cloud Bigtable API.](https://console.cloud.google.com/apis/library/bigtable.googleapis.com)
       # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
       #
+      # ### Installation
+      # ```
+      # $ gem install google-cloud-bigtable
+      # ```
+      #
       # ### Next Steps
       # - Read the [Cloud Bigtable API Product documentation][Product Documentation]
       #   to learn more about the product and see How-to Guides.
