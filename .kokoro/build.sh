@@ -27,7 +27,7 @@ bundle update
 
 # CHANGED_DIRS is the list of top-level directories that changed. CHANGED_DIRS will be empty when run on master.
 # See https://github.com/GoogleCloudPlatform/google-cloud-python/blob/master/.kokoro/build.sh for alt implementation
-CHANGED_DIRS="$(git --no-pager diff --name-only HEAD $(git merge-base HEAD master) | grep "/" | cut -d/ -f1 | sort | uniq || true)"
+CHANGED_DIRS="$(git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f1 | sort | uniq || true)"
 
 GEMSPECS=($(git ls-files -- */*.gemspec | cut -d/ -f1))
 UPDATED_GEMS=()
@@ -64,7 +64,12 @@ presubmit)
   ;;
 continuous)
   cd $PACKAGE
-  (bundle update && bundle exec rake ci:acceptance) || set_failed_status
+  if [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
+    echo "$PACKAGE was not modified, skipping acceptance tests."
+    (bundle update && bundle exec rake ci) || set_failed_status
+  else
+    (bundle update && bundle exec rake ci:acceptance) || set_failed_status
+  fi
   ;;
 release)
   (bundle update && bundle exec rake circleci:release) || set_failed_status
