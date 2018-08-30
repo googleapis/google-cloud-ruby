@@ -65,8 +65,7 @@ s.replace(
     [
       'README.md',
       'lib/google/cloud/bigquery/data_transfer.rb',
-      'lib/google/cloud/bigquery/data_transfer/v1.rb',
-      'lib/google/cloud/bigquery/data_transfer/v1/doc/overview.rb'
+      'lib/google/cloud/bigquery/data_transfer/v1.rb'
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/bigquerydatatransfer\n',
     '[Product Documentation]: https://cloud.google.com/bigquery/transfer/\n')

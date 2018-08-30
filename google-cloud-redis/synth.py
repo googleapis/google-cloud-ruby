@@ -40,8 +40,7 @@ s.replace(
     [
       'README.md',
       'lib/google/cloud/redis.rb',
-      'lib/google/cloud/redis/v1beta1.rb',
-      'lib/google/cloud/redis/v1beta1/doc/overview.rb'
+      'lib/google/cloud/redis/v1beta1.rb'
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/redis\n',
     '[Product Documentation]: https://cloud.google.com/memorystore\n')

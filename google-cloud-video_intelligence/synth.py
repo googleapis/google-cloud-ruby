@@ -77,10 +77,7 @@ s.replace(
       'lib/google/cloud/video_intelligence.rb',
       'lib/google/cloud/video_intelligence/v1.rb',
       'lib/google/cloud/video_intelligence/v1beta1.rb',
-      'lib/google/cloud/video_intelligence/v1beta2.rb',
-      'lib/google/cloud/video_intelligence/v1/doc/overview.rb',
-      'lib/google/cloud/video_intelligence/v1beta1/doc/overview.rb',
-      'lib/google/cloud/video_intelligence/v1beta2/doc/overview.rb'
+      'lib/google/cloud/video_intelligence/v1beta2.rb'
     ],
     '/video-intelligence\\.googleapis\\.com', '/videointelligence.googleapis.com')
 

@@ -17,7 +17,6 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-import os
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -33,10 +32,6 @@ s.copy(v1_library / 'lib/google/datastore/v1')
 
 # Omitting lib/google/cloud/datastore/v1.rb for now because we are not exposing
 # the low-level API.
-
-# PERMANENT: We don't want the generated overview.rb file because we have our
-# own toplevel docs for the handwritten layer.
-os.remove('lib/google/cloud/datastore/v1/doc/overview.rb')
 
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(

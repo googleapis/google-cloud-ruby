@@ -17,7 +17,6 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-import os
 import re
 
 logging.basicConfig(level=logging.DEBUG)
@@ -55,12 +54,6 @@ s.copy(v1_instance_library / 'test/google/cloud/spanner/admin/instance/v1')
 
 # Omitting lib/google/cloud/spanner/v1.rb for now because we are not exposing
 # the low-level API.
-
-# PERMANENT: We don't want the generated overview.rb file because we have our
-# own toplevel docs for the handwritten layer.
-os.remove('lib/google/cloud/spanner/v1/doc/overview.rb')
-os.remove('lib/google/cloud/spanner/admin/database/v1/doc/overview.rb')
-os.remove('lib/google/cloud/spanner/admin/instance/v1/doc/overview.rb')
 
 # PERMANENT: We're combining three APIs into one gem.
 s.replace(

@@ -17,7 +17,6 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-import os
 import re
 
 logging.basicConfig(level=logging.DEBUG)
@@ -33,10 +32,6 @@ s.copy(v1beta1_library / 'lib/google/cloud/firestore/v1beta1')
 s.copy(v1beta1_library / 'lib/google/cloud/firestore/v1beta1.rb')
 s.copy(v1beta1_library / 'lib/google/firestore/v1beta1')
 s.copy(v1beta1_library / 'test/google/cloud/firestore/v1beta1')
-
-# PERMANENT: We don't want the generated overview.rb file because we have our
-# own toplevel docs for the handwritten layer.
-os.remove('lib/google/cloud/firestore/v1beta1/doc/overview.rb')
 
 # PERMANENT: Handwritten layer owns Firestore.new so low-level clients need to
 # use Firestore::V1beta1.new instead of Firestore.new(version: :v1beta1).
