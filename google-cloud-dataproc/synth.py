@@ -90,3 +90,13 @@ s.replace(
     'lib/google/cloud/dataproc/*/*_client.rb',
     '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
     '\\1\\2# @private\n\\2\\3')
+
+# https://github.com/googleapis/gapic-generator/issues/2278
+s.replace(
+    'Rakefile',
+    '\ndesc[^\n]+\ntask :jsondoc [^\n]+\n+(  [^\n]+\n+)*end\n',
+    '')
+s.replace(
+    'Rakefile',
+    '\n\\s*header "google-cloud-\\S+ jsondoc", "\\*"\n\\s*sh "bundle exec rake jsondoc"\n',
+    '\n')
