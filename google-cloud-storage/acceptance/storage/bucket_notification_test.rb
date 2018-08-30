@@ -15,7 +15,7 @@
 require "storage_helper"
 
 describe Google::Cloud::Storage::Bucket, :notification, :storage do
-  let(:project_email) { "serviceAccount:#{storage.project}@gs-project-accounts.iam.gserviceaccount.com" }
+  let(:project_email) { "serviceAccount:#{storage.service_account_email}" }
   let(:bucket_name) { $bucket_names.first }
   let :bucket do
     storage.bucket(bucket_name) ||

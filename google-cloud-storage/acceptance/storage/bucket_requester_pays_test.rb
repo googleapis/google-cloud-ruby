@@ -54,7 +54,7 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
   end
 
   # Pub/Sub subscription notification fixtures
-  let(:project_email) { "serviceAccount:#{storage_2.project}@gs-project-accounts.iam.gserviceaccount.com" }
+  let(:project_email) { "serviceAccount:#{storage_2.service_account_email}" }
   let(:topic_name) { "#{prefix}_bucket_notification_topic" }
   let(:topic_name_full_path) { "//pubsub.googleapis.com/projects/#{storage.project}/topics/#{topic_name}" }
   let(:custom_attrs) { { "foo" => "bar" } }

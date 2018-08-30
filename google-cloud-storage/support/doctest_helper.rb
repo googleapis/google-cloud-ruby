@@ -258,6 +258,7 @@ YARD::Doctest.configure do |doctest|
     end
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_project_service_account, OpenStruct.new(email_address: "my_service_account@gs-project-accounts.iam.gserviceaccount.com"), ["my-project"]
       mock.expect :insert_notification, notification_gapi, ["my-bucket", Google::Apis::StorageV1::Notification, Hash]
     end
   end
@@ -887,6 +888,7 @@ YARD::Doctest.configure do |doctest|
     end
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_project_service_account, OpenStruct.new(email_address: "my_service_account@gs-project-accounts.iam.gserviceaccount.com"), ["my-project"]
       mock.expect :insert_notification, notification_gapi, ["my-bucket", Google::Apis::StorageV1::Notification, Hash]
     end
   end
