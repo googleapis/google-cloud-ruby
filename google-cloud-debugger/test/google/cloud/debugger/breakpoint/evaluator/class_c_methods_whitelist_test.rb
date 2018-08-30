@@ -15,17 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::Debugger::Breakpoint::Evaluator do
-  let(:evaluator) { Google::Cloud::Debugger::Breakpoint::Evaluator }
-
-  before do
-    if ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"]
-      # Have to set it here because configure gets reset by some tests.
-      eval_time_limit = Float ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"]
-      Google::Cloud::Debugger.configure.evaluation_time_limit = eval_time_limit
-    end
-  end
-
+describe Google::Cloud::Debugger::Breakpoint::Evaluator, :class_c_methods_whitelist do
   describe "Array" do
     it "allows .new" do
       expression_must_be_kind_of "Array.new 2, nil", Array

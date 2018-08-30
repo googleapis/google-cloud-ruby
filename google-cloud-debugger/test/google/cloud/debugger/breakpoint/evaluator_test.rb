@@ -14,52 +14,8 @@
 
 
 require "helper"
-require_relative "evaluator/expression_test_helper"
-
-def readonly_func1
-  "readonly func1"
-end
-
-def readonly_func2
-  readonly_func1
-end
-
-def readonly_func3
-  local_var = 1
-  local_var += 1
-  local_var
-end
-
-def readonly_func4 arg
-  yield arg
-end
-
-def mutating_func1
-  begin
-  rescue => e
-    e.message
-  end
-end
-
-def mutating_func2
-  $global_var = 2
-end
-
-def infinite_loop
-  while true; end
-end
 
 describe Google::Cloud::Debugger::Breakpoint::Evaluator do
-  let(:evaluator) { Google::Cloud::Debugger::Breakpoint::Evaluator }
-
-  before do
-    if ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"]
-      # Have to set it here because configure gets reset by some tests.
-      eval_time_limit = Float ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"]
-      Google::Cloud::Debugger.configure.evaluation_time_limit = eval_time_limit
-    end
-  end
-
   describe ".readonly_eval_expression" do
     after do
       Google::Cloud::Debugger.configure.allow_mutating_methods = false
@@ -265,5 +221,38 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       $global_var = "global"
       expression_must_equal "mutating_func2()", 2, binding
     end
+  end
+
+  def readonly_func1
+    "readonly func1"
+  end
+
+  def readonly_func2
+    readonly_func1
+  end
+
+  def readonly_func3
+    local_var = 1
+    local_var += 1
+    local_var
+  end
+
+  def readonly_func4 arg
+    yield arg
+  end
+
+  def mutating_func1
+    begin
+    rescue => e
+      e.message
+    end
+  end
+
+  def mutating_func2
+    $global_var = 2
+  end
+
+  def infinite_loop
+    while true; end
   end
 end

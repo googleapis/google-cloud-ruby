@@ -40,9 +40,9 @@ class MockDebugger < Minitest::Spec
     service
   }
   let(:debugger) {
-    if ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"]
+    if ENV["GCLOUD_TEST_DEBUGGER_TIMEOUT"]
       # Have to set it here because configure gets reset by some tests.
-      eval_time_limit = Float ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"]
+      eval_time_limit = Float ENV["GCLOUD_TEST_DEBUGGER_TIMEOUT"]
       Google::Cloud::Debugger.configure.evaluation_time_limit = eval_time_limit
     end
 
@@ -66,7 +66,7 @@ class MockDebugger < Minitest::Spec
   let(:tracer) { agent.tracer }
   let(:transmitter) { agent.transmitter }
 
-  # Register this spec type for when :speech is used.
+  # Register this spec type for when :mock_debugger is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_debugger
   end
@@ -129,6 +129,45 @@ class MockDebugger < Minitest::Spec
       },
       "variable_table" => [random_variable_array_hash]
     }
+  end
+end
+
+class EvaluatorSpec < Minitest::Spec
+  let(:evaluator) { Google::Cloud::Debugger::Breakpoint::Evaluator }
+
+  before do
+    if ENV["GCLOUD_TEST_DEBUGGER_TIMEOUT"]
+      # Have to set it here because configure gets reset by some tests.
+      eval_time_limit = Float ENV["GCLOUD_TEST_DEBUGGER_TIMEOUT"]
+      Google::Cloud::Debugger.configure.evaluation_time_limit = eval_time_limit
+    end
+  end
+
+  # Register this spec type for when Breakpoint::Evaluator is used.
+  register_spec_type(self) do |desc, *addl|
+    desc == Google::Cloud::Debugger::Breakpoint::Evaluator
+  end
+
+  def expression_must_equal expression, expected, binding = binding()
+    result = evaluator.readonly_eval_expression binding, expression
+    result.must_equal expected
+  end
+
+  def expression_must_be_kind_of expression, expected, binding = binding()
+    result = evaluator.readonly_eval_expression binding, expression
+    result.must_be_kind_of expected
+  end
+
+  def expression_prohibited expression, binding = binding()
+    result = evaluator.readonly_eval_expression binding, expression
+    result.must_be_kind_of Google::Cloud::Debugger::MutationError
+    result.message.must_match Google::Cloud::Debugger::Breakpoint::Evaluator::PROHIBITED_OPERATION_MSG
+  end
+
+  def expression_triggers_mutation expression, binding = binding()
+    result = evaluator.readonly_eval_expression binding, expression
+    result.must_be_kind_of Google::Cloud::Debugger::MutationError
+    result.message.must_match Google::Cloud::Debugger::Breakpoint::Evaluator::MUTATION_DETECTED_MSG
   end
 end
 

@@ -78,7 +78,8 @@ namespace :test do
 
     # Increase the time limit from the default of 0.05 secs because coverage
     # may run slowly.
-    ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"] ||= "0.3"
+    coverage_timeout = ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"] || "0.3"
+    ENV["GCLOUD_TEST_DEBUGGER_TIMEOUT"] = coverage_timeout
 
     header "Running tests and coverage report"
     Rake::Task["test"].invoke
@@ -622,7 +623,7 @@ end
 
 namespace :kokoro do
   ruby_versions = ['2.3', '2.4', '2.5']
-  
+
   desc "Generate presubmit configs for kokoro"
   task :builds do
     generate_kokoro_configs ruby_versions
@@ -639,7 +640,7 @@ def generate_kokoro_configs ruby_versions
 
     # generate the continuous configs
     ruby_versions.each do |ruby_version|
-      File.open("./.kokoro/continuous/#{gem}-ruby-#{ruby_version}.cfg", 'w') do |f| 
+      File.open("./.kokoro/continuous/#{gem}-ruby-#{ruby_version}.cfg", 'w') do |f|
         config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
         f.write(config.result(binding))
       end
