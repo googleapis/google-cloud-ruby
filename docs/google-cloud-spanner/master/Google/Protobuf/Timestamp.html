@@ -156,15 +156,17 @@ where {year} is always expressed using four digits while {month}, {day},
 {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
 seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
 are optional. The &quot;Z&quot; suffix indicates the timezone (&quot;UTC&quot;); the timezone
-is required, though only UTC (as indicated by &quot;Z&quot;) is presently supported.</p>
+is required. A proto3 JSON serializer should always use UTC (as indicated by
+&quot;Z&quot;) when printing the Timestamp type and a proto3 JSON parser should be
+able to accept both UTC and other timezones (as indicated by an offset).</p>
 
 <p>For example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past
 01:30 UTC on January 15, 2017.</p>
 
 <p>In JavaScript, one can convert a Date object to this format using the
 standard <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString%5D%0Amethod.%20In%20Python,%20a%20standard%20+datetime.datetime+%20object%20can%20be%20converted%0Ato%20this%20format%20using%20%5B+strftime+%5D(https://docs.python.org/2/library/time.html#time.strftime)%0Awith%20the%20time%20format%20spec%20&#x27;%Y-%m-%dT%H:%M:%S.%fZ&#x27;.%20Likewise,%20in%20Java,%20one%0Acan%20use%20the%20Joda%20Time&#x27;s%20%5B+ISODateTimeFormat.dateTime(">toISOString()</a>+](
-<a href="http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()">http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()</a>)
-to obtain a formatter capable of generating timestamps in this format.</p>
+<a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--">http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--</a>
+) to obtain a formatter capable of generating timestamps in this format.</p>
 
 
   </div>
@@ -290,10 +292,10 @@ inclusive.</p>
       <pre class="lines">
 
 
-104</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/protobuf/timestamp.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/protobuf/timestamp.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Protobuf::Timestamp (class)">Timestamp</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -349,10 +351,10 @@ inclusive.</p>
       <pre class="lines">
 
 
-104</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/protobuf/timestamp.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/protobuf/timestamp.rb', line 106</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Protobuf::Timestamp (class)">Timestamp</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

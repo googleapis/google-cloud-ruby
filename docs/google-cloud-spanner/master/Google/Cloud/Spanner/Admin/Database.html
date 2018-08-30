@@ -95,6 +95,11 @@ steps:</p>
 <li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication">Setup Authentication.</a></li>
 </ol>
 
+<h3>Installation</h3>
+
+<pre class="code ruby"><code class="ruby">$ gem install google-cloud-spanner
+</code></pre>
+
 <h3>Next Steps</h3>
 
 <ul>
@@ -414,11 +419,6 @@ is used.</p>
       <pre class="lines">
 
 
-125
-126
-127
-128
-129
 130
 131
 132
@@ -426,10 +426,15 @@ is used.</p>
 134
 135
 136
-137</pre>
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database.rb', line 130</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v1</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Spanner::Admin::Database::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>
