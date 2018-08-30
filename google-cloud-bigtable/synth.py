@@ -51,6 +51,13 @@ s.replace(
     ],
     "Gem.loaded_specs\\['google-cloud-bigtable-admin'\\]",
     "Gem.loaded_specs['google-cloud-bigtable']")
+s.replace(
+    [
+      'lib/google/cloud/bigtable/admin.rb',
+      'lib/google/cloud/bigtable/admin/v2.rb'
+    ],
+    '# \\$ gem install google-cloud-bigtable-admin',
+    '# $ gem install google-cloud-bigtable')
 
 # PERMANENT: Handwritten layer owns Bigtable.new so low-level clients need to
 # use Bigtable::V2.new instead of Bigtable.new(version: :v2). Update the

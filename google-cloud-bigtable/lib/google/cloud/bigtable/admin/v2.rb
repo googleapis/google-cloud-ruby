@@ -41,7 +41,7 @@ module Google
         #
         # ### Installation
         # ```
-        # $ gem install google-cloud-bigtable-admin
+        # $ gem install google-cloud-bigtable
         # ```
         #
         # ### Next Steps
