@@ -38,8 +38,7 @@ s.replace(
     [
       'README.md',
       'lib/google/cloud/kms.rb',
-      'lib/google/cloud/kms/v1.rb',
-      'lib/google/cloud/kms/v1/doc/overview.rb'
+      'lib/google/cloud/kms/v1.rb'
     ],
     '/kms\\.googleapis\\.com', '/cloudkms.googleapis.com')
 

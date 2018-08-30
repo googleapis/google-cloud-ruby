@@ -17,7 +17,6 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-import os
 import re
 
 logging.basicConfig(level=logging.DEBUG)
@@ -43,11 +42,6 @@ s.copy(v2_admin_library / 'lib/google/cloud/bigtable/admin/v2.rb')
 s.copy(v2_admin_library / 'lib/google/cloud/bigtable/admin.rb')
 s.copy(v2_admin_library / 'lib/google/bigtable/admin/v2')
 s.copy(v2_admin_library / 'test/google/cloud/bigtable/admin/v2')
-
-# PERMANENT: We don't want the generated overview.rb files because we have our
-# own toplevel docs for the handwritten layer.
-os.remove('lib/google/cloud/bigtable/v2/doc/overview.rb')
-os.remove('lib/google/cloud/bigtable/admin/v2/doc/overview.rb')
 
 # PERMANENT: We're combining bigtable and bigtable-admin into one gem.
 s.replace(

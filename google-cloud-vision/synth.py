@@ -17,7 +17,6 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-import os
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -30,11 +29,6 @@ v1_library = gapic.ruby_library(
 s.copy(v1_library / 'lib/google/cloud/vision/v1')
 s.copy(v1_library / 'lib/google/cloud/vision/v1.rb')
 s.copy(v1_library / 'test/google/cloud/vision/v1')
-
-# PERMANENT: We don't want the generated overview.rb file because we have our
-# own toplevel docs for the handwritten layer.
-# REMOVE when we migrate to gapic-only.
-os.remove('lib/google/cloud/vision/v1/doc/overview.rb')
 
 # PERMANENT: Handwritten layer owns Vision.new so low-level clients need to
 # use Vision::V1.new instead of Vision.new(version: :v1). Update the examples

@@ -54,9 +54,7 @@ s.replace(
       'README.md',
       'lib/google/cloud/os_login.rb',
       'lib/google/cloud/os_login/v1.rb',
-      'lib/google/cloud/os_login/v1beta.rb',
-      'lib/google/cloud/os_login/v1/doc/overview.rb',
-      'lib/google/cloud/os_login/v1beta/doc/overview.rb'
+      'lib/google/cloud/os_login/v1beta.rb'
     ],
     '/os-login\\.googleapis\\.com', '/oslogin.googleapis.com')
 
@@ -66,9 +64,7 @@ s.replace(
       'README.md',
       'lib/google/cloud/os_login.rb',
       'lib/google/cloud/os_login/v1.rb',
-      'lib/google/cloud/os_login/v1beta.rb',
-      'lib/google/cloud/os_login/v1/doc/overview.rb',
-      'lib/google/cloud/os_login/v1beta/doc/overview.rb'
+      'lib/google/cloud/os_login/v1beta.rb'
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/os-login\n',
     '[Product Documentation]: https://cloud.google.com/compute/docs/oslogin/rest/\n')

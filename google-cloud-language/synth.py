@@ -69,9 +69,7 @@ s.replace(
       'README.md',
       'lib/google/cloud/language.rb',
       'lib/google/cloud/language/v1.rb',
-      'lib/google/cloud/language/v1beta2.rb',
-      'lib/google/cloud/language/v1/doc/overview.rb',
-      'lib/google/cloud/language/v1beta2/doc/overview.rb'
+      'lib/google/cloud/language/v1beta2.rb'
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/language\n',
     '[Product Documentation]: https://cloud.google.com/natural-language\n')

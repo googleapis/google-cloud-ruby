@@ -51,6 +51,8 @@ s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-bigquery-data_transfer.gemspec', merge=merge_gemspec)
 
+print(str(v1_library))
+
 # PERMANENT: Use custom credentials env variable names
 s.replace(
     'lib/google/cloud/bigquery/data_transfer/v1/credentials.rb',
@@ -65,8 +67,7 @@ s.replace(
     [
       'README.md',
       'lib/google/cloud/bigquery/data_transfer.rb',
-      'lib/google/cloud/bigquery/data_transfer/v1.rb',
-      'lib/google/cloud/bigquery/data_transfer/v1/doc/overview.rb'
+      'lib/google/cloud/bigquery/data_transfer/v1.rb'
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/bigquerydatatransfer\n',
     '[Product Documentation]: https://cloud.google.com/bigquery/transfer/\n')

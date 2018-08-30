@@ -17,7 +17,6 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-import os
 import re
 
 logging.basicConfig(level=logging.DEBUG)
@@ -33,10 +32,6 @@ s.copy(v2_library / 'lib/google/cloud/debugger/v2')
 s.copy(v2_library / 'lib/google/cloud/debugger/v2.rb')
 s.copy(v2_library / 'lib/google/devtools')
 s.copy(v2_library / 'test/google/cloud/debugger/v2')
-
-# PERMANENT: We don't want the generated overview.rb file because we have our
-# own toplevel docs for the handwritten layer.
-os.remove('lib/google/cloud/debugger/v2/doc/overview.rb')
 
 # PERMANENT: Handwritten layer owns Debugger.new so low-level clients need to
 # use Debugger::V2.new instead of Debugger.new(version: :v2). Update the
