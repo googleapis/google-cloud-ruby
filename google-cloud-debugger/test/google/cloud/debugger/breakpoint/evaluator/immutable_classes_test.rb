@@ -15,7 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::Debugger::Breakpoint::Evaluator, :evaluator do
+describe Google::Cloud::Debugger::Breakpoint::Evaluator, :immutable_classes do
   describe "Bignum" do
     it "allows #multiplication" do
       expression_must_equal "123123123123123123123 * 3",

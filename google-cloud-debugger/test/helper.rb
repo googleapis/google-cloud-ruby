@@ -143,9 +143,9 @@ class EvaluatorSpec < Minitest::Spec
     end
   end
 
-  # Register this spec type for when :evaluator is used.
+  # Register this spec type for when Breakpoint::Evaluator is used.
   register_spec_type(self) do |desc, *addl|
-    addl.include? :evaluator
+    desc == Google::Cloud::Debugger::Breakpoint::Evaluator
   end
 
   def expression_must_equal expression, expected, binding = binding()

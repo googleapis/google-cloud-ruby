@@ -15,7 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::Debugger::Breakpoint::Evaluator, :evaluator do
+describe Google::Cloud::Debugger::Breakpoint::Evaluator, :class_c_methods_whitelist do
   describe "Array" do
     it "allows .new" do
       expression_must_be_kind_of "Array.new 2, nil", Array

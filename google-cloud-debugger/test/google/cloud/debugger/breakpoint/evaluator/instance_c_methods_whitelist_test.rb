@@ -15,7 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::Debugger::Breakpoint::Evaluator, :evaluator do
+describe Google::Cloud::Debugger::Breakpoint::Evaluator, :instance_c_methods_whitelist do
   describe "Array" do
     it "allows #size" do
       expression_must_equal "[1,2,3].size", 3

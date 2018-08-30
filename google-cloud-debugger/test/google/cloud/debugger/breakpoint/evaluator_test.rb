@@ -15,7 +15,7 @@
 
 require "helper"
 
-describe Google::Cloud::Debugger::Breakpoint::Evaluator, :evaluator do
+describe Google::Cloud::Debugger::Breakpoint::Evaluator do
   describe ".readonly_eval_expression" do
     after do
       Google::Cloud::Debugger.configure.allow_mutating_methods = false
