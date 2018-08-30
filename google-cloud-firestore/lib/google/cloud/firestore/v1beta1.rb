@@ -35,6 +35,11 @@ module Google
       # 3. [Enable the Google Cloud Firestore API.](https://console.cloud.google.com/apis/library/firestore.googleapis.com)
       # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
       #
+      # ### Installation
+      # ```
+      # $ gem install google-cloud-firestore
+      # ```
+      #
       # ### Next Steps
       # - Read the [Google Cloud Firestore API Product documentation][Product Documentation]
       #   to learn more about the product and see How-to Guides.
