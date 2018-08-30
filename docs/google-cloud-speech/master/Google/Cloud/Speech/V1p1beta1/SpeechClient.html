@@ -452,7 +452,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-96
 97
 98
 99
@@ -549,10 +548,11 @@ custom error handling.</p>
 190
 191
 192
-193</pre>
+193
+194</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/speech_client.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/speech_client.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -779,7 +779,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-120
 121
 122
 123
@@ -789,10 +788,11 @@ retries, etc.</p>
 127
 128
 129
-130</pre>
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/helpers.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/helpers.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_operation'>get_operation</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_proto_op'>proto_op</span> <span class='op'>=</span> <span class='ivar'>@operations_client</span><span class='period'>.</span><span class='id identifier rubyid_get_operation'>get_operation</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='id identifier rubyid_options'>options</span>
@@ -970,7 +970,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-307
 308
 309
 310
@@ -988,10 +987,11 @@ retries, etc.</p>
 322
 323
 324
-325</pre>
+325
+326</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/speech_client.rb', line 307</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/speech_client.rb', line 308</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_long_running_recognize'>long_running_recognize</span> \
     <span class='id identifier rubyid_config'>config</span><span class='comma'>,</span>
@@ -1192,7 +1192,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-233
 234
 235
 236
@@ -1203,10 +1202,11 @@ retries, etc.</p>
 241
 242
 243
-244</pre>
+244
+245</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/speech_client.rb', line 233</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/speech_client.rb', line 234</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_recognize'>recognize</span> \
     <span class='id identifier rubyid_config'>config</span><span class='comma'>,</span>
@@ -1355,7 +1355,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-69
 70
 71
 72
@@ -1374,10 +1373,11 @@ retries, etc.</p>
 85
 86
 87
-88</pre>
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/helpers.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1p1beta1/helpers.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_recognize'>streaming_recognize</span> <span class='id identifier rubyid_streaming_config'>streaming_config</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_streaming_config'>streaming_config</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Hash</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span>
