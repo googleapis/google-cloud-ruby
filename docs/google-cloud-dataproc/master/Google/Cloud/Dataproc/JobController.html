@@ -285,7 +285,6 @@ is used.</p>
       <pre class="lines">
 
 
-201
 202
 203
 204
@@ -297,10 +296,11 @@ is used.</p>
 210
 211
 212
-213</pre>
+213
+214</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc.rb', line 201</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc.rb', line 202</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v1</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="../Dataproc.html#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Dataproc::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>
