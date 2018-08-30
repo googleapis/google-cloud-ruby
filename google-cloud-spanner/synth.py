@@ -63,6 +63,15 @@ s.replace(
     ],
     "Gem.loaded_specs\\['google-cloud-spanner-admin-\\w+'\\]",
     "Gem.loaded_specs['google-cloud-spanner']")
+s.replace(
+    [
+      'lib/google/cloud/spanner/admin/database.rb',
+      'lib/google/cloud/spanner/admin/database/v1.rb',
+      'lib/google/cloud/spanner/admin/instance.rb',
+      'lib/google/cloud/spanner/admin/instance/v1.rb'
+    ],
+    '# \\$ gem install google-cloud-spanner-admin-\\w+',
+    '# $ gem install google-cloud-spanner')
 
 # PERMANENT: Handwritten layer owns Spanner.new so low-level clients need to
 # use Spanner::V1.new instead of Spanner.new(version: :v1). Update the
