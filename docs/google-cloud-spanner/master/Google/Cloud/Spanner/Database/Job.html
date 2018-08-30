@@ -358,14 +358,14 @@ retrieve the database object once the operation has been completed.</p>
       <pre class="lines">
 
 
-86
 87
 88
 89
-90</pre>
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_database'>database</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id identifier rubyid_done?'>done?</span>
@@ -434,12 +434,12 @@ retrieve the database object once the operation has been completed.</p>
       <pre class="lines">
 
 
-107
 108
-109</pre>
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_done?'>done?</span>
   <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span>
@@ -510,13 +510,13 @@ the status code and message, or <code>nil</code> if no error occurred.</p>
       <pre class="lines">
 
 
-149
 150
 151
-152</pre>
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error'>error</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id identifier rubyid_error?'>error?</span>
@@ -584,12 +584,12 @@ the status code and message, or <code>nil</code> if no error occurred.</p>
       <pre class="lines">
 
 
-126
 127
-128</pre>
+128
+129</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error?'>error?</span>
   <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
@@ -664,13 +664,13 @@ instance.</p>
       <pre class="lines">
 
 
-173
 174
 175
-176</pre>
+176
+177</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span>
   <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_reload!'>reload!</span>
@@ -724,12 +724,12 @@ reloads will incrementally increase.</p>
       <pre class="lines">
 
 
-195
 196
-197</pre>
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/database/job.rb', line 196</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
   <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
