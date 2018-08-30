@@ -65,9 +65,14 @@ presubmit)
 continuous)
   cd $PACKAGE
   if [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
+    echo "=========================================================================="
     echo "$PACKAGE was not modified, skipping acceptance tests."
+    echo "=========================================================================="
     (bundle update && bundle exec rake ci) || set_failed_status
   else
+    echo "=========================================================================="
+    echo "$PACKAGE was modified, running acceptance tests."
+    echo "=========================================================================="
     (bundle update && bundle exec rake ci:acceptance) || set_failed_status
   fi
   ;;
