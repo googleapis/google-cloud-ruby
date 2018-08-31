@@ -180,38 +180,6 @@ this service.</p>
 
 
 
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#asset_service_stub-instance_method" title="#asset_service_stub (instance method)">#<strong>asset_service_stub</strong>  &#x21d2; Google::Cloud::Asset::V1beta1::AssetService::Stub </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-    
-  </ul>
-
 
 
 
@@ -258,7 +226,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#batch_get_assets_history-instance_method" title="#batch_get_assets_history (instance method)">#<strong>batch_get_assets_history</strong>(parent, asset_names, content_type, read_time_window, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse </a>
+      <a href="#batch_get_assets_history-instance_method" title="#batch_get_assets_history (instance method)">#<strong>batch_get_assets_history</strong>(parent, content_type, read_time_window, asset_names: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse </a>
     
 
     
@@ -281,7 +249,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#export_assets-instance_method" title="#export_assets (instance method)">#<strong>export_assets</strong>(parent, content_types, output_config, read_time: nil, asset_types: nil, options: nil)  &#x21d2; Google::Gax::Operation </a>
+      <a href="#export_assets-instance_method" title="#export_assets (instance method)">#<strong>export_assets</strong>(parent, output_config, read_time: nil, asset_types: nil, content_types: nil, options: nil)  &#x21d2; Google::Gax::Operation </a>
     
 
     
@@ -468,8 +436,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-110
-111
 112
 113
 114
@@ -560,10 +526,12 @@ custom error handling.</p>
 199
 200
 201
-202</pre>
+202
+203
+204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -665,717 +633,6 @@ custom error handling.</p>
   
 </div>
 
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="asset_service_stub-instance_method">
-  
-    #<strong>asset_service_stub</strong>  &#x21d2; <tt>Google::Cloud::Asset::V1beta1::AssetService::Stub</tt>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Google::Cloud::Asset::V1beta1::AssetService::Stub</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 40</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::AssetServiceClient (class)">AssetServiceClient</a></span></span>
-  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:asset_service_stub</span>
-
-  <span class='comment'># The default address of the service.
-</span>  <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Asset::V1beta1::AssetServiceClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cloudasset.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='comment'># The default port of the service.
-</span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Asset::V1beta1::AssetServiceClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
-
-  <span class='comment'># The default set of gRPC interceptors.
-</span>  <span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Asset::V1beta1::AssetServiceClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-
-  <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Asset::V1beta1::AssetServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
-
-  <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
-</span>  <span class='comment'># this service.
-</span>  <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Asset::V1beta1::AssetServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-  <span class='comment'># @private
-</span>  <span class='kw'>class</span> <span class='const'>OperationsClient</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span><span class='op'>::</span><span class='const'>OperationsClient</span>
-    <span class='kw'>self</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::AssetServiceClient (class)">AssetServiceClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Asset::V1beta1::AssetServiceClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span>
-    <span class='kw'>self</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::AssetServiceClient (class)">AssetServiceClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Asset::V1beta1::AssetServiceClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span>
-  <span class='kw'>end</span>
-
-  <span class='const'>PROJECT_PATH_TEMPLATE</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PathTemplate</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/{project}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PROJECT_PATH_TEMPLATE</span>
-
-  <span class='comment'># Returns a fully-qualified project resource name string.
-</span>  <span class='comment'># @param project [String]
-</span>  <span class='comment'># @return [String]
-</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
-    <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
-      <span class='symbol'>:&quot;project&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project'>project</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-</span>  <span class='comment'>#   Provides the means for authenticating requests made by the client. This parameter can
-</span>  <span class='comment'>#   be many types.
-</span>  <span class='comment'>#   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-</span>  <span class='comment'>#   authenticating requests made by this client.
-</span>  <span class='comment'>#   A `String` will be treated as the path to the keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-</span>  <span class='comment'>#   credentials for this client.
-</span>  <span class='comment'>#   A `GRPC::Core::Channel` will be used to make calls through.
-</span>  <span class='comment'>#   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-</span>  <span class='comment'>#   should already be composed with a `GRPC::Core::CallCredentials` object.
-</span>  <span class='comment'>#   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-</span>  <span class='comment'>#   metadata for requests, generally, to give OAuth credentials.
-</span>  <span class='comment'># @param scopes [Array&lt;String&gt;]
-</span>  <span class='comment'>#   The OAuth scopes for this service. This parameter is ignored if
-</span>  <span class='comment'>#   an updater_proc is supplied.
-</span>  <span class='comment'># @param client_config [Hash]
-</span>  <span class='comment'>#   A Hash for call options for each method. See
-</span>  <span class='comment'>#   Google::Gax#construct_settings for the structure of
-</span>  <span class='comment'>#   this data. Falls back to the default config if not specified
-</span>  <span class='comment'>#   or the specified config is missing data points.
-</span>  <span class='comment'># @param timeout [Numeric]
-</span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
-</span>  <span class='comment'># @param metadata [Hash]
-</span>  <span class='comment'>#   Default metadata to be sent with each request. This can be overridden on a per call basis.
-</span>  <span class='comment'># @param exception_transformer [Proc]
-</span>  <span class='comment'>#   An optional proc that intercepts any exceptions raised during an API call to inject
-</span>  <span class='comment'>#   custom error handling.
-</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
-      <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Asset::V1beta1::AssetServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
-      <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
-      <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Asset::V1beta1::AssetServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
-      <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
-    <span class='comment'># These require statements are intentionally placed here to initialize
-</span>    <span class='comment'># the gRPC module only when it&#39;s required.
-</span>    <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
-</span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/asset/v1beta1/asset_service_services_pb</span><span class='tstring_end'>&quot;</span></span>
-
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Asset::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
-
-    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Asset::V1beta1::AssetServiceClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
-      <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
-      <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
-      <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
-      <span class='label'>lib_name:</span> <span class='id identifier rubyid_lib_name'>lib_name</span><span class='comma'>,</span>
-      <span class='label'>lib_version:</span> <span class='id identifier rubyid_lib_version'>lib_version</span><span class='comma'>,</span>
-    <span class='rparen'>)</span>
-
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Asset::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta1.html#new-class_method" title="Google::Cloud::Asset::V1beta1.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>ChannelCredentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Proc</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-asset</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
-
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-
-    <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>asset_service_client_config.json</span><span class='tstring_end'>&quot;</span></span>
-    <span class='rparen'>)</span>
-    <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
-        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.cloud.asset.v1beta1.AssetService</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-        <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
-        <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
-        <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-        <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
-      <span class='rparen'>)</span>
-    <span class='kw'>end</span>
-
-    <span class='comment'># Allow overriding the service path/port in subclasses.
-</span>    <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
-    <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
-    <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
-    <span class='ivar'>@asset_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
-      <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
-      <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
-      <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
-      <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
-      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
-      <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'>AssetService</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
-    <span class='rparen'>)</span>
-
-    <span class='ivar'>@export_assets</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@asset_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:export_assets</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>export_assets</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-    <span class='ivar'>@batch_get_assets_history</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
-      <span class='ivar'>@asset_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:batch_get_assets_history</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>batch_get_assets_history</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
-      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
-    <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Service calls
-</span>
-  <span class='comment'># Exports assets with time and resource types to a given Google Cloud Storage
-</span>  <span class='comment'># location. The output format is newline delimited JSON.
-</span>  <span class='comment'># This API implements the {Google::Longrunning::Operation} API allowing users
-</span>  <span class='comment'># to keep track of the export.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   Required. The relative name of the root asset. It can only be an
-</span>  <span class='comment'>#   organization number (e.g. &quot;organizations/123&quot;) or a project number
-</span>  <span class='comment'>#   (e.g. &quot;projects/12345&quot;).
-</span>  <span class='comment'># @param content_types [Array&lt;Google::Cloud::Asset::V1beta1::ContentType&gt;]
-</span>  <span class='comment'>#   A list of asset content types. If specified, only matching content will be
-</span>  <span class='comment'>#   returned. Otherwise, no content but the asset name will be returned.
-</span>  <span class='comment'># @param output_config [Google::Cloud::Asset::V1beta1::OutputConfig | Hash]
-</span>  <span class='comment'>#   Required. Output configuration indicating where the results will be output
-</span>  <span class='comment'>#   to. All results will be in newline delimited JSON format.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Asset::V1beta1::OutputConfig`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param read_time [Google::Protobuf::Timestamp | Hash]
-</span>  <span class='comment'>#   Timestamp to take an asset snapshot. This can only be current or past
-</span>  <span class='comment'>#   time. If not specified, the current time will be used. Due to delays in
-</span>  <span class='comment'>#   resource data collection and indexing, there is a volatile window during
-</span>  <span class='comment'>#   which running the same query may get different results.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Protobuf::Timestamp`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param asset_types [Array&lt;String&gt;]
-</span>  <span class='comment'>#   A list of asset types to take a snapshot for. Example:
-</span>  <span class='comment'>#   &quot;google.compute.disk&quot;. If specified, only matching assets will be returned.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @return [Google::Gax::Operation]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/asset&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   asset_service_client = Google::Cloud::Asset.new(version: :v1beta1)
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path(&quot;[PROJECT]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +content_types+:
-</span>  <span class='comment'>#   content_types = []
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +output_config+:
-</span>  <span class='comment'>#   output_config = {}
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Register a callback during the method call.
-</span>  <span class='comment'>#   operation = asset_service_client.export_assets(formatted_parent, content_types, output_config) do |op|
-</span>  <span class='comment'>#     raise op.results.message if op.error?
-</span>  <span class='comment'>#     op_results = op.results
-</span>  <span class='comment'>#     # Process the results.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     metadata = op.metadata
-</span>  <span class='comment'>#     # Process the metadata.
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Or use the return value to register a callback.
-</span>  <span class='comment'>#   operation.on_done do |op|
-</span>  <span class='comment'>#     raise op.results.message if op.error?
-</span>  <span class='comment'>#     op_results = op.results
-</span>  <span class='comment'>#     # Process the results.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     metadata = op.metadata
-</span>  <span class='comment'>#     # Process the metadata.
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Manually reload the operation.
-</span>  <span class='comment'>#   operation.reload!
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # Or block until the operation completes, triggering callbacks on
-</span>  <span class='comment'>#   # completion.
-</span>  <span class='comment'>#   operation.wait_until_done!
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_export_assets'>export_assets</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_content_types'>content_types</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_output_config'>output_config</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>asset_types:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>content_types:</span> <span class='id identifier rubyid_content_types'>content_types</span><span class='comma'>,</span>
-      <span class='label'>output_config:</span> <span class='id identifier rubyid_output_config'>output_config</span><span class='comma'>,</span>
-      <span class='label'>read_time:</span> <span class='id identifier rubyid_read_time'>read_time</span><span class='comma'>,</span>
-      <span class='label'>asset_types:</span> <span class='id identifier rubyid_asset_types'>asset_types</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ExportAssetsRequest.html" title="Google::Cloud::Asset::V1beta1::ExportAssetsRequest (class)">ExportAssetsRequest</a></span></span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Operation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-      <span class='ivar'>@export_assets</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='ivar'>@operations_client</span><span class='comma'>,</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ExportAssetsResponse.html" title="Google::Cloud::Asset::V1beta1::ExportAssetsResponse (class)">ExportAssetsResponse</a></span></span><span class='comma'>,</span>
-      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ExportAssetsRequest.html" title="Google::Cloud::Asset::V1beta1::ExportAssetsRequest (class)">ExportAssetsRequest</a></span></span><span class='comma'>,</span>
-      <span class='label'>call_options:</span> <span class='id identifier rubyid_options'>options</span>
-    <span class='rparen'>)</span>
-    <span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_operation'>operation</span><span class='op'>|</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_operation'>operation</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
-    <span class='id identifier rubyid_operation'>operation</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Batch gets assets update history that overlaps a time window.
-</span>  <span class='comment'># For RESOURCE content, this API outputs history with asset in both
-</span>  <span class='comment'># non-delete or deleted status.
-</span>  <span class='comment'># For IAM_POLICY content, this API only outputs history when asset and its
-</span>  <span class='comment'># attached IAM POLICY both exist. So there may be gaps in the output history.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># @param parent [String]
-</span>  <span class='comment'>#   Required. The relative name of the root asset. It can only be an
-</span>  <span class='comment'>#   organization ID (e.g. &quot;organizations/123&quot;) or a project ID
-</span>  <span class='comment'>#   (e.g. &quot;projects/12345&quot;).
-</span>  <span class='comment'># @param asset_names [Array&lt;String&gt;]
-</span>  <span class='comment'>#   A list of the full names of the assets. See:
-</span>  <span class='comment'>#   https://cloud.google.com/apis/design/resource_names#full_resource_name
-</span>  <span class='comment'>#   Example:
-</span>  <span class='comment'>#   &quot;//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1&quot;.
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   The request becomes a no-op if the asset name list is empty.
-</span>  <span class='comment'># @param content_type [Google::Cloud::Asset::V1beta1::ContentType]
-</span>  <span class='comment'>#   Required. The content type.
-</span>  <span class='comment'># @param read_time_window [Google::Cloud::Asset::V1beta1::TimeWindow | Hash]
-</span>  <span class='comment'>#   Required. The time window for the asset history. The returned results
-</span>  <span class='comment'>#   contain all temporal assets whose time window overlap with
-</span>  <span class='comment'>#   read_time_window.
-</span>  <span class='comment'>#   A hash of the same form as `Google::Cloud::Asset::V1beta1::TimeWindow`
-</span>  <span class='comment'>#   can also be provided.
-</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
-</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
-</span>  <span class='comment'>#   retries, etc.
-</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
-</span>  <span class='comment'># @yieldparam result [Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse]
-</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
-</span>  <span class='comment'># @return [Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse]
-</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
-</span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/asset&quot;
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   asset_service_client = Google::Cloud::Asset.new(version: :v1beta1)
-</span>  <span class='comment'>#   formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path(&quot;[PROJECT]&quot;)
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +asset_names+:
-</span>  <span class='comment'>#   asset_names = []
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +content_type+:
-</span>  <span class='comment'>#   content_type = :CONTENT_TYPE_UNSPECIFIED
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#   # TODO: Initialize +read_time_window+:
-</span>  <span class='comment'>#   read_time_window = {}
-</span>  <span class='comment'>#   response = asset_service_client.batch_get_assets_history(formatted_parent, asset_names, content_type, read_time_window)
-</span>
-  <span class='kw'>def</span> <span class='id identifier rubyid_batch_get_assets_history'>batch_get_assets_history</span> \
-      <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_asset_names'>asset_names</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_read_time_window'>read_time_window</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-      <span class='label'>asset_names:</span> <span class='id identifier rubyid_asset_names'>asset_names</span><span class='comma'>,</span>
-      <span class='label'>content_type:</span> <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span>
-      <span class='label'>read_time_window:</span> <span class='id identifier rubyid_read_time_window'>read_time_window</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BatchGetAssetsHistoryRequest.html" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@batch_get_assets_history</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
 
   <div id="class_method_details" class="method_details_list">
     <h2>Class Method Details</h2>
@@ -1434,14 +691,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-75
-76
 77
 78
-79</pre>
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -1462,7 +719,7 @@ custom error handling.</p>
       <div class="method_details first">
   <h3 class="signature first" id="batch_get_assets_history-instance_method">
   
-    #<strong>batch_get_assets_history</strong>(parent, asset_names, content_type, read_time_window, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="BatchGetAssetsHistoryResponse.html" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse (class)">Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse</a></span></tt> 
+    #<strong>batch_get_assets_history</strong>(parent, content_type, read_time_window, asset_names: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="BatchGetAssetsHistoryResponse.html" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse (class)">Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryResponse</a></span></tt> 
   
 
   
@@ -1490,15 +747,12 @@ attached IAM POLICY both exist. So there may be gaps in the output history.</p>
 <span class='id identifier rubyid_asset_service_client'>asset_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Asset.html#new-class_method" title="Google::Cloud::Asset.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::AssetServiceClient (class)">AssetServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +asset_names+:
-</span><span class='id identifier rubyid_asset_names'>asset_names</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-
 <span class='comment'># TODO: Initialize +content_type+:
 </span><span class='id identifier rubyid_content_type'>content_type</span> <span class='op'>=</span> <span class='symbol'>:CONTENT_TYPE_UNSPECIFIED</span>
 
 <span class='comment'># TODO: Initialize +read_time_window+:
 </span><span class='id identifier rubyid_read_time_window'>read_time_window</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_asset_service_client'>asset_service_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_get_assets_history'>batch_get_assets_history</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_asset_names'>asset_names</span><span class='comma'>,</span> <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span> <span class='id identifier rubyid_read_time_window'>read_time_window</span><span class='rparen'>)</span></code></pre>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_asset_service_client'>asset_service_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_get_assets_history'>batch_get_assets_history</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span> <span class='id identifier rubyid_read_time_window'>read_time_window</span><span class='rparen'>)</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -1517,26 +771,6 @@ attached IAM POLICY both exist. So there may be gaps in the output history.</p>
         <div class='inline'><p>Required. The relative name of the root asset. It can only be an
 organization ID (e.g. &quot;organizations/123&quot;) or a project ID
 (e.g. &quot;projects/12345&quot;).</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>asset_names</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>A list of the full names of the assets. See:
-<a href="https://cloud.google.com/apis/design/resource_names#full_resource_name">https://cloud.google.com/apis/design/resource_names#full_resource_name</a>
-Example:
-&quot;//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1&quot;.</p>
-
-<p>The request becomes a no-op if the asset name list is empty.</p>
 </div>
       
     </li>
@@ -1571,6 +805,26 @@ contain all temporal assets whose time window overlap with
 read_time_window.
 A hash of the same form as <code>Google::Cloud::Asset::V1beta1::TimeWindow</code>
 can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>asset_names</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of the full names of the assets. See:
+<a href="https://cloud.google.com/apis/design/resource_names#full_resource_name">https://cloud.google.com/apis/design/resource_names#full_resource_name</a>
+Example:
+&quot;//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1&quot;.</p>
+
+<p>The request becomes a no-op if the asset name list is empty.</p>
 </div>
       
     </li>
@@ -1673,6 +927,10 @@ retries, etc.</p>
       <pre class="lines">
 
 
+348
+349
+350
+351
 352
 353
 354
@@ -1684,27 +942,23 @@ retries, etc.</p>
 360
 361
 362
-363
-364
-365
-366
-367</pre>
+363</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 352</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 348</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_get_assets_history'>batch_get_assets_history</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_asset_names'>asset_names</span><span class='comma'>,</span>
     <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span>
     <span class='id identifier rubyid_read_time_window'>read_time_window</span><span class='comma'>,</span>
+    <span class='label'>asset_names:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-    <span class='label'>asset_names:</span> <span class='id identifier rubyid_asset_names'>asset_names</span><span class='comma'>,</span>
     <span class='label'>content_type:</span> <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span>
-    <span class='label'>read_time_window:</span> <span class='id identifier rubyid_read_time_window'>read_time_window</span>
+    <span class='label'>read_time_window:</span> <span class='id identifier rubyid_read_time_window'>read_time_window</span><span class='comma'>,</span>
+    <span class='label'>asset_names:</span> <span class='id identifier rubyid_asset_names'>asset_names</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BatchGetAssetsHistoryRequest.html" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@batch_get_assets_history</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -1717,7 +971,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="export_assets-instance_method">
   
-    #<strong>export_assets</strong>(parent, content_types, output_config, read_time: nil, asset_types: nil, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
+    #<strong>export_assets</strong>(parent, output_config, read_time: nil, asset_types: nil, content_types: nil, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
   
 
   
@@ -1744,14 +998,11 @@ to keep track of the export.</p>
 <span class='id identifier rubyid_asset_service_client'>asset_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Asset.html#new-class_method" title="Google::Cloud::Asset.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::AssetServiceClient (class)">AssetServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +content_types+:
-</span><span class='id identifier rubyid_content_types'>content_types</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-
 <span class='comment'># TODO: Initialize +output_config+:
 </span><span class='id identifier rubyid_output_config'>output_config</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
 <span class='comment'># Register a callback during the method call.
-</span><span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='id identifier rubyid_asset_service_client'>asset_service_client</span><span class='period'>.</span><span class='id identifier rubyid_export_assets'>export_assets</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_content_types'>content_types</span><span class='comma'>,</span> <span class='id identifier rubyid_output_config'>output_config</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
+</span><span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='id identifier rubyid_asset_service_client'>asset_service_client</span><span class='period'>.</span><span class='id identifier rubyid_export_assets'>export_assets</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_output_config'>output_config</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='kw'>if</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
   <span class='id identifier rubyid_op_results'>op_results</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span>
   <span class='comment'># Process the results.
@@ -1794,22 +1045,6 @@ to keep track of the export.</p>
         <div class='inline'><p>Required. The relative name of the root asset. It can only be an
 organization number (e.g. &quot;organizations/123&quot;) or a project number
 (e.g. &quot;projects/12345&quot;).</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>content_types</span>
-      
-      
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ContentType.html" title="Google::Cloud::Asset::V1beta1::ContentType (module)">Google::Cloud::Asset::V1beta1::ContentType</a></span>&gt;</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>A list of asset content types. If specified, only matching content will be
-returned. Otherwise, no content but the asset name will be returned.</p>
 </div>
       
     </li>
@@ -1870,6 +1105,22 @@ can also be provided.</p>
   
     <li>
       
+        <span class='name'>content_types</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="ContentType.html" title="Google::Cloud::Asset::V1beta1::ContentType (module)">Google::Cloud::Asset::V1beta1::ContentType</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of asset content types. If specified, only matching content will be
+returned. Otherwise, no content but the asset name will be returned.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>options</span>
       
       
@@ -1923,6 +1174,7 @@ retries, etc.</p>
       <pre class="lines">
 
 
+276
 277
 278
 279
@@ -1946,25 +1198,24 @@ retries, etc.</p>
 297
 298
 299
-300
-301</pre>
+300</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 277</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/asset_service_client.rb', line 276</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_export_assets'>export_assets</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_content_types'>content_types</span><span class='comma'>,</span>
     <span class='id identifier rubyid_output_config'>output_config</span><span class='comma'>,</span>
     <span class='label'>read_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>asset_types:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>content_types:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
-    <span class='label'>content_types:</span> <span class='id identifier rubyid_content_types'>content_types</span><span class='comma'>,</span>
     <span class='label'>output_config:</span> <span class='id identifier rubyid_output_config'>output_config</span><span class='comma'>,</span>
     <span class='label'>read_time:</span> <span class='id identifier rubyid_read_time'>read_time</span><span class='comma'>,</span>
-    <span class='label'>asset_types:</span> <span class='id identifier rubyid_asset_types'>asset_types</span>
+    <span class='label'>asset_types:</span> <span class='id identifier rubyid_asset_types'>asset_types</span><span class='comma'>,</span>
+    <span class='label'>content_types:</span> <span class='id identifier rubyid_content_types'>content_types</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Asset.html" title="Google::Cloud::Asset (module)">Asset</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Asset::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ExportAssetsRequest.html" title="Google::Cloud::Asset::V1beta1::ExportAssetsRequest (class)">ExportAssetsRequest</a></span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Operation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>

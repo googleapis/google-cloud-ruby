@@ -77,11 +77,11 @@ js:
   <div class="discussion">
     <h1>Ruby Client for Cloud Asset API (<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning">Alpha</a>)</h1>
 
-<p><a href="https://cloud.google.com/cloudasset">Cloud Asset API</a>:
+<p><a href="https://cloud.google.com/asset">Cloud Asset API</a>:
 The cloud asset API manages the history and inventory of cloud resources.</p>
 
 <ul>
-<li><a href="https://cloud.google.com/cloudasset">Product Documentation</a></li>
+<li><a href="https://cloud.google.com/asset">Product Documentation</a></li>
 </ul>
 
 <h2>Quick Start</h2>
@@ -92,14 +92,19 @@ steps:</p>
 <ol>
 <li><a href="https://console.cloud.google.com/project">Select or create a Cloud Platform project.</a></li>
 <li><a href="https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project">Enable billing for your project.</a></li>
-<li><a href="https://console.cloud.google.com/apis/library/cloudasset.googleapis.com">Enable the Cloud Asset API.</a></li>
+<li><a href="https://console.cloud.google.com/apis/library/asset.googleapis.com">Enable the Cloud Asset API.</a></li>
 <li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication">Setup Authentication.</a></li>
 </ol>
+
+<h3>Installation</h3>
+
+<pre class="code ruby"><code class="ruby">$ gem install google-cloud-asset
+</code></pre>
 
 <h3>Next Steps</h3>
 
 <ul>
-<li>Read the <a href="https://cloud.google.com/cloudasset">Cloud Asset API Product documentation</a>
+<li>Read the <a href="https://cloud.google.com/asset">Cloud Asset API Product documentation</a>
 to learn more about the product and see How-to Guides.</li>
 <li>View this <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md">repository&#39;s main README</a>
 to see the full list of Cloud APIs that we cover.</li>
@@ -331,12 +336,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-107
-108
-109
-110
-111
-112
 113
 114
 115
@@ -351,10 +350,16 @@ custom error handling.</p>
 124
 125
 126
-127</pre>
+127
+128
+129
+130
+131
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1.rb', line 113</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
