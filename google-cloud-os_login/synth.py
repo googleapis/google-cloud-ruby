@@ -34,7 +34,6 @@ s.copy(v1_library / 'test/google/cloud/os_login/v1')
 s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
-s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-os_login.gemspec', merge=merge_gemspec)
 

@@ -44,7 +44,6 @@ s.copy(v2_library / 'test')
 s.copy(v2_library / 'README.md')
 s.copy(v2_library / 'LICENSE')
 s.copy(v2_library / '.gitignore')
-s.copy(v2_library / '.rubocop.yml')
 s.copy(v2_library / '.yardopts')
 s.copy(v2_library / 'google-cloud-dlp.gemspec', merge=merge_gemspec)
 

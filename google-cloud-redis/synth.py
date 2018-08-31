@@ -31,7 +31,6 @@ s.copy(v1beta1_library / 'Rakefile')
 s.copy(v1beta1_library / 'README.md')
 s.copy(v1beta1_library / 'LICENSE')
 s.copy(v1beta1_library / '.gitignore')
-s.copy(v1beta1_library / '.rubocop.yml')
 s.copy(v1beta1_library / '.yardopts')
 s.copy(v1beta1_library / 'google-cloud-redis.gemspec', merge=merge_gemspec)
 
