@@ -1,5 +1,9 @@
 # Release History
 
+### 1.8.0 / 2018-08-31
+
+* Add ORC support to BigQuery (#2372)
+
 ### 1.7.1 / 2018-08-21
 
 * Update documentation.
