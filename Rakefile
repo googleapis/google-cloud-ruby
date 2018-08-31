@@ -639,13 +639,10 @@ def generate_kokoro_configs ruby_versions
     end
 
     # generate the continuous configs
-    ruby_versions.each do |ruby_version|
-      File.open("./.kokoro/continuous/#{gem}-ruby-#{ruby_version}.cfg", 'w') do |f|
-        config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
-        f.write(config.result(binding))
-      end
+    File.open("./.kokoro/continuous/#{gem}.cfg", 'w') do |f|
+      config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
+      f.write(config.result(binding))
     end
-
   end
 end
 
