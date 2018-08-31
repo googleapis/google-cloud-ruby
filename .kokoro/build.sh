@@ -79,9 +79,9 @@ continuous)
       (bundle update && bundle exec rake ci) || set_failed_status
     done
   else
-      echo "=========================================================================="
-      echo "$PACKAGE was modified, running acceptance tests."
-      echo "=========================================================================="
+    echo "=========================================================================="
+    echo "$PACKAGE was modified, running acceptance tests."
+    echo "=========================================================================="
     for version in "${RUBY_VERSIONS[@]}"; do
       rbenv global "$version"
       echo "================================================="
