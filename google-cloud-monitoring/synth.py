@@ -31,7 +31,6 @@ s.copy(v3_library / 'test')
 s.copy(v3_library / 'README.md')
 s.copy(v3_library / 'LICENSE')
 s.copy(v3_library / '.gitignore')
-s.copy(v3_library / '.rubocop.yml')
 s.copy(v3_library / '.yardopts')
 s.copy(v3_library / 'google-cloud-monitoring.gemspec', merge=merge_gemspec)
 

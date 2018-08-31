@@ -46,7 +46,6 @@ s.copy(v2beta2_library / 'Rakefile')
 s.copy(v2beta2_library / 'README.md')
 s.copy(v2beta2_library / 'LICENSE')
 s.copy(v2beta2_library / '.gitignore')
-s.copy(v2beta2_library / '.rubocop.yml')
 s.copy(v2beta2_library / '.yardopts')
 s.copy(v2beta2_library / 'google-cloud-tasks.gemspec', merge=merge_gemspec)
 
