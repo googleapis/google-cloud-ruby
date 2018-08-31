@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 
+
 require 'grpc'
 require 'google/cloud/tasks/v2beta2/cloudtasks_pb'
 

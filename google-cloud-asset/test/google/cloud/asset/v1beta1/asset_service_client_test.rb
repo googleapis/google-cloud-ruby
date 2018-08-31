@@ -74,7 +74,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
     it 'invokes export_assets without error' do
       # Create request parameters
       formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
-      content_types = []
       output_config = {}
 
       # Create expected grpc response
@@ -92,7 +91,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Asset::V1beta1::ExportAssetsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(content_types, request.content_types)
         assert_equal(Google::Gax::to_proto(output_config, Google::Cloud::Asset::V1beta1::OutputConfig), request.output_config)
         OpenStruct.new(execute: operation)
       end
@@ -106,11 +104,7 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
           client = Google::Cloud::Asset.new(version: :v1beta1)
 
           # Call method
-          response = client.export_assets(
-            formatted_parent,
-            content_types,
-            output_config
-          )
+          response = client.export_assets(formatted_parent, output_config)
 
           # Verify the response
           assert_equal(expected_response, response.response)
@@ -121,7 +115,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
     it 'invokes export_assets and returns an operation error.' do
       # Create request parameters
       formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
-      content_types = []
       output_config = {}
 
       # Create expected grpc response
@@ -138,7 +131,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Asset::V1beta1::ExportAssetsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(content_types, request.content_types)
         assert_equal(Google::Gax::to_proto(output_config, Google::Cloud::Asset::V1beta1::OutputConfig), request.output_config)
         OpenStruct.new(execute: operation)
       end
@@ -152,11 +144,7 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
           client = Google::Cloud::Asset.new(version: :v1beta1)
 
           # Call method
-          response = client.export_assets(
-            formatted_parent,
-            content_types,
-            output_config
-          )
+          response = client.export_assets(formatted_parent, output_config)
 
           # Verify the response
           assert(response.error?)
@@ -168,14 +156,12 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
     it 'invokes export_assets with error' do
       # Create request parameters
       formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
-      content_types = []
       output_config = {}
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Asset::V1beta1::ExportAssetsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(content_types, request.content_types)
         assert_equal(Google::Gax::to_proto(output_config, Google::Cloud::Asset::V1beta1::OutputConfig), request.output_config)
         raise custom_error
       end
@@ -190,11 +176,7 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
-            client.export_assets(
-              formatted_parent,
-              content_types,
-              output_config
-            )
+            client.export_assets(formatted_parent, output_config)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -210,7 +192,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
     it 'invokes batch_get_assets_history without error' do
       # Create request parameters
       formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
-      asset_names = []
       content_type = :CONTENT_TYPE_UNSPECIFIED
       read_time_window = {}
 
@@ -222,7 +203,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(asset_names, request.asset_names)
         assert_equal(content_type, request.content_type)
         assert_equal(Google::Gax::to_proto(read_time_window, Google::Cloud::Asset::V1beta1::TimeWindow), request.read_time_window)
         OpenStruct.new(execute: expected_response)
@@ -239,7 +219,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
           # Call method
           response = client.batch_get_assets_history(
             formatted_parent,
-            asset_names,
             content_type,
             read_time_window
           )
@@ -250,7 +229,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
           # Call method with block
           client.batch_get_assets_history(
             formatted_parent,
-            asset_names,
             content_type,
             read_time_window
           ) do |response, operation|
@@ -265,7 +243,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
     it 'invokes batch_get_assets_history with error' do
       # Create request parameters
       formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
-      asset_names = []
       content_type = :CONTENT_TYPE_UNSPECIFIED
       read_time_window = {}
 
@@ -273,7 +250,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(asset_names, request.asset_names)
         assert_equal(content_type, request.content_type)
         assert_equal(Google::Gax::to_proto(read_time_window, Google::Cloud::Asset::V1beta1::TimeWindow), request.read_time_window)
         raise custom_error
@@ -291,7 +267,6 @@ describe Google::Cloud::Asset::V1beta1::AssetServiceClient do
           err = assert_raises Google::Gax::GaxError do
             client.batch_get_assets_history(
               formatted_parent,
-              asset_names,
               content_type,
               read_time_window
             )
