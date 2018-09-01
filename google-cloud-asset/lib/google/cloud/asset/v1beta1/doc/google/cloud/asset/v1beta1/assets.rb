@@ -34,11 +34,10 @@ module Google
         # @!attribute [rw] start_time
         #   @return [Google::Protobuf::Timestamp]
         #     Start time of the time window (inclusive).
-        #     Infinite past if not specified.
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Timestamp]
         #     End time of the time window (exclusive).
-        #     Infinite future if not specified.
+        #     Current timestamp if not specified.
         class TimeWindow; end
 
         # Cloud asset. This include all Google Cloud Platform resources, as well as

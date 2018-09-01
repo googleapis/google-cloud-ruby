@@ -13,7 +13,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :parent, :string, 1
     optional :read_time, :message, 2, "google.protobuf.Timestamp"
     repeated :asset_types, :string, 3
-    repeated :content_types, :enum, 4, "google.cloud.asset.v1beta1.ContentType"
+    optional :content_type, :enum, 4, "google.cloud.asset.v1beta1.ContentType"
     optional :output_config, :message, 5, "google.cloud.asset.v1beta1.OutputConfig"
   end
   add_message "google.cloud.asset.v1beta1.ExportAssetsResponse" do
