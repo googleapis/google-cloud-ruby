@@ -235,7 +235,8 @@ js:
 Example:
 &quot;//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1&quot;.</p>
 
-<p>The request becomes a no-op if the asset name list is empty.</p>
+<p>The request becomes a no-op if the asset name list is empty, and the max
+size of the asset name list is 100 in one request.</p>
 
 
   </div>
@@ -258,7 +259,8 @@ Example:
 Example:
 &quot;//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1&quot;.</p>
 
-<p>The request becomes a no-op if the asset name list is empty.</p>
+<p>The request becomes a no-op if the asset name list is empty, and the max
+size of the asset name list is 100 in one request.</p>
 </div>
       
     </li>
@@ -271,10 +273,10 @@ Example:
       <pre class="lines">
 
 
-80</pre>
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 82</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -326,10 +328,10 @@ Example:
       <pre class="lines">
 
 
-80</pre>
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 82</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -351,8 +353,8 @@ Example:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The relative name of the root asset. It can only be an
-organization ID (e.g. &quot;organizations/123&quot;) or a project ID
-(e.g. &quot;projects/12345&quot;).</p>
+organization number (such as &quot;organizations/123&quot;), or a project id (such as
+&quot;projects/my-project-id&quot;)&quot;or a project number (such as &quot;projects/12345&quot;).</p>
 
 
   </div>
@@ -371,8 +373,8 @@ organization ID (e.g. &quot;organizations/123&quot;) or a project ID
       
         &mdash;
         <div class='inline'><p>Required. The relative name of the root asset. It can only be an
-organization ID (e.g. &quot;organizations/123&quot;) or a project ID
-(e.g. &quot;projects/12345&quot;).</p>
+organization number (such as &quot;organizations/123&quot;), or a project id (such as
+&quot;projects/my-project-id&quot;)&quot;or a project number (such as &quot;projects/12345&quot;).</p>
 </div>
       
     </li>
@@ -385,10 +387,10 @@ organization ID (e.g. &quot;organizations/123&quot;) or a project ID
       <pre class="lines">
 
 
-80</pre>
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 82</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -409,9 +411,9 @@ organization ID (e.g. &quot;organizations/123&quot;) or a project ID
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The time window for the asset history. The returned results
-contain all temporal assets whose time window overlap with
-read_time_window.</p>
+    <p>Returns Required. The time window for the asset history. The start time is
+required. The returned results contain all temporal assets whose time
+window overlap with read_time_window.</p>
 
 
   </div>
@@ -429,9 +431,9 @@ read_time_window.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The time window for the asset history. The returned results
-contain all temporal assets whose time window overlap with
-read_time_window.</p>
+        <div class='inline'><p>Required. The time window for the asset history. The start time is
+required. The returned results contain all temporal assets whose time
+window overlap with read_time_window.</p>
 </div>
       
     </li>
@@ -444,10 +446,10 @@ read_time_window.</p>
       <pre class="lines">
 
 
-80</pre>
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/asset/v1beta1/doc/google/cloud/asset/v1beta1/asset_service.rb', line 82</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Asset::V1beta1::BatchGetAssetsHistoryRequest (class)">BatchGetAssetsHistoryRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
