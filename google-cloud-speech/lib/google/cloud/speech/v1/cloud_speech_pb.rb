@@ -8,6 +8,7 @@ require 'google/api/annotations_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/duration_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -38,6 +39,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :profanity_filter, :bool, 5
     repeated :speech_contexts, :message, 6, "google.cloud.speech.v1.SpeechContext"
     optional :enable_word_time_offsets, :bool, 8
+    optional :enable_automatic_punctuation, :bool, 11
+    optional :model, :string, 13
+    optional :use_enhanced, :bool, 14
   end
   add_enum "google.cloud.speech.v1.RecognitionConfig.AudioEncoding" do
     value :ENCODING_UNSPECIFIED, 0
