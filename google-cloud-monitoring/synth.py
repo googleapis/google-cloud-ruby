@@ -34,12 +34,6 @@ s.copy(v3_library / '.gitignore')
 s.copy(v3_library / '.yardopts')
 s.copy(v3_library / 'google-cloud-monitoring.gemspec', merge=merge_gemspec)
 
-# PERMANENT: Because lib/google-cloud-monitoring.rb is present and handwritten.
-s.replace(
-    '.rubocop.yml',
-    '\\Z',
-    '\nNaming/FileName:\n  Exclude:\n    - "lib/google-cloud-monitoring.rb"\n')
-
 # PERMANENT: Use a compatible version of googleapis-common-protos-types
 s.replace(
     'google-cloud-monitoring.gemspec',
