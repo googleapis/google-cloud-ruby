@@ -20,3 +20,7 @@ Naming/FileName:
 
 Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-monitoring.rb"
