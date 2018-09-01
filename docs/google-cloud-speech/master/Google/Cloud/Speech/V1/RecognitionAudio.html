@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Speech::V1::RecognitionAudio - Google"
+title: "Class: Google::Cloud::Speech::V1::RecognitionAudio - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -92,7 +92,7 @@ js:
     <p>Contains audio data in the encoding specified in the +RecognitionConfig+.
 Either +content+ or +uri+ must be supplied. Supplying both or neither
 returns Rpc::Code::INVALID_ARGUMENT. See
-<a href="https://cloud.google.com/speech/limits#content">audio limits</a>.</p>
+<a href="https://cloud.google.com/speech-to-text/quotas#content">content limits</a>.</p>
 
 
   </div>
@@ -216,10 +216,10 @@ pure binary representation, whereas JSON representations use base64.</p>
       <pre class="lines">
 
 
-218</pre>
+291</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 218</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 291</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionAudio (class)">RecognitionAudio</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -241,7 +241,8 @@ pure binary representation, whereas JSON representations use base64.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns URI that points to a file that contains audio data bytes as specified in
-+RecognitionConfig+. Currently, only Google Cloud Storage URIs are
++RecognitionConfig+. The file must not be compressed (for example, gzip).
+Currently, only Google Cloud Storage URIs are
 supported, which must be specified in the following format:
 +gs://bucket_name/object_name+ (other URI formats return
 Rpc::Code::INVALID_ARGUMENT). For more information, see
@@ -264,7 +265,8 @@ Rpc::Code::INVALID_ARGUMENT). For more information, see
       
         &mdash;
         <div class='inline'><p>URI that points to a file that contains audio data bytes as specified in
-+RecognitionConfig+. Currently, only Google Cloud Storage URIs are
++RecognitionConfig+. The file must not be compressed (for example, gzip).
+Currently, only Google Cloud Storage URIs are
 supported, which must be specified in the following format:
 +gs://bucket_name/object_name+ (other URI formats return
 Rpc::Code::INVALID_ARGUMENT). For more information, see
@@ -281,10 +283,10 @@ Rpc::Code::INVALID_ARGUMENT). For more information, see
       <pre class="lines">
 
 
-218</pre>
+291</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 218</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 291</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionAudio (class)">RecognitionAudio</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

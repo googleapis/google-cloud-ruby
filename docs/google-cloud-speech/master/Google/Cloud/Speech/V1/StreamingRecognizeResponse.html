@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Speech::V1::StreamingRecognizeResponse - Google"
+title: "Class: Google::Cloud::Speech::V1::StreamingRecognizeResponse - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -177,7 +177,7 @@ one or more (repeated) +results+.</p></li>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Output-only</em> If set, returns a <span class='object_link'><a href="../../../Rpc/Status.html" title="Google::Rpc::Status (class)">Rpc::Status</a></span> message that specifies the error for the operation.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -203,7 +203,7 @@ one or more (repeated) +results+.</p></li>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Output-only</em> This repeated list contains zero or more results that correspond to consecutive portions of the audio currently being processed.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -229,7 +229,7 @@ one or more (repeated) +results+.</p></li>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Output-only</em> Indicates the type of speech event.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -257,7 +257,7 @@ one or more (repeated) +results+.</p></li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Output-only</em> If set, returns a <span class='object_link'><a href="../../../Rpc/Status.html" title="Google::Rpc::Status (class)">Rpc::Status</a></span> message that
+    <p>Returns Output only. If set, returns a <span class='object_link'><a href="../../../Rpc/Status.html" title="Google::Rpc::Status (class)">Rpc::Status</a></span> message that
 specifies the error for the operation.</p>
 
 
@@ -276,7 +276,7 @@ specifies the error for the operation.</p>
       
       
         &mdash;
-        <div class='inline'><p><em>Output-only</em> If set, returns a <span class='object_link'><a href="../../../Rpc/Status.html" title="Google::Rpc::Status (class)">Rpc::Status</a></span> message that
+        <div class='inline'><p>Output only. If set, returns a <span class='object_link'><a href="../../../Rpc/Status.html" title="Google::Rpc::Status (class)">Rpc::Status</a></span> message that
 specifies the error for the operation.</p>
 </div>
       
@@ -290,25 +290,25 @@ specifies the error for the operation.</p>
       <pre class="lines">
 
 
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332</pre>
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 317</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 390</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::StreamingRecognizeResponse (class)">StreamingRecognizeResponse</a></span></span>
   <span class='comment'># Indicates the type of speech event.
@@ -344,10 +344,10 @@ specifies the error for the operation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Output-only</em> This repeated list contains zero or more results that
+    <p>Returns Output only. This repeated list contains zero or more results that
 correspond to consecutive portions of the audio currently being processed.
-It contains zero or more +is_final=false+ results followed by zero or one
-+is_final=true+ result (the newly settled portion).</p>
+It contains zero or one +is_final=true+ result (the newly settled portion),
+followed by zero or more +is_final=false+ results (the interim results).</p>
 
 
   </div>
@@ -365,10 +365,10 @@ It contains zero or more +is_final=false+ results followed by zero or one
       
       
         &mdash;
-        <div class='inline'><p><em>Output-only</em> This repeated list contains zero or more results that
+        <div class='inline'><p>Output only. This repeated list contains zero or more results that
 correspond to consecutive portions of the audio currently being processed.
-It contains zero or more +is_final=false+ results followed by zero or one
-+is_final=true+ result (the newly settled portion).</p>
+It contains zero or one +is_final=true+ result (the newly settled portion),
+followed by zero or more +is_final=false+ results (the interim results).</p>
 </div>
       
     </li>
@@ -381,25 +381,25 @@ It contains zero or more +is_final=false+ results followed by zero or one
       <pre class="lines">
 
 
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332</pre>
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 317</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 390</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::StreamingRecognizeResponse (class)">StreamingRecognizeResponse</a></span></span>
   <span class='comment'># Indicates the type of speech event.
@@ -435,7 +435,7 @@ It contains zero or more +is_final=false+ results followed by zero or one
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Output-only</em> Indicates the type of speech event.</p>
+    <p>Returns Output only. Indicates the type of speech event.</p>
 
 
   </div>
@@ -453,7 +453,7 @@ It contains zero or more +is_final=false+ results followed by zero or one
       
       
         &mdash;
-        <div class='inline'><p><em>Output-only</em> Indicates the type of speech event.</p>
+        <div class='inline'><p>Output only. Indicates the type of speech event.</p>
 </div>
       
     </li>
@@ -466,25 +466,25 @@ It contains zero or more +is_final=false+ results followed by zero or one
       <pre class="lines">
 
 
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330
-331
-332</pre>
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 317</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 390</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::StreamingRecognizeResponse (class)">StreamingRecognizeResponse</a></span></span>
   <span class='comment'># Indicates the type of speech event.

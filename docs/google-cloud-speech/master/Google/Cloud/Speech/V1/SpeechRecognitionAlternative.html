@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Speech::V1::SpeechRecognitionAlternative - Google"
+title: "Class: Google::Cloud::Speech::V1::SpeechRecognitionAlternative - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Output-only</em> The confidence estimate between 0.0 and 1.0.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -150,7 +150,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Output-only</em> Transcript text representing the words that the user spoke.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -176,7 +176,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Output-only</em> A list of word-specific information for each recognized word.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -204,11 +204,12 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Output-only</em> The confidence estimate between 0.0 and 1.0. A higher number
+    <p>Returns Output only. The confidence estimate between 0.0 and 1.0. A higher number
 indicates an estimated greater likelihood that the recognized words are
-correct. This field is typically provided only for the top hypothesis, and
-only for +is_final=true+ results. Clients should not rely on the
-+confidence+ field as it is not guaranteed to be accurate or consistent.
+correct. This field is set only for the top alternative of a non-streaming
+result or, of a streaming result where +is_final=true+.
+This field is not guaranteed to be accurate and users should not rely on it
+to be always provided.
 The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
 
 
@@ -227,11 +228,12 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
       
       
         &mdash;
-        <div class='inline'><p><em>Output-only</em> The confidence estimate between 0.0 and 1.0. A higher number
+        <div class='inline'><p>Output only. The confidence estimate between 0.0 and 1.0. A higher number
 indicates an estimated greater likelihood that the recognized words are
-correct. This field is typically provided only for the top hypothesis, and
-only for +is_final=true+ results. Clients should not rely on the
-+confidence+ field as it is not guaranteed to be accurate or consistent.
+correct. This field is set only for the top alternative of a non-streaming
+result or, of a streaming result where +is_final=true+.
+This field is not guaranteed to be accurate and users should not rely on it
+to be always provided.
 The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
 </div>
       
@@ -245,10 +247,10 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
       <pre class="lines">
 
 
-380</pre>
+456</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 380</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 456</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::SpeechRecognitionAlternative (class)">SpeechRecognitionAlternative</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -269,7 +271,7 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Output-only</em> Transcript text representing the words that the user spoke.</p>
+    <p>Returns Output only. Transcript text representing the words that the user spoke.</p>
 
 
   </div>
@@ -287,7 +289,7 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
       
       
         &mdash;
-        <div class='inline'><p><em>Output-only</em> Transcript text representing the words that the user spoke.</p>
+        <div class='inline'><p>Output only. Transcript text representing the words that the user spoke.</p>
 </div>
       
     </li>
@@ -300,10 +302,10 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
       <pre class="lines">
 
 
-380</pre>
+456</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 380</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 456</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::SpeechRecognitionAlternative (class)">SpeechRecognitionAlternative</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -324,7 +326,7 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Output-only</em> A list of word-specific information for each recognized word.</p>
+    <p>Returns Output only. A list of word-specific information for each recognized word.</p>
 
 
   </div>
@@ -342,7 +344,7 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
       
       
         &mdash;
-        <div class='inline'><p><em>Output-only</em> A list of word-specific information for each recognized word.</p>
+        <div class='inline'><p>Output only. A list of word-specific information for each recognized word.</p>
 </div>
       
     </li>
@@ -355,10 +357,10 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
       <pre class="lines">
 
 
-380</pre>
+456</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 380</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 456</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::SpeechRecognitionAlternative (class)">SpeechRecognitionAlternative</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

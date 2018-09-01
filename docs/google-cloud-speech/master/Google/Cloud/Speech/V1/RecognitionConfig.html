@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Speech::V1::RecognitionConfig - Google"
+title: "Class: Google::Cloud::Speech::V1::RecognitionConfig - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -118,6 +118,32 @@ request.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#enable_automatic_punctuation-instance_method" title="#enable_automatic_punctuation (instance method)">#<strong>enable_automatic_punctuation</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><em>Optional</em> If &#39;true&#39;, adds punctuation to recognition result hypotheses.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#enable_word_time_offsets-instance_method" title="#enable_word_time_offsets (instance method)">#<strong>enable_word_time_offsets</strong>  &#x21d2; true, false </a>
     
 
@@ -161,7 +187,7 @@ request.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Required</em> Encoding of audio data sent in all +RecognitionAudio+ messages.</p>
+    <span class="summary_desc"><div class='inline'><p>Encoding of audio data sent in all +RecognitionAudio+ messages.</p>
 </div></span>
   
 </li>
@@ -222,6 +248,32 @@ request.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#model-instance_method" title="#model (instance method)">#<strong>model</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><em>Optional</em> Which model to select for the given request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#profanity_filter-instance_method" title="#profanity_filter (instance method)">#<strong>profanity_filter</strong>  &#x21d2; true, false </a>
     
 
@@ -265,7 +317,7 @@ request.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Required</em> Sample rate in Hertz of the audio data sent in all +RecognitionAudio+ messages.</p>
+    <span class="summary_desc"><div class='inline'><p>Sample rate in Hertz of the audio data sent in all +RecognitionAudio+ messages.</p>
 </div></span>
   
 </li>
@@ -291,7 +343,33 @@ request.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Optional</em> A means to provide context to assist the speech recognition.</p>
+    <span class="summary_desc"><div class='inline'><p><em>Optional</em> array of <span class='object_link'><a href="SpeechContext.html" title="Google::Cloud::Speech::V1::SpeechContext (class)">SpeechContext</a></span>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_enhanced-instance_method" title="#use_enhanced (instance method)">#<strong>use_enhanced</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><em>Optional</em> Set to true to use an enhanced model for speech recognition.</p>
 </div></span>
   
 </li>
@@ -307,9 +385,206 @@ request.</p>
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="enable_word_time_offsets=-instance_method"></span>
+      <span id="enable_automatic_punctuation=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="enable_word_time_offsets-instance_method">
+  <h3 class="signature first" id="enable_automatic_punctuation-instance_method">
+  
+    #<strong>enable_automatic_punctuation</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <em>Optional</em> If &#39;true&#39;, adds punctuation to recognition result hypotheses.
+This feature is only available in select languages. Setting this for
+requests in other languages has no effect at all.
+The default &#39;false&#39; value does not add punctuation to result hypotheses.
+Note: This is currently offered as an experimental service, complimentary
+to all users. In the future this may be exclusively available as a
+premium feature.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><em>Optional</em> If &#39;true&#39;, adds punctuation to recognition result hypotheses.
+This feature is only available in select languages. Setting this for
+requests in other languages has no effect at all.
+The default &#39;false&#39; value does not add punctuation to result hypotheses.
+Note: This is currently offered as an experimental service, complimentary
+to all users. In the future this may be exclusively available as a
+premium feature.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
+</span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># +FLAC+ (Free Lossless Audio
+</span>    <span class='comment'># Codec) is the recommended encoding because it is
+</span>    <span class='comment'># lossless--therefore recognition is not compromised--and
+</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
+</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
+</span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+</span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+</span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Opus encoded audio frames in Ogg container
+</span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
+</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
+</span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
+</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
+</span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
+</span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
+</span>    <span class='comment'># starts with a byte containing the length of the block, in bytes, followed
+</span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
+</span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
+</span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
+</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="enable_word_time_offsets=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="enable_word_time_offsets-instance_method">
   
     #<strong>enable_word_time_offsets</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
   
@@ -356,85 +631,105 @@ the start and end time offsets (timestamps) for those words. If
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
-  <span class='comment'># Audio encoding of the data sent in the audio message. All encodings support
-</span>  <span class='comment'># only 1 channel (mono) audio. Only +FLAC+ and +WAV+ include a header that
-</span>  <span class='comment'># describes the bytes of audio that follow the header. The other encodings
-</span>  <span class='comment'># are raw audio bytes with no header.
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). Recognition accuracy may be
-</span>  <span class='comment'># reduced if lossy codecs, which include the other codecs listed in
-</span>  <span class='comment'># this section, are used to capture or transmit the audio, particularly if
-</span>  <span class='comment'># background noise is present.
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
-    <span class='comment'># Not specified. Will return result {Google::Rpc::Code::INVALID_ARGUMENT}.
+    <span class='comment'># Not specified.
 </span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># [+FLAC+](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    <span class='comment'># +FLAC+ (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
 </span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
@@ -453,7 +748,7 @@ the start and end time offsets (timestamps) for those words. If
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
@@ -490,7 +785,9 @@ the start and end time offsets (timestamps) for those words. If
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Required</em> Encoding of audio data sent in all +RecognitionAudio+ messages.</p>
+    <p>Returns Encoding of audio data sent in all +RecognitionAudio+ messages.
+This field is optional for +FLAC+ and +WAV+ audio files and required
+for all other audio formats. For details, see <span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span>.</p>
 
 
   </div>
@@ -508,7 +805,9 @@ the start and end time offsets (timestamps) for those words. If
       
       
         &mdash;
-        <div class='inline'><p><em>Required</em> Encoding of audio data sent in all +RecognitionAudio+ messages.</p>
+        <div class='inline'><p>Encoding of audio data sent in all +RecognitionAudio+ messages.
+This field is optional for +FLAC+ and +WAV+ audio files and required
+for all other audio formats. For details, see <span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span>.</p>
 </div>
       
     </li>
@@ -521,85 +820,105 @@ the start and end time offsets (timestamps) for those words. If
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
-  <span class='comment'># Audio encoding of the data sent in the audio message. All encodings support
-</span>  <span class='comment'># only 1 channel (mono) audio. Only +FLAC+ and +WAV+ include a header that
-</span>  <span class='comment'># describes the bytes of audio that follow the header. The other encodings
-</span>  <span class='comment'># are raw audio bytes with no header.
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). Recognition accuracy may be
-</span>  <span class='comment'># reduced if lossy codecs, which include the other codecs listed in
-</span>  <span class='comment'># this section, are used to capture or transmit the audio, particularly if
-</span>  <span class='comment'># background noise is present.
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
-    <span class='comment'># Not specified. Will return result {Google::Rpc::Code::INVALID_ARGUMENT}.
+    <span class='comment'># Not specified.
 </span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># [+FLAC+](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    <span class='comment'># +FLAC+ (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
 </span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
@@ -618,7 +937,7 @@ the start and end time offsets (timestamps) for those words. If
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
@@ -658,7 +977,7 @@ the start and end time offsets (timestamps) for those words. If
     <p>Returns <em>Required</em> The language of the supplied audio as a
 <a href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</a> language tag.
 Example: &quot;en-US&quot;.
-See <a href="https://cloud.google.com/speech/docs/languages">Language Support</a>
+See <a href="https://cloud.google.com/speech-to-text/docs/languages">Language Support</a>
 for a list of the currently supported language codes.</p>
 
 
@@ -680,7 +999,7 @@ for a list of the currently supported language codes.</p>
         <div class='inline'><p><em>Required</em> The language of the supplied audio as a
 <a href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</a> language tag.
 Example: &quot;en-US&quot;.
-See <a href="https://cloud.google.com/speech/docs/languages">Language Support</a>
+See <a href="https://cloud.google.com/speech-to-text/docs/languages">Language Support</a>
 for a list of the currently supported language codes.</p>
 </div>
       
@@ -694,85 +1013,105 @@ for a list of the currently supported language codes.</p>
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
-  <span class='comment'># Audio encoding of the data sent in the audio message. All encodings support
-</span>  <span class='comment'># only 1 channel (mono) audio. Only +FLAC+ and +WAV+ include a header that
-</span>  <span class='comment'># describes the bytes of audio that follow the header. The other encodings
-</span>  <span class='comment'># are raw audio bytes with no header.
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). Recognition accuracy may be
-</span>  <span class='comment'># reduced if lossy codecs, which include the other codecs listed in
-</span>  <span class='comment'># this section, are used to capture or transmit the audio, particularly if
-</span>  <span class='comment'># background noise is present.
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
-    <span class='comment'># Not specified. Will return result {Google::Rpc::Code::INVALID_ARGUMENT}.
+    <span class='comment'># Not specified.
 </span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># [+FLAC+](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    <span class='comment'># +FLAC+ (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
 </span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
@@ -791,7 +1130,7 @@ for a list of the currently supported language codes.</p>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
@@ -869,85 +1208,105 @@ one. If omitted, will return a maximum of one.</p>
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
-  <span class='comment'># Audio encoding of the data sent in the audio message. All encodings support
-</span>  <span class='comment'># only 1 channel (mono) audio. Only +FLAC+ and +WAV+ include a header that
-</span>  <span class='comment'># describes the bytes of audio that follow the header. The other encodings
-</span>  <span class='comment'># are raw audio bytes with no header.
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). Recognition accuracy may be
-</span>  <span class='comment'># reduced if lossy codecs, which include the other codecs listed in
-</span>  <span class='comment'># this section, are used to capture or transmit the audio, particularly if
-</span>  <span class='comment'># background noise is present.
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
-    <span class='comment'># Not specified. Will return result {Google::Rpc::Code::INVALID_ARGUMENT}.
+    <span class='comment'># Not specified.
 </span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># [+FLAC+](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    <span class='comment'># +FLAC+ (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
 </span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
@@ -966,7 +1325,256 @@ one. If omitted, will return a maximum of one.</p>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
+</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
+</span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
+</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
+</span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
+</span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
+</span>    <span class='comment'># starts with a byte containing the length of the block, in bytes, followed
+</span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
+</span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
+</span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
+</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="model=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="model-instance_method">
+  
+    #<strong>model</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <em>Optional</em> Which model to select for the given request. Select the model
+best suited to your domain to get best results. If a model is not
+explicitly specified, then we auto-select a model based on the parameters
+in the RecognitionConfig.</p>
+
+<table>
+  <tr>
+    <td><b>Model</b></td>
+    <td><b>Description</b></td>
+  </tr>
+  <tr>
+    <td><code>command_and_search</code></td>
+    <td>Best for short queries such as voice commands or voice search.</td>
+  </tr>
+  <tr>
+    <td><code>phone_call</code></td>
+    <td>Best for audio that originated from a phone call (typically
+    recorded at an 8khz sampling rate).</td>
+  </tr>
+  <tr>
+    <td><code>video</code></td>
+    <td>Best for audio that originated from from video or includes multiple
+        speakers. Ideally the audio is recorded at a 16khz or greater
+        sampling rate. This is a premium model that costs more than the
+        standard rate.</td>
+  </tr>
+  <tr>
+    <td><code>default</code></td>
+    <td>Best for audio that is not one of the specific audio models.
+        For example, long-form audio. Ideally the audio is high-fidelity,
+        recorded at a 16khz or greater sampling rate.</td>
+  </tr>
+</table>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><em>Optional</em> Which model to select for the given request. Select the model
+best suited to your domain to get best results. If a model is not
+explicitly specified, then we auto-select a model based on the parameters
+in the RecognitionConfig.</p>
+
+<table>
+  <tr>
+    <td><b>Model</b></td>
+    <td><b>Description</b></td>
+  </tr>
+  <tr>
+    <td><code>command_and_search</code></td>
+    <td>Best for short queries such as voice commands or voice search.</td>
+  </tr>
+  <tr>
+    <td><code>phone_call</code></td>
+    <td>Best for audio that originated from a phone call (typically
+    recorded at an 8khz sampling rate).</td>
+  </tr>
+  <tr>
+    <td><code>video</code></td>
+    <td>Best for audio that originated from from video or includes multiple
+        speakers. Ideally the audio is recorded at a 16khz or greater
+        sampling rate. This is a premium model that costs more than the
+        standard rate.</td>
+  </tr>
+  <tr>
+    <td><code>default</code></td>
+    <td>Best for audio that is not one of the specific audio models.
+        For example, long-form audio. Ideally the audio is high-fidelity,
+        recorded at a 16khz or greater sampling rate.</td>
+  </tr>
+</table>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
+</span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># +FLAC+ (Free Lossless Audio
+</span>    <span class='comment'># Codec) is the recommended encoding because it is
+</span>    <span class='comment'># lossless--therefore recognition is not compromised--and
+</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
+</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
+</span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+</span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+</span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Opus encoded audio frames in Ogg container
+</span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
@@ -1040,85 +1648,105 @@ won&#39;t be filtered out.</p>
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
-  <span class='comment'># Audio encoding of the data sent in the audio message. All encodings support
-</span>  <span class='comment'># only 1 channel (mono) audio. Only +FLAC+ and +WAV+ include a header that
-</span>  <span class='comment'># describes the bytes of audio that follow the header. The other encodings
-</span>  <span class='comment'># are raw audio bytes with no header.
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). Recognition accuracy may be
-</span>  <span class='comment'># reduced if lossy codecs, which include the other codecs listed in
-</span>  <span class='comment'># this section, are used to capture or transmit the audio, particularly if
-</span>  <span class='comment'># background noise is present.
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
-    <span class='comment'># Not specified. Will return result {Google::Rpc::Code::INVALID_ARGUMENT}.
+    <span class='comment'># Not specified.
 </span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># [+FLAC+](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    <span class='comment'># +FLAC+ (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
 </span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
@@ -1137,7 +1765,7 @@ won&#39;t be filtered out.</p>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
@@ -1174,11 +1802,13 @@ won&#39;t be filtered out.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Required</em> Sample rate in Hertz of the audio data sent in all
+    <p>Returns Sample rate in Hertz of the audio data sent in all
 +RecognitionAudio+ messages. Valid values are: 8000-48000.
 16000 is optimal. For best results, set the sampling rate of the audio
 source to 16000 Hz. If that&#39;s not possible, use the native sample rate of
-the audio source (instead of re-sampling).</p>
+the audio source (instead of re-sampling).
+This field is optional for +FLAC+ and +WAV+ audio files and required
+for all other audio formats. For details, see <span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span>.</p>
 
 
   </div>
@@ -1196,11 +1826,13 @@ the audio source (instead of re-sampling).</p>
       
       
         &mdash;
-        <div class='inline'><p><em>Required</em> Sample rate in Hertz of the audio data sent in all
+        <div class='inline'><p>Sample rate in Hertz of the audio data sent in all
 +RecognitionAudio+ messages. Valid values are: 8000-48000.
 16000 is optimal. For best results, set the sampling rate of the audio
 source to 16000 Hz. If that&#39;s not possible, use the native sample rate of
-the audio source (instead of re-sampling).</p>
+the audio source (instead of re-sampling).
+This field is optional for +FLAC+ and +WAV+ audio files and required
+for all other audio formats. For details, see <span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span>.</p>
 </div>
       
     </li>
@@ -1213,85 +1845,105 @@ the audio source (instead of re-sampling).</p>
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
-  <span class='comment'># Audio encoding of the data sent in the audio message. All encodings support
-</span>  <span class='comment'># only 1 channel (mono) audio. Only +FLAC+ and +WAV+ include a header that
-</span>  <span class='comment'># describes the bytes of audio that follow the header. The other encodings
-</span>  <span class='comment'># are raw audio bytes with no header.
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). Recognition accuracy may be
-</span>  <span class='comment'># reduced if lossy codecs, which include the other codecs listed in
-</span>  <span class='comment'># this section, are used to capture or transmit the audio, particularly if
-</span>  <span class='comment'># background noise is present.
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
-    <span class='comment'># Not specified. Will return result {Google::Rpc::Code::INVALID_ARGUMENT}.
+    <span class='comment'># Not specified.
 </span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># [+FLAC+](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    <span class='comment'># +FLAC+ (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
 </span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
@@ -1310,7 +1962,7 @@ the audio source (instead of re-sampling).</p>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
@@ -1347,7 +1999,9 @@ the audio source (instead of re-sampling).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Optional</em> A means to provide context to assist the speech recognition.</p>
+    <p>Returns <em>Optional</em> array of <span class='object_link'><a href="SpeechContext.html" title="Google::Cloud::Speech::V1::SpeechContext (class)">SpeechContext</a></span>.
+A means to provide context to assist the speech recognition. For more
+information, see <a href="https://cloud.google.com/speech-to-text/docs/basics#phrase-hints">Phrase Hints</a>.</p>
 
 
   </div>
@@ -1365,7 +2019,9 @@ the audio source (instead of re-sampling).</p>
       
       
         &mdash;
-        <div class='inline'><p><em>Optional</em> A means to provide context to assist the speech recognition.</p>
+        <div class='inline'><p><em>Optional</em> array of <span class='object_link'><a href="SpeechContext.html" title="Google::Cloud::Speech::V1::SpeechContext (class)">SpeechContext</a></span>.
+A means to provide context to assist the speech recognition. For more
+information, see <a href="https://cloud.google.com/speech-to-text/docs/basics#phrase-hints">Phrase Hints</a>.</p>
 </div>
       
     </li>
@@ -1378,85 +2034,105 @@ the audio source (instead of re-sampling).</p>
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187</pre>
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
-  <span class='comment'># Audio encoding of the data sent in the audio message. All encodings support
-</span>  <span class='comment'># only 1 channel (mono) audio. Only +FLAC+ and +WAV+ include a header that
-</span>  <span class='comment'># describes the bytes of audio that follow the header. The other encodings
-</span>  <span class='comment'># are raw audio bytes with no header.
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). Recognition accuracy may be
-</span>  <span class='comment'># reduced if lossy codecs, which include the other codecs listed in
-</span>  <span class='comment'># this section, are used to capture or transmit the audio, particularly if
-</span>  <span class='comment'># background noise is present.
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
-    <span class='comment'># Not specified. Will return result {Google::Rpc::Code::INVALID_ARGUMENT}.
+    <span class='comment'># Not specified.
 </span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># [+FLAC+](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    <span class='comment'># +FLAC+ (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
 </span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
@@ -1475,7 +2151,212 @@ the audio source (instead of re-sampling).</p>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
+</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
+</span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
+</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
+</span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
+</span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
+</span>    <span class='comment'># starts with a byte containing the length of the block, in bytes, followed
+</span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
+</span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
+</span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
+</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="use_enhanced=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="use_enhanced-instance_method">
+  
+    #<strong>use_enhanced</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <em>Optional</em> Set to true to use an enhanced model for speech recognition.
+You must also set the +model+ field to a valid, enhanced model. If
++use_enhanced+ is set to true and the +model+ field is not set, then
++use_enhanced+ is ignored. If +use_enhanced+ is true and an enhanced
+version of the specified model does not exist, then the speech is
+recognized using the standard version of the specified model.</p>
+
+<p>Enhanced speech models require that you opt-in to data logging using
+instructions in the <a href="https://cloud.google.com/speech-to-text/enable-data-logging">documentation</a>.
+If you set +use_enhanced+ to true and you have not enabled audio logging,
+then you will receive an error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><em>Optional</em> Set to true to use an enhanced model for speech recognition.
+You must also set the +model+ field to a valid, enhanced model. If
++use_enhanced+ is set to true and the +model+ field is not set, then
++use_enhanced+ is ignored. If +use_enhanced+ is true and an enhanced
+version of the specified model does not exist, then the speech is
+recognized using the standard version of the specified model.</p>
+
+<p>Enhanced speech models require that you opt-in to data logging using
+instructions in the <a href="https://cloud.google.com/speech-to-text/enable-data-logging">documentation</a>.
+If you set +use_enhanced+ to true and you have not enabled audio logging,
+then you will receive an error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
+</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
+</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
+</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
+</span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># +FLAC+ (Free Lossless Audio
+</span>    <span class='comment'># Codec) is the recommended encoding because it is
+</span>    <span class='comment'># lossless--therefore recognition is not compromised--and
+</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
+</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
+</span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+</span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+</span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Opus encoded audio frames in Ogg container
+</span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
+</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
