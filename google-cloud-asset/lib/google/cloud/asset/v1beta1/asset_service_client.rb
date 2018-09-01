@@ -206,32 +206,33 @@ module Google
           # Service calls
 
           # Exports assets with time and resource types to a given Google Cloud Storage
-          # location. The output format is newline delimited JSON.
+          # location. The output format is newline-delimited JSON.
           # This API implements the {Google::Longrunning::Operation} API allowing users
           # to keep track of the export.
           #
           # @param parent [String]
-          #   Required. The relative name of the root asset. It can only be an
-          #   organization number (e.g. "organizations/123") or a project number
-          #   (e.g. "projects/12345").
+          #   Required. The relative name of the root asset. Can only be an organization
+          #   number (such as "organizations/123"), or a project id (such as
+          #   "projects/my-project-id") or a project number (such as "projects/12345").
           # @param output_config [Google::Cloud::Asset::V1beta1::OutputConfig | Hash]
           #   Required. Output configuration indicating where the results will be output
           #   to. All results will be in newline delimited JSON format.
           #   A hash of the same form as `Google::Cloud::Asset::V1beta1::OutputConfig`
           #   can also be provided.
           # @param read_time [Google::Protobuf::Timestamp | Hash]
-          #   Timestamp to take an asset snapshot. This can only be current or past
-          #   time. If not specified, the current time will be used. Due to delays in
-          #   resource data collection and indexing, there is a volatile window during
-          #   which running the same query may get different results.
+          #   Timestamp to take an asset snapshot. This can only be set to a timestamp in
+          #   the past or of the current time. If not specified, the current time will be
+          #   used. Due to delays in resource data collection and indexing, there is a
+          #   volatile window during which running the same query may get different
+          #   results.
           #   A hash of the same form as `Google::Protobuf::Timestamp`
           #   can also be provided.
           # @param asset_types [Array<String>]
-          #   A list of asset types to take a snapshot for. Example:
+          #   A list of asset types of which to take a snapshot for. Example:
           #   "google.compute.disk". If specified, only matching assets will be returned.
-          # @param content_types [Array<Google::Cloud::Asset::V1beta1::ContentType>]
-          #   A list of asset content types. If specified, only matching content will be
-          #   returned. Otherwise, no content but the asset name will be returned.
+          # @param content_type [Google::Cloud::Asset::V1beta1::ContentType]
+          #   Asset content type. If not specified, no content but the asset name will be
+          #   returned.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -278,14 +279,14 @@ module Google
               output_config,
               read_time: nil,
               asset_types: nil,
-              content_types: nil,
+              content_type: nil,
               options: nil
             req = {
               parent: parent,
               output_config: output_config,
               read_time: read_time,
               asset_types: asset_types,
-              content_types: content_types
+              content_type: content_type
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Asset::V1beta1::ExportAssetsRequest)
             operation = Google::Gax::Operation.new(
@@ -307,14 +308,14 @@ module Google
           #
           # @param parent [String]
           #   Required. The relative name of the root asset. It can only be an
-          #   organization ID (e.g. "organizations/123") or a project ID
-          #   (e.g. "projects/12345").
+          #   organization number (such as "organizations/123"), or a project id (such as
+          #   "projects/my-project-id")"or a project number (such as "projects/12345").
           # @param content_type [Google::Cloud::Asset::V1beta1::ContentType]
           #   Required. The content type.
           # @param read_time_window [Google::Cloud::Asset::V1beta1::TimeWindow | Hash]
-          #   Required. The time window for the asset history. The returned results
-          #   contain all temporal assets whose time window overlap with
-          #   read_time_window.
+          #   Required. The time window for the asset history. The start time is
+          #   required. The returned results contain all temporal assets whose time
+          #   window overlap with read_time_window.
           #   A hash of the same form as `Google::Cloud::Asset::V1beta1::TimeWindow`
           #   can also be provided.
           # @param asset_names [Array<String>]
@@ -323,7 +324,8 @@ module Google
           #   Example:
           #   "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1".
           #
-          #   The request becomes a no-op if the asset name list is empty.
+          #   The request becomes a no-op if the asset name list is empty, and the max
+          #   size of the asset name list is 100 in one request.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
