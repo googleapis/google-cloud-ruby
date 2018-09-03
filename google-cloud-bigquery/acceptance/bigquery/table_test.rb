@@ -612,7 +612,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     more_data.wont_be :nil?
   end
 
-  it "inserts rows asynchonously and gets its data" do
+  it "inserts rows asynchronously and gets its data" do
     # data = table.data
     insert_result = nil
 
@@ -715,7 +715,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     data.next.must_be :nil?
   end
 
-  it "inserts rows asynchonously with insert_ids option" do
+  it "inserts rows asynchronously with insert_ids option" do
     insert_result = nil
 
     inserter = table.insert_async do |result|

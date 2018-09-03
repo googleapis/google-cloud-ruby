@@ -315,7 +315,7 @@ module Google
         end
 
         ##
-        # Publishes a message asynchonously to the topic.
+        # Publishes a message asynchronously to the topic.
         #
         # The message payload must not be empty; it must contain either a
         # non-empty data field, or at least one attribute.
@@ -324,7 +324,7 @@ module Google
         #   to bytes encoded as ASCII-8BIT.
         # @param [Hash] attributes Optional attributes for the message.
         # @yield [result] the callback for when the message has been published
-        # @yieldparam [PublishResult] result the result of the asynchonous
+        # @yieldparam [PublishResult] result the result of the asynchronous
         #   publish
         #
         # @example
