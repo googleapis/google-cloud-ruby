@@ -37,10 +37,12 @@ for i in "${GEMSPECS[@]}"; do
   for j in "${CHANGED_DIRS[@]}"; do
     if [ "$i" = "$j" ]; then
       UPDATED_GEMS+=($i)
+      echo "$i has been modified."
     fi
   done
 done
 
+git status
 
 # Capture failures
 EXIT_STATUS=0 # everything passed
@@ -78,6 +80,11 @@ continuous)
       echo "================================================="
       (bundle update && bundle exec rake ci) || set_failed_status
     done
+  elif [ "$PACKAGE" = "post" ]; then
+    echo "=========================================================================="
+    echo "=========================== Running Post Build ==========================="
+    echo "=========================================================================="
+    (bundle update && bundle exec rake circleci:post) || set_failed_status
   else
     echo "=========================================================================="
     echo "$PACKAGE was modified, running acceptance tests."
