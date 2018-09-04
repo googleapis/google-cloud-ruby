@@ -194,7 +194,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     more_data.wont_be :nil?
   end
 
-  it "inserts rows asynchonously and gets its data" do
+  it "inserts rows asynchronously and gets its data" do
     insert_result = nil
 
     inserter = table.insert_async do |result|
