@@ -47,7 +47,7 @@ jobs:
     - run:
         name: Install bundle
         command: gem update --system && gem install bundler && bundle update
-    - run: bundle exec rake circleci:post
+    # - run: bundle exec rake circleci:post
 
   release:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
