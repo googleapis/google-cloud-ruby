@@ -112,7 +112,7 @@ logger.
 ### Configuring the framework integration
 
 You can customize the behavior of the Stackdriver Logging framework integration
-for Ruby. See the [configuration guide](../stackdriver/configuration.md) for a
+for Ruby. See the [configuration guide](../stackdriver/CONFIGURATION.md) for a
 list of possible configuration options.
 
 ## Authentication
