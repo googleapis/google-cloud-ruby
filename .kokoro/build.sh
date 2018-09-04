@@ -62,7 +62,7 @@ presubmit)
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
     echo "================================================="
-    echo "============= Using Ruby - $version ============="
+    echo "============== Using Ruby - $version =============="
     echo "================================================="
     (bundle update && bundle exec rake ci) || set_failed_status
   done
