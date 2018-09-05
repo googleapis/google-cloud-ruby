@@ -28,6 +28,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
                          "method" => ["*"],
                          "origin" => ["http://example.org", "https://example.org"],
                          "responseHeader" => ["X-My-Custom-Header"] }] }
+  let(:bucket_lifecycle) { {"rule" => [{"action" => {"storageClass" => "NEARLINE","type" => "SetStorageClass"},"condition" => {"age" => 32}}]} }
   let(:bucket_location) { "US" }
   let(:bucket_logging_bucket) { "bucket-name-logging" }
   let(:bucket_logging_prefix) { "AccessLog" }
@@ -41,7 +42,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     h = random_bucket_hash bucket_name, bucket_url_root,
                            bucket_location, bucket_storage_class, bucket_versioning,
                            bucket_logging_bucket, bucket_logging_prefix, bucket_website_main,
-                           bucket_website_404, bucket_cors, bucket_requester_pays
+                           bucket_website_404, bucket_cors, bucket_requester_pays, bucket_lifecycle
     h[:labels] = bucket_labels
     h
   end
@@ -71,12 +72,20 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     bucket_complete.labels.must_equal bucket_labels
   end
 
-  it "return frozen cors" do
+  it "returns frozen cors" do
     bucket_complete.cors.each do |cors|
       cors.must_be_kind_of Google::Cloud::Storage::Bucket::Cors::Rule
       cors.frozen?.must_equal true
     end
     bucket_complete.cors.frozen?.must_equal true
+  end
+
+  it "returns frozen lifecycle (Object Lifecycle Management)" do
+    bucket_complete.lifecycle.each do |r|
+      r.must_be_kind_of Google::Cloud::Storage::Bucket::Lifecycle::Rule
+      r.frozen?.must_equal true
+    end
+    bucket_complete.lifecycle.frozen?.must_equal true
   end
 
   it "can delete itself" do

@@ -297,6 +297,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Bucket#lifecycle" do
+    mock_storage do |mock|
+      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::Bucket#notification" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
@@ -559,6 +567,16 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Storage::Bucket::Cors#add_rule" do
     mock_storage do |mock|
       mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+  # Bucket::Lifecycle
+
+  doctest.before "Google::Cloud::Storage::Bucket::Lifecycle" do
+    mock_storage do |mock|
+      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
@@ -1029,12 +1047,38 @@ def random_bucket_hash(name = "my-bucket",
     "owner" => { "entity" => "project-owners-1234567890" },
     "location" => location,
     "cors" => [{"origin"=>["http://example.org"], "method"=>["GET","POST","DELETE"], "responseHeader"=>["X-My-Custom-Header"], "maxAgeSeconds"=>3600},{"origin"=>["http://example.org"], "method"=>["GET","POST","DELETE"], "responseHeader"=>["X-My-Custom-Header"], "maxAgeSeconds"=>3600}],
+    "lifecycle" => lifecycle_hash,
     "logging" => logging_hash(logging_bucket, logging_prefix),
     "storageClass" => storage_class,
     "versioning" => versioning_config,
     "website" => website_hash(website_main, website_404),
     "encryption" => { "defaultKmsKeyName" => kms_key_name },
     "etag" => "CAE=" }.delete_if { |_, v| v.nil? }
+end
+
+def lifecycle_hash
+  {
+    "rule" => [
+      {
+        "action" => {
+          "type" => "SetStorageClass",
+          "storageClass" => "COLDLINE"
+        },
+        "condition" => {
+          "age" => 10,
+          "matchesStorageClass" => ["MULTI_REGIONAL", "REGIONAL"]
+        }
+      },
+      {
+        "action" => {
+          "type" => "Delete"
+        },
+        "condition" => {
+          "age" => 10
+        }
+      }
+    ]
+  }
 end
 
 def logging_hash(bucket, prefix)
