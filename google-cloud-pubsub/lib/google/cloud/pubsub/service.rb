@@ -78,6 +78,7 @@ module Google
             V1::PublisherClient.new(
               credentials: channel,
               timeout: timeout,
+              client_config: client_config,
               lib_name: "gccl",
               lib_version: Google::Cloud::Pubsub::VERSION
             )
