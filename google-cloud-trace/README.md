@@ -94,7 +94,7 @@ end
 ### Configuring the library
 
 You can customize the behavior of the Stackdriver Trace library for Ruby. See
-the [configuration guide](../stackdriver/configuration.md) for a list of
+the [configuration guide](../stackdriver/CONFIGURATION.md) for a list of
 possible configuration options.
 
 ## Running on Google Cloud Platform
