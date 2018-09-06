@@ -16,6 +16,8 @@ env | grep KOKORO
 
 cd github/google-cloud-ruby/
 
+git checkout master
+
 # Print out Ruby version
 ruby --version
 echo $JOB_TYPE
@@ -41,8 +43,6 @@ for i in "${GEMSPECS[@]}"; do
     fi
   done
 done
-
-git status
 
 # Capture failures
 EXIT_STATUS=0 # everything passed
