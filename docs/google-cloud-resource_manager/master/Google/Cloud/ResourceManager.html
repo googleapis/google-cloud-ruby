@@ -78,219 +78,9 @@ js:
     <h1>Google Cloud Resource Manager</h1>
 
 <p>The Resource Manager API provides methods that you can use to
-programmatically manage your projects in the Google Cloud Platform. You
-may be familiar with managing projects in the <a href="https://developers.google.com/console/help/new/">Developers
-Console</a>. With this API
-you can do the following:</p>
+programmatically manage your projects in the Google Cloud Platform.</p>
 
-<ul>
-<li>Get a list of all projects associated with an account</li>
-<li>Create new projects</li>
-<li>Update existing projects</li>
-<li>Delete projects</li>
-<li>Undelete, or recover, projects that you don&#39;t want to delete</li>
-</ul>
-
-<h2>Authentication</h2>
-
-<p>The Resource Manager API currently requires authentication of a <a href="https://developers.google.com/identity/protocols/OAuth2">User
-Account</a>, and
-cannot currently be accessed with a <a href="https://developers.google.com/identity/protocols/OAuth2ServiceAccount">Service
-Account</a>.
-To use a User Account install the <a href="http://cloud.google.com/sdk">Google Cloud
-SDK</a> and authenticate with the following:</p>
-
-<pre class="code ruby"><code class="ruby">$ gcloud auth login
-</code></pre>
-
-<p>Also make sure all <code>GCLOUD</code> environment variables are cleared of any
-service accounts. Then google-cloud will be able to detect the user
-authentication and connect with those credentials.</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-</code></pre>
-
-<h2>Enabling Logging</h2>
-
-<p>To enable logging for this library, set the logger for the underlying
-<a href="https://github.com/google/google-api-ruby-client/blob/master/README.md#logging">Google API Client</a>
-library. The logger that you set may be a Ruby stdlib
-<a href="https://ruby-doc.org/stdlib-2.4.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a>
-as shown below, or a
-<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a>
-that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver
-Logging</a>.</p>
-
-<p>If you do not set the logger explicitly and your application is running in
-a Rails environment, it will default to <code>Rails.logger</code>. Otherwise, if you
-do not set the logger and you are not using Rails, logging is disabled by
-default.</p>
-
-<p>Configuring a Ruby stdlib logger:</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>logger</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_my_logger'>my_logger</span> <span class='op'>=</span> <span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='gvar'>$stderr</span>
-<span class='id identifier rubyid_my_logger'>my_logger</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span> <span class='const'>Logger</span><span class='op'>::</span><span class='const'>WARN</span>
-
-<span class='comment'># Set the Google API Client logger
-</span><span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Apis</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_my_logger'>my_logger</span>
-</code></pre>
-
-<h2>Listing Projects</h2>
-
-<p>Project is a collection of settings, credentials, and metadata about the
-application or applications you&#39;re working on. You can retrieve and
-inspect all projects that you have permissions to. (See
-<span class='object_link'><a href="ResourceManager/Manager.html#projects-instance_method" title="Google::Cloud::ResourceManager::Manager#projects (method)">Manager#projects</a></span>)</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-<span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_project'>project</span><span class='op'>|</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
-<span class='kw'>end</span>
-</code></pre>
-
-<h2>Managing Projects with Labels</h2>
-
-<p>Labels can be added to or removed from projects. (See
-<span class='object_link'><a href="ResourceManager/Project.html#labels-instance_method" title="Google::Cloud::ResourceManager::Project#labels (method)">Project#labels</a></span>)</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span>
-<span class='comment'># Label the project as production
-</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span>
-  <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>env</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>production</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span>
-</code></pre>
-
-<p>Projects can then be filtered by labels. (See
-<span class='object_link'><a href="ResourceManager/Manager.html#projects-instance_method" title="Google::Cloud::ResourceManager::Manager#projects (method)">Manager#projects</a></span>)</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-<span class='comment'># Find only the productions projects
-</span><span class='id identifier rubyid_projects'>projects</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_projects'>projects</span> <span class='label'>filter:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>labels.env:production</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_project'>project</span><span class='op'>|</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
-<span class='kw'>end</span>
-</code></pre>
-
-<h2>Creating a Project</h2>
-
-<p>You can also use the API to create new projects. (See
-<span class='object_link'><a href="ResourceManager/Manager.html#create_project-instance_method" title="Google::Cloud::ResourceManager::Manager#create_project (method)">Manager#create_project</a></span>)</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_create_project'>create_project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                                          <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Todos Development</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                                          <span class='label'>labels:</span> <span class='lbrace'>{</span><span class='label'>env:</span> <span class='symbol'>:development</span><span class='rbrace'>}</span>
-</code></pre>
-
-<h2>Deleting a Project</h2>
-
-<p>You can delete projects when they are no longer needed. (See
-<span class='object_link'><a href="ResourceManager/Manager.html#delete-instance_method" title="Google::Cloud::ResourceManager::Manager#delete (method)">Manager#delete</a></span> and
-<span class='object_link'><a href="ResourceManager/Project.html#delete-instance_method" title="Google::Cloud::ResourceManager::Project#delete (method)">Project#delete</a></span>)</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-<span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span>
-</code></pre>
-
-<h2>Undeleting a Project</h2>
-
-<p>You can also restore a deleted project within the waiting period that
-starts when the project was deleted. Restoring a project returns it to the
-state it was in prior to being deleted. (See
-<span class='object_link'><a href="ResourceManager/Manager.html#undelete-instance_method" title="Google::Cloud::ResourceManager::Manager#undelete (method)">Manager#undelete</a></span> and
-<span class='object_link'><a href="ResourceManager/Project.html#undelete-instance_method" title="Google::Cloud::ResourceManager::Project#undelete (method)">Project#undelete</a></span>)</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-<span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_undelete'>undelete</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span>
-</code></pre>
-
-<h2>Configuring retries and timeout</h2>
-
-<p>You can configure how many times API requests may be automatically
-retried. When an API request fails, the response will be inspected to see
-if the request meets criteria indicating that it may succeed on retry,
-such as <code>500</code> and <code>503</code> status codes or a specific internal error code
-such as <code>rateLimitExceeded</code>. If it meets the criteria, the request will be
-retried after a delay. If another error occurs, the delay will be
-increased before a subsequent attempt, until the <code>retries</code> limit is
-reached.</p>
-
-<p>You can also set the request <code>timeout</code> value in seconds.</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span> <span class='label'>retries:</span> <span class='int'>10</span><span class='comma'>,</span>
-                                                      <span class='label'>timeout:</span> <span class='int'>120</span>
-</code></pre>
-
-<p>See the <a href="https://cloud.google.com/resource-manager/docs/core_errors">Resource Manager error
-messages</a>
-for a list of error conditions.</p>
-
-<h2>Managing IAM Policies</h2>
-
-<p>Google Cloud Identity and Access Management (<a href="https://cloud.google.com/iam/">Cloud
-IAM</a>) access control policies can be
-managed on projects. These policies allow project owners to manage <em>who</em>
-(identity) has access to <em>what</em> (role). See <a href="https://cloud.google.com/iam/docs/overview">Cloud IAM
-Overview</a> for more
-information.</p>
-
-<p>A project&#39;s access control policy can be retrieved. (See
-<span class='object_link'><a href="ResourceManager/Project.html#policy-instance_method" title="Google::Cloud::ResourceManager::Project#policy (method)">Project#policy</a></span> and
-<span class='object_link'><a href="ResourceManager/Policy.html" title="Google::Cloud::ResourceManager::Policy (class)">Policy</a></span>.)</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span>
-</code></pre>
-
-<p>A project&#39;s access control policy can also be updated:</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_policy'>policy</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span>
-  <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>roles/viewer</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>serviceAccount:your-service-account</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span>
-</code></pre>
-
-<p>And permissions can be tested on a project. (See
-<span class='object_link'><a href="ResourceManager/Project.html#test_permissions-instance_method" title="Google::Cloud::ResourceManager::Project#test_permissions (method)">Project#test_permissions</a></span>)</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/resource_manager</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ResourceManager</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::ResourceManager.new (method)">new</a></span></span>
-<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_manager'>resource_manager</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tokyo-rain-123</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_perms'>perms</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_test_permissions'>test_permissions</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>resourcemanager.projects.get</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>resourcemanager.projects.delete</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_perms'>perms</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>resourcemanager.projects.get</span><span class='tstring_end'>&quot;</span></span>    <span class='comment'>#=&gt; true
-</span><span class='id identifier rubyid_perms'>perms</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>resourcemanager.projects.delete</span><span class='tstring_end'>&quot;</span></span> <span class='comment'>#=&gt; false
-</span></code></pre>
-
-<p>For more information about using access control policies see <a href="https://cloud.google.com/iam/docs/managing-policies">Managing
-Policies</a>.</p>
+<p>See <a href="../../index.html" title="Resource Manager Overview">Resource Manager Overview</a>.</p>
 
 
   </div>
@@ -464,14 +254,14 @@ Google::Cloud::ResourceManager library uses.</p>
       <pre class="lines">
 
 
-325
-326
-327
-328
-329</pre>
+104
+105
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager.rb', line 325</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -631,27 +421,27 @@ Deprecated.</p>
       <pre class="lines">
 
 
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager.rb', line 288</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>retries:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>keyfile:</span> <span class='kw'>nil</span>
