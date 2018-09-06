@@ -7,3 +7,4 @@
 ./lib/**/*.rb
 -
 README.md
+CONFIGURATION.md
