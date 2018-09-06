@@ -3,8 +3,13 @@
 --markup markdown
 --markup-provider redcarpet
 --exclude ./lib/legacy_stackdriver.rb
+--main OVERVIEW.md
 
 ./lib/**/*.rb
 -
-README.md
+OVERVIEW.md
 INSTRUMENTATION_CONFIGURATION.md
+CONTRIBUTING.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+LICENSE

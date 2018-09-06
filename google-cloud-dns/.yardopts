@@ -2,7 +2,15 @@
 --title=Google Cloud DNS
 --markup markdown
 --markup-provider redcarpet
+--main OVERVIEW.md
 
 ./lib/**/*.rb
 -
-README.md
+OVERVIEW.md
+AUTHENTICATION.md
+LOGGING.md
+CONTRIBUTING.md
+TROUBLESHOOTING.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+LICENSE

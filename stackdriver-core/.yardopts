@@ -2,7 +2,12 @@
 --title=Stackdriver Core
 --markup markdown
 --markup-provider redcarpet
+--main OVERVIEW.md
 
 ./lib/**/*.rb
 -
-README.md
+OVERVIEW.md
+CONTRIBUTING.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+LICENSE
