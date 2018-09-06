@@ -388,14 +388,14 @@ the Google::Cloud::Trace module uses.</p>
       <pre class="lines">
 
 
-331
-332
-333
-334
-335</pre>
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -467,12 +467,12 @@ or <code>nil</code>.</p>
       <pre class="lines">
 
 
-399
-400
-401</pre>
+218
+219
+220</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 399</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 218</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span>
   <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="#THREAD_KEY-constant" title="Google::Cloud::Trace::THREAD_KEY (constant)">THREAD_KEY</a></span></span><span class='rbracket'>]</span>
@@ -585,25 +585,25 @@ Optional.</p>
       <pre class="lines">
 
 
-434
-435
-436
-437
-438
-439
-440
-441
-442
-443
-444
-445
-446
-447
-448
-449</pre>
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 434</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 253</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_in_span'>in_span</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>kind:</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Trace/SpanKind.html" title="Google::Cloud::Trace::SpanKind (class)">SpanKind</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Trace/SpanKind.html#UNSPECIFIED-constant" title="Google::Cloud::Trace::SpanKind::UNSPECIFIED (constant)">UNSPECIFIED</a></span></span><span class='comma'>,</span>
                  <span class='label'>labels:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -805,31 +805,31 @@ Deprecated.</p>
       <pre class="lines">
 
 
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290</pre>
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 269</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>
@@ -922,14 +922,14 @@ being measured, the current trace object, or <code>nil</code> if none.</p>
       <pre class="lines">
 
 
-374
-375
-376
-377
-378</pre>
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 374</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace.rb', line 193</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set'>set</span> <span class='id identifier rubyid_trace'>trace</span>
   <span class='id identifier rubyid_trace_context'>trace_context</span> <span class='op'>=</span> <span class='id identifier rubyid_trace'>trace</span> <span class='op'>?</span> <span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_trace_context'>trace_context</span> <span class='op'>:</span> <span class='kw'>nil</span>
