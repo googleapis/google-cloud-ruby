@@ -2,7 +2,15 @@
 --title=Google Cloud Translation API
 --markup markdown
 --markup-provider redcarpet
+--main OVERVIEW.md
 
 ./lib/**/*.rb
 -
+OVERVIEW.md
+AUTHENTICATION.md
+CONTRIBUTING.md
+TROUBLESHOOTING.md
 README.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+LICENSE

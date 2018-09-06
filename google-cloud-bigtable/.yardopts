@@ -4,7 +4,16 @@
 --markup markdown
 --markup-provider redcarpet
 --embed-mixins
+--main OVERVIEW.md
 
 ./lib/**/*.rb
 -
+OVERVIEW.md
+AUTHENTICATION.md
+LOGGING.md
+CONTRIBUTING.md
+TROUBLESHOOTING.md
 README.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+LICENSE

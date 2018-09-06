@@ -125,6 +125,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud::Datastore") do
     mock_datastore do |mock|
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
     end
   end
 
