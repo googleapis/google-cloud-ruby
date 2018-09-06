@@ -673,7 +673,7 @@ def generate_kokoro_configs
         file_path += "#{os_version}-" unless os_version == :linux
         file_path += "#{gem}.cfg"
         File.open(file_path, "w") do |f|
-          config = ERB.new(File.read("./.kokoro/templates/gem.cfg.erb"))
+          config = ERB.new(File.read("./.kokoro/templates/#{os_version}.cfg.erb"))
           f.write(config.result(binding))
         end
       end
@@ -685,7 +685,7 @@ def generate_kokoro_configs
   os_version = :linux
   image = os_versions[os_version]
   File.open("./.kokoro/continuous/#{gem}.cfg", "w") do |f|
-    config = ERB.new(File.read("./.kokoro/templates/gem.cfg.erb"))
+    config = ERB.new(File.read("./.kokoro/templates/linux.cfg.erb"))
     f.write(config.result(binding))
   end
 end
