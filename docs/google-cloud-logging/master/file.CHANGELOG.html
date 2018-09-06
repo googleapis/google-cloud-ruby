@@ -1,0 +1,274 @@
+---
+layout: yard_main
+title: "File: CHANGELOG - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "CHANGELOG";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="file_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: CHANGELOG</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>Release History</h1>
+
+<h3>1.5.2 / 2018-08-21</h3>
+
+<ul>
+<li>Update documentation.</li>
+</ul>
+
+<h3>1.5.1 / 2018-07-05</h3>
+
+<ul>
+<li>Fix bug in List classes by propagating arguments needed for pagination calls.</li>
+<li>Fix issue when disabling Stackdriver components with Rails.env.production.</li>
+<li>Reduce string memory usage.</li>
+<li>Add documentation for enabling gRPC logging.</li>
+</ul>
+
+<h3>1.5.0 / 2018-02-27</h3>
+
+<ul>
+<li>Use Google Cloud Shared Configuration.</li>
+<li>Deprecated Logging Sink attributes.</li>
+</ul>
+
+<h3>1.4.0 / 2017-12-19</h3>
+
+<ul>
+<li>Update google-gax dependency to 1.0.</li>
+</ul>
+
+<h3>1.3.2 / 2017-11-20</h3>
+
+<ul>
+<li>Refresh GAPIC layer (low-level API) based on updates to Protobuf types.</li>
+</ul>
+
+<h3>1.3.1 / 2017-11-15</h3>
+
+<ul>
+<li>Fix credentials verification bug in Railtie.</li>
+</ul>
+
+<h3>1.3.0 / 2017-11-14</h3>
+
+<ul>
+<li>Add <code>Google::Cloud::Logging::Credentials</code> class.</li>
+<li>Rename constructor arguments to <code>project_id</code> and <code>credentials</code>.
+(The previous arguments <code>project</code> and <code>keyfile</code> are still supported.)</li>
+<li>Document <code>Google::Auth::Credentials</code> as <code>credentials</code> value.</li>
+<li>Add <code>partial_success</code> optional argument to <code>Project#write_entries</code>.</li>
+<li>Deprecate <code>HttpRequest#method</code>, use <code>HttpRequest#request_method</code> instead.</li>
+<li>Update generated low level GAPIC code.</li>
+<li>Updated <code>google-gax</code> (<code>grpc</code>, <code>google-protobuf</code>), <code>googleauth</code> dependencies.</li>
+</ul>
+
+<h3>1.2.3 / 2017-09-27</h3>
+
+<ul>
+<li>Updated protobuf classes.</li>
+<li>Updated README.</li>
+</ul>
+
+<h3>1.2.2 / 2017-09-08</h3>
+
+<ul>
+<li>Add <code>labels</code> configuration option to <code>Google::Cloud::Logging::Middleware</code> for Rails and other Rack-based framework integrations.</li>
+</ul>
+
+<h3>1.2.1 / 2017-07-11</h3>
+
+<ul>
+<li>stackdriver-core 1.2.0 release</li>
+</ul>
+
+<h3>1.2.0 / 2017-07-11</h3>
+
+<ul>
+<li>Update <code>labels</code> parameter in <code>Google::Cloud::Logging::Logger#initialize</code> to default to empty hash.</li>
+<li>Update <code>Google::Cloud::Logging::Logger</code> to support the following <code>ActiveSupport::Logger</code> methods: <code>:local_level</code>, <code>:local_level=</code>, <code>:silence</code>, <code>:silencer</code>, and <code>:unknown?</code>.</li>
+<li>Update GAPIC configuration to exclude <code>UNAVAILABLE</code> errors from automatic retry.</li>
+<li>Update gem spec homepage links.</li>
+</ul>
+
+<h3>1.1.0 / 2017-05-25</h3>
+
+<ul>
+<li>Introduce new <code>Google::Cloud::Logging.configure</code> instrumentation configuration interface.</li>
+<li>Google::Cloud::Logger now sends extra trace context information in log entries.</li>
+</ul>
+
+<h3>1.0.1 / 2017-04-21</h3>
+
+<ul>
+<li>Middleware constructor can be called without an explicit logger. This should make integration in non-Rails applications simpler.</li>
+<li>If Rails integration fails due to an auth error, the notice is now printed to STDOUT rather than STDERR, which should make it a bit less scary when displayed in Docker output.</li>
+</ul>
+
+<h3>1.0.0 / 2017-03-31</h3>
+
+<ul>
+<li>Release 1.0</li>
+<li>Added <code>#trace</code> and <code>#source_location</code> to Entry</li>
+<li>Added listing of logs for the project</li>
+<li>Updated documentation</li>
+<li>Automatic retry on <code>UNAVAILABLE</code> errors</li>
+</ul>
+
+<h3>0.24.2 / 2017-03-03</h3>
+
+<ul>
+<li>No public API changes.</li>
+<li>Update GRPC header value sent to the Logging API.</li>
+</ul>
+
+<h3>0.24.1 / 2017-03-01</h3>
+
+<ul>
+<li>No public API changes.</li>
+<li>Update GRPC header value sent to the Logging API.</li>
+<li>Low level API adds new Protobuf types and GAPIC methods.</li>
+</ul>
+
+<h3>0.24.0 / 2017-02-21</h3>
+
+<ul>
+<li>Fix GRPC retry bug</li>
+<li>The client_config data structure has replaced retry_codes/retry_codes_def with retry_codes</li>
+<li>Update GRPC/Protobuf/GAX dependencies</li>
+</ul>
+
+<h3>0.23.2 / 2016-12-27</h3>
+
+<ul>
+<li><code>Google::Cloud::Logging::Logger</code> depended on standard logger but didn&#39;t require it. Fixed.</li>
+</ul>
+
+<h3>0.23.1 / 2016-12-22</h3>
+
+<ul>
+<li>Use the <code>stackdriver-core</code> gem to obtain Trace ID, for compatibility with the <code>google-cloud-trace</code> gem.</li>
+<li><code>Google::Cloud::Logging::Logger</code> now understands all remaining standard Logger methods.</li>
+<li>Clean up <code>AsyncWriter</code> threads on VM exit, to prevent gRPC from crashing if it&#39;s still in the middle of a call.</li>
+<li>Support setting log name by path, and direct App Engine health checks to a separate log by default.</li>
+<li>Minor improvements to warning messages.</li>
+</ul>
+
+<h3>0.23.0 / 2016-12-8</h3>
+
+<ul>
+<li>Add <code>resources</code> method argument to <code>Project#entries</code></li>
+<li>Deprecate <code>projects</code> method argument from <code>Project#entries</code></li>
+<li>Add <code>start_at</code>, <code>end_at</code>, and <code>writer_identity</code> attributes to <code>Sink</code></li>
+<li>Add <code>start_at</code>, <code>end_at</code>, and <code>unique_writer_identity</code> parameters to <code>Project#create_sink</code></li>
+<li>Add <code>unique_writer_identity</code> parameter to <code>Sink#save</code></li>
+<li>Many documentation improvements</li>
+<li>Add documentation for Low Level API</li>
+</ul>
+
+<h3>0.21.2 / 2016-11-15</h3>
+
+<ul>
+<li>Fix issue with uninitialized VERSION (remi)</li>
+</ul>
+
+<h3>0.21.1 / 2016-11-4</h3>
+
+<ul>
+<li>Upgraded Google::Cloud::Logging::Railtie to use AsyncWriter</li>
+<li>Added Rails configuration for custom monitored resource</li>
+</ul>
+
+<h3>0.21.0 / 2016-10-20</h3>
+
+<ul>
+<li>New service constructor Google::Cloud::Logging.new</li>
+<li>New constructor argument client_config</li>
+<li>Logger is now asynchronous</li>
+<li>AsyncWriter added</li>
+<li>Rails and Rack integration added</li>
+</ul>
+
+<h3>0.20.1 / 2016-09-02</h3>
+
+<ul>
+<li>Fix an issue with the GRPC client and forked sub-processes</li>
+</ul>
+
+<h3>0.20.0 / 2016-08-26</h3>
+
+<p>This gem contains the Stackdriver Logging service implementation for the <code>google-cloud</code> gem. The <code>google-cloud</code> gem replaces the old <code>gcloud</code> gem. Legacy code can continue to use the <code>gcloud</code> gem.</p>
+
+<ul>
+<li>Namespace is now <code>Google::Cloud</code></li>
+<li>The <code>google-cloud</code> gem is now an umbrella package for individual gems</li>
+</ul>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
