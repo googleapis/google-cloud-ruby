@@ -14,11 +14,5 @@ env_vars: {
 
 env_vars: {
     key: "TRAMPOLINE_BUILD_FILE"
-    value: "github/google-cloud-ruby/.kokoro/<%= 
-        if os_version == :windows
-            "build.bat"
-        else
-            "build.sh"
-        end
-    %>"
+    value: "github/google-cloud-ruby/.kokoro/build.sh"
 }

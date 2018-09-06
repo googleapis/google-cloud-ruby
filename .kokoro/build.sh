@@ -20,7 +20,7 @@ git checkout master
 
 # Print out Ruby version
 ruby --version
-echo $JOB_TYPE
+
 # Temporary workaround for a known bundler+docker issue:
 # https://github.com/bundler/bundler/issues/6154
 export BUNDLE_GEMFILE=
@@ -58,11 +58,9 @@ if [ "$PACKAGE" = "post" ]; then
   rbenv global "2.5.1"
   (bundle update && bundle exec rake circleci:post) || set_failed_status
 else
-  cd $PACKAGE
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
-    bundle update
-    (bundle exec rake kokoro:$JOB_TYPE) || set_failed_status
+    (bundle update && bundle exec rake kokoro:$JOB_TYPE) || set_failed_status
   done
 fi
 

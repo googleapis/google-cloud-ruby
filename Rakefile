@@ -630,6 +630,7 @@ namespace :kokoro do
   end
 
   task :presubmit do
+    header_2 ENV["JOB_TYPE"]
     Dir.chdir ENV["PACKAGE"] do
       Bundler.with_clean_env do
         header "Using Ruby - #{RUBY_VERSION}"
@@ -640,6 +641,7 @@ namespace :kokoro do
   end
 
   task :continuous do
+    header_2 ENV["JOB_TYPE"]
     updated = updated_gems.include? ENV["PACKAGE"]
     Dir.chdir ENV["PACKAGE"] do
       Bundler.with_clean_env do
