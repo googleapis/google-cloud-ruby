@@ -25,8 +25,6 @@ echo $JOB_TYPE
 # https://github.com/bundler/bundler/issues/6154
 export BUNDLE_GEMFILE=
 
-bundle update
-
 # CHANGED_DIRS is the list of top-level directories that changed. CHANGED_DIRS will be empty when run on master.
 # See https://github.com/GoogleCloudPlatform/google-cloud-python/blob/master/.kokoro/build.sh for alt implementation
 CHANGED_DIRS="$(git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f1 | sort | uniq || true)"
@@ -63,6 +61,7 @@ else
   cd $PACKAGE
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
+    bundle update
     (bundle exec rake kokoro:$JOB_TYPE) || set_failed_status
   done
 fi
