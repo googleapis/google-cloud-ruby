@@ -30,19 +30,15 @@ require "google/cloud/core/version"
 # App Engine and Google Kubernetes Engine. In other environments you can
 # configure authentication easily, either directly in your code or via
 # environment variables. Read more about the options for connecting in the
-# [Authentication
-# Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
-#
-# You can learn more about various options for connection on the [Authentication
-# Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+# {file:AUTHENTICATION.md Authentication Guide}.
 #
 module Google
   module Cloud
     ##
     # Creates a new object for connecting to Google Cloud.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String] project_id Project identifier for the service you are
     #   connecting to.

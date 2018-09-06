@@ -21,7 +21,7 @@ When you first use Cloud Spanner, you must create an instance, which is an
 allocation of resources that are used by Cloud Spanner databases. When you
 create an instance, you choose where your data is stored and how many nodes are
 used for your data. (For more information, see [Configuration
-Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CONFIGURATION)).
+Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)).
 
 Use {Google::Cloud::Spanner::Project#create_instance Project#create_instance} to
 create an instance:

@@ -78,7 +78,8 @@ The environment variables that Logging checks for project ID are:
 1. `LOGGING_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that Logging checks for credentials are configured on {Google::Cloud::Logging::V1beta1::Credentials}:
+The environment variables that Logging checks for credentials are configured on
+{Google::Cloud::Logging::V2::Credentials}:
 
 1. `LOGGING_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `LOGGING_KEYFILE` - Path to JSON file, or JSON contents

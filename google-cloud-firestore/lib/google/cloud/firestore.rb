@@ -37,8 +37,7 @@ module Google
       # Each call creates a new connection.
       #
       # For more information on connecting to Google Cloud see the
-      # [Authentication
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      # {file:AUTHENTICATION.md Authentication Guide}.
       #
       # @param [String] project_id Identifier for a Firestore project. If not
       #   present, the default project for the credentials is used.

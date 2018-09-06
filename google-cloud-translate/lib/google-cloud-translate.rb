@@ -34,7 +34,7 @@ module Google
     # it supports authentication using a public API access key. (If both the API
     # key and the project and OAuth 2.0 credentials are provided, the API key
     # will be used.) Instructions and configuration options are covered in the
-    # [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
@@ -87,7 +87,7 @@ module Google
     # it supports authentication using a public API access key. (If both the API
     # key and the project and OAuth 2.0 credentials are provided, the API key
     # will be used.) Instructions and configuration options are covered in the
-    # [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String] key a public API access key (not an OAuth 2.0 token)
     # @param [String] project_id Project identifier for the Cloud Translation

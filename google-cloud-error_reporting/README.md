@@ -2,14 +2,13 @@
 
 [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) counts,
 analyzes and aggregates errors raised in your running cloud services. A
-centralized error management interface displays the results with sorting
-and filtering capabilities. A dedicated view shows the error details: time
-chart, occurrences, affected user count, first and last seen dates and a
-cleaned exception stack trace. Opt-in to receive email and mobile alerts on
-new errors.
+centralized error management interface displays the results with sorting and
+filtering capabilities. A dedicated view shows the error details: time chart,
+occurrences, affected user count, first and last seen dates and a cleaned
+exception stack trace. Opt-in to receive email and mobile alerts on new errors.
 
-- [google-cloud-error_reporting API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest)
-- [google-cloud-error_reporting instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation)
+- [google-cloud-error_reporting API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest)
+- [google-cloud-error_reporting instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest/file.INSTRUMENTATION)
 - [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
 - [Stackdriver ErrorReporting documentation](https://cloud.google.com/error-reporting/docs/)
 
@@ -35,13 +34,14 @@ gem "google-cloud-error_reporting"
 $ bundle install
 ```
 
-Alternatively, check out the [`stackdriver`](../stackdriver) gem that includes
-the `google-cloud-error_reporting` gem.
+Alternatively, check out the
+[`stackdriver`](http://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest)
+gem that includes the `google-cloud-error_reporting` gem.
 
 ## Enable Stackdriver Error Reporting API
 
-The Stackdriver Error Reporting library needs the [Stackdriver Error
-Reporting API](https://console.cloud.google.com/apis/library/clouderrorreporting.googleapis.com)
+The Stackdriver Error Reporting library needs the [Stackdriver Error Reporting
+API](https://console.cloud.google.com/apis/library/clouderrorreporting.googleapis.com)
 to be enabled on your Google Cloud project. Make sure it's enabled if not
 already.
 
@@ -54,8 +54,8 @@ automatically reports exceptions captured from the application's Rack stack.
 
 ### With Ruby on Rails
 
-You can load the Railtie that comes with the library into your Ruby
-on Rails application by explicitly requiring it during the application startup:
+You can load the Railtie that comes with the library into your Ruby on Rails
+application by explicitly requiring it during the application startup:
 
 ```ruby
 # In config/application.rb
@@ -91,8 +91,9 @@ end
 ## Configuring the library
 
 You can customize the behavior of the Stackdriver Error Reporting library for
-Ruby. See the [configuration guide](../stackdriver/CONFIGURATION.md) for a list
-of possible configuration options.
+Ruby. See the [configuration
+guide](http://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+for a list of possible configuration options.
 
 ## Running on Google Cloud Platform
 
@@ -104,8 +105,8 @@ enabled on that instance.
 ### App Engine
 
 On Google App Engine, the Stackdriver Error Reporting API access scope is
-enabled by default, and the Stackdriver Error Reporting library for Ruby can
-be used without providing credentials or a project ID.
+enabled by default, and the Stackdriver Error Reporting library for Ruby can be
+used without providing credentials or a project ID.
 
 ### Container Engine
 
@@ -131,18 +132,17 @@ full access to all Cloud APIs" under Access scopes.
 
 To run the Stackdriver Error Reporting outside of Google Cloud Platform, you
 must supply your GCP project ID and appropriate service account credentials
-directly to the Stackdriver Error Reporting. This applies to running the
-library on your own workstation, on your datacenter's computers, or on the VM
-instances of another cloud provider. See the [Authentication
-section](#authentication) for instructions on how to do so.
+directly to the Stackdriver Error Reporting. This applies to running the library
+on your own workstation, on your datacenter's computers, or on the VM instances
+of another cloud provider. See the [Authentication section](#authentication) for
+instructions on how to do so.
 
 ## Authentication
 
-The Instrumentation client and API use Service Account credentials to connect
-to Google Cloud services. When running on Google Cloud Platform environments,
-the credentials will be discovered automatically. When running on other
-environments the Service Account credentials can be specified by providing in
-several ways.
+The Instrumentation client and API use Service Account credentials to connect to
+Google Cloud services. When running on Google Cloud Platform environments, the
+credentials will be discovered automatically. When running on other environments
+the Service Account credentials can be specified by providing in several ways.
 
 The best way to provide authentication information if you're using Ruby on Rails
 is through the Rails configuration interface:
@@ -175,12 +175,24 @@ end
 ```
 
 This library also supports the other authentication methods provided by the
-`google-cloud-ruby` suite. Instructions and configuration options are covered
-in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/authentication).
+`google-cloud-ruby` suite. Instructions and configuration options are covered in
+the [Authentication
+Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.AUTHENTCATION).
 
 ## Enabling Logging
 
-To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+To enable logging for this library, set the logger for the underlying
+[gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger
+that you set may be a Ruby stdlib
+[`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as
+shown below, or a
+[`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger)
+that will write logs to [Stackdriver
+Logging](https://cloud.google.com/logging/). See
+[grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
+and the gRPC
+[spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb)
+for additional information.
 
 Configuring a Ruby stdlib logger:
 
@@ -205,9 +217,9 @@ end
 This library is supported on Ruby 2.3+.
 
 Google provides official support for Ruby versions that are actively supported
-by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.3
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
+by Ruby Core—that is, Ruby versions that are either in normal maintenance or in
+security maintenance, and not end of life. Currently, this means Ruby 2.3 and
+later. Older versions of Ruby _may_ still work, but are unsupported and not
 recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
 about the Ruby support schedule.
 
@@ -222,24 +234,24 @@ change at any time and the public API should not be considered stable.
 
 Contributions to this library are always welcome and highly encouraged.
 
-See the
-[Contributing Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing)
+See the [Contributing
+Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CONTRIBUTING)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
-participating in this project you agree to abide by its terms. See
-[Code of Conduct](../CODE_OF_CONDUCT.md) for more information.
+participating in this project you agree to abide by its terms. See [Code of
+Conduct](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CODE_OF_CONDUCT)
+for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
- [LICENSE](LICENSE).
+[LICENSE](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.LICENSE).
 
 ## Support
 
-Please
-[report bugs at the project on Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues).
-Don't hesitate to
-[ask questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
+Please [report bugs at the project on
+Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues). Don't
+hesitate to [ask
+questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
 about the client or APIs on [StackOverflow](http://stackoverflow.com).
-

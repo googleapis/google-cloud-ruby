@@ -34,8 +34,7 @@ module Google
       # service. Each call creates a new connection.
       #
       # For more information on connecting to Google Cloud see the
-      # [Authentication
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      # {file:AUTHENTICATION.md Authentication Guide}.
       #
       # @param [String, Hash, Google::Auth::Credentials] credentials The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a

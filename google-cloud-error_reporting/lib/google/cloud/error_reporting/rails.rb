@@ -35,7 +35,7 @@ module Google
       # and handle all Exceptions without interfering with Rails's normal error
       # pages.
       # See the [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
       # on how to configure the Railtie and Middleware.
       #
       class Railtie < ::Rails::Railtie

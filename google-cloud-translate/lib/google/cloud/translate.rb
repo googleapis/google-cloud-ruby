@@ -48,8 +48,7 @@ module Google
       # addition, it supports authentication using a public API access key. (If
       # both the API key and the project and OAuth 2.0 credentials are provided,
       # the API key will be used.) Instructions and configuration options are
-      # covered in the [Authentication
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
+      # covered in the {file:AUTHENTICATION.md Authentication Guide}.
       #
       # @param [String] project_id Project identifier for the Cloud Translation
       #   service you are connecting to. If not present, the default project for

@@ -30,8 +30,8 @@ module Google
     # Creates a new object for connecting to the Resource Manager service.
     # Each call creates a new connection.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
@@ -74,8 +74,8 @@ module Google
     # Creates a new `Project` instance connected to the Resource Manager
     # service. Each call creates a new connection.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String, Hash, Google::Auth::Credentials] credentials The path to
     #   the keyfile as a String, the contents of the keyfile as a Hash, or a

@@ -45,8 +45,7 @@ module Google
       # Each call creates a new connection.
       #
       # For more information on connecting to Google Cloud see the
-      # [Authentication
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      # {file:AUTHENTICATION.md Authentication Guide}.
       #
       # @param [String] project_id Project identifier for the Stackdriver
       #   Logging service you are connecting to. If not present, the default
@@ -139,7 +138,7 @@ module Google
       #   Rack environment.
       #
       # See the [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
       # for full configuration parameters.
       #
       # @return [Google::Cloud::Config] The configuration object

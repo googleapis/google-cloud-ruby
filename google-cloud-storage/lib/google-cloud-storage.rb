@@ -29,8 +29,8 @@ module Google
     # Creates a new object for connecting to the Storage service.
     # Each call creates a new connection.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @see https://cloud.google.com/storage/docs/authentication#oauth Storage
     #   OAuth 2.0 Authentication
@@ -74,8 +74,8 @@ module Google
     # Creates a new object for connecting to the Storage service.
     # Each call creates a new connection.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String] project_id Project identifier for the Storage service
     #   you are connecting to. If not present, the default project for the

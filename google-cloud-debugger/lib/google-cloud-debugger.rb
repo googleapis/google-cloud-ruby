@@ -31,8 +31,8 @@ module Google
     # an application. Each call creates a new debugger agent with independent
     # connection service.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String] service_name Name for the debuggee application. Optional.
     # @param [String] service_version Version identifier for the debuggee
@@ -83,8 +83,8 @@ module Google
     # an application. Each call creates a new debugger agent with independent
     # connection service.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String] project_id Project identifier for the Stackdriver Debugger
     #   service you are connecting to. If not present, the default project for

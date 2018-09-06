@@ -33,21 +33,27 @@ module Google
     #
     # Obtain an instance of the environment info with:
     #
-    #     require "google/cloud/env"
-    #     env = Google::Cloud.env
+    # ```ruby
+    # require "google/cloud/env"
+    # env = Google::Cloud.env
+    # ```
     #
     # Then you can interrogate any fields using methods on the object.
     #
-    #     if env.app_engine?
-    #       # App engine specific logic
-    #     end
+    # ```ruby
+    # if env.app_engine?
+    #   # App engine specific logic
+    # end
+    # ```
     #
     # Any item that does not apply to the current environment will return nil.
     # For example:
     #
-    #     unless env.app_engine?
-    #       service = env.app_engine_service_id  # => nil
-    #     end
+    # ```ruby
+    # unless env.app_engine?
+    #   service = env.app_engine_service_id  # => nil
+    # end
+    # ```
     #
     class Env
       # @private Base (host) URL for the metadata server.

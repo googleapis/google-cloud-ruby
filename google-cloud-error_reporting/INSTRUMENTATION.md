@@ -26,7 +26,7 @@ you want to run on a non Google Cloud environment or you want to customize  the
 default behavior.
 
 See the [Configuration
-Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CONFIGURATION)
+Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
 for full configuration parameters.
 
 ## Rack Middleware and Railtie

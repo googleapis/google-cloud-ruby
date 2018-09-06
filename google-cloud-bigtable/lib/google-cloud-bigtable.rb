@@ -28,8 +28,8 @@ module Google
   module Cloud
     # Creates a new object for connecting to the Bigtable service.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param scope [Array<String>]
     #   The OAuth 2.0 scopes controlling the set of resources and operations

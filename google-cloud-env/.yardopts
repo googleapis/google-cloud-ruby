@@ -6,3 +6,7 @@
 ./lib/**/*.rb
 -
 README.md
+CONTRIBUTING.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+LICENSE

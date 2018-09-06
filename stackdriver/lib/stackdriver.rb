@@ -39,18 +39,19 @@ end
 # information for your application.
 #
 # Specifically, this gem is a convenience package that loads the following gems:
-# - [google-cloud-debugger](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger)
-# - [google-cloud-error_reporting](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting)
-# - [google-cloud-logging](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging)
-# - [google-cloud-trace](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace)
+#
+# - [google-cloud-debugger](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger)
+# - [google-cloud-error_reporting](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting)
+# - [google-cloud-logging](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging)
+# - [google-cloud-trace](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-trace)
 #
 # On top of that, stackdriver gem automatically activates the following
 # instrumentation features:
-# - [google-cloud-debugger instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/debugger_instrumentation)
-# - [google-cloud-error_reporting instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/error_reporting_instrumentation)
-# - [google-cloud-logging instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/logging_instrumentation)
-# - [google-cloud-trace instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/trace_instrumentation)
 #
+# - [google-cloud-debugger instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.INSTRUMENTATION)
+# - [google-cloud-error_reporting instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest/file.INSTRUMENTATION)
+# - [google-cloud-logging instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/file.INSTRUMENTATION)
+# - [google-cloud-trace instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.INSTRUMENTATION)
 #
 # ## Usage
 #
