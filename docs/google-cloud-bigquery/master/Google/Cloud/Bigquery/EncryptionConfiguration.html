@@ -92,8 +92,7 @@ js:
     <h1>Encryption Configuration</h1>
 
 <p>A builder for BigQuery table encryption configurations, passed to block
-arguments to <span class='object_link'><a href="Dataset.html#create_table-instance_method" title="Google::Cloud::Bigquery::Dataset#create_table (method)">Dataset#create_table</a></span> and
-Table#encryption_configuration.</p>
+arguments to <span class='object_link'><a href="Dataset.html#create_table-instance_method" title="Google::Cloud::Bigquery::Dataset#create_table (method)">Dataset#create_table</a></span> and <span class='object_link'><a href="Table.html#encryption-instance_method" title="Google::Cloud::Bigquery::Table#encryption (method)">Table#encryption</a></span>.</p>
 
 
   </div>
@@ -246,12 +245,12 @@ The default value is <code>nil</code>, which means default encryption is used.</
       <pre class="lines">
 
 
+65
 66
-67
-68</pre>
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/encryption_configuration.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/encryption_configuration.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_kms_key'>kms_key</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_kms_key_name'>kms_key_name</span>
@@ -319,13 +318,13 @@ The default value is <code>nil</code>, which means default encryption is used.</
       <pre class="lines">
 
 
+83
 84
 85
-86
-87</pre>
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/encryption_configuration.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/encryption_configuration.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_kms_key='>kms_key=</span> <span class='id identifier rubyid_new_kms_key_name'>new_kms_key_name</span>
   <span class='id identifier rubyid_frozen_check!'>frozen_check!</span>

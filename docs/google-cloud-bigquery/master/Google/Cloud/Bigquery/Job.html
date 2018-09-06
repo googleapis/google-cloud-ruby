@@ -739,15 +739,15 @@ js:
       <pre class="lines">
 
 
-305
-306
 307
 308
 309
-310</pre>
+310
+311
+312</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 305</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 307</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel'>cancel</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1263,7 +1263,9 @@ characters.</p>
 provided when the job is created, and used to organize and group jobs.</p>
 
 <p>The returned hash is frozen and changes are not allowed. Use
-#labels= to replace the entire hash.</p>
+<span class='object_link'><a href="CopyJob/Updater.html#labels=-instance_method" title="Google::Cloud::Bigquery::CopyJob::Updater#labels= (method)">CopyJob::Updater#labels=</a></span> or <span class='object_link'><a href="ExtractJob/Updater.html#labels=-instance_method" title="Google::Cloud::Bigquery::ExtractJob::Updater#labels= (method)">ExtractJob::Updater#labels=</a></span> or
+<span class='object_link'><a href="LoadJob/Updater.html#labels=-instance_method" title="Google::Cloud::Bigquery::LoadJob::Updater#labels= (method)">LoadJob::Updater#labels=</a></span> or <span class='object_link'><a href="QueryJob/Updater.html#labels=-instance_method" title="Google::Cloud::Bigquery::QueryJob::Updater#labels= (method)">QueryJob::Updater#labels=</a></span> to replace
+the entire hash.</p>
 
 
   </div>
@@ -1294,14 +1296,14 @@ provided when the job is created, and used to organize and group jobs.</p>
       <pre class="lines">
 
 
-284
-285
 286
 287
-288</pre>
+288
+289
+290</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 286</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
   <span class='id identifier rubyid_m'>m</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span>
@@ -1535,14 +1537,14 @@ provided when the job is created, and used to organize and group jobs.</p>
       <pre class="lines">
 
 
-351
-352
 353
 354
-355</pre>
+355
+356
+357</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 351</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 353</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1597,14 +1599,14 @@ provided when the job is created, and used to organize and group jobs.</p>
       <pre class="lines">
 
 
-328
-329
 330
 331
-332</pre>
+332
+333
+334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 328</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 330</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rerun!'>rerun!</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2027,8 +2029,6 @@ seconds.</p>
       <pre class="lines">
 
 
-375
-376
 377
 378
 379
@@ -2038,10 +2038,12 @@ seconds.</p>
 383
 384
 385
-386</pre>
+386
+387
+388</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 375</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/job.rb', line 377</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
   <span class='id identifier rubyid_backoff'>backoff</span> <span class='op'>=</span> <span class='id identifier rubyid_lambda'>lambda</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_retries'>retries</span><span class='op'>|</span>
