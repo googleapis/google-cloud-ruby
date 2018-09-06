@@ -663,7 +663,8 @@ module Google
           return Datastore::Dataset.new(
             Datastore::Service.new(
               project_id, :this_channel_is_insecure,
-              host: emulator_host, client_config: client_config
+              host: emulator_host, timeout: timeout,
+              client_config: client_config
             )
           )
         end
