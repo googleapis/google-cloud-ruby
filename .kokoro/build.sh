@@ -50,61 +50,21 @@ function set_failed_status {
   EXIT_STATUS=1
 }
 
-# Setup service account credentials.
-export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
-
 # Set other environment variables
 sh ${KOKORO_GFILE_DIR}/env_vars.sh
 
-case $JOB_TYPE in
-presubmit)
+# Setup service account credentials.
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
+
+if [ "$PACKAGE" = "post" ]; then
+  rbenv global "2.5.1"
+  (bundle update && bundle exec rake circleci:post) || set_failed_status
+else
   cd $PACKAGE
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
-    echo "================================================="
-    echo "============== Using Ruby - $version =============="
-    echo "================================================="
-    (bundle update && bundle exec rake ci) || set_failed_status
+    (bundle exec rake kokoro:$JOB_TYPE) || set_failed_status
   done
-  ;;
-continuous)
-  if [ "$PACKAGE" = "post" ]; then
-    echo "=========================================================================="
-    echo "=========================== Running Post Build ==========================="
-    echo "=========================================================================="
-    rbenv global "2.5.1"
-    (bundle update && bundle exec rake circleci:post) || set_failed_status
-  elif [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
-    cd $PACKAGE
-    echo "=========================================================================="
-    echo "$PACKAGE was not modified, skipping acceptance tests."
-    echo "=========================================================================="
-    for version in "${RUBY_VERSIONS[@]}"; do
-      rbenv global "$version"
-      echo "================================================="
-      echo "============= Using Ruby - $version ============="
-      echo "================================================="
-      (bundle update && bundle exec rake ci) || set_failed_status
-    done
-  else
-    cd $PACKAGE
-    echo "=========================================================================="
-    echo "$PACKAGE was modified, running acceptance tests."
-    echo "=========================================================================="
-    for version in "${RUBY_VERSIONS[@]}"; do
-      rbenv global "$version"
-      echo "================================================="
-      echo "============= Using Ruby - $version ============="
-      echo "================================================="
-      (bundle update && bundle exec rake ci:acceptance) || set_failed_status
-    done
-  fi
-  ;;
-release)
-  (bundle update && bundle exec rake circleci:release) || set_failed_status
-  ;;
-*)
-  ;;
-esac
+fi
 
 exit $EXIT_STATUS

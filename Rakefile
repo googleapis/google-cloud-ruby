@@ -628,6 +628,34 @@ namespace :kokoro do
   task :builds do
     generate_kokoro_configs
   end
+
+  task :presubmit do
+    Dir.chdir ENV["PACKAGE"] do
+      Bundler.with_clean_env do
+        header "Using Ruby - #{RUBY_VERSION}"
+        sh "bundle update"
+        sh "bundle exec rake ci"
+      end
+    end
+  end
+
+  task :continuous do
+    updated = updated_gems.include? ENV["PACKAGE"]
+    Dir.chdir ENV["PACKAGE"] do
+      Bundler.with_clean_env do
+        header "Using Ruby - #{RUBY_VERSION}"
+        if updated
+          header "Gem Updated - Running Acceptance"
+        else
+          header "Gem Unchanged - Skipping Acceptance"
+        end
+        sh "bundle update"
+        command = "bundle exec rake ci"
+        command += ":acceptance" if updated
+        sh command
+      end
+    end
+  end
 end
 
 def generate_kokoro_configs
@@ -662,6 +690,11 @@ end
 
 def gems
   `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
+end
+
+def updated_gems
+  updated_directories = `git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f1 | sort | uniq || true`
+  gems.select { |gem| updated_directories.include? gem }
 end
 
 def valid_gems
