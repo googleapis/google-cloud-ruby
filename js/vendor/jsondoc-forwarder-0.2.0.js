@@ -76,8 +76,12 @@
     return '#' + name + '-' + type + '_method';
   }
 
+  function isMasterOrLatestVersion(str) {
+    return str === 'master' || str === 'latest';
+  }
+
   function isVersion(str) {
-    return str === 'master' || str === 'latest' || /^v\d/.test(str);
+    return isMasterOrLatestVersion(str) || /^v\d/.test(str);
   }
 
   /**
@@ -131,28 +135,39 @@
       var path = getPath(url);
       var query = getQuery(url);
       // Remove leading and trailing slashes to prevent empty strings in split array.
-      path = path.replace(/^\//,'').replace(/\/$/,'');
+      path = path.replace(/^\//, '').replace(/\/$/, '');
       var pathElements = path.split('/');
 
       // Return base url if /# or /#/
       if (pathElements.length === 1 && !pathElements[0]) return this.targetUrl;
 
-      // Add 'latest' if version is missing from path that includes modules.
-      if (pathElements.length > 2 && !isVersion(pathElements[2]))
+      if (pathElements.length === 3 && pathElements[1] === 'guides') {
+        // Remove 'guides' from /docs/guides/*
+        pathElements.splice(1, 1);
+
+      } else if (pathElements.length > 2 && !isVersion(pathElements[2])) {
+        // Add 'latest' if version is missing from path that includes modules.
         pathElements.splice(2, 0, 'latest');
+      }
 
       // The first three elements are 'docs', gem, and version and do not require camel-casing.
       if (pathElements.length > 3) {
-        if (pathElements[1] == 'google-cloud') {
+        if (pathElements[1] === 'google-cloud') {
           // Special case: 'google-cloud' paths must all be redirected to the google-cloud version root.
           pathElements = pathElements.slice(0, 3);
-        } else if (pathElements[3] == 'guides' && pathElements.length === 5) {
-          // Special case: '/guides/' paths must all be redirected to the gem/version root.
+        } else if (pathElements[3] == 'guides' && isMasterOrLatestVersion(pathElements[2])) {
+          // Master and latest '/guides/' paths can be redirected to yard files.
+          var guide = "file." + pathElements[4].toUpperCase();
+          pathElements = pathElements.slice(0, 3);
+          pathElements.push(guide);
+        } else if (pathElements[3] == 'guides') {
+          // Special case: Existing version '/guides/' paths must all be redirected to the gem/version root.
           pathElements = pathElements.slice(0, 3);
         } else {
           capitalizeModuleNames(pathElements, this.moduleNames); // This mutates pathElements.
         }
       }
+
       var newPath = addTrailiingSlash(this.targetUrl) + pathElements.join('/');
       if (query) newPath += getAnchorFromQuery(query);
       return newPath;
