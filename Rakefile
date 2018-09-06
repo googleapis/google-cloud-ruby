@@ -624,31 +624,37 @@ end
 namespace :kokoro do
   ruby_versions = ['2.3', '2.4', '2.5']
 
-  desc "Generate presubmit configs for kokoro"
+  desc "Generate configs for kokoro"
   task :builds do
     generate_kokoro_configs
   end
 end
 
 def generate_kokoro_configs
+  os_versions = {
+    linux: "gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-multi-ubuntu",
+    windows: "gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/windows",
+    osx: "gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/osx"
+  }
   gems.each do |gem|
-    #  generate the presubmi configs
-    File.open("./.kokoro/presubmit/#{gem}.cfg", 'w') do |f|
-      config = ERB.new(File.read('./.kokoro/templates/presubmit.cfg.erb'))
-      f.write(config.result(binding))
-    end
-
-    # generate the continuous configs
-    File.open("./.kokoro/continuous/#{gem}.cfg", 'w') do |f|
-      config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
-      f.write(config.result(binding))
+    os_versions.each do |os_version, image|
+      ["presubmit", "continuous"].each do |build_type|
+        file_path = "./.kokoro/#{build_type}/"
+        file_path += "#{os_version}-" unless os_version == :linux
+        file_path += "#{gem}.cfg"
+        File.open(file_path, "w") do |f|
+          config = ERB.new(File.read("./.kokoro/templates/gem.cfg.erb"))
+          f.write(config.result(binding))
+        end
+      end
     end
   end
 
   # generate post-build config
-  gem = 'post'
-  File.open("./.kokoro/continuous/#{gem}.cfg", 'w') do |f|
-    config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
+  gem = "post"
+  image = os_versions[:linux]
+  File.open("./.kokoro/continuous/#{gem}.cfg", "w") do |f|
+    config = ERB.new(File.read("./.kokoro/templates/gem.cfg.erb"))
     f.write(config.result(binding))
   end
 end

@@ -68,8 +68,14 @@ presubmit)
   done
   ;;
 continuous)
-  cd $PACKAGE
-  if [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
+  if [ "$PACKAGE" = "post" ]; then
+    echo "=========================================================================="
+    echo "=========================== Running Post Build ==========================="
+    echo "=========================================================================="
+    rbenv global "2.5.1"
+    (bundle update && bundle exec rake circleci:post) || set_failed_status
+  elif [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
+    cd $PACKAGE
     echo "=========================================================================="
     echo "$PACKAGE was not modified, skipping acceptance tests."
     echo "=========================================================================="
@@ -80,13 +86,8 @@ continuous)
       echo "================================================="
       (bundle update && bundle exec rake ci) || set_failed_status
     done
-  elif [ "$PACKAGE" = "post" ]; then
-    echo "=========================================================================="
-    echo "=========================== Running Post Build ==========================="
-    echo "=========================================================================="
-    rbenv global "2.5.1"
-    (bundle update && bundle exec rake circleci:post) || set_failed_status
   else
+    cd $PACKAGE
     echo "=========================================================================="
     echo "$PACKAGE was modified, running acceptance tests."
     echo "=========================================================================="
