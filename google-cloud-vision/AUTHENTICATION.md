@@ -78,7 +78,8 @@ The environment variables that Vision checks for project ID are:
 1. `VISION_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that Vision checks for credentials are configured on {Google::Cloud::Vision::V2::Credentials}:
+The environment variables that Vision checks for credentials are configured on
+{Google::Cloud::Vision::V1::Credentials}:
 
 1. `VISION_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `VISION_KEYFILE` - Path to JSON file, or JSON contents

@@ -78,7 +78,8 @@ The environment variables that DNS checks for project ID are:
 1. `DNS_PROJECT`
 2. `GOOGLE_CLOUD_PROJECT`
 
-The environment variables that DNS checks for credentials are configured on {Google::Cloud::Dns::V2::Credentials}:
+The environment variables that DNS checks for credentials are configured on
+{Google::Cloud::Dns::Credentials}:
 
 1. `DNS_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `DNS_KEYFILE` - Path to JSON file, or JSON contents
@@ -97,7 +98,8 @@ dns = Google::Cloud::Dns.new
 
 ### Configuration
 
-The **Project ID** and **Credentials JSON** can be configured instead of placing them in environment variables or providing them as arguments.
+The **Project ID** and **Credentials JSON** can be configured instead of placing
+them in environment variables or providing them as arguments.
 
 ```ruby
 require "google/cloud/dns"

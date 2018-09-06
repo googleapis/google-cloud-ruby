@@ -30,8 +30,8 @@ Practices - Image
 Sizing](https://cloud.google.com/vision/docs/best-practices#image_sizing)
 for current file size limits.
 
-Use {Vision::Project#image} to create images for the Cloud Vision service.
-You can provide a file path:
+Use {Google::Cloud::Vision::Project#image} to create images for the Cloud Vision
+service. You can provide a file path:
 
 ```ruby
 require "google/cloud/vision"
@@ -65,10 +65,10 @@ Creating an Image instance does not perform an API request.
 
 ## Annotating images
 
-The instance methods on {Vision::Image} invoke Cloud Vision's detection
-features individually. Each method call makes an API request. (If you want
-to run multiple features in a single request, see the examples for
-{Vision::Project#annotate}, below.)
+The instance methods on {Google::Cloud::Vision::Image} invoke Cloud Vision's
+detection features individually. Each method call makes an API request. (If you
+want to run multiple features in a single request, see the examples for
+{Google::Cloud::Vision::Project#annotate}, below.)
 
 ```ruby
 require "google/cloud/vision"
@@ -86,9 +86,9 @@ face.features.chin.center
 #<Landmark (x: 233.21977, y: 189.47475, z: 19.487228)>
 ```
 
-To run multiple features on an image in a single request, pass the image
-(or a string file path, publicly-accessible image HTTP/HTTPS URL, or
-Storage URI) to {Vision::Project#annotate}:
+To run multiple features on an image in a single request, pass the image (or a
+string file path, publicly-accessible image HTTP/HTTPS URL, or Storage URI) to
+{Google::Cloud::Vision::Project#annotate}:
 
 ```ruby
 require "google/cloud/vision"
