@@ -694,6 +694,7 @@ end
 
 def updated_gems
   updated_directories = `git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f1 | sort | uniq || true`
+  updated_directories = updated_directories.split("\n")
   gems.select { |gem| updated_directories.include? gem }
 end
 
