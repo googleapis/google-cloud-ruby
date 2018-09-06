@@ -50,8 +50,7 @@ module Google
       # Each call creates a new connection.
       #
       # For more information on connecting to Google Cloud see the
-      # [Authentication
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+      # {file:AUTHENTICATION.md Authentication Guide}.
       #
       # @param [String] project_id Project identifier for the Stackdriver Trace
       #   service you are connecting to. If not present, the default project for
@@ -140,9 +139,8 @@ module Google
       #   Default:
       #   `Google::Cloud::Trace::Notifications::DEFAULT_MAX_DATA_LENGTH`
       #
-      # See the [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
-      # for full configuration parameters.
+      # See the {file:INSTRUMENTATION.md Configuration Guide} for full
+      # configuration parameters.
       #
       # @return [Google::Cloud::Config] The configuration object
       #   the Google::Cloud::Trace module uses.

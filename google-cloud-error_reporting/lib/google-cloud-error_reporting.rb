@@ -28,8 +28,8 @@ module Google
     # Create a new object for connecting to the Stackdriver Error Reporting
     # service. Each call creates a new connection.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication)
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
@@ -70,8 +70,8 @@ module Google
     # Create a new object for connecting to the Stackdriver Error Reporting
     # service. Each call creates a new connection.
     #
-    # For more information on connecting to Google Cloud see the [Authentication
-    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication)
+    # For more information on connecting to Google Cloud see the
+    # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param [String] project_id Google Cloud Platform project identifier for
     #   the Stackdriver Error Reporting service you are connecting to. If not
