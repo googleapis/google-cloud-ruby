@@ -626,11 +626,11 @@ namespace :kokoro do
 
   desc "Generate presubmit configs for kokoro"
   task :builds do
-    generate_kokoro_configs ruby_versions
+    generate_kokoro_configs
   end
 end
 
-def generate_kokoro_configs ruby_versions
+def generate_kokoro_configs
   gems.each do |gem|
     #  generate the presubmi configs
     File.open("./.kokoro/presubmit/#{gem}.cfg", 'w') do |f|
@@ -643,6 +643,13 @@ def generate_kokoro_configs ruby_versions
       config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
       f.write(config.result(binding))
     end
+  end
+
+  # generate post-build config
+  gem = 'post'
+  File.open("./.kokoro/continuous/#{gem}.cfg", 'w') do |f|
+    config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
+    f.write(config.result(binding))
   end
 end
 

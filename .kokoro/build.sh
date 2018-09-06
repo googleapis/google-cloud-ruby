@@ -37,10 +37,12 @@ for i in "${GEMSPECS[@]}"; do
   for j in "${CHANGED_DIRS[@]}"; do
     if [ "$i" = "$j" ]; then
       UPDATED_GEMS+=($i)
+      echo "$i has been modified."
     fi
   done
 done
 
+git status
 
 # Capture failures
 EXIT_STATUS=0 # everything passed
@@ -60,7 +62,7 @@ presubmit)
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
     echo "================================================="
-    echo "============= Using Ruby - $version ============="
+    echo "============== Using Ruby - $version =============="
     echo "================================================="
     (bundle update && bundle exec rake ci) || set_failed_status
   done
@@ -78,6 +80,12 @@ continuous)
       echo "================================================="
       (bundle update && bundle exec rake ci) || set_failed_status
     done
+  elif [ "$PACKAGE" = "post" ]; then
+    echo "=========================================================================="
+    echo "=========================== Running Post Build ==========================="
+    echo "=========================================================================="
+    rbenv global "2.5.1"
+    (bundle update && bundle exec rake circleci:post) || set_failed_status
   else
     echo "=========================================================================="
     echo "$PACKAGE was modified, running acceptance tests."
