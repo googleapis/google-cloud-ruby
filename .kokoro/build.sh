@@ -23,22 +23,7 @@ ruby --version
 # https://github.com/bundler/bundler/issues/6154
 export BUNDLE_GEMFILE=
 
-# CHANGED_DIRS is the list of top-level directories that changed. CHANGED_DIRS will be empty when run on master.
-# See https://github.com/GoogleCloudPlatform/google-cloud-python/blob/master/.kokoro/build.sh for alt implementation
-CHANGED_DIRS="$(git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f1 | sort | uniq || true)"
-
-GEMSPECS=($(git ls-files -- */*.gemspec | cut -d/ -f1))
-UPDATED_GEMS=()
 RUBY_VERSIONS=("2.3.7" "2.4.4" "2.5.1")
-
-for i in "${GEMSPECS[@]}"; do
-  for j in "${CHANGED_DIRS[@]}"; do
-    if [ "$i" = "$j" ]; then
-      UPDATED_GEMS+=($i)
-      echo "$i has been modified."
-    fi
-  done
-done
 
 # Capture failures
 EXIT_STATUS=0 # everything passed
@@ -56,7 +41,7 @@ if [ "$PACKAGE" = "post" ]; then
   rbenv global "2.5.1"
   (bundle update && bundle exec rake circleci:post) || set_failed_status
 elif [ "$JOB_TYPE" = "continuous" ]; then
-  git checkout master
+  git fetch --unshallow
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
     (bundle update && bundle exec rake kokoro:continuous) || set_failed_status

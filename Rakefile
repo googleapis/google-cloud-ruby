@@ -643,6 +643,7 @@ namespace :kokoro do
   task :continuous do
     header_2 ENV["JOB_TYPE"]
     updated = updated_gems.include? ENV["PACKAGE"]
+    updated_gems.each { |gem| header_2 "#{gem} has been updated" }
     Dir.chdir ENV["PACKAGE"] do
       Bundler.with_clean_env do
         header "Using Ruby - #{RUBY_VERSION}"
