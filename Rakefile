@@ -661,14 +661,9 @@ namespace :kokoro do
 end
 
 def generate_kokoro_configs
-  os_versions = {
-    linux: "gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/ruby-multi-ubuntu",
-    windows: "gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/windows",
-    osx: "gcr.io/cloud-devrel-kokoro-resources/google-cloud-ruby/osx"
-  }
   gems.each do |gem|
-    os_versions.each do |os_version, image|
-      ["presubmit", "continuous"].each do |build_type|
+    [:linux, :windows, :osx].each do |os_version|
+      [:presubmit, :continuous].each do |build_type|
         file_path = "./.kokoro/#{build_type}/"
         file_path += "#{os_version}-" unless os_version == :linux
         file_path += "#{gem}.cfg"
@@ -683,7 +678,6 @@ def generate_kokoro_configs
   # generate post-build config
   gem = "post"
   os_version = :linux
-  image = os_versions[os_version]
   File.open("./.kokoro/continuous/#{gem}.cfg", "w") do |f|
     config = ERB.new(File.read("./.kokoro/templates/linux.cfg.erb"))
     f.write(config.result(binding))
