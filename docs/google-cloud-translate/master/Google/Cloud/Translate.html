@@ -266,14 +266,14 @@ Google::Cloud::Translate library uses.</p>
       <pre class="lines">
 
 
+159
 160
 161
 162
-163
-164</pre>
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/translate.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/translate.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -304,8 +304,7 @@ supports authentication using a project ID and OAuth 2.0 credentials. In
 addition, it supports authentication using a public API access key. (If
 both the API key and the project and OAuth 2.0 credentials are provided,
 the API key will be used.) Instructions and configuration options are
-covered in the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication">Authentication
-Guide</a>.</p>
+covered in the <a href="../../file.AUTHENTICATION.html" title="Authentication Guide">Authentication Guide</a>.</p>
 
 
   </div>
@@ -526,6 +525,7 @@ Deprecated.</p>
       <pre class="lines">
 
 
+108
 109
 110
 111
@@ -554,11 +554,10 @@ Deprecated.</p>
 134
 135
 136
-137
-138</pre>
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/translate.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/translate.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>key:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>retries:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>
