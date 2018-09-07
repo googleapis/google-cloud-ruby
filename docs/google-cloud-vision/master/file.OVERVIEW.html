@@ -77,8 +77,8 @@ Practices - Image
 Sizing</a>
 for current file size limits.</p>
 
-<p>Use Vision::Project#image to create images for the Cloud Vision service.
-You can provide a file path:</p>
+<p>Use <span class='object_link'><a href="Google/Cloud/Vision/Project.html#image-instance_method" title="Google::Cloud::Vision::Project#image (method)">Google::Cloud::Vision::Project#image</a></span> to create images for the Cloud Vision
+service. You can provide a file path:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
 
@@ -109,10 +109,10 @@ You can provide a file path:</p>
 
 <h2>Annotating images</h2>
 
-<p>The instance methods on Vision::Image invoke Cloud Vision&#39;s detection
-features individually. Each method call makes an API request. (If you want
-to run multiple features in a single request, see the examples for
-Vision::Project#annotate, below.)</p>
+<p>The instance methods on <span class='object_link'><a href="Google/Cloud/Vision/Image.html" title="Google::Cloud::Vision::Image (class)">Google::Cloud::Vision::Image</a></span> invoke Cloud Vision&#39;s
+detection features individually. Each method call makes an API request. (If you
+want to run multiple features in a single request, see the examples for
+<span class='object_link'><a href="Google/Cloud/Vision/Project.html#annotate-instance_method" title="Google::Cloud::Vision::Project#annotate (method)">Google::Cloud::Vision::Project#annotate</a></span>, below.)</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
 
@@ -129,9 +129,9 @@ Vision::Project#annotate, below.)</p>
 <span class='comment'>#&lt;Landmark (x: 233.21977, y: 189.47475, z: 19.487228)&gt;
 </span></code></pre>
 
-<p>To run multiple features on an image in a single request, pass the image
-(or a string file path, publicly-accessible image HTTP/HTTPS URL, or
-Storage URI) to Vision::Project#annotate:</p>
+<p>To run multiple features on an image in a single request, pass the image (or a
+string file path, publicly-accessible image HTTP/HTTPS URL, or Storage URI) to
+<span class='object_link'><a href="Google/Cloud/Vision/Project.html#annotate-instance_method" title="Google::Cloud::Vision::Project#annotate (method)">Google::Cloud::Vision::Project#annotate</a></span>:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
 
