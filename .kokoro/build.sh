@@ -18,12 +18,10 @@ cd github/google-cloud-ruby/
 
 # Print out Ruby version
 ruby --version
-echo $JOB_TYPE
+
 # Temporary workaround for a known bundler+docker issue:
 # https://github.com/bundler/bundler/issues/6154
 export BUNDLE_GEMFILE=
-
-bundle update
 
 # CHANGED_DIRS is the list of top-level directories that changed. CHANGED_DIRS will be empty when run on master.
 # See https://github.com/GoogleCloudPlatform/google-cloud-python/blob/master/.kokoro/build.sh for alt implementation
@@ -42,68 +40,32 @@ for i in "${GEMSPECS[@]}"; do
   done
 done
 
-git status
-
 # Capture failures
 EXIT_STATUS=0 # everything passed
 function set_failed_status {
   EXIT_STATUS=1
 }
 
-# Setup service account credentials.
-export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
-
 # Set other environment variables
 sh ${KOKORO_GFILE_DIR}/env_vars.sh
 
-case $JOB_TYPE in
-presubmit)
-  cd $PACKAGE
+# Setup service account credentials.
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
+
+if [ "$PACKAGE" = "post" ]; then
+  rbenv global "2.5.1"
+  (bundle update && bundle exec rake circleci:post) || set_failed_status
+elif [ "$JOB_TYPE" = "continuous" ]; then
+  git checkout master
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
-    echo "================================================="
-    echo "============== Using Ruby - $version =============="
-    echo "================================================="
-    (bundle update && bundle exec rake ci) || set_failed_status
+    (bundle update && bundle exec rake kokoro:continuous) || set_failed_status
   done
-  ;;
-continuous)
-  cd $PACKAGE
-  if [[ ! "${UPDATED_GEMS[@]}" =~ "${PACKAGE}" ]]; then
-    echo "=========================================================================="
-    echo "$PACKAGE was not modified, skipping acceptance tests."
-    echo "=========================================================================="
-    for version in "${RUBY_VERSIONS[@]}"; do
-      rbenv global "$version"
-      echo "================================================="
-      echo "============= Using Ruby - $version ============="
-      echo "================================================="
-      (bundle update && bundle exec rake ci) || set_failed_status
-    done
-  elif [ "$PACKAGE" = "post" ]; then
-    echo "=========================================================================="
-    echo "=========================== Running Post Build ==========================="
-    echo "=========================================================================="
-    rbenv global "2.5.1"
-    (bundle update && bundle exec rake circleci:post) || set_failed_status
-  else
-    echo "=========================================================================="
-    echo "$PACKAGE was modified, running acceptance tests."
-    echo "=========================================================================="
-    for version in "${RUBY_VERSIONS[@]}"; do
-      rbenv global "$version"
-      echo "================================================="
-      echo "============= Using Ruby - $version ============="
-      echo "================================================="
-      (bundle update && bundle exec rake ci:acceptance) || set_failed_status
-    done
-  fi
-  ;;
-release)
-  (bundle update && bundle exec rake circleci:release) || set_failed_status
-  ;;
-*)
-  ;;
-esac
+else
+  for version in "${RUBY_VERSIONS[@]}"; do
+    rbenv global "$version"
+    (bundle update && bundle exec rake kokoro:presubmit) || set_failed_status
+  done
+fi
 
 exit $EXIT_STATUS

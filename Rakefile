@@ -624,37 +624,74 @@ end
 namespace :kokoro do
   ruby_versions = ['2.3', '2.4', '2.5']
 
-  desc "Generate presubmit configs for kokoro"
+  desc "Generate configs for kokoro"
   task :builds do
     generate_kokoro_configs
+  end
+
+  task :presubmit do
+    header_2 ENV["JOB_TYPE"]
+    Dir.chdir ENV["PACKAGE"] do
+      Bundler.with_clean_env do
+        header "Using Ruby - #{RUBY_VERSION}"
+        sh "bundle update"
+        sh "bundle exec rake ci"
+      end
+    end
+  end
+
+  task :continuous do
+    header_2 ENV["JOB_TYPE"]
+    updated = updated_gems.include? ENV["PACKAGE"]
+    Dir.chdir ENV["PACKAGE"] do
+      Bundler.with_clean_env do
+        header "Using Ruby - #{RUBY_VERSION}"
+        if updated
+          header "Gem Updated - Running Acceptance"
+        else
+          header "Gem Unchanged - Skipping Acceptance"
+        end
+        sh "bundle update"
+        command = "bundle exec rake ci"
+        command += ":acceptance" if updated
+        sh command
+      end
+    end
   end
 end
 
 def generate_kokoro_configs
   gems.each do |gem|
-    #  generate the presubmi configs
-    File.open("./.kokoro/presubmit/#{gem}.cfg", 'w') do |f|
-      config = ERB.new(File.read('./.kokoro/templates/presubmit.cfg.erb'))
-      f.write(config.result(binding))
-    end
-
-    # generate the continuous configs
-    File.open("./.kokoro/continuous/#{gem}.cfg", 'w') do |f|
-      config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
-      f.write(config.result(binding))
+    [:linux, :windows, :osx].each do |os_version|
+      [:presubmit, :continuous].each do |build_type|
+        file_path = "./.kokoro/#{build_type}/"
+        file_path += "#{os_version}-" unless os_version == :linux
+        file_path += "#{gem}.cfg"
+        File.open(file_path, "w") do |f|
+          config = ERB.new(File.read("./.kokoro/templates/#{os_version}.cfg.erb"))
+          f.write(config.result(binding))
+        end
+      end
     end
   end
 
   # generate post-build config
-  gem = 'post'
-  File.open("./.kokoro/continuous/#{gem}.cfg", 'w') do |f|
-    config = ERB.new(File.read('./.kokoro/templates/continuous.cfg.erb'))
+  gem = "post"
+  os_version = :linux
+  File.open("./.kokoro/continuous/#{gem}.cfg", "w") do |f|
+    config = ERB.new(File.read("./.kokoro/templates/linux.cfg.erb"))
     f.write(config.result(binding))
   end
 end
 
 def gems
   `git ls-files -- */*.gemspec`.split("\n").map { |gem| gem.split("/").first }.sort
+end
+
+def updated_gems
+  updated_directories = `git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f1 | sort | uniq || true`
+  updated_directories = updated_directories.split("\n")
+  gems.select { |gem| updated_directories.include? gem }
 end
 
 def valid_gems
