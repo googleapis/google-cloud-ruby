@@ -258,7 +258,7 @@ string label values or callables/<code>Proc</code> which are functions of the
 Rack environment.</li>
 </ul>
 
-<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration">Configuration
+<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION">Configuration
 Guide</a>
 for full configuration parameters.</p>
 
@@ -305,14 +305,14 @@ the Google::Cloud::Logging module uses.</p>
       <pre class="lines">
 
 
+147
 148
 149
 150
-151
-152</pre>
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -339,8 +339,7 @@ the Google::Cloud::Logging module uses.</p>
 Each call creates a new connection.</p>
 
 <p>For more information on connecting to Google Cloud see the
-<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
-Guide</a>.</p>
+<a href="../../file.AUTHENTICATION.html" title="Authentication Guide">Authentication Guide</a>.</p>
 
 
   </div>
@@ -519,6 +518,7 @@ Deprecated.</p>
       <pre class="lines">
 
 
+84
 85
 86
 87
@@ -539,11 +539,10 @@ Deprecated.</p>
 102
 103
 104
-105
-106</pre>
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>
