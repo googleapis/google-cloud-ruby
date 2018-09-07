@@ -223,16 +223,16 @@ Google::Cloud libraries.</p>
       <pre class="lines">
 
 
+88
+89
+90
+91
 92
 93
-94
-95
-96
-97
-98</pre>
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='ivar'>@config</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Cloud/Config.html" title="Google::Cloud::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'><span class='object_link'><a href="Cloud/Config.html#create-class_method" title="Google::Cloud::Config.create (method)">create</a></span></span>
@@ -259,8 +259,8 @@ Google::Cloud libraries.</p>
   <div class="discussion">
     <p>Creates a new object for connecting to Google Cloud.</p>
 
-<p>For more information on connecting to Google Cloud see the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
-Guide</a>.</p>
+<p>For more information on connecting to Google Cloud see the
+<a href="../file.AUTHENTICATION.html" title="Authentication Guide">Authentication Guide</a>.</p>
 
 
   </div>
@@ -372,18 +372,18 @@ error. The default value is <code>3</code>. Optional.</p>
       <pre class="lines">
 
 
+62
+63
+64
+65
 66
 67
 68
 69
-70
-71
-72
-73
-74</pre>
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>retries:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'>Object</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
