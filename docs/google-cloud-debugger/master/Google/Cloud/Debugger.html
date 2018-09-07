@@ -289,16 +289,16 @@ want to disable the side effect checker globally for your app.</p>
       <pre class="lines">
 
 
+236
 237
 238
 239
 240
 241
-242
-243</pre>
+242</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 237</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 236</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_allow_mutating_methods!'>allow_mutating_methods!</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_evaluator'>evaluator</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Debugger/Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Breakpoint/Evaluator.html" title="Google::Cloud::Debugger::Breakpoint::Evaluator (class)">Evaluator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span>
@@ -353,7 +353,7 @@ state. Defaults to false.</li>
 expression evaluation. Defaults to 0.05.</li>
 </ul>
 
-<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration">Configuration
+<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION">Configuration
 Guide</a>
 for full configuration parameters.</p>
 
@@ -400,14 +400,14 @@ Google::Cloud::Debugger module uses.</p>
       <pre class="lines">
 
 
+158
 159
 160
 161
-162
-163</pre>
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 158</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_debugger'>debugger</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -435,8 +435,7 @@ an application. Each call creates a new debugger agent with independent
 connection service.</p>
 
 <p>For more information on connecting to Google Cloud see the
-<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
-Guide</a>.</p>
+<a href="../../file.AUTHENTICATION.html" title="Authentication Guide">Authentication Guide</a>.</p>
 
 
   </div>
@@ -645,6 +644,7 @@ either the JSON data or the path to a readable file.</p>
       <pre class="lines">
 
 
+85
 86
 87
 88
@@ -677,11 +677,10 @@ either the JSON data or the path to a readable file.</p>
 115
 116
 117
-118
-119</pre>
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>service_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>service_version:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
