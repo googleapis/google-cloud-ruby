@@ -599,6 +599,8 @@ module Google
     # ```
     #
     module Datastore
+      # rubocop:disable Metrics/MethodLength
+
       ##
       # Creates a new object for connecting to the Datastore service.
       # Each call creates a new connection.
@@ -660,8 +662,13 @@ module Google
         client_config ||= configure.client_config
         emulator_host ||= configure.emulator_host
         if emulator_host
-          return dataset_for_emulator(project_id, emulator_host, timeout,
-                                      client_config)
+          return Datastore::Dataset.new(
+            Datastore::Service.new(
+              project_id, :this_channel_is_insecure,
+              host: emulator_host, timeout: timeout,
+              client_config: client_config
+            )
+          )
         end
 
         credentials ||= (keyfile || default_credentials(scope: scope))
@@ -669,8 +676,15 @@ module Google
           credentials = Datastore::Credentials.new credentials, scope: scope
         end
 
-        dataset(project_id, credentials, timeout, client_config)
+        Datastore::Dataset.new(
+          Datastore::Service.new(
+            project_id, credentials,
+            timeout: timeout, client_config: client_config
+          )
+        )
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Configure the Google Cloud Datastore library.
@@ -698,30 +712,6 @@ module Google
         yield Google::Cloud.configure.datastore if block_given?
 
         Google::Cloud.configure.datastore
-      end
-
-      ##
-      # @private Dataset for usage with an emulator
-      def self.dataset_for_emulator project_id, emulator_host, timeout,
-                                    client_config
-        Datastore::Dataset.new(
-          Datastore::Service.new(
-            project_id, :this_channel_is_insecure,
-            host: emulator_host, timeout: timeout,
-            client_config: client_config
-          )
-        )
-      end
-
-      ##
-      # @private Dataset for usage in production
-      def self.dataset project_id, credentials, timeout, client_config
-        Datastore::Dataset.new(
-          Datastore::Service.new(
-            project_id, credentials,
-            timeout: timeout, client_config: client_config
-          )
-        )
       end
 
       ##
