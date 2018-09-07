@@ -279,14 +279,14 @@ Google::Cloud::Datastore library uses.</p>
       <pre class="lines">
 
 
-152
-153
-154
-155
-156</pre>
+157
+158
+159
+160
+161</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore.rb', line 152</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_datastore'>datastore</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -514,8 +514,6 @@ Deprecated.</p>
       <pre class="lines">
 
 
-97
-98
 99
 100
 101
@@ -545,10 +543,13 @@ Deprecated.</p>
 125
 126
 127
-128</pre>
+128
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>emulator_host:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -565,7 +566,8 @@ Deprecated.</p>
     <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Datastore/Dataset.html" title="Google::Cloud::Datastore::Dataset (class)">Dataset</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
       <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
         <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='symbol'>:this_channel_is_insecure</span><span class='comma'>,</span>
-        <span class='label'>host:</span> <span class='id identifier rubyid_emulator_host'>emulator_host</span><span class='comma'>,</span> <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span>
+        <span class='label'>host:</span> <span class='id identifier rubyid_emulator_host'>emulator_host</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+        <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span>
       <span class='rparen'>)</span>
     <span class='rparen'>)</span>
   <span class='kw'>end</span>
