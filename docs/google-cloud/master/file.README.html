@@ -47,16 +47,48 @@ js:
 
   <div id="content"><div id='filecontents'><h1>google-cloud</h1>
 
-<p>This gem is a convenience package for loading all gems in the google-cloud project. Please see the top-level project <a href="../README.md">README</a> for more information about the individual google-cloud gems.</p>
+<p>This gem is a convenience package for loading all gems in the google-cloud
+project. Users are encouraged to depending on the individual gems needed for
+your project instead of using this gem with every dependency. Please see the
+<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby">GitHub repository</a>
+for more information about the individual google-cloud gems.</p>
+
+<ul>
+<li><a href="http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud/latest">google-cloud API documentation</a></li>
+<li><a href="https://rubygems.org/gems/google-cloud">google-cloud on RubyGems</a></li>
+</ul>
+
+<h2>Quick Start</h2>
+
+<pre class="code sh"><code class="sh">$ gem install google-cloud
+</code></pre>
+
+<h2>Authentication</h2>
+
+<p>Instructions and configuration options are covered in the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud/latest/file.AUTHENTICATION">Authentication
+Guide</a>.</p>
+
+<h2>Example</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google-cloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-dataset</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span>
+<span class='kw'>end</span>
+</code></pre>
 
 <h2>Supported Ruby Versions</h2>
 
 <p>This library is supported on Ruby 2.3+.</p>
 
 <p>Google provides official support for Ruby versions that are actively supported
-by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.3
-and later. Older versions of Ruby <em>may</em> still work, but are unsupported and not
+by Ruby Core—that is, Ruby versions that are either in normal maintenance or in
+security maintenance, and not end of life. Currently, this means Ruby 2.3 and
+later. Older versions of Ruby <em>may</em> still work, but are unsupported and not
 recommended. See <a href="https://www.ruby-lang.org/en/downloads/branches/">https://www.ruby-lang.org/en/downloads/branches/</a> for details
 about the Ruby support schedule.</p>
 
@@ -64,24 +96,34 @@ about the Ruby support schedule.</p>
 
 <p>This library follows <a href="http://semver.org/">Semantic Versioning</a>.</p>
 
-<p>It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.</p>
+<p>It is currently in major version zero (0.y.z), which means that anything may
+change at any time and the public API should not be considered stable.</p>
 
 <h2>Contributing</h2>
 
 <p>Contributions to this library are always welcome and highly encouraged.</p>
 
-<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing">Contributing Guide</a> for more information on how to get started.</p>
+<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud/latest/file.CONTRIBUTING">Contributing
+Guide</a>
+for more information on how to get started.</p>
 
-<p>Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. See <a href="../CODE_OF_CONDUCT.md">Code of Conduct</a> for more information.</p>
+<p>Please note that this project is released with a Contributor Code of Conduct. By
+participating in this project you agree to abide by its terms. See <a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud/latest/file.CODE_OF_CONDUCT">Code of
+Conduct</a>
+for more information.</p>
 
 <h2>License</h2>
 
-<p>This library is licensed under Apache 2.0. Full license text is available in <a href="LICENSE">LICENSE</a>.</p>
+<p>This library is licensed under Apache 2.0. Full license text is available in
+<a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud/latest/file.LICENSE">LICENSE</a>.</p>
 
 <h2>Support</h2>
 
-<p>Please <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues">report bugs at the project on Github</a>.
-Don&#39;t hesitate to <a href="http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby">ask questions</a> about the client or APIs on <a href="http://stackoverflow.com">StackOverflow</a>.</p>
+<p>Please <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues">report bugs at the project on
+Github</a>. Don&#39;t
+hesitate to <a href="http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby">ask
+questions</a>
+about the client or APIs on <a href="http://stackoverflow.com">StackOverflow</a>.</p>
 </div></div>
 
   <div id="footer">
