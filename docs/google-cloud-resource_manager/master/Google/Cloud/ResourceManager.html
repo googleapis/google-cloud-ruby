@@ -254,14 +254,14 @@ Google::Cloud::ResourceManager library uses.</p>
       <pre class="lines">
 
 
+103
 104
 105
 106
-107
-108</pre>
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_resource_manager'>resource_manager</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -288,8 +288,7 @@ Google::Cloud::ResourceManager library uses.</p>
 service. Each call creates a new connection.</p>
 
 <p>For more information on connecting to Google Cloud see the
-<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
-Guide</a>.</p>
+<a href="../../file.AUTHENTICATION.html" title="Authentication Guide">Authentication Guide</a>.</p>
 
 
   </div>
@@ -421,6 +420,7 @@ Deprecated.</p>
       <pre class="lines">
 
 
+66
 67
 68
 69
@@ -437,11 +437,10 @@ Deprecated.</p>
 80
 81
 82
-83
-84</pre>
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/resource_manager.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>retries:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>keyfile:</span> <span class='kw'>nil</span>
