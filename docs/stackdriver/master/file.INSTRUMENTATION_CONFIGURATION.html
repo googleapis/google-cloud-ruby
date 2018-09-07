@@ -1,0 +1,202 @@
+---
+layout: yard_main
+title: "File: INSTRUMENTATION_CONFIGURATION - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "INSTRUMENTATION_CONFIGURATION";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="file_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: INSTRUMENTATION_CONFIGURATION</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>Stackdriver Instrumentation Configuration</h1>
+
+<p>Stackdriver instrumentation libraries are fully integrated with Rails
+configuration interface. You can provide all the configuration parameters in
+your <code>config/environments/*.rb</code> files:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='comment'># Shared project_id and keyfile
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/key.json</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># Library specific configurations
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_error_reporting'>error_reporting</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error-reporting-project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-app-logname</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_capture_stack'>capture_stack</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>Other Rack-based applications can also configure all the Stackdriver
+instrumentation libraries through a similar configuration interface in Ruby:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Google</span><span class='op'>::</span><span class='const'>Cloud</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='comment'># Shared project_id and keyfile
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/key.json</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># Library specific configurations
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_error_reporting'>error_reporting</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error-reporting-project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-app-log</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_capture_stack'>capture_stack</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>Individual libraries can be configured separately:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Error Reporting specific configurations
+</span><span class='const'>Google</span><span class='op'>::</span><span class='const'>Cloud</span><span class='op'>::</span><span class='const'>ErrorReporting</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error-reporting-project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-service</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='comment'># Debugger specific configurations
+</span><span class='const'>Google</span><span class='op'>::</span><span class='const'>Cloud</span><span class='op'>::</span><span class='const'>Debugger</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>debugger-project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-service</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_allow_mutating_methods'>allow_mutating_methods</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Logging specific configurations
+</span><span class='const'>Google</span><span class='op'>::</span><span class='const'>Cloud</span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error-reporting-project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-app-log</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-static-label</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>static-label-value</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-dynamic-label</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tlambda'>-&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_rack_env'>rack_env</span><span class='rparen'>)</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_rack_env'>rack_env</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>HTTP_X_MY_HEADER</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Trace specific configurations
+</span><span class='const'>Google</span><span class='op'>::</span><span class='const'>Cloud</span><span class='op'>::</span><span class='const'>Trace</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>error-reporting-project</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_capture_stack'>capture_stack</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Configuration Options</h2>
+
+<h4>Shared</h4>
+
+<ul>
+<li><code>project_id</code>: [<code>String</code>] Shared Google Cloud Platform Project identifier. Self discovered on GCP.</li>
+<li><code>credentials</code>: [<code>String</code>] Path to shared service account JSON keyfile. Self discovered on GCP.</li>
+<li><code>use_error_reporting</code>: [<code>Boolean</code>] Explicitly enable or disable Error Reporting features. Default: <code>Rails.env.production?</code></li>
+<li><code>use_debugger</code>: [<code>Boolean</code>] Explicitly enable or disable Debugger features. Default: <code>Rails.env.production?</code></li>
+<li><code>use_logging</code>: [<code>Boolean</code>] Explicitly enable or disable Logging features. Default: <code>Rails.env.production?</code></li>
+<li><code>use_trace</code>: [<code>Boolean</code>] Explicitly enable or disable Trace features. Default: <code>Rails.env.production?</code></li>
+</ul>
+
+<h4>Error Reporting</h4>
+
+<ul>
+<li><code>error_reporting.project_id</code>: [<code>String</code>] Google Cloud Platform Project identifier just for Error Reporting. Self discovered on GCP.</li>
+<li><code>error_reporting.credentials</code>: [<code>String</code>] Path to service account JSON keyfile. Self discovered on GCP.</li>
+<li><code>error_reporting.service_name</code>: [<code>String</code>] Identifier to running service. Self discovered on GCP. Default: <code>&quot;ruby&quot;</code></li>
+<li><code>error_reporting.service_version</code>: [<code>String</code>] Version identifier to running service. Self discovered on GCP.</li>
+<li><code>error_reporting.ignore_classes</code>: [<code>Array</code>] An Array of Exception classes to ignore. Default: <code>[]</code></li>
+</ul>
+
+<h4>Debugger</h4>
+
+<ul>
+<li><code>debugger.project_id</code>: [<code>String</code>] Google Cloud Platform Project identifier just for Debugger. Self discovered on GCP.</li>
+<li><code>debugger.credentials</code>: [<code>String</code>] Path to service account JSON keyfile. Self discovered on GCP.</li>
+<li><code>debugger.service_name</code>: [<code>String</code>] Identifier to running service. Self discovered on GCP. Default: <code>&quot;ruby-app&quot;</code></li>
+<li><code>debugger.service_version</code>: [<code>String</code>] Version identifier to running service. Self discovered on GCP.</li>
+<li><code>debugger.root</code>: [<code>String</code>] The root directory of the debuggee application in absolute file path form. Default: <code>Rack::Directory#root</code> if the application framework is rack-based,i.e. Ruby on Rails, Sinatra. Otherwise use current working directory.</li>
+<li><code>debugger.allow_mutating_methods</code>: [<code>boolean</code>] Whether to allow expressions to call methods that could mutate program state. Default is <code>false</code>.</li>
+<li><code>debugger.evaluation_time_limit</code>: [<code>Numeric</code>] The time limit in seconds for evaluating expressions. Default is <code>0.05</code>.</li>
+</ul>
+
+<h4>Logging</h4>
+
+<ul>
+<li><code>logging.project_id</code>: [<code>String</code>] Google Cloud Platform Project identifier just for Logging. Self discovered on GCP.</li>
+<li><code>logging.credentials</code>: [<code>String</code>] Path to service account JSON keyfile. Self discovered on GCP.</li>
+<li><code>logging.log_name</code>: [<code>String</code>] Name of the application log file. Default: <code>&quot;ruby_app_log&quot;</code></li>
+<li><code>logging.log_name_map</code>: [<code>Hash</code>] Map specific request routes to other log. Default: <code>{ &quot;/_ah/health&quot; =&gt; &quot;ruby_health_check_log&quot; }</code></li>
+<li><code>logging.monitored_resource.type</code>: [<code>String</code>] Resource type name. See <a href="https://cloud.google.com/logging/docs/api/v2/resource-list">full list</a>. Self discovered on GCP.</li>
+<li><code>logging.monitored_resource.labels</code>: [<code>Hash</code>] Resource labels. See <a href="https://cloud.google.com/logging/docs/api/v2/resource-list">full list</a>. Self discovered on GCP.</li>
+<li><code>logging.labels</code>: [<code>Hash</code>] User defined labels. A <code>Hash</code> of label names to string label values or callables/<code>Proc</code> which are functions of the Rack environment.</li>
+</ul>
+
+<h4>Trace</h4>
+
+<ul>
+<li><code>trace.project_id</code>: [<code>String</code>] Google Cloud Platform Project identifier just for Trace. Self discovered on GCP.</li>
+<li><code>trace.credentials</code>: [<code>String</code>] Path to service account JSON keyfile. Self discovered on GCP.</li>
+<li><code>trace.capture_stack</code>: [<code>Boolean</code>] Whether to capture stack traces for each span. Default: <code>false</code></li>
+<li><code>trace.sampler</code>: [<code>Proc</code>] A sampler Proc makes the decision whether to record a trace for each request. Default: <code>Google::Cloud::Trace::TimeSampler</code></li>
+<li><code>trace.span_id_generator</code>: [<code>Proc</code>] A generator Proc that generates the name String for new TraceRecord. Default: <code>random numbers</code></li>
+<li><code>trace.notifications</code>: [<code>Array</code>] An array of ActiveSupport notification types to include in traces. Rails-only option. Default: <code>Google::Cloud::Trace::Railtie::DEFAULT_NOTIFICATIONS</code></li>
+<li><code>trace.max_data_length</code>: [<code>Integer</code>] The maximum length of span properties recorded with ActiveSupport notification events. Rails-only option. Default: <code>Google::Cloud::Trace::Notifications::DEFAULT_MAX_DATA_LENGTH</code></li>
+</ul>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
