@@ -88,7 +88,8 @@ module Google
           return Pubsub::Project.new(
             Pubsub::Service.new(
               project_id, :this_channel_is_insecure,
-              host: emulator_host
+              host: emulator_host, timeout: timeout,
+              client_config: client_config
             )
           )
         end

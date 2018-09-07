@@ -46,6 +46,8 @@ module Google
     #   datastore.save task
     #
     module Datastore
+      # rubocop:disable Metrics/MethodLength
+
       ##
       # Creates a new object for connecting to the Datastore service.
       # Each call creates a new connection.
@@ -109,7 +111,8 @@ module Google
           return Datastore::Dataset.new(
             Datastore::Service.new(
               project_id, :this_channel_is_insecure,
-              host: emulator_host, client_config: client_config
+              host: emulator_host, timeout: timeout,
+              client_config: client_config
             )
           )
         end
@@ -126,6 +129,8 @@ module Google
           )
         )
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Configure the Google Cloud Datastore library.
