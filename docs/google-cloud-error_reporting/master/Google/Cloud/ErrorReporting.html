@@ -247,7 +247,7 @@ behavior of the API client.</li>
 should not be reported.</li>
 </ul>
 
-<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration">Configuration
+<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION">Configuration
 Guide</a>
 for full configuration parameters.</p>
 
@@ -317,14 +317,14 @@ the Google::Cloud::ErrorReporting module uses.</p>
       <pre class="lines">
 
 
+152
 153
 154
 155
-156
-157</pre>
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 153</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_error_reporting'>error_reporting</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -351,8 +351,7 @@ the Google::Cloud::ErrorReporting module uses.</p>
 service. Each call creates a new connection.</p>
 
 <p>For more information on connecting to Google Cloud see the
-<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
-Guide</a>.</p>
+<a href="../../file.AUTHENTICATION.html" title="Authentication Guide">Authentication Guide</a>.</p>
 
 
   </div>
@@ -527,6 +526,7 @@ Deprecated.</p>
       <pre class="lines">
 
 
+77
 78
 79
 80
@@ -548,11 +548,10 @@ Deprecated.</p>
 96
 97
 98
-99
-100</pre>
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>
@@ -718,6 +717,7 @@ service.</p>
       <pre class="lines">
 
 
+203
 204
 205
 206
@@ -731,11 +731,10 @@ service.</p>
 214
 215
 216
-217
-218</pre>
+217</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 204</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 203</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_report'>report</span> <span class='id identifier rubyid_exception'>exception</span><span class='comma'>,</span> <span class='label'>service_name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>service_version:</span> <span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_use_error_reporting'>use_error_reporting</span> <span class='op'>==</span> <span class='kw'>false</span>
