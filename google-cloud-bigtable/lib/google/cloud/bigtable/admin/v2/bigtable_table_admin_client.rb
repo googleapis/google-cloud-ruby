@@ -552,6 +552,9 @@ module Google
             # @param view [Google::Bigtable::Admin::V2::Table::View]
             #   The view to be applied to the returned tables' fields.
             #   Defaults to +NAME_ONLY+ if unspecified; no others are currently supported.
+            # @param page_size [Integer]
+            #   Maximum number of results per page.
+            #   CURRENTLY UNIMPLEMENTED AND IGNORED.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -586,11 +589,13 @@ module Google
             def list_tables \
                 parent,
                 view: nil,
+                page_size: nil,
                 options: nil,
                 &block
               req = {
                 parent: parent,
-                view: view
+                view: view,
+                page_size: page_size
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::ListTablesRequest)
               @list_tables.call(req, options, &block)

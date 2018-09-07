@@ -35,6 +35,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.bigtable.admin.v2.ListTablesRequest" do
     optional :parent, :string, 1
     optional :view, :enum, 2, "google.bigtable.admin.v2.Table.View"
+    optional :page_size, :int32, 4
     optional :page_token, :string, 3
   end
   add_message "google.bigtable.admin.v2.ListTablesResponse" do

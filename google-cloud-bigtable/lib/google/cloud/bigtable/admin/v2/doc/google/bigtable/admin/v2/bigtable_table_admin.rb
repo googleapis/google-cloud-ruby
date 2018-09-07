@@ -105,6 +105,10 @@ module Google
         #   @return [Google::Bigtable::Admin::V2::Table::View]
         #     The view to be applied to the returned tables' fields.
         #     Defaults to +NAME_ONLY+ if unspecified; no others are currently supported.
+        # @!attribute [rw] page_size
+        #   @return [Integer]
+        #     Maximum number of results per page.
+        #     CURRENTLY UNIMPLEMENTED AND IGNORED.
         # @!attribute [rw] page_token
         #   @return [String]
         #     The value of +next_page_token+ returned by a previous call.
@@ -277,7 +281,8 @@ module Google
         #     e.g., +projects/<project>/instances/<instance>/clusters/-+.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     The maximum number of snapshots to return.
+        #     The maximum number of snapshots to return per page.
+        #     CURRENTLY UNIMPLEMENTED AND IGNORED.
         # @!attribute [rw] page_token
         #   @return [String]
         #     The value of +next_page_token+ returned by a previous call.
