@@ -16,8 +16,6 @@ env | grep KOKORO
 
 cd github/google-cloud-ruby/
 
-git checkout master
-
 # Print out Ruby version
 ruby --version
 
@@ -57,10 +55,16 @@ export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 if [ "$PACKAGE" = "post" ]; then
   rbenv global "2.5.1"
   (bundle update && bundle exec rake circleci:post) || set_failed_status
+elif [ "$JOB_TYPE" = "continuous" ]; then
+  git checkout master
+  for version in "${RUBY_VERSIONS[@]}"; do
+    rbenv global "$version"
+    (bundle update && bundle exec rake kokoro:continuous) || set_failed_status
+  done
 else
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
-    (bundle update && bundle exec rake kokoro:$JOB_TYPE) || set_failed_status
+    (bundle update && bundle exec rake kokoro:presubmit) || set_failed_status
   done
 fi
 
