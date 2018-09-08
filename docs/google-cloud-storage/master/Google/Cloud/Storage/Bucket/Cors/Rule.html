@@ -87,7 +87,48 @@ js:
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Bucket Cors Rule</h1>
 
+<p>Represents a website CORS rule for a bucket. Accessed via
+<span class='object_link'><a href="../../Bucket.html#cors-instance_method" title="Google::Cloud::Storage::Bucket#cors (method)">Google::Cloud::Storage::Bucket#cors</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Retrieving the bucket&#39;s CORS rules.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Storage.html" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Storage.html#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_cors'>cors</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='comment'>#=&gt; 2
+</span><span class='id identifier rubyid_rule'>rule</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_cors'>cors</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+<span class='id identifier rubyid_rule'>rule</span><span class='period'>.</span><span class='id identifier rubyid_origin'>origin</span> <span class='comment'>#=&gt; [&quot;http://example.org&quot;]
+</span><span class='id identifier rubyid_rule'>rule</span><span class='period'>.</span><span class='id identifier rubyid_methods'>methods</span> <span class='comment'>#=&gt; [&quot;GET&quot;,&quot;POST&quot;,&quot;DELETE&quot;]
+</span><span class='id identifier rubyid_rule'>rule</span><span class='period'>.</span><span class='id identifier rubyid_headers'>headers</span> <span class='comment'>#=&gt; [&quot;X-My-Custom-Header&quot;]
+</span><span class='id identifier rubyid_rule'>rule</span><span class='period'>.</span><span class='id identifier rubyid_max_age'>max_age</span> <span class='comment'>#=&gt; 3600</span></code></pre>
+    
+  </div>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/storage/docs/cross-origin" target="_parent" title="Cross-Origin Resource Sharing (CORS)">Cross-Origin Resource Sharing (CORS)</a></li>
+    
+  </ul>
+
+</div>
 
 
 
@@ -97,7 +138,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#headers-instance_method" title="#headers (instance method)">#<strong>headers</strong>  &#x21d2; Object </a>
+      <a href="#headers-instance_method" title="#headers (instance method)">#<strong>headers</strong>  &#x21d2; String </a>
     
 
     
@@ -114,7 +155,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute headers.</p>
+    <span class="summary_desc"><div class='inline'><p>The list of header field names to send in the Access-Control-Allow-Headers header in the preflight response.</p>
 </div></span>
   
 </li>
@@ -123,7 +164,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#max_age-instance_method" title="#max_age (instance method)">#<strong>max_age</strong>  &#x21d2; Object </a>
+      <a href="#max_age-instance_method" title="#max_age (instance method)">#<strong>max_age</strong>  &#x21d2; String </a>
     
 
     
@@ -140,7 +181,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute max_age.</p>
+    <span class="summary_desc"><div class='inline'><p>The value to send in the Access-Control-Max-Age header in the preflight response.</p>
 </div></span>
   
 </li>
@@ -149,7 +190,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#methods-instance_method" title="#methods (instance method)">#<strong>methods</strong>  &#x21d2; Object </a>
+      <a href="#methods-instance_method" title="#methods (instance method)">#<strong>methods</strong>  &#x21d2; String </a>
     
 
     
@@ -166,7 +207,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute methods.</p>
+    <span class="summary_desc"><div class='inline'><p>The list of HTTP methods permitted in cross origin resource sharing with the bucket.</p>
 </div></span>
   
 </li>
@@ -175,7 +216,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#origin-instance_method" title="#origin (instance method)">#<strong>origin</strong>  &#x21d2; Object </a>
+      <a href="#origin-instance_method" title="#origin (instance method)">#<strong>origin</strong>  &#x21d2; String </a>
     
 
     
@@ -192,7 +233,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute origin.</p>
+    <span class="summary_desc"><div class='inline'><p>The <a href="http://tools.ietf.org/html/rfc6454">origin</a> or origins permitted for cross origin resource sharing with the bucket.</p>
 </div></span>
   
 </li>
@@ -203,167 +244,6 @@ js:
 
 
 
-  
-    <h2>
-      Class Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#from_gapi-class_method" title="from_gapi (class method)">.<strong>from_gapi</strong>(gapi)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-    </ul>
-  
-    <h2>
-      Instance Method Summary
-      <small><a href="#" class="summary_toggle">collapse</a></small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#freeze-instance_method" title="#freeze (instance method)">#<strong>freeze</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(origin, methods, headers: nil, max_age: nil)  &#x21d2; Rule </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title constructor">constructor</span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>A new instance of Rule.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#to_gapi-instance_method" title="#to_gapi (instance method)">#<strong>to_gapi</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-    </ul>
-  
-
-<div id="constructor_details" class="method_details_list">
-  <h2>Constructor Details</h2>
-  
-    <div class="method_details first">
-  <h3 class="signature first" id="initialize-instance_method">
-  
-    #<strong>initialize</strong>(origin, methods, headers: nil, max_age: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Storage::Bucket::Cors::Rule (class)">Rule</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns a new instance of Rule</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-124
-125
-126
-127
-128
-129</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 124</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_origin'>origin</span><span class='comma'>,</span> <span class='id identifier rubyid_methods'>methods</span><span class='comma'>,</span> <span class='label'>headers:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max_age:</span> <span class='kw'>nil</span>
-  <span class='ivar'>@origin</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_origin'>origin</span><span class='rparen'>)</span>
-  <span class='ivar'>@methods</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_methods'>methods</span><span class='rparen'>)</span>
-  <span class='ivar'>@headers</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_headers'>headers</span><span class='rparen'>)</span>
-  <span class='ivar'>@max_age</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_max_age'>max_age</span> <span class='op'>||</span> <span class='int'>1800</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-  
-</div>
 
   <div id="instance_attr_details" class="attr_details">
     <h2>Instance Attribute Details</h2>
@@ -373,7 +253,7 @@ js:
       <div class="method_details first">
   <h3 class="signature first" id="headers-instance_method">
   
-    #<strong>headers</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>headers</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -381,13 +261,33 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the value of attribute headers</p>
+    <p>The list of header field names to send in the
+Access-Control-Allow-Headers header in the preflight response.
+Indicates the custom request headers that may be used in the
+actual request.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of headers</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -395,12 +295,12 @@ js:
       <pre class="lines">
 
 
-122
-123
-124</pre>
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_headers'>headers</span>
   <span class='ivar'>@headers</span>
@@ -415,7 +315,7 @@ js:
       <div class="method_details ">
   <h3 class="signature " id="max_age-instance_method">
   
-    #<strong>max_age</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>max_age</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -423,13 +323,34 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the value of attribute max_age</p>
+    <p>The value to send in the
+Access-Control-Max-Age header in the preflight response. Indicates
+how many seconds the results of a preflight request can be cached
+in a preflight result cache. The default value is <code>1800</code> (30
+minutes.)</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of max_age</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -437,12 +358,12 @@ js:
       <pre class="lines">
 
 
-122
-123
-124</pre>
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_age'>max_age</span>
   <span class='ivar'>@max_age</span>
@@ -457,7 +378,7 @@ js:
       <div class="method_details ">
   <h3 class="signature " id="methods-instance_method">
   
-    #<strong>methods</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>methods</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -465,13 +386,33 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the value of attribute methods</p>
+    <p>The list of HTTP methods permitted in cross
+origin resource sharing with the bucket. (GET, OPTIONS, POST, etc)
+Note: &quot;*&quot; is permitted in the list of methods, and means
+&quot;any method&quot;.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of methods</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -479,12 +420,12 @@ js:
       <pre class="lines">
 
 
-122
-123
-124</pre>
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_methods'>methods</span>
   <span class='ivar'>@methods</span>
@@ -499,7 +440,7 @@ js:
       <div class="method_details ">
   <h3 class="signature " id="origin-instance_method">
   
-    #<strong>origin</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>origin</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -507,13 +448,33 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the value of attribute origin</p>
+    <p>The <a href="http://tools.ietf.org/html/rfc6454">origin</a>
+or origins permitted for cross origin resource sharing with the
+bucket. Note: &quot;*&quot; is permitted in the list of origins, and means
+&quot;any Origin&quot;.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of origin</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -521,12 +482,12 @@ js:
       <pre class="lines">
 
 
-122
-123
-124</pre>
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_origin'>origin</span>
   <span class='ivar'>@origin</span>
@@ -538,124 +499,6 @@ js:
     
   </div>
 
-
-  <div id="class_method_details" class="method_details_list">
-    <h2>Class Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="from_gapi-class_method">
-  
-    .<strong>from_gapi</strong>(gapi)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-138
-139
-140
-141
-142</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 138</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span> <span class='id identifier rubyid_gapi'>gapi</span>
-  <span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='period'>.</span><span class='id identifier rubyid_origin'>origin</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='period'>.</span><span class='id identifier rubyid_http_method'>http_method</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span> \
-      <span class='label'>headers:</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='period'>.</span><span class='id identifier rubyid_response_header'>response_header</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span>
-      <span class='label'>max_age:</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='period'>.</span><span class='id identifier rubyid_max_age_seconds'>max_age_seconds</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
-  <div id="instance_method_details" class="method_details_list">
-    <h2>Instance Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="freeze-instance_method">
-  
-    #<strong>freeze</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-144
-145
-146
-147
-148
-149</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 144</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_freeze'>freeze</span>
-  <span class='ivar'>@origin</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-  <span class='ivar'>@methods</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-  <span class='ivar'>@headers</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
-  <span class='kw'>super</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="to_gapi-instance_method">
-  
-    #<strong>to_gapi</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-131
-132
-133
-134
-135
-136</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/bucket/cors.rb', line 131</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_to_gapi'>to_gapi</span>
-  <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Apis</span><span class='op'>::</span><span class='const'>StorageV1</span><span class='op'>::</span><span class='const'>Bucket</span><span class='op'>::</span><span class='const'>CorsConfiguration</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
-    <span class='label'>origin:</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_origin'>origin</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span> <span class='label'>http_method:</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_methods'>methods</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span>
-    <span class='label'>response_header:</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_headers'>headers</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span> <span class='label'>max_age_seconds:</span> <span class='id identifier rubyid_max_age'>max_age</span>
-  <span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 </div>
 

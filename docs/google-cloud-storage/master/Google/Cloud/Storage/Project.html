@@ -284,6 +284,12 @@ read, updated, and deleted by Google::Cloud::Storage::Project.</p>
   
 
 
+  
+  
+  
+  
+  
+  
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
@@ -437,19 +443,19 @@ does not exist</p>
       <pre class="lines">
 
 
-207
-208
-209
 210
 211
 212
 213
 214
 215
-216</pre>
+216
+217
+218
+219</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 207</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bucket'>bucket</span> <span class='id identifier rubyid_bucket_name'>bucket_name</span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>user_project:</span> <span class='kw'>nil</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_skip_lookup'>skip_lookup</span>
@@ -632,15 +638,15 @@ bucket instances and their files.</p>
       <pre class="lines">
 
 
-148
-149
-150
 151
 152
-153</pre>
+153
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_buckets'>buckets</span> <span class='label'>prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>user_project:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_buckets'>list_buckets</span> \
@@ -707,6 +713,8 @@ for the bucket, including a block that defines CORS rule. See
                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>*</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
                    <span class='label'>headers:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X-My-Custom-Header</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
                    <span class='label'>max_age:</span> <span class='int'>300</span>
+
+  <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_lifecycle'>lifecycle</span><span class='period'>.</span><span class='id identifier rubyid_add_set_storage_class_rule'>add_set_storage_class_rule</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>COLDLINE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>age:</span> <span class='int'>10</span>
 <span class='kw'>end</span></code></pre>
     
   </div>
@@ -977,7 +985,7 @@ created</p>
   
     <li>
       
-        <span class='name'>cors</span>
+        <span class='name'>bucket</span>
       
       
         <span class='type'>(<tt><span class='object_link'><a href="Bucket.html" title="Google::Cloud::Storage::Bucket (class)">Bucket</a></span></tt>)</span>
@@ -1020,11 +1028,6 @@ created</p>
       <pre class="lines">
 
 
-347
-348
-349
-350
-351
 352
 353
 354
@@ -1046,10 +1049,16 @@ created</p>
 370
 371
 372
-373</pre>
+373
+374
+375
+376
+377
+378
+379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 347</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 352</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='id identifier rubyid_bucket_name'>bucket_name</span><span class='comma'>,</span> <span class='label'>acl:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>default_acl:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                   <span class='label'>location:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>storage_class:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1073,6 +1082,7 @@ created</p>
   <span class='kw'>yield</span> <span class='id identifier rubyid_updater'>updater</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
   <span class='id identifier rubyid_updater'>updater</span><span class='period'>.</span><span class='id identifier rubyid_check_for_changed_labels!'>check_for_changed_labels!</span>
   <span class='id identifier rubyid_updater'>updater</span><span class='period'>.</span><span class='id identifier rubyid_check_for_mutable_cors!'>check_for_mutable_cors!</span>
+  <span class='id identifier rubyid_updater'>updater</span><span class='period'>.</span><span class='id identifier rubyid_check_for_mutable_lifecycle!'>check_for_mutable_lifecycle!</span>
   <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_insert_bucket'>insert_bucket</span> \
     <span class='id identifier rubyid_new_bucket'>new_bucket</span><span class='comma'>,</span> <span class='label'>acl:</span> <span class='id identifier rubyid_acl_rule'>acl_rule</span><span class='lparen'>(</span><span class='id identifier rubyid_acl'>acl</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>default_acl:</span> <span class='id identifier rubyid_acl_rule'>acl_rule</span><span class='lparen'>(</span><span class='id identifier rubyid_default_acl'>default_acl</span><span class='rparen'>)</span><span class='comma'>,</span>
                 <span class='label'>user_project:</span> <span class='id identifier rubyid_user_project'>user_project</span>
@@ -1140,12 +1150,12 @@ created</p>
       <pre class="lines">
 
 
-76
-77
-78</pre>
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_project_id'>project_id</span>
   <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span>
@@ -1199,13 +1209,13 @@ project used to initialize the client library. (See also
       <pre class="lines">
 
 
-88
-89
-90
-91</pre>
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_service_account_email'>service_account_email</span>
   <span class='ivar'>@service_account_email</span> <span class='op'>||=</span> \
@@ -1539,21 +1549,21 @@ corresponding values. (These values can be permanently set using
       <pre class="lines">
 
 
-477
-478
-479
-480
-481
-482
 483
 484
 485
 486
 487
-488</pre>
+488
+489
+490
+491
+492
+493
+494</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 477</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/project.rb', line 483</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_signed_url'>signed_url</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='label'>method:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>expires:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                <span class='label'>content_type:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>content_md5:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>headers:</span> <span class='kw'>nil</span><span class='comma'>,</span>
