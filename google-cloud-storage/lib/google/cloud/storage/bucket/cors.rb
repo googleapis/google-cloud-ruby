@@ -46,6 +46,19 @@ module Google
         #                max_age: 3600
         #   end
         #
+        # @example Retrieving the bucket's CORS rules.
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.cors.size #=> 2
+        #   rule = bucket.cors.first
+        #   rule.origin #=> ["http://example.org"]
+        #   rule.methods #=> ["GET","POST","DELETE"]
+        #   rule.headers #=> ["X-My-Custom-Header"]
+        #   rule.max_age #=> 3600
+        #
         class Cors < DelegateClass(::Array)
           ##
           # @private Initialize a new CORS rules builder with existing CORS
@@ -118,9 +131,50 @@ module Google
             super
           end
 
+          ##
+          # # Bucket Cors Rule
+          #
+          # Represents a website CORS rule for a bucket. Accessed via
+          # {Bucket#cors}.
+          #
+          # @see https://cloud.google.com/storage/docs/cross-origin Cross-Origin
+          #   Resource Sharing (CORS)
+          #
+          # @attr [String] origin The [origin](http://tools.ietf.org/html/rfc6454)
+          #   or origins permitted for cross origin resource sharing with the
+          #   bucket. Note: "*" is permitted in the list of origins, and means
+          #   "any Origin".
+          # @attr [String] methods The list of HTTP methods permitted in cross
+          #   origin resource sharing with the bucket. (GET, OPTIONS, POST, etc)
+          #   Note: "*" is permitted in the list of methods, and means
+          #   "any method".
+          # @attr [String] headers The list of header field names to send in the
+          #   Access-Control-Allow-Headers header in the preflight response.
+          #   Indicates the custom request headers that may be used in the
+          #   actual request.
+          # @attr [String] max_age The value to send in the
+          #   Access-Control-Max-Age header in the preflight response. Indicates
+          #   how many seconds the results of a preflight request can be cached
+          #   in a preflight result cache. The default value is `1800` (30
+          #   minutes.)
+          #
+          # @example Retrieving the bucket's CORS rules.
+          #   require "google/cloud/storage"
+          #
+          #   storage = Google::Cloud::Storage.new
+          #
+          #   bucket = storage.bucket "my-bucket"
+          #   bucket.cors.size #=> 2
+          #   rule = bucket.cors.first
+          #   rule.origin #=> ["http://example.org"]
+          #   rule.methods #=> ["GET","POST","DELETE"]
+          #   rule.headers #=> ["X-My-Custom-Header"]
+          #   rule.max_age #=> 3600
+          #
           class Rule
             attr_accessor :origin, :methods, :headers, :max_age
 
+            # @private
             def initialize origin, methods, headers: nil, max_age: nil
               @origin = Array(origin)
               @methods = Array(methods)
@@ -128,6 +182,7 @@ module Google
               @max_age = (max_age || 1800)
             end
 
+            # @private
             def to_gapi
               Google::Apis::StorageV1::Bucket::CorsConfiguration.new(
                 origin: Array(origin).dup, http_method: Array(methods).dup,
@@ -135,12 +190,14 @@ module Google
               )
             end
 
+            # @private
             def self.from_gapi gapi
               new gapi.origin.dup, gapi.http_method.dup, \
                   headers: gapi.response_header.dup,
                   max_age: gapi.max_age_seconds
             end
 
+            # @private
             def freeze
               @origin.freeze
               @methods.freeze

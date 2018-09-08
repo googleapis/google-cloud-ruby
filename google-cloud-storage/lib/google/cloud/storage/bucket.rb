@@ -16,10 +16,12 @@
 require "google/cloud/storage/bucket/acl"
 require "google/cloud/storage/bucket/list"
 require "google/cloud/storage/bucket/cors"
-require "google/cloud/storage/policy"
-require "google/cloud/storage/post_object"
+require "google/cloud/storage/bucket/lifecycle"
+require "google/cloud/storage/convert"
 require "google/cloud/storage/file"
 require "google/cloud/storage/notification"
+require "google/cloud/storage/policy"
+require "google/cloud/storage/post_object"
 require "pathname"
 
 module Google
@@ -39,6 +41,7 @@ module Google
       #   file = bucket.file "path/to/my-file.ext"
       #
       class Bucket
+        include Convert
         ##
         # @private The Service object.
         attr_accessor :service
@@ -186,6 +189,73 @@ module Google
             end
           end
           cors_builder.freeze # always return frozen objects
+        end
+
+        ##
+        # Returns the current Object Lifecycle Management rules configuration
+        # for the bucket.
+        #
+        # This method also accepts a block for updating the bucket's Object
+        # Lifecycle Management rules. See {Bucket::Lifecycle} for details.
+        #
+        # @see https://cloud.google.com/storage/docs/lifecycle Object
+        #   Lifecycle Management
+        # @see https://cloud.google.com/storage/docs/managing-lifecycles
+        #   Managing Object Lifecycles
+        #
+        # @yield [lifecycle] a block for setting Object Lifecycle Management
+        #   rules
+        # @yieldparam [Bucket::Lifecycle] lifecycle the object accepting Object
+        #   Lifecycle Management rules
+        #
+        # @return [Bucket::Lifecycle] The frozen builder object.
+        #
+        # @example Retrieving a bucket's lifecycle management rules.
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.lifecycle.size #=> 2
+        #   rule = bucket.lifecycle.first
+        #   rule.action #=> "SetStorageClass"
+        #   rule.storage_class #=> "COLDLINE"
+        #   rule.age #=> 10
+        #   rule.matches_storage_class #=> ["MULTI_REGIONAL", "REGIONAL"]
+        #
+        # @example Updating the bucket's lifecycle management rules in a block.
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.update do |b|
+        #     b.lifecycle do |l|
+        #       # Remove the last rule from the array
+        #       l.pop
+        #       # Remove rules with the given condition
+        #       l.delete_if do |r|
+        #         r.matches_storage_class.include? "NEARLINE"
+        #       end
+        #       # Update rules
+        #       l.each do |r|
+        #         r.age = 90 if r.action == "Delete"
+        #       end
+        #       # Add a rule
+        #       l.add_set_storage_class_rule "COLDLINE", age: 10
+        #     end
+        #   end
+        #
+        def lifecycle
+          lifecycle_builder = Bucket::Lifecycle.from_gapi @gapi.lifecycle
+          if block_given?
+            yield lifecycle_builder
+            if lifecycle_builder.changed?
+              @gapi.lifecycle = lifecycle_builder.to_gapi
+              patch_gapi! :lifecycle
+            end
+          end
+          lifecycle_builder.freeze # always return frozen objects
         end
 
         ##
@@ -522,6 +592,7 @@ module Google
           # Add check for mutable cors
           updater.check_for_changed_labels!
           updater.check_for_mutable_cors!
+          updater.check_for_mutable_lifecycle!
           patch_gapi! updater.updates unless updater.updates.empty?
         end
 
@@ -1639,18 +1710,6 @@ module Google
           raise ArgumentError, "cannot find file #{file}"
         end
 
-        def storage_class_for str
-          return nil if str.nil?
-          { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
-            "dra" => "DURABLE_REDUCED_AVAILABILITY",
-            "durable" => "DURABLE_REDUCED_AVAILABILITY",
-            "nearline" => "NEARLINE",
-            "coldline" => "COLDLINE",
-            "multi_regional" => "MULTI_REGIONAL",
-            "regional" => "REGIONAL",
-            "standard" => "STANDARD" }[str.to_s.downcase] || str.to_s
-        end
-
         ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < Bucket
@@ -1662,6 +1721,7 @@ module Google
             @gapi = gapi
             @labels = @gapi.labels.to_h.dup
             @cors_builder = nil
+            @lifecycle_builder = nil
           end
 
           ##
@@ -1706,6 +1766,22 @@ module Google
             return unless @cors_builder.changed?
             @gapi.cors_configurations = @cors_builder.to_gapi
             patch_gapi! :cors_configurations
+          end
+
+          def lifecycle
+            # Same as Bucket#lifecycle, but not frozen
+            @lifecycle_builder ||= Bucket::Lifecycle.from_gapi @gapi.lifecycle
+            yield @lifecycle_builder if block_given?
+            @lifecycle_builder
+          end
+
+          ##
+          # @private Make sure any lifecycle changes are saved
+          def check_for_mutable_lifecycle!
+            return if @lifecycle_builder.nil?
+            return unless @lifecycle_builder.changed?
+            @gapi.lifecycle = @lifecycle_builder.to_gapi
+            patch_gapi! :lifecycle
           end
 
           protected

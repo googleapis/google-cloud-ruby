@@ -211,6 +211,24 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket.cors.class.must_equal Google::Cloud::Storage::Bucket::Cors
   end
 
+  it "creates a bucket with block lifecycle (Object Lifecycle Management)" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name, lifecycle: lifecycle_gapi(lifecycle_rule_gapi("SetStorageClass", storage_class: "NEARLINE", age: 32))
+    mock.expect :insert_bucket, created_bucket, [project, created_bucket, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name do |b|
+      b.lifecycle.add_set_storage_class_rule "NEARLINE", age: 32
+    end
+
+    mock.verify
+
+    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
+    bucket.name.must_equal bucket_name
+    bucket.lifecycle.class.must_equal Google::Cloud::Storage::Bucket::Lifecycle
+  end
+
   it "creates a bucket with block labels" do
     mock = Minitest::Mock.new
     created_bucket = create_bucket_gapi bucket_name
@@ -661,11 +679,11 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
   def create_bucket_gapi name = nil, location: nil, storage_class: nil,
                          versioning: nil, logging: nil, website: nil, cors: nil,
-                         billing: nil
+                         billing: nil, lifecycle: nil
     options = {
       name: name, location: location, storage_class: storage_class,
       versioning: versioning, logging: logging, website: website,
-      cors_configurations: cors, billing: billing
+      cors_configurations: cors, billing: billing, lifecycle: lifecycle
     }.delete_if { |_, v| v.nil? }
     Google::Apis::StorageV1::Bucket.new options
   end

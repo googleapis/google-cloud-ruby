@@ -15,9 +15,11 @@
 
 require "google/cloud/storage/errors"
 require "google/cloud/storage/service"
+require "google/cloud/storage/convert"
 require "google/cloud/storage/credentials"
 require "google/cloud/storage/bucket"
 require "google/cloud/storage/bucket/cors"
+require "google/cloud/storage/bucket/lifecycle"
 require "google/cloud/storage/file"
 
 module Google
@@ -46,6 +48,7 @@ module Google
       #   file = bucket.file "path/to/my-file.ext"
       #
       class Project
+        include Convert
         ##
         # @private The Service object.
         attr_accessor :service
@@ -318,7 +321,7 @@ module Google
         #
         # @yield [bucket] a block for configuring the bucket before it is
         #   created
-        # @yieldparam [Bucket] cors the bucket object to be configured
+        # @yieldparam [Bucket] bucket the bucket object to be configured
         #
         # @return [Google::Cloud::Storage::Bucket]
         #
@@ -342,6 +345,8 @@ module Google
         #                      "*",
         #                      headers: ["X-My-Custom-Header"],
         #                      max_age: 300
+        #
+        #     b.lifecycle.add_set_storage_class_rule "COLDLINE", age: 10
         #   end
         #
         def create_bucket bucket_name, acl: nil, default_acl: nil,
@@ -366,6 +371,7 @@ module Google
           yield updater if block_given?
           updater.check_for_changed_labels!
           updater.check_for_mutable_cors!
+          updater.check_for_mutable_lifecycle!
           gapi = service.insert_bucket \
             new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl),
                         user_project: user_project
@@ -491,18 +497,6 @@ module Google
 
         def acl_rule option_name
           Bucket::Acl.predefined_rule_for option_name
-        end
-
-        def storage_class_for str
-          return nil if str.nil?
-          { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
-            "dra" => "DURABLE_REDUCED_AVAILABILITY",
-            "durable" => "DURABLE_REDUCED_AVAILABILITY",
-            "nearline" => "NEARLINE",
-            "coldline" => "COLDLINE",
-            "multi_regional" => "MULTI_REGIONAL",
-            "regional" => "REGIONAL",
-            "standard" => "STANDARD" }[str.to_s.downcase] || str.to_s
         end
       end
     end

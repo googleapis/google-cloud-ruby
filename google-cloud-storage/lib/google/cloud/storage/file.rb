@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/storage/convert"
 require "google/cloud/storage/file/acl"
 require "google/cloud/storage/file/list"
 require "google/cloud/storage/file/verifier"
@@ -62,6 +63,7 @@ module Google
       #   downloaded.read #=> "Hello world!"
       #
       class File
+        include Convert
         ##
         # @private The Connection object.
         attr_accessor :service
@@ -1484,18 +1486,6 @@ module Google
             gz = Zlib::GzipReader.new StringIO.new(local_file.read)
             StringIO.new gz.read
           end
-        end
-
-        def storage_class_for str
-          return nil if str.nil?
-          { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
-            "dra" => "DURABLE_REDUCED_AVAILABILITY",
-            "durable" => "DURABLE_REDUCED_AVAILABILITY",
-            "nearline" => "NEARLINE",
-            "coldline" => "COLDLINE",
-            "multi_regional" => "MULTI_REGIONAL",
-            "regional" => "REGIONAL",
-            "standard" => "STANDARD" }[str.to_s.downcase] || str.to_s
         end
 
         ##

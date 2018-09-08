@@ -90,6 +90,12 @@ describe Google::Cloud::Storage::Bucket, :storage do
       cors.frozen?.must_equal true
     end
     bucket.cors.frozen?.must_equal true
+
+    bucket.lifecycle.each do |r|
+      r.must_be_kind_of Google::Cloud::Storage::Bucket::Lifecycle::Rule
+      r.frozen?.must_equal true
+    end
+    bucket.lifecycle.frozen?.must_equal true
   end
 
   it "sets and updates cors rules" do
@@ -121,6 +127,61 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.cors.last.methods.must_equal ["PUT"]
     bucket.cors.last.headers.must_equal ["X-My-Custom-Header", "X-Another-Custom-Header"]
     bucket.cors.last.max_age.must_equal 600
+  end
+
+  it "sets and updates lifecycle rules" do
+    original_count = bucket.lifecycle.count
+
+    bucket.lifecycle do |l|
+      l.add_set_storage_class_rule "NEARLINE",
+                                   age: 10,
+                                   created_before: Date.parse("2013-01-15"), # string in RFC 3339 date format also ok
+                                   is_live: true,
+                                   matches_storage_class: ["MULTI_REGIONAL"],
+                                   num_newer_versions: 3
+
+    end
+
+    bucket.lifecycle.wont_be :empty?
+    bucket.lifecycle.count.must_equal original_count + 1
+    bucket.lifecycle.last.action.must_equal "SetStorageClass"
+    bucket.lifecycle.last.storage_class.must_equal "NEARLINE"
+    bucket.lifecycle.last.age.must_equal 10
+    bucket.lifecycle.last.created_before.must_equal "2013-01-15"
+    bucket.lifecycle.last.is_live.must_equal true
+    bucket.lifecycle.last.matches_storage_class.must_equal ["MULTI_REGIONAL"]
+    bucket.lifecycle.last.num_newer_versions.must_equal 3
+
+    bucket.reload!
+
+    bucket.lifecycle do |l|
+      l.last.storage_class = "COLDLINE"
+      l.last.age = 20
+      l.last.created_before = "2013-01-20"
+      l.last.is_live = false
+      l.last.matches_storage_class = ["NEARLINE"]
+      l.last.num_newer_versions = 4
+    end
+
+    bucket.reload!
+
+    bucket.lifecycle.wont_be :empty?
+    bucket.lifecycle.count.must_equal original_count + 1
+    bucket.lifecycle.last.action.must_equal "SetStorageClass"
+    bucket.lifecycle.last.storage_class.must_equal "COLDLINE"
+    bucket.lifecycle.last.age.must_equal 20
+    bucket.lifecycle.last.created_before.must_equal "2013-01-20"
+    bucket.lifecycle.last.is_live.must_equal false
+    bucket.lifecycle.last.matches_storage_class.must_equal ["NEARLINE"]
+    bucket.lifecycle.last.num_newer_versions.must_equal 4
+
+    bucket.lifecycle do |l|
+      l.delete_at(bucket.lifecycle.count - 1)
+    end
+
+    bucket.reload!
+
+    bucket.lifecycle.count.must_equal original_count
   end
 
   it "does not error when getting a file that does not exist" do
