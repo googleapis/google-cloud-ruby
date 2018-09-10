@@ -30,7 +30,7 @@ task :recompile do
 end
 
 desc "Run tests."
-task :test => :compile do
+task test: :compile do
   $LOAD_PATH.unshift "lib", "test"
   Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
 end
@@ -156,7 +156,7 @@ YARD::Rake::YardocTask.new do |y|
 end
 
 desc "Run the CI build"
-task :ci do
+task ci: :compile do
   header "BUILDING google-cloud-debugger"
   header "google-cloud-debugger rubocop", "*"
   sh "bundle exec rake rubocop"
