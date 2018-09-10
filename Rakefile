@@ -28,7 +28,7 @@ task :each, :bundleupdate do |t, args|
         header "#{gem} doctest", "*"
         run_task_if_exists "doctest"
         header "#{gem} test", "*"
-        sh "bundle exec rake test"
+        Rake::Task["test"].invoke
       end
     end
   end
@@ -54,7 +54,7 @@ namespace :test do
       Dir.chdir gem do
         Bundler.with_clean_env do
           header "RUNNING TESTS FOR #{gem}"
-          sh "bundle exec rake test"
+          Rake::Task["test"].invoke
         end
       end
     end
@@ -135,7 +135,7 @@ namespace :acceptance do
       Dir.chdir gem do
         Bundler.with_clean_env do
           header "ACCEPTANCE TESTS FOR #{gem}"
-          sh "bundle exec rake acceptance -v"
+          Rake::Task["acceptance"].invoke
         end
       end
     end
@@ -196,7 +196,7 @@ task :rubocop, :bundleupdate do |t, args|
     Dir.chdir gem do
       Bundler.with_clean_env do
         header "RUBOCOP REPORT FOR #{gem}"
-        sh "bundle exec rake rubocop"
+        Rake::Task["rubocop"].invoke
       end
     end
   end

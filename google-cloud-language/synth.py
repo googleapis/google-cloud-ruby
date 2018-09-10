@@ -83,7 +83,7 @@ s.replace(
         task :smoke_test do
           Rake::Task["ci"].invoke
           header "google-cloud-language smoke_test", "*"
-          sh "bundle exec rake smoke_test -v"
+          Rake::Task["smoke_test"].invoke
         end
         desc "Run the CI build, with acceptance tests."
         task :acceptance do"""))

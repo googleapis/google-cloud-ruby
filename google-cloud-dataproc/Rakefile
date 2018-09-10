@@ -120,11 +120,11 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-dataproc"
   header "google-cloud-dataproc rubocop", "*"
-  sh "bundle exec rake rubocop"
+  Rake::Task["rubocop"].invoke
   header "google-cloud-dataproc doctest", "*"
-  sh "bundle exec rake doctest"
+  Rake::Task["doctest"].invoke
   header "google-cloud-dataproc test", "*"
-  sh "bundle exec rake test"
+  Rake::Task["test"].invoke
 end
 
 namespace :ci do
@@ -132,13 +132,13 @@ namespace :ci do
   task :smoke_test do
     Rake::Task["ci"].invoke
     header "google-cloud-dataproc smoke_test", "*"
-    sh "bundle exec rake smoke_test -v"
+    Rake::Task["smoke_test"].invoke
   end
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
     Rake::Task["ci"].invoke
     header "google-cloud-dataproc acceptance", "*"
-    sh "bundle exec rake acceptance -v"
+    Rake::Task["acceptance"].invoke
   end
   task :a do
     # This is a handy shortcut to save typing

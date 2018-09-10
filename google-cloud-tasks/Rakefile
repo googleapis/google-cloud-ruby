@@ -73,11 +73,11 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-tasks"
   header "google-cloud-tasks rubocop", "*"
-  sh "bundle exec rake rubocop"
+  Rake::Task["rubocop"].invoke
   header "google-cloud-tasks doctest", "*"
-  sh "bundle exec rake doctest"
+  Rake::Task["doctest"].invoke
   header "google-cloud-tasks test", "*"
-  sh "bundle exec rake test"
+  Rake::Task["test"].invoke
 end
 
 namespace :ci do
@@ -85,7 +85,7 @@ namespace :ci do
   task :acceptance do
     Rake::Task["ci"].invoke
     header "google-cloud-tasks acceptance", "*"
-    sh "bundle exec rake acceptance -v"
+    Rake::Task["acceptance"].invoke
   end
   task :a do
     # This is a handy shortcut to save typing
