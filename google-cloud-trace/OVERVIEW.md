@@ -112,7 +112,7 @@ Stackdriver Trace API. This API provides calls to report and modify
 application traces, as well as to query and analyze existing traces.
 
 For further information on the trace API, see
-{Project}.
+{Google::Cloud::Trace::Project}.
 
 ### Querying traces using the API
 

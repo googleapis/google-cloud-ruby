@@ -163,9 +163,6 @@ YARD::Doctest.configure do |doctest|
   # Google::Cloud::Bigquery::Dataset#access@Manage the access rules by passing a block:
   doctest.before "Google::Cloud::Bigquery::Dataset#access" do
     mock_bigquery do |mock|
-      def other_dataset_view_object
-        "foo"
-      end
       mock.expect :insert_dataset, dataset_full_gapi, ["my-project", Google::Apis::BigqueryV2::Dataset]
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :patch_dataset, dataset_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Dataset, Hash]
@@ -361,9 +358,6 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigquery::Dataset::Access" do
     mock_bigquery do |mock|
-      def other_dataset_view_object
-        "foo"
-      end
       mock.expect :insert_dataset, dataset_full_gapi, ["my-project", Google::Apis::BigqueryV2::Dataset]
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_other_dataset"] # for view methods
@@ -1285,4 +1279,8 @@ end
 
 def time_millis
   (Time.now.to_f * 1000).floor.to_s
+end
+
+def other_dataset_view_object
+  "foo"
 end

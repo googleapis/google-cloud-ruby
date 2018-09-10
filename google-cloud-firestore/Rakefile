@@ -154,11 +154,13 @@ end
 
 require "yard"
 require "yard/rake/yardoc_task"
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |y|
+  # y.options << "--fail-on-warning"
+end
 
 desc "Run yard-doctest example tests."
-task doctest: :yard do
-  sh "bundle exec yard doctest"
+task :doctest do
+  sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
 end
 
 desc "Run the CI build"
@@ -166,6 +168,9 @@ task :ci do
   header "BUILDING google-cloud-firestore"
   header "google-cloud-firestore rubocop", "*"
   sh "bundle exec rake rubocop"
+  header "google-cloud-firestore yard", "*"
+  header "firestore yard still had warnings", "!"
+  sh "bundle exec rake yard"
   header "google-cloud-firestore doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-firestore test", "*"

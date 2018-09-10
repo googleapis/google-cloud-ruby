@@ -31,5 +31,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rubocop", "~> 0.50.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
-  gem.add_development_dependency "yard-doctest", "<= 0.1.8"
+  gem.add_development_dependency "yard-doctest", "~> 0.1.13"
 end

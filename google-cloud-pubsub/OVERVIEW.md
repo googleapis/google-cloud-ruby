@@ -70,8 +70,7 @@ puts subscription.name
 ## Creating a Subscription
 
 A Subscription is created from a Topic. (See
-{Google::Cloud::Pubsub::Topic#subscribe Topic#subscribe} and
-{Google::Cloud::Pubsub::Project#subscribe Project#subscribe})
+{Google::Cloud::Pubsub::Topic#subscribe Topic#subscribe})
 
 ```ruby
 require "google/cloud/pubsub"
@@ -101,8 +100,7 @@ sub = topic.subscribe "my-topic-sub",
 
 Messages are published to a topic. Any message published to a topic without a
 subscription will be lost. Ensure the topic has a subscription before
-publishing. (See {Google::Cloud::Pubsub::Topic#publish Topic#publish} and
-{Google::Cloud::Pubsub::Project#publish Project#publish})
+publishing. (See {Google::Cloud::Pubsub::Topic#publish Topic#publish})
 
 ```ruby
 require "google/cloud/pubsub"
