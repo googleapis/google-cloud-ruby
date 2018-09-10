@@ -1,0 +1,899 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../VideoIntelligence.html" title="Google::Cloud::VideoIntelligence (module)">VideoIntelligence</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::VideoIntelligence::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">VideoIntelligenceServiceClient</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Service that implements Google Cloud Video Intelligence API.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="SERVICE_ADDRESS-constant" class="">SERVICE_ADDRESS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default address of the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>videointelligence.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="DEFAULT_SERVICE_PORT-constant" class="">DEFAULT_SERVICE_PORT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default port of the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>443</span></pre></dd>
+      
+        <dt id="GRPC_INTERCEPTORS-constant" class="">GRPC_INTERCEPTORS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default set of gRPC interceptors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='rbracket'>]</span></pre></dd>
+      
+        <dt id="DEFAULT_TIMEOUT-constant" class="">DEFAULT_TIMEOUT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span></pre></dd>
+      
+        <dt id="ALL_SCOPES-constant" class="">ALL_SCOPES =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The scopes needed to make gRPC calls to all of the methods defined in
+this service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#annotate_video-instance_method" title="#annotate_video (instance method)">#<strong>annotate_video</strong>(input_uri, features, input_content: nil, video_context: nil, output_uri: nil, location_id: nil, options: nil)  &#x21d2; Google::Gax::Operation </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Performs asynchronous video annotation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; VideoIntelligenceServiceClient </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A new instance of VideoIntelligenceServiceClient.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient (class)">VideoIntelligenceServiceClient</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new instance of VideoIntelligenceServiceClient</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>credentials</span>
+      
+      
+        <span class='type'>(<tt>Google::Auth::Credentials</tt>, <tt>String</tt>, <tt>Hash</tt>, <tt>GRPC::Core::Channel</tt>, <tt>GRPC::Core::ChannelCredentials</tt>, <tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Provides the means for authenticating requests made by the client. This parameter can
+be many types.
+A <code>Google::Auth::Credentials</code> uses a the properties of its represented keyfile for
+authenticating requests made by this client.
+A <code>String</code> will be treated as the path to the keyfile to be used for the construction of
+credentials for this client.
+A <code>Hash</code> will be treated as the contents of a keyfile to be used for the construction of
+credentials for this client.
+A <code>GRPC::Core::Channel</code> will be used to make calls through.
+A <code>GRPC::Core::ChannelCredentials</code> for the setting up the RPC client. The channel credentials
+should already be composed with a <code>GRPC::Core::CallCredentials</code> object.
+A <code>Proc</code> will be used as an updater_proc for the Grpc channel. The proc transforms the
+metadata for requests, generally, to give OAuth credentials.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scopes</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth scopes for this service. This parameter is ignored if
+an updater_proc is supplied.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Hash for call options for each method. See
+Google::Gax#construct_settings for the structure of
+this data. Falls back to the default config if not specified
+or the specified config is missing data points.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The default timeout, in seconds, for calls made through this client.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>metadata</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default metadata to be sent with each request. This can be overridden on a per call basis.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>exception_transformer</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An optional proc that intercepts any exceptions raised during an API call to inject
+custom error handling.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
+    <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
+    <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+    <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='comment'># These require statements are intentionally placed here to initialize
+</span>  <span class='comment'># the gRPC module only when it&#39;s required.
+</span>  <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
+</span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/videointelligence/v1beta1/video_intelligence_services_pb</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../VideoIntelligence.html" title="Google::Cloud::VideoIntelligence (module)">VideoIntelligence</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::VideoIntelligence::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::VideoIntelligence::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+
+  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+    <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+    <span class='label'>lib_name:</span> <span class='id identifier rubyid_lib_name'>lib_name</span><span class='comma'>,</span>
+    <span class='label'>lib_version:</span> <span class='id identifier rubyid_lib_version'>lib_version</span><span class='comma'>,</span>
+  <span class='rparen'>)</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../VideoIntelligence.html" title="Google::Cloud::VideoIntelligence (module)">VideoIntelligence</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::VideoIntelligence::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::VideoIntelligence::V1beta1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta1.html#new-class_method" title="Google::Cloud::VideoIntelligence::V1beta1.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>ChannelCredentials</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Proc</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-video_intelligence</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>video_intelligence_service_client_config.json</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.cloud.videointelligence.v1beta1.VideoIntelligenceService</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+      <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
+      <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Allow overriding the service path/port in subclasses.
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+  <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
+  <span class='ivar'>@video_intelligence_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
+    <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
+    <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
+    <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+    <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence.html" title="Google::Cloud::Videointelligence (module)">Videointelligence</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence/V1beta1.html" title="Google::Cloud::Videointelligence::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'>VideoIntelligenceService</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+
+  <span class='ivar'>@annotate_video</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@video_intelligence_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:annotate_video</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>annotate_video</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="annotate_video-instance_method">
+  
+    #<strong>annotate_video</strong>(input_uri, features, input_content: nil, video_context: nil, output_uri: nil, location_id: nil, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Performs asynchronous video annotation. Progress and results can be
+retrieved through the +google.longrunning.Operations+ interface.
++Operation.metadata+ contains +AnnotateVideoProgress+ (progress).
++Operation.response+ contains +AnnotateVideoResponse+ (results).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/video_intelligence</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_video_intelligence_service_client'>video_intelligence_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../VideoIntelligence.html" title="Google::Cloud::VideoIntelligence (module)">VideoIntelligence</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../VideoIntelligence.html#new-class_method" title="Google::Cloud::VideoIntelligence.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_input_uri'>input_uri</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://demomaker/cat.mp4</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_features_element'>features_element</span> <span class='op'>=</span> <span class='symbol'>:LABEL_DETECTION</span>
+<span class='id identifier rubyid_features'>features</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_features_element'>features_element</span><span class='rbracket'>]</span>
+
+<span class='comment'># Register a callback during the method call.
+</span><span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='id identifier rubyid_video_intelligence_service_client'>video_intelligence_service_client</span><span class='period'>.</span><span class='id identifier rubyid_annotate_video'>annotate_video</span><span class='lparen'>(</span><span class='id identifier rubyid_input_uri'>input_uri</span><span class='comma'>,</span> <span class='id identifier rubyid_features'>features</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='kw'>if</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_op_results'>op_results</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span>
+  <span class='comment'># Process the results.
+</span>
+  <span class='id identifier rubyid_metadata'>metadata</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_metadata'>metadata</span>
+  <span class='comment'># Process the metadata.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Or use the return value to register a callback.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_op'>op</span><span class='op'>|</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='kw'>if</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_op_results'>op_results</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_results'>results</span>
+  <span class='comment'># Process the results.
+</span>
+  <span class='id identifier rubyid_metadata'>metadata</span> <span class='op'>=</span> <span class='id identifier rubyid_op'>op</span><span class='period'>.</span><span class='id identifier rubyid_metadata'>metadata</span>
+  <span class='comment'># Process the metadata.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Manually reload the operation.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_reload!'>reload!</span>
+
+<span class='comment'># Or block until the operation completes, triggering callbacks on
+</span><span class='comment'># completion.
+</span><span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input_uri</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Input video location. Currently, only
+<a href="https://cloud.google.com/storage/">Google Cloud Storage</a> URIs are
+supported, which must be specified in the following format:
++gs://bucket-id/object-id+ (other URI formats return
+Rpc::Code::INVALID_ARGUMENT). For more information, see
+<a href="https://cloud.google.com/storage/docs/reference-uris">Request URIs</a>.
+A video URI may include wildcards in +object-id+, and thus identify
+multiple videos. Supported wildcards: &#39;*&#39; to match 0 or more characters;
+&#39;?&#39; to match 1 character. If unset, the input video should be embedded
+in the request as +input_content+. If set, +input_content+ should be unset.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>features</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../Videointelligence/V1beta1/Feature.html" title="Google::Cloud::Videointelligence::V1beta1::Feature (module)">Google::Cloud::Videointelligence::V1beta1::Feature</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Requested video annotation features.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>input_content</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The video data bytes. Encoding: base64. If unset, the input video(s)
+should be specified via +input_uri+. If set, +input_uri+ should be unset.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>video_context</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Videointelligence/V1beta1/VideoContext.html" title="Google::Cloud::Videointelligence::V1beta1::VideoContext (class)">Google::Cloud::Videointelligence::V1beta1::VideoContext</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Additional video context and/or feature-specific parameters.
+A hash of the same form as <code>Google::Cloud::Videointelligence::V1beta1::VideoContext</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>output_uri</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional location where the output (in JSON format) should be stored.
+Currently, only <a href="https://cloud.google.com/storage/">Google Cloud Storage</a>
+URIs are supported, which must be specified in the following format:
++gs://bucket-id/object-id+ (other URI formats return
+Rpc::Code::INVALID_ARGUMENT). For more information, see
+<a href="https://cloud.google.com/storage/docs/reference-uris">Request URIs</a>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional cloud region where annotation should take place. Supported cloud
+regions: +us-east1+, +us-west1+, +europe-west1+, +asia-east1+. If no region
+is specified, a region will be determined based on video file location.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client.rb', line 264</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_annotate_video'>annotate_video</span> \
+    <span class='id identifier rubyid_input_uri'>input_uri</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_features'>features</span><span class='comma'>,</span>
+    <span class='label'>input_content:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>video_context:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>output_uri:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>location_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>input_uri:</span> <span class='id identifier rubyid_input_uri'>input_uri</span><span class='comma'>,</span>
+    <span class='label'>features:</span> <span class='id identifier rubyid_features'>features</span><span class='comma'>,</span>
+    <span class='label'>input_content:</span> <span class='id identifier rubyid_input_content'>input_content</span><span class='comma'>,</span>
+    <span class='label'>video_context:</span> <span class='id identifier rubyid_video_context'>video_context</span><span class='comma'>,</span>
+    <span class='label'>output_uri:</span> <span class='id identifier rubyid_output_uri'>output_uri</span><span class='comma'>,</span>
+    <span class='label'>location_id:</span> <span class='id identifier rubyid_location_id'>location_id</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence.html" title="Google::Cloud::Videointelligence (module)">Videointelligence</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence/V1beta1.html" title="Google::Cloud::Videointelligence::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence/V1beta1/AnnotateVideoRequest.html" title="Google::Cloud::Videointelligence::V1beta1::AnnotateVideoRequest (class)">AnnotateVideoRequest</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Operation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='ivar'>@annotate_video</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='ivar'>@operations_client</span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence.html" title="Google::Cloud::Videointelligence (module)">Videointelligence</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence/V1beta1.html" title="Google::Cloud::Videointelligence::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence/V1beta1/AnnotateVideoResponse.html" title="Google::Cloud::Videointelligence::V1beta1::AnnotateVideoResponse (class)">AnnotateVideoResponse</a></span></span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence.html" title="Google::Cloud::Videointelligence (module)">Videointelligence</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence/V1beta1.html" title="Google::Cloud::Videointelligence::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Videointelligence/V1beta1/AnnotateVideoProgress.html" title="Google::Cloud::Videointelligence::V1beta1::AnnotateVideoProgress (class)">AnnotateVideoProgress</a></span></span><span class='comma'>,</span>
+    <span class='label'>call_options:</span> <span class='id identifier rubyid_options'>options</span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_operation'>operation</span><span class='period'>.</span><span class='id identifier rubyid_on_done'>on_done</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_operation'>operation</span><span class='op'>|</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_operation'>operation</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='id identifier rubyid_operation'>operation</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
