@@ -1,5 +1,10 @@
 # Release History
 
+### 0.31.0 / 2018-09-10
+
+* Add get_operation to retrieve long running operation resource.
+* Update documentation.
+
 ### 0.30.1 / 2018-08-21
 
 * Update documentation.

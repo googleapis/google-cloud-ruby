@@ -1,5 +1,10 @@
 # Release History
 
+### 0.32.1 / 2018-09-10
+
+* Fix issue where client_config was not being used on publisher API calls.
+* Update documentation.
+
 ### 0.32.0 / 2018-08-14
 
 * Updated Subscriber implementation

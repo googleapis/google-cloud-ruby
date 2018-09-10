@@ -1,5 +1,9 @@
 # Release History
 
+### 0.56.1 / 2018-09-10
+
+* Update documentation.
+
 ### 0.56.0 / 2018-08-16
 
 * Add Cloud Bigtable
