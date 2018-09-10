@@ -1,5 +1,9 @@
 # Release History
 
+### 1.0.3 / 2018-09-10
+
+* Update documentation.
+
 ### 1.0.2 / 2018-06-28
 
 * Use Kubernetes Engine names.

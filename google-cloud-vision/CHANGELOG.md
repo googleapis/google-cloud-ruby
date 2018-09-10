@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.2 / 2018-09-10
+
+* Update documentation.
+
 ### 0.30.1 / 2018-08-21
 
 * Update documentation.

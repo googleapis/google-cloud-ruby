@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Debugger
-      VERSION = "0.32.2".freeze
+      VERSION = "0.32.3".freeze
     end
   end
 end

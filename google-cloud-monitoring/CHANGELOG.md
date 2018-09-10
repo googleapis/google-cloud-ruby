@@ -1,5 +1,9 @@
 # Release History
 
+### 0.29.1 / 2018-09-10
+
+* Update documentation.
+
 ### 0.29.0 / 2018-08-21
 
 * Move Credentials location:

@@ -1,5 +1,9 @@
 # Release History
 
+### 1.3.1 / 2018-09-10
+
+* Update documentation.
+
 ### 1.3.0 / 2018-02-27
 
 * Use Google Cloud Shared Configuration.

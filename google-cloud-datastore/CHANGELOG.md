@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.2 / 2018-09-10
+
+* Fix issue where client_config was not being passed when connecting to the
+  datastore emulator.
+* Update documentation.
+
 ### 1.4.1 / 2018-08-21
 
 * Update documentation.
