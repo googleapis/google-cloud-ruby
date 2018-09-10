@@ -1,0 +1,1340 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Language::V1::DependencyEdge - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Language::V1::DependencyEdge";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">DependencyEdge</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Language::V1::DependencyEdge
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Language::V1::DependencyEdge</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Represents dependency parse tree information for a token. (For more
+information on dependency labels, see
+<a href="http://www.aclweb.org/anthology/P13-2017">http://www.aclweb.org/anthology/P13-2017</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="DependencyEdge/Label.html" title="Google::Cloud::Language::V1::DependencyEdge::Label (module)">Label</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#head_token_index-instance_method" title="#head_token_index (instance method)">#<strong>head_token_index</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Represents the head of this token in the dependency tree.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#label-instance_method" title="#label (instance method)">#<strong>label</strong>  &#x21d2; Google::Cloud::Language::V1::DependencyEdge::Label </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The parse label for the token.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="head_token_index=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="head_token_index-instance_method">
+  
+    #<strong>head_token_index</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Represents the head of this token in the dependency tree.
+This is the index of the token which has an arc going to this token.
+The index is the position of the token in the array of tokens returned
+by the API method. If this token is a root token, then the
++head_token_index+ is its own index.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Represents the head of this token in the dependency tree.
+This is the index of the token which has an arc going to this token.
+The index is the position of the token in the array of tokens returned
+by the API method. If this token is a root token, then the
++head_token_index+ is its own index.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 504</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::DependencyEdge (class)">DependencyEdge</a></span></span>
+  <span class='comment'># The parse label enum for the token.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DependencyEdge/Label.html" title="Google::Cloud::Language::V1::DependencyEdge::Label (module)">Label</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Abbreviation modifier
+</span>    <span class='const'>ABBREV</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adjectival complement
+</span>    <span class='const'>ACOMP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverbial clause modifier
+</span>    <span class='const'>ADVCL</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Adverbial modifier
+</span>    <span class='const'>ADVMOD</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Adjectival modifier of an NP
+</span>    <span class='const'>AMOD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Appositional modifier of an NP
+</span>    <span class='const'>APPOS</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Attribute dependent of a copular verb
+</span>    <span class='const'>ATTR</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Auxiliary (non-main) verb
+</span>    <span class='const'>AUX</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Passive auxiliary
+</span>    <span class='const'>AUXPASS</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Coordinating conjunction
+</span>    <span class='const'>CC</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Clausal complement of a verb or adjective
+</span>    <span class='const'>CCOMP</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Conjunct
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Clausal subject
+</span>    <span class='const'>CSUBJ</span> <span class='op'>=</span> <span class='int'>13</span>
+
+    <span class='comment'># Clausal passive subject
+</span>    <span class='const'>CSUBJPASS</span> <span class='op'>=</span> <span class='int'>14</span>
+
+    <span class='comment'># Dependency (unable to determine)
+</span>    <span class='const'>DEP</span> <span class='op'>=</span> <span class='int'>15</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>16</span>
+
+    <span class='comment'># Discourse
+</span>    <span class='const'>DISCOURSE</span> <span class='op'>=</span> <span class='int'>17</span>
+
+    <span class='comment'># Direct object
+</span>    <span class='const'>DOBJ</span> <span class='op'>=</span> <span class='int'>18</span>
+
+    <span class='comment'># Expletive
+</span>    <span class='const'>EXPL</span> <span class='op'>=</span> <span class='int'>19</span>
+
+    <span class='comment'># Goes with (part of a word in a text not well edited)
+</span>    <span class='const'>GOESWITH</span> <span class='op'>=</span> <span class='int'>20</span>
+
+    <span class='comment'># Indirect object
+</span>    <span class='const'>IOBJ</span> <span class='op'>=</span> <span class='int'>21</span>
+
+    <span class='comment'># Marker (word introducing a subordinate clause)
+</span>    <span class='const'>MARK</span> <span class='op'>=</span> <span class='int'>22</span>
+
+    <span class='comment'># Multi-word expression
+</span>    <span class='const'>MWE</span> <span class='op'>=</span> <span class='int'>23</span>
+
+    <span class='comment'># Multi-word verbal expression
+</span>    <span class='const'>MWV</span> <span class='op'>=</span> <span class='int'>24</span>
+
+    <span class='comment'># Negation modifier
+</span>    <span class='const'>NEG</span> <span class='op'>=</span> <span class='int'>25</span>
+
+    <span class='comment'># Noun compound modifier
+</span>    <span class='const'>NN</span> <span class='op'>=</span> <span class='int'>26</span>
+
+    <span class='comment'># Noun phrase used as an adverbial modifier
+</span>    <span class='const'>NPADVMOD</span> <span class='op'>=</span> <span class='int'>27</span>
+
+    <span class='comment'># Nominal subject
+</span>    <span class='const'>NSUBJ</span> <span class='op'>=</span> <span class='int'>28</span>
+
+    <span class='comment'># Passive nominal subject
+</span>    <span class='const'>NSUBJPASS</span> <span class='op'>=</span> <span class='int'>29</span>
+
+    <span class='comment'># Numeric modifier of a noun
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>30</span>
+
+    <span class='comment'># Element of compound number
+</span>    <span class='const'>NUMBER</span> <span class='op'>=</span> <span class='int'>31</span>
+
+    <span class='comment'># Punctuation mark
+</span>    <span class='const'>P</span> <span class='op'>=</span> <span class='int'>32</span>
+
+    <span class='comment'># Parataxis relation
+</span>    <span class='const'>PARATAXIS</span> <span class='op'>=</span> <span class='int'>33</span>
+
+    <span class='comment'># Participial modifier
+</span>    <span class='const'>PARTMOD</span> <span class='op'>=</span> <span class='int'>34</span>
+
+    <span class='comment'># The complement of a preposition is a clause
+</span>    <span class='const'>PCOMP</span> <span class='op'>=</span> <span class='int'>35</span>
+
+    <span class='comment'># Object of a preposition
+</span>    <span class='const'>POBJ</span> <span class='op'>=</span> <span class='int'>36</span>
+
+    <span class='comment'># Possession modifier
+</span>    <span class='const'>POSS</span> <span class='op'>=</span> <span class='int'>37</span>
+
+    <span class='comment'># Postverbal negative particle
+</span>    <span class='const'>POSTNEG</span> <span class='op'>=</span> <span class='int'>38</span>
+
+    <span class='comment'># Predicate complement
+</span>    <span class='const'>PRECOMP</span> <span class='op'>=</span> <span class='int'>39</span>
+
+    <span class='comment'># Preconjunt
+</span>    <span class='const'>PRECONJ</span> <span class='op'>=</span> <span class='int'>40</span>
+
+    <span class='comment'># Predeterminer
+</span>    <span class='const'>PREDET</span> <span class='op'>=</span> <span class='int'>41</span>
+
+    <span class='comment'># Prefix
+</span>    <span class='const'>PREF</span> <span class='op'>=</span> <span class='int'>42</span>
+
+    <span class='comment'># Prepositional modifier
+</span>    <span class='const'>PREP</span> <span class='op'>=</span> <span class='int'>43</span>
+
+    <span class='comment'># The relationship between a verb and verbal morpheme
+</span>    <span class='const'>PRONL</span> <span class='op'>=</span> <span class='int'>44</span>
+
+    <span class='comment'># Particle
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>45</span>
+
+    <span class='comment'># Associative or possessive marker
+</span>    <span class='const'>PS</span> <span class='op'>=</span> <span class='int'>46</span>
+
+    <span class='comment'># Quantifier phrase modifier
+</span>    <span class='const'>QUANTMOD</span> <span class='op'>=</span> <span class='int'>47</span>
+
+    <span class='comment'># Relative clause modifier
+</span>    <span class='const'>RCMOD</span> <span class='op'>=</span> <span class='int'>48</span>
+
+    <span class='comment'># Complementizer in relative clause
+</span>    <span class='const'>RCMODREL</span> <span class='op'>=</span> <span class='int'>49</span>
+
+    <span class='comment'># Ellipsis without a preceding predicate
+</span>    <span class='const'>RDROP</span> <span class='op'>=</span> <span class='int'>50</span>
+
+    <span class='comment'># Referent
+</span>    <span class='const'>REF</span> <span class='op'>=</span> <span class='int'>51</span>
+
+    <span class='comment'># Remnant
+</span>    <span class='const'>REMNANT</span> <span class='op'>=</span> <span class='int'>52</span>
+
+    <span class='comment'># Reparandum
+</span>    <span class='const'>REPARANDUM</span> <span class='op'>=</span> <span class='int'>53</span>
+
+    <span class='comment'># Root
+</span>    <span class='const'>ROOT</span> <span class='op'>=</span> <span class='int'>54</span>
+
+    <span class='comment'># Suffix specifying a unit of number
+</span>    <span class='const'>SNUM</span> <span class='op'>=</span> <span class='int'>55</span>
+
+    <span class='comment'># Suffix
+</span>    <span class='const'>SUFF</span> <span class='op'>=</span> <span class='int'>56</span>
+
+    <span class='comment'># Temporal modifier
+</span>    <span class='const'>TMOD</span> <span class='op'>=</span> <span class='int'>57</span>
+
+    <span class='comment'># Topic marker
+</span>    <span class='const'>TOPIC</span> <span class='op'>=</span> <span class='int'>58</span>
+
+    <span class='comment'># Clause headed by an infinite form of the verb that modifies a noun
+</span>    <span class='const'>VMOD</span> <span class='op'>=</span> <span class='int'>59</span>
+
+    <span class='comment'># Vocative
+</span>    <span class='const'>VOCATIVE</span> <span class='op'>=</span> <span class='int'>60</span>
+
+    <span class='comment'># Open clausal complement
+</span>    <span class='const'>XCOMP</span> <span class='op'>=</span> <span class='int'>61</span>
+
+    <span class='comment'># Name suffix
+</span>    <span class='const'>SUFFIX</span> <span class='op'>=</span> <span class='int'>62</span>
+
+    <span class='comment'># Name title
+</span>    <span class='const'>TITLE</span> <span class='op'>=</span> <span class='int'>63</span>
+
+    <span class='comment'># Adverbial phrase modifier
+</span>    <span class='const'>ADVPHMOD</span> <span class='op'>=</span> <span class='int'>64</span>
+
+    <span class='comment'># Causative auxiliary
+</span>    <span class='const'>AUXCAUS</span> <span class='op'>=</span> <span class='int'>65</span>
+
+    <span class='comment'># Helper auxiliary
+</span>    <span class='const'>AUXVV</span> <span class='op'>=</span> <span class='int'>66</span>
+
+    <span class='comment'># Rentaishi (Prenominal modifier)
+</span>    <span class='const'>DTMOD</span> <span class='op'>=</span> <span class='int'>67</span>
+
+    <span class='comment'># Foreign words
+</span>    <span class='const'>FOREIGN</span> <span class='op'>=</span> <span class='int'>68</span>
+
+    <span class='comment'># Keyword
+</span>    <span class='const'>KW</span> <span class='op'>=</span> <span class='int'>69</span>
+
+    <span class='comment'># List for chains of comparable items
+</span>    <span class='const'>LIST</span> <span class='op'>=</span> <span class='int'>70</span>
+
+    <span class='comment'># Nominalized clause
+</span>    <span class='const'>NOMC</span> <span class='op'>=</span> <span class='int'>71</span>
+
+    <span class='comment'># Nominalized clausal subject
+</span>    <span class='const'>NOMCSUBJ</span> <span class='op'>=</span> <span class='int'>72</span>
+
+    <span class='comment'># Nominalized clausal passive
+</span>    <span class='const'>NOMCSUBJPASS</span> <span class='op'>=</span> <span class='int'>73</span>
+
+    <span class='comment'># Compound of numeric modifier
+</span>    <span class='const'>NUMC</span> <span class='op'>=</span> <span class='int'>74</span>
+
+    <span class='comment'># Copula
+</span>    <span class='const'>COP</span> <span class='op'>=</span> <span class='int'>75</span>
+
+    <span class='comment'># Dislocated relation (for fronted/topicalized elements)
+</span>    <span class='const'>DISLOCATED</span> <span class='op'>=</span> <span class='int'>76</span>
+
+    <span class='comment'># Aspect marker
+</span>    <span class='const'>ASP</span> <span class='op'>=</span> <span class='int'>77</span>
+
+    <span class='comment'># Genitive modifier
+</span>    <span class='const'>GMOD</span> <span class='op'>=</span> <span class='int'>78</span>
+
+    <span class='comment'># Genitive object
+</span>    <span class='const'>GOBJ</span> <span class='op'>=</span> <span class='int'>79</span>
+
+    <span class='comment'># Infinitival modifier
+</span>    <span class='const'>INFMOD</span> <span class='op'>=</span> <span class='int'>80</span>
+
+    <span class='comment'># Measure
+</span>    <span class='const'>MES</span> <span class='op'>=</span> <span class='int'>81</span>
+
+    <span class='comment'># Nominal complement of a noun
+</span>    <span class='const'>NCOMP</span> <span class='op'>=</span> <span class='int'>82</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="label=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="label-instance_method">
+  
+    #<strong>label</strong>  &#x21d2; <tt><span class='object_link'><a href="DependencyEdge/Label.html" title="Google::Cloud::Language::V1::DependencyEdge::Label (module)">Google::Cloud::Language::V1::DependencyEdge::Label</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The parse label for the token.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DependencyEdge/Label.html" title="Google::Cloud::Language::V1::DependencyEdge::Label (module)">Google::Cloud::Language::V1::DependencyEdge::Label</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The parse label for the token.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/doc/google/cloud/language/v1/language_service.rb', line 504</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1::DependencyEdge (class)">DependencyEdge</a></span></span>
+  <span class='comment'># The parse label enum for the token.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DependencyEdge/Label.html" title="Google::Cloud::Language::V1::DependencyEdge::Label (module)">Label</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Abbreviation modifier
+</span>    <span class='const'>ABBREV</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adjectival complement
+</span>    <span class='const'>ACOMP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverbial clause modifier
+</span>    <span class='const'>ADVCL</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Adverbial modifier
+</span>    <span class='const'>ADVMOD</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Adjectival modifier of an NP
+</span>    <span class='const'>AMOD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Appositional modifier of an NP
+</span>    <span class='const'>APPOS</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Attribute dependent of a copular verb
+</span>    <span class='const'>ATTR</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Auxiliary (non-main) verb
+</span>    <span class='const'>AUX</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Passive auxiliary
+</span>    <span class='const'>AUXPASS</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Coordinating conjunction
+</span>    <span class='const'>CC</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Clausal complement of a verb or adjective
+</span>    <span class='const'>CCOMP</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Conjunct
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Clausal subject
+</span>    <span class='const'>CSUBJ</span> <span class='op'>=</span> <span class='int'>13</span>
+
+    <span class='comment'># Clausal passive subject
+</span>    <span class='const'>CSUBJPASS</span> <span class='op'>=</span> <span class='int'>14</span>
+
+    <span class='comment'># Dependency (unable to determine)
+</span>    <span class='const'>DEP</span> <span class='op'>=</span> <span class='int'>15</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>16</span>
+
+    <span class='comment'># Discourse
+</span>    <span class='const'>DISCOURSE</span> <span class='op'>=</span> <span class='int'>17</span>
+
+    <span class='comment'># Direct object
+</span>    <span class='const'>DOBJ</span> <span class='op'>=</span> <span class='int'>18</span>
+
+    <span class='comment'># Expletive
+</span>    <span class='const'>EXPL</span> <span class='op'>=</span> <span class='int'>19</span>
+
+    <span class='comment'># Goes with (part of a word in a text not well edited)
+</span>    <span class='const'>GOESWITH</span> <span class='op'>=</span> <span class='int'>20</span>
+
+    <span class='comment'># Indirect object
+</span>    <span class='const'>IOBJ</span> <span class='op'>=</span> <span class='int'>21</span>
+
+    <span class='comment'># Marker (word introducing a subordinate clause)
+</span>    <span class='const'>MARK</span> <span class='op'>=</span> <span class='int'>22</span>
+
+    <span class='comment'># Multi-word expression
+</span>    <span class='const'>MWE</span> <span class='op'>=</span> <span class='int'>23</span>
+
+    <span class='comment'># Multi-word verbal expression
+</span>    <span class='const'>MWV</span> <span class='op'>=</span> <span class='int'>24</span>
+
+    <span class='comment'># Negation modifier
+</span>    <span class='const'>NEG</span> <span class='op'>=</span> <span class='int'>25</span>
+
+    <span class='comment'># Noun compound modifier
+</span>    <span class='const'>NN</span> <span class='op'>=</span> <span class='int'>26</span>
+
+    <span class='comment'># Noun phrase used as an adverbial modifier
+</span>    <span class='const'>NPADVMOD</span> <span class='op'>=</span> <span class='int'>27</span>
+
+    <span class='comment'># Nominal subject
+</span>    <span class='const'>NSUBJ</span> <span class='op'>=</span> <span class='int'>28</span>
+
+    <span class='comment'># Passive nominal subject
+</span>    <span class='const'>NSUBJPASS</span> <span class='op'>=</span> <span class='int'>29</span>
+
+    <span class='comment'># Numeric modifier of a noun
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>30</span>
+
+    <span class='comment'># Element of compound number
+</span>    <span class='const'>NUMBER</span> <span class='op'>=</span> <span class='int'>31</span>
+
+    <span class='comment'># Punctuation mark
+</span>    <span class='const'>P</span> <span class='op'>=</span> <span class='int'>32</span>
+
+    <span class='comment'># Parataxis relation
+</span>    <span class='const'>PARATAXIS</span> <span class='op'>=</span> <span class='int'>33</span>
+
+    <span class='comment'># Participial modifier
+</span>    <span class='const'>PARTMOD</span> <span class='op'>=</span> <span class='int'>34</span>
+
+    <span class='comment'># The complement of a preposition is a clause
+</span>    <span class='const'>PCOMP</span> <span class='op'>=</span> <span class='int'>35</span>
+
+    <span class='comment'># Object of a preposition
+</span>    <span class='const'>POBJ</span> <span class='op'>=</span> <span class='int'>36</span>
+
+    <span class='comment'># Possession modifier
+</span>    <span class='const'>POSS</span> <span class='op'>=</span> <span class='int'>37</span>
+
+    <span class='comment'># Postverbal negative particle
+</span>    <span class='const'>POSTNEG</span> <span class='op'>=</span> <span class='int'>38</span>
+
+    <span class='comment'># Predicate complement
+</span>    <span class='const'>PRECOMP</span> <span class='op'>=</span> <span class='int'>39</span>
+
+    <span class='comment'># Preconjunt
+</span>    <span class='const'>PRECONJ</span> <span class='op'>=</span> <span class='int'>40</span>
+
+    <span class='comment'># Predeterminer
+</span>    <span class='const'>PREDET</span> <span class='op'>=</span> <span class='int'>41</span>
+
+    <span class='comment'># Prefix
+</span>    <span class='const'>PREF</span> <span class='op'>=</span> <span class='int'>42</span>
+
+    <span class='comment'># Prepositional modifier
+</span>    <span class='const'>PREP</span> <span class='op'>=</span> <span class='int'>43</span>
+
+    <span class='comment'># The relationship between a verb and verbal morpheme
+</span>    <span class='const'>PRONL</span> <span class='op'>=</span> <span class='int'>44</span>
+
+    <span class='comment'># Particle
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>45</span>
+
+    <span class='comment'># Associative or possessive marker
+</span>    <span class='const'>PS</span> <span class='op'>=</span> <span class='int'>46</span>
+
+    <span class='comment'># Quantifier phrase modifier
+</span>    <span class='const'>QUANTMOD</span> <span class='op'>=</span> <span class='int'>47</span>
+
+    <span class='comment'># Relative clause modifier
+</span>    <span class='const'>RCMOD</span> <span class='op'>=</span> <span class='int'>48</span>
+
+    <span class='comment'># Complementizer in relative clause
+</span>    <span class='const'>RCMODREL</span> <span class='op'>=</span> <span class='int'>49</span>
+
+    <span class='comment'># Ellipsis without a preceding predicate
+</span>    <span class='const'>RDROP</span> <span class='op'>=</span> <span class='int'>50</span>
+
+    <span class='comment'># Referent
+</span>    <span class='const'>REF</span> <span class='op'>=</span> <span class='int'>51</span>
+
+    <span class='comment'># Remnant
+</span>    <span class='const'>REMNANT</span> <span class='op'>=</span> <span class='int'>52</span>
+
+    <span class='comment'># Reparandum
+</span>    <span class='const'>REPARANDUM</span> <span class='op'>=</span> <span class='int'>53</span>
+
+    <span class='comment'># Root
+</span>    <span class='const'>ROOT</span> <span class='op'>=</span> <span class='int'>54</span>
+
+    <span class='comment'># Suffix specifying a unit of number
+</span>    <span class='const'>SNUM</span> <span class='op'>=</span> <span class='int'>55</span>
+
+    <span class='comment'># Suffix
+</span>    <span class='const'>SUFF</span> <span class='op'>=</span> <span class='int'>56</span>
+
+    <span class='comment'># Temporal modifier
+</span>    <span class='const'>TMOD</span> <span class='op'>=</span> <span class='int'>57</span>
+
+    <span class='comment'># Topic marker
+</span>    <span class='const'>TOPIC</span> <span class='op'>=</span> <span class='int'>58</span>
+
+    <span class='comment'># Clause headed by an infinite form of the verb that modifies a noun
+</span>    <span class='const'>VMOD</span> <span class='op'>=</span> <span class='int'>59</span>
+
+    <span class='comment'># Vocative
+</span>    <span class='const'>VOCATIVE</span> <span class='op'>=</span> <span class='int'>60</span>
+
+    <span class='comment'># Open clausal complement
+</span>    <span class='const'>XCOMP</span> <span class='op'>=</span> <span class='int'>61</span>
+
+    <span class='comment'># Name suffix
+</span>    <span class='const'>SUFFIX</span> <span class='op'>=</span> <span class='int'>62</span>
+
+    <span class='comment'># Name title
+</span>    <span class='const'>TITLE</span> <span class='op'>=</span> <span class='int'>63</span>
+
+    <span class='comment'># Adverbial phrase modifier
+</span>    <span class='const'>ADVPHMOD</span> <span class='op'>=</span> <span class='int'>64</span>
+
+    <span class='comment'># Causative auxiliary
+</span>    <span class='const'>AUXCAUS</span> <span class='op'>=</span> <span class='int'>65</span>
+
+    <span class='comment'># Helper auxiliary
+</span>    <span class='const'>AUXVV</span> <span class='op'>=</span> <span class='int'>66</span>
+
+    <span class='comment'># Rentaishi (Prenominal modifier)
+</span>    <span class='const'>DTMOD</span> <span class='op'>=</span> <span class='int'>67</span>
+
+    <span class='comment'># Foreign words
+</span>    <span class='const'>FOREIGN</span> <span class='op'>=</span> <span class='int'>68</span>
+
+    <span class='comment'># Keyword
+</span>    <span class='const'>KW</span> <span class='op'>=</span> <span class='int'>69</span>
+
+    <span class='comment'># List for chains of comparable items
+</span>    <span class='const'>LIST</span> <span class='op'>=</span> <span class='int'>70</span>
+
+    <span class='comment'># Nominalized clause
+</span>    <span class='const'>NOMC</span> <span class='op'>=</span> <span class='int'>71</span>
+
+    <span class='comment'># Nominalized clausal subject
+</span>    <span class='const'>NOMCSUBJ</span> <span class='op'>=</span> <span class='int'>72</span>
+
+    <span class='comment'># Nominalized clausal passive
+</span>    <span class='const'>NOMCSUBJPASS</span> <span class='op'>=</span> <span class='int'>73</span>
+
+    <span class='comment'># Compound of numeric modifier
+</span>    <span class='const'>NUMC</span> <span class='op'>=</span> <span class='int'>74</span>
+
+    <span class='comment'># Copula
+</span>    <span class='const'>COP</span> <span class='op'>=</span> <span class='int'>75</span>
+
+    <span class='comment'># Dislocated relation (for fronted/topicalized elements)
+</span>    <span class='const'>DISLOCATED</span> <span class='op'>=</span> <span class='int'>76</span>
+
+    <span class='comment'># Aspect marker
+</span>    <span class='const'>ASP</span> <span class='op'>=</span> <span class='int'>77</span>
+
+    <span class='comment'># Genitive modifier
+</span>    <span class='const'>GMOD</span> <span class='op'>=</span> <span class='int'>78</span>
+
+    <span class='comment'># Genitive object
+</span>    <span class='const'>GOBJ</span> <span class='op'>=</span> <span class='int'>79</span>
+
+    <span class='comment'># Infinitival modifier
+</span>    <span class='const'>INFMOD</span> <span class='op'>=</span> <span class='int'>80</span>
+
+    <span class='comment'># Measure
+</span>    <span class='const'>MES</span> <span class='op'>=</span> <span class='int'>81</span>
+
+    <span class='comment'># Nominal complement of a noun
+</span>    <span class='const'>NCOMP</span> <span class='op'>=</span> <span class='int'>82</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
