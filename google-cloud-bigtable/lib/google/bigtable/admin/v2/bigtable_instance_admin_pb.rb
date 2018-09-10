@@ -89,11 +89,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.bigtable.admin.v2.ListAppProfilesRequest" do
     optional :parent, :string, 1
+    optional :page_size, :int32, 3
     optional :page_token, :string, 2
   end
   add_message "google.bigtable.admin.v2.ListAppProfilesResponse" do
     repeated :app_profiles, :message, 1, "google.bigtable.admin.v2.AppProfile"
     optional :next_page_token, :string, 2
+    repeated :failed_locations, :string, 3
   end
   add_message "google.bigtable.admin.v2.UpdateAppProfileRequest" do
     optional :app_profile, :message, 1, "google.bigtable.admin.v2.AppProfile"

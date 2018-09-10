@@ -37,7 +37,7 @@ module Google
         #     cluster ID, e.g., just +mycluster+ rather than
         #     +projects/myproject/instances/myinstance/clusters/mycluster+.
         #     Fields marked +OutputOnly+ must be left blank.
-        #     Currently exactly one cluster must be specified.
+        #     Currently, at most two clusters can be specified.
         class CreateInstanceRequest; end
 
         # Request message for BigtableInstanceAdmin.GetInstance.
@@ -54,7 +54,7 @@ module Google
         #     Values are of the form +projects/<project>+.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     The value of +next_page_token+ returned by a previous call.
+        #     DEPRECATED: This field is unused and ignored.
         class ListInstancesRequest; end
 
         # Response message for BigtableInstanceAdmin.ListInstances.
@@ -68,11 +68,10 @@ module Google
         #     Instances whose Clusters are all in one of the failed locations
         #     may be missing from +instances+, and Instances with at least one
         #     Cluster in a failed location may only have partial information returned.
+        #     Values are of the form +projects/<project>/locations/<zone_id>+
         # @!attribute [rw] next_page_token
         #   @return [String]
-        #     Set if not all instances could be returned in a single response.
-        #     Pass this value to +page_token+ in another request to get the next
-        #     page of results.
+        #     DEPRECATED: This field is unused and ignored.
         class ListInstancesResponse; end
 
         # Request message for BigtableInstanceAdmin.PartialUpdateInstance.
@@ -125,7 +124,7 @@ module Google
         #     e.g., +projects/myproject/instances/-+.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     The value of +next_page_token+ returned by a previous call.
+        #     DEPRECATED: This field is unused and ignored.
         class ListClustersRequest; end
 
         # Response message for BigtableInstanceAdmin.ListClusters.
@@ -138,11 +137,10 @@ module Google
         #     due to an outage or some other transient condition.
         #     Clusters from these locations may be missing from +clusters+,
         #     or may only have partial information returned.
+        #     Values are of the form +projects/<project>/locations/<zone_id>+
         # @!attribute [rw] next_page_token
         #   @return [String]
-        #     Set if not all clusters could be returned in a single response.
-        #     Pass this value to +page_token+ in another request to get the next
-        #     page of results.
+        #     DEPRECATED: This field is unused and ignored.
         class ListClustersResponse; end
 
         # Request message for BigtableInstanceAdmin.DeleteCluster.
@@ -233,6 +231,12 @@ module Google
         #     The unique name of the instance for which a list of app profiles is
         #     requested. Values are of the form
         #     +projects/<project>/instances/<instance>+.
+        #     Use +<instance> = '-'+ to list AppProfiles for all Instances in a project,
+        #     e.g., +projects/myproject/instances/-+.
+        # @!attribute [rw] page_size
+        #   @return [Integer]
+        #     Maximum number of results per page.
+        #     CURRENTLY UNIMPLEMENTED AND IGNORED.
         # @!attribute [rw] page_token
         #   @return [String]
         #     The value of +next_page_token+ returned by a previous call.
@@ -247,6 +251,12 @@ module Google
         #     Set if not all app profiles could be returned in a single response.
         #     Pass this value to +page_token+ in another request to get the next
         #     page of results.
+        # @!attribute [rw] failed_locations
+        #   @return [Array<String>]
+        #     Locations from which AppProfile information could not be retrieved,
+        #     due to an outage or some other transient condition.
+        #     AppProfiles from these locations may be missing from +app_profiles+.
+        #     Values are of the form +projects/<project>/locations/<zone_id>+
         class ListAppProfilesResponse; end
 
         # Request message for BigtableInstanceAdmin.UpdateAppProfile.

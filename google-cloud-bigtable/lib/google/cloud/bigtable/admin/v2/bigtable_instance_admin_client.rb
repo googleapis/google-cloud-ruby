@@ -459,7 +459,7 @@ module Google
             #   cluster ID, e.g., just +mycluster+ rather than
             #   +projects/myproject/instances/myinstance/clusters/mycluster+.
             #   Fields marked +OutputOnly+ must be left blank.
-            #   Currently exactly one cluster must be specified.
+            #   Currently, at most two clusters can be specified.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Cluster`
             #   can also be provided.
             # @param options [Google::Gax::CallOptions]
@@ -570,7 +570,7 @@ module Google
             #   The unique name of the project for which a list of instances is requested.
             #   Values are of the form +projects/<project>+.
             # @param page_token [String]
-            #   The value of +next_page_token+ returned by a previous call.
+            #   DEPRECATED: This field is unused and ignored.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -894,7 +894,7 @@ module Google
             #   Use +<instance> = '-'+ to list Clusters for all Instances in a project,
             #   e.g., +projects/myproject/instances/-+.
             # @param page_token [String]
-            #   The value of +next_page_token+ returned by a previous call.
+            #   DEPRECATED: This field is unused and ignored.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1135,6 +1135,11 @@ module Google
             #   The unique name of the instance for which a list of app profiles is
             #   requested. Values are of the form
             #   +projects/<project>/instances/<instance>+.
+            #   Use +<instance> = '-'+ to list AppProfiles for all Instances in a project,
+            #   e.g., +projects/myproject/instances/-+.
+            # @param page_size [Integer]
+            #   Maximum number of results per page.
+            #   CURRENTLY UNIMPLEMENTED AND IGNORED.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1168,10 +1173,12 @@ module Google
 
             def list_app_profiles \
                 parent,
+                page_size: nil,
                 options: nil,
                 &block
               req = {
-                parent: parent
+                parent: parent,
+                page_size: page_size
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::ListAppProfilesRequest)
               @list_app_profiles.call(req, options, &block)
