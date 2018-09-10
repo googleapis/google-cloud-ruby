@@ -79,7 +79,9 @@ end
 
 require "yard"
 require "yard/rake/yardoc_task"
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |y|
+  y.options << "--fail-on-warning"
+end
 
 desc "Run the CI build"
 task :ci do
@@ -87,6 +89,8 @@ task :ci do
   sh "bundle exec rake debugger_c"
   header "stackdriver rubocop", "*"
   sh "bundle exec rake rubocop"
+  header "stackdriver yard", "*"
+  sh "bundle exec rake yard"
   header "stackdriver doctest", "*"
   sh "bundle exec rake doctest"
   header "stackdriver test", "*"
