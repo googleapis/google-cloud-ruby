@@ -104,8 +104,8 @@ namespace :acceptance do
 end
 
 desc "Run yard-doctest example tests."
-task doctest: :yard do
-  sh "bundle exec yard doctest"
+task :doctest do
+  sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
 end
 
 desc "Start an interactive shell."
