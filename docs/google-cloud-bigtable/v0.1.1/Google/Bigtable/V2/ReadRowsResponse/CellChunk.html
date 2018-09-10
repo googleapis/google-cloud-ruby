@@ -1,0 +1,946 @@
+---
+layout: yard_main
+title: "Class: Google::Bigtable::V2::ReadRowsResponse::CellChunk - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Bigtable::V2::ReadRowsResponse::CellChunk";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Bigtable (module)">Bigtable</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V2.html" title="Google::Bigtable::V2 (module)">V2</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../ReadRowsResponse.html" title="Google::Bigtable::V2::ReadRowsResponse (class)">ReadRowsResponse</a></span></span>
+     &raquo; 
+    <span class="title">CellChunk</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Bigtable::V2::ReadRowsResponse::CellChunk
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Bigtable::V2::ReadRowsResponse::CellChunk</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Specifies a piece of a row&#39;s contents returned as part of the read
+response stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#commit_row-instance_method" title="#commit_row (instance method)">#<strong>commit_row</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Indicates that the client can safely process all previous chunks for +row_key+, as its data has been fully read.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#family_name-instance_method" title="#family_name (instance method)">#<strong>family_name</strong>  &#x21d2; Google::Protobuf::StringValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The column family name for this chunk of data.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Labels applied to the cell by a <span class='object_link'><a href="../RowFilter.html" title="Google::Bigtable::V2::RowFilter (class)">RowFilter</a></span>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#qualifier-instance_method" title="#qualifier (instance method)">#<strong>qualifier</strong>  &#x21d2; Google::Protobuf::BytesValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The column qualifier for this chunk of data.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset_row-instance_method" title="#reset_row (instance method)">#<strong>reset_row</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Indicates that the client should drop all previous chunks for +row_key+, as it will be re-read from the beginning.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_key-instance_method" title="#row_key (instance method)">#<strong>row_key</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The row key for this chunk of data.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timestamp_micros-instance_method" title="#timestamp_micros (instance method)">#<strong>timestamp_micros</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The cell&#39;s stored timestamp, which also uniquely identifies it within its column.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value-instance_method" title="#value (instance method)">#<strong>value</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The value stored in the cell.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_size-instance_method" title="#value_size (instance method)">#<strong>value_size</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If this CellChunk is part of a chunked cell value and this is not the final chunk of that cell, value_size will be set to the total length of the cell value.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="commit_row=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="commit_row-instance_method">
+  
+    #<strong>commit_row</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Indicates that the client can safely process all previous chunks for
++row_key+, as its data has been fully read.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Indicates that the client can safely process all previous chunks for
++row_key+, as its data has been fully read.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="family_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="family_name-instance_method">
+  
+    #<strong>family_name</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/StringValue.html" title="Google::Protobuf::StringValue (class)">Google::Protobuf::StringValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The column family name for this chunk of data.  If this message
+is not present this CellChunk is a continuation of the same column
+family as the previous CellChunk.  The empty string can occur as a
+column family name in a response so clients must check
+explicitly for the presence of this message, not just for
++family_name.value+ being non-empty.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/StringValue.html" title="Google::Protobuf::StringValue (class)">Google::Protobuf::StringValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The column family name for this chunk of data.  If this message
+is not present this CellChunk is a continuation of the same column
+family as the previous CellChunk.  The empty string can occur as a
+column family name in a response so clients must check
+explicitly for the presence of this message, not just for
++family_name.value+ being non-empty.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Labels applied to the cell by a
+<span class='object_link'><a href="../RowFilter.html" title="Google::Bigtable::V2::RowFilter (class)">RowFilter</a></span>.  Labels are only set
+on the first CellChunk per cell.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Labels applied to the cell by a
+<span class='object_link'><a href="../RowFilter.html" title="Google::Bigtable::V2::RowFilter (class)">RowFilter</a></span>.  Labels are only set
+on the first CellChunk per cell.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="qualifier=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="qualifier-instance_method">
+  
+    #<strong>qualifier</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/BytesValue.html" title="Google::Protobuf::BytesValue (class)">Google::Protobuf::BytesValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The column qualifier for this chunk of data.  If this message
+is not present, this CellChunk is a continuation of the same column
+as the previous CellChunk.  Column qualifiers may be empty so
+clients must check for the presence of this message, not just
+for +qualifier.value+ being non-empty.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/BytesValue.html" title="Google::Protobuf::BytesValue (class)">Google::Protobuf::BytesValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The column qualifier for this chunk of data.  If this message
+is not present, this CellChunk is a continuation of the same column
+as the previous CellChunk.  Column qualifiers may be empty so
+clients must check for the presence of this message, not just
+for +qualifier.value+ being non-empty.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="reset_row=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="reset_row-instance_method">
+  
+    #<strong>reset_row</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Indicates that the client should drop all previous chunks for
++row_key+, as it will be re-read from the beginning.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Indicates that the client should drop all previous chunks for
++row_key+, as it will be re-read from the beginning.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="row_key=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="row_key-instance_method">
+  
+    #<strong>row_key</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The row key for this chunk of data.  If the row key is empty,
+this CellChunk is a continuation of the same row as the previous
+CellChunk in the response stream, even if that CellChunk was in a
+previous ReadRowsResponse message.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The row key for this chunk of data.  If the row key is empty,
+this CellChunk is a continuation of the same row as the previous
+CellChunk in the response stream, even if that CellChunk was in a
+previous ReadRowsResponse message.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="timestamp_micros=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="timestamp_micros-instance_method">
+  
+    #<strong>timestamp_micros</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The cell&#39;s stored timestamp, which also uniquely identifies it
+within its column.  Values are always expressed in
+microseconds, but individual tables may set a coarser
+granularity to further restrict the allowed values. For
+example, a table which specifies millisecond granularity will
+only allow values of +timestamp_micros+ which are multiples of</p>
+
+<ol>
+<li> Timestamps are only set in the first CellChunk per cell
+(for cells split into multiple chunks).</li>
+</ol>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The cell&#39;s stored timestamp, which also uniquely identifies it
+within its column.  Values are always expressed in
+microseconds, but individual tables may set a coarser
+granularity to further restrict the allowed values. For
+example, a table which specifies millisecond granularity will
+only allow values of +timestamp_micros+ which are multiples of</p>
+
+<ol>
+<li> Timestamps are only set in the first CellChunk per cell
+(for cells split into multiple chunks).</li>
+</ol>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="value=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="value-instance_method">
+  
+    #<strong>value</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The value stored in the cell.  Cell values can be split across
+multiple CellChunks.  In that case only the value field will be
+set in CellChunks after the first: the timestamp and labels
+will only be present in the first CellChunk, even if the first
+CellChunk came in a previous ReadRowsResponse.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The value stored in the cell.  Cell values can be split across
+multiple CellChunks.  In that case only the value field will be
+set in CellChunks after the first: the timestamp and labels
+will only be present in the first CellChunk, even if the first
+CellChunk came in a previous ReadRowsResponse.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="value_size=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="value_size-instance_method">
+  
+    #<strong>value_size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If this CellChunk is part of a chunked cell value and this is
+not the final chunk of that cell, value_size will be set to the
+total length of the cell value.  The client can use this size
+to pre-allocate memory to hold the full cell value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If this CellChunk is part of a chunked cell value and this is
+not the final chunk of that cell, value_size will be set to the
+total length of the cell value.  The client can use this size
+to pre-allocate memory to hold the full cell value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
