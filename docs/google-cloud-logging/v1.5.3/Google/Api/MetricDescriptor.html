@@ -1,0 +1,1710 @@
+---
+layout: yard_main
+title: "Class: Google::Api::MetricDescriptor - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Api::MetricDescriptor";
+  relpath = '../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../_index.html">Index (M)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Api.html" title="Google::Api (module)">Api</a></span></span>
+     &raquo; 
+    <span class="title">MetricDescriptor</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Api::MetricDescriptor
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Api::MetricDescriptor</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/logging/v2/doc/google/api/metric.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Defines a metric type and its schema. Once a metric descriptor is created,
+deleting or altering it stops data collection and makes the metric type&#39;s
+existing data unusable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span>, <span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A detailed description of the metric, which can be used in documentation.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display_name-instance_method" title="#display_name (instance method)">#<strong>display_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A concise name for the metric, which can be displayed in user interfaces.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Array&lt;Google::Api::LabelDescriptor&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The set of labels that can be used to describe a specific instance of this metric type.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#metric_kind-instance_method" title="#metric_kind (instance method)">#<strong>metric_kind</strong>  &#x21d2; Google::Api::MetricDescriptor::MetricKind </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the metric records instantaneous values, changes to a value, etc.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The resource name of the metric descriptor.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type-instance_method" title="#type (instance method)">#<strong>type</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The metric type, including its DNS name prefix.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unit-instance_method" title="#unit (instance method)">#<strong>unit</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unit in which the metric value is reported.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_type-instance_method" title="#value_type (instance method)">#<strong>value_type</strong>  &#x21d2; Google::Api::MetricDescriptor::ValueType </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the measurement is an integer, a floating-point number, etc.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="description=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="description-instance_method">
+  
+    #<strong>description</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A detailed description of the metric, which can be used in documentation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A detailed description of the metric, which can be used in documentation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># The kind of measurement. It describes how the data is reported.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>METRIC_KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># An instantaneous measurement of a value.
+</span>    <span class='const'>GAUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The change in a value during a time interval.
+</span>    <span class='const'>DELTA</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A value accumulated over a time interval.  Cumulative
+</span>    <span class='comment'># measurements in a time series should have the same start time
+</span>    <span class='comment'># and increasing end times, until an event resets the cumulative
+</span>    <span class='comment'># value to zero and sets a new start time for the following
+</span>    <span class='comment'># points.
+</span>    <span class='const'>CUMULATIVE</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The value type of a metric.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>VALUE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The value is a boolean.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>BOOL</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The value is a signed 64-bit integer.
+</span>    <span class='const'>INT64</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The value is a double precision floating point number.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The value is a text string.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The value is a {Google::Api::Distribution +Distribution+}.
+</span>    <span class='const'>DISTRIBUTION</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The value is money.
+</span>    <span class='const'>MONEY</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="display_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="display_name-instance_method">
+  
+    #<strong>display_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A concise name for the metric, which can be displayed in user interfaces.
+Use sentence case without an ending period, for example &quot;Request count&quot;.
+This field is optional but it is recommended to be set for any metrics
+associated with user-visible concepts, such as Quota.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A concise name for the metric, which can be displayed in user interfaces.
+Use sentence case without an ending period, for example &quot;Request count&quot;.
+This field is optional but it is recommended to be set for any metrics
+associated with user-visible concepts, such as Quota.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># The kind of measurement. It describes how the data is reported.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>METRIC_KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># An instantaneous measurement of a value.
+</span>    <span class='const'>GAUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The change in a value during a time interval.
+</span>    <span class='const'>DELTA</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A value accumulated over a time interval.  Cumulative
+</span>    <span class='comment'># measurements in a time series should have the same start time
+</span>    <span class='comment'># and increasing end times, until an event resets the cumulative
+</span>    <span class='comment'># value to zero and sets a new start time for the following
+</span>    <span class='comment'># points.
+</span>    <span class='const'>CUMULATIVE</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The value type of a metric.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>VALUE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The value is a boolean.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>BOOL</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The value is a signed 64-bit integer.
+</span>    <span class='const'>INT64</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The value is a double precision floating point number.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The value is a text string.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The value is a {Google::Api::Distribution +Distribution+}.
+</span>    <span class='const'>DISTRIBUTION</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The value is money.
+</span>    <span class='const'>MONEY</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="LabelDescriptor.html" title="Google::Api::LabelDescriptor (class)">Google::Api::LabelDescriptor</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The set of labels that can be used to describe a specific
+instance of this metric type. For example, the
++appengine.googleapis.com/http/server/response_latencies+ metric
+type has a label for the HTTP response code, +response_code+, so
+you can look at latencies for successful responses or just
+for responses that failed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="LabelDescriptor.html" title="Google::Api::LabelDescriptor (class)">Google::Api::LabelDescriptor</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The set of labels that can be used to describe a specific
+instance of this metric type. For example, the
++appengine.googleapis.com/http/server/response_latencies+ metric
+type has a label for the HTTP response code, +response_code+, so
+you can look at latencies for successful responses or just
+for responses that failed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># The kind of measurement. It describes how the data is reported.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>METRIC_KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># An instantaneous measurement of a value.
+</span>    <span class='const'>GAUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The change in a value during a time interval.
+</span>    <span class='const'>DELTA</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A value accumulated over a time interval.  Cumulative
+</span>    <span class='comment'># measurements in a time series should have the same start time
+</span>    <span class='comment'># and increasing end times, until an event resets the cumulative
+</span>    <span class='comment'># value to zero and sets a new start time for the following
+</span>    <span class='comment'># points.
+</span>    <span class='const'>CUMULATIVE</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The value type of a metric.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>VALUE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The value is a boolean.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>BOOL</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The value is a signed 64-bit integer.
+</span>    <span class='const'>INT64</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The value is a double precision floating point number.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The value is a text string.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The value is a {Google::Api::Distribution +Distribution+}.
+</span>    <span class='const'>DISTRIBUTION</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The value is money.
+</span>    <span class='const'>MONEY</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="metric_kind=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="metric_kind-instance_method">
+  
+    #<strong>metric_kind</strong>  &#x21d2; <tt><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">Google::Api::MetricDescriptor::MetricKind</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Whether the metric records instantaneous values, changes to a value, etc.
+Some combinations of +metric_kind+ and +value_type+ might not be supported.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">Google::Api::MetricDescriptor::MetricKind</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether the metric records instantaneous values, changes to a value, etc.
+Some combinations of +metric_kind+ and +value_type+ might not be supported.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># The kind of measurement. It describes how the data is reported.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>METRIC_KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># An instantaneous measurement of a value.
+</span>    <span class='const'>GAUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The change in a value during a time interval.
+</span>    <span class='const'>DELTA</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A value accumulated over a time interval.  Cumulative
+</span>    <span class='comment'># measurements in a time series should have the same start time
+</span>    <span class='comment'># and increasing end times, until an event resets the cumulative
+</span>    <span class='comment'># value to zero and sets a new start time for the following
+</span>    <span class='comment'># points.
+</span>    <span class='const'>CUMULATIVE</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The value type of a metric.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>VALUE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The value is a boolean.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>BOOL</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The value is a signed 64-bit integer.
+</span>    <span class='const'>INT64</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The value is a double precision floating point number.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The value is a text string.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The value is a {Google::Api::Distribution +Distribution+}.
+</span>    <span class='const'>DISTRIBUTION</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The value is money.
+</span>    <span class='const'>MONEY</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The resource name of the metric descriptor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The resource name of the metric descriptor.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># The kind of measurement. It describes how the data is reported.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>METRIC_KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># An instantaneous measurement of a value.
+</span>    <span class='const'>GAUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The change in a value during a time interval.
+</span>    <span class='const'>DELTA</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A value accumulated over a time interval.  Cumulative
+</span>    <span class='comment'># measurements in a time series should have the same start time
+</span>    <span class='comment'># and increasing end times, until an event resets the cumulative
+</span>    <span class='comment'># value to zero and sets a new start time for the following
+</span>    <span class='comment'># points.
+</span>    <span class='const'>CUMULATIVE</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The value type of a metric.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>VALUE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The value is a boolean.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>BOOL</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The value is a signed 64-bit integer.
+</span>    <span class='const'>INT64</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The value is a double precision floating point number.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The value is a text string.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The value is a {Google::Api::Distribution +Distribution+}.
+</span>    <span class='const'>DISTRIBUTION</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The value is money.
+</span>    <span class='const'>MONEY</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="type-instance_method">
+  
+    #<strong>type</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The metric type, including its DNS name prefix. The type is not
+URL-encoded.  All user-defined custom metric types have the DNS name
++custom.googleapis.com+.  Metric types should use a natural hierarchical
+grouping. For example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>custom.googleapis.com/invoice/paid/amount</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>appengine.googleapis.com/http/server/response_latencies</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The metric type, including its DNS name prefix. The type is not
+URL-encoded.  All user-defined custom metric types have the DNS name
++custom.googleapis.com+.  Metric types should use a natural hierarchical
+grouping. For example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>custom.googleapis.com/invoice/paid/amount</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>appengine.googleapis.com/http/server/response_latencies</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># The kind of measurement. It describes how the data is reported.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>METRIC_KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># An instantaneous measurement of a value.
+</span>    <span class='const'>GAUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The change in a value during a time interval.
+</span>    <span class='const'>DELTA</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A value accumulated over a time interval.  Cumulative
+</span>    <span class='comment'># measurements in a time series should have the same start time
+</span>    <span class='comment'># and increasing end times, until an event resets the cumulative
+</span>    <span class='comment'># value to zero and sets a new start time for the following
+</span>    <span class='comment'># points.
+</span>    <span class='const'>CUMULATIVE</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The value type of a metric.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>VALUE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The value is a boolean.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>BOOL</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The value is a signed 64-bit integer.
+</span>    <span class='const'>INT64</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The value is a double precision floating point number.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The value is a text string.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The value is a {Google::Api::Distribution +Distribution+}.
+</span>    <span class='const'>DISTRIBUTION</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The value is money.
+</span>    <span class='const'>MONEY</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="unit=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="unit-instance_method">
+  
+    #<strong>unit</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The unit in which the metric value is reported. It is only applicable
+if the +value_type+ is +INT64+, +DOUBLE+, or +DISTRIBUTION+. The
+supported units are a subset of <a href="http://unitsofmeasure.org/ucum.html">The Unified Code for Units of
+Measure</a> standard:</p>
+
+<p><strong>Basic units (UNIT)</strong></p>
+
+<ul>
+<li>+bit+   bit</li>
+<li>+By+    byte</li>
+<li>+s+     second</li>
+<li>+min+   minute</li>
+<li>+h+     hour</li>
+<li>+d+     day</li>
+</ul>
+
+<p><strong>Prefixes (PREFIX)</strong></p>
+
+<ul>
+<li>+k+     kilo    (10**3)</li>
+<li>+M+     mega    (10**6)</li>
+<li>+G+     giga    (10**9)</li>
+<li>+T+     tera    (10**12)</li>
+<li>+P+     peta    (10**15)</li>
+<li>+E+     exa     (10**18)</li>
+<li>+Z+     zetta   (10**21)</li>
+<li>+Y+     yotta   (10**24)</li>
+<li>+m+     milli   (10**-3)</li>
+<li>+u+     micro   (10**-6)</li>
+<li>+n+     nano    (10**-9)</li>
+<li>+p+     pico    (10**-12)</li>
+<li>+f+     femto   (10**-15)</li>
+<li>+a+     atto    (10**-18)</li>
+<li>+z+     zepto   (10**-21)</li>
+<li>+y+     yocto   (10**-24)</li>
+<li>+Ki+    kibi    (2**10)</li>
+<li>+Mi+    mebi    (2**20)</li>
+<li>+Gi+    gibi    (2**30)</li>
+<li>+Ti+    tebi    (2**40)</li>
+</ul>
+
+<p><strong>Grammar</strong></p>
+
+<p>The grammar also includes these connectors:</p>
+
+<ul>
+<li>+/+    division (as an infix operator, e.g. +1/s+).</li>
+<li>+.+    multiplication (as an infix operator, e.g. +GBy.d+)</li>
+</ul>
+
+<p>The grammar for a unit is as follows:</p>
+
+<pre class="code ruby"><code class="ruby">Expression = Component { &quot;.&quot; Component } { &quot;/&quot; Component } ;
+
+Component = ( [ PREFIX ] UNIT | &quot;%&quot; ) [ Annotation ]
+          | Annotation
+          | &quot;1&quot;
+          ;
+
+Annotation = &quot;{&quot; NAME &quot;}&quot; ;
+</code></pre>
+
+<p>Notes:</p>
+
+<ul>
+<li>+Annotation+ is just a comment if it follows a +UNIT+ and is
+equivalent to +1+ if it is used alone. For examples,
++{requests}/s == 1/s+, +By{transmitted}/s == By/s+.</li>
+<li>+NAME+ is a sequence of non-blank printable ASCII characters not
+containing &#39;or &#39;&#39;.</li>
+<li>+1+ represents dimensionless value 1, such as in +1/s+.</li>
+<li>+%+ represents dimensionless value 1/100, and annotates values giving
+a percentage.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unit in which the metric value is reported. It is only applicable
+if the +value_type+ is +INT64+, +DOUBLE+, or +DISTRIBUTION+. The
+supported units are a subset of <a href="http://unitsofmeasure.org/ucum.html">The Unified Code for Units of
+Measure</a> standard:</p>
+
+<p><strong>Basic units (UNIT)</strong></p>
+
+<ul>
+<li>+bit+   bit</li>
+<li>+By+    byte</li>
+<li>+s+     second</li>
+<li>+min+   minute</li>
+<li>+h+     hour</li>
+<li>+d+     day</li>
+</ul>
+
+<p><strong>Prefixes (PREFIX)</strong></p>
+
+<ul>
+<li>+k+     kilo    (10**3)</li>
+<li>+M+     mega    (10**6)</li>
+<li>+G+     giga    (10**9)</li>
+<li>+T+     tera    (10**12)</li>
+<li>+P+     peta    (10**15)</li>
+<li>+E+     exa     (10**18)</li>
+<li>+Z+     zetta   (10**21)</li>
+<li>+Y+     yotta   (10**24)</li>
+<li>+m+     milli   (10**-3)</li>
+<li>+u+     micro   (10**-6)</li>
+<li>+n+     nano    (10**-9)</li>
+<li>+p+     pico    (10**-12)</li>
+<li>+f+     femto   (10**-15)</li>
+<li>+a+     atto    (10**-18)</li>
+<li>+z+     zepto   (10**-21)</li>
+<li>+y+     yocto   (10**-24)</li>
+<li>+Ki+    kibi    (2**10)</li>
+<li>+Mi+    mebi    (2**20)</li>
+<li>+Gi+    gibi    (2**30)</li>
+<li>+Ti+    tebi    (2**40)</li>
+</ul>
+
+<p><strong>Grammar</strong></p>
+
+<p>The grammar also includes these connectors:</p>
+
+<ul>
+<li>+/+    division (as an infix operator, e.g. +1/s+).</li>
+<li>+.+    multiplication (as an infix operator, e.g. +GBy.d+)</li>
+</ul>
+
+<p>The grammar for a unit is as follows:</p>
+
+<pre class="code ruby"><code class="ruby">Expression = Component { &quot;.&quot; Component } { &quot;/&quot; Component } ;
+
+Component = ( [ PREFIX ] UNIT | &quot;%&quot; ) [ Annotation ]
+          | Annotation
+          | &quot;1&quot;
+          ;
+
+Annotation = &quot;{&quot; NAME &quot;}&quot; ;
+</code></pre>
+
+<p>Notes:</p>
+
+<ul>
+<li>+Annotation+ is just a comment if it follows a +UNIT+ and is
+equivalent to +1+ if it is used alone. For examples,
++{requests}/s == 1/s+, +By{transmitted}/s == By/s+.</li>
+<li>+NAME+ is a sequence of non-blank printable ASCII characters not
+containing &#39;or &#39;&#39;.</li>
+<li>+1+ represents dimensionless value 1, such as in +1/s+.</li>
+<li>+%+ represents dimensionless value 1/100, and annotates values giving
+a percentage.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># The kind of measurement. It describes how the data is reported.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>METRIC_KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># An instantaneous measurement of a value.
+</span>    <span class='const'>GAUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The change in a value during a time interval.
+</span>    <span class='const'>DELTA</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A value accumulated over a time interval.  Cumulative
+</span>    <span class='comment'># measurements in a time series should have the same start time
+</span>    <span class='comment'># and increasing end times, until an event resets the cumulative
+</span>    <span class='comment'># value to zero and sets a new start time for the following
+</span>    <span class='comment'># points.
+</span>    <span class='const'>CUMULATIVE</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The value type of a metric.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>VALUE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The value is a boolean.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>BOOL</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The value is a signed 64-bit integer.
+</span>    <span class='const'>INT64</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The value is a double precision floating point number.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The value is a text string.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The value is a {Google::Api::Distribution +Distribution+}.
+</span>    <span class='const'>DISTRIBUTION</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The value is money.
+</span>    <span class='const'>MONEY</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="value_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="value_type-instance_method">
+  
+    #<strong>value_type</strong>  &#x21d2; <tt><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">Google::Api::MetricDescriptor::ValueType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Whether the measurement is an integer, a floating-point number, etc.
+Some combinations of +metric_kind+ and +value_type+ might not be supported.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">Google::Api::MetricDescriptor::ValueType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether the measurement is an integer, a floating-point number, etc.
+Some combinations of +metric_kind+ and +value_type+ might not be supported.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># The kind of measurement. It describes how the data is reported.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>METRIC_KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># An instantaneous measurement of a value.
+</span>    <span class='const'>GAUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The change in a value during a time interval.
+</span>    <span class='const'>DELTA</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A value accumulated over a time interval.  Cumulative
+</span>    <span class='comment'># measurements in a time series should have the same start time
+</span>    <span class='comment'># and increasing end times, until an event resets the cumulative
+</span>    <span class='comment'># value to zero and sets a new start time for the following
+</span>    <span class='comment'># points.
+</span>    <span class='const'>CUMULATIVE</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The value type of a metric.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>VALUE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The value is a boolean.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>BOOL</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The value is a signed 64-bit integer.
+</span>    <span class='const'>INT64</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The value is a double precision floating point number.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The value is a text string.
+</span>    <span class='comment'># This value type can be used only if the metric kind is +GAUGE+.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The value is a {Google::Api::Distribution +Distribution+}.
+</span>    <span class='const'>DISTRIBUTION</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The value is money.
+</span>    <span class='const'>MONEY</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

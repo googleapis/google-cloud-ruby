@@ -1,0 +1,761 @@
+---
+layout: yard_main
+title: "Class: Google::Api::Distribution::BucketOptions - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Api::Distribution::BucketOptions";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Api.html" title="Google::Api (module)">Api</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Distribution.html" title="Google::Api::Distribution (class)">Distribution</a></span></span>
+     &raquo; 
+    <span class="title">BucketOptions</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Api::Distribution::BucketOptions
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Api::Distribution::BucketOptions</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/logging/v2/doc/google/api/distribution.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A Distribution may optionally contain a histogram of the values in the
+population.  The histogram is given in +bucket_counts+ as counts of values
+that fall into one of a sequence of non-overlapping buckets.  The sequence
+of buckets is described by +bucket_options+.</p>
+
+<p>A bucket specifies an inclusive lower bound and exclusive upper bound for
+the values that are counted for that bucket.  The upper bound of a bucket
+is strictly greater than the lower bound.</p>
+
+<p>The sequence of N buckets for a Distribution consists of an underflow
+bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
+an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
+bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
+The buckets span the whole range of finite values: lower bound of the
+underflow bucket is -infinity and the upper bound of the overflow bucket is
++infinity.  The finite buckets are so-called because both bounds are
+finite.</p>
+
+<p>+BucketOptions+ describes bucket boundaries in one of three ways.  Two
+describe the boundaries by giving parameters for a formula to generate
+boundaries and one gives the bucket boundaries explicitly.</p>
+
+<p>If +bucket_boundaries+ is not given, then no +bucket_counts+ may be given.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="BucketOptions/Explicit.html" title="Google::Api::Distribution::BucketOptions::Explicit (class)">Explicit</a></span>, <span class='object_link'><a href="BucketOptions/Exponential.html" title="Google::Api::Distribution::BucketOptions::Exponential (class)">Exponential</a></span>, <span class='object_link'><a href="BucketOptions/Linear.html" title="Google::Api::Distribution::BucketOptions::Linear (class)">Linear</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#explicit_buckets-instance_method" title="#explicit_buckets (instance method)">#<strong>explicit_buckets</strong>  &#x21d2; Google::Api::Distribution::BucketOptions::Explicit </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The explicit buckets.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exponential_buckets-instance_method" title="#exponential_buckets (instance method)">#<strong>exponential_buckets</strong>  &#x21d2; Google::Api::Distribution::BucketOptions::Exponential </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The exponential buckets.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#linear_buckets-instance_method" title="#linear_buckets (instance method)">#<strong>linear_buckets</strong>  &#x21d2; Google::Api::Distribution::BucketOptions::Linear </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The linear bucket.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="explicit_buckets=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="explicit_buckets-instance_method">
+  
+    #<strong>explicit_buckets</strong>  &#x21d2; <tt><span class='object_link'><a href="BucketOptions/Explicit.html" title="Google::Api::Distribution::BucketOptions::Explicit (class)">Google::Api::Distribution::BucketOptions::Explicit</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The explicit buckets.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BucketOptions/Explicit.html" title="Google::Api::Distribution::BucketOptions::Explicit (class)">Google::Api::Distribution::BucketOptions::Explicit</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The explicit buckets.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
+  <span class='comment'># Specify a sequence of buckets that all have the same width (except
+</span>  <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
+</span>  <span class='comment'># uncertainty on the specific value in the bucket.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket +i+:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
+</span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
+</span>  <span class='comment'># @!attribute [rw] num_finite_buckets
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='comment'># @!attribute [rw] width
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='comment'># @!attribute [rw] offset
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Lower bound of the first bucket.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Linear.html" title="Google::Api::Distribution::BucketOptions::Linear (class)">Linear</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
+</span>  <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
+</span>  <span class='comment'># uncertainty on a specific value in the bucket.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
+</span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
+</span>  <span class='comment'># @!attribute [rw] num_finite_buckets
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='comment'># @!attribute [rw] growth_factor
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Must be greater than 1.
+</span>  <span class='comment'># @!attribute [rw] scale
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Exponential.html" title="Google::Api::Distribution::BucketOptions::Exponential (class)">Exponential</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># A set of buckets with arbitrary widths.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Defines +size(bounds) + 1+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
+</span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
+</span>  <span class='comment'>#
+</span>  <span class='comment'># There must be at least one element in +bounds+.  If +bounds+ has only one
+</span>  <span class='comment'># element, there are no finite buckets, and that single element is the
+</span>  <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>  <span class='comment'># @!attribute [rw] bounds
+</span>  <span class='comment'>#   @return [Array&lt;Float&gt;]
+</span>  <span class='comment'>#     The values must be monotonically increasing.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Explicit.html" title="Google::Api::Distribution::BucketOptions::Explicit (class)">Explicit</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="exponential_buckets=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="exponential_buckets-instance_method">
+  
+    #<strong>exponential_buckets</strong>  &#x21d2; <tt><span class='object_link'><a href="BucketOptions/Exponential.html" title="Google::Api::Distribution::BucketOptions::Exponential (class)">Google::Api::Distribution::BucketOptions::Exponential</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The exponential buckets.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BucketOptions/Exponential.html" title="Google::Api::Distribution::BucketOptions::Exponential (class)">Google::Api::Distribution::BucketOptions::Exponential</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The exponential buckets.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
+  <span class='comment'># Specify a sequence of buckets that all have the same width (except
+</span>  <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
+</span>  <span class='comment'># uncertainty on the specific value in the bucket.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket +i+:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
+</span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
+</span>  <span class='comment'># @!attribute [rw] num_finite_buckets
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='comment'># @!attribute [rw] width
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='comment'># @!attribute [rw] offset
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Lower bound of the first bucket.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Linear.html" title="Google::Api::Distribution::BucketOptions::Linear (class)">Linear</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
+</span>  <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
+</span>  <span class='comment'># uncertainty on a specific value in the bucket.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
+</span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
+</span>  <span class='comment'># @!attribute [rw] num_finite_buckets
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='comment'># @!attribute [rw] growth_factor
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Must be greater than 1.
+</span>  <span class='comment'># @!attribute [rw] scale
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Exponential.html" title="Google::Api::Distribution::BucketOptions::Exponential (class)">Exponential</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># A set of buckets with arbitrary widths.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Defines +size(bounds) + 1+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
+</span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
+</span>  <span class='comment'>#
+</span>  <span class='comment'># There must be at least one element in +bounds+.  If +bounds+ has only one
+</span>  <span class='comment'># element, there are no finite buckets, and that single element is the
+</span>  <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>  <span class='comment'># @!attribute [rw] bounds
+</span>  <span class='comment'>#   @return [Array&lt;Float&gt;]
+</span>  <span class='comment'>#     The values must be monotonically increasing.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Explicit.html" title="Google::Api::Distribution::BucketOptions::Explicit (class)">Explicit</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="linear_buckets=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="linear_buckets-instance_method">
+  
+    #<strong>linear_buckets</strong>  &#x21d2; <tt><span class='object_link'><a href="BucketOptions/Linear.html" title="Google::Api::Distribution::BucketOptions::Linear (class)">Google::Api::Distribution::BucketOptions::Linear</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The linear bucket.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BucketOptions/Linear.html" title="Google::Api::Distribution::BucketOptions::Linear (class)">Google::Api::Distribution::BucketOptions::Linear</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The linear bucket.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 114</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
+  <span class='comment'># Specify a sequence of buckets that all have the same width (except
+</span>  <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
+</span>  <span class='comment'># uncertainty on the specific value in the bucket.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket +i+:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
+</span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
+</span>  <span class='comment'># @!attribute [rw] num_finite_buckets
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='comment'># @!attribute [rw] width
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='comment'># @!attribute [rw] offset
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Lower bound of the first bucket.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Linear.html" title="Google::Api::Distribution::BucketOptions::Linear (class)">Linear</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
+</span>  <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
+</span>  <span class='comment'># uncertainty on a specific value in the bucket.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
+</span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
+</span>  <span class='comment'># @!attribute [rw] num_finite_buckets
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='comment'># @!attribute [rw] growth_factor
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Must be greater than 1.
+</span>  <span class='comment'># @!attribute [rw] scale
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Must be greater than 0.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Exponential.html" title="Google::Api::Distribution::BucketOptions::Exponential (class)">Exponential</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># A set of buckets with arbitrary widths.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Defines +size(bounds) + 1+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
+</span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
+</span>  <span class='comment'>#
+</span>  <span class='comment'># There must be at least one element in +bounds+.  If +bounds+ has only one
+</span>  <span class='comment'># element, there are no finite buckets, and that single element is the
+</span>  <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>  <span class='comment'># @!attribute [rw] bounds
+</span>  <span class='comment'>#   @return [Array&lt;Float&gt;]
+</span>  <span class='comment'>#     The values must be monotonically increasing.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Explicit.html" title="Google::Api::Distribution::BucketOptions::Explicit (class)">Explicit</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
