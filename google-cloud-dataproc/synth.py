@@ -58,9 +58,9 @@ s.replace(
       namespace :ci do
         desc "Run the CI build, with smoke tests."
         task :smoke_test do
-          Rake::Task["ci"].invoke
+          Rake::Task[:ci].invoke
           header "google-cloud-dataproc smoke_test", "*"
-          Rake::Task["smoke_test"].invoke
+          Rake::Task[:smoke_test].invoke
         end
         desc "Run the CI build, with acceptance tests."
         task :acceptance do"""))

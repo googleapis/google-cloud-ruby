@@ -20,7 +20,7 @@ namespace :test do
       add_filter "test/"
     end
 
-    Rake::Task["test"].invoke
+    Rake::Task[:test].invoke
   end
 end
 
@@ -69,20 +69,20 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud"
   header "google-cloud rubocop", "*"
-  Rake::Task["rubocop"].invoke
+  Rake::Task[:rubocop].invoke
   header "google-cloud yard", "*"
-  Rake::Task["yard"].invoke
+  Rake::Task[:yard].invoke
   header "google-cloud doctest", "*"
-  Rake::Task["doctest"].invoke
+  Rake::Task[:doctest].invoke
   header "google-cloud test", "*"
-  Rake::Task["test"].invoke
+  Rake::Task[:test].invoke
 end
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
+    Rake::Task[:ci].invoke
     header "google-cloud acceptance", "*"
-    Rake::Task["acceptance"].invoke
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing

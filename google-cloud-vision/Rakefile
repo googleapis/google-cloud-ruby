@@ -21,7 +21,7 @@ namespace :test do
       add_filter "lib/google/cloud/vision/v1/"
     end
 
-    Rake::Task["test"].invoke
+    Rake::Task[:test].invoke
   end
 end
 
@@ -70,7 +70,7 @@ namespace :acceptance do
       add_filter "acceptance/"
     end
 
-    Rake::Task["acceptance"].invoke
+    Rake::Task[:acceptance].invoke
   end
 
   task :run do
@@ -109,21 +109,21 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-vision"
   header "google-cloud-vision rubocop", "*"
-  Rake::Task["rubocop"].invoke
+  Rake::Task[:rubocop].invoke
   header "google-cloud-vision yard", "*"
   header "vision yard still had warnings", "!"
-  Rake::Task["yard"].invoke
+  Rake::Task[:yard].invoke
   header "google-cloud-vision doctest", "*"
-  Rake::Task["doctest"].invoke
+  Rake::Task[:doctest].invoke
   header "google-cloud-vision test", "*"
-  Rake::Task["test"].invoke
+  Rake::Task[:test].invoke
 end
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
+    Rake::Task[:ci].invoke
     header "google-cloud-vision acceptance", "*"
-    Rake::Task["acceptance"].invoke
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing

@@ -35,7 +35,7 @@ namespace :test do
       add_filter "test/"
     end
 
-    Rake::Task["test"].invoke
+    Rake::Task[:test].invoke
   end
 end
 
@@ -56,7 +56,7 @@ namespace :smoke_test do
       add_filter "test/"
     end
 
-    Rake::Task["smoke_test"].invoke
+    Rake::Task[:smoke_test].invoke
   end
 end
 
@@ -95,7 +95,7 @@ end
 
 namespace :acceptance do
   task :run do
-    Rake::Task["smoke_test"].invoke
+    Rake::Task[:smoke_test].invoke
   end
 
   desc "Run acceptance tests with coverage."
@@ -120,19 +120,19 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-bigquery-data_transfer"
   header "google-cloud-bigquery-data_transfer rubocop", "*"
-  Rake::Task["rubocop"].invoke
+  Rake::Task[:rubocop].invoke
   header "google-cloud-bigquery-data_transfer doctest", "*"
-  Rake::Task["doctest"].invoke
+  Rake::Task[:doctest].invoke
   header "google-cloud-bigquery-data_transfer test", "*"
-  Rake::Task["test"].invoke
+  Rake::Task[:test].invoke
 end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
+    Rake::Task[:ci].invoke
     header "google-cloud-bigquery-data_transfer acceptance", "*"
-    Rake::Task["acceptance"].invoke
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing

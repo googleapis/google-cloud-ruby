@@ -20,7 +20,7 @@ namespace :test do
       add_filter "test/"
     end
 
-    Rake::Task["test"].invoke
+    Rake::Task[:test].invoke
   end
 end
 
@@ -68,20 +68,20 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING stackdriver-core"
   header "stackdriver-core rubocop", "*"
-  Rake::Task["rubocop"].invoke
+  Rake::Task[:rubocop].invoke
   header "stackdriver-core yard", "*"
-  Rake::Task["yard"].invoke
+  Rake::Task[:yard].invoke
   header "stackdriver-core doctest", "*"
-  Rake::Task["doctest"].invoke
+  Rake::Task[:doctest].invoke
   header "stackdriver-core test", "*"
-  Rake::Task["test"].invoke
+  Rake::Task[:test].invoke
 end
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
+    Rake::Task[:ci].invoke
     header "stackdriver-core acceptance", "*"
-    Rake::Task["acceptance"].invoke
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing
