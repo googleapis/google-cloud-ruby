@@ -128,13 +128,17 @@ end
 
 require "yard"
 require "yard/rake/yardoc_task"
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |y|
+  y.options << "--fail-on-warning"
+end
 
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-pubsub"
   header "google-cloud-pubsub rubocop", "*"
   sh "bundle exec rake rubocop"
+  header "google-cloud-pubsub yard", "*"
+  sh "bundle exec rake yard"
   header "google-cloud-pubsub doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-pubsub test", "*"

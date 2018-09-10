@@ -151,13 +151,17 @@ end
 
 require "yard"
 require "yard/rake/yardoc_task"
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |y|
+  y.options << "--fail-on-warning"
+end
 
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-debugger"
   header "google-cloud-debugger rubocop", "*"
   sh "bundle exec rake rubocop"
+  header "google-cloud-debugger yard", "*"
+  sh "bundle exec rake yard"
   header "google-cloud-debugger doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-debugger test", "*"

@@ -146,7 +146,9 @@ end
 
 require "yard"
 require "yard/rake/yardoc_task"
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |y|
+  # y.options << "--fail-on-warning"
+end
 
 desc "Run yard-doctest example tests."
 task :doctest do
@@ -158,6 +160,9 @@ task :ci do
   header "BUILDING google-cloud-bigtable"
   header "google-cloud-bigtable rubocop", "*"
   sh "bundle exec rake rubocop"
+  header "google-cloud-bigtable yard", "*"
+  header "bigtable yard still had warnings", "!"
+  sh "bundle exec rake yard"
   header "google-cloud-bigtable doctest", "*"
   sh "bundle exec rake doctest"
   header "google-cloud-bigtable test", "*"
