@@ -176,7 +176,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set if not all clusters could be returned in a single response.</p>
+    <span class="summary_desc"><div class='inline'><p>DEPRECATED: This field is unused and ignored.</p>
 </div></span>
   
 </li>
@@ -235,10 +235,10 @@ js:
       <pre class="lines">
 
 
-146</pre>
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 144</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::ListClustersResponse (class)">ListClustersResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -262,7 +262,8 @@ js:
     <p>Returns Locations from which Cluster information could not be retrieved,
 due to an outage or some other transient condition.
 Clusters from these locations may be missing from +clusters+,
-or may only have partial information returned.</p>
+or may only have partial information returned.
+Values are of the form +projects/<project>/locations/<zone_id>+</p>
 
 
   </div>
@@ -283,7 +284,8 @@ or may only have partial information returned.</p>
         <div class='inline'><p>Locations from which Cluster information could not be retrieved,
 due to an outage or some other transient condition.
 Clusters from these locations may be missing from +clusters+,
-or may only have partial information returned.</p>
+or may only have partial information returned.
+Values are of the form +projects/<project>/locations/<zone_id>+</p>
 </div>
       
     </li>
@@ -296,10 +298,10 @@ or may only have partial information returned.</p>
       <pre class="lines">
 
 
-146</pre>
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 144</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::ListClustersResponse (class)">ListClustersResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -320,9 +322,7 @@ or may only have partial information returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Set if not all clusters could be returned in a single response.
-Pass this value to +page_token+ in another request to get the next
-page of results.</p>
+    <p>Returns DEPRECATED: This field is unused and ignored.</p>
 
 
   </div>
@@ -340,9 +340,7 @@ page of results.</p>
       
       
         &mdash;
-        <div class='inline'><p>Set if not all clusters could be returned in a single response.
-Pass this value to +page_token+ in another request to get the next
-page of results.</p>
+        <div class='inline'><p>DEPRECATED: This field is unused and ignored.</p>
 </div>
       
     </li>
@@ -355,10 +353,10 @@ page of results.</p>
       <pre class="lines">
 
 
-146</pre>
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 144</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::ListClustersResponse (class)">ListClustersResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

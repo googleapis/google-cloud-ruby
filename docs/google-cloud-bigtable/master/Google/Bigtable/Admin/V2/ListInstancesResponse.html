@@ -176,7 +176,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Set if not all instances could be returned in a single response.</p>
+    <span class="summary_desc"><div class='inline'><p>DEPRECATED: This field is unused and ignored.</p>
 </div></span>
   
 </li>
@@ -208,7 +208,8 @@ js:
 due to an outage or some other transient condition.
 Instances whose Clusters are all in one of the failed locations
 may be missing from +instances+, and Instances with at least one
-Cluster in a failed location may only have partial information returned.</p>
+Cluster in a failed location may only have partial information returned.
+Values are of the form +projects/<project>/locations/<zone_id>+</p>
 
 
   </div>
@@ -230,7 +231,8 @@ Cluster in a failed location may only have partial information returned.</p>
 due to an outage or some other transient condition.
 Instances whose Clusters are all in one of the failed locations
 may be missing from +instances+, and Instances with at least one
-Cluster in a failed location may only have partial information returned.</p>
+Cluster in a failed location may only have partial information returned.
+Values are of the form +projects/<project>/locations/<zone_id>+</p>
 </div>
       
     </li>
@@ -243,10 +245,10 @@ Cluster in a failed location may only have partial information returned.</p>
       <pre class="lines">
 
 
-76</pre>
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 75</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::ListInstancesResponse (class)">ListInstancesResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -298,10 +300,10 @@ Cluster in a failed location may only have partial information returned.</p>
       <pre class="lines">
 
 
-76</pre>
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 75</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::ListInstancesResponse (class)">ListInstancesResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -322,9 +324,7 @@ Cluster in a failed location may only have partial information returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Set if not all instances could be returned in a single response.
-Pass this value to +page_token+ in another request to get the next
-page of results.</p>
+    <p>Returns DEPRECATED: This field is unused and ignored.</p>
 
 
   </div>
@@ -342,9 +342,7 @@ page of results.</p>
       
       
         &mdash;
-        <div class='inline'><p>Set if not all instances could be returned in a single response.
-Pass this value to +page_token+ in another request to get the next
-page of results.</p>
+        <div class='inline'><p>DEPRECATED: This field is unused and ignored.</p>
 </div>
       
     </li>
@@ -357,10 +355,10 @@ page of results.</p>
       <pre class="lines">
 
 
-76</pre>
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/bigtable_instance_admin.rb', line 75</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::ListInstancesResponse (class)">ListInstancesResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

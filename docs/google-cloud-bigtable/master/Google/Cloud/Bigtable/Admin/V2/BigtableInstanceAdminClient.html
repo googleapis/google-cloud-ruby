@@ -583,7 +583,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#list_app_profiles-instance_method" title="#list_app_profiles (instance method)">#<strong>list_app_profiles</strong>(parent, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Bigtable::Admin::V2::AppProfile&gt; </a>
+      <a href="#list_app_profiles-instance_method" title="#list_app_profiles (instance method)">#<strong>list_app_profiles</strong>(parent, page_size: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Bigtable::Admin::V2::AppProfile&gt; </a>
     
 
     
@@ -2459,7 +2459,7 @@ can also be provided.</p>
 cluster ID, e.g., just +mycluster+ rather than
 +projects/myproject/instances/myinstance/clusters/mycluster+.
 Fields marked +OutputOnly+ must be left blank.
-Currently exactly one cluster must be specified.
+Currently, at most two clusters can be specified.
 A hash of the same form as <code>Google::Bigtable::Admin::V2::Cluster</code>
 can also be provided.</p>
 </div>
@@ -2731,22 +2731,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1282
-1283
-1284
-1285
-1286
-1287
-1288
 1289
 1290
 1291
 1292
 1293
-1294</pre>
+1294
+1295
+1296
+1297
+1298
+1299
+1300
+1301</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1282</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1289</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_app_profile'>delete_app_profile</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3600,19 +3600,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1318
-1319
-1320
-1321
-1322
-1323
-1324
 1325
 1326
-1327</pre>
+1327
+1328
+1329
+1330
+1331
+1332
+1333
+1334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1318</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1325</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3807,7 +3807,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="list_app_profiles-instance_method">
   
-    #<strong>list_app_profiles</strong>(parent, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../../Bigtable/Admin/V2/AppProfile.html" title="Google::Bigtable::Admin::V2::AppProfile (class)">Google::Bigtable::Admin::V2::AppProfile</a></span>&gt;</tt> 
+    #<strong>list_app_profiles</strong>(parent, page_size: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../../Bigtable/Admin/V2/AppProfile.html" title="Google::Bigtable::Admin::V2::AppProfile (class)">Google::Bigtable::Admin::V2::AppProfile</a></span>&gt;</tt> 
   
 
   
@@ -3860,7 +3860,25 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>The unique name of the instance for which a list of app profiles is
 requested. Values are of the form
-+projects/<project>/instances/<instance>+.</p>
++projects/<project>/instances/<instance>+.
+Use +<instance> = &#39;-&#39;+ to list AppProfiles for all Instances in a project,
+e.g., +projects/myproject/instances/-+.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum number of results per page.
+CURRENTLY UNIMPLEMENTED AND IGNORED.</p>
 </div>
       
     </li>
@@ -3970,26 +3988,30 @@ object.</p>
       <pre class="lines">
 
 
-1169
-1170
-1171
-1172
-1173
 1174
 1175
 1176
 1177
-1178</pre>
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1169</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_app_profiles'>list_app_profiles</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
+    <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span>
+    <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
+    <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Bigtable.html" title="Google::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Bigtable/Admin.html" title="Google::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Bigtable/Admin/V2.html" title="Google::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Bigtable/Admin/V2/ListAppProfilesRequest.html" title="Google::Bigtable::Admin::V2::ListAppProfilesRequest (class)">ListAppProfilesRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@list_app_profiles</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -4059,7 +4081,7 @@ e.g., +projects/myproject/instances/-+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The value of +next_page_token+ returned by a previous call.</p>
+        <div class='inline'><p>DEPRECATED: This field is unused and ignored.</p>
 </div>
       
     </li>
@@ -4253,7 +4275,7 @@ Values are of the form +projects/<project>+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The value of +next_page_token+ returned by a previous call.</p>
+        <div class='inline'><p>DEPRECATED: This field is unused and ignored.</p>
 </div>
       
     </li>
@@ -4760,21 +4782,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1361
-1362
-1363
-1364
-1365
-1366
-1367
 1368
 1369
 1370
 1371
-1372</pre>
+1372
+1373
+1374
+1375
+1376
+1377
+1378
+1379</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1361</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1368</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -4961,21 +4983,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1403
-1404
-1405
-1406
-1407
-1408
-1409
 1410
 1411
 1412
 1413
-1414</pre>
+1414
+1415
+1416
+1417
+1418
+1419
+1420
+1421</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1403</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1410</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5162,13 +5184,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1236
-1237
-1238
-1239
-1240
-1241
-1242
 1243
 1244
 1245
@@ -5182,10 +5197,17 @@ retries, etc.</p>
 1253
 1254
 1255
-1256</pre>
+1256
+1257
+1258
+1259
+1260
+1261
+1262
+1263</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1236</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb', line 1243</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_app_profile'>update_app_profile</span> \
     <span class='id identifier rubyid_app_profile'>app_profile</span><span class='comma'>,</span>
