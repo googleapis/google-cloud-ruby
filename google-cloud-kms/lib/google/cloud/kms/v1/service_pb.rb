@@ -19,11 +19,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :parent, :string, 1
     optional :page_size, :int32, 2
     optional :page_token, :string, 3
+    optional :version_view, :enum, 4, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView"
   end
   add_message "google.cloud.kms.v1.ListCryptoKeyVersionsRequest" do
     optional :parent, :string, 1
     optional :page_size, :int32, 2
     optional :page_token, :string, 3
+    optional :view, :enum, 4, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView"
   end
   add_message "google.cloud.kms.v1.ListKeyRingsResponse" do
     repeated :key_rings, :message, 1, "google.cloud.kms.v1.KeyRing"
@@ -47,6 +49,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
   end
   add_message "google.cloud.kms.v1.GetCryptoKeyVersionRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.cloud.kms.v1.GetPublicKeyRequest" do
     optional :name, :string, 1
   end
   add_message "google.cloud.kms.v1.CreateKeyRingRequest" do
@@ -81,12 +86,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :ciphertext, :bytes, 2
     optional :additional_authenticated_data, :bytes, 3
   end
+  add_message "google.cloud.kms.v1.AsymmetricSignRequest" do
+    optional :name, :string, 1
+    optional :digest, :message, 3, "google.cloud.kms.v1.Digest"
+  end
+  add_message "google.cloud.kms.v1.AsymmetricDecryptRequest" do
+    optional :name, :string, 1
+    optional :ciphertext, :bytes, 3
+  end
   add_message "google.cloud.kms.v1.DecryptResponse" do
     optional :plaintext, :bytes, 1
   end
   add_message "google.cloud.kms.v1.EncryptResponse" do
     optional :name, :string, 1
     optional :ciphertext, :bytes, 2
+  end
+  add_message "google.cloud.kms.v1.AsymmetricSignResponse" do
+    optional :signature, :bytes, 1
+  end
+  add_message "google.cloud.kms.v1.AsymmetricDecryptResponse" do
+    optional :plaintext, :bytes, 1
   end
   add_message "google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest" do
     optional :name, :string, 1
@@ -97,6 +116,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.kms.v1.RestoreCryptoKeyVersionRequest" do
     optional :name, :string, 1
+  end
+  add_message "google.cloud.kms.v1.Digest" do
+    oneof :digest do
+      optional :sha256, :bytes, 1
+      optional :sha384, :bytes, 2
+      optional :sha512, :bytes, 3
+    end
+  end
+  add_message "google.cloud.kms.v1.LocationMetadata" do
+    optional :hsm_available, :bool, 1
   end
 end
 
@@ -113,6 +142,7 @@ module Google
         GetKeyRingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetKeyRingRequest").msgclass
         GetCryptoKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetCryptoKeyRequest").msgclass
         GetCryptoKeyVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetCryptoKeyVersionRequest").msgclass
+        GetPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetPublicKeyRequest").msgclass
         CreateKeyRingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CreateKeyRingRequest").msgclass
         CreateCryptoKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CreateCryptoKeyRequest").msgclass
         CreateCryptoKeyVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CreateCryptoKeyVersionRequest").msgclass
@@ -120,11 +150,17 @@ module Google
         UpdateCryptoKeyVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateCryptoKeyVersionRequest").msgclass
         EncryptRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EncryptRequest").msgclass
         DecryptRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.DecryptRequest").msgclass
+        AsymmetricSignRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.AsymmetricSignRequest").msgclass
+        AsymmetricDecryptRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.AsymmetricDecryptRequest").msgclass
         DecryptResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.DecryptResponse").msgclass
         EncryptResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EncryptResponse").msgclass
+        AsymmetricSignResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.AsymmetricSignResponse").msgclass
+        AsymmetricDecryptResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.AsymmetricDecryptResponse").msgclass
         UpdateCryptoKeyPrimaryVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest").msgclass
         DestroyCryptoKeyVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.DestroyCryptoKeyVersionRequest").msgclass
         RestoreCryptoKeyVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.RestoreCryptoKeyVersionRequest").msgclass
+        Digest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.Digest").msgclass
+        LocationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.LocationMetadata").msgclass
       end
     end
   end
