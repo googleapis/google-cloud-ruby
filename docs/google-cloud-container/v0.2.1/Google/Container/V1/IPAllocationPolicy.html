@@ -1,0 +1,1155 @@
+---
+layout: yard_main
+title: "Class: Google::Container::V1::IPAllocationPolicy - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Container::V1::IPAllocationPolicy";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (I)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Container.html" title="Google::Container (module)">Container</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Container::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">IPAllocationPolicy</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Container::V1::IPAllocationPolicy
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Container::V1::IPAllocationPolicy</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Configuration for controlling how IPs are allocated in the cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cluster_ipv4_cidr-instance_method" title="#cluster_ipv4_cidr (instance method)">#<strong>cluster_ipv4_cidr</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This field is deprecated, use cluster_ipv4_cidr_block.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cluster_ipv4_cidr_block-instance_method" title="#cluster_ipv4_cidr_block (instance method)">#<strong>cluster_ipv4_cidr_block</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The IP address range for the cluster pod IPs.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cluster_secondary_range_name-instance_method" title="#cluster_secondary_range_name (instance method)">#<strong>cluster_secondary_range_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the secondary range to be used for the cluster CIDR block.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_subnetwork-instance_method" title="#create_subnetwork (instance method)">#<strong>create_subnetwork</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether a new subnetwork will be created automatically for the cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#node_ipv4_cidr-instance_method" title="#node_ipv4_cidr (instance method)">#<strong>node_ipv4_cidr</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This field is deprecated, use node_ipv4_cidr_block.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#node_ipv4_cidr_block-instance_method" title="#node_ipv4_cidr_block (instance method)">#<strong>node_ipv4_cidr_block</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The IP address range of the instance IPs in this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#services_ipv4_cidr-instance_method" title="#services_ipv4_cidr (instance method)">#<strong>services_ipv4_cidr</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This field is deprecated, use services_ipv4_cidr_block.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#services_ipv4_cidr_block-instance_method" title="#services_ipv4_cidr_block (instance method)">#<strong>services_ipv4_cidr_block</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The IP address range of the services IPs in this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#services_secondary_range_name-instance_method" title="#services_secondary_range_name (instance method)">#<strong>services_secondary_range_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the secondary range to be used as for the services CIDR block.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#subnetwork_name-instance_method" title="#subnetwork_name (instance method)">#<strong>subnetwork_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A custom subnetwork name to be used if +create_subnetwork+ is true.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_ip_aliases-instance_method" title="#use_ip_aliases (instance method)">#<strong>use_ip_aliases</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether alias IPs will be used for pod IPs in the cluster.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="cluster_ipv4_cidr=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="cluster_ipv4_cidr-instance_method">
+  
+    #<strong>cluster_ipv4_cidr</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns This field is deprecated, use cluster_ipv4_cidr_block.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>This field is deprecated, use cluster_ipv4_cidr_block.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="cluster_ipv4_cidr_block=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="cluster_ipv4_cidr_block-instance_method">
+  
+    #<strong>cluster_ipv4_cidr_block</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The IP address range for the cluster pod IPs. If this field is set, then
++cluster.cluster_ipv4_cidr+ must be left blank.</p>
+
+<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+
+<p>Set to blank to have a range chosen with the default size.</p>
+
+<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+netmask.</p>
+
+<p>Set to a
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
++10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+to use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The IP address range for the cluster pod IPs. If this field is set, then
++cluster.cluster_ipv4_cidr+ must be left blank.</p>
+
+<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+
+<p>Set to blank to have a range chosen with the default size.</p>
+
+<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+netmask.</p>
+
+<p>Set to a
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
++10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+to use.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="cluster_secondary_range_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="cluster_secondary_range_name-instance_method">
+  
+    #<strong>cluster_secondary_range_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name of the secondary range to be used for the cluster CIDR
+block.  The secondary range will be used for pod IP
+addresses. This must be an existing secondary range associated
+with the cluster subnetwork.</p>
+
+<p>This field is only applicable with use_ip_aliases is true and
+create_subnetwork is false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of the secondary range to be used for the cluster CIDR
+block.  The secondary range will be used for pod IP
+addresses. This must be an existing secondary range associated
+with the cluster subnetwork.</p>
+
+<p>This field is only applicable with use_ip_aliases is true and
+create_subnetwork is false.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="create_subnetwork=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="create_subnetwork-instance_method">
+  
+    #<strong>create_subnetwork</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Whether a new subnetwork will be created automatically for the cluster.</p>
+
+<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether a new subnetwork will be created automatically for the cluster.</p>
+
+<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="node_ipv4_cidr=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="node_ipv4_cidr-instance_method">
+  
+    #<strong>node_ipv4_cidr</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns This field is deprecated, use node_ipv4_cidr_block.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>This field is deprecated, use node_ipv4_cidr_block.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="node_ipv4_cidr_block=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="node_ipv4_cidr_block-instance_method">
+  
+    #<strong>node_ipv4_cidr_block</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The IP address range of the instance IPs in this cluster.</p>
+
+<p>This is applicable only if +create_subnetwork+ is true.</p>
+
+<p>Set to blank to have a range chosen with the default size.</p>
+
+<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+netmask.</p>
+
+<p>Set to a
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
++10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+to use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The IP address range of the instance IPs in this cluster.</p>
+
+<p>This is applicable only if +create_subnetwork+ is true.</p>
+
+<p>Set to blank to have a range chosen with the default size.</p>
+
+<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+netmask.</p>
+
+<p>Set to a
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
++10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+to use.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="services_ipv4_cidr=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="services_ipv4_cidr-instance_method">
+  
+    #<strong>services_ipv4_cidr</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns This field is deprecated, use services_ipv4_cidr_block.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>This field is deprecated, use services_ipv4_cidr_block.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="services_ipv4_cidr_block=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="services_ipv4_cidr_block-instance_method">
+  
+    #<strong>services_ipv4_cidr_block</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The IP address range of the services IPs in this cluster. If blank, a range
+will be automatically chosen with the default size.</p>
+
+<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+
+<p>Set to blank to have a range chosen with the default size.</p>
+
+<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+netmask.</p>
+
+<p>Set to a
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
++10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+to use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The IP address range of the services IPs in this cluster. If blank, a range
+will be automatically chosen with the default size.</p>
+
+<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+
+<p>Set to blank to have a range chosen with the default size.</p>
+
+<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+netmask.</p>
+
+<p>Set to a
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
++10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+to use.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="services_secondary_range_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="services_secondary_range_name-instance_method">
+  
+    #<strong>services_secondary_range_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name of the secondary range to be used as for the services
+CIDR block.  The secondary range will be used for service
+ClusterIPs. This must be an existing secondary range associated
+with the cluster subnetwork.</p>
+
+<p>This field is only applicable with use_ip_aliases is true and
+create_subnetwork is false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of the secondary range to be used as for the services
+CIDR block.  The secondary range will be used for service
+ClusterIPs. This must be an existing secondary range associated
+with the cluster subnetwork.</p>
+
+<p>This field is only applicable with use_ip_aliases is true and
+create_subnetwork is false.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="subnetwork_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="subnetwork_name-instance_method">
+  
+    #<strong>subnetwork_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A custom subnetwork name to be used if +create_subnetwork+ is true.  If
+this field is empty, then an automatic name will be chosen for the new
+subnetwork.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A custom subnetwork name to be used if +create_subnetwork+ is true.  If
+this field is empty, then an automatic name will be chosen for the new
+subnetwork.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="use_ip_aliases=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="use_ip_aliases-instance_method">
+  
+    #<strong>use_ip_aliases</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Whether alias IPs will be used for pod IPs in the cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether alias IPs will be used for pod IPs in the cluster.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 352</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::IPAllocationPolicy (class)">IPAllocationPolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
