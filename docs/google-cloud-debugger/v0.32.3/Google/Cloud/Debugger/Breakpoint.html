@@ -1,0 +1,2439 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Debugger::Breakpoint - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Debugger::Breakpoint";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span>
+     &raquo; 
+    <span class="title">Breakpoint</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Debugger::Breakpoint
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Debugger::Breakpoint</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>MonitorMixin</dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger/breakpoint.rb<span class="defines">,<br />
+  lib/google/cloud/debugger/breakpoint/variable.rb,<br /> lib/google/cloud/debugger/breakpoint/evaluator.rb,<br /> lib/google/cloud/debugger/breakpoint/validator.rb,<br /> lib/google/cloud/debugger/breakpoint/stack_frame.rb,<br /> lib/google/cloud/debugger/breakpoint/status_message.rb,<br /> lib/google/cloud/debugger/breakpoint/variable_table.rb,<br /> lib/google/cloud/debugger/breakpoint/source_location.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Breakpoint</h1>
+
+<p>Abstract class that represents a breakpoint, which can be set and
+triggered in a debuggee application. Maps to gRPC struct
+<span class='object_link'><a href="../../Devtools/Clouddebugger/V2/Breakpoint.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Devtools::Clouddebugger::V2::Breakpoint</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Logpoint.html" title="Google::Cloud::Debugger::Logpoint (class)">Logpoint</a></span>, <span class='object_link'><a href="Snappoint.html" title="Google::Cloud::Debugger::Snappoint (class)">Snappoint</a></span></p>
+</div>
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Breakpoint/Validator.html" title="Google::Cloud::Debugger::Breakpoint::Validator (module)">Validator</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Breakpoint/Evaluator.html" title="Google::Cloud::Debugger::Breakpoint::Evaluator (class)">Evaluator</a></span>, <span class='object_link'><a href="Breakpoint/SourceLocation.html" title="Google::Cloud::Debugger::Breakpoint::SourceLocation (class)">SourceLocation</a></span>, <span class='object_link'><a href="Breakpoint/StackFrame.html" title="Google::Cloud::Debugger::Breakpoint::StackFrame (class)">StackFrame</a></span>, <span class='object_link'><a href="Breakpoint/StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">StatusMessage</a></span>, <span class='object_link'><a href="Breakpoint/Variable.html" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Variable</a></span>, <span class='object_link'><a href="Breakpoint/VariableTable.html" title="Google::Cloud::Debugger::Breakpoint::VariableTable (class)">VariableTable</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action-instance_method" title="#action (instance method)">#<strong>action</strong>  &#x21d2; Symbol </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Action to take when a breakpoint is hit.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#app_root-instance_method" title="#app_root (instance method)">#<strong>app_root</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Absolute path to the debuggee Ruby application root directory.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#condition-instance_method" title="#condition (instance method)">#<strong>condition</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Condition that triggers the breakpoint.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_time-instance_method" title="#create_time (instance method)">#<strong>create_time</strong>  &#x21d2; Time </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Time this breakpoint was created by the server in seconds resolution.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#evaluated_expressions-instance_method" title="#evaluated_expressions (instance method)">#<strong>evaluated_expressions</strong>  &#x21d2; Array&lt;Google::Cloud::Debugger::Breakpoint::Variable&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Values of evaluated expressions at breakpoint time.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#evaluated_log_message-instance_method" title="#evaluated_log_message (instance method)">#<strong>evaluated_log_message</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The evaluated log message when action is LOG.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#expressions-instance_method" title="#expressions (instance method)">#<strong>expressions</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of read-only expressions to evaluate at the breakpoint location.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#final_time-instance_method" title="#final_time (instance method)">#<strong>final_time</strong>  &#x21d2; Time </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Time this breakpoint was finalized as seen by the server in seconds resolution.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id-instance_method" title="#id (instance method)">#<strong>id</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Breakpoint identifier, unique in the scope of the debuggee.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_final_state-instance_method" title="#is_final_state (instance method)">#<strong>is_final_state</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When true, indicates that this is a final result and the breakpoint state will not change from here on.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Hash&lt;String, String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A set of custom breakpoint properties, populated by the agent, to be displayed to the user.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#location-instance_method" title="#location (instance method)">#<strong>location</strong>  &#x21d2; Google::Cloud::Debugger::Breakpoint::SourceLocation </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Breakpoint source location.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#log_level-instance_method" title="#log_level (instance method)">#<strong>log_level</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Indicates the severity of the log.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#log_message_format-instance_method" title="#log_message_format (instance method)">#<strong>log_message_format</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Only relevant when action is LOG.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stack_frames-instance_method" title="#stack_frames (instance method)">#<strong>stack_frames</strong>  &#x21d2; Array&lt;Google::Cloud::Debugger::Breakpoint::StackFrame&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The stack at breakpoint time.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status-instance_method" title="#status (instance method)">#<strong>status</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Breakpoint status.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user_email-instance_method" title="#user_email (instance method)">#<strong>user_email</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>E-mail address of the user that created this breakpoint.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#variable_table-instance_method" title="#variable_table (instance method)">#<strong>variable_table</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The variable_table exists to aid with computation, memory and network traffic optimization.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#check_condition-instance_method" title="#check_condition (instance method)">#<strong>check_condition</strong>(binding)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Evaluate the breakpoint&#39;s condition expression against a given binding object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#complete-instance_method" title="#complete (instance method)">#<strong>complete</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Marks a breakpoint as complete if this breakpoint isn&#39;t completed already.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#complete%3F-instance_method" title="#complete? (instance method)">#<strong>complete?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the breakpoint has been evaluated or set to a final error state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eql%3F-instance_method" title="#eql? (instance method)">#<strong>eql?</strong>(other)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if two breakpoints are equal to each other.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#full_path-instance_method" title="#full_path (instance method)">#<strong>full_path</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get full absolute file path by combining the relative file path with application root directory path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#line-instance_method" title="#line (instance method)">#<strong>line</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the line number of this breakpoint.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#path-instance_method" title="#path (instance method)">#<strong>path</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the file path of this breakpoint.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_error_state-instance_method" title="#set_error_state (instance method)">#<strong>set_error_state</strong>(message, refers_to: StatusMessage::UNSPECIFIED, is_final: true)  &#x21d2; Google::Cloud::Debugger::Breakpoint::StatusMessage </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set breakpoint to an error state, which initializes the @status instance variable with the error message.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#valid%3F-instance_method" title="#valid? (instance method)">#<strong>valid?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if the breakpoint is valid or not.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="action=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="action-instance_method">
+  
+    #<strong>action</strong>  &#x21d2; <tt>Symbol</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Action to take when a breakpoint is hit. Either :CAPTURE or :LOG.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_action'>action</span>
+  <span class='ivar'>@action</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="app_root=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="app_root-instance_method">
+  
+    #<strong>app_root</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Absolute path to the debuggee Ruby application root directory.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_app_root'>app_root</span>
+  <span class='ivar'>@app_root</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="condition=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="condition-instance_method">
+  
+    #<strong>condition</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Condition that triggers the breakpoint. The condition is a compound
+boolean expression composed using expressions in a programming
+language at the source location.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 77</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_condition'>condition</span>
+  <span class='ivar'>@condition</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="create_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="create_time-instance_method">
+  
+    #<strong>create_time</strong>  &#x21d2; <tt>Time</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Time this breakpoint was created by the server in seconds resolution.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_time'>create_time</span>
+  <span class='ivar'>@create_time</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="evaluated_expressions=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="evaluated_expressions-instance_method">
+  
+    #<strong>evaluated_expressions</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Breakpoint/Variable.html" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Google::Cloud::Debugger::Breakpoint::Variable</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Values of evaluated expressions at breakpoint time. The evaluated
+expressions appear in exactly the same order they are listed in the
+expressions field. The name field holds the original expression text,
+the value or members field holds the result of the evaluated
+expression. If the expression cannot be evaluated, the status inside
+the Variable will indicate an error and contain the error text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Breakpoint/Variable.html" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Google::Cloud::Debugger::Breakpoint::Variable</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 101</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_evaluated_expressions'>evaluated_expressions</span>
+  <span class='ivar'>@evaluated_expressions</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="evaluated_log_message=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="evaluated_log_message-instance_method">
+  
+    #<strong>evaluated_log_message</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The evaluated log message when action is LOG.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_evaluated_log_message'>evaluated_log_message</span>
+  <span class='ivar'>@evaluated_log_message</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="expressions=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="expressions-instance_method">
+  
+    #<strong>expressions</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>List of read-only expressions to evaluate at the breakpoint location.
+The expressions are composed using expressions in the programming
+language at the source location. If the breakpoint action is LOG, the
+evaluated expressions are included in log statements.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_expressions'>expressions</span>
+  <span class='ivar'>@expressions</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="final_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="final_time-instance_method">
+  
+    #<strong>final_time</strong>  &#x21d2; <tt>Time</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Time this breakpoint was finalized as seen by the server in seconds
+resolution.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+112
+113
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 112</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_final_time'>final_time</span>
+  <span class='ivar'>@final_time</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="id-instance_method">
+  
+    #<strong>id</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Breakpoint identifier, unique in the scope of the debuggee.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 40</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="is_final_state=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="is_final_state-instance_method">
+  
+    #<strong>is_final_state</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>When true, indicates that this is a final result and the breakpoint
+state will not change from here on.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_final_state'>is_final_state</span>
+  <span class='ivar'>@is_final_state</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Hash&lt;String, String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A set of custom breakpoint properties, populated by the agent, to be
+displayed to the user.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;String, String&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='ivar'>@labels</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="location=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="location-instance_method">
+  
+    #<strong>location</strong>  &#x21d2; <tt><span class='object_link'><a href="Breakpoint/SourceLocation.html" title="Google::Cloud::Debugger::Breakpoint::SourceLocation (class)">Google::Cloud::Debugger::Breakpoint::SourceLocation</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Breakpoint source location.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Breakpoint/SourceLocation.html" title="Google::Cloud::Debugger::Breakpoint::SourceLocation (class)">Google::Cloud::Debugger::Breakpoint::SourceLocation</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_location'>location</span>
+  <span class='ivar'>@location</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="log_level=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="log_level-instance_method">
+  
+    #<strong>log_level</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Indicates the severity of the log. Only relevant when action is LOG.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 62</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_log_level'>log_level</span>
+  <span class='ivar'>@log_level</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="log_message_format=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="log_message_format-instance_method">
+  
+    #<strong>log_message_format</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Only relevant when action is LOG. Defines the message to log when the
+breakpoint hits. The message may include parameter placeholders $0,
+$1, etc. These placeholders are replaced with the evaluated value of
+the appropriate expression. Expressions not referenced in
+logMessageFormat are not logged.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_log_message_format'>log_message_format</span>
+  <span class='ivar'>@log_message_format</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="stack_frames=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="stack_frames-instance_method">
+  
+    #<strong>stack_frames</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Breakpoint/StackFrame.html" title="Google::Cloud::Debugger::Breakpoint::StackFrame (class)">Google::Cloud::Debugger::Breakpoint::StackFrame</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The stack at breakpoint time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Breakpoint/StackFrame.html" title="Google::Cloud::Debugger::Breakpoint::StackFrame (class)">Google::Cloud::Debugger::Breakpoint::StackFrame</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153
+154
+155</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 153</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stack_frames'>stack_frames</span>
+  <span class='ivar'>@stack_frames</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="status=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status-instance_method">
+  
+    #<strong>status</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Breakpoint status.</p>
+
+<p>The status includes an error flag and a human readable message. This
+field is usually unset. The message can be either informational or an
+error message. Regardless, clients should always display the text
+message back to the user.</p>
+
+<p>Error status indicates complete failure of the breakpoint.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 127</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span>
+  <span class='ivar'>@status</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="user_email=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="user_email-instance_method">
+  
+    #<strong>user_email</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>E-mail address of the user that created this breakpoint</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 116</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_user_email'>user_email</span>
+  <span class='ivar'>@user_email</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="variable_table=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="variable_table-instance_method">
+  
+    #<strong>variable_table</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The variable_table exists to aid with computation, memory and network
+traffic optimization. It enables storing a variable once and reference
+it from multiple variables, including variables stored in the
+variable_table itself. For example, the same this object, which may
+appear at many levels of the stack, can have all of its data stored
+once in this table. The stack frame variables then would hold only a
+reference to it.</p>
+
+<p>The variable var_table_index field is an index into this repeated
+field. The stored objects are nameless and get their name from the
+referencing variable. The effective variable is a merge of the
+referencing variable and the referenced variable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+142
+143
+144</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 142</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_variable_table'>variable_table</span>
+  <span class='ivar'>@variable_table</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="check_condition-instance_method">
+  
+    #<strong>check_condition</strong>(binding)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Evaluate the breakpoint&#39;s condition expression against a given binding
+object. Returns true if the condition expression evalutes to true or
+there isn&#39;t a condition; otherwise false. Set breakpoint to error
+state if exception happens.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>binding</span>
+      
+      
+        <span class='type'>(<tt>Binding</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Ruby Binding object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>True if condition evalutes to true or there isn&#39;t a
+condition. False if condition evaluates to false or error raised
+during evaluation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 303</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_check_condition'>check_condition</span> <span class='id identifier rubyid_binding'>binding</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_condition'>condition</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_condition'>condition</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_condition_result'>condition_result</span> <span class='op'>=</span>
+    <span class='const'><span class='object_link'><a href="Breakpoint/Evaluator.html" title="Google::Cloud::Debugger::Breakpoint::Evaluator (class)">Evaluator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_readonly_eval_expression'>readonly_eval_expression</span> <span class='id identifier rubyid_binding'>binding</span><span class='comma'>,</span> <span class='id identifier rubyid_condition'>condition</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_condition_result'>condition_result</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Exception</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span>
+     <span class='id identifier rubyid_condition_result'>condition_result</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_get'>instance_variable_get</span><span class='lparen'>(</span><span class='symbol'>:@mutation_cause</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_set_error_state'>set_error_state</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_condition_result'>condition_result</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                    <span class='label'>refers_to:</span> <span class='const'><span class='object_link'><a href="Breakpoint/StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">StatusMessage</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Breakpoint/StatusMessage.html#BREAKPOINT_CONDITION-constant" title="Google::Cloud::Debugger::Breakpoint::StatusMessage::BREAKPOINT_CONDITION (constant)">BREAKPOINT_CONDITION</a></span></span>
+
+    <span class='kw'>return</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+
+
+  <span class='id identifier rubyid_condition_result'>condition_result</span> <span class='op'>?</span> <span class='kw'>true</span> <span class='op'>:</span> <span class='kw'>false</span>
+<span class='kw'>rescue</span> <span class='const'>StandardError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+  <span class='id identifier rubyid_set_error_state'>set_error_state</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                  <span class='label'>refers_to:</span> <span class='const'><span class='object_link'><a href="Breakpoint/StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">StatusMessage</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Breakpoint/StatusMessage.html#BREAKPOINT_CONDITION-constant" title="Google::Cloud::Debugger::Breakpoint::StatusMessage::BREAKPOINT_CONDITION (constant)">BREAKPOINT_CONDITION</a></span></span>
+  <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="complete-instance_method">
+  
+    #<strong>complete</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Marks a breakpoint as complete if this breakpoint isn&#39;t completed
+already. Set @is_final_state to true and set @final_time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+246
+247
+248
+249
+250
+251
+252
+253</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 246</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_complete'>complete</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='kw'>return</span> <span class='kw'>if</span> <span class='id identifier rubyid_complete?'>complete?</span>
+
+    <span class='ivar'>@is_final_state</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='ivar'>@final_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="complete?-instance_method">
+  
+    #<strong>complete?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the breakpoint has been evaluated or set to a final error
+state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+258
+259
+260</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 258</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_complete?'>complete?</span>
+  <span class='id identifier rubyid_is_final_state'>is_final_state</span> <span class='op'>?</span> <span class='kw'>true</span> <span class='op'>:</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="eql?-instance_method">
+  
+    #<strong>eql?</strong>(other)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if two breakpoints are equal to each other</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 326</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_eql?'>eql?</span> <span class='id identifier rubyid_other'>other</span>
+  <span class='id identifier rubyid_id'>id</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>&amp;&amp;</span>
+    <span class='id identifier rubyid_path'>path</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>&amp;&amp;</span>
+    <span class='id identifier rubyid_line'>line</span> <span class='op'>==</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_line'>line</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="full_path-instance_method">
+  
+    #<strong>full_path</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get full absolute file path by combining the relative file path
+with application root directory path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+389
+390
+391
+392
+393
+394
+395</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 389</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_full_path'>full_path</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_app_root'>app_root</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_app_root'>app_root</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_path'>path</span>
+  <span class='kw'>else</span>
+    <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span> <span class='id identifier rubyid_app_root'>app_root</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="line-instance_method">
+  
+    #<strong>line</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the line number of this breakpoint</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_breakpoint'>breakpoint</span> <span class='op'>=</span>
+  <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/file.rb</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>11</span>
+<span class='id identifier rubyid_breakpoint'>breakpoint</span><span class='period'>.</span><span class='id identifier rubyid_line'>line</span> <span class='comment'>#=&gt; 11</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The line number for this breakpoint</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+289
+290
+291</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 289</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_line'>line</span>
+  <span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='kw'>nil</span> <span class='op'>:</span> <span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_line'>line</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="path-instance_method">
+  
+    #<strong>path</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the file path of this breakpoint</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_breakpoint'>breakpoint</span> <span class='op'>=</span>
+  <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/file.rb</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_breakpoint'>breakpoint</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='comment'>#=&gt; &quot;path/to/file.rb&quot;</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The file path for this breakpoint</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+278
+279
+280</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 278</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_path'>path</span>
+  <span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='kw'>nil</span> <span class='op'>:</span> <span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_error_state-instance_method">
+  
+    #<strong>set_error_state</strong>(message, refers_to: StatusMessage::UNSPECIFIED, is_final: true)  &#x21d2; <tt><span class='object_link'><a href="Breakpoint/StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">Google::Cloud::Debugger::Breakpoint::StatusMessage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set breakpoint to an error state, which initializes the @status
+instance variable with the error message. Also mark this breakpoint as
+completed if is_final is true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The error message</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>refers_to</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Enum that specifies what the error refers
+to. Defaults :UNSPECIFIED. See <span class='object_link'><a href="Breakpoint/StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">StatusMessage</a></span> class for
+list of possible values</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>is_final</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Marks the breakpoint as final if true.
+Defaults true.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Breakpoint/StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">Google::Cloud::Debugger::Breakpoint::StatusMessage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The grpc
+StatusMessage object, which describes the breakpoint&#39;s error state.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 373</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_error_state'>set_error_state</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='label'>refers_to:</span> <span class='const'><span class='object_link'><a href="Breakpoint/StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">StatusMessage</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Breakpoint/StatusMessage.html#UNSPECIFIED-constant" title="Google::Cloud::Debugger::Breakpoint::StatusMessage::UNSPECIFIED (constant)">UNSPECIFIED</a></span></span><span class='comma'>,</span>
+                    <span class='label'>is_final:</span> <span class='kw'>true</span>
+  <span class='ivar'>@status</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Breakpoint/StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">StatusMessage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_is_error'>is_error</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_refers_to'>refers_to</span> <span class='op'>=</span> <span class='id identifier rubyid_refers_to'>refers_to</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_complete'>complete</span> <span class='kw'>if</span> <span class='id identifier rubyid_is_final'>is_final</span>
+
+  <span class='ivar'>@status</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="valid?-instance_method">
+  
+    #<strong>valid?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if the breakpoint is valid or not. Invoke validation function
+if breakpoint hasn&#39;t been finallized yet.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+265
+266
+267
+268
+269</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint.rb', line 265</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_valid?'>valid?</span>
+  <span class='const'><span class='object_link'><a href="Breakpoint/Validator.html" title="Google::Cloud::Debugger::Breakpoint::Validator (module)">Validator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_validate'><span class='object_link'><a href="Breakpoint/Validator.html#validate-class_method" title="Google::Cloud::Debugger::Breakpoint::Validator.validate (method)">validate</a></span></span> <span class='kw'>self</span> <span class='kw'>unless</span> <span class='id identifier rubyid_complete?'>complete?</span>
+
+  <span class='id identifier rubyid_status'>status</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_status'>status</span><span class='period'>.</span><span class='id identifier rubyid_is_error'>is_error</span> <span class='op'>?</span> <span class='kw'>false</span> <span class='op'>:</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
