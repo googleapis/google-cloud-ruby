@@ -21,11 +21,11 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Key Management Service (KMS) API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Key Management Service (KMS) API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
-    # [Google Cloud Key Management Service (KMS) API][Product Documentation]:
-    # Manages encryption for your cloud services the same way you do on-premises.
-    # You can generate, use, rotate, and destroy AES256 encryption keys.
+    # [Cloud Key Management Service (KMS) API][Product Documentation]:
+    # Manages keys and performs cryptographic operations in a central cloud
+    # service, for direct use by other cloud resources and applications.
     # - [Product Documentation][]
     #
     # ## Quick Start
@@ -34,7 +34,7 @@ module Google
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
     # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Google Cloud Key Management Service (KMS) API.](https://console.cloud.google.com/apis/library/cloudkms.googleapis.com)
+    # 3. [Enable the Cloud Key Management Service (KMS) API.](https://console.cloud.google.com/apis/library/cloudkms.googleapis.com)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Installation
@@ -43,7 +43,7 @@ module Google
     # ```
     #
     # ### Next Steps
-    # - Read the [Google Cloud Key Management Service (KMS) API Product documentation][Product Documentation]
+    # - Read the [Cloud Key Management Service (KMS) API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
     # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
@@ -96,6 +96,9 @@ module Google
       # * {Google::Cloud::Kms::V1::KeyRing KeyRing}
       # * {Google::Cloud::Kms::V1::CryptoKey CryptoKey}
       # * {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+      #
+      # If you are using manual gRPC libraries, see
+      # [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).
       #
       # @param version [Symbol, String]
       #   The major version of the service to be used. By default :v1
