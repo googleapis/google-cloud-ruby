@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Kms::V1::KeyRing - Cloud"
+title: "Class: Google::Cloud::Kms::V1::KeyOperationAttestation - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Kms::V1::KeyRing";
+  pathId = "Google::Cloud::Kms::V1::KeyOperationAttestation";
   relpath = '../../../../';
 </script>
 
@@ -27,7 +27,7 @@ js:
     <a href="../../../../_index.html">Index (K)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span>
      &raquo; 
-    <span class="title">KeyRing</span>
+    <span class="title">KeyOperationAttestation</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Cloud::Kms::V1::KeyRing
+  <div id="content"><h1>Class: Google::Cloud::Kms::V1::KeyOperationAttestation
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Cloud::Kms::V1::KeyRing</li>
+            <li class="next">Google::Cloud::Kms::V1::KeyOperationAttestation</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> is a toplevel logical grouping of <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKeys</a></span>.</p>
+    <p>Contains an HSM-generated attestation about a key operation.</p>
 
 
   </div>
@@ -97,7 +97,17 @@ js:
 <div class="tags">
   
 
-</div>
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="KeyOperationAttestation/AttestationFormat.html" title="Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat (module)">AttestationFormat</a></span>
+    
+  
+    
+  
+</p>
+
 
 
 
@@ -107,7 +117,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_time-instance_method" title="#create_time (instance method)">#<strong>create_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+      <a href="#content-instance_method" title="#content (instance method)">#<strong>content</strong>  &#x21d2; String </a>
     
 
     
@@ -133,7 +143,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+      <a href="#format-instance_method" title="#format (instance method)">#<strong>format</strong>  &#x21d2; Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat </a>
     
 
     
@@ -166,66 +176,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="create_time=-instance_method"></span>
+      <span id="content=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="create_time-instance_method">
+  <h3 class="signature first" id="content-instance_method">
   
-    #<strong>create_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns Output only. The time at which this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> was created.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>Output only. The time at which this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> was created.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-28</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 28</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="name=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="name-instance_method">
-  
-    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>content</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -233,8 +188,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. The resource name for the <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> in the format
-+projects/<em>/locations/</em>/keyRings/*+.</p>
+    <p>Returns Output only. The attestation data provided by the HSM when the key
+operation was performed.</p>
 
 
   </div>
@@ -252,8 +207,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>Output only. The resource name for the <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> in the format
-+projects/<em>/locations/</em>/keyRings/*+.</p>
+        <div class='inline'><p>Output only. The attestation data provided by the HSM when the key
+operation was performed.</p>
 </div>
       
     </li>
@@ -266,12 +221,103 @@ js:
       <pre class="lines">
 
 
-28</pre>
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 143</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyOperationAttestation (class)">KeyOperationAttestation</a></span></span>
+  <span class='comment'># Attestion formats provided by the HSM.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="KeyOperationAttestation/AttestationFormat.html" title="Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat (module)">AttestationFormat</a></span></span>
+    <span class='const'>ATTESTATION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Cavium HSM attestation compressed with gzip. Note that this format is
+</span>    <span class='comment'># defined by Cavium and subject to change at any time.
+</span>    <span class='const'>CAVIUM_V1_COMPRESSED</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="format=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="format-instance_method">
+  
+    #<strong>format</strong>  &#x21d2; <tt><span class='object_link'><a href="KeyOperationAttestation/AttestationFormat.html" title="Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat (module)">Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. The format of the attestation data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="KeyOperationAttestation/AttestationFormat.html" title="Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat (module)">Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. The format of the attestation data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 143</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyOperationAttestation (class)">KeyOperationAttestation</a></span></span>
+  <span class='comment'># Attestion formats provided by the HSM.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="KeyOperationAttestation/AttestationFormat.html" title="Google::Cloud::Kms::V1::KeyOperationAttestation::AttestationFormat (module)">AttestationFormat</a></span></span>
+    <span class='const'>ATTESTATION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Cavium HSM attestation compressed with gzip. Note that this format is
+</span>    <span class='comment'># defined by Cavium and subject to change at any time.
+</span>    <span class='const'>CAVIUM_V1_COMPRESSED</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

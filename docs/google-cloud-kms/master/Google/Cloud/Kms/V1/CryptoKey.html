@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Kms::V1::CryptoKey - Google"
+title: "Class: Google::Cloud::Kms::V1::CryptoKey - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -300,6 +300,32 @@ represent the actual key material used in cryptographic operations.</p>
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#version_template-instance_method" title="#version_template (instance method)">#<strong>version_template</strong>  &#x21d2; Google::Cloud::Kms::V1::CryptoKeyVersionTemplate </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A template describing settings for new <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> instances.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -353,28 +379,38 @@ represent the actual key material used in cryptographic operations.</p>
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88</pre>
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 92</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span></span>
-  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the capabilities of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Two
-</span>  <span class='comment'># keys with the same purpose may use different underlying algorithms, but
-</span>  <span class='comment'># must support the same set of operations.
+  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the cryptographic capabilities of a
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. A given key can only be used for the operations allowed by
+</span>  <span class='comment'># its purpose.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose (module)">CryptoKeyPurpose</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_PURPOSE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -383,6 +419,16 @@ represent the actual key material used in cryptographic operations.</p>
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt} and
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}.
 </span>    <span class='const'>ENCRYPT_DECRYPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign AsymmetricSign} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_SIGN</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt AsymmetricDecrypt} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_DECRYPT</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -436,28 +482,38 @@ represent the actual key material used in cryptographic operations.</p>
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88</pre>
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 92</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span></span>
-  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the capabilities of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Two
-</span>  <span class='comment'># keys with the same purpose may use different underlying algorithms, but
-</span>  <span class='comment'># must support the same set of operations.
+  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the cryptographic capabilities of a
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. A given key can only be used for the operations allowed by
+</span>  <span class='comment'># its purpose.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose (module)">CryptoKeyPurpose</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_PURPOSE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -466,6 +522,16 @@ represent the actual key material used in cryptographic operations.</p>
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt} and
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}.
 </span>    <span class='const'>ENCRYPT_DECRYPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign AsymmetricSign} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_SIGN</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt AsymmetricDecrypt} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_DECRYPT</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -519,28 +585,38 @@ represent the actual key material used in cryptographic operations.</p>
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88</pre>
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 92</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span></span>
-  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the capabilities of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Two
-</span>  <span class='comment'># keys with the same purpose may use different underlying algorithms, but
-</span>  <span class='comment'># must support the same set of operations.
+  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the cryptographic capabilities of a
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. A given key can only be used for the operations allowed by
+</span>  <span class='comment'># its purpose.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose (module)">CryptoKeyPurpose</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_PURPOSE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -549,6 +625,16 @@ represent the actual key material used in cryptographic operations.</p>
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt} and
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}.
 </span>    <span class='const'>ENCRYPT_DECRYPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign AsymmetricSign} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_SIGN</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt AsymmetricDecrypt} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_DECRYPT</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -581,6 +667,10 @@ CreateCryptoKeyVersion and
 UpdateCryptoKeyPrimaryVersion
 do not affect <span class='object_link'><a href="#next_rotation_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#next_rotation_time (method)">next_rotation_time</a></span>.</p>
 
+<p>Keys with <span class='object_link'><a href="#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">purpose</a></span>
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span> support
+automatic rotation. For other keys, this field must be omitted.</p>
+
 
   </div>
 </div>
@@ -608,6 +698,10 @@ do not affect <span class='object_link'><a href="#next_rotation_time-instance_me
 CreateCryptoKeyVersion and
 UpdateCryptoKeyPrimaryVersion
 do not affect <span class='object_link'><a href="#next_rotation_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#next_rotation_time (method)">next_rotation_time</a></span>.</p>
+
+<p>Keys with <span class='object_link'><a href="#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">purpose</a></span>
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span> support
+automatic rotation. For other keys, this field must be omitted.</p>
 </div>
       
     </li>
@@ -620,28 +714,38 @@ do not affect <span class='object_link'><a href="#next_rotation_time-instance_me
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88</pre>
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 92</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span></span>
-  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the capabilities of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Two
-</span>  <span class='comment'># keys with the same purpose may use different underlying algorithms, but
-</span>  <span class='comment'># must support the same set of operations.
+  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the cryptographic capabilities of a
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. A given key can only be used for the operations allowed by
+</span>  <span class='comment'># its purpose.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose (module)">CryptoKeyPurpose</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_PURPOSE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -650,6 +754,16 @@ do not affect <span class='object_link'><a href="#next_rotation_time-instance_me
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt} and
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}.
 </span>    <span class='const'>ENCRYPT_DECRYPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign AsymmetricSign} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_SIGN</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt AsymmetricDecrypt} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_DECRYPT</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -677,6 +791,10 @@ in <span class='object_link'><a href="EncryptRequest.html#name-instance_method" 
 <p>The <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>&#39;s primary version can be updated via
 UpdateCryptoKeyPrimaryVersion.</p>
 
+<p>All keys with <span class='object_link'><a href="#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">purpose</a></span>
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span> have a
+primary. For other keys, this field will be omitted.</p>
+
 
   </div>
 </div>
@@ -699,6 +817,10 @@ in <span class='object_link'><a href="EncryptRequest.html#name-instance_method" 
 
 <p>The <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>&#39;s primary version can be updated via
 UpdateCryptoKeyPrimaryVersion.</p>
+
+<p>All keys with <span class='object_link'><a href="#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">purpose</a></span>
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span> have a
+primary. For other keys, this field will be omitted.</p>
 </div>
       
     </li>
@@ -711,28 +833,38 @@ UpdateCryptoKeyPrimaryVersion.</p>
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88</pre>
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 92</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span></span>
-  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the capabilities of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Two
-</span>  <span class='comment'># keys with the same purpose may use different underlying algorithms, but
-</span>  <span class='comment'># must support the same set of operations.
+  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the cryptographic capabilities of a
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. A given key can only be used for the operations allowed by
+</span>  <span class='comment'># its purpose.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose (module)">CryptoKeyPurpose</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_PURPOSE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -741,6 +873,16 @@ UpdateCryptoKeyPrimaryVersion.</p>
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt} and
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}.
 </span>    <span class='const'>ENCRYPT_DECRYPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign AsymmetricSign} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_SIGN</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt AsymmetricDecrypt} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_DECRYPT</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -761,8 +903,7 @@ UpdateCryptoKeyPrimaryVersion.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The immutable purpose of this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>. Currently, the only acceptable
-purpose is <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span>.</p>
+    <p>Returns The immutable purpose of this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>.</p>
 
 
   </div>
@@ -780,8 +921,7 @@ purpose is <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#EN
       
       
         &mdash;
-        <div class='inline'><p>The immutable purpose of this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>. Currently, the only acceptable
-purpose is <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span>.</p>
+        <div class='inline'><p>The immutable purpose of this <span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span>.</p>
 </div>
       
     </li>
@@ -794,28 +934,38 @@ purpose is <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#EN
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88</pre>
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 92</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span></span>
-  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the capabilities of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Two
-</span>  <span class='comment'># keys with the same purpose may use different underlying algorithms, but
-</span>  <span class='comment'># must support the same set of operations.
+  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the cryptographic capabilities of a
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. A given key can only be used for the operations allowed by
+</span>  <span class='comment'># its purpose.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose (module)">CryptoKeyPurpose</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_PURPOSE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -824,6 +974,16 @@ purpose is <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#EN
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt} and
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}.
 </span>    <span class='const'>ENCRYPT_DECRYPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign AsymmetricSign} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_SIGN</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt AsymmetricDecrypt} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_DECRYPT</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -849,6 +1009,10 @@ automatically rotates a key. Must be at least one day.</p>
 
 <p>If <span class='object_link'><a href="#rotation_period-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#rotation_period (method)">rotation_period</a></span> is set, <span class='object_link'><a href="#next_rotation_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#next_rotation_time (method)">next_rotation_time</a></span> must also be set.</p>
 
+<p>Keys with <span class='object_link'><a href="#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">purpose</a></span>
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span> support
+automatic rotation. For other keys, this field must be omitted.</p>
+
 
   </div>
 </div>
@@ -869,6 +1033,10 @@ automatically rotates a key. Must be at least one day.</p>
 automatically rotates a key. Must be at least one day.</p>
 
 <p>If <span class='object_link'><a href="#rotation_period-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#rotation_period (method)">rotation_period</a></span> is set, <span class='object_link'><a href="#next_rotation_time-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#next_rotation_time (method)">next_rotation_time</a></span> must also be set.</p>
+
+<p>Keys with <span class='object_link'><a href="#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">purpose</a></span>
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span> support
+automatic rotation. For other keys, this field must be omitted.</p>
 </div>
       
     </li>
@@ -881,28 +1049,38 @@ automatically rotates a key. Must be at least one day.</p>
       <pre class="lines">
 
 
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88</pre>
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 92</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span></span>
-  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the capabilities of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. Two
-</span>  <span class='comment'># keys with the same purpose may use different underlying algorithms, but
-</span>  <span class='comment'># must support the same set of operations.
+  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the cryptographic capabilities of a
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. A given key can only be used for the operations allowed by
+</span>  <span class='comment'># its purpose.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose (module)">CryptoKeyPurpose</a></span></span>
     <span class='comment'># Not specified.
 </span>    <span class='const'>CRYPTO_KEY_PURPOSE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -911,6 +1089,123 @@ automatically rotates a key. Must be at least one day.</p>
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt} and
 </span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}.
 </span>    <span class='const'>ENCRYPT_DECRYPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign AsymmetricSign} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_SIGN</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt AsymmetricDecrypt} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_DECRYPT</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="version_template=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="version_template-instance_method">
+  
+    #<strong>version_template</strong>  &#x21d2; <tt><span class='object_link'><a href="CryptoKeyVersionTemplate.html" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate (class)">Google::Cloud::Kms::V1::CryptoKeyVersionTemplate</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A template describing settings for new <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> instances.
+The properties of new <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> instances created by either
+CreateCryptoKeyVersion or
+auto-rotation are controlled by this template.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CryptoKeyVersionTemplate.html" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate (class)">Google::Cloud::Kms::V1::CryptoKeyVersionTemplate</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A template describing settings for new <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> instances.
+The properties of new <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> instances created by either
+CreateCryptoKeyVersion or
+auto-rotation are controlled by this template.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb', line 92</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span></span>
+  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurpose} describes the cryptographic capabilities of a
+</span>  <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKey}. A given key can only be used for the operations allowed by
+</span>  <span class='comment'># its purpose.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose (module)">CryptoKeyPurpose</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>CRYPTO_KEY_PURPOSE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Encrypt Encrypt} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::Decrypt Decrypt}.
+</span>    <span class='const'>ENCRYPT_DECRYPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign AsymmetricSign} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_SIGN</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt AsymmetricDecrypt} and
+</span>    <span class='comment'># {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+</span>    <span class='const'>ASYMMETRIC_DECRYPT</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>

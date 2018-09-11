@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Kms::V1::EncryptRequest - Google"
+title: "Class: Google::Cloud::Kms::V1::EncryptRequest - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -205,8 +205,14 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Optional data that, if specified, must also be provided during decryption
-through <span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.  Must be no
-larger than 64KiB.</p>
+through <span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.</p>
+
+<p>The maximum size depends on the key version&#39;s
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
+<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the AAD must be no larger than
+64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
+plaintext and additional_authenticated_data fields must be no larger than
+8KiB.</p>
 
 
   </div>
@@ -225,8 +231,14 @@ larger than 64KiB.</p>
       
         &mdash;
         <div class='inline'><p>Optional data that, if specified, must also be provided during decryption
-through <span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.  Must be no
-larger than 64KiB.</p>
+through <span class='object_link'><a href="DecryptRequest.html#additional_authenticated_data-instance_method" title="Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data (method)">DecryptRequest#additional_authenticated_data</a></span>.</p>
+
+<p>The maximum size depends on the key version&#39;s
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
+<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the AAD must be no larger than
+64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
+plaintext and additional_authenticated_data fields must be no larger than
+8KiB.</p>
 </div>
       
     </li>
@@ -239,10 +251,10 @@ larger than 64KiB.</p>
       <pre class="lines">
 
 
-203</pre>
+229</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 203</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 229</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::EncryptRequest (class)">EncryptRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -302,10 +314,10 @@ to use for encryption.</p>
       <pre class="lines">
 
 
-203</pre>
+229</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 203</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 229</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::EncryptRequest (class)">EncryptRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -328,6 +340,13 @@ to use for encryption.</p>
   <div class="discussion">
     <p>Returns Required. The data to encrypt. Must be no larger than 64KiB.</p>
 
+<p>The maximum size depends on the key version&#39;s
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
+<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the plaintext must be no larger
+than 64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
+plaintext and additional_authenticated_data fields must be no larger than
+8KiB.</p>
+
 
   </div>
 </div>
@@ -345,6 +364,13 @@ to use for encryption.</p>
       
         &mdash;
         <div class='inline'><p>Required. The data to encrypt. Must be no larger than 64KiB.</p>
+
+<p>The maximum size depends on the key version&#39;s
+<span class='object_link'><a href="CryptoKeyVersionTemplate.html#protection_level-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level (method)">protection_level</a></span>. For
+<span class='object_link'><a href="ProtectionLevel.html#SOFTWARE-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE (constant)">SOFTWARE</a></span> keys, the plaintext must be no larger
+than 64KiB. For <span class='object_link'><a href="ProtectionLevel.html#HSM-constant" title="Google::Cloud::Kms::V1::ProtectionLevel::HSM (constant)">HSM</a></span> keys, the combined length of the
+plaintext and additional_authenticated_data fields must be no larger than
+8KiB.</p>
 </div>
       
     </li>
@@ -357,10 +383,10 @@ to use for encryption.</p>
       <pre class="lines">
 
 
-203</pre>
+229</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 203</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb', line 229</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::EncryptRequest (class)">EncryptRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

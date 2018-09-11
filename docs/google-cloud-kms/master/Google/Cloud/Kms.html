@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Kms - Google"
+title: "Module: Google::Cloud::Kms - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -256,6 +256,9 @@ model with the following objects:</p>
 <li><span class='object_link'><a href="Kms/V1/CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></li>
 </ul>
 
+<p>If you are using manual gRPC libraries, see
+<a href="https://cloud.google.com/kms/docs/grpc">Using gRPC with Cloud KMS</a>.</p>
+
 
   </div>
 </div>
@@ -410,9 +413,6 @@ is used.</p>
       <pre class="lines">
 
 
-133
-134
-135
 136
 137
 138
@@ -422,10 +422,13 @@ is used.</p>
 142
 143
 144
-145</pre>
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms.rb', line 136</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v1</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Kms::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>
