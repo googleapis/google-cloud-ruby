@@ -19,10 +19,12 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
+require "rake/testtask"
 desc "Run tests."
-task :test do
-  $LOAD_PATH.unshift "lib", "test"
-  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/**/*_test.rb"]
+  t.warning = false
 end
 
 namespace :test do
