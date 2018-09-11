@@ -37,7 +37,7 @@ namespace :test do
       add_filter "test/"
     end
 
-    Rake::Task["test"].invoke
+    Rake::Task[:test].invoke
   end
 end
 
@@ -93,7 +93,7 @@ namespace :acceptance do
       add_filter "acceptance/"
     end
 
-    Rake::Task["acceptance"].invoke(args[:project], args[:keyfile])
+    Rake::Task[:acceptance].invoke(args[:project], args[:keyfile])
   end
 
   desc "Run acceptance cleanup."
@@ -159,22 +159,22 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-bigtable"
   header "google-cloud-bigtable rubocop", "*"
-  sh "bundle exec rake rubocop"
+  Rake::Task[:rubocop].invoke
   header "google-cloud-bigtable yard", "*"
   header "bigtable yard still had warnings", "!"
-  sh "bundle exec rake yard"
+  Rake::Task[:yard].invoke
   header "google-cloud-bigtable doctest", "*"
-  sh "bundle exec rake doctest"
+  Rake::Task[:doctest].invoke
   header "google-cloud-bigtable test", "*"
-  sh "bundle exec rake test"
+  Rake::Task[:test].invoke
 end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
+    Rake::Task[:ci].invoke
     header "google-cloud-bigtable acceptance", "*"
-    sh "bundle exec rake acceptance -v"
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing

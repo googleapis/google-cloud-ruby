@@ -22,7 +22,7 @@ namespace :test do
       add_filter "lib/google/cloud/datastore/v1/"
     end
 
-    Rake::Task["test"].invoke
+    Rake::Task[:test].invoke
   end
 end
 
@@ -64,7 +64,7 @@ namespace :acceptance do
       add_filter "acceptance/"
     end
 
-    Rake::Task["acceptance"].invoke
+    Rake::Task[:acceptance].invoke
   end
 
   desc "Run acceptance cleanup."
@@ -109,21 +109,21 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-datastore"
   header "google-cloud-datastore rubocop", "*"
-  sh "bundle exec rake rubocop"
+  Rake::Task[:rubocop].invoke
   header "google-cloud-datastore yard", "*"
   header "datastore yard still had warnings", "!"
-  sh "bundle exec rake yard"
+  Rake::Task[:yard].invoke
   header "google-cloud-datastore doctest", "*"
-  sh "bundle exec rake doctest"
+  Rake::Task[:doctest].invoke
   header "google-cloud-datastore test", "*"
-  sh "bundle exec rake test"
+  Rake::Task[:test].invoke
 end
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
+    Rake::Task[:ci].invoke
     header "google-cloud-datastore acceptance", "*"
-    sh "bundle exec rake acceptance -v"
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing
