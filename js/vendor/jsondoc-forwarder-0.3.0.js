@@ -134,6 +134,7 @@
       if (url.split('#')[0] !== addTrailiingSlash(this.baseUrl)) return null;
       var path = getPath(url);
       var query = getQuery(url);
+
       // Remove leading and trailing slashes to prevent empty strings in split array.
       path = path.replace(/^\//, '').replace(/\/$/, '');
       var pathElements = path.split('/');
@@ -141,27 +142,45 @@
       // Return base url if /# or /#/
       if (pathElements.length === 1 && !pathElements[0]) return this.targetUrl;
 
+      // Remove 'guides' from /docs/guides/*
       if (pathElements.length === 3 && pathElements[1] === 'guides') {
-        // Remove 'guides' from /docs/guides/*
         pathElements.splice(1, 1);
 
+      // Add 'latest' if version is missing from path that includes modules.
       } else if (pathElements.length > 2 && !isVersion(pathElements[2])) {
-        // Add 'latest' if version is missing from path that includes modules.
         pathElements.splice(2, 0, 'latest');
       }
 
       // The first three elements are 'docs', gem, and version and do not require camel-casing.
       if (pathElements.length > 3) {
+
+
+        // Special case: 'google-cloud' paths must all be redirected to the google-cloud version root.
         if (pathElements[1] === 'google-cloud') {
-          // Special case: 'google-cloud' paths must all be redirected to the google-cloud version root.
           pathElements = pathElements.slice(0, 3);
+
+        // Master and latest '/guides/' paths can be redirected to yard files.
         } else if (pathElements[3] == 'guides' && isMasterOrLatestVersion(pathElements[2])) {
-          // Master and latest '/guides/' paths can be redirected to yard files.
-          var guide = "file." + pathElements[4].toUpperCase();
+          var oldGuide = pathElements[4];
+
+          // Special case: stackdriver instrumentation guide redirects
+          if (pathElements[1] === 'stackdriver') {
+            var stackdriverGems = ["debugger", "error_reporting", "logging", "trace"];
+            for (var i = 0; i < stackdriverGems.length; i++) {
+              var gem = stackdriverGems[i];
+              if (oldGuide === gem + '_instrumentation') {
+                pathElements[1] = 'google-cloud-' + gem;
+                oldGuide = 'instrumentation';
+              }
+            }
+          }
+
+          var guide = "file." + oldGuide.toUpperCase();
           pathElements = pathElements.slice(0, 3);
           pathElements.push(guide);
+
+        // Special case: Existing version '/guides/' paths must all be redirected to the gem/version root.
         } else if (pathElements[3] == 'guides') {
-          // Special case: Existing version '/guides/' paths must all be redirected to the gem/version root.
           pathElements = pathElements.slice(0, 3);
         } else {
           capitalizeModuleNames(pathElements, this.moduleNames); // This mutates pathElements.
