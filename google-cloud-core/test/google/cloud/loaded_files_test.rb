@@ -16,11 +16,12 @@
 require "helper"
 
 describe Google::Cloud, :loaded_files do
+  let(:parent_dir) { File.expand_path(File.dirname(__FILE__)) }
   let :loaded_files do
     [
-      "lib/google/cloud.rb:123:in `require'",
-      "../google-cloud-core/lib/google/cloud/config.rb:123:in `require'",
-      File.realpath("lib/google/cloud/credentials.rb") + ":123:in `require'",
+      "#{parent_dir}/../../../lib/google/cloud.rb:123:in `require'",
+      "#{parent_dir}/../../../../google-cloud-core/lib/google/cloud/config.rb:123:in `require'",
+      File.realpath("#{parent_dir}/../../../lib/google/cloud/credentials.rb") + ":123:in `require'",
       "-e:1:in `<main>'"
     ]
   end
@@ -28,9 +29,9 @@ describe Google::Cloud, :loaded_files do
   it "gives real paths of files that exist" do
     Google::Cloud.stub :caller, loaded_files do
       Google::Cloud.loaded_files.must_equal [
-        File.realpath("lib/google/cloud.rb"),
-        File.realpath("lib/google/cloud/config.rb"),
-        File.realpath("lib/google/cloud/credentials.rb")
+        File.realpath("#{parent_dir}/../../../lib/google/cloud.rb"),
+        File.realpath("#{parent_dir}/../../../lib/google/cloud/config.rb"),
+        File.realpath("#{parent_dir}/../../../lib/google/cloud/credentials.rb")
       ]
     end
   end
