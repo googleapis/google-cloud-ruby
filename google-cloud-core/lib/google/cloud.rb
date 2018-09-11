@@ -190,8 +190,10 @@ module Google
     #
     def self.auto_load_gems
       previously_loaded_files = Array(caller).map do |backtrace_line|
-        File.realpath backtrace_line.split(":").first
-      end.uniq
+        path = backtrace_line.split(":").first
+        # Skip one-line scripts started with ruby -e
+        File.realpath path unless path == "-e"
+      end.compact.uniq
 
       auto_load_files.each do |auto_load_file|
         auto_load_file = File.realpath auto_load_file
