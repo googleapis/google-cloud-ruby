@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.6 / 2018-09-12
+
+* Add missing documentation files to package.
+
 ### 1.2.5 / 2018-09-11
 
 * Fix for issue when auto-loading google-cloud-* gem.
