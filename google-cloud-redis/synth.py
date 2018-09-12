@@ -37,19 +37,31 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-redis.gemspec', merge=merge_gemspec)
 
+v1beta1_library = gapic.ruby_library(
+    'redis', 'v1beta1',
+    artman_output_name='google-cloud-ruby/google-cloud-redis'
+)
+s.copy(v1beta1_library / 'lib/google/cloud/redis/v1beta1')
+s.copy(v1beta1_library / 'lib/google/cloud/redis/v1beta1.rb')
+s.copy(v1beta1_library / 'test/google/cloud/redis/v1beta1')
+
 # https://github.com/googleapis/gapic-generator/issues/2196
 s.replace(
     [
         'README.md',
         'lib/google/cloud/redis.rb',
         'lib/google/cloud/redis/v1.rb'
+        'lib/google/cloud/redis/v1beta1.rb'
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/redis\n',
     '[Product Documentation]: https://cloud.google.com/memorystore\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2232
 s.replace(
-    'lib/google/cloud/redis/v1/cloud_redis_client.rb',
+    [
+        'lib/google/cloud/redis/v1/cloud_redis_client.rb',
+        'lib/google/cloud/redis/v1/cloud_redis_client.rb',
+    ],
     '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
     '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
 
