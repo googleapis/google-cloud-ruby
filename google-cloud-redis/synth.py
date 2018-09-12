@@ -50,7 +50,7 @@ s.replace(
     [
         'README.md',
         'lib/google/cloud/redis.rb',
-        'lib/google/cloud/redis/v1.rb'
+        'lib/google/cloud/redis/v1.rb',
         'lib/google/cloud/redis/v1beta1.rb'
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/redis\n',
@@ -60,7 +60,7 @@ s.replace(
 s.replace(
     [
         'lib/google/cloud/redis/v1/cloud_redis_client.rb',
-        'lib/google/cloud/redis/v1/cloud_redis_client.rb',
+        'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb'
     ],
     '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
     '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
