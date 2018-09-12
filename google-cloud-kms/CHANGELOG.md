@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.3 / 2018-09-12
+
+* Add Assymetric Sign/Decrypt.
+* Add CryptoKeyVersion template and view classes.
+* Add KeyOperationAttestation.
+
 ### 0.2.2 / 2018-09-10
 
 * Update documentation.
