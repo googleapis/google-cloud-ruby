@@ -16,6 +16,7 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.ruby as ruby
 import logging
 import re
 
@@ -23,18 +24,6 @@ import re
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
-
-# Temporary until we get Ruby-specific tools into synthtool
-def merge_gemspec(src, dest, path):
-    regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    regex = re.compile(r'^\s+gem.homepage\s*=\s*"[^"]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    return src
 
 v1beta1_library = gapic.ruby_library(
     'asset', 'v1beta1', artman_output_name='google-cloud-ruby/google-cloud-asset',
@@ -46,7 +35,7 @@ s.copy(v1beta1_library / 'README.md')
 s.copy(v1beta1_library / 'LICENSE')
 s.copy(v1beta1_library / '.gitignore')
 s.copy(v1beta1_library / '.yardopts')
-s.copy(v1beta1_library / 'google-cloud-asset.gemspec', merge=merge_gemspec)
+s.copy(v1beta1_library / 'google-cloud-asset.gemspec', merge=ruby.merge_gemspec)
 
 # https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
