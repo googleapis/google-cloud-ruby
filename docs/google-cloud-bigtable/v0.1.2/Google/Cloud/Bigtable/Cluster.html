@@ -1,0 +1,1583 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Bigtable::Cluster - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigtable::Cluster";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span>
+     &raquo; 
+    <span class="title">Cluster</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Bigtable::Cluster
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Bigtable::Cluster</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigtable/cluster.rb<span class="defines">,<br />
+  lib/google/cloud/bigtable/cluster/job.rb,<br /> lib/google/cloud/bigtable/cluster/list.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Cluster</h1>
+
+<p>A configuration object describing how Cloud Bigtable should treat traffic
+from a particular end user application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_cluster'>cluster</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_cluster'>cluster</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-cluster</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># Update
+</span><span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>=</span> <span class='int'>3</span>
+<span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+
+<span class='comment'># Delete
+</span><span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span></code></pre>
+    
+  </div>
+
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Cluster/Job.html" title="Google::Cloud::Bigtable::Cluster::Job (class)">Job</a></span>, <span class='object_link'><a href="Cluster/List.html" title="Google::Cloud::Bigtable::Cluster::List (class)">List</a></span>
+    
+  
+</p>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cluster_id-instance_method" title="#cluster_id (instance method)">#<strong>cluster_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique identifier for the cluster.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#creating%3F-instance_method" title="#creating? (instance method)">#<strong>creating?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The instance is currently being created, and may be destroyed if the creation process encounters an error.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete-instance_method" title="#delete (instance method)">#<strong>delete</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Permanently deletes the cluster.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#disabled%3F-instance_method" title="#disabled? (instance method)">#<strong>disabled?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The cluster has no backing nodes.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#instance_id-instance_method" title="#instance_id (instance method)">#<strong>instance_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique identifier for the instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#location-instance_method" title="#location (instance method)">#<strong>location</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Cluster location.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#location_path-instance_method" title="#location_path (instance method)">#<strong>location_path</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Cluster location path in form of <code>projects/&lt;project_id&gt;/locations/&lt;zone&gt;</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nodes-instance_method" title="#nodes (instance method)">#<strong>nodes</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of nodes allocated to this cluster.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nodes=-instance_method" title="#nodes= (instance method)">#<strong>nodes=</strong>(serve_nodes)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of nodes allocated to this cluster.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#path-instance_method" title="#path (instance method)">#<strong>path</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique name of the cluster.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_id-instance_method" title="#project_id (instance method)">#<strong>project_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique identifier for the project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ready%3F-instance_method" title="#ready? (instance method)">#<strong>ready?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The cluster has been successfully created and is ready to serve requests.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reload!-instance_method" title="#reload! (instance method)">#<strong>reload!</strong>  &#x21d2; Google::Cloud::Bigtable::Cluster </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reload cluster information.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resizing%3F-instance_method" title="#resizing? (instance method)">#<strong>resizing?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The cluster is currently being resized, and may revert to its previous node count if the process encounters an error.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save-instance_method" title="#save (instance method)">#<strong>save</strong>  &#x21d2; Google::Cloud::Bigtable::Cluster::Job </a>
+    
+
+    
+      (also: #update)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Update cluster.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state-instance_method" title="#state (instance method)">#<strong>state</strong>  &#x21d2; Symbol </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The current instance state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#storage_type-instance_method" title="#storage_type (instance method)">#<strong>storage_type</strong>  &#x21d2; Symbol </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The type of storage used by this cluster to serve its parent instance&#39;s tables, unless explicitly overridden.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="cluster_id-instance_method">
+  
+    #<strong>cluster_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique identifier for the cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 74</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cluster_id'>cluster_id</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>5</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="creating?-instance_method">
+  
+    #<strong>creating?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The instance is currently being created, and may be destroyed if the
+creation process encounters an error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_creating?'>creating?</span>
+  <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='symbol'>:CREATING</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete-instance_method">
+  
+    #<strong>delete</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Permanently deletes the cluster</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_cluster'>cluster</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_cluster'>cluster</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-cluster</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns <code>true</code> if the cluster was deleted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+234
+235
+236
+237
+238</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 234</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_delete_cluster'>delete_cluster</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_cluster_id'>cluster_id</span><span class='rparen'>)</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="disabled?-instance_method">
+  
+    #<strong>disabled?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The cluster has no backing nodes. The data (tables) still
+exist, but no operations can be performed on the cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_disabled?'>disabled?</span>
+  <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='symbol'>:DISABLED</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="instance_id-instance_method">
+  
+    #<strong>instance_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique identifier for the instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 67</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_instance_id'>instance_id</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="location-instance_method">
+  
+    #<strong>location</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Cluster location.
+i.e &quot;us-east-1b&quot;</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+158
+159
+160</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 158</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_location'>location</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="location_path-instance_method">
+  
+    #<strong>location_path</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Cluster location path in form of
+<code>projects/&lt;project_id&gt;/locations/&lt;zone&gt;</code></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+166
+167
+168</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 166</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_location_path'>location_path</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="nodes-instance_method">
+  
+    #<strong>nodes</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of nodes allocated to this cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_nodes'>nodes</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_serve_nodes'>serve_nodes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="nodes=-instance_method">
+  
+    #<strong>nodes=</strong>(serve_nodes)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The number of nodes allocated to this cluster. More nodes enable higher
+throughput and more consistent performance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>serve_nodes</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Number of nodes</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+140
+141
+142</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 140</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_nodes='>nodes=</span> <span class='id identifier rubyid_serve_nodes'>serve_nodes</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_serve_nodes'>serve_nodes</span> <span class='op'>=</span> <span class='id identifier rubyid_serve_nodes'>serve_nodes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="path-instance_method">
+  
+    #<strong>path</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique name of the cluster. Value in the form
+<code>projects/&lt;project_id&gt;/instances/&lt;instance_id&gt;/clusters/&lt;cluster_id&gt;</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_path'>path</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project_id-instance_method">
+  
+    #<strong>project_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique identifier for the project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project_id'>project_id</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ready?-instance_method">
+  
+    #<strong>ready?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The cluster has been successfully created and is ready to serve requests.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ready?'>ready?</span>
+  <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='symbol'>:READY</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reload!-instance_method">
+  
+    #<strong>reload!</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Cluster (class)">Google::Cloud::Bigtable::Cluster</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reload cluster information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Cluster (class)">Google::Cloud::Bigtable::Cluster</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+216
+217
+218
+219</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 216</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span>
+  <span class='ivar'>@grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_cluster'>get_cluster</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_cluster_id'>cluster_id</span><span class='rparen'>)</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resizing?-instance_method">
+  
+    #<strong>resizing?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The cluster is currently being resized, and may revert to its previous
+node count if the process encounters an error.
+A cluster is still capable of serving requests while being resized,
+but may exhibit performance as if its number of allocated nodes is
+between the starting and requested states.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+117
+118
+119</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 117</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resizing?'>resizing?</span>
+  <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='symbol'>:RESIZING</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save-instance_method">
+  
+    #<strong>save</strong>  &#x21d2; <tt><span class='object_link'><a href="Cluster/Job.html" title="Google::Cloud::Bigtable::Cluster::Job (class)">Google::Cloud::Bigtable::Cluster::Job</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='update-instance_method'>update</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Update cluster.</p>
+
+<p>Updatable fields are no of nodes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_cluster'>cluster</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_cluster'>cluster</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-cluster</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>=</span> <span class='int'>3</span>
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; false
+</span>
+<span class='comment'># To block until the operation completes.
+</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; true
+</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_error'>error</span>
+<span class='kw'>else</span>
+  <span class='id identifier rubyid_cluster'>cluster</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_cluster'>cluster</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cluster/Job.html" title="Google::Cloud::Bigtable::Cluster::Job (class)">Google::Cloud::Bigtable::Cluster::Job</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The job representing the long-running, asynchronous processing of
+an update cluster operation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 200</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_save'>save</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_update_cluster'>update_cluster</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_cluster_id'>cluster_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_location_path'>location_path</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_nodes'>nodes</span>
+  <span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Cluster (class)">Cluster</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cluster/Job.html" title="Google::Cloud::Bigtable::Cluster::Job (class)">Job</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span><span class='lparen'>(</span><span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="state-instance_method">
+  
+    #<strong>state</strong>  &#x21d2; <tt>Symbol</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The current instance state.
+Possible values are
+<code>:CREATING</code>, <code>:READY</code>, <code>:STATE_NOT_KNOWN</code>, <code>:RESIZING</code>, <code>:DISABLED</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_state'>state</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="storage_type-instance_method">
+  
+    #<strong>storage_type</strong>  &#x21d2; <tt>Symbol</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The type of storage used by this cluster to serve its
+parent instance&#39;s tables, unless explicitly overridden.
+Valid values are <code>:SSD</code>(Flash (SSD) storage should be used),
+<code>:HDD</code>(Magnetic drive (HDD) storage should be used)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+150
+151
+152</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/cluster.rb', line 150</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_storage_type'>storage_type</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_default_storage_type'>default_storage_type</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
