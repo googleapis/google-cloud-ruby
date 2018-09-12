@@ -28,7 +28,7 @@ $ gem install google-cloud-redis
 - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
-[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest/google/cloud/redis/v1beta1
+[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest/google/cloud/redis/v1
 [Product Documentation]: https://cloud.google.com/memorystore
 
 ## Enabling Logging
