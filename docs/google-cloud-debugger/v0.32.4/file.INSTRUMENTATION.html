@@ -1,0 +1,193 @@
+---
+layout: yard_main
+title: "File: INSTRUMENTATION - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "INSTRUMENTATION";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="file_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: INSTRUMENTATION</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>Stackdriver Debugger Instrumentation</h1>
+
+<p>Stackdriver Debugger is a feature of the Google Cloud Platform that lets
+you inspect the state of an application at any code location without using
+logging statements and without stopping or slowing down your applications.
+Your users are not impacted during debugging. Using the production
+debugger you can capture the local variables and call stack and link it
+back to a specific line location in your source code. You can use this to
+analyze the production state of your application and understand the
+behavior of your code in production.</p>
+
+<p>For general information about Stackdriver Debugger, read <a href="https://cloud.google.com/debugger/docs/">Stackdriver
+Debugger Documentation</a>.</p>
+
+<p>The Stackdriver Debugger Ruby library, <code>google-cloud-debugger</code>, provides an
+easy-to-use debugger instrumentation that reports state data, such as
+value of program variables and the call stack, to Stackdriver Debugger
+when the code at a breakpoint location is executed in your Ruby
+application. See the <a href="#instrumenting-your-app">instrumenting your app</a>
+section for how to debug your application, in both development and production.</p>
+
+<h2>Instrumenting Your App</h2>
+
+<p>This instrumentation library provides the following features to help you
+debug your applications in production:</p>
+
+<ul>
+<li>  Automatic application registration. It facilitates multiple running
+instances of same version of application when hosted in production.</li>
+<li>  A background debugger agent that runs side-by-side with your
+application that automatically collects state data when code is
+executed at breakpoint locations.</li>
+<li>  A Rack middleware and Railtie that automatically manages the debugger
+agent for Ruby on Rails and other Rack-based Ruby applications.</li>
+</ul>
+
+<p>When this library is configured in your running application, and the
+source code and breakpoints are setup through the Google Cloud Console,
+You&#39;ll be able to
+<a href="https://cloud.google.com/debugger/docs/debugging">interact</a> with your
+application in real time through the <a href="https://console.cloud.google.com/debug?_ga=1.84295834.280814654.1476313407">Stackdriver Debugger 
+UI</a>.
+This library also integrates with Google App Engine Flexible to make debuggee
+application configuration more seemless.</p>
+
+<p>Note that when no breakpoints are created, the debugger agent consumes
+very little resource and has no interference with the running application.
+Once breakpoints are created and depends on where the breakpoints are
+located, the debugger agent may add a little latency onto each request.
+The application performance will be back to normal after all breakpoints
+are finished being evaluated. Be aware the more breakpoints are created,
+or the harder to reach the breakpoints, the more resource the debugger
+agent would need to consume.</p>
+
+<h3>Configuration</h3>
+
+<p>The default configuration enables Stackdriver instrumentation features to run on
+Google Cloud Platform. You can easily configure the instrumentation library if 
+you want to run on a non Google Cloud environment or you want to customize 
+the default behavior.</p>
+
+<p>See the
+<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration">Configuration Guide</a>
+for full configuration parameters.</p>
+
+<h3>Using instrumentation with Ruby on Rails</h3>
+
+<p>To install application instrumentation in your Ruby on Rails app, add this
+gem, <code>google-cloud-debugger</code>, to your Gemfile and update your bundle. Then
+add the following line to your <code>config/application.rb</code> file:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/rails</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>This will load a Railtie that automatically integrates with the Rails
+framework by injecting a Rack middleware. </p>
+
+<h3>Using instrumentation with Sinatra</h3>
+
+<p>To install application instrumentation in your Sinatra app, add this gem,
+<code>google-cloud-debugger</code>, to your Gemfile and update your bundle. Then add
+the following lines to your main application Ruby file:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Debugger/Middleware.html" title="Google::Cloud::Debugger::Middleware (class)">Middleware</a></span></span>
+</code></pre>
+
+<p>This will install the debugger middleware in your application.</p>
+
+<h3>Using instrumentation with other Rack-based frameworks</h3>
+
+<p>To install application instrumentation in an app using another Rack-based
+web framework, add this gem, <code>google-cloud-debugger</code>, to your Gemfile and
+update your bundle. Then add install the debugger middleware in your
+middleware stack. In most cases, this means adding these lines to your
+<code>config.ru</code> Rack configuration file:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Debugger/Middleware.html" title="Google::Cloud::Debugger::Middleware (class)">Middleware</a></span></span>
+</code></pre>
+
+<p>Some web frameworks have an alternate mechanism for modifying the
+middleware stack. Consult your web framework&#39;s documentation for more
+information.</p>
+
+<h3>The Stackdriver diagnostics suite</h3>
+
+<p>The debugger library is part of the Stackdriver diagnostics suite, which
+also includes error reporting, log analysis, and tracing analysis. If you
+include the <code>stackdriver</code> gem in your Gemfile, this debugger library will
+be included automatically. In addition, if you include the <code>stackdriver</code>
+gem in an application using Ruby On Rails, the Railties will be installed
+automatically. See the documentation for the &quot;stackdriver&quot; gem
+for more details.</p>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

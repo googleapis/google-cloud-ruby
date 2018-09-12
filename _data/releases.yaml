@@ -122,6 +122,7 @@ google-cloud-datastore:
 - v0.20.1
 - v0.20.0
 google-cloud-debugger:
+- v0.32.4
 - v0.32.3
 - v0.32.2
 - v0.32.1
