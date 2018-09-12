@@ -1,5 +1,10 @@
 # Release History
 
+### 1.4.3 / 2018-09-12
+
+* Update documentation.
+* Add missing documentation files to package.
+
 ### 1.4.2 / 2018-09-10
 
 * Fix issue where client_config was not being passed when connecting to the

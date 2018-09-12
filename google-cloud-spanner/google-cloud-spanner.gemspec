@@ -12,7 +12,8 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-spanner"
   gem.license       = "Apache-2.0"
 
-  gem.files         = `git ls-files -- lib/*`.split("\n")
+  gem.files         = `git ls-files -- lib/*`.split("\n") +
+                      ["OVERVIEW.md", "AUTHENTICATION.md", "LOGGING.md", "CONTRIBUTING.md", "TROUBLESHOOTING.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 2.0.0"
