@@ -50,6 +50,7 @@ google-cloud:
 - v0.20.1
 - v0.20.0
 google-cloud-bigquery:
+- v1.8.1
 - v1.8.0
 - v1.7.1
 - v1.7.0
