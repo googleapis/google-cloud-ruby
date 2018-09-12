@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Longrunning::GetOperationRequest - Google"
+title: "Class: Google::Cloud::Redis::V1::DeleteInstanceRequest - Google"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,13 +10,13 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Longrunning::GetOperationRequest";
-  relpath = '../../';
+  pathId = "Google::Cloud::Redis::V1::DeleteInstanceRequest";
+  relpath = '../../../../';
 </script>
 
 
 <div class="nav_wrap">
-  <iframe id="nav" src="../../class_list.html?1"></iframe>
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
   <div id="resizer"></div>
 </div>
 
@@ -24,17 +24,17 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../_index.html">Index (G)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span>
+    <a href="../../../../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Redis.html" title="Google::Cloud::Redis (module)">Redis</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Redis::V1 (module)">V1</a></span></span>
      &raquo; 
-    <span class="title">GetOperationRequest</span>
+    <span class="title">DeleteInstanceRequest</span>
   
 </div>
 
     <div id="search">
   
     <a class="full_list_link" id="class_list_link"
-        href="../../class_list.html">
+        href="../../../../class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Longrunning::GetOperationRequest
+  <div id="content"><h1>Class: Google::Cloud::Redis::V1::DeleteInstanceRequest
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Longrunning::GetOperationRequest</li>
+            <li class="next">Google::Cloud::Redis::V1::DeleteInstanceRequest</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -82,16 +82,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/redis/v1/doc/google/longrunning/operations.rb<span class="defines">,<br />
-  lib/google/cloud/redis/v1beta1/doc/google/longrunning/operations.rb</span>
-</dd>
+    <dd>lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The request message for Operations::GetOperation.</p>
+    <p>Request for DeleteInstance.</p>
 
 
   </div>
@@ -126,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the operation resource.</p>
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
 </div></span>
   
 </li>
@@ -154,7 +152,9 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the operation resource.</p>
+    <p>Returns Required. Redis instance resource name using the form:
+    +projects/{project_id}/locations/{location_id}/instances/{instance_id}+
+where +location_id+ refers to a GCP region</p>
 
 
   </div>
@@ -172,7 +172,9 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The name of the operation resource.</p>
+        <div class='inline'><p>Required. Redis instance resource name using the form:
+    +projects/{project_id}/locations/{location_id}/instances/{instance_id}+
+where +location_id+ refers to a GCP region</p>
 </div>
       
     </li>
@@ -185,12 +187,12 @@ js:
       <pre class="lines">
 
 
-55</pre>
+239</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/longrunning/operations.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb', line 239</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Longrunning::GetOperationRequest (class)">GetOperationRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Redis::V1::DeleteInstanceRequest (class)">DeleteInstanceRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

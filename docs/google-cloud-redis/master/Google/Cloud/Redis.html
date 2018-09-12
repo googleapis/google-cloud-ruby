@@ -67,7 +67,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google/cloud/redis.rb<span class="defines">,<br />
-  lib/google/cloud/redis/v1beta1.rb,<br /> lib/google/cloud/redis/v1beta1/credentials.rb,<br /> lib/google/cloud/redis/v1beta1/cloud_redis_client.rb,<br /> lib/google/cloud/redis/v1beta1/doc/google/cloud/redis/v1beta1/cloud_redis.rb</span>
+  lib/google/cloud/redis/v1.rb,<br /> lib/google/cloud/redis/v1beta1.rb,<br /> lib/google/cloud/redis/v1/credentials.rb,<br /> lib/google/cloud/redis/v1beta1/credentials.rb,<br /> lib/google/cloud/redis/v1/cloud_redis_client.rb,<br /> lib/google/cloud/redis/v1beta1/cloud_redis_client.rb,<br /> lib/google/cloud/redis/v1/doc/google/cloud/redis/v1/cloud_redis.rb,<br /> lib/google/cloud/redis/v1beta1/doc/google/cloud/redis/v1beta1/cloud_redis.rb</span>
 </dd>
   </dl>
   
@@ -146,7 +146,7 @@ and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spe
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Redis/V1beta1.html" title="Google::Cloud::Redis::V1beta1 (module)">V1beta1</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Redis/V1.html" title="Google::Cloud::Redis::V1 (module)">V1</a></span>, <span class='object_link'><a href="Redis/V1beta1.html" title="Google::Cloud::Redis::V1beta1 (module)">V1beta1</a></span>
     
   
     
@@ -247,7 +247,7 @@ and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spe
   <div class="discussion">
     <p>Configures and manages Cloud Memorystore for Redis instances</p>
 
-<p>Google Cloud Memorystore for Redis v1beta1</p>
+<p>Google Cloud Memorystore for Redis v1</p>
 
 <p>The +redis.googleapis.com+ service implements the Google Cloud Memorystore
 for Redis API and defines the following resource model for managing Redis
@@ -406,7 +406,7 @@ custom error handling.</p>
       
       
         &mdash;
-        <div class='inline'><p>The major version of the service to be used. By default :v1beta1
+        <div class='inline'><p>The major version of the service to be used. By default :v1
 is used.</p>
 </div>
       
@@ -438,7 +438,7 @@ is used.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/redis.rb', line 140</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='label'>version:</span> <span class='symbol'>:v1</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='const'><span class='object_link'><a href="#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Redis::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The version: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_version'>version</span><span class='embexpr_end'>}</span><span class='tstring_content'> is not available. The available versions </span><span class='tstring_end'>&quot;</span></span> \
       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>are: [</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#AVAILABLE_VERSIONS-constant" title="Google::Cloud::Redis::AVAILABLE_VERSIONS (constant)">AVAILABLE_VERSIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>]</span><span class='tstring_end'>&quot;</span></span>
