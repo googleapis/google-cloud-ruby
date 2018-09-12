@@ -67,7 +67,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google/cloud/video_intelligence.rb<span class="defines">,<br />
-  lib/google/cloud/video_intelligence/v1.rb,<br /> lib/google/cloud/video_intelligence/v1beta1.rb,<br /> lib/google/cloud/video_intelligence/v1beta2.rb,<br /> lib/google/cloud/video_intelligence/credentials.rb,<br /> lib/google/cloud/video_intelligence/v1/credentials.rb,<br /> lib/google/cloud/video_intelligence/v1/doc/overview.rb,<br /> lib/google/cloud/video_intelligence/v1beta1/credentials.rb,<br /> lib/google/cloud/video_intelligence/v1beta2/credentials.rb,<br /> lib/google/cloud/video_intelligence/v1beta1/doc/overview.rb,<br /> lib/google/cloud/video_intelligence/v1beta2/doc/overview.rb,<br /> lib/google/cloud/video_intelligence/v1/video_intelligence_service_client.rb,<br /> lib/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client.rb,<br /> lib/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client.rb</span>
+  lib/google/cloud/video_intelligence/v1.rb,<br /> lib/google/cloud/video_intelligence/v1beta1.rb,<br /> lib/google/cloud/video_intelligence/v1beta2.rb,<br /> lib/google/cloud/video_intelligence/credentials.rb,<br /> lib/google/cloud/video_intelligence/v1/credentials.rb,<br /> lib/google/cloud/video_intelligence/v1beta1/credentials.rb,<br /> lib/google/cloud/video_intelligence/v1beta2/credentials.rb,<br /> lib/google/cloud/video_intelligence/v1/video_intelligence_service_client.rb,<br /> lib/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client.rb,<br /> lib/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client.rb</span>
 </dd>
   </dl>
   
@@ -75,10 +75,10 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <h1>Ruby Client for Google Cloud Video Intelligence API (<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning">GA</a>)</h1>
+    <h1>Ruby Client for Cloud Video Intelligence API (<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning">GA</a>)</h1>
 
-<p><a href="https://cloud.google.com/video-intelligence">Google Cloud Video Intelligence API</a>:
-Google Cloud Video Intelligence API.</p>
+<p><a href="https://cloud.google.com/video-intelligence">Cloud Video Intelligence API</a>:
+Cloud Video Intelligence API.</p>
 
 <ul>
 <li><a href="https://cloud.google.com/video-intelligence">Product Documentation</a></li>
@@ -92,7 +92,7 @@ steps:</p>
 <ol>
 <li><a href="https://console.cloud.google.com/project">Select or create a Cloud Platform project.</a></li>
 <li><a href="https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project">Enable billing for your project.</a></li>
-<li><a href="https://console.cloud.google.com/apis/library/videointelligence.googleapis.com">Enable the Google Cloud Video Intelligence API.</a></li>
+<li><a href="https://console.cloud.google.com/apis/library/videointelligence.googleapis.com">Enable the Cloud Video Intelligence API.</a></li>
 <li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication">Setup Authentication.</a></li>
 </ol>
 
@@ -101,10 +101,49 @@ steps:</p>
 <pre class="code ruby"><code class="ruby">$ gem install google-cloud-video_intelligence
 </code></pre>
 
+<h3>Preview</h3>
+
+<h4>VideoIntelligenceServiceClient</h4>
+
+<pre class="code rb"><code class="rb">require &quot;google/cloud/video_intelligence&quot;
+
+video_intelligence_service_client = Google::Cloud::VideoIntelligence.new
+input_uri = &quot;gs://demomaker/cat.mp4&quot;
+features_element = :LABEL_DETECTION
+features = [features_element]
+
+# Register a callback during the method call.
+operation = video_intelligence_service_client.annotate_video(input_uri: input_uri, features: features) do |op|
+  raise op.results.message if op.error?
+  op_results = op.results
+  # Process the results.
+
+  metadata = op.metadata
+  # Process the metadata.
+end
+
+# Or use the return value to register a callback.
+operation.on_done do |op|
+  raise op.results.message if op.error?
+  op_results = op.results
+  # Process the results.
+
+  metadata = op.metadata
+  # Process the metadata.
+end
+
+# Manually reload the operation.
+operation.reload!
+
+# Or block until the operation completes, triggering callbacks on
+# completion.
+operation.wait_until_done!
+</code></pre>
+
 <h3>Next Steps</h3>
 
 <ul>
-<li>Read the <a href="https://cloud.google.com/video-intelligence">Google Cloud Video Intelligence API Product documentation</a>
+<li>Read the <a href="https://cloud.google.com/video-intelligence">Cloud Video Intelligence API Product documentation</a>
 to learn more about the product and see How-to Guides.</li>
 <li>View this <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md">repository&#39;s main README</a>
 to see the full list of Cloud APIs that we cover.</li>
