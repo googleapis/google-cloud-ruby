@@ -32,7 +32,7 @@ function set_failed_status {
 }
 
 # Set other environment variables
-sh ${KOKORO_GFILE_DIR}/env_vars.sh
+. ${KOKORO_GFILE_DIR}/env_vars.sh
 
 # Setup service account credentials.
 export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json

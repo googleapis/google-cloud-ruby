@@ -16,6 +16,7 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.ruby as ruby
 import logging
 import re
 from textwrap import dedent
@@ -23,18 +24,6 @@ from textwrap import dedent
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
-
-# Temporary until we get Ruby-specific tools into synthtool
-def merge_gemspec(src, dest, path):
-    regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    regex = re.compile(r'^\s+gem.homepage\s*=\s*"[^"]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    return src
 
 v1_library = gapic.ruby_library(
     'speech', 'v1',
@@ -49,7 +38,7 @@ s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
-s.copy(v1_library / 'google-cloud-speech.gemspec', merge=merge_gemspec)
+s.copy(v1_library / 'google-cloud-speech.gemspec', merge=ruby.merge_gemspec)
 
 v1p1beta1_library = gapic.ruby_library(
     'speech', 'v1p1beta1',
@@ -71,13 +60,12 @@ s.replace(
     'require "google/cloud/speech/v1p1beta1/speech_client"\nrequire "google/cloud/speech/v1p1beta1/helpers"')
 
 # PERMANENT: Remove methods replaced by partial gapics
-s.replace(
+ruby.delete_method(
     [
       'lib/google/cloud/speech/v1/speech_client.rb',
       'lib/google/cloud/speech/v1p1beta1/speech_client.rb'
     ],
-    f'\\n\\n(\\s+#[^\\n]*\\n)*\\n*(\\s+)def\\s+streaming_recognize[^\\n]+\\n+(\\2\\s\\s[^\\n]+\\n+)*\\2end\\n',
-    '\n')
+    'streaming_recognize')
 
 # PERMANENT: Remove streaming test from generated tests
 s.replace(

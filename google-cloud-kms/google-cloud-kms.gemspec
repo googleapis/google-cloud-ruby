@@ -3,12 +3,12 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-kms"
-  gem.version       = "0.2.1"
+  gem.version       = "0.2.2"
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-kms is the official library for Google Cloud Key Management Service (KMS) API."
-  gem.summary       = "API Client library for Google Cloud Key Management Service (KMS) API"
+  gem.description   = "google-cloud-kms is the official library for Cloud Key Management Service (KMS) API."
+  gem.summary       = "API Client library for Cloud Key Management Service (KMS) API"
   gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"
 

@@ -1,5 +1,13 @@
 # Release History
 
+### 0.33.4 / 2018-09-12
+
+* Add missing documentation files to package.
+
+### 0.33.3 / 2018-09-10
+
+* Update documentation.
+
 ### 0.33.2 / 2018-08-21
 
 * Update documentation.

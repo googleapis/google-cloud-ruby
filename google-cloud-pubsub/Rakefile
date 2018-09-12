@@ -4,10 +4,12 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
+require "rake/testtask"
 desc "Run tests."
-task :test do
-  $LOAD_PATH.unshift "lib", "test"
-  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/**/*_test.rb"]
+  t.warning = false
 end
 
 namespace :test do
@@ -22,7 +24,7 @@ namespace :test do
       add_filter "lib/google/cloud/pubsub/v1/"
     end
 
-    Rake::Task["test"].invoke
+    Rake::Task[:test].invoke
   end
 end
 
@@ -64,7 +66,7 @@ namespace :acceptance do
       add_filter "acceptance/"
     end
 
-    Rake::Task["acceptance"].invoke
+    Rake::Task[:acceptance].invoke
   end
 
   desc "Removes *ALL* topics and subscriptions. Use with caution."
@@ -99,16 +101,18 @@ namespace :acceptance do
     Google::Cloud.pubsub.snapshots.all &:delete
   end
 
-  task :run do
-    $LOAD_PATH.unshift "lib", "acceptance"
-    Dir.glob("acceptance/pubsub/**/*_test.rb").each { |file| require_relative file }
+  Rake::TestTask.new :run do |t|
+    t.libs << "acceptance"
+    t.test_files = FileList["acceptance/**/*_test.rb"]
+    t.verbose = true
+    t.warning = false
   end
 end
 
 desc "Run yard-doctest example tests."
-#task doctest: :yard do
+#task :doctest do
 task :doctest do
-  sh "bundle exec yard doctest"
+  sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
 end
 
 desc "Start an interactive shell."
@@ -128,24 +132,28 @@ end
 
 require "yard"
 require "yard/rake/yardoc_task"
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |y|
+  y.options << "--fail-on-warning"
+end
 
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-pubsub"
   header "google-cloud-pubsub rubocop", "*"
-  sh "bundle exec rake rubocop"
+  Rake::Task[:rubocop].invoke
+  header "google-cloud-pubsub yard", "*"
+  Rake::Task[:yard].invoke
   header "google-cloud-pubsub doctest", "*"
-  sh "bundle exec rake doctest"
+  Rake::Task[:doctest].invoke
   header "google-cloud-pubsub test", "*"
-  sh "bundle exec rake test"
+  Rake::Task[:test].invoke
 end
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
+    Rake::Task[:ci].invoke
     header "google-cloud-pubsub acceptance", "*"
-    sh "bundle exec rake acceptance -v"
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing

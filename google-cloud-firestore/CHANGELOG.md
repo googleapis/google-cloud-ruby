@@ -1,5 +1,15 @@
 # Release History
 
+### 0.24.1 / 2018-09-12
+
+* Add missing documentation files to package.
+
+### 0.24.0 / 2018-09-10
+
+* Add array_union and array_delete FieldValue configuration.
+* Add array-contains as an operator to the Query#where method.
+* Update documentation.
+
 ### 0.23.0 / 2018-08-17
 
 * Add Firestore Watch

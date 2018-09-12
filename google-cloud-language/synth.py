@@ -16,6 +16,7 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.ruby as ruby
 import logging
 import re
 from textwrap import dedent
@@ -23,18 +24,6 @@ from textwrap import dedent
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
-
-# Temporary until we get Ruby-specific tools into synthtool
-def merge_gemspec(src, dest, path):
-    regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    regex = re.compile(r'^\s+gem.homepage\s*=\s*"[^"]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    return src
 
 v1_library = gapic.ruby_library(
     'language', 'v1',
@@ -46,12 +35,11 @@ s.copy(v1_library / 'lib/google/cloud/language/v1.rb')
 s.copy(v1_library / 'lib/google/cloud/language/v1')
 s.copy(v1_library / 'lib/google/cloud/language.rb')
 s.copy(v1_library / 'test/google/cloud/language/v1')
-s.copy(v1_library / 'Rakefile')
 s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
-s.copy(v1_library / 'google-cloud-language.gemspec', merge=merge_gemspec)
+s.copy(v1_library / 'google-cloud-language.gemspec', merge=ruby.merge_gemspec)
 
 v1beta2_library = gapic.ruby_library(
     'language', 'v1beta2',
@@ -73,36 +61,11 @@ s.replace(
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/language\n',
     '[Product Documentation]: https://cloud.google.com/natural-language\n')
 
-# https://github.com/googleapis/gapic-generator/issues/2211
-s.replace(
-    'Rakefile',
-    'namespace :ci do\n  desc "Run the CI build, with acceptance tests\\."\n  task :acceptance do',
-    dedent("""\
-      namespace :ci do
-        desc "Run the CI build, with smoke tests."
-        task :smoke_test do
-          Rake::Task["ci"].invoke
-          header "google-cloud-language smoke_test", "*"
-          sh "bundle exec rake smoke_test -v"
-        end
-        desc "Run the CI build, with acceptance tests."
-        task :acceptance do"""))
-
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
     'lib/google/cloud/language/*/*_client.rb',
     '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
     '\\1\\2# @private\n\\2\\3')
-
-# https://github.com/googleapis/gapic-generator/issues/2278
-s.replace(
-    'Rakefile',
-    '\ndesc[^\n]+\ntask :jsondoc [^\n]+\n+(  [^\n]+\n+)*end\n',
-    '')
-s.replace(
-    'Rakefile',
-    '\n\\s*header "google-cloud-\\S+ jsondoc", "\\*"\n\\s*sh "bundle exec rake jsondoc"\n',
-    '\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2279
 s.replace(

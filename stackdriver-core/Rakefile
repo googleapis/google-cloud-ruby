@@ -4,10 +4,12 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
+require "rake/testtask"
 desc "Run tests."
-task :test do
-  $LOAD_PATH.unshift "lib", "test"
-  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/**/*_test.rb"]
+  t.warning = false
 end
 
 namespace :test do
@@ -20,7 +22,7 @@ namespace :test do
       add_filter "test/"
     end
 
-    Rake::Task["test"].invoke
+    Rake::Task[:test].invoke
   end
 end
 
@@ -60,24 +62,28 @@ end
 
 require "yard"
 require "yard/rake/yardoc_task"
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |y|
+  y.options << "--fail-on-warning"
+end
 
 desc "Run the CI build"
 task :ci do
   header "BUILDING stackdriver-core"
   header "stackdriver-core rubocop", "*"
-  sh "bundle exec rake rubocop"
+  Rake::Task[:rubocop].invoke
+  header "stackdriver-core yard", "*"
+  Rake::Task[:yard].invoke
   header "stackdriver-core doctest", "*"
-  sh "bundle exec rake doctest"
+  Rake::Task[:doctest].invoke
   header "stackdriver-core test", "*"
-  sh "bundle exec rake test"
+  Rake::Task[:test].invoke
 end
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
+    Rake::Task[:ci].invoke
     header "stackdriver-core acceptance", "*"
-    sh "bundle exec rake acceptance -v"
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing

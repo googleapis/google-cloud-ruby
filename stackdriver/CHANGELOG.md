@@ -1,5 +1,13 @@
 # Release History
 
+### 0.15.2 / 2018-09-12
+
+* Add missing documentation files to package.
+
+### 0.15.1 / 2018-09-10
+
+* Update documentation.
+
 ### 0.15.0 / 2018-05-24
 
 * Debugger 0.32.0

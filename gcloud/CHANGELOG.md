@@ -1,5 +1,13 @@
 # Release History
 
+### 0.23.2 / 2018-09-12
+
+* Add missing documentation files to package.
+
+### 0.23.1 / 2018-09-10
+
+* Update documentation.
+
 ### 0.23.0 / 2016-12-8
 
 * Update dependency on `google-cloud` gem to 0.23 or greater.

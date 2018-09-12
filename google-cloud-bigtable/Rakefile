@@ -17,12 +17,12 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
+require "rake/testtask"
 desc "Run tests."
-task :test do
-  $LOAD_PATH.unshift "lib", "test"
-  Dir.glob("test/**/*test.rb")
-    .reject { |file| file.include? "smoke_test" }
-    .each { |file| require_relative file }
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/**/*_test.rb"]
+  t.warning = false
 end
 
 namespace :test do
@@ -37,7 +37,7 @@ namespace :test do
       add_filter "test/"
     end
 
-    Rake::Task["test"].invoke
+    Rake::Task[:test].invoke
   end
 end
 
@@ -77,9 +77,11 @@ task :acceptance, :project, :keyfile do |_t, args|
 end
 
 namespace :acceptance do
-  task :run do
-    $LOAD_PATH.unshift "lib", "acceptance"
-    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+  Rake::TestTask.new :run do |t|
+    t.libs << "acceptance"
+    t.test_files = FileList["acceptance/**/*_test.rb"]
+    t.verbose = true
+    t.warning = false
   end
 
   desc "Run acceptance tests with coverage."
@@ -93,7 +95,7 @@ namespace :acceptance do
       add_filter "acceptance/"
     end
 
-    Rake::Task["acceptance"].invoke(args[:project], args[:keyfile])
+    Rake::Task[:acceptance].invoke(args[:project], args[:keyfile])
   end
 
   desc "Run acceptance cleanup."
@@ -146,7 +148,9 @@ end
 
 require "yard"
 require "yard/rake/yardoc_task"
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |y|
+  # y.options << "--fail-on-warning"
+end
 
 desc "Run yard-doctest example tests."
 task :doctest do
@@ -157,19 +161,22 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-bigtable"
   header "google-cloud-bigtable rubocop", "*"
-  sh "bundle exec rake rubocop"
+  Rake::Task[:rubocop].invoke
+  header "google-cloud-bigtable yard", "*"
+  header "bigtable yard still had warnings", "!"
+  Rake::Task[:yard].invoke
   header "google-cloud-bigtable doctest", "*"
-  sh "bundle exec rake doctest"
+  Rake::Task[:doctest].invoke
   header "google-cloud-bigtable test", "*"
-  sh "bundle exec rake test"
+  Rake::Task[:test].invoke
 end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task["ci"].invoke
+    Rake::Task[:ci].invoke
     header "google-cloud-bigtable acceptance", "*"
-    sh "bundle exec rake acceptance -v"
+    Rake::Task[:acceptance].invoke
   end
   task :a do
     # This is a handy shortcut to save typing

@@ -49,6 +49,9 @@ module Google
         #   @return [String]
         #     Optional pagination token, returned earlier via
         #     {Google::Cloud::Kms::V1::ListCryptoKeysResponse#next_page_token ListCryptoKeysResponse#next_page_token}.
+        # @!attribute [rw] version_view
+        #   @return [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
+        #     The fields of the primary version to include in the response.
         class ListCryptoKeysRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}.
@@ -67,6 +70,9 @@ module Google
         #   @return [String]
         #     Optional pagination token, returned earlier via
         #     {Google::Cloud::Kms::V1::ListCryptoKeyVersionsResponse#next_page_token ListCryptoKeyVersionsResponse#next_page_token}.
+        # @!attribute [rw] view
+        #   @return [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
+        #     The fields to include in the response.
         class ListCryptoKeyVersionsRequest; end
 
         # Response message for {Google::Cloud::Kms::V1::KeyManagementService::ListKeyRings KeyManagementService::ListKeyRings}.
@@ -127,6 +133,13 @@ module Google
         #   @return [String]
         #     The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to get.
         class GetCryptoKeyVersionRequest; end
+
+        # Request message for {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey KeyManagementService::GetPublicKey}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
+        #     get.
+        class GetPublicKeyRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::CreateKeyRing KeyManagementService::CreateKeyRing}.
         # @!attribute [rw] parent
@@ -195,11 +208,24 @@ module Google
         # @!attribute [rw] plaintext
         #   @return [String]
         #     Required. The data to encrypt. Must be no larger than 64KiB.
+        #
+        #     The maximum size depends on the key version's
+        #     {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
+        #     {Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the plaintext must be no larger
+        #     than 64KiB. For {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
+        #     plaintext and additional_authenticated_data fields must be no larger than
+        #     8KiB.
         # @!attribute [rw] additional_authenticated_data
         #   @return [String]
         #     Optional data that, if specified, must also be provided during decryption
-        #     through {Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest#additional_authenticated_data}.  Must be no
-        #     larger than 64KiB.
+        #     through {Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest#additional_authenticated_data}.
+        #
+        #     The maximum size depends on the key version's
+        #     {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
+        #     {Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the AAD must be no larger than
+        #     64KiB. For {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
+        #     plaintext and additional_authenticated_data fields must be no larger than
+        #     8KiB.
         class EncryptRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::Decrypt KeyManagementService::Decrypt}.
@@ -217,6 +243,28 @@ module Google
         #     {Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest#additional_authenticated_data}.
         class DecryptRequest; end
 
+        # Request message for {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign KeyManagementService::AsymmetricSign}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
+        # @!attribute [rw] digest
+        #   @return [Google::Cloud::Kms::V1::Digest]
+        #     Required. The digest of the data to sign. The digest must be produced with
+        #     the same digest algorithm as specified by the key version's
+        #     {Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
+        class AsymmetricSignRequest; end
+
+        # Request message for {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt KeyManagementService::AsymmetricDecrypt}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
+        #     decryption.
+        # @!attribute [rw] ciphertext
+        #   @return [String]
+        #     Required. The data encrypted with the named {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
+        #     key using OAEP.
+        class AsymmetricDecryptRequest; end
+
         # Response message for {Google::Cloud::Kms::V1::KeyManagementService::Decrypt KeyManagementService::Decrypt}.
         # @!attribute [rw] plaintext
         #   @return [String]
@@ -231,6 +279,18 @@ module Google
         #   @return [String]
         #     The encrypted data.
         class EncryptResponse; end
+
+        # Response message for {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricSign KeyManagementService::AsymmetricSign}.
+        # @!attribute [rw] signature
+        #   @return [String]
+        #     The created signature.
+        class AsymmetricSignResponse; end
+
+        # Response message for {Google::Cloud::Kms::V1::KeyManagementService::AsymmetricDecrypt KeyManagementService::AsymmetricDecrypt}.
+        # @!attribute [rw] plaintext
+        #   @return [String]
+        #     The decrypted data originally encrypted with the matching public key.
+        class AsymmetricDecryptResponse; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::UpdateCryptoKeyPrimaryVersion KeyManagementService::UpdateCryptoKeyPrimaryVersion}.
         # @!attribute [rw] name
@@ -252,6 +312,26 @@ module Google
         #   @return [String]
         #     The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
         class RestoreCryptoKeyVersionRequest; end
+
+        # A {Google::Cloud::Kms::V1::Digest Digest} holds a cryptographic message digest.
+        # @!attribute [rw] sha256
+        #   @return [String]
+        #     A message digest produced with the SHA-256 algorithm.
+        # @!attribute [rw] sha384
+        #   @return [String]
+        #     A message digest produced with the SHA-384 algorithm.
+        # @!attribute [rw] sha512
+        #   @return [String]
+        #     A message digest produced with the SHA-512 algorithm.
+        class Digest; end
+
+        # Cloud KMS metadata for the given {Google::Cloud::Location::Location}.
+        # @!attribute [rw] hsm_available
+        #   @return [true, false]
+        #     Indicates whether {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with
+        #     {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}
+        #     {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} can be created in this location.
+        class LocationMetadata; end
       end
     end
   end

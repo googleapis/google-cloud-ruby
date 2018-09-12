@@ -1,5 +1,16 @@
 # Release History
 
+### 1.14.1 / 2018-09-12
+
+* Add missing documentation files to package.
+
+### 1.14.0 / 2018-09-10
+
+* Add Object Lifecycle Management:
+  * Add Bucket#lifecycle.
+  * Add Bucket::Lifecycle and Bucket::Lifecycle::Rule.
+* Update documentation.
+
 ### 1.13.1 / 2018-08-21
 
 * Update documentation.

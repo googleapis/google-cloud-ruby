@@ -1,5 +1,13 @@
 # Release History
 
+### 0.30.2 / 2018-09-12
+
+* Add missing documentation files to package.
+
+### 0.30.1 / 2018-09-10
+
+* Update documentation.
+
 ### 0.30.0 / 2018-06-22
 
 * Update Policy, protect from role duplication.

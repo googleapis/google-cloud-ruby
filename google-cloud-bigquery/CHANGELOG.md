@@ -1,5 +1,14 @@
 # Release History
 
+### 1.8.1 / 2018-09-12
+
+* Add missing documentation files to package.
+
+### 1.8.0 / 2018-09-10
+
+* Add support for OCR format.
+* Update documentation.
+
 ### 1.7.1 / 2018-08-21
 
 * Update documentation.
