@@ -21,7 +21,7 @@ describe "Spanner Client", :types, :struct, :spanner do
     nested_sql = "SELECT ARRAY(SELECT AS STRUCT C1, C2 " \
       "FROM (SELECT 'a' AS C1, 1 AS C2 UNION ALL SELECT 'b' AS C1, 2 AS C2) " \
       "ORDER BY C1 ASC)"
-    results = db.execute nested_sql
+    results = db.execute_query nested_sql
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ 0 => [db.fields(C1: :STRING, C2: :INT64)] })
@@ -30,7 +30,7 @@ describe "Spanner Client", :types, :struct, :spanner do
 
   it "queries an empty struct" do
     empty_sql = "SELECT ARRAY(SELECT AS STRUCT * FROM (SELECT 'a', 1) WHERE 0 = 1)"
-    results = db.execute empty_sql
+    results = db.execute_query empty_sql
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ 0 => [db.fields(0 => :STRING, 1 => :INT64)] })

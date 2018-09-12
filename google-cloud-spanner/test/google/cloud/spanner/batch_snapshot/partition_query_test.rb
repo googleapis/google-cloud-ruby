@@ -398,6 +398,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
 
     partitions.each do |partition|
       partition.must_be :execute?
+      partition.must_be :execute_query?
 
       partition.execute.partition_token.must_equal "partition-token"
       partition.execute.sql.must_equal sql

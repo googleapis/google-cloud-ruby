@@ -33,7 +33,7 @@ module Google
       #   db = spanner.client "my-instance", "my-database"
       #
       #   db.snapshot do |snp|
-      #     results = snp.execute "SELECT * FROM users"
+      #     results = snp.execute_query "SELECT * FROM users"
       #
       #     results.rows.each do |row|
       #       puts "User #{row[:id]} is #{row[:name]}"
@@ -128,7 +128,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.snapshot do |snp|
-        #     results = snp.execute "SELECT * FROM users"
+        #     results = snp.execute_query "SELECT * FROM users"
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -142,7 +142,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.snapshot do |snp|
-        #     results = snp.execute "SELECT * FROM users " \
+        #     results = snp.execute_query "SELECT * FROM users " \
         #                           "WHERE active = @active",
         #                           params: { active: true }
         #
@@ -160,11 +160,13 @@ module Google
         #   db.snapshot do |snp|
         #      user_hash = { id: 1, name: "Charlie", active: false }
         #
-        #     results = snp.execute "SELECT * FROM users WHERE " \
-        #                           "ID = @user_struct.id " \
-        #                           "AND name = @user_struct.name " \
-        #                           "AND active = @user_struct.active",
-        #                           params: { user_struct: user_hash }
+        #     results = snp.execute_query(
+        #       "SELECT * FROM users WHERE " \
+        #       "ID = @user_struct.id " \
+        #       "AND name = @user_struct.name " \
+        #       "AND active = @user_struct.active",
+        #       params: { user_struct: user_hash }
+        #     )
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -181,12 +183,14 @@ module Google
         #      user_type = snp.fields id: :INT64, name: :STRING, active: :BOOL
         #      user_hash = { id: 1, name: nil, active: false }
         #
-        #     results = snp.execute "SELECT * FROM users WHERE " \
-        #                           "ID = @user_struct.id " \
-        #                           "AND name = @user_struct.name " \
-        #                           "AND active = @user_struct.active",
-        #                           params: { user_struct: user_hash },
-        #                           types: { user_struct: user_type }
+        #     results = snp.execute_query(
+        #       "SELECT * FROM users WHERE " \
+        #       "ID = @user_struct.id " \
+        #       "AND name = @user_struct.name " \
+        #       "AND active = @user_struct.active",
+        #       params: { user_struct: user_hash },
+        #       types: { user_struct: user_type }
+        #     )
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -203,30 +207,34 @@ module Google
         #      user_type = snp.fields id: :INT64, name: :STRING, active: :BOOL
         #   user_data = user_type.struct id: 1, name: nil, active: false
         #
-        #     results = snp.execute "SELECT * FROM users WHERE " \
-        #                           "ID = @user_struct.id " \
-        #                           "AND name = @user_struct.name " \
-        #                           "AND active = @user_struct.active",
-        #                           params: { user_struct: user_data }
+        #     results = snp.execute_query(
+        #       "SELECT * FROM users WHERE " \
+        #       "ID = @user_struct.id " \
+        #       "AND name = @user_struct.name " \
+        #       "AND active = @user_struct.active",
+        #       params: { user_struct: user_data }
+        #     )
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
         #     end
         #   end
         #
-        def execute sql, params: nil, types: nil
+        def execute_query sql, params: nil, types: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
 
-          session.execute sql, params: params, types: types,
-                               transaction: tx_selector
+          session.execute_query sql, params: params, types: types,
+                                     transaction: tx_selector
         end
-        alias query execute
+        alias execute execute_query
+        alias query execute_query
+        alias execute_sql execute_query
 
         ##
         # Read rows from a database table, as a simple alternative to
-        # {#execute}.
+        # {#execute_query}.
         #
         # @param [String] table The name of the table in the database to be
         #   read.

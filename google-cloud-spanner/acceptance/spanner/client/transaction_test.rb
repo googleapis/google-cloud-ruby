@@ -169,7 +169,7 @@ describe "Spanner Client", :transaction, :spanner do
   end
 
   it "supports tx isolation with query and update" do
-    results = db.execute query_reputation
+    results = db.execute_sql query_reputation
     original_val = results.rows.first[:reputation]
     begin
       thr_1 = Thread.new do
@@ -183,7 +183,7 @@ describe "Spanner Client", :transaction, :spanner do
       thr_2.join
     end
 
-    results = db.execute query_reputation
+    results = db.execute_sql query_reputation
     results.rows.first[:reputation].must_equal original_val + 2
   end
 
@@ -199,7 +199,7 @@ describe "Spanner Client", :transaction, :spanner do
 
   def query_and_update db
     db.transaction do |tx|
-      tx_results = tx.execute query_reputation
+      tx_results = tx.execute_sql query_reputation
       tx_val = tx_results.rows.first[:reputation]
       sleep 1 # ensure that both threads would have read same value if not read locked
       new_val = tx_val + 1

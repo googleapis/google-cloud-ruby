@@ -60,19 +60,19 @@ describe "Spanner Client", :edge, :spanner do
 
   it "queries to a non-existing table fails" do
     assert_raises Google::Cloud::InvalidArgumentError do
-      db.execute "SELECT id, name FROM invalid_table"
+      db.execute_sql "SELECT id, name FROM invalid_table"
     end
   end
 
   it "queries to a non-existing column fails" do
     assert_raises Google::Cloud::InvalidArgumentError do
-      db.execute "SELECT id, name FROM #{table_name}"
+      db.execute_sql "SELECT id, name FROM #{table_name}"
     end
   end
 
   it "queries with bad SQL fails" do
     assert_raises Google::Cloud::InvalidArgumentError do
-      db.execute "SELECT Apples AND Oranges"
+      db.execute_sql "SELECT Apples AND Oranges"
     end
   end
 end

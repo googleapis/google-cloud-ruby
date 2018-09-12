@@ -331,7 +331,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     else #sql
       params, param_types = Google::Cloud::Spanner::Convert.to_input_params_and_types params, param_types
 
-      execute_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
+      execute_sql_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
         {
           session: session.path,
           sql: sql,
@@ -342,7 +342,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
         }.delete_if { |_, v| v.nil? }
       )
 
-      Google::Cloud::Spanner::Partition.from_execute_grpc execute_grpc
+      Google::Cloud::Spanner::Partition.from_execute_sql_grpc execute_sql_grpc
     end
   end
 

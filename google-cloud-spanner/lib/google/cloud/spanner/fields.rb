@@ -33,7 +33,7 @@ module Google
       #
       #   db = spanner.client "my-instance", "my-database"
       #
-      #   results = db.execute "SELECT * FROM users"
+      #   results = db.execute_query "SELECT * FROM users"
       #
       #   results.fields.pairs.each do |name, type|
       #     puts "Column #{name} is type #{type}"

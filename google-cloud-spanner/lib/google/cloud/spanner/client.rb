@@ -42,7 +42,7 @@ module Google
       #   db = spanner.client "my-instance", "my-database"
       #
       #   db.transaction do |tx|
-      #     results = tx.execute "SELECT * FROM users"
+      #     results = tx.execute_query "SELECT * FROM users"
       #
       #     results.rows.each do |row|
       #       puts "User #{row[:id]} is #{row[:name]}"
@@ -218,7 +218,7 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.execute "SELECT * FROM users"
+        #   results = db.execute_query "SELECT * FROM users"
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -231,8 +231,10 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.execute "SELECT * FROM users WHERE active = @active",
-        #                        params: { active: true }
+        #   results = db.execute_query(
+        #     "SELECT * FROM users WHERE active = @active",
+        #     params: { active: true }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -247,11 +249,13 @@ module Google
         #
         #   user_hash = { id: 1, name: "Charlie", active: false }
         #
-        #   results = db.execute "SELECT * FROM users WHERE " \
-        #                        "ID = @user_struct.id " \
-        #                        "AND name = @user_struct.name " \
-        #                        "AND active = @user_struct.active",
-        #                        params: { user_struct: user_hash }
+        #   results = db.execute_query(
+        #     "SELECT * FROM users WHERE " \
+        #     "ID = @user_struct.id " \
+        #     "AND name = @user_struct.name " \
+        #     "AND active = @user_struct.active",
+        #     params: { user_struct: user_hash }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -267,12 +271,14 @@ module Google
         #   user_type = db.fields id: :INT64, name: :STRING, active: :BOOL
         #   user_hash = { id: 1, name: nil, active: false }
         #
-        #   results = db.execute "SELECT * FROM users WHERE " \
-        #                        "ID = @user_struct.id " \
-        #                        "AND name = @user_struct.name " \
-        #                        "AND active = @user_struct.active",
-        #                        params: { user_struct: user_hash },
-        #                        types: { user_struct: user_type }
+        #   results = db.execute_query(
+        #     "SELECT * FROM users WHERE " \
+        #     "ID = @user_struct.id " \
+        #     "AND name = @user_struct.name " \
+        #     "AND active = @user_struct.active",
+        #     params: { user_struct: user_hash },
+        #     types: { user_struct: user_type }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -288,17 +294,19 @@ module Google
         #   user_type = db.fields id: :INT64, name: :STRING, active: :BOOL
         #   user_data = user_type.struct id: 1, name: nil, active: false
         #
-        #   results = db.execute "SELECT * FROM users WHERE " \
-        #                        "ID = @user_struct.id " \
-        #                        "AND name = @user_struct.name " \
-        #                        "AND active = @user_struct.active",
-        #                        params: { user_struct: user_data }
+        #   results = db.execute_query(
+        #     "SELECT * FROM users WHERE " \
+        #     "ID = @user_struct.id " \
+        #     "AND name = @user_struct.name " \
+        #     "AND active = @user_struct.active",
+        #     params: { user_struct: user_data }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute sql, params: nil, types: nil, single_use: nil
+        def execute_query sql, params: nil, types: nil, single_use: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -307,12 +315,14 @@ module Google
           single_use_tx = single_use_transaction single_use
           results = nil
           @pool.with_session do |session|
-            results = session.execute \
+            results = session.execute_query \
               sql, params: params, types: types, transaction: single_use_tx
           end
           results
         end
-        alias query execute
+        alias execute execute_query
+        alias query execute_query
+        alias execute_sql execute_query
 
         ##
         # Executes a Partitioned DML SQL statement.
@@ -478,7 +488,7 @@ module Google
 
           results = nil
           @pool.with_session do |session|
-            results = session.execute \
+            results = session.execute_query \
               sql, params: params, types: types,
                    transaction: pdml_transaction(session)
           end
@@ -495,7 +505,7 @@ module Google
 
         ##
         # Read rows from a database table, as a simple alternative to
-        # {#execute}.
+        # {#execute_query}.
         #
         # @param [String] table The name of the table in the database to be
         #   read.
@@ -943,7 +953,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     results = tx.execute "SELECT * FROM users"
+        #     results = tx.execute_query "SELECT * FROM users"
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -1062,7 +1072,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.snapshot do |snp|
-        #     results = snp.execute "SELECT * FROM users"
+        #     results = snp.execute_query "SELECT * FROM users"
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -1191,7 +1201,7 @@ module Google
         #             types: users_types
         #
         def fields_for table
-          execute("SELECT * FROM #{table} WHERE 1 = 0").fields
+          execute_query("SELECT * FROM #{table} WHERE 1 = 0").fields
         end
 
         ##

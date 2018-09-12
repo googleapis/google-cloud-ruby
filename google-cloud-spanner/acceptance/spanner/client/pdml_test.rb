@@ -30,13 +30,13 @@ describe "Spanner Client", :pdml, :spanner do
   end
 
   it "executes a simple Partitioned DML statement" do
-    prior_results = db.execute "SELECT * FROM accounts WHERE active = TRUE"
+    prior_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE"
     prior_results.rows.count.must_equal 2
 
     pdml_row_count = db.execute_partition_update "UPDATE accounts a SET a.active = TRUE WHERE a.active = FALSE"
     pdml_row_count.must_equal 1
 
-    post_results = db.execute "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
+    post_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
     post_results.rows.count.must_equal 3
   end
 end

@@ -52,7 +52,7 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
     client.close
 
     assert_raises Google::Cloud::Spanner::ClientClosedError do
-      client.execute "SELECT 1"
+      client.execute_query "SELECT 1"
     end
 
     shutdown_pool! pool

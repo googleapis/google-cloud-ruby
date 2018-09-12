@@ -52,11 +52,15 @@ module Google
         def initialize; end
 
         ##
-        # Whether the partition was created for an execute/query operation.
+        # Whether the partition was created for an execute_query/query
+        # operation.
         # @return [Boolean]
-        def execute?
+        def execute_query?
           !@execute.nil?
         end
+        alias execute? execute_query?
+        alias execute_sql? execute_query?
+        alias query? execute_query?
 
         ##
         # Whether the partition was created for a read operation.
@@ -67,7 +71,8 @@ module Google
 
         ##
         # @private
-        # Whether the partition does not have an execute or read operation.
+        # Whether the partition does not have an execute_query or read
+        # operation.
         # @return [Boolean]
         def empty?
           @execute.nil? && @read.nil?
@@ -84,7 +89,7 @@ module Google
         def to_h
           {}.tap do |h|
             h[:execute] = Base64.strict_encode64(@execute.to_proto) if @execute
-            h[:read] = Base64.strict_encode64(@read.to_proto) if @read
+            h[:read]    = Base64.strict_encode64(@read.to_proto)    if @read
           end
         end
 
@@ -163,12 +168,14 @@ module Google
         def self.load data
           data = JSON.parse data, symbolize_names: true unless data.is_a? Hash
 
-          # TODO: raise if hash[:execute].nil? && hash[:read].nil?
+          # TODO: raise if hash[:execute_query].nil? && hash[:read].nil?
           new.tap do |p|
             if data[:execute]
-              execute_grpc = Google::Spanner::V1::ExecuteSqlRequest.decode \
-                Base64.decode64(data[:execute])
-              p.instance_variable_set :@execute, execute_grpc
+              execute_sql_grpc = \
+                Google::Spanner::V1::ExecuteSqlRequest.decode(
+                  Base64.decode64(data[:execute])
+                )
+              p.instance_variable_set :@execute, execute_sql_grpc
             end
             if data[:read]
               read_grpc = Google::Spanner::V1::ReadRequest.decode \
@@ -189,7 +196,7 @@ module Google
         ##
         # @private New Partition from a Google::Spanner::V1::ExecuteSqlRequest
         # object.
-        def self.from_execute_grpc grpc
+        def self.from_execute_sql_grpc grpc
           new.tap do |p|
             p.instance_variable_set :@execute, grpc
           end

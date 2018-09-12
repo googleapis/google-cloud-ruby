@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Client, :execute, :resume, :mock_spanner do
+describe Google::Cloud::Spanner::Client, :execute_query, :resume, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -110,7 +110,7 @@ describe Google::Cloud::Spanner::Client, :execute, :resume, :mock_spanner do
     mock.expect :execute_streaming_sql, RaiseableEnumerator.new(results_enum2), [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: "abc123", partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users"
+    results = client.execute_query "SELECT * FROM users"
 
     assert_results results
 

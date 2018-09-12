@@ -31,7 +31,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with strong option" do
-    results = db.execute "SELECT * FROM accounts", single_use: { strong: true }
+    results = db.execute_sql "SELECT * FROM accounts", single_use: { strong: true }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash
@@ -57,7 +57,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with timestamp option" do
-    results = db.execute "SELECT * FROM accounts", single_use: { timestamp: @setup_timestamp }
+    results = db.execute_sql "SELECT * FROM accounts", single_use: { timestamp: @setup_timestamp }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash
@@ -83,7 +83,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with staleness option" do
-    results = db.execute "SELECT * FROM accounts", single_use: { staleness: 0.0001 }
+    results = db.execute_sql "SELECT * FROM accounts", single_use: { staleness: 0.0001 }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash
@@ -109,7 +109,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with bounded_timestamp option" do
-    results = db.execute "SELECT * FROM accounts", single_use: { bounded_timestamp: @setup_timestamp }
+    results = db.execute_sql "SELECT * FROM accounts", single_use: { bounded_timestamp: @setup_timestamp }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash
@@ -135,7 +135,7 @@ describe "Spanner Client", :single_use, :spanner do
   end
 
   it "runs a query with bounded_staleness option" do
-    results = db.execute "SELECT * FROM accounts", single_use: { bounded_staleness: 0.0001 }
+    results = db.execute_sql "SELECT * FROM accounts", single_use: { bounded_staleness: 0.0001 }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal fields_hash

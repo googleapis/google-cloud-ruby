@@ -18,7 +18,7 @@ describe "Spanner Client", :params, :string, :spanner do
   let(:db) { spanner_client }
 
   it "queries and returns a string parameter" do
-    results = db.execute "SELECT @value AS value", params: { value: "hello" }
+    results = db.execute_query "SELECT @value AS value", params: { value: "hello" }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal :STRING
@@ -26,7 +26,7 @@ describe "Spanner Client", :params, :string, :spanner do
   end
 
   it "queries and returns a NULL string parameter" do
-    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: :STRING }
+    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: :STRING }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal :STRING
@@ -34,7 +34,7 @@ describe "Spanner Client", :params, :string, :spanner do
   end
 
   it "queries and returns an array of string parameters" do
-    results = db.execute "SELECT @value AS value", params: { value: ["foo", "bar", "baz"] }
+    results = db.execute_query "SELECT @value AS value", params: { value: ["foo", "bar", "baz"] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:STRING]
@@ -42,7 +42,7 @@ describe "Spanner Client", :params, :string, :spanner do
   end
 
   it "queries and returns an array of string parameters with a nil value" do
-    results = db.execute "SELECT @value AS value", params: { value: [nil, "foo", "bar", "baz"] }
+    results = db.execute_query "SELECT @value AS value", params: { value: [nil, "foo", "bar", "baz"] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:STRING]
@@ -50,7 +50,7 @@ describe "Spanner Client", :params, :string, :spanner do
   end
 
   it "queries and returns an empty array of string parameters" do
-    results = db.execute "SELECT @value AS value", params: { value: [] }, types: { value: [:STRING] }
+    results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: { value: [:STRING] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:STRING]
@@ -58,7 +58,7 @@ describe "Spanner Client", :params, :string, :spanner do
   end
 
   it "queries and returns a NULL array of string parameters" do
-    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: [:STRING] }
+    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: [:STRING] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:STRING]

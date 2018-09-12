@@ -58,7 +58,7 @@ module Google
       #   db = spanner.client "my-instance", "my-database"
       #
       #   db.transaction do |tx|
-      #     results = tx.execute "SELECT * FROM users"
+      #     results = tx.execute_query "SELECT * FROM users"
       #
       #     results.rows.each do |row|
       #       puts "User #{row[:id]} is #{row[:name]}"
@@ -463,7 +463,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     results = tx.execute "SELECT * FROM users"
+        #     results = tx.execute_query "SELECT * FROM users"
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"

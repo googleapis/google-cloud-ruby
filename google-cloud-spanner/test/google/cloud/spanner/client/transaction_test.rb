@@ -79,7 +79,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     results = nil
     timestamp = client.transaction do |tx|
       tx.must_be_kind_of Google::Cloud::Spanner::Transaction
-      results = tx.execute "SELECT * FROM users"
+      results = tx.execute_query "SELECT * FROM users"
     end
     timestamp.must_equal commit_time
 

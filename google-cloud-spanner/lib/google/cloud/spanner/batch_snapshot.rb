@@ -200,7 +200,7 @@ module Google
 
           results.partitions.map do |grpc|
             # Convert partition protos to execute sql request protos
-            execute_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
+            execute_sql_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
               {
                 session: session.path,
                 sql: sql,
@@ -210,7 +210,7 @@ module Google
                 partition_token: grpc.partition_token
               }.delete_if { |_, v| v.nil? }
             )
-            Partition.from_execute_grpc execute_grpc
+            Partition.from_execute_sql_grpc execute_sql_grpc
           end
         end
 
@@ -425,7 +425,7 @@ module Google
         #   batch_client = spanner.batch_client "my-instance", "my-database"
         #   batch_snapshot = batch_client.batch_snapshot
         #
-        #   results = batch_snapshot.execute "SELECT * FROM users"
+        #   results = batch_snapshot.execute_query "SELECT * FROM users"
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -438,9 +438,11 @@ module Google
         #   batch_client = spanner.batch_client "my-instance", "my-database"
         #   batch_snapshot = batch_client.batch_snapshot
         #
-        #   results = batch_snapshot.execute "SELECT * FROM users " \
-        #                                    "WHERE active = @active",
-        #                                    params: { active: true }
+        #   results = batch_snapshot.execute_query(
+        #      "SELECT * FROM users " \
+        #      "WHERE active = @active",
+        #      params: { active: true }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -455,11 +457,13 @@ module Google
         #
         #   user_hash = { id: 1, name: "Charlie", active: false }
         #
-        #   results = batch_snapshot.execute "SELECT * FROM users WHERE " \
-        #                                    "ID = @user_struct.id " \
-        #                                    "AND name = @user_struct.name " \
-        #                                    "AND active = @user_struct.active",
-        #                                    params: { user_struct: user_hash }
+        #   results = batch_snapshot.execute_query(
+        #     "SELECT * FROM users WHERE " \
+        #     "ID = @user_struct.id " \
+        #     "AND name = @user_struct.name " \
+        #     "AND active = @user_struct.active",
+        #     params: { user_struct: user_hash }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -477,12 +481,14 @@ module Google
         #   )
         #   user_hash = { id: 1, name: nil, active: false }
         #
-        #   results = batch_snapshot.execute "SELECT * FROM users WHERE " \
-        #                                    "ID = @user_struct.id " \
-        #                                    "AND name = @user_struct.name " \
-        #                                    "AND active = @user_struct.active",
-        #                                    params: { user_struct: user_hash },
-        #                                    types: { user_struct: user_type }
+        #   results = batch_snapshot.execute_query(
+        #     "SELECT * FROM users WHERE " \
+        #     "ID = @user_struct.id " \
+        #     "AND name = @user_struct.name " \
+        #     "AND active = @user_struct.active",
+        #     params: { user_struct: user_hash },
+        #     types: { user_struct: user_type }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -500,29 +506,33 @@ module Google
         #   )
         #   user_data = user_type.struct id: 1, name: nil, active: false
         #
-        #   results = batch_snapshot.execute "SELECT * FROM users WHERE " \
-        #                                    "ID = @user_struct.id " \
-        #                                    "AND name = @user_struct.name " \
-        #                                    "AND active = @user_struct.active",
-        #                                    params: { user_struct: user_data }
+        #   results = batch_snapshot.execute_query(
+        #     "SELECT * FROM users WHERE " \
+        #     "ID = @user_struct.id " \
+        #     "AND name = @user_struct.name " \
+        #     "AND active = @user_struct.active",
+        #     params: { user_struct: user_data }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute sql, params: nil, types: nil
+        def execute_query sql, params: nil, types: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
 
-          session.execute sql, params: params, types: types,
-                               transaction: tx_selector
+          session.execute_query sql, params: params, types: types,
+                                     transaction: tx_selector
         end
-        alias query execute
+        alias execute execute_query
+        alias query execute_query
+        alias execute_sql execute_query
 
         ##
         # Read rows from a database table, as a simple alternative to
-        # {#execute}.
+        # {#execute_query}.
         #
         # @param [String] table The name of the table in the database to be
         #   read.
@@ -651,11 +661,12 @@ module Google
         end
 
         def execute_partition_query partition
-          session.execute partition.execute.sql,
-                          params: partition.execute.params,
-                          types: partition.execute.param_types.to_h,
-                          transaction: partition.execute.transaction,
-                          partition_token: partition.execute.partition_token
+          session.execute_query \
+            partition.execute.sql,
+            params: partition.execute.params,
+            types: partition.execute.param_types.to_h,
+            transaction: partition.execute.transaction,
+            partition_token: partition.execute.partition_token
         end
 
         def execute_partition_read partition

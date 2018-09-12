@@ -158,7 +158,7 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     results = tx.execute "SELECT * FROM users"
+        #     results = tx.execute_query "SELECT * FROM users"
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -172,8 +172,10 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     results = tx.execute "SELECT * FROM users WHERE active = @active",
-        #                          params: { active: true }
+        #     results = tx.execute_query(
+        #       "SELECT * FROM users WHERE active = @active",
+        #       params: { active: true }
+        #     )
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -189,11 +191,13 @@ module Google
         #   db.transaction do |tx|
         #     user_hash = { id: 1, name: "Charlie", active: false }
         #
-        #     results = tx.execute "SELECT * FROM users WHERE " \
-        #                          "ID = @user_struct.id " \
-        #                          "AND name = @user_struct.name " \
-        #                          "AND active = @user_struct.active",
-        #                          params: { user_struct: user_hash }
+        #     results = tx.execute_query(
+        #       "SELECT * FROM users WHERE " \
+        #       "ID = @user_struct.id " \
+        #       "AND name = @user_struct.name " \
+        #       "AND active = @user_struct.active",
+        #       params: { user_struct: user_hash }
+        #     )
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -210,12 +214,14 @@ module Google
         #     user_type = tx.fields id: :INT64, name: :STRING, active: :BOOL
         #     user_hash = { id: 1, name: nil, active: false }
         #
-        #     results = tx.execute "SELECT * FROM users WHERE " \
-        #                          "ID = @user_struct.id " \
-        #                          "AND name = @user_struct.name " \
-        #                          "AND active = @user_struct.active",
-        #                          params: { user_struct: user_hash },
-        #                          types: { user_struct: user_type }
+        #     results = tx.execute_query(
+        #       "SELECT * FROM users WHERE " \
+        #       "ID = @user_struct.id " \
+        #       "AND name = @user_struct.name " \
+        #       "AND active = @user_struct.active",
+        #       params: { user_struct: user_hash },
+        #       types: { user_struct: user_type }
+        #     )
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -232,28 +238,32 @@ module Google
         #     user_type = tx.fields id: :INT64, name: :STRING, active: :BOOL
         #     user_data = user_type.struct id: 1, name: nil, active: false
         #
-        #     results = tx.execute "SELECT * FROM users WHERE " \
-        #                          "ID = @user_struct.id " \
-        #                          "AND name = @user_struct.name " \
-        #                          "AND active = @user_struct.active",
-        #                          params: { user_struct: user_data }
+        #     results = tx.execute_query(
+        #       "SELECT * FROM users WHERE " \
+        #       "ID = @user_struct.id " \
+        #       "AND name = @user_struct.name " \
+        #       "AND active = @user_struct.active",
+        #       params: { user_struct: user_data }
+        #     )
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
         #     end
         #   end
         #
-        def execute sql, params: nil, types: nil
+        def execute_query sql, params: nil, types: nil
           ensure_session!
 
           @seqno += 1
 
           params, types = Convert.to_input_params_and_types params, types
 
-          session.execute sql, params: params, types: types,
-                               transaction: tx_selector, seqno: @seqno
+          session.execute_query sql, params: params, types: types,
+                                     transaction: tx_selector, seqno: @seqno
         end
-        alias query execute
+        alias execute execute_query
+        alias query execute_query
+        alias execute_sql execute_query
 
         ##
         # Executes a DML statement.
@@ -341,7 +351,7 @@ module Google
         #   end
         #
         def execute_update sql, params: nil, types: nil
-          results = execute sql, params: params, types: types
+          results = execute_query sql, params: params, types: types
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
           # Raise an error if there is not a row count returned
@@ -354,7 +364,7 @@ module Google
 
         ##
         # Read rows from a database table, as a simple alternative to
-        # {#execute}.
+        # {#execute_query}.
         #
         # @param [String] table The name of the table in the database to be
         #   read.
@@ -630,7 +640,7 @@ module Google
         #   end
         #
         def fields_for table
-          execute("SELECT * FROM #{table} WHERE 1 = 0").fields
+          execute_query("SELECT * FROM #{table} WHERE 1 = 0").fields
         end
 
         ##
