@@ -1,0 +1,1562 @@
+---
+layout: yard_main
+title: "Class: Google::Logging::V2::LogEntry - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Logging::V2::LogEntry";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Logging.html" title="Google::Logging (module)">Logging</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">LogEntry</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Logging::V2::LogEntry
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Logging::V2::LogEntry</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>An individual entry in a log.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#http_request-instance_method" title="#http_request (instance method)">#<strong>http_request</strong>  &#x21d2; Google::Logging::Type::HttpRequest </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_id-instance_method" title="#insert_id (instance method)">#<strong>insert_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#json_payload-instance_method" title="#json_payload (instance method)">#<strong>json_payload</strong>  &#x21d2; Google::Protobuf::Struct </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The log entry payload, represented as a structure that is expressed as a JSON object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#log_name-instance_method" title="#log_name (instance method)">#<strong>log_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#metadata-instance_method" title="#metadata (instance method)">#<strong>metadata</strong>  &#x21d2; Google::Api::MonitoredResourceMetadata </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#operation-instance_method" title="#operation (instance method)">#<strong>operation</strong>  &#x21d2; Google::Logging::V2::LogEntryOperation </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#proto_payload-instance_method" title="#proto_payload (instance method)">#<strong>proto_payload</strong>  &#x21d2; Google::Protobuf::Any </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The log entry payload, represented as a protocol buffer.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receive_timestamp-instance_method" title="#receive_timestamp (instance method)">#<strong>receive_timestamp</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource-instance_method" title="#resource (instance method)">#<strong>resource</strong>  &#x21d2; Google::Api::MonitoredResource </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#severity-instance_method" title="#severity (instance method)">#<strong>severity</strong>  &#x21d2; Google::Logging::Type::LogSeverity </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_location-instance_method" title="#source_location (instance method)">#<strong>source_location</strong>  &#x21d2; Google::Logging::V2::LogEntrySourceLocation </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#span_id-instance_method" title="#span_id (instance method)">#<strong>span_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#text_payload-instance_method" title="#text_payload (instance method)">#<strong>text_payload</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The log entry payload, represented as a Unicode string (UTF-8).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timestamp-instance_method" title="#timestamp (instance method)">#<strong>timestamp</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#trace-instance_method" title="#trace (instance method)">#<strong>trace</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="http_request=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="http_request-instance_method">
+  
+    #<strong>http_request</strong>  &#x21d2; <tt><span class='object_link'><a href="../Type/HttpRequest.html" title="Google::Logging::Type::HttpRequest (class)">Google::Logging::Type::HttpRequest</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Information about the HTTP request associated with this
+log entry, if applicable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Type/HttpRequest.html" title="Google::Logging::Type::HttpRequest (class)">Google::Logging::Type::HttpRequest</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Information about the HTTP request associated with this
+log entry, if applicable.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="insert_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="insert_id-instance_method">
+  
+    #<strong>insert_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. A unique identifier for the log entry. If you provide a value,
+then Stackdriver Logging considers other log entries in the same project,
+with the same +timestamp+, and with the same +insert_id+ to be duplicates
+which can be removed.  If omitted in new log entries, then Stackdriver
+Logging assigns its own unique identifier. The +insert_id+ is also used
+to order log entries that have the same +timestamp+ value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. A unique identifier for the log entry. If you provide a value,
+then Stackdriver Logging considers other log entries in the same project,
+with the same +timestamp+, and with the same +insert_id+ to be duplicates
+which can be removed.  If omitted in new log entries, then Stackdriver
+Logging assigns its own unique identifier. The +insert_id+ is also used
+to order log entries that have the same +timestamp+ value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="json_payload=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="json_payload-instance_method">
+  
+    #<strong>json_payload</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Google::Protobuf::Struct</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The log entry payload, represented as a structure that is
+expressed as a JSON object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Google::Protobuf::Struct</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as a structure that is
+expressed as a JSON object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. A set of user-defined (key, value) data that provides additional
+information about the log entry.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. A set of user-defined (key, value) data that provides additional
+information about the log entry.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="log_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="log_name-instance_method">
+  
+    #<strong>log_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required. The resource name of the log to which this log entry belongs:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/[PROJECT_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>organizations/[ORGANIZATION_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>A project number may optionally be used in place of PROJECT_ID. The
+ project number is translated to its corresponding PROJECT_ID internally
+ and the +log_name+ field will contain PROJECT_ID in queries and exports.</p>
+
+<p>+[LOG_ID]+ must be URL-encoded within +log_name+. Example:
++&quot;organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity&quot;+.
++[LOG_ID]+ must be less than 512 characters long and can only include the
+following characters: upper and lower case alphanumeric characters,
+forward-slash, underscore, hyphen, and period.</p>
+
+<p>For backward compatibility, if +log_name+ begins with a forward-slash, such
+as +/projects/...+, then the log entry is ingested as usual but the
+forward-slash is removed. Listing the log entry will not show the leading
+slash and filtering for a log name with a leading slash will never return
+any results.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The resource name of the log to which this log entry belongs:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/[PROJECT_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>organizations/[ORGANIZATION_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>A project number may optionally be used in place of PROJECT_ID. The
+ project number is translated to its corresponding PROJECT_ID internally
+ and the +log_name+ field will contain PROJECT_ID in queries and exports.</p>
+
+<p>+[LOG_ID]+ must be URL-encoded within +log_name+. Example:
++&quot;organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity&quot;+.
++[LOG_ID]+ must be less than 512 characters long and can only include the
+following characters: upper and lower case alphanumeric characters,
+forward-slash, underscore, hyphen, and period.</p>
+
+<p>For backward compatibility, if +log_name+ begins with a forward-slash, such
+as +/projects/...+, then the log entry is ingested as usual but the
+forward-slash is removed. Listing the log entry will not show the leading
+slash and filtering for a log name with a leading slash will never return
+any results.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="metadata=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="metadata-instance_method">
+  
+    #<strong>metadata</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Api/MonitoredResourceMetadata.html" title="Google::Api::MonitoredResourceMetadata (class)">Google::Api::MonitoredResourceMetadata</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. Additional metadata about the monitored resource.
+Only +k8s_container+, +k8s_pod+, and +k8s_node+ MonitoredResources have
+this field populated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Api/MonitoredResourceMetadata.html" title="Google::Api::MonitoredResourceMetadata (class)">Google::Api::MonitoredResourceMetadata</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. Additional metadata about the monitored resource.
+Only +k8s_container+, +k8s_pod+, and +k8s_node+ MonitoredResources have
+this field populated.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="operation=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="operation-instance_method">
+  
+    #<strong>operation</strong>  &#x21d2; <tt><span class='object_link'><a href="LogEntryOperation.html" title="Google::Logging::V2::LogEntryOperation (class)">Google::Logging::V2::LogEntryOperation</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Information about an operation associated with the log entry, if
+applicable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="LogEntryOperation.html" title="Google::Logging::V2::LogEntryOperation (class)">Google::Logging::V2::LogEntryOperation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Information about an operation associated with the log entry, if
+applicable.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="proto_payload=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="proto_payload-instance_method">
+  
+    #<strong>proto_payload</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Any.html" title="Google::Protobuf::Any (class)">Google::Protobuf::Any</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The log entry payload, represented as a protocol buffer.  Some
+Google Cloud Platform services use this field for their log
+entry payloads.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Any.html" title="Google::Protobuf::Any (class)">Google::Protobuf::Any</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as a protocol buffer.  Some
+Google Cloud Platform services use this field for their log
+entry payloads.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="receive_timestamp=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="receive_timestamp-instance_method">
+  
+    #<strong>receive_timestamp</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. The time the log entry was received by Stackdriver Logging.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. The time the log entry was received by Stackdriver Logging.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="resource=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="resource-instance_method">
+  
+    #<strong>resource</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Api/MonitoredResource.html" title="Google::Api::MonitoredResource (class)">Google::Api::MonitoredResource</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required. The primary monitored resource associated with this log entry.
+Example: a log entry that reports a database error would be
+associated with the monitored resource designating the particular
+database that reported the error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Api/MonitoredResource.html" title="Google::Api::MonitoredResource (class)">Google::Api::MonitoredResource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The primary monitored resource associated with this log entry.
+Example: a log entry that reports a database error would be
+associated with the monitored resource designating the particular
+database that reported the error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="severity=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="severity-instance_method">
+  
+    #<strong>severity</strong>  &#x21d2; <tt>Google::Logging::Type::LogSeverity</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. The severity of the log entry. The default value is
++LogSeverity.DEFAULT+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Logging::Type::LogSeverity</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. The severity of the log entry. The default value is
++LogSeverity.DEFAULT+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="source_location=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="source_location-instance_method">
+  
+    #<strong>source_location</strong>  &#x21d2; <tt><span class='object_link'><a href="LogEntrySourceLocation.html" title="Google::Logging::V2::LogEntrySourceLocation (class)">Google::Logging::V2::LogEntrySourceLocation</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Source code location information associated with the log entry,
+if any.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="LogEntrySourceLocation.html" title="Google::Logging::V2::LogEntrySourceLocation (class)">Google::Logging::V2::LogEntrySourceLocation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Source code location information associated with the log entry,
+if any.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="span_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="span_id-instance_method">
+  
+    #<strong>span_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. The span ID within the trace associated with the log entry. For
+Stackdriver Trace spans, this is the same format that the Stackdriver Trace
+API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such
+as <code>&quot;000000000000004a&quot;</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. The span ID within the trace associated with the log entry. For
+Stackdriver Trace spans, this is the same format that the Stackdriver Trace
+API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such
+as <code>&quot;000000000000004a&quot;</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="text_payload=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="text_payload-instance_method">
+  
+    #<strong>text_payload</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The log entry payload, represented as a Unicode string (UTF-8).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as a Unicode string (UTF-8).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="timestamp=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="timestamp-instance_method">
+  
+    #<strong>timestamp</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. The time the event described by the log entry occurred.
+This time is used to compute the log entry&#39;s age and to enforce
+the logs retention period. If this field is omitted in a new log
+entry, then Stackdriver Logging assigns it the current time.
+Timestamps have nanosecond accuracy, but trailing zeros in the fractional
+seconds might be omitted when the timestamp is displayed.</p>
+
+<p>Incoming log entries should have timestamps that are no more than
+the <a href="https://cloud.google.com/logging/quotas">logs retention period</a> in the past,
+and no more than 24 hours in the future. Log entries outside those time
+boundaries will not be available when calling +entries.list+, but
+those log entries can still be exported with
+<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">LogSinks</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. The time the event described by the log entry occurred.
+This time is used to compute the log entry&#39;s age and to enforce
+the logs retention period. If this field is omitted in a new log
+entry, then Stackdriver Logging assigns it the current time.
+Timestamps have nanosecond accuracy, but trailing zeros in the fractional
+seconds might be omitted when the timestamp is displayed.</p>
+
+<p>Incoming log entries should have timestamps that are no more than
+the <a href="https://cloud.google.com/logging/quotas">logs retention period</a> in the past,
+and no more than 24 hours in the future. Log entries outside those time
+boundaries will not be available when calling +entries.list+, but
+those log entries can still be exported with
+<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">LogSinks</a>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="trace=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="trace-instance_method">
+  
+    #<strong>trace</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Resource name of the trace associated with the log entry, if any.
+If it contains a relative resource name, the name is assumed to be relative
+to +//tracing.googleapis.com+. Example:
++projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Resource name of the trace associated with the log entry, if any.
+If it contains a relative resource name, the name is assumed to be relative
+to +//tracing.googleapis.com+. Example:
++projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 125</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
