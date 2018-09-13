@@ -178,7 +178,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The resource name of the document, for example +projects/{project_id}/databases/{database_id}/documents/{document_path}+.</p>
+    <span class="summary_desc"><div class='inline'><p>The resource name of the document, for example <code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.</p>
 </div></span>
   
 </li>
@@ -236,7 +236,7 @@ js:
 
 <p>This value increases monotonically when a document is deleted then
 recreated. It can also be compared to values from other documents and
-the +read_time+ of a query.</p>
+the <code>read_time</code> of a query.</p>
 
 
   </div>
@@ -258,7 +258,7 @@ the +read_time+ of a query.</p>
 
 <p>This value increases monotonically when a document is deleted then
 recreated. It can also be compared to values from other documents and
-the +read_time+ of a query.</p>
+the <code>read_time</code> of a query.</p>
 </div>
       
     </li>
@@ -299,29 +299,26 @@ the +read_time+ of a query.</p>
 
 <p>The map keys represent field names.</p>
 
-<p>A simple field name contains only characters +a+ to +z+, +A+ to +Z+,
-+0+ to +9+, or +_+, and must not start with +0+ to +9+. For example,
-+foo_bar_17+.</p>
+<p>A simple field name contains only characters <code>a</code> to <code>z</code>, <code>A</code> to <code>Z</code>,
+<code>0</code> to <code>9</code>, or <code>_</code>, and must not start with <code>0</code> to <code>9</code>. For example,
+<code>foo_bar_17</code>.</p>
 
-<p>Field names matching the regular expression +<strong>.*</strong>+ are reserved. Reserved
+<p>Field names matching the regular expression <code>__.*__</code> are reserved. Reserved
 field names are forbidden except in certain documented contexts. The map
 keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be
 empty.</p>
 
 <p>Field paths may be used in other contexts to refer to structured fields
-defined here. For +map_value+, the field path is represented by the simple
-or quoted field names of the containing fields, delimited by +.+. For
+defined here. For <code>map_value</code>, the field path is represented by the simple
+or quoted field names of the containing fields, delimited by <code>.</code>. For
 example, the structured field
-+&quot;foo&quot; : { map_value: { &quot;x&amp;y&quot; : { string_value: &quot;hello&quot; }}}+ would be
-represented by the field path +foo.x&amp;y+.</p>
+<code>&quot;foo&quot; : { map_value: { &quot;x&amp;y&quot; : { string_value: &quot;hello&quot; }}}</code> would be
+represented by the field path <code>foo.x&amp;y</code>.</p>
 
-<p>Within a field path, a quoted field name starts and ends with + + + and
-may contain any character. Some characters, including + + +, must be
-escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
-
-<ul>
-<li>+bak+tik+ + represents + bak+tik +.</li>
-</ul>
+<p>Within a field path, a quoted field name starts and ends with <code>`</code> and
+may contain any character. Some characters, including <code>`</code>, must be
+escaped using a <code>\</code>. For example, <code>`x&amp;y`</code> represents <code>x&amp;y</code> and
+<code>`bak\`tik`</code> represents <code>bak`tik</code>.</p>
 
 
   </div>
@@ -343,29 +340,26 @@ escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
 
 <p>The map keys represent field names.</p>
 
-<p>A simple field name contains only characters +a+ to +z+, +A+ to +Z+,
-+0+ to +9+, or +_+, and must not start with +0+ to +9+. For example,
-+foo_bar_17+.</p>
+<p>A simple field name contains only characters <code>a</code> to <code>z</code>, <code>A</code> to <code>Z</code>,
+<code>0</code> to <code>9</code>, or <code>_</code>, and must not start with <code>0</code> to <code>9</code>. For example,
+<code>foo_bar_17</code>.</p>
 
-<p>Field names matching the regular expression +<strong>.*</strong>+ are reserved. Reserved
+<p>Field names matching the regular expression <code>__.*__</code> are reserved. Reserved
 field names are forbidden except in certain documented contexts. The map
 keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be
 empty.</p>
 
 <p>Field paths may be used in other contexts to refer to structured fields
-defined here. For +map_value+, the field path is represented by the simple
-or quoted field names of the containing fields, delimited by +.+. For
+defined here. For <code>map_value</code>, the field path is represented by the simple
+or quoted field names of the containing fields, delimited by <code>.</code>. For
 example, the structured field
-+&quot;foo&quot; : { map_value: { &quot;x&amp;y&quot; : { string_value: &quot;hello&quot; }}}+ would be
-represented by the field path +foo.x&amp;y+.</p>
+<code>&quot;foo&quot; : { map_value: { &quot;x&amp;y&quot; : { string_value: &quot;hello&quot; }}}</code> would be
+represented by the field path <code>foo.x&amp;y</code>.</p>
 
-<p>Within a field path, a quoted field name starts and ends with + + + and
-may contain any character. Some characters, including + + +, must be
-escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
-
-<ul>
-<li>+bak+tik+ + represents + bak+tik +.</li>
-</ul>
+<p>Within a field path, a quoted field name starts and ends with <code>`</code> and
+may contain any character. Some characters, including <code>`</code>, must be
+escaped using a <code>\</code>. For example, <code>`x&amp;y`</code> represents <code>x&amp;y</code> and
+<code>`bak\`tik`</code> represents <code>bak`tik</code>.</p>
 </div>
       
     </li>
@@ -403,7 +397,7 @@ escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The resource name of the document, for example
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.</p>
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.</p>
 
 
   </div>
@@ -422,7 +416,7 @@ escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
       
         &mdash;
         <div class='inline'><p>The resource name of the document, for example
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.</p>
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.</p>
 </div>
       
     </li>
@@ -461,9 +455,9 @@ escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
   <div class="discussion">
     <p>Returns Output only. The time at which the document was last changed.</p>
 
-<p>This value is initially set to the +create_time+ then increases
+<p>This value is initially set to the <code>create_time</code> then increases
 monotonically with each change to the document. It can also be
-compared to values from other documents and the +read_time+ of a query.</p>
+compared to values from other documents and the <code>read_time</code> of a query.</p>
 
 
   </div>
@@ -483,9 +477,9 @@ compared to values from other documents and the +read_time+ of a query.</p>
         &mdash;
         <div class='inline'><p>Output only. The time at which the document was last changed.</p>
 
-<p>This value is initially set to the +create_time+ then increases
+<p>This value is initially set to the <code>create_time</code> then increases
 monotonically with each change to the document. It can also be
-compared to values from other documents and the +read_time+ of a query.</p>
+compared to values from other documents and the <code>read_time</code> of a query.</p>
 </div>
       
     </li>

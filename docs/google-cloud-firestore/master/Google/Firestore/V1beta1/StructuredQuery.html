@@ -519,7 +519,7 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/query.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::StructuredQuery (class)">StructuredQuery</a></span></span>
-  <span class='comment'># A selection of a collection, such as +messages as m1+.
+  <span class='comment'># A selection of a collection, such as `messages as m1`.
 </span>  <span class='comment'># @!attribute [rw] collection_id
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The collection ID.
@@ -527,7 +527,7 @@ js:
 </span>  <span class='comment'># @!attribute [rw] all_descendants
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     When false, selects only collections that are immediate children of
-</span>  <span class='comment'>#     the +parent+ specified in the containing +RunQueryRequest+.
+</span>  <span class='comment'>#     the `parent` specified in the containing `RunQueryRequest`.
 </span>  <span class='comment'>#     When true, selects all descendant collections.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/CollectionSelector.html" title="Google::Firestore::V1beta1::StructuredQuery::CollectionSelector (class)">CollectionSelector</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -578,17 +578,17 @@ js:
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>OPERATOR_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># Less than. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
-      <span class='comment'># Less than or equal. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than or equal. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>2</span>
 
-      <span class='comment'># Greater than. Requires that the field come first in +order_by+.
+      <span class='comment'># Greater than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>GREATER_THAN</span> <span class='op'>=</span> <span class='int'>3</span>
 
       <span class='comment'># Greater than or equal. Requires that the field come first in
-</span>      <span class='comment'># +order_by+.
+</span>      <span class='comment'># `order_by`.
 </span>      <span class='const'>GREATER_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>4</span>
 
       <span class='comment'># Equal.
@@ -626,10 +626,10 @@ js:
 </span>  <span class='comment'>#     The field to order by.
 </span>  <span class='comment'># @!attribute [rw] direction
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::Direction]
-</span>  <span class='comment'>#     The direction to order by. Defaults to +ASCENDING+.
+</span>  <span class='comment'>#     The direction to order by. Defaults to `ASCENDING`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Order.html" title="Google::Firestore::V1beta1::StructuredQuery::Order (class)">Order</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A reference to a field, such as +max(messages.time) as max_time+.
+  <span class='comment'># A reference to a field, such as `max(messages.time) as max_time`.
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -640,7 +640,7 @@ js:
 </span>  <span class='comment'>#     The fields to return.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use +[&#39;__name__&#39;]+.
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
@@ -846,7 +846,7 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/query.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::StructuredQuery (class)">StructuredQuery</a></span></span>
-  <span class='comment'># A selection of a collection, such as +messages as m1+.
+  <span class='comment'># A selection of a collection, such as `messages as m1`.
 </span>  <span class='comment'># @!attribute [rw] collection_id
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The collection ID.
@@ -854,7 +854,7 @@ js:
 </span>  <span class='comment'># @!attribute [rw] all_descendants
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     When false, selects only collections that are immediate children of
-</span>  <span class='comment'>#     the +parent+ specified in the containing +RunQueryRequest+.
+</span>  <span class='comment'>#     the `parent` specified in the containing `RunQueryRequest`.
 </span>  <span class='comment'>#     When true, selects all descendant collections.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/CollectionSelector.html" title="Google::Firestore::V1beta1::StructuredQuery::CollectionSelector (class)">CollectionSelector</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -905,17 +905,17 @@ js:
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>OPERATOR_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># Less than. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
-      <span class='comment'># Less than or equal. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than or equal. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>2</span>
 
-      <span class='comment'># Greater than. Requires that the field come first in +order_by+.
+      <span class='comment'># Greater than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>GREATER_THAN</span> <span class='op'>=</span> <span class='int'>3</span>
 
       <span class='comment'># Greater than or equal. Requires that the field come first in
-</span>      <span class='comment'># +order_by+.
+</span>      <span class='comment'># `order_by`.
 </span>      <span class='const'>GREATER_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>4</span>
 
       <span class='comment'># Equal.
@@ -953,10 +953,10 @@ js:
 </span>  <span class='comment'>#     The field to order by.
 </span>  <span class='comment'># @!attribute [rw] direction
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::Direction]
-</span>  <span class='comment'>#     The direction to order by. Defaults to +ASCENDING+.
+</span>  <span class='comment'>#     The direction to order by. Defaults to `ASCENDING`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Order.html" title="Google::Firestore::V1beta1::StructuredQuery::Order (class)">Order</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A reference to a field, such as +max(messages.time) as max_time+.
+  <span class='comment'># A reference to a field, such as `max(messages.time) as max_time`.
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -967,7 +967,7 @@ js:
 </span>  <span class='comment'>#     The fields to return.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use +[&#39;__name__&#39;]+.
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
@@ -1179,7 +1179,7 @@ Must be &gt;= 0 if specified.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/query.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::StructuredQuery (class)">StructuredQuery</a></span></span>
-  <span class='comment'># A selection of a collection, such as +messages as m1+.
+  <span class='comment'># A selection of a collection, such as `messages as m1`.
 </span>  <span class='comment'># @!attribute [rw] collection_id
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The collection ID.
@@ -1187,7 +1187,7 @@ Must be &gt;= 0 if specified.</p>
 </span>  <span class='comment'># @!attribute [rw] all_descendants
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     When false, selects only collections that are immediate children of
-</span>  <span class='comment'>#     the +parent+ specified in the containing +RunQueryRequest+.
+</span>  <span class='comment'>#     the `parent` specified in the containing `RunQueryRequest`.
 </span>  <span class='comment'>#     When true, selects all descendant collections.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/CollectionSelector.html" title="Google::Firestore::V1beta1::StructuredQuery::CollectionSelector (class)">CollectionSelector</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1238,17 +1238,17 @@ Must be &gt;= 0 if specified.</p>
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>OPERATOR_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># Less than. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
-      <span class='comment'># Less than or equal. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than or equal. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>2</span>
 
-      <span class='comment'># Greater than. Requires that the field come first in +order_by+.
+      <span class='comment'># Greater than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>GREATER_THAN</span> <span class='op'>=</span> <span class='int'>3</span>
 
       <span class='comment'># Greater than or equal. Requires that the field come first in
-</span>      <span class='comment'># +order_by+.
+</span>      <span class='comment'># `order_by`.
 </span>      <span class='const'>GREATER_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>4</span>
 
       <span class='comment'># Equal.
@@ -1286,10 +1286,10 @@ Must be &gt;= 0 if specified.</p>
 </span>  <span class='comment'>#     The field to order by.
 </span>  <span class='comment'># @!attribute [rw] direction
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::Direction]
-</span>  <span class='comment'>#     The direction to order by. Defaults to +ASCENDING+.
+</span>  <span class='comment'>#     The direction to order by. Defaults to `ASCENDING`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Order.html" title="Google::Firestore::V1beta1::StructuredQuery::Order (class)">Order</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A reference to a field, such as +max(messages.time) as max_time+.
+  <span class='comment'># A reference to a field, such as `max(messages.time) as max_time`.
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1300,7 +1300,7 @@ Must be &gt;= 0 if specified.</p>
 </span>  <span class='comment'>#     The fields to return.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use +[&#39;__name__&#39;]+.
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
@@ -1512,7 +1512,7 @@ specified.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/query.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::StructuredQuery (class)">StructuredQuery</a></span></span>
-  <span class='comment'># A selection of a collection, such as +messages as m1+.
+  <span class='comment'># A selection of a collection, such as `messages as m1`.
 </span>  <span class='comment'># @!attribute [rw] collection_id
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The collection ID.
@@ -1520,7 +1520,7 @@ specified.</p>
 </span>  <span class='comment'># @!attribute [rw] all_descendants
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     When false, selects only collections that are immediate children of
-</span>  <span class='comment'>#     the +parent+ specified in the containing +RunQueryRequest+.
+</span>  <span class='comment'>#     the `parent` specified in the containing `RunQueryRequest`.
 </span>  <span class='comment'>#     When true, selects all descendant collections.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/CollectionSelector.html" title="Google::Firestore::V1beta1::StructuredQuery::CollectionSelector (class)">CollectionSelector</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1571,17 +1571,17 @@ specified.</p>
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>OPERATOR_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># Less than. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
-      <span class='comment'># Less than or equal. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than or equal. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>2</span>
 
-      <span class='comment'># Greater than. Requires that the field come first in +order_by+.
+      <span class='comment'># Greater than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>GREATER_THAN</span> <span class='op'>=</span> <span class='int'>3</span>
 
       <span class='comment'># Greater than or equal. Requires that the field come first in
-</span>      <span class='comment'># +order_by+.
+</span>      <span class='comment'># `order_by`.
 </span>      <span class='const'>GREATER_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>4</span>
 
       <span class='comment'># Equal.
@@ -1619,10 +1619,10 @@ specified.</p>
 </span>  <span class='comment'>#     The field to order by.
 </span>  <span class='comment'># @!attribute [rw] direction
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::Direction]
-</span>  <span class='comment'>#     The direction to order by. Defaults to +ASCENDING+.
+</span>  <span class='comment'>#     The direction to order by. Defaults to `ASCENDING`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Order.html" title="Google::Firestore::V1beta1::StructuredQuery::Order (class)">Order</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A reference to a field, such as +max(messages.time) as max_time+.
+  <span class='comment'># A reference to a field, such as `max(messages.time) as max_time`.
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1633,7 +1633,7 @@ specified.</p>
 </span>  <span class='comment'>#     The fields to return.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use +[&#39;__name__&#39;]+.
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
@@ -1671,22 +1671,22 @@ specified.</p>
 <p>Firestore guarantees a stable ordering through the following rules:</p>
 
 <ul>
-<li>Any field required to appear in +order_by+, that is not already
-specified in +order_by+, is appended to the order in field name order
+<li>Any field required to appear in <code>order_by</code>, that is not already
+specified in <code>order_by</code>, is appended to the order in field name order
 by default.</li>
-<li>If an order on +<strong>name</strong>+ is not specified, it is appended by default.</li>
+<li>If an order on <code>__name__</code> is not specified, it is appended by default.</li>
 </ul>
 
 <p>Fields are appended with the same sort direction as the last order
 specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 
 <ul>
-<li>+SELECT * FROM Foo ORDER BY A+ becomes
-+SELECT * FROM Foo ORDER BY A, <strong>name</strong>+</li>
-<li>+SELECT * FROM Foo ORDER BY A DESC+ becomes
-+SELECT * FROM Foo ORDER BY A DESC, <strong>name</strong> DESC+</li>
-<li>+SELECT * FROM Foo WHERE A &gt; 1+ becomes
-+SELECT * FROM Foo WHERE A &gt; 1 ORDER BY A, <strong>name</strong>+</li>
+<li><code>SELECT * FROM Foo ORDER BY A</code> becomes
+<code>SELECT * FROM Foo ORDER BY A, __name__</code></li>
+<li><code>SELECT * FROM Foo ORDER BY A DESC</code> becomes
+<code>SELECT * FROM Foo ORDER BY A DESC, __name__ DESC</code></li>
+<li><code>SELECT * FROM Foo WHERE A &gt; 1</code> becomes
+<code>SELECT * FROM Foo WHERE A &gt; 1 ORDER BY A, __name__</code></li>
 </ul>
 
 
@@ -1710,22 +1710,22 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 <p>Firestore guarantees a stable ordering through the following rules:</p>
 
 <ul>
-<li>Any field required to appear in +order_by+, that is not already
-specified in +order_by+, is appended to the order in field name order
+<li>Any field required to appear in <code>order_by</code>, that is not already
+specified in <code>order_by</code>, is appended to the order in field name order
 by default.</li>
-<li>If an order on +<strong>name</strong>+ is not specified, it is appended by default.</li>
+<li>If an order on <code>__name__</code> is not specified, it is appended by default.</li>
 </ul>
 
 <p>Fields are appended with the same sort direction as the last order
 specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 
 <ul>
-<li>+SELECT * FROM Foo ORDER BY A+ becomes
-+SELECT * FROM Foo ORDER BY A, <strong>name</strong>+</li>
-<li>+SELECT * FROM Foo ORDER BY A DESC+ becomes
-+SELECT * FROM Foo ORDER BY A DESC, <strong>name</strong> DESC+</li>
-<li>+SELECT * FROM Foo WHERE A &gt; 1+ becomes
-+SELECT * FROM Foo WHERE A &gt; 1 ORDER BY A, <strong>name</strong>+</li>
+<li><code>SELECT * FROM Foo ORDER BY A</code> becomes
+<code>SELECT * FROM Foo ORDER BY A, __name__</code></li>
+<li><code>SELECT * FROM Foo ORDER BY A DESC</code> becomes
+<code>SELECT * FROM Foo ORDER BY A DESC, __name__ DESC</code></li>
+<li><code>SELECT * FROM Foo WHERE A &gt; 1</code> becomes
+<code>SELECT * FROM Foo WHERE A &gt; 1 ORDER BY A, __name__</code></li>
 </ul>
 </div>
       
@@ -1881,7 +1881,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/query.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::StructuredQuery (class)">StructuredQuery</a></span></span>
-  <span class='comment'># A selection of a collection, such as +messages as m1+.
+  <span class='comment'># A selection of a collection, such as `messages as m1`.
 </span>  <span class='comment'># @!attribute [rw] collection_id
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The collection ID.
@@ -1889,7 +1889,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'># @!attribute [rw] all_descendants
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     When false, selects only collections that are immediate children of
-</span>  <span class='comment'>#     the +parent+ specified in the containing +RunQueryRequest+.
+</span>  <span class='comment'>#     the `parent` specified in the containing `RunQueryRequest`.
 </span>  <span class='comment'>#     When true, selects all descendant collections.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/CollectionSelector.html" title="Google::Firestore::V1beta1::StructuredQuery::CollectionSelector (class)">CollectionSelector</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1940,17 +1940,17 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>OPERATOR_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># Less than. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
-      <span class='comment'># Less than or equal. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than or equal. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>2</span>
 
-      <span class='comment'># Greater than. Requires that the field come first in +order_by+.
+      <span class='comment'># Greater than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>GREATER_THAN</span> <span class='op'>=</span> <span class='int'>3</span>
 
       <span class='comment'># Greater than or equal. Requires that the field come first in
-</span>      <span class='comment'># +order_by+.
+</span>      <span class='comment'># `order_by`.
 </span>      <span class='const'>GREATER_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>4</span>
 
       <span class='comment'># Equal.
@@ -1988,10 +1988,10 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'>#     The field to order by.
 </span>  <span class='comment'># @!attribute [rw] direction
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::Direction]
-</span>  <span class='comment'>#     The direction to order by. Defaults to +ASCENDING+.
+</span>  <span class='comment'>#     The direction to order by. Defaults to `ASCENDING`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Order.html" title="Google::Firestore::V1beta1::StructuredQuery::Order (class)">Order</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A reference to a field, such as +max(messages.time) as max_time+.
+  <span class='comment'># A reference to a field, such as `max(messages.time) as max_time`.
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2002,7 +2002,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'>#     The fields to return.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use +[&#39;__name__&#39;]+.
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
@@ -2208,7 +2208,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/query.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::StructuredQuery (class)">StructuredQuery</a></span></span>
-  <span class='comment'># A selection of a collection, such as +messages as m1+.
+  <span class='comment'># A selection of a collection, such as `messages as m1`.
 </span>  <span class='comment'># @!attribute [rw] collection_id
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The collection ID.
@@ -2216,7 +2216,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'># @!attribute [rw] all_descendants
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     When false, selects only collections that are immediate children of
-</span>  <span class='comment'>#     the +parent+ specified in the containing +RunQueryRequest+.
+</span>  <span class='comment'>#     the `parent` specified in the containing `RunQueryRequest`.
 </span>  <span class='comment'>#     When true, selects all descendant collections.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/CollectionSelector.html" title="Google::Firestore::V1beta1::StructuredQuery::CollectionSelector (class)">CollectionSelector</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -2267,17 +2267,17 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>OPERATOR_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># Less than. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
-      <span class='comment'># Less than or equal. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than or equal. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>2</span>
 
-      <span class='comment'># Greater than. Requires that the field come first in +order_by+.
+      <span class='comment'># Greater than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>GREATER_THAN</span> <span class='op'>=</span> <span class='int'>3</span>
 
       <span class='comment'># Greater than or equal. Requires that the field come first in
-</span>      <span class='comment'># +order_by+.
+</span>      <span class='comment'># `order_by`.
 </span>      <span class='const'>GREATER_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>4</span>
 
       <span class='comment'># Equal.
@@ -2315,10 +2315,10 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'>#     The field to order by.
 </span>  <span class='comment'># @!attribute [rw] direction
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::Direction]
-</span>  <span class='comment'>#     The direction to order by. Defaults to +ASCENDING+.
+</span>  <span class='comment'>#     The direction to order by. Defaults to `ASCENDING`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Order.html" title="Google::Firestore::V1beta1::StructuredQuery::Order (class)">Order</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A reference to a field, such as +max(messages.time) as max_time+.
+  <span class='comment'># A reference to a field, such as `max(messages.time) as max_time`.
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2329,7 +2329,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'>#     The fields to return.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use +[&#39;__name__&#39;]+.
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
@@ -2535,7 +2535,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/query.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::StructuredQuery (class)">StructuredQuery</a></span></span>
-  <span class='comment'># A selection of a collection, such as +messages as m1+.
+  <span class='comment'># A selection of a collection, such as `messages as m1`.
 </span>  <span class='comment'># @!attribute [rw] collection_id
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The collection ID.
@@ -2543,7 +2543,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'># @!attribute [rw] all_descendants
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     When false, selects only collections that are immediate children of
-</span>  <span class='comment'>#     the +parent+ specified in the containing +RunQueryRequest+.
+</span>  <span class='comment'>#     the `parent` specified in the containing `RunQueryRequest`.
 </span>  <span class='comment'>#     When true, selects all descendant collections.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/CollectionSelector.html" title="Google::Firestore::V1beta1::StructuredQuery::CollectionSelector (class)">CollectionSelector</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -2594,17 +2594,17 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>OPERATOR_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># Less than. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
-      <span class='comment'># Less than or equal. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than or equal. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>2</span>
 
-      <span class='comment'># Greater than. Requires that the field come first in +order_by+.
+      <span class='comment'># Greater than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>GREATER_THAN</span> <span class='op'>=</span> <span class='int'>3</span>
 
       <span class='comment'># Greater than or equal. Requires that the field come first in
-</span>      <span class='comment'># +order_by+.
+</span>      <span class='comment'># `order_by`.
 </span>      <span class='const'>GREATER_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>4</span>
 
       <span class='comment'># Equal.
@@ -2642,10 +2642,10 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'>#     The field to order by.
 </span>  <span class='comment'># @!attribute [rw] direction
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::Direction]
-</span>  <span class='comment'>#     The direction to order by. Defaults to +ASCENDING+.
+</span>  <span class='comment'>#     The direction to order by. Defaults to `ASCENDING`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Order.html" title="Google::Firestore::V1beta1::StructuredQuery::Order (class)">Order</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A reference to a field, such as +max(messages.time) as max_time+.
+  <span class='comment'># A reference to a field, such as `max(messages.time) as max_time`.
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2656,7 +2656,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'>#     The fields to return.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use +[&#39;__name__&#39;]+.
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.
@@ -2862,7 +2862,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/query.rb', line 67</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::StructuredQuery (class)">StructuredQuery</a></span></span>
-  <span class='comment'># A selection of a collection, such as +messages as m1+.
+  <span class='comment'># A selection of a collection, such as `messages as m1`.
 </span>  <span class='comment'># @!attribute [rw] collection_id
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The collection ID.
@@ -2870,7 +2870,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'># @!attribute [rw] all_descendants
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     When false, selects only collections that are immediate children of
-</span>  <span class='comment'>#     the +parent+ specified in the containing +RunQueryRequest+.
+</span>  <span class='comment'>#     the `parent` specified in the containing `RunQueryRequest`.
 </span>  <span class='comment'>#     When true, selects all descendant collections.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/CollectionSelector.html" title="Google::Firestore::V1beta1::StructuredQuery::CollectionSelector (class)">CollectionSelector</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -2921,17 +2921,17 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>OPERATOR_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># Less than. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
-      <span class='comment'># Less than or equal. Requires that the field come first in +order_by+.
+      <span class='comment'># Less than or equal. Requires that the field come first in `order_by`.
 </span>      <span class='const'>LESS_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>2</span>
 
-      <span class='comment'># Greater than. Requires that the field come first in +order_by+.
+      <span class='comment'># Greater than. Requires that the field come first in `order_by`.
 </span>      <span class='const'>GREATER_THAN</span> <span class='op'>=</span> <span class='int'>3</span>
 
       <span class='comment'># Greater than or equal. Requires that the field come first in
-</span>      <span class='comment'># +order_by+.
+</span>      <span class='comment'># `order_by`.
 </span>      <span class='const'>GREATER_THAN_OR_EQUAL</span> <span class='op'>=</span> <span class='int'>4</span>
 
       <span class='comment'># Equal.
@@ -2969,10 +2969,10 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'>#     The field to order by.
 </span>  <span class='comment'># @!attribute [rw] direction
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::StructuredQuery::Direction]
-</span>  <span class='comment'>#     The direction to order by. Defaults to +ASCENDING+.
+</span>  <span class='comment'>#     The direction to order by. Defaults to `ASCENDING`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Order.html" title="Google::Firestore::V1beta1::StructuredQuery::Order (class)">Order</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A reference to a field, such as +max(messages.time) as max_time+.
+  <span class='comment'># A reference to a field, such as `max(messages.time) as max_time`.
 </span>  <span class='comment'># @!attribute [rw] field_path
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/FieldReference.html" title="Google::Firestore::V1beta1::StructuredQuery::FieldReference (class)">FieldReference</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2983,7 +2983,7 @@ specified, or &#39;ASCENDING&#39; if no order was specified. For example:</p>
 </span>  <span class='comment'>#     The fields to return.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     If empty, all fields are returned. To only return the name
-</span>  <span class='comment'>#     of the document, use +[&#39;__name__&#39;]+.
+</span>  <span class='comment'>#     of the document, use `[&#39;__name__&#39;]`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="StructuredQuery/Projection.html" title="Google::Firestore::V1beta1::StructuredQuery::Projection (class)">Projection</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A sort direction.

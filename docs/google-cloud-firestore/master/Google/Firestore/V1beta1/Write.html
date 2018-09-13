@@ -316,7 +316,7 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns A document name to delete. In the format:
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.</p>
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.</p>
 
 
   </div>
@@ -335,7 +335,7 @@ js:
       
         &mdash;
         <div class='inline'><p>A document name to delete. In the format:
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.</p>
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.</p>
 </div>
       
     </li>
@@ -373,8 +373,8 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Applies a tranformation to a document.
-At most one +transform+ per document is allowed in a given request.
-An +update+ cannot follow a +transform+ on the same document in a given
+At most one <code>transform</code> per document is allowed in a given request.
+An <code>update</code> cannot follow a <code>transform</code> on the same document in a given
 request.</p>
 
 
@@ -394,8 +394,8 @@ request.</p>
       
         &mdash;
         <div class='inline'><p>Applies a tranformation to a document.
-At most one +transform+ per document is allowed in a given request.
-An +update+ cannot follow a +transform+ on the same document in a given
+At most one <code>transform</code> per document is allowed in a given request.
+An <code>update</code> cannot follow a <code>transform</code> on the same document in a given
 request.</p>
 </div>
       
@@ -490,8 +490,8 @@ request.</p>
   <div class="discussion">
     <p>Returns The fields to update in this write.</p>
 
-<p>This field can be set only when the operation is +update+.
-If the mask is not set for an +update+ and the document exists, any
+<p>This field can be set only when the operation is <code>update</code>.
+If the mask is not set for an <code>update</code> and the document exists, any
 existing data will be overwritten.
 If the mask is set and the document on the server has fields not covered by
 the mask, they are left unchanged.
@@ -517,8 +517,8 @@ The field paths in this mask must not contain a reserved field name.</p>
         &mdash;
         <div class='inline'><p>The fields to update in this write.</p>
 
-<p>This field can be set only when the operation is +update+.
-If the mask is not set for an +update+ and the document exists, any
+<p>This field can be set only when the operation is <code>update</code>.
+If the mask is not set for an <code>update</code> and the document exists, any
 existing data will be overwritten.
 If the mask is set and the document on the server has fields not covered by
 the mask, they are left unchanged.

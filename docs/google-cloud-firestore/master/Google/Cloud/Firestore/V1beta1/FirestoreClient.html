@@ -94,17 +94,17 @@ js:
 <p>This service exposes several types of comparable timestamps:</p>
 
 <ul>
-<li>+create_time+ - The time at which a document was created. Changes only
+<li><code>create_time</code> - The time at which a document was created. Changes only
 when a document is deleted, then re-created. Increases in a strict
 monotonic fashion.</li>
-<li>+update_time+ - The time at which a document was last updated. Changes
+<li><code>update_time</code> - The time at which a document was last updated. Changes
 every time a document is modified. Does not change when a write results
 in no modifications. Increases in a strict monotonic fashion.</li>
-<li>+read_time+ - The time at which a particular state was observed. Used
+<li><code>read_time</code> - The time at which a particular state was observed. Used
 to denote a consistent snapshot of the database or the time at which a
 Document was observed to not exist.</li>
-<li>+commit_time+ - The time at which the writes in a transaction were
-committed. Any read with an equal or greater +read_time+ is guaranteed
+<li><code>commit_time</code> - The time at which the writes in a transaction were
+committed. Any read with an equal or greater <code>read_time</code> is guaranteed
 to see the effects of the transaction.</li>
 </ul>
 
@@ -1487,7 +1487,7 @@ same order that they were requested.</p>
 <span class='id identifier rubyid_firestore_client'>firestore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta1.html#new-class_method" title="Google::Cloud::Firestore::V1beta1.new (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_database'>formatted_database</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore::V1beta1::FirestoreClient (class)">FirestoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_database_root_path'><span class='object_link'><a href="#database_root_path-class_method" title="Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path (method)">database_root_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +documents+:
+<span class='comment'># TODO: Initialize `documents`:
 </span><span class='id identifier rubyid_documents'>documents</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_firestore_client'>firestore_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_get_documents'>batch_get_documents</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_database'>formatted_database</span><span class='comma'>,</span> <span class='id identifier rubyid_documents'>documents</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
   <span class='comment'># Process element.
@@ -1508,7 +1508,7 @@ same order that they were requested.</p>
       
         &mdash;
         <div class='inline'><p>The database name. In the format:
-+projects/{project_id}/databases/{database_id}+.</p>
+<code>projects/{project_id}/databases/{database_id}</code>.</p>
 </div>
       
     </li>
@@ -1524,9 +1524,9 @@ same order that they were requested.</p>
       
         &mdash;
         <div class='inline'><p>The names of the documents to retrieve. In the format:
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.
 The request will fail if any of the document is not a child resource of the
-given +database+. Duplicate names will be elided.</p>
+given <code>database</code>. Duplicate names will be elided.</p>
 </div>
       
     </li>
@@ -1753,7 +1753,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The database name. In the format:
-+projects/{project_id}/databases/{database_id}+.</p>
+<code>projects/{project_id}/databases/{database_id}</code>.</p>
 </div>
       
     </li>
@@ -1934,7 +1934,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_firestore_client'>firestore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta1.html#new-class_method" title="Google::Cloud::Firestore::V1beta1.new (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_database'>formatted_database</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore::V1beta1::FirestoreClient (class)">FirestoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_database_root_path'><span class='object_link'><a href="#database_root_path-class_method" title="Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path (method)">database_root_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +writes+:
+<span class='comment'># TODO: Initialize `writes`:
 </span><span class='id identifier rubyid_writes'>writes</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore_client'>firestore_client</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_database'>formatted_database</span><span class='comma'>,</span> <span class='id identifier rubyid_writes'>writes</span><span class='rparen'>)</span></code></pre>
     
@@ -1953,7 +1953,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The database name. In the format:
-+projects/{project_id}/databases/{database_id}+.</p>
+<code>projects/{project_id}/databases/{database_id}</code>.</p>
 </div>
       
     </li>
@@ -2154,13 +2154,13 @@ retries, etc.</p>
 <span class='id identifier rubyid_firestore_client'>firestore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta1.html#new-class_method" title="Google::Cloud::Firestore::V1beta1.new (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore::V1beta1::FirestoreClient (class)">FirestoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_any_path_path'><span class='object_link'><a href="#any_path_path-class_method" title="Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path (method)">any_path_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DOCUMENT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[ANY_PATH]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +collection_id+:
+<span class='comment'># TODO: Initialize `collection_id`:
 </span><span class='id identifier rubyid_collection_id'>collection_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +document_id+:
+<span class='comment'># TODO: Initialize `document_id`:
 </span><span class='id identifier rubyid_document_id'>document_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +document+:
+<span class='comment'># TODO: Initialize `document`:
 </span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore_client'>firestore_client</span><span class='period'>.</span><span class='id identifier rubyid_create_document'>create_document</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_collection_id'>collection_id</span><span class='comma'>,</span> <span class='id identifier rubyid_document_id'>document_id</span><span class='comma'>,</span> <span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
@@ -2179,8 +2179,8 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The parent resource. For example:
-+projects/{project_id}/databases/{database_id}/documents+ or
-+projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}+</p>
+<code>projects/{project_id}/databases/{database_id}/documents</code> or
+<code>projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}</code></p>
 </div>
       
     </li>
@@ -2195,7 +2195,7 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The collection ID, relative to +parent+, to list. For example: +chatrooms+.</p>
+        <div class='inline'><p>The collection ID, relative to <code>parent</code>, to list. For example: <code>chatrooms</code>.</p>
 </div>
       
     </li>
@@ -2227,7 +2227,7 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The document to create. +name+ must not be set.
+        <div class='inline'><p>The document to create. <code>name</code> must not be set.
 A hash of the same form as <code>Google::Firestore::V1beta1::Document</code>
 can also be provided.</p>
 </div>
@@ -2440,7 +2440,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The resource name of the Document to delete. In the format:
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.</p>
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.</p>
 </div>
       
     </li>
@@ -2630,7 +2630,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The resource name of the Document to get. In the format:
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.</p>
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.</p>
 </div>
       
     </li>
@@ -2882,9 +2882,9 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The parent document. In the format:
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.
 For example:
-+projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+</p>
+<code>projects/my-project/databases/my-database/documents/chatrooms/my-chatroom</code></p>
 </div>
       
     </li>
@@ -3073,7 +3073,7 @@ object.</p>
 <span class='id identifier rubyid_firestore_client'>firestore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta1.html#new-class_method" title="Google::Cloud::Firestore::V1beta1.new (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore::V1beta1::FirestoreClient (class)">FirestoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_any_path_path'><span class='object_link'><a href="#any_path_path-class_method" title="Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path (method)">any_path_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DOCUMENT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[ANY_PATH]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +collection_id+:
+<span class='comment'># TODO: Initialize `collection_id`:
 </span><span class='id identifier rubyid_collection_id'>collection_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
 <span class='comment'># Iterate over all results.
@@ -3104,11 +3104,11 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The parent resource name. In the format:
-+projects/{project_id}/databases/{database_id}/documents+ or
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+<code>projects/{project_id}/databases/{database_id}/documents</code> or
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.
 For example:
-+projects/my-project/databases/my-database/documents+ or
-+projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+</p>
+<code>projects/my-project/databases/my-database/documents</code> or
+<code>projects/my-project/databases/my-database/documents/chatrooms/my-chatroom</code></p>
 </div>
       
     </li>
@@ -3123,8 +3123,8 @@ For example:
       
       
         &mdash;
-        <div class='inline'><p>The collection ID, relative to +parent+, to list. For example: +chatrooms+
-or +messages+.</p>
+        <div class='inline'><p>The collection ID, relative to <code>parent</code>, to list. For example: <code>chatrooms</code>
+or <code>messages</code>.</p>
 </div>
       
     </li>
@@ -3158,7 +3158,7 @@ resources in a page.</p>
       
       
         &mdash;
-        <div class='inline'><p>The order to sort results by. For example: +priority desc, name+.</p>
+        <div class='inline'><p>The order to sort results by. For example: <code>priority desc, name</code>.</p>
 </div>
       
     </li>
@@ -3231,8 +3231,8 @@ document that does not exist but has sub-documents. These documents will
 be returned with a key but will not have fields, <span class='object_link'><a href="../../../Firestore/V1beta1/Document.html#create_time-instance_method" title="Google::Firestore::V1beta1::Document#create_time (method)">Document#create_time</a></span>,
 or <span class='object_link'><a href="../../../Firestore/V1beta1/Document.html#update_time-instance_method" title="Google::Firestore::V1beta1::Document#update_time (method)">Document#update_time</a></span> set.</p>
 
-<p>Requests with +show_missing+ may not specify +where+ or
-+order_by+.</p>
+<p>Requests with <code>show_missing</code> may not specify <code>where</code> or
+<code>order_by</code>.</p>
 </div>
       
     </li>
@@ -3566,7 +3566,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_firestore_client'>firestore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta1.html#new-class_method" title="Google::Cloud::Firestore::V1beta1.new (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_database'>formatted_database</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore::V1beta1::FirestoreClient (class)">FirestoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_database_root_path'><span class='object_link'><a href="#database_root_path-class_method" title="Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path (method)">database_root_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +transaction+:
+<span class='comment'># TODO: Initialize `transaction`:
 </span><span class='id identifier rubyid_transaction'>transaction</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_firestore_client'>firestore_client</span><span class='period'>.</span><span class='id identifier rubyid_rollback'>rollback</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_database'>formatted_database</span><span class='comma'>,</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='rparen'>)</span></code></pre>
     
@@ -3585,7 +3585,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The database name. In the format:
-+projects/{project_id}/databases/{database_id}+.</p>
+<code>projects/{project_id}/databases/{database_id}</code>.</p>
 </div>
       
     </li>
@@ -3774,11 +3774,11 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The parent resource name. In the format:
-+projects/{project_id}/databases/{database_id}/documents+ or
-+projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+<code>projects/{project_id}/databases/{database_id}/documents</code> or
+<code>projects/{project_id}/databases/{database_id}/documents/{document_path}</code>.
 For example:
-+projects/my-project/databases/my-database/documents+ or
-+projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+</p>
+<code>projects/my-project/databases/my-database/documents</code> or
+<code>projects/my-project/databases/my-database/documents/chatrooms/my-chatroom</code></p>
 </div>
       
     </li>
@@ -3981,10 +3981,10 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_firestore_client'>firestore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Firestore::V1beta1 (module)">V1beta1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta1.html#new-class_method" title="Google::Cloud::Firestore::V1beta1.new (method)">new</a></span></span>
 
-<span class='comment'># TODO: Initialize +document+:
+<span class='comment'># TODO: Initialize `document`:
 </span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +update_mask+:
+<span class='comment'># TODO: Initialize `update_mask`:
 </span><span class='id identifier rubyid_update_mask'>update_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore_client'>firestore_client</span><span class='period'>.</span><span class='id identifier rubyid_update_document'>update_document</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='comma'>,</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='rparen'>)</span></code></pre>
     

@@ -160,7 +160,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The consistent +read_time+ for the given +target_ids+ (omitted when the target_ids are not at a consistent snapshot).</p>
+    <span class="summary_desc"><div class='inline'><p>The consistent <code>read_time</code> for the given <code>target_ids</code> (omitted when the target_ids are not at a consistent snapshot).</p>
 </div></span>
   
 </li>
@@ -186,7 +186,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A token that can be used to resume the stream for the given +target_ids+, or all targets if +target_ids+ is empty.</p>
+    <span class="summary_desc"><div class='inline'><p>A token that can be used to resume the stream for the given <code>target_ids</code>, or all targets if <code>target_ids</code> is empty.</p>
 </div></span>
   
 </li>
@@ -334,7 +334,7 @@ js:
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::TargetChange (class)">TargetChange</a></span></span>
   <span class='comment'># The type of change.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="TargetChange/TargetChangeType.html" title="Google::Firestore::V1beta1::TargetChange::TargetChangeType (module)">TargetChangeType</a></span></span>
-    <span class='comment'># No change has occurred. Used only to send an updated +resume_token+.
+    <span class='comment'># No change has occurred. Used only to send an updated `resume_token`.
 </span>    <span class='const'>NO_CHANGE</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The targets have been added.
@@ -346,7 +346,7 @@ js:
     <span class='comment'># The targets reflect all changes committed before the targets were added
 </span>    <span class='comment'># to the stream.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># This will be sent after or with a +read_time+ that is greater than or
+</span>    <span class='comment'># This will be sent after or with a `read_time` that is greater than or
 </span>    <span class='comment'># equal to the time at which the targets were added.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Listeners can wait for this change if read-after-write semantics
@@ -356,8 +356,8 @@ js:
     <span class='comment'># The targets have been reset, and a new initial state for the targets
 </span>    <span class='comment'># will be returned in subsequent changes.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># After the initial state is complete, +CURRENT+ will be returned even
-</span>    <span class='comment'># if the target was previously indicated to be +CURRENT+.
+</span>    <span class='comment'># After the initial state is complete, `CURRENT` will be returned even
+</span>    <span class='comment'># if the target was previously indicated to be `CURRENT`.
 </span>    <span class='const'>RESET</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -379,15 +379,15 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The consistent +read_time+ for the given +target_ids+ (omitted when the
+    <p>Returns The consistent <code>read_time</code> for the given <code>target_ids</code> (omitted when the
 target_ids are not at a consistent snapshot).</p>
 
-<p>The stream is guaranteed to send a +read_time+ with +target_ids+ empty
+<p>The stream is guaranteed to send a <code>read_time</code> with <code>target_ids</code> empty
 whenever the entire stream reaches a new consistent snapshot. ADD,
 CURRENT, and RESET messages are guaranteed to (eventually) result in a
 new consistent snapshot (while NO_CHANGE and REMOVE messages are not).</p>
 
-<p>For a given stream, +read_time+ is guaranteed to be monotonically
+<p>For a given stream, <code>read_time</code> is guaranteed to be monotonically
 increasing.</p>
 
 
@@ -406,15 +406,15 @@ increasing.</p>
       
       
         &mdash;
-        <div class='inline'><p>The consistent +read_time+ for the given +target_ids+ (omitted when the
+        <div class='inline'><p>The consistent <code>read_time</code> for the given <code>target_ids</code> (omitted when the
 target_ids are not at a consistent snapshot).</p>
 
-<p>The stream is guaranteed to send a +read_time+ with +target_ids+ empty
+<p>The stream is guaranteed to send a <code>read_time</code> with <code>target_ids</code> empty
 whenever the entire stream reaches a new consistent snapshot. ADD,
 CURRENT, and RESET messages are guaranteed to (eventually) result in a
 new consistent snapshot (while NO_CHANGE and REMOVE messages are not).</p>
 
-<p>For a given stream, +read_time+ is guaranteed to be monotonically
+<p>For a given stream, <code>read_time</code> is guaranteed to be monotonically
 increasing.</p>
 </div>
       
@@ -465,7 +465,7 @@ increasing.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::TargetChange (class)">TargetChange</a></span></span>
   <span class='comment'># The type of change.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="TargetChange/TargetChangeType.html" title="Google::Firestore::V1beta1::TargetChange::TargetChangeType (module)">TargetChangeType</a></span></span>
-    <span class='comment'># No change has occurred. Used only to send an updated +resume_token+.
+    <span class='comment'># No change has occurred. Used only to send an updated `resume_token`.
 </span>    <span class='const'>NO_CHANGE</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The targets have been added.
@@ -477,7 +477,7 @@ increasing.</p>
     <span class='comment'># The targets reflect all changes committed before the targets were added
 </span>    <span class='comment'># to the stream.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># This will be sent after or with a +read_time+ that is greater than or
+</span>    <span class='comment'># This will be sent after or with a `read_time` that is greater than or
 </span>    <span class='comment'># equal to the time at which the targets were added.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Listeners can wait for this change if read-after-write semantics
@@ -487,8 +487,8 @@ increasing.</p>
     <span class='comment'># The targets have been reset, and a new initial state for the targets
 </span>    <span class='comment'># will be returned in subsequent changes.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># After the initial state is complete, +CURRENT+ will be returned even
-</span>    <span class='comment'># if the target was previously indicated to be +CURRENT+.
+</span>    <span class='comment'># After the initial state is complete, `CURRENT` will be returned even
+</span>    <span class='comment'># if the target was previously indicated to be `CURRENT`.
 </span>    <span class='const'>RESET</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -510,8 +510,8 @@ increasing.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A token that can be used to resume the stream for the given +target_ids+,
-or all targets if +target_ids+ is empty.</p>
+    <p>Returns A token that can be used to resume the stream for the given <code>target_ids</code>,
+or all targets if <code>target_ids</code> is empty.</p>
 
 <p>Not set on every target change.</p>
 
@@ -531,8 +531,8 @@ or all targets if +target_ids+ is empty.</p>
       
       
         &mdash;
-        <div class='inline'><p>A token that can be used to resume the stream for the given +target_ids+,
-or all targets if +target_ids+ is empty.</p>
+        <div class='inline'><p>A token that can be used to resume the stream for the given <code>target_ids</code>,
+or all targets if <code>target_ids</code> is empty.</p>
 
 <p>Not set on every target change.</p>
 </div>
@@ -584,7 +584,7 @@ or all targets if +target_ids+ is empty.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::TargetChange (class)">TargetChange</a></span></span>
   <span class='comment'># The type of change.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="TargetChange/TargetChangeType.html" title="Google::Firestore::V1beta1::TargetChange::TargetChangeType (module)">TargetChangeType</a></span></span>
-    <span class='comment'># No change has occurred. Used only to send an updated +resume_token+.
+    <span class='comment'># No change has occurred. Used only to send an updated `resume_token`.
 </span>    <span class='const'>NO_CHANGE</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The targets have been added.
@@ -596,7 +596,7 @@ or all targets if +target_ids+ is empty.</p>
     <span class='comment'># The targets reflect all changes committed before the targets were added
 </span>    <span class='comment'># to the stream.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># This will be sent after or with a +read_time+ that is greater than or
+</span>    <span class='comment'># This will be sent after or with a `read_time` that is greater than or
 </span>    <span class='comment'># equal to the time at which the targets were added.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Listeners can wait for this change if read-after-write semantics
@@ -606,8 +606,8 @@ or all targets if +target_ids+ is empty.</p>
     <span class='comment'># The targets have been reset, and a new initial state for the targets
 </span>    <span class='comment'># will be returned in subsequent changes.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># After the initial state is complete, +CURRENT+ will be returned even
-</span>    <span class='comment'># if the target was previously indicated to be +CURRENT+.
+</span>    <span class='comment'># After the initial state is complete, `CURRENT` will be returned even
+</span>    <span class='comment'># if the target was previously indicated to be `CURRENT`.
 </span>    <span class='const'>RESET</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -697,7 +697,7 @@ or all targets if +target_ids+ is empty.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::TargetChange (class)">TargetChange</a></span></span>
   <span class='comment'># The type of change.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="TargetChange/TargetChangeType.html" title="Google::Firestore::V1beta1::TargetChange::TargetChangeType (module)">TargetChangeType</a></span></span>
-    <span class='comment'># No change has occurred. Used only to send an updated +resume_token+.
+    <span class='comment'># No change has occurred. Used only to send an updated `resume_token`.
 </span>    <span class='const'>NO_CHANGE</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The targets have been added.
@@ -709,7 +709,7 @@ or all targets if +target_ids+ is empty.</p>
     <span class='comment'># The targets reflect all changes committed before the targets were added
 </span>    <span class='comment'># to the stream.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># This will be sent after or with a +read_time+ that is greater than or
+</span>    <span class='comment'># This will be sent after or with a `read_time` that is greater than or
 </span>    <span class='comment'># equal to the time at which the targets were added.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Listeners can wait for this change if read-after-write semantics
@@ -719,8 +719,8 @@ or all targets if +target_ids+ is empty.</p>
     <span class='comment'># The targets have been reset, and a new initial state for the targets
 </span>    <span class='comment'># will be returned in subsequent changes.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># After the initial state is complete, +CURRENT+ will be returned even
-</span>    <span class='comment'># if the target was previously indicated to be +CURRENT+.
+</span>    <span class='comment'># After the initial state is complete, `CURRENT` will be returned even
+</span>    <span class='comment'># if the target was previously indicated to be `CURRENT`.
 </span>    <span class='const'>RESET</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -746,7 +746,7 @@ or all targets if +target_ids+ is empty.</p>
 
 <p>If empty, the change applies to all targets.</p>
 
-<p>For +target_change_type=ADD+, the order of the target IDs matches the order
+<p>For <code>target_change_type=ADD</code>, the order of the target IDs matches the order
 of the requests to add the targets. This allows clients to unambiguously
 associate server-assigned target IDs with added targets.</p>
 
@@ -772,7 +772,7 @@ associate server-assigned target IDs with added targets.</p>
 
 <p>If empty, the change applies to all targets.</p>
 
-<p>For +target_change_type=ADD+, the order of the target IDs matches the order
+<p>For <code>target_change_type=ADD</code>, the order of the target IDs matches the order
 of the requests to add the targets. This allows clients to unambiguously
 associate server-assigned target IDs with added targets.</p>
 
@@ -826,7 +826,7 @@ associate server-assigned target IDs with added targets.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::TargetChange (class)">TargetChange</a></span></span>
   <span class='comment'># The type of change.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="TargetChange/TargetChangeType.html" title="Google::Firestore::V1beta1::TargetChange::TargetChangeType (module)">TargetChangeType</a></span></span>
-    <span class='comment'># No change has occurred. Used only to send an updated +resume_token+.
+    <span class='comment'># No change has occurred. Used only to send an updated `resume_token`.
 </span>    <span class='const'>NO_CHANGE</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The targets have been added.
@@ -838,7 +838,7 @@ associate server-assigned target IDs with added targets.</p>
     <span class='comment'># The targets reflect all changes committed before the targets were added
 </span>    <span class='comment'># to the stream.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># This will be sent after or with a +read_time+ that is greater than or
+</span>    <span class='comment'># This will be sent after or with a `read_time` that is greater than or
 </span>    <span class='comment'># equal to the time at which the targets were added.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Listeners can wait for this change if read-after-write semantics
@@ -848,8 +848,8 @@ associate server-assigned target IDs with added targets.</p>
     <span class='comment'># The targets have been reset, and a new initial state for the targets
 </span>    <span class='comment'># will be returned in subsequent changes.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># After the initial state is complete, +CURRENT+ will be returned even
-</span>    <span class='comment'># if the target was previously indicated to be +CURRENT+.
+</span>    <span class='comment'># After the initial state is complete, `CURRENT` will be returned even
+</span>    <span class='comment'># if the target was previously indicated to be `CURRENT`.
 </span>    <span class='const'>RESET</span> <span class='op'>=</span> <span class='int'>4</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
