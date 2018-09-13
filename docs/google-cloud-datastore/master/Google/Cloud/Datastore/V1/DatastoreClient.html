@@ -786,10 +786,10 @@ before it is inserted.</p>
 
 <span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +keys+:
+<span class='comment'># TODO: Initialize `keys`:
 </span><span class='id identifier rubyid_keys'>keys</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_allocate_ids'>allocate_ids</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span></code></pre>
     
@@ -987,7 +987,7 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_begin_transaction'>begin_transaction</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span></code></pre>
     
@@ -1185,13 +1185,13 @@ entities.</p>
 
 <span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +mode+:
+<span class='comment'># TODO: Initialize `mode`:
 </span><span class='id identifier rubyid_mode'>mode</span> <span class='op'>=</span> <span class='symbol'>:MODE_UNSPECIFIED</span>
 
-<span class='comment'># TODO: Initialize +mutations+:
+<span class='comment'># TODO: Initialize `mutations`:
 </span><span class='id identifier rubyid_mutations'>mutations</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_mode'>mode</span><span class='comma'>,</span> <span class='id identifier rubyid_mutations'>mutations</span><span class='rparen'>)</span></code></pre>
     
@@ -1224,7 +1224,7 @@ entities.</p>
       
       
         &mdash;
-        <div class='inline'><p>The type of commit to perform. Defaults to +TRANSACTIONAL+.</p>
+        <div class='inline'><p>The type of commit to perform. Defaults to <code>TRANSACTIONAL</code>.</p>
 </div>
       
     </li>
@@ -1241,18 +1241,18 @@ entities.</p>
         &mdash;
         <div class='inline'><p>The mutations to perform.</p>
 
-<p>When mode is +TRANSACTIONAL+, mutations affecting a single entity are
+<p>When mode is <code>TRANSACTIONAL</code>, mutations affecting a single entity are
 applied in order. The following sequences of mutations affecting a single
-entity are not permitted in a single +Commit+ request:</p>
+entity are not permitted in a single <code>Commit</code> request:</p>
 
 <ul>
-<li>+insert+ followed by +insert+</li>
-<li>+update+ followed by +insert+</li>
-<li>+upsert+ followed by +insert+</li>
-<li>+delete+ followed by +update+</li>
+<li><code>insert</code> followed by <code>insert</code></li>
+<li><code>update</code> followed by <code>insert</code></li>
+<li><code>upsert</code> followed by <code>insert</code></li>
+<li><code>delete</code> followed by <code>update</code></li>
 </ul>
 
-<p>When mode is +NON_TRANSACTIONAL+, no two mutations may affect a single
+<p>When mode is <code>NON_TRANSACTIONAL</code>, no two mutations may affect a single
 entity.
 A hash of the same form as <code>Google::Datastore::V1::Mutation</code>
 can also be provided.</p>
@@ -1442,10 +1442,10 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +keys+:
+<span class='comment'># TODO: Initialize `keys`:
 </span><span class='id identifier rubyid_keys'>keys</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_lookup'>lookup</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span></code></pre>
     
@@ -1664,10 +1664,10 @@ Datastore.</p>
 
 <span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +keys+:
+<span class='comment'># TODO: Initialize `keys`:
 </span><span class='id identifier rubyid_keys'>keys</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_reserve_ids'>reserve_ids</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span></code></pre>
     
@@ -1884,10 +1884,10 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +transaction+:
+<span class='comment'># TODO: Initialize `transaction`:
 </span><span class='id identifier rubyid_transaction'>transaction</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_rollback'>rollback</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='rparen'>)</span></code></pre>
     
@@ -2083,10 +2083,10 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Datastore.html#new-class_method" title="Google::Cloud::Datastore.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +partition_id+:
+<span class='comment'># TODO: Initialize `partition_id`:
 </span><span class='id identifier rubyid_partition_id'>partition_id</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_run_query'>run_query</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_partition_id'>partition_id</span><span class='rparen'>)</span></code></pre>
     

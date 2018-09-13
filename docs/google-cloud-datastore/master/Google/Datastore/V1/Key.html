@@ -262,9 +262,9 @@ Queries are scoped to a single partition.</p>
 </span>  <span class='comment'># @!attribute [rw] kind
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The kind of the entity.
-</span>  <span class='comment'>#     A kind matching regex +__.*__+ is reserved/read-only.
+</span>  <span class='comment'>#     A kind matching regex `__.*__` is reserved/read-only.
 </span>  <span class='comment'>#     A kind must not contain more than 1500 bytes when UTF-8 encoded.
-</span>  <span class='comment'>#     Cannot be +&quot;&quot;+.
+</span>  <span class='comment'>#     Cannot be `&quot;&quot;`.
 </span>  <span class='comment'># @!attribute [rw] id
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The auto-allocated ID of the entity.
@@ -273,9 +273,9 @@ Queries are scoped to a single partition.</p>
 </span>  <span class='comment'># @!attribute [rw] name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The name of the entity.
-</span>  <span class='comment'>#     A name matching regex +__.*__+ is reserved/read-only.
+</span>  <span class='comment'>#     A name matching regex `__.*__` is reserved/read-only.
 </span>  <span class='comment'>#     A name must not be more than 1500 bytes when UTF-8 encoded.
-</span>  <span class='comment'>#     Cannot be +&quot;&quot;+.
+</span>  <span class='comment'>#     Cannot be `&quot;&quot;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Key/PathElement.html" title="Google::Datastore::V1::Key::PathElement (class)">PathElement</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -308,7 +308,7 @@ the path are called the element&#39;s <em>ancestors</em>.</p>
 are required to be in the path along with the entity identifier itself.
 The only exception is that in some documented cases, the identifier in the
 last path element (for the entity) itself may be omitted. For example,
-the last path element of the key of +Mutation.insert+ may have no
+the last path element of the key of <code>Mutation.insert</code> may have no
 identifier.</p>
 
 <p>A path can never be empty, and a path can have at most 100 elements.</p>
@@ -341,7 +341,7 @@ the path are called the element&#39;s <em>ancestors</em>.</p>
 are required to be in the path along with the entity identifier itself.
 The only exception is that in some documented cases, the identifier in the
 last path element (for the entity) itself may be omitted. For example,
-the last path element of the key of +Mutation.insert+ may have no
+the last path element of the key of <code>Mutation.insert</code> may have no
 identifier.</p>
 
 <p>A path can never be empty, and a path can have at most 100 elements.</p>
@@ -393,9 +393,9 @@ identifier.</p>
 </span>  <span class='comment'># @!attribute [rw] kind
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The kind of the entity.
-</span>  <span class='comment'>#     A kind matching regex +__.*__+ is reserved/read-only.
+</span>  <span class='comment'>#     A kind matching regex `__.*__` is reserved/read-only.
 </span>  <span class='comment'>#     A kind must not contain more than 1500 bytes when UTF-8 encoded.
-</span>  <span class='comment'>#     Cannot be +&quot;&quot;+.
+</span>  <span class='comment'>#     Cannot be `&quot;&quot;`.
 </span>  <span class='comment'># @!attribute [rw] id
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The auto-allocated ID of the entity.
@@ -404,9 +404,9 @@ identifier.</p>
 </span>  <span class='comment'># @!attribute [rw] name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The name of the entity.
-</span>  <span class='comment'>#     A name matching regex +__.*__+ is reserved/read-only.
+</span>  <span class='comment'>#     A name matching regex `__.*__` is reserved/read-only.
 </span>  <span class='comment'>#     A name must not be more than 1500 bytes when UTF-8 encoded.
-</span>  <span class='comment'>#     Cannot be +&quot;&quot;+.
+</span>  <span class='comment'>#     Cannot be `&quot;&quot;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Key/PathElement.html" title="Google::Datastore::V1::Key::PathElement (class)">PathElement</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>

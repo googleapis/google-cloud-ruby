@@ -232,8 +232,8 @@ js:
   <div class="discussion">
     <p>Returns When false, the query string must not contain any literals and instead must
 bind all values. For example,
-+SELECT * FROM Kind WHERE a = &#39;string literal&#39;+ is not allowed, while
-+SELECT * FROM Kind WHERE a = @value+ is.</p>
+<code>SELECT * FROM Kind WHERE a = &#39;string literal&#39;</code> is not allowed, while
+<code>SELECT * FROM Kind WHERE a = @value</code> is.</p>
 
 
   </div>
@@ -253,8 +253,8 @@ bind all values. For example,
         &mdash;
         <div class='inline'><p>When false, the query string must not contain any literals and instead must
 bind all values. For example,
-+SELECT * FROM Kind WHERE a = &#39;string literal&#39;+ is not allowed, while
-+SELECT * FROM Kind WHERE a = @value+ is.</p>
+<code>SELECT * FROM Kind WHERE a = &#39;string literal&#39;</code> is not allowed, while
+<code>SELECT * FROM Kind WHERE a = @value</code> is.</p>
 </div>
       
     </li>
@@ -294,8 +294,8 @@ bind all values. For example,
     <p>Returns For each non-reserved named binding site in the query string, there must be
 a named parameter with that name, but not necessarily the inverse.</p>
 
-<p>Key must match regex +[A-Za-z_$][A-Za-z_$0-9]<em>+, must not match regex
-+__.</em>__+, and must not be +&quot;&quot;+.</p>
+<p>Key must match regex <code>[A-Za-z_$][A-Za-z_$0-9]*</code>, must not match regex
+<code>__.*__</code>, and must not be <code>&quot;&quot;</code>.</p>
 
 
   </div>
@@ -316,8 +316,8 @@ a named parameter with that name, but not necessarily the inverse.</p>
         <div class='inline'><p>For each non-reserved named binding site in the query string, there must be
 a named parameter with that name, but not necessarily the inverse.</p>
 
-<p>Key must match regex +[A-Za-z_$][A-Za-z_$0-9]<em>+, must not match regex
-+__.</em>__+, and must not be +&quot;&quot;+.</p>
+<p>Key must match regex <code>[A-Za-z_$][A-Za-z_$0-9]*</code>, must not match regex
+<code>__.*__</code>, and must not be <code>&quot;&quot;</code>.</p>
 </div>
       
     </li>
@@ -357,7 +357,7 @@ a named parameter with that name, but not necessarily the inverse.</p>
     <p>Returns Numbered binding site @1 references the first numbered parameter,
 effectively using 1-based indexing, rather than the usual 0.</p>
 
-<p>For each binding site numbered i in +query_string+, there must be an i-th
+<p>For each binding site numbered i in <code>query_string</code>, there must be an i-th
 numbered parameter. The inverse must also be true.</p>
 
 
@@ -379,7 +379,7 @@ numbered parameter. The inverse must also be true.</p>
         <div class='inline'><p>Numbered binding site @1 references the first numbered parameter,
 effectively using 1-based indexing, rather than the usual 0.</p>
 
-<p>For each binding site numbered i in +query_string+, there must be an i-th
+<p>For each binding site numbered i in <code>query_string</code>, there must be an i-th
 numbered parameter. The inverse must also be true.</p>
 </div>
       

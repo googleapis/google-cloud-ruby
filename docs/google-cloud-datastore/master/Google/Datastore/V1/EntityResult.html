@@ -215,7 +215,7 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns A cursor that points to the position after the result entity.
-Set only when the +EntityResult+ is part of a +QueryResultBatch+ message.</p>
+Set only when the <code>EntityResult</code> is part of a <code>QueryResultBatch</code> message.</p>
 
 
   </div>
@@ -234,7 +234,7 @@ Set only when the +EntityResult+ is part of a +QueryResultBatch+ message.</p>
       
         &mdash;
         <div class='inline'><p>A cursor that points to the position after the result entity.
-Set only when the +EntityResult+ is part of a +QueryResultBatch+ message.</p>
+Set only when the <code>EntityResult</code> is part of a <code>QueryResultBatch</code> message.</p>
 </div>
       
     </li>
@@ -273,10 +273,10 @@ Set only when the +EntityResult+ is part of a +QueryResultBatch+ message.</p>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Datastore::V1::EntityResult (class)">EntityResult</a></span></span>
   <span class='comment'># Specifies what data the &#39;entity&#39; field contains.
-</span>  <span class='comment'># A +ResultType+ is either implied (for example, in +LookupResponse.missing+
-</span>  <span class='comment'># from +datastore.proto+, it is always +KEY_ONLY+) or specified by context
-</span>  <span class='comment'># (for example, in message +QueryResultBatch+, field +entity_result_type+
-</span>  <span class='comment'># specifies a +ResultType+ for all the values in field +entity_results+).
+</span>  <span class='comment'># A `ResultType` is either implied (for example, in `LookupResponse.missing`
+</span>  <span class='comment'># from `datastore.proto`, it is always `KEY_ONLY`) or specified by context
+</span>  <span class='comment'># (for example, in message `QueryResultBatch`, field `entity_result_type`
+</span>  <span class='comment'># specifies a `ResultType` for all the values in field `entity_results`).
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityResult/ResultType.html" title="Google::Datastore::V1::EntityResult::ResultType (module)">ResultType</a></span></span>
     <span class='comment'># Unspecified. This value is never used.
 </span>    <span class='const'>RESULT_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -366,10 +366,10 @@ Set only when the +EntityResult+ is part of a +QueryResultBatch+ message.</p>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Datastore::V1::EntityResult (class)">EntityResult</a></span></span>
   <span class='comment'># Specifies what data the &#39;entity&#39; field contains.
-</span>  <span class='comment'># A +ResultType+ is either implied (for example, in +LookupResponse.missing+
-</span>  <span class='comment'># from +datastore.proto+, it is always +KEY_ONLY+) or specified by context
-</span>  <span class='comment'># (for example, in message +QueryResultBatch+, field +entity_result_type+
-</span>  <span class='comment'># specifies a +ResultType+ for all the values in field +entity_results+).
+</span>  <span class='comment'># A `ResultType` is either implied (for example, in `LookupResponse.missing`
+</span>  <span class='comment'># from `datastore.proto`, it is always `KEY_ONLY`) or specified by context
+</span>  <span class='comment'># (for example, in message `QueryResultBatch`, field `entity_result_type`
+</span>  <span class='comment'># specifies a `ResultType` for all the values in field `entity_results`).
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityResult/ResultType.html" title="Google::Datastore::V1::EntityResult::ResultType (module)">ResultType</a></span></span>
     <span class='comment'># Unspecified. This value is never used.
 </span>    <span class='const'>RESULT_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
@@ -405,10 +405,10 @@ Set only when the +EntityResult+ is part of a +QueryResultBatch+ message.</p>
     <p>Returns The version of the entity, a strictly positive number that monotonically
 increases with changes to the entity.</p>
 
-<p>This field is set for <span class='object_link'><a href="EntityResult/ResultType.html#FULL-constant" title="Google::Datastore::V1::EntityResult::ResultType::FULL (constant)">+FULL+</a></span> entity
+<p>This field is set for <span class='object_link'><a href="EntityResult/ResultType.html#FULL-constant" title="Google::Datastore::V1::EntityResult::ResultType::FULL (constant)"><code>FULL</code></a></span> entity
 results.</p>
 
-<p>For <span class='object_link'><a href="LookupResponse.html#missing-instance_method" title="Google::Datastore::V1::LookupResponse#missing (method)">missing</a></span> entities in +LookupResponse+, this
+<p>For <span class='object_link'><a href="LookupResponse.html#missing-instance_method" title="Google::Datastore::V1::LookupResponse#missing (method)">missing</a></span> entities in <code>LookupResponse</code>, this
 is the version of the snapshot that was used to look up the entity, and it
 is always set except for eventually consistent reads.</p>
 
@@ -431,10 +431,10 @@ is always set except for eventually consistent reads.</p>
         <div class='inline'><p>The version of the entity, a strictly positive number that monotonically
 increases with changes to the entity.</p>
 
-<p>This field is set for <span class='object_link'><a href="EntityResult/ResultType.html#FULL-constant" title="Google::Datastore::V1::EntityResult::ResultType::FULL (constant)">+FULL+</a></span> entity
+<p>This field is set for <span class='object_link'><a href="EntityResult/ResultType.html#FULL-constant" title="Google::Datastore::V1::EntityResult::ResultType::FULL (constant)"><code>FULL</code></a></span> entity
 results.</p>
 
-<p>For <span class='object_link'><a href="LookupResponse.html#missing-instance_method" title="Google::Datastore::V1::LookupResponse#missing (method)">missing</a></span> entities in +LookupResponse+, this
+<p>For <span class='object_link'><a href="LookupResponse.html#missing-instance_method" title="Google::Datastore::V1::LookupResponse#missing (method)">missing</a></span> entities in <code>LookupResponse</code>, this
 is the version of the snapshot that was used to look up the entity, and it
 is always set except for eventually consistent reads.</p>
 </div>
@@ -475,10 +475,10 @@ is always set except for eventually consistent reads.</p>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Datastore::V1::EntityResult (class)">EntityResult</a></span></span>
   <span class='comment'># Specifies what data the &#39;entity&#39; field contains.
-</span>  <span class='comment'># A +ResultType+ is either implied (for example, in +LookupResponse.missing+
-</span>  <span class='comment'># from +datastore.proto+, it is always +KEY_ONLY+) or specified by context
-</span>  <span class='comment'># (for example, in message +QueryResultBatch+, field +entity_result_type+
-</span>  <span class='comment'># specifies a +ResultType+ for all the values in field +entity_results+).
+</span>  <span class='comment'># A `ResultType` is either implied (for example, in `LookupResponse.missing`
+</span>  <span class='comment'># from `datastore.proto`, it is always `KEY_ONLY`) or specified by context
+</span>  <span class='comment'># (for example, in message `QueryResultBatch`, field `entity_result_type`
+</span>  <span class='comment'># specifies a `ResultType` for all the values in field `entity_results`).
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityResult/ResultType.html" title="Google::Datastore::V1::EntityResult::ResultType (module)">ResultType</a></span></span>
     <span class='comment'># Unspecified. This value is never used.
 </span>    <span class='const'>RESULT_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>

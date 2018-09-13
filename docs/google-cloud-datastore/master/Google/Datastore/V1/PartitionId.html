@@ -98,10 +98,10 @@ project ID and namespace ID.</p>
 <p>Partition dimensions:</p>
 
 <ul>
-<li>May be +&quot;&quot;+.</li>
+<li>May be <code>&quot;&quot;</code>.</li>
 <li>Must be valid UTF-8 bytes.</li>
-<li>Must have values that match regex +[A-Za-z\d.-<em>]1,100+
-If the value of any dimension matches regex +</em><em>.*</em>_+, the partition is
+<li>Must have values that match regex <code>[A-Za-z\d\.\-_]{1,100}</code>
+If the value of any dimension matches regex <code>__.*__</code>, the partition is
 reserved/read-only.
 A reserved/read-only partition ID is forbidden in certain documented
 contexts.</li>

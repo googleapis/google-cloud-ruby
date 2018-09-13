@@ -240,7 +240,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The type of commit to perform. Defaults to +TRANSACTIONAL+.</p>
+    <p>Returns The type of commit to perform. Defaults to <code>TRANSACTIONAL</code>.</p>
 
 
   </div>
@@ -258,7 +258,7 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The type of commit to perform. Defaults to +TRANSACTIONAL+.</p>
+        <div class='inline'><p>The type of commit to perform. Defaults to <code>TRANSACTIONAL</code>.</p>
 </div>
       
     </li>
@@ -323,18 +323,18 @@ js:
   <div class="discussion">
     <p>Returns The mutations to perform.</p>
 
-<p>When mode is +TRANSACTIONAL+, mutations affecting a single entity are
+<p>When mode is <code>TRANSACTIONAL</code>, mutations affecting a single entity are
 applied in order. The following sequences of mutations affecting a single
-entity are not permitted in a single +Commit+ request:</p>
+entity are not permitted in a single <code>Commit</code> request:</p>
 
 <ul>
-<li>+insert+ followed by +insert+</li>
-<li>+update+ followed by +insert+</li>
-<li>+upsert+ followed by +insert+</li>
-<li>+delete+ followed by +update+</li>
+<li><code>insert</code> followed by <code>insert</code></li>
+<li><code>update</code> followed by <code>insert</code></li>
+<li><code>upsert</code> followed by <code>insert</code></li>
+<li><code>delete</code> followed by <code>update</code></li>
 </ul>
 
-<p>When mode is +NON_TRANSACTIONAL+, no two mutations may affect a single
+<p>When mode is <code>NON_TRANSACTIONAL</code>, no two mutations may affect a single
 entity.</p>
 
 
@@ -355,18 +355,18 @@ entity.</p>
         &mdash;
         <div class='inline'><p>The mutations to perform.</p>
 
-<p>When mode is +TRANSACTIONAL+, mutations affecting a single entity are
+<p>When mode is <code>TRANSACTIONAL</code>, mutations affecting a single entity are
 applied in order. The following sequences of mutations affecting a single
-entity are not permitted in a single +Commit+ request:</p>
+entity are not permitted in a single <code>Commit</code> request:</p>
 
 <ul>
-<li>+insert+ followed by +insert+</li>
-<li>+update+ followed by +insert+</li>
-<li>+upsert+ followed by +insert+</li>
-<li>+delete+ followed by +update+</li>
+<li><code>insert</code> followed by <code>insert</code></li>
+<li><code>update</code> followed by <code>insert</code></li>
+<li><code>upsert</code> followed by <code>insert</code></li>
+<li><code>delete</code> followed by <code>update</code></li>
 </ul>
 
-<p>When mode is +NON_TRANSACTIONAL+, no two mutations may affect a single
+<p>When mode is <code>NON_TRANSACTIONAL</code>, no two mutations may affect a single
 entity.</p>
 </div>
       
