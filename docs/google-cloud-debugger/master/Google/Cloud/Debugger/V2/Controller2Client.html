@@ -95,10 +95,10 @@ to a process of an application which may include one or more replicas.</p>
 
 <p>The debugger agents register with the Controller to identify the application
 being debugged, the Debuggee. All agents that register with the same data,
-represent the same Debuggee, and are assigned the same +debuggee_id+.</p>
+represent the same Debuggee, and are assigned the same <code>debuggee_id</code>.</p>
 
 <p>The debugger agents call the Controller to retrieve  the list of active
-Breakpoints. Agents with the same +debuggee_id+ get the same breakpoints
+Breakpoints. Agents with the same <code>debuggee_id</code> get the same breakpoints
 list. An agent that can fulfill the breakpoint request updates the
 Controller with the breakpoint result. The controller selects the first
 result received and discards the rest of the results.
@@ -654,7 +654,7 @@ custom error handling.</p>
   <div class="discussion">
     <p>Returns the list of all active breakpoints for the debuggee.</p>
 
-<p>The breakpoint specification (+location+, +condition+, and +expressions+
+<p>The breakpoint specification (<code>location</code>, <code>condition</code>, and <code>expressions</code>
 fields) is semantically immutable, although the field values may
 change. For example, an agent may update the location line number
 to reflect the actual line where the breakpoint was set, but this
@@ -679,7 +679,7 @@ setting those breakpoints again.</p>
 
 <span class='id identifier rubyid_controller2_client'>controller2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Controller2.html" title="Google::Cloud::Debugger::V2::Controller2 (module)">Controller2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Controller2.html#new-class_method" title="Google::Cloud::Debugger::V2::Controller2.new (method)">new</a></span></span>
 
-<span class='comment'># TODO: Initialize +debuggee_id+:
+<span class='comment'># TODO: Initialize `debuggee_id`:
 </span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_controller2_client'>controller2_client</span><span class='period'>.</span><span class='id identifier rubyid_list_active_breakpoints'>list_active_breakpoints</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='rparen'>)</span></code></pre>
     
@@ -714,8 +714,8 @@ setting those breakpoints again.</p>
         &mdash;
         <div class='inline'><p>A token that, if specified, blocks the method call until the list
 of active breakpoints has changed, or a server-selected timeout has
-expired. The value should be set from the +next_wait_token+ field in
-the last response. The initial value should be set to +&quot;init&quot;+.</p>
+expired. The value should be set from the <code>next_wait_token</code> field in
+the last response. The initial value should be set to <code>&quot;init&quot;</code>.</p>
 </div>
       
     </li>
@@ -730,11 +730,11 @@ the last response. The initial value should be set to +&quot;init&quot;+.</p>
       
       
         &mdash;
-        <div class='inline'><p>If set to +true+ (recommended), returns +google.rpc.Code.OK+ status and
-sets the +wait_expired+ response field to +true+ when the server-selected
+        <div class='inline'><p>If set to <code>true</code> (recommended), returns <code>google.rpc.Code.OK</code> status and
+sets the <code>wait_expired</code> response field to <code>true</code> when the server-selected
 timeout has expired.</p>
 
-<p>If set to +false+ (deprecated), returns +google.rpc.Code.ABORTED+ status
+<p>If set to <code>false</code> (deprecated), returns <code>google.rpc.Code.ABORTED</code> status
 when the server-selected timeout has expired.</p>
 </div>
       
@@ -889,13 +889,13 @@ retries, etc.</p>
     <p>Registers the debuggee with the controller service.</p>
 
 <p>All agents attached to the same application must call this method with
-exactly the same request content to get back the same stable +debuggee_id+.
-Agents should call this method again whenever +google.rpc.Code.NOT_FOUND+
+exactly the same request content to get back the same stable <code>debuggee_id</code>.
+Agents should call this method again whenever <code>google.rpc.Code.NOT_FOUND</code>
 is returned from any controller method.</p>
 
 <p>This protocol allows the controller service to disable debuggees, recover
-from data loss, or change the +debuggee_id+ format. Agents must handle
-+debuggee_id+ value changing upon re-registration.</p>
+from data loss, or change the <code>debuggee_id</code> format. Agents must handle
+<code>debuggee_id</code> value changing upon re-registration.</p>
 
 
   </div>
@@ -910,7 +910,7 @@ from data loss, or change the +debuggee_id+ format. Agents must handle
 
 <span class='id identifier rubyid_controller2_client'>controller2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Controller2.html" title="Google::Cloud::Debugger::V2::Controller2 (module)">Controller2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Controller2.html#new-class_method" title="Google::Cloud::Debugger::V2::Controller2.new (method)">new</a></span></span>
 
-<span class='comment'># TODO: Initialize +debuggee+:
+<span class='comment'># TODO: Initialize `debuggee`:
 </span><span class='id identifier rubyid_debuggee'>debuggee</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_controller2_client'>controller2_client</span><span class='period'>.</span><span class='id identifier rubyid_register_debuggee'>register_debuggee</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee'>debuggee</span><span class='rparen'>)</span></code></pre>
     
@@ -929,7 +929,7 @@ from data loss, or change the +debuggee_id+ format. Agents must handle
       
         &mdash;
         <div class='inline'><p>Debuggee information to register.
-The fields +project+, +uniquifier+, +description+ and +agent_version+
+The fields <code>project</code>, <code>uniquifier</code>, <code>description</code> and <code>agent_version</code>
 of the debuggee must be set.
 A hash of the same form as <code>Google::Devtools::Clouddebugger::V2::Debuggee</code>
 can also be provided.</p>
@@ -1079,8 +1079,8 @@ retries, etc.</p>
 The entire Breakpoint message must be sent back to the controller service.</p>
 
 <p>Updates to active breakpoint fields are only allowed if the new value
-does not change the breakpoint specification. Updates to the +location+,
-+condition+ and +expressions+ fields should not alter the breakpoint
+does not change the breakpoint specification. Updates to the <code>location</code>,
+<code>condition</code> and <code>expressions</code> fields should not alter the breakpoint
 semantics. These may only make changes such as canonicalizing a value
 or snapping the location to the correct line of code.</p>
 
@@ -1097,10 +1097,10 @@ or snapping the location to the correct line of code.</p>
 
 <span class='id identifier rubyid_controller2_client'>controller2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Controller2.html" title="Google::Cloud::Debugger::V2::Controller2 (module)">Controller2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Controller2.html#new-class_method" title="Google::Cloud::Debugger::V2::Controller2.new (method)">new</a></span></span>
 
-<span class='comment'># TODO: Initialize +debuggee_id+:
+<span class='comment'># TODO: Initialize `debuggee_id`:
 </span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +breakpoint+:
+<span class='comment'># TODO: Initialize `breakpoint`:
 </span><span class='id identifier rubyid_breakpoint'>breakpoint</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_controller2_client'>controller2_client</span><span class='period'>.</span><span class='id identifier rubyid_update_active_breakpoint'>update_active_breakpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span> <span class='id identifier rubyid_breakpoint'>breakpoint</span><span class='rparen'>)</span></code></pre>
     
@@ -1134,7 +1134,7 @@ or snapping the location to the correct line of code.</p>
       
         &mdash;
         <div class='inline'><p>Updated breakpoint information.
-The field +id+ must be set.
+The field <code>id</code> must be set.
 The agent must echo all Breakpoint specification fields in the update.
 A hash of the same form as <code>Google::Devtools::Clouddebugger::V2::Breakpoint</code>
 can also be provided.</p>

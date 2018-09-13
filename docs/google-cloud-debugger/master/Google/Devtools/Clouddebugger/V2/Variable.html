@@ -142,7 +142,7 @@ T* p = &amp;x;
 </code></pre>
 
 <p>The status should describe the reason for the missing value,
-such as +<optimized out>+, +<inaccessible>+, +<pointers limit reached>+.</p>
+such as <code>&lt;optimized out&gt;</code>, <code>&lt;inaccessible&gt;</code>, <code>&lt;pointers limit reached&gt;</code>.</p>
 
 <p>Note that a null pointer should not have members.</p>
 
@@ -179,7 +179,7 @@ int** pp = &amp;p;
 
 <p>To optimize computation, memory and network traffic, variables that
 repeat in the output multiple times can be stored once in a shared
-variable table and be referenced using the +var_table_index+ field.  The
+variable table and be referenced using the <code>var_table_index</code> field.  The
 variables stored in the shared table are nameless and are essentially
 a partition of the complete variable. To reconstruct the complete
 variable, merge the referencing variable with the referenced variable.</p>
@@ -317,7 +317,7 @@ to be shared between pointers and references.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Variable type (e.g. +MyClass+).</p>
+    <span class="summary_desc"><div class='inline'><p>Variable type (e.g. <code>MyClass</code>).</p>
 </div></span>
   
 </li>
@@ -513,20 +513,20 @@ expression. The rest of breakpoint data still remains valid. Variables
 might be reported in error state even when breakpoint is not in final
 state.</p>
 
-<p>The message may refer to variable name with +refers_to+ set to
-+VARIABLE_NAME+. Alternatively +refers_to+ will be set to +VARIABLE_VALUE+.
+<p>The message may refer to variable name with <code>refers_to</code> set to
+<code>VARIABLE_NAME</code>. Alternatively <code>refers_to</code> will be set to <code>VARIABLE_VALUE</code>.
 In either case variable value and members will be unset.</p>
 
-<p>Example of error message applied to name: +Invalid expression syntax+.</p>
+<p>Example of error message applied to name: <code>Invalid expression syntax</code>.</p>
 
-<p>Example of information message applied to value: +Not captured+.</p>
+<p>Example of information message applied to value: <code>Not captured</code>.</p>
 
 <p>Examples of error message applied to value:</p>
 
 <ul>
-<li>+Malformed string+,</li>
-<li>+Field f not found in class C+</li>
-<li>+Null pointer dereference+</li>
+<li><code>Malformed string</code>,</li>
+<li><code>Field f not found in class C</code></li>
+<li><code>Null pointer dereference</code></li>
 </ul>
 
 
@@ -551,20 +551,20 @@ expression. The rest of breakpoint data still remains valid. Variables
 might be reported in error state even when breakpoint is not in final
 state.</p>
 
-<p>The message may refer to variable name with +refers_to+ set to
-+VARIABLE_NAME+. Alternatively +refers_to+ will be set to +VARIABLE_VALUE+.
+<p>The message may refer to variable name with <code>refers_to</code> set to
+<code>VARIABLE_NAME</code>. Alternatively <code>refers_to</code> will be set to <code>VARIABLE_VALUE</code>.
 In either case variable value and members will be unset.</p>
 
-<p>Example of error message applied to name: +Invalid expression syntax+.</p>
+<p>Example of error message applied to name: <code>Invalid expression syntax</code>.</p>
 
-<p>Example of information message applied to value: +Not captured+.</p>
+<p>Example of information message applied to value: <code>Not captured</code>.</p>
 
 <p>Examples of error message applied to value:</p>
 
 <ul>
-<li>+Malformed string+,</li>
-<li>+Field f not found in class C+</li>
-<li>+Null pointer dereference+</li>
+<li><code>Malformed string</code>,</li>
+<li><code>Field f not found in class C</code></li>
+<li><code>Null pointer dereference</code></li>
 </ul>
 </div>
       
@@ -602,8 +602,8 @@ In either case variable value and members will be unset.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Variable type (e.g. +MyClass+). If the variable is split with
-+var_table_index+, +type+ goes next to +value+. The interpretation of
+    <p>Returns Variable type (e.g. <code>MyClass</code>). If the variable is split with
+<code>var_table_index</code>, <code>type</code> goes next to <code>value</code>. The interpretation of
 a type is agent specific. It is recommended to include the dynamic type
 rather than a static type of an object.</p>
 
@@ -623,8 +623,8 @@ rather than a static type of an object.</p>
       
       
         &mdash;
-        <div class='inline'><p>Variable type (e.g. +MyClass+). If the variable is split with
-+var_table_index+, +type+ goes next to +value+. The interpretation of
+        <div class='inline'><p>Variable type (e.g. <code>MyClass</code>). If the variable is split with
+<code>var_table_index</code>, <code>type</code> goes next to <code>value</code>. The interpretation of
 a type is agent specific. It is recommended to include the dynamic type
 rather than a static type of an object.</p>
 </div>
@@ -720,7 +720,7 @@ rather than a static type of an object.</p>
   <div class="discussion">
     <p>Returns Reference to a variable in the shared variable table. More than
 one variable can reference the same variable in the table. The
-+var_table_index+ field is an index into +variable_table+ in Breakpoint.</p>
+<code>var_table_index</code> field is an index into <code>variable_table</code> in Breakpoint.</p>
 
 
   </div>
@@ -740,7 +740,7 @@ one variable can reference the same variable in the table. The
         &mdash;
         <div class='inline'><p>Reference to a variable in the shared variable table. More than
 one variable can reference the same variable in the table. The
-+var_table_index+ field is an index into +variable_table+ in Breakpoint.</p>
+<code>var_table_index</code> field is an index into <code>variable_table</code> in Breakpoint.</p>
 </div>
       
     </li>

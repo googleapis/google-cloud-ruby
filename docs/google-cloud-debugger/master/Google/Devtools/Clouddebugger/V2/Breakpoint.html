@@ -420,7 +420,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Only relevant when action is +LOG+.</p>
+    <span class="summary_desc"><div class='inline'><p>Only relevant when action is <code>LOG</code>.</p>
 </div></span>
   
 </li>
@@ -524,7 +524,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The +variable_table+ exists to aid with computation, memory and network traffic optimization.</p>
+    <span class="summary_desc"><div class='inline'><p>The <code>variable_table</code> exists to aid with computation, memory and network traffic optimization.</p>
 </div></span>
   
 </li>
@@ -875,10 +875,10 @@ in a programming language at the source location.</p>
   <div class="discussion">
     <p>Returns Values of evaluated expressions at breakpoint time.
 The evaluated expressions appear in exactly the same order they
-are listed in the +expressions+ field.
-The +name+ field holds the original expression text, the +value+ or
-+members+ field holds the result of the evaluated expression.
-If the expression cannot be evaluated, the +status+ inside the +Variable+
+are listed in the <code>expressions</code> field.
+The <code>name</code> field holds the original expression text, the <code>value</code> or
+<code>members</code> field holds the result of the evaluated expression.
+If the expression cannot be evaluated, the <code>status</code> inside the <code>Variable</code>
 will indicate an error and contain the error text.</p>
 
 
@@ -899,10 +899,10 @@ will indicate an error and contain the error text.</p>
         &mdash;
         <div class='inline'><p>Values of evaluated expressions at breakpoint time.
 The evaluated expressions appear in exactly the same order they
-are listed in the +expressions+ field.
-The +name+ field holds the original expression text, the +value+ or
-+members+ field holds the result of the evaluated expression.
-If the expression cannot be evaluated, the +status+ inside the +Variable+
+are listed in the <code>expressions</code> field.
+The <code>name</code> field holds the original expression text, the <code>value</code> or
+<code>members</code> field holds the result of the evaluated expression.
+If the expression cannot be evaluated, the <code>status</code> inside the <code>Variable</code>
 will indicate an error and contain the error text.</p>
 </div>
       
@@ -992,7 +992,7 @@ will indicate an error and contain the error text.</p>
   <div class="discussion">
     <p>Returns List of read-only expressions to evaluate at the breakpoint location.
 The expressions are composed using expressions in the programming language
-at the source location. If the breakpoint action is +LOG+, the evaluated
+at the source location. If the breakpoint action is <code>LOG</code>, the evaluated
 expressions are included in log statements.</p>
 
 
@@ -1013,7 +1013,7 @@ expressions are included in log statements.</p>
         &mdash;
         <div class='inline'><p>List of read-only expressions to evaluate at the breakpoint location.
 The expressions are composed using expressions in the programming language
-at the source location. If the breakpoint action is +LOG+, the evaluated
+at the source location. If the breakpoint action is <code>LOG</code>, the evaluated
 expressions are included in log statements.</p>
 </div>
       
@@ -1632,7 +1632,7 @@ displayed to the user.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Indicates the severity of the log. Only relevant when action is +LOG+.</p>
+    <p>Returns Indicates the severity of the log. Only relevant when action is <code>LOG</code>.</p>
 
 
   </div>
@@ -1650,7 +1650,7 @@ displayed to the user.</p>
       
       
         &mdash;
-        <div class='inline'><p>Indicates the severity of the log. Only relevant when action is +LOG+.</p>
+        <div class='inline'><p>Indicates the severity of the log. Only relevant when action is <code>LOG</code>.</p>
 </div>
       
     </li>
@@ -1737,14 +1737,14 @@ displayed to the user.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Only relevant when action is +LOG+. Defines the message to log when
-the breakpoint hits. The message may include parameter placeholders +$0+,
-+$1+, etc. These placeholders are replaced with the evaluated value
+    <p>Returns Only relevant when action is <code>LOG</code>. Defines the message to log when
+the breakpoint hits. The message may include parameter placeholders <code>$0</code>,
+<code>$1</code>, etc. These placeholders are replaced with the evaluated value
 of the appropriate expression. Expressions not referenced in
-+log_message_format+ are not logged.</p>
+<code>log_message_format</code> are not logged.</p>
 
-<p>Example: +Message received, id = $0, count = $1+ with
-+expressions+ = +[ message.id, message.count ]+.</p>
+<p>Example: <code>Message received, id = $0, count = $1</code> with
+<code>expressions</code> = <code>[ message.id, message.count ]</code>.</p>
 
 
   </div>
@@ -1762,14 +1762,14 @@ of the appropriate expression. Expressions not referenced in
       
       
         &mdash;
-        <div class='inline'><p>Only relevant when action is +LOG+. Defines the message to log when
-the breakpoint hits. The message may include parameter placeholders +$0+,
-+$1+, etc. These placeholders are replaced with the evaluated value
+        <div class='inline'><p>Only relevant when action is <code>LOG</code>. Defines the message to log when
+the breakpoint hits. The message may include parameter placeholders <code>$0</code>,
+<code>$1</code>, etc. These placeholders are replaced with the evaluated value
 of the appropriate expression. Expressions not referenced in
-+log_message_format+ are not logged.</p>
+<code>log_message_format</code> are not logged.</p>
 
-<p>Example: +Message received, id = $0, count = $1+ with
-+expressions+ = +[ message.id, message.count ]+.</p>
+<p>Example: <code>Message received, id = $0, count = $1</code> with
+<code>expressions</code> = <code>[ message.id, message.count ]</code>.</p>
 </div>
       
     </li>
@@ -1970,13 +1970,13 @@ display the text message back to the user.</p>
 
 <p>Error status indicates complete failure of the breakpoint.</p>
 
-<p>Example (non-final state): +Still loading symbols...+</p>
+<p>Example (non-final state): <code>Still loading symbols...</code></p>
 
 <p>Examples (final state):</p>
 
 <ul>
-<li>+Invalid line number+ referring to location</li>
-<li>+Field f not found in class C+ referring to condition</li>
+<li><code>Invalid line number</code> referring to location</li>
+<li><code>Field f not found in class C</code> referring to condition</li>
 </ul>
 
 
@@ -2004,13 +2004,13 @@ display the text message back to the user.</p>
 
 <p>Error status indicates complete failure of the breakpoint.</p>
 
-<p>Example (non-final state): +Still loading symbols...+</p>
+<p>Example (non-final state): <code>Still loading symbols...</code></p>
 
 <p>Examples (final state):</p>
 
 <ul>
-<li>+Invalid line number+ referring to location</li>
-<li>+Field f not found in class C+ referring to condition</li>
+<li><code>Invalid line number</code> referring to location</li>
+<li><code>Field f not found in class C</code> referring to condition</li>
 </ul>
 </div>
       
@@ -2203,15 +2203,15 @@ display the text message back to the user.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The +variable_table+ exists to aid with computation, memory and network
+    <p>Returns The <code>variable_table</code> exists to aid with computation, memory and network
 traffic optimization.  It enables storing a variable once and reference
 it from multiple variables, including variables stored in the
-+variable_table+ itself.
-For example, the same +this+ object, which may appear at many levels of
+<code>variable_table</code> itself.
+For example, the same <code>this</code> object, which may appear at many levels of
 the stack, can have all of its data stored once in this table.  The
 stack frame variables then would hold only a reference to it.</p>
 
-<p>The variable +var_table_index+ field is an index into this repeated field.
+<p>The variable <code>var_table_index</code> field is an index into this repeated field.
 The stored objects are nameless and get their name from the referencing
 variable. The effective variable is a merge of the referencing variable
 and the referenced variable.</p>
@@ -2232,15 +2232,15 @@ and the referenced variable.</p>
       
       
         &mdash;
-        <div class='inline'><p>The +variable_table+ exists to aid with computation, memory and network
+        <div class='inline'><p>The <code>variable_table</code> exists to aid with computation, memory and network
 traffic optimization.  It enables storing a variable once and reference
 it from multiple variables, including variables stored in the
-+variable_table+ itself.
-For example, the same +this+ object, which may appear at many levels of
+<code>variable_table</code> itself.
+For example, the same <code>this</code> object, which may appear at many levels of
 the stack, can have all of its data stored once in this table.  The
 stack frame variables then would hold only a reference to it.</p>
 
-<p>The variable +var_table_index+ field is an index into this repeated field.
+<p>The variable <code>var_table_index</code> field is an index into this repeated field.
 The stored objects are nameless and get their name from the referencing
 variable. The effective variable is a merge of the referencing variable
 and the referenced variable.</p>
