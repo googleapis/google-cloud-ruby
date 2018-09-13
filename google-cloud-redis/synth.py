@@ -25,34 +25,19 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
 
-# Temporary until we get Ruby-specific tools into synthtool
-
-
-def merge_gemspec(src, dest, path):
-    regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    regex = re.compile(r'^\s+gem.homepage\s*=\s*"[^"]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    return src
-
-
 v1_library = gapic.ruby_library(
     'redis', 'v1',
-    config_path='artman_redis_v1.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-redis'
 )
-s.copy(v1_library / 'lib')
-s.copy(v1_library / 'test')
-s.copy(v1_library / 'Rakefile')
+s.copy(v1_library / 'lib/google/cloud/redis.rb')
+s.copy(v1_library / 'lib/google/cloud/redis/v1')
+s.copy(v1_library / 'lib/google/cloud/redis/v1.rb')
+s.copy(v1_library / 'test/google/cloud/redis/v1')
 s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
-s.copy(v1_library / 'google-cloud-redis.gemspec', merge=merge_gemspec)
+s.copy(v1_library / 'google-cloud-redis.gemspec', merge=ruby.merge_gemspec)
 
 v1beta1_library = gapic.ruby_library(
     'redis', 'v1beta1',
@@ -83,8 +68,6 @@ s.replace(
     '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
 
 # https://github.com/googleapis/gapic-generator/issues/2242
-
-
 def escape_braces(match):
     expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
     content = match.group(0)
@@ -92,8 +75,6 @@ def escape_braces(match):
         content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
         if count == 0:
             return content
-
-
 s.replace(
     'lib/google/cloud/**/*.rb',
     '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
