@@ -74,7 +74,7 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Represents the text encoding that the caller uses to process the output.
-Providing an +EncodingType+ is recommended because the API provides the
+Providing an <code>EncodingType</code> is recommended because the API provides the
 beginning offsets for various outputs, such as tokens and mentions, and
 languages that natively use different text encodings may access offsets
 differently.</p>
@@ -97,8 +97,8 @@ differently.</p>
         <dt id="NONE-constant" class="">NONE =
           <div class="docstring">
   <div class="discussion">
-    <p>If +EncodingType+ is not specified, encoding-dependent information (such as
-+begin_offset+) will be set at +-1+.</p>
+    <p>If <code>EncodingType</code> is not specified, encoding-dependent information (such as
+<code>begin_offset</code>) will be set at <code>-1</code>.</p>
 
 
   </div>
@@ -113,7 +113,7 @@ differently.</p>
         <dt id="UTF8-constant" class="">UTF8 =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoding-dependent information (such as +begin_offset+) is calculated based
+    <p>Encoding-dependent information (such as <code>begin_offset</code>) is calculated based
 on the UTF-8 encoding of the input. C++ and Go are examples of languages
 that use this encoding natively.</p>
 
@@ -130,7 +130,7 @@ that use this encoding natively.</p>
         <dt id="UTF16-constant" class="">UTF16 =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoding-dependent information (such as +begin_offset+) is calculated based
+    <p>Encoding-dependent information (such as <code>begin_offset</code>) is calculated based
 on the UTF-16 encoding of the input. Java and Javascript are examples of
 languages that use this encoding natively.</p>
 
@@ -147,7 +147,7 @@ languages that use this encoding natively.</p>
         <dt id="UTF32-constant" class="">UTF32 =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoding-dependent information (such as +begin_offset+) is calculated based
+    <p>Encoding-dependent information (such as <code>begin_offset</code>) is calculated based
 on the UTF-32 encoding of the input. Python is an example of a language
 that uses this encoding natively.</p>
 
