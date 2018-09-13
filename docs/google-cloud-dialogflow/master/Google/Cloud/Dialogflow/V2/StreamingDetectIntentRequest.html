@@ -90,15 +90,15 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The top-level message sent by the client to the
-+StreamingDetectIntent+ method.</p>
+<code>StreamingDetectIntent</code> method.</p>
 
 <p>Multiple request messages should be sent in order:</p>
 
 <ol>
-<li><p>The first message must contain +session+, +query_input+ plus optionally
-+query_params+ and/or +single_utterance+. The message must not contain +input_audio+.</p></li>
-<li><p>If +query_input+ was set to a streaming input audio config,
-all subsequent messages must contain only +input_audio+.
+<li><p>The first message must contain <code>session</code>, <code>query_input</code> plus optionally
+<code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.</p></li>
+<li><p>If <code>query_input</code> was set to a streaming input audio config,
+all subsequent messages must contain only <code>input_audio</code>.
 Otherwise, finish the request stream.</p></li>
 </ol>
 
@@ -268,7 +268,7 @@ Otherwise, finish the request stream.</p></li>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Optional. The input audio content to be recognized. Must be sent if
-+query_input+ was set to a streaming input audio config. The complete audio
+<code>query_input</code> was set to a streaming input audio config. The complete audio
 over all streaming messages must not exceed 1 minute.</p>
 
 
@@ -288,7 +288,7 @@ over all streaming messages must not exceed 1 minute.</p>
       
         &mdash;
         <div class='inline'><p>Optional. The input audio content to be recognized. Must be sent if
-+query_input+ was set to a streaming input audio config. The complete audio
+<code>query_input</code> was set to a streaming input audio config. The complete audio
 over all streaming messages must not exceed 1 minute.</p>
 </div>
       
@@ -452,7 +452,7 @@ the speech audio,</p></li>
   <div class="discussion">
     <p>Returns Required. The name of the session the query is sent to.
 Format of the session name:
-+projects/<Project ID>/agent/sessions/<Session ID>+. It’s up to the API
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>. It’s up to the API
 caller to choose an appropriate <Session ID>. It can be a random number or
 some type of user identifier (preferably hashed). The length of the session
 ID must not exceed 36 characters.</p>
@@ -475,7 +475,7 @@ ID must not exceed 36 characters.</p>
         &mdash;
         <div class='inline'><p>Required. The name of the session the query is sent to.
 Format of the session name:
-+projects/<Project ID>/agent/sessions/<Session ID>+. It’s up to the API
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>. It’s up to the API
 caller to choose an appropriate <Session ID>. It can be a random number or
 some type of user identifier (preferably hashed). The length of the session
 ID must not exceed 36 characters.</p>
@@ -515,14 +515,14 @@ ID must not exceed 36 characters.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. If +false+ (default), recognition does not cease until the
+    <p>Returns Optional. If <code>false</code> (default), recognition does not cease until the
 client closes the stream.
-If +true+, the recognizer will detect a single spoken utterance in input
+If <code>true</code>, the recognizer will detect a single spoken utterance in input
 audio. Recognition ceases when it detects the audio&#39;s voice has
 stopped or paused. In this case, once a detected intent is received, the
 client should close the stream and start a new request with a new stream as
 needed.
-This setting is ignored when +query_input+ is a piece of text or an event.</p>
+This setting is ignored when <code>query_input</code> is a piece of text or an event.</p>
 
 
   </div>
@@ -540,14 +540,14 @@ This setting is ignored when +query_input+ is a piece of text or an event.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. If +false+ (default), recognition does not cease until the
+        <div class='inline'><p>Optional. If <code>false</code> (default), recognition does not cease until the
 client closes the stream.
-If +true+, the recognizer will detect a single spoken utterance in input
+If <code>true</code>, the recognizer will detect a single spoken utterance in input
 audio. Recognition ceases when it detects the audio&#39;s voice has
 stopped or paused. In this case, once a detected intent is received, the
 client should close the stream and start a new request with a new stream as
 needed.
-This setting is ignored when +query_input+ is a piece of text or an event.</p>
+This setting is ignored when <code>query_input</code> is a piece of text or an event.</p>
 </div>
       
     </li>

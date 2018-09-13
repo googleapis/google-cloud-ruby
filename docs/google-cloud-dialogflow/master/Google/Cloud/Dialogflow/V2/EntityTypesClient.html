@@ -102,13 +102,13 @@ that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&qu
 <ul>
 <li><p><strong>System</strong> - entities that are defined by the Dialogflow API for common
 data types such as date, time, currency, and so on. A system entity is
-represented by the +EntityType+ type.</p></li>
+represented by the <code>EntityType</code> type.</p></li>
 <li><p><strong>Developer</strong> - entities that are defined by you that represent
 actionable data that is meaningful to your application. For example,
-you could define a +pizza.sauce+ entity for red or white pizza sauce,
-a +pizza.cheese+ entity for the different types of cheese on a pizza,
-a +pizza.topping+ entity for different toppings, and so on. A developer
-entity is represented by the +EntityType+ type.</p></li>
+you could define a <code>pizza.sauce</code> entity for red or white pizza sauce,
+a <code>pizza.cheese</code> entity for the different types of cheese on a pizza,
+a <code>pizza.topping</code> entity for different toppings, and so on. A developer
+entity is represented by the <code>EntityType</code> type.</p></li>
 <li><p><strong>User</strong> - entities that are built for an individual user such as
 favorites, preferences, playlists, and so on. A user entity is
 represented by the <span class='object_link'><a href="SessionEntityType.html" title="Google::Cloud::Dialogflow::V2::SessionEntityType (class)">SessionEntityType</a></span> type.</p></li>
@@ -1146,7 +1146,7 @@ existing collection of entries).</p>
 <span class='id identifier rubyid_entity_types_client'>entity_types_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../EntityTypes.html" title="Google::Cloud::Dialogflow::EntityTypes (module)">EntityTypes</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../EntityTypes.html#new-class_method" title="Google::Cloud::Dialogflow::EntityTypes.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::EntityTypesClient (class)">EntityTypesClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity_type_path'><span class='object_link'><a href="#entity_type_path-class_method" title="Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path (method)">entity_type_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[ENTITY_TYPE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +entities+:
+<span class='comment'># TODO: Initialize `entities`:
 </span><span class='id identifier rubyid_entities'>entities</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -1191,7 +1191,7 @@ existing collection of entries).</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the entity type to create entities in. Format:
-+projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;Entity Type ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1223,7 +1223,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The language of entity synonyms defined in +entities+. If not
+        <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entities</code>. If not
 specified, the agent&#39;s default language is used.
 <a href="https://dialogflow.com/docs/reference/language">More than a dozen
 languages</a> are supported.
@@ -1368,7 +1368,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_entity_types_client'>entity_types_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../EntityTypes.html" title="Google::Cloud::Dialogflow::EntityTypes (module)">EntityTypes</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../EntityTypes.html#new-class_method" title="Google::Cloud::Dialogflow::EntityTypes.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::EntityTypesClient (class)">EntityTypesClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity_type_path'><span class='object_link'><a href="#entity_type_path-class_method" title="Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path (method)">entity_type_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[ENTITY_TYPE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +entity_values+:
+<span class='comment'># TODO: Initialize `entity_values`:
 </span><span class='id identifier rubyid_entity_values'>entity_values</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -1413,7 +1413,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the entity type to delete entries for. Format:
-+projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;Entity Type ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1428,9 +1428,9 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The canonical +values+ of the entities to delete. Note that
+        <div class='inline'><p>Required. The canonical <code>values</code> of the entities to delete. Note that
 these are not fully-qualified names, i.e. they don&#39;t start with
-+projects/<Project ID>+.</p>
+<code>projects/&lt;Project ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1445,7 +1445,7 @@ these are not fully-qualified names, i.e. they don&#39;t start with
       
       
         &mdash;
-        <div class='inline'><p>Optional. The language of entity synonyms defined in +entities+. If not
+        <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entities</code>. If not
 specified, the agent&#39;s default language is used.
 <a href="https://dialogflow.com/docs/reference/language">More than a dozen
 languages</a> are supported.
@@ -1590,7 +1590,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_entity_types_client'>entity_types_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../EntityTypes.html" title="Google::Cloud::Dialogflow::EntityTypes (module)">EntityTypes</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../EntityTypes.html#new-class_method" title="Google::Cloud::Dialogflow::EntityTypes.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::EntityTypesClient (class)">EntityTypesClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_agent_path'><span class='object_link'><a href="#project_agent_path-class_method" title="Google::Cloud::Dialogflow::V2::EntityTypesClient.project_agent_path (method)">project_agent_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +entity_type_names+:
+<span class='comment'># TODO: Initialize `entity_type_names`:
 </span><span class='id identifier rubyid_entity_type_names'>entity_type_names</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -1635,7 +1635,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the agent to delete all entities types for. Format:
-+projects/<Project ID>/agent+.</p>
+<code>projects/&lt;Project ID&gt;/agent</code>.</p>
 </div>
       
     </li>
@@ -1651,7 +1651,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The names entity types to delete. All names must point to the
-same agent as +parent+.</p>
+same agent as <code>parent</code>.</p>
 </div>
       
     </li>
@@ -1789,7 +1789,7 @@ collection of entries).</p>
 <span class='id identifier rubyid_entity_types_client'>entity_types_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../EntityTypes.html" title="Google::Cloud::Dialogflow::EntityTypes (module)">EntityTypes</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../EntityTypes.html#new-class_method" title="Google::Cloud::Dialogflow::EntityTypes.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::EntityTypesClient (class)">EntityTypesClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_entity_type_path'><span class='object_link'><a href="#entity_type_path-class_method" title="Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path (method)">entity_type_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[ENTITY_TYPE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +entities+:
+<span class='comment'># TODO: Initialize `entities`:
 </span><span class='id identifier rubyid_entities'>entities</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -1834,7 +1834,7 @@ collection of entries).</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the entity type to update the entities in. Format:
-+projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;Entity Type ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1866,7 +1866,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The language of entity synonyms defined in +entities+. If not
+        <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entities</code>. If not
 specified, the agent&#39;s default language is used.
 <a href="https://dialogflow.com/docs/reference/language">More than a dozen
 languages</a> are supported.
@@ -2074,7 +2074,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the agent to update or create entity types in.
-Format: +projects/<Project ID>/agent+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent</code>.</p>
 </div>
       
     </li>
@@ -2124,7 +2124,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The language of entity synonyms defined in +entity_types+. If not
+        <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entity_types</code>. If not
 specified, the agent&#39;s default language is used.
 <a href="https://dialogflow.com/docs/reference/language">More than a dozen
 languages</a> are supported.
@@ -2291,7 +2291,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_entity_types_client'>entity_types_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../EntityTypes.html" title="Google::Cloud::Dialogflow::EntityTypes (module)">EntityTypes</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../EntityTypes.html#new-class_method" title="Google::Cloud::Dialogflow::EntityTypes.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::EntityTypesClient (class)">EntityTypesClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_agent_path'><span class='object_link'><a href="#project_agent_path-class_method" title="Google::Cloud::Dialogflow::V2::EntityTypesClient.project_agent_path (method)">project_agent_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +entity_type+:
+<span class='comment'># TODO: Initialize `entity_type`:
 </span><span class='id identifier rubyid_entity_type'>entity_type</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_entity_types_client'>entity_types_client</span><span class='period'>.</span><span class='id identifier rubyid_create_entity_type'>create_entity_type</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_entity_type'>entity_type</span><span class='rparen'>)</span></code></pre>
     
@@ -2310,7 +2310,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The agent to create a entity type for.
-Format: +projects/<Project ID>/agent+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent</code>.</p>
 </div>
       
     </li>
@@ -2342,7 +2342,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The language of entity synonyms defined in +entity_type+. If not
+        <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
 specified, the agent&#39;s default language is used.
 <a href="https://dialogflow.com/docs/reference/language">More than a dozen
 languages</a> are supported.
@@ -2529,7 +2529,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the entity type to delete.
-Format: +projects/<Project ID>/agent/entityTypes/<EntityType ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;EntityType ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -2697,7 +2697,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the entity type.
-Format: +projects/<Project ID>/agent/entityTypes/<EntityType ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;EntityType ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -2907,7 +2907,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The agent to list all entity types from.
-Format: +projects/<Project ID>/agent+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent</code>.</p>
 </div>
       
     </li>
@@ -3118,7 +3118,7 @@ object.</p>
 
 <span class='id identifier rubyid_entity_types_client'>entity_types_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../EntityTypes.html" title="Google::Cloud::Dialogflow::EntityTypes (module)">EntityTypes</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../EntityTypes.html#new-class_method" title="Google::Cloud::Dialogflow::EntityTypes.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +entity_type+:
+<span class='comment'># TODO: Initialize `entity_type`:
 </span><span class='id identifier rubyid_entity_type'>entity_type</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_entity_types_client'>entity_types_client</span><span class='period'>.</span><span class='id identifier rubyid_update_entity_type'>update_entity_type</span><span class='lparen'>(</span><span class='id identifier rubyid_entity_type'>entity_type</span><span class='rparen'>)</span></code></pre>
     
@@ -3137,7 +3137,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Required. The entity type to update.
-Format: +projects/<Project ID>/agent/entityTypes/<EntityType ID>+.
+Format: <code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;EntityType ID&gt;</code>.
 A hash of the same form as <code>Google::Cloud::Dialogflow::V2::EntityType</code>
 can also be provided.</p>
 </div>
@@ -3154,7 +3154,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The language of entity synonyms defined in +entity_type+. If not
+        <div class='inline'><p>Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
 specified, the agent&#39;s default language is used.
 <a href="https://dialogflow.com/docs/reference/language">More than a dozen
 languages</a> are supported.

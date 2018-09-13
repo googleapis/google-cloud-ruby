@@ -231,7 +231,7 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Optional. The natural language speech audio to be processed. This field
-should be populated iff +query_input+ is set to an input audio config.
+should be populated iff <code>query_input</code> is set to an input audio config.
 A single request can contain up to 1 minute of speech audio data.</p>
 
 
@@ -251,7 +251,7 @@ A single request can contain up to 1 minute of speech audio data.</p>
       
         &mdash;
         <div class='inline'><p>Optional. The natural language speech audio to be processed. This field
-should be populated iff +query_input+ is set to an input audio config.
+should be populated iff <code>query_input</code> is set to an input audio config.
 A single request can contain up to 1 minute of speech audio data.</p>
 </div>
       
@@ -414,7 +414,7 @@ which instructs the speech recognizer how to process the speech audio,</p></li>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The name of the session this query is sent to. Format:
-+projects/<Project ID>/agent/sessions/<Session ID>+. It&#39;s up to the API
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>. It&#39;s up to the API
 caller to choose an appropriate session ID. It can be a random number or
 some type of user identifier (preferably hashed). The length of the session
 ID must not exceed 36 bytes.</p>
@@ -436,7 +436,7 @@ ID must not exceed 36 bytes.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the session this query is sent to. Format:
-+projects/<Project ID>/agent/sessions/<Session ID>+. It&#39;s up to the API
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>. It&#39;s up to the API
 caller to choose an appropriate session ID. It can be a random number or
 some type of user identifier (preferably hashed). The length of the session
 ID must not exceed 36 bytes.</p>

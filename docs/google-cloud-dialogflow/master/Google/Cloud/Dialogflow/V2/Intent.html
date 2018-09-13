@@ -372,7 +372,7 @@ action is an extraction of a user command or sentence semantics.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Required for all methods except +create+ (+create+ populates the name automatically. The unique identifier of this intent. Format: +projects/<Project ID>/agent/intents/<Intent ID>+..</p>
+    <span class="summary_desc"><div class='inline'><p>Required for all methods except <code>create</code> (<code>create</code> populates the name automatically. The unique identifier of this intent. Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>..</p>
 </div></span>
   
 </li>
@@ -1092,7 +1092,7 @@ action is an extraction of a user command or sentence semantics.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -1108,7 +1108,7 @@ action is an extraction of a user command or sentence semantics.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -1147,19 +1147,19 @@ action is an extraction of a user command or sentence semantics.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -1176,7 +1176,7 @@ action is an extraction of a user command or sentence semantics.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -1282,9 +1282,9 @@ action is an extraction of a user command or sentence semantics.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -1499,11 +1499,11 @@ action is an extraction of a user command or sentence semantics.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -2023,7 +2023,7 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -2039,7 +2039,7 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -2078,19 +2078,19 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -2107,7 +2107,7 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -2213,9 +2213,9 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -2430,11 +2430,11 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -2952,7 +2952,7 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -2968,7 +2968,7 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -3007,19 +3007,19 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -3036,7 +3036,7 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -3142,9 +3142,9 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -3359,11 +3359,11 @@ taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -3885,7 +3885,7 @@ be present in the active user session for an event to trigger this intent.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -3901,7 +3901,7 @@ be present in the active user session for an event to trigger this intent.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -3940,19 +3940,19 @@ be present in the active user session for an event to trigger this intent.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -3969,7 +3969,7 @@ be present in the active user session for an event to trigger this intent.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -4075,9 +4075,9 @@ be present in the active user session for an event to trigger this intent.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -4292,11 +4292,11 @@ be present in the active user session for an event to trigger this intent.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -4816,7 +4816,7 @@ name of this intent as a root_name.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -4832,7 +4832,7 @@ name of this intent as a root_name.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -4871,19 +4871,19 @@ name of this intent as a root_name.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -4900,7 +4900,7 @@ name of this intent as a root_name.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -5006,9 +5006,9 @@ name of this intent as a root_name.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -5223,11 +5223,11 @@ name of this intent as a root_name.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -5263,7 +5263,7 @@ name of this intent as a root_name.</p>
   <div class="discussion">
     <p>Returns Optional. The list of context names required for this intent to be
 triggered.
-Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context ID&gt;</code>.</p>
 
 
   </div>
@@ -5283,7 +5283,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
         &mdash;
         <div class='inline'><p>Optional. The list of context names required for this intent to be
 triggered.
-Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -5749,7 +5749,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -5765,7 +5765,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -5804,19 +5804,19 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -5833,7 +5833,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -5939,9 +5939,9 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -6156,11 +6156,11 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -6678,7 +6678,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -6694,7 +6694,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -6733,19 +6733,19 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -6762,7 +6762,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -6868,9 +6868,9 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -7085,11 +7085,11 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -7124,7 +7124,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Optional. The collection of rich messages corresponding to the
-+Response+ field in the Dialogflow console.</p>
+<code>Response</code> field in the Dialogflow console.</p>
 
 
   </div>
@@ -7143,7 +7143,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
       
         &mdash;
         <div class='inline'><p>Optional. The collection of rich messages corresponding to the
-+Response+ field in the Dialogflow console.</p>
+<code>Response</code> field in the Dialogflow console.</p>
 </div>
       
     </li>
@@ -7609,7 +7609,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -7625,7 +7625,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -7664,19 +7664,19 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -7693,7 +7693,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -7799,9 +7799,9 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -8016,11 +8016,11 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -8055,8 +8055,8 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Optional. Indicates whether Machine Learning is disabled for the intent.
-Note: If +ml_diabled+ setting is set to true, then this intent is not
-taken into account during inference in +ML ONLY+ match mode. Also,
+Note: If <code>ml_diabled</code> setting is set to true, then this intent is not
+taken into account during inference in <code>ML ONLY</code> match mode. Also,
 auto-markup in the UI is turned off.</p>
 
 
@@ -8076,8 +8076,8 @@ auto-markup in the UI is turned off.</p>
       
         &mdash;
         <div class='inline'><p>Optional. Indicates whether Machine Learning is disabled for the intent.
-Note: If +ml_diabled+ setting is set to true, then this intent is not
-taken into account during inference in +ML ONLY+ match mode. Also,
+Note: If <code>ml_diabled</code> setting is set to true, then this intent is not
+taken into account during inference in <code>ML ONLY</code> match mode. Also,
 auto-markup in the UI is turned off.</p>
 </div>
       
@@ -8544,7 +8544,7 @@ auto-markup in the UI is turned off.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -8560,7 +8560,7 @@ auto-markup in the UI is turned off.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -8599,19 +8599,19 @@ auto-markup in the UI is turned off.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -8628,7 +8628,7 @@ auto-markup in the UI is turned off.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -8734,9 +8734,9 @@ auto-markup in the UI is turned off.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -8951,11 +8951,11 @@ auto-markup in the UI is turned off.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -8989,10 +8989,10 @@ auto-markup in the UI is turned off.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required for all methods except +create+ (+create+ populates the name
+    <p>Returns Required for all methods except <code>create</code> (<code>create</code> populates the name
 automatically.
 The unique identifier of this intent.
-Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.</p>
 
 
   </div>
@@ -9010,10 +9010,10 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required for all methods except +create+ (+create+ populates the name
+        <div class='inline'><p>Required for all methods except <code>create</code> (<code>create</code> populates the name
 automatically.
 The unique identifier of this intent.
-Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -9479,7 +9479,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -9495,7 +9495,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -9534,19 +9534,19 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -9563,7 +9563,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -9669,9 +9669,9 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -9886,11 +9886,11 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -9926,9 +9926,9 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
   <div class="discussion">
     <p>Returns Optional. The collection of contexts that are activated when the intent
 is matched. Context messages in this collection should not set the
-parameters field. Setting the +lifespan_count+ to 0 will reset the context
+parameters field. Setting the <code>lifespan_count</code> to 0 will reset the context
 when the intent is matched.
-Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context ID&gt;</code>.</p>
 
 
   </div>
@@ -9948,9 +9948,9 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
         &mdash;
         <div class='inline'><p>Optional. The collection of contexts that are activated when the intent
 is matched. Context messages in this collection should not set the
-parameters field. Setting the +lifespan_count+ to 0 will reset the context
+parameters field. Setting the <code>lifespan_count</code> to 0 will reset the context
 when the intent is matched.
-Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/sessions/-/contexts/&lt;Context ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -10416,7 +10416,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -10432,7 +10432,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -10471,19 +10471,19 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -10500,7 +10500,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -10606,9 +10606,9 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -10823,11 +10823,11 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -11345,7 +11345,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -11361,7 +11361,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -11400,19 +11400,19 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -11429,7 +11429,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -11535,9 +11535,9 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -11752,11 +11752,11 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -11793,7 +11793,7 @@ Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.</p>
     <p>Returns The unique identifier of the parent intent in the chain of followup
 intents.
 It identifies the parent followup intent.
-Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.</p>
 
 
   </div>
@@ -11814,7 +11814,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
         <div class='inline'><p>The unique identifier of the parent intent in the chain of followup
 intents.
 It identifies the parent followup intent.
-Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -12280,7 +12280,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -12296,7 +12296,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -12335,19 +12335,19 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -12364,7 +12364,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -12470,9 +12470,9 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -12687,11 +12687,11 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -13211,7 +13211,7 @@ priorities. Zero or negative numbers mean that the intent is disabled.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -13227,7 +13227,7 @@ priorities. Zero or negative numbers mean that the intent is disabled.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -13266,19 +13266,19 @@ priorities. Zero or negative numbers mean that the intent is disabled.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -13295,7 +13295,7 @@ priorities. Zero or negative numbers mean that the intent is disabled.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -13401,9 +13401,9 @@ priorities. Zero or negative numbers mean that the intent is disabled.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -13618,11 +13618,11 @@ priorities. Zero or negative numbers mean that the intent is disabled.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -14142,7 +14142,7 @@ session when this intent is matched.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -14158,7 +14158,7 @@ session when this intent is matched.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -14197,19 +14197,19 @@ session when this intent is matched.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -14226,7 +14226,7 @@ session when this intent is matched.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -14332,9 +14332,9 @@ session when this intent is matched.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -14549,11 +14549,11 @@ session when this intent is matched.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -14589,7 +14589,7 @@ session when this intent is matched.</p>
   <div class="discussion">
     <p>Returns The unique identifier of the root intent in the chain of followup intents.
 It identifies the correct followup intents chain for this intent.
-Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.</p>
 
 
   </div>
@@ -14609,7 +14609,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
         &mdash;
         <div class='inline'><p>The unique identifier of the root intent in the chain of followup intents.
 It identifies the correct followup intents chain for this intent.
-Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -15075,7 +15075,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -15091,7 +15091,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -15130,19 +15130,19 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -15159,7 +15159,7 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -15265,9 +15265,9 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -15482,11 +15482,11 @@ Format: +projects/<Project ID>/agent/intents/<Intent ID>+.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -16006,7 +16006,7 @@ trained on.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -16022,7 +16022,7 @@ trained on.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -16061,19 +16061,19 @@ trained on.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -16090,7 +16090,7 @@ trained on.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -16196,9 +16196,9 @@ trained on.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -16413,11 +16413,11 @@ trained on.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.
@@ -16935,7 +16935,7 @@ trained on.</p>
 </span>  <span class='comment'># @!attribute [rw] parts
 </span>  <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part&gt;]
 </span>  <span class='comment'>#     Required. The collection of training phrase parts (can be annotated).
-</span>  <span class='comment'>#     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+</span>  <span class='comment'>#     Fields: `entity_type`, `alias` and `user_defined` should be populated
 </span>  <span class='comment'>#     only for the annotated parts of the training phrase.
 </span>  <span class='comment'># @!attribute [rw] times_added_count
 </span>  <span class='comment'>#   @return [Integer]
@@ -16951,7 +16951,7 @@ trained on.</p>
 </span>    <span class='comment'>#     annotated examples, it is the text for one of the example&#39;s parts.
 </span>    <span class='comment'># @!attribute [rw] entity_type
 </span>    <span class='comment'>#   @return [String]
-</span>    <span class='comment'>#     Optional. The entity type name prefixed with +@+. This field is
+</span>    <span class='comment'>#     Optional. The entity type name prefixed with `@`. This field is
 </span>    <span class='comment'>#     required for the annotated part of the text and applies only to
 </span>    <span class='comment'>#     examples.
 </span>    <span class='comment'># @!attribute [rw] alias
@@ -16990,19 +16990,19 @@ trained on.</p>
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Optional. The definition of the parameter value. It can be:
 </span>  <span class='comment'>#     * a constant string,
-</span>  <span class='comment'>#     * a parameter value defined as +$parameter_name+,
-</span>  <span class='comment'>#     * an original parameter value defined as +$parameter_name.original+,
+</span>  <span class='comment'>#     * a parameter value defined as `$parameter_name`,
+</span>  <span class='comment'>#     * an original parameter value defined as `$parameter_name.original`,
 </span>  <span class='comment'>#     * a parameter value from some context defined as
-</span>  <span class='comment'>#       +#context_name.parameter_name+.
+</span>  <span class='comment'>#       `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] default_value
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The default value to use when the +value+ yields an empty
+</span>  <span class='comment'>#     Optional. The default value to use when the `value` yields an empty
 </span>  <span class='comment'>#     result.
 </span>  <span class='comment'>#     Default values can be extracted from contexts by using the following
-</span>  <span class='comment'>#     syntax: +#context_name.parameter_name+.
+</span>  <span class='comment'>#     syntax: `#context_name.parameter_name`.
 </span>  <span class='comment'># @!attribute [rw] entity_type_display_name
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with +@+, that
+</span>  <span class='comment'>#     Optional. The name of the entity type, prefixed with `@`, that
 </span>  <span class='comment'>#     describes values of the parameter. If the parameter is
 </span>  <span class='comment'>#     required, this must be provided.
 </span>  <span class='comment'># @!attribute [rw] mandatory
@@ -17019,7 +17019,7 @@ trained on.</p>
 </span>  <span class='comment'>#     Optional. Indicates whether the parameter represents a list of values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/Parameter.html" title="Google::Cloud::Dialogflow::V2::Intent::Parameter (class)">Parameter</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Corresponds to the +Response+ field in the Dialogflow console.
+  <span class='comment'># Corresponds to the `Response` field in the Dialogflow console.
 </span>  <span class='comment'># @!attribute [rw] text
 </span>  <span class='comment'>#   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
 </span>  <span class='comment'>#     The text response.
@@ -17125,9 +17125,9 @@ trained on.</p>
 </span>    <span class='kw'>class</span> <span class='const'>SimpleResponse</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The collection of simple response candidates.
-</span>    <span class='comment'># This message in +QueryResult.fulfillment_messages+ and
-</span>    <span class='comment'># +WebhookResponse.fulfillment_messages+ should contain only one
-</span>    <span class='comment'># +SimpleResponse+.
+</span>    <span class='comment'># This message in `QueryResult.fulfillment_messages` and
+</span>    <span class='comment'># `WebhookResponse.fulfillment_messages` should contain only one
+</span>    <span class='comment'># `SimpleResponse`.
 </span>    <span class='comment'># @!attribute [rw] simple_responses
 </span>    <span class='comment'>#   @return [Array&lt;Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse&gt;]
 </span>    <span class='comment'>#     Required. The list of simple responses.
@@ -17342,11 +17342,11 @@ trained on.</p>
 </span>  <span class='comment'># @!attribute [rw] followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='comment'># @!attribute [rw] parent_followup_intent_name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The unique identifier of the followup intent parent.
-</span>  <span class='comment'>#     Format: +projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;+.
+</span>  <span class='comment'>#     Format: `projects/&lt;Project ID&gt;/agent/intents/&lt;Intent ID&gt;`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Intent/FollowupIntentInfo.html" title="Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo (class)">FollowupIntentInfo</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents the different states that webhooks can be in.

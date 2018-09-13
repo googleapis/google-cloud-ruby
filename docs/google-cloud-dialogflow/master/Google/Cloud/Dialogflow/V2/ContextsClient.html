@@ -100,9 +100,9 @@ geographic location, and so on.</p>
 DetectIntent (or
 StreamingDetectIntent) request,
 or as output contexts included in the returned intent.
-Contexts expire when an intent is matched, after the number of +DetectIntent+
-requests specified by the +lifespan_count+ parameter, or after 10 minutes
-if no intents are matched for a +DetectIntent+ request.</p>
+Contexts expire when an intent is matched, after the number of <code>DetectIntent</code>
+requests specified by the <code>lifespan_count</code> parameter, or after 10 minutes
+if no intents are matched for a <code>DetectIntent</code> request.</p>
 
 <p>For more information about contexts, see the
 <a href="https://dialogflow.com/docs/contexts">Dialogflow documentation</a>.</p>
@@ -1009,7 +1009,7 @@ custom error handling.</p>
 <span class='id identifier rubyid_contexts_client'>contexts_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Contexts.html" title="Google::Cloud::Dialogflow::Contexts (module)">Contexts</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Contexts.html#new-class_method" title="Google::Cloud::Dialogflow::Contexts.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::ContextsClient (class)">ContextsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Dialogflow::V2::ContextsClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +context+:
+<span class='comment'># TODO: Initialize `context`:
 </span><span class='id identifier rubyid_context'>context</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_contexts_client'>contexts_client</span><span class='period'>.</span><span class='id identifier rubyid_create_context'>create_context</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_context'>context</span><span class='rparen'>)</span></code></pre>
     
@@ -1028,7 +1028,7 @@ custom error handling.</p>
       
         &mdash;
         <div class='inline'><p>Required. The session to create a context for.
-Format: +projects/<Project ID>/agent/sessions/<Session ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1224,7 +1224,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the session to delete all contexts from. Format:
-+projects/<Project ID>/agent/sessions/<Session ID>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1392,7 +1392,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the context to delete. Format:
-+projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;/contexts/&lt;Context ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1560,7 +1560,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the context. Format:
-+projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;/contexts/&lt;Context ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1747,7 +1747,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The session to list all contexts from.
-Format: +projects/<Project ID>/agent/sessions/<Session ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1935,7 +1935,7 @@ object.</p>
 
 <span class='id identifier rubyid_contexts_client'>contexts_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Contexts.html" title="Google::Cloud::Dialogflow::Contexts (module)">Contexts</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Contexts.html#new-class_method" title="Google::Cloud::Dialogflow::Contexts.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +context+:
+<span class='comment'># TODO: Initialize `context`:
 </span><span class='id identifier rubyid_context'>context</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_contexts_client'>contexts_client</span><span class='period'>.</span><span class='id identifier rubyid_update_context'>update_context</span><span class='lparen'>(</span><span class='id identifier rubyid_context'>context</span><span class='rparen'>)</span></code></pre>
     

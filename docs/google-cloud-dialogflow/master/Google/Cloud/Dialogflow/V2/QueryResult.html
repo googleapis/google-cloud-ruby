@@ -150,7 +150,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This field is set to: * +false+ if the matched intent has required parameters and not all of   the required parameter values have been collected.</p>
+    <span class="summary_desc"><div class='inline'><p>This field is set to: * <code>false</code> if the matched intent has required parameters and not all of   the required parameter values have been collected.</p>
 </div></span>
   
 </li>
@@ -384,7 +384,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The original conversational query text: * If natural language text was provided as input, +query_text+ contains   a copy of the input.</p>
+    <span class="summary_desc"><div class='inline'><p>The original conversational query text: * If natural language text was provided as input, <code>query_text</code> contains   a copy of the input.</p>
 </div></span>
   
 </li>
@@ -436,7 +436,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If the query was fulfilled by a webhook call, this field is set to the value of the +payload+ field returned in the webhook response.</p>
+    <span class="summary_desc"><div class='inline'><p>If the query was fulfilled by a webhook call, this field is set to the value of the <code>payload</code> field returned in the webhook response.</p>
 </div></span>
   
 </li>
@@ -462,7 +462,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If the query was fulfilled by a webhook call, this field is set to the value of the +source+ field returned in the webhook response.</p>
+    <span class="summary_desc"><div class='inline'><p>If the query was fulfilled by a webhook call, this field is set to the value of the <code>source</code> field returned in the webhook response.</p>
 </div></span>
   
 </li>
@@ -548,9 +548,9 @@ js:
     <p>Returns This field is set to:</p>
 
 <ul>
-<li>+false+ if the matched intent has required parameters and not all of
+<li><code>false</code> if the matched intent has required parameters and not all of
 the required parameter values have been collected.</li>
-<li>+true+ if all required parameter values have been collected, or if the
+<li><code>true</code> if all required parameter values have been collected, or if the
 matched intent doesn&#39;t contain any required parameters.</li>
 </ul>
 
@@ -573,9 +573,9 @@ matched intent doesn&#39;t contain any required parameters.</li>
         <div class='inline'><p>This field is set to:</p>
 
 <ul>
-<li>+false+ if the matched intent has required parameters and not all of
+<li><code>false</code> if the matched intent has required parameters and not all of
 the required parameter values have been collected.</li>
-<li>+true+ if all required parameter values have been collected, or if the
+<li><code>true</code> if all required parameter values have been collected, or if the
 matched intent doesn&#39;t contain any required parameters.</li>
 </ul>
 </div>
@@ -783,7 +783,7 @@ could contain webhook call latency.</p>
   <div class="discussion">
     <p>Returns The intent that matched the conversational query. Some, not
 all fields are filled in this message, including but not limited to:
-+name+, +display_name+ and +webhook_state+.</p>
+<code>name</code>, <code>display_name</code> and <code>webhook_state</code>.</p>
 
 
   </div>
@@ -803,7 +803,7 @@ all fields are filled in this message, including but not limited to:
         &mdash;
         <div class='inline'><p>The intent that matched the conversational query. Some, not
 all fields are filled in this message, including but not limited to:
-+name+, +display_name+ and +webhook_state+.</p>
+<code>name</code>, <code>display_name</code> and <code>webhook_state</code>.</p>
 </div>
       
     </li>
@@ -957,8 +957,8 @@ for a list of the currently supported language codes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The collection of output contexts. If applicable,
-+output_contexts.parameters+ contains entries with name
-+<parameter name>.original+ containing the original parameter values
+<code>output_contexts.parameters</code> contains entries with name
+<code>&lt;parameter name&gt;.original</code> containing the original parameter values
 before the query.</p>
 
 
@@ -978,8 +978,8 @@ before the query.</p>
       
         &mdash;
         <div class='inline'><p>The collection of output contexts. If applicable,
-+output_contexts.parameters+ contains entries with name
-+<parameter name>.original+ containing the original parameter values
+<code>output_contexts.parameters</code> contains entries with name
+<code>&lt;parameter name&gt;.original</code> containing the original parameter values
 before the query.</p>
 </div>
       
@@ -1075,12 +1075,12 @@ before the query.</p>
     <p>Returns The original conversational query text:</p>
 
 <ul>
-<li>If natural language text was provided as input, +query_text+ contains
+<li>If natural language text was provided as input, <code>query_text</code> contains
 a copy of the input.</li>
-<li>If natural language speech audio was provided as input, +query_text+
+<li>If natural language speech audio was provided as input, <code>query_text</code>
 contains the speech recognition result. If speech recognizer produced
 multiple alternatives, a particular one is picked.</li>
-<li>If an event was provided as input, +query_text+ is not set.</li>
+<li>If an event was provided as input, <code>query_text</code> is not set.</li>
 </ul>
 
 
@@ -1102,12 +1102,12 @@ multiple alternatives, a particular one is picked.</li>
         <div class='inline'><p>The original conversational query text:</p>
 
 <ul>
-<li>If natural language text was provided as input, +query_text+ contains
+<li>If natural language text was provided as input, <code>query_text</code> contains
 a copy of the input.</li>
-<li>If natural language speech audio was provided as input, +query_text+
+<li>If natural language speech audio was provided as input, <code>query_text</code>
 contains the speech recognition result. If speech recognizer produced
 multiple alternatives, a particular one is picked.</li>
-<li>If an event was provided as input, +query_text+ is not set.</li>
+<li>If an event was provided as input, <code>query_text</code> is not set.</li>
 </ul>
 </div>
       
@@ -1217,7 +1217,7 @@ estimates per portion of the audio in StreamingRecognitionResult.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If the query was fulfilled by a webhook call, this field is set to the
-value of the +payload+ field returned in the webhook response.</p>
+value of the <code>payload</code> field returned in the webhook response.</p>
 
 
   </div>
@@ -1236,7 +1236,7 @@ value of the +payload+ field returned in the webhook response.</p>
       
         &mdash;
         <div class='inline'><p>If the query was fulfilled by a webhook call, this field is set to the
-value of the +payload+ field returned in the webhook response.</p>
+value of the <code>payload</code> field returned in the webhook response.</p>
 </div>
       
     </li>
@@ -1274,7 +1274,7 @@ value of the +payload+ field returned in the webhook response.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If the query was fulfilled by a webhook call, this field is set to the
-value of the +source+ field returned in the webhook response.</p>
+value of the <code>source</code> field returned in the webhook response.</p>
 
 
   </div>
@@ -1293,7 +1293,7 @@ value of the +source+ field returned in the webhook response.</p>
       
         &mdash;
         <div class='inline'><p>If the query was fulfilled by a webhook call, this field is set to the
-value of the +source+ field returned in the webhook response.</p>
+value of the <code>source</code> field returned in the webhook response.</p>
 </div>
       
     </li>

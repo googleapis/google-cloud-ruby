@@ -103,20 +103,20 @@ of the single requested utterance.</p>
 is_final: true</p></li>
 <li><p>transcript: &quot; that&#39;s&quot;</p></li>
 <li><p>transcript: &quot; that is&quot;</p></li>
-<li><p>recognition_event_type: +RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE+</p></li>
+<li><p>recognition_event_type: <code>RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE</code></p></li>
 <li><p>transcript: &quot; that is the question&quot;
 is_final: true</p></li>
 </ol>
 
 <p>Only two of the responses contain final results (#4 and #8 indicated by
-+is_final: true+). Concatenating these generates the full transcript: &quot;to be
+<code>is_final: true</code>). Concatenating these generates the full transcript: &quot;to be
 or not to be that is the question&quot;.</p>
 
 <p>In each response we populate:</p>
 
 <ul>
-<li><p>for +MESSAGE_TYPE_TRANSCRIPT+: +transcript+ and possibly +is_final+.</p></li>
-<li><p>for +MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE+: only +event_type+.</p></li>
+<li><p>for <code>MESSAGE_TYPE_TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.</p></li>
+<li><p>for <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code>: only <code>event_type</code>.</p></li>
 </ul>
 
 
@@ -188,7 +188,7 @@ or not to be that is the question&quot;.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
+    <span class="summary_desc"><div class='inline'><p>The default of 0.0 is a sentinel value indicating <code>confidence</code> was not set.</p>
 </div></span>
   
 </li>
@@ -273,7 +273,7 @@ A higher number indicates an estimated greater likelihood that the
 recognized words are correct. The default of 0.0 is a sentinel value
 indicating that confidence was not set.</p>
 
-<p>This field is typically only provided if +is_final+ is true and you should
+<p>This field is typically only provided if <code>is_final</code> is true and you should
 not rely on it being accurate or even set.</p>
 
 
@@ -297,7 +297,7 @@ A higher number indicates an estimated greater likelihood that the
 recognized words are correct. The default of 0.0 is a sentinel value
 indicating that confidence was not set.</p>
 
-<p>This field is typically only provided if +is_final+ is true and you should
+<p>This field is typically only provided if <code>is_final</code> is true and you should
 not rely on it being accurate or even set.</p>
 </div>
       
@@ -349,7 +349,7 @@ not rely on it being accurate or even set.</p>
 </span>    <span class='comment'># additional results). The client should stop sending additional audio
 </span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
 </span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
-</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -371,11 +371,11 @@ not rely on it being accurate or even set.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The default of 0.0 is a sentinel value indicating +confidence+ was not set.
-If +false+, the +StreamingRecognitionResult+ represents an
-interim result that may change. If +true+, the recognizer will not return
+    <p>Returns The default of 0.0 is a sentinel value indicating <code>confidence</code> was not set.
+If <code>false</code>, the <code>StreamingRecognitionResult</code> represents an
+interim result that may change. If <code>true</code>, the recognizer will not return
 any further hypotheses about this piece of the audio. May only be populated
-for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+for <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.</p>
 
 
   </div>
@@ -393,11 +393,11 @@ for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The default of 0.0 is a sentinel value indicating +confidence+ was not set.
-If +false+, the +StreamingRecognitionResult+ represents an
-interim result that may change. If +true+, the recognizer will not return
+        <div class='inline'><p>The default of 0.0 is a sentinel value indicating <code>confidence</code> was not set.
+If <code>false</code>, the <code>StreamingRecognitionResult</code> represents an
+interim result that may change. If <code>true</code>, the recognizer will not return
 any further hypotheses about this piece of the audio. May only be populated
-for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+for <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.</p>
 </div>
       
     </li>
@@ -448,7 +448,7 @@ for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
 </span>    <span class='comment'># additional results). The client should stop sending additional audio
 </span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
 </span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
-</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -539,7 +539,7 @@ for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
 </span>    <span class='comment'># additional results). The client should stop sending additional audio
 </span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
 </span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
-</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -562,7 +562,7 @@ for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Transcript text representing the words that the user spoke.
-Populated if and only if +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+Populated if and only if <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.</p>
 
 
   </div>
@@ -581,7 +581,7 @@ Populated if and only if +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
       
         &mdash;
         <div class='inline'><p>Transcript text representing the words that the user spoke.
-Populated if and only if +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+Populated if and only if <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.</p>
 </div>
       
     </li>
@@ -632,7 +632,7 @@ Populated if and only if +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
 </span>    <span class='comment'># additional results). The client should stop sending additional audio
 </span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
 </span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
-</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

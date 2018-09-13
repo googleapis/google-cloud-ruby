@@ -90,17 +90,17 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The top-level message returned from the
-+StreamingDetectIntent+ method.</p>
+<code>StreamingDetectIntent</code> method.</p>
 
 <p>Multiple response messages can be returned in order:</p>
 
 <ol>
 <li><p>If the input was set to streaming audio, the first one or more messages
-contain +recognition_result+. Each +recognition_result+ represents a more
-complete transcript of what the user said. The last +recognition_result+
-has +is_final+ set to +true+.</p></li>
-<li><p>The next message contains +response_id+, +query_result+
-and optionally +webhook_status+ if a WebHook was called.</p></li>
+contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more
+complete transcript of what the user said. The last <code>recognition_result</code>
+has <code>is_final</code> set to <code>true</code>.</p></li>
+<li><p>The next message contains <code>response_id</code>, <code>query_result</code>
+and optionally <code>webhook_status</code> if a WebHook was called.</p></li>
 </ol>
 
 

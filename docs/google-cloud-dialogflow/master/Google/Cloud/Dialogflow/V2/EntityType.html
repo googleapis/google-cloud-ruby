@@ -242,7 +242,7 @@ language queries.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Required for all methods except +create+ (+create+ populates the name automatically. The unique identifier of the entity type. Format: +projects/<Project ID>/agent/entityTypes/<Entity Type ID>+..</p>
+    <span class="summary_desc"><div class='inline'><p>Required for all methods except <code>create</code> (<code>create</code> populates the name automatically. The unique identifier of the entity type. Format: <code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;Entity Type ID&gt;</code>..</p>
 </div></span>
   
 </li>
@@ -355,15 +355,15 @@ expanded.</p>
 </span>  <span class='comment'># @!attribute [rw] value
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#     For +KIND_MAP+ entity types:
+</span>  <span class='comment'>#     For `KIND_MAP` entity types:
 </span>  <span class='comment'>#       A canonical name to be used in place of synonyms.
-</span>  <span class='comment'>#     For +KIND_LIST+ entity types:
+</span>  <span class='comment'>#     For `KIND_LIST` entity types:
 </span>  <span class='comment'>#       A string that can contain references to other entity types (with or
 </span>  <span class='comment'>#       without aliases).
 </span>  <span class='comment'># @!attribute [rw] synonyms
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Required. A collection of synonyms. For +KIND_LIST+ entity types this
-</span>  <span class='comment'>#     must contain exactly one synonym equal to +value+.
+</span>  <span class='comment'>#     Required. A collection of synonyms. For `KIND_LIST` entity types this
+</span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents kinds of entities.
@@ -494,15 +494,15 @@ expanded.</p>
 </span>  <span class='comment'># @!attribute [rw] value
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#     For +KIND_MAP+ entity types:
+</span>  <span class='comment'>#     For `KIND_MAP` entity types:
 </span>  <span class='comment'>#       A canonical name to be used in place of synonyms.
-</span>  <span class='comment'>#     For +KIND_LIST+ entity types:
+</span>  <span class='comment'>#     For `KIND_LIST` entity types:
 </span>  <span class='comment'>#       A string that can contain references to other entity types (with or
 </span>  <span class='comment'>#       without aliases).
 </span>  <span class='comment'># @!attribute [rw] synonyms
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Required. A collection of synonyms. For +KIND_LIST+ entity types this
-</span>  <span class='comment'>#     must contain exactly one synonym equal to +value+.
+</span>  <span class='comment'>#     Required. A collection of synonyms. For `KIND_LIST` entity types this
+</span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents kinds of entities.
@@ -633,15 +633,15 @@ expanded.</p>
 </span>  <span class='comment'># @!attribute [rw] value
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#     For +KIND_MAP+ entity types:
+</span>  <span class='comment'>#     For `KIND_MAP` entity types:
 </span>  <span class='comment'>#       A canonical name to be used in place of synonyms.
-</span>  <span class='comment'>#     For +KIND_LIST+ entity types:
+</span>  <span class='comment'>#     For `KIND_LIST` entity types:
 </span>  <span class='comment'>#       A string that can contain references to other entity types (with or
 </span>  <span class='comment'>#       without aliases).
 </span>  <span class='comment'># @!attribute [rw] synonyms
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Required. A collection of synonyms. For +KIND_LIST+ entity types this
-</span>  <span class='comment'>#     must contain exactly one synonym equal to +value+.
+</span>  <span class='comment'>#     Required. A collection of synonyms. For `KIND_LIST` entity types this
+</span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents kinds of entities.
@@ -772,15 +772,15 @@ expanded.</p>
 </span>  <span class='comment'># @!attribute [rw] value
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#     For +KIND_MAP+ entity types:
+</span>  <span class='comment'>#     For `KIND_MAP` entity types:
 </span>  <span class='comment'>#       A canonical name to be used in place of synonyms.
-</span>  <span class='comment'>#     For +KIND_LIST+ entity types:
+</span>  <span class='comment'>#     For `KIND_LIST` entity types:
 </span>  <span class='comment'>#       A string that can contain references to other entity types (with or
 </span>  <span class='comment'>#       without aliases).
 </span>  <span class='comment'># @!attribute [rw] synonyms
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Required. A collection of synonyms. For +KIND_LIST+ entity types this
-</span>  <span class='comment'>#     must contain exactly one synonym equal to +value+.
+</span>  <span class='comment'>#     Required. A collection of synonyms. For `KIND_LIST` entity types this
+</span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents kinds of entities.
@@ -828,10 +828,10 @@ expanded.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required for all methods except +create+ (+create+ populates the name
+    <p>Returns Required for all methods except <code>create</code> (<code>create</code> populates the name
 automatically.
 The unique identifier of the entity type. Format:
-+projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;Entity Type ID&gt;</code>.</p>
 
 
   </div>
@@ -849,10 +849,10 @@ The unique identifier of the entity type. Format:
       
       
         &mdash;
-        <div class='inline'><p>Required for all methods except +create+ (+create+ populates the name
+        <div class='inline'><p>Required for all methods except <code>create</code> (<code>create</code> populates the name
 automatically.
 The unique identifier of the entity type. Format:
-+projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/entityTypes/&lt;Entity Type ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -917,15 +917,15 @@ The unique identifier of the entity type. Format:
 </span>  <span class='comment'># @!attribute [rw] value
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     Required.
-</span>  <span class='comment'>#     For +KIND_MAP+ entity types:
+</span>  <span class='comment'>#     For `KIND_MAP` entity types:
 </span>  <span class='comment'>#       A canonical name to be used in place of synonyms.
-</span>  <span class='comment'>#     For +KIND_LIST+ entity types:
+</span>  <span class='comment'>#     For `KIND_LIST` entity types:
 </span>  <span class='comment'>#       A string that can contain references to other entity types (with or
 </span>  <span class='comment'>#       without aliases).
 </span>  <span class='comment'># @!attribute [rw] synonyms
 </span>  <span class='comment'>#   @return [Array&lt;String&gt;]
-</span>  <span class='comment'>#     Required. A collection of synonyms. For +KIND_LIST+ entity types this
-</span>  <span class='comment'>#     must contain exactly one synonym equal to +value+.
+</span>  <span class='comment'>#     Required. A collection of synonyms. For `KIND_LIST` entity types this
+</span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Represents kinds of entities.

@@ -125,11 +125,11 @@ details.</p>
         <dt id="AUDIO_ENCODING_FLAC-constant" class="">AUDIO_ENCODING_FLAC =
           <div class="docstring">
   <div class="discussion">
-    <p><a href="https://xiph.org/flac/documentation.html">+FLAC+</a> (Free Lossless Audio
+    <p><a href="https://xiph.org/flac/documentation.html"><code>FLAC</code></a> (Free Lossless Audio
 Codec) is the recommended encoding because it is lossless (therefore
 recognition is not compromised) and requires only about half the
-bandwidth of +LINEAR16+. +FLAC+ stream encoding supports 16-bit and
-24-bit samples, however, not all fields in +STREAMINFO+ are supported.</p>
+bandwidth of <code>LINEAR16</code>. <code>FLAC</code> stream encoding supports 16-bit and
+24-bit samples, however, not all fields in <code>STREAMINFO</code> are supported.</p>
 
 
   </div>
@@ -159,7 +159,7 @@ bandwidth of +LINEAR16+. +FLAC+ stream encoding supports 16-bit and
         <dt id="AUDIO_ENCODING_AMR-constant" class="">AUDIO_ENCODING_AMR =
           <div class="docstring">
   <div class="discussion">
-    <p>Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.</p>
+    <p>Adaptive Multi-Rate Narrowband codec. <code>sample_rate_hertz</code> must be 8000.</p>
 
 
   </div>
@@ -174,7 +174,7 @@ bandwidth of +LINEAR16+. +FLAC+ stream encoding supports 16-bit and
         <dt id="AUDIO_ENCODING_AMR_WB-constant" class="">AUDIO_ENCODING_AMR_WB =
           <div class="docstring">
   <div class="discussion">
-    <p>Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.</p>
+    <p>Adaptive Multi-Rate Wideband codec. <code>sample_rate_hertz</code> must be 16000.</p>
 
 
   </div>
@@ -191,7 +191,7 @@ bandwidth of +LINEAR16+. +FLAC+ stream encoding supports 16-bit and
   <div class="discussion">
     <p>Opus encoded audio frames in Ogg container
 (<a href="https://wiki.xiph.org/OggOpus">OggOpus</a>).
-+sample_rate_hertz+ must be 16000.</p>
+<code>sample_rate_hertz</code> must be 16000.</p>
 
 
   </div>
@@ -207,10 +207,10 @@ bandwidth of +LINEAR16+. +FLAC+ stream encoding supports 16-bit and
           <div class="docstring">
   <div class="discussion">
     <p>Although the use of lossy encodings is not recommended, if a very low
-bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+bitrate encoding is required, <code>OGG_OPUS</code> is highly preferred over
 Speex encoding. The <a href="https://speex.org/">Speex</a> encoding supported by
 Dialogflow API has a header byte in each block, as in MIME type
-+audio/x-speex-with-header-byte+.
+<code>audio/x-speex-with-header-byte</code>.
 It is a variant of the RTP Speex encoding defined in
 <a href="https://tools.ietf.org/html/rfc5574">RFC 5574</a>.
 The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -218,7 +218,7 @@ starts with a byte containing the length of the block, in bytes, followed
 by one or more frames of Speex data, padded to an integral number of
 bytes (octets) as specified in RFC 5574. In other words, each RTP header
 is replaced with a single byte containing the block length. Only Speex
-wideband is supported. +sample_rate_hertz+ must be 16000.</p>
+wideband is supported. <code>sample_rate_hertz</code> must be 16000.</p>
 
 
   </div>

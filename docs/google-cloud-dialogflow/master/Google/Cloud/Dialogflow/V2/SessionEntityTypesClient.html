@@ -971,7 +971,7 @@ custom error handling.</p>
 <span class='id identifier rubyid_session_entity_types_client'>session_entity_types_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../SessionEntityTypes.html" title="Google::Cloud::Dialogflow::SessionEntityTypes (module)">SessionEntityTypes</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../SessionEntityTypes.html#new-class_method" title="Google::Cloud::Dialogflow::SessionEntityTypes.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::SessionEntityTypesClient (class)">SessionEntityTypesClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Dialogflow::V2::SessionEntityTypesClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +session_entity_type+:
+<span class='comment'># TODO: Initialize `session_entity_type`:
 </span><span class='id identifier rubyid_session_entity_type'>session_entity_type</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_session_entity_types_client'>session_entity_types_client</span><span class='period'>.</span><span class='id identifier rubyid_create_session_entity_type'>create_session_entity_type</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_session_entity_type'>session_entity_type</span><span class='rparen'>)</span></code></pre>
     
@@ -990,7 +990,7 @@ custom error handling.</p>
       
         &mdash;
         <div class='inline'><p>Required. The session to create a session entity type for.
-Format: +projects/<Project ID>/agent/sessions/<Session ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1186,8 +1186,8 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the entity type to delete. Format:
-+projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-Display Name>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;/entityTypes/&lt;Entity Type
+Display Name&gt;</code>.</p>
 </div>
       
     </li>
@@ -1355,8 +1355,8 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the session entity type. Format:
-+projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-Display Name>+.</p>
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;/entityTypes/&lt;Entity Type
+Display Name&gt;</code>.</p>
 </div>
       
     </li>
@@ -1543,7 +1543,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The session to list all session entity types from.
-Format: +projects/<Project ID>/agent/sessions/<Session ID>+.</p>
+Format: <code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>.</p>
 </div>
       
     </li>
@@ -1731,7 +1731,7 @@ object.</p>
 
 <span class='id identifier rubyid_session_entity_types_client'>session_entity_types_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../SessionEntityTypes.html" title="Google::Cloud::Dialogflow::SessionEntityTypes (module)">SessionEntityTypes</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../SessionEntityTypes.html#new-class_method" title="Google::Cloud::Dialogflow::SessionEntityTypes.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +session_entity_type+:
+<span class='comment'># TODO: Initialize `session_entity_type`:
 </span><span class='id identifier rubyid_session_entity_type'>session_entity_type</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_session_entity_types_client'>session_entity_types_client</span><span class='period'>.</span><span class='id identifier rubyid_update_session_entity_type'>update_session_entity_type</span><span class='lparen'>(</span><span class='id identifier rubyid_session_entity_type'>session_entity_type</span><span class='rparen'>)</span></code></pre>
     
@@ -1750,8 +1750,8 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Required. The entity type to update. Format:
-+projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-Display Name>+.
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;/entityTypes/&lt;Entity Type
+Display Name&gt;</code>.
 A hash of the same form as <code>Google::Cloud::Dialogflow::V2::SessionEntityType</code>
 can also be provided.</p>
 </div>

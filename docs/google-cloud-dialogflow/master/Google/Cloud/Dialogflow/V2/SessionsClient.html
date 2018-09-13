@@ -744,7 +744,7 @@ results of future queries.</p>
 <span class='id identifier rubyid_sessions_client'>sessions_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Sessions.html" title="Google::Cloud::Dialogflow::Sessions (module)">Sessions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Sessions.html#new-class_method" title="Google::Cloud::Dialogflow::Sessions.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::SessionsClient (class)">SessionsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Dialogflow::V2::SessionsClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +query_input+:
+<span class='comment'># TODO: Initialize `query_input`:
 </span><span class='id identifier rubyid_query_input'>query_input</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_sessions_client'>sessions_client</span><span class='period'>.</span><span class='id identifier rubyid_detect_intent'>detect_intent</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_query_input'>query_input</span><span class='rparen'>)</span></code></pre>
     
@@ -763,7 +763,7 @@ results of future queries.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the session this query is sent to. Format:
-+projects/<Project ID>/agent/sessions/<Session ID>+. It&#39;s up to the API
+<code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>. It&#39;s up to the API
 caller to choose an appropriate session ID. It can be a random number or
 some type of user identifier (preferably hashed). The length of the session
 ID must not exceed 36 bytes.</p>
@@ -823,7 +823,7 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>Optional. The natural language speech audio to be processed. This field
-should be populated iff +query_input+ is set to an input audio config.
+should be populated iff <code>query_input</code> is set to an input audio config.
 A single request can contain up to 1 minute of speech audio data.</p>
 </div>
       
@@ -1005,10 +1005,10 @@ available via the gRPC API (not REST).</p>
 
 <span class='id identifier rubyid_sessions_client'>sessions_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Sessions.html" title="Google::Cloud::Dialogflow::Sessions (module)">Sessions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Sessions.html#new-class_method" title="Google::Cloud::Dialogflow::Sessions.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +session+:
+<span class='comment'># TODO: Initialize `session`:
 </span><span class='id identifier rubyid_session'>session</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +query_input+:
+<span class='comment'># TODO: Initialize `query_input`:
 </span><span class='id identifier rubyid_query_input'>query_input</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span> <span class='label'>query_input:</span> <span class='id identifier rubyid_query_input'>query_input</span> <span class='rbrace'>}</span>
 <span class='id identifier rubyid_requests'>requests</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_request'>request</span><span class='rbracket'>]</span>
