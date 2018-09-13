@@ -144,13 +144,14 @@ class MockPubsub < Minitest::Spec
 
   def subscription_json topic_name, sub_name,
                         deadline = 60,
-                        endpoint = "http://example.com/callback"
+                        endpoint = "http://example.com/callback", labels: nil
     { "name" => subscription_path(sub_name),
       "topic" => topic_path(topic_name),
       "push_config" => { "push_endpoint" => endpoint },
       "ack_deadline_seconds" => deadline,
       "retain_acked_messages" => true,
-      "message_retention_duration" => {"seconds" => 600, "nanos" => 900000000} # 600.9 seconds
+      "message_retention_duration" => {"seconds" => 600, "nanos" => 900000000}, # 600.9 seconds
+      "labels" => labels
     }.to_json
   end
 

@@ -214,6 +214,7 @@ module Google
           deadline = options[:deadline]
           retain_acked = options[:retain_acked]
           mrd = Convert.number_to_duration options[:retention]
+          labels = options[:labels]
 
           execute do
             subscriber.create_subscription name,
@@ -222,6 +223,7 @@ module Google
                                            ack_deadline_seconds: deadline,
                                            retain_acked_messages: retain_acked,
                                            message_retention_duration: mrd,
+                                           labels: labels,
                                            options: default_options
           end
         end

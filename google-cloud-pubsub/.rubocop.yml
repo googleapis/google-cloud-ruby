@@ -30,7 +30,7 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
-  Max: 20
+  Max: 25
   Exclude:
     - "lib/google/cloud/pubsub.rb"
 Metrics/ParameterLists:

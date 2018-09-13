@@ -175,6 +175,20 @@ module Google
         end
 
         ##
+        # A hash of user-provided labels associated with this subscription.
+        # Labels can be provided when the subscription is created, and used to
+        # organize and group subscriptions.See [Creating and Managing
+        # Labels](https://cloud.google.com/pubsub/docs/labels).
+        #
+        # The returned hash is frozen and changes are not allowed.
+        #
+        # @return [Hash] The frozen labels hash.
+        #
+        def labels
+          @grpc.labels.to_h.freeze
+        end
+
+        ##
         # Determines whether the subscription exists in the Pub/Sub service.
         #
         # @example
