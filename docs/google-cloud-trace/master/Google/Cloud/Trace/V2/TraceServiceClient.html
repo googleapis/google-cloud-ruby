@@ -852,7 +852,7 @@ existing spans.</p>
 <span class='id identifier rubyid_trace_service_client'>trace_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Trace::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V2::TraceServiceClient (class)">TraceServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Trace::V2::TraceServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +spans+:
+<span class='comment'># TODO: Initialize `spans`:
 </span><span class='id identifier rubyid_spans'>spans</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_trace_service_client'>trace_service_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_write_spans'>batch_write_spans</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_spans'>spans</span><span class='rparen'>)</span></code></pre>
     
@@ -871,7 +871,7 @@ existing spans.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the project where the spans belong. The format is
-+projects/[PROJECT_ID]+.</p>
+<code>projects/[PROJECT_ID]</code>.</p>
 </div>
       
     </li>
@@ -1045,16 +1045,16 @@ retries, etc.</p>
 <span class='id identifier rubyid_trace_service_client'>trace_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Trace.html#new-class_method" title="Google::Cloud::Trace.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Trace::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V2::TraceServiceClient (class)">TraceServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_span_path'><span class='object_link'><a href="#span_path-class_method" title="Google::Cloud::Trace::V2::TraceServiceClient.span_path (method)">span_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TRACE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SPAN]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +span_id+:
+<span class='comment'># TODO: Initialize `span_id`:
 </span><span class='id identifier rubyid_span_id'>span_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +display_name+:
+<span class='comment'># TODO: Initialize `display_name`:
 </span><span class='id identifier rubyid_display_name'>display_name</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +start_time+:
+<span class='comment'># TODO: Initialize `start_time`:
 </span><span class='id identifier rubyid_start_time'>start_time</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +end_time+:
+<span class='comment'># TODO: Initialize `end_time`:
 </span><span class='id identifier rubyid_end_time'>end_time</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_trace_service_client'>trace_service_client</span><span class='period'>.</span><span class='id identifier rubyid_create_span'>create_span</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_span_id'>span_id</span><span class='comma'>,</span> <span class='id identifier rubyid_display_name'>display_name</span><span class='comma'>,</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='comma'>,</span> <span class='id identifier rubyid_end_time'>end_time</span><span class='rparen'>)</span></code></pre>
     

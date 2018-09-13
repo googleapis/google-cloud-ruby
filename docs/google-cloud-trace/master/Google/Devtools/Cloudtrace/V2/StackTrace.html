@@ -272,7 +272,7 @@ js:
 </span>  <span class='comment'>#     method that is active in this frame (up to 1024 bytes).
 </span>  <span class='comment'># @!attribute [rw] original_function_name
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
-</span>  <span class='comment'>#     An un-mangled function name, if +function_name+ is
+</span>  <span class='comment'>#     An un-mangled function name, if `function_name` is
 </span>  <span class='comment'>#     [mangled](http://www.avabodh.com/cxxin/namemangling.html). The name can
 </span>  <span class='comment'>#     be fully-qualified (up to 1024 bytes).
 </span>  <span class='comment'># @!attribute [rw] file_name
@@ -281,7 +281,7 @@ js:
 </span>  <span class='comment'>#     bytes).
 </span>  <span class='comment'># @!attribute [rw] line_number
 </span>  <span class='comment'>#   @return [Integer]
-</span>  <span class='comment'>#     The line number in +file_name+ where the function call appears.
+</span>  <span class='comment'>#     The line number in `file_name` where the function call appears.
 </span>  <span class='comment'># @!attribute [rw] column_number
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The column number where the function call appears, if available.
@@ -328,10 +328,10 @@ stack traces within a single trace.</p>
 
 <p>Often multiple spans will have identical stack traces.
 The first occurrence of a stack trace should contain both the
-+stackFrame+ content and a value in +stackTraceHashId+.</p>
+<code>stackFrame</code> content and a value in <code>stackTraceHashId</code>.</p>
 
 <p>Subsequent spans within the same request can refer
-to that stack trace by only setting +stackTraceHashId+.</p>
+to that stack trace by only setting <code>stackTraceHashId</code>.</p>
 
 
   </div>
@@ -354,10 +354,10 @@ stack traces within a single trace.</p>
 
 <p>Often multiple spans will have identical stack traces.
 The first occurrence of a stack trace should contain both the
-+stackFrame+ content and a value in +stackTraceHashId+.</p>
+<code>stackFrame</code> content and a value in <code>stackTraceHashId</code>.</p>
 
 <p>Subsequent spans within the same request can refer
-to that stack trace by only setting +stackTraceHashId+.</p>
+to that stack trace by only setting <code>stackTraceHashId</code>.</p>
 </div>
       
     </li>
@@ -423,7 +423,7 @@ to that stack trace by only setting +stackTraceHashId+.</p>
 </span>  <span class='comment'>#     method that is active in this frame (up to 1024 bytes).
 </span>  <span class='comment'># @!attribute [rw] original_function_name
 </span>  <span class='comment'>#   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
-</span>  <span class='comment'>#     An un-mangled function name, if +function_name+ is
+</span>  <span class='comment'>#     An un-mangled function name, if `function_name` is
 </span>  <span class='comment'>#     [mangled](http://www.avabodh.com/cxxin/namemangling.html). The name can
 </span>  <span class='comment'>#     be fully-qualified (up to 1024 bytes).
 </span>  <span class='comment'># @!attribute [rw] file_name
@@ -432,7 +432,7 @@ to that stack trace by only setting +stackTraceHashId+.</p>
 </span>  <span class='comment'>#     bytes).
 </span>  <span class='comment'># @!attribute [rw] line_number
 </span>  <span class='comment'>#   @return [Integer]
-</span>  <span class='comment'>#     The line number in +file_name+ where the function call appears.
+</span>  <span class='comment'>#     The line number in `file_name` where the function call appears.
 </span>  <span class='comment'># @!attribute [rw] column_number
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The column number where the function call appears, if available.

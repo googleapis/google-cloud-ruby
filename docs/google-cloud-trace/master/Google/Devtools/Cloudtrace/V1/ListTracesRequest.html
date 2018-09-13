@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The request message for the +ListTraces+ method. All fields are required
+    <p>The request message for the <code>ListTraces</code> method. All fields are required
 unless specified.</p>
 
 
@@ -405,7 +405,7 @@ collected from the application.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span>
   <span class='comment'># Type of data returned for traces in the list.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ListTracesRequest/ViewType.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType (module)">ViewType</a></span></span>
-    <span class='comment'># Default is +MINIMAL+ if unspecified.
+    <span class='comment'># Default is `MINIMAL` if unspecified.
 </span>    <span class='const'>VIEW_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Minimal view of the trace record that contains only the project
@@ -417,7 +417,7 @@ collected from the application.</p>
 </span>    <span class='const'>ROOTSPAN</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Complete view of the trace record that contains the actual trace data.
-</span>    <span class='comment'># This is equivalent to calling the REST +get+ or RPC +GetTrace+ method
+</span>    <span class='comment'># This is equivalent to calling the REST `get` or RPC `GetTrace` method
 </span>    <span class='comment'># using the ID of each listed trace.
 </span>    <span class='const'>COMPLETE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -443,34 +443,34 @@ collected from the application.</p>
     <p>Returns An optional filter against labels for the request.</p>
 
 <p>By default, searches use prefix matching. To specify exact match, prepend
-a plus symbol (+++) to the search term.
+a plus symbol (<code>+</code>) to the search term.
 Multiple terms are ANDed. Syntax:</p>
 
 <ul>
-<li>+root:NAME_PREFIX+ or +NAME_PREFIX+: Return traces where any root
-span starts with +NAME_PREFIX+.</li>
-<li>++root:NAME+ or ++NAME+: Return traces where any root span&#39;s name is
-exactly +NAME+.</li>
-<li>+span:NAME_PREFIX+: Return traces where any span starts with
-+NAME_PREFIX+.</li>
-<li>++span:NAME+: Return traces where any span&#39;s name is exactly
-+NAME+.</li>
-<li>+latency:DURATION+: Return traces whose overall latency is
-greater or equal to than +DURATION+. Accepted units are nanoseconds
-(+ns+), milliseconds (+ms+), and seconds (+s+). Default is +ms+. For
-example, +latency:24ms+ returns traces whose overall latency
+<li><code>root:NAME_PREFIX</code> or <code>NAME_PREFIX</code>: Return traces where any root
+span starts with <code>NAME_PREFIX</code>.</li>
+<li><code>+root:NAME</code> or <code>+NAME</code>: Return traces where any root span&#39;s name is
+exactly <code>NAME</code>.</li>
+<li><code>span:NAME_PREFIX</code>: Return traces where any span starts with
+<code>NAME_PREFIX</code>.</li>
+<li><code>+span:NAME</code>: Return traces where any span&#39;s name is exactly
+<code>NAME</code>.</li>
+<li><code>latency:DURATION</code>: Return traces whose overall latency is
+greater or equal to than <code>DURATION</code>. Accepted units are nanoseconds
+(<code>ns</code>), milliseconds (<code>ms</code>), and seconds (<code>s</code>). Default is <code>ms</code>. For
+example, <code>latency:24ms</code> returns traces whose overall latency
 is greater than or equal to 24 milliseconds.</li>
-<li>+label:LABEL_KEY+: Return all traces containing the specified
+<li><code>label:LABEL_KEY</code>: Return all traces containing the specified
 label key (exact match, case-sensitive) regardless of the key:value
 pair&#39;s value (including empty values).</li>
-<li>+LABEL_KEY:VALUE_PREFIX+: Return all traces containing the specified
+<li><code>LABEL_KEY:VALUE_PREFIX</code>: Return all traces containing the specified
 label key (exact match, case-sensitive) whose value starts with
-+VALUE_PREFIX+. Both a key and a value must be specified.</li>
-<li>++LABEL_KEY:VALUE+: Return all traces containing a key:value pair
+<code>VALUE_PREFIX</code>. Both a key and a value must be specified.</li>
+<li><code>+LABEL_KEY:VALUE</code>: Return all traces containing a key:value pair
 exactly matching the specified text. Both a key and a value must be
 specified.</li>
-<li>+method:VALUE+: Equivalent to +/http/method:VALUE+.</li>
-<li>+url:VALUE+: Equivalent to +/http/url:VALUE+.</li>
+<li><code>method:VALUE</code>: Equivalent to <code>/http/method:VALUE</code>.</li>
+<li><code>url:VALUE</code>: Equivalent to <code>/http/url:VALUE</code>.</li>
 </ul>
 
 
@@ -492,34 +492,34 @@ specified.</li>
         <div class='inline'><p>An optional filter against labels for the request.</p>
 
 <p>By default, searches use prefix matching. To specify exact match, prepend
-a plus symbol (+++) to the search term.
+a plus symbol (<code>+</code>) to the search term.
 Multiple terms are ANDed. Syntax:</p>
 
 <ul>
-<li>+root:NAME_PREFIX+ or +NAME_PREFIX+: Return traces where any root
-span starts with +NAME_PREFIX+.</li>
-<li>++root:NAME+ or ++NAME+: Return traces where any root span&#39;s name is
-exactly +NAME+.</li>
-<li>+span:NAME_PREFIX+: Return traces where any span starts with
-+NAME_PREFIX+.</li>
-<li>++span:NAME+: Return traces where any span&#39;s name is exactly
-+NAME+.</li>
-<li>+latency:DURATION+: Return traces whose overall latency is
-greater or equal to than +DURATION+. Accepted units are nanoseconds
-(+ns+), milliseconds (+ms+), and seconds (+s+). Default is +ms+. For
-example, +latency:24ms+ returns traces whose overall latency
+<li><code>root:NAME_PREFIX</code> or <code>NAME_PREFIX</code>: Return traces where any root
+span starts with <code>NAME_PREFIX</code>.</li>
+<li><code>+root:NAME</code> or <code>+NAME</code>: Return traces where any root span&#39;s name is
+exactly <code>NAME</code>.</li>
+<li><code>span:NAME_PREFIX</code>: Return traces where any span starts with
+<code>NAME_PREFIX</code>.</li>
+<li><code>+span:NAME</code>: Return traces where any span&#39;s name is exactly
+<code>NAME</code>.</li>
+<li><code>latency:DURATION</code>: Return traces whose overall latency is
+greater or equal to than <code>DURATION</code>. Accepted units are nanoseconds
+(<code>ns</code>), milliseconds (<code>ms</code>), and seconds (<code>s</code>). Default is <code>ms</code>. For
+example, <code>latency:24ms</code> returns traces whose overall latency
 is greater than or equal to 24 milliseconds.</li>
-<li>+label:LABEL_KEY+: Return all traces containing the specified
+<li><code>label:LABEL_KEY</code>: Return all traces containing the specified
 label key (exact match, case-sensitive) regardless of the key:value
 pair&#39;s value (including empty values).</li>
-<li>+LABEL_KEY:VALUE_PREFIX+: Return all traces containing the specified
+<li><code>LABEL_KEY:VALUE_PREFIX</code>: Return all traces containing the specified
 label key (exact match, case-sensitive) whose value starts with
-+VALUE_PREFIX+. Both a key and a value must be specified.</li>
-<li>++LABEL_KEY:VALUE+: Return all traces containing a key:value pair
+<code>VALUE_PREFIX</code>. Both a key and a value must be specified.</li>
+<li><code>+LABEL_KEY:VALUE</code>: Return all traces containing a key:value pair
 exactly matching the specified text. Both a key and a value must be
 specified.</li>
-<li>+method:VALUE+: Equivalent to +/http/method:VALUE+.</li>
-<li>+url:VALUE+: Equivalent to +/http/url:VALUE+.</li>
+<li><code>method:VALUE</code>: Equivalent to <code>/http/method:VALUE</code>.</li>
+<li><code>url:VALUE</code>: Equivalent to <code>/http/url:VALUE</code>.</li>
 </ul>
 </div>
       
@@ -560,7 +560,7 @@ specified.</li>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span>
   <span class='comment'># Type of data returned for traces in the list.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ListTracesRequest/ViewType.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType (module)">ViewType</a></span></span>
-    <span class='comment'># Default is +MINIMAL+ if unspecified.
+    <span class='comment'># Default is `MINIMAL` if unspecified.
 </span>    <span class='const'>VIEW_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Minimal view of the trace record that contains only the project
@@ -572,7 +572,7 @@ specified.</li>
 </span>    <span class='const'>ROOTSPAN</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Complete view of the trace record that contains the actual trace data.
-</span>    <span class='comment'># This is equivalent to calling the REST +get+ or RPC +GetTrace+ method
+</span>    <span class='comment'># This is equivalent to calling the REST `get` or RPC `GetTrace` method
 </span>    <span class='comment'># using the ID of each listed trace.
 </span>    <span class='const'>COMPLETE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -599,15 +599,15 @@ specified.</li>
 Can be one of the following:</p>
 
 <ul>
-<li>+trace_id+</li>
-<li>+name+ (+name+ field of root span in the trace)</li>
-<li>+duration+ (difference between +end_time+ and +start_time+ fields of
+<li><code>trace_id</code></li>
+<li><code>name</code> (<code>name</code> field of root span in the trace)</li>
+<li><code>duration</code> (difference between <code>end_time</code> and <code>start_time</code> fields of
 the root span)</li>
-<li>+start+ (+start_time+ field of the root span)</li>
+<li><code>start</code> (<code>start_time</code> field of the root span)</li>
 </ul>
 
-<p>Descending order can be specified by appending +desc+ to the sort field
-(for example, +name desc+).</p>
+<p>Descending order can be specified by appending <code>desc</code> to the sort field
+(for example, <code>name desc</code>).</p>
 
 <p>Only one sort field is permitted.</p>
 
@@ -631,15 +631,15 @@ the root span)</li>
 Can be one of the following:</p>
 
 <ul>
-<li>+trace_id+</li>
-<li>+name+ (+name+ field of root span in the trace)</li>
-<li>+duration+ (difference between +end_time+ and +start_time+ fields of
+<li><code>trace_id</code></li>
+<li><code>name</code> (<code>name</code> field of root span in the trace)</li>
+<li><code>duration</code> (difference between <code>end_time</code> and <code>start_time</code> fields of
 the root span)</li>
-<li>+start+ (+start_time+ field of the root span)</li>
+<li><code>start</code> (<code>start_time</code> field of the root span)</li>
 </ul>
 
-<p>Descending order can be specified by appending +desc+ to the sort field
-(for example, +name desc+).</p>
+<p>Descending order can be specified by appending <code>desc</code> to the sort field
+(for example, <code>name desc</code>).</p>
 
 <p>Only one sort field is permitted.</p>
 </div>
@@ -681,7 +681,7 @@ the root span)</li>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span>
   <span class='comment'># Type of data returned for traces in the list.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ListTracesRequest/ViewType.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType (module)">ViewType</a></span></span>
-    <span class='comment'># Default is +MINIMAL+ if unspecified.
+    <span class='comment'># Default is `MINIMAL` if unspecified.
 </span>    <span class='const'>VIEW_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Minimal view of the trace record that contains only the project
@@ -693,7 +693,7 @@ the root span)</li>
 </span>    <span class='const'>ROOTSPAN</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Complete view of the trace record that contains the actual trace data.
-</span>    <span class='comment'># This is equivalent to calling the REST +get+ or RPC +GetTrace+ method
+</span>    <span class='comment'># This is equivalent to calling the REST `get` or RPC `GetTrace` method
 </span>    <span class='comment'># using the ID of each listed trace.
 </span>    <span class='const'>COMPLETE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -778,7 +778,7 @@ return fewer traces than the requested page size. Optional.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span>
   <span class='comment'># Type of data returned for traces in the list.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ListTracesRequest/ViewType.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType (module)">ViewType</a></span></span>
-    <span class='comment'># Default is +MINIMAL+ if unspecified.
+    <span class='comment'># Default is `MINIMAL` if unspecified.
 </span>    <span class='const'>VIEW_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Minimal view of the trace record that contains only the project
@@ -790,7 +790,7 @@ return fewer traces than the requested page size. Optional.</p>
 </span>    <span class='const'>ROOTSPAN</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Complete view of the trace record that contains the actual trace data.
-</span>    <span class='comment'># This is equivalent to calling the REST +get+ or RPC +GetTrace+ method
+</span>    <span class='comment'># This is equivalent to calling the REST `get` or RPC `GetTrace` method
 </span>    <span class='comment'># using the ID of each listed trace.
 </span>    <span class='const'>COMPLETE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -814,7 +814,7 @@ return fewer traces than the requested page size. Optional.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Token identifying the page of results to return. If provided, use the
-value of the +next_page_token+ field from a previous request. Optional.</p>
+value of the <code>next_page_token</code> field from a previous request. Optional.</p>
 
 
   </div>
@@ -833,7 +833,7 @@ value of the +next_page_token+ field from a previous request. Optional.</p>
       
         &mdash;
         <div class='inline'><p>Token identifying the page of results to return. If provided, use the
-value of the +next_page_token+ field from a previous request. Optional.</p>
+value of the <code>next_page_token</code> field from a previous request. Optional.</p>
 </div>
       
     </li>
@@ -873,7 +873,7 @@ value of the +next_page_token+ field from a previous request. Optional.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span>
   <span class='comment'># Type of data returned for traces in the list.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ListTracesRequest/ViewType.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType (module)">ViewType</a></span></span>
-    <span class='comment'># Default is +MINIMAL+ if unspecified.
+    <span class='comment'># Default is `MINIMAL` if unspecified.
 </span>    <span class='const'>VIEW_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Minimal view of the trace record that contains only the project
@@ -885,7 +885,7 @@ value of the +next_page_token+ field from a previous request. Optional.</p>
 </span>    <span class='const'>ROOTSPAN</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Complete view of the trace record that contains the actual trace data.
-</span>    <span class='comment'># This is equivalent to calling the REST +get+ or RPC +GetTrace+ method
+</span>    <span class='comment'># This is equivalent to calling the REST `get` or RPC `GetTrace` method
 </span>    <span class='comment'># using the ID of each listed trace.
 </span>    <span class='const'>COMPLETE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -966,7 +966,7 @@ value of the +next_page_token+ field from a previous request. Optional.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span>
   <span class='comment'># Type of data returned for traces in the list.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ListTracesRequest/ViewType.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType (module)">ViewType</a></span></span>
-    <span class='comment'># Default is +MINIMAL+ if unspecified.
+    <span class='comment'># Default is `MINIMAL` if unspecified.
 </span>    <span class='const'>VIEW_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Minimal view of the trace record that contains only the project
@@ -978,7 +978,7 @@ value of the +next_page_token+ field from a previous request. Optional.</p>
 </span>    <span class='const'>ROOTSPAN</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Complete view of the trace record that contains the actual trace data.
-</span>    <span class='comment'># This is equivalent to calling the REST +get+ or RPC +GetTrace+ method
+</span>    <span class='comment'># This is equivalent to calling the REST `get` or RPC `GetTrace` method
 </span>    <span class='comment'># using the ID of each listed trace.
 </span>    <span class='const'>COMPLETE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -1061,7 +1061,7 @@ collected from the application.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span>
   <span class='comment'># Type of data returned for traces in the list.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ListTracesRequest/ViewType.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType (module)">ViewType</a></span></span>
-    <span class='comment'># Default is +MINIMAL+ if unspecified.
+    <span class='comment'># Default is `MINIMAL` if unspecified.
 </span>    <span class='const'>VIEW_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Minimal view of the trace record that contains only the project
@@ -1073,7 +1073,7 @@ collected from the application.</p>
 </span>    <span class='const'>ROOTSPAN</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Complete view of the trace record that contains the actual trace data.
-</span>    <span class='comment'># This is equivalent to calling the REST +get+ or RPC +GetTrace+ method
+</span>    <span class='comment'># This is equivalent to calling the REST `get` or RPC `GetTrace` method
 </span>    <span class='comment'># using the ID of each listed trace.
 </span>    <span class='const'>COMPLETE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -1097,7 +1097,7 @@ collected from the application.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Type of data returned for traces in the list. Optional. Default is
-+MINIMAL+.</p>
+<code>MINIMAL</code>.</p>
 
 
   </div>
@@ -1116,7 +1116,7 @@ collected from the application.</p>
       
         &mdash;
         <div class='inline'><p>Type of data returned for traces in the list. Optional. Default is
-+MINIMAL+.</p>
+<code>MINIMAL</code>.</p>
 </div>
       
     </li>
@@ -1156,7 +1156,7 @@ collected from the application.</p>
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span>
   <span class='comment'># Type of data returned for traces in the list.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ListTracesRequest/ViewType.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType (module)">ViewType</a></span></span>
-    <span class='comment'># Default is +MINIMAL+ if unspecified.
+    <span class='comment'># Default is `MINIMAL` if unspecified.
 </span>    <span class='const'>VIEW_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># Minimal view of the trace record that contains only the project
@@ -1168,7 +1168,7 @@ collected from the application.</p>
 </span>    <span class='const'>ROOTSPAN</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># Complete view of the trace record that contains the actual trace data.
-</span>    <span class='comment'># This is equivalent to calling the REST +get+ or RPC +GetTrace+ method
+</span>    <span class='comment'># This is equivalent to calling the REST `get` or RPC `GetTrace` method
 </span>    <span class='comment'># using the ID of each listed trace.
 </span>    <span class='const'>COMPLETE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
