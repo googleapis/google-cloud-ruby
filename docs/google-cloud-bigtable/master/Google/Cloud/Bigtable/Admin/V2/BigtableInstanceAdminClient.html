@@ -1888,10 +1888,10 @@ custom error handling.</p>
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient (class)">BigtableInstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +app_profile_id+:
+<span class='comment'># TODO: Initialize `app_profile_id`:
 </span><span class='id identifier rubyid_app_profile_id'>app_profile_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +app_profile+:
+<span class='comment'># TODO: Initialize `app_profile`:
 </span><span class='id identifier rubyid_app_profile'>app_profile</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_create_app_profile'>create_app_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_app_profile_id'>app_profile_id</span><span class='comma'>,</span> <span class='id identifier rubyid_app_profile'>app_profile</span><span class='rparen'>)</span></code></pre>
     
@@ -1911,7 +1911,7 @@ custom error handling.</p>
         &mdash;
         <div class='inline'><p>The unique name of the instance in which to create the new app profile.
 Values are of the form
-+projects/<project>/instances/<instance>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -1927,8 +1927,8 @@ Values are of the form
       
         &mdash;
         <div class='inline'><p>The ID to be used when referring to the new app profile within its
-instance, e.g., just +myprofile+ rather than
-+projects/myproject/instances/myinstance/appProfiles/myprofile+.</p>
+instance, e.g., just <code>myprofile</code> rather than
+<code>projects/myproject/instances/myinstance/appProfiles/myprofile</code>.</p>
 </div>
       
     </li>
@@ -1944,7 +1944,7 @@ instance, e.g., just +myprofile+ rather than
       
         &mdash;
         <div class='inline'><p>The app profile to be created.
-Fields marked +OutputOnly+ will be ignored.
+Fields marked <code>OutputOnly</code> will be ignored.
 A hash of the same form as <code>Google::Bigtable::Admin::V2::AppProfile</code>
 can also be provided.</p>
 </div>
@@ -2132,10 +2132,10 @@ retries, etc.</p>
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient (class)">BigtableInstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +cluster_id+:
+<span class='comment'># TODO: Initialize `cluster_id`:
 </span><span class='id identifier rubyid_cluster_id'>cluster_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +cluster+:
+<span class='comment'># TODO: Initialize `cluster`:
 </span><span class='id identifier rubyid_cluster'>cluster</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -2181,7 +2181,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>The unique name of the instance in which to create the new cluster.
 Values are of the form
-+projects/<project>/instances/<instance>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -2197,8 +2197,8 @@ Values are of the form
       
         &mdash;
         <div class='inline'><p>The ID to be used when referring to the new cluster within its instance,
-e.g., just +mycluster+ rather than
-+projects/myproject/instances/myinstance/clusters/mycluster+.</p>
+e.g., just <code>mycluster</code> rather than
+<code>projects/myproject/instances/myinstance/clusters/mycluster</code>.</p>
 </div>
       
     </li>
@@ -2214,7 +2214,7 @@ e.g., just +mycluster+ rather than
       
         &mdash;
         <div class='inline'><p>The cluster to be created.
-Fields marked +OutputOnly+ must be left blank.
+Fields marked <code>OutputOnly</code> must be left blank.
 A hash of the same form as <code>Google::Bigtable::Admin::V2::Cluster</code>
 can also be provided.</p>
 </div>
@@ -2354,13 +2354,13 @@ retries, etc.</p>
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient (class)">BigtableInstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +instance_id+:
+<span class='comment'># TODO: Initialize `instance_id`:
 </span><span class='id identifier rubyid_instance_id'>instance_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +instance+:
+<span class='comment'># TODO: Initialize `instance`:
 </span><span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +clusters+:
+<span class='comment'># TODO: Initialize `clusters`:
 </span><span class='id identifier rubyid_clusters'>clusters</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -2405,7 +2405,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the project in which to create the new instance.
-Values are of the form +projects/<project>+.</p>
+Values are of the form <code>projects/&lt;project&gt;</code>.</p>
 </div>
       
     </li>
@@ -2421,8 +2421,8 @@ Values are of the form +projects/<project>+.</p>
       
         &mdash;
         <div class='inline'><p>The ID to be used when referring to the new instance within its project,
-e.g., just +myinstance+ rather than
-+projects/myproject/instances/myinstance+.</p>
+e.g., just <code>myinstance</code> rather than
+<code>projects/myproject/instances/myinstance</code>.</p>
 </div>
       
     </li>
@@ -2438,7 +2438,7 @@ e.g., just +myinstance+ rather than
       
         &mdash;
         <div class='inline'><p>The instance to create.
-Fields marked +OutputOnly+ must be left blank.
+Fields marked <code>OutputOnly</code> must be left blank.
 A hash of the same form as <code>Google::Bigtable::Admin::V2::Instance</code>
 can also be provided.</p>
 </div>
@@ -2456,9 +2456,9 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>The clusters to be created within the instance, mapped by desired
-cluster ID, e.g., just +mycluster+ rather than
-+projects/myproject/instances/myinstance/clusters/mycluster+.
-Fields marked +OutputOnly+ must be left blank.
+cluster ID, e.g., just <code>mycluster</code> rather than
+<code>projects/myproject/instances/myinstance/clusters/mycluster</code>.
+Fields marked <code>OutputOnly</code> must be left blank.
 Currently, at most two clusters can be specified.
 A hash of the same form as <code>Google::Bigtable::Admin::V2::Cluster</code>
 can also be provided.</p>
@@ -2603,7 +2603,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient (class)">BigtableInstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_app_profile_path'><span class='object_link'><a href="#app_profile_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.app_profile_path (method)">app_profile_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[APP_PROFILE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +ignore_warnings+:
+<span class='comment'># TODO: Initialize `ignore_warnings`:
 </span><span class='id identifier rubyid_ignore_warnings'>ignore_warnings</span> <span class='op'>=</span> <span class='kw'>false</span>
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_delete_app_profile'>delete_app_profile</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_ignore_warnings'>ignore_warnings</span><span class='rparen'>)</span></code></pre>
     
@@ -2622,7 +2622,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the app profile to be deleted. Values are of the form
-+projects/<project>/instances/<instance>/appProfiles/<app_profile>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/appProfiles/&lt;app_profile&gt;</code>.</p>
 </div>
       
     </li>
@@ -2809,7 +2809,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the cluster to be deleted. Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;</code>.</p>
 </div>
       
     </li>
@@ -2977,7 +2977,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the instance to be deleted.
-Values are of the form +projects/<project>/instances/<instance>+.</p>
+Values are of the form <code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -3145,7 +3145,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the requested app profile. Values are of the form
-+projects/<project>/instances/<instance>/appProfiles/<app_profile>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/appProfiles/&lt;app_profile&gt;</code>.</p>
 </div>
       
     </li>
@@ -3320,7 +3320,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the requested cluster. Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;</code>.</p>
 </div>
       
     </li>
@@ -3496,8 +3496,8 @@ policy if an instance exists but does not have a policy set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -3672,7 +3672,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the requested instance. Values are of the form
-+projects/<project>/instances/<instance>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -3860,9 +3860,9 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>The unique name of the instance for which a list of app profiles is
 requested. Values are of the form
-+projects/<project>/instances/<instance>+.
-Use +<instance> = &#39;-&#39;+ to list AppProfiles for all Instances in a project,
-e.g., +projects/myproject/instances/-+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.
+Use <code>&lt;instance&gt; = &#39;-&#39;</code> to list AppProfiles for all Instances in a project,
+e.g., <code>projects/myproject/instances/-</code>.</p>
 </div>
       
     </li>
@@ -4064,9 +4064,9 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the instance for which a list of clusters is requested.
-Values are of the form +projects/<project>/instances/<instance>+.
-Use +<instance> = &#39;-&#39;+ to list Clusters for all Instances in a project,
-e.g., +projects/myproject/instances/-+.</p>
+Values are of the form <code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.
+Use <code>&lt;instance&gt; = &#39;-&#39;</code> to list Clusters for all Instances in a project,
+e.g., <code>projects/myproject/instances/-</code>.</p>
 </div>
       
     </li>
@@ -4260,7 +4260,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the project for which a list of instances is requested.
-Values are of the form +projects/<project>+.</p>
+Values are of the form <code>projects/&lt;project&gt;</code>.</p>
 </div>
       
     </li>
@@ -4437,10 +4437,10 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +instance+:
+<span class='comment'># TODO: Initialize `instance`:
 </span><span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +update_mask+:
+<span class='comment'># TODO: Initialize `update_mask`:
 </span><span class='id identifier rubyid_update_mask'>update_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -4639,7 +4639,7 @@ existing policy.</p>
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient (class)">BigtableInstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +policy+:
+<span class='comment'># TODO: Initialize `policy`:
 </span><span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_policy'>policy</span><span class='rparen'>)</span></code></pre>
     
@@ -4658,8 +4658,8 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -4674,7 +4674,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>REQUIRED: The complete policy to be applied to the +resource+. The size of
+        <div class='inline'><p>REQUIRED: The complete policy to be applied to the <code>resource</code>. The size of
 the policy is limited to a few 10s of KB. An empty policy is a
 valid policy but certain Cloud Platform services (such as Projects)
 might reject them.
@@ -4842,7 +4842,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient (class)">BigtableInstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +permissions+:
+<span class='comment'># TODO: Initialize `permissions`:
 </span><span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span></code></pre>
     
@@ -4861,8 +4861,8 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -4877,7 +4877,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The set of permissions to check for the +resource+. Permissions with
+        <div class='inline'><p>The set of permissions to check for the <code>resource</code>. Permissions with
 wildcards (such as &#39;<em>&#39; or &#39;storage.</em>&#39;) are not allowed. For more
 information see
 <a href="https://cloud.google.com/iam/docs/overview#permissions">IAM Overview</a>.</p>
@@ -5042,10 +5042,10 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +app_profile+:
+<span class='comment'># TODO: Initialize `app_profile`:
 </span><span class='id identifier rubyid_app_profile'>app_profile</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +update_mask+:
+<span class='comment'># TODO: Initialize `update_mask`:
 </span><span class='id identifier rubyid_update_mask'>update_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -5262,7 +5262,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient (class)">BigtableInstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_cluster_path'><span class='object_link'><a href="#cluster_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path (method)">cluster_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CLUSTER]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +serve_nodes+:
+<span class='comment'># TODO: Initialize `serve_nodes`:
 </span><span class='id identifier rubyid_serve_nodes'>serve_nodes</span> <span class='op'>=</span> <span class='int'>0</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -5306,9 +5306,9 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The unique name of the cluster. Values are of the form
-+projects/<project>/instances/<instance>/clusters/[a-z][-a-z0-9]*+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/[a-z][-a-z0-9]*</code>.</p>
 </div>
       
     </li>
@@ -5339,11 +5339,11 @@ throughput and more consistent performance.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+CreationOnly+)
+        <div class='inline'><p>(<code>CreationOnly</code>)
 The location where this cluster&#39;s nodes and storage reside. For best
 performance, clients should be located as close as possible to this
 cluster. Currently only zones are supported, so values should be of the
-form +projects/<project>/locations/<zone>+.</p>
+form <code>projects/&lt;project&gt;/locations/&lt;zone&gt;</code>.</p>
 </div>
       
     </li>
@@ -5358,7 +5358,7 @@ form +projects/<project>/locations/<zone>+.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The current state of the cluster.</p>
 </div>
       
@@ -5374,7 +5374,7 @@ The current state of the cluster.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+CreationOnly+)
+        <div class='inline'><p>(<code>CreationOnly</code>)
 The type of storage used by this cluster to serve its
 parent instance&#39;s tables, unless explicitly overridden.</p>
 </div>
@@ -5522,13 +5522,13 @@ retries, etc.</p>
 <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableInstanceAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin (module)">BigtableInstanceAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableInstanceAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient (class)">BigtableInstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +display_name+:
+<span class='comment'># TODO: Initialize `display_name`:
 </span><span class='id identifier rubyid_display_name'>display_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +type+:
+<span class='comment'># TODO: Initialize `type`:
 </span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='symbol'>:TYPE_UNSPECIFIED</span>
 
-<span class='comment'># TODO: Initialize +labels+:
+<span class='comment'># TODO: Initialize `labels`:
 </span><span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable_instance_admin_client'>bigtable_instance_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_update_instance'>update_instance</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_display_name'>display_name</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span><span class='rparen'>)</span></code></pre>
     
@@ -5546,9 +5546,9 @@ retries, etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The unique name of the instance. Values are of the form
-+projects/<project>/instances/[a-z][a-z0-9\-]+[a-z0-9]+.</p>
+<code>projects/&lt;project&gt;/instances/[a-z][a-z0-9\\-]+[a-z0-9]</code>.</p>
 </div>
       
     </li>
@@ -5580,7 +5580,7 @@ to avoid confusion.</p>
       
       
         &mdash;
-        <div class='inline'><p>The type of the instance. Defaults to +PRODUCTION+.</p>
+        <div class='inline'><p>The type of the instance. Defaults to <code>PRODUCTION</code>.</p>
 </div>
       
     </li>
@@ -5602,9 +5602,9 @@ metrics.</p>
 
 <ul>
 <li>Label keys must be between 1 and 63 characters long and must conform to
-the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+.</li>
+the regular expression: <code>[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}</code>.</li>
 <li>Label values must be between 0 and 63 characters long and must conform to
-the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.</li>
+the regular expression: <code>[\p{Ll}\p{Lo}\p{N}_-]{0,63}</code>.</li>
 <li>No more than 64 labels can be associated with a given resource.</li>
 <li>Keys and values must both be under 128 bytes.</li>
 </ul>
@@ -5622,7 +5622,7 @@ the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.</li>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The current state of the instance.</p>
 </div>
       

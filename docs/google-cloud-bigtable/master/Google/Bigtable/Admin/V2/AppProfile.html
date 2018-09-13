@@ -213,7 +213,7 @@ from a particular end user application.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The unique name of the app profile.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The unique name of the app profile.</p>
 </div></span>
   
 </li>
@@ -337,7 +337,7 @@ from a particular end user application.</p>
 </span>  <span class='comment'>#     The cluster to which read/write requests should be routed.
 </span>  <span class='comment'># @!attribute [rw] allow_transactional_writes
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Whether or not +CheckAndMutateRow+ and +ReadModifyWriteRow+ requests are
+</span>  <span class='comment'>#     Whether or not `CheckAndMutateRow` and `ReadModifyWriteRow` requests are
 </span>  <span class='comment'>#     allowed by this app profile. It is unsafe to send these requests to
 </span>  <span class='comment'>#     the same table/row/column in multiple clusters.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AppProfile/SingleClusterRouting.html" title="Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting (class)">SingleClusterRouting</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -361,9 +361,9 @@ from a particular end user application.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Strongly validated etag for optimistic concurrency control. Preserve the
-value returned from +GetAppProfile+ when calling +UpdateAppProfile+ to
+value returned from <code>GetAppProfile</code> when calling <code>UpdateAppProfile</code> to
 fail the request if there has been a modification in the mean time. The
-+update_mask+ of the request need not include +etag+ for this protection
+<code>update_mask</code> of the request need not include <code>etag</code> for this protection
 to apply.
 See <a href="https://en.wikipedia.org/wiki/HTTP_ETag">Wikipedia</a> and
 <a href="https://tools.ietf.org/html/rfc7232#section-2.3">RFC 7232</a> for more
@@ -386,9 +386,9 @@ details.</p>
       
         &mdash;
         <div class='inline'><p>Strongly validated etag for optimistic concurrency control. Preserve the
-value returned from +GetAppProfile+ when calling +UpdateAppProfile+ to
+value returned from <code>GetAppProfile</code> when calling <code>UpdateAppProfile</code> to
 fail the request if there has been a modification in the mean time. The
-+update_mask+ of the request need not include +etag+ for this protection
+<code>update_mask</code> of the request need not include <code>etag</code> for this protection
 to apply.
 See <a href="https://en.wikipedia.org/wiki/HTTP_ETag">Wikipedia</a> and
 <a href="https://tools.ietf.org/html/rfc7232#section-2.3">RFC 7232</a> for more
@@ -444,7 +444,7 @@ details.</p>
 </span>  <span class='comment'>#     The cluster to which read/write requests should be routed.
 </span>  <span class='comment'># @!attribute [rw] allow_transactional_writes
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Whether or not +CheckAndMutateRow+ and +ReadModifyWriteRow+ requests are
+</span>  <span class='comment'>#     Whether or not `CheckAndMutateRow` and `ReadModifyWriteRow` requests are
 </span>  <span class='comment'>#     allowed by this app profile. It is unsafe to send these requests to
 </span>  <span class='comment'>#     the same table/row/column in multiple clusters.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AppProfile/SingleClusterRouting.html" title="Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting (class)">SingleClusterRouting</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -537,7 +537,7 @@ details.</p>
 </span>  <span class='comment'>#     The cluster to which read/write requests should be routed.
 </span>  <span class='comment'># @!attribute [rw] allow_transactional_writes
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Whether or not +CheckAndMutateRow+ and +ReadModifyWriteRow+ requests are
+</span>  <span class='comment'>#     Whether or not `CheckAndMutateRow` and `ReadModifyWriteRow` requests are
 </span>  <span class='comment'>#     allowed by this app profile. It is unsafe to send these requests to
 </span>  <span class='comment'>#     the same table/row/column in multiple clusters.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AppProfile/SingleClusterRouting.html" title="Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting (class)">SingleClusterRouting</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -560,9 +560,9 @@ details.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The unique name of the app profile. Values are of the form
-+projects/<project>/instances/<instance>/appProfiles/[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/appProfiles/[_a-zA-Z0-9][-_.a-zA-Z0-9]*</code>.</p>
 
 
   </div>
@@ -580,9 +580,9 @@ The unique name of the app profile. Values are of the form
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The unique name of the app profile. Values are of the form
-+projects/<project>/instances/<instance>/appProfiles/[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/appProfiles/[_a-zA-Z0-9][-_.a-zA-Z0-9]*</code>.</p>
 </div>
       
     </li>
@@ -634,7 +634,7 @@ The unique name of the app profile. Values are of the form
 </span>  <span class='comment'>#     The cluster to which read/write requests should be routed.
 </span>  <span class='comment'># @!attribute [rw] allow_transactional_writes
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Whether or not +CheckAndMutateRow+ and +ReadModifyWriteRow+ requests are
+</span>  <span class='comment'>#     Whether or not `CheckAndMutateRow` and `ReadModifyWriteRow` requests are
 </span>  <span class='comment'>#     allowed by this app profile. It is unsafe to send these requests to
 </span>  <span class='comment'>#     the same table/row/column in multiple clusters.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AppProfile/SingleClusterRouting.html" title="Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting (class)">SingleClusterRouting</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -727,7 +727,7 @@ The unique name of the app profile. Values are of the form
 </span>  <span class='comment'>#     The cluster to which read/write requests should be routed.
 </span>  <span class='comment'># @!attribute [rw] allow_transactional_writes
 </span>  <span class='comment'>#   @return [true, false]
-</span>  <span class='comment'>#     Whether or not +CheckAndMutateRow+ and +ReadModifyWriteRow+ requests are
+</span>  <span class='comment'>#     Whether or not `CheckAndMutateRow` and `ReadModifyWriteRow` requests are
 </span>  <span class='comment'>#     allowed by this app profile. It is unsafe to send these requests to
 </span>  <span class='comment'>#     the same table/row/column in multiple clusters.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AppProfile/SingleClusterRouting.html" title="Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting (class)">SingleClusterRouting</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>

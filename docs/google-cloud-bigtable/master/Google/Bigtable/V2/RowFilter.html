@@ -103,17 +103,17 @@ as well as two ways to compose simple filters into more complex ones
 
 <ul>
 <li><p>True filters alter the input row by excluding some of its cells wholesale
-from the output row. An example of a true filter is the +value_regex_filter+,
+from the output row. An example of a true filter is the <code>value_regex_filter</code>,
 which excludes cells whose values don&#39;t match the specified pattern. All
 regex true filters use RE2 syntax (<a href="https://github.com/google/re2/wiki/Syntax">https://github.com/google/re2/wiki/Syntax</a>)
 in raw byte mode (RE2::Latin1), and are evaluated as full matches. An
-important point to keep in mind is that +RE2(.)+ is equivalent by default to
-+RE2([^\n])+, meaning that it does not match newlines. When attempting to
-match an arbitrary byte, you should therefore use the escape sequence +\C+,
-which may need to be further escaped as +\C+ in your client language.</p></li>
+important point to keep in mind is that <code>RE2(.)</code> is equivalent by default to
+<code>RE2([^\n])</code>, meaning that it does not match newlines. When attempting to
+match an arbitrary byte, you should therefore use the escape sequence <code>\C</code>,
+which may need to be further escaped as <code>\\C</code> in your client language.</p></li>
 <li><p>Transformers alter the input row by changing the values of some of its
 cells in the output, without excluding them completely. Currently, the only
-supported transformer is the +strip_value_transformer+, which replaces every
+supported transformer is the <code>strip_value_transformer</code>, which replaces every
 cell&#39;s value with the empty string.</p></li>
 <li><p>Chains and interleaves are described in more detail in the
 RowFilter.Chain and RowFilter.Interleave documentation.</p></li>
@@ -667,12 +667,12 @@ the client to determine which results were produced from which part of
 the filter.</p>
 
 <p>Values must be at most 15 characters in length, and match the RE2
-pattern +[a-z0-9\-]++</p>
+pattern <code>[a-z0-9\\-]+</code></p>
 
 <p>Due to a technical limitation, it is not currently possible to apply
 multiple labels to a cell. As a result, a Chain may have no more than
-one sub-filter which contains a +apply_label_transformer+. It is okay for
-an Interleave to contain multiple +apply_label_transformers+, as they
+one sub-filter which contains a <code>apply_label_transformer</code>. It is okay for
+an Interleave to contain multiple <code>apply_label_transformers</code>, as they
 will be applied to separate copies of the input. This may be relaxed in
 the future.</p>
 
@@ -697,12 +697,12 @@ the client to determine which results were produced from which part of
 the filter.</p>
 
 <p>Values must be at most 15 characters in length, and match the RE2
-pattern +[a-z0-9\-]++</p>
+pattern <code>[a-z0-9\\-]+</code></p>
 
 <p>Due to a technical limitation, it is not currently possible to apply
 multiple labels to a cell. As a result, a Chain may have no more than
-one sub-filter which contains a +apply_label_transformer+. It is okay for
-an Interleave to contain multiple +apply_label_transformers+, as they
+one sub-filter which contains a <code>apply_label_transformer</code>. It is okay for
+an Interleave to contain multiple <code>apply_label_transformers</code>, as they
 will be applied to separate copies of the input. This may be relaxed in
 the future.</p>
 </div>
@@ -832,15 +832,15 @@ the future.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1011,15 +1011,15 @@ disabling just part of a filter.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1043,9 +1043,9 @@ disabling just part of a filter.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Matches only the most recent N cells within each column. For example,
-if N=2, this filter would match column +foo:bar+ at timestamps 10 and 9,
-skip all earlier cells in +foo:bar+, and then begin matching again in
-column +foo:bar2+.
+if N=2, this filter would match column <code>foo:bar</code> at timestamps 10 and 9,
+skip all earlier cells in <code>foo:bar</code>, and then begin matching again in
+column <code>foo:bar2</code>.
 If duplicate cells are present, as is possible when using an Interleave,
 each copy of the cell is counted separately.</p>
 
@@ -1066,9 +1066,9 @@ each copy of the cell is counted separately.</p>
       
         &mdash;
         <div class='inline'><p>Matches only the most recent N cells within each column. For example,
-if N=2, this filter would match column +foo:bar+ at timestamps 10 and 9,
-skip all earlier cells in +foo:bar+, and then begin matching again in
-column +foo:bar2+.
+if N=2, this filter would match column <code>foo:bar</code> at timestamps 10 and 9,
+skip all earlier cells in <code>foo:bar</code>, and then begin matching again in
+column <code>foo:bar2</code>.
 If duplicate cells are present, as is possible when using an Interleave,
 each copy of the cell is counted separately.</p>
 </div>
@@ -1198,15 +1198,15 @@ each copy of the cell is counted separately.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1379,15 +1379,15 @@ each copy of the cell is counted separately.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1560,15 +1560,15 @@ each copy of the cell is counted separately.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1739,15 +1739,15 @@ narrowing the results.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -1772,9 +1772,9 @@ narrowing the results.</p>
   <div class="discussion">
     <p>Returns Matches only cells from columns whose qualifiers satisfy the given RE2
 regex.
-Note that, since column qualifiers can contain arbitrary bytes, the +\C+
-escape sequence must be used if a true wildcard is desired. The +.+
-character will not match the new line character +\n+, which may be
+Note that, since column qualifiers can contain arbitrary bytes, the <code>\C</code>
+escape sequence must be used if a true wildcard is desired. The <code>.</code>
+character will not match the new line character <code>\n</code>, which may be
 present in a binary qualifier.</p>
 
 
@@ -1795,9 +1795,9 @@ present in a binary qualifier.</p>
         &mdash;
         <div class='inline'><p>Matches only cells from columns whose qualifiers satisfy the given RE2
 regex.
-Note that, since column qualifiers can contain arbitrary bytes, the +\C+
-escape sequence must be used if a true wildcard is desired. The +.+
-character will not match the new line character +\n+, which may be
+Note that, since column qualifiers can contain arbitrary bytes, the <code>\C</code>
+escape sequence must be used if a true wildcard is desired. The <code>.</code>
+character will not match the new line character <code>\n</code>, which may be
 present in a binary qualifier.</p>
 </div>
       
@@ -1926,15 +1926,15 @@ present in a binary qualifier.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2103,15 +2103,15 @@ present in a binary qualifier.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2282,15 +2282,15 @@ a predicate RowFilter.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2314,10 +2314,10 @@ a predicate RowFilter.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Matches only cells from columns whose families satisfy the given RE2
-regex. For technical reasons, the regex must not contain the +:+
+regex. For technical reasons, the regex must not contain the <code>:</code>
 character, even if it is not being used as a literal.
 Note that, since column families cannot contain the new line character
-+\n+, it is sufficient to use +.+ as a full wildcard when matching
+<code>\n</code>, it is sufficient to use <code>.</code> as a full wildcard when matching
 column family names.</p>
 
 
@@ -2337,10 +2337,10 @@ column family names.</p>
       
         &mdash;
         <div class='inline'><p>Matches only cells from columns whose families satisfy the given RE2
-regex. For technical reasons, the regex must not contain the +:+
+regex. For technical reasons, the regex must not contain the <code>:</code>
 character, even if it is not being used as a literal.
 Note that, since column families cannot contain the new line character
-+\n+, it is sufficient to use +.+ as a full wildcard when matching
+<code>\n</code>, it is sufficient to use <code>.</code> as a full wildcard when matching
 column family names.</p>
 </div>
       
@@ -2469,15 +2469,15 @@ column family names.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2648,15 +2648,15 @@ results.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2680,7 +2680,7 @@ results.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Matches all cells, regardless of input. Functionally equivalent to
-leaving +filter+ unset, but included for completeness.</p>
+leaving <code>filter</code> unset, but included for completeness.</p>
 
 
   </div>
@@ -2699,7 +2699,7 @@ leaving +filter+ unset, but included for completeness.</p>
       
         &mdash;
         <div class='inline'><p>Matches all cells, regardless of input. Functionally equivalent to
-leaving +filter+ unset, but included for completeness.</p>
+leaving <code>filter</code> unset, but included for completeness.</p>
 </div>
       
     </li>
@@ -2827,15 +2827,15 @@ leaving +filter+ unset, but included for completeness.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -2861,9 +2861,9 @@ leaving +filter+ unset, but included for completeness.</p>
     <p>Returns Matches only cells from rows whose keys satisfy the given RE2 regex. In
 other words, passes through the entire row when the key matches, and
 otherwise produces an empty row.
-Note that, since row keys can contain arbitrary bytes, the +\C+ escape
-sequence must be used if a true wildcard is desired. The +.+ character
-will not match the new line character +\n+, which may be present in a
+Note that, since row keys can contain arbitrary bytes, the <code>\C</code> escape
+sequence must be used if a true wildcard is desired. The <code>.</code> character
+will not match the new line character <code>\n</code>, which may be present in a
 binary key.</p>
 
 
@@ -2885,9 +2885,9 @@ binary key.</p>
         <div class='inline'><p>Matches only cells from rows whose keys satisfy the given RE2 regex. In
 other words, passes through the entire row when the key matches, and
 otherwise produces an empty row.
-Note that, since row keys can contain arbitrary bytes, the +\C+ escape
-sequence must be used if a true wildcard is desired. The +.+ character
-will not match the new line character +\n+, which may be present in a
+Note that, since row keys can contain arbitrary bytes, the <code>\C</code> escape
+sequence must be used if a true wildcard is desired. The <code>.</code> character
+will not match the new line character <code>\n</code>, which may be present in a
 binary key.</p>
 </div>
       
@@ -3016,15 +3016,15 @@ binary key.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -3195,15 +3195,15 @@ from the row with probability 1-p.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -3284,8 +3284,8 @@ because one copy passed through the all filter while the other was
 passed through the label and sink. Note that one copy has label &quot;foo&quot;,
 while the other does not.</p>
 
-<p>Cannot be used within the +predicate_filter+, +true_filter+, or
-+false_filter+ of a <span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span>.</p>
+<p>Cannot be used within the <code>predicate_filter</code>, <code>true_filter</code>, or
+<code>false_filter</code> of a <span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span>.</p>
 
 
   </div>
@@ -3361,8 +3361,8 @@ because one copy passed through the all filter while the other was
 passed through the label and sink. Note that one copy has label &quot;foo&quot;,
 while the other does not.</p>
 
-<p>Cannot be used within the +predicate_filter+, +true_filter+, or
-+false_filter+ of a <span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span>.</p>
+<p>Cannot be used within the <code>predicate_filter</code>, <code>true_filter</code>, or
+<code>false_filter</code> of a <span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span>.</p>
 </div>
       
     </li>
@@ -3490,15 +3490,15 @@ while the other does not.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -3667,15 +3667,15 @@ while the other does not.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -3844,15 +3844,15 @@ while the other does not.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -4021,15 +4021,15 @@ while the other does not.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -4053,9 +4053,9 @@ while the other does not.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Matches only cells with values that satisfy the given regular expression.
-Note that, since cell values can contain arbitrary bytes, the +\C+ escape
-sequence must be used if a true wildcard is desired. The +.+ character
-will not match the new line character +\n+, which may be present in a
+Note that, since cell values can contain arbitrary bytes, the <code>\C</code> escape
+sequence must be used if a true wildcard is desired. The <code>.</code> character
+will not match the new line character <code>\n</code>, which may be present in a
 binary value.</p>
 
 
@@ -4075,9 +4075,9 @@ binary value.</p>
       
         &mdash;
         <div class='inline'><p>Matches only cells with values that satisfy the given regular expression.
-Note that, since cell values can contain arbitrary bytes, the +\C+ escape
-sequence must be used if a true wildcard is desired. The +.+ character
-will not match the new line character +\n+, which may be present in a
+Note that, since cell values can contain arbitrary bytes, the <code>\C</code> escape
+sequence must be used if a true wildcard is desired. The <code>.</code> character
+will not match the new line character <code>\n</code>, which may be present in a
 binary value.</p>
 </div>
       
@@ -4206,15 +4206,15 @@ binary value.</p>
 </span>  <span class='comment'># when filters are set for the false condition.
 </span>  <span class='comment'># @!attribute [rw] predicate_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-</span>  <span class='comment'>#     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+</span>  <span class='comment'>#     If `predicate_filter` outputs any cells, then `true_filter` will be
+</span>  <span class='comment'>#     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
 </span>  <span class='comment'># @!attribute [rw] true_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ returns any
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` returns any
 </span>  <span class='comment'>#     results. If not provided, no results will be returned in the true case.
 </span>  <span class='comment'># @!attribute [rw] false_filter
 </span>  <span class='comment'>#   @return [Google::Bigtable::V2::RowFilter]
-</span>  <span class='comment'>#     The filter to apply to the input row if +predicate_filter+ does not
+</span>  <span class='comment'>#     The filter to apply to the input row if `predicate_filter` does not
 </span>  <span class='comment'>#     return any results. If not provided, no results will be returned in the
 </span>  <span class='comment'>#     false case.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RowFilter/Condition.html" title="Google::Bigtable::V2::RowFilter::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>

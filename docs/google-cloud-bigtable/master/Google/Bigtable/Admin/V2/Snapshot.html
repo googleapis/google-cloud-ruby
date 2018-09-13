@@ -140,7 +140,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The time when the snapshot is created.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The time when the snapshot is created.</p>
 </div></span>
   
 </li>
@@ -166,7 +166,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The size of the data in the source table at the time the snapshot was taken.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The size of the data in the source table at the time the snapshot was taken.</p>
 </div></span>
   
 </li>
@@ -192,7 +192,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The time when the snapshot will be deleted.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The time when the snapshot will be deleted.</p>
 </div></span>
   
 </li>
@@ -218,7 +218,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) Description of the snapshot.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) Description of the snapshot.</p>
 </div></span>
   
 </li>
@@ -244,7 +244,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The unique name of the snapshot.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The unique name of the snapshot.</p>
 </div></span>
   
 </li>
@@ -270,7 +270,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The source table at the time the snapshot was taken.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The source table at the time the snapshot was taken.</p>
 </div></span>
   
 </li>
@@ -296,7 +296,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The current state of the snapshot.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The current state of the snapshot.</p>
 </div></span>
   
 </li>
@@ -324,7 +324,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The time when the snapshot is created.</p>
 
 
@@ -343,7 +343,7 @@ The time when the snapshot is created.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The time when the snapshot is created.</p>
 </div>
       
@@ -409,7 +409,7 @@ The time when the snapshot is created.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The size of the data in the source table at the time the snapshot was
 taken. In some cases, this value may be computed asynchronously via a
 background process and a placeholder of 0 will be used in the meantime.</p>
@@ -430,7 +430,7 @@ background process and a placeholder of 0 will be used in the meantime.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The size of the data in the source table at the time the snapshot was
 taken. In some cases, this value may be computed asynchronously via a
 background process and a placeholder of 0 will be used in the meantime.</p>
@@ -498,7 +498,7 @@ background process and a placeholder of 0 will be used in the meantime.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The time when the snapshot will be deleted. The maximum amount of time a
 snapshot can stay active is 365 days. If &#39;ttl&#39; is not specified,
 the default maximum of 365 days will be used.</p>
@@ -519,7 +519,7 @@ the default maximum of 365 days will be used.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The time when the snapshot will be deleted. The maximum amount of time a
 snapshot can stay active is 365 days. If &#39;ttl&#39; is not specified,
 the default maximum of 365 days will be used.</p>
@@ -587,7 +587,7 @@ the default maximum of 365 days will be used.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 Description of the snapshot.</p>
 
 
@@ -606,7 +606,7 @@ Description of the snapshot.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 Description of the snapshot.</p>
 </div>
       
@@ -672,10 +672,10 @@ Description of the snapshot.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The unique name of the snapshot.
 Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;/snapshots/&lt;snapshot&gt;</code>.</p>
 
 
   </div>
@@ -693,10 +693,10 @@ Values are of the form
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The unique name of the snapshot.
 Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;/snapshots/&lt;snapshot&gt;</code>.</p>
 </div>
       
     </li>
@@ -761,7 +761,7 @@ Values are of the form
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The source table at the time the snapshot was taken.</p>
 
 
@@ -780,7 +780,7 @@ The source table at the time the snapshot was taken.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The source table at the time the snapshot was taken.</p>
 </div>
       
@@ -846,7 +846,7 @@ The source table at the time the snapshot was taken.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The current state of the snapshot.</p>
 
 
@@ -865,7 +865,7 @@ The current state of the snapshot.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The current state of the snapshot.</p>
 </div>
       

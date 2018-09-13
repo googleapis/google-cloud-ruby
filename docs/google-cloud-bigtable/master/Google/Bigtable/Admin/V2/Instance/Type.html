@@ -94,7 +94,7 @@ js:
           <div class="docstring">
   <div class="discussion">
     <p>The type of the instance is unspecified. If set when creating an
-instance, a +PRODUCTION+ instance will be created. If set when updating
+instance, a <code>PRODUCTION</code> instance will be created. If set when updating
 an instance, the type will be left unchanged.</p>
 
 
@@ -110,7 +110,7 @@ an instance, the type will be left unchanged.</p>
         <dt id="PRODUCTION-constant" class="">PRODUCTION =
           <div class="docstring">
   <div class="discussion">
-    <p>An instance meant for production use. +serve_nodes+ must be set
+    <p>An instance meant for production use. <code>serve_nodes</code> must be set
 on the cluster.</p>
 
 
@@ -129,9 +129,9 @@ on the cluster.</p>
     <p>The instance is meant for development and testing purposes only; it has
 no performance or uptime guarantees and is not covered by SLA.
 After a development instance is created, it can be upgraded by
-updating the instance to type +PRODUCTION+. An instance created
+updating the instance to type <code>PRODUCTION</code>. An instance created
 as a production instance cannot be changed to a development instance.
-When creating a development instance, +serve_nodes+ on the cluster must
+When creating a development instance, <code>serve_nodes</code> on the cluster must
 not be set.</p>
 
 

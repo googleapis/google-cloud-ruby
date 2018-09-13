@@ -189,7 +189,7 @@ All tables in an instance are served from a single
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The unique name of the instance.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The unique name of the instance.</p>
 </div></span>
   
 </li>
@@ -215,7 +215,7 @@ All tables in an instance are served from a single
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The current state of the instance.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The current state of the instance.</p>
 </div></span>
   
 </li>
@@ -362,20 +362,20 @@ to avoid confusion.</p>
   <span class='comment'># The type of the instance.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Instance/Type.html" title="Google::Bigtable::Admin::V2::Instance::Type (module)">Type</a></span></span>
     <span class='comment'># The type of the instance is unspecified. If set when creating an
-</span>    <span class='comment'># instance, a +PRODUCTION+ instance will be created. If set when updating
+</span>    <span class='comment'># instance, a `PRODUCTION` instance will be created. If set when updating
 </span>    <span class='comment'># an instance, the type will be left unchanged.
 </span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># An instance meant for production use. +serve_nodes+ must be set
+    <span class='comment'># An instance meant for production use. `serve_nodes` must be set
 </span>    <span class='comment'># on the cluster.
 </span>    <span class='const'>PRODUCTION</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># The instance is meant for development and testing purposes only; it has
 </span>    <span class='comment'># no performance or uptime guarantees and is not covered by SLA.
 </span>    <span class='comment'># After a development instance is created, it can be upgraded by
-</span>    <span class='comment'># updating the instance to type +PRODUCTION+. An instance created
+</span>    <span class='comment'># updating the instance to type `PRODUCTION`. An instance created
 </span>    <span class='comment'># as a production instance cannot be changed to a development instance.
-</span>    <span class='comment'># When creating a development instance, +serve_nodes+ on the cluster must
+</span>    <span class='comment'># When creating a development instance, `serve_nodes` on the cluster must
 </span>    <span class='comment'># not be set.
 </span>    <span class='const'>DEVELOPMENT</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -405,9 +405,9 @@ metrics.</p>
 
 <ul>
 <li>Label keys must be between 1 and 63 characters long and must conform to
-the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+.</li>
+the regular expression: <code>[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}</code>.</li>
 <li>Label values must be between 0 and 63 characters long and must conform to
-the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.</li>
+the regular expression: <code>[\p{Ll}\p{Lo}\p{N}_-]{0,63}</code>.</li>
 <li>No more than 64 labels can be associated with a given resource.</li>
 <li>Keys and values must both be under 128 bytes.</li>
 </ul>
@@ -435,9 +435,9 @@ metrics.</p>
 
 <ul>
 <li>Label keys must be between 1 and 63 characters long and must conform to
-the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+.</li>
+the regular expression: <code>[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}</code>.</li>
 <li>Label values must be between 0 and 63 characters long and must conform to
-the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.</li>
+the regular expression: <code>[\p{Ll}\p{Lo}\p{N}_-]{0,63}</code>.</li>
 <li>No more than 64 labels can be associated with a given resource.</li>
 <li>Keys and values must both be under 128 bytes.</li>
 </ul>
@@ -511,20 +511,20 @@ the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.</li>
   <span class='comment'># The type of the instance.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Instance/Type.html" title="Google::Bigtable::Admin::V2::Instance::Type (module)">Type</a></span></span>
     <span class='comment'># The type of the instance is unspecified. If set when creating an
-</span>    <span class='comment'># instance, a +PRODUCTION+ instance will be created. If set when updating
+</span>    <span class='comment'># instance, a `PRODUCTION` instance will be created. If set when updating
 </span>    <span class='comment'># an instance, the type will be left unchanged.
 </span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># An instance meant for production use. +serve_nodes+ must be set
+    <span class='comment'># An instance meant for production use. `serve_nodes` must be set
 </span>    <span class='comment'># on the cluster.
 </span>    <span class='const'>PRODUCTION</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># The instance is meant for development and testing purposes only; it has
 </span>    <span class='comment'># no performance or uptime guarantees and is not covered by SLA.
 </span>    <span class='comment'># After a development instance is created, it can be upgraded by
-</span>    <span class='comment'># updating the instance to type +PRODUCTION+. An instance created
+</span>    <span class='comment'># updating the instance to type `PRODUCTION`. An instance created
 </span>    <span class='comment'># as a production instance cannot be changed to a development instance.
-</span>    <span class='comment'># When creating a development instance, +serve_nodes+ on the cluster must
+</span>    <span class='comment'># When creating a development instance, `serve_nodes` on the cluster must
 </span>    <span class='comment'># not be set.
 </span>    <span class='const'>DEVELOPMENT</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -547,9 +547,9 @@ the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.</li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The unique name of the instance. Values are of the form
-+projects/<project>/instances/[a-z][a-z0-9\-]+[a-z0-9]+.</p>
+<code>projects/&lt;project&gt;/instances/[a-z][a-z0-9\\-]+[a-z0-9]</code>.</p>
 
 
   </div>
@@ -567,9 +567,9 @@ The unique name of the instance. Values are of the form
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The unique name of the instance. Values are of the form
-+projects/<project>/instances/[a-z][a-z0-9\-]+[a-z0-9]+.</p>
+<code>projects/&lt;project&gt;/instances/[a-z][a-z0-9\\-]+[a-z0-9]</code>.</p>
 </div>
       
     </li>
@@ -640,20 +640,20 @@ The unique name of the instance. Values are of the form
   <span class='comment'># The type of the instance.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Instance/Type.html" title="Google::Bigtable::Admin::V2::Instance::Type (module)">Type</a></span></span>
     <span class='comment'># The type of the instance is unspecified. If set when creating an
-</span>    <span class='comment'># instance, a +PRODUCTION+ instance will be created. If set when updating
+</span>    <span class='comment'># instance, a `PRODUCTION` instance will be created. If set when updating
 </span>    <span class='comment'># an instance, the type will be left unchanged.
 </span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># An instance meant for production use. +serve_nodes+ must be set
+    <span class='comment'># An instance meant for production use. `serve_nodes` must be set
 </span>    <span class='comment'># on the cluster.
 </span>    <span class='const'>PRODUCTION</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># The instance is meant for development and testing purposes only; it has
 </span>    <span class='comment'># no performance or uptime guarantees and is not covered by SLA.
 </span>    <span class='comment'># After a development instance is created, it can be upgraded by
-</span>    <span class='comment'># updating the instance to type +PRODUCTION+. An instance created
+</span>    <span class='comment'># updating the instance to type `PRODUCTION`. An instance created
 </span>    <span class='comment'># as a production instance cannot be changed to a development instance.
-</span>    <span class='comment'># When creating a development instance, +serve_nodes+ on the cluster must
+</span>    <span class='comment'># When creating a development instance, `serve_nodes` on the cluster must
 </span>    <span class='comment'># not be set.
 </span>    <span class='const'>DEVELOPMENT</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -676,7 +676,7 @@ The unique name of the instance. Values are of the form
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The current state of the instance.</p>
 
 
@@ -695,7 +695,7 @@ The current state of the instance.</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The current state of the instance.</p>
 </div>
       
@@ -767,20 +767,20 @@ The current state of the instance.</p>
   <span class='comment'># The type of the instance.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Instance/Type.html" title="Google::Bigtable::Admin::V2::Instance::Type (module)">Type</a></span></span>
     <span class='comment'># The type of the instance is unspecified. If set when creating an
-</span>    <span class='comment'># instance, a +PRODUCTION+ instance will be created. If set when updating
+</span>    <span class='comment'># instance, a `PRODUCTION` instance will be created. If set when updating
 </span>    <span class='comment'># an instance, the type will be left unchanged.
 </span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># An instance meant for production use. +serve_nodes+ must be set
+    <span class='comment'># An instance meant for production use. `serve_nodes` must be set
 </span>    <span class='comment'># on the cluster.
 </span>    <span class='const'>PRODUCTION</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># The instance is meant for development and testing purposes only; it has
 </span>    <span class='comment'># no performance or uptime guarantees and is not covered by SLA.
 </span>    <span class='comment'># After a development instance is created, it can be upgraded by
-</span>    <span class='comment'># updating the instance to type +PRODUCTION+. An instance created
+</span>    <span class='comment'># updating the instance to type `PRODUCTION`. An instance created
 </span>    <span class='comment'># as a production instance cannot be changed to a development instance.
-</span>    <span class='comment'># When creating a development instance, +serve_nodes+ on the cluster must
+</span>    <span class='comment'># When creating a development instance, `serve_nodes` on the cluster must
 </span>    <span class='comment'># not be set.
 </span>    <span class='const'>DEVELOPMENT</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -803,7 +803,7 @@ The current state of the instance.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The type of the instance. Defaults to +PRODUCTION+.</p>
+    <p>Returns The type of the instance. Defaults to <code>PRODUCTION</code>.</p>
 
 
   </div>
@@ -821,7 +821,7 @@ The current state of the instance.</p>
       
       
         &mdash;
-        <div class='inline'><p>The type of the instance. Defaults to +PRODUCTION+.</p>
+        <div class='inline'><p>The type of the instance. Defaults to <code>PRODUCTION</code>.</p>
 </div>
       
     </li>
@@ -892,20 +892,20 @@ The current state of the instance.</p>
   <span class='comment'># The type of the instance.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Instance/Type.html" title="Google::Bigtable::Admin::V2::Instance::Type (module)">Type</a></span></span>
     <span class='comment'># The type of the instance is unspecified. If set when creating an
-</span>    <span class='comment'># instance, a +PRODUCTION+ instance will be created. If set when updating
+</span>    <span class='comment'># instance, a `PRODUCTION` instance will be created. If set when updating
 </span>    <span class='comment'># an instance, the type will be left unchanged.
 </span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># An instance meant for production use. +serve_nodes+ must be set
+    <span class='comment'># An instance meant for production use. `serve_nodes` must be set
 </span>    <span class='comment'># on the cluster.
 </span>    <span class='const'>PRODUCTION</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># The instance is meant for development and testing purposes only; it has
 </span>    <span class='comment'># no performance or uptime guarantees and is not covered by SLA.
 </span>    <span class='comment'># After a development instance is created, it can be upgraded by
-</span>    <span class='comment'># updating the instance to type +PRODUCTION+. An instance created
+</span>    <span class='comment'># updating the instance to type `PRODUCTION`. An instance created
 </span>    <span class='comment'># as a production instance cannot be changed to a development instance.
-</span>    <span class='comment'># When creating a development instance, +serve_nodes+ on the cluster must
+</span>    <span class='comment'># When creating a development instance, `serve_nodes` on the cluster must
 </span>    <span class='comment'># not be set.
 </span>    <span class='const'>DEVELOPMENT</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>

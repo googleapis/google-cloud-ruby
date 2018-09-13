@@ -237,7 +237,7 @@ of a table.</p>
     <p>Returns The unique key which identifies this family within its row. This is the
 same key that&#39;s used to identify the family in, for example, a RowFilter
 which sets its &quot;family_name_regex_filter&quot; field.
-Must match +[-_.a-zA-Z0-9]++, except that AggregatingRowProcessors may
+Must match <code>[-_.a-zA-Z0-9]+</code>, except that AggregatingRowProcessors may
 produce cells in a sentinel family with an empty name.
 Must be no greater than 64 characters in length.</p>
 
@@ -260,7 +260,7 @@ Must be no greater than 64 characters in length.</p>
         <div class='inline'><p>The unique key which identifies this family within its row. This is the
 same key that&#39;s used to identify the family in, for example, a RowFilter
 which sets its &quot;family_name_regex_filter&quot; field.
-Must match +[-_.a-zA-Z0-9]++, except that AggregatingRowProcessors may
+Must match <code>[-_.a-zA-Z0-9]+</code>, except that AggregatingRowProcessors may
 produce cells in a sentinel family with an empty name.
 Must be no greater than 64 characters in length.</p>
 </div>

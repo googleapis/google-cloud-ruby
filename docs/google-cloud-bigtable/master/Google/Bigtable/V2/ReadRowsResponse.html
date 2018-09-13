@@ -295,14 +295,14 @@ js:
 </span>  <span class='comment'>#     family as the previous CellChunk.  The empty string can occur as a
 </span>  <span class='comment'>#     column family name in a response so clients must check
 </span>  <span class='comment'>#     explicitly for the presence of this message, not just for
-</span>  <span class='comment'>#     +family_name.value+ being non-empty.
+</span>  <span class='comment'>#     `family_name.value` being non-empty.
 </span>  <span class='comment'># @!attribute [rw] qualifier
 </span>  <span class='comment'>#   @return [Google::Protobuf::BytesValue]
 </span>  <span class='comment'>#     The column qualifier for this chunk of data.  If this message
 </span>  <span class='comment'>#     is not present, this CellChunk is a continuation of the same column
 </span>  <span class='comment'>#     as the previous CellChunk.  Column qualifiers may be empty so
 </span>  <span class='comment'>#     clients must check for the presence of this message, not just
-</span>  <span class='comment'>#     for +qualifier.value+ being non-empty.
+</span>  <span class='comment'>#     for `qualifier.value` being non-empty.
 </span>  <span class='comment'># @!attribute [rw] timestamp_micros
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The cell&#39;s stored timestamp, which also uniquely identifies it
@@ -310,7 +310,7 @@ js:
 </span>  <span class='comment'>#     microseconds, but individual tables may set a coarser
 </span>  <span class='comment'>#     granularity to further restrict the allowed values. For
 </span>  <span class='comment'>#     example, a table which specifies millisecond granularity will
-</span>  <span class='comment'>#     only allow values of +timestamp_micros+ which are multiples of
+</span>  <span class='comment'>#     only allow values of `timestamp_micros` which are multiples of
 </span>  <span class='comment'>#     1000.  Timestamps are only set in the first CellChunk per cell
 </span>  <span class='comment'>#     (for cells split into multiple chunks).
 </span>  <span class='comment'># @!attribute [rw] labels
@@ -334,11 +334,11 @@ js:
 </span>  <span class='comment'># @!attribute [rw] reset_row
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     Indicates that the client should drop all previous chunks for
-</span>  <span class='comment'>#     +row_key+, as it will be re-read from the beginning.
+</span>  <span class='comment'>#     `row_key`, as it will be re-read from the beginning.
 </span>  <span class='comment'># @!attribute [rw] commit_row
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     Indicates that the client can safely process all previous chunks for
-</span>  <span class='comment'>#     +row_key+, as its data has been fully read.
+</span>  <span class='comment'>#     `row_key`, as its data has been fully read.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="ReadRowsResponse/CellChunk.html" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -484,14 +484,14 @@ key, allowing the client to skip that work on a retry.</p>
 </span>  <span class='comment'>#     family as the previous CellChunk.  The empty string can occur as a
 </span>  <span class='comment'>#     column family name in a response so clients must check
 </span>  <span class='comment'>#     explicitly for the presence of this message, not just for
-</span>  <span class='comment'>#     +family_name.value+ being non-empty.
+</span>  <span class='comment'>#     `family_name.value` being non-empty.
 </span>  <span class='comment'># @!attribute [rw] qualifier
 </span>  <span class='comment'>#   @return [Google::Protobuf::BytesValue]
 </span>  <span class='comment'>#     The column qualifier for this chunk of data.  If this message
 </span>  <span class='comment'>#     is not present, this CellChunk is a continuation of the same column
 </span>  <span class='comment'>#     as the previous CellChunk.  Column qualifiers may be empty so
 </span>  <span class='comment'>#     clients must check for the presence of this message, not just
-</span>  <span class='comment'>#     for +qualifier.value+ being non-empty.
+</span>  <span class='comment'>#     for `qualifier.value` being non-empty.
 </span>  <span class='comment'># @!attribute [rw] timestamp_micros
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     The cell&#39;s stored timestamp, which also uniquely identifies it
@@ -499,7 +499,7 @@ key, allowing the client to skip that work on a retry.</p>
 </span>  <span class='comment'>#     microseconds, but individual tables may set a coarser
 </span>  <span class='comment'>#     granularity to further restrict the allowed values. For
 </span>  <span class='comment'>#     example, a table which specifies millisecond granularity will
-</span>  <span class='comment'>#     only allow values of +timestamp_micros+ which are multiples of
+</span>  <span class='comment'>#     only allow values of `timestamp_micros` which are multiples of
 </span>  <span class='comment'>#     1000.  Timestamps are only set in the first CellChunk per cell
 </span>  <span class='comment'>#     (for cells split into multiple chunks).
 </span>  <span class='comment'># @!attribute [rw] labels
@@ -523,11 +523,11 @@ key, allowing the client to skip that work on a retry.</p>
 </span>  <span class='comment'># @!attribute [rw] reset_row
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     Indicates that the client should drop all previous chunks for
-</span>  <span class='comment'>#     +row_key+, as it will be re-read from the beginning.
+</span>  <span class='comment'>#     `row_key`, as it will be re-read from the beginning.
 </span>  <span class='comment'># @!attribute [rw] commit_row
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     Indicates that the client can safely process all previous chunks for
-</span>  <span class='comment'>#     +row_key+, as its data has been fully read.
+</span>  <span class='comment'>#     `row_key`, as its data has been fully read.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="ReadRowsResponse/CellChunk.html" title="Google::Bigtable::V2::ReadRowsResponse::CellChunk (class)">CellChunk</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>

@@ -1588,7 +1588,7 @@ and the check request.</p>
 <span class='id identifier rubyid_bigtable_table_admin_client'>bigtable_table_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableTableAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin (module)">BigtableTableAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableTableAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient (class)">BigtableTableAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_table_path'><span class='object_link'><a href="#table_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path (method)">table_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TABLE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +consistency_token+:
+<span class='comment'># TODO: Initialize `consistency_token`:
 </span><span class='id identifier rubyid_consistency_token'>consistency_token</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable_table_admin_client'>bigtable_table_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_check_consistency'>check_consistency</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_consistency_token'>consistency_token</span><span class='rparen'>)</span></code></pre>
     
@@ -1608,7 +1608,7 @@ and the check request.</p>
         &mdash;
         <div class='inline'><p>The unique name of the Table for which to check replication consistency.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 </div>
       
     </li>
@@ -1788,10 +1788,10 @@ specified in the request.</p>
 <span class='id identifier rubyid_bigtable_table_admin_client'>bigtable_table_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableTableAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin (module)">BigtableTableAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableTableAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient (class)">BigtableTableAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +table_id+:
+<span class='comment'># TODO: Initialize `table_id`:
 </span><span class='id identifier rubyid_table_id'>table_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +table+:
+<span class='comment'># TODO: Initialize `table`:
 </span><span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable_table_admin_client'>bigtable_table_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_create_table'>create_table</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span> <span class='id identifier rubyid_table'>table</span><span class='rparen'>)</span></code></pre>
     
@@ -1810,7 +1810,7 @@ specified in the request.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the instance in which to create the table.
-Values are of the form +projects/<project>/instances/<instance>+.</p>
+Values are of the form <code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -1826,7 +1826,7 @@ Values are of the form +projects/<project>/instances/<instance>+.</p>
       
         &mdash;
         <div class='inline'><p>The name by which the new table should be referred to within the parent
-instance, e.g., +foobar+ rather than +<parent>/tables/foobar+.</p>
+instance, e.g., <code>foobar</code> rather than <code>&lt;parent&gt;/tables/foobar</code>.</p>
 </div>
       
     </li>
@@ -1860,23 +1860,23 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>The optional list of row keys that will be used to initially split the
 table into several tablets (tablets are similar to HBase regions).
-Given two split keys, +s1+ and +s2+, three tablets will be created,
-spanning the key ranges: +[, s1), [s1, s2), [s2, )+.</p>
+Given two split keys, <code>s1</code> and <code>s2</code>, three tablets will be created,
+spanning the key ranges: <code>[, s1), [s1, s2), [s2, )</code>.</p>
 
 <p>Example:</p>
 
 <ul>
-<li>Row keys := +[&quot;a&quot;, &quot;apple&quot;, &quot;custom&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;,+
-+&quot;other&quot;, &quot;zz&quot;]+</li>
-<li>initial_split_keys := +[&quot;apple&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;]+</li>
+<li>Row keys := <code>[&quot;a&quot;, &quot;apple&quot;, &quot;custom&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;,</code>
+<code>&quot;other&quot;, &quot;zz&quot;]</code></li>
+<li>initial_split_keys := <code>[&quot;apple&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;]</code></li>
 <li>Key assignment:
 
 <ul>
-<li>Tablet 1 +[, apple)                =&gt; &quot;a&quot;.+</li>
-<li>Tablet 2 +[apple, customer_1)      =&gt; &quot;custom&quot;.+</li>
-<li>Tablet 3 +[customer_1, customer_2) =&gt; &quot;customer_1&quot;.+</li>
-<li>Tablet 4 +[customer_2, other)      =&gt; &quot;customer_2&quot;.+</li>
-<li>Tablet 5 +[other, )                =&gt; &quot;zz&quot;.+
+<li>Tablet 1 <code>[, apple)                =&gt; {&quot;a&quot;}.</code></li>
+<li>Tablet 2 <code>[apple, customer_1)      =&gt; {&quot;apple&quot;, &quot;custom&quot;}.</code></li>
+<li>Tablet 3 <code>[customer_1, customer_2) =&gt; {&quot;customer_1&quot;}.</code></li>
+<li>Tablet 4 <code>[customer_2, other)      =&gt; {&quot;customer_2&quot;}.</code></li>
+<li>Tablet 5 <code>[other, )                =&gt; {&quot;other&quot;, &quot;zz&quot;}.</code>
 A hash of the same form as <code>Google::Bigtable::Admin::V2::CreateTableRequest::Split</code>
 can also be provided.</li>
 </ul></li>
@@ -2058,10 +2058,10 @@ policy.</p>
 <span class='id identifier rubyid_bigtable_table_admin_client'>bigtable_table_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableTableAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin (module)">BigtableTableAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableTableAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient (class)">BigtableTableAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +table_id+:
+<span class='comment'># TODO: Initialize `table_id`:
 </span><span class='id identifier rubyid_table_id'>table_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +source_snapshot+:
+<span class='comment'># TODO: Initialize `source_snapshot`:
 </span><span class='id identifier rubyid_source_snapshot'>source_snapshot</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
 <span class='comment'># Register a callback during the method call.
@@ -2106,7 +2106,7 @@ policy.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the instance in which to create the table.
-Values are of the form +projects/<project>/instances/<instance>+.</p>
+Values are of the form <code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -2122,7 +2122,7 @@ Values are of the form +projects/<project>/instances/<instance>+.</p>
       
         &mdash;
         <div class='inline'><p>The name by which the new table should be referred to within the parent
-instance, e.g., +foobar+ rather than +<parent>/tables/foobar+.</p>
+instance, e.g., <code>foobar</code> rather than <code>&lt;parent&gt;/tables/foobar</code>.</p>
 </div>
       
     </li>
@@ -2140,7 +2140,7 @@ instance, e.g., +foobar+ rather than +<parent>/tables/foobar+.</p>
         <div class='inline'><p>The unique name of the snapshot from which to restore the table. The
 snapshot and the table must be in the same instance.
 Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;/snapshots/&lt;snapshot&gt;</code>.</p>
 </div>
       
     </li>
@@ -2301,7 +2301,7 @@ policy.</p>
         &mdash;
         <div class='inline'><p>The unique name of the snapshot to be deleted.
 Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;/snapshots/&lt;snapshot&gt;</code>.</p>
 </div>
       
     </li>
@@ -2470,7 +2470,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>The unique name of the table to be deleted.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 </div>
       
     </li>
@@ -2641,7 +2641,7 @@ particular prefix.</p>
         &mdash;
         <div class='inline'><p>The unique name of the table on which to drop a range of rows.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 </div>
       
     </li>
@@ -2852,7 +2852,7 @@ for 90 days.</p>
         &mdash;
         <div class='inline'><p>The unique name of the Table for which to create a consistency token.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 </div>
       
     </li>
@@ -3034,7 +3034,7 @@ policy.</p>
         &mdash;
         <div class='inline'><p>The unique name of the requested snapshot.
 Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;/snapshots/&lt;snapshot&gt;</code>.</p>
 </div>
       
     </li>
@@ -3210,7 +3210,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>The unique name of the requested table.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 </div>
       
     </li>
@@ -3226,7 +3226,7 @@ Values are of the form
       
         &mdash;
         <div class='inline'><p>The view to be applied to the returned table&#39;s fields.
-Defaults to +SCHEMA_VIEW+ if unspecified.</p>
+Defaults to <code>SCHEMA_VIEW</code> if unspecified.</p>
 </div>
       
     </li>
@@ -3424,9 +3424,9 @@ policy.</p>
         &mdash;
         <div class='inline'><p>The unique name of the cluster for which snapshots should be listed.
 Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>+.
-Use +<cluster> = &#39;-&#39;+ to list snapshots for all clusters in an instance,
-e.g., +projects/<project>/instances/<instance>/clusters/-+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;</code>.
+Use <code>&lt;cluster&gt; = &#39;-&#39;</code> to list snapshots for all clusters in an instance,
+e.g., <code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/-</code>.</p>
 </div>
       
     </li>
@@ -3643,7 +3643,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The unique name of the instance for which tables should be listed.
-Values are of the form +projects/<project>/instances/<instance>+.</p>
+Values are of the form <code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -3659,7 +3659,7 @@ Values are of the form +projects/<project>/instances/<instance>+.</p>
       
         &mdash;
         <div class='inline'><p>The view to be applied to the returned tables&#39; fields.
-Defaults to +NAME_ONLY+ if unspecified; no others are currently supported.</p>
+Defaults to <code>NAME_ONLY</code> if unspecified; no others are currently supported.</p>
 </div>
       
     </li>
@@ -3852,7 +3852,7 @@ where only some modifications have taken effect.</p>
 <span class='id identifier rubyid_bigtable_table_admin_client'>bigtable_table_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableTableAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin (module)">BigtableTableAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableTableAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient (class)">BigtableTableAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_table_path'><span class='object_link'><a href="#table_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path (method)">table_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TABLE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +modifications+:
+<span class='comment'># TODO: Initialize `modifications`:
 </span><span class='id identifier rubyid_modifications'>modifications</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable_table_admin_client'>bigtable_table_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_modify_column_families'>modify_column_families</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_modifications'>modifications</span><span class='rparen'>)</span></code></pre>
     
@@ -3872,7 +3872,7 @@ where only some modifications have taken effect.</p>
         &mdash;
         <div class='inline'><p>The unique name of the table whose families should be modified.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 </div>
       
     </li>
@@ -4062,13 +4062,13 @@ policy.</p>
 <span class='id identifier rubyid_bigtable_table_admin_client'>bigtable_table_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../BigtableTableAdmin.html" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin (module)">BigtableTableAdmin</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../BigtableTableAdmin.html#new-class_method" title="Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Admin.html" title="Google::Cloud::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient (class)">BigtableTableAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_table_path'><span class='object_link'><a href="#table_path-class_method" title="Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path (method)">table_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TABLE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +cluster+:
+<span class='comment'># TODO: Initialize `cluster`:
 </span><span class='id identifier rubyid_cluster'>cluster</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +snapshot_id+:
+<span class='comment'># TODO: Initialize `snapshot_id`:
 </span><span class='id identifier rubyid_snapshot_id'>snapshot_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +description+:
+<span class='comment'># TODO: Initialize `description`:
 </span><span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
 <span class='comment'># Register a callback during the method call.
@@ -4114,7 +4114,7 @@ policy.</p>
         &mdash;
         <div class='inline'><p>The unique name of the table to have the snapshot taken.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 </div>
       
     </li>
@@ -4131,7 +4131,7 @@ Values are of the form
         &mdash;
         <div class='inline'><p>The name of the cluster where the snapshot will be created in.
 Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;</code>.</p>
 </div>
       
     </li>
@@ -4147,9 +4147,9 @@ Values are of the form
       
         &mdash;
         <div class='inline'><p>The ID by which the new snapshot should be referred to within the parent
-cluster, e.g., +mysnapshot+ of the form: +[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+
+cluster, e.g., <code>mysnapshot</code> of the form: <code>[_a-zA-Z0-9][-_.a-zA-Z0-9]*</code>
 rather than
-+projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;/snapshots/mysnapshot</code>.</p>
 </div>
       
     </li>

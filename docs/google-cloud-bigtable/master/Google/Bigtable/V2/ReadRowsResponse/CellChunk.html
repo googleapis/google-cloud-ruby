@@ -125,7 +125,7 @@ response stream.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Indicates that the client can safely process all previous chunks for +row_key+, as its data has been fully read.</p>
+    <span class="summary_desc"><div class='inline'><p>Indicates that the client can safely process all previous chunks for <code>row_key</code>, as its data has been fully read.</p>
 </div></span>
   
 </li>
@@ -229,7 +229,7 @@ response stream.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Indicates that the client should drop all previous chunks for +row_key+, as it will be re-read from the beginning.</p>
+    <span class="summary_desc"><div class='inline'><p>Indicates that the client should drop all previous chunks for <code>row_key</code>, as it will be re-read from the beginning.</p>
 </div></span>
   
 </li>
@@ -362,7 +362,7 @@ response stream.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Indicates that the client can safely process all previous chunks for
-+row_key+, as its data has been fully read.</p>
+<code>row_key</code>, as its data has been fully read.</p>
 
 
   </div>
@@ -381,7 +381,7 @@ response stream.</p>
       
         &mdash;
         <div class='inline'><p>Indicates that the client can safely process all previous chunks for
-+row_key+, as its data has been fully read.</p>
+<code>row_key</code>, as its data has been fully read.</p>
 </div>
       
     </li>
@@ -423,7 +423,7 @@ is not present this CellChunk is a continuation of the same column
 family as the previous CellChunk.  The empty string can occur as a
 column family name in a response so clients must check
 explicitly for the presence of this message, not just for
-+family_name.value+ being non-empty.</p>
+<code>family_name.value</code> being non-empty.</p>
 
 
   </div>
@@ -446,7 +446,7 @@ is not present this CellChunk is a continuation of the same column
 family as the previous CellChunk.  The empty string can occur as a
 column family name in a response so clients must check
 explicitly for the presence of this message, not just for
-+family_name.value+ being non-empty.</p>
+<code>family_name.value</code> being non-empty.</p>
 </div>
       
     </li>
@@ -546,7 +546,7 @@ on the first CellChunk per cell.</p>
 is not present, this CellChunk is a continuation of the same column
 as the previous CellChunk.  Column qualifiers may be empty so
 clients must check for the presence of this message, not just
-for +qualifier.value+ being non-empty.</p>
+for <code>qualifier.value</code> being non-empty.</p>
 
 
   </div>
@@ -568,7 +568,7 @@ for +qualifier.value+ being non-empty.</p>
 is not present, this CellChunk is a continuation of the same column
 as the previous CellChunk.  Column qualifiers may be empty so
 clients must check for the presence of this message, not just
-for +qualifier.value+ being non-empty.</p>
+for <code>qualifier.value</code> being non-empty.</p>
 </div>
       
     </li>
@@ -606,7 +606,7 @@ for +qualifier.value+ being non-empty.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Indicates that the client should drop all previous chunks for
-+row_key+, as it will be re-read from the beginning.</p>
+<code>row_key</code>, as it will be re-read from the beginning.</p>
 
 
   </div>
@@ -625,7 +625,7 @@ for +qualifier.value+ being non-empty.</p>
       
         &mdash;
         <div class='inline'><p>Indicates that the client should drop all previous chunks for
-+row_key+, as it will be re-read from the beginning.</p>
+<code>row_key</code>, as it will be re-read from the beginning.</p>
 </div>
       
     </li>
@@ -728,7 +728,7 @@ within its column.  Values are always expressed in
 microseconds, but individual tables may set a coarser
 granularity to further restrict the allowed values. For
 example, a table which specifies millisecond granularity will
-only allow values of +timestamp_micros+ which are multiples of</p>
+only allow values of <code>timestamp_micros</code> which are multiples of</p>
 
 <ol>
 <li> Timestamps are only set in the first CellChunk per cell
@@ -756,7 +756,7 @@ within its column.  Values are always expressed in
 microseconds, but individual tables may set a coarser
 granularity to further restrict the allowed values. For
 example, a table which specifies millisecond granularity will
-only allow values of +timestamp_micros+ which are multiples of</p>
+only allow values of <code>timestamp_micros</code> which are multiples of</p>
 
 <ol>
 <li> Timestamps are only set in the first CellChunk per cell

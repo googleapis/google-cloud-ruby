@@ -208,7 +208,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The ID by which the new snapshot should be referred to within the parent cluster, e.g., +mysnapshot+ of the form: +[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+ rather than +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot+.</p>
+    <span class="summary_desc"><div class='inline'><p>The ID by which the new snapshot should be referred to within the parent cluster, e.g., <code>mysnapshot</code> of the form: <code>[_a-zA-Z0-9][-_.a-zA-Z0-9]*</code> rather than <code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;/snapshots/mysnapshot</code>.</p>
 </div></span>
   
 </li>
@@ -264,7 +264,7 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
   <div class="discussion">
     <p>Returns The name of the cluster where the snapshot will be created in.
 Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;</code>.</p>
 
 
   </div>
@@ -284,7 +284,7 @@ Values are of the form
         &mdash;
         <div class='inline'><p>The name of the cluster where the snapshot will be created in.
 Values are of the form
-+projects/<project>/instances/<instance>/clusters/<cluster>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;</code>.</p>
 </div>
       
     </li>
@@ -378,7 +378,7 @@ Values are of the form
   <div class="discussion">
     <p>Returns The unique name of the table to have the snapshot taken.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 
 
   </div>
@@ -398,7 +398,7 @@ Values are of the form
         &mdash;
         <div class='inline'><p>The unique name of the table to have the snapshot taken.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 </div>
       
     </li>
@@ -436,9 +436,9 @@ Values are of the form
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The ID by which the new snapshot should be referred to within the parent
-cluster, e.g., +mysnapshot+ of the form: +[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+
+cluster, e.g., <code>mysnapshot</code> of the form: <code>[_a-zA-Z0-9][-_.a-zA-Z0-9]*</code>
 rather than
-+projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;/snapshots/mysnapshot</code>.</p>
 
 
   </div>
@@ -457,9 +457,9 @@ rather than
       
         &mdash;
         <div class='inline'><p>The ID by which the new snapshot should be referred to within the parent
-cluster, e.g., +mysnapshot+ of the form: +[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+
+cluster, e.g., <code>mysnapshot</code> of the form: <code>[_a-zA-Z0-9][-_.a-zA-Z0-9]*</code>
 rather than
-+projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/clusters/&lt;cluster&gt;/snapshots/mysnapshot</code>.</p>
 </div>
       
     </li>

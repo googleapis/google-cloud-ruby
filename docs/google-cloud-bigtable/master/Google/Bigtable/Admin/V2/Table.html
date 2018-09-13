@@ -137,7 +137,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) Map from cluster ID to per-cluster table state.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) Map from cluster ID to per-cluster table state.</p>
 </div></span>
   
 </li>
@@ -163,7 +163,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+CreationOnly+) The column families configured for this table, mapped by column family ID.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>CreationOnly</code>) The column families configured for this table, mapped by column family ID.</p>
 </div></span>
   
 </li>
@@ -189,7 +189,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+CreationOnly+) The granularity (i.e. +MILLIS+) at which timestamps are stored in this table.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>CreationOnly</code>) The granularity (i.e. <code>MILLIS</code>) at which timestamps are stored in this table.</p>
 </div></span>
   
 </li>
@@ -215,7 +215,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The unique name of the table.</p>
+    <span class="summary_desc"><div class='inline'><p>(<code>OutputOnly</code>) The unique name of the table.</p>
 </div></span>
   
 </li>
@@ -243,12 +243,12 @@ Each table is served using the resources of its parent cluster.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 Map from cluster ID to per-cluster table state.
 If it could not be determined whether or not the table has data in a
 particular cluster (for example, if its zone is unavailable), then
-there will be an entry for the cluster with UNKNOWN +replication_status+.
-Views: +REPLICATION_VIEW+, +FULL+</p>
+there will be an entry for the cluster with UNKNOWN <code>replication_status</code>.
+Views: <code>REPLICATION_VIEW</code>, <code>FULL</code></p>
 
 
   </div>
@@ -266,12 +266,12 @@ Views: +REPLICATION_VIEW+, +FULL+</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 Map from cluster ID to per-cluster table state.
 If it could not be determined whether or not the table has data in a
 particular cluster (for example, if its zone is unavailable), then
-there will be an entry for the cluster with UNKNOWN +replication_status+.
-Views: +REPLICATION_VIEW+, +FULL+</p>
+there will be an entry for the cluster with UNKNOWN <code>replication_status</code>.
+Views: <code>REPLICATION_VIEW</code>, <code>FULL</code></p>
 </div>
       
     </li>
@@ -354,7 +354,7 @@ Views: +REPLICATION_VIEW+, +FULL+</p>
   <span class='comment'># The state of a table&#39;s data in a particular cluster.
 </span>  <span class='comment'># @!attribute [rw] replication_state
 </span>  <span class='comment'>#   @return [Google::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
-</span>  <span class='comment'>#     (+OutputOnly+)
+</span>  <span class='comment'>#     (`OutputOnly`)
 </span>  <span class='comment'>#     The state of replication for the table in this cluster.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">ClusterState</a></span></span>
     <span class='comment'># Table replication states.
@@ -398,13 +398,13 @@ Views: +REPLICATION_VIEW+, +FULL+</p>
     <span class='comment'># Uses the default view for each method as documented in its request.
 </span>    <span class='const'>VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Only populates +name+.
+    <span class='comment'># Only populates `name`.
 </span>    <span class='const'>NAME_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Only populates +name+ and fields related to the table&#39;s schema.
+    <span class='comment'># Only populates `name` and fields related to the table&#39;s schema.
 </span>    <span class='const'>SCHEMA_VIEW</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Only populates +name+ and fields related to the table&#39;s
+    <span class='comment'># Only populates `name` and fields related to the table&#39;s
 </span>    <span class='comment'># replication state.
 </span>    <span class='const'>REPLICATION_VIEW</span> <span class='op'>=</span> <span class='int'>3</span>
 
@@ -430,9 +430,9 @@ Views: +REPLICATION_VIEW+, +FULL+</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+CreationOnly+)
+    <p>Returns (<code>CreationOnly</code>)
 The column families configured for this table, mapped by column family ID.
-Views: +SCHEMA_VIEW+, +FULL+</p>
+Views: <code>SCHEMA_VIEW</code>, <code>FULL</code></p>
 
 
   </div>
@@ -450,9 +450,9 @@ Views: +SCHEMA_VIEW+, +FULL+</p>
       
       
         &mdash;
-        <div class='inline'><p>(+CreationOnly+)
+        <div class='inline'><p>(<code>CreationOnly</code>)
 The column families configured for this table, mapped by column family ID.
-Views: +SCHEMA_VIEW+, +FULL+</p>
+Views: <code>SCHEMA_VIEW</code>, <code>FULL</code></p>
 </div>
       
     </li>
@@ -535,7 +535,7 @@ Views: +SCHEMA_VIEW+, +FULL+</p>
   <span class='comment'># The state of a table&#39;s data in a particular cluster.
 </span>  <span class='comment'># @!attribute [rw] replication_state
 </span>  <span class='comment'>#   @return [Google::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
-</span>  <span class='comment'>#     (+OutputOnly+)
+</span>  <span class='comment'>#     (`OutputOnly`)
 </span>  <span class='comment'>#     The state of replication for the table in this cluster.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">ClusterState</a></span></span>
     <span class='comment'># Table replication states.
@@ -579,13 +579,13 @@ Views: +SCHEMA_VIEW+, +FULL+</p>
     <span class='comment'># Uses the default view for each method as documented in its request.
 </span>    <span class='const'>VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Only populates +name+.
+    <span class='comment'># Only populates `name`.
 </span>    <span class='const'>NAME_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Only populates +name+ and fields related to the table&#39;s schema.
+    <span class='comment'># Only populates `name` and fields related to the table&#39;s schema.
 </span>    <span class='const'>SCHEMA_VIEW</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Only populates +name+ and fields related to the table&#39;s
+    <span class='comment'># Only populates `name` and fields related to the table&#39;s
 </span>    <span class='comment'># replication state.
 </span>    <span class='const'>REPLICATION_VIEW</span> <span class='op'>=</span> <span class='int'>3</span>
 
@@ -611,11 +611,11 @@ Views: +SCHEMA_VIEW+, +FULL+</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+CreationOnly+)
-The granularity (i.e. +MILLIS+) at which timestamps are stored in
+    <p>Returns (<code>CreationOnly</code>)
+The granularity (i.e. <code>MILLIS</code>) at which timestamps are stored in
 this table. Timestamps not matching the granularity will be rejected.
-If unspecified at creation time, the value will be set to +MILLIS+.
-Views: +SCHEMA_VIEW+, +FULL+</p>
+If unspecified at creation time, the value will be set to <code>MILLIS</code>.
+Views: <code>SCHEMA_VIEW</code>, <code>FULL</code></p>
 
 
   </div>
@@ -633,11 +633,11 @@ Views: +SCHEMA_VIEW+, +FULL+</p>
       
       
         &mdash;
-        <div class='inline'><p>(+CreationOnly+)
-The granularity (i.e. +MILLIS+) at which timestamps are stored in
+        <div class='inline'><p>(<code>CreationOnly</code>)
+The granularity (i.e. <code>MILLIS</code>) at which timestamps are stored in
 this table. Timestamps not matching the granularity will be rejected.
-If unspecified at creation time, the value will be set to +MILLIS+.
-Views: +SCHEMA_VIEW+, +FULL+</p>
+If unspecified at creation time, the value will be set to <code>MILLIS</code>.
+Views: <code>SCHEMA_VIEW</code>, <code>FULL</code></p>
 </div>
       
     </li>
@@ -720,7 +720,7 @@ Views: +SCHEMA_VIEW+, +FULL+</p>
   <span class='comment'># The state of a table&#39;s data in a particular cluster.
 </span>  <span class='comment'># @!attribute [rw] replication_state
 </span>  <span class='comment'>#   @return [Google::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
-</span>  <span class='comment'>#     (+OutputOnly+)
+</span>  <span class='comment'>#     (`OutputOnly`)
 </span>  <span class='comment'>#     The state of replication for the table in this cluster.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">ClusterState</a></span></span>
     <span class='comment'># Table replication states.
@@ -764,13 +764,13 @@ Views: +SCHEMA_VIEW+, +FULL+</p>
     <span class='comment'># Uses the default view for each method as documented in its request.
 </span>    <span class='const'>VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Only populates +name+.
+    <span class='comment'># Only populates `name`.
 </span>    <span class='const'>NAME_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Only populates +name+ and fields related to the table&#39;s schema.
+    <span class='comment'># Only populates `name` and fields related to the table&#39;s schema.
 </span>    <span class='const'>SCHEMA_VIEW</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Only populates +name+ and fields related to the table&#39;s
+    <span class='comment'># Only populates `name` and fields related to the table&#39;s
 </span>    <span class='comment'># replication state.
 </span>    <span class='const'>REPLICATION_VIEW</span> <span class='op'>=</span> <span class='int'>3</span>
 
@@ -796,10 +796,10 @@ Views: +SCHEMA_VIEW+, +FULL+</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns (+OutputOnly+)
+    <p>Returns (<code>OutputOnly</code>)
 The unique name of the table. Values are of the form
-+projects/<project>/instances/<instance>/tables/[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+.
-Views: +NAME_ONLY+, +SCHEMA_VIEW+, +REPLICATION_VIEW+, +FULL+</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*</code>.
+Views: <code>NAME_ONLY</code>, <code>SCHEMA_VIEW</code>, <code>REPLICATION_VIEW</code>, <code>FULL</code></p>
 
 
   </div>
@@ -817,10 +817,10 @@ Views: +NAME_ONLY+, +SCHEMA_VIEW+, +REPLICATION_VIEW+, +FULL+</p>
       
       
         &mdash;
-        <div class='inline'><p>(+OutputOnly+)
+        <div class='inline'><p>(<code>OutputOnly</code>)
 The unique name of the table. Values are of the form
-+projects/<project>/instances/<instance>/tables/[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+.
-Views: +NAME_ONLY+, +SCHEMA_VIEW+, +REPLICATION_VIEW+, +FULL+</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*</code>.
+Views: <code>NAME_ONLY</code>, <code>SCHEMA_VIEW</code>, <code>REPLICATION_VIEW</code>, <code>FULL</code></p>
 </div>
       
     </li>
@@ -903,7 +903,7 @@ Views: +NAME_ONLY+, +SCHEMA_VIEW+, +REPLICATION_VIEW+, +FULL+</p>
   <span class='comment'># The state of a table&#39;s data in a particular cluster.
 </span>  <span class='comment'># @!attribute [rw] replication_state
 </span>  <span class='comment'>#   @return [Google::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
-</span>  <span class='comment'>#     (+OutputOnly+)
+</span>  <span class='comment'>#     (`OutputOnly`)
 </span>  <span class='comment'>#     The state of replication for the table in this cluster.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">ClusterState</a></span></span>
     <span class='comment'># Table replication states.
@@ -947,13 +947,13 @@ Views: +NAME_ONLY+, +SCHEMA_VIEW+, +REPLICATION_VIEW+, +FULL+</p>
     <span class='comment'># Uses the default view for each method as documented in its request.
 </span>    <span class='const'>VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Only populates +name+.
+    <span class='comment'># Only populates `name`.
 </span>    <span class='const'>NAME_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Only populates +name+ and fields related to the table&#39;s schema.
+    <span class='comment'># Only populates `name` and fields related to the table&#39;s schema.
 </span>    <span class='const'>SCHEMA_VIEW</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Only populates +name+ and fields related to the table&#39;s
+    <span class='comment'># Only populates `name` and fields related to the table&#39;s
 </span>    <span class='comment'># replication state.
 </span>    <span class='const'>REPLICATION_VIEW</span> <span class='op'>=</span> <span class='int'>3</span>
 

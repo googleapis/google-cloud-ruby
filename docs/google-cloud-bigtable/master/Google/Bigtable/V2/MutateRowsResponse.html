@@ -213,11 +213,11 @@ js:
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::V2::MutateRowsResponse (class)">MutateRowsResponse</a></span></span>
   <span class='comment'># @!attribute [rw] index
 </span>  <span class='comment'>#   @return [Integer]
-</span>  <span class='comment'>#     The index into the original request&#39;s +entries+ list of the Entry
+</span>  <span class='comment'>#     The index into the original request&#39;s `entries` list of the Entry
 </span>  <span class='comment'>#     for which a result is being reported.
 </span>  <span class='comment'># @!attribute [rw] status
 </span>  <span class='comment'>#   @return [Google::Rpc::Status]
-</span>  <span class='comment'>#     The result of the request Entry identified by +index+.
+</span>  <span class='comment'>#     The result of the request Entry identified by `index`.
 </span>  <span class='comment'>#     Depending on how requests are batched during execution, it is possible
 </span>  <span class='comment'>#     for one Entry to fail due to an error with another Entry. In the event
 </span>  <span class='comment'>#     that this occurs, the same error will be reported for both entries.

@@ -150,7 +150,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Changes to be atomically applied to the specified row if +predicate_filter+ does not yield any cells when applied to +row_key+.</p>
+    <span class="summary_desc"><div class='inline'><p>Changes to be atomically applied to the specified row if <code>predicate_filter</code> does not yield any cells when applied to <code>row_key</code>.</p>
 </div></span>
   
 </li>
@@ -254,7 +254,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Changes to be atomically applied to the specified row if +predicate_filter+ yields at least one cell when applied to +row_key+.</p>
+    <span class="summary_desc"><div class='inline'><p>Changes to be atomically applied to the specified row if <code>predicate_filter</code> yields at least one cell when applied to <code>row_key</code>.</p>
 </div></span>
   
 </li>
@@ -339,10 +339,10 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Changes to be atomically applied to the specified row if +predicate_filter+
-does not yield any cells when applied to +row_key+. Entries are applied in
+    <p>Returns Changes to be atomically applied to the specified row if <code>predicate_filter</code>
+does not yield any cells when applied to <code>row_key</code>. Entries are applied in
 order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one entry if +true_mutations+ is empty, and at most
+Must contain at least one entry if <code>true_mutations</code> is empty, and at most
 100000.</p>
 
 
@@ -361,10 +361,10 @@ Must contain at least one entry if +true_mutations+ is empty, and at most
       
       
         &mdash;
-        <div class='inline'><p>Changes to be atomically applied to the specified row if +predicate_filter+
-does not yield any cells when applied to +row_key+. Entries are applied in
+        <div class='inline'><p>Changes to be atomically applied to the specified row if <code>predicate_filter</code>
+does not yield any cells when applied to <code>row_key</code>. Entries are applied in
 order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one entry if +true_mutations+ is empty, and at most
+Must contain at least one entry if <code>true_mutations</code> is empty, and at most
 100000.</p>
 </div>
       
@@ -403,8 +403,8 @@ Must contain at least one entry if +true_mutations+ is empty, and at most
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The filter to be applied to the contents of the specified row. Depending
-on whether or not any results are yielded, either +true_mutations+ or
-+false_mutations+ will be executed. If unset, checks that the row contains
+on whether or not any results are yielded, either <code>true_mutations</code> or
+<code>false_mutations</code> will be executed. If unset, checks that the row contains
 any values at all.</p>
 
 
@@ -424,8 +424,8 @@ any values at all.</p>
       
         &mdash;
         <div class='inline'><p>The filter to be applied to the contents of the specified row. Depending
-on whether or not any results are yielded, either +true_mutations+ or
-+false_mutations+ will be executed. If unset, checks that the row contains
+on whether or not any results are yielded, either <code>true_mutations</code> or
+<code>false_mutations</code> will be executed. If unset, checks that the row contains
 any values at all.</p>
 </div>
       
@@ -521,7 +521,7 @@ any values at all.</p>
     <p>Returns The unique name of the table to which the conditional mutation should be
 applied.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 
 
   </div>
@@ -542,7 +542,7 @@ Values are of the form
         <div class='inline'><p>The unique name of the table to which the conditional mutation should be
 applied.
 Values are of the form
-+projects/<project>/instances/<instance>/tables/<table>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/tables/&lt;table&gt;</code>.</p>
 </div>
       
     </li>
@@ -579,10 +579,10 @@ Values are of the form
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Changes to be atomically applied to the specified row if +predicate_filter+
-yields at least one cell when applied to +row_key+. Entries are applied in
+    <p>Returns Changes to be atomically applied to the specified row if <code>predicate_filter</code>
+yields at least one cell when applied to <code>row_key</code>. Entries are applied in
 order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one entry if +false_mutations+ is empty, and at most
+Must contain at least one entry if <code>false_mutations</code> is empty, and at most
 100000.</p>
 
 
@@ -601,10 +601,10 @@ Must contain at least one entry if +false_mutations+ is empty, and at most
       
       
         &mdash;
-        <div class='inline'><p>Changes to be atomically applied to the specified row if +predicate_filter+
-yields at least one cell when applied to +row_key+. Entries are applied in
+        <div class='inline'><p>Changes to be atomically applied to the specified row if <code>predicate_filter</code>
+yields at least one cell when applied to <code>row_key</code>. Entries are applied in
 order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one entry if +false_mutations+ is empty, and at most
+Must contain at least one entry if <code>false_mutations</code> is empty, and at most
 100000.</p>
 </div>
       
