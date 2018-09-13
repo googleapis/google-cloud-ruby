@@ -623,9 +623,9 @@ custom error handling.</p>
     <p>Run asynchronous image detection and annotation for a list of generic
 files, such as PDF files, which may contain multiple pages and multiple
 images per page. Progress and results can be retrieved through the
-+google.longrunning.Operations+ interface.
-+Operation.metadata+ contains +OperationMetadata+ (metadata).
-+Operation.response+ contains +AsyncBatchAnnotateFilesResponse+ (results).</p>
+<code>google.longrunning.Operations</code> interface.
+<code>Operation.metadata</code> contains <code>OperationMetadata</code> (metadata).
+<code>Operation.response</code> contains <code>AsyncBatchAnnotateFilesResponse</code> (results).</p>
 
 
   </div>
@@ -640,7 +640,7 @@ images per page. Progress and results can be retrieved through the
 
 <span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Vision::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Vision::V1.new (method)">new</a></span></span>
 
-<span class='comment'># TODO: Initialize +requests+:
+<span class='comment'># TODO: Initialize `requests`:
 </span><span class='id identifier rubyid_requests'>requests</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -815,7 +815,7 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Vision::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Vision::V1.new (method)">new</a></span></span>
 
-<span class='comment'># TODO: Initialize +requests+:
+<span class='comment'># TODO: Initialize `requests`:
 </span><span class='id identifier rubyid_requests'>requests</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_annotate_images'>batch_annotate_images</span><span class='lparen'>(</span><span class='id identifier rubyid_requests'>requests</span><span class='rparen'>)</span></code></pre>
     

@@ -90,8 +90,8 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The type of Google Cloud Vision API detection to perform, and the maximum
-number of results to return for that type. Multiple +Feature+ objects can
-be specified in the +features+ list.</p>
+number of results to return for that type. Multiple <code>Feature</code> objects can
+be specified in the <code>features</code> list.</p>
 
 
   </div>
@@ -217,7 +217,7 @@ be specified in the +features+ list.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Maximum number of results of this type. Does not apply to
-+TEXT_DETECTION+, +DOCUMENT_TEXT_DETECTION+, or +CROP_HINTS+.</p>
+<code>TEXT_DETECTION</code>, <code>DOCUMENT_TEXT_DETECTION</code>, or <code>CROP_HINTS</code>.</p>
 
 
   </div>
@@ -236,7 +236,7 @@ be specified in the +features+ list.</p>
       
         &mdash;
         <div class='inline'><p>Maximum number of results of this type. Does not apply to
-+TEXT_DETECTION+, +DOCUMENT_TEXT_DETECTION+, or +CROP_HINTS+.</p>
+<code>TEXT_DETECTION</code>, <code>DOCUMENT_TEXT_DETECTION</code>, or <code>CROP_HINTS</code>.</p>
 </div>
       
     </li>
@@ -318,11 +318,11 @@ be specified in the +features+ list.</p>
 
     <span class='comment'># Run text detection / optical character recognition (OCR). Text detection
 </span>    <span class='comment'># is optimized for areas of text within a larger image; if the image is
-</span>    <span class='comment'># a document, use +DOCUMENT_TEXT_DETECTION+ instead.
+</span>    <span class='comment'># a document, use `DOCUMENT_TEXT_DETECTION` instead.
 </span>    <span class='const'>TEXT_DETECTION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Run dense text document OCR. Takes precedence when both
-</span>    <span class='comment'># +DOCUMENT_TEXT_DETECTION+ and +TEXT_DETECTION+ are present.
+</span>    <span class='comment'># `DOCUMENT_TEXT_DETECTION` and `TEXT_DETECTION` are present.
 </span>    <span class='const'>DOCUMENT_TEXT_DETECTION</span> <span class='op'>=</span> <span class='int'>11</span>
 
     <span class='comment'># Run Safe Search to detect potentially unsafe
@@ -465,11 +465,11 @@ Supported values: &quot;builtin/stable&quot; (the default if unset) and
 
     <span class='comment'># Run text detection / optical character recognition (OCR). Text detection
 </span>    <span class='comment'># is optimized for areas of text within a larger image; if the image is
-</span>    <span class='comment'># a document, use +DOCUMENT_TEXT_DETECTION+ instead.
+</span>    <span class='comment'># a document, use `DOCUMENT_TEXT_DETECTION` instead.
 </span>    <span class='const'>TEXT_DETECTION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Run dense text document OCR. Takes precedence when both
-</span>    <span class='comment'># +DOCUMENT_TEXT_DETECTION+ and +TEXT_DETECTION+ are present.
+</span>    <span class='comment'># `DOCUMENT_TEXT_DETECTION` and `TEXT_DETECTION` are present.
 </span>    <span class='const'>DOCUMENT_TEXT_DETECTION</span> <span class='op'>=</span> <span class='int'>11</span>
 
     <span class='comment'># Run Safe Search to detect potentially unsafe
@@ -608,11 +608,11 @@ Supported values: &quot;builtin/stable&quot; (the default if unset) and
 
     <span class='comment'># Run text detection / optical character recognition (OCR). Text detection
 </span>    <span class='comment'># is optimized for areas of text within a larger image; if the image is
-</span>    <span class='comment'># a document, use +DOCUMENT_TEXT_DETECTION+ instead.
+</span>    <span class='comment'># a document, use `DOCUMENT_TEXT_DETECTION` instead.
 </span>    <span class='const'>TEXT_DETECTION</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Run dense text document OCR. Takes precedence when both
-</span>    <span class='comment'># +DOCUMENT_TEXT_DETECTION+ and +TEXT_DETECTION+ are present.
+</span>    <span class='comment'># `DOCUMENT_TEXT_DETECTION` and `TEXT_DETECTION` are present.
 </span>    <span class='const'>DOCUMENT_TEXT_DETECTION</span> <span class='op'>=</span> <span class='int'>11</span>
 
     <span class='comment'># Run Safe Search to detect potentially unsafe

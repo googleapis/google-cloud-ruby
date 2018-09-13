@@ -238,7 +238,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The +fd_bounding_poly+ bounding polygon is tighter than the +boundingPoly+, and encloses only the skin part of the face.</p>
+    <span class="summary_desc"><div class='inline'><p>The <code>fd_bounding_poly</code> bounding polygon is tighter than the <code>boundingPoly</code>, and encloses only the skin part of the face.</p>
 </div></span>
   
 </li>
@@ -693,7 +693,7 @@ js:
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -988,7 +988,7 @@ js:
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -1117,11 +1117,11 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The bounding polygon around the face. The coordinates of the bounding box
-are in the original image&#39;s scale, as returned in +ImageParams+.
+are in the original image&#39;s scale, as returned in <code>ImageParams</code>.
 The bounding box is computed to &quot;frame&quot; the face in accordance with human
 expectations. It is based on the landmarker results.
 Note that one or more x and/or y coordinates may not be generated in the
-+BoundingPoly+ (the polygon will be unbounded) if only a partial face
+<code>BoundingPoly</code> (the polygon will be unbounded) if only a partial face
 appears in the image to be annotated.</p>
 
 
@@ -1141,11 +1141,11 @@ appears in the image to be annotated.</p>
       
         &mdash;
         <div class='inline'><p>The bounding polygon around the face. The coordinates of the bounding box
-are in the original image&#39;s scale, as returned in +ImageParams+.
+are in the original image&#39;s scale, as returned in <code>ImageParams</code>.
 The bounding box is computed to &quot;frame&quot; the face in accordance with human
 expectations. It is based on the landmarker results.
 Note that one or more x and/or y coordinates may not be generated in the
-+BoundingPoly+ (the polygon will be unbounded) if only a partial face
+<code>BoundingPoly</code> (the polygon will be unbounded) if only a partial face
 appears in the image to be annotated.</p>
 </div>
       
@@ -1295,7 +1295,7 @@ appears in the image to be annotated.</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -1590,7 +1590,7 @@ appears in the image to be annotated.</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -1718,8 +1718,8 @@ appears in the image to be annotated.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The +fd_bounding_poly+ bounding polygon is tighter than the
-+boundingPoly+, and encloses only the skin part of the face. Typically, it
+    <p>Returns The <code>fd_bounding_poly</code> bounding polygon is tighter than the
+<code>boundingPoly</code>, and encloses only the skin part of the face. Typically, it
 is used to eliminate the face from any image analysis that detects the
 &quot;amount of skin&quot; visible in an image. It is not based on the
 landmarker results, only on the initial face detection, hence
@@ -1741,8 +1741,8 @@ the <code>fd</code> (face detection) prefix.</p>
       
       
         &mdash;
-        <div class='inline'><p>The +fd_bounding_poly+ bounding polygon is tighter than the
-+boundingPoly+, and encloses only the skin part of the face. Typically, it
+        <div class='inline'><p>The <code>fd_bounding_poly</code> bounding polygon is tighter than the
+<code>boundingPoly</code>, and encloses only the skin part of the face. Typically, it
 is used to eliminate the face from any image analysis that detects the
 &quot;amount of skin&quot; visible in an image. It is not based on the
 landmarker results, only on the initial face detection, hence
@@ -1895,7 +1895,7 @@ the <code>fd</code> (face detection) prefix.</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -2190,7 +2190,7 @@ the <code>fd</code> (face detection) prefix.</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -2485,7 +2485,7 @@ the <code>fd</code> (face detection) prefix.</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -2780,7 +2780,7 @@ the <code>fd</code> (face detection) prefix.</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -3075,7 +3075,7 @@ the <code>fd</code> (face detection) prefix.</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -3374,7 +3374,7 @@ pointing relative to the vertical plane perpendicular to the image. Range
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -3673,7 +3673,7 @@ the face. Range [-180,180].</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -3968,7 +3968,7 @@ the face. Range [-180,180].</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -4263,7 +4263,7 @@ the face. Range [-180,180].</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -4560,7 +4560,7 @@ pointing relative to the image&#39;s horizontal plane. Range [-180,180].</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
@@ -4855,7 +4855,7 @@ pointing relative to the image&#39;s horizontal plane. Range [-180,180].</p>
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="FaceAnnotation/Landmark.html" title="Google::Cloud::Vision::V1::FaceAnnotation::Landmark (class)">Landmark</a></span></span>
     <span class='comment'># Face landmark (feature) type.
 </span>    <span class='comment'># Left and right are defined from the vantage of the viewer of the image
-</span>    <span class='comment'># without considering mirror projections typical of photos. So, +LEFT_EYE+,
+</span>    <span class='comment'># without considering mirror projections typical of photos. So, `LEFT_EYE`,
 </span>    <span class='comment'># typically, is the person&#39;s right eye.
 </span>    <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="../../../Type.html" title="Google::Type (module)">Type</a></span></span>
       <span class='comment'># Unknown face landmark detected. Should not be filled.
