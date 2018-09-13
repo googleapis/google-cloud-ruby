@@ -1074,7 +1074,7 @@ so it&#39;s useful to refresh data automatically.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Default data refresh window on days.
-Only meaningful when +data_refresh_type+ = +SLIDING_WINDOW+.</p>
+Only meaningful when <code>data_refresh_type</code> = <code>SLIDING_WINDOW</code>.</p>
 
 
   </div>
@@ -1093,7 +1093,7 @@ Only meaningful when +data_refresh_type+ = +SLIDING_WINDOW+.</p>
       
         &mdash;
         <div class='inline'><p>Default data refresh window on days.
-Only meaningful when +data_refresh_type+ = +SLIDING_WINDOW+.</p>
+Only meaningful when <code>data_refresh_type</code> = <code>SLIDING_WINDOW</code>.</p>
 </div>
       
     </li>
@@ -1192,9 +1192,9 @@ Only meaningful when +data_refresh_type+ = +SLIDING_WINDOW+.</p>
   <div class="discussion">
     <p>Returns Default data transfer schedule.
 Examples of valid schedules include:
-+1st,3rd monday of month 15:30+,
-+every wed,fri of jan,jun 13:15+, and
-+first sunday of quarter 00:00+.</p>
+<code>1st,3rd monday of month 15:30</code>,
+<code>every wed,fri of jan,jun 13:15</code>, and
+<code>first sunday of quarter 00:00</code>.</p>
 
 
   </div>
@@ -1214,9 +1214,9 @@ Examples of valid schedules include:
         &mdash;
         <div class='inline'><p>Default data transfer schedule.
 Examples of valid schedules include:
-+1st,3rd monday of month 15:30+,
-+every wed,fri of jan,jun 13:15+, and
-+first sunday of quarter 00:00+.</p>
+<code>1st,3rd monday of month 15:30</code>,
+<code>every wed,fri of jan,jun 13:15</code>, and
+<code>first sunday of quarter 00:00</code>.</p>
 </div>
       
     </li>
@@ -2121,7 +2121,7 @@ for the data source.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Api auth scopes for which refresh token needs to be obtained. Only valid
-when +client_id+ is specified. Ignored otherwise. These are scopes needed
+when <code>client_id</code> is specified. Ignored otherwise. These are scopes needed
 by a data source to prepare data and ingest them into BigQuery,
 e.g., <a href="https://www.googleapis.com/auth/bigquery">https://www.googleapis.com/auth/bigquery</a></p>
 
@@ -2142,7 +2142,7 @@ e.g., <a href="https://www.googleapis.com/auth/bigquery">https://www.googleapis.
       
         &mdash;
         <div class='inline'><p>Api auth scopes for which refresh token needs to be obtained. Only valid
-when +client_id+ is specified. Ignored otherwise. These are scopes needed
+when <code>client_id</code> is specified. Ignored otherwise. These are scopes needed
 by a data source to prepare data and ingest them into BigQuery,
 e.g., <a href="https://www.googleapis.com/auth/bigquery">https://www.googleapis.com/auth/bigquery</a></p>
 </div>
@@ -2243,7 +2243,7 @@ e.g., <a href="https://www.googleapis.com/auth/bigquery">https://www.googleapis.
   <div class="discussion">
     <p>Returns Specifies whether the data source supports a user defined schedule, or
 operates on the default schedule.
-When set to +true+, user can override default schedule.</p>
+When set to <code>true</code>, user can override default schedule.</p>
 
 
   </div>
@@ -2263,7 +2263,7 @@ When set to +true+, user can override default schedule.</p>
         &mdash;
         <div class='inline'><p>Specifies whether the data source supports a user defined schedule, or
 operates on the default schedule.
-When set to +true+, user can override default schedule.</p>
+When set to <code>true</code>, user can override default schedule.</p>
 </div>
       
     </li>

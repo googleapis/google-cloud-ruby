@@ -1529,7 +1529,7 @@ create a transfer config.</p>
       
         &mdash;
         <div class='inline'><p>The data source in the form:
-+projects/{project_id}/dataSources/{data_source_id}+</p>
+<code>projects/{project_id}/dataSources/{data_source_id}</code></p>
 </div>
       
     </li>
@@ -1688,7 +1688,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_data_transfer_service_client'>data_transfer_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../DataTransfer.html" title="Google::Cloud::Bigquery::DataTransfer (module)">DataTransfer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../DataTransfer.html#new-class_method" title="Google::Cloud::Bigquery::DataTransfer.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../DataTransfer.html" title="Google::Cloud::Bigquery::DataTransfer (module)">DataTransfer</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Bigquery::DataTransfer::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient (class)">DataTransferServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +transfer_config+:
+<span class='comment'># TODO: Initialize `transfer_config`:
 </span><span class='id identifier rubyid_transfer_config'>transfer_config</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_data_transfer_service_client'>data_transfer_service_client</span><span class='period'>.</span><span class='id identifier rubyid_create_transfer_config'>create_transfer_config</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_transfer_config'>transfer_config</span><span class='rparen'>)</span></code></pre>
     
@@ -1743,7 +1743,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional OAuth2 authorization code to use with this transfer configuration.
 This is required if new credentials are needed, as indicated by
-+CheckValidCreds+.
+<code>CheckValidCreds</code>.
 In order to obtain authorization_code, please make a
 request to
 <a href="https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=">https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=</a><datatransferapiclientid>&amp;scope=<data_source_scopes>&amp;redirect_uri=<redirect_uri></p>
@@ -1942,7 +1942,7 @@ including any associated transfer runs and logs.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/{project_id}/transferConfigs/{config_id}+</p>
+<code>projects/{project_id}/transferConfigs/{config_id}</code></p>
 </div>
       
     </li>
@@ -2110,7 +2110,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}+</p>
+<code>projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}</code></p>
 </div>
       
     </li>
@@ -2279,7 +2279,7 @@ which can be used for UI rendering.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/{project_id}/dataSources/{data_source_id}+</p>
+<code>projects/{project_id}/dataSources/{data_source_id}</code></p>
 </div>
       
     </li>
@@ -2454,7 +2454,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/{project_id}/transferConfigs/{config_id}+</p>
+<code>projects/{project_id}/transferConfigs/{config_id}</code></p>
 </div>
       
     </li>
@@ -2629,7 +2629,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The field will contain name of the resource requested, for example:
-+projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}+</p>
+<code>projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}</code></p>
 </div>
       
     </li>
@@ -2817,7 +2817,7 @@ which can be used for UI rendering.</p>
       
         &mdash;
         <div class='inline'><p>The BigQuery project id for which data sources should be returned.
-Must be in the form: +projects/{project_id}+</p>
+Must be in the form: <code>projects/{project_id}</code></p>
 </div>
       
     </li>
@@ -3034,7 +3034,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The BigQuery project id for which data sources
-should be returned: +projects/{project_id}+.</p>
+should be returned: <code>projects/{project_id}</code>.</p>
 </div>
       
     </li>
@@ -3270,7 +3270,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Transfer run name in the form:
-+projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}+.</p>
+<code>projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}</code>.</p>
 </div>
       
     </li>
@@ -3508,7 +3508,7 @@ object.</p>
         &mdash;
         <div class='inline'><p>Name of transfer configuration for which transfer runs should be retrieved.
 Format of transfer configuration resource name is:
-+projects/{project_id}/transferConfigs/{config_id}+.</p>
+<code>projects/{project_id}/transferConfigs/{config_id}</code>.</p>
 </div>
       
     </li>
@@ -3738,10 +3738,10 @@ Note that runs are created per UTC time in the time range.</p>
 <span class='id identifier rubyid_data_transfer_service_client'>data_transfer_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../DataTransfer.html" title="Google::Cloud::Bigquery::DataTransfer (module)">DataTransfer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../DataTransfer.html#new-class_method" title="Google::Cloud::Bigquery::DataTransfer.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../DataTransfer.html" title="Google::Cloud::Bigquery::DataTransfer (module)">DataTransfer</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Bigquery::DataTransfer::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient (class)">DataTransferServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_transfer_config_path'><span class='object_link'><a href="#project_transfer_config_path-class_method" title="Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_transfer_config_path (method)">project_transfer_config_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TRANSFER_CONFIG]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +start_time+:
+<span class='comment'># TODO: Initialize `start_time`:
 </span><span class='id identifier rubyid_start_time'>start_time</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +end_time+:
+<span class='comment'># TODO: Initialize `end_time`:
 </span><span class='id identifier rubyid_end_time'>end_time</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_data_transfer_service_client'>data_transfer_service_client</span><span class='period'>.</span><span class='id identifier rubyid_schedule_transfer_runs'>schedule_transfer_runs</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='comma'>,</span> <span class='id identifier rubyid_end_time'>end_time</span><span class='rparen'>)</span></code></pre>
     
@@ -3760,7 +3760,7 @@ Note that runs are created per UTC time in the time range.</p>
       
         &mdash;
         <div class='inline'><p>Transfer configuration name in the form:
-+projects/{project_id}/transferConfigs/{config_id}+.</p>
+<code>projects/{project_id}/transferConfigs/{config_id}</code>.</p>
 </div>
       
     </li>
@@ -3776,7 +3776,7 @@ Note that runs are created per UTC time in the time range.</p>
       
         &mdash;
         <div class='inline'><p>Start time of the range of transfer runs. For example,
-+&quot;2017-05-25T00:00:00+00:00&quot;+.
+<code>&quot;2017-05-25T00:00:00+00:00&quot;</code>.
 A hash of the same form as <code>Google::Protobuf::Timestamp</code>
 can also be provided.</p>
 </div>
@@ -3794,7 +3794,7 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>End time of the range of transfer runs. For example,
-+&quot;2017-05-30T00:00:00+00:00&quot;+.
+<code>&quot;2017-05-30T00:00:00+00:00&quot;</code>.
 A hash of the same form as <code>Google::Protobuf::Timestamp</code>
 can also be provided.</p>
 </div>
@@ -3963,10 +3963,10 @@ All fields must be set, even if they are not updated.</p>
 
 <span class='id identifier rubyid_data_transfer_service_client'>data_transfer_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../DataTransfer.html" title="Google::Cloud::Bigquery::DataTransfer (module)">DataTransfer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../DataTransfer.html#new-class_method" title="Google::Cloud::Bigquery::DataTransfer.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +transfer_config+:
+<span class='comment'># TODO: Initialize `transfer_config`:
 </span><span class='id identifier rubyid_transfer_config'>transfer_config</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +update_mask+:
+<span class='comment'># TODO: Initialize `update_mask`:
 </span><span class='id identifier rubyid_update_mask'>update_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_data_transfer_service_client'>data_transfer_service_client</span><span class='period'>.</span><span class='id identifier rubyid_update_transfer_config'>update_transfer_config</span><span class='lparen'>(</span><span class='id identifier rubyid_transfer_config'>transfer_config</span><span class='comma'>,</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='rparen'>)</span></code></pre>
     
