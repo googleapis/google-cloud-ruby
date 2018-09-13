@@ -585,9 +585,9 @@ custom error handling.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Performs asynchronous video annotation. Progress and results can be
-retrieved through the +google.longrunning.Operations+ interface.
-+Operation.metadata+ contains +AnnotateVideoProgress+ (progress).
-+Operation.response+ contains +AnnotateVideoResponse+ (results).</p>
+retrieved through the <code>google.longrunning.Operations</code> interface.
+<code>Operation.metadata</code> contains <code>AnnotateVideoProgress</code> (progress).
+<code>Operation.response</code> contains <code>AnnotateVideoResponse</code> (results).</p>
 
 
   </div>
@@ -649,13 +649,13 @@ retrieved through the +google.longrunning.Operations+ interface.
         <div class='inline'><p>Input video location. Currently, only
 <a href="https://cloud.google.com/storage/">Google Cloud Storage</a> URIs are
 supported, which must be specified in the following format:
-+gs://bucket-id/object-id+ (other URI formats return
+<code>gs://bucket-id/object-id</code> (other URI formats return
 Rpc::Code::INVALID_ARGUMENT). For more information, see
 <a href="https://cloud.google.com/storage/docs/reference-uris">Request URIs</a>.
-A video URI may include wildcards in +object-id+, and thus identify
+A video URI may include wildcards in <code>object-id</code>, and thus identify
 multiple videos. Supported wildcards: &#39;*&#39; to match 0 or more characters;
 &#39;?&#39; to match 1 character. If unset, the input video should be embedded
-in the request as +input_content+. If set, +input_content+ should be unset.</p>
+in the request as <code>input_content</code>. If set, <code>input_content</code> should be unset.</p>
 </div>
       
     </li>
@@ -686,7 +686,7 @@ in the request as +input_content+. If set, +input_content+ should be unset.</p>
       
         &mdash;
         <div class='inline'><p>The video data bytes. Encoding: base64. If unset, the input video(s)
-should be specified via +input_uri+. If set, +input_uri+ should be unset.</p>
+should be specified via <code>input_uri</code>. If set, <code>input_uri</code> should be unset.</p>
 </div>
       
     </li>
@@ -721,7 +721,7 @@ can also be provided.</p>
         <div class='inline'><p>Optional location where the output (in JSON format) should be stored.
 Currently, only <a href="https://cloud.google.com/storage/">Google Cloud Storage</a>
 URIs are supported, which must be specified in the following format:
-+gs://bucket-id/object-id+ (other URI formats return
+<code>gs://bucket-id/object-id</code> (other URI formats return
 Rpc::Code::INVALID_ARGUMENT). For more information, see
 <a href="https://cloud.google.com/storage/docs/reference-uris">Request URIs</a>.</p>
 </div>
@@ -739,7 +739,7 @@ Rpc::Code::INVALID_ARGUMENT). For more information, see
       
         &mdash;
         <div class='inline'><p>Optional cloud region where annotation should take place. Supported cloud
-regions: +us-east1+, +us-west1+, +europe-west1+, +asia-east1+. If no region
+regions: <code>us-east1</code>, <code>us-west1</code>, <code>europe-west1</code>, <code>asia-east1</code>. If no region
 is specified, a region will be determined based on video file location.</p>
 </div>
       
