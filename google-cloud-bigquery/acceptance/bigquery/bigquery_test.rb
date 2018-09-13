@@ -15,7 +15,7 @@
 require "bigquery_helper"
 
 describe Google::Cloud::Bigquery, :bigquery do
-  let(:publicdata_query) { "SELECT url FROM publicdata.samples.github_nested LIMIT 100" }
+  let(:publicdata_query) { "SELECT url FROM `bigquery-public-data.samples.github_nested` LIMIT 100" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
@@ -109,13 +109,13 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   it "should run an query without legacy SQL syntax" do
-    rows = bigquery.query "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100", legacy_sql: false
+    rows = bigquery.query publicdata_query, legacy_sql: false
     rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 100
   end
 
   it "should run an query with standard SQL syntax" do
-    rows = bigquery.query "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100", standard_sql: true
+    rows = bigquery.query publicdata_query, standard_sql: true
     rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 100
   end

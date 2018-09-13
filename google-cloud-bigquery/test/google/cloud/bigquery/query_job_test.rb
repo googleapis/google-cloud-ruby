@@ -97,7 +97,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     step.kind.must_equal "READ"
     step.substeps.wont_be_nil
     step.substeps.must_be_kind_of Array
-    step.substeps.must_equal [ "word", "FROM publicdata:samples.shakespeare" ]
+    step.substeps.must_equal [ "word", "FROM bigquery-public-data:samples.shakespeare" ]
   end
 
   it "knows its user defined function resources" do
@@ -181,7 +181,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
               kind: "READ",
               substeps: [
                 "word",
-                "FROM publicdata:samples.shakespeare"
+                "FROM bigquery-public-data:samples.shakespeare"
               ]
             )
           ],
