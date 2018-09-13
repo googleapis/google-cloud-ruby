@@ -176,9 +176,9 @@ module Google
         # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
         # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) request,
         # or as output contexts included in the returned intent.
-        # Contexts expire when an intent is matched, after the number of +DetectIntent+
-        # requests specified by the +lifespan_count+ parameter, or after 10 minutes
-        # if no intents are matched for a +DetectIntent+ request.
+        # Contexts expire when an intent is matched, after the number of `DetectIntent`
+        # requests specified by the `lifespan_count` parameter, or after 10 minutes
+        # if no intents are matched for a `DetectIntent` request.
         #
         # For more information about contexts, see the
         # [Dialogflow documentation](https://dialogflow.com/docs/contexts).
@@ -245,14 +245,14 @@ module Google
         #
         # * **System** - entities that are defined by the Dialogflow API for common
         #   data types such as date, time, currency, and so on. A system entity is
-        #   represented by the +EntityType+ type.
+        #   represented by the `EntityType` type.
         #
         # * **Developer** - entities that are defined by you that represent
         #   actionable data that is meaningful to your application. For example,
-        #   you could define a +pizza.sauce+ entity for red or white pizza sauce,
-        #   a +pizza.cheese+ entity for the different types of cheese on a pizza,
-        #   a +pizza.topping+ entity for different toppings, and so on. A developer
-        #   entity is represented by the +EntityType+ type.
+        #   you could define a `pizza.sauce` entity for red or white pizza sauce,
+        #   a `pizza.cheese` entity for the different types of cheese on a pizza,
+        #   a `pizza.topping` entity for different toppings, and so on. A developer
+        #   entity is represented by the `EntityType` type.
         #
         # * **User** - entities that are built for an individual user such as
         #   favorites, preferences, playlists, and so on. A user entity is
@@ -317,7 +317,7 @@ module Google
         # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) method, the
         # Dialogflow API analyzes the input and searches
         # for a matching intent. If no match is found, the Dialogflow API returns a
-        # fallback intent (+is_fallback+ = true).
+        # fallback intent (`is_fallback` = true).
         #
         # You can provide additional information for the Dialogflow API to use to
         # match user input to an intent by adding the following to your intent.

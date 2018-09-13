@@ -18,15 +18,15 @@ module Google
     module Vision
       module V1
         # The type of Google Cloud Vision API detection to perform, and the maximum
-        # number of results to return for that type. Multiple +Feature+ objects can
-        # be specified in the +features+ list.
+        # number of results to return for that type. Multiple `Feature` objects can
+        # be specified in the `features` list.
         # @!attribute [rw] type
         #   @return [Google::Cloud::Vision::V1::Feature::Type]
         #     The feature type.
         # @!attribute [rw] max_results
         #   @return [Integer]
         #     Maximum number of results of this type. Does not apply to
-        #     +TEXT_DETECTION+, +DOCUMENT_TEXT_DETECTION+, or +CROP_HINTS+.
+        #     `TEXT_DETECTION`, `DOCUMENT_TEXT_DETECTION`, or `CROP_HINTS`.
         # @!attribute [rw] model
         #   @return [String]
         #     Model to use for the feature.
@@ -52,11 +52,11 @@ module Google
 
             # Run text detection / optical character recognition (OCR). Text detection
             # is optimized for areas of text within a larger image; if the image is
-            # a document, use +DOCUMENT_TEXT_DETECTION+ instead.
+            # a document, use `DOCUMENT_TEXT_DETECTION` instead.
             TEXT_DETECTION = 5
 
             # Run dense text document OCR. Takes precedence when both
-            # +DOCUMENT_TEXT_DETECTION+ and +TEXT_DETECTION+ are present.
+            # `DOCUMENT_TEXT_DETECTION` and `TEXT_DETECTION` are present.
             DOCUMENT_TEXT_DETECTION = 11
 
             # Run Safe Search to detect potentially unsafe
@@ -81,10 +81,10 @@ module Google
         # External image source (Google Cloud Storage or web URL image location).
         # @!attribute [rw] gcs_image_uri
         #   @return [String]
-        #     **Use +image_uri+ instead.**
+        #     **Use `image_uri` instead.**
         #
         #     The Google Cloud Storage  URI of the form
-        #     +gs://bucket_name/object_name+. Object versioning is not supported. See
+        #     `gs://bucket_name/object_name`. Object versioning is not supported. See
         #     [Google Cloud Storage Request
         #     URIs](https://cloud.google.com/storage/docs/reference-uris) for more info.
         # @!attribute [rw] image_uri
@@ -92,7 +92,7 @@ module Google
         #     The URI of the source image. Can be either:
         #
         #     1. A Google Cloud Storage URI of the form
-        #        +gs://bucket_name/object_name+. Object versioning is not supported. See
+        #        `gs://bucket_name/object_name`. Object versioning is not supported. See
         #        [Google Cloud Storage Request
         #        URIs](https://cloud.google.com/storage/docs/reference-uris) for more
         #        info.
@@ -104,7 +104,7 @@ module Google
         #        throttles requests to the site for abuse prevention. You should not
         #        depend on externally-hosted images for production applications.
         #
-        #     When both +gcs_image_uri+ and +image_uri+ are specified, +image_uri+ takes
+        #     When both `gcs_image_uri` and `image_uri` are specified, `image_uri` takes
         #     precedence.
         class ImageSource; end
 
@@ -112,12 +112,12 @@ module Google
         # @!attribute [rw] content
         #   @return [String]
         #     Image content, represented as a stream of bytes.
-        #     Note: As with all +bytes+ fields, protobuffers use a pure binary
+        #     Note: As with all `bytes` fields, protobuffers use a pure binary
         #     representation, whereas JSON representations use base64.
         # @!attribute [rw] source
         #   @return [Google::Cloud::Vision::V1::ImageSource]
         #     Google Cloud Storage image location, or publicly-accessible image
-        #     URL. If both +content+ and +source+ are provided for an image, +content+
+        #     URL. If both `content` and `source` are provided for an image, `content`
         #     takes precedence and is used to perform the image annotation request.
         class Image; end
 
@@ -125,16 +125,16 @@ module Google
         # @!attribute [rw] bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
         #     The bounding polygon around the face. The coordinates of the bounding box
-        #     are in the original image's scale, as returned in +ImageParams+.
+        #     are in the original image's scale, as returned in `ImageParams`.
         #     The bounding box is computed to "frame" the face in accordance with human
         #     expectations. It is based on the landmarker results.
         #     Note that one or more x and/or y coordinates may not be generated in the
-        #     +BoundingPoly+ (the polygon will be unbounded) if only a partial face
+        #     `BoundingPoly` (the polygon will be unbounded) if only a partial face
         #     appears in the image to be annotated.
         # @!attribute [rw] fd_bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
-        #     The +fd_bounding_poly+ bounding polygon is tighter than the
-        #     +boundingPoly+, and encloses only the skin part of the face. Typically, it
+        #     The `fd_bounding_poly` bounding polygon is tighter than the
+        #     `boundingPoly`, and encloses only the skin part of the face. Typically, it
         #     is used to eliminate the face from any image analysis that detects the
         #     "amount of skin" visible in an image. It is not based on the
         #     landmarker results, only on the initial face detection, hence
@@ -194,7 +194,7 @@ module Google
           class Landmark
             # Face landmark (feature) type.
             # Left and right are defined from the vantage of the viewer of the image
-            # without considering mirror projections typical of photos. So, +LEFT_EYE+,
+            # without considering mirror projections typical of photos. So, `LEFT_EYE`,
             # typically, is the person's right eye.
             module Type
               # Unknown face landmark detected. Should not be filled.
@@ -311,7 +311,7 @@ module Google
         #     lat/long location coordinates.
         class LocationInfo; end
 
-        # A +Property+ consists of a user-supplied name/value pair.
+        # A `Property` consists of a user-supplied name/value pair.
         # @!attribute [rw] name
         #   @return [String]
         #     Name of the property.
@@ -332,16 +332,16 @@ module Google
         # @!attribute [rw] locale
         #   @return [String]
         #     The language code for the locale in which the entity textual
-        #     +description+ is expressed.
+        #     `description` is expressed.
         # @!attribute [rw] description
         #   @return [String]
-        #     Entity textual description, expressed in its +locale+ language.
+        #     Entity textual description, expressed in its `locale` language.
         # @!attribute [rw] score
         #   @return [Float]
         #     Overall score of the result. Range [0, 1].
         # @!attribute [rw] confidence
         #   @return [Float]
-        #     **Deprecated. Use +score+ instead.**
+        #     **Deprecated. Use `score` instead.**
         #     The accuracy of the entity detection in an image.
         #     For example, for an image in which the "Eiffel Tower" entity is detected,
         #     this field represents the confidence that there is a tower in the query
@@ -356,17 +356,17 @@ module Google
         # @!attribute [rw] bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
         #     Image region to which this entity belongs. Not produced
-        #     for +LABEL_DETECTION+ features.
+        #     for `LABEL_DETECTION` features.
         # @!attribute [rw] locations
         #   @return [Array<Google::Cloud::Vision::V1::LocationInfo>]
         #     The location information for the detected entity. Multiple
-        #     +LocationInfo+ elements can be present because one location may
+        #     `LocationInfo` elements can be present because one location may
         #     indicate the location of the scene in the image, and another location
         #     may indicate the location of the place where the image was taken.
         #     Location information is usually present for landmarks.
         # @!attribute [rw] properties
         #   @return [Array<Google::Cloud::Vision::V1::Property>]
-        #     Some entities may have optional user-supplied +Property+ (name/value)
+        #     Some entities may have optional user-supplied `Property` (name/value)
         #     fields, such a score or string that qualifies the entity.
         class EntityAnnotation; end
 
@@ -381,7 +381,7 @@ module Google
         #     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
         # @!attribute [rw] name
         #   @return [String]
-        #     Object name, expressed in its +language_code+ language.
+        #     Object name, expressed in its `language_code` language.
         # @!attribute [rw] score
         #   @return [Float]
         #     Score of the result. Range [0, 1].
@@ -417,7 +417,7 @@ module Google
         #     body areas.
         class SafeSearchAnnotation; end
 
-        # Rectangle determined by min and max +LatLng+ pairs.
+        # Rectangle determined by min and max `LatLng` pairs.
         # @!attribute [rw] min_lat_lng
         #   @return [Google::Type::LatLng]
         #     Min lat/long pair.
@@ -456,7 +456,7 @@ module Google
         # @!attribute [rw] bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
         #     The bounding polygon for the crop region. The coordinates of the bounding
-        #     box are in the original image's scale, as returned in +ImageParams+.
+        #     box are in the original image's scale, as returned in `ImageParams`.
         # @!attribute [rw] confidence
         #   @return [Float]
         #     Confidence of this being a salient region.  Range [0, 1].
@@ -497,7 +497,7 @@ module Google
         #   @return [Array<String>]
         #     List of languages to use for TEXT_DETECTION. In most cases, an empty value
         #     yields the best results since it enables automatic language detection. For
-        #     languages based on the Latin alphabet, setting +language_hints+ is not
+        #     languages based on the Latin alphabet, setting `language_hints` is not
         #     needed. In rare cases, when the language of the text in the image is known,
         #     setting a hint will help get better results (although it will be a
         #     significant hindrance if the hint is wrong). Text detection returns an
@@ -577,7 +577,7 @@ module Google
         #   @return [Google::Rpc::Status]
         #     If set, represents the error message for the operation.
         #     Note that filled-in image annotations are guaranteed to be
-        #     correct, even when +error+ is set.
+        #     correct, even when `error` is set.
         # @!attribute [rw] context
         #   @return [Google::Cloud::Vision::V1::ImageAnnotationContext]
         #     If present, contextual information is needed to understand where this image
@@ -662,9 +662,9 @@ module Google
         #     The valid range is [1, 100]. If not specified, the default value is 20.
         #
         #     For example, for one pdf file with 100 pages, 100 response protos will
-        #     be generated. If +batch_size+ = 20, then 5 json files each
+        #     be generated. If `batch_size` = 20, then 5 json files each
         #     containing 20 response protos will be written under the prefix
-        #     +gcs_destination+.+uri+.
+        #     `gcs_destination`.`uri`.
         #
         #     Currently, batch_size only applies to GcsDestination, with potential future
         #     support for other output configurations.
@@ -683,7 +683,7 @@ module Google
         #     Google Cloud Storage URI where the results will be stored. Results will
         #     be in JSON format and preceded by its corresponding input URI. This field
         #     can either represent a single file, or a prefix for multiple outputs.
-        #     Prefixes must end in a +/+.
+        #     Prefixes must end in a `/`.
         #
         #     Examples:
         #

@@ -218,7 +218,7 @@ module Google
           #
           # @param name [String]
           #   Required. The name of the project where the spans belong. The format is
-          #   +projects/[PROJECT_ID]+.
+          #   `projects/[PROJECT_ID]`.
           # @param spans [Array<Google::Devtools::Cloudtrace::V2::Span | Hash>]
           #   A list of new spans. The span names must not match existing
           #   spans, or the results are undefined.
@@ -237,7 +237,7 @@ module Google
           #   trace_service_client = Google::Cloud::Trace.new(version: :v2)
           #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +spans+:
+          #   # TODO: Initialize `spans`:
           #   spans = []
           #   trace_service_client.batch_write_spans(formatted_name, spans)
 
@@ -342,16 +342,16 @@ module Google
           #   trace_service_client = Google::Cloud::Trace.new(version: :v2)
           #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.span_path("[PROJECT]", "[TRACE]", "[SPAN]")
           #
-          #   # TODO: Initialize +span_id+:
+          #   # TODO: Initialize `span_id`:
           #   span_id = ''
           #
-          #   # TODO: Initialize +display_name+:
+          #   # TODO: Initialize `display_name`:
           #   display_name = {}
           #
-          #   # TODO: Initialize +start_time+:
+          #   # TODO: Initialize `start_time`:
           #   start_time = {}
           #
-          #   # TODO: Initialize +end_time+:
+          #   # TODO: Initialize `end_time`:
           #   end_time = {}
           #   response = trace_service_client.create_span(formatted_name, span_id, display_name, start_time, end_time)
 

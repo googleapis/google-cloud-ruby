@@ -60,13 +60,13 @@ module Google
           # @!attribute [rw] max_findings_per_item
           #   @return [Integer]
           #     Max number of findings that will be returned for each item scanned.
-          #     When set within +InspectDataSourceRequest+,
+          #     When set within `InspectDataSourceRequest`,
           #     the maximum returned is 1000 regardless if this is set higher.
-          #     When set within +InspectContentRequest+, this field is ignored.
+          #     When set within `InspectContentRequest`, this field is ignored.
           # @!attribute [rw] max_findings_per_request
           #   @return [Integer]
           #     Max number of findings that will be returned per request/job.
-          #     When set within +InspectContentRequest+, the maximum returned is 1000
+          #     When set within `InspectContentRequest`, the maximum returned is 1000
           #     regardless if this is set higher.
           # @!attribute [rw] max_findings_per_info_type
           #   @return [Array<Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit>]
@@ -123,10 +123,10 @@ module Google
         #     learn more.
         # @!attribute [rw] byte_item
         #   @return [Google::Privacy::Dlp::V2::ByteContentItem]
-        #     Content data to inspect or redact. Replaces +type+ and +data+.
+        #     Content data to inspect or redact. Replaces `type` and `data`.
         class ContentItem; end
 
-        # Structured content to inspect. Up to 50,000 +Value+s per request allowed.
+        # Structured content to inspect. Up to 50,000 `Value`s per request allowed.
         # See https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
         # learn more.
         # @!attribute [rw] headers
@@ -158,16 +158,16 @@ module Google
         #   @return [String]
         #     The content that was found. Even if the content is not textual, it
         #     may be converted to a textual representation here.
-        #     Provided if +include_quote+ is true and the finding is
+        #     Provided if `include_quote` is true and the finding is
         #     less than or equal to 4096 bytes long. If the finding exceeds 4096 bytes
         #     in length, the quote may be omitted.
         # @!attribute [rw] info_type
         #   @return [Google::Privacy::Dlp::V2::InfoType]
         #     The type of content that might have been found.
-        #     Provided if +excluded_types+ is false.
+        #     Provided if `excluded_types` is false.
         # @!attribute [rw] likelihood
         #   @return [Google::Privacy::Dlp::V2::Likelihood]
-        #     Confidence of how likely it is that the +info_type+ is correct.
+        #     Confidence of how likely it is that the `info_type` is correct.
         # @!attribute [rw] location
         #   @return [Google::Privacy::Dlp::V2::Location]
         #     Where the content was found.
@@ -244,7 +244,7 @@ module Google
         #     Field id of the field containing the finding.
         # @!attribute [rw] table_location
         #   @return [Google::Privacy::Dlp::V2::TableLocation]
-        #     Location within a +ContentItem.Table+.
+        #     Location within a `ContentItem.Table`.
         class RecordLocation; end
 
         # Location of a finding within a table.
@@ -385,7 +385,7 @@ module Google
         #     The de-identified item.
         # @!attribute [rw] overview
         #   @return [Google::Privacy::Dlp::V2::TransformationOverview]
-        #     An overview of the changes that were made on the +item+.
+        #     An overview of the changes that were made on the `item`.
         class DeidentifyContentResponse; end
 
         # Request to re-identify an item.
@@ -402,7 +402,7 @@ module Google
         #     reverse. This requires that only reversible transformations
         #     be provided here. The reversible transformations are:
         #
-        #     * +CryptoReplaceFfxFpeConfig+
+        #     * `CryptoReplaceFfxFpeConfig`
         # @!attribute [rw] inspect_config
         #   @return [Google::Privacy::Dlp::V2::InspectConfig]
         #     Configuration for the inspector.
@@ -412,15 +412,15 @@ module Google
         # @!attribute [rw] inspect_template_name
         #   @return [String]
         #     Optional template to use. Any configuration directly specified in
-        #     +inspect_config+ will override those set in the template. Singular fields
+        #     `inspect_config` will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
         # @!attribute [rw] reidentify_template_name
         #   @return [String]
-        #     Optional template to use. References an instance of +DeidentifyTemplate+.
-        #     Any configuration directly specified in +reidentify_config+ or
-        #     +inspect_config+ will override those set in the template. Singular fields
+        #     Optional template to use. References an instance of `DeidentifyTemplate`.
+        #     Any configuration directly specified in `reidentify_config` or
+        #     `inspect_config` will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
@@ -432,7 +432,7 @@ module Google
         #     The re-identified item.
         # @!attribute [rw] overview
         #   @return [Google::Privacy::Dlp::V2::TransformationOverview]
-        #     An overview of the changes that were made to the +item+.
+        #     An overview of the changes that were made to the `item`.
         class ReidentifyContentResponse; end
 
         # Request to search for potentially sensitive info in a ContentItem.
@@ -471,7 +471,7 @@ module Google
         #     generating the date details.
         #
         #     For Inspect, each column in an existing output table must have the same
-        #     name, type, and mode of a field in the +Finding+ object.
+        #     name, type, and mode of a field in the `Finding` object.
         #
         #     For Risk, an existing output table should be the output of a previous
         #     Risk analysis job run on the same source table, with the same privacy
@@ -482,7 +482,7 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema]
         #     Schema used for writing the findings for Inspect jobs. This field is only
         #     used for Inspect and must be unspecified for Risk jobs. Columns are derived
-        #     from the +Finding+ object. If appending to an existing table, any columns
+        #     from the `Finding` object. If appending to an existing table, any columns
         #     from the predefined schema that are missing will be added. No columns in
         #     the existing table will be deleted.
         #
@@ -493,8 +493,8 @@ module Google
           module OutputSchema
             OUTPUT_SCHEMA_UNSPECIFIED = 0
 
-            # Basic schema including only +info_type+, +quote+, +certainty+, and
-            # +timestamp+.
+            # Basic schema including only `info_type`, `quote`, `certainty`, and
+            # `timestamp`.
             BASIC_COLUMNS = 1
 
             # Schema tailored to findings from scanning Google Cloud Storage.
@@ -1135,7 +1135,7 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::DateShiftConfig]
         class PrimitiveTransformation; end
 
-        # For use with +Date+, +Timestamp+, and +TimeOfDay+, extract or preserve a
+        # For use with `Date`, `Timestamp`, and `TimeOfDay`, extract or preserve a
         # portion of the value.
         # @!attribute [rw] part_to_extract
         #   @return [Google::Privacy::Dlp::V2::TimePartConfig::TimePart]
@@ -1174,7 +1174,7 @@ module Google
         #     The key used by the hash function.
         class CryptoHashConfig; end
 
-        # Replace each input value with a given +Value+.
+        # Replace each input value with a given `Value`.
         # @!attribute [rw] new_value
         #   @return [Google::Privacy::Dlp::V2::Value]
         #     Value to replace it with.
@@ -1183,7 +1183,7 @@ module Google
         # Replace each matching finding with the name of the info_type.
         class ReplaceWithInfoTypeConfig; end
 
-        # Redact a given value. For example, if used with an +InfoTypeTransformation+
+        # Redact a given value. For example, if used with an `InfoTypeTransformation`
         # transforming PHONE_NUMBER, and input 'My phone number is 206-555-0123', the
         # output would be 'My phone number is '.
         class RedactConfig; end
@@ -1207,7 +1207,7 @@ module Google
             # a-z
             ALPHA_LOWER_CASE = 3
 
-            # US Punctuation, one of !"#$%&'()*+,-./:;<=>?@[\]^_+{|}~
+            # US Punctuation, one of !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
             PUNCTUATION = 4
 
             # Whitespace character, one of [ \t\n\x0B\f\r]
@@ -1233,15 +1233,15 @@ module Google
         #     masked. Skipped characters do not count towards this tally.
         # @!attribute [rw] reverse_order
         #   @return [true, false]
-        #     Mask characters in reverse order. For example, if +masking_character+ is
-        #     '0', number_to_mask is 14, and +reverse_order+ is false, then
+        #     Mask characters in reverse order. For example, if `masking_character` is
+        #     '0', number_to_mask is 14, and `reverse_order` is false, then
         #     1234-5678-9012-3456 -> 00000000000000-3456
-        #     If +masking_character+ is '*', +number_to_mask+ is 3, and +reverse_order+
+        #     If `masking_character` is '*', `number_to_mask` is 3, and `reverse_order`
         #     is true, then 12345 -> 12***
         # @!attribute [rw] characters_to_ignore
         #   @return [Array<Google::Privacy::Dlp::V2::CharsToIgnore>]
         #     When masking a string, items in this list will be skipped when replacing.
-        #     For example, if your string is 555-555-5555 and you ask us to skip +-+ and
+        #     For example, if your string is 555-555-5555 and you ask us to skip `-` and
         #     mask 5 chars with * we would produce ***-*55-5555.
         class CharacterMaskConfig; end
 
@@ -1263,19 +1263,19 @@ module Google
         # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
         # @!attribute [rw] lower_bound
         #   @return [Google::Privacy::Dlp::V2::Value]
-        #     Lower bound value of buckets. All values less than +lower_bound+ are
-        #     grouped together into a single bucket; for example if +lower_bound+ = 10,
+        #     Lower bound value of buckets. All values less than `lower_bound` are
+        #     grouped together into a single bucket; for example if `lower_bound` = 10,
         #     then all values less than 10 are replaced with the value “-10”. [Required].
         # @!attribute [rw] upper_bound
         #   @return [Google::Privacy::Dlp::V2::Value]
         #     Upper bound value of buckets. All values greater than upper_bound are
-        #     grouped together into a single bucket; for example if +upper_bound+ = 89,
+        #     grouped together into a single bucket; for example if `upper_bound` = 89,
         #     then all values greater than 89 are replaced with the value “89+”.
         #     [Required].
         # @!attribute [rw] bucket_size
         #   @return [Float]
         #     Size of each bucket (except for minimum and maximum buckets). So if
-        #     +lower_bound+ = 10, +upper_bound+ = 89, and +bucket_size+ = 10, then the
+        #     `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
         #     following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
         #     60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works. [Required].
         class FixedSizeBucketingConfig; end
@@ -1285,7 +1285,7 @@ module Google
         # such as 1-30 -> LOW 31-65 -> MEDIUM 66-100 -> HIGH
         # This can be used on
         # data of type: number, long, string, timestamp.
-        # If the bound +Value+ type differs from the type of data being transformed, we
+        # If the bound `Value` type differs from the type of data being transformed, we
         # will first attempt converting the type of the data to be transformed to match
         # the type of the bound before comparing.
         # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
@@ -1309,7 +1309,7 @@ module Google
         end
 
         # Replaces an identifier with a surrogate using FPE with the FFX
-        # mode of operation; however when used in the +ReidentifyContent+ API method,
+        # mode of operation; however when used in the `ReidentifyContent` API method,
         # it serves the opposite function by reversing the surrogate back into
         # the original identifier.
         # The identifier must be encoded as ASCII.
@@ -1334,8 +1334,8 @@ module Google
         #
         #     a default tweak will be used.
         #
-        #     Note that case (1) is expected when an +InfoTypeTransformation+ is
-        #     applied to both structured and non-structured +ContentItem+s.
+        #     Note that case (1) is expected when an `InfoTypeTransformation` is
+        #     applied to both structured and non-structured `ContentItem`s.
         #     Currently, the referenced field may be of value type integer or string.
         #
         #     The tweak is constructed as a sequence of bytes in big endian byte order
@@ -1371,7 +1371,7 @@ module Google
         #
         #     This annotation identifies the surrogate when inspecting content using the
         #     custom infoType
-        #     [+SurrogateType+](https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype).
+        #     [`SurrogateType`](https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype).
         #     This facilitates reversal of the surrogate when it occurs in free text.
         #
         #     In order for inspection to work properly, the name of this infoType must
@@ -1424,7 +1424,7 @@ module Google
         #   @return [String]
         #     Name of the key. [required]
         #     This is an arbitrary string used to differentiate different keys.
-        #     A unique key is generated per name: two separate +TransientCryptoKey+
+        #     A unique key is generated per name: two separate `TransientCryptoKey`
         #     protos share the same generated key if their names are the same.
         #     When the data crypto key is generated, this name is not used in any way
         #     (repeating the api call will result in a different key being generated).
@@ -1476,7 +1476,7 @@ module Google
         class DateShiftConfig; end
 
         # A type of transformation that will scan unstructured text and
-        # apply various +PrimitiveTransformation+s to each finding, where the
+        # apply various `PrimitiveTransformation`s to each finding, where the
         # transformation is applied to only values that were identified as a specific
         # info_type.
         # @!attribute [rw] transformations
@@ -1490,7 +1490,7 @@ module Google
           #   @return [Array<Google::Privacy::Dlp::V2::InfoType>]
           #     InfoTypes to apply the transformation to. An empty list will cause
           #     this transformation to apply to all findings that correspond to
-          #     infoTypes that were requested in +InspectConfig+.
+          #     infoTypes that were requested in `InspectConfig`.
           # @!attribute [rw] primitive_transformation
           #   @return [Google::Privacy::Dlp::V2::PrimitiveTransformation]
           #     Primitive transformation to apply to the infoType. [required]
@@ -1504,7 +1504,7 @@ module Google
         # @!attribute [rw] condition
         #   @return [Google::Privacy::Dlp::V2::RecordCondition]
         #     Only apply the transformation if the condition evaluates to true for the
-        #     given +RecordCondition+. The conditions are allowed to reference fields
+        #     given `RecordCondition`. The conditions are allowed to reference fields
         #     that are not used in the actual transformation. [optional]
         #
         #     Example Use Cases:
@@ -1518,7 +1518,7 @@ module Google
         # @!attribute [rw] info_type_transformations
         #   @return [Google::Privacy::Dlp::V2::InfoTypeTransformations]
         #     Treat the contents of the field as free text, and selectively
-        #     transform content that matches an +InfoType+.
+        #     transform content that matches an `InfoType`.
         class FieldTransformation; end
 
         # A type of transformation that is applied over structured data such as a
@@ -1546,20 +1546,20 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::RecordCondition::Expressions]
         #     An expression.
         class RecordCondition
-          # The field type of +value+ and +field+ do not need to match to be
+          # The field type of `value` and `field` do not need to match to be
           # considered equal, but not all comparisons are possible.
           #
-          # A +value+ of type:
+          # A `value` of type:
           #
-          # * +string+ can be compared against all other types
-          # * +boolean+ can only be compared against other booleans
-          # * +integer+ can be compared against doubles or a string if the string value
+          # * `string` can be compared against all other types
+          # * `boolean` can only be compared against other booleans
+          # * `integer` can be compared against doubles or a string if the string value
           #   can be parsed as an integer.
-          # * +double+ can be compared against integers or a string if the string can
+          # * `double` can be compared against integers or a string if the string can
           #   be parsed as a double.
-          # * +Timestamp+ can be compared against strings in RFC 3339 date string
+          # * `Timestamp` can be compared against strings in RFC 3339 date string
           #   format.
-          # * +TimeOfDay+ can be compared against timestamps and strings in the format
+          # * `TimeOfDay` can be compared against timestamps and strings in the format
           #   of 'HH:mm:ss'.
           #
           # If we fail to compare do to type mismatch, a warning will be given and
@@ -1572,7 +1572,7 @@ module Google
           #     Operator used to compare the field or infoType to the value. [required]
           # @!attribute [rw] value
           #   @return [Google::Privacy::Dlp::V2::Value]
-          #     Value to compare against. [Required, except for +EXISTS+ tests.]
+          #     Value to compare against. [Required, except for `EXISTS` tests.]
           class Condition; end
 
           # A collection of conditions.
@@ -1584,7 +1584,7 @@ module Google
           # @!attribute [rw] logical_operator
           #   @return [Google::Privacy::Dlp::V2::RecordCondition::Expressions::LogicalOperator]
           #     The operator to apply to the result of conditions. Default and currently
-          #     only supported value is +AND+.
+          #     only supported value is `AND`.
           # @!attribute [rw] conditions
           #   @return [Google::Privacy::Dlp::V2::RecordCondition::Conditions]
           class Expressions
@@ -1632,7 +1632,7 @@ module Google
         #     Total size in bytes that were transformed in some way.
         class TransformationSummary
           # A collection that informs the user the number of times a particular
-          # +TransformationResultCode+ and error details occurred.
+          # `TransformationResultCode` and error details occurred.
           # @!attribute [rw] count
           #   @return [Integer]
           # @!attribute [rw] code
@@ -1675,8 +1675,8 @@ module Google
         #     The template name. Output only.
         #
         #     The template will have one of the following formats:
-        #     +projects/PROJECT_ID/inspectTemplates/TEMPLATE_ID+ OR
-        #     +organizations/ORGANIZATION_ID/inspectTemplates/TEMPLATE_ID+
+        #     `projects/PROJECT_ID/inspectTemplates/TEMPLATE_ID` OR
+        #     `organizations/ORGANIZATION_ID/inspectTemplates/TEMPLATE_ID`
         # @!attribute [rw] display_name
         #   @return [String]
         #     Display name (max 256 chars).
@@ -1701,8 +1701,8 @@ module Google
         #     The template name. Output only.
         #
         #     The template will have one of the following formats:
-        #     +projects/PROJECT_ID/deidentifyTemplates/TEMPLATE_ID+ OR
-        #     +organizations/ORGANIZATION_ID/deidentifyTemplates/TEMPLATE_ID+
+        #     `projects/PROJECT_ID/deidentifyTemplates/TEMPLATE_ID` OR
+        #     `organizations/ORGANIZATION_ID/deidentifyTemplates/TEMPLATE_ID`
         # @!attribute [rw] display_name
         #   @return [String]
         #     Display name (max 256 chars).
@@ -1736,7 +1736,7 @@ module Google
         #   @return [String]
         #     Unique resource name for the triggeredJob, assigned by the service when the
         #     triggeredJob is created, for example
-        #     +projects/dlp-test-project/triggeredJobs/53234423+.
+        #     `projects/dlp-test-project/triggeredJobs/53234423`.
         # @!attribute [rw] display_name
         #   @return [String]
         #     Display name (max 100 chars)
@@ -1848,7 +1848,7 @@ module Google
         #   @return [String]
         #     The template id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: +[a-zA-Z\\d-]++. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateInspectTemplateRequest; end
 
@@ -1856,7 +1856,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of organization and inspectTemplate to be updated, for
-        #     example +organizations/433245324/inspectTemplates/432452342+ or
+        #     example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         # @!attribute [rw] inspect_template
         #   @return [Google::Privacy::Dlp::V2::InspectTemplate]
@@ -1870,7 +1870,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the organization and inspectTemplate to be read, for
-        #     example +organizations/433245324/inspectTemplates/432452342+ or
+        #     example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         class GetInspectTemplateRequest; end
 
@@ -1882,7 +1882,7 @@ module Google
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional page token to continue retrieval. Comes from previous call
-        #     to +ListInspectTemplates+.
+        #     to `ListInspectTemplates`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional size of the page, can be limited by server. If zero server returns
@@ -1903,7 +1903,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the organization and inspectTemplate to be deleted, for
-        #     example +organizations/433245324/inspectTemplates/432452342+ or
+        #     example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         class DeleteInspectTemplateRequest; end
 
@@ -1918,7 +1918,7 @@ module Google
         #   @return [String]
         #     The trigger id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: +[a-zA-Z\\d-]++. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateJobTriggerRequest; end
 
@@ -1926,7 +1926,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the project and the triggeredJob, for example
-        #     +projects/dlp-test-project/jobTriggers/53234423+.
+        #     `projects/dlp-test-project/jobTriggers/53234423`.
         # @!attribute [rw] job_trigger
         #   @return [Google::Privacy::Dlp::V2::JobTrigger]
         #     New JobTrigger value.
@@ -1939,7 +1939,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the project and the triggeredJob, for example
-        #     +projects/dlp-test-project/jobTriggers/53234423+.
+        #     `projects/dlp-test-project/jobTriggers/53234423`.
         class GetJobTriggerRequest; end
 
         # Request message for CreateDlpJobRequest. Used to initiate long running
@@ -1956,18 +1956,18 @@ module Google
         #   @return [String]
         #     The job id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: +[a-zA-Z\\d-]++. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateDlpJobRequest; end
 
         # Request message for ListJobTriggers.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example +projects/my-project-id+.
+        #     The parent resource name, for example `projects/my-project-id`.
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional page token to continue retrieval. Comes from previous call
-        #     to ListJobTriggers. +order_by+ field must not
+        #     to ListJobTriggers. `order_by` field must not
         #     change for subsequent calls.
         # @!attribute [rw] page_size
         #   @return [Integer]
@@ -1975,17 +1975,17 @@ module Google
         # @!attribute [rw] order_by
         #   @return [String]
         #     Optional comma separated list of triggeredJob fields to order by,
-        #     followed by +asc+ or +desc+ postfix. This list is case-insensitive,
+        #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
         #     insignificant.
         #
-        #     Example: +name asc,update_time, create_time desc+
+        #     Example: `name asc,update_time, create_time desc`
         #
         #     Supported fields are:
         #
-        #     * +create_time+: corresponds to time the triggeredJob was created.
-        #     * +update_time+: corresponds to time the triggeredJob was last updated.
-        #     * +name+: corresponds to JobTrigger's name.
+        #     * `create_time`: corresponds to time the triggeredJob was created.
+        #     * `update_time`: corresponds to time the triggeredJob was last updated.
+        #     * `name`: corresponds to JobTrigger's name.
         class ListJobTriggersRequest; end
 
         # Response message for ListJobTriggers.
@@ -2002,7 +2002,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the project and the triggeredJob, for example
-        #     +projects/dlp-test-project/jobTriggers/53234423+.
+        #     `projects/dlp-test-project/jobTriggers/53234423`.
         class DeleteJobTriggerRequest; end
 
         # @!attribute [rw] storage_config
@@ -2014,7 +2014,7 @@ module Google
         # @!attribute [rw] inspect_template_name
         #   @return [String]
         #     If provided, will be used as the default for all values in InspectConfig.
-        #     +inspect_config+ will be merged into the values persisted as part of the
+        #     `inspect_config` will be merged into the values persisted as part of the
         #     template.
         # @!attribute [rw] actions
         #   @return [Array<Google::Privacy::Dlp::V2::Action>]
@@ -2092,16 +2092,16 @@ module Google
         #     Supported syntax:
         #
         #     * Filter expressions are made up of one or more restrictions.
-        #     * Restrictions can be combined by +AND+ or +OR+ logical operators. A
-        #       sequence of restrictions implicitly uses +AND+.
-        #     * A restriction has the form of +<field> <operator> <value>+.
+        #     * Restrictions can be combined by `AND` or `OR` logical operators. A
+        #       sequence of restrictions implicitly uses `AND`.
+        #     * A restriction has the form of `<field> <operator> <value>`.
         #     * Supported fields/values for inspect jobs:
-        #       * +state+ - PENDING|RUNNING|CANCELED|FINISHED|FAILED
-        #         * +inspected_storage+ - DATASTORE|CLOUD_STORAGE|BIGQUERY
-        #         * +trigger_name+ - The resource name of the trigger that created job.
+        #       * `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
+        #         * `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+        #         * `trigger_name` - The resource name of the trigger that created job.
         #       * Supported fields for risk analysis jobs:
-        #         * +state+ - RUNNING|CANCELED|FINISHED|FAILED
-        #       * The operator must be +=+ or +!=+.
+        #         * `state` - RUNNING|CANCELED|FINISHED|FAILED
+        #       * The operator must be `=` or `!=`.
         #
         #       Examples:
         #
@@ -2118,7 +2118,7 @@ module Google
         #     The standard list page token.
         # @!attribute [rw] type
         #   @return [Google::Privacy::Dlp::V2::DlpJobType]
-        #     The type of job. Defaults to +DlpJobType.INSPECT+
+        #     The type of job. Defaults to `DlpJobType.INSPECT`
         class ListDlpJobsRequest; end
 
         # The response message for listing DLP jobs.
@@ -2154,7 +2154,7 @@ module Google
         #   @return [String]
         #     The template id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: +[a-zA-Z\\d-]++. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateDeidentifyTemplateRequest; end
 
@@ -2162,7 +2162,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of organization and deidentify template to be updated, for
-        #     example +organizations/433245324/deidentifyTemplates/432452342+ or
+        #     example `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         # @!attribute [rw] deidentify_template
         #   @return [Google::Privacy::Dlp::V2::DeidentifyTemplate]
@@ -2176,7 +2176,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the organization and deidentify template to be read, for
-        #     example +organizations/433245324/deidentifyTemplates/432452342+ or
+        #     example `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         class GetDeidentifyTemplateRequest; end
 
@@ -2188,7 +2188,7 @@ module Google
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional page token to continue retrieval. Comes from previous call
-        #     to +ListDeidentifyTemplates+.
+        #     to `ListDeidentifyTemplates`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional size of the page, can be limited by server. If zero server returns
@@ -2210,7 +2210,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the organization and deidentify template to be deleted,
-        #     for example +organizations/433245324/deidentifyTemplates/432452342+ or
+        #     for example `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         class DeleteDeidentifyTemplateRequest; end
 
@@ -2218,7 +2218,7 @@ module Google
         # up to the maximum size defined in the
         # [limits](https://cloud.google.com/dlp/limits) page. The artifacts of
         # dictionary creation are stored in the specified Google Cloud Storage
-        # location. Consider using +CustomInfoType.Dictionary+ for smaller dictionaries
+        # location. Consider using `CustomInfoType.Dictionary` for smaller dictionaries
         # that satisfy the size requirements.
         # @!attribute [rw] output_path
         #   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
@@ -2270,7 +2270,7 @@ module Google
         #     deleted by the user or another system, the dictionary becomes invalid.
         #     <p>If any errors occur, fix the problem indicated by the error message and
         #     use the UpdateStoredInfoType API method to create another version of the
-        #     storedInfoType to continue using it, reusing the same +config+ if it was
+        #     storedInfoType to continue using it, reusing the same `config` if it was
         #     not the source of the error.
         class StoredInfoTypeVersion; end
 
@@ -2300,7 +2300,7 @@ module Google
         #   @return [String]
         #     The storedInfoType ID can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
-        #     expression: +[a-zA-Z\\d-]++. The maximum length is 100
+        #     expression: `[a-zA-Z\\d-]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         class CreateStoredInfoTypeRequest; end
 
@@ -2308,7 +2308,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of organization and storedInfoType to be updated, for
-        #     example +organizations/433245324/storedInfoTypes/432452342+ or
+        #     example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         # @!attribute [rw] config
         #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeConfig]
@@ -2324,7 +2324,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the organization and storedInfoType to be read, for
-        #     example +organizations/433245324/storedInfoTypes/432452342+ or
+        #     example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class GetStoredInfoTypeRequest; end
 
@@ -2336,7 +2336,7 @@ module Google
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional page token to continue retrieval. Comes from previous call
-        #     to +ListStoredInfoTypes+.
+        #     to `ListStoredInfoTypes`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional size of the page, can be limited by server. If zero server returns
@@ -2357,7 +2357,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the organization and storedInfoType to be deleted, for
-        #     example +organizations/433245324/storedInfoTypes/432452342+ or
+        #     example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class DeleteStoredInfoTypeRequest; end
 
@@ -2432,12 +2432,12 @@ module Google
           READY = 2
 
           # StoredInfoType creation failed. All relevant error messages are returned in
-          # the +StoredInfoTypeVersion+ message.
+          # the `StoredInfoTypeVersion` message.
           FAILED = 3
 
           # StoredInfoType is no longer valid because artifacts stored in
           # user-controlled storage were modified. To fix an invalid StoredInfoType,
-          # use the +UpdateStoredInfoType+ method to create a new version.
+          # use the `UpdateStoredInfoType` method to create a new version.
           INVALID = 4
         end
       end

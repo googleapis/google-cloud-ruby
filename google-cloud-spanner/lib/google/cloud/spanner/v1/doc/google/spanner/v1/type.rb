@@ -16,22 +16,22 @@
 module Google
   module Spanner
     module V1
-      # +Type+ indicates the type of a Cloud Spanner value, as might be stored in a
+      # `Type` indicates the type of a Cloud Spanner value, as might be stored in a
       # table cell or returned from an SQL query.
       # @!attribute [rw] code
       #   @return [Google::Spanner::V1::TypeCode]
       #     Required. The {Google::Spanner::V1::TypeCode TypeCode} for this type.
       # @!attribute [rw] array_element_type
       #   @return [Google::Spanner::V1::Type]
-      #     If {Google::Spanner::V1::Type#code code} == {Google::Spanner::V1::TypeCode::ARRAY ARRAY}, then +array_element_type+
+      #     If {Google::Spanner::V1::Type#code code} == {Google::Spanner::V1::TypeCode::ARRAY ARRAY}, then `array_element_type`
       #     is the type of the array elements.
       # @!attribute [rw] struct_type
       #   @return [Google::Spanner::V1::StructType]
-      #     If {Google::Spanner::V1::Type#code code} == {Google::Spanner::V1::TypeCode::STRUCT STRUCT}, then +struct_type+
+      #     If {Google::Spanner::V1::Type#code code} == {Google::Spanner::V1::TypeCode::STRUCT STRUCT}, then `struct_type`
       #     provides type information for the struct's fields.
       class Type; end
 
-      # +StructType+ defines the fields of a {Google::Spanner::V1::TypeCode::STRUCT STRUCT} type.
+      # `StructType` defines the fields of a {Google::Spanner::V1::TypeCode::STRUCT STRUCT} type.
       # @!attribute [rw] fields
       #   @return [Array<Google::Spanner::V1::StructType::Field>]
       #     The list of fields that make up this struct. Order is
@@ -39,17 +39,17 @@ module Google
       #     lists, where the order of field values matches the order of
       #     fields in the {Google::Spanner::V1::StructType StructType}. In turn, the order of fields
       #     matches the order of columns in a read request, or the order of
-      #     fields in the +SELECT+ clause of a query.
+      #     fields in the `SELECT` clause of a query.
       class StructType
         # Message representing a single field of a struct.
         # @!attribute [rw] name
         #   @return [String]
         #     The name of the field. For reads, this is the column name. For
-        #     SQL queries, it is the column alias (e.g., +"Word"+ in the
-        #     query +"SELECT 'hello' AS Word"+), or the column name (e.g.,
-        #     +"ColName"+ in the query +"SELECT ColName FROM Table"+). Some
+        #     SQL queries, it is the column alias (e.g., `"Word"` in the
+        #     query `"SELECT 'hello' AS Word"`), or the column name (e.g.,
+        #     `"ColName"` in the query `"SELECT ColName FROM Table"`). Some
         #     columns might have an empty name (e.g., !"SELECT
-        #     UPPER(ColName)"+). Note that a query result can contain
+        #     UPPER(ColName)"`). Note that a query result can contain
         #     multiple fields with the same name.
         # @!attribute [rw] type
         #   @return [Google::Spanner::V1::Type]
@@ -57,52 +57,52 @@ module Google
         class Field; end
       end
 
-      # +TypeCode+ is used as part of {Google::Spanner::V1::Type Type} to
+      # `TypeCode` is used as part of {Google::Spanner::V1::Type Type} to
       # indicate the type of a Cloud Spanner value.
       #
       # Each legal value of a type can be encoded to or decoded from a JSON
       # value, using the encodings described below. All Cloud Spanner values can
-      # be +null+, regardless of type; +null+s are always encoded as a JSON
-      # +null+.
+      # be `null`, regardless of type; `null`s are always encoded as a JSON
+      # `null`.
       module TypeCode
         # Not specified.
         TYPE_CODE_UNSPECIFIED = 0
 
-        # Encoded as JSON +true+ or +false+.
+        # Encoded as JSON `true` or `false`.
         BOOL = 1
 
-        # Encoded as +string+, in decimal format.
+        # Encoded as `string`, in decimal format.
         INT64 = 2
 
-        # Encoded as +number+, or the strings +"NaN"+, +"Infinity"+, or
-        # +"-Infinity"+.
+        # Encoded as `number`, or the strings `"NaN"`, `"Infinity"`, or
+        # `"-Infinity"`.
         FLOAT64 = 3
 
-        # Encoded as +string+ in RFC 3339 timestamp format. The time zone
-        # must be present, and must be +"Z"+.
+        # Encoded as `string` in RFC 3339 timestamp format. The time zone
+        # must be present, and must be `"Z"`.
         #
         # If the schema has the column option
-        # +allow_commit_timestamp=true+, the placeholder string
-        # +"spanner.commit_timestamp()"+ can be used to instruct the system
+        # `allow_commit_timestamp=true`, the placeholder string
+        # `"spanner.commit_timestamp()"` can be used to instruct the system
         # to insert the commit timestamp associated with the transaction
         # commit.
         TIMESTAMP = 4
 
-        # Encoded as +string+ in RFC 3339 date format.
+        # Encoded as `string` in RFC 3339 date format.
         DATE = 5
 
-        # Encoded as +string+.
+        # Encoded as `string`.
         STRING = 6
 
-        # Encoded as a base64-encoded +string+, as described in RFC 4648,
+        # Encoded as a base64-encoded `string`, as described in RFC 4648,
         # section 4.
         BYTES = 7
 
-        # Encoded as +list+, where the list elements are represented
+        # Encoded as `list`, where the list elements are represented
         # according to {Google::Spanner::V1::Type#array_element_type array_element_type}.
         ARRAY = 8
 
-        # Encoded as +list+, where list element +i+ is represented according
+        # Encoded as `list`, where list element `i` is represented according
         # to [struct_type.fields[i]][google.spanner.v1.StructType.fields].
         STRUCT = 9
       end

@@ -22,7 +22,7 @@ module Google
         #   @return [String]
         #     Required. Unique name of the resource in this scope including project and
         #     location using the form:
-        #         +projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #
         #     Note: Redis instances are managed and addressed at regional level so
         #     location_id here refers to a GCP region; however, users may choose which
@@ -52,7 +52,7 @@ module Google
         #     Optional. The version of Redis software.
         #     If not provided, latest supported version will be used. Updating the
         #     version will perform an upgrade/downgrade to the new version. Currently,
-        #     the supported values are +REDIS_3_2+ for Redis 3.2.
+        #     the supported values are `REDIS_3_2` for Redis 3.2.
         # @!attribute [rw] reserved_ip_range
         #   @return [String]
         #     Optional. The CIDR range of internal addresses that are reserved for this
@@ -101,7 +101,7 @@ module Google
         #   @return [String]
         #     Optional. The full name of the Google Compute Engine
         #     [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the
-        #     instance is connected. If left unspecified, the +default+ network
+        #     instance is connected. If left unspecified, the `default` network
         #     will be used.
         class Instance
           # Represents the different states of a Redis instance.
@@ -124,7 +124,7 @@ module Google
             DELETING = 4
 
             # Redis instance is being repaired and may be unusable. Details can be
-            # found in the +status_message+ field.
+            # found in the `status_message` field.
             REPAIRING = 5
 
             # Maintenance is being performed on this Redis instance.
@@ -148,8 +148,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the instance location using the form:
-        #         +projects/\\{project_id}/locations/\\{location_id}+
-        #     where +location_id+ refers to a GCP region
+        #         `projects/{project_id}/locations/{location_id}`
+        #     where `location_id` refers to a GCP region
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     The maximum number of items to return.
@@ -171,7 +171,7 @@ module Google
         #     A list of Redis instances in the project in the specified location,
         #     or across all locations.
         #
-        #     If the +location_id+ in the parent field of the request is "-", all regions
+        #     If the `location_id` in the parent field of the request is "-", all regions
         #     available to the project are queried, and the results aggregated.
         #     If in such an aggregated query a location is unavailable, a dummy Redis
         #     entry is included in the response with the "name" field set to a value of
@@ -188,16 +188,16 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. Redis instance resource name using the form:
-        #         +projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
-        #     where +location_id+ refers to a GCP region
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region
         class GetInstanceRequest; end
 
         # Request for {Google::Cloud::Redis::V1::CloudRedis::CreateInstance CreateInstance}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the instance location using the form:
-        #         +projects/\\{project_id}/locations/\\{location_id}+
-        #     where +location_id+ refers to a GCP region
+        #         `projects/{project_id}/locations/{location_id}`
+        #     where `location_id` refers to a GCP region
         # @!attribute [rw] instance_id
         #   @return [String]
         #     Required. The logical name of the Redis instance in the customer project
@@ -220,10 +220,10 @@ module Google
         #     this field. The elements of the repeated paths field may only include these
         #     fields from {CloudRedis::Instance Instance}:
         #
-        #     * +displayName+
-        #       * +labels+
-        #     * +memorySizeGb+
-        #       * +redisConfig+
+        #     * `displayName`
+        #       * `labels`
+        #     * `memorySizeGb`
+        #       * `redisConfig`
         # @!attribute [rw] instance
         #   @return [Google::Cloud::Redis::V1::Instance]
         #     Required. Update description.
@@ -234,8 +234,8 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. Redis instance resource name using the form:
-        #         +projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
-        #     where +location_id+ refers to a GCP region
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region
         class DeleteInstanceRequest; end
 
         # Represents the v1 metadata of the long-running operation.
@@ -265,12 +265,12 @@ module Google
         # This location metadata represents additional configuration options for a
         # given location where a Redis instance may be created. All fields are output
         # only. It is returned as content of the
-        # +google.cloud.location.Location.metadata+ field.
+        # `google.cloud.location.Location.metadata` field.
         # @!attribute [rw] available_zones
         #   @return [Hash{String => Google::Cloud::Redis::V1::ZoneMetadata}]
         #     Output only. The set of available zones in the location. The map is keyed
         #     by the lowercase ID of each zone, as defined by GCE. These keys can be
-        #     specified in +location_id+ or +alternative_location_id+ fields when
+        #     specified in `location_id` or `alternative_location_id` fields when
         #     creating a Redis instance.
         class LocationMetadata; end
 

@@ -32,20 +32,20 @@ module Google
       #
       #     Firestore guarantees a stable ordering through the following rules:
       #
-      #     * Any field required to appear in +order_by+, that is not already
-      #       specified in +order_by+, is appended to the order in field name order
+      #     * Any field required to appear in `order_by`, that is not already
+      #       specified in `order_by`, is appended to the order in field name order
       #       by default.
-      #     * If an order on +__name__+ is not specified, it is appended by default.
+      #     * If an order on `__name__` is not specified, it is appended by default.
       #
       #     Fields are appended with the same sort direction as the last order
       #     specified, or 'ASCENDING' if no order was specified. For example:
       #
-      #     * +SELECT * FROM Foo ORDER BY A+ becomes
-      #       +SELECT * FROM Foo ORDER BY A, __name__+
-      #     * +SELECT * FROM Foo ORDER BY A DESC+ becomes
-      #       +SELECT * FROM Foo ORDER BY A DESC, __name__ DESC+
-      #     * +SELECT * FROM Foo WHERE A > 1+ becomes
-      #       +SELECT * FROM Foo WHERE A > 1 ORDER BY A, __name__+
+      #     * `SELECT * FROM Foo ORDER BY A` becomes
+      #       `SELECT * FROM Foo ORDER BY A, __name__`
+      #     * `SELECT * FROM Foo ORDER BY A DESC` becomes
+      #       `SELECT * FROM Foo ORDER BY A DESC, __name__ DESC`
+      #     * `SELECT * FROM Foo WHERE A > 1` becomes
+      #       `SELECT * FROM Foo WHERE A > 1 ORDER BY A, __name__`
       # @!attribute [rw] start_at
       #   @return [Google::Firestore::V1beta1::Cursor]
       #     A starting point for the query results.
@@ -65,7 +65,7 @@ module Google
       #     Applies after all other constraints.
       #     Must be >= 0 if specified.
       class StructuredQuery
-        # A selection of a collection, such as +messages as m1+.
+        # A selection of a collection, such as `messages as m1`.
         # @!attribute [rw] collection_id
         #   @return [String]
         #     The collection ID.
@@ -73,7 +73,7 @@ module Google
         # @!attribute [rw] all_descendants
         #   @return [true, false]
         #     When false, selects only collections that are immediate children of
-        #     the +parent+ specified in the containing +RunQueryRequest+.
+        #     the `parent` specified in the containing `RunQueryRequest`.
         #     When true, selects all descendant collections.
         class CollectionSelector; end
 
@@ -124,17 +124,17 @@ module Google
             # Unspecified. This value must not be used.
             OPERATOR_UNSPECIFIED = 0
 
-            # Less than. Requires that the field come first in +order_by+.
+            # Less than. Requires that the field come first in `order_by`.
             LESS_THAN = 1
 
-            # Less than or equal. Requires that the field come first in +order_by+.
+            # Less than or equal. Requires that the field come first in `order_by`.
             LESS_THAN_OR_EQUAL = 2
 
-            # Greater than. Requires that the field come first in +order_by+.
+            # Greater than. Requires that the field come first in `order_by`.
             GREATER_THAN = 3
 
             # Greater than or equal. Requires that the field come first in
-            # +order_by+.
+            # `order_by`.
             GREATER_THAN_OR_EQUAL = 4
 
             # Equal.
@@ -172,10 +172,10 @@ module Google
         #     The field to order by.
         # @!attribute [rw] direction
         #   @return [Google::Firestore::V1beta1::StructuredQuery::Direction]
-        #     The direction to order by. Defaults to +ASCENDING+.
+        #     The direction to order by. Defaults to `ASCENDING`.
         class Order; end
 
-        # A reference to a field, such as +max(messages.time) as max_time+.
+        # A reference to a field, such as `max(messages.time) as max_time`.
         # @!attribute [rw] field_path
         #   @return [String]
         class FieldReference; end
@@ -186,7 +186,7 @@ module Google
         #     The fields to return.
         #
         #     If empty, all fields are returned. To only return the name
-        #     of the document, use +['__name__']+.
+        #     of the document, use `['__name__']`.
         class Projection; end
 
         # A sort direction.

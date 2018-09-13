@@ -20,9 +20,9 @@ module Google
       # specify access control policies for Cloud Platform resources.
       #
       #
-      # A +Policy+ consists of a list of +bindings+. A +Binding+ binds a list of
-      # +members+ to a +role+, where the members can be user accounts, Google groups,
-      # Google domains, and service accounts. A +role+ is a named list of permissions
+      # A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
+      # `members` to a `role`, where the members can be user accounts, Google groups,
+      # Google domains, and service accounts. A `role` is a named list of permissions
       # defined by IAM.
       #
       # **Example**
@@ -49,55 +49,55 @@ module Google
       # [IAM developer's guide](https://cloud.google.com/iam).
       # @!attribute [rw] version
       #   @return [Integer]
-      #     Version of the +Policy+. The default version is 0.
+      #     Version of the `Policy`. The default version is 0.
       # @!attribute [rw] bindings
       #   @return [Array<Google::Iam::V1::Binding>]
-      #     Associates a list of +members+ to a +role+.
-      #     Multiple +bindings+ must not be specified for the same +role+.
-      #     +bindings+ with no members will result in an error.
+      #     Associates a list of `members` to a `role`.
+      #     Multiple `bindings` must not be specified for the same `role`.
+      #     `bindings` with no members will result in an error.
       # @!attribute [rw] etag
       #   @return [String]
-      #     +etag+ is used for optimistic concurrency control as a way to help
+      #     `etag` is used for optimistic concurrency control as a way to help
       #     prevent simultaneous updates of a policy from overwriting each other.
-      #     It is strongly suggested that systems make use of the +etag+ in the
+      #     It is strongly suggested that systems make use of the `etag` in the
       #     read-modify-write cycle to perform policy updates in order to avoid race
-      #     conditions: An +etag+ is returned in the response to +getIamPolicy+, and
-      #     systems are expected to put that etag in the request to +setIamPolicy+ to
+      #     conditions: An `etag` is returned in the response to `getIamPolicy`, and
+      #     systems are expected to put that etag in the request to `setIamPolicy` to
       #     ensure that their change will be applied to the same version of the policy.
       #
-      #     If no +etag+ is provided in the call to +setIamPolicy+, then the existing
+      #     If no `etag` is provided in the call to `setIamPolicy`, then the existing
       #     policy is overwritten blindly.
       class Policy; end
 
-      # Associates +members+ with a +role+.
+      # Associates `members` with a `role`.
       # @!attribute [rw] role
       #   @return [String]
-      #     Role that is assigned to +members+.
-      #     For example, +roles/viewer+, +roles/editor+, or +roles/owner+.
+      #     Role that is assigned to `members`.
+      #     For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
       #     Required
       # @!attribute [rw] members
       #   @return [Array<String>]
       #     Specifies the identities requesting access for a Cloud Platform resource.
-      #     +members+ can have the following values:
+      #     `members` can have the following values:
       #
-      #     * +allUsers+: A special identifier that represents anyone who is
+      #     * `allUsers`: A special identifier that represents anyone who is
       #       on the internet; with or without a Google account.
       #
-      #     * +allAuthenticatedUsers+: A special identifier that represents anyone
+      #     * `allAuthenticatedUsers`: A special identifier that represents anyone
       #       who is authenticated with a Google account or a service account.
       #
-      #     * +user:\\{emailid}+: An email address that represents a specific Google
-      #       account. For example, +alice@gmail.com+ or +joe@example.com+.
+      #     * `user:{emailid}`: An email address that represents a specific Google
+      #       account. For example, `alice@gmail.com` or `joe@example.com`.
       #
       #
-      #     * +serviceAccount:\\{emailid}+: An email address that represents a service
-      #       account. For example, +my-other-app@appspot.gserviceaccount.com+.
+      #     * `serviceAccount:{emailid}`: An email address that represents a service
+      #       account. For example, `my-other-app@appspot.gserviceaccount.com`.
       #
-      #     * +group:\\{emailid}+: An email address that represents a Google group.
-      #       For example, +admins@example.com+.
+      #     * `group:{emailid}`: An email address that represents a Google group.
+      #       For example, `admins@example.com`.
       #
-      #     * +domain:\\{domain}+: A Google Apps domain name that represents all the
-      #       users of that domain. For example, +google.com+ or +example.com+.
+      #     * `domain:{domain}`: A Google Apps domain name that represents all the
+      #       users of that domain. For example, `google.com` or `example.com`.
       class Binding; end
 
       # The difference delta between two policies.
@@ -114,8 +114,8 @@ module Google
       #     Required
       # @!attribute [rw] role
       #   @return [String]
-      #     Role that is assigned to +members+.
-      #     For example, +roles/viewer+, +roles/editor+, or +roles/owner+.
+      #     Role that is assigned to `members`.
+      #     For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
       #     Required
       # @!attribute [rw] member
       #   @return [String]

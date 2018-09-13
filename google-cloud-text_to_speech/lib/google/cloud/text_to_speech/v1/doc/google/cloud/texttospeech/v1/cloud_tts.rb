@@ -17,7 +17,7 @@ module Google
   module Cloud
     module Texttospeech
       module V1
-        # The top-level message sent by the client for the +ListVoices+ method.
+        # The top-level message sent by the client for the `ListVoices` method.
         # @!attribute [rw] language_code
         #   @return [String]
         #     Optional (but recommended)
@@ -30,7 +30,7 @@ module Google
         #     supported "yue-*" voices.
         class ListVoicesRequest; end
 
-        # The message returned to the client by the +ListVoices+ method.
+        # The message returned to the client by the `ListVoices` method.
         # @!attribute [rw] voices
         #   @return [Array<Google::Cloud::Texttospeech::V1::Voice>]
         #     The list of voices.
@@ -53,7 +53,7 @@ module Google
         #     The natural sample rate (in hertz) for this voice.
         class Voice; end
 
-        # The top-level message sent by the client for the +SynthesizeSpeech+ method.
+        # The top-level message sent by the client for the `SynthesizeSpeech` method.
         # @!attribute [rw] input
         #   @return [Google::Cloud::Texttospeech::V1::SynthesisInput]
         #     Required. The Synthesizer requires either plain text or SSML as input.
@@ -65,7 +65,7 @@ module Google
         #     Required. The configuration of the synthesized audio.
         class SynthesizeSpeechRequest; end
 
-        # Contains text input to be synthesized. Either +text+ or +ssml+ must be
+        # Contains text input to be synthesized. Either `text` or `ssml` must be
         # supplied. Supplying both or neither returns
         # {Google::Rpc::Code::INVALID_ARGUMENT}. The input size is limited to 5000
         # characters.
@@ -142,7 +142,7 @@ module Google
         #     and return {Google::Rpc::Code::INVALID_ARGUMENT}.
         class AudioConfig; end
 
-        # The message returned to the client by the +SynthesizeSpeech+ method.
+        # The message returned to the client by the `SynthesizeSpeech` method.
         # @!attribute [rw] audio_content
         #   @return [String]
         #     The audio data bytes encoded as specified in the request, including the

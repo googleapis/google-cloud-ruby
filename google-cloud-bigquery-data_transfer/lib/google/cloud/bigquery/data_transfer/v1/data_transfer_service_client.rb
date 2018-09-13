@@ -367,7 +367,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/\\{project_id}/dataSources/\\{data_source_id}+
+            #   `projects/{project_id}/dataSources/{data_source_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -399,7 +399,7 @@ module Google
             #
             # @param parent [String]
             #   The BigQuery project id for which data sources should be returned.
-            #   Must be in the form: +projects/\\{project_id}+
+            #   Must be in the form: `projects/{project_id}`
             # @param page_size [Integer]
             #   The maximum number of resources contained in the underlying API
             #   response. If page streaming is performed per-resource, this
@@ -464,7 +464,7 @@ module Google
             # @param authorization_code [String]
             #   Optional OAuth2 authorization code to use with this transfer configuration.
             #   This is required if new credentials are needed, as indicated by
-            #   +CheckValidCreds+.
+            #   `CheckValidCreds`.
             #   In order to obtain authorization_code, please make a
             #   request to
             #   https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
@@ -492,7 +492,7 @@ module Google
             #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path("[PROJECT]")
             #
-            #   # TODO: Initialize +transfer_config+:
+            #   # TODO: Initialize `transfer_config`:
             #   transfer_config = {}
             #   response = data_transfer_service_client.create_transfer_config(formatted_parent, transfer_config)
 
@@ -552,10 +552,10 @@ module Google
             #
             #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #
-            #   # TODO: Initialize +transfer_config+:
+            #   # TODO: Initialize `transfer_config`:
             #   transfer_config = {}
             #
-            #   # TODO: Initialize +update_mask+:
+            #   # TODO: Initialize `update_mask`:
             #   update_mask = {}
             #   response = data_transfer_service_client.update_transfer_config(transfer_config, update_mask)
 
@@ -579,7 +579,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/\\{project_id}/transferConfigs/\\{config_id}+
+            #   `projects/{project_id}/transferConfigs/{config_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -610,7 +610,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/\\{project_id}/transferConfigs/\\{config_id}+
+            #   `projects/{project_id}/transferConfigs/{config_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -641,7 +641,7 @@ module Google
             #
             # @param parent [String]
             #   The BigQuery project id for which data sources
-            #   should be returned: +projects/\\{project_id}+.
+            #   should be returned: `projects/{project_id}`.
             # @param data_source_ids [Array<String>]
             #   When specified, only configurations of requested data sources are returned.
             # @param page_size [Integer]
@@ -703,15 +703,15 @@ module Google
             #
             # @param parent [String]
             #   Transfer configuration name in the form:
-            #   +projects/\\{project_id}/transferConfigs/\\{config_id}+.
+            #   `projects/{project_id}/transferConfigs/{config_id}`.
             # @param start_time [Google::Protobuf::Timestamp | Hash]
             #   Start time of the range of transfer runs. For example,
-            #   +"2017-05-25T00:00:00+00:00"+.
+            #   `"2017-05-25T00:00:00+00:00"`.
             #   A hash of the same form as `Google::Protobuf::Timestamp`
             #   can also be provided.
             # @param end_time [Google::Protobuf::Timestamp | Hash]
             #   End time of the range of transfer runs. For example,
-            #   +"2017-05-30T00:00:00+00:00"+.
+            #   `"2017-05-30T00:00:00+00:00"`.
             #   A hash of the same form as `Google::Protobuf::Timestamp`
             #   can also be provided.
             # @param options [Google::Gax::CallOptions]
@@ -728,10 +728,10 @@ module Google
             #   data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
             #   formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_transfer_config_path("[PROJECT]", "[TRANSFER_CONFIG]")
             #
-            #   # TODO: Initialize +start_time+:
+            #   # TODO: Initialize `start_time`:
             #   start_time = {}
             #
-            #   # TODO: Initialize +end_time+:
+            #   # TODO: Initialize `end_time`:
             #   end_time = {}
             #   response = data_transfer_service_client.schedule_transfer_runs(formatted_parent, start_time, end_time)
 
@@ -754,7 +754,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/\\{project_id}/transferConfigs/\\{config_id}/runs/\\{run_id}+
+            #   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -785,7 +785,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/\\{project_id}/transferConfigs/\\{config_id}/runs/\\{run_id}+
+            #   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -817,7 +817,7 @@ module Google
             # @param parent [String]
             #   Name of transfer configuration for which transfer runs should be retrieved.
             #   Format of transfer configuration resource name is:
-            #   +projects/\\{project_id}/transferConfigs/\\{config_id}+.
+            #   `projects/{project_id}/transferConfigs/{config_id}`.
             # @param states [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferState>]
             #   When specified, only transfer runs with requested states are returned.
             # @param page_size [Integer]
@@ -880,7 +880,7 @@ module Google
             #
             # @param parent [String]
             #   Transfer run name in the form:
-            #   +projects/\\{project_id}/transferConfigs/\\{config_Id}/runs/\\{run_id}+.
+            #   `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
             # @param page_size [Integer]
             #   The maximum number of resources contained in the underlying API
             #   response. If page streaming is performed per-resource, this
@@ -945,7 +945,7 @@ module Google
             #
             # @param name [String]
             #   The data source in the form:
-            #   +projects/\\{project_id}/dataSources/\\{data_source_id}+
+            #   `projects/{project_id}/dataSources/{data_source_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.

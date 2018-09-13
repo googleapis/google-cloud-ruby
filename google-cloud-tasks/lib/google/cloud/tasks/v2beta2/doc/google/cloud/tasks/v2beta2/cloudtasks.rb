@@ -23,12 +23,12 @@ module Google
         #     Required.
         #
         #     The location name.
-        #     For example: +projects/PROJECT_ID/locations/LOCATION_ID+
+        #     For example: `projects/PROJECT_ID/locations/LOCATION_ID`
         # @!attribute [rw] filter
         #   @return [String]
-        #     +filter+ can be used to specify a subset of queues. Any {Google::Cloud::Tasks::V2beta2::Queue Queue}
+        #     `filter` can be used to specify a subset of queues. Any {Google::Cloud::Tasks::V2beta2::Queue Queue}
         #     field can be used as a filter and several operators as supported.
-        #     For example: +<=, <, >=, >, !=, =, :+. The filter syntax is the same as
+        #     For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
         #     described in
         #     [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
         #
@@ -80,7 +80,7 @@ module Google
         #     Required.
         #
         #     The resource name of the queue. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         class GetQueueRequest; end
 
         # Request message for {Google::Cloud::Tasks::V2beta2::CloudTasks::CreateQueue CreateQueue}.
@@ -89,7 +89,7 @@ module Google
         #     Required.
         #
         #     The location name in which the queue will be created.
-        #     For example: +projects/PROJECT_ID/locations/LOCATION_ID+
+        #     For example: `projects/PROJECT_ID/locations/LOCATION_ID`
         #
         #     The list of allowed locations can be obtained by calling Cloud
         #     Tasks' implementation of
@@ -128,7 +128,7 @@ module Google
         #     Required.
         #
         #     The queue name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         class DeleteQueueRequest; end
 
         # Request message for {Google::Cloud::Tasks::V2beta2::CloudTasks::PurgeQueue PurgeQueue}.
@@ -137,7 +137,7 @@ module Google
         #     Required.
         #
         #     The queue name. For example:
-        #     +projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID+
+        #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class PurgeQueueRequest; end
 
         # Request message for {Google::Cloud::Tasks::V2beta2::CloudTasks::PauseQueue PauseQueue}.
@@ -146,7 +146,7 @@ module Google
         #     Required.
         #
         #     The queue name. For example:
-        #     +projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID+
+        #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class PauseQueueRequest; end
 
         # Request message for {Google::Cloud::Tasks::V2beta2::CloudTasks::ResumeQueue ResumeQueue}.
@@ -155,7 +155,7 @@ module Google
         #     Required.
         #
         #     The queue name. For example:
-        #     +projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID+
+        #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class ResumeQueueRequest; end
 
         # Request message for listing tasks using {Google::Cloud::Tasks::V2beta2::CloudTasks::ListTasks ListTasks}.
@@ -164,7 +164,7 @@ module Google
         #     Required.
         #
         #     The queue name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta2::Task::View]
         #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
@@ -177,7 +177,7 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
         #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         # @!attribute [rw] page_size
         #   @return [Integer]
@@ -222,7 +222,7 @@ module Google
         #     Required.
         #
         #     The task name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta2::Task::View]
         #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
@@ -235,7 +235,7 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
         #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class GetTaskRequest; end
 
@@ -245,7 +245,7 @@ module Google
         #     Required.
         #
         #     The queue name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         #
         #     The queue must already exist.
         # @!attribute [rw] task
@@ -255,7 +255,7 @@ module Google
         #     The task to add.
         #
         #     Task names have the following format:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+.
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
         #     The user can optionally specify a task {Google::Cloud::Tasks::V2beta2::Task#name name}. If a
         #     name is not specified then the system will generate a random
         #     unique task id, which will be set in the task returned in the
@@ -297,7 +297,7 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
         #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class CreateTaskRequest; end
 
@@ -308,7 +308,7 @@ module Google
         #     Required.
         #
         #     The task name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         class DeleteTaskRequest; end
 
         # Request message for leasing tasks using {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks}.
@@ -317,15 +317,15 @@ module Google
         #     Required.
         #
         #     The queue name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
         # @!attribute [rw] max_tasks
         #   @return [Integer]
         #     The maximum number of tasks to lease.
         #
         #     The system will make a best effort to return as close to as
-        #     +max_tasks+ as possible.
+        #     `max_tasks` as possible.
         #
-        #     The largest that +max_tasks+ can be is 1000.
+        #     The largest that `max_tasks` can be is 1000.
         # @!attribute [rw] lease_duration
         #   @return [Google::Protobuf::Duration]
         #     After the worker has successfully finished the work associated
@@ -336,7 +336,7 @@ module Google
         #     that another worker can retry it.
         #
         #     The maximum lease duration is 1 week.
-        #     +lease_duration+ will be truncated to the nearest second.
+        #     `lease_duration` will be truncated to the nearest second.
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta2::Task::View]
         #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
@@ -349,30 +349,30 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
         #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         # @!attribute [rw] filter
         #   @return [String]
-        #     +filter+ can be used to specify a subset of tasks to lease.
+        #     `filter` can be used to specify a subset of tasks to lease.
         #
-        #     When +filter+ is set to +tag=<my-tag>+ then the
+        #     When `filter` is set to `tag=<my-tag>` then the
         #     {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will contain only tasks whose
-        #     {Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} is equal to +<my-tag>+. +<my-tag>+ must be
+        #     {Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} is equal to `<my-tag>`. `<my-tag>` must be
         #     less than 500 characters.
         #
-        #     When +filter+ is set to +tag_function=oldest_tag()+, only tasks which have
+        #     When `filter` is set to `tag_function=oldest_tag()`, only tasks which have
         #     the same tag as the task with the oldest
         #     {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be returned.
         #
         #     Grammar Syntax:
         #
-        #     * +filter = "tag=" tag | "tag_function=" function+
+        #     * `filter = "tag=" tag | "tag_function=" function`
         #
-        #     * +tag = string+
+        #     * `tag = string`
         #
-        #     * +function = "oldest_tag()"+
+        #     * `function = "oldest_tag()"`
         #
-        #     The +oldest_tag()+ function returns tasks which have the same tag as the
+        #     The `oldest_tag()` function returns tasks which have the same tag as the
         #     oldest task (ordered by schedule time).
         #
         #     SDK compatibility: Although the SDK allows tags to be either
@@ -397,7 +397,7 @@ module Google
         #     Required.
         #
         #     The task name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         # @!attribute [rw] schedule_time
         #   @return [Google::Protobuf::Timestamp]
         #     Required.
@@ -416,7 +416,7 @@ module Google
         #     Required.
         #
         #     The task name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         # @!attribute [rw] schedule_time
         #   @return [Google::Protobuf::Timestamp]
         #     Required.
@@ -434,7 +434,7 @@ module Google
         #
         #
         #     The maximum lease duration is 1 week.
-        #     +lease_duration+ will be truncated to the nearest second.
+        #     `lease_duration` will be truncated to the nearest second.
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta2::Task::View]
         #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
@@ -447,7 +447,7 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
         #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class RenewLeaseRequest; end
 
@@ -458,7 +458,7 @@ module Google
         #     Required.
         #
         #     The task name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         # @!attribute [rw] schedule_time
         #   @return [Google::Protobuf::Timestamp]
         #     Required.
@@ -480,7 +480,7 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
         #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class CancelLeaseRequest; end
 
@@ -491,7 +491,7 @@ module Google
         #     Required.
         #
         #     The task name. For example:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         # @!attribute [rw] response_view
         #   @return [Google::Cloud::Tasks::V2beta2::Task::View]
         #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
@@ -504,7 +504,7 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
         #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class RunTaskRequest; end
       end

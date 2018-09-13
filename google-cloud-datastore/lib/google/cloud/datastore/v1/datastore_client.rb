@@ -230,10 +230,10 @@ module Google
           #
           #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +keys+:
+          #   # TODO: Initialize `keys`:
           #   keys = []
           #   response = datastore_client.lookup(project_id, keys)
 
@@ -288,10 +288,10 @@ module Google
           #
           #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +partition_id+:
+          #   # TODO: Initialize `partition_id`:
           #   partition_id = {}
           #   response = datastore_client.run_query(project_id, partition_id)
 
@@ -335,7 +335,7 @@ module Google
           #
           #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #   response = datastore_client.begin_transaction(project_id)
 
@@ -358,20 +358,20 @@ module Google
           # @param project_id [String]
           #   The ID of the project against which to make the request.
           # @param mode [Google::Datastore::V1::CommitRequest::Mode]
-          #   The type of commit to perform. Defaults to +TRANSACTIONAL+.
+          #   The type of commit to perform. Defaults to `TRANSACTIONAL`.
           # @param mutations [Array<Google::Datastore::V1::Mutation | Hash>]
           #   The mutations to perform.
           #
-          #   When mode is +TRANSACTIONAL+, mutations affecting a single entity are
+          #   When mode is `TRANSACTIONAL`, mutations affecting a single entity are
           #   applied in order. The following sequences of mutations affecting a single
-          #   entity are not permitted in a single +Commit+ request:
+          #   entity are not permitted in a single `Commit` request:
           #
-          #   * +insert+ followed by +insert+
-          #   * +update+ followed by +insert+
-          #   * +upsert+ followed by +insert+
-          #   * +delete+ followed by +update+
+          #   * `insert` followed by `insert`
+          #   * `update` followed by `insert`
+          #   * `upsert` followed by `insert`
+          #   * `delete` followed by `update`
           #
-          #   When mode is +NON_TRANSACTIONAL+, no two mutations may affect a single
+          #   When mode is `NON_TRANSACTIONAL`, no two mutations may affect a single
           #   entity.
           #   A hash of the same form as `Google::Datastore::V1::Mutation`
           #   can also be provided.
@@ -392,13 +392,13 @@ module Google
           #
           #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +mode+:
+          #   # TODO: Initialize `mode`:
           #   mode = :MODE_UNSPECIFIED
           #
-          #   # TODO: Initialize +mutations+:
+          #   # TODO: Initialize `mutations`:
           #   mutations = []
           #   response = datastore_client.commit(project_id, mode, mutations)
 
@@ -439,10 +439,10 @@ module Google
           #
           #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +transaction+:
+          #   # TODO: Initialize `transaction`:
           #   transaction = ''
           #   response = datastore_client.rollback(project_id, transaction)
 
@@ -482,10 +482,10 @@ module Google
           #
           #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +keys+:
+          #   # TODO: Initialize `keys`:
           #   keys = []
           #   response = datastore_client.allocate_ids(project_id, keys)
 
@@ -527,10 +527,10 @@ module Google
           #
           #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +keys+:
+          #   # TODO: Initialize `keys`:
           #   keys = []
           #   response = datastore_client.reserve_ids(project_id, keys)
 

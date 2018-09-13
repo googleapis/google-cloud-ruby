@@ -20,7 +20,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The resource name of the Document to get. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+      #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       # @!attribute [rw] mask
       #   @return [Google::Firestore::V1beta1::DocumentMask]
       #     The fields to return. If not set, returns all fields.
@@ -40,24 +40,24 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent resource name. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+      #     `projects/{project_id}/databases/{database_id}/documents` or
+      #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       #     For example:
-      #     +projects/my-project/databases/my-database/documents+ or
-      #     +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
+      #     `projects/my-project/databases/my-database/documents` or
+      #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
       # @!attribute [rw] collection_id
       #   @return [String]
-      #     The collection ID, relative to +parent+, to list. For example: +chatrooms+
-      #     or +messages+.
+      #     The collection ID, relative to `parent`, to list. For example: `chatrooms`
+      #     or `messages`.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     The maximum number of documents to return.
       # @!attribute [rw] page_token
       #   @return [String]
-      #     The +next_page_token+ value returned from a previous List request, if any.
+      #     The `next_page_token` value returned from a previous List request, if any.
       # @!attribute [rw] order_by
       #   @return [String]
-      #     The order to sort results by. For example: +priority desc, name+.
+      #     The order to sort results by. For example: `priority desc, name`.
       # @!attribute [rw] mask
       #   @return [Google::Firestore::V1beta1::DocumentMask]
       #     The fields to return. If not set, returns all fields.
@@ -78,8 +78,8 @@ module Google
       #     be returned with a key but will not have fields, {Google::Firestore::V1beta1::Document#create_time Document#create_time},
       #     or {Google::Firestore::V1beta1::Document#update_time Document#update_time} set.
       #
-      #     Requests with +show_missing+ may not specify +where+ or
-      #     +order_by+.
+      #     Requests with `show_missing` may not specify `where` or
+      #     `order_by`.
       class ListDocumentsRequest; end
 
       # The response for {Google::Firestore::V1beta1::Firestore::ListDocuments Firestore::ListDocuments}.
@@ -95,11 +95,11 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent resource. For example:
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents/chatrooms/\\{chatroom_id}+
+      #     `projects/{project_id}/databases/{database_id}/documents` or
+      #     `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
       # @!attribute [rw] collection_id
       #   @return [String]
-      #     The collection ID, relative to +parent+, to list. For example: +chatrooms+.
+      #     The collection ID, relative to `parent`, to list. For example: `chatrooms`.
       # @!attribute [rw] document_id
       #   @return [String]
       #     The client-assigned document ID to use for this document.
@@ -107,7 +107,7 @@ module Google
       #     Optional. If not specified, an ID will be assigned by the service.
       # @!attribute [rw] document
       #   @return [Google::Firestore::V1beta1::Document]
-      #     The document to create. +name+ must not be set.
+      #     The document to create. `name` must not be set.
       # @!attribute [rw] mask
       #   @return [Google::Firestore::V1beta1::DocumentMask]
       #     The fields to return. If not set, returns all fields.
@@ -146,7 +146,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The resource name of the Document to delete. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+      #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       # @!attribute [rw] current_document
       #   @return [Google::Firestore::V1beta1::Precondition]
       #     An optional precondition on the document.
@@ -157,13 +157,13 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}+.
+      #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] documents
       #   @return [Array<String>]
       #     The names of the documents to retrieve. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+      #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       #     The request will fail if any of the document is not a child resource of the
-      #     given +database+. Duplicate names will be elided.
+      #     given `database`. Duplicate names will be elided.
       # @!attribute [rw] mask
       #   @return [Google::Firestore::V1beta1::DocumentMask]
       #     The fields to return. If not set, returns all fields.
@@ -192,7 +192,7 @@ module Google
       # @!attribute [rw] missing
       #   @return [String]
       #     A document name that was requested but does not exist. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+      #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The transaction that was started as part of this request.
@@ -210,7 +210,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}+.
+      #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] options
       #   @return [Google::Firestore::V1beta1::TransactionOptions]
       #     The options for the transaction.
@@ -227,7 +227,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}+.
+      #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] writes
       #   @return [Array<Google::Firestore::V1beta1::Write>]
       #     The writes to apply.
@@ -254,7 +254,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}+.
+      #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The transaction to roll back.
@@ -264,11 +264,11 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent resource name. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+      #     `projects/{project_id}/databases/{database_id}/documents` or
+      #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       #     For example:
-      #     +projects/my-project/databases/my-database/documents+ or
-      #     +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
+      #     `projects/my-project/databases/my-database/documents` or
+      #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
       # @!attribute [rw] structured_query
       #   @return [Google::Firestore::V1beta1::StructuredQuery]
       #     A structured query.
@@ -302,10 +302,10 @@ module Google
       #   @return [Google::Protobuf::Timestamp]
       #     The time at which the document was read. This may be monotonically
       #     increasing; in this case, the previous documents in the result stream are
-      #     guaranteed not to have changed between their +read_time+ and this one.
+      #     guaranteed not to have changed between their `read_time` and this one.
       #
-      #     If the query returns no results, a response with +read_time+ and no
-      #     +document+ will be sent, and this represents the time at which the query
+      #     If the query returns no results, a response with `read_time` and no
+      #     `document` will be sent, and this represents the time at which the query
       #     was run.
       # @!attribute [rw] skipped_results
       #   @return [Integer]
@@ -326,7 +326,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}+.
+      #     `projects/{project_id}/databases/{database_id}`.
       #     This is only required in the first message.
       # @!attribute [rw] stream_id
       #   @return [String]
@@ -354,7 +354,7 @@ module Google
       #     responses.
       #
       #     Leave this field unset when creating a new stream. To resume a stream at
-      #     a specific point, set this field and the +stream_id+ field.
+      #     a specific point, set this field and the `stream_id` field.
       #
       #     Leave this field unset when creating a new stream.
       # @!attribute [rw] labels
@@ -388,7 +388,7 @@ module Google
       # @!attribute [rw] database
       #   @return [String]
       #     The database name. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}+.
+      #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] add_target
       #   @return [Google::Firestore::V1beta1::Target]
       #     A target to add to this stream.
@@ -437,7 +437,7 @@ module Google
       #     Using a resume token with a different target is unsupported and may fail.
       # @!attribute [rw] read_time
       #   @return [Google::Protobuf::Timestamp]
-      #     Start listening after a specific +read_time+.
+      #     Start listening after a specific `read_time`.
       #
       #     The client must know the state of matching documents at this time.
       # @!attribute [rw] target_id
@@ -458,20 +458,20 @@ module Google
         # @!attribute [rw] documents
         #   @return [Array<String>]
         #     The names of the documents to retrieve. In the format:
-        #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+        #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
         #     The request will fail if any of the document is not a child resource of
-        #     the given +database+. Duplicate names will be elided.
+        #     the given `database`. Duplicate names will be elided.
         class DocumentsTarget; end
 
         # A target specified by a query.
         # @!attribute [rw] parent
         #   @return [String]
         #     The parent resource name. In the format:
-        #     +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-        #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+        #     `projects/{project_id}/databases/{database_id}/documents` or
+        #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
         #     For example:
-        #     +projects/my-project/databases/my-database/documents+ or
-        #     +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
+        #     `projects/my-project/databases/my-database/documents` or
+        #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
         # @!attribute [rw] structured_query
         #   @return [Google::Firestore::V1beta1::StructuredQuery]
         #     A structured query.
@@ -488,7 +488,7 @@ module Google
       #
       #     If empty, the change applies to all targets.
       #
-      #     For +target_change_type=ADD+, the order of the target IDs matches the order
+      #     For `target_change_type=ADD`, the order of the target IDs matches the order
       #     of the requests to add the targets. This allows clients to unambiguously
       #     associate server-assigned target IDs with added targets.
       #
@@ -498,26 +498,26 @@ module Google
       #     The error that resulted in this change, if applicable.
       # @!attribute [rw] resume_token
       #   @return [String]
-      #     A token that can be used to resume the stream for the given +target_ids+,
-      #     or all targets if +target_ids+ is empty.
+      #     A token that can be used to resume the stream for the given `target_ids`,
+      #     or all targets if `target_ids` is empty.
       #
       #     Not set on every target change.
       # @!attribute [rw] read_time
       #   @return [Google::Protobuf::Timestamp]
-      #     The consistent +read_time+ for the given +target_ids+ (omitted when the
+      #     The consistent `read_time` for the given `target_ids` (omitted when the
       #     target_ids are not at a consistent snapshot).
       #
-      #     The stream is guaranteed to send a +read_time+ with +target_ids+ empty
+      #     The stream is guaranteed to send a `read_time` with `target_ids` empty
       #     whenever the entire stream reaches a new consistent snapshot. ADD,
       #     CURRENT, and RESET messages are guaranteed to (eventually) result in a
       #     new consistent snapshot (while NO_CHANGE and REMOVE messages are not).
       #
-      #     For a given stream, +read_time+ is guaranteed to be monotonically
+      #     For a given stream, `read_time` is guaranteed to be monotonically
       #     increasing.
       class TargetChange
         # The type of change.
         module TargetChangeType
-          # No change has occurred. Used only to send an updated +resume_token+.
+          # No change has occurred. Used only to send an updated `resume_token`.
           NO_CHANGE = 0
 
           # The targets have been added.
@@ -529,7 +529,7 @@ module Google
           # The targets reflect all changes committed before the targets were added
           # to the stream.
           #
-          # This will be sent after or with a +read_time+ that is greater than or
+          # This will be sent after or with a `read_time` that is greater than or
           # equal to the time at which the targets were added.
           #
           # Listeners can wait for this change if read-after-write semantics
@@ -539,8 +539,8 @@ module Google
           # The targets have been reset, and a new initial state for the targets
           # will be returned in subsequent changes.
           #
-          # After the initial state is complete, +CURRENT+ will be returned even
-          # if the target was previously indicated to be +CURRENT+.
+          # After the initial state is complete, `CURRENT` will be returned even
+          # if the target was previously indicated to be `CURRENT`.
           RESET = 4
         end
       end
@@ -549,9 +549,9 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent document. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+      #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       #     For example:
-      #     +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
+      #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     The maximum number of results to return.

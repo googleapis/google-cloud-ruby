@@ -23,19 +23,19 @@ module Google
       # @!attribute [rw] delete
       #   @return [String]
       #     A document name to delete. In the format:
-      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+      #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       # @!attribute [rw] transform
       #   @return [Google::Firestore::V1beta1::DocumentTransform]
       #     Applies a tranformation to a document.
-      #     At most one +transform+ per document is allowed in a given request.
-      #     An +update+ cannot follow a +transform+ on the same document in a given
+      #     At most one `transform` per document is allowed in a given request.
+      #     An `update` cannot follow a `transform` on the same document in a given
       #     request.
       # @!attribute [rw] update_mask
       #   @return [Google::Firestore::V1beta1::DocumentMask]
       #     The fields to update in this write.
       #
-      #     This field can be set only when the operation is +update+.
-      #     If the mask is not set for an +update+ and the document exists, any
+      #     This field can be set only when the operation is `update`.
+      #     If the mask is not set for an `update` and the document exists, any
       #     existing data will be overwritten.
       #     If the mask is set and the document on the server has fields not covered by
       #     the mask, they are left unchanged.
@@ -110,7 +110,7 @@ module Google
       # @!attribute [rw] update_time
       #   @return [Google::Protobuf::Timestamp]
       #     The last update time of the document after applying the write. Not set
-      #     after a +delete+.
+      #     after a `delete`.
       #
       #     If the write did not actually change the document, this will be the
       #     previous update_time.
@@ -131,7 +131,7 @@ module Google
       #   @return [Google::Firestore::V1beta1::Document]
       #     The new state of the {Google::Firestore::V1beta1::Document Document}.
       #
-      #     If +mask+ is set, contains only fields that were updated or added.
+      #     If `mask` is set, contains only fields that were updated or added.
       # @!attribute [rw] target_ids
       #   @return [Array<Integer>]
       #     A set of target IDs of targets that match this document.
@@ -157,7 +157,7 @@ module Google
       #   @return [Google::Protobuf::Timestamp]
       #     The read timestamp at which the delete was observed.
       #
-      #     Greater or equal to the +commit_time+ of the delete.
+      #     Greater or equal to the `commit_time` of the delete.
       class DocumentDelete; end
 
       # A {Google::Firestore::V1beta1::Document Document} has been removed from the view of the targets.
@@ -178,7 +178,7 @@ module Google
       #   @return [Google::Protobuf::Timestamp]
       #     The read timestamp at which the remove was observed.
       #
-      #     Greater or equal to the +commit_time+ of the change/delete/remove.
+      #     Greater or equal to the `commit_time` of the change/delete/remove.
       class DocumentRemove; end
 
       # A digest of all the documents that match a given target.

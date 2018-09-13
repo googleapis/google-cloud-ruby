@@ -351,7 +351,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
+          #   Example: `"projects/my-project-id/sinks/my-sink-id"`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -380,7 +380,7 @@ module Google
 
           # Creates a sink that exports specified log entries to a destination.  The
           # export of newly-ingested log entries begins immediately, unless the sink's
-          # +writer_identity+ is not permitted to write to the destination.  A sink can
+          # `writer_identity` is not permitted to write to the destination.  A sink can
           # export log entries only from the resource owning the sink.
           #
           # @param parent [String]
@@ -391,24 +391,24 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]"
           #       "folders/[FOLDER_ID]"
           #
-          #   Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
+          #   Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
           # @param sink [Google::Logging::V2::LogSink | Hash]
-          #   Required. The new sink, whose +name+ parameter is a sink identifier that
+          #   Required. The new sink, whose `name` parameter is a sink identifier that
           #   is not already in use.
           #   A hash of the same form as `Google::Logging::V2::LogSink`
           #   can also be provided.
           # @param unique_writer_identity [true, false]
-          #   Optional. Determines the kind of IAM identity returned as +writer_identity+
+          #   Optional. Determines the kind of IAM identity returned as `writer_identity`
           #   in the new sink.  If this value is omitted or set to false, and if the
-          #   sink's parent is a project, then the value returned as +writer_identity+ is
+          #   sink's parent is a project, then the value returned as `writer_identity` is
           #   the same group or service account used by Stackdriver Logging before the
           #   addition of writer identities to this API. The sink's destination must be
           #   in the same project as the sink itself.
           #
           #   If this field is set to true, or if the sink is owned by a non-project
-          #   resource such as an organization, then the value of +writer_identity+ will
+          #   resource such as an organization, then the value of `writer_identity` will
           #   be a unique service account used only for exports from the new sink.  For
-          #   more information, see +writer_identity+ in {Google::Logging::V2::LogSink LogSink}.
+          #   more information, see `writer_identity` in {Google::Logging::V2::LogSink LogSink}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -423,7 +423,7 @@ module Google
           #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +sink+:
+          #   # TODO: Initialize `sink`:
           #   sink = {}
           #   response = config_service_v2_client.create_sink(formatted_parent, sink)
 
@@ -443,9 +443,9 @@ module Google
           end
 
           # Updates a sink.  This method replaces the following fields in the existing
-          # sink with values from the new sink: +destination+, and +filter+.
-          # The updated sink might also have a new +writer_identity+; see the
-          # +unique_writer_identity+ field.
+          # sink with values from the new sink: `destination`, and `filter`.
+          # The updated sink might also have a new `writer_identity`; see the
+          # `unique_writer_identity` field.
           #
           # @param sink_name [String]
           #   Required. The full resource name of the sink to update, including the
@@ -456,29 +456,29 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
+          #   Example: `"projects/my-project-id/sinks/my-sink-id"`.
           # @param sink [Google::Logging::V2::LogSink | Hash]
           #   Required. The updated sink, whose name is the same identifier that appears
-          #   as part of +sink_name+.
+          #   as part of `sink_name`.
           #   A hash of the same form as `Google::Logging::V2::LogSink`
           #   can also be provided.
           # @param unique_writer_identity [true, false]
           #   Optional. See
           #   [sinks.create](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create)
           #   for a description of this field.  When updating a sink, the effect of this
-          #   field on the value of +writer_identity+ in the updated sink depends on both
+          #   field on the value of `writer_identity` in the updated sink depends on both
           #   the old and new values of this field:
           #
           #   * If the old and new values of this field are both false or both true,
-          #     then there is no change to the sink's +writer_identity+.
+          #     then there is no change to the sink's `writer_identity`.
           #   * If the old value is false and the new value is true, then
-          #     +writer_identity+ is changed to a unique service account.
+          #     `writer_identity` is changed to a unique service account.
           #   * It is an error if the old value is true and the new value is
           #     set to false or defaulted to false.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional. Field mask that specifies the fields in +sink+ that need
+          #   Optional. Field mask that specifies the fields in `sink` that need
           #   an update. A sink field will be overwritten if, and only if, it is
-          #   in the update mask.  +name+ and output only fields cannot be updated.
+          #   in the update mask.  `name` and output only fields cannot be updated.
           #
           #   An empty updateMask is temporarily treated as using the following mask
           #   for backwards compatibility purposes:
@@ -486,10 +486,10 @@ module Google
           #   At some point in the future, behavior will be removed and specifying an
           #   empty updateMask will be an error.
           #
-          #   For a detailed +FieldMask+ definition, see
+          #   For a detailed `FieldMask` definition, see
           #   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
           #
-          #   Example: +updateMask=filter+.
+          #   Example: `updateMask=filter`.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -506,7 +506,7 @@ module Google
           #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #
-          #   # TODO: Initialize +sink+:
+          #   # TODO: Initialize `sink`:
           #   sink = {}
           #   response = config_service_v2_client.update_sink(formatted_sink_name, sink)
 
@@ -527,7 +527,7 @@ module Google
             @update_sink.call(req, options, &block)
           end
 
-          # Deletes a sink. If the sink has a unique +writer_identity+, then that
+          # Deletes a sink. If the sink has a unique `writer_identity`, then that
           # service account is also deleted.
           #
           # @param sink_name [String]
@@ -539,7 +539,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
+          #   Example: `"projects/my-project-id/sinks/my-sink-id"`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -635,7 +635,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
           #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
           #
-          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+          #   Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -674,9 +674,9 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]"
           #       "folders/[FOLDER_ID]"
           #
-          #   Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
+          #   Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
           # @param exclusion [Google::Logging::V2::LogExclusion | Hash]
-          #   Required. The new exclusion, whose +name+ parameter is an exclusion name
+          #   Required. The new exclusion, whose `name` parameter is an exclusion name
           #   that is not already used in the parent resource.
           #   A hash of the same form as `Google::Logging::V2::LogExclusion`
           #   can also be provided.
@@ -694,7 +694,7 @@ module Google
           #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +exclusion+:
+          #   # TODO: Initialize `exclusion`:
           #   exclusion = {}
           #   response = config_service_v2_client.create_exclusion(formatted_parent, exclusion)
 
@@ -721,20 +721,20 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
           #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
           #
-          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+          #   Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
           # @param exclusion [Google::Logging::V2::LogExclusion | Hash]
           #   Required. New values for the existing exclusion. Only the fields specified
-          #   in +update_mask+ are relevant.
+          #   in `update_mask` are relevant.
           #   A hash of the same form as `Google::Logging::V2::LogExclusion`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Required. A nonempty list of fields to change in the existing exclusion.
           #   New values for the fields are taken from the corresponding fields in the
           #   {Google::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
-          #   +update_mask+ are not changed and are ignored in the request.
+          #   `update_mask` are not changed and are ignored in the request.
           #
           #   For example, to change the filter and description of an exclusion,
-          #   specify an +update_mask+ of +"filter,description"+.
+          #   specify an `update_mask` of `"filter,description"`.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -751,10 +751,10 @@ module Google
           #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
           #
-          #   # TODO: Initialize +exclusion+:
+          #   # TODO: Initialize `exclusion`:
           #   exclusion = {}
           #
-          #   # TODO: Initialize +update_mask+:
+          #   # TODO: Initialize `update_mask`:
           #   update_mask = {}
           #   response = config_service_v2_client.update_exclusion(formatted_name, exclusion, update_mask)
 
@@ -783,7 +783,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
           #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
           #
-          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+          #   Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

@@ -21,7 +21,7 @@ module Google
       #   @return [String]
       #     The unique name of the table from which to read.
       #     Values are of the form
-      #     +projects/<project>/instances/<instance>/tables/<table>+.
+      #     `projects/<project>/instances/<instance>/tables/<table>`.
       # @!attribute [rw] app_profile_id
       #   @return [String]
       #     This value specifies routing for replication. If not specified, the
@@ -67,14 +67,14 @@ module Google
         #     family as the previous CellChunk.  The empty string can occur as a
         #     column family name in a response so clients must check
         #     explicitly for the presence of this message, not just for
-        #     +family_name.value+ being non-empty.
+        #     `family_name.value` being non-empty.
         # @!attribute [rw] qualifier
         #   @return [Google::Protobuf::BytesValue]
         #     The column qualifier for this chunk of data.  If this message
         #     is not present, this CellChunk is a continuation of the same column
         #     as the previous CellChunk.  Column qualifiers may be empty so
         #     clients must check for the presence of this message, not just
-        #     for +qualifier.value+ being non-empty.
+        #     for `qualifier.value` being non-empty.
         # @!attribute [rw] timestamp_micros
         #   @return [Integer]
         #     The cell's stored timestamp, which also uniquely identifies it
@@ -82,7 +82,7 @@ module Google
         #     microseconds, but individual tables may set a coarser
         #     granularity to further restrict the allowed values. For
         #     example, a table which specifies millisecond granularity will
-        #     only allow values of +timestamp_micros+ which are multiples of
+        #     only allow values of `timestamp_micros` which are multiples of
         #     1000.  Timestamps are only set in the first CellChunk per cell
         #     (for cells split into multiple chunks).
         # @!attribute [rw] labels
@@ -106,11 +106,11 @@ module Google
         # @!attribute [rw] reset_row
         #   @return [true, false]
         #     Indicates that the client should drop all previous chunks for
-        #     +row_key+, as it will be re-read from the beginning.
+        #     `row_key`, as it will be re-read from the beginning.
         # @!attribute [rw] commit_row
         #   @return [true, false]
         #     Indicates that the client can safely process all previous chunks for
-        #     +row_key+, as its data has been fully read.
+        #     `row_key`, as its data has been fully read.
         class CellChunk; end
       end
 
@@ -119,7 +119,7 @@ module Google
       #   @return [String]
       #     The unique name of the table from which to sample row keys.
       #     Values are of the form
-      #     +projects/<project>/instances/<instance>/tables/<table>+.
+      #     `projects/<project>/instances/<instance>/tables/<table>`.
       # @!attribute [rw] app_profile_id
       #   @return [String]
       #     This value specifies routing for replication. If not specified, the
@@ -139,9 +139,9 @@ module Google
       # @!attribute [rw] offset_bytes
       #   @return [Integer]
       #     Approximate total storage space used by all rows in the table which precede
-      #     +row_key+. Buffering the contents of all rows between two subsequent
+      #     `row_key`. Buffering the contents of all rows between two subsequent
       #     samples would require space roughly equal to the difference in their
-      #     +offset_bytes+ fields.
+      #     `offset_bytes` fields.
       class SampleRowKeysResponse; end
 
       # Request message for Bigtable.MutateRow.
@@ -149,7 +149,7 @@ module Google
       #   @return [String]
       #     The unique name of the table to which the mutation should be applied.
       #     Values are of the form
-      #     +projects/<project>/instances/<instance>/tables/<table>+.
+      #     `projects/<project>/instances/<instance>/tables/<table>`.
       # @!attribute [rw] app_profile_id
       #   @return [String]
       #     This value specifies routing for replication. If not specified, the
@@ -185,7 +185,7 @@ module Google
       class MutateRowsRequest
         # @!attribute [rw] row_key
         #   @return [String]
-        #     The key of the row to which the +mutations+ should be applied.
+        #     The key of the row to which the `mutations` should be applied.
         # @!attribute [rw] mutations
         #   @return [Array<Google::Bigtable::V2::Mutation>]
         #     Changes to be atomically applied to the specified row. Mutations are
@@ -202,11 +202,11 @@ module Google
       class MutateRowsResponse
         # @!attribute [rw] index
         #   @return [Integer]
-        #     The index into the original request's +entries+ list of the Entry
+        #     The index into the original request's `entries` list of the Entry
         #     for which a result is being reported.
         # @!attribute [rw] status
         #   @return [Google::Rpc::Status]
-        #     The result of the request Entry identified by +index+.
+        #     The result of the request Entry identified by `index`.
         #     Depending on how requests are batched during execution, it is possible
         #     for one Entry to fail due to an error with another Entry. In the event
         #     that this occurs, the same error will be reported for both entries.
@@ -219,7 +219,7 @@ module Google
       #     The unique name of the table to which the conditional mutation should be
       #     applied.
       #     Values are of the form
-      #     +projects/<project>/instances/<instance>/tables/<table>+.
+      #     `projects/<project>/instances/<instance>/tables/<table>`.
       # @!attribute [rw] app_profile_id
       #   @return [String]
       #     This value specifies routing for replication. If not specified, the
@@ -230,29 +230,29 @@ module Google
       # @!attribute [rw] predicate_filter
       #   @return [Google::Bigtable::V2::RowFilter]
       #     The filter to be applied to the contents of the specified row. Depending
-      #     on whether or not any results are yielded, either +true_mutations+ or
-      #     +false_mutations+ will be executed. If unset, checks that the row contains
+      #     on whether or not any results are yielded, either `true_mutations` or
+      #     `false_mutations` will be executed. If unset, checks that the row contains
       #     any values at all.
       # @!attribute [rw] true_mutations
       #   @return [Array<Google::Bigtable::V2::Mutation>]
-      #     Changes to be atomically applied to the specified row if +predicate_filter+
-      #     yields at least one cell when applied to +row_key+. Entries are applied in
+      #     Changes to be atomically applied to the specified row if `predicate_filter`
+      #     yields at least one cell when applied to `row_key`. Entries are applied in
       #     order, meaning that earlier mutations can be masked by later ones.
-      #     Must contain at least one entry if +false_mutations+ is empty, and at most
+      #     Must contain at least one entry if `false_mutations` is empty, and at most
       #     100000.
       # @!attribute [rw] false_mutations
       #   @return [Array<Google::Bigtable::V2::Mutation>]
-      #     Changes to be atomically applied to the specified row if +predicate_filter+
-      #     does not yield any cells when applied to +row_key+. Entries are applied in
+      #     Changes to be atomically applied to the specified row if `predicate_filter`
+      #     does not yield any cells when applied to `row_key`. Entries are applied in
       #     order, meaning that earlier mutations can be masked by later ones.
-      #     Must contain at least one entry if +true_mutations+ is empty, and at most
+      #     Must contain at least one entry if `true_mutations` is empty, and at most
       #     100000.
       class CheckAndMutateRowRequest; end
 
       # Response message for Bigtable.CheckAndMutateRow.
       # @!attribute [rw] predicate_matched
       #   @return [true, false]
-      #     Whether or not the request's +predicate_filter+ yielded any results for
+      #     Whether or not the request's `predicate_filter` yielded any results for
       #     the specified row.
       class CheckAndMutateRowResponse; end
 
@@ -262,7 +262,7 @@ module Google
       #     The unique name of the table to which the read/modify/write rules should be
       #     applied.
       #     Values are of the form
-      #     +projects/<project>/instances/<instance>/tables/<table>+.
+      #     `projects/<project>/instances/<instance>/tables/<table>`.
       # @!attribute [rw] app_profile_id
       #   @return [String]
       #     This value specifies routing for replication. If not specified, the

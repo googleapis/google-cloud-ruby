@@ -190,14 +190,14 @@ module Google
           # <strong>or</strong> an
           # <a href="https://support.google.com/cloud/answer/6158862">API key</a>
           # for authentication. To use an API key, append it to the URL as the value of
-          # a +key+ parameter. For example:
+          # a `key` parameter. For example:
           # <pre>POST https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456</pre>
           #
           # @param project_name [String]
           #   [Required] The resource name of the Google Cloud Platform project. Written
-          #   as +projects/+ plus the
+          #   as `projects/` plus the
           #   [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
-          #   Example: +projects/my-project-123+.
+          #   Example: `projects/my-project-123`.
           # @param event [Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent | Hash]
           #   [Required] The error event to be reported.
           #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent`
@@ -216,7 +216,7 @@ module Google
           #   report_errors_service_client = Google::Cloud::ErrorReporting::ReportErrors.new(version: :v1beta1)
           #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +event+:
+          #   # TODO: Initialize `event`:
           #   event = {}
           #   response = report_errors_service_client.report_error_event(formatted_project_name, event)
 

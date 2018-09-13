@@ -217,7 +217,7 @@ module Google
           #
           #   language_service_client = Google::Cloud::Language.new(version: :v1beta2)
           #
-          #   # TODO: Initialize +document+:
+          #   # TODO: Initialize `document`:
           #   document = {}
           #   response = language_service_client.analyze_sentiment(document)
 
@@ -257,7 +257,7 @@ module Google
           #
           #   language_service_client = Google::Cloud::Language.new(version: :v1beta2)
           #
-          #   # TODO: Initialize +document+:
+          #   # TODO: Initialize `document`:
           #   document = {}
           #   response = language_service_client.analyze_entities(document)
 
@@ -296,7 +296,7 @@ module Google
           #
           #   language_service_client = Google::Cloud::Language.new(version: :v1beta2)
           #
-          #   # TODO: Initialize +document+:
+          #   # TODO: Initialize `document`:
           #   document = {}
           #   response = language_service_client.analyze_entity_sentiment(document)
 
@@ -336,7 +336,7 @@ module Google
           #
           #   language_service_client = Google::Cloud::Language.new(version: :v1beta2)
           #
-          #   # TODO: Initialize +document+:
+          #   # TODO: Initialize `document`:
           #   document = {}
           #   response = language_service_client.analyze_syntax(document)
 
@@ -372,7 +372,7 @@ module Google
           #
           #   language_service_client = Google::Cloud::Language.new(version: :v1beta2)
           #
-          #   # TODO: Initialize +document+:
+          #   # TODO: Initialize `document`:
           #   document = {}
           #   response = language_service_client.classify_text(document)
 
@@ -413,10 +413,10 @@ module Google
           #
           #   language_service_client = Google::Cloud::Language.new(version: :v1beta2)
           #
-          #   # TODO: Initialize +document+:
+          #   # TODO: Initialize `document`:
           #   document = {}
           #
-          #   # TODO: Initialize +features+:
+          #   # TODO: Initialize `features`:
           #   features = {}
           #   response = language_service_client.annotate_text(document, features)
 

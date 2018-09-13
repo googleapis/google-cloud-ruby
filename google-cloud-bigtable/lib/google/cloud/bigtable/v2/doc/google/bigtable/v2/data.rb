@@ -36,7 +36,7 @@ module Google
       #     The unique key which identifies this family within its row. This is the
       #     same key that's used to identify the family in, for example, a RowFilter
       #     which sets its "family_name_regex_filter" field.
-      #     Must match +[-_.a-zA-Z0-9]++, except that AggregatingRowProcessors may
+      #     Must match `[-_.a-zA-Z0-9]+`, except that AggregatingRowProcessors may
       #     produce cells in a sentinel family with an empty name.
       #     Must be no greater than 64 characters in length.
       # @!attribute [rw] columns
@@ -50,7 +50,7 @@ module Google
       #   @return [String]
       #     The unique key which identifies this column within its family. This is the
       #     same key that's used to identify the column in, for example, a RowFilter
-      #     which sets its +column_qualifier_regex_filter+ field.
+      #     which sets its `column_qualifier_regex_filter` field.
       #     May contain any byte string, including the empty string, up to 16kiB in
       #     length.
       # @!attribute [rw] cells
@@ -66,7 +66,7 @@ module Google
       #     Values are always expressed in microseconds, but individual tables may set
       #     a coarser granularity to further restrict the allowed values. For
       #     example, a table which specifies millisecond granularity will only allow
-      #     values of +timestamp_micros+ which are multiples of 1000.
+      #     values of `timestamp_micros` which are multiples of 1000.
       # @!attribute [rw] value
       #   @return [String]
       #     The value stored in the cell.
@@ -159,18 +159,18 @@ module Google
       # (chains and interleaves). They work as follows:
       #
       # * True filters alter the input row by excluding some of its cells wholesale
-      #   from the output row. An example of a true filter is the +value_regex_filter+,
+      #   from the output row. An example of a true filter is the `value_regex_filter`,
       #   which excludes cells whose values don't match the specified pattern. All
       #   regex true filters use RE2 syntax (https://github.com/google/re2/wiki/Syntax)
       #   in raw byte mode (RE2::Latin1), and are evaluated as full matches. An
-      #   important point to keep in mind is that +RE2(.)+ is equivalent by default to
-      #   +RE2([^\n])+, meaning that it does not match newlines. When attempting to
-      #   match an arbitrary byte, you should therefore use the escape sequence +\C+,
-      #   which may need to be further escaped as +\\C+ in your client language.
+      #   important point to keep in mind is that `RE2(.)` is equivalent by default to
+      #   `RE2([^\n])`, meaning that it does not match newlines. When attempting to
+      #   match an arbitrary byte, you should therefore use the escape sequence `\C`,
+      #   which may need to be further escaped as `\\C` in your client language.
       #
       # * Transformers alter the input row by changing the values of some of its
       #   cells in the output, without excluding them completely. Currently, the only
-      #   supported transformer is the +strip_value_transformer+, which replaces every
+      #   supported transformer is the `strip_value_transformer`, which replaces every
       #   cell's value with the empty string.
       #
       # * Chains and interleaves are described in more detail in the
@@ -250,12 +250,12 @@ module Google
       #     passed through the label and sink. Note that one copy has label "foo",
       #     while the other does not.
       #
-      #     Cannot be used within the +predicate_filter+, +true_filter+, or
-      #     +false_filter+ of a {Google::Bigtable::V2::RowFilter::Condition Condition}.
+      #     Cannot be used within the `predicate_filter`, `true_filter`, or
+      #     `false_filter` of a {Google::Bigtable::V2::RowFilter::Condition Condition}.
       # @!attribute [rw] pass_all_filter
       #   @return [true, false]
       #     Matches all cells, regardless of input. Functionally equivalent to
-      #     leaving +filter+ unset, but included for completeness.
+      #     leaving `filter` unset, but included for completeness.
       # @!attribute [rw] block_all_filter
       #   @return [true, false]
       #     Does not match any cells, regardless of input. Useful for temporarily
@@ -265,9 +265,9 @@ module Google
       #     Matches only cells from rows whose keys satisfy the given RE2 regex. In
       #     other words, passes through the entire row when the key matches, and
       #     otherwise produces an empty row.
-      #     Note that, since row keys can contain arbitrary bytes, the +\C+ escape
-      #     sequence must be used if a true wildcard is desired. The +.+ character
-      #     will not match the new line character +\n+, which may be present in a
+      #     Note that, since row keys can contain arbitrary bytes, the `\C` escape
+      #     sequence must be used if a true wildcard is desired. The `.` character
+      #     will not match the new line character `\n`, which may be present in a
       #     binary key.
       # @!attribute [rw] row_sample_filter
       #   @return [Float]
@@ -276,18 +276,18 @@ module Google
       # @!attribute [rw] family_name_regex_filter
       #   @return [String]
       #     Matches only cells from columns whose families satisfy the given RE2
-      #     regex. For technical reasons, the regex must not contain the +:+
+      #     regex. For technical reasons, the regex must not contain the `:`
       #     character, even if it is not being used as a literal.
       #     Note that, since column families cannot contain the new line character
-      #     +\n+, it is sufficient to use +.+ as a full wildcard when matching
+      #     `\n`, it is sufficient to use `.` as a full wildcard when matching
       #     column family names.
       # @!attribute [rw] column_qualifier_regex_filter
       #   @return [String]
       #     Matches only cells from columns whose qualifiers satisfy the given RE2
       #     regex.
-      #     Note that, since column qualifiers can contain arbitrary bytes, the +\C+
-      #     escape sequence must be used if a true wildcard is desired. The +.+
-      #     character will not match the new line character +\n+, which may be
+      #     Note that, since column qualifiers can contain arbitrary bytes, the `\C`
+      #     escape sequence must be used if a true wildcard is desired. The `.`
+      #     character will not match the new line character `\n`, which may be
       #     present in a binary qualifier.
       # @!attribute [rw] column_range_filter
       #   @return [Google::Bigtable::V2::ColumnRange]
@@ -298,9 +298,9 @@ module Google
       # @!attribute [rw] value_regex_filter
       #   @return [String]
       #     Matches only cells with values that satisfy the given regular expression.
-      #     Note that, since cell values can contain arbitrary bytes, the +\C+ escape
-      #     sequence must be used if a true wildcard is desired. The +.+ character
-      #     will not match the new line character +\n+, which may be present in a
+      #     Note that, since cell values can contain arbitrary bytes, the `\C` escape
+      #     sequence must be used if a true wildcard is desired. The `.` character
+      #     will not match the new line character `\n`, which may be present in a
       #     binary value.
       # @!attribute [rw] value_range_filter
       #   @return [Google::Bigtable::V2::ValueRange]
@@ -318,9 +318,9 @@ module Google
       # @!attribute [rw] cells_per_column_limit_filter
       #   @return [Integer]
       #     Matches only the most recent N cells within each column. For example,
-      #     if N=2, this filter would match column +foo:bar+ at timestamps 10 and 9,
-      #     skip all earlier cells in +foo:bar+, and then begin matching again in
-      #     column +foo:bar2+.
+      #     if N=2, this filter would match column `foo:bar` at timestamps 10 and 9,
+      #     skip all earlier cells in `foo:bar`, and then begin matching again in
+      #     column `foo:bar2`.
       #     If duplicate cells are present, as is possible when using an Interleave,
       #     each copy of the cell is counted separately.
       # @!attribute [rw] strip_value_transformer
@@ -333,12 +333,12 @@ module Google
       #     the filter.
       #
       #     Values must be at most 15 characters in length, and match the RE2
-      #     pattern +[a-z0-9\\-]++
+      #     pattern `[a-z0-9\\-]+`
       #
       #     Due to a technical limitation, it is not currently possible to apply
       #     multiple labels to a cell. As a result, a Chain may have no more than
-      #     one sub-filter which contains a +apply_label_transformer+. It is okay for
-      #     an Interleave to contain multiple +apply_label_transformers+, as they
+      #     one sub-filter which contains a `apply_label_transformer`. It is okay for
+      #     an Interleave to contain multiple `apply_label_transformers`, as they
       #     will be applied to separate copies of the input. This may be relaxed in
       #     the future.
       class RowFilter
@@ -390,15 +390,15 @@ module Google
         # when filters are set for the false condition.
         # @!attribute [rw] predicate_filter
         #   @return [Google::Bigtable::V2::RowFilter]
-        #     If +predicate_filter+ outputs any cells, then +true_filter+ will be
-        #     evaluated on the input row. Otherwise, +false_filter+ will be evaluated.
+        #     If `predicate_filter` outputs any cells, then `true_filter` will be
+        #     evaluated on the input row. Otherwise, `false_filter` will be evaluated.
         # @!attribute [rw] true_filter
         #   @return [Google::Bigtable::V2::RowFilter]
-        #     The filter to apply to the input row if +predicate_filter+ returns any
+        #     The filter to apply to the input row if `predicate_filter` returns any
         #     results. If not provided, no results will be returned in the true case.
         # @!attribute [rw] false_filter
         #   @return [Google::Bigtable::V2::RowFilter]
-        #     The filter to apply to the input row if +predicate_filter+ does not
+        #     The filter to apply to the input row if `predicate_filter` does not
         #     return any results. If not provided, no results will be returned in the
         #     false case.
         class Condition; end
@@ -422,7 +422,7 @@ module Google
         # @!attribute [rw] family_name
         #   @return [String]
         #     The name of the family into which new data should be written.
-        #     Must match +[-_.a-zA-Z0-9]++
+        #     Must match `[-_.a-zA-Z0-9]+`
         # @!attribute [rw] column_qualifier
         #   @return [String]
         #     The qualifier of the column into which new data should be written.
@@ -444,7 +444,7 @@ module Google
         # @!attribute [rw] family_name
         #   @return [String]
         #     The name of the family from which cells should be deleted.
-        #     Must match +[-_.a-zA-Z0-9]++
+        #     Must match `[-_.a-zA-Z0-9]+`
         # @!attribute [rw] column_qualifier
         #   @return [String]
         #     The qualifier of the column from which cells should be deleted.
@@ -458,7 +458,7 @@ module Google
         # @!attribute [rw] family_name
         #   @return [String]
         #     The name of the family from which cells should be deleted.
-        #     Must match +[-_.a-zA-Z0-9]++
+        #     Must match `[-_.a-zA-Z0-9]+`
         class DeleteFromFamily; end
 
         # A Mutation which deletes all cells from the containing row.
@@ -470,7 +470,7 @@ module Google
       # @!attribute [rw] family_name
       #   @return [String]
       #     The name of the family to which the read/modify/write should be applied.
-      #     Must match +[-_.a-zA-Z0-9]++
+      #     Must match `[-_.a-zA-Z0-9]+`
       # @!attribute [rw] column_qualifier
       #   @return [String]
       #     The qualifier of the column to which the read/modify/write should be
@@ -478,12 +478,12 @@ module Google
       #     Can be any byte string, including the empty string.
       # @!attribute [rw] append_value
       #   @return [String]
-      #     Rule specifying that +append_value+ be appended to the existing value.
+      #     Rule specifying that `append_value` be appended to the existing value.
       #     If the targeted cell is unset, it will be treated as containing the
       #     empty string.
       # @!attribute [rw] increment_amount
       #   @return [Integer]
-      #     Rule specifying that +increment_amount+ be added to the existing value.
+      #     Rule specifying that `increment_amount` be added to the existing value.
       #     If the targeted cell is unset, it will be treated as containing a zero.
       #     Otherwise, the targeted cell must contain an 8-byte value (interpreted
       #     as a 64-bit big-endian signed integer), or the entire request will fail.

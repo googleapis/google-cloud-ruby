@@ -28,16 +28,16 @@ module Google
       #
       #      A project number may optionally be used in place of PROJECT_ID. The
       #      project number is translated to its corresponding PROJECT_ID internally
-      #      and the +log_name+ field will contain PROJECT_ID in queries and exports.
+      #      and the `log_name` field will contain PROJECT_ID in queries and exports.
       #
-      #     +[LOG_ID]+ must be URL-encoded within +log_name+. Example:
-      #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
-      #     +[LOG_ID]+ must be less than 512 characters long and can only include the
+      #     `[LOG_ID]` must be URL-encoded within `log_name`. Example:
+      #     `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+      #     `[LOG_ID]` must be less than 512 characters long and can only include the
       #     following characters: upper and lower case alphanumeric characters,
       #     forward-slash, underscore, hyphen, and period.
       #
-      #     For backward compatibility, if +log_name+ begins with a forward-slash, such
-      #     as +/projects/...+, then the log entry is ingested as usual but the
+      #     For backward compatibility, if `log_name` begins with a forward-slash, such
+      #     as `/projects/...`, then the log entry is ingested as usual but the
       #     forward-slash is removed. Listing the log entry will not show the leading
       #     slash and filtering for a log name with a leading slash will never return
       #     any results.
@@ -71,7 +71,7 @@ module Google
       #     Incoming log entries should have timestamps that are no more than
       #     the [logs retention period](https://cloud.google.com/logging/quotas) in the past,
       #     and no more than 24 hours in the future. Log entries outside those time
-      #     boundaries will not be available when calling +entries.list+, but
+      #     boundaries will not be available when calling `entries.list`, but
       #     those log entries can still be exported with
       #     [LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
       # @!attribute [rw] receive_timestamp
@@ -80,15 +80,15 @@ module Google
       # @!attribute [rw] severity
       #   @return [Google::Logging::Type::LogSeverity]
       #     Optional. The severity of the log entry. The default value is
-      #     +LogSeverity.DEFAULT+.
+      #     `LogSeverity.DEFAULT`.
       # @!attribute [rw] insert_id
       #   @return [String]
       #     Optional. A unique identifier for the log entry. If you provide a value,
       #     then Stackdriver Logging considers other log entries in the same project,
-      #     with the same +timestamp+, and with the same +insert_id+ to be duplicates
+      #     with the same `timestamp`, and with the same `insert_id` to be duplicates
       #     which can be removed.  If omitted in new log entries, then Stackdriver
-      #     Logging assigns its own unique identifier. The +insert_id+ is also used
-      #     to order log entries that have the same +timestamp+ value.
+      #     Logging assigns its own unique identifier. The `insert_id` is also used
+      #     to order log entries that have the same `timestamp` value.
       # @!attribute [rw] http_request
       #   @return [Google::Logging::Type::HttpRequest]
       #     Optional. Information about the HTTP request associated with this
@@ -100,7 +100,7 @@ module Google
       # @!attribute [rw] metadata
       #   @return [Google::Api::MonitoredResourceMetadata]
       #     Output only. Additional metadata about the monitored resource.
-      #     Only +k8s_container+, +k8s_pod+, and +k8s_node+ MonitoredResources have
+      #     Only `k8s_container`, `k8s_pod`, and `k8s_node` MonitoredResources have
       #     this field populated.
       # @!attribute [rw] operation
       #   @return [Google::Logging::V2::LogEntryOperation]
@@ -110,8 +110,8 @@ module Google
       #   @return [String]
       #     Optional. Resource name of the trace associated with the log entry, if any.
       #     If it contains a relative resource name, the name is assumed to be relative
-      #     to +//tracing.googleapis.com+. Example:
-      #     +projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824+
+      #     to `//tracing.googleapis.com`. Example:
+      #     `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
       # @!attribute [rw] span_id
       #   @return [String]
       #     Optional. The span ID within the trace associated with the log entry. For
@@ -133,8 +133,8 @@ module Google
       # @!attribute [rw] producer
       #   @return [String]
       #     Optional. An arbitrary producer identifier. The combination of
-      #     +id+ and +producer+ must be globally unique.  Examples for +producer+:
-      #     +"MyDivision.MyBigCompany.com"+, +"github.com/MyProject/MyApplication"+.
+      #     `id` and `producer` must be globally unique.  Examples for `producer`:
+      #     `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
       # @!attribute [rw] first
       #   @return [true, false]
       #     Optional. Set this to True if this is the first log entry in the operation.
@@ -159,7 +159,7 @@ module Google
       #     optional context such as the class or package name. This information may be
       #     used in contexts such as the logs viewer, where a file and line number are
       #     less meaningful. The format can vary by language. For example:
-      #     +qual.if.ied.Class.method+ (Java), +dir/package.func+ (Go), +function+
+      #     `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
       #     (Python).
       class LogEntrySourceLocation; end
     end

@@ -21,12 +21,12 @@ module Google
       # information MUST be defined in a separate message.
       # @!attribute [rw] request_method
       #   @return [String]
-      #     The request method. Examples: +"GET"+, +"HEAD"+, +"PUT"+, +"POST"+.
+      #     The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`.
       # @!attribute [rw] request_url
       #   @return [String]
       #     The scheme (http, https), the host name, the path and the query
       #     portion of the URL that was requested.
-      #     Example: +"http://example.com/some/info?color=red"+.
+      #     Example: `"http://example.com/some/info?color=red"`.
       # @!attribute [rw] request_size
       #   @return [Integer]
       #     The size of the HTTP request message in bytes, including the request
@@ -42,11 +42,11 @@ module Google
       # @!attribute [rw] user_agent
       #   @return [String]
       #     The user agent sent by the client. Example:
-      #     +"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)"+.
+      #     `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)"`.
       # @!attribute [rw] remote_ip
       #   @return [String]
       #     The IP address (IPv4 or IPv6) of the client that issued the HTTP
-      #     request. Examples: +"192.168.1.1"+, +"FE80::0202:B3FF:FE1E:8329"+.
+      #     request. Examples: `"192.168.1.1"`, `"FE80::0202:B3FF:FE1E:8329"`.
       # @!attribute [rw] server_ip
       #   @return [String]
       #     The IP address (IPv4 or IPv6) of the origin server that the request was
@@ -69,7 +69,7 @@ module Google
       # @!attribute [rw] cache_validated_with_origin_server
       #   @return [true, false]
       #     Whether or not the response was validated with the origin server before
-      #     being served from cache. This field is only meaningful if +cache_hit+ is
+      #     being served from cache. This field is only meaningful if `cache_hit` is
       #     True.
       # @!attribute [rw] cache_fill_bytes
       #   @return [Integer]

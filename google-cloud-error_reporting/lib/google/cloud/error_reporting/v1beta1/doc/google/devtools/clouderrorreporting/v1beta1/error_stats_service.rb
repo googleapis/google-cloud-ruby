@@ -17,7 +17,7 @@ module Google
   module Devtools
     module Clouderrorreporting
       module V1beta1
-        # Specifies a set of +ErrorGroupStats+ to return.
+        # Specifies a set of `ErrorGroupStats` to return.
         # @!attribute [rw] project_name
         #   @return [String]
         #     [Required] The resource name of the Google Cloud Platform project. Written
@@ -45,12 +45,12 @@ module Google
         #     occurrences are returned.
         # @!attribute [rw] timed_count_duration
         #   @return [Google::Protobuf::Duration]
-        #     [Optional] The preferred duration for a single returned +TimedCount+.
+        #     [Optional] The preferred duration for a single returned `TimedCount`.
         #     If not set, no timed counts are returned.
         # @!attribute [rw] alignment
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::TimedCountAlignment]
         #     [Optional] The alignment of the timed counts to be returned.
-        #     Default is +ALIGNMENT_EQUAL_AT_END+.
+        #     Default is `ALIGNMENT_EQUAL_AT_END`.
         # @!attribute [rw] alignment_time
         #   @return [Google::Protobuf::Timestamp]
         #     [Optional] Time where the timed counts shall be aligned if rounded
@@ -58,14 +58,14 @@ module Google
         # @!attribute [rw] order
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupOrder]
         #     [Optional] The sort order in which the results are returned.
-        #     Default is +COUNT_DESC+.
+        #     Default is `COUNT_DESC`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     [Optional] The maximum number of results to return per response.
         #     Default is 20.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     [Optional] A +next_page_token+ provided by a previous response. To view
+        #     [Optional] A `next_page_token` provided by a previous response. To view
         #     additional results, pass this token along with the identical query
         #     parameters as the first request.
         class ListGroupStatsRequest; end
@@ -100,7 +100,7 @@ module Google
         #   @return [Integer]
         #     Approximate number of affected users in the given group that
         #     match the filter criteria.
-        #     Users are distinguished by data in the +ErrorContext+ of the
+        #     Users are distinguished by data in the `ErrorContext` of the
         #     individual error events, such as their login name or their remote
         #     IP address in case of HTTP requests.
         #     The number of affected users can be zero even if the number of
@@ -132,7 +132,7 @@ module Google
         #   @return [Array<Google::Devtools::Clouderrorreporting::V1beta1::ServiceContext>]
         #     Service contexts with a non-zero error count for the given filter
         #     criteria. This list can be truncated if multiple services are affected.
-        #     Refer to +num_affected_services+ for the total count.
+        #     Refer to `num_affected_services` for the total count.
         # @!attribute [rw] num_affected_services
         #   @return [Integer]
         #     The total number of services with a non-zero error count for the given
@@ -154,20 +154,20 @@ module Google
         #     Approximate number of occurrences in the given time period.
         # @!attribute [rw] start_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Start of the time period to which +count+ refers (included).
+        #     Start of the time period to which `count` refers (included).
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Timestamp]
-        #     End of the time period to which +count+ refers (excluded).
+        #     End of the time period to which `count` refers (excluded).
         class TimedCount; end
 
         # Specifies a set of error events to return.
         # @!attribute [rw] project_name
         #   @return [String]
         #     [Required] The resource name of the Google Cloud Platform project. Written
-        #     as +projects/+ plus the
+        #     as `projects/` plus the
         #     [Google Cloud Platform project
         #     ID](https://support.google.com/cloud/answer/6158840).
-        #     Example: +projects/my-project-123+.
+        #     Example: `projects/my-project-123`.
         # @!attribute [rw] group_id
         #   @return [String]
         #     [Required] The group for which events shall be returned.
@@ -186,7 +186,7 @@ module Google
         #     [Optional] The maximum number of results to return per response.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     [Optional] A +next_page_token+ provided by a previous response.
+        #     [Optional] A `next_page_token` provided by a previous response.
         class ListEventsRequest; end
 
         # Contains a set of requested error events.
@@ -237,31 +237,31 @@ module Google
         end
 
         # Specifies criteria for filtering a subset of service contexts.
-        # The fields in the filter correspond to the fields in +ServiceContext+.
+        # The fields in the filter correspond to the fields in `ServiceContext`.
         # Only exact, case-sensitive matches are supported.
         # If a field is unset or empty, it matches arbitrary values.
         # @!attribute [rw] service
         #   @return [String]
         #     [Optional] The exact value to match against
-        #     [+ServiceContext.service+](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
+        #     [`ServiceContext.service`](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
         # @!attribute [rw] version
         #   @return [String]
         #     [Optional] The exact value to match against
-        #     [+ServiceContext.version+](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+        #     [`ServiceContext.version`](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
         # @!attribute [rw] resource_type
         #   @return [String]
         #     [Optional] The exact value to match against
-        #     [+ServiceContext.resource_type+](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
+        #     [`ServiceContext.resource_type`](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
         class ServiceContextFilter; end
 
         # Deletes all events in the project.
         # @!attribute [rw] project_name
         #   @return [String]
         #     [Required] The resource name of the Google Cloud Platform project. Written
-        #     as +projects/+ plus the
+        #     as `projects/` plus the
         #     [Google Cloud Platform project
         #     ID](https://support.google.com/cloud/answer/6158840).
-        #     Example: +projects/my-project-123+.
+        #     Example: `projects/my-project-123`.
         class DeleteEventsRequest; end
 
         # Response message for deleting error events.
@@ -273,9 +273,9 @@ module Google
           ERROR_COUNT_ALIGNMENT_UNSPECIFIED = 0
 
           # The time periods shall be consecutive, have width equal to the
-          # requested duration, and be aligned at the +alignment_time+ provided in
+          # requested duration, and be aligned at the `alignment_time` provided in
           # the request.
-          # The +alignment_time+ does not have to be inside the query period but
+          # The `alignment_time` does not have to be inside the query period but
           # even if it is outside, only time periods are returned which overlap
           # with the query period.
           # A rounded alignment will typically result in a

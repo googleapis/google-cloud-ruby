@@ -85,17 +85,17 @@ module Google
         #
         # Google Cloud Memorystore for Redis v1beta1
         #
-        # The +redis.googleapis.com+ service implements the Google Cloud Memorystore
+        # The `redis.googleapis.com` service implements the Google Cloud Memorystore
         # for Redis API and defines the following resource model for managing Redis
         # instances:
-        # * The service works with a collection of cloud projects, named: +/projects/*+
-        # * Each project has a collection of available locations, named: +/locations/*+
-        # * Each location has a collection of Redis instances, named: +/instances/*+
+        # * The service works with a collection of cloud projects, named: `/projects/*`
+        # * Each project has a collection of available locations, named: `/locations/*`
+        # * Each location has a collection of Redis instances, named: `/instances/*`
         # * As such, Redis instances are resources of the form:
-        #   +/projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
+        #   `/projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #
-        # Note that location_id must be refering to a GCP +region+; for example:
-        # * +projects/redpepper-1290/locations/us-central1/instances/my-redis+
+        # Note that location_id must be refering to a GCP `region`; for example:
+        # * `projects/redpepper-1290/locations/us-central1/instances/my-redis`
         #
         # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
         #   Provides the means for authenticating requests made by the client. This parameter can

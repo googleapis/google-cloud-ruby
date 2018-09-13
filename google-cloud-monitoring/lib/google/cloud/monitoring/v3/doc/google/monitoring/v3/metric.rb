@@ -19,10 +19,10 @@ module Google
       # A single data point in a time series.
       # @!attribute [rw] interval
       #   @return [Google::Monitoring::V3::TimeInterval]
-      #     The time interval to which the data point applies.  For +GAUGE+ metrics,
-      #     only the end time of the interval is used.  For +DELTA+ metrics, the start
+      #     The time interval to which the data point applies.  For `GAUGE` metrics,
+      #     only the end time of the interval is used.  For `DELTA` metrics, the start
       #     and end time should specify a non-zero interval, with subsequent points
-      #     specifying contiguous and non-overlapping intervals.  For +CUMULATIVE+
+      #     specifying contiguous and non-overlapping intervals.  For `CUMULATIVE`
       #     metrics, the start and end time should specify a non-zero interval, with
       #     subsequent points specifying the same start time and increasing end times,
       #     until an event resets the cumulative value to zero and sets a new start
@@ -58,8 +58,8 @@ module Google
       #     When creating a time series, this field is optional. If present, it must be
       #     the same as the metric kind of the associated metric. If the associated
       #     metric's descriptor must be auto-created, then this field specifies the
-      #     metric kind of the new descriptor and must be either +GAUGE+ (the default)
-      #     or +CUMULATIVE+.
+      #     metric kind of the new descriptor and must be either `GAUGE` (the default)
+      #     or `CUMULATIVE`.
       # @!attribute [rw] value_type
       #   @return [Google::Api::MetricDescriptor::ValueType]
       #     The value type of the time series. When listing time series, this value
@@ -67,7 +67,7 @@ module Google
       #     this time series is an alignment or reduction of other time series.
       #
       #     When creating a time series, this field is optional. If present, it must be
-      #     the same as the type of the data in the +points+ field.
+      #     the same as the type of the data in the `points` field.
       # @!attribute [rw] points
       #   @return [Array<Google::Monitoring::V3::Point>]
       #     The data points of this time series. When listing time series, points are
@@ -77,7 +77,7 @@ module Google
       #     the point's type must be the same as the value type of the associated
       #     metric. If the associated metric's descriptor must be auto-created, then
       #     the value type of the descriptor is determined by the point's type, which
-      #     must be +BOOL+, +INT64+, +DOUBLE+, or +DISTRIBUTION+.
+      #     must be `BOOL`, `INT64`, `DOUBLE`, or `DISTRIBUTION`.
       class TimeSeries; end
     end
   end

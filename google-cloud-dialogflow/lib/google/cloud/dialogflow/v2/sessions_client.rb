@@ -201,7 +201,7 @@ module Google
           #
           # @param session [String]
           #   Required. The name of the session this query is sent to. Format:
-          #   +projects/<Project ID>/agent/sessions/<Session ID>+. It's up to the API
+          #   `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
           #   caller to choose an appropriate session ID. It can be a random number or
           #   some type of user identifier (preferably hashed). The length of the session
           #   ID must not exceed 36 bytes.
@@ -222,7 +222,7 @@ module Google
           #   can also be provided.
           # @param input_audio [String]
           #   Optional. The natural language speech audio to be processed. This field
-          #   should be populated iff +query_input+ is set to an input audio config.
+          #   should be populated iff `query_input` is set to an input audio config.
           #   A single request can contain up to 1 minute of speech audio data.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -238,7 +238,7 @@ module Google
           #   sessions_client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
           #   formatted_session = Google::Cloud::Dialogflow::V2::SessionsClient.session_path("[PROJECT]", "[SESSION]")
           #
-          #   # TODO: Initialize +query_input+:
+          #   # TODO: Initialize `query_input`:
           #   query_input = {}
           #   response = sessions_client.detect_intent(formatted_session, query_input)
 
@@ -283,10 +283,10 @@ module Google
           #
           #   sessions_client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
           #
-          #   # TODO: Initialize +session+:
+          #   # TODO: Initialize `session`:
           #   session = ''
           #
-          #   # TODO: Initialize +query_input+:
+          #   # TODO: Initialize `query_input`:
           #   query_input = {}
           #   request = { session: session, query_input: query_input }
           #   requests = [request]

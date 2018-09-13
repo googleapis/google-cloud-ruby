@@ -16,11 +16,11 @@
 module Google
   module Monitoring
     module V3
-      # The protocol for the +ListUptimeCheckConfigs+ request.
+      # The protocol for the `ListUptimeCheckConfigs` request.
       # @!attribute [rw] parent
       #   @return [String]
       #     The project whose uptime check configurations are listed. The format
-      #       is +projects/[PROJECT_ID]+.
+      #       is `projects/[PROJECT_ID]`.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     The maximum number of results to return in a single response. The server
@@ -29,12 +29,12 @@ module Google
       #     to be returned.
       # @!attribute [rw] page_token
       #   @return [String]
-      #     If this field is not empty then it must contain the +nextPageToken+ value
+      #     If this field is not empty then it must contain the `nextPageToken` value
       #     returned by a previous call to this method.  Using this field causes the
       #     method to return more results from the previous method call.
       class ListUptimeCheckConfigsRequest; end
 
-      # The protocol for the +ListUptimeCheckConfigs+ response.
+      # The protocol for the `ListUptimeCheckConfigs` response.
       # @!attribute [rw] uptime_check_configs
       #   @return [Array<Google::Monitoring::V3::UptimeCheckConfig>]
       #     The returned uptime check configurations.
@@ -51,24 +51,24 @@ module Google
       #     irrespective of any pagination.
       class ListUptimeCheckConfigsResponse; end
 
-      # The protocol for the +GetUptimeCheckConfig+ request.
+      # The protocol for the `GetUptimeCheckConfig` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The uptime check configuration to retrieve. The format
-      #       is +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
+      #       is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
       class GetUptimeCheckConfigRequest; end
 
-      # The protocol for the +CreateUptimeCheckConfig+ request.
+      # The protocol for the `CreateUptimeCheckConfig` request.
       # @!attribute [rw] parent
       #   @return [String]
       #     The project in which to create the uptime check. The format
-      #       is +projects/[PROJECT_ID]+.
+      #       is `projects/[PROJECT_ID]`.
       # @!attribute [rw] uptime_check_config
       #   @return [Google::Monitoring::V3::UptimeCheckConfig]
       #     The new uptime check configuration.
       class CreateUptimeCheckConfigRequest; end
 
-      # The protocol for the +UpdateUptimeCheckConfig+ request.
+      # The protocol for the `UpdateUptimeCheckConfig` request.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
       #     Optional. If present, only the listed fields in the current uptime check
@@ -77,27 +77,27 @@ module Google
       #     the new configuration.
       # @!attribute [rw] uptime_check_config
       #   @return [Google::Monitoring::V3::UptimeCheckConfig]
-      #     Required. If an +"updateMask"+ has been specified, this field gives
-      #     the values for the set of fields mentioned in the +"updateMask"+. If an
-      #     +"updateMask"+ has not been given, this uptime check configuration replaces
-      #     the current configuration. If a field is mentioned in +"updateMask"+ but
+      #     Required. If an `"updateMask"` has been specified, this field gives
+      #     the values for the set of fields mentioned in the `"updateMask"`. If an
+      #     `"updateMask"` has not been given, this uptime check configuration replaces
+      #     the current configuration. If a field is mentioned in `"updateMask"` but
       #     the corresonding field is omitted in this partial uptime check
       #     configuration, it has the effect of deleting/clearing the field from the
       #     configuration on the server.
       #
-      #     The following fields can be updated: +display_name+,
-      #     +http_check+, +tcp_check+, +timeout+, +content_matchers+, and
-      #     +selected_regions+.
+      #     The following fields can be updated: `display_name`,
+      #     `http_check`, `tcp_check`, `timeout`, `content_matchers`, and
+      #     `selected_regions`.
       class UpdateUptimeCheckConfigRequest; end
 
-      # The protocol for the +DeleteUptimeCheckConfig+ request.
+      # The protocol for the `DeleteUptimeCheckConfig` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The uptime check configuration to delete. The format
-      #       is +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
+      #       is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
       class DeleteUptimeCheckConfigRequest; end
 
-      # The protocol for the +ListUptimeCheckIps+ request.
+      # The protocol for the `ListUptimeCheckIps` request.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     The maximum number of results to return in a single response. The server
@@ -107,13 +107,13 @@ module Google
       #     NOTE: this field is not yet implemented
       # @!attribute [rw] page_token
       #   @return [String]
-      #     If this field is not empty then it must contain the +nextPageToken+ value
+      #     If this field is not empty then it must contain the `nextPageToken` value
       #     returned by a previous call to this method.  Using this field causes the
       #     method to return more results from the previous method call.
       #     NOTE: this field is not yet implemented
       class ListUptimeCheckIpsRequest; end
 
-      # The protocol for the +ListUptimeCheckIps+ response.
+      # The protocol for the `ListUptimeCheckIps` response.
       # @!attribute [rw] uptime_check_ips
       #   @return [Array<Google::Monitoring::V3::UptimeCheckIp>]
       #     The returned list of IP addresses (including region and location) that the

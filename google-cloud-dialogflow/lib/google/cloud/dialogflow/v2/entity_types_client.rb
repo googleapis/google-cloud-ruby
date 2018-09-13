@@ -46,14 +46,14 @@ module Google
         #
         # * **System** - entities that are defined by the Dialogflow API for common
         #   data types such as date, time, currency, and so on. A system entity is
-        #   represented by the +EntityType+ type.
+        #   represented by the `EntityType` type.
         #
         # * **Developer** - entities that are defined by you that represent
         #   actionable data that is meaningful to your application. For example,
-        #   you could define a +pizza.sauce+ entity for red or white pizza sauce,
-        #   a +pizza.cheese+ entity for the different types of cheese on a pizza,
-        #   a +pizza.topping+ entity for different toppings, and so on. A developer
-        #   entity is represented by the +EntityType+ type.
+        #   you could define a `pizza.sauce` entity for red or white pizza sauce,
+        #   a `pizza.cheese` entity for the different types of cheese on a pizza,
+        #   a `pizza.topping` entity for different toppings, and so on. A developer
+        #   entity is represented by the `EntityType` type.
         #
         # * **User** - entities that are built for an individual user such as
         #   favorites, preferences, playlists, and so on. A user entity is
@@ -302,7 +302,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The agent to list all entity types from.
-          #   Format: +projects/<Project ID>/agent+.
+          #   Format: `projects/<Project ID>/agent`.
           # @param language_code [String]
           #   Optional. The language to list entity synonyms for. If not specified,
           #   the agent's default language is used.
@@ -365,7 +365,7 @@ module Google
           #
           # @param name [String]
           #   Required. The name of the entity type.
-          #   Format: +projects/<Project ID>/agent/entityTypes/<EntityType ID>+.
+          #   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
           # @param language_code [String]
           #   Optional. The language to retrieve entity synonyms for. If not specified,
           #   the agent's default language is used.
@@ -404,13 +404,13 @@ module Google
           #
           # @param parent [String]
           #   Required. The agent to create a entity type for.
-          #   Format: +projects/<Project ID>/agent+.
+          #   Format: `projects/<Project ID>/agent`.
           # @param entity_type [Google::Cloud::Dialogflow::V2::EntityType | Hash]
           #   Required. The entity type to create.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::EntityType`
           #   can also be provided.
           # @param language_code [String]
-          #   Optional. The language of entity synonyms defined in +entity_type+. If not
+          #   Optional. The language of entity synonyms defined in `entity_type`. If not
           #   specified, the agent's default language is used.
           #   [More than a dozen
           #   languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -429,7 +429,7 @@ module Google
           #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.project_agent_path("[PROJECT]")
           #
-          #   # TODO: Initialize +entity_type+:
+          #   # TODO: Initialize `entity_type`:
           #   entity_type = {}
           #   response = entity_types_client.create_entity_type(formatted_parent, entity_type)
 
@@ -452,11 +452,11 @@ module Google
           #
           # @param entity_type [Google::Cloud::Dialogflow::V2::EntityType | Hash]
           #   Required. The entity type to update.
-          #   Format: +projects/<Project ID>/agent/entityTypes/<EntityType ID>+.
+          #   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::EntityType`
           #   can also be provided.
           # @param language_code [String]
-          #   Optional. The language of entity synonyms defined in +entity_type+. If not
+          #   Optional. The language of entity synonyms defined in `entity_type`. If not
           #   specified, the agent's default language is used.
           #   [More than a dozen
           #   languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -478,7 +478,7 @@ module Google
           #
           #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #
-          #   # TODO: Initialize +entity_type+:
+          #   # TODO: Initialize `entity_type`:
           #   entity_type = {}
           #   response = entity_types_client.update_entity_type(entity_type)
 
@@ -501,7 +501,7 @@ module Google
           #
           # @param name [String]
           #   Required. The name of the entity type to delete.
-          #   Format: +projects/<Project ID>/agent/entityTypes/<EntityType ID>+.
+          #   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -535,7 +535,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The name of the agent to update or create entity types in.
-          #   Format: +projects/<Project ID>/agent+.
+          #   Format: `projects/<Project ID>/agent`.
           # @param entity_type_batch_uri [String]
           #   The URI to a Google Cloud Storage file containing entity types to update
           #   or create. The file format can either be a serialized proto (of
@@ -546,7 +546,7 @@ module Google
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::EntityTypeBatch`
           #   can also be provided.
           # @param language_code [String]
-          #   Optional. The language of entity synonyms defined in +entity_types+. If not
+          #   Optional. The language of entity synonyms defined in `entity_types`. If not
           #   specified, the agent's default language is used.
           #   [More than a dozen
           #   languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -626,10 +626,10 @@ module Google
           #
           # @param parent [String]
           #   Required. The name of the agent to delete all entities types for. Format:
-          #   +projects/<Project ID>/agent+.
+          #   `projects/<Project ID>/agent`.
           # @param entity_type_names [Array<String>]
           #   Required. The names entity types to delete. All names must point to the
-          #   same agent as +parent+.
+          #   same agent as `parent`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -641,7 +641,7 @@ module Google
           #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.project_agent_path("[PROJECT]")
           #
-          #   # TODO: Initialize +entity_type_names+:
+          #   # TODO: Initialize `entity_type_names`:
           #   entity_type_names = []
           #
           #   # Register a callback during the method call.
@@ -698,13 +698,13 @@ module Google
           #
           # @param parent [String]
           #   Required. The name of the entity type to create entities in. Format:
-          #   +projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.
+          #   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
           # @param entities [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity | Hash>]
           #   Required. The collection of entities to create.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::EntityType::Entity`
           #   can also be provided.
           # @param language_code [String]
-          #   Optional. The language of entity synonyms defined in +entities+. If not
+          #   Optional. The language of entity synonyms defined in `entities`. If not
           #   specified, the agent's default language is used.
           #   [More than a dozen
           #   languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -720,7 +720,7 @@ module Google
           #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path("[PROJECT]", "[ENTITY_TYPE]")
           #
-          #   # TODO: Initialize +entities+:
+          #   # TODO: Initialize `entities`:
           #   entities = []
           #
           #   # Register a callback during the method call.
@@ -780,13 +780,13 @@ module Google
           #
           # @param parent [String]
           #   Required. The name of the entity type to update the entities in. Format:
-          #   +projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.
+          #   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
           # @param entities [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity | Hash>]
           #   Required. The collection of new entities to replace the existing entities.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::EntityType::Entity`
           #   can also be provided.
           # @param language_code [String]
-          #   Optional. The language of entity synonyms defined in +entities+. If not
+          #   Optional. The language of entity synonyms defined in `entities`. If not
           #   specified, the agent's default language is used.
           #   [More than a dozen
           #   languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -806,7 +806,7 @@ module Google
           #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path("[PROJECT]", "[ENTITY_TYPE]")
           #
-          #   # TODO: Initialize +entities+:
+          #   # TODO: Initialize `entities`:
           #   entities = []
           #
           #   # Register a callback during the method call.
@@ -867,13 +867,13 @@ module Google
           #
           # @param parent [String]
           #   Required. The name of the entity type to delete entries for. Format:
-          #   +projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.
+          #   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
           # @param entity_values [Array<String>]
-          #   Required. The canonical +values+ of the entities to delete. Note that
+          #   Required. The canonical `values` of the entities to delete. Note that
           #   these are not fully-qualified names, i.e. they don't start with
-          #   +projects/<Project ID>+.
+          #   `projects/<Project ID>`.
           # @param language_code [String]
-          #   Optional. The language of entity synonyms defined in +entities+. If not
+          #   Optional. The language of entity synonyms defined in `entities`. If not
           #   specified, the agent's default language is used.
           #   [More than a dozen
           #   languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -889,7 +889,7 @@ module Google
           #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path("[PROJECT]", "[ENTITY_TYPE]")
           #
-          #   # TODO: Initialize +entity_values+:
+          #   # TODO: Initialize `entity_values`:
           #   entity_values = []
           #
           #   # Register a callback during the method call.

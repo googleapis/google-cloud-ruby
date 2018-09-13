@@ -36,10 +36,10 @@ s.copy(v1beta1_library / 'lib/google/devtools/clouderrorreporting/v1beta1')
 
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):
-    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    expr = re.compile('^([^`]*(`[^`]*`[^`]*)*)([^`#\\$\\\\])\\{([\\w,]+)\\}')
     content = match.group(0)
     while True:
-        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        content, count = expr.subn('\\1\\3\\\\\\\\{\\4}', content)
         if count == 0:
             return content
 s.replace(

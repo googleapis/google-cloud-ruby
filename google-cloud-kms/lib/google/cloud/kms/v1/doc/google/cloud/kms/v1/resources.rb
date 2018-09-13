@@ -21,7 +21,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Output only. The resource name for the {Google::Cloud::Kms::V1::KeyRing KeyRing} in the format
-        #     +projects/*/locations/*/keyRings/*+.
+        #     `projects/*/locations/*/keyRings/*`.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time at which this {Google::Cloud::Kms::V1::KeyRing KeyRing} was created.
@@ -35,7 +35,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Output only. The resource name for this {Google::Cloud::Kms::V1::CryptoKey CryptoKey} in the format
-        #     +projects/*/locations/*/keyRings/*/cryptoKeys/*+.
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
         # @!attribute [rw] primary
         #   @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
         #     Output only. A copy of the "primary" {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} that will be used
@@ -164,7 +164,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Output only. The resource name for this {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} in the format
-        #     +projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*+.
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*`.
         # @!attribute [rw] state
         #   @return [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState]
         #     The current state of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.

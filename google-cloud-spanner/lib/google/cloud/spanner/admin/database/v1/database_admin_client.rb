@@ -282,7 +282,7 @@ module Google
               #
               # @param parent [String]
               #   Required. The instance whose databases should be listed.
-              #   Values are of the form +projects/<project>/instances/<instance>+.
+              #   Values are of the form `projects/<project>/instances/<instance>`.
               # @param page_size [Integer]
               #   The maximum number of resources contained in the underlying API
               #   response. If page streaming is performed per-resource, this
@@ -335,7 +335,7 @@ module Google
 
               # Creates a new Cloud Spanner database and starts to prepare it for serving.
               # The returned {Google::Longrunning::Operation long-running operation} will
-              # have a name of the format +<database_name>/operations/<operation_id>+ and
+              # have a name of the format `<database_name>/operations/<operation_id>` and
               # can be used to track preparation of the database. The
               # {Google::Longrunning::Operation#metadata metadata} field type is
               # {Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata CreateDatabaseMetadata}. The
@@ -344,13 +344,13 @@ module Google
               #
               # @param parent [String]
               #   Required. The name of the instance that will serve the new database.
-              #   Values are of the form +projects/<project>/instances/<instance>+.
+              #   Values are of the form `projects/<project>/instances/<instance>`.
               # @param create_statement [String]
-              #   Required. A +CREATE DATABASE+ statement, which specifies the ID of the
+              #   Required. A `CREATE DATABASE` statement, which specifies the ID of the
               #   new database.  The database ID must conform to the regular expression
-              #   +[a-z][a-z0-9_\-]*[a-z0-9]+ and be between 2 and 30 characters in length.
+              #   `[a-z][a-z0-9_\-]*[a-z0-9]` and be between 2 and 30 characters in length.
               #   If the database ID is a reserved word or if it contains a hyphen, the
-              #   database ID must be enclosed in backticks (+ + +).
+              #   database ID must be enclosed in backticks (`` ` ``).
               # @param extra_statements [Array<String>]
               #   An optional list of DDL statements to run inside the newly created
               #   database. Statements can create tables, indexes, etc. These
@@ -367,7 +367,7 @@ module Google
               #   database_admin_client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
               #   formatted_parent = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #
-              #   # TODO: Initialize +create_statement+:
+              #   # TODO: Initialize `create_statement`:
               #   create_statement = ''
               #
               #   # Register a callback during the method call.
@@ -423,7 +423,7 @@ module Google
               #
               # @param name [String]
               #   Required. The name of the requested database. Values are of the form
-              #   +projects/<project>/instances/<instance>/databases/<database>+.
+              #   `projects/<project>/instances/<instance>/databases/<database>`.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -453,7 +453,7 @@ module Google
               # Updates the schema of a Cloud Spanner database by
               # creating/altering/dropping tables, columns, indexes, etc. The returned
               # {Google::Longrunning::Operation long-running operation} will have a name of
-              # the format +<database_name>/operations/<operation_id>+ and can be used to
+              # the format `<database_name>/operations/<operation_id>` and can be used to
               # track execution of the schema change(s). The
               # {Google::Longrunning::Operation#metadata metadata} field type is
               # {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata UpdateDatabaseDdlMetadata}.  The operation has no response.
@@ -464,7 +464,7 @@ module Google
               #   DDL statements to be applied to the database.
               # @param operation_id [String]
               #   If empty, the new update request is assigned an
-              #   automatically-generated operation ID. Otherwise, +operation_id+
+              #   automatically-generated operation ID. Otherwise, `operation_id`
               #   is used to construct the name of the resulting
               #   {Google::Longrunning::Operation Operation}.
               #
@@ -472,16 +472,16 @@ module Google
               #   whether the statements were executed in the event that the
               #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl} call is replayed,
               #   or the return value is otherwise lost: the {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database} and
-              #   +operation_id+ fields can be combined to form the
+              #   `operation_id` fields can be combined to form the
               #   {Google::Longrunning::Operation#name name} of the resulting
-              #   {Google::Longrunning::Operation longrunning::Operation}: +<database>/operations/<operation_id>+.
+              #   {Google::Longrunning::Operation longrunning::Operation}: `<database>/operations/<operation_id>`.
               #
-              #   +operation_id+ should be unique within the database, and must be
-              #   a valid identifier: +[a-z][a-z0-9_]*+. Note that
+              #   `operation_id` should be unique within the database, and must be
+              #   a valid identifier: `[a-z][a-z0-9_]*`. Note that
               #   automatically-generated operation IDs always begin with an
               #   underscore. If the named operation already exists,
               #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl} returns
-              #   +ALREADY_EXISTS+.
+              #   `ALREADY_EXISTS`.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -493,7 +493,7 @@ module Google
               #   database_admin_client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
               #   formatted_database = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
               #
-              #   # TODO: Initialize +statements+:
+              #   # TODO: Initialize `statements`:
               #   statements = []
               #
               #   # Register a callback during the method call.
@@ -610,15 +610,15 @@ module Google
               # Sets the access control policy on a database resource. Replaces any
               # existing policy.
               #
-              # Authorization requires +spanner.databases.setIamPolicy+ permission on
+              # Authorization requires `spanner.databases.setIamPolicy` permission on
               # {Google::Iam::V1::SetIamPolicyRequest#resource resource}.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy is being specified.
-              #   +resource+ is usually specified as a path. For example, a Project
-              #   resource is specified as +projects/\\{project}+.
+              #   `resource` is usually specified as a path. For example, a Project
+              #   resource is specified as `projects/{project}`.
               # @param policy [Google::Iam::V1::Policy | Hash]
-              #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+              #   REQUIRED: The complete policy to be applied to the `resource`. The size of
               #   the policy is limited to a few 10s of KB. An empty policy is a
               #   valid policy but certain Cloud Platform services (such as Projects)
               #   might reject them.
@@ -638,7 +638,7 @@ module Google
               #   database_admin_client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
               #   formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
               #
-              #   # TODO: Initialize +policy+:
+              #   # TODO: Initialize `policy`:
               #   policy = {}
               #   response = database_admin_client.set_iam_policy(formatted_resource, policy)
 
@@ -658,13 +658,13 @@ module Google
               # Gets the access control policy for a database resource. Returns an empty
               # policy if a database exists but does not have a policy set.
               #
-              # Authorization requires +spanner.databases.getIamPolicy+ permission on
+              # Authorization requires `spanner.databases.getIamPolicy` permission on
               # {Google::Iam::V1::GetIamPolicyRequest#resource resource}.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy is being requested.
-              #   +resource+ is usually specified as a path. For example, a Project
-              #   resource is specified as +projects/\\{project}+.
+              #   `resource` is usually specified as a path. For example, a Project
+              #   resource is specified as `projects/{project}`.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -694,16 +694,16 @@ module Google
               # Returns permissions that the caller has on the specified database resource.
               #
               # Attempting this RPC on a non-existent Cloud Spanner database will result in
-              # a NOT_FOUND error if the user has +spanner.databases.list+ permission on
+              # a NOT_FOUND error if the user has `spanner.databases.list` permission on
               # the containing Cloud Spanner instance. Otherwise returns an empty set of
               # permissions.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy detail is being requested.
-              #   +resource+ is usually specified as a path. For example, a Project
-              #   resource is specified as +projects/\\{project}+.
+              #   `resource` is usually specified as a path. For example, a Project
+              #   resource is specified as `projects/{project}`.
               # @param permissions [Array<String>]
-              #   The set of permissions to check for the +resource+. Permissions with
+              #   The set of permissions to check for the `resource`. Permissions with
               #   wildcards (such as '*' or 'storage.*') are not allowed. For more
               #   information see
               #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
@@ -721,7 +721,7 @@ module Google
               #   database_admin_client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
               #   formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
               #
-              #   # TODO: Initialize +permissions+:
+              #   # TODO: Initialize `permissions`:
               #   permissions = []
               #   response = database_admin_client.test_iam_permissions(formatted_resource, permissions)
 

@@ -263,7 +263,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The project that the agent to fetch is associated with.
-          #   Format: +projects/<Project ID>+.
+          #   Format: `projects/<Project ID>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -300,7 +300,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The project to list agents from.
-          #   Format: +projects/<Project ID or '-'>+.
+          #   Format: `projects/<Project ID or '-'>`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -358,7 +358,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The project that the agent to train is associated with.
-          #   Format: +projects/<Project ID>+.
+          #   Format: `projects/<Project ID>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -422,7 +422,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The project that the agent to export is associated with.
-          #   Format: +projects/<Project ID>+.
+          #   Format: `projects/<Project ID>`.
           # @param agent_uri [String]
           #   Optional. The Google Cloud Storage URI to export the agent to.
           #   Note: The URI must start with
@@ -496,7 +496,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The project that the agent to import is associated with.
-          #   Format: +projects/<Project ID>+.
+          #   Format: `projects/<Project ID>`.
           # @param agent_uri [String]
           #   The URI to a Google Cloud Storage file containing the agent to import.
           #   Note: The URI must start with "gs://".
@@ -585,7 +585,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The project that the agent to restore is associated with.
-          #   Format: +projects/<Project ID>+.
+          #   Format: `projects/<Project ID>`.
           # @param agent_uri [String]
           #   The URI to a Google Cloud Storage file containing the agent to restore.
           #   Note: The URI must start with "gs://".

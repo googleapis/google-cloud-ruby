@@ -82,9 +82,9 @@ module Google
     #   @return [Integer]
     #     Signed fractions of a second at nanosecond resolution of the span
     #     of time. Durations less than one second are represented with a 0
-    #     +seconds+ field and a positive or negative +nanos+ field. For durations
-    #     of one second or more, a non-zero value for the +nanos+ field must be
-    #     of the same sign as the +seconds+ field. Must be from -999,999,999
+    #     `seconds` field and a positive or negative `nanos` field. For durations
+    #     of one second or more, a non-zero value for the `nanos` field must be
+    #     of the same sign as the `seconds` field. Must be from -999,999,999
     #     to +999,999,999 inclusive.
     class Duration; end
   end

@@ -239,13 +239,13 @@ module Google
           #
           #   text_to_speech_client = Google::Cloud::TextToSpeech.new(version: :v1)
           #
-          #   # TODO: Initialize +input+:
+          #   # TODO: Initialize `input`:
           #   input = {}
           #
-          #   # TODO: Initialize +voice+:
+          #   # TODO: Initialize `voice`:
           #   voice = {}
           #
-          #   # TODO: Initialize +audio_config+:
+          #   # TODO: Initialize `audio_config`:
           #   audio_config = {}
           #   response = text_to_speech_client.synthesize_speech(input, voice, audio_config)
 

@@ -393,10 +393,10 @@ module Google
             #
             # @param parent [String]
             #   The unique name of the instance in which to create the table.
-            #   Values are of the form +projects/<project>/instances/<instance>+.
+            #   Values are of the form `projects/<project>/instances/<instance>`.
             # @param table_id [String]
             #   The name by which the new table should be referred to within the parent
-            #   instance, e.g., +foobar+ rather than +<parent>/tables/foobar+.
+            #   instance, e.g., `foobar` rather than `<parent>/tables/foobar`.
             # @param table [Google::Bigtable::Admin::V2::Table | Hash]
             #   The Table to create.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Table`
@@ -404,20 +404,20 @@ module Google
             # @param initial_splits [Array<Google::Bigtable::Admin::V2::CreateTableRequest::Split | Hash>]
             #   The optional list of row keys that will be used to initially split the
             #   table into several tablets (tablets are similar to HBase regions).
-            #   Given two split keys, +s1+ and +s2+, three tablets will be created,
-            #   spanning the key ranges: +[, s1), [s1, s2), [s2, )+.
+            #   Given two split keys, `s1` and `s2`, three tablets will be created,
+            #   spanning the key ranges: `[, s1), [s1, s2), [s2, )`.
             #
             #   Example:
             #
-            #   * Row keys := +["a", "apple", "custom", "customer_1", "customer_2",+
-            #     +"other", "zz"]+
-            #   * initial_split_keys := +["apple", "customer_1", "customer_2", "other"]+
+            #   * Row keys := `["a", "apple", "custom", "customer_1", "customer_2",`
+            #     `"other", "zz"]`
+            #   * initial_split_keys := `["apple", "customer_1", "customer_2", "other"]`
             #   * Key assignment:
-            #     * Tablet 1 +[, apple)                => {"a"}.+
-            #       * Tablet 2 +[apple, customer_1)      => {"apple", "custom"}.+
-            #       * Tablet 3 +[customer_1, customer_2) => {"customer_1"}.+
-            #       * Tablet 4 +[customer_2, other)      => {"customer_2"}.+
-            #       * Tablet 5 +[other, )                => {"other", "zz"}.+
+            #     * Tablet 1 `[, apple)                => {"a"}.`
+            #       * Tablet 2 `[apple, customer_1)      => {"apple", "custom"}.`
+            #       * Tablet 3 `[customer_1, customer_2) => {"customer_1"}.`
+            #       * Tablet 4 `[customer_2, other)      => {"customer_2"}.`
+            #       * Tablet 5 `[other, )                => {"other", "zz"}.`
             #   A hash of the same form as `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
             #   can also be provided.
             # @param options [Google::Gax::CallOptions]
@@ -434,10 +434,10 @@ module Google
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
-            #   # TODO: Initialize +table_id+:
+            #   # TODO: Initialize `table_id`:
             #   table_id = ''
             #
-            #   # TODO: Initialize +table+:
+            #   # TODO: Initialize `table`:
             #   table = {}
             #   response = bigtable_table_admin_client.create_table(formatted_parent, table_id, table)
 
@@ -469,15 +469,15 @@ module Google
             #
             # @param parent [String]
             #   The unique name of the instance in which to create the table.
-            #   Values are of the form +projects/<project>/instances/<instance>+.
+            #   Values are of the form `projects/<project>/instances/<instance>`.
             # @param table_id [String]
             #   The name by which the new table should be referred to within the parent
-            #   instance, e.g., +foobar+ rather than +<parent>/tables/foobar+.
+            #   instance, e.g., `foobar` rather than `<parent>/tables/foobar`.
             # @param source_snapshot [String]
             #   The unique name of the snapshot from which to restore the table. The
             #   snapshot and the table must be in the same instance.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+            #   `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -489,10 +489,10 @@ module Google
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
-            #   # TODO: Initialize +table_id+:
+            #   # TODO: Initialize `table_id`:
             #   table_id = ''
             #
-            #   # TODO: Initialize +source_snapshot+:
+            #   # TODO: Initialize `source_snapshot`:
             #   source_snapshot = ''
             #
             #   # Register a callback during the method call.
@@ -548,10 +548,10 @@ module Google
             #
             # @param parent [String]
             #   The unique name of the instance for which tables should be listed.
-            #   Values are of the form +projects/<project>/instances/<instance>+.
+            #   Values are of the form `projects/<project>/instances/<instance>`.
             # @param view [Google::Bigtable::Admin::V2::Table::View]
             #   The view to be applied to the returned tables' fields.
-            #   Defaults to +NAME_ONLY+ if unspecified; no others are currently supported.
+            #   Defaults to `NAME_ONLY` if unspecified; no others are currently supported.
             # @param page_size [Integer]
             #   Maximum number of results per page.
             #   CURRENTLY UNIMPLEMENTED AND IGNORED.
@@ -606,10 +606,10 @@ module Google
             # @param name [String]
             #   The unique name of the requested table.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            #   `projects/<project>/instances/<instance>/tables/<table>`.
             # @param view [Google::Bigtable::Admin::V2::Table::View]
             #   The view to be applied to the returned table's fields.
-            #   Defaults to +SCHEMA_VIEW+ if unspecified.
+            #   Defaults to `SCHEMA_VIEW` if unspecified.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -643,7 +643,7 @@ module Google
             # @param name [String]
             #   The unique name of the table to be deleted.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            #   `projects/<project>/instances/<instance>/tables/<table>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -678,7 +678,7 @@ module Google
             # @param name [String]
             #   The unique name of the table whose families should be modified.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            #   `projects/<project>/instances/<instance>/tables/<table>`.
             # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification | Hash>]
             #   Modifications to be atomically applied to the specified table's families.
             #   Entries are applied in order, meaning that earlier modifications can be
@@ -700,7 +700,7 @@ module Google
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #
-            #   # TODO: Initialize +modifications+:
+            #   # TODO: Initialize `modifications`:
             #   modifications = []
             #   response = bigtable_table_admin_client.modify_column_families(formatted_name, modifications)
 
@@ -724,7 +724,7 @@ module Google
             # @param name [String]
             #   The unique name of the table on which to drop a range of rows.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            #   `projects/<project>/instances/<instance>/tables/<table>`.
             # @param row_key_prefix [String]
             #   Delete all rows that start with this row key prefix. Prefix cannot be
             #   zero length.
@@ -768,7 +768,7 @@ module Google
             # @param name [String]
             #   The unique name of the Table for which to create a consistency token.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            #   `projects/<project>/instances/<instance>/tables/<table>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -802,7 +802,7 @@ module Google
             # @param name [String]
             #   The unique name of the Table for which to check replication consistency.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            #   `projects/<project>/instances/<instance>/tables/<table>`.
             # @param consistency_token [String]
             #   The token created using GenerateConsistencyToken for the Table.
             # @param options [Google::Gax::CallOptions]
@@ -819,7 +819,7 @@ module Google
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #
-            #   # TODO: Initialize +consistency_token+:
+            #   # TODO: Initialize `consistency_token`:
             #   consistency_token = ''
             #   response = bigtable_table_admin_client.check_consistency(formatted_name, consistency_token)
 
@@ -848,16 +848,16 @@ module Google
             # @param name [String]
             #   The unique name of the table to have the snapshot taken.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            #   `projects/<project>/instances/<instance>/tables/<table>`.
             # @param cluster [String]
             #   The name of the cluster where the snapshot will be created in.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/clusters/<cluster>+.
+            #   `projects/<project>/instances/<instance>/clusters/<cluster>`.
             # @param snapshot_id [String]
             #   The ID by which the new snapshot should be referred to within the parent
-            #   cluster, e.g., +mysnapshot+ of the form: +[_a-zA-Z0-9][-_.a-zA-Z0-9]*+
+            #   cluster, e.g., `mysnapshot` of the form: `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
             #   rather than
-            #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot+.
+            #   `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot`.
             # @param description [String]
             #   Description of the snapshot.
             # @param ttl [Google::Protobuf::Duration | Hash]
@@ -878,13 +878,13 @@ module Google
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #
-            #   # TODO: Initialize +cluster+:
+            #   # TODO: Initialize `cluster`:
             #   cluster = ''
             #
-            #   # TODO: Initialize +snapshot_id+:
+            #   # TODO: Initialize `snapshot_id`:
             #   snapshot_id = ''
             #
-            #   # TODO: Initialize +description+:
+            #   # TODO: Initialize `description`:
             #   description = ''
             #
             #   # Register a callback during the method call.
@@ -951,7 +951,7 @@ module Google
             # @param name [String]
             #   The unique name of the requested snapshot.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+            #   `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -989,9 +989,9 @@ module Google
             # @param parent [String]
             #   The unique name of the cluster for which snapshots should be listed.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/clusters/<cluster>+.
-            #   Use +<cluster> = '-'+ to list snapshots for all clusters in an instance,
-            #   e.g., +projects/<project>/instances/<instance>/clusters/-+.
+            #   `projects/<project>/instances/<instance>/clusters/<cluster>`.
+            #   Use `<cluster> = '-'` to list snapshots for all clusters in an instance,
+            #   e.g., `projects/<project>/instances/<instance>/clusters/-`.
             # @param page_size [Integer]
             #   The maximum number of resources contained in the underlying API
             #   response. If page streaming is performed per-resource, this
@@ -1053,7 +1053,7 @@ module Google
             # @param name [String]
             #   The unique name of the snapshot to be deleted.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+            #   `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.

@@ -88,12 +88,12 @@ module Google
         #     An optional number of child spans that were generated while this span
         #     was active. If set, allows implementation to detect missing child spans.
         class Span
-          # A set of attributes, each in the format +[KEY]:[VALUE]+.
+          # A set of attributes, each in the format `[KEY]:[VALUE]`.
           # @!attribute [rw] attribute_map
           #   @return [Hash{String => Google::Devtools::Cloudtrace::V2::AttributeValue}]
           #     The set of attributes. Each attribute's key can be up to 128 bytes
           #     long. The value can be a string up to 256 bytes, an integer, or the
-          #     Boolean values +true+ and +false+. For example:
+          #     Boolean values `true` and `false`. For example:
           #
           #         "/instance_id": "my-instance"
           #         "/http/user_agent": ""
@@ -160,12 +160,12 @@ module Google
             end
           end
 
-          # A collection of +TimeEvent+s. A +TimeEvent+ is a time-stamped annotation
+          # A collection of `TimeEvent`s. A `TimeEvent` is a time-stamped annotation
           # on the span, consisting of either user-supplied key:value pairs, or
           # details of a message sent/received between Spans.
           # @!attribute [rw] time_event
           #   @return [Array<Google::Devtools::Cloudtrace::V2::Span::TimeEvent>]
-          #     A collection of +TimeEvent+s.
+          #     A collection of `TimeEvent`s.
           # @!attribute [rw] dropped_annotations_count
           #   @return [Integer]
           #     The number of dropped annotations in all the included time events.
@@ -220,7 +220,7 @@ module Google
           class Links; end
         end
 
-        # The allowed types for [VALUE] in a +[KEY]:[VALUE]+ attribute.
+        # The allowed types for [VALUE] in a `[KEY]:[VALUE]` attribute.
         # @!attribute [rw] string_value
         #   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
         #     A string up to 256 bytes long.
@@ -229,7 +229,7 @@ module Google
         #     A 64-bit signed integer.
         # @!attribute [rw] bool_value
         #   @return [true, false]
-        #     A Boolean value represented by +true+ or +false+.
+        #     A Boolean value represented by `true` or `false`.
         class AttributeValue; end
 
         # A call stack appearing in a trace.
@@ -243,10 +243,10 @@ module Google
         #
         #     Often multiple spans will have identical stack traces.
         #     The first occurrence of a stack trace should contain both the
-        #     +stackFrame+ content and a value in +stackTraceHashId+.
+        #     `stackFrame` content and a value in `stackTraceHashId`.
         #
         #     Subsequent spans within the same request can refer
-        #     to that stack trace by only setting +stackTraceHashId+.
+        #     to that stack trace by only setting `stackTraceHashId`.
         class StackTrace
           # Represents a single stack frame in a stack trace.
           # @!attribute [rw] function_name
@@ -255,7 +255,7 @@ module Google
           #     method that is active in this frame (up to 1024 bytes).
           # @!attribute [rw] original_function_name
           #   @return [Google::Devtools::Cloudtrace::V2::TruncatableString]
-          #     An un-mangled function name, if +function_name+ is
+          #     An un-mangled function name, if `function_name` is
           #     [mangled](http://www.avabodh.com/cxxin/namemangling.html). The name can
           #     be fully-qualified (up to 1024 bytes).
           # @!attribute [rw] file_name
@@ -264,7 +264,7 @@ module Google
           #     bytes).
           # @!attribute [rw] line_number
           #   @return [Integer]
-          #     The line number in +file_name+ where the function call appears.
+          #     The line number in `file_name` where the function call appears.
           # @!attribute [rw] column_number
           #   @return [Integer]
           #     The column number where the function call appears, if available.
@@ -305,7 +305,7 @@ module Google
         #   @return [String]
         #     The shortened string. For example, if the original string is 500
         #     bytes long and the limit of the string is 128 bytes, then
-        #     +value+ contains the first 128 bytes of the 500-byte string.
+        #     `value` contains the first 128 bytes of the 500-byte string.
         #
         #     Truncation always happens on a UTF8 character boundary. If there
         #     are multi-byte characters in the string, then the length of the

@@ -431,6 +431,30 @@ module Google
                 {'name' => request.name}
               end
             )
+            @get_public_key = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:get_public_key),
+              defaults["get_public_key"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @asymmetric_decrypt = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:asymmetric_decrypt),
+              defaults["asymmetric_decrypt"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @asymmetric_sign = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:asymmetric_sign),
+              defaults["asymmetric_sign"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @set_iam_policy = Google::Gax.create_api_call(
               @iam_policy_stub.method(:set_iam_policy),
               defaults["set_iam_policy"],
@@ -463,7 +487,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The resource name of the location associated with the
-          #   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format +projects/*/locations/*+.
+          #   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -518,7 +542,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The resource name of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to list, in the format
-          #   +projects/*/locations/*/keyRings/*+.
+          #   `projects/*/locations/*/keyRings/*`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -577,7 +601,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to list, in the format
-          #   +projects/*/locations/*/keyRings/*/cryptoKeys/*+.
+          #   `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -727,10 +751,10 @@ module Google
           #
           # @param parent [String]
           #   Required. The resource name of the location associated with the
-          #   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format +projects/*/locations/*+.
+          #   {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
           # @param key_ring_id [String]
           #   Required. It must be unique within a location and match the regular
-          #   expression +[a-zA-Z0-9_-]\\{1,63}+
+          #   expression `[a-zA-Z0-9_-]{1,63}`
           # @param key_ring [Google::Cloud::Kms::V1::KeyRing | Hash]
           #   A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::KeyRing`
@@ -749,10 +773,10 @@ module Google
           #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path("[PROJECT]", "[LOCATION]")
           #
-          #   # TODO: Initialize +key_ring_id+:
+          #   # TODO: Initialize `key_ring_id`:
           #   key_ring_id = ''
           #
-          #   # TODO: Initialize +key_ring+:
+          #   # TODO: Initialize `key_ring`:
           #   key_ring = {}
           #   response = key_management_service_client.create_key_ring(formatted_parent, key_ring_id, key_ring)
 
@@ -782,7 +806,7 @@ module Google
           #   {Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
           # @param crypto_key_id [String]
           #   Required. It must be unique within a KeyRing and match the regular
-          #   expression +[a-zA-Z0-9_-]\\{1,63}+
+          #   expression `[a-zA-Z0-9_-]{1,63}`
           # @param crypto_key [Google::Cloud::Kms::V1::CryptoKey | Hash]
           #   A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKey`
@@ -855,7 +879,7 @@ module Google
           #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
           #
-          #   # TODO: Initialize +crypto_key_version+:
+          #   # TODO: Initialize `crypto_key_version`:
           #   crypto_key_version = {}
           #   response = key_management_service_client.create_crypto_key_version(formatted_parent, crypto_key_version)
 
@@ -895,10 +919,10 @@ module Google
           #
           #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #
-          #   # TODO: Initialize +crypto_key+:
+          #   # TODO: Initialize `crypto_key`:
           #   crypto_key = {}
           #
-          #   # TODO: Initialize +update_mask+:
+          #   # TODO: Initialize `update_mask`:
           #   update_mask = {}
           #   response = key_management_service_client.update_crypto_key(crypto_key, update_mask)
 
@@ -944,10 +968,10 @@ module Google
           #
           #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #
-          #   # TODO: Initialize +crypto_key_version+:
+          #   # TODO: Initialize `crypto_key_version`:
           #   crypto_key_version = {}
           #
-          #   # TODO: Initialize +update_mask+:
+          #   # TODO: Initialize `update_mask`:
           #   update_mask = {}
           #   response = key_management_service_client.update_crypto_key_version(crypto_key_version, update_mask)
 
@@ -1007,7 +1031,7 @@ module Google
           #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY_PATH]")
           #
-          #   # TODO: Initialize +plaintext+:
+          #   # TODO: Initialize `plaintext`:
           #   plaintext = ''
           #   response = key_management_service_client.encrypt(formatted_name, plaintext)
 
@@ -1052,7 +1076,7 @@ module Google
           #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
           #
-          #   # TODO: Initialize +ciphertext+:
+          #   # TODO: Initialize `ciphertext`:
           #   ciphertext = ''
           #   response = key_management_service_client.decrypt(formatted_name, ciphertext)
 
@@ -1093,7 +1117,7 @@ module Google
           #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
           #
-          #   # TODO: Initialize +crypto_key_version_id+:
+          #   # TODO: Initialize `crypto_key_version_id`:
           #   crypto_key_version_id = ''
           #   response = key_management_service_client.update_crypto_key_primary_version(formatted_name, crypto_key_version_id)
 
@@ -1187,15 +1211,133 @@ module Google
             @restore_crypto_key_version.call(req, options, &block)
           end
 
+          # Returns the public key for the given {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. The
+          # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} must be
+          # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN} or
+          # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT ASYMMETRIC_DECRYPT}.
+          #
+          # @param name [String]
+          #   The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
+          #   get.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Kms::V1::PublicKey]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Kms::V1::PublicKey]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+          #   response = key_management_service_client.get_public_key(formatted_name)
+
+          def get_public_key \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::GetPublicKeyRequest)
+            @get_public_key.call(req, options, &block)
+          end
+
+          # Decrypts data that was encrypted with a public key retrieved from
+          # {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey} corresponding to a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with
+          # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} ASYMMETRIC_DECRYPT.
+          #
+          # @param name [String]
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
+          #   decryption.
+          # @param ciphertext [String]
+          #   Required. The data encrypted with the named {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
+          #   key using OAEP.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+          #
+          #   # TODO: Initialize `ciphertext`:
+          #   ciphertext = ''
+          #   response = key_management_service_client.asymmetric_decrypt(formatted_name, ciphertext)
+
+          def asymmetric_decrypt \
+              name,
+              ciphertext,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              ciphertext: ciphertext
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::AsymmetricDecryptRequest)
+            @asymmetric_decrypt.call(req, options, &block)
+          end
+
+          # Signs data using a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+          # ASYMMETRIC_SIGN, producing a signature that can be verified with the public
+          # key retrieved from {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+          #
+          # @param name [String]
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
+          # @param digest [Google::Cloud::Kms::V1::Digest | Hash]
+          #   Required. The digest of the data to sign. The digest must be produced with
+          #   the same digest algorithm as specified by the key version's
+          #   {Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
+          #   A hash of the same form as `Google::Cloud::Kms::V1::Digest`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Kms::V1::AsymmetricSignResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Kms::V1::AsymmetricSignResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+          #
+          #   # TODO: Initialize `digest`:
+          #   digest = {}
+          #   response = key_management_service_client.asymmetric_sign(formatted_name, digest)
+
+          def asymmetric_sign \
+              name,
+              digest,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              digest: digest
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::AsymmetricSignRequest)
+            @asymmetric_sign.call(req, options, &block)
+          end
+
           # Sets the access control policy on the specified resource. Replaces any
           # existing policy.
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
-          #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/\\{project}+.
+          #   `resource` is usually specified as a path. For example, a Project
+          #   resource is specified as `projects/{project}`.
           # @param policy [Google::Iam::V1::Policy | Hash]
-          #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+          #   REQUIRED: The complete policy to be applied to the `resource`. The size of
           #   the policy is limited to a few 10s of KB. An empty policy is a
           #   valid policy but certain Cloud Platform services (such as Projects)
           #   might reject them.
@@ -1215,7 +1357,7 @@ module Google
           #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
           #
-          #   # TODO: Initialize +policy+:
+          #   # TODO: Initialize `policy`:
           #   policy = {}
           #   response = key_management_service_client.set_iam_policy(formatted_resource, policy)
 
@@ -1238,8 +1380,8 @@ module Google
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
-          #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/\\{project}+.
+          #   `resource` is usually specified as a path. For example, a Project
+          #   resource is specified as `projects/{project}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1272,10 +1414,10 @@ module Google
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.
-          #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/\\{project}+.
+          #   `resource` is usually specified as a path. For example, a Project
+          #   resource is specified as `projects/{project}`.
           # @param permissions [Array<String>]
-          #   The set of permissions to check for the +resource+. Permissions with
+          #   The set of permissions to check for the `resource`. Permissions with
           #   wildcards (such as '*' or 'storage.*') are not allowed. For more
           #   information see
           #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
@@ -1293,7 +1435,7 @@ module Google
           #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
           #
-          #   # TODO: Initialize +permissions+:
+          #   # TODO: Initialize `permissions`:
           #   permissions = []
           #   response = key_management_service_client.test_iam_permissions(formatted_resource, permissions)
 

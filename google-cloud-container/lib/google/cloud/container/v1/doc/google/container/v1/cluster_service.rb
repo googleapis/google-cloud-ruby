@@ -21,10 +21,10 @@ module Google
       #   @return [String]
       #     The name of a Google Compute Engine [machine
       #     type](/compute/docs/machine-types) (e.g.
-      #     +n1-standard-1+).
+      #     `n1-standard-1`).
       #
       #     If unspecified, the default machine type is
-      #     +n1-standard-1+.
+      #     `n1-standard-1`.
       # @!attribute [rw] disk_size_gb
       #   @return [Integer]
       #     Size of the disk attached to each node, specified in GB.
@@ -39,9 +39,9 @@ module Google
       #     The following scopes are recommended, but not required, and by default are
       #     not included:
       #
-      #     * +https://www.googleapis.com/auth/compute+ is required for mounting
+      #     * `https://www.googleapis.com/auth/compute` is required for mounting
       #       persistent storage on your nodes.
-      #     * +https://www.googleapis.com/auth/devstorage.read_only+ is required for
+      #     * `https://www.googleapis.com/auth/devstorage.read_only` is required for
       #       communicating with **gcr.io**
       #       (the [Google Container Registry](https://cloud.google.com/container-registry/)).
       #
@@ -266,10 +266,10 @@ module Google
       #   @return [true, false]
       #     Whether a new subnetwork will be created automatically for the cluster.
       #
-      #     This field is only applicable when +use_ip_aliases+ is true.
+      #     This field is only applicable when `use_ip_aliases` is true.
       # @!attribute [rw] subnetwork_name
       #   @return [String]
-      #     A custom subnetwork name to be used if +create_subnetwork+ is true.  If
+      #     A custom subnetwork name to be used if `create_subnetwork` is true.  If
       #     this field is empty, then an automatic name will be chosen for the new
       #     subnetwork.
       # @!attribute [rw] cluster_ipv4_cidr
@@ -302,52 +302,52 @@ module Google
       # @!attribute [rw] cluster_ipv4_cidr_block
       #   @return [String]
       #     The IP address range for the cluster pod IPs. If this field is set, then
-      #     +cluster.cluster_ipv4_cidr+ must be left blank.
+      #     `cluster.cluster_ipv4_cidr` must be left blank.
       #
-      #     This field is only applicable when +use_ip_aliases+ is true.
+      #     This field is only applicable when `use_ip_aliases` is true.
       #
       #     Set to blank to have a range chosen with the default size.
       #
-      #     Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+      #     Set to /netmask (e.g. `/14`) to have a range chosen with a specific
       #     netmask.
       #
       #     Set to a
       #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-      #     notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
-      #     +10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+      #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
+      #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
       #     to use.
       # @!attribute [rw] node_ipv4_cidr_block
       #   @return [String]
       #     The IP address range of the instance IPs in this cluster.
       #
-      #     This is applicable only if +create_subnetwork+ is true.
+      #     This is applicable only if `create_subnetwork` is true.
       #
       #     Set to blank to have a range chosen with the default size.
       #
-      #     Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+      #     Set to /netmask (e.g. `/14`) to have a range chosen with a specific
       #     netmask.
       #
       #     Set to a
       #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-      #     notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
-      #     +10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+      #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
+      #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
       #     to use.
       # @!attribute [rw] services_ipv4_cidr_block
       #   @return [String]
       #     The IP address range of the services IPs in this cluster. If blank, a range
       #     will be automatically chosen with the default size.
       #
-      #     This field is only applicable when +use_ip_aliases+ is true.
+      #     This field is only applicable when `use_ip_aliases` is true.
       #
       #     Set to blank to have a range chosen with the default size.
       #
-      #     Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+      #     Set to /netmask (e.g. `/14`) to have a range chosen with a specific
       #     netmask.
       #
       #     Set to a
       #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-      #     notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
-      #     +10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+      #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
+      #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
       #     to use.
       class IPAllocationPolicy; end
 
@@ -376,7 +376,7 @@ module Google
       # @!attribute [rw] node_config
       #   @return [Google::Container::V1::NodeConfig]
       #     Parameters used in creating the cluster's nodes.
-      #     See +nodeConfig+ for the description of its properties.
+      #     See `nodeConfig` for the description of its properties.
       #     For requests, this field should only be used in lieu of a
       #     "node_pool" object, since this configuration (along with the
       #     "initial_node_count") will be used to create a "NodePool" object with an
@@ -393,29 +393,29 @@ module Google
       #     The logging service the cluster should use to write logs.
       #     Currently available options:
       #
-      #     * +logging.googleapis.com+ - the Google Cloud Logging service.
-      #     * +none+ - no logs will be exported from the cluster.
-      #     * if left as an empty string,+logging.googleapis.com+ will be used.
+      #     * `logging.googleapis.com` - the Google Cloud Logging service.
+      #     * `none` - no logs will be exported from the cluster.
+      #     * if left as an empty string,`logging.googleapis.com` will be used.
       # @!attribute [rw] monitoring_service
       #   @return [String]
       #     The monitoring service the cluster should use to write metrics.
       #     Currently available options:
       #
-      #     * +monitoring.googleapis.com+ - the Google Cloud Monitoring service.
-      #     * +none+ - no metrics will be exported from the cluster.
-      #     * if left as an empty string, +monitoring.googleapis.com+ will be used.
+      #     * `monitoring.googleapis.com` - the Google Cloud Monitoring service.
+      #     * `none` - no metrics will be exported from the cluster.
+      #     * if left as an empty string, `monitoring.googleapis.com` will be used.
       # @!attribute [rw] network
       #   @return [String]
       #     The name of the Google Compute Engine
       #     [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the
-      #     cluster is connected. If left unspecified, the +default+ network
+      #     cluster is connected. If left unspecified, the `default` network
       #     will be used.
       # @!attribute [rw] cluster_ipv4_cidr
       #   @return [String]
       #     The IP address range of the container pods in this cluster, in
       #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-      #     notation (e.g. +10.96.0.0/14+). Leave blank to have
-      #     one automatically chosen or specify a +/14+ block in +10.0.0.0/8+.
+      #     notation (e.g. `10.96.0.0/14`). Leave blank to have
+      #     one automatically chosen or specify a `/14` block in `10.0.0.0/8`.
       # @!attribute [rw] addons_config
       #   @return [Google::Container::V1::AddonsConfig]
       #     Configurations for the various addons available to run in the cluster.
@@ -477,9 +477,9 @@ module Google
       #   @return [String]
       #     [Output only] The IP address of this cluster's master endpoint.
       #     The endpoint can be accessed from the internet at
-      #     +https://username:password@endpoint/+.
+      #     `https://username:password@endpoint/`.
       #
-      #     See the +masterAuth+ property of this resource for username and
+      #     See the `masterAuth` property of this resource for username and
       #     password information.
       # @!attribute [rw] initial_cluster_version
       #   @return [String]
@@ -509,15 +509,15 @@ module Google
       # @!attribute [rw] node_ipv4_cidr_size
       #   @return [Integer]
       #     [Output only] The size of the address space on each node for hosting
-      #     containers. This is provisioned from within the +container_ipv4_cidr+
+      #     containers. This is provisioned from within the `container_ipv4_cidr`
       #     range.
       # @!attribute [rw] services_ipv4_cidr
       #   @return [String]
       #     [Output only] The IP address range of the Kubernetes services in
       #     this cluster, in
       #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-      #     notation (e.g. +1.2.3.4/29+). Service addresses are
-      #     typically put in the last +/16+ from the container CIDR.
+      #     notation (e.g. `1.2.3.4/29`). Service addresses are
+      #     typically put in the last `/16` from the container CIDR.
       # @!attribute [rw] instance_group_urls
       #   @return [Array<String>]
       #     Deprecated. Use node_pools.instance_group_urls.
@@ -543,14 +543,14 @@ module Google
 
           # The RECONCILING state indicates that some work is actively being done on
           # the cluster, such as upgrading the master or node software. Details can
-          # be found in the +statusMessage+ field.
+          # be found in the `statusMessage` field.
           RECONCILING = 3
 
           # The STOPPING state indicates the cluster is being deleted.
           STOPPING = 4
 
           # The ERROR state indicates the cluster may be unusable. Details
-          # can be found in the +statusMessage+ field.
+          # can be found in the `statusMessage` field.
           ERROR = 5
         end
       end
@@ -561,7 +561,7 @@ module Google
       # @!attribute [rw] desired_node_version
       #   @return [String]
       #     The Kubernetes version to change the nodes to (typically an
-      #     upgrade). Use +-+ to upgrade to the latest version supported by
+      #     upgrade). Use `-` to upgrade to the latest version supported by
       #     the server.
       # @!attribute [rw] desired_monitoring_service
       #   @return [String]
@@ -787,7 +787,7 @@ module Google
       # @!attribute [rw] node_version
       #   @return [String]
       #     The Kubernetes version to change the nodes to (typically an
-      #     upgrade). Use +-+ to upgrade to the latest version supported by
+      #     upgrade). Use `-` to upgrade to the latest version supported by
       #     the server.
       # @!attribute [rw] image_type
       #   @return [String]
@@ -1011,7 +1011,7 @@ module Google
       #     resides.
       # @!attribute [rw] operation_id
       #   @return [String]
-      #     The server-assigned +name+ of the operation.
+      #     The server-assigned `name` of the operation.
       class GetOperationRequest; end
 
       # ListOperationsRequest lists operations.
@@ -1022,7 +1022,7 @@ module Google
       # @!attribute [rw] zone
       #   @return [String]
       #     The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available)
-      #     to return operations for, or +-+ for all zones.
+      #     to return operations for, or `-` for all zones.
       class ListOperationsRequest; end
 
       # CancelOperationRequest cancels a single operation.
@@ -1036,7 +1036,7 @@ module Google
       #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
       # @!attribute [rw] operation_id
       #   @return [String]
-      #     The server-assigned +name+ of the operation.
+      #     The server-assigned `name` of the operation.
       class CancelOperationRequest; end
 
       # ListOperationsResponse is the result of ListOperationsRequest.
@@ -1211,14 +1211,14 @@ module Google
 
           # The RECONCILING state indicates that some work is actively being done on
           # the node pool, such as upgrading node software. Details can
-          # be found in the +statusMessage+ field.
+          # be found in the `statusMessage` field.
           RECONCILING = 4
 
           # The STOPPING state indicates the node pool is being deleted.
           STOPPING = 5
 
           # The ERROR state indicates the node pool may be unusable. Details
-          # can be found in the +statusMessage+ field.
+          # can be found in the `statusMessage` field.
           ERROR = 6
         end
       end

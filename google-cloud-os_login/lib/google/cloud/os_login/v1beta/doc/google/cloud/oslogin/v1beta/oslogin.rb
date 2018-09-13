@@ -39,7 +39,7 @@ module Google
         #   @return [String]
         #     A reference to the POSIX account to update. POSIX accounts are identified
         #     by the project ID they are associated with. A reference to the POSIX
-        #     account is in format +users/\\{user}/projects/\\{project}+.
+        #     account is in format `users/{user}/projects/{project}`.
         class DeletePosixAccountRequest; end
 
         # A request message for deleting an SSH public key.
@@ -47,13 +47,13 @@ module Google
         #   @return [String]
         #     The fingerprint of the public key to update. Public keys are identified by
         #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-        #     +users/\\{user}/sshPublicKeys/\\{fingerprint}+.
+        #     `users/{user}/sshPublicKeys/{fingerprint}`.
         class DeleteSshPublicKeyRequest; end
 
         # A request message for retrieving the login profile information for a user.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique ID for the user in format +users/\\{user}+.
+        #     The unique ID for the user in format `users/{user}`.
         class GetLoginProfileRequest; end
 
         # A request message for retrieving an SSH public key.
@@ -61,13 +61,13 @@ module Google
         #   @return [String]
         #     The fingerprint of the public key to retrieve. Public keys are identified
         #     by their SHA-256 fingerprint. The fingerprint of the public key is in
-        #     format +users/\\{user}/sshPublicKeys/\\{fingerprint}+.
+        #     format `users/{user}/sshPublicKeys/{fingerprint}`.
         class GetSshPublicKeyRequest; end
 
         # A request message for importing an SSH public key.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The unique ID for the user in format +users/\\{user}+.
+        #     The unique ID for the user in format `users/{user}`.
         # @!attribute [rw] ssh_public_key
         #   @return [Google::Cloud::Oslogin::Common::SshPublicKey]
         #     The SSH public key and expiration time.
@@ -87,7 +87,7 @@ module Google
         #   @return [String]
         #     The fingerprint of the public key to update. Public keys are identified by
         #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-        #     +users/\\{user}/sshPublicKeys/\\{fingerprint}+.
+        #     `users/{user}/sshPublicKeys/{fingerprint}`.
         # @!attribute [rw] ssh_public_key
         #   @return [Google::Cloud::Oslogin::Common::SshPublicKey]
         #     The SSH public key and expiration time.

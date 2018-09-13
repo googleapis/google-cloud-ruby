@@ -19,7 +19,7 @@ module Google
       # A single strongly-typed value.
       # @!attribute [rw] bool_value
       #   @return [true, false]
-      #     A Boolean value: +true+ or +false+.
+      #     A Boolean value: `true` or `false`.
       # @!attribute [rw] int64_value
       #   @return [Integer]
       #     A 64-bit integer. Its range is approximately &plusmn;9.2x10<sup>18</sup>.
@@ -51,19 +51,19 @@ module Google
 
       # Describes how to combine multiple time series to provide different views of
       # the data.  Aggregation consists of an alignment step on individual time
-      # series (+alignment_period+ and +per_series_aligner+) followed by an optional
+      # series (`alignment_period` and `per_series_aligner`) followed by an optional
       # reduction step of the data across the aligned time series
-      # (+cross_series_reducer+ and +group_by_fields+).  For more details, see
+      # (`cross_series_reducer` and `group_by_fields`).  For more details, see
       # [Aggregation](https://cloud.google.com/monitoring/api/learn_more#aggregation).
       # @!attribute [rw] alignment_period
       #   @return [Google::Protobuf::Duration]
       #     The alignment period for per-{Google::Monitoring::V3::TimeSeries time series}
-      #     alignment. If present, +alignmentPeriod+ must be at least 60
+      #     alignment. If present, `alignmentPeriod` must be at least 60
       #     seconds.  After per-time series alignment, each time series will
       #     contain data points only on the period boundaries. If
-      #     +perSeriesAligner+ is not specified or equals +ALIGN_NONE+, then
-      #     this field is ignored. If +perSeriesAligner+ is specified and
-      #     does not equal +ALIGN_NONE+, then this field must be defined;
+      #     `perSeriesAligner` is not specified or equals `ALIGN_NONE`, then
+      #     this field is ignored. If `perSeriesAligner` is specified and
+      #     does not equal `ALIGN_NONE`, then this field must be defined;
       #     otherwise an error is returned.
       # @!attribute [rw] per_series_aligner
       #   @return [Google::Monitoring::V3::Aggregation::Aligner]
@@ -74,9 +74,9 @@ module Google
       #     the time series.
       #
       #     Time series data must be aligned in order to perform cross-time
-      #     series reduction. If +crossSeriesReducer+ is specified, then
-      #     +perSeriesAligner+ must be specified and not equal +ALIGN_NONE+
-      #     and +alignmentPeriod+ must be specified; otherwise, an error is
+      #     series reduction. If `crossSeriesReducer` is specified, then
+      #     `perSeriesAligner` must be specified and not equal `ALIGN_NONE`
+      #     and `alignmentPeriod` must be specified; otherwise, an error is
       #     returned.
       # @!attribute [rw] cross_series_reducer
       #   @return [Google::Monitoring::V3::Aggregation::Reducer]
@@ -87,25 +87,25 @@ module Google
       #     time series.
       #
       #     Time series data must be aligned in order to perform cross-time
-      #     series reduction. If +crossSeriesReducer+ is specified, then
-      #     +perSeriesAligner+ must be specified and not equal +ALIGN_NONE+
-      #     and +alignmentPeriod+ must be specified; otherwise, an error is
+      #     series reduction. If `crossSeriesReducer` is specified, then
+      #     `perSeriesAligner` must be specified and not equal `ALIGN_NONE`
+      #     and `alignmentPeriod` must be specified; otherwise, an error is
       #     returned.
       # @!attribute [rw] group_by_fields
       #   @return [Array<String>]
-      #     The set of fields to preserve when +crossSeriesReducer+ is
-      #     specified. The +groupByFields+ determine how the time series are
+      #     The set of fields to preserve when `crossSeriesReducer` is
+      #     specified. The `groupByFields` determine how the time series are
       #     partitioned into subsets prior to applying the aggregation
       #     function. Each subset contains time series that have the same
       #     value for each of the grouping fields. Each individual time
       #     series is a member of exactly one subset. The
-      #     +crossSeriesReducer+ is applied to each subset of time series.
+      #     `crossSeriesReducer` is applied to each subset of time series.
       #     It is not possible to reduce across different resource types, so
-      #     this field implicitly contains +resource.type+.  Fields not
-      #     specified in +groupByFields+ are aggregated away.  If
-      #     +groupByFields+ is not specified and all the time series have
+      #     this field implicitly contains `resource.type`.  Fields not
+      #     specified in `groupByFields` are aggregated away.  If
+      #     `groupByFields` is not specified and all the time series have
       #     the same resource type, then the time series are aggregated into
-      #     a single output time series. If +crossSeriesReducer+ is not
+      #     a single output time series. If `crossSeriesReducer` is not
       #     defined, this field is ignored.
       class Aggregation
         # The Aligner describes how to bring the data points in a single
@@ -137,7 +137,7 @@ module Google
           # and the output unit is one that has a "/time" dimension.
           #
           # If, by rate, you are looking for percentage change, see the
-          # +ALIGN_PERCENT_CHANGE+ aligner option.
+          # `ALIGN_PERCENT_CHANGE` aligner option.
           ALIGN_RATE = 2
 
           # Align by interpolating between adjacent points around the

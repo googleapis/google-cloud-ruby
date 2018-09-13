@@ -19,7 +19,7 @@ module Google
       # Node information for nodes appearing in a {Google::Spanner::V1::QueryPlan#plan_nodes QueryPlan#plan_nodes}.
       # @!attribute [rw] index
       #   @return [Integer]
-      #     The +PlanNode+'s index in {Google::Spanner::V1::QueryPlan#plan_nodes node list}.
+      #     The `PlanNode`'s index in {Google::Spanner::V1::QueryPlan#plan_nodes node list}.
       # @!attribute [rw] kind
       #   @return [Google::Spanner::V1::PlanNode::Kind]
       #     Used to determine the type of node. May be needed for visualizing
@@ -32,7 +32,7 @@ module Google
       #     The display name for the node.
       # @!attribute [rw] child_links
       #   @return [Array<Google::Spanner::V1::PlanNode::ChildLink>]
-      #     List of child node +index+es and their relationship to this parent.
+      #     List of child node `index`es and their relationship to this parent.
       # @!attribute [rw] short_representation
       #   @return [Google::Spanner::V1::PlanNode::ShortRepresentation]
       #     Condensed representation for {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} nodes.
@@ -69,24 +69,24 @@ module Google
         #     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
         #     to an output variable of the parent node. The field carries the name of
         #     the output variable.
-        #     For example, a +TableScan+ operator that reads rows from a table will
-        #     have child links to the +SCALAR+ nodes representing the output variables
+        #     For example, a `TableScan` operator that reads rows from a table will
+        #     have child links to the `SCALAR` nodes representing the output variables
         #     created for each column that is read by the operator. The corresponding
-        #     +variable+ fields will be set to the variable names assigned to the
+        #     `variable` fields will be set to the variable names assigned to the
         #     columns.
         class ChildLink; end
 
         # Condensed representation of a node and its subtree. Only present for
-        # +SCALAR+ {Google::Spanner::V1::PlanNode PlanNode(s)}.
+        # `SCALAR` {Google::Spanner::V1::PlanNode PlanNode(s)}.
         # @!attribute [rw] description
         #   @return [String]
         #     A string representation of the expression subtree rooted at this node.
         # @!attribute [rw] subqueries
         #   @return [Hash{String => Integer}]
         #     A mapping of (subquery variable name) -> (subquery node id) for cases
-        #     where the +description+ string of this node references a +SCALAR+
+        #     where the `description` string of this node references a `SCALAR`
         #     subquery contained in the expression subtree rooted at this node. The
-        #     referenced +SCALAR+ subquery may not necessarily be a direct child of
+        #     referenced `SCALAR` subquery may not necessarily be a direct child of
         #     this node.
         class ShortRepresentation; end
 
@@ -98,7 +98,7 @@ module Google
 
           # Denotes a Relational operator node in the expression tree. Relational
           # operators represent iterative processing of rows during query execution.
-          # For example, a +TableScan+ operation that reads rows from a table.
+          # For example, a `TableScan` operation that reads rows from a table.
           RELATIONAL = 1
 
           # Denotes a Scalar node in the expression tree. Scalar nodes represent
@@ -113,8 +113,8 @@ module Google
       # @!attribute [rw] plan_nodes
       #   @return [Array<Google::Spanner::V1::PlanNode>]
       #     The nodes in the query plan. Plan nodes are returned in pre-order starting
-      #     with the plan root. Each {Google::Spanner::V1::PlanNode PlanNode}'s +id+ corresponds to its index in
-      #     +plan_nodes+.
+      #     with the plan root. Each {Google::Spanner::V1::PlanNode PlanNode}'s `id` corresponds to its index in
+      #     `plan_nodes`.
       class QueryPlan; end
     end
   end

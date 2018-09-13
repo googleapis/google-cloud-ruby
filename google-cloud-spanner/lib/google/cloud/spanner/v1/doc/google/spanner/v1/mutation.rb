@@ -22,11 +22,11 @@ module Google
       # @!attribute [rw] insert
       #   @return [Google::Spanner::V1::Mutation::Write]
       #     Insert new rows in a table. If any of the rows already exist,
-      #     the write or transaction fails with error +ALREADY_EXISTS+.
+      #     the write or transaction fails with error `ALREADY_EXISTS`.
       # @!attribute [rw] update
       #   @return [Google::Spanner::V1::Mutation::Write]
       #     Update existing rows in a table. If any of the rows does not
-      #     already exist, the transaction fails with error +NOT_FOUND+.
+      #     already exist, the transaction fails with error `NOT_FOUND`.
       # @!attribute [rw] insert_or_update
       #   @return [Google::Spanner::V1::Mutation::Write]
       #     Like {Google::Spanner::V1::Mutation#insert insert}, except that if the row already exists, then
@@ -37,7 +37,7 @@ module Google
       #     Like {Google::Spanner::V1::Mutation#insert insert}, except that if the row already exists, it is
       #     deleted, and the column values provided are inserted
       #     instead. Unlike {Google::Spanner::V1::Mutation#insert_or_update insert_or_update}, this means any values not
-      #     explicitly written become +NULL+.
+      #     explicitly written become `NULL`.
       # @!attribute [rw] delete
       #   @return [Google::Spanner::V1::Mutation::Delete]
       #     Delete rows from a table. Succeeds whether or not the named
@@ -57,12 +57,12 @@ module Google
         #     row(s) to be modified.
         # @!attribute [rw] values
         #   @return [Array<Google::Protobuf::ListValue>]
-        #     The values to be written. +values+ can contain more than one
+        #     The values to be written. `values` can contain more than one
         #     list of values. If it does, then multiple rows are written, one
-        #     for each entry in +values+. Each list in +values+ must have
+        #     for each entry in `values`. Each list in `values` must have
         #     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
         #     above. Sending multiple lists is equivalent to sending multiple
-        #     +Mutation+s, each containing one +values+ entry and repeating
+        #     `Mutation`s, each containing one `values` entry and repeating
         #     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
         #     encoded as described {Google::Spanner::V1::TypeCode here}.
         class Write; end

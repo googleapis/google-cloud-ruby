@@ -661,7 +661,7 @@ module Google
           #   reverse. This requires that only reversible transformations
           #   be provided here. The reversible transformations are:
           #
-          #   * +CryptoReplaceFfxFpeConfig+
+          #   * `CryptoReplaceFfxFpeConfig`
           #   A hash of the same form as `Google::Privacy::Dlp::V2::DeidentifyConfig`
           #   can also be provided.
           # @param inspect_config [Google::Privacy::Dlp::V2::InspectConfig | Hash]
@@ -674,14 +674,14 @@ module Google
           #   can also be provided.
           # @param inspect_template_name [String]
           #   Optional template to use. Any configuration directly specified in
-          #   +inspect_config+ will override those set in the template. Singular fields
+          #   `inspect_config` will override those set in the template. Singular fields
           #   that are set in this request will replace their corresponding fields in the
           #   template. Repeated fields are appended. Singular sub-messages and groups
           #   are recursively merged.
           # @param reidentify_template_name [String]
-          #   Optional template to use. References an instance of +DeidentifyTemplate+.
-          #   Any configuration directly specified in +reidentify_config+ or
-          #   +inspect_config+ will override those set in the template. Singular fields
+          #   Optional template to use. References an instance of `DeidentifyTemplate`.
+          #   Any configuration directly specified in `reidentify_config` or
+          #   `inspect_config` will override those set in the template. Singular fields
           #   that are set in this request will replace their corresponding fields in the
           #   template. Repeated fields are appended. Singular sub-messages and groups
           #   are recursively merged.
@@ -773,7 +773,7 @@ module Google
           # @param template_id [String]
           #   The template id can contain uppercase and lowercase letters,
           #   numbers, and hyphens; that is, it must match the regular
-          #   expression: +[a-zA-Z\\d-]++. The maximum length is 100
+          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -810,7 +810,7 @@ module Google
           #
           # @param name [String]
           #   Resource name of organization and inspectTemplate to be updated, for
-          #   example +organizations/433245324/inspectTemplates/432452342+ or
+          #   example `organizations/433245324/inspectTemplates/432452342` or
           #   projects/project-id/inspectTemplates/432452342.
           # @param inspect_template [Google::Privacy::Dlp::V2::InspectTemplate | Hash]
           #   New InspectTemplate value.
@@ -855,7 +855,7 @@ module Google
           #
           # @param name [String]
           #   Resource name of the organization and inspectTemplate to be read, for
-          #   example +organizations/433245324/inspectTemplates/432452342+ or
+          #   example `organizations/433245324/inspectTemplates/432452342` or
           #   projects/project-id/inspectTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -943,7 +943,7 @@ module Google
           #
           # @param name [String]
           #   Resource name of the organization and inspectTemplate to be deleted, for
-          #   example +organizations/433245324/inspectTemplates/432452342+ or
+          #   example `organizations/433245324/inspectTemplates/432452342` or
           #   projects/project-id/inspectTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -986,7 +986,7 @@ module Google
           # @param template_id [String]
           #   The template id can contain uppercase and lowercase letters,
           #   numbers, and hyphens; that is, it must match the regular
-          #   expression: +[a-zA-Z\\d-]++. The maximum length is 100
+          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1024,7 +1024,7 @@ module Google
           #
           # @param name [String]
           #   Resource name of organization and deidentify template to be updated, for
-          #   example +organizations/433245324/deidentifyTemplates/432452342+ or
+          #   example `organizations/433245324/deidentifyTemplates/432452342` or
           #   projects/project-id/deidentifyTemplates/432452342.
           # @param deidentify_template [Google::Privacy::Dlp::V2::DeidentifyTemplate | Hash]
           #   New DeidentifyTemplate value.
@@ -1070,7 +1070,7 @@ module Google
           #
           # @param name [String]
           #   Resource name of the organization and deidentify template to be read, for
-          #   example +organizations/433245324/deidentifyTemplates/432452342+ or
+          #   example `organizations/433245324/deidentifyTemplates/432452342` or
           #   projects/project-id/deidentifyTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1161,7 +1161,7 @@ module Google
           #
           # @param name [String]
           #   Resource name of the organization and deidentify template to be deleted,
-          #   for example +organizations/433245324/deidentifyTemplates/432452342+ or
+          #   for example `organizations/433245324/deidentifyTemplates/432452342` or
           #   projects/project-id/deidentifyTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1208,7 +1208,7 @@ module Google
           # @param job_id [String]
           #   The job id can contain uppercase and lowercase letters,
           #   numbers, and hyphens; that is, it must match the regular
-          #   expression: +[a-zA-Z\\d-]++. The maximum length is 100
+          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1254,16 +1254,16 @@ module Google
           #   Supported syntax:
           #
           #   * Filter expressions are made up of one or more restrictions.
-          #   * Restrictions can be combined by +AND+ or +OR+ logical operators. A
-          #     sequence of restrictions implicitly uses +AND+.
-          #   * A restriction has the form of +<field> <operator> <value>+.
+          #   * Restrictions can be combined by `AND` or `OR` logical operators. A
+          #     sequence of restrictions implicitly uses `AND`.
+          #   * A restriction has the form of `<field> <operator> <value>`.
           #   * Supported fields/values for inspect jobs:
-          #     * +state+ - PENDING|RUNNING|CANCELED|FINISHED|FAILED
-          #       * +inspected_storage+ - DATASTORE|CLOUD_STORAGE|BIGQUERY
-          #       * +trigger_name+ - The resource name of the trigger that created job.
+          #     * `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
+          #       * `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+          #       * `trigger_name` - The resource name of the trigger that created job.
           #     * Supported fields for risk analysis jobs:
-          #       * +state+ - RUNNING|CANCELED|FINISHED|FAILED
-          #     * The operator must be +=+ or +!=+.
+          #       * `state` - RUNNING|CANCELED|FINISHED|FAILED
+          #     * The operator must be `=` or `!=`.
           #
           #     Examples:
           #
@@ -1279,7 +1279,7 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param type [Google::Privacy::Dlp::V2::DlpJobType]
-          #   The type of job. Defaults to +DlpJobType.INSPECT+
+          #   The type of job. Defaults to `DlpJobType.INSPECT`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1432,7 +1432,7 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param parent [String]
-          #   The parent resource name, for example +projects/my-project-id+.
+          #   The parent resource name, for example `projects/my-project-id`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -1441,17 +1441,17 @@ module Google
           #   resources in a page.
           # @param order_by [String]
           #   Optional comma separated list of triggeredJob fields to order by,
-          #   followed by +asc+ or +desc+ postfix. This list is case-insensitive,
+          #   followed by `asc` or `desc` postfix. This list is case-insensitive,
           #   default sorting order is ascending, redundant space characters are
           #   insignificant.
           #
-          #   Example: +name asc,update_time, create_time desc+
+          #   Example: `name asc,update_time, create_time desc`
           #
           #   Supported fields are:
           #
-          #   * +create_time+: corresponds to time the triggeredJob was created.
-          #   * +update_time+: corresponds to time the triggeredJob was last updated.
-          #   * +name+: corresponds to JobTrigger's name.
+          #   * `create_time`: corresponds to time the triggeredJob was created.
+          #   * `update_time`: corresponds to time the triggeredJob was last updated.
+          #   * `name`: corresponds to JobTrigger's name.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1503,7 +1503,7 @@ module Google
           #
           # @param name [String]
           #   Resource name of the project and the triggeredJob, for example
-          #   +projects/dlp-test-project/jobTriggers/53234423+.
+          #   `projects/dlp-test-project/jobTriggers/53234423`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1535,7 +1535,7 @@ module Google
           #
           # @param name [String]
           #   Resource name of the project and the triggeredJob, for example
-          #   +projects/dlp-test-project/jobTriggers/53234423+.
+          #   `projects/dlp-test-project/jobTriggers/53234423`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1548,7 +1548,7 @@ module Google
           #
           #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
           #
-          #   # TODO: Initialize +name+:
+          #   # TODO: Initialize `name`:
           #   name = ''
           #   dlp_service_client.delete_job_trigger(name)
 
@@ -1569,7 +1569,7 @@ module Google
           #
           # @param name [String]
           #   Resource name of the project and the triggeredJob, for example
-          #   +projects/dlp-test-project/jobTriggers/53234423+.
+          #   `projects/dlp-test-project/jobTriggers/53234423`.
           # @param job_trigger [Google::Privacy::Dlp::V2::JobTrigger | Hash]
           #   New JobTrigger value.
           #   A hash of the same form as `Google::Privacy::Dlp::V2::JobTrigger`
@@ -1621,7 +1621,7 @@ module Google
           # @param trigger_id [String]
           #   The trigger id can contain uppercase and lowercase letters,
           #   numbers, and hyphens; that is, it must match the regular
-          #   expression: +[a-zA-Z\\d-]++. The maximum length is 100
+          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,

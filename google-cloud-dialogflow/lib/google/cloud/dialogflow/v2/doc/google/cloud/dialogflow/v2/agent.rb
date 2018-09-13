@@ -21,7 +21,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project of this agent.
-        #     Format: +projects/<Project ID>+.
+        #     Format: `projects/<Project ID>`.
         # @!attribute [rw] display_name
         #   @return [String]
         #     Required. The name of this agent.
@@ -30,11 +30,11 @@ module Google
         #     Required. The default language of the agent as a language tag. See
         #     [Language Support](https://dialogflow.com/docs/reference/language) for a
         #     list of the currently supported language codes.
-        #     This field cannot be set by the +Update+ method.
+        #     This field cannot be set by the `Update` method.
         # @!attribute [rw] supported_language_codes
         #   @return [Array<String>]
         #     Optional. The list of all languages supported by this agent (except for the
-        #     +default_language_code+).
+        #     `default_language_code`).
         # @!attribute [rw] time_zone
         #   @return [String]
         #     Required. The time zone of this agent from the
@@ -84,14 +84,14 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to fetch is associated with.
-        #     Format: +projects/<Project ID>+.
+        #     Format: `projects/<Project ID>`.
         class GetAgentRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::Agents::SearchAgents Agents::SearchAgents}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project to list agents from.
-        #     Format: +projects/<Project ID or '-'>+.
+        #     Format: `projects/<Project ID or '-'>`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional. The maximum number of items to return in a single page. By
@@ -116,14 +116,14 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to train is associated with.
-        #     Format: +projects/<Project ID>+.
+        #     Format: `projects/<Project ID>`.
         class TrainAgentRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::Agents::ExportAgent Agents::ExportAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to export is associated with.
-        #     Format: +projects/<Project ID>+.
+        #     Format: `projects/<Project ID>`.
         # @!attribute [rw] agent_uri
         #   @return [String]
         #     Optional. The Google Cloud Storage URI to export the agent to.
@@ -135,7 +135,7 @@ module Google
         # @!attribute [rw] agent_uri
         #   @return [String]
         #     The URI to a file containing the exported agent. This field is populated
-        #     only if +agent_uri+ is specified in +ExportAgentRequest+.
+        #     only if `agent_uri` is specified in `ExportAgentRequest`.
         # @!attribute [rw] agent_content
         #   @return [String]
         #     The exported agent.
@@ -158,7 +158,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to import is associated with.
-        #     Format: +projects/<Project ID>+.
+        #     Format: `projects/<Project ID>`.
         # @!attribute [rw] agent_uri
         #   @return [String]
         #     The URI to a Google Cloud Storage file containing the agent to import.
@@ -185,7 +185,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to restore is associated with.
-        #     Format: +projects/<Project ID>+.
+        #     Format: `projects/<Project ID>`.
         # @!attribute [rw] agent_uri
         #   @return [String]
         #     The URI to a Google Cloud Storage file containing the agent to restore.

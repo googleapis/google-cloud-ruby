@@ -321,7 +321,7 @@ module Google
               # @param parent [String]
               #   Required. The name of the project for which a list of supported instance
               #   configurations is requested. Values are of the form
-              #   +projects/<project>+.
+              #   `projects/<project>`.
               # @param page_size [Integer]
               #   The maximum number of resources contained in the underlying API
               #   response. If page streaming is performed per-resource, this
@@ -376,7 +376,7 @@ module Google
               #
               # @param name [String]
               #   Required. The name of the requested instance configuration. Values are of
-              #   the form +projects/<project>/instanceConfigs/<config>+.
+              #   the form `projects/<project>/instanceConfigs/<config>`.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -407,7 +407,7 @@ module Google
               #
               # @param parent [String]
               #   Required. The name of the project for which a list of instances is
-              #   requested. Values are of the form +projects/<project>+.
+              #   requested. Values are of the form `projects/<project>`.
               # @param page_size [Integer]
               #   The maximum number of resources contained in the underlying API
               #   response. If page streaming is performed per-resource, this
@@ -418,20 +418,20 @@ module Google
               #   An expression for filtering the results of the request. Filter rules are
               #   case insensitive. The fields eligible for filtering are:
               #
-              #   * +name+
-              #     * +display_name+
-              #     * +labels.key+ where key is the name of a label
+              #   * `name`
+              #     * `display_name`
+              #     * `labels.key` where key is the name of a label
               #
               #     Some examples of using filters are:
               #
-              #     * +name:*+ --> The instance has a name.
-              #     * +name:Howl+ --> The instance's name contains the string "howl".
-              #     * +name:HOWL+ --> Equivalent to above.
-              #     * +NAME:howl+ --> Equivalent to above.
-              #     * +labels.env:*+ --> The instance has the label "env".
-              #     * +labels.env:dev+ --> The instance has the label "env" and the value of
+              #     * `name:*` --> The instance has a name.
+              #     * `name:Howl` --> The instance's name contains the string "howl".
+              #     * `name:HOWL` --> Equivalent to above.
+              #     * `NAME:howl` --> Equivalent to above.
+              #     * `labels.env:*` --> The instance has the label "env".
+              #     * `labels.env:dev` --> The instance has the label "env" and the value of
               #       the label contains the string "dev".
-              #     * +name:howl labels.env:dev+ --> The instance's name contains "howl" and
+              #     * `name:howl labels.env:dev` --> The instance's name contains "howl" and
               #       it has the label "env" with its value
               #       containing "dev".
               # @param options [Google::Gax::CallOptions]
@@ -484,7 +484,7 @@ module Google
               #
               # @param name [String]
               #   Required. The name of the requested instance. Values are of the form
-              #   +projects/<project>/instances/<instance>+.
+              #   `projects/<project>/instances/<instance>`.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -515,13 +515,13 @@ module Google
               # returned {Google::Longrunning::Operation long-running operation}
               # can be used to track the progress of preparing the new
               # instance. The instance name is assigned by the caller. If the
-              # named instance already exists, +CreateInstance+ returns
-              # +ALREADY_EXISTS+.
+              # named instance already exists, `CreateInstance` returns
+              # `ALREADY_EXISTS`.
               #
               # Immediately upon completion of this request:
               #
               # * The instance is readable via the API, with all requested attributes
-              #   but no allocated resources. Its state is +CREATING+.
+              #   but no allocated resources. Its state is `CREATING`.
               #
               # Until completion of the returned operation:
               #
@@ -536,10 +536,10 @@ module Google
               #     may have lower than the requested levels).
               #   * Databases can be created in the instance.
               #   * The instance's allocated resource levels are readable via the API.
-              #   * The instance's state becomes +READY+.
+              #   * The instance's state becomes `READY`.
               #
               #   The returned {Google::Longrunning::Operation long-running operation} will
-              #   have a name of the format +<instance_name>/operations/<operation_id>+ and
+              #   have a name of the format `<instance_name>/operations/<operation_id>` and
               #   can be used to track creation of the instance.  The
               #   {Google::Longrunning::Operation#metadata metadata} field type is
               #   {Google::Spanner::Admin::Instance::V1::CreateInstanceMetadata CreateInstanceMetadata}.
@@ -548,14 +548,14 @@ module Google
               #
               # @param parent [String]
               #   Required. The name of the project in which to create the instance. Values
-              #   are of the form +projects/<project>+.
+              #   are of the form `projects/<project>`.
               # @param instance_id [String]
               #   Required. The ID of the instance to create.  Valid identifiers are of the
-              #   form +[a-z][-a-z0-9]*[a-z0-9]+ and must be between 6 and 30 characters in
+              #   form `[a-z][-a-z0-9]*[a-z0-9]` and must be between 6 and 30 characters in
               #   length.
               # @param instance [Google::Spanner::Admin::Instance::V1::Instance | Hash]
               #   Required. The instance to create.  The name may be omitted, but if
-              #   specified must be +<parent>/instances/<instance_id>+.
+              #   specified must be `<parent>/instances/<instance_id>`.
               #   A hash of the same form as `Google::Spanner::Admin::Instance::V1::Instance`
               #   can also be provided.
               # @param options [Google::Gax::CallOptions]
@@ -569,10 +569,10 @@ module Google
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
               #   formatted_parent = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path("[PROJECT]")
               #
-              #   # TODO: Initialize +instance_id+:
+              #   # TODO: Initialize `instance_id`:
               #   instance_id = ''
               #
-              #   # TODO: Initialize +instance+:
+              #   # TODO: Initialize `instance`:
               #   instance = {}
               #
               #   # Register a callback during the method call.
@@ -628,7 +628,7 @@ module Google
               # as requested. The returned [long-running
               # operation][google.longrunning.Operation] can be used to track the
               # progress of updating the instance. If the named instance does not
-              # exist, returns +NOT_FOUND+.
+              # exist, returns `NOT_FOUND`.
               #
               # Immediately upon completion of this request:
               #
@@ -641,7 +641,7 @@ module Google
               #   {Google::Spanner::Admin::Instance::V1::UpdateInstanceMetadata#cancel_time cancel_time}, and begins
               #   restoring resources to their pre-request values. The operation
               #   is guaranteed to succeed at undoing all resource changes,
-              #   after which point it terminates with a +CANCELLED+ status.
+              #   after which point it terminates with a `CANCELLED` status.
               #   * All other attempts to modify the instance are rejected.
               #   * Reading the instance via the API continues to give the pre-request
               #     resource levels.
@@ -655,14 +655,14 @@ module Google
               #   * The instance's new resource levels are readable via the API.
               #
               #   The returned {Google::Longrunning::Operation long-running operation} will
-              #   have a name of the format +<instance_name>/operations/<operation_id>+ and
+              #   have a name of the format `<instance_name>/operations/<operation_id>` and
               #   can be used to track the instance modification.  The
               #   {Google::Longrunning::Operation#metadata metadata} field type is
               #   {Google::Spanner::Admin::Instance::V1::UpdateInstanceMetadata UpdateInstanceMetadata}.
               #   The {Google::Longrunning::Operation#response response} field type is
               #   {Google::Spanner::Admin::Instance::V1::Instance Instance}, if successful.
               #
-              # Authorization requires +spanner.instances.update+ permission on
+              # Authorization requires `spanner.instances.update` permission on
               # resource {Google::Spanner::Admin::Instance::V1::Instance#name name}.
               #
               # @param instance [Google::Spanner::Admin::Instance::V1::Instance | Hash]
@@ -687,10 +687,10 @@ module Google
               #
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
               #
-              #   # TODO: Initialize +instance+:
+              #   # TODO: Initialize `instance`:
               #   instance = {}
               #
-              #   # TODO: Initialize +field_mask+:
+              #   # TODO: Initialize `field_mask`:
               #   field_mask = {}
               #
               #   # Register a callback during the method call.
@@ -754,7 +754,7 @@ module Google
               #
               # @param name [String]
               #   Required. The name of the instance to be deleted. Values are of the form
-              #   +projects/<project>/instances/<instance>+
+              #   `projects/<project>/instances/<instance>`
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -784,15 +784,15 @@ module Google
               # Sets the access control policy on an instance resource. Replaces any
               # existing policy.
               #
-              # Authorization requires +spanner.instances.setIamPolicy+ on
+              # Authorization requires `spanner.instances.setIamPolicy` on
               # {Google::Iam::V1::SetIamPolicyRequest#resource resource}.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy is being specified.
-              #   +resource+ is usually specified as a path. For example, a Project
-              #   resource is specified as +projects/\\{project}+.
+              #   `resource` is usually specified as a path. For example, a Project
+              #   resource is specified as `projects/{project}`.
               # @param policy [Google::Iam::V1::Policy | Hash]
-              #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+              #   REQUIRED: The complete policy to be applied to the `resource`. The size of
               #   the policy is limited to a few 10s of KB. An empty policy is a
               #   valid policy but certain Cloud Platform services (such as Projects)
               #   might reject them.
@@ -812,7 +812,7 @@ module Google
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
               #   formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #
-              #   # TODO: Initialize +policy+:
+              #   # TODO: Initialize `policy`:
               #   policy = {}
               #   response = instance_admin_client.set_iam_policy(formatted_resource, policy)
 
@@ -832,13 +832,13 @@ module Google
               # Gets the access control policy for an instance resource. Returns an empty
               # policy if an instance exists but does not have a policy set.
               #
-              # Authorization requires +spanner.instances.getIamPolicy+ on
+              # Authorization requires `spanner.instances.getIamPolicy` on
               # {Google::Iam::V1::GetIamPolicyRequest#resource resource}.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy is being requested.
-              #   +resource+ is usually specified as a path. For example, a Project
-              #   resource is specified as +projects/\\{project}+.
+              #   `resource` is usually specified as a path. For example, a Project
+              #   resource is specified as `projects/{project}`.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.
@@ -868,16 +868,16 @@ module Google
               # Returns permissions that the caller has on the specified instance resource.
               #
               # Attempting this RPC on a non-existent Cloud Spanner instance resource will
-              # result in a NOT_FOUND error if the user has +spanner.instances.list+
+              # result in a NOT_FOUND error if the user has `spanner.instances.list`
               # permission on the containing Google Cloud Project. Otherwise returns an
               # empty set of permissions.
               #
               # @param resource [String]
               #   REQUIRED: The resource for which the policy detail is being requested.
-              #   +resource+ is usually specified as a path. For example, a Project
-              #   resource is specified as +projects/\\{project}+.
+              #   `resource` is usually specified as a path. For example, a Project
+              #   resource is specified as `projects/{project}`.
               # @param permissions [Array<String>]
-              #   The set of permissions to check for the +resource+. Permissions with
+              #   The set of permissions to check for the `resource`. Permissions with
               #   wildcards (such as '*' or 'storage.*') are not allowed. For more
               #   information see
               #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
@@ -895,7 +895,7 @@ module Google
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
               #   formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #
-              #   # TODO: Initialize +permissions+:
+              #   # TODO: Initialize `permissions`:
               #   permissions = []
               #   response = instance_admin_client.test_iam_permissions(formatted_resource, permissions)
 

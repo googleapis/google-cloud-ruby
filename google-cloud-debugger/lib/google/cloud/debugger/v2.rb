@@ -155,10 +155,10 @@ module Google
           #
           # The debugger agents register with the Controller to identify the application
           # being debugged, the Debuggee. All agents that register with the same data,
-          # represent the same Debuggee, and are assigned the same +debuggee_id+.
+          # represent the same Debuggee, and are assigned the same `debuggee_id`.
           #
           # The debugger agents call the Controller to retrieve  the list of active
-          # Breakpoints. Agents with the same +debuggee_id+ get the same breakpoints
+          # Breakpoints. Agents with the same `debuggee_id` get the same breakpoints
           # list. An agent that can fulfill the breakpoint request updates the
           # Controller with the breakpoint result. The controller selects the first
           # result received and discards the rest of the results.

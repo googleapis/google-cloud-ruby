@@ -29,12 +29,12 @@ module Google
         # A reference to a StoredInfoType to use with scanning.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the requested +StoredInfoType+, for example
-        #     +organizations/433245324/storedInfoTypes/432452342+ or
-        #     +projects/project-id/storedInfoTypes/432452342+.
+        #     Resource name of the requested `StoredInfoType`, for example
+        #     `organizations/433245324/storedInfoTypes/432452342` or
+        #     `projects/project-id/storedInfoTypes/432452342`.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Timestamp indicating when the version of the +StoredInfoType+ used for
+        #     Timestamp indicating when the version of the `StoredInfoType` used for
         #     inspection was created. Output-only field, populated by the system.
         class StoredType; end
 
@@ -48,7 +48,7 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::Likelihood]
         #     Likelihood to return for this CustomInfoType. This base value can be
         #     altered by a detection rule if the finding meets the criteria specified by
-        #     the rule. Defaults to +VERY_LIKELY+ if not specified.
+        #     the rule. Defaults to `VERY_LIKELY` if not specified.
         # @!attribute [rw] dictionary
         #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary]
         #     A list of phrases to detect as a CustomInfoType.
@@ -61,13 +61,13 @@ module Google
         #     support reversing.
         # @!attribute [rw] stored_type
         #   @return [Google::Privacy::Dlp::V2::StoredType]
-        #     Load an existing +StoredInfoType+ resource for use in
-        #     +InspectDataSource+. Not currently supported in +InspectContent+.
+        #     Load an existing `StoredInfoType` resource for use in
+        #     `InspectDataSource`. Not currently supported in `InspectContent`.
         # @!attribute [rw] detection_rules
         #   @return [Array<Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule>]
         #     Set of detection rules to apply to all findings of this CustomInfoType.
         #     Rules are applied in order that they are specified. Not supported for the
-        #     +surrogate_type+ CustomInfoType.
+        #     `surrogate_type` CustomInfoType.
         class CustomInfoType
           # Custom information type based on a dictionary of words or phrases. This can
           # be used to match sensitive information specific to the data, such as a list
@@ -90,8 +90,8 @@ module Google
           # are treated as whitespace. The
           # [limits](https://cloud.google.com/dlp/limits) page contains details about
           # the size limits of dictionaries. For dictionaries that do not fit within
-          # these constraints, consider using +LargeCustomDictionaryConfig+ in the
-          # +StoredInfoType+ API.
+          # these constraints, consider using `LargeCustomDictionaryConfig` in the
+          # `StoredInfoType` API.
           # @!attribute [rw] word_list
           #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
           #     List of words or phrases to search for.
@@ -117,17 +117,17 @@ module Google
 
           # Message for detecting output from deidentification transformations
           # such as
-          # [+CryptoReplaceFfxFpeConfig+](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+          # [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
           # These types of transformations are
           # those that perform pseudonymization, thereby producing a "surrogate" as
           # output. This should be used in conjunction with a field on the
-          # transformation such as +surrogate_info_type+. This CustomInfoType does
-          # not support the use of +detection_rules+.
+          # transformation such as `surrogate_info_type`. This CustomInfoType does
+          # not support the use of `detection_rules`.
           class SurrogateType; end
 
           # Rule for modifying a CustomInfoType to alter behavior under certain
           # circumstances, depending on the specific details of the rule. Not supported
-          # for the +surrogate_type+ custom info type.
+          # for the `surrogate_type` custom info type.
           # @!attribute [rw] hotword_rule
           #   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
           #     Hotword-based detection rule.
@@ -150,13 +150,13 @@ module Google
             # @!attribute [rw] relative_likelihood
             #   @return [Integer]
             #     Increase or decrease the likelihood by the specified number of
-            #     levels. For example, if a finding would be +POSSIBLE+ without the
-            #     detection rule and +relative_likelihood+ is 1, then it is upgraded to
-            #     +LIKELY+, while a value of -1 would downgrade it to +UNLIKELY+.
-            #     Likelihood may never drop below +VERY_UNLIKELY+ or exceed
-            #     +VERY_LIKELY+, so applying an adjustment of 1 followed by an
-            #     adjustment of -1 when base likelihood is +VERY_LIKELY+ will result in
-            #     a final likelihood of +LIKELY+.
+            #     levels. For example, if a finding would be `POSSIBLE` without the
+            #     detection rule and `relative_likelihood` is 1, then it is upgraded to
+            #     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+            #     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+            #     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+            #     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+            #     a final likelihood of `LIKELY`.
             class LikelihoodAdjustment; end
 
             # The rule that adjusts the likelihood of findings within a certain
@@ -248,7 +248,7 @@ module Google
           # Set of files to scan.
           # @!attribute [rw] url
           #   @return [String]
-          #     The url, in the format +gs://<bucket>/<path>+. Trailing wildcard in the
+          #     The url, in the format `gs://<bucket>/<path>`. Trailing wildcard in the
           #     path is allowed.
           class FileSet; end
 
@@ -270,7 +270,7 @@ module Google
         # Message representing a set of files in Cloud Storage.
         # @!attribute [rw] url
         #   @return [String]
-        #     The url, in the format +gs://<bucket>/<path>+. Trailing wildcard in the
+        #     The url, in the format `gs://<bucket>/<path>`. Trailing wildcard in the
         #     path is allowed.
         class CloudStorageFileSet; end
 
@@ -288,7 +288,7 @@ module Google
         # @!attribute [rw] identifying_fields
         #   @return [Array<Google::Privacy::Dlp::V2::FieldId>]
         #     References to fields uniquely identifying rows within the table.
-        #     Nested fields in the format, like +person.birthdate.year+, are allowed.
+        #     Nested fields in the format, like `person.birthdate.year`, are allowed.
         # @!attribute [rw] rows_limit
         #   @return [Integer]
         #     Max number of rows to scan. If the table has more rows than this value, the
@@ -405,9 +405,9 @@ module Google
           # @!attribute [rw] kind
           #   @return [String]
           #     The kind of the entity.
-          #     A kind matching regex +__.*__+ is reserved/read-only.
+          #     A kind matching regex `__.*__` is reserved/read-only.
           #     A kind must not contain more than 1500 bytes when UTF-8 encoded.
-          #     Cannot be +""+.
+          #     Cannot be `""`.
           # @!attribute [rw] id
           #   @return [Integer]
           #     The auto-allocated ID of the entity.
@@ -416,9 +416,9 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     The name of the entity.
-          #     A name matching regex +__.*__+ is reserved/read-only.
+          #     A name matching regex `__.*__` is reserved/read-only.
           #     A name must not be more than 1500 bytes when UTF-8 encoded.
-          #     Cannot be +""+.
+          #     Cannot be `""`.
           class PathElement; end
         end
 
@@ -432,8 +432,8 @@ module Google
         # Message defining the location of a BigQuery table. A table is uniquely
         # identified  by its project_id, dataset_id, and table_name. Within a query
         # a table is often referenced with a string in the format of:
-        # +<project_id>:<dataset_id>.<table_id>+ or
-        # +<project_id>.<dataset_id>.<table_id>+.
+        # `<project_id>:<dataset_id>.<table_id>` or
+        # `<project_id>.<dataset_id>.<table_id>`.
         # @!attribute [rw] project_id
         #   @return [String]
         #     The Google Cloud Platform project ID of the project containing the table.
@@ -456,7 +456,7 @@ module Google
         class BigQueryField; end
 
         # An entity in a dataset is a field or set of fields that correspond to a
-        # single person. For example, in medical records the +EntityId+ might be a
+        # single person. For example, in medical records the `EntityId` might be a
         # patient identifier, or for financial records it might be an account
         # identifier. This message is used when generalizations or analysis must take
         # into account that multiple rows correspond to the same entity.

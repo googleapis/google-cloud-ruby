@@ -337,10 +337,10 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #   response = cluster_manager_client.list_clusters(project_id, zone)
 
@@ -381,13 +381,13 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #   response = cluster_manager_client.get_cluster(project_id, zone, cluster_id)
 
@@ -445,13 +445,13 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster+:
+          #   # TODO: Initialize `cluster`:
           #   cluster = {}
           #   response = cluster_manager_client.create_cluster(project_id, zone, cluster)
 
@@ -498,16 +498,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +update+:
+          #   # TODO: Initialize `update`:
           #   update = {}
           #   response = cluster_manager_client.update_cluster(project_id, zone, cluster_id, update)
 
@@ -543,7 +543,7 @@ module Google
           #   The name of the node pool to upgrade.
           # @param node_version [String]
           #   The Kubernetes version to change the nodes to (typically an
-          #   upgrade). Use +-+ to upgrade to the latest version supported by
+          #   upgrade). Use `-` to upgrade to the latest version supported by
           #   the server.
           # @param image_type [String]
           #   The desired image type for the node pool.
@@ -560,22 +560,22 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +node_pool_id+:
+          #   # TODO: Initialize `node_pool_id`:
           #   node_pool_id = ''
           #
-          #   # TODO: Initialize +node_version+:
+          #   # TODO: Initialize `node_version`:
           #   node_version = ''
           #
-          #   # TODO: Initialize +image_type+:
+          #   # TODO: Initialize `image_type`:
           #   image_type = ''
           #   response = cluster_manager_client.update_node_pool(project_id, zone, cluster_id, node_pool_id, node_version, image_type)
 
@@ -630,19 +630,19 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +node_pool_id+:
+          #   # TODO: Initialize `node_pool_id`:
           #   node_pool_id = ''
           #
-          #   # TODO: Initialize +autoscaling+:
+          #   # TODO: Initialize `autoscaling`:
           #   autoscaling = {}
           #   response = cluster_manager_client.set_node_pool_autoscaling(project_id, zone, cluster_id, node_pool_id, autoscaling)
 
@@ -695,16 +695,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +logging_service+:
+          #   # TODO: Initialize `logging_service`:
           #   logging_service = ''
           #   response = cluster_manager_client.set_logging_service(project_id, zone, cluster_id, logging_service)
 
@@ -755,16 +755,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +monitoring_service+:
+          #   # TODO: Initialize `monitoring_service`:
           #   monitoring_service = ''
           #   response = cluster_manager_client.set_monitoring_service(project_id, zone, cluster_id, monitoring_service)
 
@@ -814,16 +814,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +addons_config+:
+          #   # TODO: Initialize `addons_config`:
           #   addons_config = {}
           #   response = cluster_manager_client.set_addons_config(project_id, zone, cluster_id, addons_config)
 
@@ -876,16 +876,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +locations+:
+          #   # TODO: Initialize `locations`:
           #   locations = []
           #   response = cluster_manager_client.set_locations(project_id, zone, cluster_id, locations)
 
@@ -934,16 +934,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +master_version+:
+          #   # TODO: Initialize `master_version`:
           #   master_version = ''
           #   response = cluster_manager_client.update_master(project_id, zone, cluster_id, master_version)
 
@@ -996,19 +996,19 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +action+:
+          #   # TODO: Initialize `action`:
           #   action = :UNKNOWN
           #
-          #   # TODO: Initialize +update+:
+          #   # TODO: Initialize `update`:
           #   update = {}
           #   response = cluster_manager_client.set_master_auth(project_id, zone, cluster_id, action, update)
 
@@ -1063,13 +1063,13 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #   response = cluster_manager_client.delete_cluster(project_id, zone, cluster_id)
 
@@ -1095,7 +1095,7 @@ module Google
           #   number](https://support.google.com/cloud/answer/6158840).
           # @param zone [String]
           #   The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available)
-          #   to return operations for, or +-+ for all zones.
+          #   to return operations for, or `-` for all zones.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1109,10 +1109,10 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #   response = cluster_manager_client.list_operations(project_id, zone)
 
@@ -1139,7 +1139,7 @@ module Google
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           # @param operation_id [String]
-          #   The server-assigned +name+ of the operation.
+          #   The server-assigned `name` of the operation.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1153,13 +1153,13 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +operation_id+:
+          #   # TODO: Initialize `operation_id`:
           #   operation_id = ''
           #   response = cluster_manager_client.get_operation(project_id, zone, operation_id)
 
@@ -1187,7 +1187,7 @@ module Google
           #   The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
           # @param operation_id [String]
-          #   The server-assigned +name+ of the operation.
+          #   The server-assigned `name` of the operation.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1200,13 +1200,13 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +operation_id+:
+          #   # TODO: Initialize `operation_id`:
           #   operation_id = ''
           #   cluster_manager_client.cancel_operation(project_id, zone, operation_id)
 
@@ -1247,10 +1247,10 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #   response = cluster_manager_client.get_server_config(project_id, zone)
 
@@ -1291,13 +1291,13 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #   response = cluster_manager_client.list_node_pools(project_id, zone, cluster_id)
 
@@ -1342,16 +1342,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +node_pool_id+:
+          #   # TODO: Initialize `node_pool_id`:
           #   node_pool_id = ''
           #   response = cluster_manager_client.get_node_pool(project_id, zone, cluster_id, node_pool_id)
 
@@ -1400,16 +1400,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +node_pool+:
+          #   # TODO: Initialize `node_pool`:
           #   node_pool = {}
           #   response = cluster_manager_client.create_node_pool(project_id, zone, cluster_id, node_pool)
 
@@ -1456,16 +1456,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +node_pool_id+:
+          #   # TODO: Initialize `node_pool_id`:
           #   node_pool_id = ''
           #   response = cluster_manager_client.delete_node_pool(project_id, zone, cluster_id, node_pool_id)
 
@@ -1513,16 +1513,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +node_pool_id+:
+          #   # TODO: Initialize `node_pool_id`:
           #   node_pool_id = ''
           #   response = cluster_manager_client.rollback_node_pool_upgrade(project_id, zone, cluster_id, node_pool_id)
 
@@ -1573,19 +1573,19 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +node_pool_id+:
+          #   # TODO: Initialize `node_pool_id`:
           #   node_pool_id = ''
           #
-          #   # TODO: Initialize +management+:
+          #   # TODO: Initialize `management`:
           #   management = {}
           #   response = cluster_manager_client.set_node_pool_management(project_id, zone, cluster_id, node_pool_id, management)
 
@@ -1641,19 +1641,19 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +resource_labels+:
+          #   # TODO: Initialize `resource_labels`:
           #   resource_labels = {}
           #
-          #   # TODO: Initialize +label_fingerprint+:
+          #   # TODO: Initialize `label_fingerprint`:
           #   label_fingerprint = ''
           #   response = cluster_manager_client.set_labels(project_id, zone, cluster_id, resource_labels, label_fingerprint)
 
@@ -1702,16 +1702,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +enabled+:
+          #   # TODO: Initialize `enabled`:
           #   enabled = false
           #   response = cluster_manager_client.set_legacy_abac(project_id, zone, cluster_id, enabled)
 
@@ -1756,13 +1756,13 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #   response = cluster_manager_client.start_ip_rotation(project_id, zone, cluster_id)
 
@@ -1805,13 +1805,13 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #   response = cluster_manager_client.complete_ip_rotation(project_id, zone, cluster_id)
 
@@ -1858,19 +1858,19 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +node_pool_id+:
+          #   # TODO: Initialize `node_pool_id`:
           #   node_pool_id = ''
           #
-          #   # TODO: Initialize +node_count+:
+          #   # TODO: Initialize `node_count`:
           #   node_count = 0
           #   response = cluster_manager_client.set_node_pool_size(project_id, zone, cluster_id, node_pool_id, node_count)
 
@@ -1921,16 +1921,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +network_policy+:
+          #   # TODO: Initialize `network_policy`:
           #   network_policy = {}
           #   response = cluster_manager_client.set_network_policy(project_id, zone, cluster_id, network_policy)
 
@@ -1980,16 +1980,16 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +zone+:
+          #   # TODO: Initialize `zone`:
           #   zone = ''
           #
-          #   # TODO: Initialize +cluster_id+:
+          #   # TODO: Initialize `cluster_id`:
           #   cluster_id = ''
           #
-          #   # TODO: Initialize +maintenance_policy+:
+          #   # TODO: Initialize `maintenance_policy`:
           #   maintenance_policy = {}
           #   response = cluster_manager_client.set_maintenance_policy(project_id, zone, cluster_id, maintenance_policy)
 

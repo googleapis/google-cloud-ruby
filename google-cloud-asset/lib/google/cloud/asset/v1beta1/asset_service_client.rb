@@ -244,7 +244,7 @@ module Google
           #   asset_service_client = Google::Cloud::Asset.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +output_config+:
+          #   # TODO: Initialize `output_config`:
           #   output_config = {}
           #
           #   # Register a callback during the method call.
@@ -340,10 +340,10 @@ module Google
           #   asset_service_client = Google::Cloud::Asset.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Asset::V1beta1::AssetServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +content_type+:
+          #   # TODO: Initialize `content_type`:
           #   content_type = :CONTENT_TYPE_UNSPECIFIED
           #
-          #   # TODO: Initialize +read_time_window+:
+          #   # TODO: Initialize `read_time_window`:
           #   read_time_window = {}
           #   response = asset_service_client.batch_get_assets_history(formatted_parent, content_type, read_time_window)
 

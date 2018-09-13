@@ -269,9 +269,9 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
           #       "folders/[FOLDER_ID]/logs/[LOG_ID]"
           #
-          #   +[LOG_ID]+ must be URL-encoded. For example,
-          #   +"projects/my-project-id/logs/syslog"+,
-          #   +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
+          #   `[LOG_ID]` must be URL-encoded. For example,
+          #   `"projects/my-project-id/logs/syslog"`,
+          #   `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
           #   For more information about log names, see
           #   {Google::Logging::V2::LogEntry LogEntry}.
           # @param options [Google::Gax::CallOptions]
@@ -312,46 +312,46 @@ module Google
           # @param entries [Array<Google::Logging::V2::LogEntry | Hash>]
           #   Required. The log entries to send to Stackdriver Logging. The order of log
           #   entries in this list does not matter. Values supplied in this method's
-          #   +log_name+, +resource+, and +labels+ fields are copied into those log
+          #   `log_name`, `resource`, and `labels` fields are copied into those log
           #   entries in this list that do not include values for their corresponding
           #   fields. For more information, see the
           #   {Google::Logging::V2::LogEntry LogEntry} type.
           #
-          #   If the +timestamp+ or +insert_id+ fields are missing in log entries, then
+          #   If the `timestamp` or `insert_id` fields are missing in log entries, then
           #   this method supplies the current time or a unique identifier, respectively.
           #   The supplied values are chosen so that, among the log entries that did not
           #   supply their own values, the entries earlier in the list will sort before
-          #   the entries later in the list. See the +entries.list+ method.
+          #   the entries later in the list. See the `entries.list` method.
           #
           #   Log entries with timestamps that are more than the
           #   [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
-          #   24 hours in the future will not be available when calling +entries.list+.
+          #   24 hours in the future will not be available when calling `entries.list`.
           #   However, those log entries can still be exported with
           #   [LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
           #
           #   To improve throughput and to avoid exceeding the
-          #   [quota limit](https://cloud.google.com/logging/quota-policy) for calls to +entries.write+,
+          #   [quota limit](https://cloud.google.com/logging/quota-policy) for calls to `entries.write`,
           #   you should try to include several log entries in this list,
           #   rather than calling this method for each individual log entry.
           #   A hash of the same form as `Google::Logging::V2::LogEntry`
           #   can also be provided.
           # @param log_name [String]
           #   Optional. A default log resource name that is assigned to all log entries
-          #   in +entries+ that do not specify a value for +log_name+:
+          #   in `entries` that do not specify a value for `log_name`:
           #
           #       "projects/[PROJECT_ID]/logs/[LOG_ID]"
           #       "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
           #       "folders/[FOLDER_ID]/logs/[LOG_ID]"
           #
-          #   +[LOG_ID]+ must be URL-encoded. For example,
-          #   +"projects/my-project-id/logs/syslog"+ or
-          #   +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
+          #   `[LOG_ID]` must be URL-encoded. For example,
+          #   `"projects/my-project-id/logs/syslog"` or
+          #   `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
           #   For more information about log names, see
           #   {Google::Logging::V2::LogEntry LogEntry}.
           # @param resource [Google::Api::MonitoredResource | Hash]
           #   Optional. A default monitored resource object that is assigned to all log
-          #   entries in +entries+ that do not specify a value for +resource+. Example:
+          #   entries in `entries` that do not specify a value for `resource`. Example:
           #
           #       { "type": "gce_instance",
           #         "labels": {
@@ -361,8 +361,8 @@ module Google
           #   A hash of the same form as `Google::Api::MonitoredResource`
           #   can also be provided.
           # @param labels [Hash{String => String}]
-          #   Optional. Default labels that are added to the +labels+ field of all log
-          #   entries in +entries+. If a log entry already has a label with the same key
+          #   Optional. Default labels that are added to the `labels` field of all log
+          #   entries in `entries`. If a log entry already has a label with the same key
           #   as a label in this parameter, then the log entry's label is not changed.
           #   See {Google::Logging::V2::LogEntry LogEntry}.
           # @param partial_success [true, false]
@@ -370,7 +370,7 @@ module Google
           #   entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
           #   entry is not written, then the response status is the error associated
           #   with one of the failed entries and the response includes error details
-          #   keyed by the entries' zero-based index in the +entries.write+ method.
+          #   keyed by the entries' zero-based index in the `entries.write` method.
           # @param dry_run [true, false]
           #   Optional. If true, the request should expect normal response, but the
           #   entries won't be persisted nor exported. Useful for checking whether the
@@ -388,7 +388,7 @@ module Google
           #
           #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #
-          #   # TODO: Initialize +entries+:
+          #   # TODO: Initialize `entries`:
           #   entries = []
           #   response = logging_service_v2_client.write_log_entries(entries)
 
@@ -426,28 +426,28 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]"
           #       "folders/[FOLDER_ID]"
           #
-          #   Projects listed in the +project_ids+ field are added to this list.
+          #   Projects listed in the `project_ids` field are added to this list.
           # @param project_ids [Array<String>]
-          #   Deprecated. Use +resource_names+ instead.  One or more project identifiers
+          #   Deprecated. Use `resource_names` instead.  One or more project identifiers
           #   or project numbers from which to retrieve log entries.  Example:
-          #   +"my-project-1A"+. If present, these project identifiers are converted to
+          #   `"my-project-1A"`. If present, these project identifiers are converted to
           #   resource name format and added to the list of resources in
-          #   +resource_names+.
+          #   `resource_names`.
           # @param filter [String]
           #   Optional. A filter that chooses which log entries to return.  See [Advanced
           #   Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
           #   match the filter are returned.  An empty filter matches all log entries in
-          #   the resources listed in +resource_names+. Referencing a parent resource
-          #   that is not listed in +resource_names+ will cause the filter to return no
+          #   the resources listed in `resource_names`. Referencing a parent resource
+          #   that is not listed in `resource_names` will cause the filter to return no
           #   results.
           #   The maximum length of the filter is 20000 characters.
           # @param order_by [String]
           #   Optional. How the results should be sorted.  Presently, the only permitted
-          #   values are +"timestamp asc"+ (default) and +"timestamp desc"+. The first
+          #   values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
           #   option returns entries in order of increasing values of
-          #   +LogEntry.timestamp+ (oldest first), and the second option returns entries
+          #   `LogEntry.timestamp` (oldest first), and the second option returns entries
           #   in order of decreasing timestamps (newest first).  Entries with equal
-          #   timestamps are returned in order of their +insert_id+ values.
+          #   timestamps are returned in order of their `insert_id` values.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -471,7 +471,7 @@ module Google
           #
           #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #
-          #   # TODO: Initialize +formatted_resource_names+:
+          #   # TODO: Initialize `formatted_resource_names`:
           #   formatted_resource_names = []
           #
           #   # Iterate over all results.

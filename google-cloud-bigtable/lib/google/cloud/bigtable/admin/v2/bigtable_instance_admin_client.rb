@@ -444,21 +444,21 @@ module Google
             #
             # @param parent [String]
             #   The unique name of the project in which to create the new instance.
-            #   Values are of the form +projects/<project>+.
+            #   Values are of the form `projects/<project>`.
             # @param instance_id [String]
             #   The ID to be used when referring to the new instance within its project,
-            #   e.g., just +myinstance+ rather than
-            #   +projects/myproject/instances/myinstance+.
+            #   e.g., just `myinstance` rather than
+            #   `projects/myproject/instances/myinstance`.
             # @param instance [Google::Bigtable::Admin::V2::Instance | Hash]
             #   The instance to create.
-            #   Fields marked +OutputOnly+ must be left blank.
+            #   Fields marked `OutputOnly` must be left blank.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Instance`
             #   can also be provided.
             # @param clusters [Hash{String => Google::Bigtable::Admin::V2::Cluster | Hash}]
             #   The clusters to be created within the instance, mapped by desired
-            #   cluster ID, e.g., just +mycluster+ rather than
-            #   +projects/myproject/instances/myinstance/clusters/mycluster+.
-            #   Fields marked +OutputOnly+ must be left blank.
+            #   cluster ID, e.g., just `mycluster` rather than
+            #   `projects/myproject/instances/myinstance/clusters/mycluster`.
+            #   Fields marked `OutputOnly` must be left blank.
             #   Currently, at most two clusters can be specified.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Cluster`
             #   can also be provided.
@@ -473,13 +473,13 @@ module Google
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.project_path("[PROJECT]")
             #
-            #   # TODO: Initialize +instance_id+:
+            #   # TODO: Initialize `instance_id`:
             #   instance_id = ''
             #
-            #   # TODO: Initialize +instance+:
+            #   # TODO: Initialize `instance`:
             #   instance = {}
             #
-            #   # TODO: Initialize +clusters+:
+            #   # TODO: Initialize `clusters`:
             #   clusters = {}
             #
             #   # Register a callback during the method call.
@@ -537,7 +537,7 @@ module Google
             #
             # @param name [String]
             #   The unique name of the requested instance. Values are of the form
-            #   +projects/<project>/instances/<instance>+.
+            #   `projects/<project>/instances/<instance>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -568,7 +568,7 @@ module Google
             #
             # @param parent [String]
             #   The unique name of the project for which a list of instances is requested.
-            #   Values are of the form +projects/<project>+.
+            #   Values are of the form `projects/<project>`.
             # @param page_token [String]
             #   DEPRECATED: This field is unused and ignored.
             # @param options [Google::Gax::CallOptions]
@@ -602,15 +602,15 @@ module Google
             # Updates an instance within a project.
             #
             # @param name [String]
-            #   (+OutputOnly+)
+            #   (`OutputOnly`)
             #   The unique name of the instance. Values are of the form
-            #   +projects/<project>/instances/[a-z][a-z0-9\\-]+[a-z0-9]+.
+            #   `projects/<project>/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
             # @param display_name [String]
             #   The descriptive name for this instance as it appears in UIs.
             #   Can be changed at any time, but should be kept globally unique
             #   to avoid confusion.
             # @param type [Google::Bigtable::Admin::V2::Instance::Type]
-            #   The type of the instance. Defaults to +PRODUCTION+.
+            #   The type of the instance. Defaults to `PRODUCTION`.
             # @param labels [Hash{String => String}]
             #   Labels are a flexible and lightweight mechanism for organizing cloud
             #   resources into groups that reflect a customer's organizational needs and
@@ -618,13 +618,13 @@ module Google
             #   metrics.
             #
             #   * Label keys must be between 1 and 63 characters long and must conform to
-            #     the regular expression: +[\p\\{Ll}\p\\{Lo}][\p\\{Ll}\p\\{Lo}\p\\{N}_-]\\{0,62}+.
+            #     the regular expression: `[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}`.
             #   * Label values must be between 0 and 63 characters long and must conform to
-            #     the regular expression: +[\p\\{Ll}\p\\{Lo}\p\\{N}_-]\\{0,63}+.
+            #     the regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`.
             #   * No more than 64 labels can be associated with a given resource.
             #   * Keys and values must both be under 128 bytes.
             # @param state [Google::Bigtable::Admin::V2::Instance::State]
-            #   (+OutputOnly+)
+            #   (`OutputOnly`)
             #   The current state of the instance.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -640,13 +640,13 @@ module Google
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
-            #   # TODO: Initialize +display_name+:
+            #   # TODO: Initialize `display_name`:
             #   display_name = ''
             #
-            #   # TODO: Initialize +type+:
+            #   # TODO: Initialize `type`:
             #   type = :TYPE_UNSPECIFIED
             #
-            #   # TODO: Initialize +labels+:
+            #   # TODO: Initialize `labels`:
             #   labels = {}
             #   response = bigtable_instance_admin_client.update_instance(formatted_name, display_name, type, labels)
 
@@ -690,10 +690,10 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #
-            #   # TODO: Initialize +instance+:
+            #   # TODO: Initialize `instance`:
             #   instance = {}
             #
-            #   # TODO: Initialize +update_mask+:
+            #   # TODO: Initialize `update_mask`:
             #   update_mask = {}
             #
             #   # Register a callback during the method call.
@@ -747,7 +747,7 @@ module Google
             #
             # @param name [String]
             #   The unique name of the instance to be deleted.
-            #   Values are of the form +projects/<project>/instances/<instance>+.
+            #   Values are of the form `projects/<project>/instances/<instance>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -779,14 +779,14 @@ module Google
             # @param parent [String]
             #   The unique name of the instance in which to create the new cluster.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>+.
+            #   `projects/<project>/instances/<instance>`.
             # @param cluster_id [String]
             #   The ID to be used when referring to the new cluster within its instance,
-            #   e.g., just +mycluster+ rather than
-            #   +projects/myproject/instances/myinstance/clusters/mycluster+.
+            #   e.g., just `mycluster` rather than
+            #   `projects/myproject/instances/myinstance/clusters/mycluster`.
             # @param cluster [Google::Bigtable::Admin::V2::Cluster | Hash]
             #   The cluster to be created.
-            #   Fields marked +OutputOnly+ must be left blank.
+            #   Fields marked `OutputOnly` must be left blank.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Cluster`
             #   can also be provided.
             # @param options [Google::Gax::CallOptions]
@@ -800,10 +800,10 @@ module Google
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
-            #   # TODO: Initialize +cluster_id+:
+            #   # TODO: Initialize `cluster_id`:
             #   cluster_id = ''
             #
-            #   # TODO: Initialize +cluster+:
+            #   # TODO: Initialize `cluster`:
             #   cluster = {}
             #
             #   # Register a callback during the method call.
@@ -859,7 +859,7 @@ module Google
             #
             # @param name [String]
             #   The unique name of the requested cluster. Values are of the form
-            #   +projects/<project>/instances/<instance>/clusters/<cluster>+.
+            #   `projects/<project>/instances/<instance>/clusters/<cluster>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -890,9 +890,9 @@ module Google
             #
             # @param parent [String]
             #   The unique name of the instance for which a list of clusters is requested.
-            #   Values are of the form +projects/<project>/instances/<instance>+.
-            #   Use +<instance> = '-'+ to list Clusters for all Instances in a project,
-            #   e.g., +projects/myproject/instances/-+.
+            #   Values are of the form `projects/<project>/instances/<instance>`.
+            #   Use `<instance> = '-'` to list Clusters for all Instances in a project,
+            #   e.g., `projects/myproject/instances/-`.
             # @param page_token [String]
             #   DEPRECATED: This field is unused and ignored.
             # @param options [Google::Gax::CallOptions]
@@ -926,23 +926,23 @@ module Google
             # Updates a cluster within an instance.
             #
             # @param name [String]
-            #   (+OutputOnly+)
+            #   (`OutputOnly`)
             #   The unique name of the cluster. Values are of the form
-            #   +projects/<project>/instances/<instance>/clusters/[a-z][-a-z0-9]*+.
+            #   `projects/<project>/instances/<instance>/clusters/[a-z][-a-z0-9]*`.
             # @param serve_nodes [Integer]
             #   The number of nodes allocated to this cluster. More nodes enable higher
             #   throughput and more consistent performance.
             # @param location [String]
-            #   (+CreationOnly+)
+            #   (`CreationOnly`)
             #   The location where this cluster's nodes and storage reside. For best
             #   performance, clients should be located as close as possible to this
             #   cluster. Currently only zones are supported, so values should be of the
-            #   form +projects/<project>/locations/<zone>+.
+            #   form `projects/<project>/locations/<zone>`.
             # @param state [Google::Bigtable::Admin::V2::Cluster::State]
-            #   (+OutputOnly+)
+            #   (`OutputOnly`)
             #   The current state of the cluster.
             # @param default_storage_type [Google::Bigtable::Admin::V2::StorageType]
-            #   (+CreationOnly+)
+            #   (`CreationOnly`)
             #   The type of storage used by this cluster to serve its
             #   parent instance's tables, unless explicitly overridden.
             # @param options [Google::Gax::CallOptions]
@@ -956,7 +956,7 @@ module Google
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
             #
-            #   # TODO: Initialize +serve_nodes+:
+            #   # TODO: Initialize `serve_nodes`:
             #   serve_nodes = 0
             #
             #   # Register a callback during the method call.
@@ -1016,7 +1016,7 @@ module Google
             #
             # @param name [String]
             #   The unique name of the cluster to be deleted. Values are of the form
-            #   +projects/<project>/instances/<instance>/clusters/<cluster>+.
+            #   `projects/<project>/instances/<instance>/clusters/<cluster>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1048,14 +1048,14 @@ module Google
             # @param parent [String]
             #   The unique name of the instance in which to create the new app profile.
             #   Values are of the form
-            #   +projects/<project>/instances/<instance>+.
+            #   `projects/<project>/instances/<instance>`.
             # @param app_profile_id [String]
             #   The ID to be used when referring to the new app profile within its
-            #   instance, e.g., just +myprofile+ rather than
-            #   +projects/myproject/instances/myinstance/appProfiles/myprofile+.
+            #   instance, e.g., just `myprofile` rather than
+            #   `projects/myproject/instances/myinstance/appProfiles/myprofile`.
             # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
             #   The app profile to be created.
-            #   Fields marked +OutputOnly+ will be ignored.
+            #   Fields marked `OutputOnly` will be ignored.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::AppProfile`
             #   can also be provided.
             # @param ignore_warnings [true, false]
@@ -1074,10 +1074,10 @@ module Google
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
-            #   # TODO: Initialize +app_profile_id+:
+            #   # TODO: Initialize `app_profile_id`:
             #   app_profile_id = ''
             #
-            #   # TODO: Initialize +app_profile+:
+            #   # TODO: Initialize `app_profile`:
             #   app_profile = {}
             #   response = bigtable_instance_admin_client.create_app_profile(formatted_parent, app_profile_id, app_profile)
 
@@ -1102,7 +1102,7 @@ module Google
             #
             # @param name [String]
             #   The unique name of the requested app profile. Values are of the form
-            #   +projects/<project>/instances/<instance>/appProfiles/<app_profile>+.
+            #   `projects/<project>/instances/<instance>/appProfiles/<app_profile>`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1134,9 +1134,9 @@ module Google
             # @param parent [String]
             #   The unique name of the instance for which a list of app profiles is
             #   requested. Values are of the form
-            #   +projects/<project>/instances/<instance>+.
-            #   Use +<instance> = '-'+ to list AppProfiles for all Instances in a project,
-            #   e.g., +projects/myproject/instances/-+.
+            #   `projects/<project>/instances/<instance>`.
+            #   Use `<instance> = '-'` to list AppProfiles for all Instances in a project,
+            #   e.g., `projects/myproject/instances/-`.
             # @param page_size [Integer]
             #   Maximum number of results per page.
             #   CURRENTLY UNIMPLEMENTED AND IGNORED.
@@ -1207,10 +1207,10 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #
-            #   # TODO: Initialize +app_profile+:
+            #   # TODO: Initialize `app_profile`:
             #   app_profile = {}
             #
-            #   # TODO: Initialize +update_mask+:
+            #   # TODO: Initialize `update_mask`:
             #   update_mask = {}
             #
             #   # Register a callback during the method call.
@@ -1266,7 +1266,7 @@ module Google
             #
             # @param name [String]
             #   The unique name of the app profile to be deleted. Values are of the form
-            #   +projects/<project>/instances/<instance>/appProfiles/<app_profile>+.
+            #   `projects/<project>/instances/<instance>/appProfiles/<app_profile>`.
             # @param ignore_warnings [true, false]
             #   If true, ignore safety checks when deleting the app profile.
             # @param options [Google::Gax::CallOptions]
@@ -1282,7 +1282,7 @@ module Google
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.app_profile_path("[PROJECT]", "[INSTANCE]", "[APP_PROFILE]")
             #
-            #   # TODO: Initialize +ignore_warnings+:
+            #   # TODO: Initialize `ignore_warnings`:
             #   ignore_warnings = false
             #   bigtable_instance_admin_client.delete_app_profile(formatted_name, ignore_warnings)
 
@@ -1305,8 +1305,8 @@ module Google
             #
             # @param resource [String]
             #   REQUIRED: The resource for which the policy is being requested.
-            #   +resource+ is usually specified as a path. For example, a Project
-            #   resource is specified as +projects/\\{project}+.
+            #   `resource` is usually specified as a path. For example, a Project
+            #   resource is specified as `projects/{project}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1338,10 +1338,10 @@ module Google
             #
             # @param resource [String]
             #   REQUIRED: The resource for which the policy is being specified.
-            #   +resource+ is usually specified as a path. For example, a Project
-            #   resource is specified as +projects/\\{project}+.
+            #   `resource` is usually specified as a path. For example, a Project
+            #   resource is specified as `projects/{project}`.
             # @param policy [Google::Iam::V1::Policy | Hash]
-            #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+            #   REQUIRED: The complete policy to be applied to the `resource`. The size of
             #   the policy is limited to a few 10s of KB. An empty policy is a
             #   valid policy but certain Cloud Platform services (such as Projects)
             #   might reject them.
@@ -1361,7 +1361,7 @@ module Google
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
-            #   # TODO: Initialize +policy+:
+            #   # TODO: Initialize `policy`:
             #   policy = {}
             #   response = bigtable_instance_admin_client.set_iam_policy(formatted_resource, policy)
 
@@ -1382,10 +1382,10 @@ module Google
             #
             # @param resource [String]
             #   REQUIRED: The resource for which the policy detail is being requested.
-            #   +resource+ is usually specified as a path. For example, a Project
-            #   resource is specified as +projects/\\{project}+.
+            #   `resource` is usually specified as a path. For example, a Project
+            #   resource is specified as `projects/{project}`.
             # @param permissions [Array<String>]
-            #   The set of permissions to check for the +resource+. Permissions with
+            #   The set of permissions to check for the `resource`. Permissions with
             #   wildcards (such as '*' or 'storage.*') are not allowed. For more
             #   information see
             #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
@@ -1403,7 +1403,7 @@ module Google
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
-            #   # TODO: Initialize +permissions+:
+            #   # TODO: Initialize `permissions`:
             #   permissions = []
             #   response = bigtable_instance_admin_client.test_iam_permissions(formatted_resource, permissions)
 

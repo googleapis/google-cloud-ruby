@@ -38,17 +38,17 @@ module Google
         #
         # Google Cloud Memorystore for Redis v1
         #
-        # The +redis.googleapis.com+ service implements the Google Cloud Memorystore
+        # The `redis.googleapis.com` service implements the Google Cloud Memorystore
         # for Redis API and defines the following resource model for managing Redis
         # instances:
-        # * The service works with a collection of cloud projects, named: +/projects/*+
-        # * Each project has a collection of available locations, named: +/locations/*+
-        # * Each location has a collection of Redis instances, named: +/instances/*+
+        # * The service works with a collection of cloud projects, named: `/projects/*`
+        # * Each project has a collection of available locations, named: `/locations/*`
+        # * Each location has a collection of Redis instances, named: `/instances/*`
         # * As such, Redis instances are resources of the form:
-        #   +/projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
+        #   `/projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #
-        # Note that location_id must be refering to a GCP +region+; for example:
-        # * +projects/redpepper-1290/locations/us-central1/instances/my-redis+
+        # Note that location_id must be refering to a GCP `region`; for example:
+        # * `projects/redpepper-1290/locations/us-central1/instances/my-redis`
         #
         # @!attribute [r] cloud_redis_stub
         #   @return [Google::Cloud::Redis::V1::CloudRedis::Stub]
@@ -269,15 +269,15 @@ module Google
           # location (region) or all locations.
           #
           # The location should have the following format:
-          # * +projects/\\{project_id}/locations/\\{location_id}+
+          # * `projects/{project_id}/locations/{location_id}`
           #
-          # If +location_id+ is specified as +-+ (wildcard), then all regions
+          # If `location_id` is specified as `-` (wildcard), then all regions
           # available to the project are queried, and the results are aggregated.
           #
           # @param parent [String]
           #   Required. The resource name of the instance location using the form:
-          #       +projects/\\{project_id}/locations/\\{location_id}+
-          #   where +location_id+ refers to a GCP region
+          #       `projects/{project_id}/locations/{location_id}`
+          #   where `location_id` refers to a GCP region
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -332,8 +332,8 @@ module Google
           #
           # @param name [String]
           #   Required. Redis instance resource name using the form:
-          #       +projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
-          #   where +location_id+ refers to a GCP region
+          #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+          #   where `location_id` refers to a GCP region
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -375,8 +375,8 @@ module Google
           #
           # @param parent [String]
           #   Required. The resource name of the instance location using the form:
-          #       +projects/\\{project_id}/locations/\\{location_id}+
-          #   where +location_id+ refers to a GCP region
+          #       `projects/{project_id}/locations/{location_id}`
+          #   where `location_id` refers to a GCP region
           # @param instance_id [String]
           #   Required. The logical name of the Redis instance in the customer project
           #   with the following restrictions:
@@ -465,10 +465,10 @@ module Google
           #   this field. The elements of the repeated paths field may only include these
           #   fields from {CloudRedis::Instance Instance}:
           #
-          #   * +displayName+
-          #     * +labels+
-          #   * +memorySizeGb+
-          #     * +redisConfig+
+          #   * `displayName`
+          #     * `labels`
+          #   * `memorySizeGb`
+          #     * `redisConfig`
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param instance [Google::Cloud::Redis::V1::Instance | Hash]
@@ -545,8 +545,8 @@ module Google
           #
           # @param name [String]
           #   Required. Redis instance resource name using the form:
-          #       +projects/\\{project_id}/locations/\\{location_id}/instances/\\{instance_id}+
-          #   where +location_id+ refers to a GCP region
+          #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+          #   where `location_id` refers to a GCP region
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

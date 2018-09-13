@@ -21,7 +21,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the location associated with the
-        #     {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format +projects/*/locations/*+.
+        #     {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional limit on the number of {Google::Cloud::Kms::V1::KeyRing KeyRings} to include in the
@@ -38,7 +38,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to list, in the format
-        #     +projects/*/locations/*/keyRings/*+.
+        #     `projects/*/locations/*/keyRings/*`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional limit on the number of {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} to include in the
@@ -58,7 +58,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to list, in the format
-        #     +projects/*/locations/*/keyRings/*/cryptoKeys/*+.
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional limit on the number of {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} to
@@ -145,11 +145,11 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the location associated with the
-        #     {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format +projects/*/locations/*+.
+        #     {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
         # @!attribute [rw] key_ring_id
         #   @return [String]
         #     Required. It must be unique within a location and match the regular
-        #     expression +[a-zA-Z0-9_-]\\{1,63}+
+        #     expression `[a-zA-Z0-9_-]{1,63}`
         # @!attribute [rw] key_ring
         #   @return [Google::Cloud::Kms::V1::KeyRing]
         #     A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
@@ -163,7 +163,7 @@ module Google
         # @!attribute [rw] crypto_key_id
         #   @return [String]
         #     Required. It must be unique within a KeyRing and match the regular
-        #     expression +[a-zA-Z0-9_-]\\{1,63}+
+        #     expression `[a-zA-Z0-9_-]{1,63}`
         # @!attribute [rw] crypto_key
         #   @return [Google::Cloud::Kms::V1::CryptoKey]
         #     A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.

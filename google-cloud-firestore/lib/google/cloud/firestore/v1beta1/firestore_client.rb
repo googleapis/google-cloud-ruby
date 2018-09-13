@@ -36,17 +36,17 @@ module Google
         #
         # This service exposes several types of comparable timestamps:
         #
-        # * +create_time+ - The time at which a document was created. Changes only
+        # * `create_time` - The time at which a document was created. Changes only
         #   when a document is deleted, then re-created. Increases in a strict
         #   monotonic fashion.
-        # * +update_time+ - The time at which a document was last updated. Changes
+        # * `update_time` - The time at which a document was last updated. Changes
         #   every time a document is modified. Does not change when a write results
         #   in no modifications. Increases in a strict monotonic fashion.
-        # * +read_time+ - The time at which a particular state was observed. Used
+        # * `read_time` - The time at which a particular state was observed. Used
         #   to denote a consistent snapshot of the database or the time at which a
         #   Document was observed to not exist.
-        # * +commit_time+ - The time at which the writes in a transaction were
-        #   committed. Any read with an equal or greater +read_time+ is guaranteed
+        # * `commit_time` - The time at which the writes in a transaction were
+        #   committed. Any read with an equal or greater `read_time` is guaranteed
         #   to see the effects of the transaction.
         #
         # @!attribute [r] firestore_stub
@@ -337,7 +337,7 @@ module Google
           #
           # @param name [String]
           #   The resource name of the Document to get. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+          #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           # @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
           #   The fields to return. If not set, returns all fields.
           #
@@ -388,14 +388,14 @@ module Google
           #
           # @param parent [String]
           #   The parent resource name. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+          #   `projects/{project_id}/databases/{database_id}/documents` or
+          #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           #   For example:
-          #   +projects/my-project/databases/my-database/documents+ or
-          #   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
+          #   `projects/my-project/databases/my-database/documents` or
+          #   `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
           # @param collection_id [String]
-          #   The collection ID, relative to +parent+, to list. For example: +chatrooms+
-          #   or +messages+.
+          #   The collection ID, relative to `parent`, to list. For example: `chatrooms`
+          #   or `messages`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -403,7 +403,7 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param order_by [String]
-          #   The order to sort results by. For example: +priority desc, name+.
+          #   The order to sort results by. For example: `priority desc, name`.
           # @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
           #   The fields to return. If not set, returns all fields.
           #
@@ -424,8 +424,8 @@ module Google
           #   be returned with a key but will not have fields, {Google::Firestore::V1beta1::Document#create_time Document#create_time},
           #   or {Google::Firestore::V1beta1::Document#update_time Document#update_time} set.
           #
-          #   Requests with +show_missing+ may not specify +where+ or
-          #   +order_by+.
+          #   Requests with `show_missing` may not specify `where` or
+          #   `order_by`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -444,7 +444,7 @@ module Google
           #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #
-          #   # TODO: Initialize +collection_id+:
+          #   # TODO: Initialize `collection_id`:
           #   collection_id = ''
           #
           #   # Iterate over all results.
@@ -489,16 +489,16 @@ module Google
           #
           # @param parent [String]
           #   The parent resource. For example:
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents/chatrooms/\\{chatroom_id}+
+          #   `projects/{project_id}/databases/{database_id}/documents` or
+          #   `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
           # @param collection_id [String]
-          #   The collection ID, relative to +parent+, to list. For example: +chatrooms+.
+          #   The collection ID, relative to `parent`, to list. For example: `chatrooms`.
           # @param document_id [String]
           #   The client-assigned document ID to use for this document.
           #
           #   Optional. If not specified, an ID will be assigned by the service.
           # @param document [Google::Firestore::V1beta1::Document | Hash]
-          #   The document to create. +name+ must not be set.
+          #   The document to create. `name` must not be set.
           #   A hash of the same form as `Google::Firestore::V1beta1::Document`
           #   can also be provided.
           # @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
@@ -522,13 +522,13 @@ module Google
           #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #
-          #   # TODO: Initialize +collection_id+:
+          #   # TODO: Initialize `collection_id`:
           #   collection_id = ''
           #
-          #   # TODO: Initialize +document_id+:
+          #   # TODO: Initialize `document_id`:
           #   document_id = ''
           #
-          #   # TODO: Initialize +document+:
+          #   # TODO: Initialize `document`:
           #   document = {}
           #   response = firestore_client.create_document(formatted_parent, collection_id, document_id, document)
 
@@ -593,10 +593,10 @@ module Google
           #
           #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #
-          #   # TODO: Initialize +document+:
+          #   # TODO: Initialize `document`:
           #   document = {}
           #
-          #   # TODO: Initialize +update_mask+:
+          #   # TODO: Initialize `update_mask`:
           #   update_mask = {}
           #   response = firestore_client.update_document(document, update_mask)
 
@@ -621,7 +621,7 @@ module Google
           #
           # @param name [String]
           #   The resource name of the Document to delete. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+          #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           # @param current_document [Google::Firestore::V1beta1::Precondition | Hash]
           #   An optional precondition on the document.
           #   The request will fail if this is set and not met by the target document.
@@ -662,12 +662,12 @@ module Google
           #
           # @param database [String]
           #   The database name. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}+.
+          #   `projects/{project_id}/databases/{database_id}`.
           # @param documents [Array<String>]
           #   The names of the documents to retrieve. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+          #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           #   The request will fail if any of the document is not a child resource of the
-          #   given +database+. Duplicate names will be elided.
+          #   given `database`. Duplicate names will be elided.
           # @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
           #   The fields to return. If not set, returns all fields.
           #
@@ -702,7 +702,7 @@ module Google
           #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #
-          #   # TODO: Initialize +documents+:
+          #   # TODO: Initialize `documents`:
           #   documents = []
           #   firestore_client.batch_get_documents(formatted_database, documents).each do |element|
           #     # Process element.
@@ -732,7 +732,7 @@ module Google
           #
           # @param database [String]
           #   The database name. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}+.
+          #   `projects/{project_id}/databases/{database_id}`.
           # @param options_ [Google::Firestore::V1beta1::TransactionOptions | Hash]
           #   The options for the transaction.
           #   Defaults to a read-write transaction.
@@ -770,7 +770,7 @@ module Google
           #
           # @param database [String]
           #   The database name. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}+.
+          #   `projects/{project_id}/databases/{database_id}`.
           # @param writes [Array<Google::Firestore::V1beta1::Write | Hash>]
           #   The writes to apply.
           #
@@ -793,7 +793,7 @@ module Google
           #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #
-          #   # TODO: Initialize +writes+:
+          #   # TODO: Initialize `writes`:
           #   writes = []
           #   response = firestore_client.commit(formatted_database, writes)
 
@@ -816,7 +816,7 @@ module Google
           #
           # @param database [String]
           #   The database name. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}+.
+          #   `projects/{project_id}/databases/{database_id}`.
           # @param transaction [String]
           #   The transaction to roll back.
           # @param options [Google::Gax::CallOptions]
@@ -832,7 +832,7 @@ module Google
           #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #
-          #   # TODO: Initialize +transaction+:
+          #   # TODO: Initialize `transaction`:
           #   transaction = ''
           #   firestore_client.rollback(formatted_database, transaction)
 
@@ -854,11 +854,11 @@ module Google
           #
           # @param parent [String]
           #   The parent resource name. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents+ or
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+          #   `projects/{project_id}/databases/{database_id}/documents` or
+          #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           #   For example:
-          #   +projects/my-project/databases/my-database/documents+ or
-          #   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
+          #   `projects/my-project/databases/my-database/documents` or
+          #   `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
           # @param structured_query [Google::Firestore::V1beta1::StructuredQuery | Hash]
           #   A structured query.
           #   A hash of the same form as `Google::Firestore::V1beta1::StructuredQuery`
@@ -985,9 +985,9 @@ module Google
           #
           # @param parent [String]
           #   The parent document. In the format:
-          #   +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
+          #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           #   For example:
-          #   +projects/my-project/databases/my-database/documents/chatrooms/my-chatroom+
+          #   `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this

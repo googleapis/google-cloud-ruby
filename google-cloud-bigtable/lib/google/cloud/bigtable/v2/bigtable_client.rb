@@ -245,7 +245,7 @@ module Google
           # @param table_name [String]
           #   The unique name of the table from which to read.
           #   Values are of the form
-          #   +projects/<project>/instances/<instance>/tables/<table>+.
+          #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param app_profile_id [String]
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
@@ -303,7 +303,7 @@ module Google
           # @param table_name [String]
           #   The unique name of the table from which to sample row keys.
           #   Values are of the form
-          #   +projects/<project>/instances/<instance>/tables/<table>+.
+          #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param app_profile_id [String]
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
@@ -336,12 +336,12 @@ module Google
           end
 
           # Mutates a row atomically. Cells already present in the row are left
-          # unchanged unless explicitly changed by +mutation+.
+          # unchanged unless explicitly changed by `mutation`.
           #
           # @param table_name [String]
           #   The unique name of the table to which the mutation should be applied.
           #   Values are of the form
-          #   +projects/<project>/instances/<instance>/tables/<table>+.
+          #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param row_key [String]
           #   The key of the row to which the mutation should be applied.
           # @param mutations [Array<Google::Bigtable::V2::Mutation | Hash>]
@@ -367,10 +367,10 @@ module Google
           #   bigtable_client = Google::Cloud::Bigtable::V2.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
-          #   # TODO: Initialize +row_key+:
+          #   # TODO: Initialize `row_key`:
           #   row_key = ''
           #
-          #   # TODO: Initialize +mutations+:
+          #   # TODO: Initialize `mutations`:
           #   mutations = []
           #   response = bigtable_client.mutate_row(formatted_table_name, row_key, mutations)
 
@@ -421,7 +421,7 @@ module Google
           #   bigtable_client = Google::Cloud::Bigtable::V2.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
-          #   # TODO: Initialize +entries+:
+          #   # TODO: Initialize `entries`:
           #   entries = []
           #   bigtable_client.mutate_rows(formatted_table_name, entries).each do |element|
           #     # Process element.
@@ -447,7 +447,7 @@ module Google
           #   The unique name of the table to which the conditional mutation should be
           #   applied.
           #   Values are of the form
-          #   +projects/<project>/instances/<instance>/tables/<table>+.
+          #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param row_key [String]
           #   The key of the row to which the conditional mutation should be applied.
           # @param app_profile_id [String]
@@ -455,24 +455,24 @@ module Google
           #   "default" application profile will be used.
           # @param predicate_filter [Google::Bigtable::V2::RowFilter | Hash]
           #   The filter to be applied to the contents of the specified row. Depending
-          #   on whether or not any results are yielded, either +true_mutations+ or
-          #   +false_mutations+ will be executed. If unset, checks that the row contains
+          #   on whether or not any results are yielded, either `true_mutations` or
+          #   `false_mutations` will be executed. If unset, checks that the row contains
           #   any values at all.
           #   A hash of the same form as `Google::Bigtable::V2::RowFilter`
           #   can also be provided.
           # @param true_mutations [Array<Google::Bigtable::V2::Mutation | Hash>]
-          #   Changes to be atomically applied to the specified row if +predicate_filter+
-          #   yields at least one cell when applied to +row_key+. Entries are applied in
+          #   Changes to be atomically applied to the specified row if `predicate_filter`
+          #   yields at least one cell when applied to `row_key`. Entries are applied in
           #   order, meaning that earlier mutations can be masked by later ones.
-          #   Must contain at least one entry if +false_mutations+ is empty, and at most
+          #   Must contain at least one entry if `false_mutations` is empty, and at most
           #   100000.
           #   A hash of the same form as `Google::Bigtable::V2::Mutation`
           #   can also be provided.
           # @param false_mutations [Array<Google::Bigtable::V2::Mutation | Hash>]
-          #   Changes to be atomically applied to the specified row if +predicate_filter+
-          #   does not yield any cells when applied to +row_key+. Entries are applied in
+          #   Changes to be atomically applied to the specified row if `predicate_filter`
+          #   does not yield any cells when applied to `row_key`. Entries are applied in
           #   order, meaning that earlier mutations can be masked by later ones.
-          #   Must contain at least one entry if +true_mutations+ is empty, and at most
+          #   Must contain at least one entry if `true_mutations` is empty, and at most
           #   100000.
           #   A hash of the same form as `Google::Bigtable::V2::Mutation`
           #   can also be provided.
@@ -490,7 +490,7 @@ module Google
           #   bigtable_client = Google::Cloud::Bigtable::V2.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
-          #   # TODO: Initialize +row_key+:
+          #   # TODO: Initialize `row_key`:
           #   row_key = ''
           #   response = bigtable_client.check_and_mutate_row(formatted_table_name, row_key)
 
@@ -525,7 +525,7 @@ module Google
           #   The unique name of the table to which the read/modify/write rules should be
           #   applied.
           #   Values are of the form
-          #   +projects/<project>/instances/<instance>/tables/<table>+.
+          #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param row_key [String]
           #   The key of the row to which the read/modify/write rules should be applied.
           # @param rules [Array<Google::Bigtable::V2::ReadModifyWriteRule | Hash>]
@@ -551,10 +551,10 @@ module Google
           #   bigtable_client = Google::Cloud::Bigtable::V2.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
-          #   # TODO: Initialize +row_key+:
+          #   # TODO: Initialize `row_key`:
           #   row_key = ''
           #
-          #   # TODO: Initialize +rules+:
+          #   # TODO: Initialize `rules`:
           #   rules = []
           #   response = bigtable_client.read_modify_write_row(formatted_table_name, row_key, rules)
 

@@ -255,7 +255,7 @@ module Google
           #
           # @param parent [String]
           #   The project whose uptime check configurations are listed. The format
-          #     is +projects/[PROJECT_ID]+.
+          #     is `projects/[PROJECT_ID]`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -310,7 +310,7 @@ module Google
           #
           # @param name [String]
           #   The uptime check configuration to retrieve. The format
-          #     is +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
+          #     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -341,7 +341,7 @@ module Google
           #
           # @param parent [String]
           #   The project in which to create the uptime check. The format
-          #     is +projects/[PROJECT_ID]+.
+          #     is `projects/[PROJECT_ID]`.
           # @param uptime_check_config [Google::Monitoring::V3::UptimeCheckConfig | Hash]
           #   The new uptime check configuration.
           #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
@@ -360,7 +360,7 @@ module Google
           #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #   formatted_parent = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +uptime_check_config+:
+          #   # TODO: Initialize `uptime_check_config`:
           #   uptime_check_config = {}
           #   response = uptime_check_service_client.create_uptime_check_config(formatted_parent, uptime_check_config)
 
@@ -379,21 +379,21 @@ module Google
 
           # Updates an uptime check configuration. You can either replace the entire
           # configuration with a new one or replace only certain fields in the current
-          # configuration by specifying the fields to be updated via +"updateMask"+.
+          # configuration by specifying the fields to be updated via `"updateMask"`.
           # Returns the updated configuration.
           #
           # @param uptime_check_config [Google::Monitoring::V3::UptimeCheckConfig | Hash]
-          #   Required. If an +"updateMask"+ has been specified, this field gives
-          #   the values for the set of fields mentioned in the +"updateMask"+. If an
-          #   +"updateMask"+ has not been given, this uptime check configuration replaces
-          #   the current configuration. If a field is mentioned in +"updateMask"+ but
+          #   Required. If an `"updateMask"` has been specified, this field gives
+          #   the values for the set of fields mentioned in the `"updateMask"`. If an
+          #   `"updateMask"` has not been given, this uptime check configuration replaces
+          #   the current configuration. If a field is mentioned in `"updateMask"` but
           #   the corresonding field is omitted in this partial uptime check
           #   configuration, it has the effect of deleting/clearing the field from the
           #   configuration on the server.
           #
-          #   The following fields can be updated: +display_name+,
-          #   +http_check+, +tcp_check+, +timeout+, +content_matchers+, and
-          #   +selected_regions+.
+          #   The following fields can be updated: `display_name`,
+          #   `http_check`, `tcp_check`, `timeout`, `content_matchers`, and
+          #   `selected_regions`.
           #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -416,7 +416,7 @@ module Google
           #
           #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #
-          #   # TODO: Initialize +uptime_check_config+:
+          #   # TODO: Initialize `uptime_check_config`:
           #   uptime_check_config = {}
           #   response = uptime_check_service_client.update_uptime_check_config(uptime_check_config)
 
@@ -439,7 +439,7 @@ module Google
           #
           # @param name [String]
           #   The uptime check configuration to delete. The format
-          #     is +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
+          #     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

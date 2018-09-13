@@ -334,7 +334,7 @@ module Google
           #
           # @param name [String]
           #   The channel type for which to execute the request. The format is
-          #   +projects/[PROJECT_ID]/notificationChannelDescriptors/\\{channel_type}+.
+          #   `projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -365,11 +365,11 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   +projects/[PROJECT_ID]+. That is, this names the container
+          #   `projects/[PROJECT_ID]`. That is, this names the container
           #   in which to look for the notification channels; it does not name a
           #   specific channel. To query a specific channel by REST resource name, use
           #   the
-          #   {Google::Monitoring::V3::NotificationChannelService::GetNotificationChannel +GetNotificationChannel+} operation.
+          #   {Google::Monitoring::V3::NotificationChannelService::GetNotificationChannel `GetNotificationChannel`} operation.
           # @param filter [String]
           #   If provided, this field specifies the criteria that must be met by
           #   notification channels to be included in the response.
@@ -378,7 +378,7 @@ module Google
           #   filtering](/monitoring/api/v3/sorting-and-filtering).
           # @param order_by [String]
           #   A comma-separated list of fields by which to sort the result. Supports
-          #   the same set of fields as in +filter+. Entries can be prefixed with
+          #   the same set of fields as in `filter`. Entries can be prefixed with
           #   a minus sign to sort in descending rather than ascending order.
           #
           #   For more details, see [sorting and
@@ -445,7 +445,7 @@ module Google
           #
           # @param name [String]
           #   The channel for which to execute the request. The format is
-          #   +projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]+.
+          #   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -483,9 +483,9 @@ module Google
           #   Note that this names the container into which the channel will be
           #   written. This does not name the newly created channel. The resulting
           #   channel's name will have a normalized version of this field as a prefix,
-          #   but will add +/notificationChannels/[CHANNEL_ID]+ to identify the channel.
+          #   but will add `/notificationChannels/[CHANNEL_ID]` to identify the channel.
           # @param notification_channel [Google::Monitoring::V3::NotificationChannel | Hash]
-          #   The definition of the +NotificationChannel+ to create.
+          #   The definition of the `NotificationChannel` to create.
           #   A hash of the same form as `Google::Monitoring::V3::NotificationChannel`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -502,7 +502,7 @@ module Google
           #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +notification_channel+:
+          #   # TODO: Initialize `notification_channel`:
           #   notification_channel = {}
           #   response = notification_channel_service_client.create_notification_channel(formatted_name, notification_channel)
 
@@ -526,7 +526,7 @@ module Google
           #   A description of the changes to be applied to the specified
           #   notification channel. The description must provide a definition for
           #   fields to be updated; the names of these fields should also be
-          #   included in the +update_mask+.
+          #   included in the `update_mask`.
           #   A hash of the same form as `Google::Monitoring::V3::NotificationChannel`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -546,7 +546,7 @@ module Google
           #
           #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #
-          #   # TODO: Initialize +notification_channel+:
+          #   # TODO: Initialize `notification_channel`:
           #   notification_channel = {}
           #   response = notification_channel_service_client.update_notification_channel(notification_channel)
 
@@ -567,7 +567,7 @@ module Google
           #
           # @param name [String]
           #   The channel for which to execute the request. The format is
-          #   +projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]+.
+          #   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
           # @param force [true, false]
           #   If true, the notification channel will be deleted regardless of its
           #   use in alert policies (the policies will be updated to remove the

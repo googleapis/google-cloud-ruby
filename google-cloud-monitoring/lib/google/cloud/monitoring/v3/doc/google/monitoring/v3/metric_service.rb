@@ -16,18 +16,18 @@
 module Google
   module Monitoring
     module V3
-      # The +ListMonitoredResourceDescriptors+ request.
+      # The `ListMonitoredResourceDescriptors` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
-      #     +"projects/\\{project_id_or_number}"+.
+      #     `"projects/{project_id_or_number}"`.
       # @!attribute [rw] filter
       #   @return [String]
       #     An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
       #     the descriptors to be returned.  The filter can reference
       #     the descriptor's type and labels. For example, the
       #     following filter returns only Google Compute Engine descriptors
-      #     that have an +id+ label:
+      #     that have an `id` label:
       #
       #         resource.type = starts_with("gce_") AND resource.label:id
       # @!attribute [rw] page_size
@@ -35,37 +35,37 @@ module Google
       #     A positive number that is the maximum number of results to return.
       # @!attribute [rw] page_token
       #   @return [String]
-      #     If this field is not empty then it must contain the +nextPageToken+ value
+      #     If this field is not empty then it must contain the `nextPageToken` value
       #     returned by a previous call to this method.  Using this field causes the
       #     method to return additional results from the previous method call.
       class ListMonitoredResourceDescriptorsRequest; end
 
-      # The +ListMonitoredResourceDescriptors+ response.
+      # The `ListMonitoredResourceDescriptors` response.
       # @!attribute [rw] resource_descriptors
       #   @return [Array<Google::Api::MonitoredResourceDescriptor>]
       #     The monitored resource descriptors that are available to this project
-      #     and that match +filter+, if present.
+      #     and that match `filter`, if present.
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     If there are more results than have been returned, then this field is set
       #     to a non-empty value.  To see the additional results,
-      #     use that value as +pageToken+ in the next call to this method.
+      #     use that value as `pageToken` in the next call to this method.
       class ListMonitoredResourceDescriptorsResponse; end
 
-      # The +GetMonitoredResourceDescriptor+ request.
+      # The `GetMonitoredResourceDescriptor` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The monitored resource descriptor to get.  The format is
-      #     +"projects/\\{project_id_or_number}/monitoredResourceDescriptors/\\{resource_type}"+.
-      #     The +\\{resource_type}+ is a predefined type, such as
-      #     +cloudsql_database+.
+      #     `"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"`.
+      #     The `{resource_type}` is a predefined type, such as
+      #     `cloudsql_database`.
       class GetMonitoredResourceDescriptorRequest; end
 
-      # The +ListMetricDescriptors+ request.
+      # The `ListMetricDescriptors` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
-      #     +"projects/\\{project_id_or_number}"+.
+      #     `"projects/{project_id_or_number}"`.
       # @!attribute [rw] filter
       #   @return [String]
       #     If this field is empty, all custom and
@@ -81,53 +81,53 @@ module Google
       #     A positive number that is the maximum number of results to return.
       # @!attribute [rw] page_token
       #   @return [String]
-      #     If this field is not empty then it must contain the +nextPageToken+ value
+      #     If this field is not empty then it must contain the `nextPageToken` value
       #     returned by a previous call to this method.  Using this field causes the
       #     method to return additional results from the previous method call.
       class ListMetricDescriptorsRequest; end
 
-      # The +ListMetricDescriptors+ response.
+      # The `ListMetricDescriptors` response.
       # @!attribute [rw] metric_descriptors
       #   @return [Array<Google::Api::MetricDescriptor>]
       #     The metric descriptors that are available to the project
-      #     and that match the value of +filter+, if present.
+      #     and that match the value of `filter`, if present.
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     If there are more results than have been returned, then this field is set
       #     to a non-empty value.  To see the additional results,
-      #     use that value as +pageToken+ in the next call to this method.
+      #     use that value as `pageToken` in the next call to this method.
       class ListMetricDescriptorsResponse; end
 
-      # The +GetMetricDescriptor+ request.
+      # The `GetMetricDescriptor` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The metric descriptor on which to execute the request. The format is
-      #     +"projects/\\{project_id_or_number}/metricDescriptors/\\{metric_id}"+.
-      #     An example value of +\\{metric_id}+ is
-      #     +"compute.googleapis.com/instance/disk/read_bytes_count"+.
+      #     `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
+      #     An example value of `{metric_id}` is
+      #     `"compute.googleapis.com/instance/disk/read_bytes_count"`.
       class GetMetricDescriptorRequest; end
 
-      # The +CreateMetricDescriptor+ request.
+      # The `CreateMetricDescriptor` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
-      #     +"projects/\\{project_id_or_number}"+.
+      #     `"projects/{project_id_or_number}"`.
       # @!attribute [rw] metric_descriptor
       #   @return [Google::Api::MetricDescriptor]
       #     The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
       #     descriptor.
       class CreateMetricDescriptorRequest; end
 
-      # The +DeleteMetricDescriptor+ request.
+      # The `DeleteMetricDescriptor` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The metric descriptor on which to execute the request. The format is
-      #     +"projects/\\{project_id_or_number}/metricDescriptors/\\{metric_id}"+.
-      #     An example of +\\{metric_id}+ is:
-      #     +"custom.googleapis.com/my_test_metric"+.
+      #     `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
+      #     An example of `{metric_id}` is:
+      #     `"custom.googleapis.com/my_test_metric"`.
       class DeleteMetricDescriptorRequest; end
 
-      # The +ListTimeSeries+ request.
+      # The `ListTimeSeries` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
@@ -161,17 +161,17 @@ module Google
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     A positive number that is the maximum number of results to return. If
-      #     +page_size+ is empty or more than 100,000 results, the effective
-      #     +page_size+ is 100,000 results. If +view+ is set to +FULL+, this is the
-      #     maximum number of +Points+ returned. If +view+ is set to +HEADERS+, this is
-      #     the maximum number of +TimeSeries+ returned.
+      #     `page_size` is empty or more than 100,000 results, the effective
+      #     `page_size` is 100,000 results. If `view` is set to `FULL`, this is the
+      #     maximum number of `Points` returned. If `view` is set to `HEADERS`, this is
+      #     the maximum number of `TimeSeries` returned.
       # @!attribute [rw] page_token
       #   @return [String]
-      #     If this field is not empty then it must contain the +nextPageToken+ value
+      #     If this field is not empty then it must contain the `nextPageToken` value
       #     returned by a previous call to this method.  Using this field causes the
       #     method to return additional results from the previous method call.
       class ListTimeSeriesRequest
-        # Controls which fields are returned by +ListTimeSeries+.
+        # Controls which fields are returned by `ListTimeSeries`.
         module TimeSeriesView
           # Returns the identity of the metric(s), the time series,
           # and the time series data.
@@ -183,7 +183,7 @@ module Google
         end
       end
 
-      # The +ListTimeSeries+ response.
+      # The `ListTimeSeries` response.
       # @!attribute [rw] time_series
       #   @return [Array<Google::Monitoring::V3::TimeSeries>]
       #     One or more time series that match the filter included in the request.
@@ -191,32 +191,32 @@ module Google
       #   @return [String]
       #     If there are more results than have been returned, then this field is set
       #     to a non-empty value.  To see the additional results,
-      #     use that value as +pageToken+ in the next call to this method.
+      #     use that value as `pageToken` in the next call to this method.
       # @!attribute [rw] execution_errors
       #   @return [Array<Google::Rpc::Status>]
       #     Query execution errors that may have caused the time series data returned
       #     to be incomplete.
       class ListTimeSeriesResponse; end
 
-      # The +CreateTimeSeries+ request.
+      # The `CreateTimeSeries` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The project on which to execute the request. The format is
-      #     +"projects/\\{project_id_or_number}"+.
+      #     `"projects/{project_id_or_number}"`.
       # @!attribute [rw] time_series
       #   @return [Array<Google::Monitoring::V3::TimeSeries>]
       #     The new data to be added to a list of time series.
       #     Adds at most one data point to each of several time series.  The new data
       #     point must be more recent than any other point in its time series.  Each
-      #     +TimeSeries+ value must fully specify a unique time series by supplying
+      #     `TimeSeries` value must fully specify a unique time series by supplying
       #     all label values for the metric and the monitored resource.
       class CreateTimeSeriesRequest; end
 
       # Describes the result of a failed request to write data to a time series.
       # @!attribute [rw] time_series
       #   @return [Google::Monitoring::V3::TimeSeries]
-      #     The time series, including the +Metric+, +MonitoredResource+,
-      #     and +Point+s (including timestamp and value) that resulted
+      #     The time series, including the `Metric`, `MonitoredResource`,
+      #     and `Point`s (including timestamp and value) that resulted
       #     in the error. This field provides all of the context that
       #     would be needed to retry the operation.
       # @!attribute [rw] status

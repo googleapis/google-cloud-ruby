@@ -350,7 +350,7 @@ module Google
           #   metrics_service_v2_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::MetricsServiceV2Client.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +metric+:
+          #   # TODO: Initialize `metric`:
           #   metric = {}
           #   response = metrics_service_v2_client.create_log_metric(formatted_parent, metric)
 
@@ -375,8 +375,8 @@ module Google
           #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
           #
           #   The updated metric must be provided in the request and it's
-          #   +name+ field must be the same as +[METRIC_ID]+ If the metric
-          #   does not exist in +[PROJECT_ID]+, then a new metric is created.
+          #   `name` field must be the same as `[METRIC_ID]` If the metric
+          #   does not exist in `[PROJECT_ID]`, then a new metric is created.
           # @param metric [Google::Logging::V2::LogMetric | Hash]
           #   The updated metric.
           #   A hash of the same form as `Google::Logging::V2::LogMetric`
@@ -395,7 +395,7 @@ module Google
           #   metrics_service_v2_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
           #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
           #
-          #   # TODO: Initialize +metric+:
+          #   # TODO: Initialize `metric`:
           #   metric = {}
           #   response = metrics_service_v2_client.update_log_metric(formatted_metric_name, metric)
 

@@ -65,7 +65,7 @@ module Google
               EOL_SURE_SPACE = 3
 
               # End-line hyphen that is not present in text; does not co-occur with
-              # +SPACE+, +LEADER_SPACE+, or +LINE_BREAK+.
+              # `SPACE`, `LEADER_SPACE`, or `LINE_BREAK`.
               HYPHEN = 4
 
               # Line break that ends a paragraph.

@@ -71,11 +71,11 @@ module Google
         # @!attribute [rw] main_class
         #   @return [String]
         #     The name of the driver's main class. The jar file containing the class
-        #     must be in the default CLASSPATH or specified in +jar_file_uris+.
+        #     must be in the default CLASSPATH or specified in `jar_file_uris`.
         # @!attribute [rw] args
         #   @return [Array<String>]
         #     Optional. The arguments to pass to the driver. Do not
-        #     include arguments, such as +-libjars+ or +-Dfoo=bar+, that can be set as job
+        #     include arguments, such as `-libjars` or `-Dfoo=bar`, that can be set as job
         #     properties, since a collision may occur that causes an incorrect job
         #     submission.
         # @!attribute [rw] jar_file_uris
@@ -111,11 +111,11 @@ module Google
         # @!attribute [rw] main_class
         #   @return [String]
         #     The name of the driver's main class. The jar file that contains the class
-        #     must be in the default CLASSPATH or specified in +jar_file_uris+.
+        #     must be in the default CLASSPATH or specified in `jar_file_uris`.
         # @!attribute [rw] args
         #   @return [Array<String>]
         #     Optional. The arguments to pass to the driver. Do not include arguments,
-        #     such as +--conf+, that can be set as job properties, since a collision may
+        #     such as `--conf`, that can be set as job properties, since a collision may
         #     occur that causes an incorrect job submission.
         # @!attribute [rw] jar_file_uris
         #   @return [Array<String>]
@@ -151,7 +151,7 @@ module Google
         # @!attribute [rw] args
         #   @return [Array<String>]
         #     Optional. The arguments to pass to the driver.  Do not include arguments,
-        #     such as +--conf+, that can be set as job properties, since a collision may
+        #     such as `--conf`, that can be set as job properties, since a collision may
         #     occur that causes an incorrect job submission.
         # @!attribute [rw] python_file_uris
         #   @return [Array<String>]
@@ -210,12 +210,12 @@ module Google
         # @!attribute [rw] continue_on_failure
         #   @return [true, false]
         #     Optional. Whether to continue executing queries if a query fails.
-        #     The default value is +false+. Setting to +true+ can be useful when executing
+        #     The default value is `false`. Setting to `true` can be useful when executing
         #     independent parallel queries.
         # @!attribute [rw] script_variables
         #   @return [Hash{String => String}]
         #     Optional. Mapping of query variable names to values (equivalent to the
-        #     Hive command: +SET name="value";+).
+        #     Hive command: `SET name="value";`).
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. A mapping of property names and values, used to configure Hive.
@@ -240,7 +240,7 @@ module Google
         # @!attribute [rw] script_variables
         #   @return [Hash{String => String}]
         #     Optional. Mapping of query variable names to values (equivalent to the
-        #     Spark SQL command: SET +name="value";+).
+        #     Spark SQL command: SET `name="value";`).
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. A mapping of property names to values, used to configure
@@ -265,12 +265,12 @@ module Google
         # @!attribute [rw] continue_on_failure
         #   @return [true, false]
         #     Optional. Whether to continue executing queries if a query fails.
-        #     The default value is +false+. Setting to +true+ can be useful when executing
+        #     The default value is `false`. Setting to `true` can be useful when executing
         #     independent parallel queries.
         # @!attribute [rw] script_variables
         #   @return [Hash{String => String}]
         #     Optional. Mapping of query variable names to values (equivalent to the Pig
-        #     command: +name=[value]+).
+        #     command: `name=[value]`).
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. A mapping of property names to values, used to configure Pig.
@@ -492,7 +492,7 @@ module Google
         #   @return [String]
         #     Output-only. If present, the location of miscellaneous control files
         #     which may be used as part of job setup and handling. If not present,
-        #     control files may be placed in the same location as +driver_output_uri+.
+        #     control files may be placed in the same location as `driver_output_uri`.
         # @!attribute [rw] labels
         #   @return [Hash{String => String}]
         #     Optional. The labels to associate with this job.
@@ -572,7 +572,7 @@ module Google
         #     Optional. Specifies enumerated categories of jobs to list.
         #     (default = match ALL jobs).
         #
-        #     If +filter+ is provided, +jobStateMatcher+ will be ignored.
+        #     If `filter` is provided, `jobStateMatcher` will be ignored.
         # @!attribute [rw] filter
         #   @return [String]
         #     Optional. A filter constraining the jobs to list. Filters are
@@ -580,11 +580,11 @@ module Google
         #
         #     [field = value] AND [field [= value]] ...
         #
-        #     where **field** is +status.state+ or +labels.[KEY]+, and +[KEY]+ is a label
-        #     key. **value** can be +*+ to match all values.
-        #     +status.state+ can be either +ACTIVE+ or +NON_ACTIVE+.
-        #     Only the logical +AND+ operator is supported; space-separated items are
-        #     treated as having an implicit +AND+ operator.
+        #     where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
+        #     key. **value** can be `*` to match all values.
+        #     `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
+        #     Only the logical `AND` operator is supported; space-separated items are
+        #     treated as having an implicit `AND` operator.
         #
         #     Example filter:
         #
@@ -623,7 +623,7 @@ module Google
         #     Required. Specifies the path, relative to <code>Job</code>, of
         #     the field to update. For example, to update the labels of a Job the
         #     <code>update_mask</code> parameter would be specified as
-        #     <code>labels</code>, and the +PATCH+ request body would specify the new
+        #     <code>labels</code>, and the `PATCH` request body would specify the new
         #     value. <strong>Note:</strong> Currently, <code>labels</code> is the only
         #     field that can be updated.
         class UpdateJobRequest; end
@@ -636,7 +636,7 @@ module Google
         #   @return [String]
         #     Optional. This token is included in the response if there are more results
         #     to fetch. To fetch additional results, provide this value as the
-        #     +page_token+ in a subsequent <code>ListJobsRequest</code>.
+        #     `page_token` in a subsequent <code>ListJobsRequest</code>.
         class ListJobsResponse; end
 
         # A request to cancel a job.
