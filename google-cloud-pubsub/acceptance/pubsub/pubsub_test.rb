@@ -34,6 +34,7 @@ describe Google::Cloud::Pubsub, :pubsub do
   let(:new_topic_name)  {  $topic_names[0] }
   let(:topic_names)     {  $topic_names[3..6] }
   let(:lazy_topic_name) {  $topic_names[7] }
+  let(:labels) { { "foo" => "bar" } }
 
   before do
     # create all topics
@@ -72,6 +73,17 @@ describe Google::Cloud::Pubsub, :pubsub do
       topic = pubsub.create_topic new_topic_name
       topic.must_be_kind_of Google::Cloud::Pubsub::Topic
       pubsub.topic(topic.name).wont_be :nil?
+      topic.delete
+      pubsub.topic(topic.name).must_be :nil?
+    end
+
+    it "should be created and fetched and deleted with labels" do
+      topic = pubsub.create_topic new_topic_name, labels: labels
+      topic.must_be_kind_of Google::Cloud::Pubsub::Topic
+      topic = pubsub.topic(topic.name)
+      topic.wont_be :nil?
+      topic.labels.must_equal labels
+      topic.labels.must_be :frozen?
       topic.delete
       pubsub.topic(topic.name).must_be :nil?
     end

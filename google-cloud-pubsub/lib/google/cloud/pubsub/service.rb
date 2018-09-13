@@ -123,9 +123,10 @@ module Google
 
         ##
         # Creates the given topic with the given name.
-        def create_topic topic_name, options = {}
+        def create_topic topic_name, labels: nil, options: {}
           execute do
             publisher.create_topic topic_path(topic_name, options),
+                                   labels: labels,
                                    options: default_options
           end
         end

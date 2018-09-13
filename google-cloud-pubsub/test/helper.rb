@@ -120,8 +120,8 @@ class MockPubsub < Minitest::Spec
     data.to_json
   end
 
-  def topic_json topic_name
-    { "name" => topic_path(topic_name) }.to_json
+  def topic_json topic_name, labels: nil
+    { "name" => topic_path(topic_name), labels: labels }.to_json
   end
 
   def topic_subscriptions_json num_subs, token = nil

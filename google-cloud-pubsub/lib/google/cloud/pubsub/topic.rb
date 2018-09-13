@@ -28,6 +28,8 @@ module Google
       #
       # A named resource to which messages are published.
       #
+      # See {Project#create_topic} and {Project#topic}.
+      #
       # @example
       #   require "google/cloud/pubsub"
       #
@@ -84,8 +86,25 @@ module Google
         ##
         # The name of the topic in the form of
         # "/projects/project-identifier/topics/topic-name".
+        #
+        # @return [String]
+        #
         def name
           @grpc.name
+        end
+
+        ##
+        # A hash of user-provided labels associated with this topic. Labels can
+        # be provided when the topic is created, and used to organize and group
+        # topics.See [Creating and Managing
+        # Labels](https://cloud.google.com/pubsub/docs/labels).
+        #
+        # The returned hash is frozen and changes are not allowed.
+        #
+        # @return [Hash] The frozen labels hash.
+        #
+        def labels
+          @grpc.labels.to_h.freeze
         end
 
         ##

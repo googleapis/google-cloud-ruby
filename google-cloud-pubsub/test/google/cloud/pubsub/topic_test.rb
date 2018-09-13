@@ -16,7 +16,8 @@ require "helper"
 
 describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
+  let(:labels) { { "foo" => "bar" } }
+  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name, labels: labels)),
                                                 pubsub.service }
   let(:subscriptions_with_token) do
     response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
@@ -33,6 +34,11 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
   it "knows its name" do
     topic.name.must_equal topic_path(topic_name)
+  end
+
+  it "knows its labels" do
+    topic.labels.must_equal labels
+    topic.labels.must_be :frozen?
   end
 
   it "can delete itself" do

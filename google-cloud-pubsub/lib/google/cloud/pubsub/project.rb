@@ -163,6 +163,14 @@ module Google
         # Creates a new topic.
         #
         # @param [String] topic_name Name of a topic.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the topic. You can use these to organize and group your topics.
+        #   Label keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key. See [Creating and Managing
+        #   Labels](https://cloud.google.com/pubsub/docs/labels).
         # @param [Hash] async A hash of values to configure the topic's
         #   {AsyncPublisher} that is created when {Topic#publish_async}
         #   is called. Optional.
@@ -191,9 +199,9 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #   topic = pubsub.create_topic "my-topic"
         #
-        def create_topic topic_name, async: nil
+        def create_topic topic_name, labels: nil, async: nil
           ensure_service!
-          grpc = service.create_topic topic_name
+          grpc = service.create_topic topic_name, labels: labels
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic
