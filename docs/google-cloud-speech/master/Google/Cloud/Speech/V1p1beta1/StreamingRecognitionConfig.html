@@ -151,7 +151,7 @@ request.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Optional</em> If +true+, interim results (tentative hypotheses) may be returned as they become available (these interim results are indicated with the +is_final=false+ flag).</p>
+    <span class="summary_desc"><div class='inline'><p><em>Optional</em> If <code>true</code>, interim results (tentative hypotheses) may be returned as they become available (these interim results are indicated with the <code>is_final=false</code> flag).</p>
 </div></span>
   
 </li>
@@ -177,7 +177,7 @@ request.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Optional</em> If +false+ or omitted, the recognizer will perform continuous recognition (continuing to wait for and process audio even if the user pauses speaking) until the client closes the input stream (gRPC API) or until the maximum time limit has been reached.</p>
+    <span class="summary_desc"><div class='inline'><p><em>Optional</em> If <code>false</code> or omitted, the recognizer will perform continuous recognition (continuing to wait for and process audio even if the user pauses speaking) until the client closes the input stream (gRPC API) or until the maximum time limit has been reached.</p>
 </div></span>
   
 </li>
@@ -262,10 +262,10 @@ process the request.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p><em>Optional</em> If +true+, interim results (tentative hypotheses) may be
+    <p><em>Optional</em> If <code>true</code>, interim results (tentative hypotheses) may be
 returned as they become available (these interim results are indicated with
-the +is_final=false+ flag).
-If +false+ or omitted, only +is_final=true+ result(s) are returned.</p>
+the <code>is_final=false</code> flag).
+If <code>false</code> or omitted, only <code>is_final=true</code> result(s) are returned.</p>
 
 
   </div>
@@ -283,10 +283,10 @@ If +false+ or omitted, only +is_final=true+ result(s) are returned.</p>
       
       
         &mdash;
-        <div class='inline'><p><em>Optional</em> If +true+, interim results (tentative hypotheses) may be
+        <div class='inline'><p><em>Optional</em> If <code>true</code>, interim results (tentative hypotheses) may be
 returned as they become available (these interim results are indicated with
-the +is_final=false+ flag).
-If +false+ or omitted, only +is_final=true+ result(s) are returned.</p>
+the <code>is_final=false</code> flag).
+If <code>false</code> or omitted, only <code>is_final=true</code> result(s) are returned.</p>
 </div>
       
     </li>
@@ -323,17 +323,17 @@ If +false+ or omitted, only +is_final=true+ result(s) are returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Optional</em> If +false+ or omitted, the recognizer will perform continuous
+    <p>Returns <em>Optional</em> If <code>false</code> or omitted, the recognizer will perform continuous
 recognition (continuing to wait for and process audio even if the user
 pauses speaking) until the client closes the input stream (gRPC API) or
 until the maximum time limit has been reached. May return multiple
-+StreamingRecognitionResult+s with the +is_final+ flag set to +true+.</p>
+<code>StreamingRecognitionResult</code>s with the <code>is_final</code> flag set to <code>true</code>.</p>
 
-<p>If +true+, the recognizer will detect a single spoken utterance. When it
+<p>If <code>true</code>, the recognizer will detect a single spoken utterance. When it
 detects that the user has paused or stopped speaking, it will return an
-+END_OF_SINGLE_UTTERANCE+ event and cease recognition. It will return no
-more than one +StreamingRecognitionResult+ with the +is_final+ flag set to
-+true+.</p>
+<code>END_OF_SINGLE_UTTERANCE</code> event and cease recognition. It will return no
+more than one <code>StreamingRecognitionResult</code> with the <code>is_final</code> flag set to
+<code>true</code>.</p>
 
 
   </div>
@@ -351,17 +351,17 @@ more than one +StreamingRecognitionResult+ with the +is_final+ flag set to
       
       
         &mdash;
-        <div class='inline'><p><em>Optional</em> If +false+ or omitted, the recognizer will perform continuous
+        <div class='inline'><p><em>Optional</em> If <code>false</code> or omitted, the recognizer will perform continuous
 recognition (continuing to wait for and process audio even if the user
 pauses speaking) until the client closes the input stream (gRPC API) or
 until the maximum time limit has been reached. May return multiple
-+StreamingRecognitionResult+s with the +is_final+ flag set to +true+.</p>
+<code>StreamingRecognitionResult</code>s with the <code>is_final</code> flag set to <code>true</code>.</p>
 
-<p>If +true+, the recognizer will detect a single spoken utterance. When it
+<p>If <code>true</code>, the recognizer will detect a single spoken utterance. When it
 detects that the user has paused or stopped speaking, it will return an
-+END_OF_SINGLE_UTTERANCE+ event and cease recognition. It will return no
-more than one +StreamingRecognitionResult+ with the +is_final+ flag set to
-+true+.</p>
+<code>END_OF_SINGLE_UTTERANCE</code> event and cease recognition. It will return no
+more than one <code>StreamingRecognitionResult</code> with the <code>is_final</code> flag set to
+<code>true</code>.</p>
 </div>
       
     </li>

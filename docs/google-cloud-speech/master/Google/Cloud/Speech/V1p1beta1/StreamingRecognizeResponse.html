@@ -89,13 +89,13 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>+StreamingRecognizeResponse+ is the only message returned to the client by
-+StreamingRecognize+. A series of zero or more +StreamingRecognizeResponse+
+    <p><code>StreamingRecognizeResponse</code> is the only message returned to the client by
+<code>StreamingRecognize</code>. A series of zero or more <code>StreamingRecognizeResponse</code>
 messages are streamed back to the client. If there is no recognizable
-audio, and +single_utterance+ is set to false, then no messages are streamed
+audio, and <code>single_utterance</code> is set to false, then no messages are streamed
 back to the client.</p>
 
-<p>Here&#39;s an example of a series of ten +StreamingRecognizeResponse+s that might
+<p>Here&#39;s an example of a series of ten <code>StreamingRecognizeResponse</code>s that might
 be returned while processing audio:</p>
 
 <ol>
@@ -120,18 +120,18 @@ results { alternatives { transcript: &quot; the question&quot; } stability: 0.01
 
 <ul>
 <li><p>Only two of the above responses #4 and #7 contain final results; they are
-indicated by +is_final: true+. Concatenating these together generates the
+indicated by <code>is_final: true</code>. Concatenating these together generates the
 full transcript: &quot;to be or not to be that is the question&quot;.</p></li>
-<li><p>The others contain interim +results+. #3 and #6 contain two interim
-+results+: the first portion has a high stability and is less likely to
+<li><p>The others contain interim <code>results</code>. #3 and #6 contain two interim
+<code>results</code>: the first portion has a high stability and is less likely to
 change; the second portion has a low stability and is very likely to
-change. A UI designer might choose to show only high stability +results+.</p></li>
-<li><p>The specific +stability+ and +confidence+ values shown above are only for
+change. A UI designer might choose to show only high stability <code>results</code>.</p></li>
+<li><p>The specific <code>stability</code> and <code>confidence</code> values shown above are only for
 illustrative purposes. Actual values may vary.</p></li>
 <li><p>In each response, only one of these fields will be set:
-+error+,
-+speech_event_type+, or
-one or more (repeated) +results+.</p></li>
+<code>error</code>,
+<code>speech_event_type</code>, or
+one or more (repeated) <code>results</code>.</p></li>
 </ul>
 
 
@@ -322,7 +322,7 @@ specifies the error for the operation.</p>
 </span>    <span class='comment'># additional results). The client should stop sending additional audio
 </span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
 </span>    <span class='comment'># until the server closes the gRPC connection. This event is only sent if
-</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -346,8 +346,8 @@ specifies the error for the operation.</p>
   <div class="discussion">
     <p>Returns Output only. This repeated list contains zero or more results that
 correspond to consecutive portions of the audio currently being processed.
-It contains zero or one +is_final=true+ result (the newly settled portion),
-followed by zero or more +is_final=false+ results (the interim results).</p>
+It contains zero or one <code>is_final=true</code> result (the newly settled portion),
+followed by zero or more <code>is_final=false</code> results (the interim results).</p>
 
 
   </div>
@@ -367,8 +367,8 @@ followed by zero or more +is_final=false+ results (the interim results).</p>
         &mdash;
         <div class='inline'><p>Output only. This repeated list contains zero or more results that
 correspond to consecutive portions of the audio currently being processed.
-It contains zero or one +is_final=true+ result (the newly settled portion),
-followed by zero or more +is_final=false+ results (the interim results).</p>
+It contains zero or one <code>is_final=true</code> result (the newly settled portion),
+followed by zero or more <code>is_final=false</code> results (the interim results).</p>
 </div>
       
     </li>
@@ -413,7 +413,7 @@ followed by zero or more +is_final=false+ results (the interim results).</p>
 </span>    <span class='comment'># additional results). The client should stop sending additional audio
 </span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
 </span>    <span class='comment'># until the server closes the gRPC connection. This event is only sent if
-</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -498,7 +498,7 @@ followed by zero or more +is_final=false+ results (the interim results).</p>
 </span>    <span class='comment'># additional results). The client should stop sending additional audio
 </span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
 </span>    <span class='comment'># until the server closes the gRPC connection. This event is only sent if
-</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='comment'># `single_utterance` was set to `true`, and is not used otherwise.
 </span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

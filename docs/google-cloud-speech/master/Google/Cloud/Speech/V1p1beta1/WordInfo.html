@@ -259,10 +259,10 @@ js:
     <p>Returns Output only. The confidence estimate between 0.0 and 1.0. A higher number
 indicates an estimated greater likelihood that the recognized words are
 correct. This field is set only for the top alternative of a non-streaming
-result or, of a streaming result where +is_final=true+.
+result or, of a streaming result where <code>is_final=true</code>.
 This field is not guaranteed to be accurate and users should not rely on it
 to be always provided.
-The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
+The default of 0.0 is a sentinel value indicating <code>confidence</code> was not set.</p>
 
 
   </div>
@@ -283,10 +283,10 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
         <div class='inline'><p>Output only. The confidence estimate between 0.0 and 1.0. A higher number
 indicates an estimated greater likelihood that the recognized words are
 correct. This field is set only for the top alternative of a non-streaming
-result or, of a streaming result where +is_final=true+.
+result or, of a streaming result where <code>is_final=true</code>.
 This field is not guaranteed to be accurate and users should not rely on it
 to be always provided.
-The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
+The default of 0.0 is a sentinel value indicating <code>confidence</code> was not set.</p>
 </div>
       
     </li>
@@ -325,7 +325,7 @@ The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
   <div class="discussion">
     <p>Returns Output only. Time offset relative to the beginning of the audio,
 and corresponding to the end of the spoken word.
-This field is only set if +enable_word_time_offsets=true+ and only
+This field is only set if <code>enable_word_time_offsets=true</code> and only
 in the top hypothesis.
 This is an experimental feature and the accuracy of the time offset can
 vary.</p>
@@ -348,7 +348,7 @@ vary.</p>
         &mdash;
         <div class='inline'><p>Output only. Time offset relative to the beginning of the audio,
 and corresponding to the end of the spoken word.
-This field is only set if +enable_word_time_offsets=true+ and only
+This field is only set if <code>enable_word_time_offsets=true</code> and only
 in the top hypothesis.
 This is an experimental feature and the accuracy of the time offset can
 vary.</p>
@@ -453,7 +453,7 @@ top alternative.</p>
   <div class="discussion">
     <p>Returns Output only. Time offset relative to the beginning of the audio,
 and corresponding to the start of the spoken word.
-This field is only set if +enable_word_time_offsets=true+ and only
+This field is only set if <code>enable_word_time_offsets=true</code> and only
 in the top hypothesis.
 This is an experimental feature and the accuracy of the time offset can
 vary.</p>
@@ -476,7 +476,7 @@ vary.</p>
         &mdash;
         <div class='inline'><p>Output only. Time offset relative to the beginning of the audio,
 and corresponding to the start of the spoken word.
-This field is only set if +enable_word_time_offsets=true+ and only
+This field is only set if <code>enable_word_time_offsets=true</code> and only
 in the top hypothesis.
 This is an experimental feature and the accuracy of the time offset can
 vary.</p>

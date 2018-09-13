@@ -206,7 +206,7 @@ that is currently being processed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Output only. May contain one or more recognition hypotheses (up to the
-maximum specified in +max_alternatives+).
+maximum specified in <code>max_alternatives</code>).
 These alternatives are ordered in terms of accuracy, with the top (first)
 alternative being the most probable, as ranked by the recognizer.</p>
 
@@ -227,7 +227,7 @@ alternative being the most probable, as ranked by the recognizer.</p>
       
         &mdash;
         <div class='inline'><p>Output only. May contain one or more recognition hypotheses (up to the
-maximum specified in +max_alternatives+).
+maximum specified in <code>max_alternatives</code>).
 These alternatives are ordered in terms of accuracy, with the top (first)
 alternative being the most probable, as ranked by the recognizer.</p>
 </div>
@@ -266,9 +266,9 @@ alternative being the most probable, as ranked by the recognizer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output only. If +false+, this +StreamingRecognitionResult+ represents an
-interim result that may change. If +true+, this is the final time the
-speech service will return this particular +StreamingRecognitionResult+,
+    <p>Returns Output only. If <code>false</code>, this <code>StreamingRecognitionResult</code> represents an
+interim result that may change. If <code>true</code>, this is the final time the
+speech service will return this particular <code>StreamingRecognitionResult</code>,
 the recognizer will not return any further hypotheses for this portion of
 the transcript and corresponding audio.</p>
 
@@ -288,9 +288,9 @@ the transcript and corresponding audio.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output only. If +false+, this +StreamingRecognitionResult+ represents an
-interim result that may change. If +true+, this is the final time the
-speech service will return this particular +StreamingRecognitionResult+,
+        <div class='inline'><p>Output only. If <code>false</code>, this <code>StreamingRecognitionResult</code> represents an
+interim result that may change. If <code>true</code>, this is the final time the
+speech service will return this particular <code>StreamingRecognitionResult</code>,
 the recognizer will not return any further hypotheses for this portion of
 the transcript and corresponding audio.</p>
 </div>
@@ -332,8 +332,8 @@ the transcript and corresponding audio.</p>
     <p>Returns Output only. An estimate of the likelihood that the recognizer will not
 change its guess about this interim result. Values range from 0.0
 (completely unstable) to 1.0 (completely stable).
-This field is only provided for interim results (+is_final=false+).
-The default of 0.0 is a sentinel value indicating +stability+ was not set.</p>
+This field is only provided for interim results (<code>is_final=false</code>).
+The default of 0.0 is a sentinel value indicating <code>stability</code> was not set.</p>
 
 
   </div>
@@ -354,8 +354,8 @@ The default of 0.0 is a sentinel value indicating +stability+ was not set.</p>
         <div class='inline'><p>Output only. An estimate of the likelihood that the recognizer will not
 change its guess about this interim result. Values range from 0.0
 (completely unstable) to 1.0 (completely stable).
-This field is only provided for interim results (+is_final=false+).
-The default of 0.0 is a sentinel value indicating +stability+ was not set.</p>
+This field is only provided for interim results (<code>is_final=false</code>).
+The default of 0.0 is a sentinel value indicating <code>stability</code> was not set.</p>
 </div>
       
     </li>

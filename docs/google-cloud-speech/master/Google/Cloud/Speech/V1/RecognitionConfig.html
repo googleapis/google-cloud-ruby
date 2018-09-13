@@ -161,7 +161,7 @@ request.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Optional</em> If +true+, the top result includes a list of words and the start and end time offsets (timestamps) for those words.</p>
+    <span class="summary_desc"><div class='inline'><p><em>Optional</em> If <code>true</code>, the top result includes a list of words and the start and end time offsets (timestamps) for those words.</p>
 </div></span>
   
 </li>
@@ -187,7 +187,7 @@ request.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Encoding of audio data sent in all +RecognitionAudio+ messages.</p>
+    <span class="summary_desc"><div class='inline'><p>Encoding of audio data sent in all <code>RecognitionAudio</code> messages.</p>
 </div></span>
   
 </li>
@@ -291,7 +291,7 @@ request.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p><em>Optional</em> If set to +true+, the server will attempt to filter out profanities, replacing all but the initial character in each filtered word with asterisks, e.g.</p>
+    <span class="summary_desc"><div class='inline'><p><em>Optional</em> If set to <code>true</code>, the server will attempt to filter out profanities, replacing all but the initial character in each filtered word with asterisks, e.g.</p>
 </div></span>
   
 </li>
@@ -317,7 +317,7 @@ request.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Sample rate in Hertz of the audio data sent in all +RecognitionAudio+ messages.</p>
+    <span class="summary_desc"><div class='inline'><p>Sample rate in Hertz of the audio data sent in all <code>RecognitionAudio</code> messages.</p>
 </div></span>
   
 </li>
@@ -516,18 +516,18 @@ premium feature.</p>
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -538,33 +538,33 @@ premium feature.</p>
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -572,7 +572,7 @@ premium feature.</p>
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -594,10 +594,10 @@ premium feature.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Optional</em> If +true+, the top result includes a list of words and
+    <p>Returns <em>Optional</em> If <code>true</code>, the top result includes a list of words and
 the start and end time offsets (timestamps) for those words. If
-+false+, no word-level time offset information is returned. The default is
-+false+.</p>
+<code>false</code>, no word-level time offset information is returned. The default is
+<code>false</code>.</p>
 
 
   </div>
@@ -615,10 +615,10 @@ the start and end time offsets (timestamps) for those words. If
       
       
         &mdash;
-        <div class='inline'><p><em>Optional</em> If +true+, the top result includes a list of words and
+        <div class='inline'><p><em>Optional</em> If <code>true</code>, the top result includes a list of words and
 the start and end time offsets (timestamps) for those words. If
-+false+, no word-level time offset information is returned. The default is
-+false+.</p>
+<code>false</code>, no word-level time offset information is returned. The default is
+<code>false</code>.</p>
 </div>
       
     </li>
@@ -707,18 +707,18 @@ the start and end time offsets (timestamps) for those words. If
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -729,33 +729,33 @@ the start and end time offsets (timestamps) for those words. If
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -763,7 +763,7 @@ the start and end time offsets (timestamps) for those words. If
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -785,8 +785,8 @@ the start and end time offsets (timestamps) for those words. If
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Encoding of audio data sent in all +RecognitionAudio+ messages.
-This field is optional for +FLAC+ and +WAV+ audio files and required
+    <p>Returns Encoding of audio data sent in all <code>RecognitionAudio</code> messages.
+This field is optional for <code>FLAC</code> and <code>WAV</code> audio files and required
 for all other audio formats. For details, see <span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span>.</p>
 
 
@@ -805,8 +805,8 @@ for all other audio formats. For details, see <span class='object_link'><a href=
       
       
         &mdash;
-        <div class='inline'><p>Encoding of audio data sent in all +RecognitionAudio+ messages.
-This field is optional for +FLAC+ and +WAV+ audio files and required
+        <div class='inline'><p>Encoding of audio data sent in all <code>RecognitionAudio</code> messages.
+This field is optional for <code>FLAC</code> and <code>WAV</code> audio files and required
 for all other audio formats. For details, see <span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span>.</p>
 </div>
       
@@ -896,18 +896,18 @@ for all other audio formats. For details, see <span class='object_link'><a href=
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -918,33 +918,33 @@ for all other audio formats. For details, see <span class='object_link'><a href=
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -952,7 +952,7 @@ for all other audio formats. For details, see <span class='object_link'><a href=
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1089,18 +1089,18 @@ for a list of the currently supported language codes.</p>
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -1111,33 +1111,33 @@ for a list of the currently supported language codes.</p>
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -1145,7 +1145,7 @@ for a list of the currently supported language codes.</p>
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1168,10 +1168,10 @@ for a list of the currently supported language codes.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns <em>Optional</em> Maximum number of recognition hypotheses to be returned.
-Specifically, the maximum number of +SpeechRecognitionAlternative+ messages
-within each +SpeechRecognitionResult+.
-The server may return fewer than +max_alternatives+.
-Valid values are +0+-+30+. A value of +0+ or +1+ will return a maximum of
+Specifically, the maximum number of <code>SpeechRecognitionAlternative</code> messages
+within each <code>SpeechRecognitionResult</code>.
+The server may return fewer than <code>max_alternatives</code>.
+Valid values are <code>0</code>-<code>30</code>. A value of <code>0</code> or <code>1</code> will return a maximum of
 one. If omitted, will return a maximum of one.</p>
 
 
@@ -1191,10 +1191,10 @@ one. If omitted, will return a maximum of one.</p>
       
         &mdash;
         <div class='inline'><p><em>Optional</em> Maximum number of recognition hypotheses to be returned.
-Specifically, the maximum number of +SpeechRecognitionAlternative+ messages
-within each +SpeechRecognitionResult+.
-The server may return fewer than +max_alternatives+.
-Valid values are +0+-+30+. A value of +0+ or +1+ will return a maximum of
+Specifically, the maximum number of <code>SpeechRecognitionAlternative</code> messages
+within each <code>SpeechRecognitionResult</code>.
+The server may return fewer than <code>max_alternatives</code>.
+Valid values are <code>0</code>-<code>30</code>. A value of <code>0</code> or <code>1</code> will return a maximum of
 one. If omitted, will return a maximum of one.</p>
 </div>
       
@@ -1284,18 +1284,18 @@ one. If omitted, will return a maximum of one.</p>
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -1306,33 +1306,33 @@ one. If omitted, will return a maximum of one.</p>
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -1340,7 +1340,7 @@ one. If omitted, will return a maximum of one.</p>
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1533,18 +1533,18 @@ in the RecognitionConfig.</p>
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -1555,33 +1555,33 @@ in the RecognitionConfig.</p>
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -1589,7 +1589,7 @@ in the RecognitionConfig.</p>
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1611,9 +1611,9 @@ in the RecognitionConfig.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns <em>Optional</em> If set to +true+, the server will attempt to filter out
+    <p>Returns <em>Optional</em> If set to <code>true</code>, the server will attempt to filter out
 profanities, replacing all but the initial character in each filtered word
-with asterisks, e.g. &quot;f***&quot;. If set to +false+ or omitted, profanities
+with asterisks, e.g. &quot;f***&quot;. If set to <code>false</code> or omitted, profanities
 won&#39;t be filtered out.</p>
 
 
@@ -1632,9 +1632,9 @@ won&#39;t be filtered out.</p>
       
       
         &mdash;
-        <div class='inline'><p><em>Optional</em> If set to +true+, the server will attempt to filter out
+        <div class='inline'><p><em>Optional</em> If set to <code>true</code>, the server will attempt to filter out
 profanities, replacing all but the initial character in each filtered word
-with asterisks, e.g. &quot;f***&quot;. If set to +false+ or omitted, profanities
+with asterisks, e.g. &quot;f***&quot;. If set to <code>false</code> or omitted, profanities
 won&#39;t be filtered out.</p>
 </div>
       
@@ -1724,18 +1724,18 @@ won&#39;t be filtered out.</p>
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -1746,33 +1746,33 @@ won&#39;t be filtered out.</p>
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -1780,7 +1780,7 @@ won&#39;t be filtered out.</p>
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1803,11 +1803,11 @@ won&#39;t be filtered out.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Sample rate in Hertz of the audio data sent in all
-+RecognitionAudio+ messages. Valid values are: 8000-48000.
+<code>RecognitionAudio</code> messages. Valid values are: 8000-48000.
 16000 is optimal. For best results, set the sampling rate of the audio
 source to 16000 Hz. If that&#39;s not possible, use the native sample rate of
 the audio source (instead of re-sampling).
-This field is optional for +FLAC+ and +WAV+ audio files and required
+This field is optional for <code>FLAC</code> and <code>WAV</code> audio files and required
 for all other audio formats. For details, see <span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span>.</p>
 
 
@@ -1827,11 +1827,11 @@ for all other audio formats. For details, see <span class='object_link'><a href=
       
         &mdash;
         <div class='inline'><p>Sample rate in Hertz of the audio data sent in all
-+RecognitionAudio+ messages. Valid values are: 8000-48000.
+<code>RecognitionAudio</code> messages. Valid values are: 8000-48000.
 16000 is optimal. For best results, set the sampling rate of the audio
 source to 16000 Hz. If that&#39;s not possible, use the native sample rate of
 the audio source (instead of re-sampling).
-This field is optional for +FLAC+ and +WAV+ audio files and required
+This field is optional for <code>FLAC</code> and <code>WAV</code> audio files and required
 for all other audio formats. For details, see <span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span>.</p>
 </div>
       
@@ -1921,18 +1921,18 @@ for all other audio formats. For details, see <span class='object_link'><a href=
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -1943,33 +1943,33 @@ for all other audio formats. For details, see <span class='object_link'><a href=
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -1977,7 +1977,7 @@ for all other audio formats. For details, see <span class='object_link'><a href=
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2110,18 +2110,18 @@ information, see <a href="https://cloud.google.com/speech-to-text/docs/basics#ph
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -2132,33 +2132,33 @@ information, see <a href="https://cloud.google.com/speech-to-text/docs/basics#ph
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -2166,7 +2166,7 @@ information, see <a href="https://cloud.google.com/speech-to-text/docs/basics#ph
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2189,15 +2189,15 @@ information, see <a href="https://cloud.google.com/speech-to-text/docs/basics#ph
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns <em>Optional</em> Set to true to use an enhanced model for speech recognition.
-You must also set the +model+ field to a valid, enhanced model. If
-+use_enhanced+ is set to true and the +model+ field is not set, then
-+use_enhanced+ is ignored. If +use_enhanced+ is true and an enhanced
+You must also set the <code>model</code> field to a valid, enhanced model. If
+<code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
+<code>use_enhanced</code> is ignored. If <code>use_enhanced</code> is true and an enhanced
 version of the specified model does not exist, then the speech is
 recognized using the standard version of the specified model.</p>
 
 <p>Enhanced speech models require that you opt-in to data logging using
 instructions in the <a href="https://cloud.google.com/speech-to-text/enable-data-logging">documentation</a>.
-If you set +use_enhanced+ to true and you have not enabled audio logging,
+If you set <code>use_enhanced</code> to true and you have not enabled audio logging,
 then you will receive an error.</p>
 
 
@@ -2217,15 +2217,15 @@ then you will receive an error.</p>
       
         &mdash;
         <div class='inline'><p><em>Optional</em> Set to true to use an enhanced model for speech recognition.
-You must also set the +model+ field to a valid, enhanced model. If
-+use_enhanced+ is set to true and the +model+ field is not set, then
-+use_enhanced+ is ignored. If +use_enhanced+ is true and an enhanced
+You must also set the <code>model</code> field to a valid, enhanced model. If
+<code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
+<code>use_enhanced</code> is ignored. If <code>use_enhanced</code> is true and an enhanced
 version of the specified model does not exist, then the speech is
 recognized using the standard version of the specified model.</p>
 
 <p>Enhanced speech models require that you opt-in to data logging using
 instructions in the <a href="https://cloud.google.com/speech-to-text/enable-data-logging">documentation</a>.
-If you set +use_enhanced+ to true and you have not enabled audio logging,
+If you set <code>use_enhanced</code> to true and you have not enabled audio logging,
 then you will receive an error.</p>
 </div>
       
@@ -2315,18 +2315,18 @@ then you will receive an error.</p>
 </span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
-</span>  <span class='comment'># a lossless encoding (+FLAC+ or +LINEAR16+). The accuracy of the speech
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
 </span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
 </span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
-</span>  <span class='comment'># +MULAW+, +AMR+, +AMR_WB+, +OGG_OPUS+, and +SPEEX_WITH_HEADER_BYTE+.
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># The +FLAC+ and +WAV+ audio file formats include a header that describes the
-</span>  <span class='comment'># included audio content. You can request recognition for +WAV+ files that
-</span>  <span class='comment'># contain either +LINEAR16+ or +MULAW+ encoded audio.
-</span>  <span class='comment'># If you send +FLAC+ or +WAV+ audio file format in
-</span>  <span class='comment'># your request, you do not need to specify an +AudioEncoding+; the audio
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
 </span>  <span class='comment'># encoding format is determined from the file header. If you specify
-</span>  <span class='comment'># an +AudioEncoding+ when you send  send +FLAC+ or +WAV+ audio, the
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
 </span>  <span class='comment'># encoding configuration must match the encoding described in the audio
 </span>  <span class='comment'># header; otherwise the request returns an
 </span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
@@ -2337,33 +2337,33 @@ then you will receive an error.</p>
     <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
 </span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +FLAC+ (Free Lossless Audio
+    <span class='comment'># `FLAC` (Free Lossless Audio
 </span>    <span class='comment'># Codec) is the recommended encoding because it is
 </span>    <span class='comment'># lossless--therefore recognition is not compromised--and
-</span>    <span class='comment'># requires only about half the bandwidth of +LINEAR16+. +FLAC+ stream
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
 </span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
-</span>    <span class='comment'># +STREAMINFO+ are supported.
+</span>    <span class='comment'># `STREAMINFO` are supported.
 </span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
 
     <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
 </span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
 
-    <span class='comment'># Adaptive Multi-Rate Narrowband codec. +sample_rate_hertz+ must be 8000.
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
 </span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
 
-    <span class='comment'># Adaptive Multi-Rate Wideband codec. +sample_rate_hertz+ must be 16000.
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
 
     <span class='comment'># Opus encoded audio frames in Ogg container
 </span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
-</span>    <span class='comment'># +sample_rate_hertz+ must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
 </span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
 
     <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
-</span>    <span class='comment'># bitrate encoding is required, +OGG_OPUS+ is highly preferred over
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
 </span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
 </span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
-</span>    <span class='comment'># +audio/x-speex-with-header-byte+.
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
 </span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
 </span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
 </span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
@@ -2371,7 +2371,7 @@ then you will receive an error.</p>
 </span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
 </span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
 </span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
-</span>    <span class='comment'># wideband is supported. +sample_rate_hertz+ must be 16000.
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
 </span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

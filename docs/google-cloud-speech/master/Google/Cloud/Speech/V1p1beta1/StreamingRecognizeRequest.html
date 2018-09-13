@@ -89,11 +89,11 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The top-level message sent by the client for the +StreamingRecognize+ method.
-Multiple +StreamingRecognizeRequest+ messages are sent. The first message
-must contain a +streaming_config+ message and must not contain +audio+ data.
-All subsequent messages must contain +audio+ data and must not contain a
-+streaming_config+ message.</p>
+    <p>The top-level message sent by the client for the <code>StreamingRecognize</code> method.
+Multiple <code>StreamingRecognizeRequest</code> messages are sent. The first message
+must contain a <code>streaming_config</code> message and must not contain <code>audio</code> data.
+All subsequent messages must contain <code>audio</code> data and must not contain a
+<code>streaming_config</code> message.</p>
 
 
   </div>
@@ -183,11 +183,11 @@ All subsequent messages must contain +audio+ data and must not contain a
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The audio data to be recognized. Sequential chunks of audio data are sent
-in sequential +StreamingRecognizeRequest+ messages. The first
-+StreamingRecognizeRequest+ message must not contain +audio_content+ data
-and all subsequent +StreamingRecognizeRequest+ messages must contain
-+audio_content+ data. The audio bytes must be encoded as specified in
-+RecognitionConfig+. Note: as with all bytes fields, protobuffers use a
+in sequential <code>StreamingRecognizeRequest</code> messages. The first
+<code>StreamingRecognizeRequest</code> message must not contain <code>audio_content</code> data
+and all subsequent <code>StreamingRecognizeRequest</code> messages must contain
+<code>audio_content</code> data. The audio bytes must be encoded as specified in
+<code>RecognitionConfig</code>. Note: as with all bytes fields, protobuffers use a
 pure binary representation (not base64). See
 <a href="https://cloud.google.com/speech/limits#content">audio limits</a>.</p>
 
@@ -208,11 +208,11 @@ pure binary representation (not base64). See
       
         &mdash;
         <div class='inline'><p>The audio data to be recognized. Sequential chunks of audio data are sent
-in sequential +StreamingRecognizeRequest+ messages. The first
-+StreamingRecognizeRequest+ message must not contain +audio_content+ data
-and all subsequent +StreamingRecognizeRequest+ messages must contain
-+audio_content+ data. The audio bytes must be encoded as specified in
-+RecognitionConfig+. Note: as with all bytes fields, protobuffers use a
+in sequential <code>StreamingRecognizeRequest</code> messages. The first
+<code>StreamingRecognizeRequest</code> message must not contain <code>audio_content</code> data
+and all subsequent <code>StreamingRecognizeRequest</code> messages must contain
+<code>audio_content</code> data. The audio bytes must be encoded as specified in
+<code>RecognitionConfig</code>. Note: as with all bytes fields, protobuffers use a
 pure binary representation (not base64). See
 <a href="https://cloud.google.com/speech/limits#content">audio limits</a>.</p>
 </div>
@@ -252,8 +252,8 @@ pure binary representation (not base64). See
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Provides information to the recognizer that specifies how to process the
-request. The first +StreamingRecognizeRequest+ message must contain a
-+streaming_config+  message.</p>
+request. The first <code>StreamingRecognizeRequest</code> message must contain a
+<code>streaming_config</code>  message.</p>
 
 
   </div>
@@ -272,8 +272,8 @@ request. The first +StreamingRecognizeRequest+ message must contain a
       
         &mdash;
         <div class='inline'><p>Provides information to the recognizer that specifies how to process the
-request. The first +StreamingRecognizeRequest+ message must contain a
-+streaming_config+  message.</p>
+request. The first <code>StreamingRecognizeRequest</code> message must contain a
+<code>streaming_config</code>  message.</p>
 </div>
       
     </li>
