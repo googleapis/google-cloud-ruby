@@ -1214,7 +1214,7 @@ You can have up to 10 exclusions in a resource.</p>
 <span class='id identifier rubyid_config_service_v2_client'>config_service_v2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::ConfigServiceV2Client (class)">ConfigServiceV2Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Logging::V2::ConfigServiceV2Client#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::ConfigServiceV2Client (class)">ConfigServiceV2Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +exclusion+:
+<span class='comment'># TODO: Initialize `exclusion`:
 </span><span class='id identifier rubyid_exclusion'>exclusion</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_config_service_v2_client'>config_service_v2_client</span><span class='period'>.</span><span class='id identifier rubyid_create_exclusion'>create_exclusion</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_exclusion'>exclusion</span><span class='rparen'>)</span></code></pre>
     
@@ -1240,7 +1240,7 @@ You can have up to 10 exclusions in a resource.</p>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Examples: +&quot;projects/my-logging-project&quot;+, +&quot;organizations/123456789&quot;+.</p>
+<p>Examples: <code>&quot;projects/my-logging-project&quot;</code>, <code>&quot;organizations/123456789&quot;</code>.</p>
 </div>
       
     </li>
@@ -1255,7 +1255,7 @@ You can have up to 10 exclusions in a resource.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The new exclusion, whose +name+ parameter is an exclusion name
+        <div class='inline'><p>Required. The new exclusion, whose <code>name</code> parameter is an exclusion name
 that is not already used in the parent resource.
 A hash of the same form as <code>Google::Logging::V2::LogExclusion</code>
 can also be provided.</p>
@@ -1407,7 +1407,7 @@ retries, etc.</p>
   <div class="discussion">
     <p>Creates a sink that exports specified log entries to a destination.  The
 export of newly-ingested log entries begins immediately, unless the sink&#39;s
-+writer_identity+ is not permitted to write to the destination.  A sink can
+<code>writer_identity</code> is not permitted to write to the destination.  A sink can
 export log entries only from the resource owning the sink.</p>
 
 
@@ -1424,7 +1424,7 @@ export log entries only from the resource owning the sink.</p>
 <span class='id identifier rubyid_config_service_v2_client'>config_service_v2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::ConfigServiceV2Client (class)">ConfigServiceV2Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Logging::V2::ConfigServiceV2Client#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::ConfigServiceV2Client (class)">ConfigServiceV2Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +sink+:
+<span class='comment'># TODO: Initialize `sink`:
 </span><span class='id identifier rubyid_sink'>sink</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_config_service_v2_client'>config_service_v2_client</span><span class='period'>.</span><span class='id identifier rubyid_create_sink'>create_sink</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_sink'>sink</span><span class='rparen'>)</span></code></pre>
     
@@ -1450,7 +1450,7 @@ export log entries only from the resource owning the sink.</p>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Examples: +&quot;projects/my-logging-project&quot;+, +&quot;organizations/123456789&quot;+.</p>
+<p>Examples: <code>&quot;projects/my-logging-project&quot;</code>, <code>&quot;organizations/123456789&quot;</code>.</p>
 </div>
       
     </li>
@@ -1465,7 +1465,7 @@ export log entries only from the resource owning the sink.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The new sink, whose +name+ parameter is a sink identifier that
+        <div class='inline'><p>Required. The new sink, whose <code>name</code> parameter is a sink identifier that
 is not already in use.
 A hash of the same form as <code>Google::Logging::V2::LogSink</code>
 can also be provided.</p>
@@ -1483,17 +1483,17 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. Determines the kind of IAM identity returned as +writer_identity+
+        <div class='inline'><p>Optional. Determines the kind of IAM identity returned as <code>writer_identity</code>
 in the new sink.  If this value is omitted or set to false, and if the
-sink&#39;s parent is a project, then the value returned as +writer_identity+ is
+sink&#39;s parent is a project, then the value returned as <code>writer_identity</code> is
 the same group or service account used by Stackdriver Logging before the
 addition of writer identities to this API. The sink&#39;s destination must be
 in the same project as the sink itself.</p>
 
 <p>If this field is set to true, or if the sink is owned by a non-project
-resource such as an organization, then the value of +writer_identity+ will
+resource such as an organization, then the value of <code>writer_identity</code> will
 be a unique service account used only for exports from the new sink.  For
-more information, see +writer_identity+ in <span class='object_link'><a href="../../../Logging/V2/LogSink.html" title="Google::Logging::V2::LogSink (class)">LogSink</a></span>.</p>
+more information, see <code>writer_identity</code> in <span class='object_link'><a href="../../../Logging/V2/LogSink.html" title="Google::Logging::V2::LogSink (class)">LogSink</a></span>.</p>
 </div>
       
     </li>
@@ -1683,7 +1683,7 @@ retries, etc.</p>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Example: +&quot;projects/my-project-id/exclusions/my-exclusion-id&quot;+.</p>
+<p>Example: <code>&quot;projects/my-project-id/exclusions/my-exclusion-id&quot;</code>.</p>
 </div>
       
     </li>
@@ -1819,7 +1819,7 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes a sink. If the sink has a unique +writer_identity+, then that
+    <p>Deletes a sink. If the sink has a unique <code>writer_identity</code>, then that
 service account is also deleted.</p>
 
 
@@ -1860,7 +1860,7 @@ parent resource and the sink identifier:</p>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/sinks/[SINK_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Example: +&quot;projects/my-project-id/sinks/my-sink-id&quot;+.</p>
+<p>Example: <code>&quot;projects/my-project-id/sinks/my-sink-id&quot;</code>.</p>
 </div>
       
     </li>
@@ -2035,7 +2035,7 @@ retries, etc.</p>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Example: +&quot;projects/my-project-id/exclusions/my-exclusion-id&quot;+.</p>
+<p>Example: <code>&quot;projects/my-project-id/exclusions/my-exclusion-id&quot;</code>.</p>
 </div>
       
     </li>
@@ -2217,7 +2217,7 @@ retries, etc.</p>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/sinks/[SINK_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Example: +&quot;projects/my-project-id/sinks/my-sink-id&quot;+.</p>
+<p>Example: <code>&quot;projects/my-project-id/sinks/my-sink-id&quot;</code>.</p>
 </div>
       
     </li>
@@ -2820,10 +2820,10 @@ object.</p>
 <span class='id identifier rubyid_config_service_v2_client'>config_service_v2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::ConfigServiceV2Client (class)">ConfigServiceV2Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Logging::V2::ConfigServiceV2Client#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::ConfigServiceV2Client (class)">ConfigServiceV2Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_exclusion_path'><span class='object_link'><a href="#exclusion_path-class_method" title="Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path (method)">exclusion_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[EXCLUSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +exclusion+:
+<span class='comment'># TODO: Initialize `exclusion`:
 </span><span class='id identifier rubyid_exclusion'>exclusion</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +update_mask+:
+<span class='comment'># TODO: Initialize `update_mask`:
 </span><span class='id identifier rubyid_update_mask'>update_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_config_service_v2_client'>config_service_v2_client</span><span class='period'>.</span><span class='id identifier rubyid_update_exclusion'>update_exclusion</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_exclusion'>exclusion</span><span class='comma'>,</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='rparen'>)</span></code></pre>
     
@@ -2849,7 +2849,7 @@ object.</p>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Example: +&quot;projects/my-project-id/exclusions/my-exclusion-id&quot;+.</p>
+<p>Example: <code>&quot;projects/my-project-id/exclusions/my-exclusion-id&quot;</code>.</p>
 </div>
       
     </li>
@@ -2865,7 +2865,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Required. New values for the existing exclusion. Only the fields specified
-in +update_mask+ are relevant.
+in <code>update_mask</code> are relevant.
 A hash of the same form as <code>Google::Logging::V2::LogExclusion</code>
 can also be provided.</p>
 </div>
@@ -2885,10 +2885,10 @@ can also be provided.</p>
         <div class='inline'><p>Required. A nonempty list of fields to change in the existing exclusion.
 New values for the fields are taken from the corresponding fields in the
 <span class='object_link'><a href="../../../Logging/V2/LogExclusion.html" title="Google::Logging::V2::LogExclusion (class)">LogExclusion</a></span> included in this request. Fields not mentioned in
-+update_mask+ are not changed and are ignored in the request.</p>
+<code>update_mask</code> are not changed and are ignored in the request.</p>
 
 <p>For example, to change the filter and description of an exclusion,
-specify an +update_mask+ of +&quot;filter,description&quot;+.
+specify an <code>update_mask</code> of <code>&quot;filter,description&quot;</code>.
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</p>
 </div>
@@ -3042,9 +3042,9 @@ retries, etc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Updates a sink.  This method replaces the following fields in the existing
-sink with values from the new sink: +destination+, and +filter+.
-The updated sink might also have a new +writer_identity+; see the
-+unique_writer_identity+ field.</p>
+sink with values from the new sink: <code>destination</code>, and <code>filter</code>.
+The updated sink might also have a new <code>writer_identity</code>; see the
+<code>unique_writer_identity</code> field.</p>
 
 
   </div>
@@ -3060,7 +3060,7 @@ The updated sink might also have a new +writer_identity+; see the
 <span class='id identifier rubyid_config_service_v2_client'>config_service_v2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::ConfigServiceV2Client (class)">ConfigServiceV2Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Logging::V2::ConfigServiceV2Client#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_sink_name'>formatted_sink_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Logging::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::V2::ConfigServiceV2Client (class)">ConfigServiceV2Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_sink_path'><span class='object_link'><a href="#sink_path-class_method" title="Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path (method)">sink_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SINK]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +sink+:
+<span class='comment'># TODO: Initialize `sink`:
 </span><span class='id identifier rubyid_sink'>sink</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_config_service_v2_client'>config_service_v2_client</span><span class='period'>.</span><span class='id identifier rubyid_update_sink'>update_sink</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_sink_name'>formatted_sink_name</span><span class='comma'>,</span> <span class='id identifier rubyid_sink'>sink</span><span class='rparen'>)</span></code></pre>
     
@@ -3087,7 +3087,7 @@ parent resource and the sink identifier:</p>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/sinks/[SINK_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Example: +&quot;projects/my-project-id/sinks/my-sink-id&quot;+.</p>
+<p>Example: <code>&quot;projects/my-project-id/sinks/my-sink-id&quot;</code>.</p>
 </div>
       
     </li>
@@ -3103,7 +3103,7 @@ parent resource and the sink identifier:</p>
       
         &mdash;
         <div class='inline'><p>Required. The updated sink, whose name is the same identifier that appears
-as part of +sink_name+.
+as part of <code>sink_name</code>.
 A hash of the same form as <code>Google::Logging::V2::LogSink</code>
 can also be provided.</p>
 </div>
@@ -3123,14 +3123,14 @@ can also be provided.</p>
         <div class='inline'><p>Optional. See
 <a href="https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create">sinks.create</a>
 for a description of this field.  When updating a sink, the effect of this
-field on the value of +writer_identity+ in the updated sink depends on both
+field on the value of <code>writer_identity</code> in the updated sink depends on both
 the old and new values of this field:</p>
 
 <ul>
 <li>If the old and new values of this field are both false or both true,
-then there is no change to the sink&#39;s +writer_identity+.</li>
+then there is no change to the sink&#39;s <code>writer_identity</code>.</li>
 <li>If the old value is false and the new value is true, then
-+writer_identity+ is changed to a unique service account.</li>
+<code>writer_identity</code> is changed to a unique service account.</li>
 <li>It is an error if the old value is true and the new value is
 set to false or defaulted to false.</li>
 </ul>
@@ -3148,9 +3148,9 @@ set to false or defaulted to false.</li>
       
       
         &mdash;
-        <div class='inline'><p>Optional. Field mask that specifies the fields in +sink+ that need
+        <div class='inline'><p>Optional. Field mask that specifies the fields in <code>sink</code> that need
 an update. A sink field will be overwritten if, and only if, it is
-in the update mask.  +name+ and output only fields cannot be updated.</p>
+in the update mask.  <code>name</code> and output only fields cannot be updated.</p>
 
 <p>An empty updateMask is temporarily treated as using the following mask
 for backwards compatibility purposes:
@@ -3158,10 +3158,10 @@ for backwards compatibility purposes:
 At some point in the future, behavior will be removed and specifying an
 empty updateMask will be an error.</p>
 
-<p>For a detailed +FieldMask+ definition, see
+<p>For a detailed <code>FieldMask</code> definition, see
 <a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask">https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask</a></p>
 
-<p>Example: +updateMask=filter+.
+<p>Example: <code>updateMask=filter</code>.
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</p>
 </div>

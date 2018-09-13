@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The parameters to +CreateSink+.</p>
+    <p>The parameters to <code>CreateSink</code>.</p>
 
 
   </div>
@@ -212,7 +212,7 @@ js:
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Examples: +&quot;projects/my-logging-project&quot;+, +&quot;organizations/123456789&quot;+.</p>
+<p>Examples: <code>&quot;projects/my-logging-project&quot;</code>, <code>&quot;organizations/123456789&quot;</code>.</p>
 
 
   </div>
@@ -238,7 +238,7 @@ js:
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Examples: +&quot;projects/my-logging-project&quot;+, +&quot;organizations/123456789&quot;+.</p>
+<p>Examples: <code>&quot;projects/my-logging-project&quot;</code>, <code>&quot;organizations/123456789&quot;</code>.</p>
 </div>
       
     </li>
@@ -275,7 +275,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The new sink, whose +name+ parameter is a sink identifier that
+    <p>Returns Required. The new sink, whose <code>name</code> parameter is a sink identifier that
 is not already in use.</p>
 
 
@@ -294,7 +294,7 @@ is not already in use.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The new sink, whose +name+ parameter is a sink identifier that
+        <div class='inline'><p>Required. The new sink, whose <code>name</code> parameter is a sink identifier that
 is not already in use.</p>
 </div>
       
@@ -332,17 +332,17 @@ is not already in use.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. Determines the kind of IAM identity returned as +writer_identity+
+    <p>Returns Optional. Determines the kind of IAM identity returned as <code>writer_identity</code>
 in the new sink.  If this value is omitted or set to false, and if the
-sink&#39;s parent is a project, then the value returned as +writer_identity+ is
+sink&#39;s parent is a project, then the value returned as <code>writer_identity</code> is
 the same group or service account used by Stackdriver Logging before the
 addition of writer identities to this API. The sink&#39;s destination must be
 in the same project as the sink itself.</p>
 
 <p>If this field is set to true, or if the sink is owned by a non-project
-resource such as an organization, then the value of +writer_identity+ will
+resource such as an organization, then the value of <code>writer_identity</code> will
 be a unique service account used only for exports from the new sink.  For
-more information, see +writer_identity+ in <span class='object_link'><a href="LogSink.html" title="Google::Logging::V2::LogSink (class)">LogSink</a></span>.</p>
+more information, see <code>writer_identity</code> in <span class='object_link'><a href="LogSink.html" title="Google::Logging::V2::LogSink (class)">LogSink</a></span>.</p>
 
 
   </div>
@@ -360,17 +360,17 @@ more information, see +writer_identity+ in <span class='object_link'><a href="Lo
       
       
         &mdash;
-        <div class='inline'><p>Optional. Determines the kind of IAM identity returned as +writer_identity+
+        <div class='inline'><p>Optional. Determines the kind of IAM identity returned as <code>writer_identity</code>
 in the new sink.  If this value is omitted or set to false, and if the
-sink&#39;s parent is a project, then the value returned as +writer_identity+ is
+sink&#39;s parent is a project, then the value returned as <code>writer_identity</code> is
 the same group or service account used by Stackdriver Logging before the
 addition of writer identities to this API. The sink&#39;s destination must be
 in the same project as the sink itself.</p>
 
 <p>If this field is set to true, or if the sink is owned by a non-project
-resource such as an organization, then the value of +writer_identity+ will
+resource such as an organization, then the value of <code>writer_identity</code> will
 be a unique service account used only for exports from the new sink.  For
-more information, see +writer_identity+ in <span class='object_link'><a href="LogSink.html" title="Google::Logging::V2::LogSink (class)">LogSink</a></span>.</p>
+more information, see <code>writer_identity</code> in <span class='object_link'><a href="LogSink.html" title="Google::Logging::V2::LogSink (class)">LogSink</a></span>.</p>
 </div>
       
     </li>

@@ -350,7 +350,7 @@ by the bucket options.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. The +bucket_options+ are required when the logs-based metric is
+    <p>Returns Optional. The <code>bucket_options</code> are required when the logs-based metric is
 using a DISTRIBUTION value type and it describes the bucket boundaries
 used to create a histogram of the extracted values.</p>
 
@@ -370,7 +370,7 @@ used to create a histogram of the extracted values.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The +bucket_options+ are required when the logs-based metric is
+        <div class='inline'><p>Optional. The <code>bucket_options</code> are required when the logs-based metric is
 using a DISTRIBUTION value type and it describes the bucket boundaries
 used to create a histogram of the extracted values.</p>
 </div>
@@ -591,13 +591,13 @@ Example:</p>
 used to extract data from a log entry field and assign as the label value.
 Each label key specified in the LabelDescriptor must have an associated
 extractor expression in this map. The syntax of the extractor expression
-is the same as for the +value_extractor+ field.</p>
+is the same as for the <code>value_extractor</code> field.</p>
 
 <p>The extracted value is converted to the type defined in the label
 descriptor. If the either the extraction or the type conversion fails,
 the label will have a default value. The default value for a string
 label is an empty string, for an integer label its 0, and for a boolean
-label its +false+.</p>
+label its <code>false</code>.</p>
 
 <p>Note that there are upper bounds on the maximum number of labels and the
 number of active time series that are allowed in a project.</p>
@@ -622,13 +622,13 @@ number of active time series that are allowed in a project.</p>
 used to extract data from a log entry field and assign as the label value.
 Each label key specified in the LabelDescriptor must have an associated
 extractor expression in this map. The syntax of the extractor expression
-is the same as for the +value_extractor+ field.</p>
+is the same as for the <code>value_extractor</code> field.</p>
 
 <p>The extracted value is converted to the type defined in the label
 descriptor. If the either the extraction or the type conversion fails,
 the label will have a default value. The default value for a string
 label is an empty string, for an integer label its 0, and for a boolean
-label its +false+.</p>
+label its <code>false</code>.</p>
 
 <p>Note that there are upper bounds on the maximum number of labels and the
 number of active time series that are allowed in a project.</p>
@@ -689,23 +689,23 @@ number of active time series that are allowed in a project.</p>
     <p>Returns Optional. The metric descriptor associated with the logs-based metric.
 If unspecified, it uses a default metric descriptor with a DELTA metric
 kind, INT64 value type, with no labels and a unit of &quot;1&quot;. Such a metric
-counts the number of log entries matching the +filter+ expression.</p>
+counts the number of log entries matching the <code>filter</code> expression.</p>
 
-<p>The +name+, +type+, and +description+ fields in the +metric_descriptor+
-are output only, and is constructed using the +name+ and +description+
+<p>The <code>name</code>, <code>type</code>, and <code>description</code> fields in the <code>metric_descriptor</code>
+are output only, and is constructed using the <code>name</code> and <code>description</code>
 field in the LogMetric.</p>
 
 <p>To create a logs-based metric that records a distribution of log values, a
 DELTA metric kind with a DISTRIBUTION value type must be used along with
-a +value_extractor+ expression in the LogMetric.</p>
+a <code>value_extractor</code> expression in the LogMetric.</p>
 
 <p>Each label in the metric descriptor must have a matching label
 name as the key and an extractor expression as the value in the
-+label_extractors+ map.</p>
+<code>label_extractors</code> map.</p>
 
-<p>The +metric_kind+ and +value_type+ fields in the +metric_descriptor+ cannot
+<p>The <code>metric_kind</code> and <code>value_type</code> fields in the <code>metric_descriptor</code> cannot
 be updated once initially configured. New labels can be added in the
-+metric_descriptor+, but existing labels cannot be modified except for
+<code>metric_descriptor</code>, but existing labels cannot be modified except for
 their description.</p>
 
 
@@ -727,23 +727,23 @@ their description.</p>
         <div class='inline'><p>Optional. The metric descriptor associated with the logs-based metric.
 If unspecified, it uses a default metric descriptor with a DELTA metric
 kind, INT64 value type, with no labels and a unit of &quot;1&quot;. Such a metric
-counts the number of log entries matching the +filter+ expression.</p>
+counts the number of log entries matching the <code>filter</code> expression.</p>
 
-<p>The +name+, +type+, and +description+ fields in the +metric_descriptor+
-are output only, and is constructed using the +name+ and +description+
+<p>The <code>name</code>, <code>type</code>, and <code>description</code> fields in the <code>metric_descriptor</code>
+are output only, and is constructed using the <code>name</code> and <code>description</code>
 field in the LogMetric.</p>
 
 <p>To create a logs-based metric that records a distribution of log values, a
 DELTA metric kind with a DISTRIBUTION value type must be used along with
-a +value_extractor+ expression in the LogMetric.</p>
+a <code>value_extractor</code> expression in the LogMetric.</p>
 
 <p>Each label in the metric descriptor must have a matching label
 name as the key and an extractor expression as the value in the
-+label_extractors+ map.</p>
+<code>label_extractors</code> map.</p>
 
-<p>The +metric_kind+ and +value_type+ fields in the +metric_descriptor+ cannot
+<p>The <code>metric_kind</code> and <code>value_type</code> fields in the <code>metric_descriptor</code> cannot
 be updated once initially configured. New labels can be added in the
-+metric_descriptor+, but existing labels cannot be modified except for
+<code>metric_descriptor</code>, but existing labels cannot be modified except for
 their description.</p>
 </div>
       
@@ -800,20 +800,20 @@ their description.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The client-assigned metric identifier.
-Examples: +&quot;error_count&quot;+, +&quot;nginx/requests&quot;+.</p>
+Examples: <code>&quot;error_count&quot;</code>, <code>&quot;nginx/requests&quot;</code>.</p>
 
 <p>Metric identifiers are limited to 100 characters and can include
-only the following characters: +A-Z+, +a-z+, +0-9+, and the
-special characters +_-.,+!*&#39;,()%/+.  The forward-slash character
-(+/+) denotes a hierarchy of name pieces, and it cannot be the
+only the following characters: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, and the
+special characters <code>_-.,+!*&#39;,()%/</code>.  The forward-slash character
+(<code>/</code>) denotes a hierarchy of name pieces, and it cannot be the
 first character of the name.</p>
 
 <p>The metric identifier in this field must not be
 <a href="https://en.wikipedia.org/wiki/Percent-encoding">URL-encoded</a>.
-However, when the metric identifier appears as the +[METRIC_ID]+
-part of a +metric_name+ API parameter, then the metric identifier
+However, when the metric identifier appears as the <code>[METRIC_ID]</code>
+part of a <code>metric_name</code> API parameter, then the metric identifier
 must be URL-encoded. Example:
-+&quot;projects/my-project/metrics/nginx%2Frequests&quot;+.</p>
+<code>&quot;projects/my-project/metrics/nginx%2Frequests&quot;</code>.</p>
 
 
   </div>
@@ -832,20 +832,20 @@ must be URL-encoded. Example:
       
         &mdash;
         <div class='inline'><p>Required. The client-assigned metric identifier.
-Examples: +&quot;error_count&quot;+, +&quot;nginx/requests&quot;+.</p>
+Examples: <code>&quot;error_count&quot;</code>, <code>&quot;nginx/requests&quot;</code>.</p>
 
 <p>Metric identifiers are limited to 100 characters and can include
-only the following characters: +A-Z+, +a-z+, +0-9+, and the
-special characters +_-.,+!*&#39;,()%/+.  The forward-slash character
-(+/+) denotes a hierarchy of name pieces, and it cannot be the
+only the following characters: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, and the
+special characters <code>_-.,+!*&#39;,()%/</code>.  The forward-slash character
+(<code>/</code>) denotes a hierarchy of name pieces, and it cannot be the
 first character of the name.</p>
 
 <p>The metric identifier in this field must not be
 <a href="https://en.wikipedia.org/wiki/Percent-encoding">URL-encoded</a>.
-However, when the metric identifier appears as the +[METRIC_ID]+
-part of a +metric_name+ API parameter, then the metric identifier
+However, when the metric identifier appears as the <code>[METRIC_ID]</code>
+part of a <code>metric_name</code> API parameter, then the metric identifier
 must be URL-encoded. Example:
-+&quot;projects/my-project/metrics/nginx%2Frequests&quot;+.</p>
+<code>&quot;projects/my-project/metrics/nginx%2Frequests&quot;</code>.</p>
 </div>
       
     </li>
@@ -900,10 +900,10 @@ must be URL-encoded. Example:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. A +value_extractor+ is required when using a distribution
+    <p>Returns Optional. A <code>value_extractor</code> is required when using a distribution
 logs-based metric to extract the values to record from a log entry.
-Two functions are supported for value extraction: +EXTRACT(field)+ or
-+REGEXP_EXTRACT(field, regex)+. The argument are:</p>
+Two functions are supported for value extraction: <code>EXTRACT(field)</code> or
+<code>REGEXP_EXTRACT(field, regex)</code>. The argument are:</p>
 
 <ol>
 <li>field: The name of the log entry field from which the value is to be
@@ -921,7 +921,7 @@ distribution always records double values. If either the extraction or
 the conversion to double fails, then those values are not recorded in the
 distribution.</p>
 
-<p>Example: +REGEXP_EXTRACT(jsonPayload.request, &quot;.<em>quantity=(\d+).</em>&quot;)+</p>
+<p>Example: <code>REGEXP_EXTRACT(jsonPayload.request, &quot;.*quantity=(\d+).*&quot;)</code></p>
 
 
   </div>
@@ -939,10 +939,10 @@ distribution.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. A +value_extractor+ is required when using a distribution
+        <div class='inline'><p>Optional. A <code>value_extractor</code> is required when using a distribution
 logs-based metric to extract the values to record from a log entry.
-Two functions are supported for value extraction: +EXTRACT(field)+ or
-+REGEXP_EXTRACT(field, regex)+. The argument are:</p>
+Two functions are supported for value extraction: <code>EXTRACT(field)</code> or
+<code>REGEXP_EXTRACT(field, regex)</code>. The argument are:</p>
 
 <ol>
 <li>field: The name of the log entry field from which the value is to be
@@ -960,7 +960,7 @@ distribution always records double values. If either the extraction or
 the conversion to double fails, then those values are not recorded in the
 distribution.</p>
 
-<p>Example: +REGEXP_EXTRACT(jsonPayload.request, &quot;.<em>quantity=(\d+).</em>&quot;)+</p>
+<p>Example: <code>REGEXP_EXTRACT(jsonPayload.request, &quot;.*quantity=(\d+).*&quot;)</code></p>
 </div>
       
     </li>

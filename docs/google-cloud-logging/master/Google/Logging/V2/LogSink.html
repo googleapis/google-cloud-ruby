@@ -355,7 +355,7 @@ account, or folder.</p>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>The sink&#39;s +writer_identity+, set when the sink is created, must
+<p>The sink&#39;s <code>writer_identity</code>, set when the sink is created, must
 have permission to write to the destination or else the log
 entries are not exported.  For more information, see
 <a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">Exporting Logs With Sinks</a>.</p>
@@ -383,7 +383,7 @@ entries are not exported.  For more information, see
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>The sink&#39;s +writer_identity+, set when the sink is created, must
+<p>The sink&#39;s <code>writer_identity</code>, set when the sink is created, must
 have permission to write to the destination or else the log
 entries are not exported.  For more information, see
 <a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">Exporting Logs With Sinks</a>.</p>
@@ -426,10 +426,10 @@ entries are not exported.  For more information, see
     <span class='comment'># An unspecified format version that will default to V2.
 </span>    <span class='const'>VERSION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># +LogEntry+ version 2 format.
+    <span class='comment'># `LogEntry` version 2 format.
 </span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +LogEntry+ version 1 format.
+    <span class='comment'># `LogEntry` version 1 format.
 </span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -509,10 +509,10 @@ entries are not exported.  For more information, see
     <span class='comment'># An unspecified format version that will default to V2.
 </span>    <span class='const'>VERSION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># +LogEntry+ version 2 format.
+    <span class='comment'># `LogEntry` version 2 format.
 </span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +LogEntry+ version 1 format.
+    <span class='comment'># `LogEntry` version 1 format.
 </span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -604,10 +604,10 @@ that match the filter.  For example:</p>
     <span class='comment'># An unspecified format version that will default to V2.
 </span>    <span class='const'>VERSION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># +LogEntry+ version 2 format.
+    <span class='comment'># `LogEntry` version 2 format.
 </span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +LogEntry+ version 1 format.
+    <span class='comment'># `LogEntry` version 1 format.
 </span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -636,7 +636,7 @@ logs from all the projects, folders, and billing accounts contained in the
 sink&#39;s parent resource are also available for export. Whether a particular
 log entry from the children is exported depends on the sink&#39;s filter
 expression. For example, if this field is true, then the filter
-+resource.type=gce_instance+ would export all Compute Engine VM instance
+<code>resource.type=gce_instance</code> would export all Compute Engine VM instance
 log entries from all projects in the sink&#39;s parent. To only export entries
 from certain child projects, filter on the project part of the log name:</p>
 
@@ -667,7 +667,7 @@ logs from all the projects, folders, and billing accounts contained in the
 sink&#39;s parent resource are also available for export. Whether a particular
 log entry from the children is exported depends on the sink&#39;s filter
 expression. For example, if this field is true, then the filter
-+resource.type=gce_instance+ would export all Compute Engine VM instance
+<code>resource.type=gce_instance</code> would export all Compute Engine VM instance
 log entries from all projects in the sink&#39;s parent. To only export entries
 from certain child projects, filter on the project part of the log name:</p>
 
@@ -713,10 +713,10 @@ resource.type=gce_instance
     <span class='comment'># An unspecified format version that will default to V2.
 </span>    <span class='const'>VERSION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># +LogEntry+ version 2 format.
+    <span class='comment'># `LogEntry` version 2 format.
 </span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +LogEntry+ version 1 format.
+    <span class='comment'># `LogEntry` version 1 format.
 </span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -739,7 +739,7 @@ resource.type=gce_instance
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The client-assigned sink identifier, unique within the
-project. Example: +&quot;my-syslog-errors-to-pubsub&quot;+.  Sink identifiers are
+project. Example: <code>&quot;my-syslog-errors-to-pubsub&quot;</code>.  Sink identifiers are
 limited to 100 characters and can include only the following characters:
 upper and lower-case alphanumeric characters, underscores, hyphens, and
 periods.</p>
@@ -761,7 +761,7 @@ periods.</p>
       
         &mdash;
         <div class='inline'><p>Required. The client-assigned sink identifier, unique within the
-project. Example: +&quot;my-syslog-errors-to-pubsub&quot;+.  Sink identifiers are
+project. Example: <code>&quot;my-syslog-errors-to-pubsub&quot;</code>.  Sink identifiers are
 limited to 100 characters and can include only the following characters:
 upper and lower-case alphanumeric characters, underscores, hyphens, and
 periods.</p>
@@ -804,10 +804,10 @@ periods.</p>
     <span class='comment'># An unspecified format version that will default to V2.
 </span>    <span class='const'>VERSION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># +LogEntry+ version 2 format.
+    <span class='comment'># `LogEntry` version 2 format.
 </span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +LogEntry+ version 1 format.
+    <span class='comment'># `LogEntry` version 1 format.
 </span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -889,10 +889,10 @@ entries.  The v2 format is used by default and cannot be changed.</p>
     <span class='comment'># An unspecified format version that will default to V2.
 </span>    <span class='const'>VERSION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># +LogEntry+ version 2 format.
+    <span class='comment'># `LogEntry` version 2 format.
 </span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +LogEntry+ version 1 format.
+    <span class='comment'># `LogEntry` version 1 format.
 </span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -972,10 +972,10 @@ entries.  The v2 format is used by default and cannot be changed.</p>
     <span class='comment'># An unspecified format version that will default to V2.
 </span>    <span class='const'>VERSION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># +LogEntry+ version 2 format.
+    <span class='comment'># `LogEntry` version 2 format.
 </span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +LogEntry+ version 1 format.
+    <span class='comment'># `LogEntry` version 1 format.
 </span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1003,7 +1003,7 @@ destination.  This field is set by
 <a href="https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create">sinks.create</a>
 and
 <a href="https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/update">sinks.update</a>,
-based on the setting of +unique_writer_identity+ in those methods.</p>
+based on the setting of <code>unique_writer_identity</code> in those methods.</p>
 
 <p>Until you grant this identity write-access to the destination, log entry
 exports from this sink will fail. For more information,
@@ -1034,7 +1034,7 @@ destination.  This field is set by
 <a href="https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create">sinks.create</a>
 and
 <a href="https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/update">sinks.update</a>,
-based on the setting of +unique_writer_identity+ in those methods.</p>
+based on the setting of <code>unique_writer_identity</code> in those methods.</p>
 
 <p>Until you grant this identity write-access to the destination, log entry
 exports from this sink will fail. For more information,
@@ -1081,10 +1081,10 @@ appropriate IAM roles to assign to the identity.</p>
     <span class='comment'># An unspecified format version that will default to V2.
 </span>    <span class='const'>VERSION_FORMAT_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># +LogEntry+ version 2 format.
+    <span class='comment'># `LogEntry` version 2 format.
 </span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># +LogEntry+ version 1 format.
+    <span class='comment'># `LogEntry` version 1 format.
 </span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
