@@ -1344,6 +1344,236 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
     end
   end
 
+  describe 'get_public_key' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_public_key."
+
+    it 'invokes get_public_key without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+
+      # Create expected grpc response
+      pem = "pem110872"
+      expected_response = { pem: pem }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::PublicKey)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::GetPublicKeyRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_public_key, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_public_key")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          response = client.get_public_key(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_public_key(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_public_key with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::GetPublicKeyRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_public_key, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_public_key")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.get_public_key(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'asymmetric_decrypt' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#asymmetric_decrypt."
+
+    it 'invokes asymmetric_decrypt without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+      ciphertext = ''
+
+      # Create expected grpc response
+      plaintext = "-9"
+      expected_response = { plaintext: plaintext }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::AsymmetricDecryptResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::AsymmetricDecryptRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(ciphertext, request.ciphertext)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:asymmetric_decrypt, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("asymmetric_decrypt")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          response = client.asymmetric_decrypt(formatted_name, ciphertext)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.asymmetric_decrypt(formatted_name, ciphertext) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes asymmetric_decrypt with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+      ciphertext = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::AsymmetricDecryptRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(ciphertext, request.ciphertext)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:asymmetric_decrypt, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("asymmetric_decrypt")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.asymmetric_decrypt(formatted_name, ciphertext)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'asymmetric_sign' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#asymmetric_sign."
+
+    it 'invokes asymmetric_sign without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+      digest = {}
+
+      # Create expected grpc response
+      signature = "-72"
+      expected_response = { signature: signature }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Kms::V1::AsymmetricSignResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::AsymmetricSignRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(Google::Gax::to_proto(digest, Google::Cloud::Kms::V1::Digest), request.digest)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:asymmetric_sign, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("asymmetric_sign")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          response = client.asymmetric_sign(formatted_name, digest)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.asymmetric_sign(formatted_name, digest) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes asymmetric_sign with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+      digest = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Kms::V1::AsymmetricSignRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(Google::Gax::to_proto(digest, Google::Cloud::Kms::V1::Digest), request.digest)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:asymmetric_sign, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("asymmetric_sign")
+
+      Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Kms.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.asymmetric_sign(formatted_name, digest)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'set_iam_policy' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#set_iam_policy."
 
