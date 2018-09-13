@@ -1,13 +1,46 @@
 # google-cloud
 
-This gem is a convenience package for loading all gems in the google-cloud
-project. Users are encouraged to depending on the individual gems needed for
-your project instead of using this gem with every dependency. Please see the
-[GitHub repository](https://github.com/GoogleCloudPlatform/google-cloud-ruby)
-for more information about the individual google-cloud gems.
+The [google-cloud](https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud)
+gem is a convenience package that lazily loads the vast majority of the
+[google-cloud-*](https://github.com/GoogleCloudPlatform/google-cloud-ruby) gems.
+Because there are now so many google-cloud-* gems, instead of using this gem in
+your production application, we encourage you to directly require only the
+individual google-cloud-* gems that you need.
 
 - [google-cloud API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud/latest)
 - [google-cloud on RubyGems](https://rubygems.org/gems/google-cloud)
+
+## List of dependencies
+
+This gem depends on and lazily loads the following google-cloud-* gems:
+
+- [google-cloud-bigquery](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-bigquery)
+- [google-cloud-bigquery-data_transfer](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-bigquery-data_transfer)
+- [google-cloud-bigtable](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-bigtable)
+- [google-cloud-container](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-container)
+- [google-cloud-dataproc](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-dataproc)
+- [google-cloud-datastore](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-datastore)
+- [google-cloud-dialogflow](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-dialogflow)
+- [google-cloud-dlp](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-dlp)
+- [google-cloud-dns](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-dns)
+- [google-cloud-error_reporting](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting)
+- [google-cloud-firestore](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-firestore)
+- [google-cloud-kms](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-kms)
+- [google-cloud-language](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-language)
+- [google-cloud-logging](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging)
+- [google-cloud-monitoring](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-monitoring)
+- [google-cloud-os_login](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-os_login)
+- [google-cloud-pubsub](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-pubsub)
+- [google-cloud-resource_manager](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-resource_manager)
+- [google-cloud-spanner](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-spanner)
+- [google-cloud-speech](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-speech)
+- [google-cloud-storage](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-storage)
+- [google-cloud-tasks](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-tasks)
+- [google-cloud-text_to_speech](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-text_to_speech)
+- [google-cloud-trace](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-trace)
+- [google-cloud-translate](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-translate)
+- [google-cloud-video_intelligence](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-video_intelligence)
+- [google-cloud-vision](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-vision)
 
 ## Quick Start
 
@@ -22,11 +55,21 @@ Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud
 
 ## Example
 
+As shown in the example below, the google-cloud gem lazily loads its
+google-cloud-* dependencies only as needed.
+
 ```ruby
 require "google-cloud"
 
 gcloud = Google::Cloud.new
+
+Google::Cloud::Bigquery #=> NameError: uninitialized constant Google::Cloud::Bigquery
+
 bigquery = gcloud.bigquery
+
+Google::Cloud::Bigquery #=> Google::Cloud::Bigquery
+Google::Cloud::Logging #=> NameError: uninitialized constant Google::Cloud::Logging
+
 dataset = bigquery.dataset "my-dataset"
 table = dataset.table "my-table"
 table.data.each do |row|
