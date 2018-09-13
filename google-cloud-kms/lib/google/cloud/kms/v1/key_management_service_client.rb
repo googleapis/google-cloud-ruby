@@ -431,6 +431,30 @@ module Google
                 {'name' => request.name}
               end
             )
+            @get_public_key = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:get_public_key),
+              defaults["get_public_key"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @asymmetric_decrypt = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:asymmetric_decrypt),
+              defaults["asymmetric_decrypt"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @asymmetric_sign = Google::Gax.create_api_call(
+              @key_management_service_stub.method(:asymmetric_sign),
+              defaults["asymmetric_sign"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @set_iam_policy = Google::Gax.create_api_call(
               @iam_policy_stub.method(:set_iam_policy),
               defaults["set_iam_policy"],
@@ -1185,6 +1209,124 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest)
             @restore_crypto_key_version.call(req, options, &block)
+          end
+
+          # Returns the public key for the given {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. The
+          # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} must be
+          # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN} or
+          # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT ASYMMETRIC_DECRYPT}.
+          #
+          # @param name [String]
+          #   The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
+          #   get.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Kms::V1::PublicKey]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Kms::V1::PublicKey]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+          #   response = key_management_service_client.get_public_key(formatted_name)
+
+          def get_public_key \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::GetPublicKeyRequest)
+            @get_public_key.call(req, options, &block)
+          end
+
+          # Decrypts data that was encrypted with a public key retrieved from
+          # {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey} corresponding to a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with
+          # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose} ASYMMETRIC_DECRYPT.
+          #
+          # @param name [String]
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
+          #   decryption.
+          # @param ciphertext [String]
+          #   Required. The data encrypted with the named {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
+          #   key using OAEP.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+          #
+          #   # TODO: Initialize +ciphertext+:
+          #   ciphertext = ''
+          #   response = key_management_service_client.asymmetric_decrypt(formatted_name, ciphertext)
+
+          def asymmetric_decrypt \
+              name,
+              ciphertext,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              ciphertext: ciphertext
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::AsymmetricDecryptRequest)
+            @asymmetric_decrypt.call(req, options, &block)
+          end
+
+          # Signs data using a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey#purpose}
+          # ASYMMETRIC_SIGN, producing a signature that can be verified with the public
+          # key retrieved from {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey GetPublicKey}.
+          #
+          # @param name [String]
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
+          # @param digest [Google::Cloud::Kms::V1::Digest | Hash]
+          #   Required. The digest of the data to sign. The digest must be produced with
+          #   the same digest algorithm as specified by the key version's
+          #   {Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
+          #   A hash of the same form as `Google::Cloud::Kms::V1::Digest`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Kms::V1::AsymmetricSignResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Kms::V1::AsymmetricSignResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/kms"
+          #
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
+          #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
+          #
+          #   # TODO: Initialize +digest+:
+          #   digest = {}
+          #   response = key_management_service_client.asymmetric_sign(formatted_name, digest)
+
+          def asymmetric_sign \
+              name,
+              digest,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              digest: digest
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Kms::V1::AsymmetricSignRequest)
+            @asymmetric_sign.call(req, options, &block)
           end
 
           # Sets the access control policy on the specified resource. Replaces any
