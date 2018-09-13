@@ -406,11 +406,11 @@ case-sensitive and have the following syntax:</p>
 
 <p>[field = value] AND [field [= value]] ...</p>
 
-<p>where <strong>field</strong> is +status.state+ or +labels.[KEY]+, and +[KEY]+ is a label
-key. <strong>value</strong> can be +*+ to match all values.
-+status.state+ can be either +ACTIVE+ or +NON_ACTIVE+.
-Only the logical +AND+ operator is supported; space-separated items are
-treated as having an implicit +AND+ operator.</p>
+<p>where <strong>field</strong> is <code>status.state</code> or <code>labels.[KEY]</code>, and <code>[KEY]</code> is a label
+key. <strong>value</strong> can be <code>*</code> to match all values.
+<code>status.state</code> can be either <code>ACTIVE</code> or <code>NON_ACTIVE</code>.
+Only the logical <code>AND</code> operator is supported; space-separated items are
+treated as having an implicit <code>AND</code> operator.</p>
 
 <p>Example filter:</p>
 
@@ -437,11 +437,11 @@ case-sensitive and have the following syntax:</p>
 
 <p>[field = value] AND [field [= value]] ...</p>
 
-<p>where <strong>field</strong> is +status.state+ or +labels.[KEY]+, and +[KEY]+ is a label
-key. <strong>value</strong> can be +*+ to match all values.
-+status.state+ can be either +ACTIVE+ or +NON_ACTIVE+.
-Only the logical +AND+ operator is supported; space-separated items are
-treated as having an implicit +AND+ operator.</p>
+<p>where <strong>field</strong> is <code>status.state</code> or <code>labels.[KEY]</code>, and <code>[KEY]</code> is a label
+key. <strong>value</strong> can be <code>*</code> to match all values.
+<code>status.state</code> can be either <code>ACTIVE</code> or <code>NON_ACTIVE</code>.
+Only the logical <code>AND</code> operator is supported; space-separated items are
+treated as having an implicit <code>AND</code> operator.</p>
 
 <p>Example filter:</p>
 
@@ -511,7 +511,7 @@ treated as having an implicit +AND+ operator.</p>
     <p>Returns Optional. Specifies enumerated categories of jobs to list.
 (default = match ALL jobs).</p>
 
-<p>If +filter+ is provided, +jobStateMatcher+ will be ignored.</p>
+<p>If <code>filter</code> is provided, <code>jobStateMatcher</code> will be ignored.</p>
 
 
   </div>
@@ -532,7 +532,7 @@ treated as having an implicit +AND+ operator.</p>
         <div class='inline'><p>Optional. Specifies enumerated categories of jobs to list.
 (default = match ALL jobs).</p>
 
-<p>If +filter+ is provided, +jobStateMatcher+ will be ignored.</p>
+<p>If <code>filter</code> is provided, <code>jobStateMatcher</code> will be ignored.</p>
 </div>
       
     </li>

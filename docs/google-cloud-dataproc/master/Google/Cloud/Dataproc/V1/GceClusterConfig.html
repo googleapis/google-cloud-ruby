@@ -338,7 +338,7 @@ instances, applicable to all instances in the cluster.</p>
     <p>Returns Optional. If true, all instances in the cluster will only have internal IP
 addresses. By default, clusters are not restricted to internal IP addresses,
 and will have ephemeral external IP addresses assigned to each instance.
-This +internal_ip_only+ restriction can only be enabled for subnetwork
+This <code>internal_ip_only</code> restriction can only be enabled for subnetwork
 enabled networks, and all off-cluster dependencies must be configured to be
 accessible without external IP addresses.</p>
 
@@ -361,7 +361,7 @@ accessible without external IP addresses.</p>
         <div class='inline'><p>Optional. If true, all instances in the cluster will only have internal IP
 addresses. By default, clusters are not restricted to internal IP addresses,
 and will have ephemeral external IP addresses assigned to each instance.
-This +internal_ip_only+ restriction can only be enabled for subnetwork
+This <code>internal_ip_only</code> restriction can only be enabled for subnetwork
 enabled networks, and all off-cluster dependencies must be configured to be
 accessible without external IP addresses.</p>
 </div>
@@ -459,16 +459,16 @@ accessible without external IP addresses.</p>
   <div class="discussion">
     <p>Returns Optional. The Google Compute Engine network to be used for machine
 communications. Cannot be specified with subnetwork_uri. If neither
-+network_uri+ nor +subnetwork_uri+ is specified, the &quot;default&quot; network of
+<code>network_uri</code> nor <code>subnetwork_uri</code> is specified, the &quot;default&quot; network of
 the project is used, if it exists. Cannot be a &quot;Custom Subnet Network&quot; (see
 <a href="https://cloud.google.com/compute/docs/subnetworks">Using Subnetworks</a> for more information).</p>
 
 <p>A full URL, partial URI, or short name are valid. Examples:</p>
 
 <ul>
-<li>+<a href="https://www.googleapis.com/compute/v1/projects/%5Bproject_id%5D/regions/global/default+">https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default+</a></li>
-<li>+projects/[project_id]/regions/global/default+</li>
-<li>+default+</li>
+<li><code>https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default</code></li>
+<li><code>projects/[project_id]/regions/global/default</code></li>
+<li><code>default</code></li>
 </ul>
 
 
@@ -489,16 +489,16 @@ the project is used, if it exists. Cannot be a &quot;Custom Subnet Network&quot;
         &mdash;
         <div class='inline'><p>Optional. The Google Compute Engine network to be used for machine
 communications. Cannot be specified with subnetwork_uri. If neither
-+network_uri+ nor +subnetwork_uri+ is specified, the &quot;default&quot; network of
+<code>network_uri</code> nor <code>subnetwork_uri</code> is specified, the &quot;default&quot; network of
 the project is used, if it exists. Cannot be a &quot;Custom Subnet Network&quot; (see
 <a href="https://cloud.google.com/compute/docs/subnetworks">Using Subnetworks</a> for more information).</p>
 
 <p>A full URL, partial URI, or short name are valid. Examples:</p>
 
 <ul>
-<li>+<a href="https://www.googleapis.com/compute/v1/projects/%5Bproject_id%5D/regions/global/default+">https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default+</a></li>
-<li>+projects/[project_id]/regions/global/default+</li>
-<li>+default+</li>
+<li><code>https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default</code></li>
+<li><code>projects/[project_id]/regions/global/default</code></li>
+<li><code>default</code></li>
 </ul>
 </div>
       
@@ -547,7 +547,7 @@ permissions equivalent to the folloing IAM roles:</p>
 
 <p>(see <a href="https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts">https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts</a>
 for more information).
-Example: +[account_id]@[project_id].iam.gserviceaccount.com+</p>
+Example: <code>[account_id]@[project_id].iam.gserviceaccount.com</code></p>
 
 
   </div>
@@ -576,7 +576,7 @@ permissions equivalent to the folloing IAM roles:</p>
 
 <p>(see <a href="https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts">https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts</a>
 for more information).
-Example: +[account_id]@[project_id].iam.gserviceaccount.com+</p>
+Example: <code>[account_id]@[project_id].iam.gserviceaccount.com</code></p>
 </div>
       
     </li>
@@ -708,9 +708,9 @@ communications. Cannot be specified with network_uri.</p>
 <p>A full URL, partial URI, or short name are valid. Examples:</p>
 
 <ul>
-<li>+<a href="https://www.googleapis.com/compute/v1/projects/%5Bproject_id%5D/regions/us-east1/sub0+">https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0+</a></li>
-<li>+projects/[project_id]/regions/us-east1/sub0+</li>
-<li>+sub0+</li>
+<li><code>https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0</code></li>
+<li><code>projects/[project_id]/regions/us-east1/sub0</code></li>
+<li><code>sub0</code></li>
 </ul>
 
 
@@ -735,9 +735,9 @@ communications. Cannot be specified with network_uri.</p>
 <p>A full URL, partial URI, or short name are valid. Examples:</p>
 
 <ul>
-<li>+<a href="https://www.googleapis.com/compute/v1/projects/%5Bproject_id%5D/regions/us-east1/sub0+">https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0+</a></li>
-<li>+projects/[project_id]/regions/us-east1/sub0+</li>
-<li>+sub0+</li>
+<li><code>https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0</code></li>
+<li><code>projects/[project_id]/regions/us-east1/sub0</code></li>
+<li><code>sub0</code></li>
 </ul>
 </div>
       
@@ -841,9 +841,9 @@ always be present.</p>
 <p>A full URL, partial URI, or short name are valid. Examples:</p>
 
 <ul>
-<li>+<a href="https://www.googleapis.com/compute/v1/projects/%5Bproject_id%5D/zones/%5Bzone%5D+">https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]+</a></li>
-<li>+projects/[project_id]/zones/[zone]+</li>
-<li>+us-central1-f+</li>
+<li><code>https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]</code></li>
+<li><code>projects/[project_id]/zones/[zone]</code></li>
+<li><code>us-central1-f</code></li>
 </ul>
 
 
@@ -871,9 +871,9 @@ always be present.</p>
 <p>A full URL, partial URI, or short name are valid. Examples:</p>
 
 <ul>
-<li>+<a href="https://www.googleapis.com/compute/v1/projects/%5Bproject_id%5D/zones/%5Bzone%5D+">https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]+</a></li>
-<li>+projects/[project_id]/zones/[zone]+</li>
-<li>+us-central1-f+</li>
+<li><code>https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]</code></li>
+<li><code>projects/[project_id]/zones/[zone]</code></li>
+<li><code>us-central1-f</code></li>
 </ul>
 </div>
       

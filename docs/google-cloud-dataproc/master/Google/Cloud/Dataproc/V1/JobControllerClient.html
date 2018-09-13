@@ -751,13 +751,13 @@ after cancellation, call
 
 <span class='id identifier rubyid_job_controller_client'>job_controller_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../JobController.html" title="Google::Cloud::Dataproc::JobController (module)">JobController</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../JobController.html#new-class_method" title="Google::Cloud::Dataproc::JobController.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +region+:
+<span class='comment'># TODO: Initialize `region`:
 </span><span class='id identifier rubyid_region'>region</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +job_id+:
+<span class='comment'># TODO: Initialize `job_id`:
 </span><span class='id identifier rubyid_job_id'>job_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_job_controller_client'>job_controller_client</span><span class='period'>.</span><span class='id identifier rubyid_cancel_job'>cancel_job</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span> <span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span></code></pre>
     
@@ -958,7 +958,7 @@ retries, etc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Deletes the job from the project. If the job is active, the delete fails,
-and the response returns +FAILED_PRECONDITION+.</p>
+and the response returns <code>FAILED_PRECONDITION</code>.</p>
 
 
   </div>
@@ -973,13 +973,13 @@ and the response returns +FAILED_PRECONDITION+.</p>
 
 <span class='id identifier rubyid_job_controller_client'>job_controller_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../JobController.html" title="Google::Cloud::Dataproc::JobController (module)">JobController</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../JobController.html#new-class_method" title="Google::Cloud::Dataproc::JobController.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +region+:
+<span class='comment'># TODO: Initialize `region`:
 </span><span class='id identifier rubyid_region'>region</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +job_id+:
+<span class='comment'># TODO: Initialize `job_id`:
 </span><span class='id identifier rubyid_job_id'>job_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_job_controller_client'>job_controller_client</span><span class='period'>.</span><span class='id identifier rubyid_delete_job'>delete_job</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span> <span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span></code></pre>
     
@@ -1187,13 +1187,13 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_job_controller_client'>job_controller_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../JobController.html" title="Google::Cloud::Dataproc::JobController (module)">JobController</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../JobController.html#new-class_method" title="Google::Cloud::Dataproc::JobController.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +region+:
+<span class='comment'># TODO: Initialize `region`:
 </span><span class='id identifier rubyid_region'>region</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +job_id+:
+<span class='comment'># TODO: Initialize `job_id`:
 </span><span class='id identifier rubyid_job_id'>job_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_job_controller_client'>job_controller_client</span><span class='period'>.</span><span class='id identifier rubyid_get_job'>get_job</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span> <span class='id identifier rubyid_job_id'>job_id</span><span class='rparen'>)</span></code></pre>
     
@@ -1408,10 +1408,10 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_job_controller_client'>job_controller_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../JobController.html" title="Google::Cloud::Dataproc::JobController (module)">JobController</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../JobController.html#new-class_method" title="Google::Cloud::Dataproc::JobController.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +region+:
+<span class='comment'># TODO: Initialize `region`:
 </span><span class='id identifier rubyid_region'>region</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
 <span class='comment'># Iterate over all results.
@@ -1510,7 +1510,7 @@ submitted to the named cluster.</p>
         <div class='inline'><p>Optional. Specifies enumerated categories of jobs to list.
 (default = match ALL jobs).</p>
 
-<p>If +filter+ is provided, +jobStateMatcher+ will be ignored.</p>
+<p>If <code>filter</code> is provided, <code>jobStateMatcher</code> will be ignored.</p>
 </div>
       
     </li>
@@ -1530,11 +1530,11 @@ case-sensitive and have the following syntax:</p>
 
 <p>[field = value] AND [field [= value]] ...</p>
 
-<p>where <strong>field</strong> is +status.state+ or +labels.[KEY]+, and +[KEY]+ is a label
-key. <strong>value</strong> can be +*+ to match all values.
-+status.state+ can be either +ACTIVE+ or +NON_ACTIVE+.
-Only the logical +AND+ operator is supported; space-separated items are
-treated as having an implicit +AND+ operator.</p>
+<p>where <strong>field</strong> is <code>status.state</code> or <code>labels.[KEY]</code>, and <code>[KEY]</code> is a label
+key. <strong>value</strong> can be <code>*</code> to match all values.
+<code>status.state</code> can be either <code>ACTIVE</code> or <code>NON_ACTIVE</code>.
+Only the logical <code>AND</code> operator is supported; space-separated items are
+treated as having an implicit <code>AND</code> operator.</p>
 
 <p>Example filter:</p>
 
@@ -1723,13 +1723,13 @@ object.</p>
 
 <span class='id identifier rubyid_job_controller_client'>job_controller_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../JobController.html" title="Google::Cloud::Dataproc::JobController (module)">JobController</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../JobController.html#new-class_method" title="Google::Cloud::Dataproc::JobController.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +region+:
+<span class='comment'># TODO: Initialize `region`:
 </span><span class='id identifier rubyid_region'>region</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +job+:
+<span class='comment'># TODO: Initialize `job`:
 </span><span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_job_controller_client'>job_controller_client</span><span class='period'>.</span><span class='id identifier rubyid_submit_job'>submit_job</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span> <span class='id identifier rubyid_job'>job</span><span class='rparen'>)</span></code></pre>
     
@@ -1946,19 +1946,19 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_job_controller_client'>job_controller_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../JobController.html" title="Google::Cloud::Dataproc::JobController (module)">JobController</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../JobController.html#new-class_method" title="Google::Cloud::Dataproc::JobController.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +project_id+:
+<span class='comment'># TODO: Initialize `project_id`:
 </span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +region+:
+<span class='comment'># TODO: Initialize `region`:
 </span><span class='id identifier rubyid_region'>region</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +job_id+:
+<span class='comment'># TODO: Initialize `job_id`:
 </span><span class='id identifier rubyid_job_id'>job_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +job+:
+<span class='comment'># TODO: Initialize `job`:
 </span><span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +update_mask+:
+<span class='comment'># TODO: Initialize `update_mask`:
 </span><span class='id identifier rubyid_update_mask'>update_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_job_controller_client'>job_controller_client</span><span class='period'>.</span><span class='id identifier rubyid_update_job'>update_job</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span> <span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='id identifier rubyid_job'>job</span><span class='comma'>,</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='rparen'>)</span></code></pre>
     
@@ -2042,7 +2042,7 @@ can also be provided.</p>
         <div class='inline'><p>Required. Specifies the path, relative to <code>Job</code>, of
 the field to update. For example, to update the labels of a Job the
 <code>update_mask</code> parameter would be specified as
-<code>labels</code>, and the +PATCH+ request body would specify the new
+<code>labels</code>, and the <code>PATCH</code> request body would specify the new
 value. <strong>Note:</strong> Currently, <code>labels</code> is the only
 field that can be updated.
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>

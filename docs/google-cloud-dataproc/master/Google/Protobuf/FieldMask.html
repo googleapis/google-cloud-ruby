@@ -89,15 +89,15 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>+FieldMask+ represents a set of symbolic field paths, for example:</p>
+    <p><code>FieldMask</code> represents a set of symbolic field paths, for example:</p>
 
 <pre class="code ruby"><code class="ruby">paths: &quot;f.a&quot;
 paths: &quot;f.b.d&quot;
 </code></pre>
 
-<p>Here +f+ represents a field in some root message, +a+ and +b+
-fields in the message found in +f+, and +d+ a field found in the
-message in +f.b+.</p>
+<p>Here <code>f</code> represents a field in some root message, <code>a</code> and <code>b</code>
+fields in the message found in <code>f</code>, and <code>d</code> a field found in the
+message in <code>f.b</code>.</p>
 
 <p>Field masks are used to specify a subset of fields that should be
 returned by a get operation or modified by an update operation.
@@ -161,7 +161,7 @@ fields not covered by the mask.</p>
 
 <p>If a repeated field is specified for an update operation, the existing
 repeated values in the target resource will be overwritten by the new values.
-Note that a repeated field is only allowed in the last position of a +paths+
+Note that a repeated field is only allowed in the last position of a <code>paths</code>
 string.</p>
 
 <p>If a sub-message is specified in the last position of the field mask for an
@@ -258,7 +258,7 @@ to/from lower-camel naming conventions.</p>
 <span class='rbrace'>}</span>
 </code></pre>
 
-<p>In proto a field mask for +Profile+ may look as such:</p>
+<p>In proto a field mask for <code>Profile</code> may look as such:</p>
 
 <pre class="code ruby"><code class="ruby">mask {
   paths: &quot;user.display_name&quot;
@@ -307,7 +307,7 @@ paths.</p>
 
 <p>The implementation of any API method which has a FieldMask type field in the
 request should verify the included field paths, and return an
-+INVALID_ARGUMENT+ error if any path is duplicated or unmappable.</p>
+<code>INVALID_ARGUMENT</code> error if any path is duplicated or unmappable.</p>
 
 
   </div>

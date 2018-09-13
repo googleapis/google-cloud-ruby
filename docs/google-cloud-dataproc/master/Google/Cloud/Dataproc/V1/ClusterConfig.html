@@ -432,8 +432,8 @@ all instances in a cluster.</p>
   <div class="discussion">
     <p>Returns Optional. Commands to execute on each node after config is
 completed. By default, executables are run on master and all worker nodes.
-You can test a node&#39;s +role+ metadata to run an executable on
-a master or worker node, as shown below using +curl+ (you can also use +wget+):</p>
+You can test a node&#39;s <code>role</code> metadata to run an executable on
+a master or worker node, as shown below using <code>curl</code> (you can also use <code>wget</code>):</p>
 
 <pre class="code ruby"><code class="ruby">ROLE=$(curl -H Metadata-Flavor:Google http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
 if [[ &quot;${ROLE}&quot; == &#39;Master&#39; ]]; then
@@ -461,8 +461,8 @@ fi
         &mdash;
         <div class='inline'><p>Optional. Commands to execute on each node after config is
 completed. By default, executables are run on master and all worker nodes.
-You can test a node&#39;s +role+ metadata to run an executable on
-a master or worker node, as shown below using +curl+ (you can also use +wget+):</p>
+You can test a node&#39;s <code>role</code> metadata to run an executable on
+a master or worker node, as shown below using <code>curl</code> (you can also use <code>wget</code>):</p>
 
 <pre class="code ruby"><code class="ruby">ROLE=$(curl -H Metadata-Flavor:Google http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
 if [[ &quot;${ROLE}&quot; == &#39;Master&#39; ]]; then

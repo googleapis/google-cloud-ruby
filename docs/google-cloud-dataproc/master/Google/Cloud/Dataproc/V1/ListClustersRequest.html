@@ -261,15 +261,15 @@ case-sensitive and have the following syntax:</p>
 
 <p>field = value [AND [field = value]] ...</p>
 
-<p>where <strong>field</strong> is one of +status.state+, +clusterName+, or +labels.[KEY]+,
-and +[KEY]+ is a label key. <strong>value</strong> can be +*+ to match all values.
-+status.state+ can be one of the following: +ACTIVE+, +INACTIVE+,
-+CREATING+, +RUNNING+, +ERROR+, +DELETING+, or +UPDATING+. +ACTIVE+
-contains the +CREATING+, +UPDATING+, and +RUNNING+ states. +INACTIVE+
-contains the +DELETING+ and +ERROR+ states.
-+clusterName+ is the name of the cluster provided at creation time.
-Only the logical +AND+ operator is supported; space-separated items are
-treated as having an implicit +AND+ operator.</p>
+<p>where <strong>field</strong> is one of <code>status.state</code>, <code>clusterName</code>, or <code>labels.[KEY]</code>,
+and <code>[KEY]</code> is a label key. <strong>value</strong> can be <code>*</code> to match all values.
+<code>status.state</code> can be one of the following: <code>ACTIVE</code>, <code>INACTIVE</code>,
+<code>CREATING</code>, <code>RUNNING</code>, <code>ERROR</code>, <code>DELETING</code>, or <code>UPDATING</code>. <code>ACTIVE</code>
+contains the <code>CREATING</code>, <code>UPDATING</code>, and <code>RUNNING</code> states. <code>INACTIVE</code>
+contains the <code>DELETING</code> and <code>ERROR</code> states.
+<code>clusterName</code> is the name of the cluster provided at creation time.
+Only the logical <code>AND</code> operator is supported; space-separated items are
+treated as having an implicit <code>AND</code> operator.</p>
 
 <p>Example filter:</p>
 
@@ -297,15 +297,15 @@ case-sensitive and have the following syntax:</p>
 
 <p>field = value [AND [field = value]] ...</p>
 
-<p>where <strong>field</strong> is one of +status.state+, +clusterName+, or +labels.[KEY]+,
-and +[KEY]+ is a label key. <strong>value</strong> can be +*+ to match all values.
-+status.state+ can be one of the following: +ACTIVE+, +INACTIVE+,
-+CREATING+, +RUNNING+, +ERROR+, +DELETING+, or +UPDATING+. +ACTIVE+
-contains the +CREATING+, +UPDATING+, and +RUNNING+ states. +INACTIVE+
-contains the +DELETING+ and +ERROR+ states.
-+clusterName+ is the name of the cluster provided at creation time.
-Only the logical +AND+ operator is supported; space-separated items are
-treated as having an implicit +AND+ operator.</p>
+<p>where <strong>field</strong> is one of <code>status.state</code>, <code>clusterName</code>, or <code>labels.[KEY]</code>,
+and <code>[KEY]</code> is a label key. <strong>value</strong> can be <code>*</code> to match all values.
+<code>status.state</code> can be one of the following: <code>ACTIVE</code>, <code>INACTIVE</code>,
+<code>CREATING</code>, <code>RUNNING</code>, <code>ERROR</code>, <code>DELETING</code>, or <code>UPDATING</code>. <code>ACTIVE</code>
+contains the <code>CREATING</code>, <code>UPDATING</code>, and <code>RUNNING</code> states. <code>INACTIVE</code>
+contains the <code>DELETING</code> and <code>ERROR</code> states.
+<code>clusterName</code> is the name of the cluster provided at creation time.
+Only the logical <code>AND</code> operator is supported; space-separated items are
+treated as having an implicit <code>AND</code> operator.</p>
 
 <p>Example filter:</p>
 

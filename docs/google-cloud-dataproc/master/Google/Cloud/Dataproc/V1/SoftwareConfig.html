@@ -179,7 +179,7 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Optional. The version of software inside the cluster. It must match the
-regular expression +[0-9]+.[0-9]++. If unspecified, it defaults to the
+regular expression <code>[0-9]+\.[0-9]+</code>. If unspecified, it defaults to the
 latest version (see <a href="https://cloud.google.com/dataproc/versioning">Cloud Dataproc Versioning</a>).</p>
 
 
@@ -199,7 +199,7 @@ latest version (see <a href="https://cloud.google.com/dataproc/versioning">Cloud
       
         &mdash;
         <div class='inline'><p>Optional. The version of software inside the cluster. It must match the
-regular expression +[0-9]+.[0-9]++. If unspecified, it defaults to the
+regular expression <code>[0-9]+\.[0-9]+</code>. If unspecified, it defaults to the
 latest version (see <a href="https://cloud.google.com/dataproc/versioning">Cloud Dataproc Versioning</a>).</p>
 </div>
       
@@ -239,20 +239,20 @@ latest version (see <a href="https://cloud.google.com/dataproc/versioning">Cloud
   <div class="discussion">
     <p>Returns Optional. The properties to set on daemon config files.</p>
 
-<p>Property keys are specified in +prefix:property+ format, such as
-+core:fs.defaultFS+. The following are supported prefixes
+<p>Property keys are specified in <code>prefix:property</code> format, such as
+<code>core:fs.defaultFS</code>. The following are supported prefixes
 and their mappings:</p>
 
 <ul>
-<li>capacity-scheduler: +capacity-scheduler.xml+</li>
-<li>core:   +core-site.xml+</li>
-<li>distcp: +distcp-default.xml+</li>
-<li>hdfs:   +hdfs-site.xml+</li>
-<li>hive:   +hive-site.xml+</li>
-<li>mapred: +mapred-site.xml+</li>
-<li>pig:    +pig.properties+</li>
-<li>spark:  +spark-defaults.conf+</li>
-<li>yarn:   +yarn-site.xml+</li>
+<li>capacity-scheduler: <code>capacity-scheduler.xml</code></li>
+<li>core:   <code>core-site.xml</code></li>
+<li>distcp: <code>distcp-default.xml</code></li>
+<li>hdfs:   <code>hdfs-site.xml</code></li>
+<li>hive:   <code>hive-site.xml</code></li>
+<li>mapred: <code>mapred-site.xml</code></li>
+<li>pig:    <code>pig.properties</code></li>
+<li>spark:  <code>spark-defaults.conf</code></li>
+<li>yarn:   <code>yarn-site.xml</code></li>
 </ul>
 
 <p>For more information, see
@@ -276,20 +276,20 @@ and their mappings:</p>
         &mdash;
         <div class='inline'><p>Optional. The properties to set on daemon config files.</p>
 
-<p>Property keys are specified in +prefix:property+ format, such as
-+core:fs.defaultFS+. The following are supported prefixes
+<p>Property keys are specified in <code>prefix:property</code> format, such as
+<code>core:fs.defaultFS</code>. The following are supported prefixes
 and their mappings:</p>
 
 <ul>
-<li>capacity-scheduler: +capacity-scheduler.xml+</li>
-<li>core:   +core-site.xml+</li>
-<li>distcp: +distcp-default.xml+</li>
-<li>hdfs:   +hdfs-site.xml+</li>
-<li>hive:   +hive-site.xml+</li>
-<li>mapred: +mapred-site.xml+</li>
-<li>pig:    +pig.properties+</li>
-<li>spark:  +spark-defaults.conf+</li>
-<li>yarn:   +yarn-site.xml+</li>
+<li>capacity-scheduler: <code>capacity-scheduler.xml</code></li>
+<li>core:   <code>core-site.xml</code></li>
+<li>distcp: <code>distcp-default.xml</code></li>
+<li>hdfs:   <code>hdfs-site.xml</code></li>
+<li>hive:   <code>hive-site.xml</code></li>
+<li>mapred: <code>mapred-site.xml</code></li>
+<li>pig:    <code>pig.properties</code></li>
+<li>spark:  <code>spark-defaults.conf</code></li>
+<li>yarn:   <code>yarn-site.xml</code></li>
 </ul>
 
 <p>For more information, see

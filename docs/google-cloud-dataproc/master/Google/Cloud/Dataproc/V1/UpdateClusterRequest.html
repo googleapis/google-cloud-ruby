@@ -478,11 +478,11 @@ cluster belongs to.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. Specifies the path, relative to +Cluster+, of
+    <p>Returns Required. Specifies the path, relative to <code>Cluster</code>, of
 the field to update. For example, to change the number of workers
-in a cluster to 5, the +update_mask+ parameter would be
-specified as +config.worker_config.num_instances+,
-and the +PATCH+ request body would specify the new value, as follows:</p>
+in a cluster to 5, the <code>update_mask</code> parameter would be
+specified as <code>config.worker_config.num_instances</code>,
+and the <code>PATCH</code> request body would specify the new value, as follows:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config</span><span class='label_end'>&quot;:</span><span class='lbrace'>{</span>
@@ -494,8 +494,8 @@ and the +PATCH+ request body would specify the new value, as follows:</p>
 </code></pre>
 
 <p>Similarly, to change the number of preemptible workers in a cluster to 5,
-the +update_mask+ parameter would be
-+config.secondary_worker_config.num_instances+, and the +PATCH+ request
+the <code>update_mask</code> parameter would be
+<code>config.secondary_worker_config.num_instances</code>, and the <code>PATCH</code> request
 body would be set as follows:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span>
@@ -546,11 +546,11 @@ body would be set as follows:</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. Specifies the path, relative to +Cluster+, of
+        <div class='inline'><p>Required. Specifies the path, relative to <code>Cluster</code>, of
 the field to update. For example, to change the number of workers
-in a cluster to 5, the +update_mask+ parameter would be
-specified as +config.worker_config.num_instances+,
-and the +PATCH+ request body would specify the new value, as follows:</p>
+in a cluster to 5, the <code>update_mask</code> parameter would be
+specified as <code>config.worker_config.num_instances</code>,
+and the <code>PATCH</code> request body would specify the new value, as follows:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>config</span><span class='label_end'>&quot;:</span><span class='lbrace'>{</span>
@@ -562,8 +562,8 @@ and the +PATCH+ request body would specify the new value, as follows:</p>
 </code></pre>
 
 <p>Similarly, to change the number of preemptible workers in a cluster to 5,
-the +update_mask+ parameter would be
-+config.secondary_worker_config.num_instances+, and the +PATCH+ request
+the <code>update_mask</code> parameter would be
+<code>config.secondary_worker_config.num_instances</code>, and the <code>PATCH</code> request
 body would be set as follows:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span>
