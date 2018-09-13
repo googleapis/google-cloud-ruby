@@ -127,7 +127,7 @@ network API call.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If the value is +false+, it means the operation is still in progress.</p>
+    <span class="summary_desc"><div class='inline'><p>If the value is <code>false</code>, it means the operation is still in progress.</p>
 </div></span>
   
 </li>
@@ -259,8 +259,8 @@ network API call.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns If the value is +false+, it means the operation is still in progress.
-If true, the operation is completed, and either +error+ or +response+ is
+    <p>Returns If the value is <code>false</code>, it means the operation is still in progress.
+If true, the operation is completed, and either <code>error</code> or <code>response</code> is
 available.</p>
 
 
@@ -279,8 +279,8 @@ available.</p>
       
       
         &mdash;
-        <div class='inline'><p>If the value is +false+, it means the operation is still in progress.
-If true, the operation is completed, and either +error+ or +response+ is
+        <div class='inline'><p>If the value is <code>false</code>, it means the operation is still in progress.
+If true, the operation is completed, and either <code>error</code> or <code>response</code> is
 available.</p>
 </div>
       
@@ -436,7 +436,7 @@ long-running operation should document the metadata type, if any.</p>
   <div class="discussion">
     <p>Returns The server-assigned name, which is only unique within the same service that
 originally returns it. If you use the default HTTP mapping, the
-+name+ should have the format of +operations/some/unique/name+.</p>
+<code>name</code> should have the format of <code>operations/some/unique/name</code>.</p>
 
 
   </div>
@@ -456,7 +456,7 @@ originally returns it. If you use the default HTTP mapping, the
         &mdash;
         <div class='inline'><p>The server-assigned name, which is only unique within the same service that
 originally returns it. If you use the default HTTP mapping, the
-+name+ should have the format of +operations/some/unique/name+.</p>
+<code>name</code> should have the format of <code>operations/some/unique/name</code>.</p>
 </div>
       
     </li>
@@ -494,13 +494,13 @@ originally returns it. If you use the default HTTP mapping, the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The normal response of the operation in case of success.  If the original
-method returns no data on success, such as +Delete+, the response is
-+google.protobuf.Empty+.  If the original method is standard
-+Get+/+Create+/+Update+, the response should be the resource.  For other
-methods, the response should have the type +XxxResponse+, where +Xxx+
+method returns no data on success, such as <code>Delete</code>, the response is
+<code>google.protobuf.Empty</code>.  If the original method is standard
+<code>Get</code>/<code>Create</code>/<code>Update</code>, the response should be the resource.  For other
+methods, the response should have the type <code>XxxResponse</code>, where <code>Xxx</code>
 is the original method name.  For example, if the original method name
-is +TakeSnapshot()+, the inferred response type is
-+TakeSnapshotResponse+.</p>
+is <code>TakeSnapshot()</code>, the inferred response type is
+<code>TakeSnapshotResponse</code>.</p>
 
 
   </div>
@@ -519,13 +519,13 @@ is +TakeSnapshot()+, the inferred response type is
       
         &mdash;
         <div class='inline'><p>The normal response of the operation in case of success.  If the original
-method returns no data on success, such as +Delete+, the response is
-+google.protobuf.Empty+.  If the original method is standard
-+Get+/+Create+/+Update+, the response should be the resource.  For other
-methods, the response should have the type +XxxResponse+, where +Xxx+
+method returns no data on success, such as <code>Delete</code>, the response is
+<code>google.protobuf.Empty</code>.  If the original method is standard
+<code>Get</code>/<code>Create</code>/<code>Update</code>, the response should be the resource.  For other
+methods, the response should have the type <code>XxxResponse</code>, where <code>Xxx</code>
 is the original method name.  For example, if the original method name
-is +TakeSnapshot()+, the inferred response type is
-+TakeSnapshotResponse+.</p>
+is <code>TakeSnapshot()</code>, the inferred response type is
+<code>TakeSnapshotResponse</code>.</p>
 </div>
       
     </li>

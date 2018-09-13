@@ -126,7 +126,7 @@ values, but are a little trickier to consume.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If true, then the final value in <span class='object_link'><a href="#values-instance_method" title="Google::Spanner::V1::PartialResultSet#values (method)">values</a></span> is chunked, and must be combined with more values from subsequent +PartialResultSet+s to obtain a complete field value.</p>
+    <span class="summary_desc"><div class='inline'><p>If true, then the final value in <span class='object_link'><a href="#values-instance_method" title="Google::Spanner::V1::PartialResultSet#values (method)">values</a></span> is chunked, and must be combined with more values from subsequent <code>PartialResultSet</code>s to obtain a complete field value.</p>
 </div></span>
   
 </li>
@@ -230,7 +230,7 @@ values, but are a little trickier to consume.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A streamed result set consists of a stream of values, which might be split into many +PartialResultSet+ messages to accommodate large rows and/or large values.</p>
+    <span class="summary_desc"><div class='inline'><p>A streamed result set consists of a stream of values, which might be split into many <code>PartialResultSet</code> messages to accommodate large rows and/or large values.</p>
 </div></span>
   
 </li>
@@ -259,7 +259,7 @@ values, but are a little trickier to consume.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If true, then the final value in <span class='object_link'><a href="#values-instance_method" title="Google::Spanner::V1::PartialResultSet#values (method)">values</a></span> is chunked, and must
-be combined with more values from subsequent +PartialResultSet+s
+be combined with more values from subsequent <code>PartialResultSet</code>s
 to obtain a complete field value.</p>
 
 
@@ -279,7 +279,7 @@ to obtain a complete field value.</p>
       
         &mdash;
         <div class='inline'><p>If true, then the final value in <span class='object_link'><a href="#values-instance_method" title="Google::Spanner::V1::PartialResultSet#values (method)">values</a></span> is chunked, and must
-be combined with more values from subsequent +PartialResultSet+s
+be combined with more values from subsequent <code>PartialResultSet</code>s
 to obtain a complete field value.</p>
 </div>
       
@@ -377,7 +377,7 @@ Only present in the first response.</p>
     <p>Returns Streaming calls might be interrupted for a variety of reasons, such
 as TCP connection loss. If this occurs, the stream of results can
 be resumed by re-sending the original request and including
-+resume_token+. Note that executing any other transaction in the
+<code>resume_token</code>. Note that executing any other transaction in the
 same session invalidates the token.</p>
 
 
@@ -399,7 +399,7 @@ same session invalidates the token.</p>
         <div class='inline'><p>Streaming calls might be interrupted for a variety of reasons, such
 as TCP connection loss. If this occurs, the stream of results can
 be resumed by re-sending the original request and including
-+resume_token+. Note that executing any other transaction in the
+<code>resume_token</code>. Note that executing any other transaction in the
 same session invalidates the token.</p>
 </div>
       
@@ -499,7 +499,7 @@ only once with the last response in the stream.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns A streamed result set consists of a stream of values, which might
-be split into many +PartialResultSet+ messages to accommodate
+be split into many <code>PartialResultSet</code> messages to accommodate
 large rows and/or large values. Every N complete values defines a
 row, where N is equal to the number of entries in
 <span class='object_link'><a href="StructType.html#fields-instance_method" title="Google::Spanner::V1::StructType#fields (method)">metadata::row_type::fields</a></span>.</p>
@@ -509,19 +509,19 @@ row, where N is equal to the number of entries in
 
 <p>It is possible that the last value in values is &quot;chunked&quot;,
 meaning that the rest of the value is sent in subsequent
-+PartialResultSet+(s). This is denoted by the <span class='object_link'><a href="#chunked_value-instance_method" title="Google::Spanner::V1::PartialResultSet#chunked_value (method)">chunked_value</a></span>
+<code>PartialResultSet</code>(s). This is denoted by the <span class='object_link'><a href="#chunked_value-instance_method" title="Google::Spanner::V1::PartialResultSet#chunked_value (method)">chunked_value</a></span>
 field. Two or more chunked values can be merged to form a
 complete value as follows:</p>
 
 <ul>
-<li>+bool/number/null+: cannot be chunked
+<li><code>bool/number/null</code>: cannot be chunked
 
 <ul>
-<li>+string+: concatenate the strings</li>
-<li>+list+: concatenate the lists. If the last element in a list is a
-+string+, +list+, or +object+, merge it with the first element in
+<li><code>string</code>: concatenate the strings</li>
+<li><code>list</code>: concatenate the lists. If the last element in a list is a
+<code>string</code>, <code>list</code>, or <code>object</code>, merge it with the first element in
 the next list by applying these rules recursively.</li>
-<li>+object+: concatenate the (field name, field value) pairs. If a
+<li><code>object</code>: concatenate the (field name, field value) pairs. If a
 field name is duplicated, then apply these rules recursively
 to merge the field values.</li>
 </ul></li>
@@ -555,7 +555,7 @@ to merge the field values.</li>
 
 <p>For a more complete example, suppose a streaming SQL query is
 yielding a result set whose rows contain a single string
-field. The following +PartialResultSet+s might be yielded:</p>
+field. The following <code>PartialResultSet</code>s might be yielded:</p>
 
 <pre class="code ruby"><code class="ruby">{
   &quot;metadata&quot;: { ... }
@@ -574,9 +574,9 @@ field. The following +PartialResultSet+s might be yielded:</p>
 }
 </code></pre>
 
-<p>This sequence of +PartialResultSet+s encodes two rows, one
-containing the field value +&quot;Hello&quot;+, and a second containing the
-field value +&quot;World&quot; = &quot;W&quot; + &quot;orl&quot; + &quot;d&quot;+.</p>
+<p>This sequence of <code>PartialResultSet</code>s encodes two rows, one
+containing the field value <code>&quot;Hello&quot;</code>, and a second containing the
+field value <code>&quot;World&quot; = &quot;W&quot; + &quot;orl&quot; + &quot;d&quot;</code>.</p>
 
 
   </div>
@@ -595,7 +595,7 @@ field value +&quot;World&quot; = &quot;W&quot; + &quot;orl&quot; + &quot;d&quot;
       
         &mdash;
         <div class='inline'><p>A streamed result set consists of a stream of values, which might
-be split into many +PartialResultSet+ messages to accommodate
+be split into many <code>PartialResultSet</code> messages to accommodate
 large rows and/or large values. Every N complete values defines a
 row, where N is equal to the number of entries in
 <span class='object_link'><a href="StructType.html#fields-instance_method" title="Google::Spanner::V1::StructType#fields (method)">metadata::row_type::fields</a></span>.</p>
@@ -605,19 +605,19 @@ row, where N is equal to the number of entries in
 
 <p>It is possible that the last value in values is &quot;chunked&quot;,
 meaning that the rest of the value is sent in subsequent
-+PartialResultSet+(s). This is denoted by the <span class='object_link'><a href="#chunked_value-instance_method" title="Google::Spanner::V1::PartialResultSet#chunked_value (method)">chunked_value</a></span>
+<code>PartialResultSet</code>(s). This is denoted by the <span class='object_link'><a href="#chunked_value-instance_method" title="Google::Spanner::V1::PartialResultSet#chunked_value (method)">chunked_value</a></span>
 field. Two or more chunked values can be merged to form a
 complete value as follows:</p>
 
 <ul>
-<li>+bool/number/null+: cannot be chunked
+<li><code>bool/number/null</code>: cannot be chunked
 
 <ul>
-<li>+string+: concatenate the strings</li>
-<li>+list+: concatenate the lists. If the last element in a list is a
-+string+, +list+, or +object+, merge it with the first element in
+<li><code>string</code>: concatenate the strings</li>
+<li><code>list</code>: concatenate the lists. If the last element in a list is a
+<code>string</code>, <code>list</code>, or <code>object</code>, merge it with the first element in
 the next list by applying these rules recursively.</li>
-<li>+object+: concatenate the (field name, field value) pairs. If a
+<li><code>object</code>: concatenate the (field name, field value) pairs. If a
 field name is duplicated, then apply these rules recursively
 to merge the field values.</li>
 </ul></li>
@@ -651,7 +651,7 @@ to merge the field values.</li>
 
 <p>For a more complete example, suppose a streaming SQL query is
 yielding a result set whose rows contain a single string
-field. The following +PartialResultSet+s might be yielded:</p>
+field. The following <code>PartialResultSet</code>s might be yielded:</p>
 
 <pre class="code ruby"><code class="ruby">{
   &quot;metadata&quot;: { ... }
@@ -670,9 +670,9 @@ field. The following +PartialResultSet+s might be yielded:</p>
 }
 </code></pre>
 
-<p>This sequence of +PartialResultSet+s encodes two rows, one
-containing the field value +&quot;Hello&quot;+, and a second containing the
-field value +&quot;World&quot; = &quot;W&quot; + &quot;orl&quot; + &quot;d&quot;+.</p>
+<p>This sequence of <code>PartialResultSet</code>s encodes two rows, one
+containing the field value <code>&quot;Hello&quot;</code>, and a second containing the
+field value <code>&quot;World&quot; = &quot;W&quot; + &quot;orl&quot; + &quot;d&quot;</code>.</p>
 </div>
       
     </li>

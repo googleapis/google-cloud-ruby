@@ -1101,7 +1101,7 @@ custom error handling.</p>
   <div class="discussion">
     <p>Creates a new Cloud Spanner database and starts to prepare it for serving.
 The returned <span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">long-running operation</a></span> will
-have a name of the format +<database_name>/operations/<operation_id>+ and
+have a name of the format <code>&lt;database_name&gt;/operations/&lt;operation_id&gt;</code> and
 can be used to track preparation of the database. The
 <span class='object_link'><a href="../../../../../Longrunning/Operation.html#metadata-instance_method" title="Google::Longrunning::Operation#metadata (method)">metadata</a></span> field type is
 <span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/CreateDatabaseMetadata.html" title="Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata (class)">CreateDatabaseMetadata</a></span>. The
@@ -1122,7 +1122,7 @@ can be used to track preparation of the database. The
 <span class='id identifier rubyid_database_admin_client'>database_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Database.html#new-class_method" title="Google::Cloud::Spanner::Admin::Database.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::Admin::Database::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient (class)">DatabaseAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +create_statement+:
+<span class='comment'># TODO: Initialize `create_statement`:
 </span><span class='id identifier rubyid_create_statement'>create_statement</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
 <span class='comment'># Register a callback during the method call.
@@ -1167,7 +1167,7 @@ can be used to track preparation of the database. The
       
         &mdash;
         <div class='inline'><p>Required. The name of the instance that will serve the new database.
-Values are of the form +projects/<project>/instances/<instance>+.</p>
+Values are of the form <code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -1182,11 +1182,11 @@ Values are of the form +projects/<project>/instances/<instance>+.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. A +CREATE DATABASE+ statement, which specifies the ID of the
+        <div class='inline'><p>Required. A <code>CREATE DATABASE</code> statement, which specifies the ID of the
 new database.  The database ID must conform to the regular expression
-+[a-z][a-z0-9_-]*[a-z0-9]+ and be between 2 and 30 characters in length.
+<code>[a-z][a-z0-9_\-]*[a-z0-9]</code> and be between 2 and 30 characters in length.
 If the database ID is a reserved word or if it contains a hyphen, the
-database ID must be enclosed in backticks (+ + +).</p>
+database ID must be enclosed in backticks (<code>`</code>).</p>
 </div>
       
     </li>
@@ -1525,7 +1525,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the requested database. Values are of the form
-+projects/<project>/instances/<instance>/databases/<database>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/databases/&lt;database&gt;</code>.</p>
 </div>
       
     </li>
@@ -1847,7 +1847,7 @@ retries, etc.</p>
     <p>Gets the access control policy for a database resource. Returns an empty
 policy if a database exists but does not have a policy set.</p>
 
-<p>Authorization requires +spanner.databases.getIamPolicy+ permission on
+<p>Authorization requires <code>spanner.databases.getIamPolicy</code> permission on
 <span class='object_link'><a href="../../../../../Iam/V1/GetIamPolicyRequest.html#resource-instance_method" title="Google::Iam::V1::GetIamPolicyRequest#resource (method)">resource</a></span>.</p>
 
 
@@ -1880,8 +1880,8 @@ policy if a database exists but does not have a policy set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -2068,7 +2068,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The instance whose databases should be listed.
-Values are of the form +projects/<project>/instances/<instance>+.</p>
+Values are of the form <code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -2244,7 +2244,7 @@ object.</p>
     <p>Sets the access control policy on a database resource. Replaces any
 existing policy.</p>
 
-<p>Authorization requires +spanner.databases.setIamPolicy+ permission on
+<p>Authorization requires <code>spanner.databases.setIamPolicy</code> permission on
 <span class='object_link'><a href="../../../../../Iam/V1/SetIamPolicyRequest.html#resource-instance_method" title="Google::Iam::V1::SetIamPolicyRequest#resource (method)">resource</a></span>.</p>
 
 
@@ -2261,7 +2261,7 @@ existing policy.</p>
 <span class='id identifier rubyid_database_admin_client'>database_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Database.html#new-class_method" title="Google::Cloud::Spanner::Admin::Database.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::Admin::Database::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient (class)">DatabaseAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_database_path'><span class='object_link'><a href="#database_path-class_method" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path (method)">database_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +policy+:
+<span class='comment'># TODO: Initialize `policy`:
 </span><span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_database_admin_client'>database_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_policy'>policy</span><span class='rparen'>)</span></code></pre>
     
@@ -2280,8 +2280,8 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -2296,7 +2296,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>REQUIRED: The complete policy to be applied to the +resource+. The size of
+        <div class='inline'><p>REQUIRED: The complete policy to be applied to the <code>resource</code>. The size of
 the policy is limited to a few 10s of KB. An empty policy is a
 valid policy but certain Cloud Platform services (such as Projects)
 might reject them.
@@ -2451,7 +2451,7 @@ retries, etc.</p>
     <p>Returns permissions that the caller has on the specified database resource.</p>
 
 <p>Attempting this RPC on a non-existent Cloud Spanner database will result in
-a NOT_FOUND error if the user has +spanner.databases.list+ permission on
+a NOT_FOUND error if the user has <code>spanner.databases.list</code> permission on
 the containing Cloud Spanner instance. Otherwise returns an empty set of
 permissions.</p>
 
@@ -2469,7 +2469,7 @@ permissions.</p>
 <span class='id identifier rubyid_database_admin_client'>database_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Database.html#new-class_method" title="Google::Cloud::Spanner::Admin::Database.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::Admin::Database::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient (class)">DatabaseAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_database_path'><span class='object_link'><a href="#database_path-class_method" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path (method)">database_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +permissions+:
+<span class='comment'># TODO: Initialize `permissions`:
 </span><span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_database_admin_client'>database_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span></code></pre>
     
@@ -2488,8 +2488,8 @@ permissions.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -2504,7 +2504,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The set of permissions to check for the +resource+. Permissions with
+        <div class='inline'><p>The set of permissions to check for the <code>resource</code>. Permissions with
 wildcards (such as &#39;<em>&#39; or &#39;storage.</em>&#39;) are not allowed. For more
 information see
 <a href="https://cloud.google.com/iam/docs/overview#permissions">IAM Overview</a>.</p>
@@ -2657,7 +2657,7 @@ retries, etc.</p>
     <p>Updates the schema of a Cloud Spanner database by
 creating/altering/dropping tables, columns, indexes, etc. The returned
 <span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">long-running operation</a></span> will have a name of
-the format +<database_name>/operations/<operation_id>+ and can be used to
+the format <code>&lt;database_name&gt;/operations/&lt;operation_id&gt;</code> and can be used to
 track execution of the schema change(s). The
 <span class='object_link'><a href="../../../../../Longrunning/Operation.html#metadata-instance_method" title="Google::Longrunning::Operation#metadata (method)">metadata</a></span> field type is
 <span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/UpdateDatabaseDdlMetadata.html" title="Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata (class)">UpdateDatabaseDdlMetadata</a></span>.  The operation has no response.</p>
@@ -2676,7 +2676,7 @@ track execution of the schema change(s). The
 <span class='id identifier rubyid_database_admin_client'>database_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Database.html#new-class_method" title="Google::Cloud::Spanner::Admin::Database.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_database'>formatted_database</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::Admin::Database::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient (class)">DatabaseAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_database_path'><span class='object_link'><a href="#database_path-class_method" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path (method)">database_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +statements+:
+<span class='comment'># TODO: Initialize `statements`:
 </span><span class='id identifier rubyid_statements'>statements</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -2751,7 +2751,7 @@ track execution of the schema change(s). The
       
         &mdash;
         <div class='inline'><p>If empty, the new update request is assigned an
-automatically-generated operation ID. Otherwise, +operation_id+
+automatically-generated operation ID. Otherwise, <code>operation_id</code>
 is used to construct the name of the resulting
 <span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Operation</a></span>.</p>
 
@@ -2759,16 +2759,16 @@ is used to construct the name of the resulting
 whether the statements were executed in the event that the
 UpdateDatabaseDdl call is replayed,
 or the return value is otherwise lost: the <span class='object_link'><a href="../../../../../Spanner/Admin/Database/V1/UpdateDatabaseDdlRequest.html#database-instance_method" title="Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database (method)">database</a></span> and
-+operation_id+ fields can be combined to form the
+<code>operation_id</code> fields can be combined to form the
 <span class='object_link'><a href="../../../../../Longrunning/Operation.html#name-instance_method" title="Google::Longrunning::Operation#name (method)">name</a></span> of the resulting
-<span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">longrunning::Operation</a></span>: +<database>/operations/<operation_id>+.</p>
+<span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">longrunning::Operation</a></span>: <code>&lt;database&gt;/operations/&lt;operation_id&gt;</code>.</p>
 
-<p>+operation_id+ should be unique within the database, and must be
-a valid identifier: +[a-z][a-z0-9_]*+. Note that
+<p><code>operation_id</code> should be unique within the database, and must be
+a valid identifier: <code>[a-z][a-z0-9_]*</code>. Note that
 automatically-generated operation IDs always begin with an
 underscore. If the named operation already exists,
 UpdateDatabaseDdl returns
-+ALREADY_EXISTS+.</p>
+<code>ALREADY_EXISTS</code>.</p>
 </div>
       
     </li>

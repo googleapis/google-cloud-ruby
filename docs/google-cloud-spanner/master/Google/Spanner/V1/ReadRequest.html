@@ -203,7 +203,7 @@ StreamingRead.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If greater than zero, only the first +limit+ rows are yielded.</p>
+    <span class="summary_desc"><div class='inline'><p>If greater than zero, only the first <code>limit</code> rows are yielded.</p>
 </div></span>
   
 </li>
@@ -255,7 +255,7 @@ StreamingRead.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If this request is resuming a previously interrupted read, +resume_token+ should be copied from the last <span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption.</p>
+    <span class="summary_desc"><div class='inline'><p>If this request is resuming a previously interrupted read, <code>resume_token</code> should be copied from the last <span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption.</p>
 </div></span>
   
 </li>
@@ -477,7 +477,7 @@ and sorting result rows. See <span class='object_link'><a href="#key_set-instanc
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
+    <p>Returns Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
 primary keys of the rows in <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>
 is present. If <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> instead names
 index keys in <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>.</p>
@@ -487,7 +487,7 @@ in table primary key order (if <span class='object_link'><a href="#index-instanc
 (if <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is non-empty).  If the <span class='object_link'><a href="#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is not
 empty, rows will be yielded in an unspecified order.</p>
 
-<p>It is not an error for the +key_set+ to name rows that do not
+<p>It is not an error for the <code>key_set</code> to name rows that do not
 exist in the database. Read yields nothing for nonexistent rows.</p>
 
 
@@ -506,7 +506,7 @@ exist in the database. Read yields nothing for nonexistent rows.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
+        <div class='inline'><p>Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
 primary keys of the rows in <span class='object_link'><a href="#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>
 is present. If <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> instead names
 index keys in <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>.</p>
@@ -516,7 +516,7 @@ in table primary key order (if <span class='object_link'><a href="#index-instanc
 (if <span class='object_link'><a href="#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is non-empty).  If the <span class='object_link'><a href="#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is not
 empty, rows will be yielded in an unspecified order.</p>
 
-<p>It is not an error for the +key_set+ to name rows that do not
+<p>It is not an error for the <code>key_set</code> to name rows that do not
 exist in the database. Read yields nothing for nonexistent rows.</p>
 </div>
       
@@ -554,9 +554,9 @@ exist in the database. Read yields nothing for nonexistent rows.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns If greater than zero, only the first +limit+ rows are yielded. If +limit+
+    <p>Returns If greater than zero, only the first <code>limit</code> rows are yielded. If <code>limit</code>
 is zero, the default is no limit. A limit cannot be specified if
-+partition_token+ is set.</p>
+<code>partition_token</code> is set.</p>
 
 
   </div>
@@ -574,9 +574,9 @@ is zero, the default is no limit. A limit cannot be specified if
       
       
         &mdash;
-        <div class='inline'><p>If greater than zero, only the first +limit+ rows are yielded. If +limit+
+        <div class='inline'><p>If greater than zero, only the first <code>limit</code> rows are yielded. If <code>limit</code>
 is zero, the default is no limit. A limit cannot be specified if
-+partition_token+ is set.</p>
+<code>partition_token</code> is set.</p>
 </div>
       
     </li>
@@ -675,7 +675,7 @@ PartitionReadRequest message used to create this partition_token.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If this request is resuming a previously interrupted read,
-+resume_token+ should be copied from the last
+<code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
 enables the new read to resume where the last read left off. The
 rest of the request parameters must exactly match the request
@@ -698,7 +698,7 @@ that yielded this token.</p>
       
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted read,
-+resume_token+ should be copied from the last
+<code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
 enables the new read to resume where the last read left off. The
 rest of the request parameters must exactly match the request

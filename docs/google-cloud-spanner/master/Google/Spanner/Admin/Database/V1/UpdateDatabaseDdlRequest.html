@@ -96,8 +96,8 @@ are executable (syntactically valid, name tables that exist, etc.)
 before enqueueing them, but they may still fail upon
 later execution (e.g., if a statement from another batch of
 statements is applied first and it conflicts in some way, or if
-there is some data-related problem like a +NULL+ value in a column to
-which +NOT NULL+ would be added). If a statement fails, all
+there is some data-related problem like a <code>NULL</code> value in a column to
+which <code>NOT NULL</code> would be added). If a statement fails, all
 subsequent statements in the batch are automatically cancelled.</p>
 
 <p>Each batch of statements is assigned a name which can be used with
@@ -275,7 +275,7 @@ details.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If empty, the new update request is assigned an
-automatically-generated operation ID. Otherwise, +operation_id+
+automatically-generated operation ID. Otherwise, <code>operation_id</code>
 is used to construct the name of the resulting
 <span class='object_link'><a href="../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Operation</a></span>.</p>
 
@@ -283,16 +283,16 @@ is used to construct the name of the resulting
 whether the statements were executed in the event that the
 UpdateDatabaseDdl call is replayed,
 or the return value is otherwise lost: the <span class='object_link'><a href="#database-instance_method" title="Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database (method)">database</a></span> and
-+operation_id+ fields can be combined to form the
+<code>operation_id</code> fields can be combined to form the
 <span class='object_link'><a href="../../../../Longrunning/Operation.html#name-instance_method" title="Google::Longrunning::Operation#name (method)">name</a></span> of the resulting
-<span class='object_link'><a href="../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">longrunning::Operation</a></span>: +<database>/operations/<operation_id>+.</p>
+<span class='object_link'><a href="../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">longrunning::Operation</a></span>: <code>&lt;database&gt;/operations/&lt;operation_id&gt;</code>.</p>
 
-<p>+operation_id+ should be unique within the database, and must be
-a valid identifier: +[a-z][a-z0-9_]*+. Note that
+<p><code>operation_id</code> should be unique within the database, and must be
+a valid identifier: <code>[a-z][a-z0-9_]*</code>. Note that
 automatically-generated operation IDs always begin with an
 underscore. If the named operation already exists,
 UpdateDatabaseDdl returns
-+ALREADY_EXISTS+.</p>
+<code>ALREADY_EXISTS</code>.</p>
 
 
   </div>
@@ -311,7 +311,7 @@ UpdateDatabaseDdl returns
       
         &mdash;
         <div class='inline'><p>If empty, the new update request is assigned an
-automatically-generated operation ID. Otherwise, +operation_id+
+automatically-generated operation ID. Otherwise, <code>operation_id</code>
 is used to construct the name of the resulting
 <span class='object_link'><a href="../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Operation</a></span>.</p>
 
@@ -319,16 +319,16 @@ is used to construct the name of the resulting
 whether the statements were executed in the event that the
 UpdateDatabaseDdl call is replayed,
 or the return value is otherwise lost: the <span class='object_link'><a href="#database-instance_method" title="Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database (method)">database</a></span> and
-+operation_id+ fields can be combined to form the
+<code>operation_id</code> fields can be combined to form the
 <span class='object_link'><a href="../../../../Longrunning/Operation.html#name-instance_method" title="Google::Longrunning::Operation#name (method)">name</a></span> of the resulting
-<span class='object_link'><a href="../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">longrunning::Operation</a></span>: +<database>/operations/<operation_id>+.</p>
+<span class='object_link'><a href="../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">longrunning::Operation</a></span>: <code>&lt;database&gt;/operations/&lt;operation_id&gt;</code>.</p>
 
-<p>+operation_id+ should be unique within the database, and must be
-a valid identifier: +[a-z][a-z0-9_]*+. Note that
+<p><code>operation_id</code> should be unique within the database, and must be
+a valid identifier: <code>[a-z][a-z0-9_]*</code>. Note that
 automatically-generated operation IDs always begin with an
 underscore. If the named operation already exists,
 UpdateDatabaseDdl returns
-+ALREADY_EXISTS+.</p>
+<code>ALREADY_EXISTS</code>.</p>
 </div>
       
     </li>

@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Executes all reads at a timestamp that is +exact_staleness+ old.</p>
+    <span class="summary_desc"><div class='inline'><p>Executes all reads at a timestamp that is <code>exact_staleness</code> old.</p>
 </div></span>
   
 </li>
@@ -150,7 +150,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Read data at a timestamp &gt;= +NOW - max_staleness+ seconds.</p>
+    <span class="summary_desc"><div class='inline'><p>Read data at a timestamp &gt;= <code>NOW - max_staleness</code> seconds.</p>
 </div></span>
   
 </li>
@@ -176,7 +176,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Executes all reads at a timestamp &gt;= +min_read_timestamp+.</p>
+    <span class="summary_desc"><div class='inline'><p>Executes all reads at a timestamp &gt;= <code>min_read_timestamp</code>.</p>
 </div></span>
   
 </li>
@@ -282,7 +282,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Executes all reads at a timestamp that is +exact_staleness+
+    <p>Returns Executes all reads at a timestamp that is <code>exact_staleness</code>
 old. The timestamp is chosen soon after the read is started.</p>
 
 <p>Guarantees that all writes that have committed more than the
@@ -292,7 +292,7 @@ local clock is substantially skewed from Cloud Spanner commit
 timestamps.</p>
 
 <p>Useful for reading at nearby replicas without the distributed
-timestamp negotiation overhead of +max_staleness+.</p>
+timestamp negotiation overhead of <code>max_staleness</code>.</p>
 
 
   </div>
@@ -310,7 +310,7 @@ timestamp negotiation overhead of +max_staleness+.</p>
       
       
         &mdash;
-        <div class='inline'><p>Executes all reads at a timestamp that is +exact_staleness+
+        <div class='inline'><p>Executes all reads at a timestamp that is <code>exact_staleness</code>
 old. The timestamp is chosen soon after the read is started.</p>
 
 <p>Guarantees that all writes that have committed more than the
@@ -320,7 +320,7 @@ local clock is substantially skewed from Cloud Spanner commit
 timestamps.</p>
 
 <p>Useful for reading at nearby replicas without the distributed
-timestamp negotiation overhead of +max_staleness+.</p>
+timestamp negotiation overhead of <code>max_staleness</code>.</p>
 </div>
       
     </li>
@@ -357,7 +357,7 @@ timestamp negotiation overhead of +max_staleness+.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Read data at a timestamp &gt;= +NOW - max_staleness+
+    <p>Returns Read data at a timestamp &gt;= <code>NOW - max_staleness</code>
 seconds. Guarantees that all writes that have committed more
 than the specified number of seconds ago are visible. Because
 Cloud Spanner chooses the exact timestamp, this mode works even if
@@ -387,7 +387,7 @@ transactions.</p>
       
       
         &mdash;
-        <div class='inline'><p>Read data at a timestamp &gt;= +NOW - max_staleness+
+        <div class='inline'><p>Read data at a timestamp &gt;= <code>NOW - max_staleness</code>
 seconds. Guarantees that all writes that have committed more
 than the specified number of seconds ago are visible. Because
 Cloud Spanner chooses the exact timestamp, this mode works even if
@@ -436,7 +436,7 @@ transactions.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Executes all reads at a timestamp &gt;= +min_read_timestamp+.</p>
+    <p>Returns Executes all reads at a timestamp &gt;= <code>min_read_timestamp</code>.</p>
 
 <p>This is useful for requesting fresher data than some previous
 read, or data that is fresh enough to observe the effects of some
@@ -445,7 +445,7 @@ previously committed transaction whose timestamp is known.</p>
 <p>Note that this option can only be used in single-use transactions.</p>
 
 <p>A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
-Example: +&quot;2014-10-02T15:01:23.045123456Z&quot;+.</p>
+Example: <code>&quot;2014-10-02T15:01:23.045123456Z&quot;</code>.</p>
 
 
   </div>
@@ -463,7 +463,7 @@ Example: +&quot;2014-10-02T15:01:23.045123456Z&quot;+.</p>
       
       
         &mdash;
-        <div class='inline'><p>Executes all reads at a timestamp &gt;= +min_read_timestamp+.</p>
+        <div class='inline'><p>Executes all reads at a timestamp &gt;= <code>min_read_timestamp</code>.</p>
 
 <p>This is useful for requesting fresher data than some previous
 read, or data that is fresh enough to observe the effects of some
@@ -472,7 +472,7 @@ previously committed transaction whose timestamp is known.</p>
 <p>Note that this option can only be used in single-use transactions.</p>
 
 <p>A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
-Example: +&quot;2014-10-02T15:01:23.045123456Z&quot;+.</p>
+Example: <code>&quot;2014-10-02T15:01:23.045123456Z&quot;</code>.</p>
 </div>
       
     </li>
@@ -520,7 +520,7 @@ for coordinating many reads against a consistent snapshot of the
 data.</p>
 
 <p>A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
-Example: +&quot;2014-10-02T15:01:23.045123456Z&quot;+.</p>
+Example: <code>&quot;2014-10-02T15:01:23.045123456Z&quot;</code>.</p>
 
 
   </div>
@@ -549,7 +549,7 @@ for coordinating many reads against a consistent snapshot of the
 data.</p>
 
 <p>A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
-Example: +&quot;2014-10-02T15:01:23.045123456Z&quot;+.</p>
+Example: <code>&quot;2014-10-02T15:01:23.045123456Z&quot;</code>.</p>
 </div>
       
     </li>

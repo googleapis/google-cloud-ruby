@@ -73,13 +73,13 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>+TypeCode+ is used as part of <span class='object_link'><a href="Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> to
+    <p><code>TypeCode</code> is used as part of <span class='object_link'><a href="Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> to
 indicate the type of a Cloud Spanner value.</p>
 
 <p>Each legal value of a type can be encoded to or decoded from a JSON
 value, using the encodings described below. All Cloud Spanner values can
-be +null+, regardless of type; +null+s are always encoded as a JSON
-+null+.</p>
+be <code>null</code>, regardless of type; <code>null</code>s are always encoded as a JSON
+<code>null</code>.</p>
 
 
   </div>
@@ -114,7 +114,7 @@ be +null+, regardless of type; +null+s are always encoded as a JSON
         <dt id="BOOL-constant" class="">BOOL =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoded as JSON +true+ or +false+.</p>
+    <p>Encoded as JSON <code>true</code> or <code>false</code>.</p>
 
 
   </div>
@@ -129,7 +129,7 @@ be +null+, regardless of type; +null+s are always encoded as a JSON
         <dt id="INT64-constant" class="">INT64 =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoded as +string+, in decimal format.</p>
+    <p>Encoded as <code>string</code>, in decimal format.</p>
 
 
   </div>
@@ -144,8 +144,8 @@ be +null+, regardless of type; +null+s are always encoded as a JSON
         <dt id="FLOAT64-constant" class="">FLOAT64 =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoded as +number+, or the strings +&quot;NaN&quot;+, +&quot;Infinity&quot;+, or
-+&quot;-Infinity&quot;+.</p>
+    <p>Encoded as <code>number</code>, or the strings <code>&quot;NaN&quot;</code>, <code>&quot;Infinity&quot;</code>, or
+<code>&quot;-Infinity&quot;</code>.</p>
 
 
   </div>
@@ -160,12 +160,12 @@ be +null+, regardless of type; +null+s are always encoded as a JSON
         <dt id="TIMESTAMP-constant" class="">TIMESTAMP =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoded as +string+ in RFC 3339 timestamp format. The time zone
-must be present, and must be +&quot;Z&quot;+.</p>
+    <p>Encoded as <code>string</code> in RFC 3339 timestamp format. The time zone
+must be present, and must be <code>&quot;Z&quot;</code>.</p>
 
 <p>If the schema has the column option
-+allow_commit_timestamp=true+, the placeholder string
-+&quot;spanner.commit_timestamp()&quot;+ can be used to instruct the system
+<code>allow_commit_timestamp=true</code>, the placeholder string
+<code>&quot;spanner.commit_timestamp()&quot;</code> can be used to instruct the system
 to insert the commit timestamp associated with the transaction
 commit.</p>
 
@@ -182,7 +182,7 @@ commit.</p>
         <dt id="DATE-constant" class="">DATE =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoded as +string+ in RFC 3339 date format.</p>
+    <p>Encoded as <code>string</code> in RFC 3339 date format.</p>
 
 
   </div>
@@ -197,7 +197,7 @@ commit.</p>
         <dt id="STRING-constant" class="">STRING =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoded as +string+.</p>
+    <p>Encoded as <code>string</code>.</p>
 
 
   </div>
@@ -212,7 +212,7 @@ commit.</p>
         <dt id="BYTES-constant" class="">BYTES =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoded as a base64-encoded +string+, as described in RFC 4648,
+    <p>Encoded as a base64-encoded <code>string</code>, as described in RFC 4648,
 section 4.</p>
 
 
@@ -228,7 +228,7 @@ section 4.</p>
         <dt id="ARRAY-constant" class="">ARRAY =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoded as +list+, where the list elements are represented
+    <p>Encoded as <code>list</code>, where the list elements are represented
 according to <span class='object_link'><a href="Type.html#array_element_type-instance_method" title="Google::Spanner::V1::Type#array_element_type (method)">array_element_type</a></span>.</p>
 
 
@@ -244,7 +244,7 @@ according to <span class='object_link'><a href="Type.html#array_element_type-ins
         <dt id="STRUCT-constant" class="">STRUCT =
           <div class="docstring">
   <div class="discussion">
-    <p>Encoded as +list+, where list element +i+ is represented according
+    <p>Encoded as <code>list</code>, where list element <code>i</code> is represented according
 to [struct_type.fields[i]][google.spanner.v1.StructType.fields].</p>
 
 

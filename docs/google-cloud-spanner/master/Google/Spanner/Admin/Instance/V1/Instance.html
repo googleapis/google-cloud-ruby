@@ -293,7 +293,7 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The name of the instance&#39;s configuration. Values are of the form
-+projects/<project>/instanceConfigs/<configuration>+. See
+<code>projects/&lt;project&gt;/instanceConfigs/&lt;configuration&gt;</code>. See
 also <span class='object_link'><a href="InstanceConfig.html" title="Google::Spanner::Admin::Instance::V1::InstanceConfig (class)">InstanceConfig</a></span> and
 ListInstanceConfigs.</p>
 
@@ -314,7 +314,7 @@ ListInstanceConfigs.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the instance&#39;s configuration. Values are of the form
-+projects/<project>/instanceConfigs/<configuration>+. See
+<code>projects/&lt;project&gt;/instanceConfigs/&lt;configuration&gt;</code>. See
 also <span class='object_link'><a href="InstanceConfig.html" title="Google::Spanner::Admin::Instance::V1::InstanceConfig (class)">InstanceConfig</a></span> and
 ListInstanceConfigs.</p>
 </div>
@@ -479,9 +479,9 @@ firewall, load balancing, etc.).</p>
 
 <ul>
 <li>Label keys must be between 1 and 63 characters long and must conform to
-the following regular expression: +<a href="https://cloud.google.com%5B-a-z0-9%5D*%5Ba-z0-9%5D">a-z</a>?+.</li>
+the following regular expression: <code>[a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?</code>.</li>
 <li>Label values must be between 0 and 63 characters long and must conform
-to the regular expression +(<a href="https://cloud.google.com%5B-a-z0-9%5D*%5Ba-z0-9%5D">a-z</a>?)?+.</li>
+to the regular expression <code>([a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?)?</code>.</li>
 <li>No more than 64 labels can be associated with a given resource.</li>
 </ul>
 
@@ -519,9 +519,9 @@ firewall, load balancing, etc.).</p>
 
 <ul>
 <li>Label keys must be between 1 and 63 characters long and must conform to
-the following regular expression: +<a href="https://cloud.google.com%5B-a-z0-9%5D*%5Ba-z0-9%5D">a-z</a>?+.</li>
+the following regular expression: <code>[a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?</code>.</li>
 <li>Label values must be between 0 and 63 characters long and must conform
-to the regular expression +(<a href="https://cloud.google.com%5B-a-z0-9%5D*%5Ba-z0-9%5D">a-z</a>?)?+.</li>
+to the regular expression <code>([a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?)?</code>.</li>
 <li>No more than 64 labels can be associated with a given resource.</li>
 </ul>
 
@@ -601,7 +601,7 @@ allow &quot;</em>&quot; in a future release.</p>
   <div class="discussion">
     <p>Returns Required. A unique identifier for the instance, which cannot be changed
 after the instance is created. Values are of the form
-+projects/<project>/instances/[a-z][-a-z0-9]*[a-z0-9]+. The final
+<code>projects/&lt;project&gt;/instances/[a-z][-a-z0-9]*[a-z0-9]</code>. The final
 segment of the name must be between 6 and 30 characters in length.</p>
 
 
@@ -622,7 +622,7 @@ segment of the name must be between 6 and 30 characters in length.</p>
         &mdash;
         <div class='inline'><p>Required. A unique identifier for the instance, which cannot be changed
 after the instance is created. Values are of the form
-+projects/<project>/instances/[a-z][-a-z0-9]*[a-z0-9]+. The final
+<code>projects/&lt;project&gt;/instances/[a-z][-a-z0-9]*[a-z0-9]</code>. The final
 segment of the name must be between 6 and 30 characters in length.</p>
 </div>
       
@@ -691,7 +691,7 @@ segment of the name must be between 6 and 30 characters in length.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The number of nodes allocated to this instance. This may be zero
-in API responses for instances that are not yet in state +READY+.</p>
+in API responses for instances that are not yet in state <code>READY</code>.</p>
 
 <p>See <a href="https://cloud.google.com/spanner/docs/instances#node_count">the documentation</a>
 for more information about nodes.</p>
@@ -713,7 +713,7 @@ for more information about nodes.</p>
       
         &mdash;
         <div class='inline'><p>Required. The number of nodes allocated to this instance. This may be zero
-in API responses for instances that are not yet in state +READY+.</p>
+in API responses for instances that are not yet in state <code>READY</code>.</p>
 
 <p>See <a href="https://cloud.google.com/spanner/docs/instances#node_count">the documentation</a>
 for more information about nodes.</p>
@@ -785,9 +785,9 @@ for more information about nodes.</p>
   <div class="discussion">
     <p>Returns Output only. The current instance state. For
 CreateInstance, the state must be
-either omitted or set to +CREATING+. For
+either omitted or set to <code>CREATING</code>. For
 UpdateInstance, the state must be
-either omitted or set to +READY+.</p>
+either omitted or set to <code>READY</code>.</p>
 
 
   </div>
@@ -807,9 +807,9 @@ either omitted or set to +READY+.</p>
         &mdash;
         <div class='inline'><p>Output only. The current instance state. For
 CreateInstance, the state must be
-either omitted or set to +CREATING+. For
+either omitted or set to <code>CREATING</code>. For
 UpdateInstance, the state must be
-either omitted or set to +READY+.</p>
+either omitted or set to <code>READY</code>.</p>
 </div>
       
     </li>

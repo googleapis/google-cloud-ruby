@@ -176,7 +176,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If non-empty, +page_token+ should contain a <span class='object_link'><a href="ListInstancesResponse.html#next_page_token-instance_method" title="Google::Spanner::Admin::Instance::V1::ListInstancesResponse#next_page_token (method)">next_page_token</a></span> from a previous <span class='object_link'><a href="ListInstancesResponse.html" title="Google::Spanner::Admin::Instance::V1::ListInstancesResponse (class)">ListInstancesResponse</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>If non-empty, <code>page_token</code> should contain a <span class='object_link'><a href="ListInstancesResponse.html#next_page_token-instance_method" title="Google::Spanner::Admin::Instance::V1::ListInstancesResponse#next_page_token (method)">next_page_token</a></span> from a previous <span class='object_link'><a href="ListInstancesResponse.html" title="Google::Spanner::Admin::Instance::V1::ListInstancesResponse (class)">ListInstancesResponse</a></span>.</p>
 </div></span>
   
 </li>
@@ -234,25 +234,25 @@ js:
 case insensitive. The fields eligible for filtering are:</p>
 
 <ul>
-<li>+name+
+<li><code>name</code>
 
 <ul>
-<li>+display_name+</li>
-<li>+labels.key+ where key is the name of a label</li>
+<li><code>display_name</code></li>
+<li><code>labels.key</code> where key is the name of a label</li>
 </ul></li>
 </ul>
 
 <p>Some examples of using filters are:</p>
 
 <ul>
-<li>+name:*+ --&gt; The instance has a name.</li>
-<li>+name:Howl+ --&gt; The instance&#39;s name contains the string &quot;howl&quot;.</li>
-<li>+name:HOWL+ --&gt; Equivalent to above.</li>
-<li>+NAME:howl+ --&gt; Equivalent to above.</li>
-<li>+labels.env:*+ --&gt; The instance has the label &quot;env&quot;.</li>
-<li>+labels.env:dev+ --&gt; The instance has the label &quot;env&quot; and the value of
+<li><code>name:*</code> --&gt; The instance has a name.</li>
+<li><code>name:Howl</code> --&gt; The instance&#39;s name contains the string &quot;howl&quot;.</li>
+<li><code>name:HOWL</code> --&gt; Equivalent to above.</li>
+<li><code>NAME:howl</code> --&gt; Equivalent to above.</li>
+<li><code>labels.env:*</code> --&gt; The instance has the label &quot;env&quot;.</li>
+<li><code>labels.env:dev</code> --&gt; The instance has the label &quot;env&quot; and the value of
 the label contains the string &quot;dev&quot;.</li>
-<li>+name:howl labels.env:dev+ --&gt; The instance&#39;s name contains &quot;howl&quot; and
+<li><code>name:howl labels.env:dev</code> --&gt; The instance&#39;s name contains &quot;howl&quot; and
 it has the label &quot;env&quot; with its value
 containing &quot;dev&quot;.</li>
 </ul>
@@ -277,25 +277,25 @@ containing &quot;dev&quot;.</li>
 case insensitive. The fields eligible for filtering are:</p>
 
 <ul>
-<li>+name+
+<li><code>name</code>
 
 <ul>
-<li>+display_name+</li>
-<li>+labels.key+ where key is the name of a label</li>
+<li><code>display_name</code></li>
+<li><code>labels.key</code> where key is the name of a label</li>
 </ul></li>
 </ul>
 
 <p>Some examples of using filters are:</p>
 
 <ul>
-<li>+name:*+ --&gt; The instance has a name.</li>
-<li>+name:Howl+ --&gt; The instance&#39;s name contains the string &quot;howl&quot;.</li>
-<li>+name:HOWL+ --&gt; Equivalent to above.</li>
-<li>+NAME:howl+ --&gt; Equivalent to above.</li>
-<li>+labels.env:*+ --&gt; The instance has the label &quot;env&quot;.</li>
-<li>+labels.env:dev+ --&gt; The instance has the label &quot;env&quot; and the value of
+<li><code>name:*</code> --&gt; The instance has a name.</li>
+<li><code>name:Howl</code> --&gt; The instance&#39;s name contains the string &quot;howl&quot;.</li>
+<li><code>name:HOWL</code> --&gt; Equivalent to above.</li>
+<li><code>NAME:howl</code> --&gt; Equivalent to above.</li>
+<li><code>labels.env:*</code> --&gt; The instance has the label &quot;env&quot;.</li>
+<li><code>labels.env:dev</code> --&gt; The instance has the label &quot;env&quot; and the value of
 the label contains the string &quot;dev&quot;.</li>
-<li>+name:howl labels.env:dev+ --&gt; The instance&#39;s name contains &quot;howl&quot; and
+<li><code>name:howl labels.env:dev</code> --&gt; The instance&#39;s name contains &quot;howl&quot; and
 it has the label &quot;env&quot; with its value
 containing &quot;dev&quot;.</li>
 </ul>
@@ -392,7 +392,7 @@ to the server&#39;s maximum allowed page size.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns If non-empty, +page_token+ should contain a
+    <p>Returns If non-empty, <code>page_token</code> should contain a
 <span class='object_link'><a href="ListInstancesResponse.html#next_page_token-instance_method" title="Google::Spanner::Admin::Instance::V1::ListInstancesResponse#next_page_token (method)">next_page_token</a></span> from a
 previous <span class='object_link'><a href="ListInstancesResponse.html" title="Google::Spanner::Admin::Instance::V1::ListInstancesResponse (class)">ListInstancesResponse</a></span>.</p>
 
@@ -412,7 +412,7 @@ previous <span class='object_link'><a href="ListInstancesResponse.html" title="G
       
       
         &mdash;
-        <div class='inline'><p>If non-empty, +page_token+ should contain a
+        <div class='inline'><p>If non-empty, <code>page_token</code> should contain a
 <span class='object_link'><a href="ListInstancesResponse.html#next_page_token-instance_method" title="Google::Spanner::Admin::Instance::V1::ListInstancesResponse#next_page_token (method)">next_page_token</a></span> from a
 previous <span class='object_link'><a href="ListInstancesResponse.html" title="Google::Spanner::Admin::Instance::V1::ListInstancesResponse (class)">ListInstancesResponse</a></span>.</p>
 </div>
@@ -452,7 +452,7 @@ previous <span class='object_link'><a href="ListInstancesResponse.html" title="G
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The name of the project for which a list of instances is
-requested. Values are of the form +projects/<project>+.</p>
+requested. Values are of the form <code>projects/&lt;project&gt;</code>.</p>
 
 
   </div>
@@ -471,7 +471,7 @@ requested. Values are of the form +projects/<project>+.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the project for which a list of instances is
-requested. Values are of the form +projects/<project>+.</p>
+requested. Values are of the form <code>projects/&lt;project&gt;</code>.</p>
 </div>
       
     </li>

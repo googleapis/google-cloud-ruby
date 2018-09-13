@@ -1257,7 +1257,7 @@ side-effect.</p>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::V1::SpannerClient#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Spanner::V1::SpannerClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +options_+:
+<span class='comment'># TODO: Initialize `options_`:
 </span><span class='id identifier rubyid_options_'>options_</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner_client'>spanner_client</span><span class='period'>.</span><span class='id identifier rubyid_begin_transaction'>begin_transaction</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_options_'>options_</span><span class='rparen'>)</span></code></pre>
     
@@ -1442,10 +1442,10 @@ retries, etc.</p>
     <p>Commits a transaction. The request includes the mutations to be
 applied to rows in the database.</p>
 
-<p>+Commit+ might return an +ABORTED+ error. This can occur at any time;
+<p><code>Commit</code> might return an <code>ABORTED</code> error. This can occur at any time;
 commonly, the cause is conflicts with concurrent
 transactions. However, it can also happen for a variety of other
-reasons. If +Commit+ returns +ABORTED+, the caller should re-attempt
+reasons. If <code>Commit</code> returns <code>ABORTED</code>, the caller should re-attempt
 the transaction from the beginning, re-using the same session.</p>
 
 
@@ -1462,7 +1462,7 @@ the transaction from the beginning, re-using the same session.</p>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::V1::SpannerClient#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Spanner::V1::SpannerClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +mutations+:
+<span class='comment'># TODO: Initialize `mutations`:
 </span><span class='id identifier rubyid_mutations'>mutations</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner_client'>spanner_client</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_mutations'>mutations</span><span class='rparen'>)</span></code></pre>
     
@@ -1532,7 +1532,7 @@ can also be provided.</p>
         <div class='inline'><p>Execute mutations in a temporary transaction. Note that unlike
 commit of a previously-started transaction, commit with a
 temporary transaction is non-idempotent. That is, if the
-+CommitRequest+ is sent to Cloud Spanner more than once (for
+<code>CommitRequest</code> is sent to Cloud Spanner more than once (for
 instance, due to retries in the application, or in the
 transport library), it is possible that the mutations are
 executed more than once. If this is undesirable, use
@@ -1709,10 +1709,10 @@ limit.</p>
 time; thus, it is a good idea to delete idle and/or unneeded sessions.
 Aside from explicit deletes, Cloud Spanner can delete sessions for which no
 operations are sent for more than an hour. If a session is deleted,
-requests to it return +NOT_FOUND+.</p>
+requests to it return <code>NOT_FOUND</code>.</p>
 
 <p>Idle sessions can be kept alive by sending a trivial SQL query
-periodically, e.g., +&quot;SELECT 1&quot;+.</p>
+periodically, e.g., <code>&quot;SELECT 1&quot;</code>.</p>
 
 
   </div>
@@ -2077,9 +2077,9 @@ retries, etc.</p>
     <p>Executes an SQL query, returning all rows in a single reply. This
 method cannot be used to return a result set larger than 10 MiB;
 if the query yields more data than that, the query fails with
-a +FAILED_PRECONDITION+ error.</p>
+a <code>FAILED_PRECONDITION</code> error.</p>
 
-<p>Queries inside read-write transactions might return +ABORTED+. If
+<p>Queries inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
 the beginning. See <span class='object_link'><a href="../../../Spanner/V1/Transaction.html" title="Google::Spanner::V1::Transaction (class)">Transaction</a></span> for more details.</p>
 
@@ -2100,7 +2100,7 @@ ExecuteStreamingSql instead.</p>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::V1::SpannerClient#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Spanner::V1::SpannerClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +sql+:
+<span class='comment'># TODO: Initialize `sql`:
 </span><span class='id identifier rubyid_sql'>sql</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner_client'>spanner_client</span><span class='period'>.</span><span class='id identifier rubyid_execute_sql'>execute_sql</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_sql'>sql</span><span class='rparen'>)</span></code></pre>
     
@@ -2167,17 +2167,17 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>The SQL query string can contain parameter placeholders. A parameter
-placeholder consists of +&#39;@&#39;+ followed by the parameter
+placeholder consists of <code>&#39;@&#39;</code> followed by the parameter
 name. Parameter names consist of any combination of letters,
 numbers, and underscores.</p>
 
 <p>Parameters can appear anywhere that a literal value is expected.  The same
 parameter name can be used more than once, for example:
-  +&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;+</p>
+  <code>&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;</code></p>
 
 <p>It is an error to execute an SQL query with unbound parameters.</p>
 
-<p>Parameter values are specified using +params+, which is a JSON
+<p>Parameter values are specified using <code>params</code>, which is a JSON
 object whose keys are parameter names, and whose values are the
 corresponding parameter values.
 A hash of the same form as <code>Google::Protobuf::Struct</code>
@@ -2197,10 +2197,10 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>It is not always possible for Cloud Spanner to infer the right SQL type
-from a JSON value.  For example, values of type +BYTES+ and values
-of type +STRING+ both appear in <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
+from a JSON value.  For example, values of type <code>BYTES</code> and values
+of type <code>STRING</code> both appear in <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
-<p>In these cases, +param_types+ can be used to specify the exact
+<p>In these cases, <code>param_types</code> can be used to specify the exact
 SQL type for some or all of the SQL query parameters. See the
 definition of <span class='object_link'><a href="../../../Spanner/V1/Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> for more information
 about SQL types.
@@ -2221,7 +2221,7 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted SQL query
-execution, +resume_token+ should be copied from the last
+execution, <code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
 enables the new SQL query execution to resume where the last one left
 off. The rest of the request parameters must exactly match the
@@ -2451,7 +2451,7 @@ column value can exceed 10 MiB.</p>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::V1::SpannerClient#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Spanner::V1::SpannerClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +sql+:
+<span class='comment'># TODO: Initialize `sql`:
 </span><span class='id identifier rubyid_sql'>sql</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span><span class='period'>.</span><span class='id identifier rubyid_execute_streaming_sql'>execute_streaming_sql</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_sql'>sql</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
   <span class='comment'># Process element.
@@ -2520,17 +2520,17 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>The SQL query string can contain parameter placeholders. A parameter
-placeholder consists of +&#39;@&#39;+ followed by the parameter
+placeholder consists of <code>&#39;@&#39;</code> followed by the parameter
 name. Parameter names consist of any combination of letters,
 numbers, and underscores.</p>
 
 <p>Parameters can appear anywhere that a literal value is expected.  The same
 parameter name can be used more than once, for example:
-  +&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;+</p>
+  <code>&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;</code></p>
 
 <p>It is an error to execute an SQL query with unbound parameters.</p>
 
-<p>Parameter values are specified using +params+, which is a JSON
+<p>Parameter values are specified using <code>params</code>, which is a JSON
 object whose keys are parameter names, and whose values are the
 corresponding parameter values.
 A hash of the same form as <code>Google::Protobuf::Struct</code>
@@ -2550,10 +2550,10 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>It is not always possible for Cloud Spanner to infer the right SQL type
-from a JSON value.  For example, values of type +BYTES+ and values
-of type +STRING+ both appear in <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
+from a JSON value.  For example, values of type <code>BYTES</code> and values
+of type <code>STRING</code> both appear in <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
-<p>In these cases, +param_types+ can be used to specify the exact
+<p>In these cases, <code>param_types</code> can be used to specify the exact
 SQL type for some or all of the SQL query parameters. See the
 definition of <span class='object_link'><a href="../../../Spanner/V1/Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> for more information
 about SQL types.
@@ -2574,7 +2574,7 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted SQL query
-execution, +resume_token+ should be copied from the last
+execution, <code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
 enables the new SQL query execution to resume where the last one left
 off. The rest of the request parameters must exactly match the
@@ -2743,7 +2743,7 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets a session. Returns +NOT_FOUND+ if the session does not exist.
+    <p>Gets a session. Returns <code>NOT_FOUND</code> if the session does not exist.
 This is mainly useful for determining whether a session is still
 alive.</p>
 
@@ -3000,16 +3000,16 @@ resources in a page.</p>
 case insensitive. The fields eligible for filtering are:</p>
 
 <ul>
-<li>+labels.key+ where key is the name of a label</li>
+<li><code>labels.key</code> where key is the name of a label</li>
 </ul>
 
 <p>Some examples of using filters are:</p>
 
 <ul>
-<li>+labels.env:*+ --&gt; The session has the label &quot;env&quot;.
+<li><code>labels.env:*</code> --&gt; The session has the label &quot;env&quot;.
 
 <ul>
-<li>+labels.env:dev+ --&gt; The session has the label &quot;env&quot; and the value of
+<li><code>labels.env:dev</code> --&gt; The session has the label &quot;env&quot; and the value of
 the label contains the string &quot;dev&quot;.</li>
 </ul></li>
 </ul>
@@ -3193,7 +3193,7 @@ is deleted or begins a new transaction.</p>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::V1::SpannerClient#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Spanner::V1::SpannerClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +sql+:
+<span class='comment'># TODO: Initialize `sql`:
 </span><span class='id identifier rubyid_sql'>sql</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner_client'>spanner_client</span><span class='period'>.</span><span class='id identifier rubyid_partition_query'>partition_query</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_sql'>sql</span><span class='rparen'>)</span></code></pre>
     
@@ -3265,17 +3265,17 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>The SQL query string can contain parameter placeholders. A parameter
-placeholder consists of +&#39;@&#39;+ followed by the parameter
+placeholder consists of <code>&#39;@&#39;</code> followed by the parameter
 name. Parameter names consist of any combination of letters,
 numbers, and underscores.</p>
 
 <p>Parameters can appear anywhere that a literal value is expected.  The same
 parameter name can be used more than once, for example:
-  +&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;+</p>
+  <code>&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;</code></p>
 
 <p>It is an error to execute an SQL query with unbound parameters.</p>
 
-<p>Parameter values are specified using +params+, which is a JSON
+<p>Parameter values are specified using <code>params</code>, which is a JSON
 object whose keys are parameter names, and whose values are the
 corresponding parameter values.
 A hash of the same form as <code>Google::Protobuf::Struct</code>
@@ -3295,10 +3295,10 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>It is not always possible for Cloud Spanner to infer the right SQL type
-from a JSON value.  For example, values of type +BYTES+ and values
-of type +STRING+ both appear in <span class='object_link'><a href="../../../Spanner/V1/PartitionQueryRequest.html#params-instance_method" title="Google::Spanner::V1::PartitionQueryRequest#params (method)">params</a></span> as JSON strings.</p>
+from a JSON value.  For example, values of type <code>BYTES</code> and values
+of type <code>STRING</code> both appear in <span class='object_link'><a href="../../../Spanner/V1/PartitionQueryRequest.html#params-instance_method" title="Google::Spanner::V1::PartitionQueryRequest#params (method)">params</a></span> as JSON strings.</p>
 
-<p>In these cases, +param_types+ can be used to specify the exact
+<p>In these cases, <code>param_types</code> can be used to specify the exact
 SQL type for some or all of the SQL query parameters. See the
 definition of <span class='object_link'><a href="../../../Spanner/V1/Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> for more information
 about SQL types.
@@ -3506,10 +3506,10 @@ is deleted or begins a new transaction.</p>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::V1::SpannerClient#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Spanner::V1::SpannerClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +table+:
+<span class='comment'># TODO: Initialize `table`:
 </span><span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +key_set+:
+<span class='comment'># TODO: Initialize `key_set`:
 </span><span class='id identifier rubyid_key_set'>key_set</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner_client'>spanner_client</span><span class='period'>.</span><span class='id identifier rubyid_partition_read'>partition_read</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_key_set'>key_set</span><span class='rparen'>)</span></code></pre>
     
@@ -3557,12 +3557,12 @@ is deleted or begins a new transaction.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
+        <div class='inline'><p>Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
 primary keys of the rows in <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#table-instance_method" title="Google::Spanner::V1::PartitionReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span>
 is present. If <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::PartitionReadRequest#key_set (method)">key_set</a></span> instead names
 index keys in <span class='object_link'><a href="../../../Spanner/V1/PartitionReadRequest.html#index-instance_method" title="Google::Spanner::V1::PartitionReadRequest#index (method)">index</a></span>.</p>
 
-<p>It is not an error for the +key_set+ to name rows that do not
+<p>It is not an error for the <code>key_set</code> to name rows that do not
 exist in the database. Read yields nothing for nonexistent rows.
 A hash of the same form as <code>Google::Spanner::V1::KeySet</code>
 can also be provided.</p>
@@ -3804,10 +3804,10 @@ retries, etc.</p>
 simple key/value style alternative to
 ExecuteSql.  This method cannot be used to
 return a result set larger than 10 MiB; if the read matches more
-data than that, the read fails with a +FAILED_PRECONDITION+
+data than that, the read fails with a <code>FAILED_PRECONDITION</code>
 error.</p>
 
-<p>Reads inside read-write transactions might return +ABORTED+. If
+<p>Reads inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
 the beginning. See <span class='object_link'><a href="../../../Spanner/V1/Transaction.html" title="Google::Spanner::V1::Transaction (class)">Transaction</a></span> for more details.</p>
 
@@ -3828,13 +3828,13 @@ StreamingRead instead.</p>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::V1::SpannerClient#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Spanner::V1::SpannerClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +table+:
+<span class='comment'># TODO: Initialize `table`:
 </span><span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +columns+:
+<span class='comment'># TODO: Initialize `columns`:
 </span><span class='id identifier rubyid_columns'>columns</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
-<span class='comment'># TODO: Initialize +key_set+:
+<span class='comment'># TODO: Initialize `key_set`:
 </span><span class='id identifier rubyid_key_set'>key_set</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner_client'>spanner_client</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span> <span class='id identifier rubyid_key_set'>key_set</span><span class='rparen'>)</span></code></pre>
     
@@ -3898,7 +3898,7 @@ this request.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
+        <div class='inline'><p>Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
 primary keys of the rows in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>
 is present. If <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> instead names
 index keys in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>.</p>
@@ -3908,7 +3908,7 @@ in table primary key order (if <span class='object_link'><a href="../../../Spann
 (if <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is non-empty).  If the <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is not
 empty, rows will be yielded in an unspecified order.</p>
 
-<p>It is not an error for the +key_set+ to name rows that do not
+<p>It is not an error for the <code>key_set</code> to name rows that do not
 exist in the database. Read yields nothing for nonexistent rows.
 A hash of the same form as <code>Google::Spanner::V1::KeySet</code>
 can also be provided.</p>
@@ -3961,9 +3961,9 @@ and sorting result rows. See <span class='object_link'><a href="../../../Spanner
       
       
         &mdash;
-        <div class='inline'><p>If greater than zero, only the first +limit+ rows are yielded. If +limit+
+        <div class='inline'><p>If greater than zero, only the first <code>limit</code> rows are yielded. If <code>limit</code>
 is zero, the default is no limit. A limit cannot be specified if
-+partition_token+ is set.</p>
+<code>partition_token</code> is set.</p>
 </div>
       
     </li>
@@ -3979,7 +3979,7 @@ is zero, the default is no limit. A limit cannot be specified if
       
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted read,
-+resume_token+ should be copied from the last
+<code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
 enables the new read to resume where the last read left off. The
 rest of the request parameters must exactly match the request
@@ -4181,9 +4181,9 @@ idea to call this for any transaction that includes one or more
 Read or ExecuteSql requests and
 ultimately decides not to commit.</p>
 
-<p>+Rollback+ returns +OK+ if it successfully aborts the transaction, the
+<p><code>Rollback</code> returns <code>OK</code> if it successfully aborts the transaction, the
 transaction was already aborted, or the transaction is not
-found. +Rollback+ never returns +ABORTED+.</p>
+found. <code>Rollback</code> never returns <code>ABORTED</code>.</p>
 
 
   </div>
@@ -4199,7 +4199,7 @@ found. +Rollback+ never returns +ABORTED+.</p>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::V1::SpannerClient#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Spanner::V1::SpannerClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +transaction_id+:
+<span class='comment'># TODO: Initialize `transaction_id`:
 </span><span class='id identifier rubyid_transaction_id'>transaction_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span><span class='period'>.</span><span class='id identifier rubyid_rollback'>rollback</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_transaction_id'>transaction_id</span><span class='rparen'>)</span></code></pre>
     
@@ -4392,13 +4392,13 @@ the result set can exceed 100 MiB, and no column value can exceed
 <span class='id identifier rubyid_spanner_client'>spanner_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::V1::SpannerClient#initialize (method)">new</a></span></span>
 <span class='id identifier rubyid_formatted_session'>formatted_session</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::V1::SpannerClient (class)">SpannerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_session_path'><span class='object_link'><a href="#session_path-class_method" title="Google::Cloud::Spanner::V1::SpannerClient.session_path (method)">session_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DATABASE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SESSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +table+:
+<span class='comment'># TODO: Initialize `table`:
 </span><span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +columns+:
+<span class='comment'># TODO: Initialize `columns`:
 </span><span class='id identifier rubyid_columns'>columns</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
-<span class='comment'># TODO: Initialize +key_set+:
+<span class='comment'># TODO: Initialize `key_set`:
 </span><span class='id identifier rubyid_key_set'>key_set</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_spanner_client'>spanner_client</span><span class='period'>.</span><span class='id identifier rubyid_streaming_read'>streaming_read</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_session'>formatted_session</span><span class='comma'>,</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span> <span class='id identifier rubyid_key_set'>key_set</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
   <span class='comment'># Process element.
@@ -4464,7 +4464,7 @@ this request.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
+        <div class='inline'><p>Required. <code>key_set</code> identifies the rows to be yielded. <code>key_set</code> names the
 primary keys of the rows in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#table-instance_method" title="Google::Spanner::V1::ReadRequest#table (method)">table</a></span> to be yielded, unless <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>
 is present. If <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is present, then <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#key_set-instance_method" title="Google::Spanner::V1::ReadRequest#key_set (method)">key_set</a></span> instead names
 index keys in <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span>.</p>
@@ -4474,7 +4474,7 @@ in table primary key order (if <span class='object_link'><a href="../../../Spann
 (if <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#index-instance_method" title="Google::Spanner::V1::ReadRequest#index (method)">index</a></span> is non-empty).  If the <span class='object_link'><a href="../../../Spanner/V1/ReadRequest.html#partition_token-instance_method" title="Google::Spanner::V1::ReadRequest#partition_token (method)">partition_token</a></span> field is not
 empty, rows will be yielded in an unspecified order.</p>
 
-<p>It is not an error for the +key_set+ to name rows that do not
+<p>It is not an error for the <code>key_set</code> to name rows that do not
 exist in the database. Read yields nothing for nonexistent rows.
 A hash of the same form as <code>Google::Spanner::V1::KeySet</code>
 can also be provided.</p>
@@ -4527,9 +4527,9 @@ and sorting result rows. See <span class='object_link'><a href="../../../Spanner
       
       
         &mdash;
-        <div class='inline'><p>If greater than zero, only the first +limit+ rows are yielded. If +limit+
+        <div class='inline'><p>If greater than zero, only the first <code>limit</code> rows are yielded. If <code>limit</code>
 is zero, the default is no limit. A limit cannot be specified if
-+partition_token+ is set.</p>
+<code>partition_token</code> is set.</p>
 </div>
       
     </li>
@@ -4545,7 +4545,7 @@ is zero, the default is no limit. A limit cannot be specified if
       
         &mdash;
         <div class='inline'><p>If this request is resuming a previously interrupted read,
-+resume_token+ should be copied from the last
+<code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
 enables the new read to resume where the last read left off. The
 rest of the request parameters must exactly match the request

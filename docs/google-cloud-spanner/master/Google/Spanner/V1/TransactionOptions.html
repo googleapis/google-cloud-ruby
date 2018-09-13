@@ -154,7 +154,7 @@ transaction.</p>
 <p>Cloud Spanner can commit the transaction if all read locks it acquired
 are still valid at commit time, and it is able to acquire write
 locks for all writes. Cloud Spanner can abort the transaction for any
-reason. If a commit attempt returns +ABORTED+, Cloud Spanner guarantees
+reason. If a commit attempt returns <code>ABORTED</code>, Cloud Spanner guarantees
 that the transaction has not modified any user data in Cloud Spanner.</p>
 
 <p>Unless the transaction commits, Cloud Spanner makes no guarantees about
@@ -184,10 +184,10 @@ retrying.</p>
 SQL queries and has not started a read or SQL query within the last 10
 seconds. Idle transactions can be aborted by Cloud Spanner so that they
 don&#39;t hold on to locks indefinitely. In that case, the commit will
-fail with error +ABORTED+.</p>
+fail with error <code>ABORTED</code>.</p>
 
 <p>If this behavior is undesirable, periodically executing a simple
-SQL query in the transaction (e.g., +SELECT 1+) prevents the
+SQL query in the transaction (e.g., <code>SELECT 1</code>) prevents the
 transaction from becoming idle.</p>
 
 <p>== Snapshot Read-Only Transactions</p>
@@ -310,7 +310,7 @@ are one hour old. Because of this, Cloud Spanner cannot perform reads
 at read timestamps more than one hour in the past. This
 restriction also applies to in-progress reads and/or SQL queries whose
 timestamp become too old while executing. Reads and SQL queries with
-too-old read timestamps fail with the error +FAILED_PRECONDITION+.</p>
+too-old read timestamps fail with the error <code>FAILED_PRECONDITION</code>.</p>
 
 
   </div>
@@ -412,8 +412,8 @@ too-old read timestamps fail with the error +FAILED_PRECONDITION+.</p>
     <p>Returns Transaction will not write.</p>
 
 <p>Authorization to begin a read-only transaction requires
-+spanner.databases.beginReadOnlyTransaction+ permission
-on the +session+ resource.</p>
+<code>spanner.databases.beginReadOnlyTransaction</code> permission
+on the <code>session</code> resource.</p>
 
 
   </div>
@@ -434,8 +434,8 @@ on the +session+ resource.</p>
         <div class='inline'><p>Transaction will not write.</p>
 
 <p>Authorization to begin a read-only transaction requires
-+spanner.databases.beginReadOnlyTransaction+ permission
-on the +session+ resource.</p>
+<code>spanner.databases.beginReadOnlyTransaction</code> permission
+on the <code>session</code> resource.</p>
 </div>
       
     </li>
@@ -534,7 +534,7 @@ on the +session+ resource.</p>
 </span>  <span class='comment'>#     are visible.
 </span>  <span class='comment'># @!attribute [rw] min_read_timestamp
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Executes all reads at a timestamp &gt;= +min_read_timestamp+.
+</span>  <span class='comment'>#     Executes all reads at a timestamp &gt;= `min_read_timestamp`.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This is useful for requesting fresher data than some previous
 </span>  <span class='comment'>#     read, or data that is fresh enough to observe the effects of some
@@ -543,10 +543,10 @@ on the +session+ resource.</p>
 </span>  <span class='comment'>#     Note that this option can only be used in single-use transactions.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
-</span>  <span class='comment'>#     Example: +&quot;2014-10-02T15:01:23.045123456Z&quot;+.
+</span>  <span class='comment'>#     Example: `&quot;2014-10-02T15:01:23.045123456Z&quot;`.
 </span>  <span class='comment'># @!attribute [rw] max_staleness
 </span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
-</span>  <span class='comment'>#     Read data at a timestamp &gt;= +NOW - max_staleness+
+</span>  <span class='comment'>#     Read data at a timestamp &gt;= `NOW - max_staleness`
 </span>  <span class='comment'>#     seconds. Guarantees that all writes that have committed more
 </span>  <span class='comment'>#     than the specified number of seconds ago are visible. Because
 </span>  <span class='comment'>#     Cloud Spanner chooses the exact timestamp, this mode works even if
@@ -572,10 +572,10 @@ on the +session+ resource.</p>
 </span>  <span class='comment'>#     data.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
-</span>  <span class='comment'>#     Example: +&quot;2014-10-02T15:01:23.045123456Z&quot;+.
+</span>  <span class='comment'>#     Example: `&quot;2014-10-02T15:01:23.045123456Z&quot;`.
 </span>  <span class='comment'># @!attribute [rw] exact_staleness
 </span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
-</span>  <span class='comment'>#     Executes all reads at a timestamp that is +exact_staleness+
+</span>  <span class='comment'>#     Executes all reads at a timestamp that is `exact_staleness`
 </span>  <span class='comment'>#     old. The timestamp is chosen soon after the read is started.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Guarantees that all writes that have committed more than the
@@ -585,7 +585,7 @@ on the +session+ resource.</p>
 </span>  <span class='comment'>#     timestamps.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Useful for reading at nearby replicas without the distributed
-</span>  <span class='comment'>#     timestamp negotiation overhead of +max_staleness+.
+</span>  <span class='comment'>#     timestamp negotiation overhead of `max_staleness`.
 </span>  <span class='comment'># @!attribute [rw] return_read_timestamp
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     If true, the Cloud Spanner-selected read timestamp is included in
@@ -613,8 +613,8 @@ on the +session+ resource.</p>
     <p>Returns Transaction may write.</p>
 
 <p>Authorization to begin a read-write transaction requires
-+spanner.databases.beginOrRollbackReadWriteTransaction+ permission
-on the +session+ resource.</p>
+<code>spanner.databases.beginOrRollbackReadWriteTransaction</code> permission
+on the <code>session</code> resource.</p>
 
 
   </div>
@@ -635,8 +635,8 @@ on the +session+ resource.</p>
         <div class='inline'><p>Transaction may write.</p>
 
 <p>Authorization to begin a read-write transaction requires
-+spanner.databases.beginOrRollbackReadWriteTransaction+ permission
-on the +session+ resource.</p>
+<code>spanner.databases.beginOrRollbackReadWriteTransaction</code> permission
+on the <code>session</code> resource.</p>
 </div>
       
     </li>
@@ -735,7 +735,7 @@ on the +session+ resource.</p>
 </span>  <span class='comment'>#     are visible.
 </span>  <span class='comment'># @!attribute [rw] min_read_timestamp
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Executes all reads at a timestamp &gt;= +min_read_timestamp+.
+</span>  <span class='comment'>#     Executes all reads at a timestamp &gt;= `min_read_timestamp`.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     This is useful for requesting fresher data than some previous
 </span>  <span class='comment'>#     read, or data that is fresh enough to observe the effects of some
@@ -744,10 +744,10 @@ on the +session+ resource.</p>
 </span>  <span class='comment'>#     Note that this option can only be used in single-use transactions.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
-</span>  <span class='comment'>#     Example: +&quot;2014-10-02T15:01:23.045123456Z&quot;+.
+</span>  <span class='comment'>#     Example: `&quot;2014-10-02T15:01:23.045123456Z&quot;`.
 </span>  <span class='comment'># @!attribute [rw] max_staleness
 </span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
-</span>  <span class='comment'>#     Read data at a timestamp &gt;= +NOW - max_staleness+
+</span>  <span class='comment'>#     Read data at a timestamp &gt;= `NOW - max_staleness`
 </span>  <span class='comment'>#     seconds. Guarantees that all writes that have committed more
 </span>  <span class='comment'>#     than the specified number of seconds ago are visible. Because
 </span>  <span class='comment'>#     Cloud Spanner chooses the exact timestamp, this mode works even if
@@ -773,10 +773,10 @@ on the +session+ resource.</p>
 </span>  <span class='comment'>#     data.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
-</span>  <span class='comment'>#     Example: +&quot;2014-10-02T15:01:23.045123456Z&quot;+.
+</span>  <span class='comment'>#     Example: `&quot;2014-10-02T15:01:23.045123456Z&quot;`.
 </span>  <span class='comment'># @!attribute [rw] exact_staleness
 </span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
-</span>  <span class='comment'>#     Executes all reads at a timestamp that is +exact_staleness+
+</span>  <span class='comment'>#     Executes all reads at a timestamp that is `exact_staleness`
 </span>  <span class='comment'>#     old. The timestamp is chosen soon after the read is started.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Guarantees that all writes that have committed more than the
@@ -786,7 +786,7 @@ on the +session+ resource.</p>
 </span>  <span class='comment'>#     timestamps.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     Useful for reading at nearby replicas without the distributed
-</span>  <span class='comment'>#     timestamp negotiation overhead of +max_staleness+.
+</span>  <span class='comment'>#     timestamp negotiation overhead of `max_staleness`.
 </span>  <span class='comment'># @!attribute [rw] return_read_timestamp
 </span>  <span class='comment'>#   @return [true, false]
 </span>  <span class='comment'>#     If true, the Cloud Spanner-selected read timestamp is included in

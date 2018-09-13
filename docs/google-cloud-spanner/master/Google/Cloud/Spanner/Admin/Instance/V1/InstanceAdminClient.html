@@ -1234,14 +1234,14 @@ custom error handling.</p>
 returned <span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">long-running operation</a></span>
 can be used to track the progress of preparing the new
 instance. The instance name is assigned by the caller. If the
-named instance already exists, +CreateInstance+ returns
-+ALREADY_EXISTS+.</p>
+named instance already exists, <code>CreateInstance</code> returns
+<code>ALREADY_EXISTS</code>.</p>
 
 <p>Immediately upon completion of this request:</p>
 
 <ul>
 <li>The instance is readable via the API, with all requested attributes
-but no allocated resources. Its state is +CREATING+.</li>
+but no allocated resources. Its state is <code>CREATING</code>.</li>
 </ul>
 
 <p>Until completion of the returned operation:</p>
@@ -1263,11 +1263,11 @@ via the API.
 may have lower than the requested levels).</li>
 <li>Databases can be created in the instance.</li>
 <li>The instance&#39;s allocated resource levels are readable via the API.</li>
-<li>The instance&#39;s state becomes +READY+.</li>
+<li>The instance&#39;s state becomes <code>READY</code>.</li>
 </ul>
 
 <p>The returned <span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">long-running operation</a></span> will
-  have a name of the format +<instance_name>/operations/<operation_id>+ and
+  have a name of the format <code>&lt;instance_name&gt;/operations/&lt;operation_id&gt;</code> and
   can be used to track creation of the instance.  The
   <span class='object_link'><a href="../../../../../Longrunning/Operation.html#metadata-instance_method" title="Google::Longrunning::Operation#metadata (method)">metadata</a></span> field type is
   <span class='object_link'><a href="../../../../../Spanner/Admin/Instance/V1/CreateInstanceMetadata.html" title="Google::Spanner::Admin::Instance::V1::CreateInstanceMetadata (class)">CreateInstanceMetadata</a></span>.
@@ -1288,10 +1288,10 @@ may have lower than the requested levels).</li>
 <span class='id identifier rubyid_instance_admin_client'>instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Instance.html" title="Google::Cloud::Spanner::Admin::Instance (module)">Instance</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Instance.html#new-class_method" title="Google::Cloud::Spanner::Admin::Instance.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Instance.html" title="Google::Cloud::Spanner::Admin::Instance (module)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::Admin::Instance::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient (class)">InstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +instance_id+:
+<span class='comment'># TODO: Initialize `instance_id`:
 </span><span class='id identifier rubyid_instance_id'>instance_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +instance+:
+<span class='comment'># TODO: Initialize `instance`:
 </span><span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
 <span class='comment'># Register a callback during the method call.
@@ -1336,7 +1336,7 @@ may have lower than the requested levels).</li>
       
         &mdash;
         <div class='inline'><p>Required. The name of the project in which to create the instance. Values
-are of the form +projects/<project>+.</p>
+are of the form <code>projects/&lt;project&gt;</code>.</p>
 </div>
       
     </li>
@@ -1352,7 +1352,7 @@ are of the form +projects/<project>+.</p>
       
         &mdash;
         <div class='inline'><p>Required. The ID of the instance to create.  Valid identifiers are of the
-form +[a-z][-a-z0-9]*[a-z0-9]+ and must be between 6 and 30 characters in
+form <code>[a-z][-a-z0-9]*[a-z0-9]</code> and must be between 6 and 30 characters in
 length.</p>
 </div>
       
@@ -1369,7 +1369,7 @@ length.</p>
       
         &mdash;
         <div class='inline'><p>Required. The instance to create.  The name may be omitted, but if
-specified must be +<parent>/instances/<instance_id>+.
+specified must be <code>&lt;parent&gt;/instances/&lt;instance_id&gt;</code>.
 A hash of the same form as <code>Google::Spanner::Admin::Instance::V1::Instance</code>
 can also be provided.</p>
 </div>
@@ -1539,7 +1539,7 @@ is permanently deleted.</li>
       
         &mdash;
         <div class='inline'><p>Required. The name of the instance to be deleted. Values are of the form
-+projects/<project>/instances/<instance>+</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code></p>
 </div>
       
     </li>
@@ -1678,7 +1678,7 @@ retries, etc.</p>
     <p>Gets the access control policy for an instance resource. Returns an empty
 policy if an instance exists but does not have a policy set.</p>
 
-<p>Authorization requires +spanner.instances.getIamPolicy+ on
+<p>Authorization requires <code>spanner.instances.getIamPolicy</code> on
 <span class='object_link'><a href="../../../../../Iam/V1/GetIamPolicyRequest.html#resource-instance_method" title="Google::Iam::V1::GetIamPolicyRequest#resource (method)">resource</a></span>.</p>
 
 
@@ -1711,8 +1711,8 @@ policy if an instance exists but does not have a policy set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -1887,7 +1887,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the requested instance. Values are of the form
-+projects/<project>/instances/<instance>+.</p>
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>
@@ -2062,7 +2062,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the requested instance configuration. Values are of
-the form +projects/<project>/instanceConfigs/<config>+.</p>
+the form <code>projects/&lt;project&gt;/instanceConfigs/&lt;config&gt;</code>.</p>
 </div>
       
     </li>
@@ -2250,7 +2250,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>Required. The name of the project for which a list of supported instance
 configurations is requested. Values are of the form
-+projects/<project>+.</p>
+<code>projects/&lt;project&gt;</code>.</p>
 </div>
       
     </li>
@@ -2467,7 +2467,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the project for which a list of instances is
-requested. Values are of the form +projects/<project>+.</p>
+requested. Values are of the form <code>projects/&lt;project&gt;</code>.</p>
 </div>
       
     </li>
@@ -2505,25 +2505,25 @@ resources in a page.</p>
 case insensitive. The fields eligible for filtering are:</p>
 
 <ul>
-<li>+name+
+<li><code>name</code>
 
 <ul>
-<li>+display_name+</li>
-<li>+labels.key+ where key is the name of a label</li>
+<li><code>display_name</code></li>
+<li><code>labels.key</code> where key is the name of a label</li>
 </ul></li>
 </ul>
 
 <p>Some examples of using filters are:</p>
 
 <ul>
-<li>+name:*+ --&gt; The instance has a name.</li>
-<li>+name:Howl+ --&gt; The instance&#39;s name contains the string &quot;howl&quot;.</li>
-<li>+name:HOWL+ --&gt; Equivalent to above.</li>
-<li>+NAME:howl+ --&gt; Equivalent to above.</li>
-<li>+labels.env:*+ --&gt; The instance has the label &quot;env&quot;.</li>
-<li>+labels.env:dev+ --&gt; The instance has the label &quot;env&quot; and the value of
+<li><code>name:*</code> --&gt; The instance has a name.</li>
+<li><code>name:Howl</code> --&gt; The instance&#39;s name contains the string &quot;howl&quot;.</li>
+<li><code>name:HOWL</code> --&gt; Equivalent to above.</li>
+<li><code>NAME:howl</code> --&gt; Equivalent to above.</li>
+<li><code>labels.env:*</code> --&gt; The instance has the label &quot;env&quot;.</li>
+<li><code>labels.env:dev</code> --&gt; The instance has the label &quot;env&quot; and the value of
 the label contains the string &quot;dev&quot;.</li>
-<li>+name:howl labels.env:dev+ --&gt; The instance&#39;s name contains &quot;howl&quot; and
+<li><code>name:howl labels.env:dev</code> --&gt; The instance&#39;s name contains &quot;howl&quot; and
 it has the label &quot;env&quot; with its value
 containing &quot;dev&quot;.</li>
 </ul>
@@ -2687,7 +2687,7 @@ object.</p>
     <p>Sets the access control policy on an instance resource. Replaces any
 existing policy.</p>
 
-<p>Authorization requires +spanner.instances.setIamPolicy+ on
+<p>Authorization requires <code>spanner.instances.setIamPolicy</code> on
 <span class='object_link'><a href="../../../../../Iam/V1/SetIamPolicyRequest.html#resource-instance_method" title="Google::Iam::V1::SetIamPolicyRequest#resource (method)">resource</a></span>.</p>
 
 
@@ -2704,7 +2704,7 @@ existing policy.</p>
 <span class='id identifier rubyid_instance_admin_client'>instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Instance.html" title="Google::Cloud::Spanner::Admin::Instance (module)">Instance</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Instance.html#new-class_method" title="Google::Cloud::Spanner::Admin::Instance.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Instance.html" title="Google::Cloud::Spanner::Admin::Instance (module)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::Admin::Instance::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient (class)">InstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +policy+:
+<span class='comment'># TODO: Initialize `policy`:
 </span><span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_instance_admin_client'>instance_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_policy'>policy</span><span class='rparen'>)</span></code></pre>
     
@@ -2723,8 +2723,8 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -2739,7 +2739,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>REQUIRED: The complete policy to be applied to the +resource+. The size of
+        <div class='inline'><p>REQUIRED: The complete policy to be applied to the <code>resource</code>. The size of
 the policy is limited to a few 10s of KB. An empty policy is a
 valid policy but certain Cloud Platform services (such as Projects)
 might reject them.
@@ -2894,7 +2894,7 @@ retries, etc.</p>
     <p>Returns permissions that the caller has on the specified instance resource.</p>
 
 <p>Attempting this RPC on a non-existent Cloud Spanner instance resource will
-result in a NOT_FOUND error if the user has +spanner.instances.list+
+result in a NOT_FOUND error if the user has <code>spanner.instances.list</code>
 permission on the containing Google Cloud Project. Otherwise returns an
 empty set of permissions.</p>
 
@@ -2912,7 +2912,7 @@ empty set of permissions.</p>
 <span class='id identifier rubyid_instance_admin_client'>instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Instance.html" title="Google::Cloud::Spanner::Admin::Instance (module)">Instance</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Instance.html#new-class_method" title="Google::Cloud::Spanner::Admin::Instance.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Instance.html" title="Google::Cloud::Spanner::Admin::Instance (module)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Spanner::Admin::Instance::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient (class)">InstanceAdminClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_instance_path'><span class='object_link'><a href="#instance_path-class_method" title="Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path (method)">instance_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[INSTANCE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +permissions+:
+<span class='comment'># TODO: Initialize `permissions`:
 </span><span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_instance_admin_client'>instance_admin_client</span><span class='period'>.</span><span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span></code></pre>
     
@@ -2931,8 +2931,8 @@ empty set of permissions.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -2947,7 +2947,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The set of permissions to check for the +resource+. Permissions with
+        <div class='inline'><p>The set of permissions to check for the <code>resource</code>. Permissions with
 wildcards (such as &#39;<em>&#39; or &#39;storage.</em>&#39;) are not allowed. For more
 information see
 <a href="https://cloud.google.com/iam/docs/overview#permissions">IAM Overview</a>.</p>
@@ -3101,7 +3101,7 @@ retries, etc.</p>
 as requested. The returned [long-running
 operation][google.longrunning.Operation] can be used to track the
 progress of updating the instance. If the named instance does not
-exist, returns +NOT_FOUND+.</p>
+exist, returns <code>NOT_FOUND</code>.</p>
 
 <p>Immediately upon completion of this request:</p>
 
@@ -3117,7 +3117,7 @@ has been requested, billing is based on the newly-requested level.</li>
 <span class='object_link'><a href="../../../../../Spanner/Admin/Instance/V1/UpdateInstanceMetadata.html#cancel_time-instance_method" title="Google::Spanner::Admin::Instance::V1::UpdateInstanceMetadata#cancel_time (method)">cancel_time</a></span>, and begins
 restoring resources to their pre-request values. The operation
 is guaranteed to succeed at undoing all resource changes,
-after which point it terminates with a +CANCELLED+ status.
+after which point it terminates with a <code>CANCELLED</code> status.
 
 <ul>
 <li>All other attempts to modify the instance are rejected.</li>
@@ -3137,14 +3137,14 @@ tables.</li>
 </ul>
 
 <p>The returned <span class='object_link'><a href="../../../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">long-running operation</a></span> will
-  have a name of the format +<instance_name>/operations/<operation_id>+ and
+  have a name of the format <code>&lt;instance_name&gt;/operations/&lt;operation_id&gt;</code> and
   can be used to track the instance modification.  The
   <span class='object_link'><a href="../../../../../Longrunning/Operation.html#metadata-instance_method" title="Google::Longrunning::Operation#metadata (method)">metadata</a></span> field type is
   <span class='object_link'><a href="../../../../../Spanner/Admin/Instance/V1/UpdateInstanceMetadata.html" title="Google::Spanner::Admin::Instance::V1::UpdateInstanceMetadata (class)">UpdateInstanceMetadata</a></span>.
   The <span class='object_link'><a href="../../../../../Longrunning/Operation.html#response-instance_method" title="Google::Longrunning::Operation#response (method)">response</a></span> field type is
   <span class='object_link'><a href="../../../../../Spanner/Admin/Instance/V1/Instance.html" title="Google::Spanner::Admin::Instance::V1::Instance (class)">Instance</a></span>, if successful.</p>
 
-<p>Authorization requires +spanner.instances.update+ permission on
+<p>Authorization requires <code>spanner.instances.update</code> permission on
 resource <span class='object_link'><a href="../../../../../Spanner/Admin/Instance/V1/Instance.html#name-instance_method" title="Google::Spanner::Admin::Instance::V1::Instance#name (method)">name</a></span>.</p>
 
 
@@ -3160,10 +3160,10 @@ resource <span class='object_link'><a href="../../../../../Spanner/Admin/Instanc
 
 <span class='id identifier rubyid_instance_admin_client'>instance_admin_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Instance.html" title="Google::Cloud::Spanner::Admin::Instance (module)">Instance</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Instance.html#new-class_method" title="Google::Cloud::Spanner::Admin::Instance.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +instance+:
+<span class='comment'># TODO: Initialize `instance`:
 </span><span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +field_mask+:
+<span class='comment'># TODO: Initialize `field_mask`:
 </span><span class='id identifier rubyid_field_mask'>field_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
 <span class='comment'># Register a callback during the method call.

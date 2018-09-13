@@ -204,11 +204,11 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. A +CREATE DATABASE+ statement, which specifies the ID of the
+    <p>Returns Required. A <code>CREATE DATABASE</code> statement, which specifies the ID of the
 new database.  The database ID must conform to the regular expression
-+[a-z][a-z0-9_-]*[a-z0-9]+ and be between 2 and 30 characters in length.
+<code>[a-z][a-z0-9_\-]*[a-z0-9]</code> and be between 2 and 30 characters in length.
 If the database ID is a reserved word or if it contains a hyphen, the
-database ID must be enclosed in backticks (+ + +).</p>
+database ID must be enclosed in backticks (<code>`</code>).</p>
 
 
   </div>
@@ -226,11 +226,11 @@ database ID must be enclosed in backticks (+ + +).</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. A +CREATE DATABASE+ statement, which specifies the ID of the
+        <div class='inline'><p>Required. A <code>CREATE DATABASE</code> statement, which specifies the ID of the
 new database.  The database ID must conform to the regular expression
-+[a-z][a-z0-9_-]*[a-z0-9]+ and be between 2 and 30 characters in length.
+<code>[a-z][a-z0-9_\-]*[a-z0-9]</code> and be between 2 and 30 characters in length.
 If the database ID is a reserved word or if it contains a hyphen, the
-database ID must be enclosed in backticks (+ + +).</p>
+database ID must be enclosed in backticks (<code>`</code>).</p>
 </div>
       
     </li>
@@ -329,7 +329,7 @@ if there is an error in any statement, the database is not created.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The name of the instance that will serve the new database.
-Values are of the form +projects/<project>/instances/<instance>+.</p>
+Values are of the form <code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 
 
   </div>
@@ -348,7 +348,7 @@ Values are of the form +projects/<project>/instances/<instance>+.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the instance that will serve the new database.
-Values are of the form +projects/<project>/instances/<instance>+.</p>
+Values are of the form <code>projects/&lt;project&gt;/instances/&lt;instance&gt;</code>.</p>
 </div>
       
     </li>

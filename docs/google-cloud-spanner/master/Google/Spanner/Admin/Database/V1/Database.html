@@ -189,8 +189,8 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The name of the database. Values are of the form
-+projects/<project>/instances/<instance>/databases/<database>+,
-where +<database>+ is as specified in the +CREATE DATABASE+
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/databases/&lt;database&gt;</code>,
+where <code>&lt;database&gt;</code> is as specified in the <code>CREATE DATABASE</code>
 statement. This name can be passed to other API methods to
 identify the database.</p>
 
@@ -211,8 +211,8 @@ identify the database.</p>
       
         &mdash;
         <div class='inline'><p>Required. The name of the database. Values are of the form
-+projects/<project>/instances/<instance>/databases/<database>+,
-where +<database>+ is as specified in the +CREATE DATABASE+
+<code>projects/&lt;project&gt;/instances/&lt;instance&gt;/databases/&lt;database&gt;</code>,
+where <code>&lt;database&gt;</code> is as specified in the <code>CREATE DATABASE</code>
 statement. This name can be passed to other API methods to
 identify the database.</p>
 </div>
@@ -252,7 +252,7 @@ identify the database.</p>
 </span>    <span class='const'>STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The database is still being created. Operations on the database may fail
-</span>    <span class='comment'># with +FAILED_PRECONDITION+ in this state.
+</span>    <span class='comment'># with `FAILED_PRECONDITION` in this state.
 </span>    <span class='const'>CREATING</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># The database is fully created and ready for use.
@@ -333,7 +333,7 @@ identify the database.</p>
 </span>    <span class='const'>STATE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The database is still being created. Operations on the database may fail
-</span>    <span class='comment'># with +FAILED_PRECONDITION+ in this state.
+</span>    <span class='comment'># with `FAILED_PRECONDITION` in this state.
 </span>    <span class='const'>CREATING</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># The database is fully created and ready for use.

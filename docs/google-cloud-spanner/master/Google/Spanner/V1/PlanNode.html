@@ -136,7 +136,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>List of child node +index+es and their relationship to this parent.</p>
+    <span class="summary_desc"><div class='inline'><p>List of child node <code>index</code>es and their relationship to this parent.</p>
 </div></span>
   
 </li>
@@ -214,7 +214,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The +PlanNode+&#39;s index in <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">node list</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>The <code>PlanNode</code>&#39;s index in <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">node list</a></span>.</p>
 </div></span>
   
 </li>
@@ -320,7 +320,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns List of child node +index+es and their relationship to this parent.</p>
+    <p>Returns List of child node <code>index</code>es and their relationship to this parent.</p>
 
 
   </div>
@@ -338,7 +338,7 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>List of child node +index+es and their relationship to this parent.</p>
+        <div class='inline'><p>List of child node <code>index</code>es and their relationship to this parent.</p>
 </div>
       
     </li>
@@ -428,24 +428,24 @@ js:
 </span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
 </span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
 </span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a +TableScan+ operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the +SCALAR+ nodes representing the output variables
+</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
+</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
 </span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     +variable+ fields will be set to the variable names assigned to the
+</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
 </span>  <span class='comment'>#     columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
-</span>  <span class='comment'># +SCALAR+ {Google::Spanner::V1::PlanNode PlanNode(s)}.
+</span>  <span class='comment'># `SCALAR` {Google::Spanner::V1::PlanNode PlanNode(s)}.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A string representation of the expression subtree rooted at this node.
 </span>  <span class='comment'># @!attribute [rw] subqueries
 </span>  <span class='comment'>#   @return [Hash{String =&gt; Integer}]
 </span>  <span class='comment'>#     A mapping of (subquery variable name) -&gt; (subquery node id) for cases
-</span>  <span class='comment'>#     where the +description+ string of this node references a +SCALAR+
+</span>  <span class='comment'>#     where the `description` string of this node references a `SCALAR`
 </span>  <span class='comment'>#     subquery contained in the expression subtree rooted at this node. The
-</span>  <span class='comment'>#     referenced +SCALAR+ subquery may not necessarily be a direct child of
+</span>  <span class='comment'>#     referenced `SCALAR` subquery may not necessarily be a direct child of
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -457,7 +457,7 @@ js:
 
     <span class='comment'># Denotes a Relational operator node in the expression tree. Relational
 </span>    <span class='comment'># operators represent iterative processing of rows during query execution.
-</span>    <span class='comment'># For example, a +TableScan+ operation that reads rows from a table.
+</span>    <span class='comment'># For example, a `TableScan` operation that reads rows from a table.
 </span>    <span class='const'>RELATIONAL</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Denotes a Scalar node in the expression tree. Scalar nodes represent
@@ -593,24 +593,24 @@ js:
 </span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
 </span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
 </span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a +TableScan+ operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the +SCALAR+ nodes representing the output variables
+</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
+</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
 </span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     +variable+ fields will be set to the variable names assigned to the
+</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
 </span>  <span class='comment'>#     columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
-</span>  <span class='comment'># +SCALAR+ {Google::Spanner::V1::PlanNode PlanNode(s)}.
+</span>  <span class='comment'># `SCALAR` {Google::Spanner::V1::PlanNode PlanNode(s)}.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A string representation of the expression subtree rooted at this node.
 </span>  <span class='comment'># @!attribute [rw] subqueries
 </span>  <span class='comment'>#   @return [Hash{String =&gt; Integer}]
 </span>  <span class='comment'>#     A mapping of (subquery variable name) -&gt; (subquery node id) for cases
-</span>  <span class='comment'>#     where the +description+ string of this node references a +SCALAR+
+</span>  <span class='comment'>#     where the `description` string of this node references a `SCALAR`
 </span>  <span class='comment'>#     subquery contained in the expression subtree rooted at this node. The
-</span>  <span class='comment'>#     referenced +SCALAR+ subquery may not necessarily be a direct child of
+</span>  <span class='comment'>#     referenced `SCALAR` subquery may not necessarily be a direct child of
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -622,7 +622,7 @@ js:
 
     <span class='comment'># Denotes a Relational operator node in the expression tree. Relational
 </span>    <span class='comment'># operators represent iterative processing of rows during query execution.
-</span>    <span class='comment'># For example, a +TableScan+ operation that reads rows from a table.
+</span>    <span class='comment'># For example, a `TableScan` operation that reads rows from a table.
 </span>    <span class='const'>RELATIONAL</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Denotes a Scalar node in the expression tree. Scalar nodes represent
@@ -764,24 +764,24 @@ execution etc.</p>
 </span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
 </span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
 </span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a +TableScan+ operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the +SCALAR+ nodes representing the output variables
+</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
+</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
 </span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     +variable+ fields will be set to the variable names assigned to the
+</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
 </span>  <span class='comment'>#     columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
-</span>  <span class='comment'># +SCALAR+ {Google::Spanner::V1::PlanNode PlanNode(s)}.
+</span>  <span class='comment'># `SCALAR` {Google::Spanner::V1::PlanNode PlanNode(s)}.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A string representation of the expression subtree rooted at this node.
 </span>  <span class='comment'># @!attribute [rw] subqueries
 </span>  <span class='comment'>#   @return [Hash{String =&gt; Integer}]
 </span>  <span class='comment'>#     A mapping of (subquery variable name) -&gt; (subquery node id) for cases
-</span>  <span class='comment'>#     where the +description+ string of this node references a +SCALAR+
+</span>  <span class='comment'>#     where the `description` string of this node references a `SCALAR`
 </span>  <span class='comment'>#     subquery contained in the expression subtree rooted at this node. The
-</span>  <span class='comment'>#     referenced +SCALAR+ subquery may not necessarily be a direct child of
+</span>  <span class='comment'>#     referenced `SCALAR` subquery may not necessarily be a direct child of
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -793,7 +793,7 @@ execution etc.</p>
 
     <span class='comment'># Denotes a Relational operator node in the expression tree. Relational
 </span>    <span class='comment'># operators represent iterative processing of rows during query execution.
-</span>    <span class='comment'># For example, a +TableScan+ operation that reads rows from a table.
+</span>    <span class='comment'># For example, a `TableScan` operation that reads rows from a table.
 </span>    <span class='const'>RELATIONAL</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Denotes a Scalar node in the expression tree. Scalar nodes represent
@@ -821,7 +821,7 @@ execution etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The +PlanNode+&#39;s index in <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">node list</a></span>.</p>
+    <p>Returns The <code>PlanNode</code>&#39;s index in <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">node list</a></span>.</p>
 
 
   </div>
@@ -839,7 +839,7 @@ execution etc.</p>
       
       
         &mdash;
-        <div class='inline'><p>The +PlanNode+&#39;s index in <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">node list</a></span>.</p>
+        <div class='inline'><p>The <code>PlanNode</code>&#39;s index in <span class='object_link'><a href="QueryPlan.html#plan_nodes-instance_method" title="Google::Spanner::V1::QueryPlan#plan_nodes (method)">node list</a></span>.</p>
 </div>
       
     </li>
@@ -929,24 +929,24 @@ execution etc.</p>
 </span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
 </span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
 </span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a +TableScan+ operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the +SCALAR+ nodes representing the output variables
+</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
+</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
 </span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     +variable+ fields will be set to the variable names assigned to the
+</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
 </span>  <span class='comment'>#     columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
-</span>  <span class='comment'># +SCALAR+ {Google::Spanner::V1::PlanNode PlanNode(s)}.
+</span>  <span class='comment'># `SCALAR` {Google::Spanner::V1::PlanNode PlanNode(s)}.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A string representation of the expression subtree rooted at this node.
 </span>  <span class='comment'># @!attribute [rw] subqueries
 </span>  <span class='comment'>#   @return [Hash{String =&gt; Integer}]
 </span>  <span class='comment'>#     A mapping of (subquery variable name) -&gt; (subquery node id) for cases
-</span>  <span class='comment'>#     where the +description+ string of this node references a +SCALAR+
+</span>  <span class='comment'>#     where the `description` string of this node references a `SCALAR`
 </span>  <span class='comment'>#     subquery contained in the expression subtree rooted at this node. The
-</span>  <span class='comment'>#     referenced +SCALAR+ subquery may not necessarily be a direct child of
+</span>  <span class='comment'>#     referenced `SCALAR` subquery may not necessarily be a direct child of
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -958,7 +958,7 @@ execution etc.</p>
 
     <span class='comment'># Denotes a Relational operator node in the expression tree. Relational
 </span>    <span class='comment'># operators represent iterative processing of rows during query execution.
-</span>    <span class='comment'># For example, a +TableScan+ operation that reads rows from a table.
+</span>    <span class='comment'># For example, a `TableScan` operation that reads rows from a table.
 </span>    <span class='const'>RELATIONAL</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Denotes a Scalar node in the expression tree. Scalar nodes represent
@@ -1102,24 +1102,24 @@ parent.</p>
 </span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
 </span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
 </span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a +TableScan+ operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the +SCALAR+ nodes representing the output variables
+</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
+</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
 </span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     +variable+ fields will be set to the variable names assigned to the
+</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
 </span>  <span class='comment'>#     columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
-</span>  <span class='comment'># +SCALAR+ {Google::Spanner::V1::PlanNode PlanNode(s)}.
+</span>  <span class='comment'># `SCALAR` {Google::Spanner::V1::PlanNode PlanNode(s)}.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A string representation of the expression subtree rooted at this node.
 </span>  <span class='comment'># @!attribute [rw] subqueries
 </span>  <span class='comment'>#   @return [Hash{String =&gt; Integer}]
 </span>  <span class='comment'>#     A mapping of (subquery variable name) -&gt; (subquery node id) for cases
-</span>  <span class='comment'>#     where the +description+ string of this node references a +SCALAR+
+</span>  <span class='comment'>#     where the `description` string of this node references a `SCALAR`
 </span>  <span class='comment'>#     subquery contained in the expression subtree rooted at this node. The
-</span>  <span class='comment'>#     referenced +SCALAR+ subquery may not necessarily be a direct child of
+</span>  <span class='comment'>#     referenced `SCALAR` subquery may not necessarily be a direct child of
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1131,7 +1131,7 @@ parent.</p>
 
     <span class='comment'># Denotes a Relational operator node in the expression tree. Relational
 </span>    <span class='comment'># operators represent iterative processing of rows during query execution.
-</span>    <span class='comment'># For example, a +TableScan+ operation that reads rows from a table.
+</span>    <span class='comment'># For example, a `TableScan` operation that reads rows from a table.
 </span>    <span class='const'>RELATIONAL</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Denotes a Scalar node in the expression tree. Scalar nodes represent
@@ -1283,24 +1283,24 @@ information in its metadata:</p>
 </span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
 </span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
 </span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a +TableScan+ operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the +SCALAR+ nodes representing the output variables
+</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
+</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
 </span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     +variable+ fields will be set to the variable names assigned to the
+</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
 </span>  <span class='comment'>#     columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
-</span>  <span class='comment'># +SCALAR+ {Google::Spanner::V1::PlanNode PlanNode(s)}.
+</span>  <span class='comment'># `SCALAR` {Google::Spanner::V1::PlanNode PlanNode(s)}.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A string representation of the expression subtree rooted at this node.
 </span>  <span class='comment'># @!attribute [rw] subqueries
 </span>  <span class='comment'>#   @return [Hash{String =&gt; Integer}]
 </span>  <span class='comment'>#     A mapping of (subquery variable name) -&gt; (subquery node id) for cases
-</span>  <span class='comment'>#     where the +description+ string of this node references a +SCALAR+
+</span>  <span class='comment'>#     where the `description` string of this node references a `SCALAR`
 </span>  <span class='comment'>#     subquery contained in the expression subtree rooted at this node. The
-</span>  <span class='comment'>#     referenced +SCALAR+ subquery may not necessarily be a direct child of
+</span>  <span class='comment'>#     referenced `SCALAR` subquery may not necessarily be a direct child of
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1312,7 +1312,7 @@ information in its metadata:</p>
 
     <span class='comment'># Denotes a Relational operator node in the expression tree. Relational
 </span>    <span class='comment'># operators represent iterative processing of rows during query execution.
-</span>    <span class='comment'># For example, a +TableScan+ operation that reads rows from a table.
+</span>    <span class='comment'># For example, a `TableScan` operation that reads rows from a table.
 </span>    <span class='const'>RELATIONAL</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Denotes a Scalar node in the expression tree. Scalar nodes represent
@@ -1448,24 +1448,24 @@ information in its metadata:</p>
 </span>  <span class='comment'>#     Only present if the child node is {Google::Spanner::V1::PlanNode::Kind::SCALAR SCALAR} and corresponds
 </span>  <span class='comment'>#     to an output variable of the parent node. The field carries the name of
 </span>  <span class='comment'>#     the output variable.
-</span>  <span class='comment'>#     For example, a +TableScan+ operator that reads rows from a table will
-</span>  <span class='comment'>#     have child links to the +SCALAR+ nodes representing the output variables
+</span>  <span class='comment'>#     For example, a `TableScan` operator that reads rows from a table will
+</span>  <span class='comment'>#     have child links to the `SCALAR` nodes representing the output variables
 </span>  <span class='comment'>#     created for each column that is read by the operator. The corresponding
-</span>  <span class='comment'>#     +variable+ fields will be set to the variable names assigned to the
+</span>  <span class='comment'>#     `variable` fields will be set to the variable names assigned to the
 </span>  <span class='comment'>#     columns.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ChildLink.html" title="Google::Spanner::V1::PlanNode::ChildLink (class)">ChildLink</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Condensed representation of a node and its subtree. Only present for
-</span>  <span class='comment'># +SCALAR+ {Google::Spanner::V1::PlanNode PlanNode(s)}.
+</span>  <span class='comment'># `SCALAR` {Google::Spanner::V1::PlanNode PlanNode(s)}.
 </span>  <span class='comment'># @!attribute [rw] description
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     A string representation of the expression subtree rooted at this node.
 </span>  <span class='comment'># @!attribute [rw] subqueries
 </span>  <span class='comment'>#   @return [Hash{String =&gt; Integer}]
 </span>  <span class='comment'>#     A mapping of (subquery variable name) -&gt; (subquery node id) for cases
-</span>  <span class='comment'>#     where the +description+ string of this node references a +SCALAR+
+</span>  <span class='comment'>#     where the `description` string of this node references a `SCALAR`
 </span>  <span class='comment'>#     subquery contained in the expression subtree rooted at this node. The
-</span>  <span class='comment'>#     referenced +SCALAR+ subquery may not necessarily be a direct child of
+</span>  <span class='comment'>#     referenced `SCALAR` subquery may not necessarily be a direct child of
 </span>  <span class='comment'>#     this node.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="PlanNode/ShortRepresentation.html" title="Google::Spanner::V1::PlanNode::ShortRepresentation (class)">ShortRepresentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1477,7 +1477,7 @@ information in its metadata:</p>
 
     <span class='comment'># Denotes a Relational operator node in the expression tree. Relational
 </span>    <span class='comment'># operators represent iterative processing of rows during query execution.
-</span>    <span class='comment'># For example, a +TableScan+ operation that reads rows from a table.
+</span>    <span class='comment'># For example, a `TableScan` operation that reads rows from a table.
 </span>    <span class='const'>RELATIONAL</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># Denotes a Scalar node in the expression tree. Scalar nodes represent

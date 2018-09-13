@@ -356,12 +356,12 @@ rows were present.</p>
 </span>  <span class='comment'>#     row(s) to be modified.
 </span>  <span class='comment'># @!attribute [rw] values
 </span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::ListValue&gt;]
-</span>  <span class='comment'>#     The values to be written. +values+ can contain more than one
+</span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
-</span>  <span class='comment'>#     for each entry in +values+. Each list in +values+ must have
+</span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
 </span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
 </span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     +Mutation+s, each containing one +values+ entry and repeating
+</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
 </span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
 </span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -396,7 +396,7 @@ rows were present.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Insert new rows in a table. If any of the rows already exist,
-the write or transaction fails with error +ALREADY_EXISTS+.</p>
+the write or transaction fails with error <code>ALREADY_EXISTS</code>.</p>
 
 
   </div>
@@ -415,7 +415,7 @@ the write or transaction fails with error +ALREADY_EXISTS+.</p>
       
         &mdash;
         <div class='inline'><p>Insert new rows in a table. If any of the rows already exist,
-the write or transaction fails with error +ALREADY_EXISTS+.</p>
+the write or transaction fails with error <code>ALREADY_EXISTS</code>.</p>
 </div>
       
     </li>
@@ -483,12 +483,12 @@ the write or transaction fails with error +ALREADY_EXISTS+.</p>
 </span>  <span class='comment'>#     row(s) to be modified.
 </span>  <span class='comment'># @!attribute [rw] values
 </span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::ListValue&gt;]
-</span>  <span class='comment'>#     The values to be written. +values+ can contain more than one
+</span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
-</span>  <span class='comment'>#     for each entry in +values+. Each list in +values+ must have
+</span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
 </span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
 </span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     +Mutation+s, each containing one +values+ entry and repeating
+</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
 </span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
 </span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -612,12 +612,12 @@ column values not explicitly written are preserved.</p>
 </span>  <span class='comment'>#     row(s) to be modified.
 </span>  <span class='comment'># @!attribute [rw] values
 </span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::ListValue&gt;]
-</span>  <span class='comment'>#     The values to be written. +values+ can contain more than one
+</span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
-</span>  <span class='comment'>#     for each entry in +values+. Each list in +values+ must have
+</span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
 </span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
 </span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     +Mutation+s, each containing one +values+ entry and repeating
+</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
 </span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
 </span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -654,7 +654,7 @@ column values not explicitly written are preserved.</p>
     <p>Returns Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row already exists, it is
 deleted, and the column values provided are inserted
 instead. Unlike <span class='object_link'><a href="#insert_or_update-instance_method" title="Google::Spanner::V1::Mutation#insert_or_update (method)">insert_or_update</a></span>, this means any values not
-explicitly written become +NULL+.</p>
+explicitly written become <code>NULL</code>.</p>
 
 
   </div>
@@ -675,7 +675,7 @@ explicitly written become +NULL+.</p>
         <div class='inline'><p>Like <span class='object_link'><a href="#insert-instance_method" title="Google::Spanner::V1::Mutation#insert (method)">insert</a></span>, except that if the row already exists, it is
 deleted, and the column values provided are inserted
 instead. Unlike <span class='object_link'><a href="#insert_or_update-instance_method" title="Google::Spanner::V1::Mutation#insert_or_update (method)">insert_or_update</a></span>, this means any values not
-explicitly written become +NULL+.</p>
+explicitly written become <code>NULL</code>.</p>
 </div>
       
     </li>
@@ -743,12 +743,12 @@ explicitly written become +NULL+.</p>
 </span>  <span class='comment'>#     row(s) to be modified.
 </span>  <span class='comment'># @!attribute [rw] values
 </span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::ListValue&gt;]
-</span>  <span class='comment'>#     The values to be written. +values+ can contain more than one
+</span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
-</span>  <span class='comment'>#     for each entry in +values+. Each list in +values+ must have
+</span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
 </span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
 </span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     +Mutation+s, each containing one +values+ entry and repeating
+</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
 </span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
 </span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
@@ -783,7 +783,7 @@ explicitly written become +NULL+.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Update existing rows in a table. If any of the rows does not
-already exist, the transaction fails with error +NOT_FOUND+.</p>
+already exist, the transaction fails with error <code>NOT_FOUND</code>.</p>
 
 
   </div>
@@ -802,7 +802,7 @@ already exist, the transaction fails with error +NOT_FOUND+.</p>
       
         &mdash;
         <div class='inline'><p>Update existing rows in a table. If any of the rows does not
-already exist, the transaction fails with error +NOT_FOUND+.</p>
+already exist, the transaction fails with error <code>NOT_FOUND</code>.</p>
 </div>
       
     </li>
@@ -870,12 +870,12 @@ already exist, the transaction fails with error +NOT_FOUND+.</p>
 </span>  <span class='comment'>#     row(s) to be modified.
 </span>  <span class='comment'># @!attribute [rw] values
 </span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::ListValue&gt;]
-</span>  <span class='comment'>#     The values to be written. +values+ can contain more than one
+</span>  <span class='comment'>#     The values to be written. `values` can contain more than one
 </span>  <span class='comment'>#     list of values. If it does, then multiple rows are written, one
-</span>  <span class='comment'>#     for each entry in +values+. Each list in +values+ must have
+</span>  <span class='comment'>#     for each entry in `values`. Each list in `values` must have
 </span>  <span class='comment'>#     exactly as many entries as there are entries in {Google::Spanner::V1::Mutation::Write#columns columns}
 </span>  <span class='comment'>#     above. Sending multiple lists is equivalent to sending multiple
-</span>  <span class='comment'>#     +Mutation+s, each containing one +values+ entry and repeating
+</span>  <span class='comment'>#     `Mutation`s, each containing one `values` entry and repeating
 </span>  <span class='comment'>#     {Google::Spanner::V1::Mutation::Write#table table} and {Google::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
 </span>  <span class='comment'>#     encoded as described {Google::Spanner::V1::TypeCode here}.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Write.html" title="Google::Spanner::V1::Mutation::Write (class)">Write</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>

@@ -94,9 +94,9 @@ js:
     <p>Defines an Identity and Access Management (IAM) policy. It is used to
 specify access control policies for Cloud Platform resources.</p>
 
-<p>A +Policy+ consists of a list of +bindings+. A +Binding+ binds a list of
-+members+ to a +role+, where the members can be user accounts, Google groups,
-Google domains, and service accounts. A +role+ is a named list of permissions
+<p>A <code>Policy</code> consists of a list of <code>bindings</code>. A <code>Binding</code> binds a list of
+<code>members</code> to a <code>role</code>, where the members can be user accounts, Google groups,
+Google domains, and service accounts. A <code>role</code> is a named list of permissions
 defined by IAM.</p>
 
 <p><strong>Example</strong></p>
@@ -156,7 +156,7 @@ defined by IAM.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Associates a list of +members+ to a +role+.</p>
+    <span class="summary_desc"><div class='inline'><p>Associates a list of <code>members</code> to a <code>role</code>.</p>
 </div></span>
   
 </li>
@@ -182,7 +182,7 @@ defined by IAM.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>+etag+ is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other.</p>
+    <span class="summary_desc"><div class='inline'><p><code>etag</code> is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other.</p>
 </div></span>
   
 </li>
@@ -208,7 +208,7 @@ defined by IAM.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Version of the +Policy+.</p>
+    <span class="summary_desc"><div class='inline'><p>Version of the <code>Policy</code>.</p>
 </div></span>
   
 </li>
@@ -236,9 +236,9 @@ defined by IAM.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Associates a list of +members+ to a +role+.
-Multiple +bindings+ must not be specified for the same +role+.
-+bindings+ with no members will result in an error.</p>
+    <p>Returns Associates a list of <code>members</code> to a <code>role</code>.
+Multiple <code>bindings</code> must not be specified for the same <code>role</code>.
+<code>bindings</code> with no members will result in an error.</p>
 
 
   </div>
@@ -256,9 +256,9 @@ Multiple +bindings+ must not be specified for the same +role+.
       
       
         &mdash;
-        <div class='inline'><p>Associates a list of +members+ to a +role+.
-Multiple +bindings+ must not be specified for the same +role+.
-+bindings+ with no members will result in an error.</p>
+        <div class='inline'><p>Associates a list of <code>members</code> to a <code>role</code>.
+Multiple <code>bindings</code> must not be specified for the same <code>role</code>.
+<code>bindings</code> with no members will result in an error.</p>
 </div>
       
     </li>
@@ -295,15 +295,15 @@ Multiple +bindings+ must not be specified for the same +role+.
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns +etag+ is used for optimistic concurrency control as a way to help
+    <p>Returns <code>etag</code> is used for optimistic concurrency control as a way to help
 prevent simultaneous updates of a policy from overwriting each other.
-It is strongly suggested that systems make use of the +etag+ in the
+It is strongly suggested that systems make use of the <code>etag</code> in the
 read-modify-write cycle to perform policy updates in order to avoid race
-conditions: An +etag+ is returned in the response to +getIamPolicy+, and
-systems are expected to put that etag in the request to +setIamPolicy+ to
+conditions: An <code>etag</code> is returned in the response to <code>getIamPolicy</code>, and
+systems are expected to put that etag in the request to <code>setIamPolicy</code> to
 ensure that their change will be applied to the same version of the policy.</p>
 
-<p>If no +etag+ is provided in the call to +setIamPolicy+, then the existing
+<p>If no <code>etag</code> is provided in the call to <code>setIamPolicy</code>, then the existing
 policy is overwritten blindly.</p>
 
 
@@ -322,15 +322,15 @@ policy is overwritten blindly.</p>
       
       
         &mdash;
-        <div class='inline'><p>+etag+ is used for optimistic concurrency control as a way to help
+        <div class='inline'><p><code>etag</code> is used for optimistic concurrency control as a way to help
 prevent simultaneous updates of a policy from overwriting each other.
-It is strongly suggested that systems make use of the +etag+ in the
+It is strongly suggested that systems make use of the <code>etag</code> in the
 read-modify-write cycle to perform policy updates in order to avoid race
-conditions: An +etag+ is returned in the response to +getIamPolicy+, and
-systems are expected to put that etag in the request to +setIamPolicy+ to
+conditions: An <code>etag</code> is returned in the response to <code>getIamPolicy</code>, and
+systems are expected to put that etag in the request to <code>setIamPolicy</code> to
 ensure that their change will be applied to the same version of the policy.</p>
 
-<p>If no +etag+ is provided in the call to +setIamPolicy+, then the existing
+<p>If no <code>etag</code> is provided in the call to <code>setIamPolicy</code>, then the existing
 policy is overwritten blindly.</p>
 </div>
       
@@ -368,7 +368,7 @@ policy is overwritten blindly.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Version of the +Policy+. The default version is 0.</p>
+    <p>Returns Version of the <code>Policy</code>. The default version is 0.</p>
 
 
   </div>
@@ -386,7 +386,7 @@ policy is overwritten blindly.</p>
       
       
         &mdash;
-        <div class='inline'><p>Version of the +Policy+. The default version is 0.</p>
+        <div class='inline'><p>Version of the <code>Policy</code>. The default version is 0.</p>
 </div>
       
     </li>

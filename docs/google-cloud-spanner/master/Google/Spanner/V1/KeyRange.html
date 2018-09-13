@@ -112,14 +112,14 @@ Individual values are encoded as described <span class='object_link'><a href="Ty
 <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Alfred</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>2015-06-12</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
 </code></pre>
 
-<p>Since the +UserEvents+ table&#39;s +PRIMARY KEY+ clause names two
-columns, each +UserEvents+ key has two elements; the first is the
-+UserName+, and the second is the +EventDate+.</p>
+<p>Since the <code>UserEvents</code> table&#39;s <code>PRIMARY KEY</code> clause names two
+columns, each <code>UserEvents</code> key has two elements; the first is the
+<code>UserName</code>, and the second is the <code>EventDate</code>.</p>
 
 <p>Key ranges with multiple components are interpreted
 lexicographically by component using the table or index key&#39;s declared
 sort order. For example, the following range returns all events for
-user +&quot;Bob&quot;+ that occurred in the year 2015:</p>
+user <code>&quot;Bob&quot;</code> that occurred in the year 2015:</p>
 
 <pre class="code ruby"><code class="ruby">&quot;start_closed&quot;: [&quot;Bob&quot;, &quot;2015-01-01&quot;]
 &quot;end_closed&quot;: [&quot;Bob&quot;, &quot;2015-12-31&quot;]
@@ -131,14 +131,14 @@ components: if the key is closed, then rows that exactly match the
 provided components are included; if the key is open, then rows
 that exactly match are not included.</p>
 
-<p>For example, the following range includes all events for +&quot;Bob&quot;+ that
+<p>For example, the following range includes all events for <code>&quot;Bob&quot;</code> that
 occurred during and after the year 2000:</p>
 
 <pre class="code ruby"><code class="ruby">&quot;start_closed&quot;: [&quot;Bob&quot;, &quot;2000-01-01&quot;]
 &quot;end_closed&quot;: [&quot;Bob&quot;]
 </code></pre>
 
-<p>The next example retrieves all events for +&quot;Bob&quot;+:</p>
+<p>The next example retrieves all events for <code>&quot;Bob&quot;</code>:</p>
 
 <pre class="code ruby"><code class="ruby">&quot;start_closed&quot;: [&quot;Bob&quot;]
 &quot;end_closed&quot;: [&quot;Bob&quot;]
@@ -156,14 +156,14 @@ occurred during and after the year 2000:</p>
 &quot;end_closed&quot;: []
 </code></pre>
 
-<p>This range returns all users whose +UserName+ begins with any
+<p>This range returns all users whose <code>UserName</code> begins with any
 character from A to C:</p>
 
 <pre class="code ruby"><code class="ruby">&quot;start_closed&quot;: [&quot;A&quot;]
 &quot;end_open&quot;: [&quot;D&quot;]
 </code></pre>
 
-<p>This range returns all users whose +UserName+ begins with B:</p>
+<p>This range returns all users whose <code>UserName</code> begins with B:</p>
 
 <pre class="code ruby"><code class="ruby">&quot;start_closed&quot;: [&quot;B&quot;]
 &quot;end_open&quot;: [&quot;C&quot;]
@@ -186,7 +186,7 @@ and 100 inclusive:</p>
 </code></pre>
 
 <p>Note that 100 is passed as the start, and 1 is passed as the end,
-because +Key+ is a descending column in the schema.</p>
+because <code>Key</code> is a descending column in the schema.</p>
 
 
   </div>
@@ -221,7 +221,7 @@ because +Key+ is a descending column in the schema.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If the end is closed, then the range includes all rows whose first +len(end_closed)+ key columns exactly match +end_closed+.</p>
+    <span class="summary_desc"><div class='inline'><p>If the end is closed, then the range includes all rows whose first <code>len(end_closed)</code> key columns exactly match <code>end_closed</code>.</p>
 </div></span>
   
 </li>
@@ -247,7 +247,7 @@ because +Key+ is a descending column in the schema.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If the end is open, then the range excludes rows whose first +len(end_open)+ key columns exactly match +end_open+.</p>
+    <span class="summary_desc"><div class='inline'><p>If the end is open, then the range excludes rows whose first <code>len(end_open)</code> key columns exactly match <code>end_open</code>.</p>
 </div></span>
   
 </li>
@@ -273,7 +273,7 @@ because +Key+ is a descending column in the schema.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If the start is closed, then the range includes all rows whose first +len(start_closed)+ key columns exactly match +start_closed+.</p>
+    <span class="summary_desc"><div class='inline'><p>If the start is closed, then the range includes all rows whose first <code>len(start_closed)</code> key columns exactly match <code>start_closed</code>.</p>
 </div></span>
   
 </li>
@@ -299,7 +299,7 @@ because +Key+ is a descending column in the schema.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If the start is open, then the range excludes rows whose first +len(start_open)+ key columns exactly match +start_open+.</p>
+    <span class="summary_desc"><div class='inline'><p>If the start is open, then the range excludes rows whose first <code>len(start_open)</code> key columns exactly match <code>start_open</code>.</p>
 </div></span>
   
 </li>
@@ -328,7 +328,7 @@ because +Key+ is a descending column in the schema.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If the end is closed, then the range includes all rows whose
-first +len(end_closed)+ key columns exactly match +end_closed+.</p>
+first <code>len(end_closed)</code> key columns exactly match <code>end_closed</code>.</p>
 
 
   </div>
@@ -347,7 +347,7 @@ first +len(end_closed)+ key columns exactly match +end_closed+.</p>
       
         &mdash;
         <div class='inline'><p>If the end is closed, then the range includes all rows whose
-first +len(end_closed)+ key columns exactly match +end_closed+.</p>
+first <code>len(end_closed)</code> key columns exactly match <code>end_closed</code>.</p>
 </div>
       
     </li>
@@ -385,7 +385,7 @@ first +len(end_closed)+ key columns exactly match +end_closed+.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If the end is open, then the range excludes rows whose first
-+len(end_open)+ key columns exactly match +end_open+.</p>
+<code>len(end_open)</code> key columns exactly match <code>end_open</code>.</p>
 
 
   </div>
@@ -404,7 +404,7 @@ first +len(end_closed)+ key columns exactly match +end_closed+.</p>
       
         &mdash;
         <div class='inline'><p>If the end is open, then the range excludes rows whose first
-+len(end_open)+ key columns exactly match +end_open+.</p>
+<code>len(end_open)</code> key columns exactly match <code>end_open</code>.</p>
 </div>
       
     </li>
@@ -442,7 +442,7 @@ first +len(end_closed)+ key columns exactly match +end_closed+.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If the start is closed, then the range includes all rows whose
-first +len(start_closed)+ key columns exactly match +start_closed+.</p>
+first <code>len(start_closed)</code> key columns exactly match <code>start_closed</code>.</p>
 
 
   </div>
@@ -461,7 +461,7 @@ first +len(start_closed)+ key columns exactly match +start_closed+.</p>
       
         &mdash;
         <div class='inline'><p>If the start is closed, then the range includes all rows whose
-first +len(start_closed)+ key columns exactly match +start_closed+.</p>
+first <code>len(start_closed)</code> key columns exactly match <code>start_closed</code>.</p>
 </div>
       
     </li>
@@ -499,7 +499,7 @@ first +len(start_closed)+ key columns exactly match +start_closed+.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If the start is open, then the range excludes rows whose first
-+len(start_open)+ key columns exactly match +start_open+.</p>
+<code>len(start_open)</code> key columns exactly match <code>start_open</code>.</p>
 
 
   </div>
@@ -518,7 +518,7 @@ first +len(start_closed)+ key columns exactly match +start_closed+.</p>
       
         &mdash;
         <div class='inline'><p>If the start is open, then the range excludes rows whose first
-+len(start_open)+ key columns exactly match +start_open+.</p>
+<code>len(start_open)</code> key columns exactly match <code>start_open</code>.</p>
 </div>
       
     </li>

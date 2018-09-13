@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>+StructType+ defines the fields of a <span class='object_link'><a href="TypeCode.html#STRUCT-constant" title="Google::Spanner::V1::TypeCode::STRUCT (constant)">STRUCT</a></span> type.</p>
+    <p><code>StructType</code> defines the fields of a <span class='object_link'><a href="TypeCode.html#STRUCT-constant" title="Google::Spanner::V1::TypeCode::STRUCT (constant)">STRUCT</a></span> type.</p>
 
 
   </div>
@@ -167,7 +167,7 @@ significant, because values of this struct type are represented as
 lists, where the order of field values matches the order of
 fields in the <span class='object_link'><a href="" title="Google::Spanner::V1::StructType (class)">StructType</a></span>. In turn, the order of fields
 matches the order of columns in a read request, or the order of
-fields in the +SELECT+ clause of a query.</p>
+fields in the <code>SELECT</code> clause of a query.</p>
 
 
   </div>
@@ -190,7 +190,7 @@ significant, because values of this struct type are represented as
 lists, where the order of field values matches the order of
 fields in the <span class='object_link'><a href="" title="Google::Spanner::V1::StructType (class)">StructType</a></span>. In turn, the order of fields
 matches the order of columns in a read request, or the order of
-fields in the +SELECT+ clause of a query.</p>
+fields in the <code>SELECT</code> clause of a query.</p>
 </div>
       
     </li>
@@ -228,11 +228,11 @@ fields in the +SELECT+ clause of a query.</p>
 </span>  <span class='comment'># @!attribute [rw] name
 </span>  <span class='comment'>#   @return [String]
 </span>  <span class='comment'>#     The name of the field. For reads, this is the column name. For
-</span>  <span class='comment'>#     SQL queries, it is the column alias (e.g., +&quot;Word&quot;+ in the
-</span>  <span class='comment'>#     query +&quot;SELECT &#39;hello&#39; AS Word&quot;+), or the column name (e.g.,
-</span>  <span class='comment'>#     +&quot;ColName&quot;+ in the query +&quot;SELECT ColName FROM Table&quot;+). Some
+</span>  <span class='comment'>#     SQL queries, it is the column alias (e.g., `&quot;Word&quot;` in the
+</span>  <span class='comment'>#     query `&quot;SELECT &#39;hello&#39; AS Word&quot;`), or the column name (e.g.,
+</span>  <span class='comment'>#     `&quot;ColName&quot;` in the query `&quot;SELECT ColName FROM Table&quot;`). Some
 </span>  <span class='comment'>#     columns might have an empty name (e.g., !&quot;SELECT
-</span>  <span class='comment'>#     UPPER(ColName)&quot;+). Note that a query result can contain
+</span>  <span class='comment'>#     UPPER(ColName)&quot;`). Note that a query result can contain
 </span>  <span class='comment'>#     multiple fields with the same name.
 </span>  <span class='comment'># @!attribute [rw] type
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::Type]

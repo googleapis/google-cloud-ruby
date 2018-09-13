@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>+KeySet+ defines a collection of Cloud Spanner keys and/or key ranges. All
+    <p><code>KeySet</code> defines a collection of Cloud Spanner keys and/or key ranges. All
 the keys are expected to be in the same table or index. The keys need
 not be sorted in any particular way.</p>
 
@@ -130,7 +130,7 @@ behaves as if the key were only specified once.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>For convenience +all+ can be set to +true+ to indicate that this +KeySet+ matches all keys in the table or index.</p>
+    <span class="summary_desc"><div class='inline'><p>For convenience <code>all</code> can be set to <code>true</code> to indicate that this <code>KeySet</code> matches all keys in the table or index.</p>
 </div></span>
   
 </li>
@@ -210,9 +210,9 @@ behaves as if the key were only specified once.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns For convenience +all+ can be set to +true+ to indicate that this
-+KeySet+ matches all keys in the table or index. Note that any keys
-specified in +keys+ or +ranges+ are only yielded once.</p>
+    <p>Returns For convenience <code>all</code> can be set to <code>true</code> to indicate that this
+<code>KeySet</code> matches all keys in the table or index. Note that any keys
+specified in <code>keys</code> or <code>ranges</code> are only yielded once.</p>
 
 
   </div>
@@ -230,9 +230,9 @@ specified in +keys+ or +ranges+ are only yielded once.</p>
       
       
         &mdash;
-        <div class='inline'><p>For convenience +all+ can be set to +true+ to indicate that this
-+KeySet+ matches all keys in the table or index. Note that any keys
-specified in +keys+ or +ranges+ are only yielded once.</p>
+        <div class='inline'><p>For convenience <code>all</code> can be set to <code>true</code> to indicate that this
+<code>KeySet</code> matches all keys in the table or index. Note that any keys
+specified in <code>keys</code> or <code>ranges</code> are only yielded once.</p>
 </div>
       
     </li>
@@ -269,9 +269,9 @@ specified in +keys+ or +ranges+ are only yielded once.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A list of specific keys. Entries in +keys+ should have exactly as
+    <p>Returns A list of specific keys. Entries in <code>keys</code> should have exactly as
 many elements as there are columns in the primary or index key
-with which this +KeySet+ is used.  Individual key values are
+with which this <code>KeySet</code> is used.  Individual key values are
 encoded as described <span class='object_link'><a href="TypeCode.html" title="Google::Spanner::V1::TypeCode (module)">here</a></span>.</p>
 
 
@@ -290,9 +290,9 @@ encoded as described <span class='object_link'><a href="TypeCode.html" title="Go
       
       
         &mdash;
-        <div class='inline'><p>A list of specific keys. Entries in +keys+ should have exactly as
+        <div class='inline'><p>A list of specific keys. Entries in <code>keys</code> should have exactly as
 many elements as there are columns in the primary or index key
-with which this +KeySet+ is used.  Individual key values are
+with which this <code>KeySet</code> is used.  Individual key values are
 encoded as described <span class='object_link'><a href="TypeCode.html" title="Google::Spanner::V1::TypeCode (module)">here</a></span>.</p>
 </div>
       
