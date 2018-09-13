@@ -1142,11 +1142,11 @@ custom error handling.</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic. It must have the format
-+&quot;projects/{project}/topics/{topic}&quot;+. +{topic}+ must start with a letter,
-and contain only letters (+[A-Za-z]+), numbers (+[0-9]+), dashes (+-+),
-underscores (+_+), periods (+.+), tildes (+~+), plus (+++) or percent
-signs (+%+). It must be between 3 and 255 characters in length, and it
-must not start with +&quot;goog&quot;+.</p>
+<code>&quot;projects/{project}/topics/{topic}&quot;</code>. <code>{topic}</code> must start with a letter,
+and contain only letters (<code>[A-Za-z]</code>), numbers (<code>[0-9]</code>), dashes (<code>-</code>),
+underscores (<code>_</code>), periods (<code>.</code>), tildes (<code>~</code>), plus (<code>+</code>) or percent
+signs (<code>%</code>). It must be between 3 and 255 characters in length, and it
+must not start with <code>&quot;goog&quot;</code>.</p>
 </div>
       
     </li>
@@ -1334,11 +1334,11 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Deletes the topic with the given name. Returns +NOT_FOUND+ if the topic
+    <p>Deletes the topic with the given name. Returns <code>NOT_FOUND</code> if the topic
 does not exist. After a topic is deleted, a new topic may be created with
 the same name; this is an entirely new topic with none of the old
 configuration or subscriptions. Existing subscriptions to this topic are
-not deleted, but their +topic+ field is set to +<em>deleted-topic</em>+.</p>
+not deleted, but their <code>topic</code> field is set to <code>_deleted-topic_</code>.</p>
 
 
   </div>
@@ -1370,7 +1370,7 @@ not deleted, but their +topic+ field is set to +<em>deleted-topic</em>+.</p>
       
         &mdash;
         <div class='inline'><p>Name of the topic to delete.
-Format is +projects/{project}/topics/{topic}+.</p>
+Format is <code>projects/{project}/topics/{topic}</code>.</p>
 </div>
       
     </li>
@@ -1540,8 +1540,8 @@ set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -1716,7 +1716,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic to get.
-Format is +projects/{project}/topics/{topic}+.</p>
+Format is <code>projects/{project}/topics/{topic}</code>.</p>
 </div>
       
     </li>
@@ -1903,7 +1903,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic that subscriptions are attached to.
-Format is +projects/{project}/topics/{topic}+.</p>
+Format is <code>projects/{project}/topics/{topic}</code>.</p>
 </div>
       
     </li>
@@ -2120,7 +2120,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The name of the cloud project that topics belong to.
-Format is +projects/{project}+.</p>
+Format is <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -2293,7 +2293,7 @@ object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds one or more messages to the topic. Returns +NOT_FOUND+ if the topic
+    <p>Adds one or more messages to the topic. Returns <code>NOT_FOUND</code> if the topic
 does not exist. The message payload must not be empty; it must contain
  either a non-empty data field, or at least one attribute.</p>
 
@@ -2330,7 +2330,7 @@ does not exist. The message payload must not be empty; it must contain
       
         &mdash;
         <div class='inline'><p>The messages in the request will be published on this topic.
-Format is +projects/{project}/topics/{topic}+.</p>
+Format is <code>projects/{project}/topics/{topic}</code>.</p>
 </div>
       
     </li>
@@ -2511,7 +2511,7 @@ existing policy.</p>
 <span class='id identifier rubyid_publisher_client'>publisher_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'>Publisher</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Pubsub::V1::PublisherClient (class)">PublisherClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_topic_path'><span class='object_link'><a href="#topic_path-class_method" title="Google::Cloud::Pubsub::V1::PublisherClient.topic_path (method)">topic_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TOPIC]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +policy+:
+<span class='comment'># TODO: Initialize `policy`:
 </span><span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_publisher_client'>publisher_client</span><span class='period'>.</span><span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_policy'>policy</span><span class='rparen'>)</span></code></pre>
     
@@ -2530,8 +2530,8 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -2546,7 +2546,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>REQUIRED: The complete policy to be applied to the +resource+. The size of
+        <div class='inline'><p>REQUIRED: The complete policy to be applied to the <code>resource</code>. The size of
 the policy is limited to a few 10s of KB. An empty policy is a
 valid policy but certain Cloud Platform services (such as Projects)
 might reject them.
@@ -2716,7 +2716,7 @@ permissions, not a NOT_FOUND error.</p>
 <span class='id identifier rubyid_publisher_client'>publisher_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'>Publisher</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Pubsub::V1::PublisherClient (class)">PublisherClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_topic_path'><span class='object_link'><a href="#topic_path-class_method" title="Google::Cloud::Pubsub::V1::PublisherClient.topic_path (method)">topic_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TOPIC]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +permissions+:
+<span class='comment'># TODO: Initialize `permissions`:
 </span><span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_publisher_client'>publisher_client</span><span class='period'>.</span><span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span></code></pre>
     
@@ -2735,8 +2735,8 @@ permissions, not a NOT_FOUND error.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -2751,7 +2751,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The set of permissions to check for the +resource+. Permissions with
+        <div class='inline'><p>The set of permissions to check for the <code>resource</code>. Permissions with
 wildcards (such as &#39;<em>&#39; or &#39;storage.</em>&#39;) are not allowed. For more
 information see
 <a href="https://cloud.google.com/iam/docs/overview#permissions">IAM Overview</a>.</p>
@@ -2917,10 +2917,10 @@ topic are not modifiable.</p>
 
 <span class='id identifier rubyid_publisher_client'>publisher_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'>Publisher</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +topic+:
+<span class='comment'># TODO: Initialize `topic`:
 </span><span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +update_mask+:
+<span class='comment'># TODO: Initialize `update_mask`:
 </span><span class='id identifier rubyid_update_mask'>update_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_publisher_client'>publisher_client</span><span class='period'>.</span><span class='id identifier rubyid_update_topic'>update_topic</span><span class='lparen'>(</span><span class='id identifier rubyid_topic'>topic</span><span class='comma'>,</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='rparen'>)</span></code></pre>
     
@@ -2956,10 +2956,10 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>Indicates which fields in the provided topic to update. Must be specified
-and non-empty. Note that if +update_mask+ contains
+and non-empty. Note that if <code>update_mask</code> contains
 &quot;message_storage_policy&quot; then the new value will be determined based on the
 policy configured at the project or organization level. The
-+message_storage_policy+ must not be set in the +topic+ provided above.
+<code>message_storage_policy</code> must not be set in the <code>topic</code> provided above.
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</p>
 </div>

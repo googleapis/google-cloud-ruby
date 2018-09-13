@@ -316,9 +316,9 @@ again during that time (on a best-effort basis).</p>
 
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
-+ModifyAckDeadline+ with the corresponding +ack_id+ if using
-non-streaming pull or send the +ack_id+ in a
-+StreamingModifyAckDeadlineRequest+ if using streaming pull.
+<code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
+non-streaming pull or send the <code>ack_id</code> in a
+<code>StreamingModifyAckDeadlineRequest</code> if using streaming pull.
 The minimum custom deadline you can specify is 10 seconds.
 The maximum custom deadline you can specify is 600 seconds (10 minutes).
 If this parameter is 0, a default value of 10 seconds is used.</p>
@@ -353,9 +353,9 @@ again during that time (on a best-effort basis).</p>
 
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
-+ModifyAckDeadline+ with the corresponding +ack_id+ if using
-non-streaming pull or send the +ack_id+ in a
-+StreamingModifyAckDeadlineRequest+ if using streaming pull.
+<code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
+non-streaming pull or send the <code>ack_id</code> in a
+<code>StreamingModifyAckDeadlineRequest</code> if using streaming pull.
 The minimum custom deadline you can specify is 10 seconds.
 The maximum custom deadline you can specify is 600 seconds (10 minutes).
 If this parameter is 0, a default value of 10 seconds is used.</p>
@@ -458,8 +458,8 @@ system will eventually redeliver the message.</p>
   <div class="discussion">
     <p>Returns How long to retain unacknowledged messages in the subscription&#39;s backlog,
 from the moment a message is published.
-If +retain_acked_messages+ is true, then this also configures the retention
-of acknowledged messages, and thus configures how far back in time a +Seek+
+If <code>retain_acked_messages</code> is true, then this also configures the retention
+of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
 minutes.<br><br>
 <b>ALPHA:</b> This feature is part of an alpha release. This API might be
@@ -484,8 +484,8 @@ use. It is not subject to any SLA or deprecation policy.</p>
         &mdash;
         <div class='inline'><p>How long to retain unacknowledged messages in the subscription&#39;s backlog,
 from the moment a message is published.
-If +retain_acked_messages+ is true, then this also configures the retention
-of acknowledged messages, and thus configures how far back in time a +Seek+
+If <code>retain_acked_messages</code> is true, then this also configures the retention
+of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
 minutes.<br><br>
 <b>ALPHA:</b> This feature is part of an alpha release. This API might be
@@ -528,11 +528,11 @@ use. It is not subject to any SLA or deprecation policy.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The name of the subscription. It must have the format
-+&quot;projects/{project}/subscriptions/{subscription}&quot;+. +{subscription}+ must
-start with a letter, and contain only letters (+[A-Za-z]+), numbers
-(+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
-plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
-in length, and it must not start with +&quot;goog&quot;+</p>
+<code>&quot;projects/{project}/subscriptions/{subscription}&quot;</code>. <code>{subscription}</code> must
+start with a letter, and contain only letters (<code>[A-Za-z]</code>), numbers
+(<code>[0-9]</code>), dashes (<code>-</code>), underscores (<code>_</code>), periods (<code>.</code>), tildes (<code>~</code>),
+plus (<code>+</code>) or percent signs (<code>%</code>). It must be between 3 and 255 characters
+in length, and it must not start with <code>&quot;goog&quot;</code></p>
 
 
   </div>
@@ -551,11 +551,11 @@ in length, and it must not start with +&quot;goog&quot;+</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription. It must have the format
-+&quot;projects/{project}/subscriptions/{subscription}&quot;+. +{subscription}+ must
-start with a letter, and contain only letters (+[A-Za-z]+), numbers
-(+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
-plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
-in length, and it must not start with +&quot;goog&quot;+</p>
+<code>&quot;projects/{project}/subscriptions/{subscription}&quot;</code>. <code>{subscription}</code> must
+start with a letter, and contain only letters (<code>[A-Za-z]</code>), numbers
+(<code>[0-9]</code>), dashes (<code>-</code>), underscores (<code>_</code>), periods (<code>.</code>), tildes (<code>~</code>),
+plus (<code>+</code>) or percent signs (<code>%</code>). It must be between 3 and 255 characters
+in length, and it must not start with <code>&quot;goog&quot;</code></p>
 </div>
       
     </li>
@@ -593,7 +593,7 @@ in length, and it must not start with +&quot;goog&quot;+</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns If push delivery is used with this subscription, this field is
-used to configure it. An empty +pushConfig+ signifies that the subscriber
+used to configure it. An empty <code>pushConfig</code> signifies that the subscriber
 will pull and ack messages using API methods.</p>
 
 
@@ -613,7 +613,7 @@ will pull and ack messages using API methods.</p>
       
         &mdash;
         <div class='inline'><p>If push delivery is used with this subscription, this field is
-used to configure it. An empty +pushConfig+ signifies that the subscriber
+used to configure it. An empty <code>pushConfig</code> signifies that the subscriber
 will pull and ack messages using API methods.</p>
 </div>
       
@@ -653,7 +653,7 @@ will pull and ack messages using API methods.</p>
   <div class="discussion">
     <p>Returns Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&#39;s backlog, even if they are
-acknowledged, until they fall out of the +message_retention_duration+
+acknowledged, until they fall out of the <code>message_retention_duration</code>
 window.<br><br>
 <b>ALPHA:</b> This feature is part of an alpha release. This API might be
 changed in backward-incompatible ways and is not recommended for production
@@ -677,7 +677,7 @@ use. It is not subject to any SLA or deprecation policy.</p>
         &mdash;
         <div class='inline'><p>Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&#39;s backlog, even if they are
-acknowledged, until they fall out of the +message_retention_duration+
+acknowledged, until they fall out of the <code>message_retention_duration</code>
 window.<br><br>
 <b>ALPHA:</b> This feature is part of an alpha release. This API might be
 changed in backward-incompatible ways and is not recommended for production
@@ -719,8 +719,8 @@ use. It is not subject to any SLA or deprecation policy.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The name of the topic from which this subscription is receiving messages.
-Format is +projects/{project}/topics/{topic}+.
-The value of this field will be +<em>deleted-topic</em>+ if the topic has been
+Format is <code>projects/{project}/topics/{topic}</code>.
+The value of this field will be <code>_deleted-topic_</code> if the topic has been
 deleted.</p>
 
 
@@ -740,8 +740,8 @@ deleted.</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic from which this subscription is receiving messages.
-Format is +projects/{project}/topics/{topic}+.
-The value of this field will be +<em>deleted-topic</em>+ if the topic has been
+Format is <code>projects/{project}/topics/{topic}</code>.
+The value of this field will be <code>_deleted-topic_</code> if the topic has been
 deleted.</p>
 </div>
       

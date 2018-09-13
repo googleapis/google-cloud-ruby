@@ -90,8 +90,8 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The service that an application uses to manipulate subscriptions and to
-consume messages from a subscription via the +Pull+ method or by
-establishing a bi-directional stream using the +StreamingPull+ method.</p>
+consume messages from a subscription via the <code>Pull</code> method or by
+establishing a bi-directional stream using the <code>StreamingPull</code> method.</p>
 
 
   </div>
@@ -312,7 +312,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Acknowledges the messages associated with the +ack_ids+ in the +AcknowledgeRequest+.</p>
+    <span class="summary_desc"><div class='inline'><p>Acknowledges the messages associated with the <code>ack_ids</code> in the <code>AcknowledgeRequest</code>.</p>
 </div></span>
   
 </li>
@@ -567,7 +567,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Modifies the +PushConfig+ for a specified subscription.</p>
+    <span class="summary_desc"><div class='inline'><p>Modifies the <code>PushConfig</code> for a specified subscription.</p>
 </div></span>
   
 </li>
@@ -1588,8 +1588,8 @@ custom error handling.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Acknowledges the messages associated with the +ack_ids+ in the
-+AcknowledgeRequest+. The Pub/Sub system can remove the relevant messages
+    <p>Acknowledges the messages associated with the <code>ack_ids</code> in the
+<code>AcknowledgeRequest</code>. The Pub/Sub system can remove the relevant messages
 from the subscription.</p>
 
 <p>Acknowledging a message whose ack deadline has expired may succeed,
@@ -1610,7 +1610,7 @@ than once will not result in an error.</p>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Pubsub::V1::SubscriberClient (class)">SubscriberClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_subscription_path'><span class='object_link'><a href="#subscription_path-class_method" title="Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path (method)">subscription_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SUBSCRIPTION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +ack_ids+:
+<span class='comment'># TODO: Initialize `ack_ids`:
 </span><span class='id identifier rubyid_ack_ids'>ack_ids</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge'>acknowledge</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span><span class='comma'>,</span> <span class='id identifier rubyid_ack_ids'>ack_ids</span><span class='rparen'>)</span></code></pre>
     
@@ -1629,7 +1629,7 @@ than once will not result in an error.</p>
       
         &mdash;
         <div class='inline'><p>The subscription whose message is being acknowledged.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </div>
       
     </li>
@@ -1645,7 +1645,7 @@ Format is +projects/{project}/subscriptions/{sub}+.</p>
       
         &mdash;
         <div class='inline'><p>The acknowledgment ID for the messages being acknowledged that was returned
-by the Pub/Sub system in the +Pull+ response. Must not be empty.</p>
+by the Pub/Sub system in the <code>Pull</code> response. Must not be empty.</p>
 </div>
       
     </li>
@@ -1789,11 +1789,11 @@ retries, etc.</p>
 <b>ALPHA:</b> This feature is part of an alpha release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.
-If the snapshot already exists, returns +ALREADY_EXISTS+.
-If the requested subscription doesn&#39;t exist, returns +NOT_FOUND+.
+If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
+If the requested subscription doesn&#39;t exist, returns <code>NOT_FOUND</code>.
 If the backlog in the subscription is too old -- and the resulting snapshot
-would expire in less than 1 hour -- then +FAILED_PRECONDITION+ is returned.
-See also the +Snapshot.expire_time+ field. If the name is not provided in
+would expire in less than 1 hour -- then <code>FAILED_PRECONDITION</code> is returned.
+See also the <code>Snapshot.expire_time</code> field. If the name is not provided in
 the request, the server will assign a random
 name for this snapshot on the same project as the subscription, conforming
 to the <a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
@@ -1835,7 +1835,7 @@ requests, you must specify a name in the request.</p>
 If the name is not provided in the request, the server will assign a random
 name for this snapshot on the same project as the subscription.
 Note that for REST API requests, you must specify a name.
-Format is +projects/{project}/snapshots/{snap}+.</p>
+Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
 </div>
       
     </li>
@@ -1855,10 +1855,10 @@ Specifically, the created snapshot is guaranteed to retain:
  (a) The existing backlog on the subscription. More precisely, this is
      defined as the messages in the subscription&#39;s backlog that are
      unacknowledged upon the successful completion of the
-     +CreateSnapshot+ request; as well as:
+     <code>CreateSnapshot</code> request; as well as:
  (b) Any messages published to the subscription&#39;s topic following the
      successful completion of the CreateSnapshot request.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </div>
       
     </li>
@@ -2026,8 +2026,8 @@ retries, etc.</p>
   <div class="discussion">
     <p>Creates a subscription to a given topic. See the
 <a href="/pubsub/docs/admin#resource_names"> resource name rules</a>.
-If the subscription already exists, returns +ALREADY_EXISTS+.
-If the corresponding topic doesn&#39;t exist, returns +NOT_FOUND+.</p>
+If the subscription already exists, returns <code>ALREADY_EXISTS</code>.
+If the corresponding topic doesn&#39;t exist, returns <code>NOT_FOUND</code>.</p>
 
 <p>If the name is not provided in the request, the server will assign a random
 name for this subscription on the same project as the topic, conforming
@@ -2067,11 +2067,11 @@ Note that for REST API requests, you must specify a name in the request.</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription. It must have the format
-+&quot;projects/{project}/subscriptions/{subscription}&quot;+. +{subscription}+ must
-start with a letter, and contain only letters (+[A-Za-z]+), numbers
-(+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
-plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
-in length, and it must not start with +&quot;goog&quot;+</p>
+<code>&quot;projects/{project}/subscriptions/{subscription}&quot;</code>. <code>{subscription}</code> must
+start with a letter, and contain only letters (<code>[A-Za-z]</code>), numbers
+(<code>[0-9]</code>), dashes (<code>-</code>), underscores (<code>_</code>), periods (<code>.</code>), tildes (<code>~</code>),
+plus (<code>+</code>) or percent signs (<code>%</code>). It must be between 3 and 255 characters
+in length, and it must not start with <code>&quot;goog&quot;</code></p>
 </div>
       
     </li>
@@ -2087,8 +2087,8 @@ in length, and it must not start with +&quot;goog&quot;+</p>
       
         &mdash;
         <div class='inline'><p>The name of the topic from which this subscription is receiving messages.
-Format is +projects/{project}/topics/{topic}+.
-The value of this field will be +<em>deleted-topic</em>+ if the topic has been
+Format is <code>projects/{project}/topics/{topic}</code>.
+The value of this field will be <code>_deleted-topic_</code> if the topic has been
 deleted.</p>
 </div>
       
@@ -2105,7 +2105,7 @@ deleted.</p>
       
         &mdash;
         <div class='inline'><p>If push delivery is used with this subscription, this field is
-used to configure it. An empty +pushConfig+ signifies that the subscriber
+used to configure it. An empty <code>pushConfig</code> signifies that the subscriber
 will pull and ack messages using API methods.
 A hash of the same form as <code>Google::Pubsub::V1::PushConfig</code>
 can also be provided.</p>
@@ -2131,9 +2131,9 @@ again during that time (on a best-effort basis).</p>
 
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
-+ModifyAckDeadline+ with the corresponding +ack_id+ if using
-non-streaming pull or send the +ack_id+ in a
-+StreamingModifyAckDeadlineRequest+ if using streaming pull.
+<code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
+non-streaming pull or send the <code>ack_id</code> in a
+<code>StreamingModifyAckDeadlineRequest</code> if using streaming pull.
 The minimum custom deadline you can specify is 10 seconds.
 The maximum custom deadline you can specify is 600 seconds (10 minutes).
 If this parameter is 0, a default value of 10 seconds is used.</p>
@@ -2159,7 +2159,7 @@ system will eventually redeliver the message.</p>
         &mdash;
         <div class='inline'><p>Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&#39;s backlog, even if they are
-acknowledged, until they fall out of the +message_retention_duration+
+acknowledged, until they fall out of the <code>message_retention_duration</code>
 window.<br><br>
 <b>ALPHA:</b> This feature is part of an alpha release. This API might be
 changed in backward-incompatible ways and is not recommended for production
@@ -2180,8 +2180,8 @@ use. It is not subject to any SLA or deprecation policy.</p>
         &mdash;
         <div class='inline'><p>How long to retain unacknowledged messages in the subscription&#39;s backlog,
 from the moment a message is published.
-If +retain_acked_messages+ is true, then this also configures the retention
-of acknowledged messages, and thus configures how far back in time a +Seek+
+If <code>retain_acked_messages</code> is true, then this also configures the retention
+of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
 minutes.<br><br>
 <b>ALPHA:</b> This feature is part of an alpha release. This API might be
@@ -2409,7 +2409,7 @@ snapshot or its subscription, unless the same subscription is specified.</p>
       
         &mdash;
         <div class='inline'><p>The name of the snapshot to delete.
-Format is +projects/{project}/snapshots/{snap}+.</p>
+Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
 </div>
       
     </li>
@@ -2546,8 +2546,8 @@ retries, etc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Deletes an existing subscription. All messages retained in the subscription
-are immediately dropped. Calls to +Pull+ after deletion will return
-+NOT_FOUND+. After a subscription is deleted, a new one may be created with
+are immediately dropped. Calls to <code>Pull</code> after deletion will return
+<code>NOT_FOUND</code>. After a subscription is deleted, a new one may be created with
 the same name, but the new one has no association with the old
 subscription or its topic unless the same topic is specified.</p>
 
@@ -2581,7 +2581,7 @@ subscription or its topic unless the same topic is specified.</p>
       
         &mdash;
         <div class='inline'><p>The subscription to delete.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </div>
       
     </li>
@@ -2751,8 +2751,8 @@ set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -2927,7 +2927,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription to get.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </div>
       
     </li>
@@ -3117,7 +3117,7 @@ use. It is not subject to any SLA or deprecation policy.</p>
       
         &mdash;
         <div class='inline'><p>The name of the cloud project that snapshots belong to.
-Format is +projects/{project}+.</p>
+Format is <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -3334,7 +3334,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The name of the cloud project that subscriptions belong to.
-Format is +projects/{project}+.</p>
+Format is <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -3511,7 +3511,7 @@ object.</p>
 to indicate that more time is needed to process a message by the
 subscriber, or to make the message available for redelivery if the
 processing was interrupted. Note that this does not modify the
-subscription-level +ackDeadlineSeconds+ used for subsequent messages.</p>
+subscription-level <code>ackDeadlineSeconds</code> used for subsequent messages.</p>
 
 
   </div>
@@ -3527,10 +3527,10 @@ subscription-level +ackDeadlineSeconds+ used for subsequent messages.</p>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Pubsub::V1::SubscriberClient (class)">SubscriberClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_subscription_path'><span class='object_link'><a href="#subscription_path-class_method" title="Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path (method)">subscription_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SUBSCRIPTION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +ack_ids+:
+<span class='comment'># TODO: Initialize `ack_ids`:
 </span><span class='id identifier rubyid_ack_ids'>ack_ids</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
-<span class='comment'># TODO: Initialize +ack_deadline_seconds+:
+<span class='comment'># TODO: Initialize `ack_deadline_seconds`:
 </span><span class='id identifier rubyid_ack_deadline_seconds'>ack_deadline_seconds</span> <span class='op'>=</span> <span class='int'>0</span>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span><span class='comma'>,</span> <span class='id identifier rubyid_ack_ids'>ack_ids</span><span class='comma'>,</span> <span class='id identifier rubyid_ack_deadline_seconds'>ack_deadline_seconds</span><span class='rparen'>)</span></code></pre>
     
@@ -3549,7 +3549,7 @@ subscription-level +ackDeadlineSeconds+ used for subsequent messages.</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </div>
       
     </li>
@@ -3581,7 +3581,7 @@ Format is +projects/{project}/subscriptions/{sub}+.</p>
         &mdash;
         <div class='inline'><p>The new ack deadline with respect to the time this request was sent to
 the Pub/Sub system. For example, if the value is 10, the new
-ack deadline will expire 10 seconds after the +ModifyAckDeadline+ call
+ack deadline will expire 10 seconds after the <code>ModifyAckDeadline</code> call
 was made. Specifying zero may immediately make the message available for
 another pull request.
 The minimum deadline you can specify is 0 seconds.
@@ -3729,12 +3729,12 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Modifies the +PushConfig+ for a specified subscription.</p>
+    <p>Modifies the <code>PushConfig</code> for a specified subscription.</p>
 
 <p>This may be used to change a push subscription to a pull one (signified by
-an empty +PushConfig+) or vice versa, or change the endpoint URL and other
+an empty <code>PushConfig</code>) or vice versa, or change the endpoint URL and other
 attributes of a push subscription. Messages will accumulate for delivery
-continuously through the call regardless of changes to the +PushConfig+.</p>
+continuously through the call regardless of changes to the <code>PushConfig</code>.</p>
 
 
   </div>
@@ -3750,7 +3750,7 @@ continuously through the call regardless of changes to the +PushConfig+.</p>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Pubsub::V1::SubscriberClient (class)">SubscriberClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_subscription_path'><span class='object_link'><a href="#subscription_path-class_method" title="Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path (method)">subscription_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SUBSCRIPTION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +push_config+:
+<span class='comment'># TODO: Initialize `push_config`:
 </span><span class='id identifier rubyid_push_config'>push_config</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span><span class='period'>.</span><span class='id identifier rubyid_modify_push_config'>modify_push_config</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span><span class='comma'>,</span> <span class='id identifier rubyid_push_config'>push_config</span><span class='rparen'>)</span></code></pre>
     
@@ -3769,7 +3769,7 @@ continuously through the call regardless of changes to the +PushConfig+.</p>
       
         &mdash;
         <div class='inline'><p>The name of the subscription.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </div>
       
     </li>
@@ -3786,10 +3786,10 @@ Format is +projects/{project}/subscriptions/{sub}+.</p>
         &mdash;
         <div class='inline'><p>The push configuration for future deliveries.</p>
 
-<p>An empty +pushConfig+ indicates that the Pub/Sub system should
+<p>An empty <code>pushConfig</code> indicates that the Pub/Sub system should
 stop pushing messages from the given subscription and allow
 messages to be pulled and acknowledged - effectively pausing
-the subscription if +Pull+ or +StreamingPull+ is not called.
+the subscription if <code>Pull</code> or <code>StreamingPull</code> is not called.
 A hash of the same form as <code>Google::Pubsub::V1::PushConfig</code>
 can also be provided.</p>
 </div>
@@ -3932,7 +3932,7 @@ retries, etc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Pulls messages from the server. Returns an empty list if there are no
-messages available in the backlog. The server may return +UNAVAILABLE+ if
+messages available in the backlog. The server may return <code>UNAVAILABLE</code> if
 there are too many concurrent pull requests pending for the given
 subscription.</p>
 
@@ -3950,7 +3950,7 @@ subscription.</p>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Pubsub::V1::SubscriberClient (class)">SubscriberClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_subscription_path'><span class='object_link'><a href="#subscription_path-class_method" title="Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path (method)">subscription_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SUBSCRIPTION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +max_messages+:
+<span class='comment'># TODO: Initialize `max_messages`:
 </span><span class='id identifier rubyid_max_messages'>max_messages</span> <span class='op'>=</span> <span class='int'>0</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_subscriber_client'>subscriber_client</span><span class='period'>.</span><span class='id identifier rubyid_pull'>pull</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span><span class='comma'>,</span> <span class='id identifier rubyid_max_messages'>max_messages</span><span class='rparen'>)</span></code></pre>
     
@@ -3969,7 +3969,7 @@ subscription.</p>
       
         &mdash;
         <div class='inline'><p>The subscription from which messages should be pulled.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </div>
       
     </li>
@@ -4001,7 +4001,7 @@ system may return fewer than the number specified.</p>
       
         &mdash;
         <div class='inline'><p>If this field set to true, the system will respond immediately even if
-it there are no messages available to return in the +Pull+ response.
+it there are no messages available to return in the <code>Pull</code> response.
 Otherwise, the system may wait (for a bounded amount of time) until at
 least one message is available, rather than returning no messages. The
 client may cancel the request if it does not wish to wait any longer for
@@ -4212,8 +4212,8 @@ time are marked as acknowledged, and messages retained in the
 subscription that were published after this time are marked as
 unacknowledged. Note that this operation affects only those messages
 retained in the subscription (configured by the combination of
-+message_retention_duration+ and +retain_acked_messages+). For example,
-if +time+ corresponds to a point before the message retention
+<code>message_retention_duration</code> and <code>retain_acked_messages</code>). For example,
+if <code>time</code> corresponds to a point before the message retention
 window (or to a point before the system&#39;s notion of the subscription
 creation time), only retained messages will be marked as unacknowledged,
 and already-expunged messages will not be restored.
@@ -4235,7 +4235,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>The snapshot to seek to. The snapshot&#39;s topic must be the same as that of
 the provided subscription.
-Format is +projects/{project}/snapshots/{snap}+.</p>
+Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
 </div>
       
     </li>
@@ -4403,7 +4403,7 @@ existing policy.</p>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Pubsub::V1::SubscriberClient (class)">SubscriberClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_subscription_path'><span class='object_link'><a href="#subscription_path-class_method" title="Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path (method)">subscription_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SUBSCRIPTION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +policy+:
+<span class='comment'># TODO: Initialize `policy`:
 </span><span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_subscriber_client'>subscriber_client</span><span class='period'>.</span><span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_policy'>policy</span><span class='rparen'>)</span></code></pre>
     
@@ -4422,8 +4422,8 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -4438,7 +4438,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>REQUIRED: The complete policy to be applied to the +resource+. The size of
+        <div class='inline'><p>REQUIRED: The complete policy to be applied to the <code>resource</code>. The size of
 the policy is limited to a few 10s of KB. An empty policy is a
 valid policy but certain Cloud Platform services (such as Projects)
 might reject them.
@@ -4602,7 +4602,7 @@ retries, etc.</p>
 <p>Establishes a stream with the server, which sends messages down to the
 client. The client streams acknowledgements and ack deadline modifications
 back to the server. The server will close the stream and return the status
-on any error. The server may close the stream with status +UNAVAILABLE+ to
+on any error. The server may close the stream with status <code>UNAVAILABLE</code> to
 reassign server-side resources, in which case, the client should
 re-establish the stream. Flow control can be achieved by configuring the
 underlying RPC channel.</p>
@@ -4621,7 +4621,7 @@ underlying RPC channel.</p>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Pubsub::V1::SubscriberClient (class)">SubscriberClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_subscription_path'><span class='object_link'><a href="#subscription_path-class_method" title="Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path (method)">subscription_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SUBSCRIPTION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +stream_ack_deadline_seconds+:
+<span class='comment'># TODO: Initialize `stream_ack_deadline_seconds`:
 </span><span class='id identifier rubyid_stream_ack_deadline_seconds'>stream_ack_deadline_seconds</span> <span class='op'>=</span> <span class='int'>0</span>
 <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>subscription:</span> <span class='id identifier rubyid_formatted_subscription'>formatted_subscription</span><span class='comma'>,</span> <span class='label'>stream_ack_deadline_seconds:</span> <span class='id identifier rubyid_stream_ack_deadline_seconds'>stream_ack_deadline_seconds</span> <span class='rbrace'>}</span>
 <span class='id identifier rubyid_requests'>requests</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_request'>request</span><span class='rbracket'>]</span>
@@ -4757,7 +4757,7 @@ permissions, not a NOT_FOUND error.</p>
 <span class='id identifier rubyid_subscriber_client'>subscriber_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Pubsub::V1::SubscriberClient (class)">SubscriberClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_subscription_path'><span class='object_link'><a href="#subscription_path-class_method" title="Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path (method)">subscription_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[SUBSCRIPTION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +permissions+:
+<span class='comment'># TODO: Initialize `permissions`:
 </span><span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_subscriber_client'>subscriber_client</span><span class='period'>.</span><span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span></code></pre>
     
@@ -4776,8 +4776,8 @@ permissions, not a NOT_FOUND error.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -4792,7 +4792,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The set of permissions to check for the +resource+. Permissions with
+        <div class='inline'><p>The set of permissions to check for the <code>resource</code>. Permissions with
 wildcards (such as &#39;<em>&#39; or &#39;storage.</em>&#39;) are not allowed. For more
 information see
 <a href="https://cloud.google.com/iam/docs/overview#permissions">IAM Overview</a>.</p>

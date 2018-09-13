@@ -237,7 +237,7 @@ use. It is not subject to any SLA or deprecation policy.</p>
 A newly-created snapshot expires no later than 7 days from the time of its
 creation. Its exact lifetime is determined at creation by the existing
 backlog in the source subscription. Specifically, the lifetime of the
-snapshot is +7 days - (age of oldest unacked message in the subscription)+.
+snapshot is <code>7 days - (age of oldest unacked message in the subscription)</code>.
 For example, consider a subscription whose oldest unacked message is 3 days
 old. If a snapshot is created from this subscription, the snapshot -- which
 will always capture this 3-day-old backlog as long as the snapshot
@@ -264,7 +264,7 @@ snapshot that would expire in less than 1 hour after creation.</p>
 A newly-created snapshot expires no later than 7 days from the time of its
 creation. Its exact lifetime is determined at creation by the existing
 backlog in the source subscription. Specifically, the lifetime of the
-snapshot is +7 days - (age of oldest unacked message in the subscription)+.
+snapshot is <code>7 days - (age of oldest unacked message in the subscription)</code>.
 For example, consider a subscription whose oldest unacked message is 3 days
 old. If a snapshot is created from this subscription, the snapshot -- which
 will always capture this 3-day-old backlog as long as the snapshot

@@ -203,7 +203,7 @@ it must contain either a non-empty data field, or at least one attribute.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The time at which the message was published, populated by the server when it receives the +Publish+ call.</p>
+    <span class="summary_desc"><div class='inline'><p>The time at which the message was published, populated by the server when it receives the <code>Publish</code> call.</p>
 </div></span>
   
 </li>
@@ -343,8 +343,8 @@ it must contain either a non-empty data field, or at least one attribute.</p>
   <div class="discussion">
     <p>Returns ID of this message, assigned by the server when the message is published.
 Guaranteed to be unique within the topic. This value may be read by a
-subscriber that receives a +PubsubMessage+ via a +Pull+ call or a push
-delivery. It must not be populated by the publisher in a +Publish+ call.</p>
+subscriber that receives a <code>PubsubMessage</code> via a <code>Pull</code> call or a push
+delivery. It must not be populated by the publisher in a <code>Publish</code> call.</p>
 
 
   </div>
@@ -364,8 +364,8 @@ delivery. It must not be populated by the publisher in a +Publish+ call.</p>
         &mdash;
         <div class='inline'><p>ID of this message, assigned by the server when the message is published.
 Guaranteed to be unique within the topic. This value may be read by a
-subscriber that receives a +PubsubMessage+ via a +Pull+ call or a push
-delivery. It must not be populated by the publisher in a +Publish+ call.</p>
+subscriber that receives a <code>PubsubMessage</code> via a <code>Pull</code> call or a push
+delivery. It must not be populated by the publisher in a <code>Publish</code> call.</p>
 </div>
       
     </li>
@@ -403,8 +403,8 @@ delivery. It must not be populated by the publisher in a +Publish+ call.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The time at which the message was published, populated by the server when
-it receives the +Publish+ call. It must not be populated by the
-publisher in a +Publish+ call.</p>
+it receives the <code>Publish</code> call. It must not be populated by the
+publisher in a <code>Publish</code> call.</p>
 
 
   </div>
@@ -423,8 +423,8 @@ publisher in a +Publish+ call.</p>
       
         &mdash;
         <div class='inline'><p>The time at which the message was published, populated by the server when
-it receives the +Publish+ call. It must not be populated by the
-publisher in a +Publish+ call.</p>
+it receives the <code>Publish</code> call. It must not be populated by the
+publisher in a <code>Publish</code> call.</p>
 </div>
       
     </li>

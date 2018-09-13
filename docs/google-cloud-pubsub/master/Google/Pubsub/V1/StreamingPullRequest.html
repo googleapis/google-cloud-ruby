@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Request for the +StreamingPull+ streaming RPC method. This request is used to
+    <p>Request for the <code>StreamingPull</code> streaming RPC method. This request is used to
 establish the initial stream as well as to stream acknowledgements and ack
 deadline modifications from the client to the server.</p>
 
@@ -152,7 +152,7 @@ deadline modifications from the client to the server.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>List of acknowledgement IDs whose deadline will be modified based on the corresponding element in +modify_deadline_seconds+.</p>
+    <span class="summary_desc"><div class='inline'><p>List of acknowledgement IDs whose deadline will be modified based on the corresponding element in <code>modify_deadline_seconds</code>.</p>
 </div></span>
   
 </li>
@@ -178,7 +178,7 @@ deadline modifications from the client to the server.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The list of new ack deadlines for the IDs listed in +modify_deadline_ack_ids+.</p>
+    <span class="summary_desc"><div class='inline'><p>The list of new ack deadlines for the IDs listed in <code>modify_deadline_ack_ids</code>.</p>
 </div></span>
   
 </li>
@@ -262,7 +262,7 @@ deadline modifications from the client to the server.</p>
 (received on this stream or a different stream). If an ack ID has expired,
 the corresponding message may be redelivered later. Acknowledging a message
 more than once will not result in an error. If the acknowledgement ID is
-malformed, the stream will be aborted with status +INVALID_ARGUMENT+.</p>
+malformed, the stream will be aborted with status <code>INVALID_ARGUMENT</code>.</p>
 
 
   </div>
@@ -284,7 +284,7 @@ malformed, the stream will be aborted with status +INVALID_ARGUMENT+.</p>
 (received on this stream or a different stream). If an ack ID has expired,
 the corresponding message may be redelivered later. Acknowledging a message
 more than once will not result in an error. If the acknowledgement ID is
-malformed, the stream will be aborted with status +INVALID_ARGUMENT+.</p>
+malformed, the stream will be aborted with status <code>INVALID_ARGUMENT</code>.</p>
 </div>
       
     </li>
@@ -322,7 +322,7 @@ malformed, the stream will be aborted with status +INVALID_ARGUMENT+.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns List of acknowledgement IDs whose deadline will be modified based on the
-corresponding element in +modify_deadline_seconds+. This field can be used
+corresponding element in <code>modify_deadline_seconds</code>. This field can be used
 to indicate that more time is needed to process a message by the
 subscriber, or to make the message available for redelivery if the
 processing was interrupted.</p>
@@ -344,7 +344,7 @@ processing was interrupted.</p>
       
         &mdash;
         <div class='inline'><p>List of acknowledgement IDs whose deadline will be modified based on the
-corresponding element in +modify_deadline_seconds+. This field can be used
+corresponding element in <code>modify_deadline_seconds</code>. This field can be used
 to indicate that more time is needed to process a message by the
 subscriber, or to make the message available for redelivery if the
 processing was interrupted.</p>
@@ -385,16 +385,16 @@ processing was interrupted.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The list of new ack deadlines for the IDs listed in
-+modify_deadline_ack_ids+. The size of this list must be the same as the
-size of +modify_deadline_ack_ids+. If it differs the stream will be aborted
-with +INVALID_ARGUMENT+. Each element in this list is applied to the
-element in the same position in +modify_deadline_ack_ids+. The new ack
+<code>modify_deadline_ack_ids</code>. The size of this list must be the same as the
+size of <code>modify_deadline_ack_ids</code>. If it differs the stream will be aborted
+with <code>INVALID_ARGUMENT</code>. Each element in this list is applied to the
+element in the same position in <code>modify_deadline_ack_ids</code>. The new ack
 deadline is with respect to the time this request was sent to the Pub/Sub
 system. Must be &gt;= 0. For example, if the value is 10, the new ack deadline
 will expire 10 seconds after this request is received. If the value is 0,
 the message is immediately made available for another streaming or
 non-streaming pull request. If the value is &lt; 0 (an error), the stream will
-be aborted with status +INVALID_ARGUMENT+.</p>
+be aborted with status <code>INVALID_ARGUMENT</code>.</p>
 
 
   </div>
@@ -413,16 +413,16 @@ be aborted with status +INVALID_ARGUMENT+.</p>
       
         &mdash;
         <div class='inline'><p>The list of new ack deadlines for the IDs listed in
-+modify_deadline_ack_ids+. The size of this list must be the same as the
-size of +modify_deadline_ack_ids+. If it differs the stream will be aborted
-with +INVALID_ARGUMENT+. Each element in this list is applied to the
-element in the same position in +modify_deadline_ack_ids+. The new ack
+<code>modify_deadline_ack_ids</code>. The size of this list must be the same as the
+size of <code>modify_deadline_ack_ids</code>. If it differs the stream will be aborted
+with <code>INVALID_ARGUMENT</code>. Each element in this list is applied to the
+element in the same position in <code>modify_deadline_ack_ids</code>. The new ack
 deadline is with respect to the time this request was sent to the Pub/Sub
 system. Must be &gt;= 0. For example, if the value is 10, the new ack deadline
 will expire 10 seconds after this request is received. If the value is 0,
 the message is immediately made available for another streaming or
 non-streaming pull request. If the value is &lt; 0 (an error), the stream will
-be aborted with status +INVALID_ARGUMENT+.</p>
+be aborted with status <code>INVALID_ARGUMENT</code>.</p>
 </div>
       
     </li>
@@ -523,7 +523,7 @@ seconds. The maximum deadline you can specify is 600 seconds (10 minutes).</p>
     <p>Returns The subscription for which to initialize the new stream. This must be
 provided in the first request on the stream, and must not be set in
 subsequent requests from client to server.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 
 
   </div>
@@ -544,7 +544,7 @@ Format is +projects/{project}/subscriptions/{sub}+.</p>
         <div class='inline'><p>The subscription for which to initialize the new stream. This must be
 provided in the first request on the stream, and must not be set in
 subsequent requests from client to server.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </div>
       
     </li>

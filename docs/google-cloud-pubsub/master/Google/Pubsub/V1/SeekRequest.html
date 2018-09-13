@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Request for the +Seek+ method.<br><br>
+    <p>Request for the <code>Seek</code> method.<br><br>
 <b>ALPHA:</b> This feature is part of an alpha release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
@@ -209,7 +209,7 @@ use. It is not subject to any SLA or deprecation policy.</p>
   <div class="discussion">
     <p>Returns The snapshot to seek to. The snapshot&#39;s topic must be the same as that of
 the provided subscription.
-Format is +projects/{project}/snapshots/{snap}+.</p>
+Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
 
 
   </div>
@@ -229,7 +229,7 @@ Format is +projects/{project}/snapshots/{snap}+.</p>
         &mdash;
         <div class='inline'><p>The snapshot to seek to. The snapshot&#39;s topic must be the same as that of
 the provided subscription.
-Format is +projects/{project}/snapshots/{snap}+.</p>
+Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
 </div>
       
     </li>
@@ -327,8 +327,8 @@ time are marked as acknowledged, and messages retained in the
 subscription that were published after this time are marked as
 unacknowledged. Note that this operation affects only those messages
 retained in the subscription (configured by the combination of
-+message_retention_duration+ and +retain_acked_messages+). For example,
-if +time+ corresponds to a point before the message retention
+<code>message_retention_duration</code> and <code>retain_acked_messages</code>). For example,
+if <code>time</code> corresponds to a point before the message retention
 window (or to a point before the system&#39;s notion of the subscription
 creation time), only retained messages will be marked as unacknowledged,
 and already-expunged messages will not be restored.</p>
@@ -355,8 +355,8 @@ time are marked as acknowledged, and messages retained in the
 subscription that were published after this time are marked as
 unacknowledged. Note that this operation affects only those messages
 retained in the subscription (configured by the combination of
-+message_retention_duration+ and +retain_acked_messages+). For example,
-if +time+ corresponds to a point before the message retention
+<code>message_retention_duration</code> and <code>retain_acked_messages</code>). For example,
+if <code>time</code> corresponds to a point before the message retention
 window (or to a point before the system&#39;s notion of the subscription
 creation time), only retained messages will be marked as unacknowledged,
 and already-expunged messages will not be restored.</p>

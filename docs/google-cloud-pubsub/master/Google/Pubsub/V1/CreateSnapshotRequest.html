@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Request for the +CreateSnapshot+ method.<br><br>
+    <p>Request for the <code>CreateSnapshot</code> method.<br><br>
 <b>ALPHA:</b> This feature is part of an alpha release. This API might be changed in
 backward-incompatible ways and is not recommended for production use.
 It is not subject to any SLA or deprecation policy.</p>
@@ -266,7 +266,7 @@ It is not subject to any SLA or deprecation policy.</p>
 If the name is not provided in the request, the server will assign a random
 name for this snapshot on the same project as the subscription.
 Note that for REST API requests, you must specify a name.
-Format is +projects/{project}/snapshots/{snap}+.</p>
+Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
 
 
   </div>
@@ -288,7 +288,7 @@ Format is +projects/{project}/snapshots/{snap}+.</p>
 If the name is not provided in the request, the server will assign a random
 name for this snapshot on the same project as the subscription.
 Note that for REST API requests, you must specify a name.
-Format is +projects/{project}/snapshots/{snap}+.</p>
+Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
 </div>
       
     </li>
@@ -330,10 +330,10 @@ Specifically, the created snapshot is guaranteed to retain:
  (a) The existing backlog on the subscription. More precisely, this is
      defined as the messages in the subscription&#39;s backlog that are
      unacknowledged upon the successful completion of the
-     +CreateSnapshot+ request; as well as:
+     <code>CreateSnapshot</code> request; as well as:
  (b) Any messages published to the subscription&#39;s topic following the
      successful completion of the CreateSnapshot request.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 
 
   </div>
@@ -356,10 +356,10 @@ Specifically, the created snapshot is guaranteed to retain:
  (a) The existing backlog on the subscription. More precisely, this is
      defined as the messages in the subscription&#39;s backlog that are
      unacknowledged upon the successful completion of the
-     +CreateSnapshot+ request; as well as:
+     <code>CreateSnapshot</code> request; as well as:
  (b) Any messages published to the subscription&#39;s topic following the
      successful completion of the CreateSnapshot request.
-Format is +projects/{project}/subscriptions/{sub}+.</p>
+Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </div>
       
     </li>
