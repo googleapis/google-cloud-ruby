@@ -363,7 +363,7 @@ such as a given time period and/or service filter.</p>
   <div class="discussion">
     <p>Returns Service contexts with a non-zero error count for the given filter
 criteria. This list can be truncated if multiple services are affected.
-Refer to +num_affected_services+ for the total count.</p>
+Refer to <code>num_affected_services</code> for the total count.</p>
 
 
   </div>
@@ -383,7 +383,7 @@ Refer to +num_affected_services+ for the total count.</p>
         &mdash;
         <div class='inline'><p>Service contexts with a non-zero error count for the given filter
 criteria. This list can be truncated if multiple services are affected.
-Refer to +num_affected_services+ for the total count.</p>
+Refer to <code>num_affected_services</code> for the total count.</p>
 </div>
       
     </li>
@@ -422,7 +422,7 @@ Refer to +num_affected_services+ for the total count.</p>
   <div class="discussion">
     <p>Returns Approximate number of affected users in the given group that
 match the filter criteria.
-Users are distinguished by data in the +ErrorContext+ of the
+Users are distinguished by data in the <code>ErrorContext</code> of the
 individual error events, such as their login name or their remote
 IP address in case of HTTP requests.
 The number of affected users can be zero even if the number of
@@ -451,7 +451,7 @@ this is not reflected here.</p>
         &mdash;
         <div class='inline'><p>Approximate number of affected users in the given group that
 match the filter criteria.
-Users are distinguished by data in the +ErrorContext+ of the
+Users are distinguished by data in the <code>ErrorContext</code> of the
 individual error events, such as their login name or their remote
 IP address in case of HTTP requests.
 The number of affected users can be zero even if the number of

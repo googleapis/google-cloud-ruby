@@ -682,7 +682,7 @@ custom error handling.</p>
 <strong>or</strong> an
 <a href="https://support.google.com/cloud/answer/6158862">API key</a>
 for authentication. To use an API key, append it to the URL as the value of
-a +key+ parameter. For example:</p>
+a <code>key</code> parameter. For example:</p>
 
 <pre class="code ruby"><code class="ruby">POST https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456</code></pre>
 
@@ -700,7 +700,7 @@ a +key+ parameter. For example:</p>
 <span class='id identifier rubyid_report_errors_service_client'>report_errors_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'>ReportErrors</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::ErrorReporting::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient (class)">ReportErrorsServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +event+:
+<span class='comment'># TODO: Initialize `event`:
 </span><span class='id identifier rubyid_event'>event</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_report_errors_service_client'>report_errors_service_client</span><span class='period'>.</span><span class='id identifier rubyid_report_error_event'>report_error_event</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_project_name'>formatted_project_name</span><span class='comma'>,</span> <span class='id identifier rubyid_event'>event</span><span class='rparen'>)</span></code></pre>
     
@@ -719,9 +719,9 @@ a +key+ parameter. For example:</p>
       
         &mdash;
         <div class='inline'><p>[Required] The resource name of the Google Cloud Platform project. Written
-as +projects/+ plus the
+as <code>projects/</code> plus the
 <a href="https://support.google.com/cloud/answer/6158840">Google Cloud Platform project ID</a>.
-Example: +projects/my-project-123+.</p>
+Example: <code>projects/my-project-123</code>.</p>
 </div>
       
     </li>
