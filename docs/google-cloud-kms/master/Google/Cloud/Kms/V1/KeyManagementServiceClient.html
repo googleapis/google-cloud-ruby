@@ -330,6 +330,52 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#asymmetric_decrypt-instance_method" title="#asymmetric_decrypt (instance method)">#<strong>asymmetric_decrypt</strong>(name, ciphertext, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Kms::V1::AsymmetricDecryptResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Decrypts data that was encrypted with a public key retrieved from GetPublicKey corresponding to a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> ASYMMETRIC_DECRYPT.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#asymmetric_sign-instance_method" title="#asymmetric_sign (instance method)">#<strong>asymmetric_sign</strong>(name, digest, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Kms::V1::AsymmetricSignResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Signs data using a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> ASYMMETRIC_SIGN, producing a signature that can be verified with the public key retrieved from GetPublicKey.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#create_crypto_key-instance_method" title="#create_crypto_key (instance method)">#<strong>create_crypto_key</strong>(parent, crypto_key_id, crypto_key, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Kms::V1::CryptoKey </a>
     
 
@@ -552,6 +598,29 @@ this service.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Returns metadata for a given <span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_public_key-instance_method" title="#get_public_key (instance method)">#<strong>get_public_key</strong>(name, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Kms::V1::PublicKey </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the public key for the given <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>.</p>
 </div></span>
   
 </li>
@@ -1168,7 +1237,31 @@ custom error handling.</p>
 455
 456
 457
-458</pre>
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 221</span>
@@ -1381,6 +1474,30 @@ custom error handling.</p>
   <span class='ivar'>@restore_crypto_key_version</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@key_management_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:restore_crypto_key_version</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>restore_crypto_key_version</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@get_public_key</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@key_management_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_public_key</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_public_key</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@asymmetric_decrypt</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@key_management_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:asymmetric_decrypt</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>asymmetric_decrypt</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
+      <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@asymmetric_sign</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@key_management_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:asymmetric_sign</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>asymmetric_sign</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
     <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
     <span class='label'>params_extractor:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_request'>request</span><span class='op'>|</span>
       <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
@@ -1959,7 +2076,409 @@ custom error handling.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="create_crypto_key-instance_method">
+  <h3 class="signature first" id="asymmetric_decrypt-instance_method">
+  
+    #<strong>asymmetric_decrypt</strong>(name, ciphertext, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="AsymmetricDecryptResponse.html" title="Google::Cloud::Kms::V1::AsymmetricDecryptResponse (class)">Google::Cloud::Kms::V1::AsymmetricDecryptResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Decrypts data that was encrypted with a public key retrieved from
+GetPublicKey corresponding to a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with
+<span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> ASYMMETRIC_DECRYPT.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_version_path'><span class='object_link'><a href="#crypto_key_version_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path (method)">crypto_key_version_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY_VERSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize `ciphertext`:
+</span><span class='id identifier rubyid_ciphertext'>ciphertext</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_asymmetric_decrypt'>asymmetric_decrypt</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_ciphertext'>ciphertext</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use for
+decryption.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ciphertext</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The data encrypted with the named <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>&#39;s public
+key using OAEP.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsymmetricDecryptResponse.html" title="Google::Cloud::Kms::V1::AsymmetricDecryptResponse (class)">Google::Cloud::Kms::V1::AsymmetricDecryptResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsymmetricDecryptResponse.html" title="Google::Cloud::Kms::V1::AsymmetricDecryptResponse (class)">Google::Cloud::Kms::V1::AsymmetricDecryptResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1276
+1277
+1278
+1279
+1280
+1281
+1282
+1283
+1284
+1285
+1286
+1287</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1276</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_asymmetric_decrypt'>asymmetric_decrypt</span> \
+    <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_ciphertext'>ciphertext</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='label'>ciphertext:</span> <span class='id identifier rubyid_ciphertext'>ciphertext</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AsymmetricDecryptRequest.html" title="Google::Cloud::Kms::V1::AsymmetricDecryptRequest (class)">AsymmetricDecryptRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@asymmetric_decrypt</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="asymmetric_sign-instance_method">
+  
+    #<strong>asymmetric_sign</strong>(name, digest, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="AsymmetricSignResponse.html" title="Google::Cloud::Kms::V1::AsymmetricSignResponse (class)">Google::Cloud::Kms::V1::AsymmetricSignResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Signs data using a <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> with <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+ASYMMETRIC_SIGN, producing a signature that can be verified with the public
+key retrieved from GetPublicKey.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_version_path'><span class='object_link'><a href="#crypto_key_version_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path (method)">crypto_key_version_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY_VERSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize `digest`:
+</span><span class='id identifier rubyid_digest'>digest</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_asymmetric_sign'>asymmetric_sign</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_digest'>digest</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> to use for signing.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>digest</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Digest.html" title="Google::Cloud::Kms::V1::Digest (class)">Google::Cloud::Kms::V1::Digest</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The digest of the data to sign. The digest must be produced with
+the same digest algorithm as specified by the key version&#39;s
+<span class='object_link'><a href="CryptoKeyVersion.html#algorithm-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm (method)">algorithm</a></span>.
+A hash of the same form as <code>Google::Cloud::Kms::V1::Digest</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsymmetricSignResponse.html" title="Google::Cloud::Kms::V1::AsymmetricSignResponse (class)">Google::Cloud::Kms::V1::AsymmetricSignResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsymmetricSignResponse.html" title="Google::Cloud::Kms::V1::AsymmetricSignResponse (class)">Google::Cloud::Kms::V1::AsymmetricSignResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1319
+1320
+1321
+1322
+1323
+1324
+1325
+1326
+1327
+1328
+1329
+1330</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1319</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_asymmetric_sign'>asymmetric_sign</span> \
+    <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_digest'>digest</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='label'>digest:</span> <span class='id identifier rubyid_digest'>digest</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AsymmetricSignRequest.html" title="Google::Cloud::Kms::V1::AsymmetricSignRequest (class)">AsymmetricSignRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@asymmetric_sign</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_crypto_key-instance_method">
   
     #<strong>create_crypto_key</strong>(parent, crypto_key_id, crypto_key, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">Google::Cloud::Kms::V1::CryptoKey</a></span></tt> 
   
@@ -2032,7 +2551,7 @@ are required.</p>
       
         &mdash;
         <div class='inline'><p>Required. It must be unique within a KeyRing and match the regular
-expression +[a-zA-Z0-9_-]{1,63}+</p>
+expression <code>[a-zA-Z0-9_-]{1,63}</code></p>
 </div>
       
     </li>
@@ -2152,23 +2671,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-816
-817
-818
-819
-820
-821
-822
-823
-824
-825
-826
-827
-828
-829</pre>
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 816</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 840</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_crypto_key'>create_crypto_key</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2220,7 +2739,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'><span class='object_link'><a href="#crypto_key_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path (method)">crypto_key_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +crypto_key_version+:
+<span class='comment'># TODO: Initialize `crypto_key_version`:
 </span><span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_create_crypto_key_version'>create_crypto_key_version</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span><span class='rparen'>)</span></code></pre>
     
@@ -2359,21 +2878,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-862
-863
-864
-865
-866
-867
-868
-869
-870
-871
-872
-873</pre>
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 862</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 886</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_crypto_key_version'>create_crypto_key_version</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2419,10 +2938,10 @@ retries, etc.</p>
 <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_location_path'><span class='object_link'><a href="#location_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path (method)">location_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +key_ring_id+:
+<span class='comment'># TODO: Initialize `key_ring_id`:
 </span><span class='id identifier rubyid_key_ring_id'>key_ring_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +key_ring+:
+<span class='comment'># TODO: Initialize `key_ring`:
 </span><span class='id identifier rubyid_key_ring'>key_ring</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_create_key_ring'>create_key_ring</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring_id'>key_ring_id</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='rparen'>)</span></code></pre>
     
@@ -2441,7 +2960,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The resource name of the location associated with the
-<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRings</a></span>, in the format +projects/<em>/locations/</em>+.</p>
+<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRings</a></span>, in the format <code>projects/*/locations/*</code>.</p>
 </div>
       
     </li>
@@ -2457,7 +2976,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. It must be unique within a location and match the regular
-expression +[a-zA-Z0-9_-]{1,63}+</p>
+expression <code>[a-zA-Z0-9_-]{1,63}</code></p>
 </div>
       
     </li>
@@ -2577,23 +3096,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-759
-760
-761
-762
-763
-764
-765
-766
-767
-768
-769
-770
-771
-772</pre>
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 759</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 783</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_key_ring'>create_key_ring</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2642,7 +3161,7 @@ must be <span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ENCRY
 <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'><span class='object_link'><a href="#crypto_key_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path (method)">crypto_key_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +ciphertext+:
+<span class='comment'># TODO: Initialize `ciphertext`:
 </span><span class='id identifier rubyid_ciphertext'>ciphertext</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_decrypt'>decrypt</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_ciphertext'>ciphertext</span><span class='rparen'>)</span></code></pre>
     
@@ -2796,23 +3315,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1059
-1060
-1061
-1062
-1063
-1064
-1065
-1066
-1067
-1068
-1069
-1070
-1071
-1072</pre>
+1083
+1084
+1085
+1086
+1087
+1088
+1089
+1090
+1091
+1092
+1093
+1094
+1095
+1096</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1059</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1083</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_decrypt'>decrypt</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2989,19 +3508,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1143
-1144
-1145
-1146
-1147
-1148
-1149
-1150
-1151
-1152</pre>
+1167
+1168
+1169
+1170
+1171
+1172
+1173
+1174
+1175
+1176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1143</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1167</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destroy_crypto_key_version'>destroy_crypto_key_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3047,7 +3566,7 @@ The <span class='object_link'><a href="CryptoKey.html#purpose-instance_method" t
 <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path_path'><span class='object_link'><a href="#crypto_key_path_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path (method)">crypto_key_path_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY_PATH]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +plaintext+:
+<span class='comment'># TODO: Initialize `plaintext`:
 </span><span class='id identifier rubyid_plaintext'>plaintext</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_encrypt'>encrypt</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_plaintext'>plaintext</span><span class='rparen'>)</span></code></pre>
     
@@ -3217,23 +3736,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1014
-1015
-1016
-1017
-1018
-1019
-1020
-1021
-1022
-1023
-1024
-1025
-1026
-1027</pre>
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1014</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1038</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_encrypt'>encrypt</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3400,19 +3919,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694</pre>
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 685</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 709</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_crypto_key'>get_crypto_key</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3574,19 +4093,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-715
-716
-717
-718
-719
-720
-721
-722
-723
-724</pre>
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 715</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 739</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_crypto_key_version'>get_crypto_key_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3648,8 +4167,8 @@ set.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -3752,19 +4271,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1258
-1259
-1260
-1261
-1262
-1263
-1264
-1265
-1266
-1267</pre>
+1400
+1401
+1402
+1403
+1404
+1405
+1406
+1407
+1408
+1409</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1258</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1400</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3926,19 +4445,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663</pre>
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 654</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 678</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_key_ring'>get_key_ring</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3949,6 +4468,184 @@ retries, etc.</p>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GetKeyRingRequest.html" title="Google::Cloud::Kms::V1::GetKeyRingRequest (class)">GetKeyRingRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@get_key_ring</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_public_key-instance_method">
+  
+    #<strong>get_public_key</strong>(name, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="PublicKey.html" title="Google::Cloud::Kms::V1::PublicKey (class)">Google::Cloud::Kms::V1::PublicKey</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the public key for the given <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>. The
+<span class='object_link'><a href="CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span> must be
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_SIGN-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN (constant)">ASYMMETRIC_SIGN</a></span> or
+<span class='object_link'><a href="CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT (constant)">ASYMMETRIC_DECRYPT</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_version_path'><span class='object_link'><a href="#crypto_key_version_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path (method)">crypto_key_version_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY_VERSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_get_public_key'>get_public_key</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <span class='object_link'><a href="CryptoKeyVersion.html#name-instance_method" title="Google::Cloud::Kms::V1::CryptoKeyVersion#name (method)">name</a></span> of the <span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span> public key to
+get.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PublicKey.html" title="Google::Cloud::Kms::V1::PublicKey (class)">Google::Cloud::Kms::V1::PublicKey</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PublicKey.html" title="Google::Cloud::Kms::V1::PublicKey (class)">Google::Cloud::Kms::V1::PublicKey</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1237
+1238
+1239
+1240
+1241
+1242
+1243
+1244
+1245
+1246</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1237</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_public_key'>get_public_key</span> \
+    <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GetPublicKeyRequest.html" title="Google::Cloud::Kms::V1::GetPublicKeyRequest (class)">GetPublicKeyRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@get_public_key</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -4010,7 +4707,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="CryptoKey.html" title="Google::Cloud::Kms::V1::CryptoKey (class)">CryptoKey</a></span> to list, in the format
-+projects/<em>/locations/</em>/keyRings/<em>/cryptoKeys/</em>+.</p>
+<code>projects/*/locations/*/keyRings/*/cryptoKeys/*</code>.</p>
 </div>
       
     </li>
@@ -4154,23 +4851,23 @@ object.</p>
       <pre class="lines">
 
 
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629
-630
-631
-632
-633</pre>
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 620</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 644</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_crypto_key_versions'>list_crypto_key_versions</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4246,7 +4943,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Required. The resource name of the <span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRing</a></span> to list, in the format
-+projects/<em>/locations/</em>/keyRings/*+.</p>
+<code>projects/*/locations/*/keyRings/*</code>.</p>
 </div>
       
     </li>
@@ -4390,23 +5087,23 @@ object.</p>
       <pre class="lines">
 
 
-561
-562
-563
-564
-565
-566
-567
-568
-569
-570
-571
-572
-573
-574</pre>
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 561</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 585</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_crypto_keys'>list_crypto_keys</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4482,7 +5179,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>Required. The resource name of the location associated with the
-<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRings</a></span>, in the format +projects/<em>/locations/</em>+.</p>
+<span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRings</a></span>, in the format <code>projects/*/locations/*</code>.</p>
 </div>
       
     </li>
@@ -4611,21 +5308,21 @@ object.</p>
       <pre class="lines">
 
 
-504
-505
-506
-507
-508
-509
-510
-511
-512
-513
-514
-515</pre>
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 504</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 528</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_key_rings'>list_key_rings</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4795,19 +5492,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1179
-1180
-1181
-1182
-1183
-1184
-1185
-1186
-1187
-1188</pre>
+1203
+1204
+1205
+1206
+1207
+1208
+1209
+1210
+1211
+1212</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1179</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1203</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_crypto_key_version'>restore_crypto_key_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4852,7 +5549,7 @@ existing policy.</p>
 <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'><span class='object_link'><a href="#key_ring_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path (method)">key_ring_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +policy+:
+<span class='comment'># TODO: Initialize `policy`:
 </span><span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_policy'>policy</span><span class='rparen'>)</span></code></pre>
     
@@ -4871,8 +5568,8 @@ existing policy.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -4887,7 +5584,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>REQUIRED: The complete policy to be applied to the +resource+. The size of
+        <div class='inline'><p>REQUIRED: The complete policy to be applied to the <code>resource</code>. The size of
 the policy is limited to a few 10s of KB. An empty policy is a
 valid policy but certain Cloud Platform services (such as Projects)
 might reject them.
@@ -4995,21 +5692,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1222
-1223
-1224
-1225
-1226
-1227
-1228
-1229
-1230
-1231
-1232
-1233</pre>
+1364
+1365
+1366
+1367
+1368
+1369
+1370
+1371
+1372
+1373
+1374
+1375</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1222</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1364</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5057,7 +5754,7 @@ permissions, not a NOT_FOUND error.</p>
 <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'><span class='object_link'><a href="#key_ring_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path (method)">key_ring_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +permissions+:
+<span class='comment'># TODO: Initialize `permissions`:
 </span><span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span></code></pre>
     
@@ -5076,8 +5773,8 @@ permissions, not a NOT_FOUND error.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -5092,7 +5789,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The set of permissions to check for the +resource+. Permissions with
+        <div class='inline'><p>The set of permissions to check for the <code>resource</code>. Permissions with
 wildcards (such as &#39;<em>&#39; or &#39;storage.</em>&#39;) are not allowed. For more
 information see
 <a href="https://cloud.google.com/iam/docs/overview#permissions">IAM Overview</a>.</p>
@@ -5198,21 +5895,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1300
-1301
-1302
-1303
-1304
-1305
-1306
-1307
-1308
-1309
-1310
-1311</pre>
+1442
+1443
+1444
+1445
+1446
+1447
+1448
+1449
+1450
+1451
+1452
+1453</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1300</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1442</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -5257,10 +5954,10 @@ retries, etc.</p>
 
 <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +crypto_key+:
+<span class='comment'># TODO: Initialize `crypto_key`:
 </span><span class='id identifier rubyid_crypto_key'>crypto_key</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +update_mask+:
+<span class='comment'># TODO: Initialize `update_mask`:
 </span><span class='id identifier rubyid_update_mask'>update_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_update_crypto_key'>update_crypto_key</span><span class='lparen'>(</span><span class='id identifier rubyid_crypto_key'>crypto_key</span><span class='comma'>,</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='rparen'>)</span></code></pre>
     
@@ -5400,21 +6097,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-905
-906
-907
-908
-909
-910
-911
-912
-913
-914
-915
-916</pre>
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 905</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 929</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_crypto_key'>update_crypto_key</span> \
     <span class='id identifier rubyid_crypto_key'>crypto_key</span><span class='comma'>,</span>
@@ -5462,7 +6159,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'><span class='object_link'><a href="#crypto_key_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path (method)">crypto_key_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +crypto_key_version_id+:
+<span class='comment'># TODO: Initialize `crypto_key_version_id`:
 </span><span class='id identifier rubyid_crypto_key_version_id'>crypto_key_version_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_update_crypto_key_primary_version'>update_crypto_key_primary_version</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key_version_id'>crypto_key_version_id</span><span class='rparen'>)</span></code></pre>
     
@@ -5598,21 +6295,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1100
-1101
-1102
-1103
-1104
-1105
-1106
-1107
-1108
-1109
-1110
-1111</pre>
+1124
+1125
+1126
+1127
+1128
+1129
+1130
+1131
+1132
+1133
+1134
+1135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1100</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 1124</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_crypto_key_primary_version'>update_crypto_key_primary_version</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5663,10 +6360,10 @@ move between other states.</p>
 
 <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +crypto_key_version+:
+<span class='comment'># TODO: Initialize `crypto_key_version`:
 </span><span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +update_mask+:
+<span class='comment'># TODO: Initialize `update_mask`:
 </span><span class='id identifier rubyid_update_mask'>update_mask</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_update_crypto_key_version'>update_crypto_key_version</span><span class='lparen'>(</span><span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span><span class='comma'>,</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='rparen'>)</span></code></pre>
     
@@ -5806,21 +6503,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-954
-955
-956
-957
-958
-959
-960
-961
-962
-963
-964
-965</pre>
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 954</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/key_management_service_client.rb', line 978</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_crypto_key_version'>update_crypto_key_version</span> \
     <span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span><span class='comma'>,</span>
