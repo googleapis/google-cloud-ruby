@@ -1096,7 +1096,7 @@ custom error handling.</p>
         &mdash;
         <div class='inline'><p>A reference to the POSIX account to update. POSIX accounts are identified
 by the project ID they are associated with. A reference to the POSIX
-account is in format +users/{user}/projects/{project}+.</p>
+account is in format <code>users/{user}/projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -1265,7 +1265,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>The fingerprint of the public key to update. Public keys are identified by
 their SHA-256 fingerprint. The fingerprint of the public key is in format
-+users/{user}/sshPublicKeys/{fingerprint}+.</p>
+<code>users/{user}/sshPublicKeys/{fingerprint}</code>.</p>
 </div>
       
     </li>
@@ -1433,7 +1433,7 @@ on Google Compute Engine.</p>
       
       
         &mdash;
-        <div class='inline'><p>The unique ID for the user in format +users/{user}+.</p>
+        <div class='inline'><p>The unique ID for the user in format <code>users/{user}</code>.</p>
 </div>
       
     </li>
@@ -1609,7 +1609,7 @@ retries, etc.</p>
         &mdash;
         <div class='inline'><p>The fingerprint of the public key to retrieve. Public keys are identified
 by their SHA-256 fingerprint. The fingerprint of the public key is in
-format +users/{user}/sshPublicKeys/{fingerprint}+.</p>
+format <code>users/{user}/sshPublicKeys/{fingerprint}</code>.</p>
 </div>
       
     </li>
@@ -1770,7 +1770,7 @@ login profile.</p>
 <span class='id identifier rubyid_os_login_service_client'>os_login_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../OsLogin.html" title="Google::Cloud::OsLogin (module)">OsLogin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta.html" title="Google::Cloud::OsLogin::V1beta (module)">V1beta</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta.html#new-class_method" title="Google::Cloud::OsLogin::V1beta.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../OsLogin.html" title="Google::Cloud::OsLogin (module)">OsLogin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta.html" title="Google::Cloud::OsLogin::V1beta (module)">V1beta</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::OsLogin::V1beta::OsLoginServiceClient (class)">OsLoginServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_user_path'><span class='object_link'><a href="#user_path-class_method" title="Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.user_path (method)">user_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[USER]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +ssh_public_key+:
+<span class='comment'># TODO: Initialize `ssh_public_key`:
 </span><span class='id identifier rubyid_ssh_public_key'>ssh_public_key</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_os_login_service_client'>os_login_service_client</span><span class='period'>.</span><span class='id identifier rubyid_import_ssh_public_key'>import_ssh_public_key</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_ssh_public_key'>ssh_public_key</span><span class='rparen'>)</span></code></pre>
     
@@ -1788,7 +1788,7 @@ login profile.</p>
       
       
         &mdash;
-        <div class='inline'><p>The unique ID for the user in format +users/{user}+.</p>
+        <div class='inline'><p>The unique ID for the user in format <code>users/{user}</code>.</p>
 </div>
       
     </li>
@@ -1988,7 +1988,7 @@ supports patch semantics.</p>
 <span class='id identifier rubyid_os_login_service_client'>os_login_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../OsLogin.html" title="Google::Cloud::OsLogin (module)">OsLogin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta.html" title="Google::Cloud::OsLogin::V1beta (module)">V1beta</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1beta.html#new-class_method" title="Google::Cloud::OsLogin::V1beta.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1beta</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../OsLogin.html" title="Google::Cloud::OsLogin (module)">OsLogin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1beta.html" title="Google::Cloud::OsLogin::V1beta (module)">V1beta</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::OsLogin::V1beta::OsLoginServiceClient (class)">OsLoginServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_fingerprint_path'><span class='object_link'><a href="#fingerprint_path-class_method" title="Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.fingerprint_path (method)">fingerprint_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[USER]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[FINGERPRINT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +ssh_public_key+:
+<span class='comment'># TODO: Initialize `ssh_public_key`:
 </span><span class='id identifier rubyid_ssh_public_key'>ssh_public_key</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_os_login_service_client'>os_login_service_client</span><span class='period'>.</span><span class='id identifier rubyid_update_ssh_public_key'>update_ssh_public_key</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_ssh_public_key'>ssh_public_key</span><span class='rparen'>)</span></code></pre>
     
@@ -2008,7 +2008,7 @@ supports patch semantics.</p>
         &mdash;
         <div class='inline'><p>The fingerprint of the public key to update. Public keys are identified by
 their SHA-256 fingerprint. The fingerprint of the public key is in format
-+users/{user}/sshPublicKeys/{fingerprint}+.</p>
+<code>users/{user}/sshPublicKeys/{fingerprint}</code>.</p>
 </div>
       
     </li>
