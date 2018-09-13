@@ -47,15 +47,50 @@ js:
 
   <div id="content"><div id='filecontents'><h1>google-cloud</h1>
 
-<p>This gem is a convenience package for loading all gems in the google-cloud
-project. Users are encouraged to depending on the individual gems needed for
-your project instead of using this gem with every dependency. Please see the
-<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby">GitHub repository</a>
-for more information about the individual google-cloud gems.</p>
+<p>The <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud">google-cloud</a>
+gem is a convenience package that lazily loads the vast majority of the
+<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby">google-cloud-*</a> gems.
+Because there are now so many google-cloud-* gems, instead of using this gem in
+your production application, we encourage you to directly require only the
+individual google-cloud-* gems that you need.</p>
 
 <ul>
 <li><a href="http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud/latest">google-cloud API documentation</a></li>
 <li><a href="https://rubygems.org/gems/google-cloud">google-cloud on RubyGems</a></li>
+</ul>
+
+<h2>List of dependencies</h2>
+
+<p>This gem depends on and lazily loads the following google-cloud-* gems:</p>
+
+<ul>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-bigquery">google-cloud-bigquery</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-bigquery-data_transfer">google-cloud-bigquery-data_transfer</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-bigtable">google-cloud-bigtable</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-container">google-cloud-container</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-dataproc">google-cloud-dataproc</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-datastore">google-cloud-datastore</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-dialogflow">google-cloud-dialogflow</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-dlp">google-cloud-dlp</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-dns">google-cloud-dns</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting">google-cloud-error_reporting</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-firestore">google-cloud-firestore</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-kms">google-cloud-kms</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-language">google-cloud-language</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging">google-cloud-logging</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-monitoring">google-cloud-monitoring</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-os_login">google-cloud-os_login</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-pubsub">google-cloud-pubsub</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-resource_manager">google-cloud-resource_manager</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-spanner">google-cloud-spanner</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-speech">google-cloud-speech</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-storage">google-cloud-storage</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-tasks">google-cloud-tasks</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-text_to_speech">google-cloud-text_to_speech</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-trace">google-cloud-trace</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-translate">google-cloud-translate</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-video_intelligence">google-cloud-video_intelligence</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-vision">google-cloud-vision</a></li>
 </ul>
 
 <h2>Quick Start</h2>
@@ -70,10 +105,20 @@ Guide</a>.</p>
 
 <h2>Example</h2>
 
+<p>As shown in the example below, the google-cloud gem lazily loads its
+google-cloud-* dependencies only as needed.</p>
+
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google-cloud</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+<span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Bigquery</span> <span class='comment'>#=&gt; NameError: uninitialized constant Google::Cloud::Bigquery
+</span>
 <span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_bigquery'>bigquery</span>
+
+<span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Bigquery</span> <span class='comment'>#=&gt; Google::Cloud::Bigquery
+</span><span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span> <span class='comment'>#=&gt; NameError: uninitialized constant Google::Cloud::Logging
+</span>
 <span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-dataset</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
