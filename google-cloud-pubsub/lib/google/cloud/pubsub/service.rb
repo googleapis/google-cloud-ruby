@@ -323,11 +323,12 @@ module Google
 
         ##
         # Creates a snapshot on a given subscription.
-        def create_snapshot subscription, snapshot_name
+        def create_snapshot subscription, snapshot_name, labels: nil
           name = snapshot_path snapshot_name
           execute do
             subscriber.create_snapshot name,
                                        subscription_path(subscription),
+                                       labels: labels,
                                        options: default_options
           end
         end

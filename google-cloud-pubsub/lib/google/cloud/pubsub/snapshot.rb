@@ -111,6 +111,20 @@ module Google
         end
 
         ##
+        # A hash of user-provided labels associated with this snapshot.
+        # Labels can be provided when the snapshot is created, and used to
+        # organize and group snapshots.See [Creating and Managing
+        # Labels](https://cloud.google.com/pubsub/docs/labels).
+        #
+        # The returned hash is frozen and changes are not allowed.
+        #
+        # @return [Hash] The frozen labels hash.
+        #
+        def labels
+          @grpc.labels.to_h.freeze
+        end
+
+        ##
         # Removes an existing snapshot. All messages retained in the snapshot
         # are immediately dropped. After a snapshot is deleted, a new one may be
         # created with the same name, but the new one has no association with

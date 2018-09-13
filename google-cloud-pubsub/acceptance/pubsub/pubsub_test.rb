@@ -70,14 +70,6 @@ describe Google::Cloud::Pubsub, :pubsub do
     end
 
     it "should be created and deleted" do
-      topic = pubsub.create_topic new_topic_name
-      topic.must_be_kind_of Google::Cloud::Pubsub::Topic
-      pubsub.topic(topic.name).wont_be :nil?
-      topic.delete
-      pubsub.topic(topic.name).must_be :nil?
-    end
-
-    it "should be created and fetched and deleted with labels" do
       topic = pubsub.create_topic new_topic_name, labels: labels
       topic.must_be_kind_of Google::Cloud::Pubsub::Topic
       topic = pubsub.topic(topic.name)
@@ -237,7 +229,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       msg = topic.publish "hello-#{rand(1000)}"
       msg.wont_be :nil?
 
-      snapshot = subscription.create_snapshot
+      snapshot = subscription.create_snapshot labels: labels
 
       # Check it pulls the message
       events = pull_with_retry subscription
@@ -273,6 +265,9 @@ describe Google::Cloud::Pubsub, :pubsub do
       # No messages, should be empty
       events = subscription.pull
       events.must_be :empty?
+
+      snapshot.labels.must_equal labels
+      snapshot.labels.must_be :frozen?
 
       # Remove the subscription
       subscription.delete

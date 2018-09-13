@@ -164,7 +164,7 @@ class MockPubsub < Minitest::Spec
     data.to_json
   end
 
-  def snapshot_json topic_name, snapshot_name
+  def snapshot_json topic_name, snapshot_name, labels: nil
     time = Time.now
     timestamp = {
       "seconds" => time.to_i,
@@ -172,7 +172,8 @@ class MockPubsub < Minitest::Spec
     }
     { "name" => snapshot_path(snapshot_name),
       "topic" => topic_path(topic_name),
-      "expire_time" => timestamp
+      "expire_time" => timestamp,
+      "labels" => labels
     }.to_json
   end
 
