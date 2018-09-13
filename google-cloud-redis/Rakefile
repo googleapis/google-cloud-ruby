@@ -17,11 +17,12 @@ require "bundler/gem_tasks"
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
-require "rake/testtask"
 desc "Run tests."
-Rake::TestTask.new do |t|
-  t.test_files = FileList["test/**/*_test.rb"]
-  t.warning = false
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*test.rb")
+    .reject { |file| file.include? "smoke_test" }
+    .each { |file| require_relative file }
 end
 
 namespace :test do
@@ -34,7 +35,7 @@ namespace :test do
       add_filter "test/"
     end
 
-    Rake::Task[:test].invoke
+    Rake::Task["test"].invoke
   end
 end
 
@@ -63,6 +64,44 @@ require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
 
+desc "Generates JSON output from google-cloud-redis .yardoc"
+task :jsondoc => :yard do
+  require "rubygems"
+  require "gcloud/jsondoc"
+
+  registry = YARD::Registry.load! ".yardoc"
+
+  toc_config = {
+    documents: [
+      {
+        type: "toc",
+        title: "Google::Cloud::Redis::V1::DataTypes",
+        modules: [
+          {
+            title: "Google::Cloud::Redis::V1",
+            include: ["google/cloud/redis/v1"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
+          }
+        ]
+      }
+    ]
+  }
+
+  generator = Gcloud::Jsondoc::Generator.new registry,
+                                             "google-cloud-redis",
+                                             generate: toc_config
+  rm_rf "jsondoc", verbose: true
+  generator.write_to "jsondoc"
+  cp ["docs/toc.json"], "jsondoc", verbose: true
+end
+
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-redis gem does not have doctest tests."
@@ -72,19 +111,21 @@ desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-redis"
   header "google-cloud-redis rubocop", "*"
-  Rake::Task[:rubocop].invoke
+  sh "bundle exec rake rubocop"
+  header "google-cloud-redis jsondoc", "*"
+  sh "bundle exec rake jsondoc"
   header "google-cloud-redis doctest", "*"
-  Rake::Task[:doctest].invoke
+  sh "bundle exec rake doctest"
   header "google-cloud-redis test", "*"
-  Rake::Task[:test].invoke
+  sh "bundle exec rake test"
 end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
-    Rake::Task[:ci].invoke
+    Rake::Task["ci"].invoke
     header "google-cloud-redis acceptance", "*"
-    Rake::Task[:acceptance].invoke
+    sh "bundle exec rake acceptance -v"
   end
   task :a do
     # This is a handy shortcut to save typing
