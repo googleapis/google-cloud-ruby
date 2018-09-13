@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The protocol for the +UpdateAlertPolicy+ request.</p>
+    <p>The protocol for the <code>UpdateAlertPolicy</code> request.</p>
 
 
   </div>
@@ -179,9 +179,9 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The updated alerting policy or the updated values for the
-fields listed in +update_mask+.
-If +update_mask+ is not empty, any fields in this policy that are
-not in +update_mask+ are ignored.</p>
+fields listed in <code>update_mask</code>.
+If <code>update_mask</code> is not empty, any fields in this policy that are
+not in <code>update_mask</code> are ignored.</p>
 
 
   </div>
@@ -200,9 +200,9 @@ not in +update_mask+ are ignored.</p>
       
         &mdash;
         <div class='inline'><p>Required. The updated alerting policy or the updated values for the
-fields listed in +update_mask+.
-If +update_mask+ is not empty, any fields in this policy that are
-not in +update_mask+ are ignored.</p>
+fields listed in <code>update_mask</code>.
+If <code>update_mask</code> is not empty, any fields in this policy that are
+not in <code>update_mask</code> are ignored.</p>
 </div>
       
     </li>
@@ -241,26 +241,26 @@ not in +update_mask+ are ignored.</p>
   <div class="discussion">
     <p>Returns Optional. A list of alerting policy field names. If this field is not
 empty, each listed field in the existing alerting policy is set to the
-value of the corresponding field in the supplied policy (+alert_policy+),
+value of the corresponding field in the supplied policy (<code>alert_policy</code>),
 or to the field&#39;s default value if the field is not in the supplied
 alerting policy.  Fields not listed retain their previous value.</p>
 
-<p>Examples of valid field masks include +display_name+, +documentation+,
-+documentation.content+, +documentation.mime_type+, +user_labels+,
-+user_label.nameofkey+, +enabled+, +conditions+, +combiner+, etc.</p>
+<p>Examples of valid field masks include <code>display_name</code>, <code>documentation</code>,
+<code>documentation.content</code>, <code>documentation.mime_type</code>, <code>user_labels</code>,
+<code>user_label.nameofkey</code>, <code>enabled</code>, <code>conditions</code>, <code>combiner</code>, etc.</p>
 
 <p>If this field is empty, then the supplied alerting policy replaces the
 existing policy. It is the same as deleting the existing policy and
 adding the supplied policy, except for the following:</p>
 
 <ul>
-<li>The new policy will have the same +[ALERT_POLICY_ID]+ as the former
+<li>The new policy will have the same <code>[ALERT_POLICY_ID]</code> as the former
 policy. This gives you continuity with the former policy in your
 notifications and incidents.</li>
-<li>Conditions in the new policy will keep their former +[CONDITION_ID]+ if
-the supplied condition includes the +name+ field with that
-+[CONDITION_ID]+. If the supplied condition omits the +name+ field,
-then a new +[CONDITION_ID]+ is created.</li>
+<li>Conditions in the new policy will keep their former <code>[CONDITION_ID]</code> if
+the supplied condition includes the <code>name</code> field with that
+<code>[CONDITION_ID]</code>. If the supplied condition omits the <code>name</code> field,
+then a new <code>[CONDITION_ID]</code> is created.</li>
 </ul>
 
 
@@ -281,26 +281,26 @@ then a new +[CONDITION_ID]+ is created.</li>
         &mdash;
         <div class='inline'><p>Optional. A list of alerting policy field names. If this field is not
 empty, each listed field in the existing alerting policy is set to the
-value of the corresponding field in the supplied policy (+alert_policy+),
+value of the corresponding field in the supplied policy (<code>alert_policy</code>),
 or to the field&#39;s default value if the field is not in the supplied
 alerting policy.  Fields not listed retain their previous value.</p>
 
-<p>Examples of valid field masks include +display_name+, +documentation+,
-+documentation.content+, +documentation.mime_type+, +user_labels+,
-+user_label.nameofkey+, +enabled+, +conditions+, +combiner+, etc.</p>
+<p>Examples of valid field masks include <code>display_name</code>, <code>documentation</code>,
+<code>documentation.content</code>, <code>documentation.mime_type</code>, <code>user_labels</code>,
+<code>user_label.nameofkey</code>, <code>enabled</code>, <code>conditions</code>, <code>combiner</code>, etc.</p>
 
 <p>If this field is empty, then the supplied alerting policy replaces the
 existing policy. It is the same as deleting the existing policy and
 adding the supplied policy, except for the following:</p>
 
 <ul>
-<li>The new policy will have the same +[ALERT_POLICY_ID]+ as the former
+<li>The new policy will have the same <code>[ALERT_POLICY_ID]</code> as the former
 policy. This gives you continuity with the former policy in your
 notifications and incidents.</li>
-<li>Conditions in the new policy will keep their former +[CONDITION_ID]+ if
-the supplied condition includes the +name+ field with that
-+[CONDITION_ID]+. If the supplied condition omits the +name+ field,
-then a new +[CONDITION_ID]+ is created.</li>
+<li>Conditions in the new policy will keep their former <code>[CONDITION_ID]</code> if
+the supplied condition includes the <code>name</code> field with that
+<code>[CONDITION_ID]</code>. If the supplied condition omits the <code>name</code> field,
+then a new <code>[CONDITION_ID]</code> is created.</li>
 </ul>
 </div>
       

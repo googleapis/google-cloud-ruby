@@ -93,8 +93,8 @@ js:
 overflow and underflow).  Each bucket represents a constant absolute
 uncertainty on the specific value in the bucket.</p>
 
-<p>Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
-bucket +i+:</p>
+<p>Defines <code>num_finite_buckets + 2</code> (= N) buckets with these boundaries for
+bucket <code>i</code>:</p>
 
 <p>Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).</p>

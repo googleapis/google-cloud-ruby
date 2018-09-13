@@ -93,7 +93,7 @@ js:
 are reporting data. The configuration defines a metric and
 a set of monitored resources. The predicate is considered in violation
 when a time series for the specified metric of a monitored
-resource does not include any data in the specified +duration+.</p>
+resource does not include any data in the specified <code>duration</code>.</p>
 
 
   </div>
@@ -242,8 +242,8 @@ members of a group of resrouces). Multiple aggregations
 are applied in the order specified.</p>
 
 <p>This field is similar to the
-one in the <a href="https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+ request</a>.
-It is advisable to use the +ListTimeSeries+ method when debugging this field.</p>
+one in the <a href="https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code> request</a>.
+It is advisable to use the <code>ListTimeSeries</code> method when debugging this field.</p>
 
 
   </div>
@@ -269,8 +269,8 @@ members of a group of resrouces). Multiple aggregations
 are applied in the order specified.</p>
 
 <p>This field is similar to the
-one in the <a href="https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+ request</a>.
-It is advisable to use the +ListTimeSeries+ method when debugging this field.</p>
+one in the <a href="https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code> request</a>.
+It is advisable to use the <code>ListTimeSeries</code> method when debugging this field.</p>
 </div>
       
     </li>
@@ -311,7 +311,7 @@ It is advisable to use the +ListTimeSeries+ method when debugging this field.</p
 data to be considered failing. Currently, only values that
 are a multiple of a minute--e.g.  60, 120, or 300
 seconds--are supported. If an invalid value is given, an
-error will be returned. The +Duration.nanos+ field is
+error will be returned. The <code>Duration.nanos</code> field is
 ignored.</p>
 
 
@@ -334,7 +334,7 @@ ignored.</p>
 data to be considered failing. Currently, only values that
 are a multiple of a minute--e.g.  60, 120, or 300
 seconds--are supported. If an invalid value is given, an
-error will be returned. The +Duration.nanos+ field is
+error will be returned. The <code>Duration.nanos</code> field is
 ignored.</p>
 </div>
       
@@ -376,7 +376,7 @@ ignored.</p>
 identifies which time series should be compared with the threshold.</p>
 
 <p>The filter is similar to the one that is specified in the
-<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+
+<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code>
 request</a> (that
 call is useful to verify the time series that will be retrieved /
 processed) and must specify the metric type and optionally may contain
@@ -403,7 +403,7 @@ This field may not exceed 2048 Unicode characters in length.</p>
 identifies which time series should be compared with the threshold.</p>
 
 <p>The filter is similar to the one that is specified in the
-<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+
+<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code>
 request</a> (that
 call is useful to verify the time series that will be retrieved /
 processed) and must specify the metric type and optionally may contain
@@ -448,7 +448,7 @@ This field may not exceed 2048 Unicode characters in length.</p>
     <p>Returns The number/percent of time series for which the comparison must hold
 in order for the condition to trigger. If unspecified, then the
 condition will trigger if the comparison is true for any of the
-time series that have been identified by +filter+ and +aggregations+.</p>
+time series that have been identified by <code>filter</code> and <code>aggregations</code>.</p>
 
 
   </div>
@@ -469,7 +469,7 @@ time series that have been identified by +filter+ and +aggregations+.</p>
         <div class='inline'><p>The number/percent of time series for which the comparison must hold
 in order for the condition to trigger. If unspecified, then the
 condition will trigger if the comparison is true for any of the
-time series that have been identified by +filter+ and +aggregations+.</p>
+time series that have been identified by <code>filter</code> and <code>aggregations</code>.</p>
 </div>
       
     </li>

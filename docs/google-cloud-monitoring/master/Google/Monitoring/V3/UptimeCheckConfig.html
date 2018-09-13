@@ -1082,7 +1082,7 @@ to identify; however, uniqueness is not enforced. Required.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The internal checkers that this check will egress from. If +is_internal+ is
+    <p>Returns The internal checkers that this check will egress from. If <code>is_internal</code> is
 true and this list is empty, the check will egress from all
 InternalCheckers configured for the project that owns this CheckConfig.</p>
 
@@ -1102,7 +1102,7 @@ InternalCheckers configured for the project that owns this CheckConfig.</p>
       
       
         &mdash;
-        <div class='inline'><p>The internal checkers that this check will egress from. If +is_internal+ is
+        <div class='inline'><p>The internal checkers that this check will egress from. If <code>is_internal</code> is
 true and this list is empty, the check will egress from all
 InternalCheckers configured for the project that owns this CheckConfig.</p>
 </div>
@@ -1725,7 +1725,7 @@ The following monitored resource types are supported for uptime checks:
   <div class="discussion">
     <p>Returns A unique resource name for this UptimeCheckConfig. The format is:</p>
 
-<p>+projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.</p>
+<p><code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 
 <p>This field should be omitted when creating the uptime check configuration;
 on create, the resource name is assigned by the server and included in the
@@ -1749,7 +1749,7 @@ response.</p>
         &mdash;
         <div class='inline'><p>A unique resource name for this UptimeCheckConfig. The format is:</p>
 
-<p>+projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.</p>
+<p><code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 
 <p>This field should be omitted when creating the uptime check configuration;
 on create, the resource name is assigned by the server and included in the
@@ -1943,9 +1943,9 @@ response.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns How often, in seconds, the uptime check is performed.
-Currently, the only supported values are +60s+ (1 minute), +300s+
-(5 minutes), +600s+ (10 minutes), and +900s+ (15 minutes). Optional,
-defaults to +300s+.</p>
+Currently, the only supported values are <code>60s</code> (1 minute), <code>300s</code>
+(5 minutes), <code>600s</code> (10 minutes), and <code>900s</code> (15 minutes). Optional,
+defaults to <code>300s</code>.</p>
 
 
   </div>
@@ -1964,9 +1964,9 @@ defaults to +300s+.</p>
       
         &mdash;
         <div class='inline'><p>How often, in seconds, the uptime check is performed.
-Currently, the only supported values are +60s+ (1 minute), +300s+
-(5 minutes), +600s+ (10 minutes), and +900s+ (15 minutes). Optional,
-defaults to +300s+.</p>
+Currently, the only supported values are <code>60s</code> (1 minute), <code>300s</code>
+(5 minutes), <code>600s</code> (10 minutes), and <code>900s</code> (15 minutes). Optional,
+defaults to <code>300s</code>.</p>
 </div>
       
     </li>

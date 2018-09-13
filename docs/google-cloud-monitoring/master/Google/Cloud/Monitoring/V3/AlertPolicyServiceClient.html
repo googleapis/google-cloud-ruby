@@ -1066,7 +1066,7 @@ custom error handling.</p>
 <span class='id identifier rubyid_alert_policy_service_client'>alert_policy_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../AlertPolicy.html" title="Google::Cloud::Monitoring::AlertPolicy (module)">AlertPolicy</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../AlertPolicy.html#new-class_method" title="Google::Cloud::Monitoring::AlertPolicy.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v3</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V3.html" title="Google::Cloud::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Monitoring::V3::AlertPolicyServiceClient (class)">AlertPolicyServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +alert_policy+:
+<span class='comment'># TODO: Initialize `alert_policy`:
 </span><span class='id identifier rubyid_alert_policy'>alert_policy</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_alert_policy_service_client'>alert_policy_service_client</span><span class='period'>.</span><span class='id identifier rubyid_create_alert_policy'>create_alert_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_alert_policy'>alert_policy</span><span class='rparen'>)</span></code></pre>
     
@@ -1085,13 +1085,13 @@ custom error handling.</p>
       
         &mdash;
         <div class='inline'><p>The project in which to create the alerting policy. The format is
-+projects/[PROJECT_ID]+.</p>
+<code>projects/[PROJECT_ID]</code>.</p>
 
 <p>Note that this field names the parent container in which the alerting
 policy will be written, not the name of the created policy. The alerting
 policy that is returned will have a name that contains a normalized
 representation of this name as a prefix but adds a suffix of the form
-+/alertPolicies/[POLICY_ID]+, identifying the policy in the container.</p>
+<code>/alertPolicies/[POLICY_ID]</code>, identifying the policy in the container.</p>
 </div>
       
     </li>
@@ -1106,7 +1106,7 @@ representation of this name as a prefix but adds a suffix of the form
       
       
         &mdash;
-        <div class='inline'><p>The requested alerting policy. You should omit the +name+ field in this
+        <div class='inline'><p>The requested alerting policy. You should omit the <code>name</code> field in this
 policy. The name will be returned in the new policy, including
 a new [ALERT_POLICY_ID] value.
 A hash of the same form as <code>Google::Monitoring::V3::AlertPolicy</code>
@@ -1693,7 +1693,7 @@ filtering</a>.</p>
       
         &mdash;
         <div class='inline'><p>A comma-separated list of fields by which to sort the result. Supports
-the same set of field references as the +filter+ field. Entries can be
+the same set of field references as the <code>filter</code> field. Entries can be
 prefixed with a minus sign to sort by the field in descending order.</p>
 
 <p>For more details, see <a href="/monitoring/api/v3/sorting-and-filtering">sorting and
@@ -1880,7 +1880,7 @@ object.</p>
   <div class="discussion">
     <p>Updates an alerting policy. You can either replace the entire policy with
 a new one or replace only certain fields in the current alerting policy by
-specifying the fields to be updated via +updateMask+. Returns the
+specifying the fields to be updated via <code>updateMask</code>. Returns the
 updated alerting policy.</p>
 
 
@@ -1896,7 +1896,7 @@ updated alerting policy.</p>
 
 <span class='id identifier rubyid_alert_policy_service_client'>alert_policy_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../AlertPolicy.html" title="Google::Cloud::Monitoring::AlertPolicy (module)">AlertPolicy</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../AlertPolicy.html#new-class_method" title="Google::Cloud::Monitoring::AlertPolicy.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v3</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +alert_policy+:
+<span class='comment'># TODO: Initialize `alert_policy`:
 </span><span class='id identifier rubyid_alert_policy'>alert_policy</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_alert_policy_service_client'>alert_policy_service_client</span><span class='period'>.</span><span class='id identifier rubyid_update_alert_policy'>update_alert_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_alert_policy'>alert_policy</span><span class='rparen'>)</span></code></pre>
     
@@ -1915,9 +1915,9 @@ updated alerting policy.</p>
       
         &mdash;
         <div class='inline'><p>Required. The updated alerting policy or the updated values for the
-fields listed in +update_mask+.
-If +update_mask+ is not empty, any fields in this policy that are
-not in +update_mask+ are ignored.
+fields listed in <code>update_mask</code>.
+If <code>update_mask</code> is not empty, any fields in this policy that are
+not in <code>update_mask</code> are ignored.
 A hash of the same form as <code>Google::Monitoring::V3::AlertPolicy</code>
 can also be provided.</p>
 </div>
@@ -1936,26 +1936,26 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>Optional. A list of alerting policy field names. If this field is not
 empty, each listed field in the existing alerting policy is set to the
-value of the corresponding field in the supplied policy (+alert_policy+),
+value of the corresponding field in the supplied policy (<code>alert_policy</code>),
 or to the field&#39;s default value if the field is not in the supplied
 alerting policy.  Fields not listed retain their previous value.</p>
 
-<p>Examples of valid field masks include +display_name+, +documentation+,
-+documentation.content+, +documentation.mime_type+, +user_labels+,
-+user_label.nameofkey+, +enabled+, +conditions+, +combiner+, etc.</p>
+<p>Examples of valid field masks include <code>display_name</code>, <code>documentation</code>,
+<code>documentation.content</code>, <code>documentation.mime_type</code>, <code>user_labels</code>,
+<code>user_label.nameofkey</code>, <code>enabled</code>, <code>conditions</code>, <code>combiner</code>, etc.</p>
 
 <p>If this field is empty, then the supplied alerting policy replaces the
 existing policy. It is the same as deleting the existing policy and
 adding the supplied policy, except for the following:</p>
 
 <ul>
-<li>The new policy will have the same +[ALERT_POLICY_ID]+ as the former
+<li>The new policy will have the same <code>[ALERT_POLICY_ID]</code> as the former
 policy. This gives you continuity with the former policy in your
 notifications and incidents.</li>
-<li>Conditions in the new policy will keep their former +[CONDITION_ID]+ if
-the supplied condition includes the +name+ field with that
-+[CONDITION_ID]+. If the supplied condition omits the +name+ field,
-then a new +[CONDITION_ID]+ is created.
+<li>Conditions in the new policy will keep their former <code>[CONDITION_ID]</code> if
+the supplied condition includes the <code>name</code> field with that
+<code>[CONDITION_ID]</code>. If the supplied condition omits the <code>name</code> field,
+then a new <code>[CONDITION_ID]</code> is created.
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</li>
 </ul>

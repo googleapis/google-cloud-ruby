@@ -91,13 +91,13 @@ js:
   <div class="discussion">
     <p>A set of buckets with arbitrary widths.</p>
 
-<p>Defines +size(bounds) + 1+ (= N) buckets with these boundaries for
+<p>Defines <code>size(bounds) + 1</code> (= N) buckets with these boundaries for
 bucket i:</p>
 
 <p>Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]</p>
 
-<p>There must be at least one element in +bounds+.  If +bounds+ has only one
+<p>There must be at least one element in <code>bounds</code>.  If <code>bounds</code> has only one
 element, there are no finite buckets, and that single element is the
 common boundary of the overflow and underflow buckets.</p>
 

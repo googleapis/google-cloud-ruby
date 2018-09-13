@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The protocol for the +CreateAlertPolicy+ request.</p>
+    <p>The protocol for the <code>CreateAlertPolicy</code> request.</p>
 
 
   </div>
@@ -178,7 +178,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The requested alerting policy. You should omit the +name+ field in this
+    <p>Returns The requested alerting policy. You should omit the <code>name</code> field in this
 policy. The name will be returned in the new policy, including
 a new [ALERT_POLICY_ID] value.</p>
 
@@ -198,7 +198,7 @@ a new [ALERT_POLICY_ID] value.</p>
       
       
         &mdash;
-        <div class='inline'><p>The requested alerting policy. You should omit the +name+ field in this
+        <div class='inline'><p>The requested alerting policy. You should omit the <code>name</code> field in this
 policy. The name will be returned in the new policy, including
 a new [ALERT_POLICY_ID] value.</p>
 </div>
@@ -238,13 +238,13 @@ a new [ALERT_POLICY_ID] value.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The project in which to create the alerting policy. The format is
-+projects/[PROJECT_ID]+.</p>
+<code>projects/[PROJECT_ID]</code>.</p>
 
 <p>Note that this field names the parent container in which the alerting
 policy will be written, not the name of the created policy. The alerting
 policy that is returned will have a name that contains a normalized
 representation of this name as a prefix but adds a suffix of the form
-+/alertPolicies/[POLICY_ID]+, identifying the policy in the container.</p>
+<code>/alertPolicies/[POLICY_ID]</code>, identifying the policy in the container.</p>
 
 
   </div>
@@ -263,13 +263,13 @@ representation of this name as a prefix but adds a suffix of the form
       
         &mdash;
         <div class='inline'><p>The project in which to create the alerting policy. The format is
-+projects/[PROJECT_ID]+.</p>
+<code>projects/[PROJECT_ID]</code>.</p>
 
 <p>Note that this field names the parent container in which the alerting
 policy will be written, not the name of the created policy. The alerting
 policy that is returned will have a name that contains a normalized
 representation of this name as a prefix but adds a suffix of the form
-+/alertPolicies/[POLICY_ID]+, identifying the policy in the container.</p>
+<code>/alertPolicies/[POLICY_ID]</code>, identifying the policy in the container.</p>
 </div>
       
     </li>

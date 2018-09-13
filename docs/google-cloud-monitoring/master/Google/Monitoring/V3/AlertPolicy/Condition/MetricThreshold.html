@@ -151,7 +151,7 @@ against a threshold.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The comparison to apply between the time series (indicated by +filter+ and +aggregation+) and the threshold (indicated by +threshold_value+).</p>
+    <span class="summary_desc"><div class='inline'><p>The comparison to apply between the time series (indicated by <code>filter</code> and <code>aggregation</code>) and the threshold (indicated by <code>threshold_value</code>).</p>
 </div></span>
   
 </li>
@@ -177,7 +177,7 @@ against a threshold.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Specifies the alignment of data points in individual time series selected by +denominatorFilter+ as well as how to combine the retrieved time series together (such as when aggregating multiple streams on each resource to a single stream for each resource or when aggregating streams across all members of a group of resources).</p>
+    <span class="summary_desc"><div class='inline'><p>Specifies the alignment of data points in individual time series selected by <code>denominatorFilter</code> as well as how to combine the retrieved time series together (such as when aggregating multiple streams on each resource to a single stream for each resource or when aggregating streams across all members of a group of resources).</p>
 </div></span>
   
 </li>
@@ -343,8 +343,8 @@ members of a group of resrouces). Multiple aggregations
 are applied in the order specified.</p>
 
 <p>This field is similar to the one in the
-<a href="https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+ request</a>.
-It is advisable to use the +ListTimeSeries+ method when debugging this field.</p>
+<a href="https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code> request</a>.
+It is advisable to use the <code>ListTimeSeries</code> method when debugging this field.</p>
 
 
   </div>
@@ -370,8 +370,8 @@ members of a group of resrouces). Multiple aggregations
 are applied in the order specified.</p>
 
 <p>This field is similar to the one in the
-<a href="https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+ request</a>.
-It is advisable to use the +ListTimeSeries+ method when debugging this field.</p>
+<a href="https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code> request</a>.
+It is advisable to use the <code>ListTimeSeries</code> method when debugging this field.</p>
 </div>
       
     </li>
@@ -408,12 +408,12 @@ It is advisable to use the +ListTimeSeries+ method when debugging this field.</p
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The comparison to apply between the time series (indicated by +filter+
-and +aggregation+) and the threshold (indicated by +threshold_value+).
+    <p>Returns The comparison to apply between the time series (indicated by <code>filter</code>
+and <code>aggregation</code>) and the threshold (indicated by <code>threshold_value</code>).
 The comparison is applied on each time series, with the time series
 on the left-hand side and the threshold on the right-hand side.</p>
 
-<p>Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.</p>
+<p>Only <code>COMPARISON_LT</code> and <code>COMPARISON_GT</code> are supported currently.</p>
 
 
   </div>
@@ -431,12 +431,12 @@ on the left-hand side and the threshold on the right-hand side.</p>
       
       
         &mdash;
-        <div class='inline'><p>The comparison to apply between the time series (indicated by +filter+
-and +aggregation+) and the threshold (indicated by +threshold_value+).
+        <div class='inline'><p>The comparison to apply between the time series (indicated by <code>filter</code>
+and <code>aggregation</code>) and the threshold (indicated by <code>threshold_value</code>).
 The comparison is applied on each time series, with the time series
 on the left-hand side and the threshold on the right-hand side.</p>
 
-<p>Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.</p>
+<p>Only <code>COMPARISON_LT</code> and <code>COMPARISON_GT</code> are supported currently.</p>
 </div>
       
     </li>
@@ -474,20 +474,20 @@ on the left-hand side and the threshold on the right-hand side.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Specifies the alignment of data points in individual time series
-selected by +denominatorFilter+ as
+selected by <code>denominatorFilter</code> as
 well as how to combine the retrieved time series together (such as
 when aggregating multiple streams on each resource to a single
 stream for each resource or when aggregating streams across all
 members of a group of resources).</p>
 
-<p>When computing ratios, the +aggregations+ and
-+denominator_aggregations+ fields must use the same alignment period
+<p>When computing ratios, the <code>aggregations</code> and
+<code>denominator_aggregations</code> fields must use the same alignment period
 and produce time series that have the same periodicity and labels.</p>
 
 <p>This field is similar to the one in the
-<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+
+<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code>
 request</a>. It
-is advisable to use the +ListTimeSeries+ method when debugging this
+is advisable to use the <code>ListTimeSeries</code> method when debugging this
 field.</p>
 
 
@@ -507,20 +507,20 @@ field.</p>
       
         &mdash;
         <div class='inline'><p>Specifies the alignment of data points in individual time series
-selected by +denominatorFilter+ as
+selected by <code>denominatorFilter</code> as
 well as how to combine the retrieved time series together (such as
 when aggregating multiple streams on each resource to a single
 stream for each resource or when aggregating streams across all
 members of a group of resources).</p>
 
-<p>When computing ratios, the +aggregations+ and
-+denominator_aggregations+ fields must use the same alignment period
+<p>When computing ratios, the <code>aggregations</code> and
+<code>denominator_aggregations</code> fields must use the same alignment period
 and produce time series that have the same periodicity and labels.</p>
 
 <p>This field is similar to the one in the
-<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+
+<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code>
 request</a>. It
-is advisable to use the +ListTimeSeries+ method when debugging this
+is advisable to use the <code>ListTimeSeries</code> method when debugging this
 field.</p>
 </div>
       
@@ -560,12 +560,12 @@ field.</p>
   <div class="discussion">
     <p>Returns A <a href="https://cloud.google.com/monitoring/api/v3/filters">filter</a> that identifies a time
 series that should be used as the denominator of a ratio that will be
-compared with the threshold. If a +denominator_filter+ is specified,
-the time series specified by the +filter+ field will be used as the
+compared with the threshold. If a <code>denominator_filter</code> is specified,
+the time series specified by the <code>filter</code> field will be used as the
 numerator.</p>
 
 <p>The filter is similar to the one that is specified in the
-<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+
+<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code>
 request</a> (that
 call is useful to verify the time series that will be retrieved /
 processed) and must specify the metric type and optionally may contain
@@ -590,12 +590,12 @@ This field may not exceed 2048 Unicode characters in length.</p>
         &mdash;
         <div class='inline'><p>A <a href="https://cloud.google.com/monitoring/api/v3/filters">filter</a> that identifies a time
 series that should be used as the denominator of a ratio that will be
-compared with the threshold. If a +denominator_filter+ is specified,
-the time series specified by the +filter+ field will be used as the
+compared with the threshold. If a <code>denominator_filter</code> is specified,
+the time series specified by the <code>filter</code> field will be used as the
 numerator.</p>
 
 <p>The filter is similar to the one that is specified in the
-<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+
+<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code>
 request</a> (that
 call is useful to verify the time series that will be retrieved /
 processed) and must specify the metric type and optionally may contain
@@ -644,7 +644,7 @@ seconds--are supported. If an invalid value is given, an
 error will be returned. When choosing a duration, it is useful to
 keep in mind the frequency of the underlying time series data
 (which may also be affected by any alignments specified in the
-+aggregations+ field); a good duration is long enough so that a single
+<code>aggregations</code> field); a good duration is long enough so that a single
 outlier does not generate spurious alerts, but short enough that
 unhealthy states are detected and alerted on quickly.</p>
 
@@ -671,7 +671,7 @@ seconds--are supported. If an invalid value is given, an
 error will be returned. When choosing a duration, it is useful to
 keep in mind the frequency of the underlying time series data
 (which may also be affected by any alignments specified in the
-+aggregations+ field); a good duration is long enough so that a single
+<code>aggregations</code> field); a good duration is long enough so that a single
 outlier does not generate spurious alerts, but short enough that
 unhealthy states are detected and alerted on quickly.</p>
 </div>
@@ -714,7 +714,7 @@ unhealthy states are detected and alerted on quickly.</p>
 identifies which time series should be compared with the threshold.</p>
 
 <p>The filter is similar to the one that is specified in the
-<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+
+<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code>
 request</a> (that
 call is useful to verify the time series that will be retrieved /
 processed) and must specify the metric type and optionally may contain
@@ -741,7 +741,7 @@ This field may not exceed 2048 Unicode characters in length.</p>
 identifies which time series should be compared with the threshold.</p>
 
 <p>The filter is similar to the one that is specified in the
-<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list">+MetricService.ListTimeSeries+
+<a href="/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list"><code>MetricService.ListTimeSeries</code>
 request</a> (that
 call is useful to verify the time series that will be retrieved /
 processed) and must specify the metric type and optionally may contain
@@ -841,8 +841,8 @@ This field may not exceed 2048 Unicode characters in length.</p>
     <p>Returns The number/percent of time series for which the comparison must hold
 in order for the condition to trigger. If unspecified, then the
 condition will trigger if the comparison is true for any of the
-time series that have been identified by +filter+ and +aggregations+,
-or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+time series that have been identified by <code>filter</code> and <code>aggregations</code>,
+or by the ratio, if <code>denominator_filter</code> and <code>denominator_aggregations</code>
 are specified.</p>
 
 
@@ -864,8 +864,8 @@ are specified.</p>
         <div class='inline'><p>The number/percent of time series for which the comparison must hold
 in order for the condition to trigger. If unspecified, then the
 condition will trigger if the comparison is true for any of the
-time series that have been identified by +filter+ and +aggregations+,
-or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+time series that have been identified by <code>filter</code> and <code>aggregations</code>,
+or by the ratio, if <code>denominator_filter</code> and <code>denominator_aggregations</code>
 are specified.</p>
 </div>
       

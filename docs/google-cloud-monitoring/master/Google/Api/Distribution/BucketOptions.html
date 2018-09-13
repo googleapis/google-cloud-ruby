@@ -90,9 +90,9 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A Distribution may optionally contain a histogram of the values in the
-population.  The histogram is given in +bucket_counts+ as counts of values
+population.  The histogram is given in <code>bucket_counts</code> as counts of values
 that fall into one of a sequence of non-overlapping buckets.  The sequence
-of buckets is described by +bucket_options+.</p>
+of buckets is described by <code>bucket_options</code>.</p>
 
 <p>A bucket specifies an inclusive lower bound and exclusive upper bound for
 the values that are counted for that bucket.  The upper bound of a bucket
@@ -107,11 +107,11 @@ underflow bucket is -infinity and the upper bound of the overflow bucket is
 +infinity.  The finite buckets are so-called because both bounds are
 finite.</p>
 
-<p>+BucketOptions+ describes bucket boundaries in one of three ways.  Two
+<p><code>BucketOptions</code> describes bucket boundaries in one of three ways.  Two
 describe the boundaries by giving parameters for a formula to generate
 boundaries and one gives the bucket boundaries explicitly.</p>
 
-<p>If +bucket_boundaries+ is not given, then no +bucket_counts+ may be given.</p>
+<p>If <code>bucket_boundaries</code> is not given, then no <code>bucket_counts</code> may be given.</p>
 
 
   </div>
@@ -333,8 +333,8 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
 </span>  <span class='comment'># uncertainty on the specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket +i+:
+</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket `i`:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -353,7 +353,7 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
 </span>  <span class='comment'># uncertainty on a specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
 </span>  <span class='comment'># bucket i:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
@@ -371,13 +371,13 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 
   <span class='comment'># A set of buckets with arbitrary widths.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines +size(bounds) + 1+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
 </span>  <span class='comment'># bucket i:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>  <span class='comment'>#
-</span>  <span class='comment'># There must be at least one element in +bounds+.  If +bounds+ has only one
+</span>  <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
 </span>  <span class='comment'># element, there are no finite buckets, and that single element is the
 </span>  <span class='comment'># common boundary of the overflow and underflow buckets.
 </span>  <span class='comment'># @!attribute [rw] bounds
@@ -500,8 +500,8 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
 </span>  <span class='comment'># uncertainty on the specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket +i+:
+</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket `i`:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -520,7 +520,7 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
 </span>  <span class='comment'># uncertainty on a specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
 </span>  <span class='comment'># bucket i:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
@@ -538,13 +538,13 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 
   <span class='comment'># A set of buckets with arbitrary widths.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines +size(bounds) + 1+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
 </span>  <span class='comment'># bucket i:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>  <span class='comment'>#
-</span>  <span class='comment'># There must be at least one element in +bounds+.  If +bounds+ has only one
+</span>  <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
 </span>  <span class='comment'># element, there are no finite buckets, and that single element is the
 </span>  <span class='comment'># common boundary of the overflow and underflow buckets.
 </span>  <span class='comment'># @!attribute [rw] bounds
@@ -667,8 +667,8 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
 </span>  <span class='comment'># uncertainty on the specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket +i+:
+</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
+</span>  <span class='comment'># bucket `i`:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -687,7 +687,7 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
 </span>  <span class='comment'># uncertainty on a specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
 </span>  <span class='comment'># bucket i:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
@@ -705,13 +705,13 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 
   <span class='comment'># A set of buckets with arbitrary widths.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines +size(bounds) + 1+ (= N) buckets with these boundaries for
+</span>  <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
 </span>  <span class='comment'># bucket i:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>  <span class='comment'>#
-</span>  <span class='comment'># There must be at least one element in +bounds+.  If +bounds+ has only one
+</span>  <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
 </span>  <span class='comment'># element, there are no finite buckets, and that single element is the
 </span>  <span class='comment'># common boundary of the overflow and underflow buckets.
 </span>  <span class='comment'># @!attribute [rw] bounds

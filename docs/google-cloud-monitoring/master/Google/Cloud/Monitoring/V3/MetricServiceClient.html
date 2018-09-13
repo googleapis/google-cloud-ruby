@@ -1147,7 +1147,7 @@ User-created metric descriptors define
 <span class='id identifier rubyid_metric_service_client'>metric_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Metric.html" title="Google::Cloud::Monitoring::Metric (module)">Metric</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Metric.html#new-class_method" title="Google::Cloud::Monitoring::Metric.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v3</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V3.html" title="Google::Cloud::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Monitoring::V3::MetricServiceClient (class)">MetricServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Monitoring::V3::MetricServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +metric_descriptor+:
+<span class='comment'># TODO: Initialize `metric_descriptor`:
 </span><span class='id identifier rubyid_metric_descriptor'>metric_descriptor</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_metric_service_client'>metric_service_client</span><span class='period'>.</span><span class='id identifier rubyid_create_metric_descriptor'>create_metric_descriptor</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_metric_descriptor'>metric_descriptor</span><span class='rparen'>)</span></code></pre>
     
@@ -1166,7 +1166,7 @@ User-created metric descriptors define
       
         &mdash;
         <div class='inline'><p>The project on which to execute the request. The format is
-+&quot;projects/{project_id_or_number}&quot;+.</p>
+<code>&quot;projects/{project_id_or_number}&quot;</code>.</p>
 </div>
       
     </li>
@@ -1350,7 +1350,7 @@ included in the error response.</p>
 <span class='id identifier rubyid_metric_service_client'>metric_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Metric.html" title="Google::Cloud::Monitoring::Metric (module)">Metric</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Metric.html#new-class_method" title="Google::Cloud::Monitoring::Metric.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v3</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V3.html" title="Google::Cloud::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Monitoring::V3::MetricServiceClient (class)">MetricServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Monitoring::V3::MetricServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +time_series+:
+<span class='comment'># TODO: Initialize `time_series`:
 </span><span class='id identifier rubyid_time_series'>time_series</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_metric_service_client'>metric_service_client</span><span class='period'>.</span><span class='id identifier rubyid_create_time_series'>create_time_series</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_time_series'>time_series</span><span class='rparen'>)</span></code></pre>
     
@@ -1369,7 +1369,7 @@ included in the error response.</p>
       
         &mdash;
         <div class='inline'><p>The project on which to execute the request. The format is
-+&quot;projects/{project_id_or_number}&quot;+.</p>
+<code>&quot;projects/{project_id_or_number}&quot;</code>.</p>
 </div>
       
     </li>
@@ -1387,7 +1387,7 @@ included in the error response.</p>
         <div class='inline'><p>The new data to be added to a list of time series.
 Adds at most one data point to each of several time series.  The new data
 point must be more recent than any other point in its time series.  Each
-+TimeSeries+ value must fully specify a unique time series by supplying
+<code>TimeSeries</code> value must fully specify a unique time series by supplying
 all label values for the metric and the monitored resource.
 A hash of the same form as <code>Google::Monitoring::V3::TimeSeries</code>
 can also be provided.</p>
@@ -1563,9 +1563,9 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The metric descriptor on which to execute the request. The format is
-+&quot;projects/{project_id_or_number}/metricDescriptors/{metric_id}&quot;+.
-An example of +{metric_id}+ is:
-+&quot;custom.googleapis.com/my_test_metric&quot;+.</p>
+<code>&quot;projects/{project_id_or_number}/metricDescriptors/{metric_id}&quot;</code>.
+An example of <code>{metric_id}</code> is:
+<code>&quot;custom.googleapis.com/my_test_metric&quot;</code>.</p>
 </div>
       
     </li>
@@ -1733,9 +1733,9 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The metric descriptor on which to execute the request. The format is
-+&quot;projects/{project_id_or_number}/metricDescriptors/{metric_id}&quot;+.
-An example value of +{metric_id}+ is
-+&quot;compute.googleapis.com/instance/disk/read_bytes_count&quot;+.</p>
+<code>&quot;projects/{project_id_or_number}/metricDescriptors/{metric_id}&quot;</code>.
+An example value of <code>{metric_id}</code> is
+<code>&quot;compute.googleapis.com/instance/disk/read_bytes_count&quot;</code>.</p>
 </div>
       
     </li>
@@ -1910,9 +1910,9 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The monitored resource descriptor to get.  The format is
-+&quot;projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}&quot;+.
-The +{resource_type}+ is a predefined type, such as
-+cloudsql_database+.</p>
+<code>&quot;projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}&quot;</code>.
+The <code>{resource_type}</code> is a predefined type, such as
+<code>cloudsql_database</code>.</p>
 </div>
       
     </li>
@@ -2099,7 +2099,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The project on which to execute the request. The format is
-+&quot;projects/{project_id_or_number}&quot;+.</p>
+<code>&quot;projects/{project_id_or_number}&quot;</code>.</p>
 </div>
       
     </li>
@@ -2343,7 +2343,7 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The project on which to execute the request. The format is
-+&quot;projects/{project_id_or_number}&quot;+.</p>
+<code>&quot;projects/{project_id_or_number}&quot;</code>.</p>
 </div>
       
     </li>
@@ -2362,7 +2362,7 @@ object.</p>
 the descriptors to be returned.  The filter can reference
 the descriptor&#39;s type and labels. For example, the
 following filter returns only Google Compute Engine descriptors
-that have an +id+ label:</p>
+that have an <code>id</code> label:</p>
 
 <pre class="code ruby"><code class="ruby">resource.type = starts_with(&quot;gce_&quot;) AND resource.label:id
 </code></pre>
@@ -2558,13 +2558,13 @@ object.</p>
 <span class='id identifier rubyid_metric_service_client'>metric_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Metric.html" title="Google::Cloud::Monitoring::Metric (module)">Metric</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Metric.html#new-class_method" title="Google::Cloud::Monitoring::Metric.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v3</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V3.html" title="Google::Cloud::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Monitoring::V3::MetricServiceClient (class)">MetricServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Monitoring::V3::MetricServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +filter+:
+<span class='comment'># TODO: Initialize `filter`:
 </span><span class='id identifier rubyid_filter'>filter</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 
-<span class='comment'># TODO: Initialize +interval+:
+<span class='comment'># TODO: Initialize `interval`:
 </span><span class='id identifier rubyid_interval'>interval</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +view+:
+<span class='comment'># TODO: Initialize `view`:
 </span><span class='id identifier rubyid_view'>view</span> <span class='op'>=</span> <span class='symbol'>:FULL</span>
 
 <span class='comment'># Iterate over all results.

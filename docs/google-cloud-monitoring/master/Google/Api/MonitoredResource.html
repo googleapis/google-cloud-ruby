@@ -91,13 +91,13 @@ js:
   <div class="discussion">
     <p>An object representing a resource that can be used for monitoring, logging,
 billing, or other purposes. Examples include virtual machine instances,
-databases, and storage devices such as disks. The +type+ field identifies a
+databases, and storage devices such as disks. The <code>type</code> field identifies a
 <span class='object_link'><a href="MonitoredResourceDescriptor.html" title="Google::Api::MonitoredResourceDescriptor (class)">MonitoredResourceDescriptor</a></span> object that describes the resource&#39;s
-schema. Information in the +labels+ field identifies the actual resource and
+schema. Information in the <code>labels</code> field identifies the actual resource and
 its attributes according to the schema. For example, a particular Compute
 Engine VM instance could be represented by the following object, because the
-<span class='object_link'><a href="MonitoredResourceDescriptor.html" title="Google::Api::MonitoredResourceDescriptor (class)">MonitoredResourceDescriptor</a></span> for +&quot;gce_instance&quot;+ has labels
-+&quot;instance_id&quot;+ and +&quot;zone&quot;+:</p>
+<span class='object_link'><a href="MonitoredResourceDescriptor.html" title="Google::Api::MonitoredResourceDescriptor (class)">MonitoredResourceDescriptor</a></span> for <code>&quot;gce_instance&quot;</code> has labels
+<code>&quot;instance_id&quot;</code> and <code>&quot;zone&quot;</code>:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>type</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gce_instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>labels</span><span class='label_end'>&quot;:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>instance_id</span><span class='label_end'>&quot;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>12345678901234</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
@@ -193,7 +193,7 @@ Engine VM instance could be represented by the following object, because the
   <div class="discussion">
     <p>Returns Required. Values for all of the labels listed in the associated monitored
 resource descriptor. For example, Compute Engine VM instances use the
-labels +&quot;project_id&quot;+, +&quot;instance_id&quot;+, and +&quot;zone&quot;+.</p>
+labels <code>&quot;project_id&quot;</code>, <code>&quot;instance_id&quot;</code>, and <code>&quot;zone&quot;</code>.</p>
 
 
   </div>
@@ -213,7 +213,7 @@ labels +&quot;project_id&quot;+, +&quot;instance_id&quot;+, and +&quot;zone&quot
         &mdash;
         <div class='inline'><p>Required. Values for all of the labels listed in the associated monitored
 resource descriptor. For example, Compute Engine VM instances use the
-labels +&quot;project_id&quot;+, +&quot;instance_id&quot;+, and +&quot;zone&quot;+.</p>
+labels <code>&quot;project_id&quot;</code>, <code>&quot;instance_id&quot;</code>, and <code>&quot;zone&quot;</code>.</p>
 </div>
       
     </li>
@@ -251,8 +251,8 @@ labels +&quot;project_id&quot;+, +&quot;instance_id&quot;+, and +&quot;zone&quot
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. The monitored resource type. This field must match
-the +type+ field of a <span class='object_link'><a href="MonitoredResourceDescriptor.html" title="Google::Api::MonitoredResourceDescriptor (class)">MonitoredResourceDescriptor</a></span> object. For
-example, the type of a Compute Engine VM instance is +gce_instance+.</p>
+the <code>type</code> field of a <span class='object_link'><a href="MonitoredResourceDescriptor.html" title="Google::Api::MonitoredResourceDescriptor (class)">MonitoredResourceDescriptor</a></span> object. For
+example, the type of a Compute Engine VM instance is <code>gce_instance</code>.</p>
 
 
   </div>
@@ -271,8 +271,8 @@ example, the type of a Compute Engine VM instance is +gce_instance+.</p>
       
         &mdash;
         <div class='inline'><p>Required. The monitored resource type. This field must match
-the +type+ field of a <span class='object_link'><a href="MonitoredResourceDescriptor.html" title="Google::Api::MonitoredResourceDescriptor (class)">MonitoredResourceDescriptor</a></span> object. For
-example, the type of a Compute Engine VM instance is +gce_instance+.</p>
+the <code>type</code> field of a <span class='object_link'><a href="MonitoredResourceDescriptor.html" title="Google::Api::MonitoredResourceDescriptor (class)">MonitoredResourceDescriptor</a></span> object. For
+example, the type of a Compute Engine VM instance is <code>gce_instance</code>.</p>
 </div>
       
     </li>

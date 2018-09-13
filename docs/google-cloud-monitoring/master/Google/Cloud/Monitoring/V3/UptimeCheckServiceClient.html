@@ -976,7 +976,7 @@ custom error handling.</p>
 <span class='id identifier rubyid_uptime_check_service_client'>uptime_check_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../UptimeCheck.html" title="Google::Cloud::Monitoring::UptimeCheck (module)">UptimeCheck</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../UptimeCheck.html#new-class_method" title="Google::Cloud::Monitoring::UptimeCheck.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v3</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V3.html" title="Google::Cloud::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Monitoring::V3::UptimeCheckServiceClient (class)">UptimeCheckServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +uptime_check_config+:
+<span class='comment'># TODO: Initialize `uptime_check_config`:
 </span><span class='id identifier rubyid_uptime_check_config'>uptime_check_config</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_uptime_check_service_client'>uptime_check_service_client</span><span class='period'>.</span><span class='id identifier rubyid_create_uptime_check_config'>create_uptime_check_config</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_uptime_check_config'>uptime_check_config</span><span class='rparen'>)</span></code></pre>
     
@@ -995,7 +995,7 @@ custom error handling.</p>
       
         &mdash;
         <div class='inline'><p>The project in which to create the uptime check. The format
-  is +projects/[PROJECT_ID]+.</p>
+  is <code>projects/[PROJECT_ID]</code>.</p>
 </div>
       
     </li>
@@ -1193,7 +1193,7 @@ other dependent configs that would be rendered invalid by the deletion.</p>
       
         &mdash;
         <div class='inline'><p>The uptime check configuration to delete. The format
-  is +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.</p>
+  is <code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 </div>
       
     </li>
@@ -1361,7 +1361,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The uptime check configuration to retrieve. The format
-  is +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.</p>
+  is <code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 </div>
       
     </li>
@@ -1549,7 +1549,7 @@ leaving out any invalid configurations.</p>
       
         &mdash;
         <div class='inline'><p>The project whose uptime check configurations are listed. The format
-  is +projects/[PROJECT_ID]+.</p>
+  is <code>projects/[PROJECT_ID]</code>.</p>
 </div>
       
     </li>
@@ -1920,7 +1920,7 @@ object.</p>
   <div class="discussion">
     <p>Updates an uptime check configuration. You can either replace the entire
 configuration with a new one or replace only certain fields in the current
-configuration by specifying the fields to be updated via +&quot;updateMask&quot;+.
+configuration by specifying the fields to be updated via <code>&quot;updateMask&quot;</code>.
 Returns the updated configuration.</p>
 
 
@@ -1936,7 +1936,7 @@ Returns the updated configuration.</p>
 
 <span class='id identifier rubyid_uptime_check_service_client'>uptime_check_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../UptimeCheck.html" title="Google::Cloud::Monitoring::UptimeCheck (module)">UptimeCheck</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../UptimeCheck.html#new-class_method" title="Google::Cloud::Monitoring::UptimeCheck.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v3</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +uptime_check_config+:
+<span class='comment'># TODO: Initialize `uptime_check_config`:
 </span><span class='id identifier rubyid_uptime_check_config'>uptime_check_config</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_uptime_check_service_client'>uptime_check_service_client</span><span class='period'>.</span><span class='id identifier rubyid_update_uptime_check_config'>update_uptime_check_config</span><span class='lparen'>(</span><span class='id identifier rubyid_uptime_check_config'>uptime_check_config</span><span class='rparen'>)</span></code></pre>
     
@@ -1954,17 +1954,17 @@ Returns the updated configuration.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. If an +&quot;updateMask&quot;+ has been specified, this field gives
-the values for the set of fields mentioned in the +&quot;updateMask&quot;+. If an
-+&quot;updateMask&quot;+ has not been given, this uptime check configuration replaces
-the current configuration. If a field is mentioned in +&quot;updateMask&quot;+ but
+        <div class='inline'><p>Required. If an <code>&quot;updateMask&quot;</code> has been specified, this field gives
+the values for the set of fields mentioned in the <code>&quot;updateMask&quot;</code>. If an
+<code>&quot;updateMask&quot;</code> has not been given, this uptime check configuration replaces
+the current configuration. If a field is mentioned in <code>&quot;updateMask&quot;</code> but
 the corresonding field is omitted in this partial uptime check
 configuration, it has the effect of deleting/clearing the field from the
 configuration on the server.</p>
 
-<p>The following fields can be updated: +display_name+,
-+http_check+, +tcp_check+, +timeout+, +content_matchers+, and
-+selected_regions+.
+<p>The following fields can be updated: <code>display_name</code>,
+<code>http_check</code>, <code>tcp_check</code>, <code>timeout</code>, <code>content_matchers</code>, and
+<code>selected_regions</code>.
 A hash of the same form as <code>Google::Monitoring::V3::UptimeCheckConfig</code>
 can also be provided.</p>
 </div>

@@ -373,7 +373,7 @@ this state. For an overview of alert policies, see
   
 
   
-    <span class="summary_desc"><div class='inline'><p>User-supplied key/value data to be used for organizing and identifying the +AlertPolicy+ objects.</p>
+    <span class="summary_desc"><div class='inline'><p>User-supplied key/value data to be used for organizing and identifying the <code>AlertPolicy</code> objects.</p>
 </div></span>
   
 </li>
@@ -673,14 +673,14 @@ to determine if an incident should be opened.</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -694,23 +694,23 @@ to determine if an incident should be opened.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -728,7 +728,7 @@ to determine if an incident should be opened.</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -747,7 +747,7 @@ to determine if an incident should be opened.</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -763,18 +763,18 @@ to determine if an incident should be opened.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -783,29 +783,29 @@ to determine if an incident should be opened.</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -818,7 +818,7 @@ to determine if an incident should be opened.</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -826,8 +826,8 @@ to determine if an incident should be opened.</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -835,14 +835,14 @@ to determine if an incident should be opened.</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -858,22 +858,22 @@ to determine if an incident should be opened.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -882,18 +882,18 @@ to determine if an incident should be opened.</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -917,7 +917,7 @@ to determine if an incident should be opened.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns A list of conditions for the policy. The conditions are combined by AND or
-OR according to the +combiner+ field. If the combined conditions evaluate
+OR according to the <code>combiner</code> field. If the combined conditions evaluate
 to true, then an incident is created. A policy can have from one to six
 conditions.</p>
 
@@ -938,7 +938,7 @@ conditions.</p>
       
         &mdash;
         <div class='inline'><p>A list of conditions for the policy. The conditions are combined by AND or
-OR according to the +combiner+ field. If the combined conditions evaluate
+OR according to the <code>combiner</code> field. If the combined conditions evaluate
 to true, then an incident is created. A policy can have from one to six
 conditions.</p>
 </div>
@@ -1192,14 +1192,14 @@ conditions.</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1213,23 +1213,23 @@ conditions.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -1247,7 +1247,7 @@ conditions.</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -1266,7 +1266,7 @@ conditions.</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -1282,18 +1282,18 @@ conditions.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -1302,29 +1302,29 @@ conditions.</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -1337,7 +1337,7 @@ conditions.</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -1345,8 +1345,8 @@ conditions.</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1354,14 +1354,14 @@ conditions.</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -1377,22 +1377,22 @@ conditions.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -1401,18 +1401,18 @@ conditions.</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -1707,14 +1707,14 @@ in a call to create or update, this field will be ignored.</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1728,23 +1728,23 @@ in a call to create or update, this field will be ignored.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -1762,7 +1762,7 @@ in a call to create or update, this field will be ignored.</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -1781,7 +1781,7 @@ in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -1797,18 +1797,18 @@ in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -1817,29 +1817,29 @@ in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -1852,7 +1852,7 @@ in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -1860,8 +1860,8 @@ in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -1869,14 +1869,14 @@ in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -1892,22 +1892,22 @@ in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -1916,18 +1916,18 @@ in a call to create or update, this field will be ignored.</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -2226,14 +2226,14 @@ limited to 512 Unicode characters.</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -2247,23 +2247,23 @@ limited to 512 Unicode characters.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -2281,7 +2281,7 @@ limited to 512 Unicode characters.</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -2300,7 +2300,7 @@ limited to 512 Unicode characters.</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -2316,18 +2316,18 @@ limited to 512 Unicode characters.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -2336,29 +2336,29 @@ limited to 512 Unicode characters.</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -2371,7 +2371,7 @@ limited to 512 Unicode characters.</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -2379,8 +2379,8 @@ limited to 512 Unicode characters.</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -2388,14 +2388,14 @@ limited to 512 Unicode characters.</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -2411,22 +2411,22 @@ limited to 512 Unicode characters.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -2435,18 +2435,18 @@ limited to 512 Unicode characters.</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -2747,14 +2747,14 @@ that have limited capacity might not show this documentation.</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -2768,23 +2768,23 @@ that have limited capacity might not show this documentation.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -2802,7 +2802,7 @@ that have limited capacity might not show this documentation.</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -2821,7 +2821,7 @@ that have limited capacity might not show this documentation.</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -2837,18 +2837,18 @@ that have limited capacity might not show this documentation.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -2857,29 +2857,29 @@ that have limited capacity might not show this documentation.</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -2892,7 +2892,7 @@ that have limited capacity might not show this documentation.</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -2900,8 +2900,8 @@ that have limited capacity might not show this documentation.</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -2909,14 +2909,14 @@ that have limited capacity might not show this documentation.</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -2932,22 +2932,22 @@ that have limited capacity might not show this documentation.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -2956,18 +2956,18 @@ that have limited capacity might not show this documentation.</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -3268,14 +3268,14 @@ a field projection has been specified that strips it out.</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -3289,23 +3289,23 @@ a field projection has been specified that strips it out.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -3323,7 +3323,7 @@ a field projection has been specified that strips it out.</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -3342,7 +3342,7 @@ a field projection has been specified that strips it out.</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -3358,18 +3358,18 @@ a field projection has been specified that strips it out.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -3378,29 +3378,29 @@ a field projection has been specified that strips it out.</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -3413,7 +3413,7 @@ a field projection has been specified that strips it out.</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -3421,8 +3421,8 @@ a field projection has been specified that strips it out.</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -3430,14 +3430,14 @@ a field projection has been specified that strips it out.</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -3453,22 +3453,22 @@ a field projection has been specified that strips it out.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -3477,18 +3477,18 @@ a field projection has been specified that strips it out.</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -3783,14 +3783,14 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -3804,23 +3804,23 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -3838,7 +3838,7 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -3857,7 +3857,7 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -3873,18 +3873,18 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -3893,29 +3893,29 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -3928,7 +3928,7 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -3936,8 +3936,8 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -3945,14 +3945,14 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -3968,22 +3968,22 @@ provided in a call to create or update, this field will be ignored.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -3992,18 +3992,18 @@ provided in a call to create or update, this field will be ignored.</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -4032,10 +4032,10 @@ syntax is:</p>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_projects'>projects</span><span class='op'>/</span><span class='lbracket'>[</span><span class='const'>PROJECT_ID</span><span class='rbracket'>]</span><span class='op'>/</span><span class='id identifier rubyid_alertPolicies'>alertPolicies</span><span class='op'>/</span><span class='lbracket'>[</span><span class='const'>ALERT_POLICY_ID</span><span class='rbracket'>]</span>
 </code></pre>
 
-<p>+[ALERT_POLICY_ID]+ is assigned by Stackdriver Monitoring when the policy
+<p><code>[ALERT_POLICY_ID]</code> is assigned by Stackdriver Monitoring when the policy
 is created.  When calling the
 alertPolicies::create
-method, do not include the +name+ field in the alerting policy passed as
+method, do not include the <code>name</code> field in the alerting policy passed as
 part of the request.</p>
 
 
@@ -4060,10 +4060,10 @@ syntax is:</p>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_projects'>projects</span><span class='op'>/</span><span class='lbracket'>[</span><span class='const'>PROJECT_ID</span><span class='rbracket'>]</span><span class='op'>/</span><span class='id identifier rubyid_alertPolicies'>alertPolicies</span><span class='op'>/</span><span class='lbracket'>[</span><span class='const'>ALERT_POLICY_ID</span><span class='rbracket'>]</span>
 </code></pre>
 
-<p>+[ALERT_POLICY_ID]+ is assigned by Stackdriver Monitoring when the policy
+<p><code>[ALERT_POLICY_ID]</code> is assigned by Stackdriver Monitoring when the policy
 is created.  When calling the
 alertPolicies::create
-method, do not include the +name+ field in the alerting policy passed as
+method, do not include the <code>name</code> field in the alerting policy passed as
 part of the request.</p>
 </div>
       
@@ -4316,14 +4316,14 @@ part of the request.</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -4337,23 +4337,23 @@ part of the request.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -4371,7 +4371,7 @@ part of the request.</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -4390,7 +4390,7 @@ part of the request.</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -4406,18 +4406,18 @@ part of the request.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -4426,29 +4426,29 @@ part of the request.</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -4461,7 +4461,7 @@ part of the request.</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -4469,8 +4469,8 @@ part of the request.</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -4478,14 +4478,14 @@ part of the request.</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -4501,22 +4501,22 @@ part of the request.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -4525,18 +4525,18 @@ part of the request.</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -4562,9 +4562,9 @@ part of the request.</p>
     <p>Returns Identifies the notification channels to which notifications should be sent
 when incidents are opened or closed or when new violations occur on
 an already opened incident. Each element of this array corresponds to
-the +name+ field in each of the
-<span class='object_link'><a href="NotificationChannel.html" title="Google::Monitoring::V3::NotificationChannel (class)">+NotificationChannel+</a></span>
-objects that are returned from the [+ListNotificationChannels+]
+the <code>name</code> field in each of the
+<span class='object_link'><a href="NotificationChannel.html" title="Google::Monitoring::V3::NotificationChannel (class)"><code>NotificationChannel</code></a></span>
+objects that are returned from the [<code>ListNotificationChannels</code>]
 [google.monitoring.v3.NotificationChannelService.ListNotificationChannels]
 method. The syntax of the entries in this field is:</p>
 
@@ -4590,9 +4590,9 @@ method. The syntax of the entries in this field is:</p>
         <div class='inline'><p>Identifies the notification channels to which notifications should be sent
 when incidents are opened or closed or when new violations occur on
 an already opened incident. Each element of this array corresponds to
-the +name+ field in each of the
-<span class='object_link'><a href="NotificationChannel.html" title="Google::Monitoring::V3::NotificationChannel (class)">+NotificationChannel+</a></span>
-objects that are returned from the [+ListNotificationChannels+]
+the <code>name</code> field in each of the
+<span class='object_link'><a href="NotificationChannel.html" title="Google::Monitoring::V3::NotificationChannel (class)"><code>NotificationChannel</code></a></span>
+objects that are returned from the [<code>ListNotificationChannels</code>]
 [google.monitoring.v3.NotificationChannelService.ListNotificationChannels]
 method. The syntax of the entries in this field is:</p>
 
@@ -4849,14 +4849,14 @@ method. The syntax of the entries in this field is:</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -4870,23 +4870,23 @@ method. The syntax of the entries in this field is:</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -4904,7 +4904,7 @@ method. The syntax of the entries in this field is:</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -4923,7 +4923,7 @@ method. The syntax of the entries in this field is:</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -4939,18 +4939,18 @@ method. The syntax of the entries in this field is:</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -4959,29 +4959,29 @@ method. The syntax of the entries in this field is:</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -4994,7 +4994,7 @@ method. The syntax of the entries in this field is:</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -5002,8 +5002,8 @@ method. The syntax of the entries in this field is:</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -5011,14 +5011,14 @@ method. The syntax of the entries in this field is:</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -5034,22 +5034,22 @@ method. The syntax of the entries in this field is:</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -5058,18 +5058,18 @@ method. The syntax of the entries in this field is:</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>
@@ -5093,7 +5093,7 @@ method. The syntax of the entries in this field is:</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns User-supplied key/value data to be used for organizing and
-identifying the +AlertPolicy+ objects.</p>
+identifying the <code>AlertPolicy</code> objects.</p>
 
 <p>The field can contain up to 64 entries. Each key and value is limited to
 63 Unicode characters or 128 bytes, whichever is smaller. Labels and
@@ -5117,7 +5117,7 @@ dashes. Keys must begin with a letter.</p>
       
         &mdash;
         <div class='inline'><p>User-supplied key/value data to be used for organizing and
-identifying the +AlertPolicy+ objects.</p>
+identifying the <code>AlertPolicy</code> objects.</p>
 
 <p>The field can contain up to 64 entries. Each key and value is limited to
 63 Unicode characters or 128 bytes, whichever is smaller. Labels and
@@ -5374,14 +5374,14 @@ dashes. Keys must begin with a letter.</p>
 </span>  <span class='comment'># format.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The text of the documentation, interpreted according to +mime_type+.
+</span>  <span class='comment'>#     The text of the documentation, interpreted according to `mime_type`.
 </span>  <span class='comment'>#     The content may not exceed 8,192 Unicode characters and may not exceed
 </span>  <span class='comment'>#     more than 10,240 bytes when encoded in UTF-8 format, whichever is
 </span>  <span class='comment'>#     smaller.
 </span>  <span class='comment'># @!attribute [rw] mime_type
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The format of the +content+ field. Presently, only the value
-</span>  <span class='comment'>#     +&quot;text/markdown&quot;+ is supported. See
+</span>  <span class='comment'>#     The format of the `content` field. Presently, only the value
+</span>  <span class='comment'>#     `&quot;text/markdown&quot;` is supported. See
 </span>  <span class='comment'>#     [Markdown](https://en.wikipedia.org/wiki/Markdown) for more information.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Documentation.html" title="Google::Monitoring::V3::AlertPolicy::Documentation (class)">Documentation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -5395,23 +5395,23 @@ dashes. Keys must begin with a letter.</p>
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     +[CONDITION_ID]+ is assigned by Stackdriver Monitoring when the
+</span>  <span class='comment'>#     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
 </span>  <span class='comment'>#     condition is created as part of a new or updated alerting policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::CreateAlertPolicy alertPolicies::create}
-</span>  <span class='comment'>#     method, do not include the +name+ field in the conditions of the
+</span>  <span class='comment'>#     method, do not include the `name` field in the conditions of the
 </span>  <span class='comment'>#     requested alerting policy. Stackdriver Monitoring creates the
 </span>  <span class='comment'>#     condition identifiers and includes them in the new policy.
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#     When calling the
 </span>  <span class='comment'>#     {Google::Monitoring::V3::AlertPolicyService::UpdateAlertPolicy alertPolicies::update}
-</span>  <span class='comment'>#     method to update a policy, including a condition +name+ causes the
+</span>  <span class='comment'>#     method to update a policy, including a condition `name` causes the
 </span>  <span class='comment'>#     existing condition to be updated. Conditions without names are added to
 </span>  <span class='comment'>#     the updated policy. Existing conditions are deleted if they are not
 </span>  <span class='comment'>#     updated.
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#     Best practice is to preserve +[CONDITION_ID]+ if you make only small
+</span>  <span class='comment'>#     Best practice is to preserve `[CONDITION_ID]` if you make only small
 </span>  <span class='comment'>#     changes, such as those to condition thresholds, durations, or trigger
 </span>  <span class='comment'>#     values.  Otherwise, treat the change as a new condition and let the
 </span>  <span class='comment'>#     existing condition be deleted.
@@ -5429,7 +5429,7 @@ dashes. Keys must begin with a letter.</p>
 </span>  <span class='comment'>#     receive new data points.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AlertPolicy/Condition.html" title="Google::Monitoring::V3::AlertPolicy::Condition (class)">Condition</a></span></span>
     <span class='comment'># Specifies how many time series must fail a predicate to trigger a
-</span>    <span class='comment'># condition. If not specified, then a +{count: 1}+ trigger is used.
+</span>    <span class='comment'># condition. If not specified, then a `{count: 1}` trigger is used.
 </span>    <span class='comment'># @!attribute [rw] count
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     The absolute number of time series that must fail
@@ -5448,7 +5448,7 @@ dashes. Keys must begin with a letter.</p>
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -5464,18 +5464,18 @@ dashes. Keys must begin with a letter.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] denominator_filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
 </span>    <span class='comment'>#     series that should be used as the denominator of a ratio that will be
-</span>    <span class='comment'>#     compared with the threshold. If a +denominator_filter+ is specified,
-</span>    <span class='comment'>#     the time series specified by the +filter+ field will be used as the
+</span>    <span class='comment'>#     compared with the threshold. If a `denominator_filter` is specified,
+</span>    <span class='comment'>#     the time series specified by the `filter` field will be used as the
 </span>    <span class='comment'>#     numerator.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -5484,29 +5484,29 @@ dashes. Keys must begin with a letter.</p>
 </span>    <span class='comment'># @!attribute [rw] denominator_aggregations
 </span>    <span class='comment'>#   @return [Array&lt;Google::Monitoring::V3::Aggregation&gt;]
 </span>    <span class='comment'>#     Specifies the alignment of data points in individual time series
-</span>    <span class='comment'>#     selected by +denominatorFilter+ as
+</span>    <span class='comment'>#     selected by `denominatorFilter` as
 </span>    <span class='comment'>#     well as how to combine the retrieved time series together (such as
 </span>    <span class='comment'>#     when aggregating multiple streams on each resource to a single
 </span>    <span class='comment'>#     stream for each resource or when aggregating streams across all
 </span>    <span class='comment'>#     members of a group of resources).
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     When computing ratios, the +aggregations+ and
-</span>    <span class='comment'>#     +denominator_aggregations+ fields must use the same alignment period
+</span>    <span class='comment'>#     When computing ratios, the `aggregations` and
+</span>    <span class='comment'>#     `denominator_aggregations` fields must use the same alignment period
 </span>    <span class='comment'>#     and produce time series that have the same periodicity and labels.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the one in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-</span>    <span class='comment'>#     is advisable to use the +ListTimeSeries+ method when debugging this
+</span>    <span class='comment'>#     is advisable to use the `ListTimeSeries` method when debugging this
 </span>    <span class='comment'>#     field.
 </span>    <span class='comment'># @!attribute [rw] comparison
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::ComparisonType]
-</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by +filter+
-</span>    <span class='comment'>#     and +aggregation+) and the threshold (indicated by +threshold_value+).
+</span>    <span class='comment'>#     The comparison to apply between the time series (indicated by `filter`
+</span>    <span class='comment'>#     and `aggregation`) and the threshold (indicated by `threshold_value`).
 </span>    <span class='comment'>#     The comparison is applied on each time series, with the time series
 </span>    <span class='comment'>#     on the left-hand side and the threshold on the right-hand side.
 </span>    <span class='comment'>#
-</span>    <span class='comment'>#     Only +COMPARISON_LT+ and +COMPARISON_GT+ are supported currently.
+</span>    <span class='comment'>#     Only `COMPARISON_LT` and `COMPARISON_GT` are supported currently.
 </span>    <span class='comment'># @!attribute [rw] threshold_value
 </span>    <span class='comment'>#   @return [Float]
 </span>    <span class='comment'>#     A value against which to compare the time series.
@@ -5519,7 +5519,7 @@ dashes. Keys must begin with a letter.</p>
 </span>    <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
 </span>    <span class='comment'>#     keep in mind the frequency of the underlying time series data
 </span>    <span class='comment'>#     (which may also be affected by any alignments specified in the
-</span>    <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>    <span class='comment'>#     `aggregations` field); a good duration is long enough so that a single
 </span>    <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
 </span>    <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>    <span class='comment'># @!attribute [rw] trigger
@@ -5527,8 +5527,8 @@ dashes. Keys must begin with a letter.</p>
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+,
-</span>    <span class='comment'>#     or by the ratio, if +denominator_filter+ and +denominator_aggregations+
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`,
+</span>    <span class='comment'>#     or by the ratio, if `denominator_filter` and `denominator_aggregations`
 </span>    <span class='comment'>#     are specified.
 </span>    <span class='kw'>class</span> <span class='const'>MetricThreshold</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
@@ -5536,14 +5536,14 @@ dashes. Keys must begin with a letter.</p>
 </span>    <span class='comment'># are reporting data. The configuration defines a metric and
 </span>    <span class='comment'># a set of monitored resources. The predicate is considered in violation
 </span>    <span class='comment'># when a time series for the specified metric of a monitored
-</span>    <span class='comment'># resource does not include any data in the specified +duration+.
+</span>    <span class='comment'># resource does not include any data in the specified `duration`.
 </span>    <span class='comment'># @!attribute [rw] filter
 </span>    <span class='comment'>#   @return [String]
 </span>    <span class='comment'>#     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
 </span>    <span class='comment'>#     identifies which time series should be compared with the threshold.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     The filter is similar to the one that is specified in the
-</span>    <span class='comment'>#     [+MetricService.ListTimeSeries+
+</span>    <span class='comment'>#     [`MetricService.ListTimeSeries`
 </span>    <span class='comment'>#     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
 </span>    <span class='comment'>#     call is useful to verify the time series that will be retrieved /
 </span>    <span class='comment'>#     processed) and must specify the metric type and optionally may contain
@@ -5559,22 +5559,22 @@ dashes. Keys must begin with a letter.</p>
 </span>    <span class='comment'>#     are applied in the order specified.
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#     This field is similar to the
-</span>    <span class='comment'>#     one in the [+MetricService.ListTimeSeries+ request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-</span>    <span class='comment'>#     It is advisable to use the +ListTimeSeries+ method when debugging this field.
+</span>    <span class='comment'>#     one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+</span>    <span class='comment'>#     It is advisable to use the `ListTimeSeries` method when debugging this field.
 </span>    <span class='comment'># @!attribute [rw] duration
 </span>    <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>    <span class='comment'>#     The amount of time that a time series must fail to report new
 </span>    <span class='comment'>#     data to be considered failing. Currently, only values that
 </span>    <span class='comment'>#     are a multiple of a minute--e.g.  60, 120, or 300
 </span>    <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>    <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
+</span>    <span class='comment'>#     error will be returned. The `Duration.nanos` field is
 </span>    <span class='comment'>#     ignored.
 </span>    <span class='comment'># @!attribute [rw] trigger
 </span>    <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>    <span class='comment'>#     The number/percent of time series for which the comparison must hold
 </span>    <span class='comment'>#     in order for the condition to trigger. If unspecified, then the
 </span>    <span class='comment'>#     condition will trigger if the comparison is true for any of the
-</span>    <span class='comment'>#     time series that have been identified by +filter+ and +aggregations+.
+</span>    <span class='comment'>#     time series that have been identified by `filter` and `aggregations`.
 </span>    <span class='kw'>class</span> <span class='const'>MetricAbsence</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
 
@@ -5583,18 +5583,18 @@ dashes. Keys must begin with a letter.</p>
     <span class='comment'># An unspecified combiner.
 </span>    <span class='const'>COMBINE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># Combine conditions using the logical +AND+ operator. An
+    <span class='comment'># Combine conditions using the logical `AND` operator. An
 </span>    <span class='comment'># incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously. This combiner is satisfied if all conditions are
 </span>    <span class='comment'># met, even if they are met on completely different resources.
 </span>    <span class='const'>AND</span> <span class='op'>=</span> <span class='int'>1</span>
 
-    <span class='comment'># Combine conditions using the logical +OR+ operator. An incident
+    <span class='comment'># Combine conditions using the logical `OR` operator. An incident
 </span>    <span class='comment'># is created if any of the listed conditions is met.
 </span>    <span class='const'>OR</span> <span class='op'>=</span> <span class='int'>2</span>
 
-    <span class='comment'># Combine conditions using logical +AND+ operator, but unlike the regular
-</span>    <span class='comment'># +AND+ option, an incident is created only if all conditions are met
+    <span class='comment'># Combine conditions using logical `AND` operator, but unlike the regular
+</span>    <span class='comment'># `AND` option, an incident is created only if all conditions are met
 </span>    <span class='comment'># simultaneously on at least one resource.
 </span>    <span class='const'>AND_WITH_MATCHING_RESOURCE</span> <span class='op'>=</span> <span class='int'>3</span>
   <span class='kw'>end</span>

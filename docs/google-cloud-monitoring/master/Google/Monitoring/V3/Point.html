@@ -178,10 +178,10 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The time interval to which the data point applies.  For +GAUGE+ metrics,
-only the end time of the interval is used.  For +DELTA+ metrics, the start
+    <p>Returns The time interval to which the data point applies.  For <code>GAUGE</code> metrics,
+only the end time of the interval is used.  For <code>DELTA</code> metrics, the start
 and end time should specify a non-zero interval, with subsequent points
-specifying contiguous and non-overlapping intervals.  For +CUMULATIVE+
+specifying contiguous and non-overlapping intervals.  For <code>CUMULATIVE</code>
 metrics, the start and end time should specify a non-zero interval, with
 subsequent points specifying the same start time and increasing end times,
 until an event resets the cumulative value to zero and sets a new start
@@ -203,10 +203,10 @@ time for the following points.</p>
       
       
         &mdash;
-        <div class='inline'><p>The time interval to which the data point applies.  For +GAUGE+ metrics,
-only the end time of the interval is used.  For +DELTA+ metrics, the start
+        <div class='inline'><p>The time interval to which the data point applies.  For <code>GAUGE</code> metrics,
+only the end time of the interval is used.  For <code>DELTA</code> metrics, the start
 and end time should specify a non-zero interval, with subsequent points
-specifying contiguous and non-overlapping intervals.  For +CUMULATIVE+
+specifying contiguous and non-overlapping intervals.  For <code>CUMULATIVE</code>
 metrics, the start and end time should specify a non-zero interval, with
 subsequent points specifying the same start time and increasing end times,
 until an event resets the cumulative value to zero and sets a new start

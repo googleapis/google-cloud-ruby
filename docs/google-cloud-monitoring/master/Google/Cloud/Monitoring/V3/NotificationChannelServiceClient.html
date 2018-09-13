@@ -1113,7 +1113,7 @@ endpoint such as an email address, SMS number, or pagerduty service.</p>
 <span class='id identifier rubyid_notification_channel_service_client'>notification_channel_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NotificationChannel.html" title="Google::Cloud::Monitoring::NotificationChannel (module)">NotificationChannel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../NotificationChannel.html#new-class_method" title="Google::Cloud::Monitoring::NotificationChannel.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v3</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V3.html" title="Google::Cloud::Monitoring::V3 (module)">V3</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient (class)">NotificationChannelServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_project_path'><span class='object_link'><a href="#project_path-class_method" title="Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path (method)">project_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +notification_channel+:
+<span class='comment'># TODO: Initialize `notification_channel`:
 </span><span class='id identifier rubyid_notification_channel'>notification_channel</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_notification_channel_service_client'>notification_channel_service_client</span><span class='period'>.</span><span class='id identifier rubyid_create_notification_channel'>create_notification_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_notification_channel'>notification_channel</span><span class='rparen'>)</span></code></pre>
     
@@ -1139,7 +1139,7 @@ endpoint such as an email address, SMS number, or pagerduty service.</p>
 <p>Note that this names the container into which the channel will be
 written. This does not name the newly created channel. The resulting
 channel&#39;s name will have a normalized version of this field as a prefix,
-but will add +/notificationChannels/[CHANNEL_ID]+ to identify the channel.</p>
+but will add <code>/notificationChannels/[CHANNEL_ID]</code> to identify the channel.</p>
 </div>
       
     </li>
@@ -1154,7 +1154,7 @@ but will add +/notificationChannels/[CHANNEL_ID]+ to identify the channel.</p>
       
       
         &mdash;
-        <div class='inline'><p>The definition of the +NotificationChannel+ to create.
+        <div class='inline'><p>The definition of the <code>NotificationChannel</code> to create.
 A hash of the same form as <code>Google::Monitoring::V3::NotificationChannel</code>
 can also be provided.</p>
 </div>
@@ -1335,7 +1335,7 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>The channel for which to execute the request. The format is
-+projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]+.</p>
+<code>projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]</code>.</p>
 </div>
       
     </li>
@@ -1529,7 +1529,7 @@ that was supplied in the call to the create method.</p>
       
         &mdash;
         <div class='inline'><p>The channel for which to execute the request. The format is
-+projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]+.</p>
+<code>projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]</code>.</p>
 </div>
       
     </li>
@@ -1705,7 +1705,7 @@ are expected / permitted for a notification channel of the given type.</p>
       
         &mdash;
         <div class='inline'><p>The channel type for which to execute the request. The format is
-+projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}+.</p>
+<code>projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}</code>.</p>
 </div>
       
     </li>
@@ -2118,11 +2118,11 @@ object.</p>
       
         &mdash;
         <div class='inline'><p>The project on which to execute the request. The format is
-+projects/[PROJECT_ID]+. That is, this names the container
+<code>projects/[PROJECT_ID]</code>. That is, this names the container
 in which to look for the notification channels; it does not name a
 specific channel. To query a specific channel by REST resource name, use
 the
-+GetNotificationChannel+ operation.</p>
+<code>GetNotificationChannel</code> operation.</p>
 </div>
       
     </li>
@@ -2157,7 +2157,7 @@ filtering</a>.</p>
       
         &mdash;
         <div class='inline'><p>A comma-separated list of fields by which to sort the result. Supports
-the same set of fields as in +filter+. Entries can be prefixed with
+the same set of fields as in <code>filter</code>. Entries can be prefixed with
 a minus sign to sort in descending rather than ascending order.</p>
 
 <p>For more details, see <a href="/monitoring/api/v3/sorting-and-filtering">sorting and
@@ -2358,7 +2358,7 @@ remain unchanged.</p>
 
 <span class='id identifier rubyid_notification_channel_service_client'>notification_channel_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Monitoring.html" title="Google::Cloud::Monitoring (module)">Monitoring</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../NotificationChannel.html" title="Google::Cloud::Monitoring::NotificationChannel (module)">NotificationChannel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../NotificationChannel.html#new-class_method" title="Google::Cloud::Monitoring::NotificationChannel.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v3</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +notification_channel+:
+<span class='comment'># TODO: Initialize `notification_channel`:
 </span><span class='id identifier rubyid_notification_channel'>notification_channel</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_notification_channel_service_client'>notification_channel_service_client</span><span class='period'>.</span><span class='id identifier rubyid_update_notification_channel'>update_notification_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_notification_channel'>notification_channel</span><span class='rparen'>)</span></code></pre>
     
@@ -2379,7 +2379,7 @@ remain unchanged.</p>
         <div class='inline'><p>A description of the changes to be applied to the specified
 notification channel. The description must provide a definition for
 fields to be updated; the names of these fields should also be
-included in the +update_mask+.
+included in the <code>update_mask</code>.
 A hash of the same form as <code>Google::Monitoring::V3::NotificationChannel</code>
 can also be provided.</p>
 </div>
