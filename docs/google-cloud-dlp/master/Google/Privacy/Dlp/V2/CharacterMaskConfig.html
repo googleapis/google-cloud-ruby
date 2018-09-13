@@ -236,7 +236,7 @@ type. (This allows you to take a long like 123 and modify it to a string like
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns When masking a string, items in this list will be skipped when replacing.
-For example, if your string is 555-555-5555 and you ask us to skip +-+ and
+For example, if your string is 555-555-5555 and you ask us to skip <code>-</code> and
 mask 5 chars with * we would produce ***-*55-5555.</p>
 
 
@@ -256,7 +256,7 @@ mask 5 chars with * we would produce ***-*55-5555.</p>
       
         &mdash;
         <div class='inline'><p>When masking a string, items in this list will be skipped when replacing.
-For example, if your string is 555-555-5555 and you ask us to skip +-+ and
+For example, if your string is 555-555-5555 and you ask us to skip <code>-</code> and
 mask 5 chars with * we would produce ***-*55-5555.</p>
 </div>
       
@@ -412,10 +412,10 @@ masked. Skipped characters do not count towards this tally.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Mask characters in reverse order. For example, if +masking_character+ is
-&#39;0&#39;, number_to_mask is 14, and +reverse_order+ is false, then
+    <p>Returns Mask characters in reverse order. For example, if <code>masking_character</code> is
+&#39;0&#39;, number_to_mask is 14, and <code>reverse_order</code> is false, then
 1234-5678-9012-3456 -&gt; 00000000000000-3456
-If +masking_character+ is &#39;<em>&#39;, +number_to_mask+ is 3, and +reverse_order+
+If <code>masking_character</code> is &#39;<em>&#39;, <code>number_to_mask</code> is 3, and <code>reverse_order</code>
 is true, then 12345 -&gt; 12</em>**</p>
 
 
@@ -434,10 +434,10 @@ is true, then 12345 -&gt; 12</em>**</p>
       
       
         &mdash;
-        <div class='inline'><p>Mask characters in reverse order. For example, if +masking_character+ is
-&#39;0&#39;, number_to_mask is 14, and +reverse_order+ is false, then
+        <div class='inline'><p>Mask characters in reverse order. For example, if <code>masking_character</code> is
+&#39;0&#39;, number_to_mask is 14, and <code>reverse_order</code> is false, then
 1234-5678-9012-3456 -&gt; 00000000000000-3456
-If +masking_character+ is &#39;<em>&#39;, +number_to_mask+ is 3, and +reverse_order+
+If <code>masking_character</code> is &#39;<em>&#39;, <code>number_to_mask</code> is 3, and <code>reverse_order</code>
 is true, then 12345 -&gt; 12</em>**</p>
 </div>
       

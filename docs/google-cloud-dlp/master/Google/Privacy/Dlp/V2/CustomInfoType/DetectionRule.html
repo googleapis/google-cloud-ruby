@@ -91,7 +91,7 @@ js:
   <div class="discussion">
     <p>Rule for modifying a CustomInfoType to alter behavior under certain
 circumstances, depending on the specific details of the rule. Not supported
-for the +surrogate_type+ custom info type.</p>
+for the <code>surrogate_type</code> custom info type.</p>
 
 
   </div>
@@ -266,13 +266,13 @@ for the +surrogate_type+ custom info type.</p>
 </span>  <span class='comment'># @!attribute [rw] relative_likelihood
 </span>  <span class='comment'>#   @return [Integer]
 </span>  <span class='comment'>#     Increase or decrease the likelihood by the specified number of
-</span>  <span class='comment'>#     levels. For example, if a finding would be +POSSIBLE+ without the
-</span>  <span class='comment'>#     detection rule and +relative_likelihood+ is 1, then it is upgraded to
-</span>  <span class='comment'>#     +LIKELY+, while a value of -1 would downgrade it to +UNLIKELY+.
-</span>  <span class='comment'>#     Likelihood may never drop below +VERY_UNLIKELY+ or exceed
-</span>  <span class='comment'>#     +VERY_LIKELY+, so applying an adjustment of 1 followed by an
-</span>  <span class='comment'>#     adjustment of -1 when base likelihood is +VERY_LIKELY+ will result in
-</span>  <span class='comment'>#     a final likelihood of +LIKELY+.
+</span>  <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>  <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>  <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>  <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>  <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>  <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>  <span class='comment'>#     a final likelihood of `LIKELY`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="DetectionRule/LikelihoodAdjustment.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment (class)">LikelihoodAdjustment</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># The rule that adjusts the likelihood of findings within a certain

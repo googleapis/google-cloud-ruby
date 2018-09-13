@@ -90,7 +90,7 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>A type of transformation that will scan unstructured text and
-apply various +PrimitiveTransformation+s to each finding, where the
+apply various <code>PrimitiveTransformation</code>s to each finding, where the
 transformation is applied to only values that were identified as a specific
 info_type.</p>
 
@@ -222,7 +222,7 @@ for a given infoType. [required]</p>
 </span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::InfoType&gt;]
 </span>  <span class='comment'>#     InfoTypes to apply the transformation to. An empty list will cause
 </span>  <span class='comment'>#     this transformation to apply to all findings that correspond to
-</span>  <span class='comment'>#     infoTypes that were requested in +InspectConfig+.
+</span>  <span class='comment'>#     infoTypes that were requested in `InspectConfig`.
 </span>  <span class='comment'># @!attribute [rw] primitive_transformation
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::PrimitiveTransformation]
 </span>  <span class='comment'>#     Primitive transformation to apply to the infoType. [required]

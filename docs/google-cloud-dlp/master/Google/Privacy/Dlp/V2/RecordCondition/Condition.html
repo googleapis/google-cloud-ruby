@@ -89,21 +89,21 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The field type of +value+ and +field+ do not need to match to be
+    <p>The field type of <code>value</code> and <code>field</code> do not need to match to be
 considered equal, but not all comparisons are possible.</p>
 
-<p>A +value+ of type:</p>
+<p>A <code>value</code> of type:</p>
 
 <ul>
-<li>+string+ can be compared against all other types</li>
-<li>+boolean+ can only be compared against other booleans</li>
-<li>+integer+ can be compared against doubles or a string if the string value
+<li><code>string</code> can be compared against all other types</li>
+<li><code>boolean</code> can only be compared against other booleans</li>
+<li><code>integer</code> can be compared against doubles or a string if the string value
 can be parsed as an integer.</li>
-<li>+double+ can be compared against integers or a string if the string can
+<li><code>double</code> can be compared against integers or a string if the string can
 be parsed as a double.</li>
-<li>+Timestamp+ can be compared against strings in RFC 3339 date string
+<li><code>Timestamp</code> can be compared against strings in RFC 3339 date string
 format.</li>
-<li>+TimeOfDay+ can be compared against timestamps and strings in the format
+<li><code>TimeOfDay</code> can be compared against timestamps and strings in the format
 of &#39;HH:mm:ss&#39;.</li>
 </ul>
 
@@ -333,7 +333,7 @@ the condition will evaluate to false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Value to compare against. [Required, except for +EXISTS+ tests.]</p>
+    <p>Returns Value to compare against. [Required, except for <code>EXISTS</code> tests.]</p>
 
 
   </div>
@@ -351,7 +351,7 @@ the condition will evaluate to false.</p>
       
       
         &mdash;
-        <div class='inline'><p>Value to compare against. [Required, except for +EXISTS+ tests.]</p>
+        <div class='inline'><p>Value to compare against. [Required, except for <code>EXISTS</code> tests.]</p>
 </div>
       
     </li>

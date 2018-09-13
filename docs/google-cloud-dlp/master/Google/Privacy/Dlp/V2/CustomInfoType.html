@@ -265,7 +265,7 @@ sensitive information configurable to the data in question.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Load an existing +StoredInfoType+ resource for use in +InspectDataSource+.</p>
+    <span class="summary_desc"><div class='inline'><p>Load an existing <code>StoredInfoType</code> resource for use in <code>InspectDataSource</code>.</p>
 </div></span>
   
 </li>
@@ -321,7 +321,7 @@ sensitive information configurable to the data in question.</p>
   <div class="discussion">
     <p>Returns Set of detection rules to apply to all findings of this CustomInfoType.
 Rules are applied in order that they are specified. Not supported for the
-+surrogate_type+ CustomInfoType.</p>
+<code>surrogate_type</code> CustomInfoType.</p>
 
 
   </div>
@@ -341,7 +341,7 @@ Rules are applied in order that they are specified. Not supported for the
         &mdash;
         <div class='inline'><p>Set of detection rules to apply to all findings of this CustomInfoType.
 Rules are applied in order that they are specified. Not supported for the
-+surrogate_type+ CustomInfoType.</p>
+<code>surrogate_type</code> CustomInfoType.</p>
 </div>
       
     </li>
@@ -492,8 +492,8 @@ Rules are applied in order that they are specified. Not supported for the
 </span>  <span class='comment'># are treated as whitespace. The
 </span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
 </span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
-</span>  <span class='comment'># these constraints, consider using +LargeCustomDictionaryConfig+ in the
-</span>  <span class='comment'># +StoredInfoType+ API.
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
 </span>  <span class='comment'># @!attribute [rw] word_list
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
 </span>  <span class='comment'>#     List of words or phrases to search for.
@@ -519,17 +519,17 @@ Rules are applied in order that they are specified. Not supported for the
 
   <span class='comment'># Message for detecting output from deidentification transformations
 </span>  <span class='comment'># such as
-</span>  <span class='comment'># [+CryptoReplaceFfxFpeConfig+](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
 </span>  <span class='comment'># These types of transformations are
 </span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
 </span>  <span class='comment'># output. This should be used in conjunction with a field on the
-</span>  <span class='comment'># transformation such as +surrogate_info_type+. This CustomInfoType does
-</span>  <span class='comment'># not support the use of +detection_rules+.
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
 </span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
-</span>  <span class='comment'># for the +surrogate_type+ custom info type.
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
 </span>  <span class='comment'># @!attribute [rw] hotword_rule
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
 </span>  <span class='comment'>#     Hotword-based detection rule.
@@ -552,13 +552,13 @@ Rules are applied in order that they are specified. Not supported for the
 </span>    <span class='comment'># @!attribute [rw] relative_likelihood
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
-</span>    <span class='comment'>#     levels. For example, if a finding would be +POSSIBLE+ without the
-</span>    <span class='comment'>#     detection rule and +relative_likelihood+ is 1, then it is upgraded to
-</span>    <span class='comment'>#     +LIKELY+, while a value of -1 would downgrade it to +UNLIKELY+.
-</span>    <span class='comment'>#     Likelihood may never drop below +VERY_UNLIKELY+ or exceed
-</span>    <span class='comment'>#     +VERY_LIKELY+, so applying an adjustment of 1 followed by an
-</span>    <span class='comment'>#     adjustment of -1 when base likelihood is +VERY_LIKELY+ will result in
-</span>    <span class='comment'>#     a final likelihood of +LIKELY+.
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
 </span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The rule that adjusts the likelihood of findings within a certain
@@ -769,8 +769,8 @@ Rules are applied in order that they are specified. Not supported for the
 </span>  <span class='comment'># are treated as whitespace. The
 </span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
 </span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
-</span>  <span class='comment'># these constraints, consider using +LargeCustomDictionaryConfig+ in the
-</span>  <span class='comment'># +StoredInfoType+ API.
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
 </span>  <span class='comment'># @!attribute [rw] word_list
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
 </span>  <span class='comment'>#     List of words or phrases to search for.
@@ -796,17 +796,17 @@ Rules are applied in order that they are specified. Not supported for the
 
   <span class='comment'># Message for detecting output from deidentification transformations
 </span>  <span class='comment'># such as
-</span>  <span class='comment'># [+CryptoReplaceFfxFpeConfig+](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
 </span>  <span class='comment'># These types of transformations are
 </span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
 </span>  <span class='comment'># output. This should be used in conjunction with a field on the
-</span>  <span class='comment'># transformation such as +surrogate_info_type+. This CustomInfoType does
-</span>  <span class='comment'># not support the use of +detection_rules+.
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
 </span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
-</span>  <span class='comment'># for the +surrogate_type+ custom info type.
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
 </span>  <span class='comment'># @!attribute [rw] hotword_rule
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
 </span>  <span class='comment'>#     Hotword-based detection rule.
@@ -829,13 +829,13 @@ Rules are applied in order that they are specified. Not supported for the
 </span>    <span class='comment'># @!attribute [rw] relative_likelihood
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
-</span>    <span class='comment'>#     levels. For example, if a finding would be +POSSIBLE+ without the
-</span>    <span class='comment'>#     detection rule and +relative_likelihood+ is 1, then it is upgraded to
-</span>    <span class='comment'>#     +LIKELY+, while a value of -1 would downgrade it to +UNLIKELY+.
-</span>    <span class='comment'>#     Likelihood may never drop below +VERY_UNLIKELY+ or exceed
-</span>    <span class='comment'>#     +VERY_LIKELY+, so applying an adjustment of 1 followed by an
-</span>    <span class='comment'>#     adjustment of -1 when base likelihood is +VERY_LIKELY+ will result in
-</span>    <span class='comment'>#     a final likelihood of +LIKELY+.
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
 </span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The rule that adjusts the likelihood of findings within a certain
@@ -1048,8 +1048,8 @@ that does not conflict with built-in InfoTypes or other CustomInfoTypes.</p>
 </span>  <span class='comment'># are treated as whitespace. The
 </span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
 </span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
-</span>  <span class='comment'># these constraints, consider using +LargeCustomDictionaryConfig+ in the
-</span>  <span class='comment'># +StoredInfoType+ API.
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
 </span>  <span class='comment'># @!attribute [rw] word_list
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
 </span>  <span class='comment'>#     List of words or phrases to search for.
@@ -1075,17 +1075,17 @@ that does not conflict with built-in InfoTypes or other CustomInfoTypes.</p>
 
   <span class='comment'># Message for detecting output from deidentification transformations
 </span>  <span class='comment'># such as
-</span>  <span class='comment'># [+CryptoReplaceFfxFpeConfig+](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
 </span>  <span class='comment'># These types of transformations are
 </span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
 </span>  <span class='comment'># output. This should be used in conjunction with a field on the
-</span>  <span class='comment'># transformation such as +surrogate_info_type+. This CustomInfoType does
-</span>  <span class='comment'># not support the use of +detection_rules+.
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
 </span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
-</span>  <span class='comment'># for the +surrogate_type+ custom info type.
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
 </span>  <span class='comment'># @!attribute [rw] hotword_rule
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
 </span>  <span class='comment'>#     Hotword-based detection rule.
@@ -1108,13 +1108,13 @@ that does not conflict with built-in InfoTypes or other CustomInfoTypes.</p>
 </span>    <span class='comment'># @!attribute [rw] relative_likelihood
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
-</span>    <span class='comment'>#     levels. For example, if a finding would be +POSSIBLE+ without the
-</span>    <span class='comment'>#     detection rule and +relative_likelihood+ is 1, then it is upgraded to
-</span>    <span class='comment'>#     +LIKELY+, while a value of -1 would downgrade it to +UNLIKELY+.
-</span>    <span class='comment'>#     Likelihood may never drop below +VERY_UNLIKELY+ or exceed
-</span>    <span class='comment'>#     +VERY_LIKELY+, so applying an adjustment of 1 followed by an
-</span>    <span class='comment'>#     adjustment of -1 when base likelihood is +VERY_LIKELY+ will result in
-</span>    <span class='comment'>#     a final likelihood of +LIKELY+.
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
 </span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The rule that adjusts the likelihood of findings within a certain
@@ -1158,7 +1158,7 @@ that does not conflict with built-in InfoTypes or other CustomInfoTypes.</p>
   <div class="discussion">
     <p>Returns Likelihood to return for this CustomInfoType. This base value can be
 altered by a detection rule if the finding meets the criteria specified by
-the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
+the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
 
 
   </div>
@@ -1178,7 +1178,7 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
         &mdash;
         <div class='inline'><p>Likelihood to return for this CustomInfoType. This base value can be
 altered by a detection rule if the finding meets the criteria specified by
-the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
+the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
 </div>
       
     </li>
@@ -1329,8 +1329,8 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
 </span>  <span class='comment'># are treated as whitespace. The
 </span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
 </span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
-</span>  <span class='comment'># these constraints, consider using +LargeCustomDictionaryConfig+ in the
-</span>  <span class='comment'># +StoredInfoType+ API.
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
 </span>  <span class='comment'># @!attribute [rw] word_list
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
 </span>  <span class='comment'>#     List of words or phrases to search for.
@@ -1356,17 +1356,17 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
 
   <span class='comment'># Message for detecting output from deidentification transformations
 </span>  <span class='comment'># such as
-</span>  <span class='comment'># [+CryptoReplaceFfxFpeConfig+](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
 </span>  <span class='comment'># These types of transformations are
 </span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
 </span>  <span class='comment'># output. This should be used in conjunction with a field on the
-</span>  <span class='comment'># transformation such as +surrogate_info_type+. This CustomInfoType does
-</span>  <span class='comment'># not support the use of +detection_rules+.
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
 </span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
-</span>  <span class='comment'># for the +surrogate_type+ custom info type.
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
 </span>  <span class='comment'># @!attribute [rw] hotword_rule
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
 </span>  <span class='comment'>#     Hotword-based detection rule.
@@ -1389,13 +1389,13 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
 </span>    <span class='comment'># @!attribute [rw] relative_likelihood
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
-</span>    <span class='comment'>#     levels. For example, if a finding would be +POSSIBLE+ without the
-</span>    <span class='comment'>#     detection rule and +relative_likelihood+ is 1, then it is upgraded to
-</span>    <span class='comment'>#     +LIKELY+, while a value of -1 would downgrade it to +UNLIKELY+.
-</span>    <span class='comment'>#     Likelihood may never drop below +VERY_UNLIKELY+ or exceed
-</span>    <span class='comment'>#     +VERY_LIKELY+, so applying an adjustment of 1 followed by an
-</span>    <span class='comment'>#     adjustment of -1 when base likelihood is +VERY_LIKELY+ will result in
-</span>    <span class='comment'>#     a final likelihood of +LIKELY+.
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
 </span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The rule that adjusts the likelihood of findings within a certain
@@ -1606,8 +1606,8 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
 </span>  <span class='comment'># are treated as whitespace. The
 </span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
 </span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
-</span>  <span class='comment'># these constraints, consider using +LargeCustomDictionaryConfig+ in the
-</span>  <span class='comment'># +StoredInfoType+ API.
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
 </span>  <span class='comment'># @!attribute [rw] word_list
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
 </span>  <span class='comment'>#     List of words or phrases to search for.
@@ -1633,17 +1633,17 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
 
   <span class='comment'># Message for detecting output from deidentification transformations
 </span>  <span class='comment'># such as
-</span>  <span class='comment'># [+CryptoReplaceFfxFpeConfig+](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
 </span>  <span class='comment'># These types of transformations are
 </span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
 </span>  <span class='comment'># output. This should be used in conjunction with a field on the
-</span>  <span class='comment'># transformation such as +surrogate_info_type+. This CustomInfoType does
-</span>  <span class='comment'># not support the use of +detection_rules+.
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
 </span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
-</span>  <span class='comment'># for the +surrogate_type+ custom info type.
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
 </span>  <span class='comment'># @!attribute [rw] hotword_rule
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
 </span>  <span class='comment'>#     Hotword-based detection rule.
@@ -1666,13 +1666,13 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
 </span>    <span class='comment'># @!attribute [rw] relative_likelihood
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
-</span>    <span class='comment'>#     levels. For example, if a finding would be +POSSIBLE+ without the
-</span>    <span class='comment'>#     detection rule and +relative_likelihood+ is 1, then it is upgraded to
-</span>    <span class='comment'>#     +LIKELY+, while a value of -1 would downgrade it to +UNLIKELY+.
-</span>    <span class='comment'>#     Likelihood may never drop below +VERY_UNLIKELY+ or exceed
-</span>    <span class='comment'>#     +VERY_LIKELY+, so applying an adjustment of 1 followed by an
-</span>    <span class='comment'>#     adjustment of -1 when base likelihood is +VERY_LIKELY+ will result in
-</span>    <span class='comment'>#     a final likelihood of +LIKELY+.
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
 </span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The rule that adjusts the likelihood of findings within a certain
@@ -1714,8 +1714,8 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Load an existing +StoredInfoType+ resource for use in
-+InspectDataSource+. Not currently supported in +InspectContent+.</p>
+    <p>Returns Load an existing <code>StoredInfoType</code> resource for use in
+<code>InspectDataSource</code>. Not currently supported in <code>InspectContent</code>.</p>
 
 
   </div>
@@ -1733,8 +1733,8 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>Load an existing +StoredInfoType+ resource for use in
-+InspectDataSource+. Not currently supported in +InspectContent+.</p>
+        <div class='inline'><p>Load an existing <code>StoredInfoType</code> resource for use in
+<code>InspectDataSource</code>. Not currently supported in <code>InspectContent</code>.</p>
 </div>
       
     </li>
@@ -1885,8 +1885,8 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
 </span>  <span class='comment'># are treated as whitespace. The
 </span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
 </span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
-</span>  <span class='comment'># these constraints, consider using +LargeCustomDictionaryConfig+ in the
-</span>  <span class='comment'># +StoredInfoType+ API.
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
 </span>  <span class='comment'># @!attribute [rw] word_list
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
 </span>  <span class='comment'>#     List of words or phrases to search for.
@@ -1912,17 +1912,17 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
 
   <span class='comment'># Message for detecting output from deidentification transformations
 </span>  <span class='comment'># such as
-</span>  <span class='comment'># [+CryptoReplaceFfxFpeConfig+](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
 </span>  <span class='comment'># These types of transformations are
 </span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
 </span>  <span class='comment'># output. This should be used in conjunction with a field on the
-</span>  <span class='comment'># transformation such as +surrogate_info_type+. This CustomInfoType does
-</span>  <span class='comment'># not support the use of +detection_rules+.
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
 </span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
-</span>  <span class='comment'># for the +surrogate_type+ custom info type.
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
 </span>  <span class='comment'># @!attribute [rw] hotword_rule
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
 </span>  <span class='comment'>#     Hotword-based detection rule.
@@ -1945,13 +1945,13 @@ the rule. Defaults to +VERY_LIKELY+ if not specified.</p>
 </span>    <span class='comment'># @!attribute [rw] relative_likelihood
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
-</span>    <span class='comment'>#     levels. For example, if a finding would be +POSSIBLE+ without the
-</span>    <span class='comment'>#     detection rule and +relative_likelihood+ is 1, then it is upgraded to
-</span>    <span class='comment'>#     +LIKELY+, while a value of -1 would downgrade it to +UNLIKELY+.
-</span>    <span class='comment'>#     Likelihood may never drop below +VERY_UNLIKELY+ or exceed
-</span>    <span class='comment'>#     +VERY_LIKELY+, so applying an adjustment of 1 followed by an
-</span>    <span class='comment'>#     adjustment of -1 when base likelihood is +VERY_LIKELY+ will result in
-</span>    <span class='comment'>#     a final likelihood of +LIKELY+.
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
 </span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The rule that adjusts the likelihood of findings within a certain
@@ -2164,8 +2164,8 @@ support reversing.</p>
 </span>  <span class='comment'># are treated as whitespace. The
 </span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
 </span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
-</span>  <span class='comment'># these constraints, consider using +LargeCustomDictionaryConfig+ in the
-</span>  <span class='comment'># +StoredInfoType+ API.
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
 </span>  <span class='comment'># @!attribute [rw] word_list
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
 </span>  <span class='comment'>#     List of words or phrases to search for.
@@ -2191,17 +2191,17 @@ support reversing.</p>
 
   <span class='comment'># Message for detecting output from deidentification transformations
 </span>  <span class='comment'># such as
-</span>  <span class='comment'># [+CryptoReplaceFfxFpeConfig+](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
 </span>  <span class='comment'># These types of transformations are
 </span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
 </span>  <span class='comment'># output. This should be used in conjunction with a field on the
-</span>  <span class='comment'># transformation such as +surrogate_info_type+. This CustomInfoType does
-</span>  <span class='comment'># not support the use of +detection_rules+.
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
 </span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
-</span>  <span class='comment'># for the +surrogate_type+ custom info type.
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
 </span>  <span class='comment'># @!attribute [rw] hotword_rule
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
 </span>  <span class='comment'>#     Hotword-based detection rule.
@@ -2224,13 +2224,13 @@ support reversing.</p>
 </span>    <span class='comment'># @!attribute [rw] relative_likelihood
 </span>    <span class='comment'>#   @return [Integer]
 </span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
-</span>    <span class='comment'>#     levels. For example, if a finding would be +POSSIBLE+ without the
-</span>    <span class='comment'>#     detection rule and +relative_likelihood+ is 1, then it is upgraded to
-</span>    <span class='comment'>#     +LIKELY+, while a value of -1 would downgrade it to +UNLIKELY+.
-</span>    <span class='comment'>#     Likelihood may never drop below +VERY_UNLIKELY+ or exceed
-</span>    <span class='comment'>#     +VERY_LIKELY+, so applying an adjustment of 1 followed by an
-</span>    <span class='comment'>#     adjustment of -1 when base likelihood is +VERY_LIKELY+ will result in
-</span>    <span class='comment'>#     a final likelihood of +LIKELY+.
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
 </span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
     <span class='comment'># The rule that adjusts the likelihood of findings within a certain

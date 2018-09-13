@@ -262,18 +262,18 @@ js:
 
 <ul>
 <li>Filter expressions are made up of one or more restrictions.</li>
-<li>Restrictions can be combined by +AND+ or +OR+ logical operators. A
-sequence of restrictions implicitly uses +AND+.</li>
-<li>A restriction has the form of +<field> <operator> <value>+.</li>
+<li>Restrictions can be combined by <code>AND</code> or <code>OR</code> logical operators. A
+sequence of restrictions implicitly uses <code>AND</code>.</li>
+<li>A restriction has the form of <code>&lt;field&gt; &lt;operator&gt; &lt;value&gt;</code>.</li>
 <li>Supported fields/values for inspect jobs:
 
 <ul>
-<li>+state+ - PENDING|RUNNING|CANCELED|FINISHED|FAILED</li>
-<li>+inspected_storage+ - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
-<li>+trigger_name+ - The resource name of the trigger that created job.</li>
+<li><code>state</code> - PENDING|RUNNING|CANCELED|FINISHED|FAILED</li>
+<li><code>inspected_storage</code> - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
+<li><code>trigger_name</code> - The resource name of the trigger that created job.</li>
 <li>Supported fields for risk analysis jobs:</li>
-<li>+state+ - RUNNING|CANCELED|FINISHED|FAILED</li>
-<li>The operator must be +=+ or +!=+.</li>
+<li><code>state</code> - RUNNING|CANCELED|FINISHED|FAILED</li>
+<li>The operator must be <code>=</code> or <code>!=</code>.</li>
 </ul></li>
 </ul>
 
@@ -309,18 +309,18 @@ sequence of restrictions implicitly uses +AND+.</li>
 
 <ul>
 <li>Filter expressions are made up of one or more restrictions.</li>
-<li>Restrictions can be combined by +AND+ or +OR+ logical operators. A
-sequence of restrictions implicitly uses +AND+.</li>
-<li>A restriction has the form of +<field> <operator> <value>+.</li>
+<li>Restrictions can be combined by <code>AND</code> or <code>OR</code> logical operators. A
+sequence of restrictions implicitly uses <code>AND</code>.</li>
+<li>A restriction has the form of <code>&lt;field&gt; &lt;operator&gt; &lt;value&gt;</code>.</li>
 <li>Supported fields/values for inspect jobs:
 
 <ul>
-<li>+state+ - PENDING|RUNNING|CANCELED|FINISHED|FAILED</li>
-<li>+inspected_storage+ - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
-<li>+trigger_name+ - The resource name of the trigger that created job.</li>
+<li><code>state</code> - PENDING|RUNNING|CANCELED|FINISHED|FAILED</li>
+<li><code>inspected_storage</code> - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
+<li><code>trigger_name</code> - The resource name of the trigger that created job.</li>
 <li>Supported fields for risk analysis jobs:</li>
-<li>+state+ - RUNNING|CANCELED|FINISHED|FAILED</li>
-<li>The operator must be +=+ or +!=+.</li>
+<li><code>state</code> - RUNNING|CANCELED|FINISHED|FAILED</li>
+<li>The operator must be <code>=</code> or <code>!=</code>.</li>
 </ul></li>
 </ul>
 
@@ -534,7 +534,7 @@ sequence of restrictions implicitly uses +AND+.</li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The type of job. Defaults to +DlpJobType.INSPECT+</p>
+    <p>Returns The type of job. Defaults to <code>DlpJobType.INSPECT</code></p>
 
 
   </div>
@@ -552,7 +552,7 @@ sequence of restrictions implicitly uses +AND+.</li>
       
       
         &mdash;
-        <div class='inline'><p>The type of job. Defaults to +DlpJobType.INSPECT+</p>
+        <div class='inline'><p>The type of job. Defaults to <code>DlpJobType.INSPECT</code></p>
 </div>
       
     </li>

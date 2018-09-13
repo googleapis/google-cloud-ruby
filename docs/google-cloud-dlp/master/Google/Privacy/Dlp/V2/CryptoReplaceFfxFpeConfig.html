@@ -90,7 +90,7 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Replaces an identifier with a surrogate using FPE with the FFX
-mode of operation; however when used in the +ReidentifyContent+ API method,
+mode of operation; however when used in the <code>ReidentifyContent</code> API method,
 it serves the opposite function by reversing the surrogate back into
 the original identifier.
 The identifier must be encoded as ASCII.
@@ -401,8 +401,8 @@ the context is not set, a default tweak will be used.</p>
 
 <p>a default tweak will be used.</p>
 
-<p>Note that case (1) is expected when an +InfoTypeTransformation+ is
-applied to both structured and non-structured +ContentItem+s.
+<p>Note that case (1) is expected when an <code>InfoTypeTransformation</code> is
+applied to both structured and non-structured <code>ContentItem</code>s.
 Currently, the referenced field may be of value type integer or string.</p>
 
 <p>The tweak is constructed as a sequence of bytes in big endian byte order
@@ -442,8 +442,8 @@ the context is not set, a default tweak will be used.</p>
 
 <p>a default tweak will be used.</p>
 
-<p>Note that case (1) is expected when an +InfoTypeTransformation+ is
-applied to both structured and non-structured +ContentItem+s.
+<p>Note that case (1) is expected when an <code>InfoTypeTransformation</code> is
+applied to both structured and non-structured <code>ContentItem</code>s.
 Currently, the referenced field may be of value type integer or string.</p>
 
 <p>The tweak is constructed as a sequence of bytes in big endian byte order
@@ -830,7 +830,7 @@ will be: &#39;MY_TOKEN_INFO_TYPE(3):abc&#39;</p>
 
 <p>This annotation identifies the surrogate when inspecting content using the
 custom infoType
-<a href="https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype">+SurrogateType+</a>.
+<a href="https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype"><code>SurrogateType</code></a>.
 This facilitates reversal of the surrogate when it occurs in free text.</p>
 
 <p>In order for inspection to work properly, the name of this infoType must
@@ -872,7 +872,7 @@ will be: &#39;MY_TOKEN_INFO_TYPE(3):abc&#39;</p>
 
 <p>This annotation identifies the surrogate when inspecting content using the
 custom infoType
-<a href="https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype">+SurrogateType+</a>.
+<a href="https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype"><code>SurrogateType</code></a>.
 This facilitates reversal of the surrogate when it occurs in free text.</p>
 
 <p>In order for inspection to work properly, the name of this infoType must

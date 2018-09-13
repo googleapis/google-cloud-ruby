@@ -2461,7 +2461,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>The template id can contain uppercase and lowercase letters,
 numbers, and hyphens; that is, it must match the regular
-expression: +[a-zA-Z\d-]++. The maximum length is 100
+expression: <code>[a-zA-Z\\d-]+</code>. The maximum length is 100
 characters. Can be empty to allow the system to generate one.</p>
 </div>
       
@@ -2699,7 +2699,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>The job id can contain uppercase and lowercase letters,
 numbers, and hyphens; that is, it must match the regular
-expression: +[a-zA-Z\d-]++. The maximum length is 100
+expression: <code>[a-zA-Z\\d-]+</code>. The maximum length is 100
 characters. Can be empty to allow the system to generate one.</p>
 </div>
       
@@ -2923,7 +2923,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>The template id can contain uppercase and lowercase letters,
 numbers, and hyphens; that is, it must match the regular
-expression: +[a-zA-Z\d-]++. The maximum length is 100
+expression: <code>[a-zA-Z\\d-]+</code>. The maximum length is 100
 characters. Can be empty to allow the system to generate one.</p>
 </div>
       
@@ -3142,7 +3142,7 @@ can also be provided.</p>
         &mdash;
         <div class='inline'><p>The trigger id can contain uppercase and lowercase letters,
 numbers, and hyphens; that is, it must match the regular
-expression: +[a-zA-Z\d-]++. The maximum length is 100
+expression: <code>[a-zA-Z\\d-]+</code>. The maximum length is 100
 characters. Can be empty to allow the system to generate one.</p>
 </div>
       
@@ -3622,7 +3622,7 @@ more.</p>
       
         &mdash;
         <div class='inline'><p>Resource name of the organization and deidentify template to be deleted,
-for example +organizations/433245324/deidentifyTemplates/432452342+ or
+for example <code>organizations/433245324/deidentifyTemplates/432452342</code> or
 projects/project-id/deidentifyTemplates/432452342.</p>
 </div>
       
@@ -3963,7 +3963,7 @@ See <a href="https://cloud.google.com/dlp/docs/creating-templates">https://cloud
       
         &mdash;
         <div class='inline'><p>Resource name of the organization and inspectTemplate to be deleted, for
-example +organizations/433245324/inspectTemplates/432452342+ or
+example <code>organizations/433245324/inspectTemplates/432452342</code> or
 projects/project-id/inspectTemplates/432452342.</p>
 </div>
       
@@ -4116,7 +4116,7 @@ See <a href="https://cloud.google.com/dlp/docs/creating-job-triggers">https://cl
 
 <span class='id identifier rubyid_dlp_service_client'>dlp_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dlp.html" title="Google::Cloud::Dlp (module)">Dlp</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Dlp.html#new-class_method" title="Google::Cloud::Dlp.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +name+:
+<span class='comment'># TODO: Initialize `name`:
 </span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_dlp_service_client'>dlp_service_client</span><span class='period'>.</span><span class='id identifier rubyid_delete_job_trigger'>delete_job_trigger</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span></code></pre>
     
@@ -4135,7 +4135,7 @@ See <a href="https://cloud.google.com/dlp/docs/creating-job-triggers">https://cl
       
         &mdash;
         <div class='inline'><p>Resource name of the project and the triggeredJob, for example
-+projects/dlp-test-project/jobTriggers/53234423+.</p>
+<code>projects/dlp-test-project/jobTriggers/53234423</code>.</p>
 </div>
       
     </li>
@@ -4305,7 +4305,7 @@ more.</p>
       
         &mdash;
         <div class='inline'><p>Resource name of the organization and deidentify template to be read, for
-example +organizations/433245324/deidentifyTemplates/432452342+ or
+example <code>organizations/433245324/deidentifyTemplates/432452342</code> or
 projects/project-id/deidentifyTemplates/432452342.</p>
 </div>
       
@@ -4657,7 +4657,7 @@ See <a href="https://cloud.google.com/dlp/docs/creating-templates">https://cloud
       
         &mdash;
         <div class='inline'><p>Resource name of the organization and inspectTemplate to be read, for
-example +organizations/433245324/inspectTemplates/432452342+ or
+example <code>organizations/433245324/inspectTemplates/432452342</code> or
 projects/project-id/inspectTemplates/432452342.</p>
 </div>
       
@@ -4834,7 +4834,7 @@ See <a href="https://cloud.google.com/dlp/docs/creating-job-triggers">https://cl
       
         &mdash;
         <div class='inline'><p>Resource name of the project and the triggeredJob, for example
-+projects/dlp-test-project/jobTriggers/53234423+.</p>
+<code>projects/dlp-test-project/jobTriggers/53234423</code>.</p>
 </div>
       
     </li>
@@ -5510,18 +5510,18 @@ See <a href="https://cloud.google.com/dlp/docs/inspecting-storage">https://cloud
 
 <ul>
 <li>Filter expressions are made up of one or more restrictions.</li>
-<li>Restrictions can be combined by +AND+ or +OR+ logical operators. A
-sequence of restrictions implicitly uses +AND+.</li>
-<li>A restriction has the form of +<field> <operator> <value>+.</li>
+<li>Restrictions can be combined by <code>AND</code> or <code>OR</code> logical operators. A
+sequence of restrictions implicitly uses <code>AND</code>.</li>
+<li>A restriction has the form of <code>&lt;field&gt; &lt;operator&gt; &lt;value&gt;</code>.</li>
 <li>Supported fields/values for inspect jobs:
 
 <ul>
-<li>+state+ - PENDING|RUNNING|CANCELED|FINISHED|FAILED</li>
-<li>+inspected_storage+ - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
-<li>+trigger_name+ - The resource name of the trigger that created job.</li>
+<li><code>state</code> - PENDING|RUNNING|CANCELED|FINISHED|FAILED</li>
+<li><code>inspected_storage</code> - DATASTORE|CLOUD_STORAGE|BIGQUERY</li>
+<li><code>trigger_name</code> - The resource name of the trigger that created job.</li>
 <li>Supported fields for risk analysis jobs:</li>
-<li>+state+ - RUNNING|CANCELED|FINISHED|FAILED</li>
-<li>The operator must be +=+ or +!=+.</li>
+<li><code>state</code> - RUNNING|CANCELED|FINISHED|FAILED</li>
+<li>The operator must be <code>=</code> or <code>!=</code>.</li>
 </ul></li>
 </ul>
 
@@ -5567,7 +5567,7 @@ resources in a page.</p>
       
       
         &mdash;
-        <div class='inline'><p>The type of job. Defaults to +DlpJobType.INSPECT+</p>
+        <div class='inline'><p>The type of job. Defaults to <code>DlpJobType.INSPECT</code></p>
 </div>
       
     </li>
@@ -6188,7 +6188,7 @@ See <a href="https://cloud.google.com/dlp/docs/creating-job-triggers">https://cl
       
       
         &mdash;
-        <div class='inline'><p>The parent resource name, for example +projects/my-project-id+.</p>
+        <div class='inline'><p>The parent resource name, for example <code>projects/my-project-id</code>.</p>
 </div>
       
     </li>
@@ -6223,18 +6223,18 @@ resources in a page.</p>
       
         &mdash;
         <div class='inline'><p>Optional comma separated list of triggeredJob fields to order by,
-followed by +asc+ or +desc+ postfix. This list is case-insensitive,
+followed by <code>asc</code> or <code>desc</code> postfix. This list is case-insensitive,
 default sorting order is ascending, redundant space characters are
 insignificant.</p>
 
-<p>Example: +name asc,update_time, create_time desc+</p>
+<p>Example: <code>name asc,update_time, create_time desc</code></p>
 
 <p>Supported fields are:</p>
 
 <ul>
-<li>+create_time+: corresponds to time the triggeredJob was created.</li>
-<li>+update_time+: corresponds to time the triggeredJob was last updated.</li>
-<li>+name+: corresponds to JobTrigger&#39;s name.</li>
+<li><code>create_time</code>: corresponds to time the triggeredJob was created.</li>
+<li><code>update_time</code>: corresponds to time the triggeredJob was last updated.</li>
+<li><code>name</code>: corresponds to JobTrigger&#39;s name.</li>
 </ul>
 </div>
       
@@ -6715,7 +6715,7 @@ reverse. This requires that only reversible transformations
 be provided here. The reversible transformations are:</p>
 
 <ul>
-<li>+CryptoReplaceFfxFpeConfig+
+<li><code>CryptoReplaceFfxFpeConfig</code>
 A hash of the same form as <code>Google::Privacy::Dlp::V2::DeidentifyConfig</code>
 can also be provided.</li>
 </ul>
@@ -6768,7 +6768,7 @@ can also be provided.</p>
       
         &mdash;
         <div class='inline'><p>Optional template to use. Any configuration directly specified in
-+inspect_config+ will override those set in the template. Singular fields
+<code>inspect_config</code> will override those set in the template. Singular fields
 that are set in this request will replace their corresponding fields in the
 template. Repeated fields are appended. Singular sub-messages and groups
 are recursively merged.</p>
@@ -6786,9 +6786,9 @@ are recursively merged.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional template to use. References an instance of +DeidentifyTemplate+.
-Any configuration directly specified in +reidentify_config+ or
-+inspect_config+ will override those set in the template. Singular fields
+        <div class='inline'><p>Optional template to use. References an instance of <code>DeidentifyTemplate</code>.
+Any configuration directly specified in <code>reidentify_config</code> or
+<code>inspect_config</code> will override those set in the template. Singular fields
 that are set in this request will replace their corresponding fields in the
 template. Repeated fields are appended. Singular sub-messages and groups
 are recursively merged.</p>
@@ -6988,7 +6988,7 @@ more.</p>
       
         &mdash;
         <div class='inline'><p>Resource name of organization and deidentify template to be updated, for
-example +organizations/433245324/deidentifyTemplates/432452342+ or
+example <code>organizations/433245324/deidentifyTemplates/432452342</code> or
 projects/project-id/deidentifyTemplates/432452342.</p>
 </div>
       
@@ -7207,7 +7207,7 @@ See <a href="https://cloud.google.com/dlp/docs/creating-templates">https://cloud
       
         &mdash;
         <div class='inline'><p>Resource name of organization and inspectTemplate to be updated, for
-example +organizations/433245324/inspectTemplates/432452342+ or
+example <code>organizations/433245324/inspectTemplates/432452342</code> or
 projects/project-id/inspectTemplates/432452342.</p>
 </div>
       
@@ -7426,7 +7426,7 @@ See <a href="https://cloud.google.com/dlp/docs/creating-job-triggers">https://cl
       
         &mdash;
         <div class='inline'><p>Resource name of the project and the triggeredJob, for example
-+projects/dlp-test-project/jobTriggers/53234423+.</p>
+<code>projects/dlp-test-project/jobTriggers/53234423</code>.</p>
 </div>
       
     </li>

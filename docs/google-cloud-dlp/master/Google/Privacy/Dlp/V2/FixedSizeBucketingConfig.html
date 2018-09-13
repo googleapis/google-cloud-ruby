@@ -220,7 +220,7 @@ be transformed to match the type of the bound before comparing.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Size of each bucket (except for minimum and maximum buckets). So if
-+lower_bound+ = 10, +upper_bound+ = 89, and +bucket_size+ = 10, then the
+<code>lower_bound</code> = 10, <code>upper_bound</code> = 89, and <code>bucket_size</code> = 10, then the
 following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
 60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works. [Required].</p>
 
@@ -241,7 +241,7 @@ following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
       
         &mdash;
         <div class='inline'><p>Size of each bucket (except for minimum and maximum buckets). So if
-+lower_bound+ = 10, +upper_bound+ = 89, and +bucket_size+ = 10, then the
+<code>lower_bound</code> = 10, <code>upper_bound</code> = 89, and <code>bucket_size</code> = 10, then the
 following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
 60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works. [Required].</p>
 </div>
@@ -280,8 +280,8 @@ following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Lower bound value of buckets. All values less than +lower_bound+ are
-grouped together into a single bucket; for example if +lower_bound+ = 10,
+    <p>Returns Lower bound value of buckets. All values less than <code>lower_bound</code> are
+grouped together into a single bucket; for example if <code>lower_bound</code> = 10,
 then all values less than 10 are replaced with the value “-10”. [Required].</p>
 
 
@@ -300,8 +300,8 @@ then all values less than 10 are replaced with the value “-10”. [Required].<
       
       
         &mdash;
-        <div class='inline'><p>Lower bound value of buckets. All values less than +lower_bound+ are
-grouped together into a single bucket; for example if +lower_bound+ = 10,
+        <div class='inline'><p>Lower bound value of buckets. All values less than <code>lower_bound</code> are
+grouped together into a single bucket; for example if <code>lower_bound</code> = 10,
 then all values less than 10 are replaced with the value “-10”. [Required].</p>
 </div>
       
@@ -340,7 +340,7 @@ then all values less than 10 are replaced with the value “-10”. [Required].<
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Upper bound value of buckets. All values greater than upper_bound are
-grouped together into a single bucket; for example if +upper_bound+ = 89,
+grouped together into a single bucket; for example if <code>upper_bound</code> = 89,
 then all values greater than 89 are replaced with the value “89+”.
 [Required].</p>
 
@@ -361,7 +361,7 @@ then all values greater than 89 are replaced with the value “89+”.
       
         &mdash;
         <div class='inline'><p>Upper bound value of buckets. All values greater than upper_bound are
-grouped together into a single bucket; for example if +upper_bound+ = 89,
+grouped together into a single bucket; for example if <code>upper_bound</code> = 89,
 then all values greater than 89 are replaced with the value “89+”.
 [Required].</p>
 </div>

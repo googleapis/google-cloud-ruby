@@ -249,20 +249,20 @@ a field.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1548</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::RecordCondition (class)">RecordCondition</a></span></span>
-  <span class='comment'># The field type of +value+ and +field+ do not need to match to be
+  <span class='comment'># The field type of `value` and `field` do not need to match to be
 </span>  <span class='comment'># considered equal, but not all comparisons are possible.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># A +value+ of type:
+</span>  <span class='comment'># A `value` of type:
 </span>  <span class='comment'>#
-</span>  <span class='comment'># * +string+ can be compared against all other types
-</span>  <span class='comment'># * +boolean+ can only be compared against other booleans
-</span>  <span class='comment'># * +integer+ can be compared against doubles or a string if the string value
+</span>  <span class='comment'># * `string` can be compared against all other types
+</span>  <span class='comment'># * `boolean` can only be compared against other booleans
+</span>  <span class='comment'># * `integer` can be compared against doubles or a string if the string value
 </span>  <span class='comment'>#   can be parsed as an integer.
-</span>  <span class='comment'># * +double+ can be compared against integers or a string if the string can
+</span>  <span class='comment'># * `double` can be compared against integers or a string if the string can
 </span>  <span class='comment'>#   be parsed as a double.
-</span>  <span class='comment'># * +Timestamp+ can be compared against strings in RFC 3339 date string
+</span>  <span class='comment'># * `Timestamp` can be compared against strings in RFC 3339 date string
 </span>  <span class='comment'>#   format.
-</span>  <span class='comment'># * +TimeOfDay+ can be compared against timestamps and strings in the format
+</span>  <span class='comment'># * `TimeOfDay` can be compared against timestamps and strings in the format
 </span>  <span class='comment'>#   of &#39;HH:mm:ss&#39;.
 </span>  <span class='comment'>#
 </span>  <span class='comment'># If we fail to compare do to type mismatch, a warning will be given and
@@ -275,7 +275,7 @@ a field.</p>
 </span>  <span class='comment'>#     Operator used to compare the field or infoType to the value. [required]
 </span>  <span class='comment'># @!attribute [rw] value
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::Value]
-</span>  <span class='comment'>#     Value to compare against. [Required, except for +EXISTS+ tests.]
+</span>  <span class='comment'>#     Value to compare against. [Required, except for `EXISTS` tests.]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RecordCondition/Condition.html" title="Google::Privacy::Dlp::V2::RecordCondition::Condition (class)">Condition</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># A collection of conditions.
@@ -287,7 +287,7 @@ a field.</p>
 </span>  <span class='comment'># @!attribute [rw] logical_operator
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::RecordCondition::Expressions::LogicalOperator]
 </span>  <span class='comment'>#     The operator to apply to the result of conditions. Default and currently
-</span>  <span class='comment'>#     only supported value is +AND+.
+</span>  <span class='comment'>#     only supported value is `AND`.
 </span>  <span class='comment'># @!attribute [rw] conditions
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::RecordCondition::Conditions]
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="RecordCondition/Expressions.html" title="Google::Privacy::Dlp::V2::RecordCondition::Expressions (class)">Expressions</a></span></span>
