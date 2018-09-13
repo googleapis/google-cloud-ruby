@@ -20,7 +20,7 @@
 
 
 gem "google-cloud-core"
-require "google/cloud"
+require "google/cloud" unless defined? Google::Cloud.new
 require "google/cloud/config"
 require "googleauth"
 
