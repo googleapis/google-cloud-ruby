@@ -358,7 +358,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A custom subnetwork name to be used if +create_subnetwork+ is true.</p>
+    <span class="summary_desc"><div class='inline'><p>A custom subnetwork name to be used if <code>create_subnetwork</code> is true.</p>
 </div></span>
   
 </li>
@@ -468,19 +468,19 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The IP address range for the cluster pod IPs. If this field is set, then
-+cluster.cluster_ipv4_cidr+ must be left blank.</p>
+<code>cluster.cluster_ipv4_cidr</code> must be left blank.</p>
 
-<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+<p>This field is only applicable when <code>use_ip_aliases</code> is true.</p>
 
 <p>Set to blank to have a range chosen with the default size.</p>
 
-<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+<p>Set to /netmask (e.g. <code>/14</code>) to have a range chosen with a specific
 netmask.</p>
 
 <p>Set to a
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
-+10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+notation (e.g. <code>10.96.0.0/14</code>) from the RFC-1918 private networks (e.g.
+<code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>) to pick a specific range
 to use.</p>
 
 
@@ -500,19 +500,19 @@ to use.</p>
       
         &mdash;
         <div class='inline'><p>The IP address range for the cluster pod IPs. If this field is set, then
-+cluster.cluster_ipv4_cidr+ must be left blank.</p>
+<code>cluster.cluster_ipv4_cidr</code> must be left blank.</p>
 
-<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+<p>This field is only applicable when <code>use_ip_aliases</code> is true.</p>
 
 <p>Set to blank to have a range chosen with the default size.</p>
 
-<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+<p>Set to /netmask (e.g. <code>/14</code>) to have a range chosen with a specific
 netmask.</p>
 
 <p>Set to a
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
-+10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+notation (e.g. <code>10.96.0.0/14</code>) from the RFC-1918 private networks (e.g.
+<code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>) to pick a specific range
 to use.</p>
 </div>
       
@@ -619,7 +619,7 @@ create_subnetwork is false.</p>
   <div class="discussion">
     <p>Returns Whether a new subnetwork will be created automatically for the cluster.</p>
 
-<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+<p>This field is only applicable when <code>use_ip_aliases</code> is true.</p>
 
 
   </div>
@@ -639,7 +639,7 @@ create_subnetwork is false.</p>
         &mdash;
         <div class='inline'><p>Whether a new subnetwork will be created automatically for the cluster.</p>
 
-<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+<p>This field is only applicable when <code>use_ip_aliases</code> is true.</p>
 </div>
       
     </li>
@@ -733,17 +733,17 @@ create_subnetwork is false.</p>
   <div class="discussion">
     <p>Returns The IP address range of the instance IPs in this cluster.</p>
 
-<p>This is applicable only if +create_subnetwork+ is true.</p>
+<p>This is applicable only if <code>create_subnetwork</code> is true.</p>
 
 <p>Set to blank to have a range chosen with the default size.</p>
 
-<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+<p>Set to /netmask (e.g. <code>/14</code>) to have a range chosen with a specific
 netmask.</p>
 
 <p>Set to a
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
-+10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+notation (e.g. <code>10.96.0.0/14</code>) from the RFC-1918 private networks (e.g.
+<code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>) to pick a specific range
 to use.</p>
 
 
@@ -764,17 +764,17 @@ to use.</p>
         &mdash;
         <div class='inline'><p>The IP address range of the instance IPs in this cluster.</p>
 
-<p>This is applicable only if +create_subnetwork+ is true.</p>
+<p>This is applicable only if <code>create_subnetwork</code> is true.</p>
 
 <p>Set to blank to have a range chosen with the default size.</p>
 
-<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+<p>Set to /netmask (e.g. <code>/14</code>) to have a range chosen with a specific
 netmask.</p>
 
 <p>Set to a
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
-+10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+notation (e.g. <code>10.96.0.0/14</code>) from the RFC-1918 private networks (e.g.
+<code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>) to pick a specific range
 to use.</p>
 </div>
       
@@ -870,17 +870,17 @@ to use.</p>
     <p>Returns The IP address range of the services IPs in this cluster. If blank, a range
 will be automatically chosen with the default size.</p>
 
-<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+<p>This field is only applicable when <code>use_ip_aliases</code> is true.</p>
 
 <p>Set to blank to have a range chosen with the default size.</p>
 
-<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+<p>Set to /netmask (e.g. <code>/14</code>) to have a range chosen with a specific
 netmask.</p>
 
 <p>Set to a
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
-+10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+notation (e.g. <code>10.96.0.0/14</code>) from the RFC-1918 private networks (e.g.
+<code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>) to pick a specific range
 to use.</p>
 
 
@@ -902,17 +902,17 @@ to use.</p>
         <div class='inline'><p>The IP address range of the services IPs in this cluster. If blank, a range
 will be automatically chosen with the default size.</p>
 
-<p>This field is only applicable when +use_ip_aliases+ is true.</p>
+<p>This field is only applicable when <code>use_ip_aliases</code> is true.</p>
 
 <p>Set to blank to have a range chosen with the default size.</p>
 
-<p>Set to /netmask (e.g. +/14+) to have a range chosen with a specific
+<p>Set to /netmask (e.g. <code>/14</code>) to have a range chosen with a specific
 netmask.</p>
 
 <p>Set to a
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +10.96.0.0/14+) from the RFC-1918 private networks (e.g.
-+10.0.0.0/8+, +172.16.0.0/12+, +192.168.0.0/16+) to pick a specific range
+notation (e.g. <code>10.96.0.0/14</code>) from the RFC-1918 private networks (e.g.
+<code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>) to pick a specific range
 to use.</p>
 </div>
       
@@ -1017,7 +1017,7 @@ create_subnetwork is false.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A custom subnetwork name to be used if +create_subnetwork+ is true.  If
+    <p>Returns A custom subnetwork name to be used if <code>create_subnetwork</code> is true.  If
 this field is empty, then an automatic name will be chosen for the new
 subnetwork.</p>
 
@@ -1037,7 +1037,7 @@ subnetwork.</p>
       
       
         &mdash;
-        <div class='inline'><p>A custom subnetwork name to be used if +create_subnetwork+ is true.  If
+        <div class='inline'><p>A custom subnetwork name to be used if <code>create_subnetwork</code> is true.  If
 this field is empty, then an automatic name will be chosen for the new
 subnetwork.</p>
 </div>

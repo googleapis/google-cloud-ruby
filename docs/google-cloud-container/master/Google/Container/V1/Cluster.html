@@ -160,7 +160,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The IP address range of the container pods in this cluster, in <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a> notation (e.g. +10.96.0.0/14+).</p>
+    <span class="summary_desc"><div class='inline'><p>The IP address range of the container pods in this cluster, in <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a> notation (e.g. <code>10.96.0.0/14</code>).</p>
 </div></span>
   
 </li>
@@ -914,7 +914,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>[Output only] The IP address range of the Kubernetes services in this cluster, in <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a> notation (e.g. +1.2.3.4/29+).</p>
+    <span class="summary_desc"><div class='inline'><p>[Output only] The IP address range of the Kubernetes services in this cluster, in <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a> notation (e.g. <code>1.2.3.4/29</code>).</p>
 </div></span>
   
 </li>
@@ -1122,14 +1122,14 @@ js:
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1153,8 +1153,8 @@ js:
   <div class="discussion">
     <p>Returns The IP address range of the container pods in this cluster, in
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +10.96.0.0/14+). Leave blank to have
-one automatically chosen or specify a +/14+ block in +10.0.0.0/8+.</p>
+notation (e.g. <code>10.96.0.0/14</code>). Leave blank to have
+one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8</code>.</p>
 
 
   </div>
@@ -1174,8 +1174,8 @@ one automatically chosen or specify a +/14+ block in +10.0.0.0/8+.</p>
         &mdash;
         <div class='inline'><p>The IP address range of the container pods in this cluster, in
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +10.96.0.0/14+). Leave blank to have
-one automatically chosen or specify a +/14+ block in +10.0.0.0/8+.</p>
+notation (e.g. <code>10.96.0.0/14</code>). Leave blank to have
+one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8</code>.</p>
 </div>
       
     </li>
@@ -1233,14 +1233,14 @@ one automatically chosen or specify a +/14+ block in +10.0.0.0/8+.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1340,14 +1340,14 @@ one automatically chosen or specify a +/14+ block in +10.0.0.0/8+.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1445,14 +1445,14 @@ one automatically chosen or specify a +/14+ block in +10.0.0.0/8+.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1550,14 +1550,14 @@ one automatically chosen or specify a +/14+ block in +10.0.0.0/8+.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1659,14 +1659,14 @@ of being upgraded, this reflects the minimum version of all nodes.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1764,14 +1764,14 @@ of being upgraded, this reflects the minimum version of all nodes.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1879,14 +1879,14 @@ creation.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1910,9 +1910,9 @@ creation.</p>
   <div class="discussion">
     <p>Returns [Output only] The IP address of this cluster&#39;s master endpoint.
 The endpoint can be accessed from the internet at
-+<a href="https://username:password@endpoint/+">https://username:password@endpoint/+</a>.</p>
+<code>https://username:password@endpoint/</code>.</p>
 
-<p>See the +masterAuth+ property of this resource for username and
+<p>See the <code>masterAuth</code> property of this resource for username and
 password information.</p>
 
 
@@ -1933,9 +1933,9 @@ password information.</p>
         &mdash;
         <div class='inline'><p>[Output only] The IP address of this cluster&#39;s master endpoint.
 The endpoint can be accessed from the internet at
-+<a href="https://username:password@endpoint/+">https://username:password@endpoint/+</a>.</p>
+<code>https://username:password@endpoint/</code>.</p>
 
-<p>See the +masterAuth+ property of this resource for username and
+<p>See the <code>masterAuth</code> property of this resource for username and
 password information.</p>
 </div>
       
@@ -1994,14 +1994,14 @@ password information.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2101,14 +2101,14 @@ deleted in <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text forma
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2212,14 +2212,14 @@ currentMasterVersion and currentNodeVersion.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2331,14 +2331,14 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2436,14 +2436,14 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2541,14 +2541,14 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2646,14 +2646,14 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2751,14 +2751,14 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2860,14 +2860,14 @@ should be located.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -2893,9 +2893,9 @@ should be located.</p>
 Currently available options:</p>
 
 <ul>
-<li>+logging.googleapis.com+ - the Google Cloud Logging service.</li>
-<li>+none+ - no logs will be exported from the cluster.</li>
-<li>if left as an empty string,+logging.googleapis.com+ will be used.</li>
+<li><code>logging.googleapis.com</code> - the Google Cloud Logging service.</li>
+<li><code>none</code> - no logs will be exported from the cluster.</li>
+<li>if left as an empty string,<code>logging.googleapis.com</code> will be used.</li>
 </ul>
 
 
@@ -2918,9 +2918,9 @@ Currently available options:</p>
 Currently available options:</p>
 
 <ul>
-<li>+logging.googleapis.com+ - the Google Cloud Logging service.</li>
-<li>+none+ - no logs will be exported from the cluster.</li>
-<li>if left as an empty string,+logging.googleapis.com+ will be used.</li>
+<li><code>logging.googleapis.com</code> - the Google Cloud Logging service.</li>
+<li><code>none</code> - no logs will be exported from the cluster.</li>
+<li>if left as an empty string,<code>logging.googleapis.com</code> will be used.</li>
 </ul>
 </div>
       
@@ -2979,14 +2979,14 @@ Currently available options:</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -3084,14 +3084,14 @@ Currently available options:</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -3189,14 +3189,14 @@ Currently available options:</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -3296,14 +3296,14 @@ The configuration options for master authorized networks feature.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -3329,9 +3329,9 @@ The configuration options for master authorized networks feature.</p>
 Currently available options:</p>
 
 <ul>
-<li>+monitoring.googleapis.com+ - the Google Cloud Monitoring service.</li>
-<li>+none+ - no metrics will be exported from the cluster.</li>
-<li>if left as an empty string, +monitoring.googleapis.com+ will be used.</li>
+<li><code>monitoring.googleapis.com</code> - the Google Cloud Monitoring service.</li>
+<li><code>none</code> - no metrics will be exported from the cluster.</li>
+<li>if left as an empty string, <code>monitoring.googleapis.com</code> will be used.</li>
 </ul>
 
 
@@ -3354,9 +3354,9 @@ Currently available options:</p>
 Currently available options:</p>
 
 <ul>
-<li>+monitoring.googleapis.com+ - the Google Cloud Monitoring service.</li>
-<li>+none+ - no metrics will be exported from the cluster.</li>
-<li>if left as an empty string, +monitoring.googleapis.com+ will be used.</li>
+<li><code>monitoring.googleapis.com</code> - the Google Cloud Monitoring service.</li>
+<li><code>none</code> - no metrics will be exported from the cluster.</li>
+<li>if left as an empty string, <code>monitoring.googleapis.com</code> will be used.</li>
 </ul>
 </div>
       
@@ -3415,14 +3415,14 @@ Currently available options:</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -3534,14 +3534,14 @@ and zone, and can be up to 40 characters with the following restrictions:</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -3565,7 +3565,7 @@ and zone, and can be up to 40 characters with the following restrictions:</p>
   <div class="discussion">
     <p>Returns The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/networks-and-firewalls#networks">network</a> to which the
-cluster is connected. If left unspecified, the +default+ network
+cluster is connected. If left unspecified, the <code>default</code> network
 will be used.</p>
 
 
@@ -3586,7 +3586,7 @@ will be used.</p>
         &mdash;
         <div class='inline'><p>The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/networks-and-firewalls#networks">network</a> to which the
-cluster is connected. If left unspecified, the +default+ network
+cluster is connected. If left unspecified, the <code>default</code> network
 will be used.</p>
 </div>
       
@@ -3645,14 +3645,14 @@ will be used.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -3750,14 +3750,14 @@ will be used.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -3780,7 +3780,7 @@ will be used.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Parameters used in creating the cluster&#39;s nodes.
-See +nodeConfig+ for the description of its properties.
+See <code>nodeConfig</code> for the description of its properties.
 For requests, this field should only be used in lieu of a
 &quot;node_pool&quot; object, since this configuration (along with the
 &quot;initial_node_count&quot;) will be used to create a &quot;NodePool&quot; object with an
@@ -3807,7 +3807,7 @@ the first node pool.</p>
       
         &mdash;
         <div class='inline'><p>Parameters used in creating the cluster&#39;s nodes.
-See +nodeConfig+ for the description of its properties.
+See <code>nodeConfig</code> for the description of its properties.
 For requests, this field should only be used in lieu of a
 &quot;node_pool&quot; object, since this configuration (along with the
 &quot;initial_node_count&quot;) will be used to create a &quot;NodePool&quot; object with an
@@ -3873,14 +3873,14 @@ the first node pool.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -3903,7 +3903,7 @@ the first node pool.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns [Output only] The size of the address space on each node for hosting
-containers. This is provisioned from within the +container_ipv4_cidr+
+containers. This is provisioned from within the <code>container_ipv4_cidr</code>
 range.</p>
 
 
@@ -3923,7 +3923,7 @@ range.</p>
       
         &mdash;
         <div class='inline'><p>[Output only] The size of the address space on each node for hosting
-containers. This is provisioned from within the +container_ipv4_cidr+
+containers. This is provisioned from within the <code>container_ipv4_cidr</code>
 range.</p>
 </div>
       
@@ -3982,14 +3982,14 @@ range.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -4091,14 +4091,14 @@ specified.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -4198,14 +4198,14 @@ Google Compute Engine resources.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -4303,14 +4303,14 @@ Google Compute Engine resources.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -4335,8 +4335,8 @@ Google Compute Engine resources.</p>
     <p>Returns [Output only] The IP address range of the Kubernetes services in
 this cluster, in
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +1.2.3.4/29+). Service addresses are
-typically put in the last +/16+ from the container CIDR.</p>
+notation (e.g. <code>1.2.3.4/29</code>). Service addresses are
+typically put in the last <code>/16</code> from the container CIDR.</p>
 
 
   </div>
@@ -4357,8 +4357,8 @@ typically put in the last +/16+ from the container CIDR.</p>
         <div class='inline'><p>[Output only] The IP address range of the Kubernetes services in
 this cluster, in
 <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
-notation (e.g. +1.2.3.4/29+). Service addresses are
-typically put in the last +/16+ from the container CIDR.</p>
+notation (e.g. <code>1.2.3.4/29</code>). Service addresses are
+typically put in the last <code>/16</code> from the container CIDR.</p>
 </div>
       
     </li>
@@ -4416,14 +4416,14 @@ typically put in the last +/16+ from the container CIDR.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -4521,14 +4521,14 @@ typically put in the last +/16+ from the container CIDR.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -4628,14 +4628,14 @@ cluster, if available.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -4737,14 +4737,14 @@ cluster is connected.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -4846,14 +4846,14 @@ resides.</p>
 
     <span class='comment'># The RECONCILING state indicates that some work is actively being done on
 </span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
-</span>    <span class='comment'># be found in the +statusMessage+ field.
+</span>    <span class='comment'># be found in the `statusMessage` field.
 </span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
 
     <span class='comment'># The STOPPING state indicates the cluster is being deleted.
 </span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
 
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
-</span>    <span class='comment'># can be found in the +statusMessage+ field.
+</span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
