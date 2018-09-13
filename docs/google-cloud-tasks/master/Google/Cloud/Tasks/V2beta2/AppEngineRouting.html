@@ -244,33 +244,33 @@ and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-request
 <p>The host is constructed as:</p>
 
 <ul>
-<li><p>+host = [application_domain_name]+</br>
-+| [service] + &#39;.&#39; + [application_domain_name]+</br>
-+| [version] + &#39;.&#39; + [application_domain_name]+</br>
-+| [version_dot_service]+ &#39;.&#39; + [application_domain_name]+</br>
-+| [instance] + &#39;.&#39; + [application_domain_name]+</br>
-+| [instance_dot_service] + &#39;.&#39; + [application_domain_name]+</br>
-+| [instance_dot_version] + &#39;.&#39; + [application_domain_name]+</br>
-+| [instance_dot_version_dot_service] + &#39;.&#39; + [application_domain_name]+</p></li>
-<li><p>+application_domain_name+ = The domain name of the app, for
+<li><p><code>host = [application_domain_name]</code></br>
+<code>| [service] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [version] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [version_dot_service]+ &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [instance] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [instance_dot_service] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [instance_dot_version] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [instance_dot_version_dot_service] + &#39;.&#39; + [application_domain_name]</code></p></li>
+<li><p><code>application_domain_name</code> = The domain name of the app, for
 example <app-id>.appspot.com, which is associated with the
 queue&#39;s project ID. Some tasks which were created using the App Engine
 SDK use a custom domain name.</p></li>
-<li><p>+service =+ <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p>+version =+ <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
-<li><p>+version_dot_service =+
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> ++ &#39;.&#39; ++
+<li><p><code>service =</code> <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
+<li><p><code>version =</code> <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
+<li><p><code>version_dot_service =</code>
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p>+instance =+ <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span></p></li>
-<li><p>+instance_dot_service =+
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> ++ &#39;.&#39; ++
+<li><p><code>instance =</code> <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span></p></li>
+<li><p><code>instance_dot_service =</code>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p>+instance_dot_version =+
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> ++ &#39;.&#39; ++
+<li><p><code>instance_dot_version =</code>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
-<li><p>+instance_dot_version_dot_service =+
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> ++ &#39;.&#39; ++
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> ++ &#39;.&#39; ++
+<li><p><code>instance_dot_version_dot_service =</code>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
 </ul>
 
@@ -314,33 +314,33 @@ the task is attempted.</p>
 <p>The host is constructed as:</p>
 
 <ul>
-<li><p>+host = [application_domain_name]+</br>
-+| [service] + &#39;.&#39; + [application_domain_name]+</br>
-+| [version] + &#39;.&#39; + [application_domain_name]+</br>
-+| [version_dot_service]+ &#39;.&#39; + [application_domain_name]+</br>
-+| [instance] + &#39;.&#39; + [application_domain_name]+</br>
-+| [instance_dot_service] + &#39;.&#39; + [application_domain_name]+</br>
-+| [instance_dot_version] + &#39;.&#39; + [application_domain_name]+</br>
-+| [instance_dot_version_dot_service] + &#39;.&#39; + [application_domain_name]+</p></li>
-<li><p>+application_domain_name+ = The domain name of the app, for
+<li><p><code>host = [application_domain_name]</code></br>
+<code>| [service] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [version] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [version_dot_service]+ &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [instance] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [instance_dot_service] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [instance_dot_version] + &#39;.&#39; + [application_domain_name]</code></br>
+<code>| [instance_dot_version_dot_service] + &#39;.&#39; + [application_domain_name]</code></p></li>
+<li><p><code>application_domain_name</code> = The domain name of the app, for
 example <app-id>.appspot.com, which is associated with the
 queue&#39;s project ID. Some tasks which were created using the App Engine
 SDK use a custom domain name.</p></li>
-<li><p>+service =+ <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p>+version =+ <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
-<li><p>+version_dot_service =+
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> ++ &#39;.&#39; ++
+<li><p><code>service =</code> <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
+<li><p><code>version =</code> <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
+<li><p><code>version_dot_service =</code>
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p>+instance =+ <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span></p></li>
-<li><p>+instance_dot_service =+
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> ++ &#39;.&#39; ++
+<li><p><code>instance =</code> <span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span></p></li>
+<li><p><code>instance_dot_service =</code>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
-<li><p>+instance_dot_version =+
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> ++ &#39;.&#39; ++
+<li><p><code>instance_dot_version =</code>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span></p></li>
-<li><p>+instance_dot_version_dot_service =+
-<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> ++ &#39;.&#39; ++
-<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> ++ &#39;.&#39; ++
+<li><p><code>instance_dot_version_dot_service =</code>
+<span class='object_link'><a href="#instance-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance (method)">instance</a></span> <code>+ &#39;.&#39; +</code>
+<span class='object_link'><a href="#version-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#version (method)">version</a></span> <code>+ &#39;.&#39; +</code>
 <span class='object_link'><a href="#service-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#service (method)">service</a></span></p></li>
 </ul>
 

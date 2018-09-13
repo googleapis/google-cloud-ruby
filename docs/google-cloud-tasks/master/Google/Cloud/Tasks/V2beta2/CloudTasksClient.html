@@ -1817,7 +1817,7 @@ ListTasks.</p>
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Tasks.html#new-class_method" title="Google::Cloud::Tasks.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2beta2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2beta2.html" title="Google::Cloud::Tasks::V2beta2 (module)">V2beta2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient (class)">CloudTasksClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_task_path'><span class='object_link'><a href="#task_path-class_method" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path (method)">task_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[QUEUE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TASK]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +schedule_time+:
+<span class='comment'># TODO: Initialize `schedule_time`:
 </span><span class='id identifier rubyid_schedule_time'>schedule_time</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge_task'>acknowledge_task</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_schedule_time'>schedule_time</span><span class='rparen'>)</span></code></pre>
     
@@ -1838,7 +1838,7 @@ ListTasks.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The task name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code></p>
 </div>
       
     </li>
@@ -2022,7 +2022,7 @@ LeaseTasks.</p>
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Tasks.html#new-class_method" title="Google::Cloud::Tasks.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2beta2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2beta2.html" title="Google::Cloud::Tasks::V2beta2 (module)">V2beta2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient (class)">CloudTasksClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_task_path'><span class='object_link'><a href="#task_path-class_method" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path (method)">task_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[QUEUE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TASK]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +schedule_time+:
+<span class='comment'># TODO: Initialize `schedule_time`:
 </span><span class='id identifier rubyid_schedule_time'>schedule_time</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span><span class='period'>.</span><span class='id identifier rubyid_cancel_lease'>cancel_lease</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_schedule_time'>schedule_time</span><span class='rparen'>)</span></code></pre>
     
@@ -2043,7 +2043,7 @@ LeaseTasks.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The task name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code></p>
 </div>
       
     </li>
@@ -2091,7 +2091,7 @@ of its large size or because of the sensitivity of data that it
 contains.</p>
 
 <p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-+cloudtasks.tasks.fullView+ <a href="https://cloud.google.com/iam/">Google IAM</a>
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
 permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
@@ -2250,7 +2250,7 @@ days. After a task is 31 days old, the task will be deleted regardless of whethe
 it was dispatched or not.</p>
 
 <p>WARNING: Using this method may have unintended side effects if you are
-using an App Engine +queue.yaml+ or +queue.xml+ file to manage your queues.
+using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
 Read
 <a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
 before using this method.</p>
@@ -2269,7 +2269,7 @@ before using this method.</p>
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Tasks.html#new-class_method" title="Google::Cloud::Tasks.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2beta2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2beta2.html" title="Google::Cloud::Tasks::V2beta2 (module)">V2beta2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient (class)">CloudTasksClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_location_path'><span class='object_link'><a href="#location_path-class_method" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path (method)">location_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +queue+:
+<span class='comment'># TODO: Initialize `queue`:
 </span><span class='id identifier rubyid_queue'>queue</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span><span class='period'>.</span><span class='id identifier rubyid_create_queue'>create_queue</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_queue'>queue</span><span class='rparen'>)</span></code></pre>
     
@@ -2290,7 +2290,7 @@ before using this method.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The location name in which the queue will be created.
-For example: +projects/PROJECT_ID/locations/LOCATION_ID+</p>
+For example: <code>projects/PROJECT_ID/locations/LOCATION_ID</code></p>
 
 <p>The list of allowed locations can be obtained by calling Cloud
 Tasks&#39; implementation of
@@ -2486,7 +2486,7 @@ retries, etc.</p>
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Tasks.html#new-class_method" title="Google::Cloud::Tasks.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2beta2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2beta2.html" title="Google::Cloud::Tasks::V2beta2 (module)">V2beta2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient (class)">CloudTasksClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_queue_path'><span class='object_link'><a href="#queue_path-class_method" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path (method)">queue_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[QUEUE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +task+:
+<span class='comment'># TODO: Initialize `task`:
 </span><span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span><span class='period'>.</span><span class='id identifier rubyid_create_task'>create_task</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span></code></pre>
     
@@ -2507,7 +2507,7 @@ retries, etc.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The queue name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
 
 <p>The queue must already exist.</p>
 </div>
@@ -2529,7 +2529,7 @@ retries, etc.</p>
 <p>The task to add.</p>
 
 <p>Task names have the following format:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+.
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code>.
 The user can optionally specify a task <span class='object_link'><a href="Task.html#name-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#name (method)">name</a></span>. If a
 name is not specified then the system will generate a random
 unique task id, which will be set in the task returned in the
@@ -2585,7 +2585,7 @@ of its large size or because of the sensitivity of data that it
 contains.</p>
 
 <p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-+cloudtasks.tasks.fullView+ <a href="https://cloud.google.com/iam/">Google IAM</a>
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
 permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
@@ -2745,7 +2745,7 @@ retries, etc.</p>
 for 7 days.</p>
 
 <p>WARNING: Using this method may have unintended side effects if you are
-using an App Engine +queue.yaml+ or +queue.xml+ file to manage your queues.
+using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
 Read
 <a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
 before using this method.</p>
@@ -2782,7 +2782,7 @@ before using this method.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The queue name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
 </div>
       
     </li>
@@ -2956,7 +2956,7 @@ failed.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The task name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code></p>
 </div>
       
     </li>
@@ -3101,7 +3101,7 @@ set.</p>
 resource parent:</p>
 
 <ul>
-<li>+cloudtasks.queues.getIamPolicy+</li>
+<li><code>cloudtasks.queues.getIamPolicy</code></li>
 </ul>
 
 
@@ -3134,8 +3134,8 @@ resource parent:</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -3312,7 +3312,7 @@ retries, etc.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The resource name of the queue. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
 </div>
       
     </li>
@@ -3489,7 +3489,7 @@ retries, etc.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The task name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code></p>
 </div>
       
     </li>
@@ -3514,7 +3514,7 @@ of its large size or because of the sensitivity of data that it
 contains.</p>
 
 <p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-+cloudtasks.tasks.fullView+ <a href="https://cloud.google.com/iam/">Google IAM</a>
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
 permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
@@ -3699,7 +3699,7 @@ is exceeded.</p>
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Tasks.html#new-class_method" title="Google::Cloud::Tasks.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2beta2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2beta2.html" title="Google::Cloud::Tasks::V2beta2 (module)">V2beta2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient (class)">CloudTasksClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_queue_path'><span class='object_link'><a href="#queue_path-class_method" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path (method)">queue_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[QUEUE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +lease_duration+:
+<span class='comment'># TODO: Initialize `lease_duration`:
 </span><span class='id identifier rubyid_lease_duration'>lease_duration</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span><span class='period'>.</span><span class='id identifier rubyid_lease_tasks'>lease_tasks</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_parent'>formatted_parent</span><span class='comma'>,</span> <span class='id identifier rubyid_lease_duration'>lease_duration</span><span class='rparen'>)</span></code></pre>
     
@@ -3720,7 +3720,7 @@ is exceeded.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The queue name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
 </div>
       
     </li>
@@ -3743,7 +3743,7 @@ returned to a later LeaseTasks call so
 that another worker can retry it.</p>
 
 <p>The maximum lease duration is 1 week.
-+lease_duration+ will be truncated to the nearest second.
+<code>lease_duration</code> will be truncated to the nearest second.
 A hash of the same form as <code>Google::Protobuf::Duration</code>
 can also be provided.</p>
 </div>
@@ -3763,9 +3763,9 @@ can also be provided.</p>
         <div class='inline'><p>The maximum number of tasks to lease.</p>
 
 <p>The system will make a best effort to return as close to as
-+max_tasks+ as possible.</p>
+<code>max_tasks</code> as possible.</p>
 
-<p>The largest that +max_tasks+ can be is 1000.</p>
+<p>The largest that <code>max_tasks</code> can be is 1000.</p>
 </div>
       
     </li>
@@ -3790,7 +3790,7 @@ of its large size or because of the sensitivity of data that it
 contains.</p>
 
 <p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-+cloudtasks.tasks.fullView+ <a href="https://cloud.google.com/iam/">Google IAM</a>
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
 permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
@@ -3806,26 +3806,26 @@ permission on the <span class='object_link'><a href="Task.html" title="Google::C
       
       
         &mdash;
-        <div class='inline'><p>+filter+ can be used to specify a subset of tasks to lease.</p>
+        <div class='inline'><p><code>filter</code> can be used to specify a subset of tasks to lease.</p>
 
-<p>When +filter+ is set to +tag=<my-tag>+ then the
+<p>When <code>filter</code> is set to <code>tag=&lt;my-tag&gt;</code> then the
 <span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span> will contain only tasks whose
-<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to +<my-tag>+. +<my-tag>+ must be
+<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to <code>&lt;my-tag&gt;</code>. <code>&lt;my-tag&gt;</code> must be
 less than 500 characters.</p>
 
-<p>When +filter+ is set to +tag_function=oldest_tag()+, only tasks which have
+<p>When <code>filter</code> is set to <code>tag_function=oldest_tag()</code>, only tasks which have
 the same tag as the task with the oldest
 <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be returned.</p>
 
 <p>Grammar Syntax:</p>
 
 <ul>
-<li><p>+filter = &quot;tag=&quot; tag | &quot;tag_function=&quot; function+</p></li>
-<li><p>+tag = string+</p></li>
-<li><p>+function = &quot;oldest_tag()&quot;+</p></li>
+<li><p><code>filter = &quot;tag=&quot; tag | &quot;tag_function=&quot; function</code></p></li>
+<li><p><code>tag = string</code></p></li>
+<li><p><code>function = &quot;oldest_tag()&quot;</code></p></li>
 </ul>
 
-<p>The +oldest_tag()+ function returns tasks which have the same tag as the
+<p>The <code>oldest_tag()</code> function returns tasks which have the same tag as the
 oldest task (ordered by schedule time).</p>
 
 <p>SDK compatibility: Although the SDK allows tags to be either
@@ -4041,7 +4041,7 @@ retries, etc.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The location name.
-For example: +projects/PROJECT_ID/locations/LOCATION_ID+</p>
+For example: <code>projects/PROJECT_ID/locations/LOCATION_ID</code></p>
 </div>
       
     </li>
@@ -4056,9 +4056,9 @@ For example: +projects/PROJECT_ID/locations/LOCATION_ID+</p>
       
       
         &mdash;
-        <div class='inline'><p>+filter+ can be used to specify a subset of queues. Any <span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>
+        <div class='inline'><p><code>filter</code> can be used to specify a subset of queues. Any <span class='object_link'><a href="Queue.html" title="Google::Cloud::Tasks::V2beta2::Queue (class)">Queue</a></span>
 field can be used as a filter and several operators as supported.
-For example: +&lt;=, &lt;, &gt;=, &gt;, !=, =, :+. The filter syntax is the same as
+For example: <code>&lt;=, &lt;, &gt;=, &gt;, !=, =, :</code>. The filter syntax is the same as
 described in
 <a href="https://cloud.google.com/logging/docs/view/advanced_filters">Stackdriver&#39;s Advanced Logs Filters</a>.</p>
 
@@ -4296,7 +4296,7 @@ time.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The queue name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
 </div>
       
     </li>
@@ -4321,7 +4321,7 @@ of its large size or because of the sensitivity of data that it
 contains.</p>
 
 <p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-+cloudtasks.tasks.fullView+ <a href="https://cloud.google.com/iam/">Google IAM</a>
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
 permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
@@ -4539,7 +4539,7 @@ when the queue is paused. A queue is paused if its
         <div class='inline'><p>Required.</p>
 
 <p>The queue name. For example:
-+projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID</code></p>
 </div>
       
     </li>
@@ -4721,7 +4721,7 @@ might be dispatched before the purge takes effect. A purge is irreversible.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The queue name. For example:
-+projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID</code></p>
 </div>
       
     </li>
@@ -4884,10 +4884,10 @@ returned in the task&#39;s <span class='object_link'><a href="Task.html#schedule
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Tasks.html#new-class_method" title="Google::Cloud::Tasks.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2beta2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2beta2.html" title="Google::Cloud::Tasks::V2beta2 (module)">V2beta2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient (class)">CloudTasksClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_task_path'><span class='object_link'><a href="#task_path-class_method" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path (method)">task_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[QUEUE]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[TASK]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +schedule_time+:
+<span class='comment'># TODO: Initialize `schedule_time`:
 </span><span class='id identifier rubyid_schedule_time'>schedule_time</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 
-<span class='comment'># TODO: Initialize +lease_duration+:
+<span class='comment'># TODO: Initialize `lease_duration`:
 </span><span class='id identifier rubyid_lease_duration'>lease_duration</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span><span class='period'>.</span><span class='id identifier rubyid_renew_lease'>renew_lease</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='comma'>,</span> <span class='id identifier rubyid_schedule_time'>schedule_time</span><span class='comma'>,</span> <span class='id identifier rubyid_lease_duration'>lease_duration</span><span class='rparen'>)</span></code></pre>
     
@@ -4908,7 +4908,7 @@ returned in the task&#39;s <span class='object_link'><a href="Task.html#schedule
         <div class='inline'><p>Required.</p>
 
 <p>The task name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code></p>
 </div>
       
     </li>
@@ -4951,7 +4951,7 @@ can also be provided.</p>
 <p>The desired new lease duration, starting from now.</p>
 
 <p>The maximum lease duration is 1 week.
-+lease_duration+ will be truncated to the nearest second.
+<code>lease_duration</code> will be truncated to the nearest second.
 A hash of the same form as <code>Google::Protobuf::Duration</code>
 can also be provided.</p>
 </div>
@@ -4978,7 +4978,7 @@ of its large size or because of the sensitivity of data that it
 contains.</p>
 
 <p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-+cloudtasks.tasks.fullView+ <a href="https://cloud.google.com/iam/">Google IAM</a>
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
 permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
@@ -5179,7 +5179,7 @@ queues, follow the 500/50/5 pattern described in
         <div class='inline'><p>Required.</p>
 
 <p>The queue name. For example:
-+projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID</code></p>
 </div>
       
     </li>
@@ -5382,7 +5382,7 @@ task that has already succeeded or permanently failed.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The task name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code></p>
 </div>
       
     </li>
@@ -5407,7 +5407,7 @@ of its large size or because of the sensitivity of data that it
 contains.</p>
 
 <p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-+cloudtasks.tasks.fullView+ <a href="https://cloud.google.com/iam/">Google IAM</a>
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
 permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       
@@ -5566,7 +5566,7 @@ Project-level permissions are required to use the Cloud Console.</p>
 resource parent:</p>
 
 <ul>
-<li>+cloudtasks.queues.setIamPolicy+</li>
+<li><code>cloudtasks.queues.setIamPolicy</code></li>
 </ul>
 
 
@@ -5583,7 +5583,7 @@ resource parent:</p>
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Tasks.html#new-class_method" title="Google::Cloud::Tasks.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2beta2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2beta2.html" title="Google::Cloud::Tasks::V2beta2 (module)">V2beta2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient (class)">CloudTasksClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_queue_path'><span class='object_link'><a href="#queue_path-class_method" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path (method)">queue_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[QUEUE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +policy+:
+<span class='comment'># TODO: Initialize `policy`:
 </span><span class='id identifier rubyid_policy'>policy</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span><span class='period'>.</span><span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_policy'>policy</span><span class='rparen'>)</span></code></pre>
     
@@ -5602,8 +5602,8 @@ resource parent:</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy is being specified.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -5618,7 +5618,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>REQUIRED: The complete policy to be applied to the +resource+. The size of
+        <div class='inline'><p>REQUIRED: The complete policy to be applied to the <code>resource</code>. The size of
 the policy is limited to a few 10s of KB. An empty policy is a
 valid policy but certain Cloud Platform services (such as Projects)
 might reject them.
@@ -5792,7 +5792,7 @@ may &quot;fail open&quot; without warning.</p>
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Tasks.html#new-class_method" title="Google::Cloud::Tasks.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2beta2</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2beta2.html" title="Google::Cloud::Tasks::V2beta2 (module)">V2beta2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient (class)">CloudTasksClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_queue_path'><span class='object_link'><a href="#queue_path-class_method" title="Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path (method)">queue_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[QUEUE]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +permissions+:
+<span class='comment'># TODO: Initialize `permissions`:
 </span><span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span><span class='period'>.</span><span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='comma'>,</span> <span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span></code></pre>
     
@@ -5811,8 +5811,8 @@ may &quot;fail open&quot; without warning.</p>
       
         &mdash;
         <div class='inline'><p>REQUIRED: The resource for which the policy detail is being requested.
-+resource+ is usually specified as a path. For example, a Project
-resource is specified as +projects/{project}+.</p>
+<code>resource</code> is usually specified as a path. For example, a Project
+resource is specified as <code>projects/{project}</code>.</p>
 </div>
       
     </li>
@@ -5827,7 +5827,7 @@ resource is specified as +projects/{project}+.</p>
       
       
         &mdash;
-        <div class='inline'><p>The set of permissions to check for the +resource+. Permissions with
+        <div class='inline'><p>The set of permissions to check for the <code>resource</code>. Permissions with
 wildcards (such as &#39;<em>&#39; or &#39;storage.</em>&#39;) are not allowed. For more
 information see
 <a href="https://cloud.google.com/iam/docs/overview#permissions">IAM Overview</a>.</p>
@@ -5987,7 +5987,7 @@ days. After a task is 31 days old, the task will be deleted regardless of whethe
 it was dispatched or not.</p>
 
 <p>WARNING: Using this method may have unintended side effects if you are
-using an App Engine +queue.yaml+ or +queue.xml+ file to manage your queues.
+using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
 Read
 <a href="https://cloud.google.com/tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
 before using this method.</p>
@@ -6005,7 +6005,7 @@ before using this method.</p>
 
 <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Tasks.html" title="Google::Cloud::Tasks (module)">Tasks</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Tasks.html#new-class_method" title="Google::Cloud::Tasks.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v2beta2</span><span class='rparen'>)</span>
 
-<span class='comment'># TODO: Initialize +queue+:
+<span class='comment'># TODO: Initialize `queue`:
 </span><span class='id identifier rubyid_queue'>queue</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_cloud_tasks_client'>cloud_tasks_client</span><span class='period'>.</span><span class='id identifier rubyid_update_queue'>update_queue</span><span class='lparen'>(</span><span class='id identifier rubyid_queue'>queue</span><span class='rparen'>)</span></code></pre>
     

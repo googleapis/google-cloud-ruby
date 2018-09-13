@@ -420,7 +420,7 @@ on the queue.</p>
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
 </span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -445,7 +445,7 @@ on the queue.</p>
   <div class="discussion">
     <p>Returns Output only. The time that the task was created.</p>
 
-<p>+create_time+ will be truncated to the nearest second.</p>
+<p><code>create_time</code> will be truncated to the nearest second.</p>
 
 
   </div>
@@ -465,7 +465,7 @@ on the queue.</p>
         &mdash;
         <div class='inline'><p>Output only. The time that the task was created.</p>
 
-<p>+create_time+ will be truncated to the nearest second.</p>
+<p><code>create_time</code> will be truncated to the nearest second.</p>
 </div>
       
     </li>
@@ -539,7 +539,7 @@ on the queue.</p>
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
 </span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -567,20 +567,20 @@ on the queue.</p>
 <p>The task name.</p>
 
 <p>The task name must have the following format:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code></p>
 
 <ul>
-<li>+PROJECT_ID+ can contain letters ([A-Za-z]), numbers ([0-9]),
+<li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
 <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
-<li>+LOCATION_ID+ is the canonical ID for the task&#39;s location.
+<li><code>LOCATION_ID</code> is the canonical ID for the task&#39;s location.
 The list of available locations can be obtained by calling
 ListLocations.
 For more information, see <a href="https://cloud.google.com/about/locations/">https://cloud.google.com/about/locations/</a>.</li>
-<li>+QUEUE_ID+ can contain letters ([A-Za-z]), numbers ([0-9]), or
+<li><code>QUEUE_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]), or
 hyphens (-). The maximum length is 100 characters.</li>
-<li>+TASK_ID+ can contain only letters ([A-Za-z]), numbers ([0-9]),
+<li><code>TASK_ID</code> can contain only letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 </ul>
 
@@ -605,20 +605,20 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 <p>The task name.</p>
 
 <p>The task name must have the following format:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code></p>
 
 <ul>
-<li>+PROJECT_ID+ can contain letters ([A-Za-z]), numbers ([0-9]),
+<li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
 <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
-<li>+LOCATION_ID+ is the canonical ID for the task&#39;s location.
+<li><code>LOCATION_ID</code> is the canonical ID for the task&#39;s location.
 The list of available locations can be obtained by calling
 ListLocations.
 For more information, see <a href="https://cloud.google.com/about/locations/">https://cloud.google.com/about/locations/</a>.</li>
-<li>+QUEUE_ID+ can contain letters ([A-Za-z]), numbers ([0-9]), or
+<li><code>QUEUE_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]), or
 hyphens (-). The maximum length is 100 characters.</li>
-<li>+TASK_ID+ can contain only letters ([A-Za-z]), numbers ([0-9]),
+<li><code>TASK_ID</code> can contain only letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
 </ul>
 </div>
@@ -694,7 +694,7 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
 </span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -815,7 +815,7 @@ set only if <span class='object_link'><a href="Queue.html#pull_target-instance_m
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
 </span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -847,7 +847,7 @@ be leased; if a task is currently leased, this is the time when
 the current lease expires, that is, the time that the task was
 leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_duration-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration (method)">lease_duration</a></span>.</p>
 
-<p>+schedule_time+ will be truncated to the nearest microsecond.</p>
+<p><code>schedule_time</code> will be truncated to the nearest microsecond.</p>
 
 
   </div>
@@ -874,7 +874,7 @@ be leased; if a task is currently leased, this is the time when
 the current lease expires, that is, the time that the task was
 leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_duration-instance_method" title="Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration (method)">lease_duration</a></span>.</p>
 
-<p>+schedule_time+ will be truncated to the nearest microsecond.</p>
+<p><code>schedule_time</code> will be truncated to the nearest microsecond.</p>
 </div>
       
     </li>
@@ -948,7 +948,7 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
 </span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -1063,7 +1063,7 @@ leased plus the <span class='object_link'><a href="LeaseTasksRequest.html#lease_
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
 </span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
@@ -1180,7 +1180,7 @@ been returned.</p>
     <span class='comment'># All information is returned.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-</span>    <span class='comment'># +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+</span>    <span class='comment'># `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
 </span>    <span class='comment'># permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
 </span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>

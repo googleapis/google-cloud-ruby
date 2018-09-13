@@ -424,7 +424,7 @@ retry options, target types, and others.</p>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># A queue becomes +DISABLED+ when
+</span>    <span class='comment'># A queue becomes `DISABLED` when
 </span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
 </span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
 </span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
@@ -432,7 +432,7 @@ retry options, target types, and others.</p>
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># +FAILED_PRECONDITION+ error.
+</span>    <span class='comment'># `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -463,18 +463,18 @@ after which it becomes output only.</p>
 <p>The queue name.</p>
 
 <p>The queue name must have the following format:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
 
 <ul>
-<li>+PROJECT_ID+ can contain letters ([A-Za-z]), numbers ([0-9]),
+<li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
 <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
-<li>+LOCATION_ID+ is the canonical ID for the queue&#39;s location.
+<li><code>LOCATION_ID</code> is the canonical ID for the queue&#39;s location.
 The list of available locations can be obtained by calling
 ListLocations.
 For more information, see <a href="https://cloud.google.com/about/locations/">https://cloud.google.com/about/locations/</a>.</li>
-<li>+QUEUE_ID+ can contain letters ([A-Za-z]), numbers ([0-9]), or
+<li><code>QUEUE_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]), or
 hyphens (-). The maximum length is 100 characters.</li>
 </ul>
 
@@ -500,18 +500,18 @@ after which it becomes output only.</p>
 <p>The queue name.</p>
 
 <p>The queue name must have the following format:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
 
 <ul>
-<li>+PROJECT_ID+ can contain letters ([A-Za-z]), numbers ([0-9]),
+<li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
 <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
-<li>+LOCATION_ID+ is the canonical ID for the queue&#39;s location.
+<li><code>LOCATION_ID</code> is the canonical ID for the queue&#39;s location.
 The list of available locations can be obtained by calling
 ListLocations.
 For more information, see <a href="https://cloud.google.com/about/locations/">https://cloud.google.com/about/locations/</a>.</li>
-<li>+QUEUE_ID+ can contain letters ([A-Za-z]), numbers ([0-9]), or
+<li><code>QUEUE_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]), or
 hyphens (-). The maximum length is 100 characters.</li>
 </ul>
 </div>
@@ -595,7 +595,7 @@ hyphens (-). The maximum length is 100 characters.</li>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># A queue becomes +DISABLED+ when
+</span>    <span class='comment'># A queue becomes `DISABLED` when
 </span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
 </span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
 </span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
@@ -603,7 +603,7 @@ hyphens (-). The maximum length is 100 characters.</li>
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># +FAILED_PRECONDITION+ error.
+</span>    <span class='comment'># `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -732,7 +732,7 @@ hyphens (-). The maximum length is 100 characters.</li>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># A queue becomes +DISABLED+ when
+</span>    <span class='comment'># A queue becomes `DISABLED` when
 </span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
 </span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
 </span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
@@ -740,7 +740,7 @@ hyphens (-). The maximum length is 100 characters.</li>
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># +FAILED_PRECONDITION+ error.
+</span>    <span class='comment'># `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -883,7 +883,7 @@ time will be unset if the queue has never been purged.</p>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># A queue becomes +DISABLED+ when
+</span>    <span class='comment'># A queue becomes `DISABLED` when
 </span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
 </span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
 </span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
@@ -891,7 +891,7 @@ time will be unset if the queue has never been purged.</p>
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># +FAILED_PRECONDITION+ error.
+</span>    <span class='comment'># `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -1048,7 +1048,7 @@ second attempt, third attempt, etc).</li>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># A queue becomes +DISABLED+ when
+</span>    <span class='comment'># A queue becomes `DISABLED` when
 </span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
 </span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
 </span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
@@ -1056,7 +1056,7 @@ second attempt, third attempt, etc).</li>
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># +FAILED_PRECONDITION+ error.
+</span>    <span class='comment'># `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -1201,7 +1201,7 @@ explicitly set on the task and were created by the App Engine SDK. See
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># A queue becomes +DISABLED+ when
+</span>    <span class='comment'># A queue becomes `DISABLED` when
 </span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
 </span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
 </span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
@@ -1209,7 +1209,7 @@ explicitly set on the task and were created by the App Engine SDK. See
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># +FAILED_PRECONDITION+ error.
+</span>    <span class='comment'># `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.
@@ -1236,11 +1236,11 @@ explicitly set on the task and were created by the App Engine SDK. See
   <div class="discussion">
     <p>Returns Output only. The state of the queue.</p>
 
-<p>+state+ can only be changed by called
+<p><code>state</code> can only be changed by called
 PauseQueue,
 ResumeQueue, or uploading
 <a href="https://cloud.google.com/appengine/docs/python/config/queueref">queue.yaml/xml</a>.
-UpdateQueue cannot be used to change +state+.</p>
+UpdateQueue cannot be used to change <code>state</code>.</p>
 
 
   </div>
@@ -1260,11 +1260,11 @@ UpdateQueue cannot be used to change +state+.</p>
         &mdash;
         <div class='inline'><p>Output only. The state of the queue.</p>
 
-<p>+state+ can only be changed by called
+<p><code>state</code> can only be changed by called
 PauseQueue,
 ResumeQueue, or uploading
 <a href="https://cloud.google.com/appengine/docs/python/config/queueref">queue.yaml/xml</a>.
-UpdateQueue cannot be used to change +state+.</p>
+UpdateQueue cannot be used to change <code>state</code>.</p>
 </div>
       
     </li>
@@ -1346,7 +1346,7 @@ UpdateQueue cannot be used to change +state+.</p>
 
     <span class='comment'># The queue is disabled.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># A queue becomes +DISABLED+ when
+</span>    <span class='comment'># A queue becomes `DISABLED` when
 </span>    <span class='comment'># [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
 </span>    <span class='comment'># [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
 </span>    <span class='comment'># which does not contain the queue. You cannot directly disable a queue.
@@ -1354,7 +1354,7 @@ UpdateQueue cannot be used to change +state+.</p>
 </span>    <span class='comment'># When a queue is disabled, tasks can still be added to a queue
 </span>    <span class='comment'># but the tasks are not dispatched and
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks} calls return a
-</span>    <span class='comment'># +FAILED_PRECONDITION+ error.
+</span>    <span class='comment'># `FAILED_PRECONDITION` error.
 </span>    <span class='comment'>#
 </span>    <span class='comment'># To permanently delete this queue and all of its tasks, call
 </span>    <span class='comment'># {Google::Cloud::Tasks::V2beta2::CloudTasks::DeleteQueue DeleteQueue}.

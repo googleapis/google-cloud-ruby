@@ -151,7 +151,7 @@ FAILED_PRECONDITION.</p>
   <div class="discussion">
     <p>The queue is disabled.</p>
 
-<p>A queue becomes +DISABLED+ when
+<p>A queue becomes <code>DISABLED</code> when
 <a href="https://cloud.google.com/appengine/docs/python/config/queueref">queue.yaml</a> or
 <a href="https://cloud.google.com/appengine/docs/standard/java/config/queueref">queue.xml</a> is uploaded
 which does not contain the queue. You cannot directly disable a queue.</p>
@@ -159,7 +159,7 @@ which does not contain the queue. You cannot directly disable a queue.</p>
 <p>When a queue is disabled, tasks can still be added to a queue
 but the tasks are not dispatched and
 LeaseTasks calls return a
-+FAILED_PRECONDITION+ error.</p>
+<code>FAILED_PRECONDITION</code> error.</p>
 
 <p>To permanently delete this queue and all of its tasks, call
 DeleteQueue.</p>

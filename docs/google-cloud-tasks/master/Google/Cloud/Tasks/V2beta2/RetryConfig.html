@@ -178,7 +178,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The time between retries will double +max_doublings+ times.</p>
+    <span class="summary_desc"><div class='inline'><p>The time between retries will double <code>max_doublings</code> times.</p>
 </div></span>
   
 </li>
@@ -204,7 +204,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If positive, +max_retry_duration+ specifies the time limit for retrying a failed task, measured from when the task was first attempted.</p>
+    <span class="summary_desc"><div class='inline'><p>If positive, <code>max_retry_duration</code> specifies the time limit for retrying a failed task, measured from when the task was first attempted.</p>
 </div></span>
   
 </li>
@@ -286,9 +286,9 @@ js:
   <div class="discussion">
     <p>Returns The maximum number of attempts for a task.</p>
 
-<p>Cloud Tasks will attempt the task +max_attempts+ times (that
+<p>Cloud Tasks will attempt the task <code>max_attempts</code> times (that
 is, if the first attempt fails, then there will be
-+max_attempts - 1+ retries).  Must be &gt; 0.</p>
+<code>max_attempts - 1</code> retries).  Must be &gt; 0.</p>
 
 
   </div>
@@ -308,9 +308,9 @@ is, if the first attempt fails, then there will be
         &mdash;
         <div class='inline'><p>The maximum number of attempts for a task.</p>
 
-<p>Cloud Tasks will attempt the task +max_attempts+ times (that
+<p>Cloud Tasks will attempt the task <code>max_attempts</code> times (that
 is, if the first attempt fails, then there will be
-+max_attempts - 1+ retries).  Must be &gt; 0.</p>
+<code>max_attempts - 1</code> retries).  Must be &gt; 0.</p>
 </div>
       
     </li>
@@ -358,7 +358,7 @@ default.</p>
 
 <p>This field is output only for <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>.</p>
 
-<p>+max_backoff+ will be truncated to the nearest second.</p>
+<p><code>max_backoff</code> will be truncated to the nearest second.</p>
 
 <p>This field has the same meaning as
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters">max_backoff_seconds in queue.yaml/xml</a>.</p>
@@ -390,7 +390,7 @@ default.</p>
 
 <p>This field is output only for <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>.</p>
 
-<p>+max_backoff+ will be truncated to the nearest second.</p>
+<p><code>max_backoff</code> will be truncated to the nearest second.</p>
 
 <p>This field has the same meaning as
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters">max_backoff_seconds in queue.yaml/xml</a>.</p>
@@ -430,18 +430,18 @@ default.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The time between retries will double +max_doublings+ times.</p>
+    <p>Returns The time between retries will double <code>max_doublings</code> times.</p>
 
 <p>A task&#39;s retry interval starts at
 <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#min_backoff (method)">min_backoff</a></span>, then doubles
-+max_doublings+ times, then increases linearly, and finally
+<code>max_doublings</code> times, then increases linearly, and finally
 retries retries at intervals of
 <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_backoff (method)">max_backoff</a></span> up to
 <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_attempts (method)">max_attempts</a></span> times.</p>
 
 <p>For example, if <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#min_backoff (method)">min_backoff</a></span> is 10s,
 <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_backoff (method)">max_backoff</a></span> is 300s, and
-+max_doublings+ is 3, then the a task will first be retried in
+<code>max_doublings</code> is 3, then the a task will first be retried in
 10s. The retry interval will double three times, and then
 increase linearly by 2^3 * 10s.  Finally, the task will retry at
 intervals of <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_backoff (method)">max_backoff</a></span> until the
@@ -473,18 +473,18 @@ default.</p>
       
       
         &mdash;
-        <div class='inline'><p>The time between retries will double +max_doublings+ times.</p>
+        <div class='inline'><p>The time between retries will double <code>max_doublings</code> times.</p>
 
 <p>A task&#39;s retry interval starts at
 <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#min_backoff (method)">min_backoff</a></span>, then doubles
-+max_doublings+ times, then increases linearly, and finally
+<code>max_doublings</code> times, then increases linearly, and finally
 retries retries at intervals of
 <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_backoff (method)">max_backoff</a></span> up to
 <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_attempts (method)">max_attempts</a></span> times.</p>
 
 <p>For example, if <span class='object_link'><a href="#min_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#min_backoff (method)">min_backoff</a></span> is 10s,
 <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_backoff (method)">max_backoff</a></span> is 300s, and
-+max_doublings+ is 3, then the a task will first be retried in
+<code>max_doublings</code> is 3, then the a task will first be retried in
 10s. The retry interval will double three times, and then
 increase linearly by 2^3 * 10s.  Finally, the task will retry at
 intervals of <span class='object_link'><a href="#max_backoff-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_backoff (method)">max_backoff</a></span> until the
@@ -535,9 +535,9 @@ default.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns If positive, +max_retry_duration+ specifies the time limit for
+    <p>Returns If positive, <code>max_retry_duration</code> specifies the time limit for
 retrying a failed task, measured from when the task was first
-attempted. Once +max_retry_duration+ time has passed <em>and</em> the
+attempted. Once <code>max_retry_duration</code> time has passed <em>and</em> the
 task has been attempted <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_attempts (method)">max_attempts</a></span>
 times, no further attempts will be made and the task will be
 deleted.</p>
@@ -549,7 +549,7 @@ default.</p>
 
 <p>This field is output only for <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>.</p>
 
-<p>+max_retry_duration+ will be truncated to the nearest second.</p>
+<p><code>max_retry_duration</code> will be truncated to the nearest second.</p>
 
 <p>This field has the same meaning as
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters">task_age_limit in queue.yaml/xml</a>.</p>
@@ -570,9 +570,9 @@ default.</p>
       
       
         &mdash;
-        <div class='inline'><p>If positive, +max_retry_duration+ specifies the time limit for
+        <div class='inline'><p>If positive, <code>max_retry_duration</code> specifies the time limit for
 retrying a failed task, measured from when the task was first
-attempted. Once +max_retry_duration+ time has passed <em>and</em> the
+attempted. Once <code>max_retry_duration</code> time has passed <em>and</em> the
 task has been attempted <span class='object_link'><a href="#max_attempts-instance_method" title="Google::Cloud::Tasks::V2beta2::RetryConfig#max_attempts (method)">max_attempts</a></span>
 times, no further attempts will be made and the task will be
 deleted.</p>
@@ -584,7 +584,7 @@ default.</p>
 
 <p>This field is output only for <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>.</p>
 
-<p>+max_retry_duration+ will be truncated to the nearest second.</p>
+<p><code>max_retry_duration</code> will be truncated to the nearest second.</p>
 
 <p>This field has the same meaning as
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters">task_age_limit in queue.yaml/xml</a>.</p>
@@ -635,7 +635,7 @@ default.</p>
 
 <p>This field is output only for <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>.</p>
 
-<p>+min_backoff+ will be truncated to the nearest second.</p>
+<p><code>min_backoff</code> will be truncated to the nearest second.</p>
 
 <p>This field has the same meaning as
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters">min_backoff_seconds in queue.yaml/xml</a>.</p>
@@ -667,7 +667,7 @@ default.</p>
 
 <p>This field is output only for <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>.</p>
 
-<p>+min_backoff+ will be truncated to the nearest second.</p>
+<p><code>min_backoff</code> will be truncated to the nearest second.</p>
 
 <p>This field has the same meaning as
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters">min_backoff_seconds in queue.yaml/xml</a>.</p>

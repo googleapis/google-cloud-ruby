@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>+filter+ can be used to specify a subset of tasks to lease.</p>
+    <span class="summary_desc"><div class='inline'><p><code>filter</code> can be used to specify a subset of tasks to lease.</p>
 </div></span>
   
 </li>
@@ -256,26 +256,26 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns +filter+ can be used to specify a subset of tasks to lease.</p>
+    <p>Returns <code>filter</code> can be used to specify a subset of tasks to lease.</p>
 
-<p>When +filter+ is set to +tag=<my-tag>+ then the
+<p>When <code>filter</code> is set to <code>tag=&lt;my-tag&gt;</code> then the
 <span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span> will contain only tasks whose
-<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to +<my-tag>+. +<my-tag>+ must be
+<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to <code>&lt;my-tag&gt;</code>. <code>&lt;my-tag&gt;</code> must be
 less than 500 characters.</p>
 
-<p>When +filter+ is set to +tag_function=oldest_tag()+, only tasks which have
+<p>When <code>filter</code> is set to <code>tag_function=oldest_tag()</code>, only tasks which have
 the same tag as the task with the oldest
 <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be returned.</p>
 
 <p>Grammar Syntax:</p>
 
 <ul>
-<li><p>+filter = &quot;tag=&quot; tag | &quot;tag_function=&quot; function+</p></li>
-<li><p>+tag = string+</p></li>
-<li><p>+function = &quot;oldest_tag()&quot;+</p></li>
+<li><p><code>filter = &quot;tag=&quot; tag | &quot;tag_function=&quot; function</code></p></li>
+<li><p><code>tag = string</code></p></li>
+<li><p><code>function = &quot;oldest_tag()&quot;</code></p></li>
 </ul>
 
-<p>The +oldest_tag()+ function returns tasks which have the same tag as the
+<p>The <code>oldest_tag()</code> function returns tasks which have the same tag as the
 oldest task (ordered by schedule time).</p>
 
 <p>SDK compatibility: Although the SDK allows tags to be either
@@ -302,26 +302,26 @@ aren&#39;t UTF-8 encoded can&#39;t be used in the
       
       
         &mdash;
-        <div class='inline'><p>+filter+ can be used to specify a subset of tasks to lease.</p>
+        <div class='inline'><p><code>filter</code> can be used to specify a subset of tasks to lease.</p>
 
-<p>When +filter+ is set to +tag=<my-tag>+ then the
+<p>When <code>filter</code> is set to <code>tag=&lt;my-tag&gt;</code> then the
 <span class='object_link'><a href="LeaseTasksResponse.html" title="Google::Cloud::Tasks::V2beta2::LeaseTasksResponse (class)">response</a></span> will contain only tasks whose
-<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to +<my-tag>+. +<my-tag>+ must be
+<span class='object_link'><a href="PullMessage.html#tag-instance_method" title="Google::Cloud::Tasks::V2beta2::PullMessage#tag (method)">tag</a></span> is equal to <code>&lt;my-tag&gt;</code>. <code>&lt;my-tag&gt;</code> must be
 less than 500 characters.</p>
 
-<p>When +filter+ is set to +tag_function=oldest_tag()+, only tasks which have
+<p>When <code>filter</code> is set to <code>tag_function=oldest_tag()</code>, only tasks which have
 the same tag as the task with the oldest
 <span class='object_link'><a href="Task.html#schedule_time-instance_method" title="Google::Cloud::Tasks::V2beta2::Task#schedule_time (method)">schedule_time</a></span> will be returned.</p>
 
 <p>Grammar Syntax:</p>
 
 <ul>
-<li><p>+filter = &quot;tag=&quot; tag | &quot;tag_function=&quot; function+</p></li>
-<li><p>+tag = string+</p></li>
-<li><p>+function = &quot;oldest_tag()&quot;+</p></li>
+<li><p><code>filter = &quot;tag=&quot; tag | &quot;tag_function=&quot; function</code></p></li>
+<li><p><code>tag = string</code></p></li>
+<li><p><code>function = &quot;oldest_tag()&quot;</code></p></li>
 </ul>
 
-<p>The +oldest_tag()+ function returns tasks which have the same tag as the
+<p>The <code>oldest_tag()</code> function returns tasks which have the same tag as the
 oldest task (ordered by schedule time).</p>
 
 <p>SDK compatibility: Although the SDK allows tags to be either
@@ -375,7 +375,7 @@ returned to a later LeaseTasks call so
 that another worker can retry it.</p>
 
 <p>The maximum lease duration is 1 week.
-+lease_duration+ will be truncated to the nearest second.</p>
+<code>lease_duration</code> will be truncated to the nearest second.</p>
 
 
   </div>
@@ -401,7 +401,7 @@ returned to a later LeaseTasks call so
 that another worker can retry it.</p>
 
 <p>The maximum lease duration is 1 week.
-+lease_duration+ will be truncated to the nearest second.</p>
+<code>lease_duration</code> will be truncated to the nearest second.</p>
 </div>
       
     </li>
@@ -441,9 +441,9 @@ that another worker can retry it.</p>
     <p>Returns The maximum number of tasks to lease.</p>
 
 <p>The system will make a best effort to return as close to as
-+max_tasks+ as possible.</p>
+<code>max_tasks</code> as possible.</p>
 
-<p>The largest that +max_tasks+ can be is 1000.</p>
+<p>The largest that <code>max_tasks</code> can be is 1000.</p>
 
 
   </div>
@@ -464,9 +464,9 @@ that another worker can retry it.</p>
         <div class='inline'><p>The maximum number of tasks to lease.</p>
 
 <p>The system will make a best effort to return as close to as
-+max_tasks+ as possible.</p>
+<code>max_tasks</code> as possible.</p>
 
-<p>The largest that +max_tasks+ can be is 1000.</p>
+<p>The largest that <code>max_tasks</code> can be is 1000.</p>
 </div>
       
     </li>
@@ -506,7 +506,7 @@ that another worker can retry it.</p>
     <p>Returns Required.</p>
 
 <p>The queue name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
 
 
   </div>
@@ -527,7 +527,7 @@ that another worker can retry it.</p>
         <div class='inline'><p>Required.</p>
 
 <p>The queue name. For example:
-+projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+</p>
+<code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
 </div>
       
     </li>
@@ -574,7 +574,7 @@ of its large size or because of the sensitivity of data that it
 contains.</p>
 
 <p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-+cloudtasks.tasks.fullView+ <a href="https://cloud.google.com/iam/">Google IAM</a>
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
 permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 
 
@@ -603,7 +603,7 @@ of its large size or because of the sensitivity of data that it
 contains.</p>
 
 <p>Authorization for <span class='object_link'><a href="Task/View.html#FULL-constant" title="Google::Cloud::Tasks::V2beta2::Task::View::FULL (constant)">FULL</a></span> requires
-+cloudtasks.tasks.fullView+ <a href="https://cloud.google.com/iam/">Google IAM</a>
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
 permission on the <span class='object_link'><a href="Task.html" title="Google::Cloud::Tasks::V2beta2::Task (class)">Task</a></span> resource.</p>
 </div>
       

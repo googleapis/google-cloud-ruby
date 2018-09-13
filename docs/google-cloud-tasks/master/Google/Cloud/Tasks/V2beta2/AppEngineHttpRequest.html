@@ -98,11 +98,11 @@ the task is dispatched.</p>
 <span class='object_link'><a href="Queue.html#app_engine_http_target-instance_method" title="Google::Cloud::Tasks::V2beta2::Queue#app_engine_http_target (method)">app_engine_http_target</a></span> set.</p>
 
 <p>Using <span class='object_link'><a href="" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest (class)">AppEngineHttpRequest</a></span> requires
-<a href="https://cloud.google.com/appengine/docs/admin-api/access-control">+appengine.applications.get+</a>
+<a href="https://cloud.google.com/appengine/docs/admin-api/access-control"><code>appengine.applications.get</code></a>
 Google IAM permission for the project
 and the following scope:</p>
 
-<p>+<a href="https://www.googleapis.com/auth/cloud-platform+">https://www.googleapis.com/auth/cloud-platform+</a></p>
+<p><code>https://www.googleapis.com/auth/cloud-platform</code></p>
 
 <p>The task will be delivered to the App Engine app which belongs to the same
 project as the queue. For more information, see
@@ -121,17 +121,17 @@ is for the
 <span class='object_link'><a href="#app_engine_routing-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest#app_engine_routing (method)">task-level app_engine_routing</a></span>.</li>
 </ul>
 
-<p>The +url+ that the task will be sent to is:</p>
+<p>The <code>url</code> that the task will be sent to is:</p>
 
 <ul>
-<li>+url =+ <span class='object_link'><a href="AppEngineRouting.html#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> +++
+<li><code>url =</code> <span class='object_link'><a href="AppEngineRouting.html#host-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineRouting#host (method)">host</a></span> <code>+</code>
 <span class='object_link'><a href="#relative_url-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest#relative_url (method)">relative_url</a></span></li>
 </ul>
 
 <p>The task attempt has succeeded if the app&#39;s request handler returns
-an HTTP response code in the range [+200+ - +299+]. +503+ is
+an HTTP response code in the range [<code>200</code> - <code>299</code>]. <code>503</code> is
 considered an App Engine system error instead of an application
-error. Requests returning error +503+ will be retried regardless of
+error. Requests returning error <code>503</code> will be retried regardless of
 retry configuration and not counted against retry counts.
 Any other response code or a failure to receive a response before the
 deadline is a failed attempt.</p>
@@ -376,32 +376,32 @@ Repeated headers are not supported but a header value can contain commas.</p>
 <p>Cloud Tasks sets some headers to default values:</p>
 
 <ul>
-<li>+User-Agent+: By default, this header is
-+&quot;AppEngine-Google; (+<a href="http://code.google.com/appengine)%22+">http://code.google.com/appengine)&quot;+</a>.
+<li><code>User-Agent</code>: By default, this header is
+<code>&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;</code>.
 This header can be modified, but Cloud Tasks will append
-+&quot;AppEngine-Google; (+<a href="http://code.google.com/appengine)%22+">http://code.google.com/appengine)&quot;+</a> to the
-modified +User-Agent+.</li>
+<code>&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;</code> to the
+modified <code>User-Agent</code>.</li>
 </ul>
 
 <p>If the task has a <span class='object_link'><a href="#payload-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest#payload (method)">payload</a></span>, Cloud
 Tasks sets the following headers:</p>
 
 <ul>
-<li>+Content-Type+: By default, the +Content-Type+ header is set to
-+&quot;application/octet-stream&quot;+. The default can be overridden by explicitly
-setting +Content-Type+ to a particular media type when the
+<li><code>Content-Type</code>: By default, the <code>Content-Type</code> header is set to
+<code>&quot;application/octet-stream&quot;</code>. The default can be overridden by explicitly
+setting <code>Content-Type</code> to a particular media type when the
 task is created.
-For example, +Content-Type+ can be set to +&quot;application/json&quot;+.</li>
-<li>+Content-Length+: This is computed by Cloud Tasks. This value is
+For example, <code>Content-Type</code> can be set to <code>&quot;application/json&quot;</code>.</li>
+<li><code>Content-Length</code>: This is computed by Cloud Tasks. This value is
 output only.   It cannot be changed.</li>
 </ul>
 
 <p>The headers below cannot be set or overridden:</p>
 
 <ul>
-<li>+Host+</li>
-<li>+X-Google-*+</li>
-<li>+X-AppEngine-*+</li>
+<li><code>Host</code></li>
+<li><code>X-Google-*</code></li>
+<li><code>X-AppEngine-*</code></li>
 </ul>
 
 <p>In addition, Cloud Tasks sets some headers when the task is dispatched,
@@ -440,32 +440,32 @@ Repeated headers are not supported but a header value can contain commas.</p>
 <p>Cloud Tasks sets some headers to default values:</p>
 
 <ul>
-<li>+User-Agent+: By default, this header is
-+&quot;AppEngine-Google; (+<a href="http://code.google.com/appengine)%22+">http://code.google.com/appengine)&quot;+</a>.
+<li><code>User-Agent</code>: By default, this header is
+<code>&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;</code>.
 This header can be modified, but Cloud Tasks will append
-+&quot;AppEngine-Google; (+<a href="http://code.google.com/appengine)%22+">http://code.google.com/appengine)&quot;+</a> to the
-modified +User-Agent+.</li>
+<code>&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;</code> to the
+modified <code>User-Agent</code>.</li>
 </ul>
 
 <p>If the task has a <span class='object_link'><a href="#payload-instance_method" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest#payload (method)">payload</a></span>, Cloud
 Tasks sets the following headers:</p>
 
 <ul>
-<li>+Content-Type+: By default, the +Content-Type+ header is set to
-+&quot;application/octet-stream&quot;+. The default can be overridden by explicitly
-setting +Content-Type+ to a particular media type when the
+<li><code>Content-Type</code>: By default, the <code>Content-Type</code> header is set to
+<code>&quot;application/octet-stream&quot;</code>. The default can be overridden by explicitly
+setting <code>Content-Type</code> to a particular media type when the
 task is created.
-For example, +Content-Type+ can be set to +&quot;application/json&quot;+.</li>
-<li>+Content-Length+: This is computed by Cloud Tasks. This value is
+For example, <code>Content-Type</code> can be set to <code>&quot;application/json&quot;</code>.</li>
+<li><code>Content-Length</code>: This is computed by Cloud Tasks. This value is
 output only.   It cannot be changed.</li>
 </ul>
 
 <p>The headers below cannot be set or overridden:</p>
 
 <ul>
-<li>+Host+</li>
-<li>+X-Google-*+</li>
-<li>+X-AppEngine-*+</li>
+<li><code>Host</code></li>
+<li><code>X-Google-*</code></li>
+<li><code>X-AppEngine-*</code></li>
 </ul>
 
 <p>In addition, Cloud Tasks sets some headers when the task is dispatched,

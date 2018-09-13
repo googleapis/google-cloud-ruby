@@ -221,22 +221,22 @@ many tasks are enqueued in a short period of time.</p>
 <p>The <a href="https://wikipedia.org/wiki/Token_Bucket">token bucket</a>
 algorithm is used to control the rate of task dispatches. Each
 queue has a token bucket that holds tokens, up to the maximum
-specified by +max_burst_size+. Each time a task is dispatched, a
+specified by <code>max_burst_size</code>. Each time a task is dispatched, a
 token is removed from the bucket. Tasks will be dispatched until
 the queue&#39;s bucket runs out of tokens. The bucket will be
 continuously refilled with new tokens based on
 <span class='object_link'><a href="#max_tasks_dispatched_per_second-instance_method" title="Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second (method)">max_tasks_dispatched_per_second</a></span>.</p>
 
-<p>Cloud Tasks will pick the value of +max_burst_size+ based on the
+<p>Cloud Tasks will pick the value of <code>max_burst_size</code> based on the
 value of
 <span class='object_link'><a href="#max_tasks_dispatched_per_second-instance_method" title="Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second (method)">max_tasks_dispatched_per_second</a></span>.</p>
 
 <p>For App Engine queues that were created or updated using
-+queue.yaml/xml+, +max_burst_size+ is equal to
+<code>queue.yaml/xml</code>, <code>max_burst_size</code> is equal to
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#bucket_size">bucket_size</a>.
-Since +max_burst_size+ is output only, if
+Since <code>max_burst_size</code> is output only, if
 UpdateQueue is called on a queue
-created by +queue.yaml/xml+, +max_burst_size+ will be reset based
+created by <code>queue.yaml/xml</code>, <code>max_burst_size</code> will be reset based
 on the value of
 <span class='object_link'><a href="#max_tasks_dispatched_per_second-instance_method" title="Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second (method)">max_tasks_dispatched_per_second</a></span>,
 regardless of whether
@@ -270,22 +270,22 @@ many tasks are enqueued in a short period of time.</p>
 <p>The <a href="https://wikipedia.org/wiki/Token_Bucket">token bucket</a>
 algorithm is used to control the rate of task dispatches. Each
 queue has a token bucket that holds tokens, up to the maximum
-specified by +max_burst_size+. Each time a task is dispatched, a
+specified by <code>max_burst_size</code>. Each time a task is dispatched, a
 token is removed from the bucket. Tasks will be dispatched until
 the queue&#39;s bucket runs out of tokens. The bucket will be
 continuously refilled with new tokens based on
 <span class='object_link'><a href="#max_tasks_dispatched_per_second-instance_method" title="Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second (method)">max_tasks_dispatched_per_second</a></span>.</p>
 
-<p>Cloud Tasks will pick the value of +max_burst_size+ based on the
+<p>Cloud Tasks will pick the value of <code>max_burst_size</code> based on the
 value of
 <span class='object_link'><a href="#max_tasks_dispatched_per_second-instance_method" title="Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second (method)">max_tasks_dispatched_per_second</a></span>.</p>
 
 <p>For App Engine queues that were created or updated using
-+queue.yaml/xml+, +max_burst_size+ is equal to
+<code>queue.yaml/xml</code>, <code>max_burst_size</code> is equal to
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#bucket_size">bucket_size</a>.
-Since +max_burst_size+ is output only, if
+Since <code>max_burst_size</code> is output only, if
 UpdateQueue is called on a queue
-created by +queue.yaml/xml+, +max_burst_size+ will be reset based
+created by <code>queue.yaml/xml</code>, <code>max_burst_size</code> will be reset based
 on the value of
 <span class='object_link'><a href="#max_tasks_dispatched_per_second-instance_method" title="Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second (method)">max_tasks_dispatched_per_second</a></span>,
 regardless of whether
@@ -339,7 +339,7 @@ default.</p>
 
 <p>This field is output only for
 <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span> and always -1, which indicates no limit. No other
-queue types can have +max_concurrent_tasks+ set to -1.</p>
+queue types can have <code>max_concurrent_tasks</code> set to -1.</p>
 
 <p>This field has the same meaning as
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#max_concurrent_requests">max_concurrent_requests in queue.yaml/xml</a>.</p>
@@ -372,7 +372,7 @@ default.</p>
 
 <p>This field is output only for
 <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span> and always -1, which indicates no limit. No other
-queue types can have +max_concurrent_tasks+ set to -1.</p>
+queue types can have <code>max_concurrent_tasks</code> set to -1.</p>
 
 <p>This field has the same meaning as
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#max_concurrent_requests">max_concurrent_requests in queue.yaml/xml</a>.</p>
@@ -421,7 +421,7 @@ default.</p>
 <li>For <span class='object_link'><a href="AppEngineHttpTarget.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget (class)">App Engine queues</a></span>, the maximum allowed value
 is 500.</li>
 <li>This field is output only   for <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>. In addition to the
-+max_tasks_dispatched_per_second+ limit, a maximum of 10 QPS of
+<code>max_tasks_dispatched_per_second</code> limit, a maximum of 10 QPS of
 LeaseTasks requests are allowed per pull queue.</li>
 </ul>
 
@@ -453,7 +453,7 @@ default.</p>
 <li>For <span class='object_link'><a href="AppEngineHttpTarget.html" title="Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget (class)">App Engine queues</a></span>, the maximum allowed value
 is 500.</li>
 <li>This field is output only   for <span class='object_link'><a href="PullTarget.html" title="Google::Cloud::Tasks::V2beta2::PullTarget (class)">pull queues</a></span>. In addition to the
-+max_tasks_dispatched_per_second+ limit, a maximum of 10 QPS of
+<code>max_tasks_dispatched_per_second</code> limit, a maximum of 10 QPS of
 LeaseTasks requests are allowed per pull queue.</li>
 </ul>
 
