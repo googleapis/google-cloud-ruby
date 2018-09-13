@@ -21,7 +21,7 @@ gem "google-cloud-core"
 
 require "googleauth"
 require "grpc"
-require "google/cloud"
+require "google/cloud" unless defined? Google::Cloud.new
 require "google/cloud/config"
 
 module Google
