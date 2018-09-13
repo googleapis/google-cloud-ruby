@@ -93,22 +93,22 @@ js:
 
 <p>Google Cloud Memorystore for Redis v1</p>
 
-<p>The +redis.googleapis.com+ service implements the Google Cloud Memorystore
+<p>The <code>redis.googleapis.com</code> service implements the Google Cloud Memorystore
 for Redis API and defines the following resource model for managing Redis
 instances:</p>
 
 <ul>
-<li>The service works with a collection of cloud projects, named: +/projects/*+</li>
-<li>Each project has a collection of available locations, named: +/locations/*+</li>
-<li>Each location has a collection of Redis instances, named: +/instances/*+</li>
+<li>The service works with a collection of cloud projects, named: <code>/projects/*</code></li>
+<li>Each project has a collection of available locations, named: <code>/locations/*</code></li>
+<li>Each location has a collection of Redis instances, named: <code>/instances/*</code></li>
 <li>As such, Redis instances are resources of the form:
-+/projects/{project_id}/locations/{location_id}/instances/{instance_id}+</li>
+<code>/projects/{project_id}/locations/{location_id}/instances/{instance_id}</code></li>
 </ul>
 
-<p>Note that location_id must be refering to a GCP +region+; for example:</p>
+<p>Note that location_id must be refering to a GCP <code>region</code>; for example:</p>
 
 <ul>
-<li>+projects/redpepper-1290/locations/us-central1/instances/my-redis+</li>
+<li><code>projects/redpepper-1290/locations/us-central1/instances/my-redis</code></li>
 </ul>
 
 
@@ -1055,8 +1055,8 @@ is no need to call DeleteOperation.</p>
       
         &mdash;
         <div class='inline'><p>Required. The resource name of the instance location using the form:
-    +projects/{project_id}/locations/{location_id}+
-where +location_id+ refers to a GCP region</p>
+    <code>projects/{project_id}/locations/{location_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
 </div>
       
     </li>
@@ -1278,8 +1278,8 @@ deleted.</p>
       
         &mdash;
         <div class='inline'><p>Required. Redis instance resource name using the form:
-    +projects/{project_id}/locations/{location_id}/instances/{instance_id}+
-where +location_id+ refers to a GCP region</p>
+    <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
 </div>
       
     </li>
@@ -1425,8 +1425,8 @@ retries, etc.</p>
       
         &mdash;
         <div class='inline'><p>Required. Redis instance resource name using the form:
-    +projects/{project_id}/locations/{location_id}/instances/{instance_id}+
-where +location_id+ refers to a GCP region</p>
+    <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
 </div>
       
     </li>
@@ -1575,10 +1575,10 @@ location (region) or all locations.</p>
 <p>The location should have the following format:</p>
 
 <ul>
-<li>+projects/{project_id}/locations/{location_id}+</li>
+<li><code>projects/{project_id}/locations/{location_id}</code></li>
 </ul>
 
-<p>If +location_id+ is specified as +-+ (wildcard), then all regions
+<p>If <code>location_id</code> is specified as <code>-</code> (wildcard), then all regions
 available to the project are queried, and the results are aggregated.</p>
 
 
@@ -1623,8 +1623,8 @@ available to the project are queried, and the results are aggregated.</p>
       
         &mdash;
         <div class='inline'><p>Required. The resource name of the instance location using the form:
-    +projects/{project_id}/locations/{location_id}+
-where +location_id+ refers to a GCP region</p>
+    <code>projects/{project_id}/locations/{location_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
 </div>
       
     </li>
@@ -1869,15 +1869,15 @@ this field. The elements of the repeated paths field may only include these
 fields from Instance:</p>
 
 <ul>
-<li>+displayName+
+<li><code>displayName</code>
 
 <ul>
-<li>+labels+</li>
+<li><code>labels</code></li>
 </ul></li>
-<li>+memorySizeGb+
+<li><code>memorySizeGb</code>
 
 <ul>
-<li>+redisConfig+
+<li><code>redisConfig</code>
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
 can also be provided.</li>
 </ul></li>

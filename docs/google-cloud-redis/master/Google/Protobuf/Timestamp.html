@@ -105,14 +105,14 @@ See <a href="https://www.ietf.org/rfc/rfc3339.txt">https://www.ietf.org/rfc/rfc3
 
 <p>= Examples</p>
 
-<p>Example 1: Compute Timestamp from POSIX +time()+.</p>
+<p>Example 1: Compute Timestamp from POSIX <code>time()</code>.</p>
 
 <pre class="code ruby"><code class="ruby"><span class='const'>Timestamp</span> <span class='id identifier rubyid_timestamp'>timestamp</span><span class='semicolon'>;</span>
 <span class='id identifier rubyid_timestamp'>timestamp</span><span class='period'>.</span><span class='id identifier rubyid_set_seconds'>set_seconds</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='lparen'>(</span><span class='const'>NULL</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='semicolon'>;</span>
 <span class='id identifier rubyid_timestamp'>timestamp</span><span class='period'>.</span><span class='id identifier rubyid_set_nanos'>set_nanos</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span><span class='semicolon'>;</span>
 </code></pre>
 
-<p>Example 2: Compute Timestamp from POSIX +gettimeofday()+.</p>
+<p>Example 2: Compute Timestamp from POSIX <code>gettimeofday()</code>.</p>
 
 <pre class="code ruby"><code class="ruby">struct timeval tv;
 gettimeofday(&amp;tv, NULL);
@@ -122,7 +122,7 @@ timestamp.set_seconds(tv.tv_sec);
 timestamp.set_nanos(tv.tv_usec * 1000);
 </code></pre>
 
-<p>Example 3: Compute Timestamp from Win32 +GetSystemTimeAsFileTime()+.</p>
+<p>Example 3: Compute Timestamp from Win32 <code>GetSystemTimeAsFileTime()</code>.</p>
 
 <pre class="code ruby"><code class="ruby">FILETIME ft;
 GetSystemTimeAsFileTime(&amp;ft);
@@ -135,7 +135,7 @@ timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
 timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
 </code></pre>
 
-<p>Example 4: Compute Timestamp from Java +System.currentTimeMillis()+.</p>
+<p>Example 4: Compute Timestamp from Java <code>System.currentTimeMillis()</code>.</p>
 
 <pre class="code ruby"><code class="ruby">long millis = System.currentTimeMillis();
 
@@ -166,7 +166,7 @@ able to accept both UTC and other timezones (as indicated by an offset).</p>
 01:30 UTC on January 15, 2017.</p>
 
 <p>In JavaScript, one can convert a Date object to this format using the
-standard <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString%5D%0Amethod.%20In%20Python,%20a%20standard%20+datetime.datetime+%20object%20can%20be%20converted%0Ato%20this%20format%20using%20%5B+strftime+%5D(https://docs.python.org/2/library/time.html#time.strftime)%0Awith%20the%20time%20format%20spec%20&#x27;%Y-%m-%dT%H:%M:%S.%fZ&#x27;.%20Likewise,%20in%20Java,%20one%0Acan%20use%20the%20Joda%20Time&#x27;s%20%5B+ISODateTimeFormat.dateTime(">toISOString()</a>+](
+standard <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString%5D%0Amethod.%20In%20Python,%20a%20standard%20%60datetime.datetime%60%20object%20can%20be%20converted%0Ato%20this%20format%20using%20%5B%60strftime%60%5D(https://docs.python.org/2/library/time.html#time.strftime)%0Awith%20the%20time%20format%20spec%20&#x27;%Y-%m-%dT%H:%M:%S.%fZ&#x27;.%20Likewise,%20in%20Java,%20one%0Acan%20use%20the%20Joda%20Time&#x27;s%20%5B%60ISODateTimeFormat.dateTime(">toISOString()</a>`](
 <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--">http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--</a>
 ) to obtain a formatter capable of generating timestamps in this format.</p>
 
