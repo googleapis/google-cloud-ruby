@@ -41,7 +41,6 @@ end
 desc "Runs the smoke tests."
 Rake::TestTask.new :smoke_test do |t|
   t.test_files = FileList["acceptance/**/*smoke_test.rb"]
-  t.verbose = true
   t.warning = false
 end
 

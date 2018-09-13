@@ -85,7 +85,6 @@ namespace :acceptance do
   Rake::TestTask.new :run do |t|
     t.libs << "acceptance"
     t.test_files = FileList["acceptance/**/*_test.rb"]
-    t.verbose = true
     t.warning = false
   end
 end
