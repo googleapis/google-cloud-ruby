@@ -17,11 +17,11 @@ module Google
   module Devtools
     module Cloudtrace
       module V2
-        # The request message for the +BatchWriteSpans+ method.
+        # The request message for the `BatchWriteSpans` method.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the project where the spans belong. The format is
-        #     +projects/[PROJECT_ID]+.
+        #     `projects/[PROJECT_ID]`.
         # @!attribute [rw] spans
         #   @return [Array<Google::Devtools::Cloudtrace::V2::Span>]
         #     A list of new spans. The span names must not match existing

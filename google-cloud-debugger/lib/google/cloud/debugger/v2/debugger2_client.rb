@@ -207,12 +207,12 @@ module Google
           #   ID of the debuggee where the breakpoint is to be set.
           # @param breakpoint [Google::Devtools::Clouddebugger::V2::Breakpoint | Hash]
           #   Breakpoint specification to set.
-          #   The field +location+ of the breakpoint must be set.
+          #   The field `location` of the breakpoint must be set.
           #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::Breakpoint`
           #   can also be provided.
           # @param client_version [String]
           #   The client version making the call.
-          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -226,13 +226,13 @@ module Google
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
-          #   # TODO: Initialize +debuggee_id+:
+          #   # TODO: Initialize `debuggee_id`:
           #   debuggee_id = ''
           #
-          #   # TODO: Initialize +breakpoint+:
+          #   # TODO: Initialize `breakpoint`:
           #   breakpoint = {}
           #
-          #   # TODO: Initialize +client_version+:
+          #   # TODO: Initialize `client_version`:
           #   client_version = ''
           #   response = debugger2_client.set_breakpoint(debuggee_id, breakpoint, client_version)
 
@@ -259,7 +259,7 @@ module Google
           #   ID of the breakpoint to get.
           # @param client_version [String]
           #   The client version making the call.
-          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -273,13 +273,13 @@ module Google
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
-          #   # TODO: Initialize +debuggee_id+:
+          #   # TODO: Initialize `debuggee_id`:
           #   debuggee_id = ''
           #
-          #   # TODO: Initialize +breakpoint_id+:
+          #   # TODO: Initialize `breakpoint_id`:
           #   breakpoint_id = ''
           #
-          #   # TODO: Initialize +client_version+:
+          #   # TODO: Initialize `client_version`:
           #   client_version = ''
           #   response = debugger2_client.get_breakpoint(debuggee_id, breakpoint_id, client_version)
 
@@ -306,7 +306,7 @@ module Google
           #   ID of the breakpoint to delete.
           # @param client_version [String]
           #   The client version making the call.
-          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -319,13 +319,13 @@ module Google
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
-          #   # TODO: Initialize +debuggee_id+:
+          #   # TODO: Initialize `debuggee_id`:
           #   debuggee_id = ''
           #
-          #   # TODO: Initialize +breakpoint_id+:
+          #   # TODO: Initialize `breakpoint_id`:
           #   breakpoint_id = ''
           #
-          #   # TODO: Initialize +client_version+:
+          #   # TODO: Initialize `client_version`:
           #   client_version = ''
           #   debugger2_client.delete_breakpoint(debuggee_id, breakpoint_id, client_version)
 
@@ -351,12 +351,12 @@ module Google
           #   ID of the debuggee whose breakpoints to list.
           # @param client_version [String]
           #   The client version making the call.
-          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param include_all_users [true, false]
-          #   When set to +true+, the response includes the list of breakpoints set by
+          #   When set to `true`, the response includes the list of breakpoints set by
           #   any user. Otherwise, it includes only breakpoints set by the caller.
           # @param include_inactive [true, false]
-          #   When set to +true+, the response includes active and inactive
+          #   When set to `true`, the response includes active and inactive
           #   breakpoints. Otherwise, it includes only active breakpoints.
           # @param action [Google::Devtools::Clouddebugger::V2::ListBreakpointsRequest::BreakpointActionValue | Hash]
           #   When set, the response includes only breakpoints with the specified action.
@@ -364,13 +364,13 @@ module Google
           #   can also be provided.
           # @param strip_results [true, false]
           #   This field is deprecated. The following fields are always stripped out of
-          #   the result: +stack_frames+, +evaluated_expressions+ and +variable_table+.
+          #   the result: `stack_frames`, `evaluated_expressions` and `variable_table`.
           # @param wait_token [String]
           #   A wait token that, if specified, blocks the call until the breakpoints
           #   list has changed, or a server selected timeout has expired.  The value
           #   should be set from the last response. The error code
-          #   +google.rpc.Code.ABORTED+ (RPC) is returned on wait timeout, which
-          #   should be called again with the same +wait_token+.
+          #   `google.rpc.Code.ABORTED` (RPC) is returned on wait timeout, which
+          #   should be called again with the same `wait_token`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -384,10 +384,10 @@ module Google
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
-          #   # TODO: Initialize +debuggee_id+:
+          #   # TODO: Initialize `debuggee_id`:
           #   debuggee_id = ''
           #
-          #   # TODO: Initialize +client_version+:
+          #   # TODO: Initialize `client_version`:
           #   client_version = ''
           #   response = debugger2_client.list_breakpoints(debuggee_id, client_version)
 
@@ -420,9 +420,9 @@ module Google
           #   Project number of a Google Cloud project whose debuggees to list.
           # @param client_version [String]
           #   The client version making the call.
-          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           # @param include_inactive [true, false]
-          #   When set to +true+, the result includes all debuggees. Otherwise, the
+          #   When set to `true`, the result includes all debuggees. Otherwise, the
           #   result includes only debuggees that are active.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -437,10 +437,10 @@ module Google
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
-          #   # TODO: Initialize +project+:
+          #   # TODO: Initialize `project`:
           #   project = ''
           #
-          #   # TODO: Initialize +client_version+:
+          #   # TODO: Initialize `client_version`:
           #   client_version = ''
           #   response = debugger2_client.list_debuggees(project, client_version)
 

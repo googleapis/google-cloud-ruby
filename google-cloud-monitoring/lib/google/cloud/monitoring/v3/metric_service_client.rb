@@ -279,13 +279,13 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   +"projects/\\{project_id_or_number}"+.
+          #   `"projects/{project_id_or_number}"`.
           # @param filter [String]
           #   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
           #   the descriptors to be returned.  The filter can reference
           #   the descriptor's type and labels. For example, the
           #   following filter returns only Google Compute Engine descriptors
-          #   that have an +id+ label:
+          #   that have an `id` label:
           #
           #       resource.type = starts_with("gce_") AND resource.label:id
           # @param page_size [Integer]
@@ -344,9 +344,9 @@ module Google
           #
           # @param name [String]
           #   The monitored resource descriptor to get.  The format is
-          #   +"projects/\\{project_id_or_number}/monitoredResourceDescriptors/\\{resource_type}"+.
-          #   The +\\{resource_type}+ is a predefined type, such as
-          #   +cloudsql_database+.
+          #   `"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"`.
+          #   The `{resource_type}` is a predefined type, such as
+          #   `cloudsql_database`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -377,7 +377,7 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   +"projects/\\{project_id_or_number}"+.
+          #   `"projects/{project_id_or_number}"`.
           # @param filter [String]
           #   If this field is empty, all custom and
           #   system-defined metric descriptors are returned.
@@ -443,9 +443,9 @@ module Google
           #
           # @param name [String]
           #   The metric descriptor on which to execute the request. The format is
-          #   +"projects/\\{project_id_or_number}/metricDescriptors/\\{metric_id}"+.
-          #   An example value of +\\{metric_id}+ is
-          #   +"compute.googleapis.com/instance/disk/read_bytes_count"+.
+          #   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
+          #   An example value of `{metric_id}` is
+          #   `"compute.googleapis.com/instance/disk/read_bytes_count"`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -478,7 +478,7 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   +"projects/\\{project_id_or_number}"+.
+          #   `"projects/{project_id_or_number}"`.
           # @param metric_descriptor [Google::Api::MetricDescriptor | Hash]
           #   The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
           #   descriptor.
@@ -498,7 +498,7 @@ module Google
           #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +metric_descriptor+:
+          #   # TODO: Initialize `metric_descriptor`:
           #   metric_descriptor = {}
           #   response = metric_service_client.create_metric_descriptor(formatted_name, metric_descriptor)
 
@@ -520,9 +520,9 @@ module Google
           #
           # @param name [String]
           #   The metric descriptor on which to execute the request. The format is
-          #   +"projects/\\{project_id_or_number}/metricDescriptors/\\{metric_id}"+.
-          #   An example of +\\{metric_id}+ is:
-          #   +"custom.googleapis.com/my_test_metric"+.
+          #   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
+          #   An example of `{metric_id}` is:
+          #   `"custom.googleapis.com/my_test_metric"`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -603,13 +603,13 @@ module Google
           #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +filter+:
+          #   # TODO: Initialize `filter`:
           #   filter = ''
           #
-          #   # TODO: Initialize +interval+:
+          #   # TODO: Initialize `interval`:
           #   interval = {}
           #
-          #   # TODO: Initialize +view+:
+          #   # TODO: Initialize `view`:
           #   view = :FULL
           #
           #   # Iterate over all results.
@@ -655,12 +655,12 @@ module Google
           #
           # @param name [String]
           #   The project on which to execute the request. The format is
-          #   +"projects/\\{project_id_or_number}"+.
+          #   `"projects/{project_id_or_number}"`.
           # @param time_series [Array<Google::Monitoring::V3::TimeSeries | Hash>]
           #   The new data to be added to a list of time series.
           #   Adds at most one data point to each of several time series.  The new data
           #   point must be more recent than any other point in its time series.  Each
-          #   +TimeSeries+ value must fully specify a unique time series by supplying
+          #   `TimeSeries` value must fully specify a unique time series by supplying
           #   all label values for the metric and the monitored resource.
           #   A hash of the same form as `Google::Monitoring::V3::TimeSeries`
           #   can also be provided.
@@ -677,7 +677,7 @@ module Google
           #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +time_series+:
+          #   # TODO: Initialize `time_series`:
           #   time_series = []
           #   metric_service_client.create_time_series(formatted_name, time_series)
 

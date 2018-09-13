@@ -24,7 +24,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The client-assigned sink identifier, unique within the
-      #     project. Example: +"my-syslog-errors-to-pubsub"+.  Sink identifiers are
+      #     project. Example: `"my-syslog-errors-to-pubsub"`.  Sink identifiers are
       #     limited to 100 characters and can include only the following characters:
       #     upper and lower-case alphanumeric characters, underscores, hyphens, and
       #     periods.
@@ -36,7 +36,7 @@ module Google
       #         "bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET]"
       #         "pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]"
       #
-      #     The sink's +writer_identity+, set when the sink is created, must
+      #     The sink's `writer_identity`, set when the sink is created, must
       #     have permission to write to the destination or else the log
       #     entries are not exported.  For more information, see
       #     [Exporting Logs With Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
@@ -60,7 +60,7 @@ module Google
       #     [sinks.create](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create)
       #     and
       #     [sinks.update](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/update),
-      #     based on the setting of +unique_writer_identity+ in those methods.
+      #     based on the setting of `unique_writer_identity` in those methods.
       #
       #     Until you grant this identity write-access to the destination, log entry
       #     exports from this sink will fail. For more information,
@@ -77,7 +77,7 @@ module Google
       #     sink's parent resource are also available for export. Whether a particular
       #     log entry from the children is exported depends on the sink's filter
       #     expression. For example, if this field is true, then the filter
-      #     +resource.type=gce_instance+ would export all Compute Engine VM instance
+      #     `resource.type=gce_instance` would export all Compute Engine VM instance
       #     log entries from all projects in the sink's parent. To only export entries
       #     from certain child projects, filter on the project part of the log name:
       #
@@ -97,15 +97,15 @@ module Google
           # An unspecified format version that will default to V2.
           VERSION_FORMAT_UNSPECIFIED = 0
 
-          # +LogEntry+ version 2 format.
+          # `LogEntry` version 2 format.
           V2 = 1
 
-          # +LogEntry+ version 1 format.
+          # `LogEntry` version 1 format.
           V1 = 2
         end
       end
 
-      # The parameters to +ListSinks+.
+      # The parameters to `ListSinks`.
       # @!attribute [rw] parent
       #   @return [String]
       #     Required. The parent resource whose sinks are to be listed:
@@ -117,28 +117,28 @@ module Google
       # @!attribute [rw] page_token
       #   @return [String]
       #     Optional. If present, then retrieve the next batch of results from the
-      #     preceding call to this method.  +pageToken+ must be the value of
-      #     +nextPageToken+ from the previous response.  The values of other method
+      #     preceding call to this method.  `pageToken` must be the value of
+      #     `nextPageToken` from the previous response.  The values of other method
       #     parameters should be identical to those in the previous call.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Optional. The maximum number of results to return from this request.
-      #     Non-positive values are ignored.  The presence of +nextPageToken+ in the
+      #     Non-positive values are ignored.  The presence of `nextPageToken` in the
       #     response indicates that more results might be available.
       class ListSinksRequest; end
 
-      # Result returned from +ListSinks+.
+      # Result returned from `ListSinks`.
       # @!attribute [rw] sinks
       #   @return [Array<Google::Logging::V2::LogSink>]
       #     A list of sinks.
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     If there might be more results than appear in this response, then
-      #     +nextPageToken+ is included.  To get the next set of results, call the same
-      #     method again using the value of +nextPageToken+ as +pageToken+.
+      #     `nextPageToken` is included.  To get the next set of results, call the same
+      #     method again using the value of `nextPageToken` as `pageToken`.
       class ListSinksResponse; end
 
-      # The parameters to +GetSink+.
+      # The parameters to `GetSink`.
       # @!attribute [rw] sink_name
       #   @return [String]
       #     Required. The resource name of the sink:
@@ -148,10 +148,10 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
       #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
+      #     Example: `"projects/my-project-id/sinks/my-sink-id"`.
       class GetSinkRequest; end
 
-      # The parameters to +CreateSink+.
+      # The parameters to `CreateSink`.
       # @!attribute [rw] parent
       #   @return [String]
       #     Required. The resource in which to create the sink:
@@ -161,27 +161,27 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]"
       #         "folders/[FOLDER_ID]"
       #
-      #     Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
+      #     Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
       # @!attribute [rw] sink
       #   @return [Google::Logging::V2::LogSink]
-      #     Required. The new sink, whose +name+ parameter is a sink identifier that
+      #     Required. The new sink, whose `name` parameter is a sink identifier that
       #     is not already in use.
       # @!attribute [rw] unique_writer_identity
       #   @return [true, false]
-      #     Optional. Determines the kind of IAM identity returned as +writer_identity+
+      #     Optional. Determines the kind of IAM identity returned as `writer_identity`
       #     in the new sink.  If this value is omitted or set to false, and if the
-      #     sink's parent is a project, then the value returned as +writer_identity+ is
+      #     sink's parent is a project, then the value returned as `writer_identity` is
       #     the same group or service account used by Stackdriver Logging before the
       #     addition of writer identities to this API. The sink's destination must be
       #     in the same project as the sink itself.
       #
       #     If this field is set to true, or if the sink is owned by a non-project
-      #     resource such as an organization, then the value of +writer_identity+ will
+      #     resource such as an organization, then the value of `writer_identity` will
       #     be a unique service account used only for exports from the new sink.  For
-      #     more information, see +writer_identity+ in {Google::Logging::V2::LogSink LogSink}.
+      #     more information, see `writer_identity` in {Google::Logging::V2::LogSink LogSink}.
       class CreateSinkRequest; end
 
-      # The parameters to +UpdateSink+.
+      # The parameters to `UpdateSink`.
       # @!attribute [rw] sink_name
       #   @return [String]
       #     Required. The full resource name of the sink to update, including the
@@ -192,30 +192,30 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
       #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
+      #     Example: `"projects/my-project-id/sinks/my-sink-id"`.
       # @!attribute [rw] sink
       #   @return [Google::Logging::V2::LogSink]
       #     Required. The updated sink, whose name is the same identifier that appears
-      #     as part of +sink_name+.
+      #     as part of `sink_name`.
       # @!attribute [rw] unique_writer_identity
       #   @return [true, false]
       #     Optional. See
       #     [sinks.create](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create)
       #     for a description of this field.  When updating a sink, the effect of this
-      #     field on the value of +writer_identity+ in the updated sink depends on both
+      #     field on the value of `writer_identity` in the updated sink depends on both
       #     the old and new values of this field:
       #
       #     * If the old and new values of this field are both false or both true,
-      #       then there is no change to the sink's +writer_identity+.
+      #       then there is no change to the sink's `writer_identity`.
       #     * If the old value is false and the new value is true, then
-      #       +writer_identity+ is changed to a unique service account.
+      #       `writer_identity` is changed to a unique service account.
       #     * It is an error if the old value is true and the new value is
       #       set to false or defaulted to false.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
-      #     Optional. Field mask that specifies the fields in +sink+ that need
+      #     Optional. Field mask that specifies the fields in `sink` that need
       #     an update. A sink field will be overwritten if, and only if, it is
-      #     in the update mask.  +name+ and output only fields cannot be updated.
+      #     in the update mask.  `name` and output only fields cannot be updated.
       #
       #     An empty updateMask is temporarily treated as using the following mask
       #     for backwards compatibility purposes:
@@ -223,13 +223,13 @@ module Google
       #     At some point in the future, behavior will be removed and specifying an
       #     empty updateMask will be an error.
       #
-      #     For a detailed +FieldMask+ definition, see
+      #     For a detailed `FieldMask` definition, see
       #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
       #
-      #     Example: +updateMask=filter+.
+      #     Example: `updateMask=filter`.
       class UpdateSinkRequest; end
 
-      # The parameters to +DeleteSink+.
+      # The parameters to `DeleteSink`.
       # @!attribute [rw] sink_name
       #   @return [String]
       #     Required. The full resource name of the sink to delete, including the
@@ -240,7 +240,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
       #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
+      #     Example: `"projects/my-project-id/sinks/my-sink-id"`.
       class DeleteSinkRequest; end
 
       # Specifies a set of log entries that are not to be stored in Stackdriver
@@ -252,7 +252,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     Required. A client-assigned identifier, such as
-      #     +"load-balancer-exclusion"+. Identifiers are limited to 100 characters and
+      #     `"load-balancer-exclusion"`. Identifiers are limited to 100 characters and
       #     can include only letters, digits, underscores, hyphens, and periods.
       # @!attribute [rw] description
       #   @return [String]
@@ -267,7 +267,7 @@ module Google
       #     For example, the following filter matches 99% of low-severity log
       #     entries from load balancers:
       #
-      #     +"resource.type=http_load_balancer severity<ERROR sample(insertId, 0.99)"+
+      #     `"resource.type=http_load_balancer severity<ERROR sample(insertId, 0.99)"`
       # @!attribute [rw] disabled
       #   @return [true, false]
       #     Optional. If set to True, then this exclusion is disabled and it does not
@@ -276,7 +276,7 @@ module Google
       #     to change the value of this field.
       class LogExclusion; end
 
-      # The parameters to +ListExclusions+.
+      # The parameters to `ListExclusions`.
       # @!attribute [rw] parent
       #   @return [String]
       #     Required. The parent resource whose exclusions are to be listed.
@@ -288,28 +288,28 @@ module Google
       # @!attribute [rw] page_token
       #   @return [String]
       #     Optional. If present, then retrieve the next batch of results from the
-      #     preceding call to this method.  +pageToken+ must be the value of
-      #     +nextPageToken+ from the previous response.  The values of other method
+      #     preceding call to this method.  `pageToken` must be the value of
+      #     `nextPageToken` from the previous response.  The values of other method
       #     parameters should be identical to those in the previous call.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Optional. The maximum number of results to return from this request.
-      #     Non-positive values are ignored.  The presence of +nextPageToken+ in the
+      #     Non-positive values are ignored.  The presence of `nextPageToken` in the
       #     response indicates that more results might be available.
       class ListExclusionsRequest; end
 
-      # Result returned from +ListExclusions+.
+      # Result returned from `ListExclusions`.
       # @!attribute [rw] exclusions
       #   @return [Array<Google::Logging::V2::LogExclusion>]
       #     A list of exclusions.
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     If there might be more results than appear in this response, then
-      #     +nextPageToken+ is included.  To get the next set of results, call the same
-      #     method again using the value of +nextPageToken+ as +pageToken+.
+      #     `nextPageToken` is included.  To get the next set of results, call the same
+      #     method again using the value of `nextPageToken` as `pageToken`.
       class ListExclusionsResponse; end
 
-      # The parameters to +GetExclusion+.
+      # The parameters to `GetExclusion`.
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The resource name of an existing exclusion:
@@ -319,10 +319,10 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
       #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
       #
-      #     Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+      #     Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
       class GetExclusionRequest; end
 
-      # The parameters to +CreateExclusion+.
+      # The parameters to `CreateExclusion`.
       # @!attribute [rw] parent
       #   @return [String]
       #     Required. The parent resource in which to create the exclusion:
@@ -332,14 +332,14 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]"
       #         "folders/[FOLDER_ID]"
       #
-      #     Examples: +"projects/my-logging-project"+, +"organizations/123456789"+.
+      #     Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
       # @!attribute [rw] exclusion
       #   @return [Google::Logging::V2::LogExclusion]
-      #     Required. The new exclusion, whose +name+ parameter is an exclusion name
+      #     Required. The new exclusion, whose `name` parameter is an exclusion name
       #     that is not already used in the parent resource.
       class CreateExclusionRequest; end
 
-      # The parameters to +UpdateExclusion+.
+      # The parameters to `UpdateExclusion`.
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The resource name of the exclusion to update:
@@ -349,23 +349,23 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
       #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
       #
-      #     Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+      #     Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
       # @!attribute [rw] exclusion
       #   @return [Google::Logging::V2::LogExclusion]
       #     Required. New values for the existing exclusion. Only the fields specified
-      #     in +update_mask+ are relevant.
+      #     in `update_mask` are relevant.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
       #     Required. A nonempty list of fields to change in the existing exclusion.
       #     New values for the fields are taken from the corresponding fields in the
       #     {Google::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
-      #     +update_mask+ are not changed and are ignored in the request.
+      #     `update_mask` are not changed and are ignored in the request.
       #
       #     For example, to change the filter and description of an exclusion,
-      #     specify an +update_mask+ of +"filter,description"+.
+      #     specify an `update_mask` of `"filter,description"`.
       class UpdateExclusionRequest; end
 
-      # The parameters to +DeleteExclusion+.
+      # The parameters to `DeleteExclusion`.
       # @!attribute [rw] name
       #   @return [String]
       #     Required. The resource name of an existing exclusion to delete:
@@ -375,7 +375,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
       #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
       #
-      #     Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+      #     Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
       class DeleteExclusionRequest; end
     end
   end

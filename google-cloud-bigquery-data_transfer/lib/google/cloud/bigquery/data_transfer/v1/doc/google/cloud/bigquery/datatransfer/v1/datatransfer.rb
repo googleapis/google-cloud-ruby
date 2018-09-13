@@ -119,7 +119,7 @@ module Google
           # @!attribute [rw] scopes
           #   @return [Array<String>]
           #     Api auth scopes for which refresh token needs to be obtained. Only valid
-          #     when +client_id+ is specified. Ignored otherwise. These are scopes needed
+          #     when `client_id` is specified. Ignored otherwise. These are scopes needed
           #     by a data source to prepare data and ingest them into BigQuery,
           #     e.g., https://www.googleapis.com/auth/bigquery
           # @!attribute [rw] transfer_type
@@ -137,14 +137,14 @@ module Google
           #   @return [String]
           #     Default data transfer schedule.
           #     Examples of valid schedules include:
-          #     +1st,3rd monday of month 15:30+,
-          #     +every wed,fri of jan,jun 13:15+, and
-          #     +first sunday of quarter 00:00+.
+          #     `1st,3rd monday of month 15:30`,
+          #     `every wed,fri of jan,jun 13:15`, and
+          #     `first sunday of quarter 00:00`.
           # @!attribute [rw] supports_custom_schedule
           #   @return [true, false]
           #     Specifies whether the data source supports a user defined schedule, or
           #     operates on the default schedule.
-          #     When set to +true+, user can override default schedule.
+          #     When set to `true`, user can override default schedule.
           # @!attribute [rw] parameters
           #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter>]
           #     Data source parameters.
@@ -163,7 +163,7 @@ module Google
           # @!attribute [rw] default_data_refresh_window_days
           #   @return [Integer]
           #     Default data refresh window on days.
-          #     Only meaningful when +data_refresh_type+ = +SLIDING_WINDOW+.
+          #     Only meaningful when `data_refresh_type` = `SLIDING_WINDOW`.
           # @!attribute [rw] manual_runs_disabled
           #   @return [true, false]
           #     Disables backfilling and manual run scheduling
@@ -207,21 +207,21 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     The field will contain name of the resource requested, for example:
-          #     +projects/\\{project_id}/dataSources/\\{data_source_id}+
+          #     `projects/{project_id}/dataSources/{data_source_id}`
           class GetDataSourceRequest; end
 
           # Request to list supported data sources and their data transfer settings.
           # @!attribute [rw] parent
           #   @return [String]
           #     The BigQuery project id for which data sources should be returned.
-          #     Must be in the form: +projects/\\{project_id}+
+          #     Must be in the form: `projects/{project_id}`
           # @!attribute [rw] page_token
           #   @return [String]
           #     Pagination token, which can be used to request a specific page
-          #     of +ListDataSourcesRequest+ list results. For multiple-page
-          #     results, +ListDataSourcesResponse+ outputs
-          #     a +next_page+ token, which can be used as the
-          #     +page_token+ value to request the next page of list results.
+          #     of `ListDataSourcesRequest` list results. For multiple-page
+          #     results, `ListDataSourcesResponse` outputs
+          #     a `next_page` token, which can be used as the
+          #     `page_token` value to request the next page of list results.
           # @!attribute [rw] page_size
           #   @return [Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
@@ -235,7 +235,7 @@ module Google
           #   @return [String]
           #     Output only. The next-pagination token. For multiple-page list results,
           #     this token can be used as the
-          #     +ListDataSourcesRequest.page_token+
+          #     `ListDataSourcesRequest.page_token`
           #     to request the next page of list results.
           class ListDataSourcesResponse; end
 
@@ -258,7 +258,7 @@ module Google
           #   @return [String]
           #     Optional OAuth2 authorization code to use with this transfer configuration.
           #     This is required if new credentials are needed, as indicated by
-          #     +CheckValidCreds+.
+          #     `CheckValidCreds`.
           #     In order to obtain authorization_code, please make a
           #     request to
           #     https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?client_id=<datatransferapiclientid>&scope=<data_source_scopes>&redirect_uri=<redirect_uri>
@@ -306,7 +306,7 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     The field will contain name of the resource requested, for example:
-          #     +projects/\\{project_id}/transferConfigs/\\{config_id}+
+          #     `projects/{project_id}/transferConfigs/{config_id}`
           class GetTransferConfigRequest; end
 
           # A request to delete data transfer information. All associated transfer runs
@@ -314,38 +314,38 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     The field will contain name of the resource requested, for example:
-          #     +projects/\\{project_id}/transferConfigs/\\{config_id}+
+          #     `projects/{project_id}/transferConfigs/{config_id}`
           class DeleteTransferConfigRequest; end
 
           # A request to get data transfer run information.
           # @!attribute [rw] name
           #   @return [String]
           #     The field will contain name of the resource requested, for example:
-          #     +projects/\\{project_id}/transferConfigs/\\{config_id}/runs/\\{run_id}+
+          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
           class GetTransferRunRequest; end
 
           # A request to delete data transfer run information.
           # @!attribute [rw] name
           #   @return [String]
           #     The field will contain name of the resource requested, for example:
-          #     +projects/\\{project_id}/transferConfigs/\\{config_id}/runs/\\{run_id}+
+          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
           class DeleteTransferRunRequest; end
 
           # A request to list data transfers configured for a BigQuery project.
           # @!attribute [rw] parent
           #   @return [String]
           #     The BigQuery project id for which data sources
-          #     should be returned: +projects/\\{project_id}+.
+          #     should be returned: `projects/{project_id}`.
           # @!attribute [rw] data_source_ids
           #   @return [Array<String>]
           #     When specified, only configurations of requested data sources are returned.
           # @!attribute [rw] page_token
           #   @return [String]
           #     Pagination token, which can be used to request a specific page
-          #     of +ListTransfersRequest+ list results. For multiple-page
-          #     results, +ListTransfersResponse+ outputs
-          #     a +next_page+ token, which can be used as the
-          #     +page_token+ value to request the next page of list results.
+          #     of `ListTransfersRequest` list results. For multiple-page
+          #     results, `ListTransfersResponse` outputs
+          #     a `next_page` token, which can be used as the
+          #     `page_token` value to request the next page of list results.
           # @!attribute [rw] page_size
           #   @return [Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
@@ -359,7 +359,7 @@ module Google
           #   @return [String]
           #     Output only. The next-pagination token. For multiple-page list results,
           #     this token can be used as the
-          #     +ListTransferConfigsRequest.page_token+
+          #     `ListTransferConfigsRequest.page_token`
           #     to request the next page of list results.
           class ListTransferConfigsResponse; end
 
@@ -370,17 +370,17 @@ module Google
           #   @return [String]
           #     Name of transfer configuration for which transfer runs should be retrieved.
           #     Format of transfer configuration resource name is:
-          #     +projects/\\{project_id}/transferConfigs/\\{config_id}+.
+          #     `projects/{project_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] states
           #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferState>]
           #     When specified, only transfer runs with requested states are returned.
           # @!attribute [rw] page_token
           #   @return [String]
           #     Pagination token, which can be used to request a specific page
-          #     of +ListTransferRunsRequest+ list results. For multiple-page
-          #     results, +ListTransferRunsResponse+ outputs
-          #     a +next_page+ token, which can be used as the
-          #     +page_token+ value to request the next page of list results.
+          #     of `ListTransferRunsRequest` list results. For multiple-page
+          #     results, `ListTransferRunsResponse` outputs
+          #     a `next_page` token, which can be used as the
+          #     `page_token` value to request the next page of list results.
           # @!attribute [rw] page_size
           #   @return [Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
@@ -406,7 +406,7 @@ module Google
           #   @return [String]
           #     Output only. The next-pagination token. For multiple-page list results,
           #     this token can be used as the
-          #     +ListTransferRunsRequest.page_token+
+          #     `ListTransferRunsRequest.page_token`
           #     to request the next page of list results.
           class ListTransferRunsResponse; end
 
@@ -414,14 +414,14 @@ module Google
           # @!attribute [rw] parent
           #   @return [String]
           #     Transfer run name in the form:
-          #     +projects/\\{project_id}/transferConfigs/\\{config_Id}/runs/\\{run_id}+.
+          #     `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
           # @!attribute [rw] page_token
           #   @return [String]
           #     Pagination token, which can be used to request a specific page
-          #     of +ListTransferLogsRequest+ list results. For multiple-page
-          #     results, +ListTransferLogsResponse+ outputs
-          #     a +next_page+ token, which can be used as the
-          #     +page_token+ value to request the next page of list results.
+          #     of `ListTransferLogsRequest` list results. For multiple-page
+          #     results, `ListTransferLogsResponse` outputs
+          #     a `next_page` token, which can be used as the
+          #     `page_token` value to request the next page of list results.
           # @!attribute [rw] page_size
           #   @return [Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
@@ -439,7 +439,7 @@ module Google
           #   @return [String]
           #     Output only. The next-pagination token. For multiple-page list results,
           #     this token can be used as the
-          #     +GetTransferRunLogRequest.page_token+
+          #     `GetTransferRunLogRequest.page_token`
           #     to request the next page of list results.
           class ListTransferLogsResponse; end
 
@@ -452,28 +452,28 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     The data source in the form:
-          #     +projects/\\{project_id}/dataSources/\\{data_source_id}+
+          #     `projects/{project_id}/dataSources/{data_source_id}`
           class CheckValidCredsRequest; end
 
           # A response indicating whether the credentials exist and are valid.
           # @!attribute [rw] has_valid_creds
           #   @return [true, false]
-          #     If set to +true+, the credentials exist and are valid.
+          #     If set to `true`, the credentials exist and are valid.
           class CheckValidCredsResponse; end
 
           # A request to schedule transfer runs for a time range.
           # @!attribute [rw] parent
           #   @return [String]
           #     Transfer configuration name in the form:
-          #     +projects/\\{project_id}/transferConfigs/\\{config_id}+.
+          #     `projects/{project_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] start_time
           #   @return [Google::Protobuf::Timestamp]
           #     Start time of the range of transfer runs. For example,
-          #     +"2017-05-25T00:00:00+00:00"+.
+          #     `"2017-05-25T00:00:00+00:00"`.
           # @!attribute [rw] end_time
           #   @return [Google::Protobuf::Timestamp]
           #     End time of the range of transfer runs. For example,
-          #     +"2017-05-30T00:00:00+00:00"+.
+          #     `"2017-05-30T00:00:00+00:00"`.
           class ScheduleTransferRunsRequest; end
 
           # A response to schedule transfer runs for a time range.

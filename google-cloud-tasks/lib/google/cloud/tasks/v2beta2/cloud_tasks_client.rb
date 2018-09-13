@@ -419,11 +419,11 @@ module Google
           #   Required.
           #
           #   The location name.
-          #   For example: +projects/PROJECT_ID/locations/LOCATION_ID+
+          #   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
           # @param filter [String]
-          #   +filter+ can be used to specify a subset of queues. Any {Google::Cloud::Tasks::V2beta2::Queue Queue}
+          #   `filter` can be used to specify a subset of queues. Any {Google::Cloud::Tasks::V2beta2::Queue Queue}
           #   field can be used as a filter and several operators as supported.
-          #   For example: +<=, <, >=, >, !=, =, :+. The filter syntax is the same as
+          #   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
           #   described in
           #   [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
           #
@@ -489,7 +489,7 @@ module Google
           #   Required.
           #
           #   The resource name of the queue. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -523,7 +523,7 @@ module Google
           # it was dispatched or not.
           #
           # WARNING: Using this method may have unintended side effects if you are
-          # using an App Engine +queue.yaml+ or +queue.xml+ file to manage your queues.
+          # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
           # Read
           # [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
           # before using this method.
@@ -532,7 +532,7 @@ module Google
           #   Required.
           #
           #   The location name in which the queue will be created.
-          #   For example: +projects/PROJECT_ID/locations/LOCATION_ID+
+          #   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
           #
           #   The list of allowed locations can be obtained by calling Cloud
           #   Tasks' implementation of
@@ -559,7 +559,7 @@ module Google
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
           #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
           #
-          #   # TODO: Initialize +queue+:
+          #   # TODO: Initialize `queue`:
           #   queue = {}
           #   response = cloud_tasks_client.create_queue(formatted_parent, queue)
 
@@ -586,7 +586,7 @@ module Google
           # it was dispatched or not.
           #
           # WARNING: Using this method may have unintended side effects if you are
-          # using an App Engine +queue.yaml+ or +queue.xml+ file to manage your queues.
+          # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
           # Read
           # [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
           # before using this method.
@@ -622,7 +622,7 @@ module Google
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
           #
-          #   # TODO: Initialize +queue+:
+          #   # TODO: Initialize `queue`:
           #   queue = {}
           #   response = cloud_tasks_client.update_queue(queue)
 
@@ -647,7 +647,7 @@ module Google
           # for 7 days.
           #
           # WARNING: Using this method may have unintended side effects if you are
-          # using an App Engine +queue.yaml+ or +queue.xml+ file to manage your queues.
+          # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
           # Read
           # [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
           # before using this method.
@@ -656,7 +656,7 @@ module Google
           #   Required.
           #
           #   The queue name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -694,7 +694,7 @@ module Google
           #   Required.
           #
           #   The queue name. For example:
-          #   +projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID+
+          #   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -733,7 +733,7 @@ module Google
           #   Required.
           #
           #   The queue name. For example:
-          #   +projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID+
+          #   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -777,7 +777,7 @@ module Google
           #   Required.
           #
           #   The queue name. For example:
-          #   +projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID+
+          #   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -812,12 +812,12 @@ module Google
           # [Google IAM](https://cloud.google.com/iam) permission on the specified
           # resource parent:
           #
-          # * +cloudtasks.queues.getIamPolicy+
+          # * `cloudtasks.queues.getIamPolicy`
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
-          #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/\\{project}+.
+          #   `resource` is usually specified as a path. For example, a Project
+          #   resource is specified as `projects/{project}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -854,14 +854,14 @@ module Google
           # [Google IAM](https://cloud.google.com/iam) permission on the specified
           # resource parent:
           #
-          # * +cloudtasks.queues.setIamPolicy+
+          # * `cloudtasks.queues.setIamPolicy`
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
-          #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/\\{project}+.
+          #   `resource` is usually specified as a path. For example, a Project
+          #   resource is specified as `projects/{project}`.
           # @param policy [Google::Iam::V1::Policy | Hash]
-          #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+          #   REQUIRED: The complete policy to be applied to the `resource`. The size of
           #   the policy is limited to a few 10s of KB. An empty policy is a
           #   valid policy but certain Cloud Platform services (such as Projects)
           #   might reject them.
@@ -881,7 +881,7 @@ module Google
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
           #   formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #
-          #   # TODO: Initialize +policy+:
+          #   # TODO: Initialize `policy`:
           #   policy = {}
           #   response = cloud_tasks_client.set_iam_policy(formatted_resource, policy)
 
@@ -908,10 +908,10 @@ module Google
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.
-          #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/\\{project}+.
+          #   `resource` is usually specified as a path. For example, a Project
+          #   resource is specified as `projects/{project}`.
           # @param permissions [Array<String>]
-          #   The set of permissions to check for the +resource+. Permissions with
+          #   The set of permissions to check for the `resource`. Permissions with
           #   wildcards (such as '*' or 'storage.*') are not allowed. For more
           #   information see
           #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
@@ -929,7 +929,7 @@ module Google
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
           #   formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #
-          #   # TODO: Initialize +permissions+:
+          #   # TODO: Initialize `permissions`:
           #   permissions = []
           #   response = cloud_tasks_client.test_iam_permissions(formatted_resource, permissions)
 
@@ -960,7 +960,7 @@ module Google
           #   Required.
           #
           #   The queue name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           # @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
           #   The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
           #   returned.
@@ -972,7 +972,7 @@ module Google
           #   contains.
           #
           #   Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-          #   +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+          #   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
           #   permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -1032,7 +1032,7 @@ module Google
           #   Required.
           #
           #   The task name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           # @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
           #   The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
           #   returned.
@@ -1044,7 +1044,7 @@ module Google
           #   contains.
           #
           #   Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-          #   +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+          #   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
           #   permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1086,7 +1086,7 @@ module Google
           #   Required.
           #
           #   The queue name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           #
           #   The queue must already exist.
           # @param task [Google::Cloud::Tasks::V2beta2::Task | Hash]
@@ -1095,7 +1095,7 @@ module Google
           #   The task to add.
           #
           #   Task names have the following format:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+.
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
           #   The user can optionally specify a task {Google::Cloud::Tasks::V2beta2::Task#name name}. If a
           #   name is not specified then the system will generate a random
           #   unique task id, which will be set in the task returned in the
@@ -1138,7 +1138,7 @@ module Google
           #   contains.
           #
           #   Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-          #   +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+          #   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
           #   permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1154,7 +1154,7 @@ module Google
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
           #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #
-          #   # TODO: Initialize +task+:
+          #   # TODO: Initialize `task`:
           #   task = {}
           #   response = cloud_tasks_client.create_task(formatted_parent, task)
 
@@ -1183,7 +1183,7 @@ module Google
           #   Required.
           #
           #   The task name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1237,7 +1237,7 @@ module Google
           #   Required.
           #
           #   The queue name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
           # @param lease_duration [Google::Protobuf::Duration | Hash]
           #   After the worker has successfully finished the work associated
           #   with the task, the worker must call via
@@ -1247,16 +1247,16 @@ module Google
           #   that another worker can retry it.
           #
           #   The maximum lease duration is 1 week.
-          #   +lease_duration+ will be truncated to the nearest second.
+          #   `lease_duration` will be truncated to the nearest second.
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
           # @param max_tasks [Integer]
           #   The maximum number of tasks to lease.
           #
           #   The system will make a best effort to return as close to as
-          #   +max_tasks+ as possible.
+          #   `max_tasks` as possible.
           #
-          #   The largest that +max_tasks+ can be is 1000.
+          #   The largest that `max_tasks` can be is 1000.
           # @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
           #   The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
           #   returned.
@@ -1268,29 +1268,29 @@ module Google
           #   contains.
           #
           #   Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-          #   +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+          #   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
           #   permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
           # @param filter [String]
-          #   +filter+ can be used to specify a subset of tasks to lease.
+          #   `filter` can be used to specify a subset of tasks to lease.
           #
-          #   When +filter+ is set to +tag=<my-tag>+ then the
+          #   When `filter` is set to `tag=<my-tag>` then the
           #   {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will contain only tasks whose
-          #   {Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} is equal to +<my-tag>+. +<my-tag>+ must be
+          #   {Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} is equal to `<my-tag>`. `<my-tag>` must be
           #   less than 500 characters.
           #
-          #   When +filter+ is set to +tag_function=oldest_tag()+, only tasks which have
+          #   When `filter` is set to `tag_function=oldest_tag()`, only tasks which have
           #   the same tag as the task with the oldest
           #   {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be returned.
           #
           #   Grammar Syntax:
           #
-          #   * +filter = "tag=" tag | "tag_function=" function+
+          #   * `filter = "tag=" tag | "tag_function=" function`
           #
-          #   * +tag = string+
+          #   * `tag = string`
           #
-          #   * +function = "oldest_tag()"+
+          #   * `function = "oldest_tag()"`
           #
-          #   The +oldest_tag()+ function returns tasks which have the same tag as the
+          #   The `oldest_tag()` function returns tasks which have the same tag as the
           #   oldest task (ordered by schedule time).
           #
           #   SDK compatibility: Although the SDK allows tags to be either
@@ -1314,7 +1314,7 @@ module Google
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
           #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #
-          #   # TODO: Initialize +lease_duration+:
+          #   # TODO: Initialize `lease_duration`:
           #   lease_duration = {}
           #   response = cloud_tasks_client.lease_tasks(formatted_parent, lease_duration)
 
@@ -1355,7 +1355,7 @@ module Google
           #   Required.
           #
           #   The task name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           # @param schedule_time [Google::Protobuf::Timestamp | Hash]
           #   Required.
           #
@@ -1379,7 +1379,7 @@ module Google
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
           #
-          #   # TODO: Initialize +schedule_time+:
+          #   # TODO: Initialize `schedule_time`:
           #   schedule_time = {}
           #   cloud_tasks_client.acknowledge_task(formatted_name, schedule_time)
 
@@ -1407,7 +1407,7 @@ module Google
           #   Required.
           #
           #   The task name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           # @param schedule_time [Google::Protobuf::Timestamp | Hash]
           #   Required.
           #
@@ -1425,7 +1425,7 @@ module Google
           #
           #
           #   The maximum lease duration is 1 week.
-          #   +lease_duration+ will be truncated to the nearest second.
+          #   `lease_duration` will be truncated to the nearest second.
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
           # @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
@@ -1439,7 +1439,7 @@ module Google
           #   contains.
           #
           #   Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-          #   +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+          #   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
           #   permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1455,10 +1455,10 @@ module Google
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
           #
-          #   # TODO: Initialize +schedule_time+:
+          #   # TODO: Initialize `schedule_time`:
           #   schedule_time = {}
           #
-          #   # TODO: Initialize +lease_duration+:
+          #   # TODO: Initialize `lease_duration`:
           #   lease_duration = {}
           #   response = cloud_tasks_client.renew_lease(formatted_name, schedule_time, lease_duration)
 
@@ -1490,7 +1490,7 @@ module Google
           #   Required.
           #
           #   The task name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           # @param schedule_time [Google::Protobuf::Timestamp | Hash]
           #   Required.
           #
@@ -1512,7 +1512,7 @@ module Google
           #   contains.
           #
           #   Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-          #   +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+          #   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
           #   permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1528,7 +1528,7 @@ module Google
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
           #
-          #   # TODO: Initialize +schedule_time+:
+          #   # TODO: Initialize `schedule_time`:
           #   schedule_time = {}
           #   response = cloud_tasks_client.cancel_lease(formatted_name, schedule_time)
 
@@ -1579,7 +1579,7 @@ module Google
           #   Required.
           #
           #   The task name. For example:
-          #   +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+          #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
           # @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
           #   The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
           #   returned.
@@ -1591,7 +1591,7 @@ module Google
           #   contains.
           #
           #   Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-          #   +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+          #   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
           #   permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,

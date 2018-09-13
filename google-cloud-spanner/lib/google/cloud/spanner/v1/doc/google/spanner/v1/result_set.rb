@@ -23,7 +23,7 @@ module Google
       #     Metadata about the result set, such as row type information.
       # @!attribute [rw] rows
       #   @return [Array<Google::Protobuf::ListValue>]
-      #     Each element in +rows+ is a row whose format is defined by
+      #     Each element in `rows` is a row whose format is defined by
       #     {Google::Spanner::V1::ResultSetMetadata#row_type metadata::row_type}. The ith element
       #     in each row matches the ith field in
       #     {Google::Spanner::V1::ResultSetMetadata#row_type metadata::row_type}. Elements are
@@ -46,7 +46,7 @@ module Google
       # @!attribute [rw] values
       #   @return [Array<Google::Protobuf::Value>]
       #     A streamed result set consists of a stream of values, which might
-      #     be split into many +PartialResultSet+ messages to accommodate
+      #     be split into many `PartialResultSet` messages to accommodate
       #     large rows and/or large values. Every N complete values defines a
       #     row, where N is equal to the number of entries in
       #     {Google::Spanner::V1::StructType#fields metadata::row_type::fields}.
@@ -56,16 +56,16 @@ module Google
       #
       #     It is possible that the last value in values is "chunked",
       #     meaning that the rest of the value is sent in subsequent
-      #     +PartialResultSet+(s). This is denoted by the {Google::Spanner::V1::PartialResultSet#chunked_value chunked_value}
+      #     `PartialResultSet`(s). This is denoted by the {Google::Spanner::V1::PartialResultSet#chunked_value chunked_value}
       #     field. Two or more chunked values can be merged to form a
       #     complete value as follows:
       #
-      #     * +bool/number/null+: cannot be chunked
-      #       * +string+: concatenate the strings
-      #       * +list+: concatenate the lists. If the last element in a list is a
-      #         +string+, +list+, or +object+, merge it with the first element in
+      #     * `bool/number/null`: cannot be chunked
+      #       * `string`: concatenate the strings
+      #       * `list`: concatenate the lists. If the last element in a list is a
+      #         `string`, `list`, or `object`, merge it with the first element in
       #         the next list by applying these rules recursively.
-      #       * +object+: concatenate the (field name, field value) pairs. If a
+      #       * `object`: concatenate the (field name, field value) pairs. If a
       #         field name is duplicated, then apply these rules recursively
       #         to merge the field values.
       #
@@ -97,7 +97,7 @@ module Google
       #
       #     For a more complete example, suppose a streaming SQL query is
       #     yielding a result set whose rows contain a single string
-      #     field. The following +PartialResultSet+s might be yielded:
+      #     field. The following `PartialResultSet`s might be yielded:
       #
       #         {
       #           "metadata": { ... }
@@ -115,20 +115,20 @@ module Google
       #           "resume_token": "Zx1B..."
       #         }
       #
-      #     This sequence of +PartialResultSet+s encodes two rows, one
-      #     containing the field value +"Hello"+, and a second containing the
-      #     field value +"World" = "W" + "orl" + "d"+.
+      #     This sequence of `PartialResultSet`s encodes two rows, one
+      #     containing the field value `"Hello"`, and a second containing the
+      #     field value `"World" = "W" + "orl" + "d"`.
       # @!attribute [rw] chunked_value
       #   @return [true, false]
       #     If true, then the final value in {Google::Spanner::V1::PartialResultSet#values values} is chunked, and must
-      #     be combined with more values from subsequent +PartialResultSet+s
+      #     be combined with more values from subsequent `PartialResultSet`s
       #     to obtain a complete field value.
       # @!attribute [rw] resume_token
       #   @return [String]
       #     Streaming calls might be interrupted for a variety of reasons, such
       #     as TCP connection loss. If this occurs, the stream of results can
       #     be resumed by re-sending the original request and including
-      #     +resume_token+. Note that executing any other transaction in the
+      #     `resume_token`. Note that executing any other transaction in the
       #     same session invalidates the token.
       # @!attribute [rw] stats
       #   @return [Google::Spanner::V1::ResultSetStats]
@@ -142,8 +142,8 @@ module Google
       # @!attribute [rw] row_type
       #   @return [Google::Spanner::V1::StructType]
       #     Indicates the field names and types for the rows in the result
-      #     set.  For example, a SQL query like +"SELECT UserId, UserName FROM
-      #     Users"+ could return a +row_type+ value like:
+      #     set.  For example, a SQL query like `"SELECT UserId, UserName FROM
+      #     Users"` could return a `row_type` value like:
       #
       #         "fields": [
       #           { "name": "UserId", "type": { "code": "INT64" } },

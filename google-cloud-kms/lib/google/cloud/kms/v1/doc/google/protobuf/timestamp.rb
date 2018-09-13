@@ -29,13 +29,13 @@ module Google
     #
     # = Examples
     #
-    # Example 1: Compute Timestamp from POSIX +time()+.
+    # Example 1: Compute Timestamp from POSIX `time()`.
     #
     #     Timestamp timestamp;
     #     timestamp.set_seconds(time(NULL));
     #     timestamp.set_nanos(0);
     #
-    # Example 2: Compute Timestamp from POSIX +gettimeofday()+.
+    # Example 2: Compute Timestamp from POSIX `gettimeofday()`.
     #
     #     struct timeval tv;
     #     gettimeofday(&tv, NULL);
@@ -44,7 +44,7 @@ module Google
     #     timestamp.set_seconds(tv.tv_sec);
     #     timestamp.set_nanos(tv.tv_usec * 1000);
     #
-    # Example 3: Compute Timestamp from Win32 +GetSystemTimeAsFileTime()+.
+    # Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
     #
     #     FILETIME ft;
     #     GetSystemTimeAsFileTime(&ft);
@@ -56,7 +56,7 @@ module Google
     #     timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
     #     timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
     #
-    # Example 4: Compute Timestamp from Java +System.currentTimeMillis()+.
+    # Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
     #
     #     long millis = System.currentTimeMillis();
     #
@@ -87,10 +87,10 @@ module Google
     #
     # In JavaScript, one can convert a Date object to this format using the
     # standard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString]
-    # method. In Python, a standard +datetime.datetime+ object can be converted
-    # to this format using [+strftime+](https://docs.python.org/2/library/time.html#time.strftime)
+    # method. In Python, a standard `datetime.datetime` object can be converted
+    # to this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime)
     # with the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one
-    # can use the Joda Time's [+ISODateTimeFormat.dateTime()+](
+    # can use the Joda Time's [`ISODateTimeFormat.dateTime()`](
     # http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--
     # ) to obtain a formatter capable of generating timestamps in this format.
     # @!attribute [rw] seconds

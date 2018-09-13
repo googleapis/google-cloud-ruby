@@ -88,8 +88,8 @@ module Google
         #   @return [Array<Google::Cloud::Dataproc::V1::NodeInitializationAction>]
         #     Optional. Commands to execute on each node after config is
         #     completed. By default, executables are run on master and all worker nodes.
-        #     You can test a node's +role+ metadata to run an executable on
-        #     a master or worker node, as shown below using +curl+ (you can also use +wget+):
+        #     You can test a node's `role` metadata to run an executable on
+        #     a master or worker node, as shown below using `curl` (you can also use `wget`):
         #
         #         ROLE=$(curl -H Metadata-Flavor:Google http://metadata/computeMetadata/v1/instance/attributes/dataproc-role)
         #         if [[ "${ROLE}" == 'Master' ]]; then
@@ -111,22 +111,22 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * +https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]+
-        #     * +projects/[project_id]/zones/[zone]+
-        #     * +us-central1-f+
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]`
+        #     * `projects/[project_id]/zones/[zone]`
+        #     * `us-central1-f`
         # @!attribute [rw] network_uri
         #   @return [String]
         #     Optional. The Google Compute Engine network to be used for machine
         #     communications. Cannot be specified with subnetwork_uri. If neither
-        #     +network_uri+ nor +subnetwork_uri+ is specified, the "default" network of
+        #     `network_uri` nor `subnetwork_uri` is specified, the "default" network of
         #     the project is used, if it exists. Cannot be a "Custom Subnet Network" (see
         #     [Using Subnetworks](https://cloud.google.com/compute/docs/subnetworks) for more information).
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * +https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default+
-        #     * +projects/[project_id]/regions/global/default+
-        #     * +default+
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default`
+        #     * `projects/[project_id]/regions/global/default`
+        #     * `default`
         # @!attribute [rw] subnetwork_uri
         #   @return [String]
         #     Optional. The Google Compute Engine subnetwork to be used for machine
@@ -134,15 +134,15 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * +https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0+
-        #     * +projects/[project_id]/regions/us-east1/sub0+
-        #     * +sub0+
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0`
+        #     * `projects/[project_id]/regions/us-east1/sub0`
+        #     * `sub0`
         # @!attribute [rw] internal_ip_only
         #   @return [true, false]
         #     Optional. If true, all instances in the cluster will only have internal IP
         #     addresses. By default, clusters are not restricted to internal IP addresses,
         #     and will have ephemeral external IP addresses assigned to each instance.
-        #     This +internal_ip_only+ restriction can only be enabled for subnetwork
+        #     This `internal_ip_only` restriction can only be enabled for subnetwork
         #     enabled networks, and all off-cluster dependencies must be configured to be
         #     accessible without external IP addresses.
         # @!attribute [rw] service_account
@@ -156,7 +156,7 @@ module Google
         #
         #     (see https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts
         #     for more information).
-        #     Example: +[account_id]@[project_id].iam.gserviceaccount.com+
+        #     Example: `[account_id]@[project_id].iam.gserviceaccount.com`
         # @!attribute [rw] service_account_scopes
         #   @return [Array<String>]
         #     Optional. The URIs of service account scopes to be included in Google
@@ -192,21 +192,21 @@ module Google
         # @!attribute [rw] instance_names
         #   @return [Array<String>]
         #     Optional. The list of instance names. Cloud Dataproc derives the names from
-        #     +cluster_name+, +num_instances+, and the instance group if not set by user
+        #     `cluster_name`, `num_instances`, and the instance group if not set by user
         #     (recommended practice is to let Cloud Dataproc derive the name).
         # @!attribute [rw] image_uri
         #   @return [String]
         #     Output-only. The Google Compute Engine image resource used for cluster
-        #     instances. Inferred from +SoftwareConfig.image_version+.
+        #     instances. Inferred from `SoftwareConfig.image_version`.
         # @!attribute [rw] machine_type_uri
         #   @return [String]
         #     Optional. The Google Compute Engine machine type used for cluster instances.
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * +https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2+
-        #     * +projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2+
-        #     * +n1-standard-2+
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
+        #     * `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
+        #     * `n1-standard-2`
         # @!attribute [rw] disk_config
         #   @return [Google::Cloud::Dataproc::V1::DiskConfig]
         #     Optional. Disk option config settings.
@@ -246,9 +246,9 @@ module Google
         #     /compute/docs/reference/beta/acceleratorTypes)
         #
         #     Examples
-        #     * +https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80+
-        #     * +projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80+
-        #     * +nvidia-tesla-k80+
+        #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
+        #     * `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
+        #     * `nvidia-tesla-k80`
         # @!attribute [rw] accelerator_count
         #   @return [Integer]
         #     The number of the accelerator cards of this type exposed to this instance.
@@ -339,25 +339,25 @@ module Google
         # @!attribute [rw] image_version
         #   @return [String]
         #     Optional. The version of software inside the cluster. It must match the
-        #     regular expression +[0-9]+\.[0-9]++. If unspecified, it defaults to the
+        #     regular expression `[0-9]+\.[0-9]+`. If unspecified, it defaults to the
         #     latest version (see [Cloud Dataproc Versioning](https://cloud.google.com/dataproc/versioning)).
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. The properties to set on daemon config files.
         #
-        #     Property keys are specified in +prefix:property+ format, such as
-        #     +core:fs.defaultFS+. The following are supported prefixes
+        #     Property keys are specified in `prefix:property` format, such as
+        #     `core:fs.defaultFS`. The following are supported prefixes
         #     and their mappings:
         #
-        #     * capacity-scheduler: +capacity-scheduler.xml+
-        #     * core:   +core-site.xml+
-        #     * distcp: +distcp-default.xml+
-        #     * hdfs:   +hdfs-site.xml+
-        #     * hive:   +hive-site.xml+
-        #     * mapred: +mapred-site.xml+
-        #     * pig:    +pig.properties+
-        #     * spark:  +spark-defaults.conf+
-        #     * yarn:   +yarn-site.xml+
+        #     * capacity-scheduler: `capacity-scheduler.xml`
+        #     * core:   `core-site.xml`
+        #     * distcp: `distcp-default.xml`
+        #     * hdfs:   `hdfs-site.xml`
+        #     * hive:   `hive-site.xml`
+        #     * mapred: `mapred-site.xml`
+        #     * pig:    `pig.properties`
+        #     * spark:  `spark-defaults.conf`
+        #     * yarn:   `yarn-site.xml`
         #
         #     For more information, see
         #     [Cluster properties](https://cloud.google.com/dataproc/docs/concepts/cluster-properties).
@@ -404,11 +404,11 @@ module Google
         #     Required. The changes to the cluster.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Required. Specifies the path, relative to +Cluster+, of
+        #     Required. Specifies the path, relative to `Cluster`, of
         #     the field to update. For example, to change the number of workers
-        #     in a cluster to 5, the +update_mask+ parameter would be
-        #     specified as +config.worker_config.num_instances+,
-        #     and the +PATCH+ request body would specify the new value, as follows:
+        #     in a cluster to 5, the `update_mask` parameter would be
+        #     specified as `config.worker_config.num_instances`,
+        #     and the `PATCH` request body would specify the new value, as follows:
         #
         #         {
         #           "config":{
@@ -418,8 +418,8 @@ module Google
         #           }
         #         }
         #     Similarly, to change the number of preemptible workers in a cluster to 5,
-        #     the +update_mask+ parameter would be
-        #     +config.secondary_worker_config.num_instances+, and the +PATCH+ request
+        #     the `update_mask` parameter would be
+        #     `config.secondary_worker_config.num_instances`, and the `PATCH` request
         #     body would be set as follows:
         #
         #         {
@@ -494,15 +494,15 @@ module Google
         #
         #     field = value [AND [field = value]] ...
         #
-        #     where **field** is one of +status.state+, +clusterName+, or +labels.[KEY]+,
-        #     and +[KEY]+ is a label key. **value** can be +*+ to match all values.
-        #     +status.state+ can be one of the following: +ACTIVE+, +INACTIVE+,
-        #     +CREATING+, +RUNNING+, +ERROR+, +DELETING+, or +UPDATING+. +ACTIVE+
-        #     contains the +CREATING+, +UPDATING+, and +RUNNING+ states. +INACTIVE+
-        #     contains the +DELETING+ and +ERROR+ states.
-        #     +clusterName+ is the name of the cluster provided at creation time.
-        #     Only the logical +AND+ operator is supported; space-separated items are
-        #     treated as having an implicit +AND+ operator.
+        #     where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
+        #     and `[KEY]` is a label key. **value** can be `*` to match all values.
+        #     `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
+        #     `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
+        #     contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
+        #     contains the `DELETING` and `ERROR` states.
+        #     `clusterName` is the name of the cluster provided at creation time.
+        #     Only the logical `AND` operator is supported; space-separated items are
+        #     treated as having an implicit `AND` operator.
         #
         #     Example filter:
         #
@@ -524,7 +524,7 @@ module Google
         #   @return [String]
         #     Output-only. This token is included in the response if there are more
         #     results to fetch. To fetch additional results, provide this value as the
-        #     +page_token+ in a subsequent +ListClustersRequest+.
+        #     `page_token` in a subsequent `ListClustersRequest`.
         class ListClustersResponse; end
 
         # A request to collect cluster diagnostic information.

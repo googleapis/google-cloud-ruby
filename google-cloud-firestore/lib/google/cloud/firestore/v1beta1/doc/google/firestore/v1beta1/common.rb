@@ -30,8 +30,8 @@ module Google
       # A precondition on a document, used for conditional operations.
       # @!attribute [rw] exists
       #   @return [true, false]
-      #     When set to +true+, the target document must exist.
-      #     When set to +false+, the target document must not exist.
+      #     When set to `true`, the target document must exist.
+      #     When set to `false`, the target document must not exist.
       # @!attribute [rw] update_time
       #   @return [Google::Protobuf::Timestamp]
       #     When set, the target document must exist and have been last updated at

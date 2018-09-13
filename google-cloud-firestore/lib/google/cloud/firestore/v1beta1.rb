@@ -83,17 +83,17 @@ module Google
         #
         # This service exposes several types of comparable timestamps:
         #
-        # * +create_time+ - The time at which a document was created. Changes only
+        # * `create_time` - The time at which a document was created. Changes only
         #   when a document is deleted, then re-created. Increases in a strict
         #   monotonic fashion.
-        # * +update_time+ - The time at which a document was last updated. Changes
+        # * `update_time` - The time at which a document was last updated. Changes
         #   every time a document is modified. Does not change when a write results
         #   in no modifications. Increases in a strict monotonic fashion.
-        # * +read_time+ - The time at which a particular state was observed. Used
+        # * `read_time` - The time at which a particular state was observed. Used
         #   to denote a consistent snapshot of the database or the time at which a
         #   Document was observed to not exist.
-        # * +commit_time+ - The time at which the writes in a transaction were
-        #   committed. Any read with an equal or greater +read_time+ is guaranteed
+        # * `commit_time` - The time at which the writes in a transaction were
+        #   committed. Any read with an equal or greater `read_time` is guaranteed
         #   to see the effects of the transaction.
         #
         # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]

@@ -250,7 +250,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The session to list all session entity types from.
-          #   Format: +projects/<Project ID>/agent/sessions/<Session ID>+.
+          #   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -305,8 +305,8 @@ module Google
           #
           # @param name [String]
           #   Required. The name of the session entity type. Format:
-          #   +projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-          #   Display Name>+.
+          #   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+          #   Display Name>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -337,7 +337,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The session to create a session entity type for.
-          #   Format: +projects/<Project ID>/agent/sessions/<Session ID>+.
+          #   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
           # @param session_entity_type [Google::Cloud::Dialogflow::V2::SessionEntityType | Hash]
           #   Required. The session entity type to create.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::SessionEntityType`
@@ -356,7 +356,7 @@ module Google
           #   session_entity_types_client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::SessionEntityTypesClient.session_path("[PROJECT]", "[SESSION]")
           #
-          #   # TODO: Initialize +session_entity_type+:
+          #   # TODO: Initialize `session_entity_type`:
           #   session_entity_type = {}
           #   response = session_entity_types_client.create_session_entity_type(formatted_parent, session_entity_type)
 
@@ -377,8 +377,8 @@ module Google
           #
           # @param session_entity_type [Google::Cloud::Dialogflow::V2::SessionEntityType | Hash]
           #   Required. The entity type to update. Format:
-          #   +projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-          #   Display Name>+.
+          #   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+          #   Display Name>`.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::SessionEntityType`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -398,7 +398,7 @@ module Google
           #
           #   session_entity_types_client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
           #
-          #   # TODO: Initialize +session_entity_type+:
+          #   # TODO: Initialize `session_entity_type`:
           #   session_entity_type = {}
           #   response = session_entity_types_client.update_session_entity_type(session_entity_type)
 
@@ -419,8 +419,8 @@ module Google
           #
           # @param name [String]
           #   Required. The name of the entity type to delete. Format:
-          #   +projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-          #   Display Name>+.
+          #   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+          #   Display Name>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

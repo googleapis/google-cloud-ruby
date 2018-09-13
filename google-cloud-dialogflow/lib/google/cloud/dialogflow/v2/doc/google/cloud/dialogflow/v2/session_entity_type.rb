@@ -27,8 +27,8 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The unique identifier of this session entity type. Format:
-        #     +projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-        #     Display Name>+.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+        #     Display Name>`.
         # @!attribute [rw] entity_override_mode
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityType::EntityOverrideMode]
         #     Required. Indicates whether the additional data should override or
@@ -49,8 +49,8 @@ module Google
 
             # The collection of session entities extends the collection of entities in
             # the corresponding developer entity type.
-            # Calls to +ListSessionEntityTypes+, +GetSessionEntityType+,
-            # +CreateSessionEntityType+ and +UpdateSessionEntityType+ return the full
+            # Calls to `ListSessionEntityTypes`, `GetSessionEntityType`,
+            # `CreateSessionEntityType` and `UpdateSessionEntityType` return the full
             # collection of entities from the developer entity type in the agent's
             # default language and the session entity type.
             ENTITY_OVERRIDE_MODE_SUPPLEMENT = 2
@@ -61,7 +61,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to list all session entity types from.
-        #     Format: +projects/<Project ID>/agent/sessions/<Session ID>+.
+        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional. The maximum number of items to return in a single page. By
@@ -86,15 +86,15 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the session entity type. Format:
-        #     +projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-        #     Display Name>+.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+        #     Display Name>`.
         class GetSessionEntityTypeRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::SessionEntityTypes::CreateSessionEntityType SessionEntityTypes::CreateSessionEntityType}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to create a session entity type for.
-        #     Format: +projects/<Project ID>/agent/sessions/<Session ID>+.
+        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
         # @!attribute [rw] session_entity_type
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
         #     Required. The session entity type to create.
@@ -104,8 +104,8 @@ module Google
         # @!attribute [rw] session_entity_type
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
         #     Required. The entity type to update. Format:
-        #     +projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-        #     Display Name>+.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+        #     Display Name>`.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
@@ -115,8 +115,8 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the entity type to delete. Format:
-        #     +projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-        #     Display Name>+.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+        #     Display Name>`.
         class DeleteSessionEntityTypeRequest; end
       end
     end

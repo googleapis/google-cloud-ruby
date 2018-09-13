@@ -90,7 +90,7 @@ module Google
           #     Label for extra metadata.
           # @!attribute [rw] language_code
           #   @return [String]
-          #     The BCP-47 language code for +label+, such as "en-US" or "sr-Latn".
+          #     The BCP-47 language code for `label`, such as "en-US" or "sr-Latn".
           #     For more information, see
           #     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
           class WebLabel; end

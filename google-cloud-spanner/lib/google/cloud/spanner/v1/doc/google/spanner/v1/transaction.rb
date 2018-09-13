@@ -80,7 +80,7 @@ module Google
       # Cloud Spanner can commit the transaction if all read locks it acquired
       # are still valid at commit time, and it is able to acquire write
       # locks for all writes. Cloud Spanner can abort the transaction for any
-      # reason. If a commit attempt returns +ABORTED+, Cloud Spanner guarantees
+      # reason. If a commit attempt returns `ABORTED`, Cloud Spanner guarantees
       # that the transaction has not modified any user data in Cloud Spanner.
       #
       # Unless the transaction commits, Cloud Spanner makes no guarantees about
@@ -110,10 +110,10 @@ module Google
       # SQL queries and has not started a read or SQL query within the last 10
       # seconds. Idle transactions can be aborted by Cloud Spanner so that they
       # don't hold on to locks indefinitely. In that case, the commit will
-      # fail with error +ABORTED+.
+      # fail with error `ABORTED`.
       #
       # If this behavior is undesirable, periodically executing a simple
-      # SQL query in the transaction (e.g., +SELECT 1+) prevents the
+      # SQL query in the transaction (e.g., `SELECT 1`) prevents the
       # transaction from becoming idle.
       #
       # == Snapshot Read-Only Transactions
@@ -231,21 +231,21 @@ module Google
       # at read timestamps more than one hour in the past. This
       # restriction also applies to in-progress reads and/or SQL queries whose
       # timestamp become too old while executing. Reads and SQL queries with
-      # too-old read timestamps fail with the error +FAILED_PRECONDITION+.
+      # too-old read timestamps fail with the error `FAILED_PRECONDITION`.
       # @!attribute [rw] read_write
       #   @return [Google::Spanner::V1::TransactionOptions::ReadWrite]
       #     Transaction may write.
       #
       #     Authorization to begin a read-write transaction requires
-      #     +spanner.databases.beginOrRollbackReadWriteTransaction+ permission
-      #     on the +session+ resource.
+      #     `spanner.databases.beginOrRollbackReadWriteTransaction` permission
+      #     on the `session` resource.
       # @!attribute [rw] read_only
       #   @return [Google::Spanner::V1::TransactionOptions::ReadOnly]
       #     Transaction will not write.
       #
       #     Authorization to begin a read-only transaction requires
-      #     +spanner.databases.beginReadOnlyTransaction+ permission
-      #     on the +session+ resource.
+      #     `spanner.databases.beginReadOnlyTransaction` permission
+      #     on the `session` resource.
       class TransactionOptions
         # Message type to initiate a read-write transaction. Currently this
         # transaction type has no options.
@@ -258,7 +258,7 @@ module Google
         #     are visible.
         # @!attribute [rw] min_read_timestamp
         #   @return [Google::Protobuf::Timestamp]
-        #     Executes all reads at a timestamp >= +min_read_timestamp+.
+        #     Executes all reads at a timestamp >= `min_read_timestamp`.
         #
         #     This is useful for requesting fresher data than some previous
         #     read, or data that is fresh enough to observe the effects of some
@@ -267,10 +267,10 @@ module Google
         #     Note that this option can only be used in single-use transactions.
         #
         #     A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds.
-        #     Example: +"2014-10-02T15:01:23.045123456Z"+.
+        #     Example: `"2014-10-02T15:01:23.045123456Z"`.
         # @!attribute [rw] max_staleness
         #   @return [Google::Protobuf::Duration]
-        #     Read data at a timestamp >= +NOW - max_staleness+
+        #     Read data at a timestamp >= `NOW - max_staleness`
         #     seconds. Guarantees that all writes that have committed more
         #     than the specified number of seconds ago are visible. Because
         #     Cloud Spanner chooses the exact timestamp, this mode works even if
@@ -296,10 +296,10 @@ module Google
         #     data.
         #
         #     A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds.
-        #     Example: +"2014-10-02T15:01:23.045123456Z"+.
+        #     Example: `"2014-10-02T15:01:23.045123456Z"`.
         # @!attribute [rw] exact_staleness
         #   @return [Google::Protobuf::Duration]
-        #     Executes all reads at a timestamp that is +exact_staleness+
+        #     Executes all reads at a timestamp that is `exact_staleness`
         #     old. The timestamp is chosen soon after the read is started.
         #
         #     Guarantees that all writes that have committed more than the
@@ -309,7 +309,7 @@ module Google
         #     timestamps.
         #
         #     Useful for reading at nearby replicas without the distributed
-        #     timestamp negotiation overhead of +max_staleness+.
+        #     timestamp negotiation overhead of `max_staleness`.
         # @!attribute [rw] return_read_timestamp
         #   @return [true, false]
         #     If true, the Cloud Spanner-selected read timestamp is included in
@@ -320,7 +320,7 @@ module Google
       # A transaction.
       # @!attribute [rw] id
       #   @return [String]
-      #     +id+ may be used to identify the transaction in subsequent
+      #     `id` may be used to identify the transaction in subsequent
       #     {Google::Spanner::V1::Spanner::Read Read},
       #     {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql},
       #     {Google::Spanner::V1::Spanner::Commit Commit}, or
@@ -335,7 +335,7 @@ module Google
       #     {Google::Spanner::V1::TransactionOptions::ReadOnly#return_read_timestamp TransactionOptions::ReadOnly#return_read_timestamp}.
       #
       #     A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds.
-      #     Example: +"2014-10-02T15:01:23.045123456Z"+.
+      #     Example: `"2014-10-02T15:01:23.045123456Z"`.
       class Transaction; end
 
       # This message is used to select the transaction in which a

@@ -31,12 +31,12 @@ module Google
       # The response for {Google::Datastore::V1::Datastore::Lookup Datastore::Lookup}.
       # @!attribute [rw] found
       #   @return [Array<Google::Datastore::V1::EntityResult>]
-      #     Entities found as +ResultType.FULL+ entities. The order of results in this
+      #     Entities found as `ResultType.FULL` entities. The order of results in this
       #     field is undefined and has no relation to the order of the keys in the
       #     input.
       # @!attribute [rw] missing
       #   @return [Array<Google::Datastore::V1::EntityResult>]
-      #     Entities not found as +ResultType.KEY_ONLY+ entities. The order of results
+      #     Entities not found as `ResultType.KEY_ONLY` entities. The order of results
       #     in this field is undefined and has no relation to the order of the keys
       #     in the input.
       # @!attribute [rw] deferred
@@ -73,7 +73,7 @@ module Google
       #     A batch of query results (always present).
       # @!attribute [rw] query
       #   @return [Google::Datastore::V1::Query]
-      #     The parsed form of the +GqlQuery+ from the request, if it was set.
+      #     The parsed form of the `GqlQuery` from the request, if it was set.
       class RunQueryResponse; end
 
       # The request for {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
@@ -111,7 +111,7 @@ module Google
       #     The ID of the project against which to make the request.
       # @!attribute [rw] mode
       #   @return [Google::Datastore::V1::CommitRequest::Mode]
-      #     The type of commit to perform. Defaults to +TRANSACTIONAL+.
+      #     The type of commit to perform. Defaults to `TRANSACTIONAL`.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The identifier of the transaction associated with the commit. A
@@ -121,16 +121,16 @@ module Google
       #   @return [Array<Google::Datastore::V1::Mutation>]
       #     The mutations to perform.
       #
-      #     When mode is +TRANSACTIONAL+, mutations affecting a single entity are
+      #     When mode is `TRANSACTIONAL`, mutations affecting a single entity are
       #     applied in order. The following sequences of mutations affecting a single
-      #     entity are not permitted in a single +Commit+ request:
+      #     entity are not permitted in a single `Commit` request:
       #
-      #     * +insert+ followed by +insert+
-      #     * +update+ followed by +insert+
-      #     * +upsert+ followed by +insert+
-      #     * +delete+ followed by +update+
+      #     * `insert` followed by `insert`
+      #     * `update` followed by `insert`
+      #     * `upsert` followed by `insert`
+      #     * `delete` followed by `update`
       #
-      #     When mode is +NON_TRANSACTIONAL+, no two mutations may affect a single
+      #     When mode is `NON_TRANSACTIONAL`, no two mutations may affect a single
       #     entity.
       class CommitRequest
         # The modes available for commits.
@@ -236,7 +236,7 @@ module Google
       # @!attribute [rw] read_consistency
       #   @return [Google::Datastore::V1::ReadOptions::ReadConsistency]
       #     The non-transactional read consistency to use.
-      #     Cannot be set to +STRONG+ for global queries.
+      #     Cannot be set to `STRONG` for global queries.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The identifier of the transaction in which to read. A

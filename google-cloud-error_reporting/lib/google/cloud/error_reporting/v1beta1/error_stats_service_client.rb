@@ -237,13 +237,13 @@ module Google
           #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter`
           #   can also be provided.
           # @param timed_count_duration [Google::Protobuf::Duration | Hash]
-          #   [Optional] The preferred duration for a single returned +TimedCount+.
+          #   [Optional] The preferred duration for a single returned `TimedCount`.
           #   If not set, no timed counts are returned.
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
           # @param alignment [Google::Devtools::Clouderrorreporting::V1beta1::TimedCountAlignment]
           #   [Optional] The alignment of the timed counts to be returned.
-          #   Default is +ALIGNMENT_EQUAL_AT_END+.
+          #   Default is `ALIGNMENT_EQUAL_AT_END`.
           # @param alignment_time [Google::Protobuf::Timestamp | Hash]
           #   [Optional] Time where the timed counts shall be aligned if rounded
           #   alignment is chosen. Default is 00:00 UTC.
@@ -251,7 +251,7 @@ module Google
           #   can also be provided.
           # @param order [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupOrder]
           #   [Optional] The sort order in which the results are returned.
-          #   Default is +COUNT_DESC+.
+          #   Default is `COUNT_DESC`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -276,7 +276,7 @@ module Google
           #   error_stats_service_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
           #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +time_range+:
+          #   # TODO: Initialize `time_range`:
           #   time_range = {}
           #
           #   # Iterate over all results.
@@ -323,10 +323,10 @@ module Google
           #
           # @param project_name [String]
           #   [Required] The resource name of the Google Cloud Platform project. Written
-          #   as +projects/+ plus the
+          #   as `projects/` plus the
           #   [Google Cloud Platform project
           #   ID](https://support.google.com/cloud/answer/6158840).
-          #   Example: +projects/my-project-123+.
+          #   Example: `projects/my-project-123`.
           # @param group_id [String]
           #   [Required] The group for which events shall be returned.
           # @param service_filter [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter | Hash]
@@ -365,7 +365,7 @@ module Google
           #   error_stats_service_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
           #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +group_id+:
+          #   # TODO: Initialize `group_id`:
           #   group_id = ''
           #
           #   # Iterate over all results.
@@ -404,10 +404,10 @@ module Google
           #
           # @param project_name [String]
           #   [Required] The resource name of the Google Cloud Platform project. Written
-          #   as +projects/+ plus the
+          #   as `projects/` plus the
           #   [Google Cloud Platform project
           #   ID](https://support.google.com/cloud/answer/6158840).
-          #   Example: +projects/my-project-123+.
+          #   Example: `projects/my-project-123`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

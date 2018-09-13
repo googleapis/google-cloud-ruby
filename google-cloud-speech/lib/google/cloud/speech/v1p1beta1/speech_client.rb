@@ -246,8 +246,8 @@ module Google
 
           # Performs asynchronous speech recognition: receive results via the
           # google.longrunning.Operations interface. Returns either an
-          # +Operation.error+ or an +Operation.response+ which contains
-          # a +LongRunningRecognizeResponse+ message.
+          # `Operation.error` or an `Operation.response` which contains
+          # a `LongRunningRecognizeResponse` message.
           #
           # @param config [Google::Cloud::Speech::V1p1beta1::RecognitionConfig | Hash]
           #   *Required* Provides information to the recognizer that specifies how to

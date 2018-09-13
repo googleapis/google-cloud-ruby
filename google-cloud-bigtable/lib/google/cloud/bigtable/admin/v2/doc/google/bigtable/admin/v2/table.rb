@@ -21,35 +21,35 @@ module Google
         # Each table is served using the resources of its parent cluster.
         # @!attribute [rw] name
         #   @return [String]
-        #     (+OutputOnly+)
+        #     (`OutputOnly`)
         #     The unique name of the table. Values are of the form
-        #     +projects/<project>/instances/<instance>/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*+.
-        #     Views: +NAME_ONLY+, +SCHEMA_VIEW+, +REPLICATION_VIEW+, +FULL+
+        #     `projects/<project>/instances/<instance>/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
+        #     Views: `NAME_ONLY`, `SCHEMA_VIEW`, `REPLICATION_VIEW`, `FULL`
         # @!attribute [rw] cluster_states
         #   @return [Hash{String => Google::Bigtable::Admin::V2::Table::ClusterState}]
-        #     (+OutputOnly+)
+        #     (`OutputOnly`)
         #     Map from cluster ID to per-cluster table state.
         #     If it could not be determined whether or not the table has data in a
         #     particular cluster (for example, if its zone is unavailable), then
-        #     there will be an entry for the cluster with UNKNOWN +replication_status+.
-        #     Views: +REPLICATION_VIEW+, +FULL+
+        #     there will be an entry for the cluster with UNKNOWN `replication_status`.
+        #     Views: `REPLICATION_VIEW`, `FULL`
         # @!attribute [rw] column_families
         #   @return [Hash{String => Google::Bigtable::Admin::V2::ColumnFamily}]
-        #     (+CreationOnly+)
+        #     (`CreationOnly`)
         #     The column families configured for this table, mapped by column family ID.
-        #     Views: +SCHEMA_VIEW+, +FULL+
+        #     Views: `SCHEMA_VIEW`, `FULL`
         # @!attribute [rw] granularity
         #   @return [Google::Bigtable::Admin::V2::Table::TimestampGranularity]
-        #     (+CreationOnly+)
-        #     The granularity (i.e. +MILLIS+) at which timestamps are stored in
+        #     (`CreationOnly`)
+        #     The granularity (i.e. `MILLIS`) at which timestamps are stored in
         #     this table. Timestamps not matching the granularity will be rejected.
-        #     If unspecified at creation time, the value will be set to +MILLIS+.
-        #     Views: +SCHEMA_VIEW+, +FULL+
+        #     If unspecified at creation time, the value will be set to `MILLIS`.
+        #     Views: `SCHEMA_VIEW`, `FULL`
         class Table
           # The state of a table's data in a particular cluster.
           # @!attribute [rw] replication_state
           #   @return [Google::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
-          #     (+OutputOnly+)
+          #     (`OutputOnly`)
           #     The state of replication for the table in this cluster.
           class ClusterState
             # Table replication states.
@@ -93,13 +93,13 @@ module Google
             # Uses the default view for each method as documented in its request.
             VIEW_UNSPECIFIED = 0
 
-            # Only populates +name+.
+            # Only populates `name`.
             NAME_ONLY = 1
 
-            # Only populates +name+ and fields related to the table's schema.
+            # Only populates `name` and fields related to the table's schema.
             SCHEMA_VIEW = 2
 
-            # Only populates +name+ and fields related to the table's
+            # Only populates `name` and fields related to the table's
             # replication state.
             REPLICATION_VIEW = 3
 
@@ -138,13 +138,13 @@ module Google
           # A GcRule which deletes cells matching all of the given rules.
           # @!attribute [rw] rules
           #   @return [Array<Google::Bigtable::Admin::V2::GcRule>]
-          #     Only delete cells which would be deleted by every element of +rules+.
+          #     Only delete cells which would be deleted by every element of `rules`.
           class Intersection; end
 
           # A GcRule which deletes cells matching any of the given rules.
           # @!attribute [rw] rules
           #   @return [Array<Google::Bigtable::Admin::V2::GcRule>]
-          #     Delete cells which would be deleted by any element of +rules+.
+          #     Delete cells which would be deleted by any element of `rules`.
           class Union; end
         end
 
@@ -157,37 +157,37 @@ module Google
         # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] name
         #   @return [String]
-        #     (+OutputOnly+)
+        #     (`OutputOnly`)
         #     The unique name of the snapshot.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+        #     `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
         # @!attribute [rw] source_table
         #   @return [Google::Bigtable::Admin::V2::Table]
-        #     (+OutputOnly+)
+        #     (`OutputOnly`)
         #     The source table at the time the snapshot was taken.
         # @!attribute [rw] data_size_bytes
         #   @return [Integer]
-        #     (+OutputOnly+)
+        #     (`OutputOnly`)
         #     The size of the data in the source table at the time the snapshot was
         #     taken. In some cases, this value may be computed asynchronously via a
         #     background process and a placeholder of 0 will be used in the meantime.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     (+OutputOnly+)
+        #     (`OutputOnly`)
         #     The time when the snapshot is created.
         # @!attribute [rw] delete_time
         #   @return [Google::Protobuf::Timestamp]
-        #     (+OutputOnly+)
+        #     (`OutputOnly`)
         #     The time when the snapshot will be deleted. The maximum amount of time a
         #     snapshot can stay active is 365 days. If 'ttl' is not specified,
         #     the default maximum of 365 days will be used.
         # @!attribute [rw] state
         #   @return [Google::Bigtable::Admin::V2::Snapshot::State]
-        #     (+OutputOnly+)
+        #     (`OutputOnly`)
         #     The current state of the snapshot.
         # @!attribute [rw] description
         #   @return [String]
-        #     (+OutputOnly+)
+        #     (`OutputOnly`)
         #     Description of the snapshot.
         class Snapshot
           # Possible states of a snapshot.

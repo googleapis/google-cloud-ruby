@@ -43,9 +43,9 @@ module Google
         # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
         # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) request,
         # or as output contexts included in the returned intent.
-        # Contexts expire when an intent is matched, after the number of +DetectIntent+
-        # requests specified by the +lifespan_count+ parameter, or after 10 minutes
-        # if no intents are matched for a +DetectIntent+ request.
+        # Contexts expire when an intent is matched, after the number of `DetectIntent`
+        # requests specified by the `lifespan_count` parameter, or after 10 minutes
+        # if no intents are matched for a `DetectIntent` request.
         #
         # For more information about contexts, see the
         # [Dialogflow documentation](https://dialogflow.com/docs/contexts).
@@ -260,7 +260,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The session to list all contexts from.
-          #   Format: +projects/<Project ID>/agent/sessions/<Session ID>+.
+          #   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -315,7 +315,7 @@ module Google
           #
           # @param name [String]
           #   Required. The name of the context. Format:
-          #   +projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>+.
+          #   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -346,7 +346,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The session to create a context for.
-          #   Format: +projects/<Project ID>/agent/sessions/<Session ID>+.
+          #   Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
           # @param context [Google::Cloud::Dialogflow::V2::Context | Hash]
           #   Required. The context to create.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::Context`
@@ -365,7 +365,7 @@ module Google
           #   contexts_client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::ContextsClient.session_path("[PROJECT]", "[SESSION]")
           #
-          #   # TODO: Initialize +context+:
+          #   # TODO: Initialize `context`:
           #   context = {}
           #   response = contexts_client.create_context(formatted_parent, context)
 
@@ -405,7 +405,7 @@ module Google
           #
           #   contexts_client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
           #
-          #   # TODO: Initialize +context+:
+          #   # TODO: Initialize `context`:
           #   context = {}
           #   response = contexts_client.update_context(context)
 
@@ -426,7 +426,7 @@ module Google
           #
           # @param name [String]
           #   Required. The name of the context to delete. Format:
-          #   +projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>+.
+          #   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -457,7 +457,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The name of the session to delete all contexts from. Format:
-          #   +projects/<Project ID>/agent/sessions/<Session ID>+.
+          #   `projects/<Project ID>/agent/sessions/<Session ID>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

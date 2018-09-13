@@ -24,10 +24,10 @@ module Google
       #
       # Partition dimensions:
       #
-      # * May be +""+.
+      # * May be `""`.
       # * Must be valid UTF-8 bytes.
-      # * Must have values that match regex +[A-Za-z\d\.\-_]{1,100}+
-      #   If the value of any dimension matches regex +__.*__+, the partition is
+      # * Must have values that match regex `[A-Za-z\d\.\-_]{1,100}`
+      #   If the value of any dimension matches regex `__.*__`, the partition is
       #   reserved/read-only.
       #   A reserved/read-only partition ID is forbidden in certain documented
       #   contexts.
@@ -66,7 +66,7 @@ module Google
       #     are required to be in the path along with the entity identifier itself.
       #     The only exception is that in some documented cases, the identifier in the
       #     last path element (for the entity) itself may be omitted. For example,
-      #     the last path element of the key of +Mutation.insert+ may have no
+      #     the last path element of the key of `Mutation.insert` may have no
       #     identifier.
       #
       #     A path can never be empty, and a path can have at most 100 elements.
@@ -78,9 +78,9 @@ module Google
         # @!attribute [rw] kind
         #   @return [String]
         #     The kind of the entity.
-        #     A kind matching regex +__.*__+ is reserved/read-only.
+        #     A kind matching regex `__.*__` is reserved/read-only.
         #     A kind must not contain more than 1500 bytes when UTF-8 encoded.
-        #     Cannot be +""+.
+        #     Cannot be `""`.
         # @!attribute [rw] id
         #   @return [Integer]
         #     The auto-allocated ID of the entity.
@@ -89,9 +89,9 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     The name of the entity.
-        #     A name matching regex +__.*__+ is reserved/read-only.
+        #     A name matching regex `__.*__` is reserved/read-only.
         #     A name must not be more than 1500 bytes when UTF-8 encoded.
-        #     Cannot be +""+.
+        #     Cannot be `""`.
         class PathElement; end
       end
 
@@ -128,13 +128,13 @@ module Google
       # @!attribute [rw] string_value
       #   @return [String]
       #     A UTF-8 encoded string value.
-      #     When +exclude_from_indexes+ is false (it is indexed) , may have at most 1500 bytes.
+      #     When `exclude_from_indexes` is false (it is indexed) , may have at most 1500 bytes.
       #     Otherwise, may be set to at least 1,000,000 bytes.
       # @!attribute [rw] blob_value
       #   @return [String]
       #     A blob value.
       #     May have at most 1,000,000 bytes.
-      #     When +exclude_from_indexes+ is false, may have at most 1500 bytes.
+      #     When `exclude_from_indexes` is false, may have at most 1500 bytes.
       #     In JSON requests, must be base64-encoded.
       # @!attribute [rw] geo_point_value
       #   @return [Google::Type::LatLng]
@@ -150,11 +150,11 @@ module Google
       #   @return [Google::Datastore::V1::ArrayValue]
       #     An array value.
       #     Cannot contain another array value.
-      #     A +Value+ instance that sets field +array_value+ must not set fields
-      #     +meaning+ or +exclude_from_indexes+.
+      #     A `Value` instance that sets field `array_value` must not set fields
+      #     `meaning` or `exclude_from_indexes`.
       # @!attribute [rw] meaning
       #   @return [Integer]
-      #     The +meaning+ field should only be populated for backwards compatibility.
+      #     The `meaning` field should only be populated for backwards compatibility.
       # @!attribute [rw] exclude_from_indexes
       #   @return [true, false]
       #     If the value should be excluded from all indexes including those defined
@@ -171,17 +171,17 @@ module Google
       #     The entity's key.
       #
       #     An entity must have a key, unless otherwise documented (for example,
-      #     an entity in +Value.entity_value+ may have no key).
+      #     an entity in `Value.entity_value` may have no key).
       #     An entity's kind is its key path's last element's kind,
       #     or null if it has no key.
       # @!attribute [rw] properties
       #   @return [Hash{String => Google::Datastore::V1::Value}]
       #     The entity's properties.
       #     The map's keys are property names.
-      #     A property name matching regex +__.*__+ is reserved.
+      #     A property name matching regex `__.*__` is reserved.
       #     A reserved property name is forbidden in certain documented contexts.
       #     The name must not contain more than 500 characters.
-      #     The name cannot be +""+.
+      #     The name cannot be `""`.
       class Entity; end
     end
   end

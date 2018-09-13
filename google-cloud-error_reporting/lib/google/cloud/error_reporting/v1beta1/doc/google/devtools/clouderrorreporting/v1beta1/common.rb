@@ -46,7 +46,7 @@ module Google
         #     by the Error Reporting system is used.
         # @!attribute [rw] service_context
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContext]
-        #     The +ServiceContext+ for which this error was reported.
+        #     The `ServiceContext` for which this error was reported.
         # @!attribute [rw] message
         #   @return [String]
         #     The stack trace that was reported or logged by the service.
@@ -62,10 +62,10 @@ module Google
         #     An identifier of the service, such as the name of the
         #     executable, job, or Google App Engine service name. This field is expected
         #     to have a low number of values that are relatively stable over time, as
-        #     opposed to +version+, which can be changed whenever new code is deployed.
+        #     opposed to `version`, which can be changed whenever new code is deployed.
         #
         #     Contains the service name for error reports extracted from Google
-        #     App Engine logs or +default+ if the App Engine default service is used.
+        #     App Engine logs or `default` if the App Engine default service is used.
         # @!attribute [rw] version
         #   @return [String]
         #     Represents the source code version that the developer provided,
@@ -95,15 +95,15 @@ module Google
         #     When sending an error report, leave this field empty if the user was not
         #     logged in. In this case the
         #     Error Reporting system will use other data, such as remote IP address, to
-        #     distinguish affected users. See +affected_users_count+ in
-        #     +ErrorGroupStats+.
+        #     distinguish affected users. See `affected_users_count` in
+        #     `ErrorGroupStats`.
         # @!attribute [rw] report_location
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::SourceLocation]
         #     The location in the source code where the decision was made to
         #     report the error, usually the place where it was logged.
         #     For a logged exception this would be the source line where the
         #     exception is logged, usually close to the place where it was
-        #     caught. This value is in contrast to +Exception.cause_location+,
+        #     caught. This value is in contrast to `Exception.cause_location`,
         #     which describes the source line where the exception was thrown.
         class ErrorContext; end
 
@@ -113,7 +113,7 @@ module Google
         # error report has been generated automatically from Google App Engine logs.
         # @!attribute [rw] method
         #   @return [String]
-        #     The type of HTTP request, such as +GET+, +POST+, etc.
+        #     The type of HTTP request, such as `GET`, `POST`, etc.
         # @!attribute [rw] url
         #   @return [String]
         #     The URL of the request.
@@ -150,7 +150,7 @@ module Google
         #   @return [String]
         #     Human-readable name of a function or method.
         #     The value can include optional context like the class or package name.
-        #     For example, +my.package.MyClass.method+ in case of Java.
+        #     For example, `my.package.MyClass.method` in case of Java.
         class SourceLocation; end
       end
     end

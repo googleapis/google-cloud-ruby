@@ -242,13 +242,13 @@ module Google
           #
           #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +cluster+:
+          #   # TODO: Initialize `cluster`:
           #   cluster = {}
           #
           #   # Register a callback during the method call.
@@ -314,11 +314,11 @@ module Google
           #   A hash of the same form as `Google::Cloud::Dataproc::V1::Cluster`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Required. Specifies the path, relative to +Cluster+, of
+          #   Required. Specifies the path, relative to `Cluster`, of
           #   the field to update. For example, to change the number of workers
-          #   in a cluster to 5, the +update_mask+ parameter would be
-          #   specified as +config.worker_config.num_instances+,
-          #   and the +PATCH+ request body would specify the new value, as follows:
+          #   in a cluster to 5, the `update_mask` parameter would be
+          #   specified as `config.worker_config.num_instances`,
+          #   and the `PATCH` request body would specify the new value, as follows:
           #
           #       {
           #         "config":{
@@ -328,8 +328,8 @@ module Google
           #         }
           #       }
           #   Similarly, to change the number of preemptible workers in a cluster to 5,
-          #   the +update_mask+ parameter would be
-          #   +config.secondary_worker_config.num_instances+, and the +PATCH+ request
+          #   the `update_mask` parameter would be
+          #   `config.secondary_worker_config.num_instances`, and the `PATCH` request
           #   body would be set as follows:
           #
           #       {
@@ -373,19 +373,19 @@ module Google
           #
           #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +cluster_name+:
+          #   # TODO: Initialize `cluster_name`:
           #   cluster_name = ''
           #
-          #   # TODO: Initialize +cluster+:
+          #   # TODO: Initialize `cluster`:
           #   cluster = {}
           #
-          #   # TODO: Initialize +update_mask+:
+          #   # TODO: Initialize `update_mask`:
           #   update_mask = {}
           #
           #   # Register a callback during the method call.
@@ -460,13 +460,13 @@ module Google
           #
           #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +cluster_name+:
+          #   # TODO: Initialize `cluster_name`:
           #   cluster_name = ''
           #
           #   # Register a callback during the method call.
@@ -540,13 +540,13 @@ module Google
           #
           #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +cluster_name+:
+          #   # TODO: Initialize `cluster_name`:
           #   cluster_name = ''
           #   response = cluster_controller_client.get_cluster(project_id, region, cluster_name)
 
@@ -578,15 +578,15 @@ module Google
           #
           #   field = value [AND [field = value]] ...
           #
-          #   where **field** is one of +status.state+, +clusterName+, or +labels.[KEY]+,
-          #   and +[KEY]+ is a label key. **value** can be +*+ to match all values.
-          #   +status.state+ can be one of the following: +ACTIVE+, +INACTIVE+,
-          #   +CREATING+, +RUNNING+, +ERROR+, +DELETING+, or +UPDATING+. +ACTIVE+
-          #   contains the +CREATING+, +UPDATING+, and +RUNNING+ states. +INACTIVE+
-          #   contains the +DELETING+ and +ERROR+ states.
-          #   +clusterName+ is the name of the cluster provided at creation time.
-          #   Only the logical +AND+ operator is supported; space-separated items are
-          #   treated as having an implicit +AND+ operator.
+          #   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
+          #   and `[KEY]` is a label key. **value** can be `*` to match all values.
+          #   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
+          #   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
+          #   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
+          #   contains the `DELETING` and `ERROR` states.
+          #   `clusterName` is the name of the cluster provided at creation time.
+          #   Only the logical `AND` operator is supported; space-separated items are
+          #   treated as having an implicit `AND` operator.
           #
           #   Example filter:
           #
@@ -615,10 +615,10 @@ module Google
           #
           #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
           #   # Iterate over all results.
@@ -653,7 +653,7 @@ module Google
 
           # Gets cluster diagnostic information.
           # After the operation completes, the Operation.response field
-          # contains +DiagnoseClusterOutputLocation+.
+          # contains `DiagnoseClusterOutputLocation`.
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the cluster
@@ -672,13 +672,13 @@ module Google
           #
           #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +cluster_name+:
+          #   # TODO: Initialize `cluster_name`:
           #   cluster_name = ''
           #
           #   # Register a callback during the method call.

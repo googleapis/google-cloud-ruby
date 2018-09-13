@@ -25,22 +25,22 @@ module Google
       #     The version of the entity, a strictly positive number that monotonically
       #     increases with changes to the entity.
       #
-      #     This field is set for {Google::Datastore::V1::EntityResult::ResultType::FULL +FULL+} entity
+      #     This field is set for {Google::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity
       #     results.
       #
-      #     For {Google::Datastore::V1::LookupResponse#missing missing} entities in +LookupResponse+, this
+      #     For {Google::Datastore::V1::LookupResponse#missing missing} entities in `LookupResponse`, this
       #     is the version of the snapshot that was used to look up the entity, and it
       #     is always set except for eventually consistent reads.
       # @!attribute [rw] cursor
       #   @return [String]
       #     A cursor that points to the position after the result entity.
-      #     Set only when the +EntityResult+ is part of a +QueryResultBatch+ message.
+      #     Set only when the `EntityResult` is part of a `QueryResultBatch` message.
       class EntityResult
         # Specifies what data the 'entity' field contains.
-        # A +ResultType+ is either implied (for example, in +LookupResponse.missing+
-        # from +datastore.proto+, it is always +KEY_ONLY+) or specified by context
-        # (for example, in message +QueryResultBatch+, field +entity_result_type+
-        # specifies a +ResultType+ for all the values in field +entity_results+).
+        # A `ResultType` is either implied (for example, in `LookupResponse.missing`
+        # from `datastore.proto`, it is always `KEY_ONLY`) or specified by context
+        # (for example, in message `QueryResultBatch`, field `entity_result_type`
+        # specifies a `ResultType` for all the values in field `entity_results`).
         module ResultType
           # Unspecified. This value is never used.
           RESULT_TYPE_UNSPECIFIED = 0
@@ -122,7 +122,7 @@ module Google
       #     The property to order by.
       # @!attribute [rw] direction
       #   @return [Google::Datastore::V1::PropertyOrder::Direction]
-      #     The direction to order by. Defaults to +ASCENDING+.
+      #     The direction to order by. Defaults to `ASCENDING`.
       class PropertyOrder
         # The sort direction.
         module Direction
@@ -210,21 +210,21 @@ module Google
       #   @return [true, false]
       #     When false, the query string must not contain any literals and instead must
       #     bind all values. For example,
-      #     +SELECT * FROM Kind WHERE a = 'string literal'+ is not allowed, while
-      #     +SELECT * FROM Kind WHERE a = @value+ is.
+      #     `SELECT * FROM Kind WHERE a = 'string literal'` is not allowed, while
+      #     `SELECT * FROM Kind WHERE a = @value` is.
       # @!attribute [rw] named_bindings
       #   @return [Hash{String => Google::Datastore::V1::GqlQueryParameter}]
       #     For each non-reserved named binding site in the query string, there must be
       #     a named parameter with that name, but not necessarily the inverse.
       #
-      #     Key must match regex +[A-Za-z_$][A-Za-z_$0-9]*+, must not match regex
-      #     +__.*__+, and must not be +""+.
+      #     Key must match regex `[A-Za-z_$][A-Za-z_$0-9]*`, must not match regex
+      #     `__.*__`, and must not be `""`.
       # @!attribute [rw] positional_bindings
       #   @return [Array<Google::Datastore::V1::GqlQueryParameter>]
       #     Numbered binding site @1 references the first numbered parameter,
       #     effectively using 1-based indexing, rather than the usual 0.
       #
-      #     For each binding site numbered i in +query_string+, there must be an i-th
+      #     For each binding site numbered i in `query_string`, there must be an i-th
       #     numbered parameter. The inverse must also be true.
       class GqlQuery; end
 
@@ -245,10 +245,10 @@ module Google
       # @!attribute [rw] skipped_cursor
       #   @return [String]
       #     A cursor that points to the position after the last skipped result.
-      #     Will be set when +skipped_results+ != 0.
+      #     Will be set when `skipped_results` != 0.
       # @!attribute [rw] entity_result_type
       #   @return [Google::Datastore::V1::EntityResult::ResultType]
-      #     The result type for every entity in +entity_results+.
+      #     The result type for every entity in `entity_results`.
       # @!attribute [rw] entity_results
       #   @return [Array<Google::Datastore::V1::EntityResult>]
       #     The results for this batch.
@@ -261,16 +261,16 @@ module Google
       # @!attribute [rw] snapshot_version
       #   @return [Integer]
       #     The version number of the snapshot this batch was returned from.
-      #     This applies to the range of results from the query's +start_cursor+ (or
+      #     This applies to the range of results from the query's `start_cursor` (or
       #     the beginning of the query if no cursor was given) to this batch's
-      #     +end_cursor+ (not the query's +end_cursor+).
+      #     `end_cursor` (not the query's `end_cursor`).
       #
       #     In a single transaction, subsequent query result batches for the same query
       #     can have a greater snapshot version number. Each batch's snapshot version
       #     is valid for all preceding batches.
       #     The value will be zero for eventually consistent queries.
       class QueryResultBatch
-        # The possible values for the +more_results+ field.
+        # The possible values for the `more_results` field.
         module MoreResultsType
           # Unspecified. This value is never used.
           MORE_RESULTS_TYPE_UNSPECIFIED = 0

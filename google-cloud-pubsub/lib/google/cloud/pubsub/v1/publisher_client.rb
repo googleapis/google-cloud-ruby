@@ -293,11 +293,11 @@ module Google
           #
           # @param name [String]
           #   The name of the topic. It must have the format
-          #   +"projects/\\{project}/topics/\\{topic}"+. +\\{topic}+ must start with a letter,
-          #   and contain only letters (+[A-Za-z]+), numbers (+[0-9]+), dashes (+-+),
-          #   underscores (+_+), periods (+.+), tildes (+~+), plus (+++) or percent
-          #   signs (+%+). It must be between 3 and 255 characters in length, and it
-          #   must not start with +"goog"+.
+          #   `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
+          #   and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+          #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+          #   signs (`%`). It must be between 3 and 255 characters in length, and it
+          #   must not start with `"goog"`.
           # @param labels [Hash{String => String}]
           #   User labels.
           # @param message_storage_policy [Google::Pubsub::V1::MessageStoragePolicy | Hash]
@@ -348,10 +348,10 @@ module Google
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Indicates which fields in the provided topic to update. Must be specified
-          #   and non-empty. Note that if +update_mask+ contains
+          #   and non-empty. Note that if `update_mask` contains
           #   "message_storage_policy" then the new value will be determined based on the
           #   policy configured at the project or organization level. The
-          #   +message_storage_policy+ must not be set in the +topic+ provided above.
+          #   `message_storage_policy` must not be set in the `topic` provided above.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -367,10 +367,10 @@ module Google
           #
           #   publisher_client = Google::Cloud::Pubsub::Publisher.new(version: :v1)
           #
-          #   # TODO: Initialize +topic+:
+          #   # TODO: Initialize `topic`:
           #   topic = {}
           #
-          #   # TODO: Initialize +update_mask+:
+          #   # TODO: Initialize `update_mask`:
           #   update_mask = {}
           #   response = publisher_client.update_topic(topic, update_mask)
 
@@ -387,13 +387,13 @@ module Google
             @update_topic.call(req, options, &block)
           end
 
-          # Adds one or more messages to the topic. Returns +NOT_FOUND+ if the topic
+          # Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic
           # does not exist. The message payload must not be empty; it must contain
           #  either a non-empty data field, or at least one attribute.
           #
           # @param topic [String]
           #   The messages in the request will be published on this topic.
-          #   Format is +projects/\\{project}/topics/\\{topic}+.
+          #   Format is `projects/{project}/topics/{topic}`.
           # @param messages [Array<Google::Pubsub::V1::PubsubMessage | Hash>]
           #   The messages to publish.
           #   A hash of the same form as `Google::Pubsub::V1::PubsubMessage`
@@ -433,7 +433,7 @@ module Google
           #
           # @param topic [String]
           #   The name of the topic to get.
-          #   Format is +projects/\\{project}/topics/\\{topic}+.
+          #   Format is `projects/{project}/topics/{topic}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -464,7 +464,7 @@ module Google
           #
           # @param project [String]
           #   The name of the cloud project that topics belong to.
-          #   Format is +projects/\\{project}+.
+          #   Format is `projects/{project}`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -519,7 +519,7 @@ module Google
           #
           # @param topic [String]
           #   The name of the topic that subscriptions are attached to.
-          #   Format is +projects/\\{project}/topics/\\{topic}+.
+          #   Format is `projects/{project}/topics/{topic}`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -570,15 +570,15 @@ module Google
             @list_topic_subscriptions.call(req, options, &block)
           end
 
-          # Deletes the topic with the given name. Returns +NOT_FOUND+ if the topic
+          # Deletes the topic with the given name. Returns `NOT_FOUND` if the topic
           # does not exist. After a topic is deleted, a new topic may be created with
           # the same name; this is an entirely new topic with none of the old
           # configuration or subscriptions. Existing subscriptions to this topic are
-          # not deleted, but their +topic+ field is set to +_deleted-topic_+.
+          # not deleted, but their `topic` field is set to `_deleted-topic_`.
           #
           # @param topic [String]
           #   Name of the topic to delete.
-          #   Format is +projects/\\{project}/topics/\\{topic}+.
+          #   Format is `projects/{project}/topics/{topic}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -610,10 +610,10 @@ module Google
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
-          #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/\\{project}+.
+          #   `resource` is usually specified as a path. For example, a Project
+          #   resource is specified as `projects/{project}`.
           # @param policy [Google::Iam::V1::Policy | Hash]
-          #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+          #   REQUIRED: The complete policy to be applied to the `resource`. The size of
           #   the policy is limited to a few 10s of KB. An empty policy is a
           #   valid policy but certain Cloud Platform services (such as Projects)
           #   might reject them.
@@ -633,7 +633,7 @@ module Google
           #   publisher_client = Google::Cloud::Pubsub::Publisher.new(version: :v1)
           #   formatted_resource = Google::Cloud::Pubsub::V1::PublisherClient.topic_path("[PROJECT]", "[TOPIC]")
           #
-          #   # TODO: Initialize +policy+:
+          #   # TODO: Initialize `policy`:
           #   policy = {}
           #   response = publisher_client.set_iam_policy(formatted_resource, policy)
 
@@ -656,8 +656,8 @@ module Google
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
-          #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/\\{project}+.
+          #   `resource` is usually specified as a path. For example, a Project
+          #   resource is specified as `projects/{project}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -690,10 +690,10 @@ module Google
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.
-          #   +resource+ is usually specified as a path. For example, a Project
-          #   resource is specified as +projects/\\{project}+.
+          #   `resource` is usually specified as a path. For example, a Project
+          #   resource is specified as `projects/{project}`.
           # @param permissions [Array<String>]
-          #   The set of permissions to check for the +resource+. Permissions with
+          #   The set of permissions to check for the `resource`. Permissions with
           #   wildcards (such as '*' or 'storage.*') are not allowed. For more
           #   information see
           #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
@@ -711,7 +711,7 @@ module Google
           #   publisher_client = Google::Cloud::Pubsub::Publisher.new(version: :v1)
           #   formatted_resource = Google::Cloud::Pubsub::V1::PublisherClient.topic_path("[PROJECT]", "[TOPIC]")
           #
-          #   # TODO: Initialize +permissions+:
+          #   # TODO: Initialize `permissions`:
           #   permissions = []
           #   response = publisher_client.test_iam_permissions(formatted_resource, permissions)
 

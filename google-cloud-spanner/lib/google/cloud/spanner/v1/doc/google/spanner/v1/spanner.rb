@@ -35,9 +35,9 @@ module Google
       #     The labels for the session.
       #
       #     * Label keys must be between 1 and 63 characters long and must conform to
-      #       the following regular expression: +[a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?+.
+      #       the following regular expression: `[a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?`.
       #     * Label values must be between 0 and 63 characters long and must conform
-      #       to the regular expression +([a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?)?+.
+      #       to the regular expression `([a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?)?`.
       #     * No more than 64 labels can be associated with a given session.
       #
       #     See https://goo.gl/xmQnxf for more information on and examples of labels.
@@ -66,7 +66,7 @@ module Google
       #     to the server's maximum allowed page size.
       # @!attribute [rw] page_token
       #   @return [String]
-      #     If non-empty, +page_token+ should contain a
+      #     If non-empty, `page_token` should contain a
       #     {Google::Spanner::V1::ListSessionsResponse#next_page_token next_page_token} from a previous
       #     {Google::Spanner::V1::ListSessionsResponse ListSessionsResponse}.
       # @!attribute [rw] filter
@@ -74,12 +74,12 @@ module Google
       #     An expression for filtering the results of the request. Filter rules are
       #     case insensitive. The fields eligible for filtering are:
       #
-      #     * +labels.key+ where key is the name of a label
+      #     * `labels.key` where key is the name of a label
       #
       #     Some examples of using filters are:
       #
-      #     * +labels.env:*+ --> The session has the label "env".
-      #       * +labels.env:dev+ --> The session has the label "env" and the value of
+      #     * `labels.env:*` --> The session has the label "env".
+      #       * `labels.env:dev` --> The session has the label "env" and the value of
       #         the label contains the string "dev".
       class ListSessionsRequest; end
 
@@ -89,7 +89,7 @@ module Google
       #     The list of requested sessions.
       # @!attribute [rw] next_page_token
       #   @return [String]
-      #     +next_page_token+ can be sent in a subsequent
+      #     `next_page_token` can be sent in a subsequent
       #     {Google::Spanner::V1::Spanner::ListSessions ListSessions} call to fetch more of the matching
       #     sessions.
       class ListSessionsResponse; end
@@ -115,33 +115,33 @@ module Google
       # @!attribute [rw] params
       #   @return [Google::Protobuf::Struct]
       #     The SQL query string can contain parameter placeholders. A parameter
-      #     placeholder consists of +'@'+ followed by the parameter
+      #     placeholder consists of `'@'` followed by the parameter
       #     name. Parameter names consist of any combination of letters,
       #     numbers, and underscores.
       #
       #     Parameters can appear anywhere that a literal value is expected.  The same
       #     parameter name can be used more than once, for example:
-      #       +"WHERE id > @msg_id AND id < @msg_id + 100"+
+      #       `"WHERE id > @msg_id AND id < @msg_id + 100"`
       #
       #     It is an error to execute an SQL query with unbound parameters.
       #
-      #     Parameter values are specified using +params+, which is a JSON
+      #     Parameter values are specified using `params`, which is a JSON
       #     object whose keys are parameter names, and whose values are the
       #     corresponding parameter values.
       # @!attribute [rw] param_types
       #   @return [Hash{String => Google::Spanner::V1::Type}]
       #     It is not always possible for Cloud Spanner to infer the right SQL type
-      #     from a JSON value.  For example, values of type +BYTES+ and values
-      #     of type +STRING+ both appear in {Google::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
+      #     from a JSON value.  For example, values of type `BYTES` and values
+      #     of type `STRING` both appear in {Google::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
       #
-      #     In these cases, +param_types+ can be used to specify the exact
+      #     In these cases, `param_types` can be used to specify the exact
       #     SQL type for some or all of the SQL query parameters. See the
       #     definition of {Google::Spanner::V1::Type Type} for more information
       #     about SQL types.
       # @!attribute [rw] resume_token
       #   @return [String]
       #     If this request is resuming a previously interrupted SQL query
-      #     execution, +resume_token+ should be copied from the last
+      #     execution, `resume_token` should be copied from the last
       #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
       #     enables the new SQL query execution to resume where the last one left
       #     off. The rest of the request parameters must exactly match the
@@ -215,26 +215,26 @@ module Google
       # @!attribute [rw] params
       #   @return [Google::Protobuf::Struct]
       #     The SQL query string can contain parameter placeholders. A parameter
-      #     placeholder consists of +'@'+ followed by the parameter
+      #     placeholder consists of `'@'` followed by the parameter
       #     name. Parameter names consist of any combination of letters,
       #     numbers, and underscores.
       #
       #     Parameters can appear anywhere that a literal value is expected.  The same
       #     parameter name can be used more than once, for example:
-      #       +"WHERE id > @msg_id AND id < @msg_id + 100"+
+      #       `"WHERE id > @msg_id AND id < @msg_id + 100"`
       #
       #     It is an error to execute an SQL query with unbound parameters.
       #
-      #     Parameter values are specified using +params+, which is a JSON
+      #     Parameter values are specified using `params`, which is a JSON
       #     object whose keys are parameter names, and whose values are the
       #     corresponding parameter values.
       # @!attribute [rw] param_types
       #   @return [Hash{String => Google::Spanner::V1::Type}]
       #     It is not always possible for Cloud Spanner to infer the right SQL type
-      #     from a JSON value.  For example, values of type +BYTES+ and values
-      #     of type +STRING+ both appear in {Google::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
+      #     from a JSON value.  For example, values of type `BYTES` and values
+      #     of type `STRING` both appear in {Google::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
       #
-      #     In these cases, +param_types+ can be used to specify the exact
+      #     In these cases, `param_types` can be used to specify the exact
       #     SQL type for some or all of the SQL query parameters. See the
       #     definition of {Google::Spanner::V1::Type Type} for more information
       #     about SQL types.
@@ -265,12 +265,12 @@ module Google
       #     this request.
       # @!attribute [rw] key_set
       #   @return [Google::Spanner::V1::KeySet]
-      #     Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
+      #     Required. `key_set` identifies the rows to be yielded. `key_set` names the
       #     primary keys of the rows in {Google::Spanner::V1::PartitionReadRequest#table table} to be yielded, unless {Google::Spanner::V1::PartitionReadRequest#index index}
       #     is present. If {Google::Spanner::V1::PartitionReadRequest#index index} is present, then {Google::Spanner::V1::PartitionReadRequest#key_set key_set} instead names
       #     index keys in {Google::Spanner::V1::PartitionReadRequest#index index}.
       #
-      #     It is not an error for the +key_set+ to name rows that do not
+      #     It is not an error for the `key_set` to name rows that do not
       #     exist in the database. Read yields nothing for nonexistent rows.
       # @!attribute [rw] partition_options
       #   @return [Google::Spanner::V1::PartitionOptions]
@@ -319,7 +319,7 @@ module Google
       #     this request.
       # @!attribute [rw] key_set
       #   @return [Google::Spanner::V1::KeySet]
-      #     Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
+      #     Required. `key_set` identifies the rows to be yielded. `key_set` names the
       #     primary keys of the rows in {Google::Spanner::V1::ReadRequest#table table} to be yielded, unless {Google::Spanner::V1::ReadRequest#index index}
       #     is present. If {Google::Spanner::V1::ReadRequest#index index} is present, then {Google::Spanner::V1::ReadRequest#key_set key_set} instead names
       #     index keys in {Google::Spanner::V1::ReadRequest#index index}.
@@ -329,17 +329,17 @@ module Google
       #     (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).  If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is not
       #     empty, rows will be yielded in an unspecified order.
       #
-      #     It is not an error for the +key_set+ to name rows that do not
+      #     It is not an error for the `key_set` to name rows that do not
       #     exist in the database. Read yields nothing for nonexistent rows.
       # @!attribute [rw] limit
       #   @return [Integer]
-      #     If greater than zero, only the first +limit+ rows are yielded. If +limit+
+      #     If greater than zero, only the first `limit` rows are yielded. If `limit`
       #     is zero, the default is no limit. A limit cannot be specified if
-      #     +partition_token+ is set.
+      #     `partition_token` is set.
       # @!attribute [rw] resume_token
       #   @return [String]
       #     If this request is resuming a previously interrupted read,
-      #     +resume_token+ should be copied from the last
+      #     `resume_token` should be copied from the last
       #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
       #     enables the new read to resume where the last read left off. The
       #     rest of the request parameters must exactly match the request
@@ -373,7 +373,7 @@ module Google
       #     Execute mutations in a temporary transaction. Note that unlike
       #     commit of a previously-started transaction, commit with a
       #     temporary transaction is non-idempotent. That is, if the
-      #     +CommitRequest+ is sent to Cloud Spanner more than once (for
+      #     `CommitRequest` is sent to Cloud Spanner more than once (for
       #     instance, due to retries in the application, or in the
       #     transport library), it is possible that the mutations are
       #     executed more than once. If this is undesirable, use

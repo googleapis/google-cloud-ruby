@@ -212,7 +212,7 @@ module Google
           #
           #   image_annotator_client = Google::Cloud::Vision::V1.new
           #
-          #   # TODO: Initialize +requests+:
+          #   # TODO: Initialize `requests`:
           #   requests = []
           #   response = image_annotator_client.batch_annotate_images(requests)
 
@@ -230,9 +230,9 @@ module Google
           # Run asynchronous image detection and annotation for a list of generic
           # files, such as PDF files, which may contain multiple pages and multiple
           # images per page. Progress and results can be retrieved through the
-          # +google.longrunning.Operations+ interface.
-          # +Operation.metadata+ contains +OperationMetadata+ (metadata).
-          # +Operation.response+ contains +AsyncBatchAnnotateFilesResponse+ (results).
+          # `google.longrunning.Operations` interface.
+          # `Operation.metadata` contains `OperationMetadata` (metadata).
+          # `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
           #
           # @param requests [Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest | Hash>]
           #   Individual async file annotation requests for this batch.
@@ -248,7 +248,7 @@ module Google
           #
           #   image_annotator_client = Google::Cloud::Vision::V1.new
           #
-          #   # TODO: Initialize +requests+:
+          #   # TODO: Initialize `requests`:
           #   requests = []
           #
           #   # Register a callback during the method call.

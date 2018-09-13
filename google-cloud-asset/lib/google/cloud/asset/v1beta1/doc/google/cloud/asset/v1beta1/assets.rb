@@ -81,7 +81,7 @@ module Google
         #     The REST URL for accessing the resource. An HTTP GET operation using this
         #     URL returns the resource itself.
         #     Example:
-        #     +https://cloudresourcemanager.googleapis.com/v1/projects/my-project-123+.
+        #     `https://cloudresourcemanager.googleapis.com/v1/projects/my-project-123`.
         #     It will be left unspecified for resources without a REST API.
         # @!attribute [rw] parent
         #   @return [String]

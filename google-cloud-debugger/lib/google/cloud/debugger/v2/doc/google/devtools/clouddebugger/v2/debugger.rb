@@ -24,18 +24,18 @@ module Google
         # @!attribute [rw] breakpoint
         #   @return [Google::Devtools::Clouddebugger::V2::Breakpoint]
         #     Breakpoint specification to set.
-        #     The field +location+ of the breakpoint must be set.
+        #     The field `location` of the breakpoint must be set.
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class SetBreakpointRequest; end
 
         # Response for setting a breakpoint.
         # @!attribute [rw] breakpoint
         #   @return [Google::Devtools::Clouddebugger::V2::Breakpoint]
         #     Breakpoint resource.
-        #     The field +id+ is guaranteed to be set (in addition to the echoed fileds).
+        #     The field `id` is guaranteed to be set (in addition to the echoed fileds).
         class SetBreakpointResponse; end
 
         # Request to get breakpoint information.
@@ -48,14 +48,14 @@ module Google
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class GetBreakpointRequest; end
 
         # Response for getting breakpoint information.
         # @!attribute [rw] breakpoint
         #   @return [Google::Devtools::Clouddebugger::V2::Breakpoint]
         #     Complete breakpoint state.
-        #     The fields +id+ and +location+ are guaranteed to be set.
+        #     The fields `id` and `location` are guaranteed to be set.
         class GetBreakpointResponse; end
 
         # Request to delete a breakpoint.
@@ -68,7 +68,7 @@ module Google
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class DeleteBreakpointRequest; end
 
         # Request to list breakpoints.
@@ -77,11 +77,11 @@ module Google
         #     ID of the debuggee whose breakpoints to list.
         # @!attribute [rw] include_all_users
         #   @return [true, false]
-        #     When set to +true+, the response includes the list of breakpoints set by
+        #     When set to `true`, the response includes the list of breakpoints set by
         #     any user. Otherwise, it includes only breakpoints set by the caller.
         # @!attribute [rw] include_inactive
         #   @return [true, false]
-        #     When set to +true+, the response includes active and inactive
+        #     When set to `true`, the response includes active and inactive
         #     breakpoints. Otherwise, it includes only active breakpoints.
         # @!attribute [rw] action
         #   @return [Google::Devtools::Clouddebugger::V2::ListBreakpointsRequest::BreakpointActionValue]
@@ -89,20 +89,20 @@ module Google
         # @!attribute [rw] strip_results
         #   @return [true, false]
         #     This field is deprecated. The following fields are always stripped out of
-        #     the result: +stack_frames+, +evaluated_expressions+ and +variable_table+.
+        #     the result: `stack_frames`, `evaluated_expressions` and `variable_table`.
         # @!attribute [rw] wait_token
         #   @return [String]
         #     A wait token that, if specified, blocks the call until the breakpoints
         #     list has changed, or a server selected timeout has expired.  The value
         #     should be set from the last response. The error code
-        #     +google.rpc.Code.ABORTED+ (RPC) is returned on wait timeout, which
-        #     should be called again with the same +wait_token+.
+        #     `google.rpc.Code.ABORTED` (RPC) is returned on wait timeout, which
+        #     should be called again with the same `wait_token`.
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class ListBreakpointsRequest
-          # Wrapper message for +Breakpoint.Action+. Defines a filter on the action
+          # Wrapper message for `Breakpoint.Action`. Defines a filter on the action
           # field of breakpoints.
           # @!attribute [rw] value
           #   @return [Google::Devtools::Clouddebugger::V2::Breakpoint::Action]
@@ -114,13 +114,13 @@ module Google
         # @!attribute [rw] breakpoints
         #   @return [Array<Google::Devtools::Clouddebugger::V2::Breakpoint>]
         #     List of breakpoints matching the request.
-        #     The fields +id+ and +location+ are guaranteed to be set on each breakpoint.
-        #     The fields: +stack_frames+, +evaluated_expressions+ and +variable_table+
+        #     The fields `id` and `location` are guaranteed to be set on each breakpoint.
+        #     The fields: `stack_frames`, `evaluated_expressions` and `variable_table`
         #     are cleared on each breakpoint regardless of its status.
         # @!attribute [rw] next_wait_token
         #   @return [String]
-        #     A wait token that can be used in the next call to +list+ (REST) or
-        #     +ListBreakpoints+ (RPC) to block until the list of breakpoints has changes.
+        #     A wait token that can be used in the next call to `list` (REST) or
+        #     `ListBreakpoints` (RPC) to block until the list of breakpoints has changes.
         class ListBreakpointsResponse; end
 
         # Request to list debuggees.
@@ -129,20 +129,20 @@ module Google
         #     Project number of a Google Cloud project whose debuggees to list.
         # @!attribute [rw] include_inactive
         #   @return [true, false]
-        #     When set to +true+, the result includes all debuggees. Otherwise, the
+        #     When set to `true`, the result includes all debuggees. Otherwise, the
         #     result includes only debuggees that are active.
         # @!attribute [rw] client_version
         #   @return [String]
         #     The client version making the call.
-        #     Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+        #     Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
         class ListDebuggeesRequest; end
 
         # Response for listing debuggees.
         # @!attribute [rw] debuggees
         #   @return [Array<Google::Devtools::Clouddebugger::V2::Debuggee>]
         #     List of debuggees accessible to the calling user.
-        #     The fields +debuggee.id+ and +description+ are guaranteed to be set.
-        #     The +description+ field is a human readable field provided by agents and
+        #     The fields `debuggee.id` and `description` are guaranteed to be set.
+        #     The `description` field is a human readable field provided by agents and
         #     can be displayed to users.
         class ListDebuggeesResponse; end
       end

@@ -21,7 +21,7 @@ module Google
     # represent a year and month where the day is not significant, e.g. credit card
     # expiration date. The year may be 0 to represent a month and day independent
     # of year, e.g. anniversary date. Related types are {Google::Type::TimeOfDay}
-    # and +google.protobuf.Timestamp+.
+    # and `google.protobuf.Timestamp`.
     # @!attribute [rw] year
     #   @return [Integer]
     #     Year of date. Must be from 1 to 9999, or 0 if specifying a date without

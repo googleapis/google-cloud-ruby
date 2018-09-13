@@ -29,13 +29,13 @@ module Google
     #
     # Although it is not forbidden, it is generally a bad idea to include
     # non-finite values (infinities or NaNs) in the population of values, as this
-    # will render the +mean+ and +sum_of_squared_deviation+ fields meaningless.
+    # will render the `mean` and `sum_of_squared_deviation` fields meaningless.
     # @!attribute [rw] count
     #   @return [Integer]
     #     The number of values in the population. Must be non-negative.
     # @!attribute [rw] mean
     #   @return [Float]
-    #     The arithmetic mean of the values in the population. If +count+ is zero
+    #     The arithmetic mean of the values in the population. If `count` is zero
     #     then this field must be zero.
     # @!attribute [rw] sum_of_squared_deviation
     #   @return [Float]
@@ -47,26 +47,26 @@ module Google
     #     Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition
     #     describes Welford's method for accumulating this sum in one pass.
     #
-    #     If +count+ is zero then this field must be zero.
+    #     If `count` is zero then this field must be zero.
     # @!attribute [rw] range
     #   @return [Google::Api::Distribution::Range]
     #     If specified, contains the range of the population values. The field
-    #     must not be present if the +count+ is zero.
+    #     must not be present if the `count` is zero.
     # @!attribute [rw] bucket_options
     #   @return [Google::Api::Distribution::BucketOptions]
     #     Defines the histogram bucket boundaries.
     # @!attribute [rw] bucket_counts
     #   @return [Array<Integer>]
-    #     If +bucket_options+ is given, then the sum of the values in +bucket_counts+
-    #     must equal the value in +count+.  If +bucket_options+ is not given, no
-    #     +bucket_counts+ fields may be given.
+    #     If `bucket_options` is given, then the sum of the values in `bucket_counts`
+    #     must equal the value in `count`.  If `bucket_options` is not given, no
+    #     `bucket_counts` fields may be given.
     #
     #     Bucket counts are given in order under the numbering scheme described
     #     above (the underflow bucket has number 0; the finite buckets, if any,
     #     have numbers 1 through N-2; the overflow bucket has number N-1).
     #
-    #     The size of +bucket_counts+ must be no greater than N as defined in
-    #     +bucket_options+.
+    #     The size of `bucket_counts` must be no greater than N as defined in
+    #     `bucket_options`.
     #
     #     Any suffix of trailing zero bucket_count fields may be omitted.
     class Distribution
@@ -80,9 +80,9 @@ module Google
       class Range; end
 
       # A Distribution may optionally contain a histogram of the values in the
-      # population.  The histogram is given in +bucket_counts+ as counts of values
+      # population.  The histogram is given in `bucket_counts` as counts of values
       # that fall into one of a sequence of non-overlapping buckets.  The sequence
-      # of buckets is described by +bucket_options+.
+      # of buckets is described by `bucket_options`.
       #
       # A bucket specifies an inclusive lower bound and exclusive upper bound for
       # the values that are counted for that bucket.  The upper bound of a bucket
@@ -97,11 +97,11 @@ module Google
       # +infinity.  The finite buckets are so-called because both bounds are
       # finite.
       #
-      # +BucketOptions+ describes bucket boundaries in one of three ways.  Two
+      # `BucketOptions` describes bucket boundaries in one of three ways.  Two
       # describe the boundaries by giving parameters for a formula to generate
       # boundaries and one gives the bucket boundaries explicitly.
       #
-      # If +bucket_boundaries+ is not given, then no +bucket_counts+ may be given.
+      # If `bucket_boundaries` is not given, then no `bucket_counts` may be given.
       # @!attribute [rw] linear_buckets
       #   @return [Google::Api::Distribution::BucketOptions::Linear]
       #     The linear bucket.
@@ -116,8 +116,8 @@ module Google
         # overflow and underflow).  Each bucket represents a constant absolute
         # uncertainty on the specific value in the bucket.
         #
-        # Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
-        # bucket +i+:
+        # Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
+        # bucket `i`:
         #
         #    Upper bound (0 <= i < N-1):     offset + (width * i).
         #    Lower bound (1 <= i < N):       offset + (width * (i - 1)).
@@ -136,7 +136,7 @@ module Google
         # the value of the lower bound.  Each bucket represents a constant relative
         # uncertainty on a specific value in the bucket.
         #
-        # Defines +num_finite_buckets + 2+ (= N) buckets with these boundaries for
+        # Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
         # bucket i:
         #
         #    Upper bound (0 <= i < N-1):     scale * (growth_factor ^ i).
@@ -154,13 +154,13 @@ module Google
 
         # A set of buckets with arbitrary widths.
         #
-        # Defines +size(bounds) + 1+ (= N) buckets with these boundaries for
+        # Defines `size(bounds) + 1` (= N) buckets with these boundaries for
         # bucket i:
         #
         #    Upper bound (0 <= i < N-1):     bounds[i]
         #    Lower bound (1 <= i < N);       bounds[i - 1]
         #
-        # There must be at least one element in +bounds+.  If +bounds+ has only one
+        # There must be at least one element in `bounds`.  If `bounds` has only one
         # element, there are no finite buckets, and that single element is the
         # common boundary of the overflow and underflow buckets.
         # @!attribute [rw] bounds

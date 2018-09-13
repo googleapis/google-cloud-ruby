@@ -228,13 +228,13 @@ module Google
           #
           #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +job+:
+          #   # TODO: Initialize `job`:
           #   job = {}
           #   response = job_controller_client.submit_job(project_id, region, job)
 
@@ -275,13 +275,13 @@ module Google
           #
           #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +job_id+:
+          #   # TODO: Initialize `job_id`:
           #   job_id = ''
           #   response = job_controller_client.get_job(project_id, region, job_id)
 
@@ -320,18 +320,18 @@ module Google
           #   Optional. Specifies enumerated categories of jobs to list.
           #   (default = match ALL jobs).
           #
-          #   If +filter+ is provided, +jobStateMatcher+ will be ignored.
+          #   If `filter` is provided, `jobStateMatcher` will be ignored.
           # @param filter [String]
           #   Optional. A filter constraining the jobs to list. Filters are
           #   case-sensitive and have the following syntax:
           #
           #   [field = value] AND [field [= value]] ...
           #
-          #   where **field** is +status.state+ or +labels.[KEY]+, and +[KEY]+ is a label
-          #   key. **value** can be +*+ to match all values.
-          #   +status.state+ can be either +ACTIVE+ or +NON_ACTIVE+.
-          #   Only the logical +AND+ operator is supported; space-separated items are
-          #   treated as having an implicit +AND+ operator.
+          #   where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
+          #   key. **value** can be `*` to match all values.
+          #   `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
+          #   Only the logical `AND` operator is supported; space-separated items are
+          #   treated as having an implicit `AND` operator.
           #
           #   Example filter:
           #
@@ -353,10 +353,10 @@ module Google
           #
           #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
           #   # Iterate over all results.
@@ -410,7 +410,7 @@ module Google
           #   Required. Specifies the path, relative to <code>Job</code>, of
           #   the field to update. For example, to update the labels of a Job the
           #   <code>update_mask</code> parameter would be specified as
-          #   <code>labels</code>, and the +PATCH+ request body would specify the new
+          #   <code>labels</code>, and the `PATCH` request body would specify the new
           #   value. <strong>Note:</strong> Currently, <code>labels</code> is the only
           #   field that can be updated.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -428,19 +428,19 @@ module Google
           #
           #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +job_id+:
+          #   # TODO: Initialize `job_id`:
           #   job_id = ''
           #
-          #   # TODO: Initialize +job+:
+          #   # TODO: Initialize `job`:
           #   job = {}
           #
-          #   # TODO: Initialize +update_mask+:
+          #   # TODO: Initialize `update_mask`:
           #   update_mask = {}
           #   response = job_controller_client.update_job(project_id, region, job_id, job, update_mask)
 
@@ -488,13 +488,13 @@ module Google
           #
           #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +job_id+:
+          #   # TODO: Initialize `job_id`:
           #   job_id = ''
           #   response = job_controller_client.cancel_job(project_id, region, job_id)
 
@@ -514,7 +514,7 @@ module Google
           end
 
           # Deletes the job from the project. If the job is active, the delete fails,
-          # and the response returns +FAILED_PRECONDITION+.
+          # and the response returns `FAILED_PRECONDITION`.
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the job
@@ -535,13 +535,13 @@ module Google
           #
           #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
           #
-          #   # TODO: Initialize +project_id+:
+          #   # TODO: Initialize `project_id`:
           #   project_id = ''
           #
-          #   # TODO: Initialize +region+:
+          #   # TODO: Initialize `region`:
           #   region = ''
           #
-          #   # TODO: Initialize +job_id+:
+          #   # TODO: Initialize `job_id`:
           #   job_id = ''
           #   job_controller_client.delete_job(project_id, region, job_id)
 

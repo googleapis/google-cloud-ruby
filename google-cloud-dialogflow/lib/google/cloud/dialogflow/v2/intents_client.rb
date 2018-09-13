@@ -40,7 +40,7 @@ module Google
         # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) method, the
         # Dialogflow API analyzes the input and searches
         # for a matching intent. If no match is found, the Dialogflow API returns a
-        # fallback intent (+is_fallback+ = true).
+        # fallback intent (`is_fallback` = true).
         #
         # You can provide additional information for the Dialogflow API to use to
         # match user input to an intent by adding the following to your intent.
@@ -308,7 +308,7 @@ module Google
           #
           # @param parent [String]
           #   Required. The agent to list all intents from.
-          #   Format: +projects/<Project ID>/agent+.
+          #   Format: `projects/<Project ID>/agent`.
           # @param language_code [String]
           #   Optional. The language to list training phrases, parameters and rich
           #   messages for. If not specified, the agent's default language is used.
@@ -375,7 +375,7 @@ module Google
           #
           # @param name [String]
           #   Required. The name of the intent.
-          #   Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+          #   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
           # @param language_code [String]
           #   Optional. The language to retrieve training phrases, parameters and rich
           #   messages for. If not specified, the agent's default language is used.
@@ -418,14 +418,14 @@ module Google
           #
           # @param parent [String]
           #   Required. The agent to create a intent for.
-          #   Format: +projects/<Project ID>/agent+.
+          #   Format: `projects/<Project ID>/agent`.
           # @param intent [Google::Cloud::Dialogflow::V2::Intent | Hash]
           #   Required. The intent to create.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::Intent`
           #   can also be provided.
           # @param language_code [String]
           #   Optional. The language of training phrases, parameters and rich messages
-          #   defined in +intent+. If not specified, the agent's default language is
+          #   defined in `intent`. If not specified, the agent's default language is
           #   used. [More than a dozen
           #   languages](https://dialogflow.com/docs/reference/language) are supported.
           #   Note: languages must be enabled in the agent, before they can be used.
@@ -445,7 +445,7 @@ module Google
           #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
           #
-          #   # TODO: Initialize +intent+:
+          #   # TODO: Initialize `intent`:
           #   intent = {}
           #   response = intents_client.create_intent(formatted_parent, intent)
 
@@ -470,12 +470,12 @@ module Google
           #
           # @param intent [Google::Cloud::Dialogflow::V2::Intent | Hash]
           #   Required. The intent to update.
-          #   Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+          #   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::Intent`
           #   can also be provided.
           # @param language_code [String]
           #   Optional. The language of training phrases, parameters and rich messages
-          #   defined in +intent+. If not specified, the agent's default language is
+          #   defined in `intent`. If not specified, the agent's default language is
           #   used. [More than a dozen
           #   languages](https://dialogflow.com/docs/reference/language) are supported.
           #   Note: languages must be enabled in the agent, before they can be used.
@@ -498,10 +498,10 @@ module Google
           #
           #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #
-          #   # TODO: Initialize +intent+:
+          #   # TODO: Initialize `intent`:
           #   intent = {}
           #
-          #   # TODO: Initialize +language_code+:
+          #   # TODO: Initialize `language_code`:
           #   language_code = ''
           #   response = intents_client.update_intent(intent, language_code)
 
@@ -526,7 +526,7 @@ module Google
           #
           # @param name [String]
           #   Required. The name of the intent to delete.
-          #   Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+          #   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -559,10 +559,10 @@ module Google
           #
           # @param parent [String]
           #   Required. The name of the agent to update or create intents in.
-          #   Format: +projects/<Project ID>/agent+.
+          #   Format: `projects/<Project ID>/agent`.
           # @param language_code [String]
           #   Optional. The language of training phrases, parameters and rich messages
-          #   defined in +intents+. If not specified, the agent's default language is
+          #   defined in `intents`. If not specified, the agent's default language is
           #   used. [More than a dozen
           #   languages](https://dialogflow.com/docs/reference/language) are supported.
           #   Note: languages must be enabled in the agent, before they can be used.
@@ -591,7 +591,7 @@ module Google
           #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
           #
-          #   # TODO: Initialize +language_code+:
+          #   # TODO: Initialize `language_code`:
           #   language_code = ''
           #
           #   # Register a callback during the method call.
@@ -655,9 +655,9 @@ module Google
           #
           # @param parent [String]
           #   Required. The name of the agent to delete all entities types for. Format:
-          #   +projects/<Project ID>/agent+.
+          #   `projects/<Project ID>/agent`.
           # @param intents [Array<Google::Cloud::Dialogflow::V2::Intent | Hash>]
-          #   Required. The collection of intents to delete. Only intent +name+ must be
+          #   Required. The collection of intents to delete. Only intent `name` must be
           #   filled in.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::Intent`
           #   can also be provided.
@@ -672,7 +672,7 @@ module Google
           #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
           #
-          #   # TODO: Initialize +intents+:
+          #   # TODO: Initialize `intents`:
           #   intents = []
           #
           #   # Register a callback during the method call.

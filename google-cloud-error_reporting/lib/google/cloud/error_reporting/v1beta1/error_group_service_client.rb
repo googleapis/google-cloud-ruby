@@ -248,7 +248,7 @@ module Google
           #
           #   error_group_service_client = Google::Cloud::ErrorReporting::ErrorGroup.new(version: :v1beta1)
           #
-          #   # TODO: Initialize +group+:
+          #   # TODO: Initialize `group`:
           #   group = {}
           #   response = error_group_service_client.update_group(group)
 

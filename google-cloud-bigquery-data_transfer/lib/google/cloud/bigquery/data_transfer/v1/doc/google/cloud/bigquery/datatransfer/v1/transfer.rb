@@ -20,16 +20,16 @@ module Google
         module V1
           # Represents a data transfer configuration. A transfer configuration
           # contains all metadata needed to perform a data transfer. For example,
-          # +destination_dataset_id+ specifies where data should be stored.
+          # `destination_dataset_id` specifies where data should be stored.
           # When a new transfer configuration is created, the specified
-          # +destination_dataset_id+ is created when needed and shared with the
+          # `destination_dataset_id` is created when needed and shared with the
           # appropriate data source service account.
           # @!attribute [rw] name
           #   @return [String]
           #     The resource name of the transfer config.
           #     Transfer config names have the form
-          #     +projects/\\{project_id}/transferConfigs/\\{config_id}+.
-          #     Where +config_id+ is usually a uuid, even though it is not
+          #     `projects/{project_id}/transferConfigs/{config_id}`.
+          #     Where `config_id` is usually a uuid, even though it is not
           #     guaranteed or required. The name is ignored when creating a transfer
           #     config.
           # @!attribute [rw] destination_dataset_id
@@ -52,16 +52,16 @@ module Google
           #     used.
           #     The specified times are in UTC.
           #     Examples of valid format:
-          #     +1st,3rd monday of month 15:30+,
-          #     +every wed,fri of jan,jun 13:15+, and
-          #     +first sunday of quarter 00:00+.
+          #     `1st,3rd monday of month 15:30`,
+          #     `every wed,fri of jan,jun 13:15`, and
+          #     `first sunday of quarter 00:00`.
           #     See more explanation about the format here:
           #     https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format
           #     NOTE: the granularity should be at least 8 hours, or less frequent.
           # @!attribute [rw] data_refresh_window_days
           #   @return [Integer]
           #     The number of days to look back to automatically refresh the data.
-          #     For example, if +data_refresh_window_days = 10+, then every day
+          #     For example, if `data_refresh_window_days = 10`, then every day
           #     BigQuery reingests data for [today-10, today-1], rather than ingesting data
           #     for just [today-1].
           #     Only valid if the data source supports the feature. Set the value to  0
@@ -96,7 +96,7 @@ module Google
           #   @return [String]
           #     The resource name of the transfer run.
           #     Transfer run names have the form
-          #     +projects/\\{project_id}/locations/\\{location}/transferConfigs/\\{config_id}/runs/\\{run_id}+.
+          #     `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}`.
           #     The name is ignored when creating a transfer run.
           # @!attribute [rw] schedule_time
           #   @return [Google::Protobuf::Timestamp]
@@ -144,7 +144,7 @@ module Google
           #     created as part of a regular schedule. For batch transfer runs that are
           #     scheduled manually, this is empty.
           #     NOTE: the system might choose to delay the schedule depending on the
-          #     current load, so +schedule_time+ doesn't always matches this.
+          #     current load, so `schedule_time` doesn't always matches this.
           class TransferRun; end
 
           # Represents a user facing message for a particular data transfer run.

@@ -23,7 +23,7 @@ module Google
     #       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
     #     }
     #
-    # The JSON representation for +Empty+ is empty JSON object +{}+.
+    # The JSON representation for `Empty` is empty JSON object `{}`.
     class Empty; end
   end
 end

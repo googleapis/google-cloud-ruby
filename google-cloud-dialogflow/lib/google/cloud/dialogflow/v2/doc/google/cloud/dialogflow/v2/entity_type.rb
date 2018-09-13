@@ -22,10 +22,10 @@ module Google
         # language queries.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required for all methods except +create+ (+create+ populates the name
+        #     Required for all methods except `create` (`create` populates the name
         #     automatically.
         #     The unique identifier of the entity type. Format:
-        #     +projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.
+        #     `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
         # @!attribute [rw] display_name
         #   @return [String]
         #     Required. The name of the entity.
@@ -44,15 +44,15 @@ module Google
           # @!attribute [rw] value
           #   @return [String]
           #     Required.
-          #     For +KIND_MAP+ entity types:
+          #     For `KIND_MAP` entity types:
           #       A canonical name to be used in place of synonyms.
-          #     For +KIND_LIST+ entity types:
+          #     For `KIND_LIST` entity types:
           #       A string that can contain references to other entity types (with or
           #       without aliases).
           # @!attribute [rw] synonyms
           #   @return [Array<String>]
-          #     Required. A collection of synonyms. For +KIND_LIST+ entity types this
-          #     must contain exactly one synonym equal to +value+.
+          #     Required. A collection of synonyms. For `KIND_LIST` entity types this
+          #     must contain exactly one synonym equal to `value`.
           class Entity; end
 
           # Represents kinds of entities.
@@ -87,7 +87,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The agent to list all entity types from.
-        #     Format: +projects/<Project ID>/agent+.
+        #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] language_code
         #   @return [String]
         #     Optional. The language to list entity synonyms for. If not specified,
@@ -119,7 +119,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the entity type.
-        #     Format: +projects/<Project ID>/agent/entityTypes/<EntityType ID>+.
+        #     Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
         # @!attribute [rw] language_code
         #   @return [String]
         #     Optional. The language to retrieve entity synonyms for. If not specified,
@@ -133,13 +133,13 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The agent to create a entity type for.
-        #     Format: +projects/<Project ID>/agent+.
+        #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] entity_type
         #   @return [Google::Cloud::Dialogflow::V2::EntityType]
         #     Required. The entity type to create.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in +entity_type+. If not
+        #     Optional. The language of entity synonyms defined in `entity_type`. If not
         #     specified, the agent's default language is used.
         #     [More than a dozen
         #     languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -150,10 +150,10 @@ module Google
         # @!attribute [rw] entity_type
         #   @return [Google::Cloud::Dialogflow::V2::EntityType]
         #     Required. The entity type to update.
-        #     Format: +projects/<Project ID>/agent/entityTypes/<EntityType ID>+.
+        #     Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in +entity_type+. If not
+        #     Optional. The language of entity synonyms defined in `entity_type`. If not
         #     specified, the agent's default language is used.
         #     [More than a dozen
         #     languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -167,14 +167,14 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the entity type to delete.
-        #     Format: +projects/<Project ID>/agent/entityTypes/<EntityType ID>+.
+        #     Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
         class DeleteEntityTypeRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::BatchUpdateEntityTypes EntityTypes::BatchUpdateEntityTypes}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the agent to update or create entity types in.
-        #     Format: +projects/<Project ID>/agent+.
+        #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] entity_type_batch_uri
         #   @return [String]
         #     The URI to a Google Cloud Storage file containing entity types to update
@@ -186,7 +186,7 @@ module Google
         #     The collection of entity type to update or create.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in +entity_types+. If not
+        #     Optional. The language of entity synonyms defined in `entity_types`. If not
         #     specified, the agent's default language is used.
         #     [More than a dozen
         #     languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -206,24 +206,24 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the agent to delete all entities types for. Format:
-        #     +projects/<Project ID>/agent+.
+        #     `projects/<Project ID>/agent`.
         # @!attribute [rw] entity_type_names
         #   @return [Array<String>]
         #     Required. The names entity types to delete. All names must point to the
-        #     same agent as +parent+.
+        #     same agent as `parent`.
         class BatchDeleteEntityTypesRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::BatchCreateEntities EntityTypes::BatchCreateEntities}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the entity type to create entities in. Format:
-        #     +projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.
+        #     `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
         # @!attribute [rw] entities
         #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity>]
         #     Required. The collection of entities to create.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in +entities+. If not
+        #     Optional. The language of entity synonyms defined in `entities`. If not
         #     specified, the agent's default language is used.
         #     [More than a dozen
         #     languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -234,13 +234,13 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the entity type to update the entities in. Format:
-        #     +projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.
+        #     `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
         # @!attribute [rw] entities
         #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity>]
         #     Required. The collection of new entities to replace the existing entities.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in +entities+. If not
+        #     Optional. The language of entity synonyms defined in `entities`. If not
         #     specified, the agent's default language is used.
         #     [More than a dozen
         #     languages](https://dialogflow.com/docs/reference/language) are supported.
@@ -254,15 +254,15 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the entity type to delete entries for. Format:
-        #     +projects/<Project ID>/agent/entityTypes/<Entity Type ID>+.
+        #     `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
         # @!attribute [rw] entity_values
         #   @return [Array<String>]
-        #     Required. The canonical +values+ of the entities to delete. Note that
+        #     Required. The canonical `values` of the entities to delete. Note that
         #     these are not fully-qualified names, i.e. they don't start with
-        #     +projects/<Project ID>+.
+        #     `projects/<Project ID>`.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in +entities+. If not
+        #     Optional. The language of entity synonyms defined in `entities`. If not
         #     specified, the agent's default language is used.
         #     [More than a dozen
         #     languages](https://dialogflow.com/docs/reference/language) are supported.

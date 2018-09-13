@@ -17,7 +17,7 @@ module Google
   module Type
     # Represents a time of day. The date and time zone are either not significant
     # or are specified elsewhere. An API may chose to allow leap seconds. Related
-    # types are {Google::Type::Date} and +google.protobuf.Timestamp+.
+    # types are {Google::Type::Date} and `google.protobuf.Timestamp`.
     # @!attribute [rw] hours
     #   @return [Integer]
     #     Hours of day in 24 hour format. Should be from 0 to 23. An API may choose

@@ -22,11 +22,11 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     The unique name of the instance in which to create the table.
-        #     Values are of the form +projects/<project>/instances/<instance>+.
+        #     Values are of the form `projects/<project>/instances/<instance>`.
         # @!attribute [rw] table_id
         #   @return [String]
         #     The name by which the new table should be referred to within the parent
-        #     instance, e.g., +foobar+ rather than +<parent>/tables/foobar+.
+        #     instance, e.g., `foobar` rather than `<parent>/tables/foobar`.
         # @!attribute [rw] table
         #   @return [Google::Bigtable::Admin::V2::Table]
         #     The Table to create.
@@ -34,20 +34,20 @@ module Google
         #   @return [Array<Google::Bigtable::Admin::V2::CreateTableRequest::Split>]
         #     The optional list of row keys that will be used to initially split the
         #     table into several tablets (tablets are similar to HBase regions).
-        #     Given two split keys, +s1+ and +s2+, three tablets will be created,
-        #     spanning the key ranges: +[, s1), [s1, s2), [s2, )+.
+        #     Given two split keys, `s1` and `s2`, three tablets will be created,
+        #     spanning the key ranges: `[, s1), [s1, s2), [s2, )`.
         #
         #     Example:
         #
-        #     * Row keys := +["a", "apple", "custom", "customer_1", "customer_2",+
-        #       +"other", "zz"]+
-        #     * initial_split_keys := +["apple", "customer_1", "customer_2", "other"]+
+        #     * Row keys := `["a", "apple", "custom", "customer_1", "customer_2",`
+        #       `"other", "zz"]`
+        #     * initial_split_keys := `["apple", "customer_1", "customer_2", "other"]`
         #     * Key assignment:
-        #       * Tablet 1 +[, apple)                => {"a"}.+
-        #         * Tablet 2 +[apple, customer_1)      => {"apple", "custom"}.+
-        #         * Tablet 3 +[customer_1, customer_2) => {"customer_1"}.+
-        #         * Tablet 4 +[customer_2, other)      => {"customer_2"}.+
-        #         * Tablet 5 +[other, )                => {"other", "zz"}.+
+        #       * Tablet 1 `[, apple)                => {"a"}.`
+        #         * Tablet 2 `[apple, customer_1)      => {"apple", "custom"}.`
+        #         * Tablet 3 `[customer_1, customer_2) => {"customer_1"}.`
+        #         * Tablet 4 `[customer_2, other)      => {"customer_2"}.`
+        #         * Tablet 5 `[other, )                => {"other", "zz"}.`
         class CreateTableRequest
           # An initial split point for a newly created table.
           # @!attribute [rw] key
@@ -66,17 +66,17 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     The unique name of the instance in which to create the table.
-        #     Values are of the form +projects/<project>/instances/<instance>+.
+        #     Values are of the form `projects/<project>/instances/<instance>`.
         # @!attribute [rw] table_id
         #   @return [String]
         #     The name by which the new table should be referred to within the parent
-        #     instance, e.g., +foobar+ rather than +<parent>/tables/foobar+.
+        #     instance, e.g., `foobar` rather than `<parent>/tables/foobar`.
         # @!attribute [rw] source_snapshot
         #   @return [String]
         #     The unique name of the snapshot from which to restore the table. The
         #     snapshot and the table must be in the same instance.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+        #     `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
         class CreateTableFromSnapshotRequest; end
 
         # Request message for
@@ -85,7 +85,7 @@ module Google
         #   @return [String]
         #     The unique name of the table on which to drop a range of rows.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] row_key_prefix
         #   @return [String]
         #     Delete all rows that start with this row key prefix. Prefix cannot be
@@ -100,18 +100,18 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     The unique name of the instance for which tables should be listed.
-        #     Values are of the form +projects/<project>/instances/<instance>+.
+        #     Values are of the form `projects/<project>/instances/<instance>`.
         # @!attribute [rw] view
         #   @return [Google::Bigtable::Admin::V2::Table::View]
         #     The view to be applied to the returned tables' fields.
-        #     Defaults to +NAME_ONLY+ if unspecified; no others are currently supported.
+        #     Defaults to `NAME_ONLY` if unspecified; no others are currently supported.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Maximum number of results per page.
         #     CURRENTLY UNIMPLEMENTED AND IGNORED.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     The value of +next_page_token+ returned by a previous call.
+        #     The value of `next_page_token` returned by a previous call.
         class ListTablesRequest; end
 
         # Response message for
@@ -122,7 +122,7 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [String]
         #     Set if not all tables could be returned in a single response.
-        #     Pass this value to +page_token+ in another request to get the next
+        #     Pass this value to `page_token` in another request to get the next
         #     page of results.
         class ListTablesResponse; end
 
@@ -132,11 +132,11 @@ module Google
         #   @return [String]
         #     The unique name of the requested table.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] view
         #   @return [Google::Bigtable::Admin::V2::Table::View]
         #     The view to be applied to the returned table's fields.
-        #     Defaults to +SCHEMA_VIEW+ if unspecified.
+        #     Defaults to `SCHEMA_VIEW` if unspecified.
         class GetTableRequest; end
 
         # Request message for
@@ -145,7 +145,7 @@ module Google
         #   @return [String]
         #     The unique name of the table to be deleted.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        #     `projects/<project>/instances/<instance>/tables/<table>`.
         class DeleteTableRequest; end
 
         # Request message for
@@ -154,7 +154,7 @@ module Google
         #   @return [String]
         #     The unique name of the table whose families should be modified.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] modifications
         #   @return [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
         #     Modifications to be atomically applied to the specified table's families.
@@ -187,7 +187,7 @@ module Google
         #   @return [String]
         #     The unique name of the Table for which to create a consistency token.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        #     `projects/<project>/instances/<instance>/tables/<table>`.
         class GenerateConsistencyTokenRequest; end
 
         # Response message for
@@ -203,7 +203,7 @@ module Google
         #   @return [String]
         #     The unique name of the Table for which to check replication consistency.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] consistency_token
         #   @return [String]
         #     The token created using GenerateConsistencyToken for the Table.
@@ -228,18 +228,18 @@ module Google
         #   @return [String]
         #     The unique name of the table to have the snapshot taken.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] cluster
         #   @return [String]
         #     The name of the cluster where the snapshot will be created in.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/clusters/<cluster>+.
+        #     `projects/<project>/instances/<instance>/clusters/<cluster>`.
         # @!attribute [rw] snapshot_id
         #   @return [String]
         #     The ID by which the new snapshot should be referred to within the parent
-        #     cluster, e.g., +mysnapshot+ of the form: +[_a-zA-Z0-9][-_.a-zA-Z0-9]*+
+        #     cluster, e.g., `mysnapshot` of the form: `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
         #     rather than
-        #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot+.
+        #     `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot`.
         # @!attribute [rw] ttl
         #   @return [Google::Protobuf::Duration]
         #     The amount of time that the new snapshot can stay active after it is
@@ -262,7 +262,7 @@ module Google
         #   @return [String]
         #     The unique name of the requested snapshot.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+        #     `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
         class GetSnapshotRequest; end
 
         # Request message for
@@ -276,16 +276,16 @@ module Google
         #   @return [String]
         #     The unique name of the cluster for which snapshots should be listed.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/clusters/<cluster>+.
-        #     Use +<cluster> = '-'+ to list snapshots for all clusters in an instance,
-        #     e.g., +projects/<project>/instances/<instance>/clusters/-+.
+        #     `projects/<project>/instances/<instance>/clusters/<cluster>`.
+        #     Use `<cluster> = '-'` to list snapshots for all clusters in an instance,
+        #     e.g., `projects/<project>/instances/<instance>/clusters/-`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     The maximum number of snapshots to return per page.
         #     CURRENTLY UNIMPLEMENTED AND IGNORED.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     The value of +next_page_token+ returned by a previous call.
+        #     The value of `next_page_token` returned by a previous call.
         class ListSnapshotsRequest; end
 
         # Response message for
@@ -301,7 +301,7 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [String]
         #     Set if not all snapshots could be returned in a single response.
-        #     Pass this value to +page_token+ in another request to get the next
+        #     Pass this value to `page_token` in another request to get the next
         #     page of results.
         class ListSnapshotsResponse; end
 
@@ -316,7 +316,7 @@ module Google
         #   @return [String]
         #     The unique name of the snapshot to be deleted.
         #     Values are of the form
-        #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+        #     `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
         class DeleteSnapshotRequest; end
 
         # The metadata for the Operation returned by SnapshotTable.

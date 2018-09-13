@@ -16,40 +16,40 @@
 module Google
   module Monitoring
     module V3
-      # The +ListGroup+ request.
+      # The `ListGroup` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The project whose groups are to be listed. The format is
-      #     +"projects/\\{project_id_or_number}"+.
+      #     `"projects/{project_id_or_number}"`.
       # @!attribute [rw] children_of_group
       #   @return [String]
-      #     A group name: +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
-      #     Returns groups whose +parentName+ field contains the group
+      #     A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
+      #     Returns groups whose `parentName` field contains the group
       #     name.  If no groups have this parent, the results are empty.
       # @!attribute [rw] ancestors_of_group
       #   @return [String]
-      #     A group name: +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
+      #     A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
       #     Returns groups that are ancestors of the specified group.
       #     The groups are returned in order, starting with the immediate parent and
       #     ending with the most distant ancestor.  If the specified group has no
       #     immediate parent, the results are empty.
       # @!attribute [rw] descendants_of_group
       #   @return [String]
-      #     A group name: +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
+      #     A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
       #     Returns the descendants of the specified group.  This is a superset of
-      #     the results returned by the +childrenOfGroup+ filter, and includes
+      #     the results returned by the `childrenOfGroup` filter, and includes
       #     children-of-children, and so forth.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     A positive number that is the maximum number of results to return.
       # @!attribute [rw] page_token
       #   @return [String]
-      #     If this field is not empty then it must contain the +nextPageToken+ value
+      #     If this field is not empty then it must contain the `nextPageToken` value
       #     returned by a previous call to this method.  Using this field causes the
       #     method to return additional results from the previous method call.
       class ListGroupsRequest; end
 
-      # The +ListGroups+ response.
+      # The `ListGroups` response.
       # @!attribute [rw] group
       #   @return [Array<Google::Monitoring::V3::Group>]
       #     The groups that match the specified filters.
@@ -57,58 +57,58 @@ module Google
       #   @return [String]
       #     If there are more results than have been returned, then this field is set
       #     to a non-empty value.  To see the additional results,
-      #     use that value as +pageToken+ in the next call to this method.
+      #     use that value as `pageToken` in the next call to this method.
       class ListGroupsResponse; end
 
-      # The +GetGroup+ request.
+      # The `GetGroup` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The group to retrieve. The format is
-      #     +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
+      #     `"projects/{project_id_or_number}/groups/{group_id}"`.
       class GetGroupRequest; end
 
-      # The +CreateGroup+ request.
+      # The `CreateGroup` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The project in which to create the group. The format is
-      #     +"projects/\\{project_id_or_number}"+.
+      #     `"projects/{project_id_or_number}"`.
       # @!attribute [rw] group
       #   @return [Google::Monitoring::V3::Group]
-      #     A group definition. It is an error to define the +name+ field because
+      #     A group definition. It is an error to define the `name` field because
       #     the system assigns the name.
       # @!attribute [rw] validate_only
       #   @return [true, false]
       #     If true, validate this request but do not create the group.
       class CreateGroupRequest; end
 
-      # The +UpdateGroup+ request.
+      # The `UpdateGroup` request.
       # @!attribute [rw] group
       #   @return [Google::Monitoring::V3::Group]
       #     The new definition of the group.  All fields of the existing group,
-      #     excepting +name+, are replaced with the corresponding fields of this group.
+      #     excepting `name`, are replaced with the corresponding fields of this group.
       # @!attribute [rw] validate_only
       #   @return [true, false]
       #     If true, validate this request but do not update the existing group.
       class UpdateGroupRequest; end
 
-      # The +DeleteGroup+ request. You can only delete a group if it has no children.
+      # The `DeleteGroup` request. You can only delete a group if it has no children.
       # @!attribute [rw] name
       #   @return [String]
       #     The group to delete. The format is
-      #     +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
+      #     `"projects/{project_id_or_number}/groups/{group_id}"`.
       class DeleteGroupRequest; end
 
-      # The +ListGroupMembers+ request.
+      # The `ListGroupMembers` request.
       # @!attribute [rw] name
       #   @return [String]
       #     The group whose members are listed. The format is
-      #     +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
+      #     `"projects/{project_id_or_number}/groups/{group_id}"`.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     A positive number that is the maximum number of results to return.
       # @!attribute [rw] page_token
       #   @return [String]
-      #     If this field is not empty then it must contain the +nextPageToken+ value
+      #     If this field is not empty then it must contain the `nextPageToken` value
       #     returned by a previous call to this method.  Using this field causes the
       #     method to return additional results from the previous method call.
       # @!attribute [rw] filter
@@ -128,7 +128,7 @@ module Google
       #     membership over the last minute is returned.
       class ListGroupMembersRequest; end
 
-      # The +ListGroupMembers+ response.
+      # The `ListGroupMembers` response.
       # @!attribute [rw] members
       #   @return [Array<Google::Api::MonitoredResource>]
       #     A set of monitored resources in the group.
@@ -136,7 +136,7 @@ module Google
       #   @return [String]
       #     If there are more results than have been returned, then this field is
       #     set to a non-empty value.  To see the additional results, use that value as
-      #     +pageToken+ in the next call to this method.
+      #     `pageToken` in the next call to this method.
       # @!attribute [rw] total_size
       #   @return [Integer]
       #     The total number of elements matching this request.

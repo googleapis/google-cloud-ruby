@@ -23,18 +23,18 @@ module Google
         #     Input video location. Currently, only
         #     [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
         #     supported, which must be specified in the following format:
-        #     +gs://bucket-id/object-id+ (other URI formats return
+        #     `gs://bucket-id/object-id` (other URI formats return
         #     {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
         #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
-        #     A video URI may include wildcards in +object-id+, and thus identify
+        #     A video URI may include wildcards in `object-id`, and thus identify
         #     multiple videos. Supported wildcards: '*' to match 0 or more characters;
         #     '?' to match 1 character. If unset, the input video should be embedded
-        #     in the request as +input_content+. If set, +input_content+ should be unset.
+        #     in the request as `input_content`. If set, `input_content` should be unset.
         # @!attribute [rw] input_content
         #   @return [String]
         #     The video data bytes.
-        #     If unset, the input video(s) should be specified via +input_uri+.
-        #     If set, +input_uri+ should be unset.
+        #     If unset, the input video(s) should be specified via `input_uri`.
+        #     If set, `input_uri` should be unset.
         # @!attribute [rw] features
         #   @return [Array<Google::Cloud::Videointelligence::V1::Feature>]
         #     Requested video annotation features.
@@ -46,13 +46,13 @@ module Google
         #     Optional location where the output (in JSON format) should be stored.
         #     Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
         #     URIs are supported, which must be specified in the following format:
-        #     +gs://bucket-id/object-id+ (other URI formats return
+        #     `gs://bucket-id/object-id` (other URI formats return
         #     {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
         #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
         # @!attribute [rw] location_id
         #   @return [String]
         #     Optional cloud region where annotation should take place. Supported cloud
-        #     regions: +us-east1+, +us-west1+, +europe-west1+, +asia-east1+. If no region
+        #     regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
         #     is specified, a region will be determined based on video file location.
         class AnnotateVideoRequest; end
 
@@ -81,12 +81,12 @@ module Google
         #   @return [Google::Cloud::Videointelligence::V1::LabelDetectionMode]
         #     What labels should be detected with LABEL_DETECTION, in addition to
         #     video-level labels or segment-level labels.
-        #     If unspecified, defaults to +SHOT_MODE+.
+        #     If unspecified, defaults to `SHOT_MODE`.
         # @!attribute [rw] stationary_camera
         #   @return [true, false]
         #     Whether the video has been shot from a stationary (i.e. non-moving) camera.
         #     When set to true, might improve detection accuracy for moving objects.
-        #     Should be used with +SHOT_AND_FRAME_MODE+ enabled.
+        #     Should be used with `SHOT_AND_FRAME_MODE` enabled.
         # @!attribute [rw] model
         #   @return [String]
         #     Model to use for label detection.
@@ -159,10 +159,10 @@ module Google
         #     API](https://developers.google.com/knowledge-graph/).
         # @!attribute [rw] description
         #   @return [String]
-        #     Textual description, e.g. +Fixed-gear bicycle+.
+        #     Textual description, e.g. `Fixed-gear bicycle`.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Language code for +description+ in BCP-47 format.
+        #     Language code for `description` in BCP-47 format.
         class Entity; end
 
         # Label annotation.
@@ -172,9 +172,9 @@ module Google
         # @!attribute [rw] category_entities
         #   @return [Array<Google::Cloud::Videointelligence::V1::Entity>]
         #     Common categories for the detected entity.
-        #     E.g. when the label is +Terrier+ the category is likely +dog+. And in some
-        #     cases there might be more than one categories e.g. +Terrier+ could also be
-        #     a +pet+.
+        #     E.g. when the label is `Terrier` the category is likely `dog`. And in some
+        #     cases there might be more than one categories e.g. `Terrier` could also be
+        #     a `pet`.
         # @!attribute [rw] segments
         #   @return [Array<Google::Cloud::Videointelligence::V1::LabelSegment>]
         #     All video segments where a label was detected.
@@ -276,16 +276,16 @@ module Google
         #     Explicit content annotation.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
-        #     If set, indicates an error. Note that for a single +AnnotateVideoRequest+
+        #     If set, indicates an error. Note that for a single `AnnotateVideoRequest`
         #     some videos may succeed and some may fail.
         class VideoAnnotationResults; end
 
-        # Video annotation response. Included in the +response+
-        # field of the +Operation+ returned by the +GetOperation+
-        # call of the +google::longrunning::Operations+ service.
+        # Video annotation response. Included in the `response`
+        # field of the `Operation` returned by the `GetOperation`
+        # call of the `google::longrunning::Operations` service.
         # @!attribute [rw] annotation_results
         #   @return [Array<Google::Cloud::Videointelligence::V1::VideoAnnotationResults>]
-        #     Annotation results for all videos specified in +AnnotateVideoRequest+.
+        #     Annotation results for all videos specified in `AnnotateVideoRequest`.
         class AnnotateVideoResponse; end
 
         # Annotation progress for a single video.
@@ -305,12 +305,12 @@ module Google
         #     Time of the most recent update.
         class VideoAnnotationProgress; end
 
-        # Video annotation progress. Included in the +metadata+
-        # field of the +Operation+ returned by the +GetOperation+
-        # call of the +google::longrunning::Operations+ service.
+        # Video annotation progress. Included in the `metadata`
+        # field of the `Operation` returned by the `GetOperation`
+        # call of the `google::longrunning::Operations` service.
         # @!attribute [rw] annotation_progress
         #   @return [Array<Google::Cloud::Videointelligence::V1::VideoAnnotationProgress>]
-        #     Progress metadata for all videos specified in +AnnotateVideoRequest+.
+        #     Progress metadata for all videos specified in `AnnotateVideoRequest`.
         class AnnotateVideoProgress; end
 
         # Video annotation feature.

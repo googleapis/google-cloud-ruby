@@ -22,8 +22,8 @@ module Google
         # Represents the input to API methods.
         # @!attribute [rw] type
         #   @return [Google::Cloud::Language::V1::Document::Type]
-        #     Required. If the type is not set or is +TYPE_UNSPECIFIED+,
-        #     returns an +INVALID_ARGUMENT+ error.
+        #     Required. If the type is not set or is `TYPE_UNSPECIFIED`,
+        #     returns an `INVALID_ARGUMENT` error.
         # @!attribute [rw] content
         #   @return [String]
         #     The content of the input in string format.
@@ -41,7 +41,7 @@ module Google
         #     [Language Support](https://cloud.google.com/natural-language/docs/languages)
         #     lists currently supported languages for each API method.
         #     If the language (either specified by the caller or automatically detected)
-        #     is not supported by the called API method, an +INVALID_ARGUMENT+ error
+        #     is not supported by the called API method, an `INVALID_ARGUMENT` error
         #     is returned.
         class Document
           # The document types enum.
@@ -497,7 +497,7 @@ module Google
         #     This is the index of the token which has an arc going to this token.
         #     The index is the position of the token in the array of tokens returned
         #     by the API method. If this token is a root token, then the
-        #     +head_token_index+ is its own index.
+        #     `head_token_index` is its own index.
         # @!attribute [rw] label
         #   @return [Google::Cloud::Language::V1::DependencyEdge::Label]
         #     The parse label for the token.
@@ -963,26 +963,26 @@ module Google
         class AnnotateTextResponse; end
 
         # Represents the text encoding that the caller uses to process the output.
-        # Providing an +EncodingType+ is recommended because the API provides the
+        # Providing an `EncodingType` is recommended because the API provides the
         # beginning offsets for various outputs, such as tokens and mentions, and
         # languages that natively use different text encodings may access offsets
         # differently.
         module EncodingType
-          # If +EncodingType+ is not specified, encoding-dependent information (such as
-          # +begin_offset+) will be set at +-1+.
+          # If `EncodingType` is not specified, encoding-dependent information (such as
+          # `begin_offset`) will be set at `-1`.
           NONE = 0
 
-          # Encoding-dependent information (such as +begin_offset+) is calculated based
+          # Encoding-dependent information (such as `begin_offset`) is calculated based
           # on the UTF-8 encoding of the input. C++ and Go are examples of languages
           # that use this encoding natively.
           UTF8 = 1
 
-          # Encoding-dependent information (such as +begin_offset+) is calculated based
+          # Encoding-dependent information (such as `begin_offset`) is calculated based
           # on the UTF-16 encoding of the input. Java and Javascript are examples of
           # languages that use this encoding natively.
           UTF16 = 2
 
-          # Encoding-dependent information (such as +begin_offset+) is calculated based
+          # Encoding-dependent information (such as `begin_offset`) is calculated based
           # on the UTF-32 encoding of the input. Python is an example of a language
           # that uses this encoding natively.
           UTF32 = 3

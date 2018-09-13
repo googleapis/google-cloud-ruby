@@ -254,7 +254,7 @@ module Google
           # @param name [String]
           #   A reference to the POSIX account to update. POSIX accounts are identified
           #   by the project ID they are associated with. A reference to the POSIX
-          #   account is in format +users/\\{user}/projects/\\{project}+.
+          #   account is in format `users/{user}/projects/{project}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -286,7 +286,7 @@ module Google
           # @param name [String]
           #   The fingerprint of the public key to update. Public keys are identified by
           #   their SHA-256 fingerprint. The fingerprint of the public key is in format
-          #   +users/\\{user}/sshPublicKeys/\\{fingerprint}+.
+          #   `users/{user}/sshPublicKeys/{fingerprint}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -317,7 +317,7 @@ module Google
           # on Google Compute Engine.
           #
           # @param name [String]
-          #   The unique ID for the user in format +users/\\{user}+.
+          #   The unique ID for the user in format `users/{user}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -349,7 +349,7 @@ module Google
           # @param name [String]
           #   The fingerprint of the public key to retrieve. Public keys are identified
           #   by their SHA-256 fingerprint. The fingerprint of the public key is in
-          #   format +users/\\{user}/sshPublicKeys/\\{fingerprint}+.
+          #   format `users/{user}/sshPublicKeys/{fingerprint}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -381,7 +381,7 @@ module Google
           # login profile.
           #
           # @param parent [String]
-          #   The unique ID for the user in format +users/\\{user}+.
+          #   The unique ID for the user in format `users/{user}`.
           # @param ssh_public_key [Google::Cloud::Oslogin::Common::SshPublicKey | Hash]
           #   The SSH public key and expiration time.
           #   A hash of the same form as `Google::Cloud::Oslogin::Common::SshPublicKey`
@@ -402,7 +402,7 @@ module Google
           #   os_login_service_client = Google::Cloud::OsLogin::V1beta.new(version: :v1beta)
           #   formatted_parent = Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.user_path("[USER]")
           #
-          #   # TODO: Initialize +ssh_public_key+:
+          #   # TODO: Initialize `ssh_public_key`:
           #   ssh_public_key = {}
           #   response = os_login_service_client.import_ssh_public_key(formatted_parent, ssh_public_key)
 
@@ -427,7 +427,7 @@ module Google
           # @param name [String]
           #   The fingerprint of the public key to update. Public keys are identified by
           #   their SHA-256 fingerprint. The fingerprint of the public key is in format
-          #   +users/\\{user}/sshPublicKeys/\\{fingerprint}+.
+          #   `users/{user}/sshPublicKeys/{fingerprint}`.
           # @param ssh_public_key [Google::Cloud::Oslogin::Common::SshPublicKey | Hash]
           #   The SSH public key and expiration time.
           #   A hash of the same form as `Google::Cloud::Oslogin::Common::SshPublicKey`
@@ -450,7 +450,7 @@ module Google
           #   os_login_service_client = Google::Cloud::OsLogin::V1beta.new(version: :v1beta)
           #   formatted_name = Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
           #
-          #   # TODO: Initialize +ssh_public_key+:
+          #   # TODO: Initialize `ssh_public_key`:
           #   ssh_public_key = {}
           #   response = os_login_service_client.update_ssh_public_key(formatted_name, ssh_public_key)
 

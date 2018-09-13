@@ -25,7 +25,7 @@ module Google
       #
       #         projects/[PROJECT_ID]/notificationChannelDescriptors/[TYPE]
       #
-      #     In the above, +[TYPE]+ is the value of the +type+ field.
+      #     In the above, `[TYPE]` is the value of the `type` field.
       # @!attribute [rw] type
       #   @return [String]
       #     The type of notification channel, such as "email", "sms", etc.
@@ -50,7 +50,7 @@ module Google
       #     must be one of the supported_tiers.
       class NotificationChannelDescriptor; end
 
-      # A +NotificationChannel+ is a medium through which an alert is
+      # A `NotificationChannel` is a medium through which an alert is
       # delivered when a policy violation is detected. Examples of channels
       # include email, SMS, and third-party messaging applications. Fields
       # containing sensitive information like authentication tokens or
@@ -65,7 +65,7 @@ module Google
       #
       #         projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]
       #
-      #     The +[CHANNEL_ID]+ is automatically assigned by the server on creation.
+      #     The `[CHANNEL_ID]` is automatically assigned by the server on creation.
       # @!attribute [rw] display_name
       #   @return [String]
       #     An optional human-readable name for this notification channel. It is
@@ -82,13 +82,13 @@ module Google
       #     Configuration fields that define the channel and its behavior. The
       #     permissible and required labels are specified in the
       #     {Google::Monitoring::V3::NotificationChannelDescriptor#labels NotificationChannelDescriptor#labels} of the
-      #     +NotificationChannelDescriptor+ corresponding to the +type+ field.
+      #     `NotificationChannelDescriptor` corresponding to the `type` field.
       # @!attribute [rw] user_labels
       #   @return [Hash{String => String}]
       #     User-supplied key/value data that does not need to conform to
-      #     the corresponding +NotificationChannelDescriptor+'s schema, unlike
-      #     the +labels+ field. This field is intended to be used for organizing
-      #     and identifying the +NotificationChannel+ objects.
+      #     the corresponding `NotificationChannelDescriptor`'s schema, unlike
+      #     the `labels` field. This field is intended to be used for organizing
+      #     and identifying the `NotificationChannel` objects.
       #
       #     The field can contain up to 64 entries. Each key and value is limited to
       #     63 Unicode characters or 128 bytes, whichever is smaller. Labels and
@@ -97,24 +97,24 @@ module Google
       # @!attribute [rw] verification_status
       #   @return [Google::Monitoring::V3::NotificationChannel::VerificationStatus]
       #     Indicates whether this channel has been verified or not. On a
-      #     {Google::Monitoring::V3::NotificationChannelService::ListNotificationChannels +ListNotificationChannels+}
+      #     {Google::Monitoring::V3::NotificationChannelService::ListNotificationChannels `ListNotificationChannels`}
       #     or
-      #     {Google::Monitoring::V3::NotificationChannelService::GetNotificationChannel +GetNotificationChannel+}
+      #     {Google::Monitoring::V3::NotificationChannelService::GetNotificationChannel `GetNotificationChannel`}
       #     operation, this field is expected to be populated.
       #
-      #     If the value is +UNVERIFIED+, then it indicates that the channel is
+      #     If the value is `UNVERIFIED`, then it indicates that the channel is
       #     non-functioning (it both requires verification and lacks verification);
       #     otherwise, it is assumed that the channel works.
       #
-      #     If the channel is neither +VERIFIED+ nor +UNVERIFIED+, it implies that
+      #     If the channel is neither `VERIFIED` nor `UNVERIFIED`, it implies that
       #     the channel is of a type that does not require verification or that
       #     this specific channel has been exempted from verification because it was
       #     created prior to verification being required for channels of this type.
       #
       #     This field cannot be modified using a standard
-      #     {Google::Monitoring::V3::NotificationChannelService::UpdateNotificationChannel +UpdateNotificationChannel+}
+      #     {Google::Monitoring::V3::NotificationChannelService::UpdateNotificationChannel `UpdateNotificationChannel`}
       #     operation. To change the value of this field, you must call
-      #     {Google::Monitoring::V3::NotificationChannelService::VerifyNotificationChannel +VerifyNotificationChannel+}.
+      #     {Google::Monitoring::V3::NotificationChannelService::VerifyNotificationChannel `VerifyNotificationChannel`}.
       # @!attribute [rw] enabled
       #   @return [Google::Protobuf::BoolValue]
       #     Whether notifications are forwarded to the described channel. This makes
@@ -126,9 +126,9 @@ module Google
       class NotificationChannel
         # Indicates whether the channel has been verified or not. It is illegal
         # to specify this field in a
-        # {Google::Monitoring::V3::NotificationChannelService::CreateNotificationChannel +CreateNotificationChannel+}
+        # {Google::Monitoring::V3::NotificationChannelService::CreateNotificationChannel `CreateNotificationChannel`}
         # or an
-        # {Google::Monitoring::V3::NotificationChannelService::UpdateNotificationChannel +UpdateNotificationChannel+}
+        # {Google::Monitoring::V3::NotificationChannelService::UpdateNotificationChannel `UpdateNotificationChannel`}
         # operation.
         module VerificationStatus
           # Sentinel value used to indicate that the state is unknown, omitted, or

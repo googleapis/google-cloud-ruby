@@ -186,26 +186,26 @@ module Google
           # Service calls
 
           # Performs asynchronous video annotation. Progress and results can be
-          # retrieved through the +google.longrunning.Operations+ interface.
-          # +Operation.metadata+ contains +AnnotateVideoProgress+ (progress).
-          # +Operation.response+ contains +AnnotateVideoResponse+ (results).
+          # retrieved through the `google.longrunning.Operations` interface.
+          # `Operation.metadata` contains `AnnotateVideoProgress` (progress).
+          # `Operation.response` contains `AnnotateVideoResponse` (results).
           #
           # @param input_uri [String]
           #   Input video location. Currently, only
           #   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
           #   supported, which must be specified in the following format:
-          #   +gs://bucket-id/object-id+ (other URI formats return
+          #   `gs://bucket-id/object-id` (other URI formats return
           #   {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
           #   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
-          #   A video URI may include wildcards in +object-id+, and thus identify
+          #   A video URI may include wildcards in `object-id`, and thus identify
           #   multiple videos. Supported wildcards: '*' to match 0 or more characters;
           #   '?' to match 1 character. If unset, the input video should be embedded
-          #   in the request as +input_content+. If set, +input_content+ should be unset.
+          #   in the request as `input_content`. If set, `input_content` should be unset.
           # @param features [Array<Google::Cloud::Videointelligence::V1beta1::Feature>]
           #   Requested video annotation features.
           # @param input_content [String]
           #   The video data bytes. Encoding: base64. If unset, the input video(s)
-          #   should be specified via +input_uri+. If set, +input_uri+ should be unset.
+          #   should be specified via `input_uri`. If set, `input_uri` should be unset.
           # @param video_context [Google::Cloud::Videointelligence::V1beta1::VideoContext | Hash]
           #   Additional video context and/or feature-specific parameters.
           #   A hash of the same form as `Google::Cloud::Videointelligence::V1beta1::VideoContext`
@@ -214,12 +214,12 @@ module Google
           #   Optional location where the output (in JSON format) should be stored.
           #   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
           #   URIs are supported, which must be specified in the following format:
-          #   +gs://bucket-id/object-id+ (other URI formats return
+          #   `gs://bucket-id/object-id` (other URI formats return
           #   {Google::Rpc::Code::INVALID_ARGUMENT}). For more information, see
           #   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
           # @param location_id [String]
           #   Optional cloud region where annotation should take place. Supported cloud
-          #   regions: +us-east1+, +us-west1+, +europe-west1+, +asia-east1+. If no region
+          #   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
           #   is specified, a region will be determined based on video file location.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,

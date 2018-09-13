@@ -22,8 +22,8 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The name of the database. Values are of the form
-          #     +projects/<project>/instances/<instance>/databases/<database>+,
-          #     where +<database>+ is as specified in the +CREATE DATABASE+
+          #     `projects/<project>/instances/<instance>/databases/<database>`,
+          #     where `<database>` is as specified in the `CREATE DATABASE`
           #     statement. This name can be passed to other API methods to
           #     identify the database.
           # @!attribute [rw] state
@@ -36,7 +36,7 @@ module Google
               STATE_UNSPECIFIED = 0
 
               # The database is still being created. Operations on the database may fail
-              # with +FAILED_PRECONDITION+ in this state.
+              # with `FAILED_PRECONDITION` in this state.
               CREATING = 1
 
               # The database is fully created and ready for use.
@@ -48,14 +48,14 @@ module Google
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The instance whose databases should be listed.
-          #     Values are of the form +projects/<project>/instances/<instance>+.
+          #     Values are of the form `projects/<project>/instances/<instance>`.
           # @!attribute [rw] page_size
           #   @return [Integer]
           #     Number of databases to be returned in the response. If 0 or less,
           #     defaults to the server's maximum allowed page size.
           # @!attribute [rw] page_token
           #   @return [String]
-          #     If non-empty, +page_token+ should contain a
+          #     If non-empty, `page_token` should contain a
           #     {Google::Spanner::Admin::Database::V1::ListDatabasesResponse#next_page_token next_page_token} from a
           #     previous {Google::Spanner::Admin::Database::V1::ListDatabasesResponse ListDatabasesResponse}.
           class ListDatabasesRequest; end
@@ -66,7 +66,7 @@ module Google
           #     Databases that matched the request.
           # @!attribute [rw] next_page_token
           #   @return [String]
-          #     +next_page_token+ can be sent in a subsequent
+          #     `next_page_token` can be sent in a subsequent
           #     {Google::Spanner::Admin::Database::V1::DatabaseAdmin::ListDatabases ListDatabases} call to fetch more
           #     of the matching databases.
           class ListDatabasesResponse; end
@@ -75,14 +75,14 @@ module Google
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The name of the instance that will serve the new database.
-          #     Values are of the form +projects/<project>/instances/<instance>+.
+          #     Values are of the form `projects/<project>/instances/<instance>`.
           # @!attribute [rw] create_statement
           #   @return [String]
-          #     Required. A +CREATE DATABASE+ statement, which specifies the ID of the
+          #     Required. A `CREATE DATABASE` statement, which specifies the ID of the
           #     new database.  The database ID must conform to the regular expression
-          #     +[a-z][a-z0-9_\-]*[a-z0-9]+ and be between 2 and 30 characters in length.
+          #     `[a-z][a-z0-9_\-]*[a-z0-9]` and be between 2 and 30 characters in length.
           #     If the database ID is a reserved word or if it contains a hyphen, the
-          #     database ID must be enclosed in backticks (+ + +).
+          #     database ID must be enclosed in backticks (`` ` ``).
           # @!attribute [rw] extra_statements
           #   @return [Array<String>]
           #     An optional list of DDL statements to run inside the newly created
@@ -102,7 +102,7 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The name of the requested database. Values are of the form
-          #     +projects/<project>/instances/<instance>/databases/<database>+.
+          #     `projects/<project>/instances/<instance>/databases/<database>`.
           class GetDatabaseRequest; end
 
           # Enqueues the given DDL statements to be applied, in order but not
@@ -112,8 +112,8 @@ module Google
           # before enqueueing them, but they may still fail upon
           # later execution (e.g., if a statement from another batch of
           # statements is applied first and it conflicts in some way, or if
-          # there is some data-related problem like a +NULL+ value in a column to
-          # which +NOT NULL+ would be added). If a statement fails, all
+          # there is some data-related problem like a `NULL` value in a column to
+          # which `NOT NULL` would be added). If a statement fails, all
           # subsequent statements in the batch are automatically cancelled.
           #
           # Each batch of statements is assigned a name which can be used with
@@ -130,7 +130,7 @@ module Google
           # @!attribute [rw] operation_id
           #   @return [String]
           #     If empty, the new update request is assigned an
-          #     automatically-generated operation ID. Otherwise, +operation_id+
+          #     automatically-generated operation ID. Otherwise, `operation_id`
           #     is used to construct the name of the resulting
           #     {Google::Longrunning::Operation Operation}.
           #
@@ -138,16 +138,16 @@ module Google
           #     whether the statements were executed in the event that the
           #     {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl} call is replayed,
           #     or the return value is otherwise lost: the {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database} and
-          #     +operation_id+ fields can be combined to form the
+          #     `operation_id` fields can be combined to form the
           #     {Google::Longrunning::Operation#name name} of the resulting
-          #     {Google::Longrunning::Operation longrunning::Operation}: +<database>/operations/<operation_id>+.
+          #     {Google::Longrunning::Operation longrunning::Operation}: `<database>/operations/<operation_id>`.
           #
-          #     +operation_id+ should be unique within the database, and must be
-          #     a valid identifier: +[a-z][a-z0-9_]*+. Note that
+          #     `operation_id` should be unique within the database, and must be
+          #     a valid identifier: `[a-z][a-z0-9_]*`. Note that
           #     automatically-generated operation IDs always begin with an
           #     underscore. If the named operation already exists,
           #     {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl} returns
-          #     +ALREADY_EXISTS+.
+          #     `ALREADY_EXISTS`.
           class UpdateDatabaseDdlRequest; end
 
           # Metadata type for the operation returned by
@@ -162,8 +162,8 @@ module Google
           # @!attribute [rw] commit_timestamps
           #   @return [Array<Google::Protobuf::Timestamp>]
           #     Reports the commit timestamps of all statements that have
-          #     succeeded so far, where +commit_timestamps[i]+ is the commit
-          #     timestamp for the statement +statements[i]+.
+          #     succeeded so far, where `commit_timestamps[i]` is the commit
+          #     timestamp for the statement `statements[i]`.
           class UpdateDatabaseDdlMetadata; end
 
           # The request for {Google::Spanner::Admin::Database::V1::DatabaseAdmin::DropDatabase DropDatabase}.

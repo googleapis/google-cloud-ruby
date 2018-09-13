@@ -25,19 +25,19 @@ module Google
         #     The task name.
         #
         #     The task name must have the following format:
-        #     +projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID+
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
         #
-        #     * +PROJECT_ID+ can contain letters ([A-Za-z]), numbers ([0-9]),
+        #     * `PROJECT_ID` can contain letters ([A-Za-z]), numbers ([0-9]),
         #       hyphens (-), colons (:), or periods (.).
         #       For more information, see
         #       [Identifying projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
-        #     * +LOCATION_ID+ is the canonical ID for the task's location.
+        #     * `LOCATION_ID` is the canonical ID for the task's location.
         #       The list of available locations can be obtained by calling
         #       {Google::Cloud::Location::Locations::ListLocations ListLocations}.
         #       For more information, see https://cloud.google.com/about/locations/.
-        #     * +QUEUE_ID+ can contain letters ([A-Za-z]), numbers ([0-9]), or
+        #     * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or
         #       hyphens (-). The maximum length is 100 characters.
-        #     * +TASK_ID+ can contain only letters ([A-Za-z]), numbers ([0-9]),
+        #     * `TASK_ID` can contain only letters ([A-Za-z]), numbers ([0-9]),
         #       hyphens (-), or underscores (_). The maximum length is 500 characters.
         # @!attribute [rw] app_engine_http_request
         #   @return [Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest]
@@ -64,12 +64,12 @@ module Google
         #     the current lease expires, that is, the time that the task was
         #     leased plus the {Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration lease_duration}.
         #
-        #     +schedule_time+ will be truncated to the nearest microsecond.
+        #     `schedule_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time that the task was created.
         #
-        #     +create_time+ will be truncated to the nearest second.
+        #     `create_time` will be truncated to the nearest second.
         # @!attribute [rw] status
         #   @return [Google::Cloud::Tasks::V2beta2::TaskStatus]
         #     Output only. The task status.
@@ -103,7 +103,7 @@ module Google
             # All information is returned.
             #
             # Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-            # +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+            # `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
             # permission on the {Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
             FULL = 2
           end
@@ -141,17 +141,17 @@ module Google
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time that this attempt was scheduled.
         #
-        #     +schedule_time+ will be truncated to the nearest microsecond.
+        #     `schedule_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] dispatch_time
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time that this attempt was dispatched.
         #
-        #     +dispatch_time+ will be truncated to the nearest microsecond.
+        #     `dispatch_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] response_time
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time that this attempt response was received.
         #
-        #     +response_time+ will be truncated to the nearest microsecond.
+        #     `response_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] response_status
         #   @return [Google::Rpc::Status]
         #     Output only. The response from the target for this attempt.

@@ -22,10 +22,10 @@ module Google
         # action is an extraction of a user command or sentence semantics.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required for all methods except +create+ (+create+ populates the name
+        #     Required for all methods except `create` (`create` populates the name
         #     automatically.
         #     The unique identifier of this intent.
-        #     Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+        #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         # @!attribute [rw] display_name
         #   @return [String]
         #     Required. The name of this intent.
@@ -42,14 +42,14 @@ module Google
         # @!attribute [rw] ml_disabled
         #   @return [true, false]
         #     Optional. Indicates whether Machine Learning is disabled for the intent.
-        #     Note: If +ml_diabled+ setting is set to true, then this intent is not
-        #     taken into account during inference in +ML ONLY+ match mode. Also,
+        #     Note: If `ml_diabled` setting is set to true, then this intent is not
+        #     taken into account during inference in `ML ONLY` match mode. Also,
         #     auto-markup in the UI is turned off.
         # @!attribute [rw] input_context_names
         #   @return [Array<String>]
         #     Optional. The list of context names required for this intent to be
         #     triggered.
-        #     Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.
+        #     Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
         # @!attribute [rw] events
         #   @return [Array<String>]
         #     Optional. The collection of event names that trigger the intent.
@@ -66,9 +66,9 @@ module Google
         #   @return [Array<Google::Cloud::Dialogflow::V2::Context>]
         #     Optional. The collection of contexts that are activated when the intent
         #     is matched. Context messages in this collection should not set the
-        #     parameters field. Setting the +lifespan_count+ to 0 will reset the context
+        #     parameters field. Setting the `lifespan_count` to 0 will reset the context
         #     when the intent is matched.
-        #     Format: +projects/<Project ID>/agent/sessions/-/contexts/<Context ID>+.
+        #     Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
         # @!attribute [rw] reset_contexts
         #   @return [true, false]
         #     Optional. Indicates whether to delete all contexts in the current
@@ -79,7 +79,7 @@ module Google
         # @!attribute [rw] messages
         #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message>]
         #     Optional. The collection of rich messages corresponding to the
-        #     +Response+ field in the Dialogflow console.
+        #     `Response` field in the Dialogflow console.
         # @!attribute [rw] default_response_platforms
         #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::Platform>]
         #     Optional. The list of platforms for which the first response will be
@@ -88,13 +88,13 @@ module Google
         #   @return [String]
         #     The unique identifier of the root intent in the chain of followup intents.
         #     It identifies the correct followup intents chain for this intent.
-        #     Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+        #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         # @!attribute [rw] parent_followup_intent_name
         #   @return [String]
         #     The unique identifier of the parent intent in the chain of followup
         #     intents.
         #     It identifies the parent followup intent.
-        #     Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+        #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         # @!attribute [rw] followup_intent_info
         #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo>]
         #     Optional. Collection of information about all followup intents that have
@@ -110,7 +110,7 @@ module Google
           # @!attribute [rw] parts
           #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part>]
           #     Required. The collection of training phrase parts (can be annotated).
-          #     Fields: +entity_type+, +alias+ and +user_defined+ should be populated
+          #     Fields: `entity_type`, `alias` and `user_defined` should be populated
           #     only for the annotated parts of the training phrase.
           # @!attribute [rw] times_added_count
           #   @return [Integer]
@@ -126,7 +126,7 @@ module Google
             #     annotated examples, it is the text for one of the example's parts.
             # @!attribute [rw] entity_type
             #   @return [String]
-            #     Optional. The entity type name prefixed with +@+. This field is
+            #     Optional. The entity type name prefixed with `@`. This field is
             #     required for the annotated part of the text and applies only to
             #     examples.
             # @!attribute [rw] alias
@@ -165,19 +165,19 @@ module Google
           #   @return [String]
           #     Optional. The definition of the parameter value. It can be:
           #     * a constant string,
-          #     * a parameter value defined as +$parameter_name+,
-          #     * an original parameter value defined as +$parameter_name.original+,
+          #     * a parameter value defined as `$parameter_name`,
+          #     * an original parameter value defined as `$parameter_name.original`,
           #     * a parameter value from some context defined as
-          #       +#context_name.parameter_name+.
+          #       `#context_name.parameter_name`.
           # @!attribute [rw] default_value
           #   @return [String]
-          #     Optional. The default value to use when the +value+ yields an empty
+          #     Optional. The default value to use when the `value` yields an empty
           #     result.
           #     Default values can be extracted from contexts by using the following
-          #     syntax: +#context_name.parameter_name+.
+          #     syntax: `#context_name.parameter_name`.
           # @!attribute [rw] entity_type_display_name
           #   @return [String]
-          #     Optional. The name of the entity type, prefixed with +@+, that
+          #     Optional. The name of the entity type, prefixed with `@`, that
           #     describes values of the parameter. If the parameter is
           #     required, this must be provided.
           # @!attribute [rw] mandatory
@@ -194,7 +194,7 @@ module Google
           #     Optional. Indicates whether the parameter represents a list of values.
           class Parameter; end
 
-          # Corresponds to the +Response+ field in the Dialogflow console.
+          # Corresponds to the `Response` field in the Dialogflow console.
           # @!attribute [rw] text
           #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
           #     The text response.
@@ -300,9 +300,9 @@ module Google
             class SimpleResponse; end
 
             # The collection of simple response candidates.
-            # This message in +QueryResult.fulfillment_messages+ and
-            # +WebhookResponse.fulfillment_messages+ should contain only one
-            # +SimpleResponse+.
+            # This message in `QueryResult.fulfillment_messages` and
+            # `WebhookResponse.fulfillment_messages` should contain only one
+            # `SimpleResponse`.
             # @!attribute [rw] simple_responses
             #   @return [Array<Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponse>]
             #     Required. The list of simple responses.
@@ -517,11 +517,11 @@ module Google
           # @!attribute [rw] followup_intent_name
           #   @return [String]
           #     The unique identifier of the followup intent.
-          #     Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+          #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
           # @!attribute [rw] parent_followup_intent_name
           #   @return [String]
           #     The unique identifier of the followup intent parent.
-          #     Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+          #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
           class FollowupIntentInfo; end
 
           # Represents the different states that webhooks can be in.
@@ -542,7 +542,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The agent to list all intents from.
-        #     Format: +projects/<Project ID>/agent+.
+        #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] language_code
         #   @return [String]
         #     Optional. The language to list training phrases, parameters and rich
@@ -577,7 +577,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the intent.
-        #     Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+        #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         # @!attribute [rw] language_code
         #   @return [String]
         #     Optional. The language to retrieve training phrases, parameters and rich
@@ -594,14 +594,14 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The agent to create a intent for.
-        #     Format: +projects/<Project ID>/agent+.
+        #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] intent
         #   @return [Google::Cloud::Dialogflow::V2::Intent]
         #     Required. The intent to create.
         # @!attribute [rw] language_code
         #   @return [String]
         #     Optional. The language of training phrases, parameters and rich messages
-        #     defined in +intent+. If not specified, the agent's default language is
+        #     defined in `intent`. If not specified, the agent's default language is
         #     used. [More than a dozen
         #     languages](https://dialogflow.com/docs/reference/language) are supported.
         #     Note: languages must be enabled in the agent, before they can be used.
@@ -614,11 +614,11 @@ module Google
         # @!attribute [rw] intent
         #   @return [Google::Cloud::Dialogflow::V2::Intent]
         #     Required. The intent to update.
-        #     Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+        #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         # @!attribute [rw] language_code
         #   @return [String]
         #     Optional. The language of training phrases, parameters and rich messages
-        #     defined in +intent+. If not specified, the agent's default language is
+        #     defined in `intent`. If not specified, the agent's default language is
         #     used. [More than a dozen
         #     languages](https://dialogflow.com/docs/reference/language) are supported.
         #     Note: languages must be enabled in the agent, before they can be used.
@@ -634,14 +634,14 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the intent to delete.
-        #     Format: +projects/<Project ID>/agent/intents/<Intent ID>+.
+        #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         class DeleteIntentRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::Intents::BatchUpdateIntents Intents::BatchUpdateIntents}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the agent to update or create intents in.
-        #     Format: +projects/<Project ID>/agent+.
+        #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] intent_batch_uri
         #   @return [String]
         #     The URI to a Google Cloud Storage file containing intents to update or
@@ -653,7 +653,7 @@ module Google
         # @!attribute [rw] language_code
         #   @return [String]
         #     Optional. The language of training phrases, parameters and rich messages
-        #     defined in +intents+. If not specified, the agent's default language is
+        #     defined in `intents`. If not specified, the agent's default language is
         #     used. [More than a dozen
         #     languages](https://dialogflow.com/docs/reference/language) are supported.
         #     Note: languages must be enabled in the agent, before they can be used.
@@ -675,10 +675,10 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the agent to delete all entities types for. Format:
-        #     +projects/<Project ID>/agent+.
+        #     `projects/<Project ID>/agent`.
         # @!attribute [rw] intents
         #   @return [Array<Google::Cloud::Dialogflow::V2::Intent>]
-        #     Required. The collection of intents to delete. Only intent +name+ must be
+        #     Required. The collection of intents to delete. Only intent `name` must be
         #     filled in.
         class BatchDeleteIntentsRequest; end
 

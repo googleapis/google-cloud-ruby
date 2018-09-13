@@ -20,15 +20,15 @@ module Google
         # Represents a message with parameters.
         # @!attribute [rw] format
         #   @return [String]
-        #     Format template for the message. The +format+ uses placeholders +$0+,
-        #     +$1+, etc. to reference parameters. +$$+ can be used to denote the +$+
+        #     Format template for the message. The `format` uses placeholders `$0`,
+        #     `$1`, etc. to reference parameters. `$$` can be used to denote the `$`
         #     character.
         #
         #     Examples:
         #
-        #     * +Failed to load '$0' which helps debug $1 the first time it
-        #       is loaded.  Again, $0 is very important.+
-        #     * +Please pay $$10 to use $0 instead of $1.+
+        #     * `Failed to load '$0' which helps debug $1 the first time it
+        #       is loaded.  Again, $0 is very important.`
+        #     * `Please pay $$10 to use $0 instead of $1.`
         # @!attribute [rw] parameters
         #   @return [Array<String>]
         #     Optional parameters to be embedded into the message.
@@ -37,8 +37,8 @@ module Google
         # Represents a contextual status message.
         # The message can indicate an error or informational status, and refer to
         # specific parts of the containing object.
-        # For example, the +Breakpoint.status+ field can indicate an error referring
-        # to the +BREAKPOINT_SOURCE_LOCATION+ with the message +Location not found+.
+        # For example, the `Breakpoint.status` field can indicate an error referring
+        # to the `BREAKPOINT_SOURCE_LOCATION` with the message `Location not found`.
         # @!attribute [rw] is_error
         #   @return [true, false]
         #     Distinguishes errors from informational messages.
@@ -80,7 +80,7 @@ module Google
         #     Path to the source file within the source context of the target binary.
         # @!attribute [rw] line
         #   @return [Integer]
-        #     Line inside the file. The first line in the file has the value +1+.
+        #     Line inside the file. The first line in the file has the value `1`.
         class SourceLocation; end
 
         # Represents a variable or an argument possibly of a compound object type.
@@ -132,7 +132,7 @@ module Google
         #     }
         #
         # The status should describe the reason for the missing value,
-        # such as +<optimized out>+, +<inaccessible>+, +<pointers limit reached>+.
+        # such as `<optimized out>`, `<inaccessible>`, `<pointers limit reached>`.
         #
         # Note that a null pointer should not have members.
         #
@@ -167,7 +167,7 @@ module Google
         #
         # To optimize computation, memory and network traffic, variables that
         # repeat in the output multiple times can be stored once in a shared
-        # variable table and be referenced using the +var_table_index+ field.  The
+        # variable table and be referenced using the `var_table_index` field.  The
         # variables stored in the shared table are nameless and are essentially
         # a partition of the complete variable. To reconstruct the complete
         # variable, merge the referencing variable with the referenced variable.
@@ -200,8 +200,8 @@ module Google
         #     Simple value of the variable.
         # @!attribute [rw] type
         #   @return [String]
-        #     Variable type (e.g. +MyClass+). If the variable is split with
-        #     +var_table_index+, +type+ goes next to +value+. The interpretation of
+        #     Variable type (e.g. `MyClass`). If the variable is split with
+        #     `var_table_index`, `type` goes next to `value`. The interpretation of
         #     a type is agent specific. It is recommended to include the dynamic type
         #     rather than a static type of an object.
         # @!attribute [rw] members
@@ -211,7 +211,7 @@ module Google
         #   @return [Google::Protobuf::Int32Value]
         #     Reference to a variable in the shared variable table. More than
         #     one variable can reference the same variable in the table. The
-        #     +var_table_index+ field is an index into +variable_table+ in Breakpoint.
+        #     `var_table_index` field is an index into `variable_table` in Breakpoint.
         # @!attribute [rw] status
         #   @return [Google::Devtools::Clouddebugger::V2::StatusMessage]
         #     Status associated with the variable. This field will usually stay
@@ -220,19 +220,19 @@ module Google
         #     might be reported in error state even when breakpoint is not in final
         #     state.
         #
-        #     The message may refer to variable name with +refers_to+ set to
-        #     +VARIABLE_NAME+. Alternatively +refers_to+ will be set to +VARIABLE_VALUE+.
+        #     The message may refer to variable name with `refers_to` set to
+        #     `VARIABLE_NAME`. Alternatively `refers_to` will be set to `VARIABLE_VALUE`.
         #     In either case variable value and members will be unset.
         #
-        #     Example of error message applied to name: +Invalid expression syntax+.
+        #     Example of error message applied to name: `Invalid expression syntax`.
         #
-        #     Example of information message applied to value: +Not captured+.
+        #     Example of information message applied to value: `Not captured`.
         #
         #     Examples of error message applied to value:
         #
-        #     * +Malformed string+,
-        #     * +Field f not found in class C+
-        #     * +Null pointer dereference+
+        #     * `Malformed string`,
+        #     * `Field f not found in class C`
+        #     * `Null pointer dereference`
         class Variable; end
 
         # Represents a stack frame context.
@@ -272,21 +272,21 @@ module Google
         #   @return [Array<String>]
         #     List of read-only expressions to evaluate at the breakpoint location.
         #     The expressions are composed using expressions in the programming language
-        #     at the source location. If the breakpoint action is +LOG+, the evaluated
+        #     at the source location. If the breakpoint action is `LOG`, the evaluated
         #     expressions are included in log statements.
         # @!attribute [rw] log_message_format
         #   @return [String]
-        #     Only relevant when action is +LOG+. Defines the message to log when
-        #     the breakpoint hits. The message may include parameter placeholders +$0+,
-        #     +$1+, etc. These placeholders are replaced with the evaluated value
+        #     Only relevant when action is `LOG`. Defines the message to log when
+        #     the breakpoint hits. The message may include parameter placeholders `$0`,
+        #     `$1`, etc. These placeholders are replaced with the evaluated value
         #     of the appropriate expression. Expressions not referenced in
-        #     +log_message_format+ are not logged.
+        #     `log_message_format` are not logged.
         #
-        #     Example: +Message received, id = $0, count = $1+ with
-        #     +expressions+ = +[ message.id, message.count ]+.
+        #     Example: `Message received, id = $0, count = $1` with
+        #     `expressions` = `[ message.id, message.count ]`.
         # @!attribute [rw] log_level
         #   @return [Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel]
-        #     Indicates the severity of the log. Only relevant when action is +LOG+.
+        #     Indicates the severity of the log. Only relevant when action is `LOG`.
         # @!attribute [rw] is_final_state
         #   @return [true, false]
         #     When true, indicates that this is a final result and the
@@ -312,12 +312,12 @@ module Google
         #
         #     Error status indicates complete failure of the breakpoint.
         #
-        #     Example (non-final state): +Still loading symbols...+
+        #     Example (non-final state): `Still loading symbols...`
         #
         #     Examples (final state):
         #
-        #     * +Invalid line number+ referring to location
-        #     * +Field f not found in class C+ referring to condition
+        #     * `Invalid line number` referring to location
+        #     * `Field f not found in class C` referring to condition
         # @!attribute [rw] stack_frames
         #   @return [Array<Google::Devtools::Clouddebugger::V2::StackFrame>]
         #     The stack at breakpoint time.
@@ -325,22 +325,22 @@ module Google
         #   @return [Array<Google::Devtools::Clouddebugger::V2::Variable>]
         #     Values of evaluated expressions at breakpoint time.
         #     The evaluated expressions appear in exactly the same order they
-        #     are listed in the +expressions+ field.
-        #     The +name+ field holds the original expression text, the +value+ or
-        #     +members+ field holds the result of the evaluated expression.
-        #     If the expression cannot be evaluated, the +status+ inside the +Variable+
+        #     are listed in the `expressions` field.
+        #     The `name` field holds the original expression text, the `value` or
+        #     `members` field holds the result of the evaluated expression.
+        #     If the expression cannot be evaluated, the `status` inside the `Variable`
         #     will indicate an error and contain the error text.
         # @!attribute [rw] variable_table
         #   @return [Array<Google::Devtools::Clouddebugger::V2::Variable>]
-        #     The +variable_table+ exists to aid with computation, memory and network
+        #     The `variable_table` exists to aid with computation, memory and network
         #     traffic optimization.  It enables storing a variable once and reference
         #     it from multiple variables, including variables stored in the
-        #     +variable_table+ itself.
-        #     For example, the same +this+ object, which may appear at many levels of
+        #     `variable_table` itself.
+        #     For example, the same `this` object, which may appear at many levels of
         #     the stack, can have all of its data stored once in this table.  The
         #     stack frame variables then would hold only a reference to it.
         #
-        #     The variable +var_table_index+ field is an index into this repeated field.
+        #     The variable `var_table_index` field is an index into this repeated field.
         #     The stored objects are nameless and get their name from the referencing
         #     variable. The effective variable is a merge of the referencing variable
         #     and the referenced variable.
@@ -402,16 +402,16 @@ module Google
         #     information is recommended.
         # @!attribute [rw] is_inactive
         #   @return [true, false]
-        #     If set to +true+, indicates that Controller service does not detect any
+        #     If set to `true`, indicates that Controller service does not detect any
         #     activity from the debuggee agents and the application is possibly stopped.
         # @!attribute [rw] agent_version
         #   @return [String]
         #     Version ID of the agent.
-        #     Schema: +domain/language-platform/vmajor.minor+ (for example
-        #     +google.com/java-gcp/v1.1+).
+        #     Schema: `domain/language-platform/vmajor.minor` (for example
+        #     `google.com/java-gcp/v1.1`).
         # @!attribute [rw] is_disabled
         #   @return [true, false]
-        #     If set to +true+, indicates that the agent should disable itself and
+        #     If set to `true`, indicates that the agent should disable itself and
         #     detach from the debuggee.
         # @!attribute [rw] status
         #   @return [Google::Devtools::Clouddebugger::V2::StatusMessage]

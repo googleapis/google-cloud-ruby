@@ -21,11 +21,11 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The unique identifier of the context. Format:
-        #     +projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>+.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
         # @!attribute [rw] lifespan_count
         #   @return [Integer]
         #     Optional. The number of conversational query requests after which the
-        #     context expires. If set to +0+ (the default) the context expires
+        #     context expires. If set to `0` (the default) the context expires
         #     immediately. Contexts expire automatically after 10 minutes even if there
         #     are no matching queries.
         # @!attribute [rw] parameters
@@ -39,7 +39,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to list all contexts from.
-        #     Format: +projects/<Project ID>/agent/sessions/<Session ID>+.
+        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional. The maximum number of items to return in a single page. By
@@ -64,14 +64,14 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the context. Format:
-        #     +projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>+.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
         class GetContextRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::Contexts::CreateContext Contexts::CreateContext}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to create a context for.
-        #     Format: +projects/<Project ID>/agent/sessions/<Session ID>+.
+        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
         # @!attribute [rw] context
         #   @return [Google::Cloud::Dialogflow::V2::Context]
         #     Required. The context to create.
@@ -90,14 +90,14 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the context to delete. Format:
-        #     +projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>+.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
         class DeleteContextRequest; end
 
         # The request message for {Google::Cloud::Dialogflow::V2::Contexts::DeleteAllContexts Contexts::DeleteAllContexts}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the session to delete all contexts from. Format:
-        #     +projects/<Project ID>/agent/sessions/<Session ID>+.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>`.
         class DeleteAllContextsRequest; end
       end
     end

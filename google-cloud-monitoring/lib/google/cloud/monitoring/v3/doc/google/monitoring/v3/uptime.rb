@@ -43,7 +43,7 @@ module Google
       #     A unique resource name for this UptimeCheckConfig. The format is:
       #
       #
-      #       +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
+      #       `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
       #
       #     This field should be omitted when creating the uptime check configuration;
       #     on create, the resource name is assigned by the server and included in the
@@ -76,9 +76,9 @@ module Google
       # @!attribute [rw] period
       #   @return [Google::Protobuf::Duration]
       #     How often, in seconds, the uptime check is performed.
-      #     Currently, the only supported values are +60s+ (1 minute), +300s+
-      #     (5 minutes), +600s+ (10 minutes), and +900s+ (15 minutes). Optional,
-      #     defaults to +300s+.
+      #     Currently, the only supported values are `60s` (1 minute), `300s`
+      #     (5 minutes), `600s` (10 minutes), and `900s` (15 minutes). Optional,
+      #     defaults to `300s`.
       # @!attribute [rw] timeout
       #   @return [Google::Protobuf::Duration]
       #     The maximum amount of time to wait for the request to complete (must be
@@ -102,7 +102,7 @@ module Google
       #     Denotes whether this is a check that egresses from InternalCheckers.
       # @!attribute [rw] internal_checkers
       #   @return [Array<Google::Monitoring::V3::InternalChecker>]
-      #     The internal checkers that this check will egress from. If +is_internal+ is
+      #     The internal checkers that this check will egress from. If `is_internal` is
       #     true and this list is empty, the check will egress from all
       #     InternalCheckers configured for the project that owns this CheckConfig.
       class UptimeCheckConfig
@@ -224,9 +224,9 @@ module Google
       end
 
       # The supported resource types that can be used as values of
-      # +group_resource.resource_type+.
-      # +INSTANCE+ includes +gce_instance+ and +aws_ec2_instance+ resource types.
-      # The resource types +gae_app+ and +uptime_url+ are not valid here because
+      # `group_resource.resource_type`.
+      # `INSTANCE` includes `gce_instance` and `aws_ec2_instance` resource types.
+      # The resource types `gae_app` and `uptime_url` are not valid here because
       # group checks on App Engine modules and URLs are not allowed.
       module GroupResourceType
         # Default value (not valid).

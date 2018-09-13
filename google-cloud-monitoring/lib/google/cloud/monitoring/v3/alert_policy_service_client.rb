@@ -281,7 +281,7 @@ module Google
           #   filtering](/monitoring/api/v3/sorting-and-filtering).
           # @param order_by [String]
           #   A comma-separated list of fields by which to sort the result. Supports
-          #   the same set of field references as the +filter+ field. Entries can be
+          #   the same set of field references as the `filter` field. Entries can be
           #   prefixed with a minus sign to sort by the field in descending order.
           #
           #   For more details, see [sorting and
@@ -376,15 +376,15 @@ module Google
           #
           # @param name [String]
           #   The project in which to create the alerting policy. The format is
-          #   +projects/[PROJECT_ID]+.
+          #   `projects/[PROJECT_ID]`.
           #
           #   Note that this field names the parent container in which the alerting
           #   policy will be written, not the name of the created policy. The alerting
           #   policy that is returned will have a name that contains a normalized
           #   representation of this name as a prefix but adds a suffix of the form
-          #   +/alertPolicies/[POLICY_ID]+, identifying the policy in the container.
+          #   `/alertPolicies/[POLICY_ID]`, identifying the policy in the container.
           # @param alert_policy [Google::Monitoring::V3::AlertPolicy | Hash]
-          #   The requested alerting policy. You should omit the +name+ field in this
+          #   The requested alerting policy. You should omit the `name` field in this
           #   policy. The name will be returned in the new policy, including
           #   a new [ALERT_POLICY_ID] value.
           #   A hash of the same form as `Google::Monitoring::V3::AlertPolicy`
@@ -403,7 +403,7 @@ module Google
           #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +alert_policy+:
+          #   # TODO: Initialize `alert_policy`:
           #   alert_policy = {}
           #   response = alert_policy_service_client.create_alert_policy(formatted_name, alert_policy)
 
@@ -456,38 +456,38 @@ module Google
 
           # Updates an alerting policy. You can either replace the entire policy with
           # a new one or replace only certain fields in the current alerting policy by
-          # specifying the fields to be updated via +updateMask+. Returns the
+          # specifying the fields to be updated via `updateMask`. Returns the
           # updated alerting policy.
           #
           # @param alert_policy [Google::Monitoring::V3::AlertPolicy | Hash]
           #   Required. The updated alerting policy or the updated values for the
-          #   fields listed in +update_mask+.
-          #   If +update_mask+ is not empty, any fields in this policy that are
-          #   not in +update_mask+ are ignored.
+          #   fields listed in `update_mask`.
+          #   If `update_mask` is not empty, any fields in this policy that are
+          #   not in `update_mask` are ignored.
           #   A hash of the same form as `Google::Monitoring::V3::AlertPolicy`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional. A list of alerting policy field names. If this field is not
           #   empty, each listed field in the existing alerting policy is set to the
-          #   value of the corresponding field in the supplied policy (+alert_policy+),
+          #   value of the corresponding field in the supplied policy (`alert_policy`),
           #   or to the field's default value if the field is not in the supplied
           #   alerting policy.  Fields not listed retain their previous value.
           #
-          #   Examples of valid field masks include +display_name+, +documentation+,
-          #   +documentation.content+, +documentation.mime_type+, +user_labels+,
-          #   +user_label.nameofkey+, +enabled+, +conditions+, +combiner+, etc.
+          #   Examples of valid field masks include `display_name`, `documentation`,
+          #   `documentation.content`, `documentation.mime_type`, `user_labels`,
+          #   `user_label.nameofkey`, `enabled`, `conditions`, `combiner`, etc.
           #
           #   If this field is empty, then the supplied alerting policy replaces the
           #   existing policy. It is the same as deleting the existing policy and
           #   adding the supplied policy, except for the following:
           #
-          #   * The new policy will have the same +[ALERT_POLICY_ID]+ as the former
+          #   * The new policy will have the same `[ALERT_POLICY_ID]` as the former
           #     policy. This gives you continuity with the former policy in your
           #     notifications and incidents.
-          #   * Conditions in the new policy will keep their former +[CONDITION_ID]+ if
-          #     the supplied condition includes the +name+ field with that
-          #     +[CONDITION_ID]+. If the supplied condition omits the +name+ field,
-          #     then a new +[CONDITION_ID]+ is created.
+          #   * Conditions in the new policy will keep their former `[CONDITION_ID]` if
+          #     the supplied condition includes the `name` field with that
+          #     `[CONDITION_ID]`. If the supplied condition omits the `name` field,
+          #     then a new `[CONDITION_ID]` is created.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -503,7 +503,7 @@ module Google
           #
           #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #
-          #   # TODO: Initialize +alert_policy+:
+          #   # TODO: Initialize `alert_policy`:
           #   alert_policy = {}
           #   response = alert_policy_service_client.update_alert_policy(alert_policy)
 

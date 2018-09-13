@@ -15,14 +15,14 @@
 
 module Google
   module Protobuf
-    # +FieldMask+ represents a set of symbolic field paths, for example:
+    # `FieldMask` represents a set of symbolic field paths, for example:
     #
     #     paths: "f.a"
     #     paths: "f.b.d"
     #
-    # Here +f+ represents a field in some root message, +a+ and +b+
-    # fields in the message found in +f+, and +d+ a field found in the
-    # message in +f.b+.
+    # Here `f` represents a field in some root message, `a` and `b`
+    # fields in the message found in `f`, and `d` a field found in the
+    # message in `f.b`.
     #
     # Field masks are used to specify a subset of fields that should be
     # returned by a get operation or modified by an update operation.
@@ -85,7 +85,7 @@ module Google
     #
     # If a repeated field is specified for an update operation, the existing
     # repeated values in the target resource will be overwritten by the new values.
-    # Note that a repeated field is only allowed in the last position of a +paths+
+    # Note that a repeated field is only allowed in the last position of a `paths`
     # string.
     #
     # If a sub-message is specified in the last position of the field mask for an
@@ -177,7 +177,7 @@ module Google
     #       string address = 2;
     #     }
     #
-    # In proto a field mask for +Profile+ may look as such:
+    # In proto a field mask for `Profile` may look as such:
     #
     #     mask {
     #       paths: "user.display_name"
@@ -221,7 +221,7 @@ module Google
     #
     # The implementation of any API method which has a FieldMask type field in the
     # request should verify the included field paths, and return an
-    # +INVALID_ARGUMENT+ error if any path is duplicated or unmappable.
+    # `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
     # @!attribute [rw] paths
     #   @return [Array<String>]
     #     The set of field mask paths.
