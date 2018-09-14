@@ -131,7 +131,7 @@ module Google
 
         # Permanently delete column family from table.
         #
-        # @return [Google::Cloud::Bigtable::Table]
+        # @return [Boolean] Whether the column family was deleted.
         #
         # @example
         #   require "google/cloud/bigtable"
