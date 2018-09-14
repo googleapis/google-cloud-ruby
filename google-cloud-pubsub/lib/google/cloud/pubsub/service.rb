@@ -123,9 +123,10 @@ module Google
 
         ##
         # Creates the given topic with the given name.
-        def create_topic topic_name, options = {}
+        def create_topic topic_name, labels: nil, options: {}
           execute do
             publisher.create_topic topic_path(topic_name, options),
+                                   labels: labels,
                                    options: default_options
           end
         end
@@ -213,6 +214,7 @@ module Google
           deadline = options[:deadline]
           retain_acked = options[:retain_acked]
           mrd = Convert.number_to_duration options[:retention]
+          labels = options[:labels]
 
           execute do
             subscriber.create_subscription name,
@@ -221,6 +223,7 @@ module Google
                                            ack_deadline_seconds: deadline,
                                            retain_acked_messages: retain_acked,
                                            message_retention_duration: mrd,
+                                           labels: labels,
                                            options: default_options
           end
         end
@@ -320,11 +323,12 @@ module Google
 
         ##
         # Creates a snapshot on a given subscription.
-        def create_snapshot subscription, snapshot_name
+        def create_snapshot subscription, snapshot_name, labels: nil
           name = snapshot_path snapshot_name
           execute do
             subscriber.create_snapshot name,
                                        subscription_path(subscription),
+                                       labels: labels,
                                        options: default_options
           end
         end

@@ -19,6 +19,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   let(:subscription_name) { "subscription-name-goes-here" }
   let(:subscription_grpc) { Google::Pubsub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
   let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc subscription_grpc, pubsub.service }
+  let(:labels) { { "foo" => "bar" } }
 
   it "knows its name" do
     subscription.name.must_equal subscription_path(subscription_name)
@@ -122,7 +123,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
     new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
     create_res = Google::Pubsub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name)
     mock = Minitest::Mock.new
-    mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), options: default_options]
+    mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), labels: nil, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     snapshot = subscription.create_snapshot new_snapshot_name
@@ -137,7 +138,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
     new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
     create_res = Google::Pubsub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name)
     mock = Minitest::Mock.new
-    mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), options: default_options]
+    mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), labels: nil, options: default_options]
     subscription.service.mocked_subscriber = mock
 
     snapshot = subscription.new_snapshot new_snapshot_name
@@ -146,6 +147,23 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
 
     snapshot.wont_be :nil?
     snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+  end
+
+  it "creates a snapshot with labels" do
+    new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
+    create_res = Google::Pubsub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name, labels: labels)
+    mock = Minitest::Mock.new
+    mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), labels: labels, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    snapshot = subscription.create_snapshot new_snapshot_name, labels: labels
+
+    mock.verify
+
+    snapshot.wont_be :nil?
+    snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+    snapshot.labels.must_equal labels
+    snapshot.labels.must_be :frozen?
   end
 
   it "raises when creating a snapshot that already exists" do

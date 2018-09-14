@@ -28,6 +28,8 @@ module Google
       #
       # A named resource to which messages are published.
       #
+      # See {Project#create_topic} and {Project#topic}.
+      #
       # @example
       #   require "google/cloud/pubsub"
       #
@@ -84,8 +86,25 @@ module Google
         ##
         # The name of the topic in the form of
         # "/projects/project-identifier/topics/topic-name".
+        #
+        # @return [String]
+        #
         def name
           @grpc.name
+        end
+
+        ##
+        # A hash of user-provided labels associated with this topic. Labels can
+        # be provided when the topic is created, and used to organize and group
+        # topics.See [Creating and Managing
+        # Labels](https://cloud.google.com/pubsub/docs/labels).
+        #
+        # The returned hash is frozen and changes are not allowed.
+        #
+        # @return [Hash] The frozen labels hash.
+        #
+        def labels
+          @grpc.labels.to_h.freeze
         end
 
         ##
@@ -131,6 +150,14 @@ module Google
         #   Default is 604,800 seconds (7 days).
         # @param [String] endpoint A URL locating the endpoint to which messages
         #   should be pushed.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the subscription. You can use these to organize and group your
+        #   subscriptions. Label keys and values can be no longer than 63
+        #   characters, can only contain lowercase letters, numeric characters,
+        #   underscores and dashes. International characters are allowed. Label
+        #   values are optional. Label keys must start with a letter and each
+        #   label in the list must have a different key. See [Creating and
+        #   Managing Labels](https://cloud.google.com/pubsub/docs/labels).
         #
         # @return [Google::Cloud::Pubsub::Subscription]
         #
@@ -154,10 +181,10 @@ module Google
         #                         endpoint: "https://example.com/push"
         #
         def subscribe subscription_name, deadline: nil, retain_acked: false,
-                      retention: nil, endpoint: nil
+                      retention: nil, endpoint: nil, labels: nil
           ensure_service!
           options = { deadline: deadline, retain_acked: retain_acked,
-                      retention: retention, endpoint: endpoint }
+                      retention: retention, endpoint: endpoint, labels: labels }
           grpc = service.create_subscription name, subscription_name, options
           Subscription.from_grpc grpc, service
         end

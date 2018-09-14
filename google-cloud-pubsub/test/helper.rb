@@ -120,8 +120,8 @@ class MockPubsub < Minitest::Spec
     data.to_json
   end
 
-  def topic_json topic_name
-    { "name" => topic_path(topic_name) }.to_json
+  def topic_json topic_name, labels: nil
+    { "name" => topic_path(topic_name), labels: labels }.to_json
   end
 
   def topic_subscriptions_json num_subs, token = nil
@@ -144,13 +144,14 @@ class MockPubsub < Minitest::Spec
 
   def subscription_json topic_name, sub_name,
                         deadline = 60,
-                        endpoint = "http://example.com/callback"
+                        endpoint = "http://example.com/callback", labels: nil
     { "name" => subscription_path(sub_name),
       "topic" => topic_path(topic_name),
       "push_config" => { "push_endpoint" => endpoint },
       "ack_deadline_seconds" => deadline,
       "retain_acked_messages" => true,
-      "message_retention_duration" => {"seconds" => 600, "nanos" => 900000000} # 600.9 seconds
+      "message_retention_duration" => {"seconds" => 600, "nanos" => 900000000}, # 600.9 seconds
+      "labels" => labels
     }.to_json
   end
 
@@ -163,7 +164,7 @@ class MockPubsub < Minitest::Spec
     data.to_json
   end
 
-  def snapshot_json topic_name, snapshot_name
+  def snapshot_json topic_name, snapshot_name, labels: nil
     time = Time.now
     timestamp = {
       "seconds" => time.to_i,
@@ -171,7 +172,8 @@ class MockPubsub < Minitest::Spec
     }
     { "name" => snapshot_path(snapshot_name),
       "topic" => topic_path(topic_name),
-      "expire_time" => timestamp
+      "expire_time" => timestamp,
+      "labels" => labels
     }.to_json
   end
 

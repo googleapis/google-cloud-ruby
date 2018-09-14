@@ -51,6 +51,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     response = Google::Pubsub::V1::ListSnapshotsResponse.decode_json snapshots_json("fake-topic", 3, "second_page_token")
     paged_enum_struct response
   end
+  let(:labels) { { "foo" => "bar" } }
 
   it "knows the project identifier" do
     pubsub.project.must_equal project
@@ -61,7 +62,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     create_res = Google::Pubsub::V1::Topic.decode_json topic_json(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [topic_path(new_topic_name), options: default_options]
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name
@@ -76,7 +77,7 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     create_res = Google::Pubsub::V1::Topic.decode_json topic_json(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [topic_path(new_topic_name), options: default_options]
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: nil, options: default_options]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.new_topic new_topic_name
@@ -84,6 +85,23 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     mock.verify
 
     topic.name.must_equal topic_path(new_topic_name)
+  end
+
+  it "creates a topic with labels" do
+    new_topic_name = "new-topic-#{Time.now.to_i}"
+
+    create_res = Google::Pubsub::V1::Topic.decode_json topic_json(new_topic_name, labels: labels)
+    mock = Minitest::Mock.new
+    mock.expect :create_topic, create_res, [topic_path(new_topic_name), labels: labels, options: default_options]
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.create_topic new_topic_name, labels: labels
+
+    mock.verify
+
+    topic.name.must_equal topic_path(new_topic_name)
+    topic.labels.must_equal labels
+    topic.labels.must_be :frozen?
   end
 
   it "gets a topic" do

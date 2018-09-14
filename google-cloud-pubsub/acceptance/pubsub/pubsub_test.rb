@@ -34,6 +34,7 @@ describe Google::Cloud::Pubsub, :pubsub do
   let(:new_topic_name)  {  $topic_names[0] }
   let(:topic_names)     {  $topic_names[3..6] }
   let(:lazy_topic_name) {  $topic_names[7] }
+  let(:labels) { { "foo" => "bar" } }
 
   before do
     # create all topics
@@ -69,9 +70,12 @@ describe Google::Cloud::Pubsub, :pubsub do
     end
 
     it "should be created and deleted" do
-      topic = pubsub.create_topic new_topic_name
+      topic = pubsub.create_topic new_topic_name, labels: labels
       topic.must_be_kind_of Google::Cloud::Pubsub::Topic
-      pubsub.topic(topic.name).wont_be :nil?
+      topic = pubsub.topic(topic.name)
+      topic.wont_be :nil?
+      topic.labels.must_equal labels
+      topic.labels.must_be :frozen?
       topic.delete
       pubsub.topic(topic.name).must_be :nil?
     end
@@ -174,11 +178,13 @@ describe Google::Cloud::Pubsub, :pubsub do
     end
 
     it "should allow creation of a subscription with options" do
-      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600
+      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels
       subscription.wont_be :nil?
       subscription.must_be_kind_of Google::Cloud::Pubsub::Subscription
       assert subscription.retain_acked
       subscription.retention.must_equal 600
+      subscription.labels.must_equal labels
+      subscription.labels.must_be :frozen?
       subscription.delete
     end
 
@@ -223,7 +229,7 @@ describe Google::Cloud::Pubsub, :pubsub do
       msg = topic.publish "hello-#{rand(1000)}"
       msg.wont_be :nil?
 
-      snapshot = subscription.create_snapshot
+      snapshot = subscription.create_snapshot labels: labels
 
       # Check it pulls the message
       events = pull_with_retry subscription
@@ -259,6 +265,9 @@ describe Google::Cloud::Pubsub, :pubsub do
       # No messages, should be empty
       events = subscription.pull
       events.must_be :empty?
+
+      snapshot.labels.must_equal labels
+      snapshot.labels.must_be :frozen?
 
       # Remove the subscription
       subscription.delete

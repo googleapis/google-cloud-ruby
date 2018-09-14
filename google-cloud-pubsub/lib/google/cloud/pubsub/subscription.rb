@@ -175,6 +175,20 @@ module Google
         end
 
         ##
+        # A hash of user-provided labels associated with this subscription.
+        # Labels can be provided when the subscription is created, and used to
+        # organize and group subscriptions.See [Creating and Managing
+        # Labels](https://cloud.google.com/pubsub/docs/labels).
+        #
+        # The returned hash is frozen and changes are not allowed.
+        #
+        # @return [Hash] The frozen labels hash.
+        #
+        def labels
+          @grpc.labels.to_h.freeze
+        end
+
+        ##
         # Determines whether the subscription exists in the Pub/Sub service.
         #
         # @example
@@ -484,6 +498,14 @@ module Google
         #   ([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus
         #   (+) or percent signs (%). It must be between 3 and 255 characters in
         #   length, and it must not start with "goog". Optional.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the snapshot. You can use these to organize and group your
+        #   snapshots. Label keys and values can be no longer than 63
+        #   characters, can only contain lowercase letters, numeric characters,
+        #   underscores and dashes. International characters are allowed. Label
+        #   values are optional. Label keys must start with a letter and each
+        #   label in the list must have a different key. See [Creating and
+        #   Managing Labels](https://cloud.google.com/pubsub/docs/labels).
         #
         # @return [Google::Cloud::Pubsub::Snapshot]
         #
@@ -505,9 +527,9 @@ module Google
         #   snapshot = sub.create_snapshot
         #   snapshot.name #=> "projects/my-project/snapshots/gcr-analysis-..."
         #
-        def create_snapshot snapshot_name = nil
+        def create_snapshot snapshot_name = nil, labels: nil
           ensure_service!
-          grpc = service.create_snapshot name, snapshot_name
+          grpc = service.create_snapshot name, snapshot_name, labels: labels
           Snapshot.from_grpc grpc, service
         end
         alias new_snapshot create_snapshot
