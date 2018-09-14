@@ -35,10 +35,11 @@ module Google
       # Google::Cloud::Bigtable::Project is the main object for interacting with
       # Cloud Bigtable.
       #
-      # {Google::Cloud::Bigtable::Cluster}, {Google::Cloud::Bigtable::Instance}
+      # {Google::Cloud::Bigtable::Cluster} and {Google::Cloud::Bigtable::Instance}
       # objects are created, accessed, and managed by Google::Cloud::Bigtable::Project.
       #
-      # See {Google::Cloud::Bigtable.new} and {Google::Cloud#bigtable}.
+      # To create an instance, use {Google::Cloud::Bigtable.new} or
+      # {Google::Cloud#bigtable}.
       #
       # @example Obtaining an instance and the clusters from a project.
       #   require "google/cloud"
@@ -130,7 +131,7 @@ module Google
 
         # Create a Bigtable instance.
         #
-        # @see https://cloud.google.com/compute/docs/regions-zones for cluster zone locations
+        # @see https://cloud.google.com/compute/docs/regions-zones Cluster zone locations
         #
         # @param instance_id [String] The unique identifier for the instance,
         #   which cannot be changed after the instance is created. Values are of
@@ -158,7 +159,7 @@ module Google
         #   * No more than 64 labels can be associated with a given resource.
         # @param clusters [Hash{String => Google::Cloud::Bigtable::Cluster}]
         #   (See {Google::Cloud::Bigtable::Instance::ClusterMap})
-        #   If passed as an empty use code block to add clusters.
+        #   If unspecified, you may use a code block to add clusters.
         #   Minimum one cluster must be specified.
         # @yield [clusters] A block for adding clusters.
         # @yieldparam [Hash{String => Google::Cloud::Bigtable::Cluster}]
@@ -341,7 +342,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   table = bigtable.table("my-instance", "my-table", view: :FULL, perform_lookup: true)
-        #   iftruee
+        #   if table
         #     puts table.name
         #     p table.column_families
         #     p table.cluster_states
@@ -359,7 +360,7 @@ module Google
         #     "cf-1",
         #     "field-1",
         #     "XYZ"
-        #     timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
+        #     timestamp: Time.now.to_i * 1000  # Timestamp in milliseconds.
         #   ).delete_from_column("cf2", "field02")
         #
         #   table.mutate_row(entry)
@@ -371,7 +372,7 @@ module Google
         #   table = bigtable.table("my-instance", "my-table", app_profile_id: "my-app-profile")
         #
         #   table.read_rows(limit: 5).each do |row|
-        #     row
+        #     p row
         #   end
 
         def table \
@@ -406,32 +407,31 @@ module Google
         #   The unique Id of the instance in which to create the table.
         # @param table_id [String]
         #   The name by which the new table should be referred to within the parent
-        #   instance, e.g., +foobar+
+        #   instance, e.g., `foobar`
         # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
         #   (See {Google::Cloud::Bigtable::Table::ColumnFamilyMap})
-        #   If passed as an empty use code block to add column families.
+        #   If unspecified, you may use a code block to add column families.
         # @param granularity [Symbol]
         #   The granularity at which timestamps are stored in this table.
         #   Timestamps not matching the granularity will be rejected.
         #   Valid values are `:MILLIS`.
-        #   If unspecified, the value will be set to `:MILLIS`
+        #   If unspecified, the value will be set to `:MILLIS`.
         # @param initial_splits [Array<String>]
         #   The optional list of row keys that will be used to initially split the
         #   table into several tablets (tablets are similar to HBase regions).
-        #   Given two split keys, +s1+ and +s2+, three tablets will be created,
-        #   spanning the key ranges: +[, s1), [s1, s2), [s2, )+.
+        #   Given two split keys, `s1` and `s2`, three tablets will be created,
+        #   spanning the key ranges: `[, s1), [s1, s2), [s2, )`.
         #
         #   Example:
         #
-        #   * Row keys := ["a", "apple", "custom", "customer_1", "customer_2",+
-        #     +"other", "zz"]
-        #   * initial_split_keys := +["apple", "customer_1", "customer_2", "other"]+
+        #   * Row keys := `["a", "apple", "custom", "customer_1", "customer_2", "other", "zz"]`
+        #   * initial_split_keys := `["apple", "customer_1", "customer_2", "other"]`
         #   * Key assignment:
-        #     * Tablet 1 : +[, apple)                => {"a"}.+
-        #     * Tablet 2 : +[apple, customer_1)      => {"apple", "custom"}.+
-        #     * Tablet 3 : +[customer_1, customer_2) => {"customer_1"}.+
-        #     * Tablet 4 : +[customer_2, other)      => {"customer_2"}.+
-        #     * Tablet 5 : +[other, )                => {"other", "zz"}.+
+        #     * Tablet 1 : `[, apple)                => {"a"}`
+        #     * Tablet 2 : `[apple, customer_1)      => {"apple", "custom"}`
+        #     * Tablet 3 : `[customer_1, customer_2) => {"customer_1"}`
+        #     * Tablet 4 : `[customer_2, other)      => {"customer_2"}`
+        #     * Tablet 5 : `[other, )                => {"other", "zz"}`
         #   A hash of the same form as `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
         #   can also be provided.
         # @yield [column_families] A block for adding column_families.
@@ -494,7 +494,7 @@ module Google
         #  The unique Id of the instance in which table is exists.
         # @param table_id [String]
         #   The unique name of the table to be deleted.
-        #   e.g., +foobar+
+        #   e.g., `foobar`
         #
         # @example Create table with column families and initial splits.
         #   require "google/cloud/bigtable"

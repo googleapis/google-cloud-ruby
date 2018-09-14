@@ -208,9 +208,9 @@ module Google
         #   table = bigtable.table("my-instance", "my-table")
         #
         #   if table.exists?
-        #     p "Table is exists."
+        #     p "Table exists."
         #   else
-        #     p "Table is not exists"
+        #     p "Table does not exist"
         #   end
         #
         # @example Using bigtable instance
@@ -222,9 +222,9 @@ module Google
         #   table = bigtable.table("my-table")
         #
         #   if table.exists?
-        #     p "Table is exists."
+        #     p "Table exists."
         #   else
-        #     p "Table is not exists"
+        #     p "Table does not exist"
         #   end
         #
 
@@ -234,11 +234,12 @@ module Google
           false
         end
 
-        # Create column family object to perform create,update or delete operation.
+        # Returns a column family object that can be used to perform create,
+        # update, or delete operations.
         #
         # @param name [String] Name of the column family
         # @param gc_rule [Google::Cloud::Bigtable::GcRule] Optional.
-        #   GC Rule only required for create and update.
+        #   Required for create and update operations.
         #
         # @example Create column family
         #   require "google/cloud/bigtable"
@@ -467,12 +468,12 @@ module Google
           response.consistent
         end
 
-        # Wait for replication to check replication consistency of table
-        # Checks replication consistency by generating consistency token and
-        # calling +check_consistency+ api call 5 times(default).
-        # If the response is consistent then return true. Otherwise try again.
-        # If consistency checking will run for more than 10 minutes and still
-        # not got the +true+ response then return +false+.
+        # Wait for replication to check replication consistency.
+        # Checks replication consistency by generating a consistency token and
+        # calling the `check_consistency` api call 5 times (by default).
+        # If the response is consistent, returns true. Otherwise tries again
+        # repeatedly until the timeout. If the check does not succeed by the
+        # timeout, returns `false`.
         #
         # @param timeout [Integer]
         #   Timeout in seconds. Defaults value is 600 seconds.
