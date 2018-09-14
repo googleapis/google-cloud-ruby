@@ -17,7 +17,14 @@ require "helper"
 describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
-  let(:sub_json) { subscription_json topic_name, sub_name }
+  let(:labels) { { "foo" => "bar" } }
+  let(:new_labels) { { "baz" => "qux" } }
+  let(:new_labels_map) do
+    labels_map = Google::Protobuf::Map.new(:string, :string)
+    new_labels.each { |k, v| labels_map[String(k)] = String(v) }
+    labels_map
+  end
+  let(:sub_json) { subscription_json topic_name, sub_name, labels: labels }
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_deadline) { sub_hash["ack_deadline_seconds"] }
   let(:sub_endpoint) { sub_hash["push_config"]["push_endpoint"] }
@@ -73,6 +80,50 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
     mock.verify
 
     subscription.retention.must_equal 600.2
+  end
+
+  it "updates labels" do
+    subscription.labels.must_equal labels
+
+    update_sub = sub_grpc.dup
+    update_sub.labels = new_labels_map
+    update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.labels = new_labels
+
+    mock.verify
+
+    subscription.labels.must_equal new_labels
+  end
+
+  it "updates labels to empty hash" do
+    subscription.labels.must_equal labels
+
+    update_sub = sub_grpc.dup
+    update_sub.labels = Google::Protobuf::Map.new(:string, :string)
+
+    update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.labels = {}
+
+    mock.verify
+
+    subscription.labels.wont_be :nil?
+    subscription.labels.must_be :empty?
+  end
+
+  it "raises when setting labels to nil" do
+    subscription.labels.must_equal labels
+
+    expect { subscription.labels = nil }.must_raise ArgumentError
+
+    subscription.labels.must_equal labels
   end
 
   describe :lazy do
@@ -136,6 +187,26 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
 
       subscription.wont_be :lazy?
       subscription.retention.must_equal 600.2
+    end
+
+    it "updates labels" do
+      subscription.must_be :lazy?
+
+      update_sub = Google::Pubsub::V1::Subscription.new \
+        name: subscription_path(sub_name),
+        labels: new_labels
+      sub_grpc.labels = new_labels_map
+      update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
+      mock = Minitest::Mock.new
+      mock.expect :update_subscription, sub_grpc, [update_sub, update_mask, options: default_options]
+      subscription.service.mocked_subscriber = mock
+
+      subscription.labels = new_labels
+
+      mock.verify
+
+      subscription.wont_be :lazy?
+      subscription.labels.must_equal new_labels
     end
   end
 end

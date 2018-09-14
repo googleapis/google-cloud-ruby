@@ -185,6 +185,8 @@ describe Google::Cloud::Pubsub, :pubsub do
       subscription.retention.must_equal 600
       subscription.labels.must_equal labels
       subscription.labels.must_be :frozen?
+      subscription.labels = {}
+      subscription.labels.must_be :empty?
       subscription.delete
     end
 
