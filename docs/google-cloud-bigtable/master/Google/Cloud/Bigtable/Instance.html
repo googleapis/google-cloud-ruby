@@ -919,16 +919,16 @@ serving and storage resources to be used by Bigtable tables.</p>
       <pre class="lines">
 
 
+742
 743
 744
 745
 746
 747
-748
-749</pre>
+748</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 743</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 742</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_app_profile'>app_profile</span> <span class='id identifier rubyid_app_profile_id'>app_profile_id</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1003,14 +1003,14 @@ serving and storage resources to be used by Bigtable tables.</p>
       <pre class="lines">
 
 
+769
 770
 771
 772
-773
-774</pre>
+773</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 770</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 769</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_app_profiles'>app_profiles</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1427,6 +1427,7 @@ Default value is <code>false</code></p>
       <pre class="lines">
 
 
+690
 691
 692
 693
@@ -1455,11 +1456,10 @@ Default value is <code>false</code></p>
 716
 717
 718
-719
-720</pre>
+719</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 691</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 690</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_app_profile'>create_app_profile</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1557,7 +1557,7 @@ Default value is <code>false</code></p>
       
         &mdash;
         <div class='inline'><p>The ID to be used when referring to the new cluster within its instance,
-e.g., just +mycluster+</p>
+e.g., just <code>mycluster</code></p>
 </div>
       
     </li>
@@ -1750,7 +1750,7 @@ puts table</code></pre>
       
         &mdash;
         <div class='inline'><p>The name by which the new table should be referred to within the parent
-instance, e.g., +foobar+</p>
+instance, e.g., <code>foobar</code></p>
 </div>
       
     </li>
@@ -1801,23 +1801,22 @@ If unspecified, the value will be set to <code>:MILLIS</code></p>
         &mdash;
         <div class='inline'><p>The optional list of row keys that will be used to initially split the
 table into several tablets (tablets are similar to HBase regions).
-Given two split keys, +s1+ and +s2+, three tablets will be created,
-spanning the key ranges: +[, s1), [s1, s2), [s2, )+.</p>
+Given two split keys, <code>s1</code> and <code>s2</code>, three tablets will be created,
+spanning the key ranges: <code>[, s1), [s1, s2), [s2, )</code>.</p>
 
 <p>Example:</p>
 
 <ul>
-<li>Row keys := +[&quot;a&quot;, &quot;apple&quot;, &quot;custom&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;,+
-+&quot;other&quot;, &quot;zz&quot;]+</li>
-<li>initial_split_keys := +[&quot;apple&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;]+</li>
+<li>Row keys := <code>[&quot;a&quot;, &quot;apple&quot;, &quot;custom&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;, &quot;zz&quot;]</code></li>
+<li>initial_split_keys := <code>[&quot;apple&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;]</code></li>
 <li>Key assignment:
 
 <ul>
-<li>Tablet 1 : +[, apple)                =&gt; &quot;a&quot;.+</li>
-<li>Tablet 2 : +[apple, customer_1)      =&gt; &quot;custom&quot;.+</li>
-<li>Tablet 3 : +[customer_1, customer_2) =&gt; &quot;customer_1&quot;.+</li>
-<li>Tablet 4 : +[customer_2, other)      =&gt; &quot;customer_2&quot;.+</li>
-<li>Tablet 5 : +[other, )                =&gt; &quot;zz&quot;.+
+<li>Tablet 1 : <code>[, apple)                =&gt; {&quot;a&quot;}</code></li>
+<li>Tablet 2 : <code>[apple, customer_1)      =&gt; {&quot;apple&quot;, &quot;custom&quot;}</code></li>
+<li>Tablet 3 : <code>[customer_1, customer_2) =&gt; {&quot;customer_1&quot;}</code></li>
+<li>Tablet 4 : <code>[customer_2, other)      =&gt; {&quot;customer_2&quot;}</code></li>
+<li>Tablet 5 : <code>[other, )                =&gt; {&quot;other&quot;, &quot;zz&quot;}</code>
 A hash of the same form as <code>Google::Bigtable::Admin::V2::CreateTableRequest::Split</code>
 can also be provided.</li>
 </ul></li>
@@ -1886,6 +1885,7 @@ GC Rules for column family see <span class='object_link'><a href="GcRule.html" t
       <pre class="lines">
 
 
+588
 589
 590
 591
@@ -1901,11 +1901,10 @@ GC Rules for column family see <span class='object_link'><a href="GcRule.html" t
 601
 602
 603
-604
-605</pre>
+604</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 589</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 588</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_table'>create_table</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2593,17 +2592,17 @@ instance</p>
       <pre class="lines">
 
 
+807
 808
 809
 810
 811
 812
 813
-814
-815</pre>
+814</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 808</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 807</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_policy'>policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3248,17 +3247,17 @@ See (<a href="https://cloud.google.com/bigtable/docs/access-control">https://clo
       <pre class="lines">
 
 
+885
 886
 887
 888
 889
 890
 891
-892
-893</pre>
+892</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 886</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 885</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> <span class='op'>*</span><span class='id identifier rubyid_permissions'>permissions</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3478,14 +3477,14 @@ instance</p>
       <pre class="lines">
 
 
+842
 843
 844
 845
-846
-847</pre>
+846</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 843</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 842</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_policy'>update_policy</span> <span class='id identifier rubyid_new_policy'>new_policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>

@@ -304,7 +304,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create column family object to perform create,update or delete operation.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns a column family object that can be used to perform create, update, or delete operations.</p>
 </div></span>
   
 </li>
@@ -987,7 +987,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Wait for replication to check replication consistency of table Checks replication consistency by generating consistency token and calling +check_consistency+ api call 5 times(default).</p>
+    <span class="summary_desc"><div class='inline'><p>Wait for replication to check replication consistency.</p>
 </div></span>
   
 </li>
@@ -1311,14 +1311,14 @@ and the check request.</p>
       <pre class="lines">
 
 
-464
 465
 466
 467
-468</pre>
+468
+469</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 464</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 465</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_consistency'>check_consistency</span> <span class='id identifier rubyid_token'>token</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1476,7 +1476,8 @@ Available column families data only in table view types: <code>SCHEMA_VIEW</code
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create column family object to perform create,update or delete operation.</p>
+    <p>Returns a column family object that can be used to perform create,
+update, or delete operations.</p>
 
 
   </div>
@@ -1565,7 +1566,7 @@ Available column families data only in table view types: <code>SCHEMA_VIEW</code
       
         &mdash;
         <div class='inline'><p>Optional.
-GC Rule only required for create and update.</p>
+Required for create and update operations.</p>
 </div>
       
     </li>
@@ -1579,7 +1580,6 @@ GC Rule only required for create and update.</p>
       <pre class="lines">
 
 
-281
 282
 283
 284
@@ -1590,10 +1590,11 @@ GC Rule only required for create and update.</p>
 289
 290
 291
-292</pre>
+292
+293</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 281</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 282</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_column_family'>column_family</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_gc_rule'>gc_rule</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_cf_grpc'>cf_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable.html" title="Google::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin.html" title="Google::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2.html" title="Google::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2/ColumnFamily.html" title="Google::Bigtable::Admin::V2::ColumnFamily (class)">ColumnFamily</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -1762,12 +1763,12 @@ try again with a longer request deadline.</p>
       <pre class="lines">
 
 
-547
 548
-549</pre>
+549
+550</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 547</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 548</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_all_rows'>delete_all_rows</span> <span class='label'>timeout:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_drop_row_range'>drop_row_range</span><span class='lparen'>(</span><span class='label'>delete_all_data:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='rparen'>)</span>
@@ -1866,12 +1867,12 @@ try again with a longer request deadline.</p>
       <pre class="lines">
 
 
-568
 569
-570</pre>
+570
+571</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 568</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 569</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_rows_by_prefix'>delete_rows_by_prefix</span> <span class='id identifier rubyid_prefix'>prefix</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_drop_row_range'>drop_row_range</span><span class='lparen'>(</span><span class='label'>row_key_prefix:</span> <span class='id identifier rubyid_prefix'>prefix</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='rparen'>)</span>
@@ -1967,7 +1968,6 @@ try again with a longer request deadline.</p>
       <pre class="lines">
 
 
-591
 592
 593
 594
@@ -1980,10 +1980,11 @@ try again with a longer request deadline.</p>
 601
 602
 603
-604</pre>
+604
+605</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 591</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 592</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_drop_row_range'>drop_row_range</span> \
     <span class='label'>row_key_prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -2033,9 +2034,9 @@ try again with a longer request deadline.</p>
 <span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='kw'>if</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_exists?'>exists?</span>
-  <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table is exists.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table exists.</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>else</span>
-  <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table is not exists</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table does not exist</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></code></pre>
     
       
@@ -2050,9 +2051,9 @@ try again with a longer request deadline.</p>
 <span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='kw'>if</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_exists?'>exists?</span>
-  <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table is exists.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table exists.</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>else</span>
-  <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table is not exists</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table does not exist</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></code></pre>
     
   </div>
@@ -2209,14 +2210,14 @@ for 90 days.</p>
       <pre class="lines">
 
 
-438
 439
 440
 441
-442</pre>
+442
+443</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 438</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 439</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_generate_consistency_token'>generate_consistency_token</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2502,7 +2503,6 @@ for example).</p>
       <pre class="lines">
 
 
-341
 342
 343
 344
@@ -2510,10 +2510,11 @@ for example).</p>
 346
 347
 348
-349</pre>
+349
+350</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_column_families'>modify_column_families</span> <span class='id identifier rubyid_modifications'>modifications</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3882,12 +3883,12 @@ mapreduces.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Wait for replication to check replication consistency of table
-Checks replication consistency by generating consistency token and
-calling +check_consistency+ api call 5 times(default).
-If the response is consistent then return true. Otherwise try again.
-If consistency checking will run for more than 10 minutes and still
-not got the +true+ response then return +false+.</p>
+    <p>Wait for replication to check replication consistency.
+Checks replication consistency by generating a consistency token and
+calling the <code>check_consistency</code> api call 5 times (by default).
+If the response is consistent, returns true. Otherwise tries again
+repeatedly until the timeout. If the check does not succeed by the
+timeout, returns <code>false</code>.</p>
 
 
   </div>
@@ -3973,7 +3974,6 @@ not got the +true+ response then return +false+.</p>
       <pre class="lines">
 
 
-499
 500
 501
 502
@@ -3991,10 +3991,11 @@ not got the +true+ response then return +false+.</p>
 514
 515
 516
-517</pre>
+517
+518</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 499</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/table.rb', line 500</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_for_replication'>wait_for_replication</span> <span class='label'>timeout:</span> <span class='int'>600</span><span class='comma'>,</span> <span class='label'>check_interval:</span> <span class='int'>5</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_check_interval'>check_interval</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_timeout'>timeout</span>

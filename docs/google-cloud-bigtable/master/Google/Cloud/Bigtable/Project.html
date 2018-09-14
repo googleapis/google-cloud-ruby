@@ -98,10 +98,11 @@ Cloud Bigtable data. Each project has a friendly name and a unique ID.</p>
 <p>Google::Cloud::Bigtable::Project is the main object for interacting with
 Cloud Bigtable.</p>
 
-<p><span class='object_link'><a href="Cluster.html" title="Google::Cloud::Bigtable::Cluster (class)">Cluster</a></span>, <span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Instance</a></span>
+<p><span class='object_link'><a href="Cluster.html" title="Google::Cloud::Bigtable::Cluster (class)">Cluster</a></span> and <span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Instance</a></span>
 objects are created, accessed, and managed by Google::Cloud::Bigtable::Project.</p>
 
-<p>See <span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span> and <span class='object_link'><a href="../../Cloud.html#bigtable-instance_method" title="Google::Cloud#bigtable (method)">Google::Cloud#bigtable</a></span>.</p>
+<p>To create an instance, use <span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span> or
+<span class='object_link'><a href="../../Cloud.html#bigtable-instance_method" title="Google::Cloud#bigtable (method)">Google::Cloud#bigtable</a></span>.</p>
 
 
   </div>
@@ -457,14 +458,14 @@ and that the system should return the next page of data.</p>
       <pre class="lines">
 
 
-270
 271
 272
 273
-274</pre>
+274
+275</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 270</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 271</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clusters'>clusters</span> <span class='label'>token:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -651,7 +652,7 @@ conform to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.</l
       
         &mdash;
         <div class='inline'><p>(See <span class='object_link'><a href="Instance/ClusterMap.html" title="Google::Cloud::Bigtable::Instance::ClusterMap (class)">Instance::ClusterMap</a></span>)
-If passed as an empty use code block to add clusters.
+If unspecified, you may use a code block to add clusters.
 Minimum one cluster must be specified.</p>
 </div>
       
@@ -718,7 +719,7 @@ an instance create operation.</p>
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><a href="https://cloud.google.com/compute/docs/regions-zones" target="_parent" title="for cluster zone locations">for cluster zone locations</a></li>
+      <li><a href="https://cloud.google.com/compute/docs/regions-zones" target="_parent" title="Cluster zone locations">Cluster zone locations</a></li>
     
   </ul>
 
@@ -728,7 +729,6 @@ an instance create operation.</p>
       <pre class="lines">
 
 
-222
 223
 224
 225
@@ -757,10 +757,11 @@ an instance create operation.</p>
 248
 249
 250
-251</pre>
+251
+252</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 222</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 223</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_instance'>create_instance</span> \
     <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
@@ -886,7 +887,7 @@ specified in the request.</p>
       
         &mdash;
         <div class='inline'><p>The name by which the new table should be referred to within the parent
-instance, e.g., +foobar+</p>
+instance, e.g., <code>foobar</code></p>
 </div>
       
     </li>
@@ -902,7 +903,7 @@ instance, e.g., +foobar+</p>
       
         &mdash;
         <div class='inline'><p>(See <span class='object_link'><a href="Table/ColumnFamilyMap.html" title="Google::Cloud::Bigtable::Table::ColumnFamilyMap (class)">Table::ColumnFamilyMap</a></span>)
-If passed as an empty use code block to add column families.</p>
+If unspecified, you may use a code block to add column families.</p>
 </div>
       
     </li>
@@ -920,7 +921,7 @@ If passed as an empty use code block to add column families.</p>
         <div class='inline'><p>The granularity at which timestamps are stored in this table.
 Timestamps not matching the granularity will be rejected.
 Valid values are <code>:MILLIS</code>.
-If unspecified, the value will be set to <code>:MILLIS</code></p>
+If unspecified, the value will be set to <code>:MILLIS</code>.</p>
 </div>
       
     </li>
@@ -937,23 +938,22 @@ If unspecified, the value will be set to <code>:MILLIS</code></p>
         &mdash;
         <div class='inline'><p>The optional list of row keys that will be used to initially split the
 table into several tablets (tablets are similar to HBase regions).
-Given two split keys, +s1+ and +s2+, three tablets will be created,
-spanning the key ranges: +[, s1), [s1, s2), [s2, )+.</p>
+Given two split keys, <code>s1</code> and <code>s2</code>, three tablets will be created,
+spanning the key ranges: <code>[, s1), [s1, s2), [s2, )</code>.</p>
 
 <p>Example:</p>
 
 <ul>
-<li>Row keys := [&quot;a&quot;, &quot;apple&quot;, &quot;custom&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;,+
-+&quot;other&quot;, &quot;zz&quot;]</li>
-<li>initial_split_keys := +[&quot;apple&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;]+</li>
+<li>Row keys := <code>[&quot;a&quot;, &quot;apple&quot;, &quot;custom&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;, &quot;zz&quot;]</code></li>
+<li>initial_split_keys := <code>[&quot;apple&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;]</code></li>
 <li>Key assignment:
 
 <ul>
-<li>Tablet 1 : +[, apple)                =&gt; &quot;a&quot;.+</li>
-<li>Tablet 2 : +[apple, customer_1)      =&gt; &quot;custom&quot;.+</li>
-<li>Tablet 3 : +[customer_1, customer_2) =&gt; &quot;customer_1&quot;.+</li>
-<li>Tablet 4 : +[customer_2, other)      =&gt; &quot;customer_2&quot;.+</li>
-<li>Tablet 5 : +[other, )                =&gt; &quot;zz&quot;.+
+<li>Tablet 1 : <code>[, apple)                =&gt; {&quot;a&quot;}</code></li>
+<li>Tablet 2 : <code>[apple, customer_1)      =&gt; {&quot;apple&quot;, &quot;custom&quot;}</code></li>
+<li>Tablet 3 : <code>[customer_1, customer_2) =&gt; {&quot;customer_1&quot;}</code></li>
+<li>Tablet 4 : <code>[customer_2, other)      =&gt; {&quot;customer_2&quot;}</code></li>
+<li>Tablet 5 : <code>[other, )                =&gt; {&quot;other&quot;, &quot;zz&quot;}</code>
 A hash of the same form as <code>Google::Bigtable::Admin::V2::CreateTableRequest::Split</code>
 can also be provided.</li>
 </ul></li>
@@ -1126,7 +1126,7 @@ can also be provided.</li>
       
         &mdash;
         <div class='inline'><p>The unique name of the table to be deleted.
-e.g., +foobar+</p>
+e.g., <code>foobar</code></p>
 </div>
       
     </li>
@@ -1230,16 +1230,16 @@ e.g., +foobar+</p>
       <pre class="lines">
 
 
-123
 124
 125
 126
 127
 128
-129</pre>
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_instance'>instance</span> <span class='id identifier rubyid_instance_id'>instance_id</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1332,14 +1332,14 @@ and that the system should return the next page of data.</p>
       <pre class="lines">
 
 
-101
 102
 103
 104
-105</pre>
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_instances'>instances</span> <span class='label'>token:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1568,13 +1568,13 @@ for example).</p>
       <pre class="lines">
 
 
-78
 79
 80
-81</pre>
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_project_id'>project_id</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1634,16 +1634,16 @@ for example).</p>
         <p class="example_title"><div class='inline'><p>Get table with all fields. Clusters states, column families</p>
 </div></p>
       
-      <pre class="example code"><code>require &quot;google/cloud/bigtable&quot;
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
 
-bigtable = Google::Cloud::Bigtable.new
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
 
-table = bigtable.table(&quot;my-instance&quot;, &quot;my-table&quot;, view: :FULL, perform_lookup: true)
-iftruee
-  puts table.name
-  p table.column_families
-  p table.cluster_states
-end</code></pre>
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>view:</span> <span class='symbol'>:FULL</span><span class='comma'>,</span> <span class='label'>perform_lookup:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_table'>table</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_column_families'>column_families</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_cluster_states'>cluster_states</span>
+<span class='kw'>end</span></code></pre>
     
       
         <p class="example_title"><div class='inline'><p>Mutate rows</p>
@@ -1660,7 +1660,7 @@ entry.set_cell(
   &quot;cf-1&quot;,
   &quot;field-1&quot;,
   &quot;XYZ&quot;
-  timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
+  timestamp: Time.now.to_i * 1000  # Timestamp in milliseconds.
 ).delete_from_column(&quot;cf2&quot;, &quot;field02&quot;)
 
 table.mutate_row(entry)</code></pre>
@@ -1676,7 +1676,7 @@ table.mutate_row(entry)</code></pre>
 <span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>app_profile_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-app-profile</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_read_rows'>read_rows</span><span class='lparen'>(</span><span class='label'>limit:</span> <span class='int'>5</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
-  <span class='id identifier rubyid_row'>row</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_row'>row</span>
 <span class='kw'>end</span></code></pre>
     
   </div>
@@ -1794,7 +1794,6 @@ This value specifies routing for replication. If not specified, the
       <pre class="lines">
 
 
-377
 378
 379
 380
@@ -1816,10 +1815,11 @@ This value specifies routing for replication. If not specified, the
 396
 397
 398
-399</pre>
+399
+400</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 377</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 378</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_table'>table</span> \
     <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
@@ -1928,14 +1928,14 @@ This value specifies routing for replication. If not specified, the
       <pre class="lines">
 
 
-292
 293
 294
 295
-296</pre>
+296
+297</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 292</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 293</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tables'>tables</span> <span class='id identifier rubyid_instance_id'>instance_id</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
