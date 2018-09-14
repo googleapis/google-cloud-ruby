@@ -95,6 +95,8 @@ js:
 
 <p>A named resource to which messages are published.</p>
 
+<p>See <span class='object_link'><a href="Project.html#create_topic-instance_method" title="Google::Cloud::Pubsub::Project#create_topic (method)">Project#create_topic</a></span> and <span class='object_link'><a href="Project.html#topic-instance_method" title="Google::Cloud::Pubsub::Project#topic (method)">Project#topic</a></span>.</p>
+
 
   </div>
 </div>
@@ -211,7 +213,30 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; Object </a>
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A hash of user-provided labels associated with this topic.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
     
 
     
@@ -303,7 +328,7 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#subscribe-instance_method" title="#subscribe (instance method)">#<strong>subscribe</strong>(subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil)  &#x21d2; Google::Cloud::Pubsub::Subscription </a>
+      <a href="#subscribe-instance_method" title="#subscribe (instance method)">#<strong>subscribe</strong>(subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil)  &#x21d2; Google::Cloud::Pubsub::Subscription </a>
     
 
     
@@ -496,12 +521,12 @@ js:
       <pre class="lines">
 
 
-80
-81
-82</pre>
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_async_publisher'>async_publisher</span>
   <span class='ivar'>@async_publisher</span>
@@ -566,14 +591,14 @@ js:
       <pre class="lines">
 
 
-104
-105
-106
-107
-108</pre>
+123
+124
+125
+126
+127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -636,19 +661,19 @@ js:
       <pre class="lines">
 
 
-506
-507
-508
-509
-510
-511
-512
-513
-514
-515</pre>
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 506</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 533</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span>
   <span class='comment'># Always true if the object is not set as lazy
@@ -666,9 +691,71 @@ js:
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A hash of user-provided labels associated with this topic. Labels can
+be provided when the topic is created, and used to organize and group
+topics.See <a href="https://cloud.google.com/pubsub/docs/labels">Creating and Managing
+Labels</a>.</p>
+
+<p>The returned hash is frozen and changes are not allowed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The frozen labels hash.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="name-instance_method">
   
-    #<strong>name</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -684,6 +771,19 @@ js:
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -691,12 +791,12 @@ js:
       <pre class="lines">
 
 
-87
-88
-89</pre>
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
@@ -822,17 +922,17 @@ topic</p>
       <pre class="lines">
 
 
-409
-410
-411
-412
-413
-414
-415
-416</pre>
+436
+437
+438
+439
+440
+441
+442
+443</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 409</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 436</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_policy'>policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1024,16 +1124,16 @@ block.</p>
       <pre class="lines">
 
 
-309
-310
-311
-312
-313
-314
-315</pre>
+336
+337
+338
+339
+340
+341
+342</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 309</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 336</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_publish'>publish</span> <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1200,15 +1300,15 @@ publish</p>
       <pre class="lines">
 
 
-368
-369
-370
-371
-372
-373</pre>
+395
+396
+397
+398
+399
+400</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 368</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 395</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_publish_async'>publish_async</span> <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1224,7 +1324,7 @@ publish</p>
       <div class="method_details ">
   <h3 class="signature " id="subscribe-instance_method">
   
-    #<strong>subscribe</strong>(subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil)  &#x21d2; <tt><span class='object_link'><a href="Subscription.html" title="Google::Cloud::Pubsub::Subscription (class)">Google::Cloud::Pubsub::Subscription</a></span></tt> 
+    #<strong>subscribe</strong>(subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil)  &#x21d2; <tt><span class='object_link'><a href="Subscription.html" title="Google::Cloud::Pubsub::Subscription (class)">Google::Cloud::Pubsub::Subscription</a></span></tt> 
   
 
   
@@ -1363,6 +1463,28 @@ should be pushed.</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of user-provided labels associated with
+the subscription. You can use these to organize and group your
+subscriptions. Label keys and values can be no longer than 63
+characters, can only contain lowercase letters, numeric characters,
+underscores and dashes. International characters are allowed. Label
+values are optional. Label keys must start with a letter and each
+label in the list must have a different key. See <a href="https://cloud.google.com/pubsub/docs/labels">Creating and
+Managing Labels</a>.</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Returns:</p>
@@ -1385,23 +1507,23 @@ should be pushed.</p>
       <pre class="lines">
 
 
-156
-157
-158
-159
-160
-161
-162
-163</pre>
+183
+184
+185
+186
+187
+188
+189
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscribe'>subscribe</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span><span class='comma'>,</span> <span class='label'>deadline:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>retain_acked:</span> <span class='kw'>false</span><span class='comma'>,</span>
-              <span class='label'>retention:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='kw'>nil</span>
+              <span class='label'>retention:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>deadline:</span> <span class='id identifier rubyid_deadline'>deadline</span><span class='comma'>,</span> <span class='label'>retain_acked:</span> <span class='id identifier rubyid_retain_acked'>retain_acked</span><span class='comma'>,</span>
-              <span class='label'>retention:</span> <span class='id identifier rubyid_retention'>retention</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='rbrace'>}</span>
+              <span class='label'>retention:</span> <span class='id identifier rubyid_retention'>retention</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_create_subscription'>create_subscription</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span>
   <span class='const'><span class='object_link'><a href="Subscription.html" title="Google::Cloud::Pubsub::Subscription (class)">Subscription</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
 <span class='kw'>end</span></pre>
@@ -1523,17 +1645,17 @@ the subscription does not exist.</p>
       <pre class="lines">
 
 
-200
-201
-202
-203
-204
-205
-206
-207</pre>
+227
+228
+229
+230
+231
+232
+233
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 200</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 227</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscription'>subscription</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1660,15 +1782,15 @@ and that the system should return the next page of data.</p>
       <pre class="lines">
 
 
-243
-244
-245
-246
-247
-248</pre>
+270
+271
+272
+273
+274
+275</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 243</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 270</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscriptions'>subscriptions</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1779,16 +1901,16 @@ check access for. Permissions with wildcards (such as <code>*</code> or
       <pre class="lines">
 
 
-487
-488
-489
-490
-491
-492
-493</pre>
+514
+515
+516
+517
+518
+519
+520</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 487</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 514</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_permissions'>test_permissions</span> <span class='op'>*</span><span class='id identifier rubyid_permissions'>permissions</span>
   <span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span>
@@ -1898,14 +2020,14 @@ topic</p>
       <pre class="lines">
 
 
-447
-448
-449
-450
-451</pre>
+474
+475
+476
+477
+478</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 447</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 474</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_policy'>update_policy</span> <span class='id identifier rubyid_new_policy'>new_policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>

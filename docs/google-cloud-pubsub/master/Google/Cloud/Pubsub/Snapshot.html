@@ -199,6 +199,29 @@ successful completion of the <code>create_snapshot</code> operation.</li>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A hash of user-provided labels associated with this snapshot.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; Object </a>
     
 
@@ -311,14 +334,14 @@ specified.</p>
       <pre class="lines">
 
 
-131
-132
-133
-134
-135</pre>
+145
+146
+147
+148
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/snapshot.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/snapshot.rb', line 145</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -405,6 +428,68 @@ exist.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_expiration_time'>expiration_time</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_timestamp_from_grpc'>timestamp_from_grpc</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_expire_time'>expire_time</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A hash of user-provided labels associated with this snapshot.
+Labels can be provided when the snapshot is created, and used to
+organize and group snapshots.See <a href="https://cloud.google.com/pubsub/docs/labels">Creating and Managing
+Labels</a>.</p>
+
+<p>The returned hash is frozen and changes are not allowed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The frozen labels hash.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/snapshot.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
