@@ -178,10 +178,10 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
         10_001.times do
           logger.add_request_info info: request_info
         end
-        request_info_hash = logger.instance_variable_get :@request_info
-        request_info_hash.size.must_equal 10_000
-        request_info_hash[first_thread_id].must_be_nil
-        request_info_hash[last_thread_id].must_equal request_info
+        request_info_map = logger.instance_variable_get :@request_info_map
+        request_info_map.size.must_equal 10_000
+        request_info_map[first_thread_id].must_be_nil
+        request_info_map[last_thread_id].must_equal request_info
       end
     end
 

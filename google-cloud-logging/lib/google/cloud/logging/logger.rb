@@ -14,6 +14,8 @@
 
 
 require "logger"
+require "monitor"
+require "thread"
 
 module Google
   module Cloud
@@ -51,6 +53,8 @@ module Google
       #   logger.info payload
       #
       class Logger
+        include MonitorMixin
+
         ##
         # A RequestInfo represents data about the request being handled by the
         # current thread. It is used to configure logs coming from that thread.
@@ -121,7 +125,9 @@ module Google
         # @deprecated Use request_info
         #
         def trace_ids
-          @request_info.inject({}) { |r, (k, v)| r[k] = v.trace_id }
+          synchronize do
+            @request_info_map.inject({}) { |r, (k, v)| r[k] = v.trace_id }
+          end
         end
 
         ##
@@ -166,7 +172,7 @@ module Google
           @resource = resource
           @labels = labels || {}
           @level = 0 # DEBUG is the default behavior
-          @request_info = {}
+          @request_info_map = {}
           @closed = false
           # Unused, but present for API compatibility
           @formatter = ::Logger::Formatter.new
@@ -176,6 +182,8 @@ module Google
           # The writer is usually a Project or AsyncWriter.
           logging = @writer.respond_to?(:logging) ? @writer.logging : @writer
           @project = logging.project if logging.respond_to? :project
+
+          super() # to init MonitorMixin
         end
 
         ##
@@ -302,6 +310,8 @@ module Google
         #   called when the logger is configured to show them.
         #
         def add severity, message = nil, progname = nil
+          return if @closed
+
           severity = derive_severity(severity) || ::Logger::UNKNOWN
           return true if severity < @level
 
@@ -448,17 +458,17 @@ module Google
         # @param [Hash, nil] env The request's Rack environment or `nil` if not
         #     available.
         #
-        def add_request_info info: nil,
-                             env: nil,
-                             trace_id: nil,
-                             log_name: nil
+        def add_request_info info: nil, env: nil, trace_id: nil, log_name: nil
           info ||= RequestInfo.new trace_id, log_name, env
-          @request_info[current_thread_id] = info
 
-          # Start removing old entries if hash gets too large.
-          # This should never happen, because middleware should automatically
-          # remove entries when a request is finished
-          @request_info.shift while @request_info.size > 10_000
+          synchronize do
+            @request_info_map[current_thread_id] = info
+
+            # Start removing old entries if hash gets too large.
+            # This should never happen, because middleware should automatically
+            # remove entries when a request is finished
+            @request_info_map.shift while @request_info_map.size > 10_000
+          end
 
           info
         end
@@ -470,7 +480,7 @@ module Google
         #     or `nil` if there is no data set.
         #
         def request_info
-          @request_info[current_thread_id]
+          synchronize { @request_info_map[current_thread_id] }
         end
 
         ##
@@ -479,7 +489,7 @@ module Google
         # @return [RequestInfo] The info that's being deleted
         #
         def delete_request_info
-          @request_info.delete current_thread_id
+          synchronize { @request_info_map.delete current_thread_id }
         end
 
         ##
@@ -552,14 +562,13 @@ module Google
 
           writer.write_entries entry, log_name: actual_log_name,
                                       resource: resource,
-                                      labels: entry_labels
+                                      labels: entry_labels(info)
         end
 
         ##
         # @private generate the labels hash for a log entry.
-        def entry_labels
+        def entry_labels info
           merged_labels = {}
-          info = request_info
 
           if info && !info.trace_id.nil?
             merged_labels["traceId"] = info.trace_id
@@ -568,7 +577,7 @@ module Google
             end
           end
 
-          request_env = info && request_info.env || {}
+          request_env = info && info.env || {}
 
           compute_labels(request_env).merge(merged_labels)
         end
