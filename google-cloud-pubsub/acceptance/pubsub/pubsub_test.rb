@@ -270,6 +270,8 @@ describe Google::Cloud::Pubsub, :pubsub do
 
       snapshot.labels.must_equal labels
       snapshot.labels.must_be :frozen?
+      snapshot.labels = {}
+      snapshot.labels.must_be :empty?
 
       # Remove the subscription
       subscription.delete

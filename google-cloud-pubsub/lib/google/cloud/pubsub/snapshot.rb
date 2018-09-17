@@ -112,16 +112,37 @@ module Google
 
         ##
         # A hash of user-provided labels associated with this snapshot.
-        # Labels can be provided when the snapshot is created, and used to
-        # organize and group snapshots.See [Creating and Managing
-        # Labels](https://cloud.google.com/pubsub/docs/labels).
+        # Labels can be used to organize and group snapshots.See [Creating and
+        # Managing Labels](https://cloud.google.com/pubsub/docs/labels).
         #
-        # The returned hash is frozen and changes are not allowed.
+        # The returned hash is frozen and changes are not allowed. Use
+        # {#labels=} to update the labels for this snapshot.
         #
         # @return [Hash] The frozen labels hash.
         #
         def labels
           @grpc.labels.to_h.freeze
+        end
+
+        ##
+        # Sets the hash of user-provided labels associated with this
+        # snapshot. Labels can be used to organize and group snapshots.
+        # Label keys and values can be no longer than 63 characters, can only
+        # contain lowercase letters, numeric characters, underscores and dashes.
+        # International characters are allowed. Label values are optional. Label
+        # keys must start with a letter and each label in the list must have a
+        # different key. See [Creating and Managing
+        # Labels](https://cloud.google.com/pubsub/docs/labels).
+        #
+        # @param [Hash] new_labels The new labels hash.
+        #
+        def labels= new_labels
+          raise ArgumentError, "Value must be a Hash" if new_labels.nil?
+          labels_map = Google::Protobuf::Map.new(:string, :string)
+          Hash(new_labels).each { |k, v| labels_map[String(k)] = String(v) }
+          update_grpc = @grpc.dup
+          update_grpc.labels = labels_map
+          @grpc = service.update_snapshot update_grpc, :labels
         end
 
         ##

@@ -333,6 +333,14 @@ module Google
           end
         end
 
+        def update_snapshot snapshot_obj, *fields
+          mask = Google::Protobuf::FieldMask.new paths: fields.map(&:to_s)
+          execute do
+            subscriber.update_snapshot \
+              snapshot_obj, mask, options: default_options
+          end
+        end
+
         ##
         # Deletes an existing snapshot.
         # All pending messages in the snapshot are immediately dropped.
