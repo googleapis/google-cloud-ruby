@@ -131,6 +131,14 @@ module Google
           end
         end
 
+        def update_topic topic_obj, *fields
+          mask = Google::Protobuf::FieldMask.new paths: fields.map(&:to_s)
+          execute do
+            publisher.update_topic \
+              topic_obj, mask, options: default_options
+          end
+        end
+
         ##
         # Deletes the topic with the given name. All subscriptions to this topic
         # are also deleted. Raises GRPC status code 5 if the topic does not
@@ -330,6 +338,14 @@ module Google
                                        subscription_path(subscription),
                                        labels: labels,
                                        options: default_options
+          end
+        end
+
+        def update_snapshot snapshot_obj, *fields
+          mask = Google::Protobuf::FieldMask.new paths: fields.map(&:to_s)
+          execute do
+            subscriber.update_snapshot \
+              snapshot_obj, mask, options: default_options
           end
         end
 

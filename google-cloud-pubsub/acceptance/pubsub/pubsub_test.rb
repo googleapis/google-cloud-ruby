@@ -69,13 +69,15 @@ describe Google::Cloud::Pubsub, :pubsub do
       next_topics.token.must_be :nil?
     end
 
-    it "should be created and deleted" do
+    it "should be created, updated and deleted" do
       topic = pubsub.create_topic new_topic_name, labels: labels
       topic.must_be_kind_of Google::Cloud::Pubsub::Topic
       topic = pubsub.topic(topic.name)
       topic.wont_be :nil?
       topic.labels.must_equal labels
       topic.labels.must_be :frozen?
+      topic.labels = {}
+      topic.labels.must_be :empty?
       topic.delete
       pubsub.topic(topic.name).must_be :nil?
     end
@@ -185,6 +187,8 @@ describe Google::Cloud::Pubsub, :pubsub do
       subscription.retention.must_equal 600
       subscription.labels.must_equal labels
       subscription.labels.must_be :frozen?
+      subscription.labels = {}
+      subscription.labels.must_be :empty?
       subscription.delete
     end
 
@@ -268,6 +272,8 @@ describe Google::Cloud::Pubsub, :pubsub do
 
       snapshot.labels.must_equal labels
       snapshot.labels.must_be :frozen?
+      snapshot.labels = {}
+      snapshot.labels.must_be :empty?
 
       # Remove the subscription
       subscription.delete
