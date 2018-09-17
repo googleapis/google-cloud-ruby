@@ -95,7 +95,7 @@ def run_table_operations instance_id, table_id
   # Create a column family with GC policy to drop data that matches at least
   # one condition
   gc_rule = Google::Cloud::Bigtable::GcRule.max_age(60 * 60 * 24 * 5)
-  intersection_gc_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule)
+  intersection_gc_rule = Google::Cloud::Bigtable::GcRule.intersection(gc_rule)
   family = table.column_family("cf4", intersection_gc_rule).create
   # [END bigtable_create_family_gc_intersection]
   puts "==> Created column family: `#{family.name}`"
