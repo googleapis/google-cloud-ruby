@@ -430,7 +430,7 @@ module Google
         # @deprecated Use add_request_info
         #
         def add_trace_id trace_id
-          add_request_id trace_id: trace_id
+          add_request_info trace_id: trace_id
         end
 
         ##
