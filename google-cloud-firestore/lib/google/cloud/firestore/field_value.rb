@@ -163,7 +163,7 @@ module Google
         def self.array_union *values
           # We can flatten the values because arrays don't support sub-arrays
           values.flatten!
-          raise ArgumentError, "values must be provided" if values.nil?
+          raise ArgumentError, "values must be provided" if values.empty?
           # verify the values are the correct types
           Convert.raw_to_value values
 
@@ -196,7 +196,7 @@ module Google
         def self.array_delete *values
           # We can flatten the values because arrays don't support sub-arrays
           values.flatten!
-          raise ArgumentError, "values must be provided" if values.nil?
+          raise ArgumentError, "values must be provided" if values.empty?
           # verify the values are the correct types
           Convert.raw_to_value values
 
