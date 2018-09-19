@@ -85,11 +85,11 @@ namespace :test do
     Rake::Task[:test].invoke
   end
 
-  desc "Runs coveralls report for all gems."
-  task :coveralls do
+  desc "Runs codecov report for all gems."
+  task :codecov do
     require "simplecov"
-    require "coveralls"
-    SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+    require "codecov"
+    SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
     Rake::Task["test:coverage"].invoke
   end
@@ -280,7 +280,7 @@ namespace :circleci do
   desc "Runs post-build logic on CircleCI."
   task :post do
     Rake::Task["docs:build_master"].invoke
-    Rake::Task["test:coveralls"].invoke
+    Rake::Task["test:codecov"].invoke
   end
 
   task :release do
