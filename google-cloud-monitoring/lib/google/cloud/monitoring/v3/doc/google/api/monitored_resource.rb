@@ -82,15 +82,14 @@ module Google
     # Auxiliary metadata for a {Google::Api::MonitoredResource MonitoredResource} object.
     # {Google::Api::MonitoredResource MonitoredResource} objects contain the minimum set of information to
     # uniquely identify a monitored resource instance. There is some other useful
-    # auxiliary metadata. Google Stackdriver Monitoring & Logging uses an ingestion
-    # pipeline to extract metadata for cloud resources of all types , and stores
+    # auxiliary metadata. Monitoring and Logging use an ingestion
+    # pipeline to extract metadata for cloud resources of all types, and store
     # the metadata in this message.
     # @!attribute [rw] system_labels
     #   @return [Google::Protobuf::Struct]
     #     Output only. Values for predefined system metadata labels.
-    #     System labels are a kind of metadata extracted by Google Stackdriver.
-    #     Stackdriver determines what system labels are useful and how to obtain
-    #     their values. Some examples: "machine_image", "vpc", "subnet_id",
+    #     System labels are a kind of metadata extracted by Google, including
+    #     "machine_image", "vpc", "subnet_id",
     #     "security_group", "name", etc.
     #     System label values can be only strings, Boolean values, or a list of
     #     strings. For example:
