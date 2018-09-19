@@ -7,18 +7,18 @@ your application.
 
 Specifically, this gem is a convenience package that loads the following gems:
 
-- [google-cloud-debugger](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger)
-- [google-cloud-error_reporting](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting)
-- [google-cloud-logging](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging)
-- [google-cloud-trace](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-trace)
+- [google-cloud-debugger](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger)
+- [google-cloud-error_reporting](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-error_reporting)
+- [google-cloud-logging](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging)
+- [google-cloud-trace](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace)
 
 On top of that, stackdriver gem automatically activates the following
 instrumentation features:
 
-- [google-cloud-debugger instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.INSTRUMENTATION)
-- [google-cloud-error_reporting strumentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest/file.INSTRUMENTATION)
-- [google-cloud-logging instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/file.INSTRUMENTATION)
-- [google-cloud-trace instrumentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.INSTRUMENTATION)
+- [google-cloud-debugger instrumentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.INSTRUMENTATION)
+- [google-cloud-error_reporting strumentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest/file.INSTRUMENTATION)
+- [google-cloud-logging instrumentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/file.INSTRUMENTATION)
+- [google-cloud-trace instrumentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.INSTRUMENTATION)
 
 ## Usage
 

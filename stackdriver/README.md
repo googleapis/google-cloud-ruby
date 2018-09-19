@@ -126,12 +126,12 @@ and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](http://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CONTRIBUTING)
+Guide](http://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CONTRIBUTING)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](http://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CODE_OF_CONDUCT)
+Conduct](http://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CODE_OF_CONDUCT)
 for more information.
 
 ## License

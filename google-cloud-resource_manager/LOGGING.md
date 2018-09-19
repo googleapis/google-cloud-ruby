@@ -6,7 +6,7 @@ Client](https://github.com/google/google-api-ruby-client/blob/master/README.md#l
 library. The logger that you set may be a Ruby stdlib
 [`Logger`](https://ruby-doc.org/stdlib-2.4.0/libdoc/logger/rdoc/Logger.html) as
 shown below, or a
-[`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger)
+[`Google::Cloud::Logging::Logger`](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger)
 that will write logs to [Stackdriver
 Logging](https://cloud.google.com/logging/).
 

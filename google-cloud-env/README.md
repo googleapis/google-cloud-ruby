@@ -3,7 +3,7 @@
 This library provides information on the application hosting environment for
 apps running on Google Cloud Platform.
 
-- [google-cloud-env API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-env/latest)
+- [google-cloud-env API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-env/latest)
 
 ## Supported Ruby Versions
 
@@ -28,18 +28,18 @@ change at any time and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-env/latest/file.CONTRIBUTING)
+Guide](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-env/latest/file.CONTRIBUTING)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-env/latest/file.CODE_OF_CONDUCT)
+Conduct](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-env/latest/file.CODE_OF_CONDUCT)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-env/latest/file.LICENSE).
+[LICENSE](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-env/latest/file.LICENSE).
 
 ## Support
 

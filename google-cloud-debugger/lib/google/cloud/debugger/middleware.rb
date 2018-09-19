@@ -99,7 +99,7 @@ module Google
         #   using the other parameters.
         # @param [Hash] kwargs Hash of configuration settings. Used for backward
         #   API compatibility. See the [Configuration
-        #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+        #   Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
         #   for the prefered way to set configuration parameters.
         #
         # @return [Google::Cloud::Debugger::Middleware] A new

@@ -2,7 +2,7 @@
 
 [Google Cloud Vision](https://cloud.google.com/vision/) ([docs](https://cloud.google.com/vision/docs)) allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
 
-- [google-cloud-vision API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-vision/latest)
+- [google-cloud-vision API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-vision/latest)
 - [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
 - [Google Cloud Vision documentation](https://cloud.google.com/vision/docs)
 
@@ -16,7 +16,7 @@ $ gem install google-cloud-vision
 
 This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
 
-Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-vision/latest/file.AUTHENTICATION).
+Instructions and configuration options are covered in the [Authentication Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-vision/latest/file.AUTHENTICATION).
 
 ## Example
 
@@ -33,7 +33,7 @@ landmark.description #=> "Mount Rushmore"
 
 ## Enabling Logging
 
-To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 
 Configuring a Ruby stdlib logger:
 
@@ -76,18 +76,18 @@ change at any time and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-vision/latest/file.CONTRIBUTING)
+Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-vision/latest/file.CONTRIBUTING)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-vision/latest/file.CODE_OF_CONDUCT)
+Conduct](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-vision/latest/file.CODE_OF_CONDUCT)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-vision/latest/file.LICENSE).
+[LICENSE](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-vision/latest/file.LICENSE).
 
 ## Support
 

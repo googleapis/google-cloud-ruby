@@ -118,7 +118,7 @@ module Google
         # @param [Hash] kwargs Hash of configuration settings. Used for backward
         #   API compatibility. See the {file:INSTRUMENTATION.md Instrumentation
         #   Guide} and [Configuration
-        #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+        #   Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
         #   for the prefered way to set configuration parameters.
         #
         def initialize app, service: nil, **kwargs

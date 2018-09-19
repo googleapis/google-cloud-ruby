@@ -46,7 +46,7 @@ module Google
       #
       # See the {file:INSTRUMENTATION.md Instrumentation Guide} and
       # [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+      # Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
       # on how to configure the Railtie and Middleware.
       #
       # ## Measuring custom functionality
