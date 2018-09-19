@@ -2,7 +2,7 @@
 
 [Google Cloud DNS](https://cloud.google.com/dns/) ([docs](https://cloud.google.com/dns/docs)) is a high-performance, resilient, global DNS service that provides a cost-effective way to make your applications and services available to your users. This programmable, authoritative DNS service can be used to easily publish and manage DNS records using the same infrastructure relied upon by Google. To learn more, read [What is Google Cloud DNS?](https://cloud.google.com/dns/what-is-cloud-dns).
 
-- [google-cloud-dns API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-dns/latest)
+- [google-cloud-dns API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-dns/latest)
 - [google-cloud-dns on RubyGems](https://rubygems.org/gems/google-cloud-dns)
 - [Google Cloud DNS documentation](https://cloud.google.com/dns/docs)
 

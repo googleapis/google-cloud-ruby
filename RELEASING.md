@@ -121,7 +121,7 @@ green, you may create a release as follows:
 
 17. Confirm that the new version is displayed on the [google-cloud-ruby gh-pages
     doc
-    site](https://http://googleapis.github.io/google-cloud-ruby/docs/).
+    site](https://https://googleapis.github.io/google-cloud-ruby/docs/).
 
     If the gh-pages doc site has not been updated, inspect the build logs to
     confirm that the release task completed successfully, and that the docs

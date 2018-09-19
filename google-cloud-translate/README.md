@@ -4,7 +4,7 @@
 
 Translation API supports more than one hundred different languages, from Afrikaans to Zulu. Used in combination, this enables translation between thousands of language pairs. Also, you can send in HTML and receive HTML with translated text back. You don't need to extract your source text or reassemble the translated content.
 
-- [google-cloud-translate API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-translate/latest)
+- [google-cloud-translate API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-translate/latest)
 - [google-cloud-translate on RubyGems](https://rubygems.org/gems/google-cloud-translate)
 - [Google Cloud Translation API documentation](https://cloud.google.com/translation/docs)
 

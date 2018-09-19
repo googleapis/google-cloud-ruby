@@ -2,7 +2,7 @@
 
 [Stackdriver Logging](https://cloud.google.com/logging/) ([docs](https://cloud.google.com/logging/docs/)) allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud Platform and Amazon Web Services (AWS). It supports ingestion of any custom log data from any source. Stackdriver Logging is a fully-managed service that performs at scale and can ingest application and system log data from thousands of VMs. Even better, you can analyze all that log data in real-time.
 
-- [google-cloud-logging API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest)
+- [google-cloud-logging API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest)
 - [google-cloud-logging on RubyGems](https://rubygems.org/gems/google-cloud-logging)
 - [Stackdriver Logging documentation](https://cloud.google.com/logging/docs/)
 

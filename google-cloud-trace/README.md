@@ -8,7 +8,7 @@ Stackdriver Trace automatically analyzes all of your application's traces to
 generate in-depth latency reports to surface performance degradations, and can
 capture traces from all of your VMs, containers, or Google App Engine projects.
 
-- [google-cloud-trace API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest)
+- [google-cloud-trace API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest)
 - [google-cloud-trace instrumentation documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-trace/latest/file.INSTRUMENTATION)
 - [google-cloud-trace on RubyGems](https://rubygems.org/gems/google-cloud-trace)
 - [Stackdriver Trace documentation](https://cloud.google.com/trace/docs/)

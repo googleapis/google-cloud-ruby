@@ -8,7 +8,7 @@ your application, including test, development, and production. The Ruby
 debugger adds minimal request latency, typically less than 50ms, and only when
 application state is captured. In most cases, this is not noticeable by users.
 
-- [google-cloud-debugger documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest)
+- [google-cloud-debugger documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest)
 - [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
 - [Stackdriver Debugger documentation](https://cloud.google.com/debugger/docs/)
 

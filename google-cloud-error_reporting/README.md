@@ -7,7 +7,7 @@ filtering capabilities. A dedicated view shows the error details: time chart,
 occurrences, affected user count, first and last seen dates and a cleaned
 exception stack trace. Opt-in to receive email and mobile alerts on new errors.
 
-- [google-cloud-error_reporting API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest)
+- [google-cloud-error_reporting API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest)
 - [google-cloud-error_reporting instrumentation documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest/file.INSTRUMENTATION)
 - [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
 - [Stackdriver ErrorReporting documentation](https://cloud.google.com/error-reporting/docs/)
@@ -35,7 +35,7 @@ $ bundle install
 ```
 
 Alternatively, check out the
-[`stackdriver`](http://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest)
+[`stackdriver`](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest)
 gem that includes the `google-cloud-error_reporting` gem.
 
 ## Enable Stackdriver Error Reporting API
@@ -92,7 +92,7 @@ end
 
 You can customize the behavior of the Stackdriver Error Reporting library for
 Ruby. See the [configuration
-guide](http://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
 for a list of possible configuration options.
 
 ## Running on Google Cloud Platform

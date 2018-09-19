@@ -9,7 +9,7 @@ repository](https://github.com/googleapis/google-cloud-ruby) for more
 information about using the `google-cloud` umbrella gem and the individual
 service gems.
 
-- [gcloud API documentation](http://googleapis.github.io/google-cloud-ruby/docs/gcloud/latest)
+- [gcloud API documentation](https://googleapis.github.io/google-cloud-ruby/docs/gcloud/latest)
 - [gcloud on RubyGems](https://rubygems.org/gems/gcloud)
 
 ## Quick Start

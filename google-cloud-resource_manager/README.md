@@ -9,7 +9,7 @@ programmatically manage  container resources such as Organizations and Projects,
 * Delete projects
 * Undelete, or recover, projects that you don't want to delete
 
-- [google-cloud-resource_manager API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-resource_manager/latest)
+- [google-cloud-resource_manager API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-resource_manager/latest)
 - [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
 - [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
 

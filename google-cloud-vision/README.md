@@ -2,7 +2,7 @@
 
 [Google Cloud Vision](https://cloud.google.com/vision/) ([docs](https://cloud.google.com/vision/docs)) allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
 
-- [google-cloud-vision API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-vision/latest)
+- [google-cloud-vision API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-vision/latest)
 - [google-cloud-vision on RubyGems](https://rubygems.org/gems/google-cloud-vision)
 - [Google Cloud Vision documentation](https://cloud.google.com/vision/docs)
 

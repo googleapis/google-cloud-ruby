@@ -7,7 +7,7 @@ Because there are now so many google-cloud-* gems, instead of using this gem in
 your production application, we encourage you to directly require only the
 individual google-cloud-* gems that you need.
 
-- [google-cloud API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud/latest)
+- [google-cloud API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud/latest)
 - [google-cloud on RubyGems](https://rubygems.org/gems/google-cloud)
 
 ## List of dependencies

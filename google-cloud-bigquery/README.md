@@ -2,7 +2,7 @@
 
 [Google BigQuery](https://cloud.google.com/bigquery/) ([docs](https://cloud.google.com/bigquery/docs)) enables super-fast, SQL-like queries against append-only tables, using the processing power of Google's infrastructure. Simply move your data into BigQuery and let it handle the hard work. You can control access to both the project and your data based on your business needs, such as giving others the ability to view or query your data.
 
-- [google-cloud-bigquery API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-bigquery/latest)
+- [google-cloud-bigquery API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-bigquery/latest)
 - [google-cloud-bigquery on RubyGems](https://rubygems.org/gems/google-cloud-bigquery)
 - [Google BigQuery documentation](https://cloud.google.com/bigquery/docs)
 

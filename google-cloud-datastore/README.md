@@ -4,7 +4,7 @@
 
 Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.
 
-- [google-cloud-datastore API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-datastore/latest)
+- [google-cloud-datastore API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-datastore/latest)
 - [google-cloud-datastore on RubyGems](https://rubygems.org/gems/google-cloud-datastore)
 - [Google Cloud Datastore documentation](https://cloud.google.com/datastore/docs)
 
