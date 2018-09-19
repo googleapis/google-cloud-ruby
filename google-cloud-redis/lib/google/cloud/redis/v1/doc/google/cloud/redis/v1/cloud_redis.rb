@@ -256,7 +256,7 @@ module Google
         #     Operation status details.
         # @!attribute [rw] cancel_requested
         #   @return [true, false]
-        #     Specifies if cancellation was requested for the operaiton.
+        #     Specifies if cancellation was requested for the operation.
         # @!attribute [rw] api_version
         #   @return [String]
         #     API version.
