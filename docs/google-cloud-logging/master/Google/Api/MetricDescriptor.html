@@ -107,6 +107,8 @@ existing data unusable.</p>
     
   
     
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span>
+    
   
 </p>
 
@@ -189,6 +191,32 @@ existing data unusable.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>The set of labels that can be used to describe a specific instance of this metric type.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#metadata-instance_method" title="#metadata (instance method)">#<strong>metadata</strong>  &#x21d2; Google::Api::MetricDescriptor::MetricDescriptorMetadata </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
 </div></span>
   
 </li>
@@ -377,10 +405,6 @@ existing data unusable.</p>
       <pre class="lines">
 
 
-125
-126
-127
-128
 129
 130
 131
@@ -422,12 +446,50 @@ existing data unusable.</p>
 167
 168
 169
-170</pre>
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 129</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># Additional annotations that can be used to guide the usage of a metric.
+</span>  <span class='comment'># @!attribute [rw] launch_stage
+</span>  <span class='comment'>#   @return [Google::Api::LaunchStage]
+</span>  <span class='comment'>#     The launch stage of the metric definition.
+</span>  <span class='comment'># @!attribute [rw] sample_period
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The sampling period of metric data points. For metrics which are written
+</span>  <span class='comment'>#     periodically, consecutive data points are stored at this time interval,
+</span>  <span class='comment'>#     excluding data loss due to errors. Metrics with a higher granularity have
+</span>  <span class='comment'>#     a smaller sampling period.
+</span>  <span class='comment'># @!attribute [rw] ingest_delay
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The delay of data points caused by ingestion. Data points older than this
+</span>  <span class='comment'>#     age are guaranteed to be ingested and available to be read, excluding
+</span>  <span class='comment'>#     data loss due to errors.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># The kind of measurement. It describes how the data is reported.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
     <span class='comment'># Do not use this default value.
@@ -528,10 +590,6 @@ associated with user-visible concepts, such as Quota.</p>
       <pre class="lines">
 
 
-125
-126
-127
-128
 129
 130
 131
@@ -573,12 +631,50 @@ associated with user-visible concepts, such as Quota.</p>
 167
 168
 169
-170</pre>
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 129</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># Additional annotations that can be used to guide the usage of a metric.
+</span>  <span class='comment'># @!attribute [rw] launch_stage
+</span>  <span class='comment'>#   @return [Google::Api::LaunchStage]
+</span>  <span class='comment'>#     The launch stage of the metric definition.
+</span>  <span class='comment'># @!attribute [rw] sample_period
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The sampling period of metric data points. For metrics which are written
+</span>  <span class='comment'>#     periodically, consecutive data points are stored at this time interval,
+</span>  <span class='comment'>#     excluding data loss due to errors. Metrics with a higher granularity have
+</span>  <span class='comment'>#     a smaller sampling period.
+</span>  <span class='comment'># @!attribute [rw] ingest_delay
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The delay of data points caused by ingestion. Data points older than this
+</span>  <span class='comment'>#     age are guaranteed to be ingested and available to be read, excluding
+</span>  <span class='comment'>#     data loss due to errors.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># The kind of measurement. It describes how the data is reported.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
     <span class='comment'># Do not use this default value.
@@ -683,10 +779,6 @@ for responses that failed.</p>
       <pre class="lines">
 
 
-125
-126
-127
-128
 129
 130
 131
@@ -728,12 +820,229 @@ for responses that failed.</p>
 167
 168
 169
-170</pre>
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 129</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># Additional annotations that can be used to guide the usage of a metric.
+</span>  <span class='comment'># @!attribute [rw] launch_stage
+</span>  <span class='comment'>#   @return [Google::Api::LaunchStage]
+</span>  <span class='comment'>#     The launch stage of the metric definition.
+</span>  <span class='comment'># @!attribute [rw] sample_period
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The sampling period of metric data points. For metrics which are written
+</span>  <span class='comment'>#     periodically, consecutive data points are stored at this time interval,
+</span>  <span class='comment'>#     excluding data loss due to errors. Metrics with a higher granularity have
+</span>  <span class='comment'>#     a smaller sampling period.
+</span>  <span class='comment'># @!attribute [rw] ingest_delay
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The delay of data points caused by ingestion. Data points older than this
+</span>  <span class='comment'>#     age are guaranteed to be ingested and available to be read, excluding
+</span>  <span class='comment'>#     data loss due to errors.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># The kind of measurement. It describes how the data is reported.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>METRIC_KIND_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># An instantaneous measurement of a value.
+</span>    <span class='const'>GAUGE</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The change in a value during a time interval.
+</span>    <span class='const'>DELTA</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A value accumulated over a time interval.  Cumulative
+</span>    <span class='comment'># measurements in a time series should have the same start time
+</span>    <span class='comment'># and increasing end times, until an event resets the cumulative
+</span>    <span class='comment'># value to zero and sets a new start time for the following
+</span>    <span class='comment'># points.
+</span>    <span class='const'>CUMULATIVE</span> <span class='op'>=</span> <span class='int'>3</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The value type of a metric.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/ValueType.html" title="Google::Api::MetricDescriptor::ValueType (module)">ValueType</a></span></span>
+    <span class='comment'># Do not use this default value.
+</span>    <span class='const'>VALUE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The value is a boolean.
+</span>    <span class='comment'># This value type can be used only if the metric kind is `GAUGE`.
+</span>    <span class='const'>BOOL</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The value is a signed 64-bit integer.
+</span>    <span class='const'>INT64</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The value is a double precision floating point number.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The value is a text string.
+</span>    <span class='comment'># This value type can be used only if the metric kind is `GAUGE`.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The value is a {Google::Api::Distribution `Distribution`}.
+</span>    <span class='const'>DISTRIBUTION</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The value is money.
+</span>    <span class='const'>MONEY</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="metadata=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="metadata-instance_method">
+  
+    #<strong>metadata</strong>  &#x21d2; <tt><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">Google::Api::MetricDescriptor::MetricDescriptorMetadata</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Metadata which can be used to guide usage of the metric.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">Google::Api::MetricDescriptor::MetricDescriptorMetadata</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Metadata which can be used to guide usage of the metric.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># Additional annotations that can be used to guide the usage of a metric.
+</span>  <span class='comment'># @!attribute [rw] launch_stage
+</span>  <span class='comment'>#   @return [Google::Api::LaunchStage]
+</span>  <span class='comment'>#     The launch stage of the metric definition.
+</span>  <span class='comment'># @!attribute [rw] sample_period
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The sampling period of metric data points. For metrics which are written
+</span>  <span class='comment'>#     periodically, consecutive data points are stored at this time interval,
+</span>  <span class='comment'>#     excluding data loss due to errors. Metrics with a higher granularity have
+</span>  <span class='comment'>#     a smaller sampling period.
+</span>  <span class='comment'># @!attribute [rw] ingest_delay
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The delay of data points caused by ingestion. Data points older than this
+</span>  <span class='comment'>#     age are guaranteed to be ingested and available to be read, excluding
+</span>  <span class='comment'>#     data loss due to errors.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># The kind of measurement. It describes how the data is reported.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
     <span class='comment'># Do not use this default value.
@@ -830,10 +1139,6 @@ Some combinations of <code>metric_kind</code> and <code>value_type</code> might 
       <pre class="lines">
 
 
-125
-126
-127
-128
 129
 130
 131
@@ -875,12 +1180,50 @@ Some combinations of <code>metric_kind</code> and <code>value_type</code> might 
 167
 168
 169
-170</pre>
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 129</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># Additional annotations that can be used to guide the usage of a metric.
+</span>  <span class='comment'># @!attribute [rw] launch_stage
+</span>  <span class='comment'>#   @return [Google::Api::LaunchStage]
+</span>  <span class='comment'>#     The launch stage of the metric definition.
+</span>  <span class='comment'># @!attribute [rw] sample_period
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The sampling period of metric data points. For metrics which are written
+</span>  <span class='comment'>#     periodically, consecutive data points are stored at this time interval,
+</span>  <span class='comment'>#     excluding data loss due to errors. Metrics with a higher granularity have
+</span>  <span class='comment'>#     a smaller sampling period.
+</span>  <span class='comment'># @!attribute [rw] ingest_delay
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The delay of data points caused by ingestion. Data points older than this
+</span>  <span class='comment'>#     age are guaranteed to be ingested and available to be read, excluding
+</span>  <span class='comment'>#     data loss due to errors.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># The kind of measurement. It describes how the data is reported.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
     <span class='comment'># Do not use this default value.
@@ -975,10 +1318,6 @@ Some combinations of <code>metric_kind</code> and <code>value_type</code> might 
       <pre class="lines">
 
 
-125
-126
-127
-128
 129
 130
 131
@@ -1020,12 +1359,50 @@ Some combinations of <code>metric_kind</code> and <code>value_type</code> might 
 167
 168
 169
-170</pre>
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 129</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># Additional annotations that can be used to guide the usage of a metric.
+</span>  <span class='comment'># @!attribute [rw] launch_stage
+</span>  <span class='comment'>#   @return [Google::Api::LaunchStage]
+</span>  <span class='comment'>#     The launch stage of the metric definition.
+</span>  <span class='comment'># @!attribute [rw] sample_period
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The sampling period of metric data points. For metrics which are written
+</span>  <span class='comment'>#     periodically, consecutive data points are stored at this time interval,
+</span>  <span class='comment'>#     excluding data loss due to errors. Metrics with a higher granularity have
+</span>  <span class='comment'>#     a smaller sampling period.
+</span>  <span class='comment'># @!attribute [rw] ingest_delay
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The delay of data points caused by ingestion. Data points older than this
+</span>  <span class='comment'>#     age are guaranteed to be ingested and available to be read, excluding
+</span>  <span class='comment'>#     data loss due to errors.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># The kind of measurement. It describes how the data is reported.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
     <span class='comment'># Do not use this default value.
@@ -1090,11 +1467,12 @@ Some combinations of <code>metric_kind</code> and <code>value_type</code> might 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The metric type, including its DNS name prefix. The type is not
-URL-encoded.  All user-defined custom metric types have the DNS name
-<code>custom.googleapis.com</code>.  Metric types should use a natural hierarchical
-grouping. For example:</p>
+URL-encoded.  All user-defined metric types have the DNS name
+<code>custom.googleapis.com</code> or <code>external.googleapis.com</code>.  Metric types should
+use a natural hierarchical grouping. For example:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>custom.googleapis.com/invoice/paid/amount</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>external.googleapis.com/prometheus/up</span><span class='tstring_end'>&quot;</span></span>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>appengine.googleapis.com/http/server/response_latencies</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
@@ -1115,11 +1493,12 @@ grouping. For example:</p>
       
         &mdash;
         <div class='inline'><p>The metric type, including its DNS name prefix. The type is not
-URL-encoded.  All user-defined custom metric types have the DNS name
-<code>custom.googleapis.com</code>.  Metric types should use a natural hierarchical
-grouping. For example:</p>
+URL-encoded.  All user-defined metric types have the DNS name
+<code>custom.googleapis.com</code> or <code>external.googleapis.com</code>.  Metric types should
+use a natural hierarchical grouping. For example:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>custom.googleapis.com/invoice/paid/amount</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>external.googleapis.com/prometheus/up</span><span class='tstring_end'>&quot;</span></span>
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>appengine.googleapis.com/http/server/response_latencies</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 </div>
@@ -1134,10 +1513,6 @@ grouping. For example:</p>
       <pre class="lines">
 
 
-125
-126
-127
-128
 129
 130
 131
@@ -1179,12 +1554,50 @@ grouping. For example:</p>
 167
 168
 169
-170</pre>
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 129</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># Additional annotations that can be used to guide the usage of a metric.
+</span>  <span class='comment'># @!attribute [rw] launch_stage
+</span>  <span class='comment'>#   @return [Google::Api::LaunchStage]
+</span>  <span class='comment'>#     The launch stage of the metric definition.
+</span>  <span class='comment'># @!attribute [rw] sample_period
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The sampling period of metric data points. For metrics which are written
+</span>  <span class='comment'>#     periodically, consecutive data points are stored at this time interval,
+</span>  <span class='comment'>#     excluding data loss due to errors. Metrics with a higher granularity have
+</span>  <span class='comment'>#     a smaller sampling period.
+</span>  <span class='comment'># @!attribute [rw] ingest_delay
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The delay of data points caused by ingestion. Data points older than this
+</span>  <span class='comment'>#     age are guaranteed to be ingested and available to be read, excluding
+</span>  <span class='comment'>#     data loss due to errors.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># The kind of measurement. It describes how the data is reported.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
     <span class='comment'># Do not use this default value.
@@ -1425,10 +1838,6 @@ a percentage.</li>
       <pre class="lines">
 
 
-125
-126
-127
-128
 129
 130
 131
@@ -1470,12 +1879,50 @@ a percentage.</li>
 167
 168
 169
-170</pre>
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 129</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># Additional annotations that can be used to guide the usage of a metric.
+</span>  <span class='comment'># @!attribute [rw] launch_stage
+</span>  <span class='comment'>#   @return [Google::Api::LaunchStage]
+</span>  <span class='comment'>#     The launch stage of the metric definition.
+</span>  <span class='comment'># @!attribute [rw] sample_period
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The sampling period of metric data points. For metrics which are written
+</span>  <span class='comment'>#     periodically, consecutive data points are stored at this time interval,
+</span>  <span class='comment'>#     excluding data loss due to errors. Metrics with a higher granularity have
+</span>  <span class='comment'>#     a smaller sampling period.
+</span>  <span class='comment'># @!attribute [rw] ingest_delay
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The delay of data points caused by ingestion. Data points older than this
+</span>  <span class='comment'>#     age are guaranteed to be ingested and available to be read, excluding
+</span>  <span class='comment'>#     data loss due to errors.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># The kind of measurement. It describes how the data is reported.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
     <span class='comment'># Do not use this default value.
@@ -1572,10 +2019,6 @@ Some combinations of <code>metric_kind</code> and <code>value_type</code> might 
       <pre class="lines">
 
 
-125
-126
-127
-128
 129
 130
 131
@@ -1617,12 +2060,50 @@ Some combinations of <code>metric_kind</code> and <code>value_type</code> might 
 167
 168
 169
-170</pre>
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/metric.rb', line 129</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::MetricDescriptor (class)">MetricDescriptor</a></span></span>
+  <span class='comment'># Additional annotations that can be used to guide the usage of a metric.
+</span>  <span class='comment'># @!attribute [rw] launch_stage
+</span>  <span class='comment'>#   @return [Google::Api::LaunchStage]
+</span>  <span class='comment'>#     The launch stage of the metric definition.
+</span>  <span class='comment'># @!attribute [rw] sample_period
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The sampling period of metric data points. For metrics which are written
+</span>  <span class='comment'>#     periodically, consecutive data points are stored at this time interval,
+</span>  <span class='comment'>#     excluding data loss due to errors. Metrics with a higher granularity have
+</span>  <span class='comment'>#     a smaller sampling period.
+</span>  <span class='comment'># @!attribute [rw] ingest_delay
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     The delay of data points caused by ingestion. Data points older than this
+</span>  <span class='comment'>#     age are guaranteed to be ingested and available to be read, excluding
+</span>  <span class='comment'>#     data loss due to errors.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricDescriptorMetadata.html" title="Google::Api::MetricDescriptor::MetricDescriptorMetadata (class)">MetricDescriptorMetadata</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
   <span class='comment'># The kind of measurement. It describes how the data is reported.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="MetricDescriptor/MetricKind.html" title="Google::Api::MetricDescriptor::MetricKind (module)">MetricKind</a></span></span>
     <span class='comment'># Do not use this default value.
