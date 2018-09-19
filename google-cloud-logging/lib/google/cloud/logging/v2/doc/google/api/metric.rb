@@ -24,11 +24,12 @@ module Google
     # @!attribute [rw] type
     #   @return [String]
     #     The metric type, including its DNS name prefix. The type is not
-    #     URL-encoded.  All user-defined custom metric types have the DNS name
-    #     `custom.googleapis.com`.  Metric types should use a natural hierarchical
-    #     grouping. For example:
+    #     URL-encoded.  All user-defined metric types have the DNS name
+    #     `custom.googleapis.com` or `external.googleapis.com`.  Metric types should
+    #     use a natural hierarchical grouping. For example:
     #
     #         "custom.googleapis.com/invoice/paid/amount"
+    #         "external.googleapis.com/prometheus/up"
     #         "appengine.googleapis.com/http/server/response_latencies"
     # @!attribute [rw] labels
     #   @return [Array<Google::Api::LabelDescriptor>]
@@ -122,7 +123,27 @@ module Google
     #     Use sentence case without an ending period, for example "Request count".
     #     This field is optional but it is recommended to be set for any metrics
     #     associated with user-visible concepts, such as Quota.
+    # @!attribute [rw] metadata
+    #   @return [Google::Api::MetricDescriptor::MetricDescriptorMetadata]
+    #     Optional. Metadata which can be used to guide usage of the metric.
     class MetricDescriptor
+      # Additional annotations that can be used to guide the usage of a metric.
+      # @!attribute [rw] launch_stage
+      #   @return [Google::Api::LaunchStage]
+      #     The launch stage of the metric definition.
+      # @!attribute [rw] sample_period
+      #   @return [Google::Protobuf::Duration]
+      #     The sampling period of metric data points. For metrics which are written
+      #     periodically, consecutive data points are stored at this time interval,
+      #     excluding data loss due to errors. Metrics with a higher granularity have
+      #     a smaller sampling period.
+      # @!attribute [rw] ingest_delay
+      #   @return [Google::Protobuf::Duration]
+      #     The delay of data points caused by ingestion. Data points older than this
+      #     age are guaranteed to be ingested and available to be read, excluding
+      #     data loss due to errors.
+      class MetricDescriptorMetadata; end
+
       # The kind of measurement. It describes how the data is reported.
       module MetricKind
         # Do not use this default value.
