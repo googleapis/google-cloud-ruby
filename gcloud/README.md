@@ -5,7 +5,7 @@
 The current `gcloud` gem exists only to facilitate the timely transition of
 legacy code from the deprecated `Gcloud` namespace to the new `Google::Cloud`
 namespace. Please see the [GitHub
-repository](https://github.com/GoogleCloudPlatform/google-cloud-ruby) for more
+repository](https://github.com/googleapis/google-cloud-ruby) for more
 information about using the `google-cloud` umbrella gem and the individual
 service gems.
 
@@ -76,7 +76,7 @@ This library is licensed under Apache 2.0. Full license text is available in
 ## Support
 
 Please [report bugs at the project on
-Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues). Don't
+Github](https://github.com/googleapis/google-cloud-ruby/issues). Don't
 hesitate to [ask
 questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
 about the client or APIs on [StackOverflow](http://stackoverflow.com).

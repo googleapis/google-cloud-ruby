@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["dazuma@google.com"]
   gem.description   = "google-cloud-env provides information on the Google Cloud Platform hosting environment. Applications can use this library to determine hosting context information such as the project ID, whether App Engine is running, what tags are set on the VM instance, and much more."
   gem.summary       = "Google Cloud Platform hosting environment information."
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-env"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-env"
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +

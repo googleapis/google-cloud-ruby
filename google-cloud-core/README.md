@@ -2,7 +2,7 @@
 
 This library contains shared types, such as error classes, for the google-cloud
 project. Please see the [GitHub
-repository](https://github.com/GoogleCloudPlatform/google-cloud-ruby) for more
+repository](https://github.com/googleapis/google-cloud-ruby) for more
 information about the individual google-cloud gems.
 
 - [google-cloud-core API documentation](http://googleapis.github.io/google-cloud-ruby/docs/google-cloud-core/latest)
@@ -46,7 +46,7 @@ This library is licensed under Apache 2.0. Full license text is available in
 ## Support
 
 Please [report bugs at the project on
-Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues). Don't
+Github](https://github.com/googleapis/google-cloud-ruby/issues). Don't
 hesitate to [ask
 questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
 about the client or APIs on [StackOverflow](http://stackoverflow.com).

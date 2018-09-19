@@ -1,6 +1,6 @@
 # Cloud Bigtable
 
-Ruby Client for Cloud Bigtable API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+Ruby Client for Cloud Bigtable API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
 
 [Cloud Bigtable API][Product Documentation]:
 API for reading and writing the contents of Bigtables associated with a
@@ -19,7 +19,7 @@ steps:
 ### Next Steps
 - Read the [Cloud Bigtable API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
 ## Additional information

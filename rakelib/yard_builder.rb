@@ -79,7 +79,7 @@ class YardBuilder
     if case_insensitive_fs?
       puts "You are running on a case-insensitive file system."
       puts "Documentation built on this file system may be incorrect."
-      puts "https://github.com/GoogleCloudPlatform/google-cloud-ruby/wiki/Working-with-documentation-on-a-case-insensitive-file-system"
+      puts "https://github.com/googleapis/google-cloud-ruby/wiki/Working-with-documentation-on-a-case-insensitive-file-system"
       puts "Are you sure you want to continue? [y/N]"
       answer = STDIN.gets.strip.downcase
       return true if answer != "y"
@@ -273,7 +273,7 @@ class YardBuilder
       "https://#{ENV["GH_OAUTH_TOKEN"]}@github.com/#{ENV["GH_OWNER"]}/#{ENV["GH_PROJECT_NAME"]}"
     else
       # default repo, uses local auth, for developers
-      "git@github.com:GoogleCloudPlatform/google-cloud-ruby.git"
+      "git@github.com:googleapis/google-cloud-ruby.git"
     end
   end
 

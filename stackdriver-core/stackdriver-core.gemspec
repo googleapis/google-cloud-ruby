@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["dazuma@google.com"]
   gem.description   = "stackdriver-core is an internal shared library for the Ruby Stackdriver integration libraries."
   gem.summary       = "Internal shared library for Ruby Stackdriver integration"
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/stackdriver-core"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/stackdriver-core"
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +

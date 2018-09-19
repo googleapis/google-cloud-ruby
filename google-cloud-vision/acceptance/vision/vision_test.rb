@@ -23,7 +23,7 @@ describe "Vision", :vision do
   let(:landmark_image) { "acceptance/data/landmark.jpg" }
   let(:text_image)     { "acceptance/data/text.png" }
 
-  let(:https_url)  { "https://raw.githubusercontent.com/GoogleCloudPlatform/google-cloud-ruby/master/acceptance/data/face.jpg" }
+  let(:https_url)  { "https://raw.githubusercontent.com/googleapis/google-cloud-ruby/master/acceptance/data/face.jpg" }
 
   let(:bucket)   { storage.bucket($vision_prefix) || safe_gcs_execute { storage.create_bucket($vision_prefix) } }
   let(:gcs_file) { bucket.file(face_image) || bucket.create_file(face_image) }

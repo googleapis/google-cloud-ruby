@@ -32,7 +32,7 @@ breakpoints are managed by a shared Breakpoint Manager object and they are
 traced by using using Ruby VM Tracing API at C level.
 
 ![google-cloud-debugger agent
-design](https://raw.githubusercontent.com/GoogleCloudPlatform/google-cloud-ruby/master/google-cloud-debugger/graphics/agent-design.svg "Debugger Agent Design")
+design](https://raw.githubusercontent.com/googleapis/google-cloud-ruby/master/google-cloud-debugger/graphics/agent-design.svg "Debugger Agent Design")
 
 ## Agent Components
 
@@ -209,7 +209,7 @@ The following diagram illustrates how file TracePoint, return TracePoint,
 and line tracing work together in a basic interleaving situation:
 
 ![google-cloud-debugger tracer
-flow](https://raw.githubusercontent.com/GoogleCloudPlatform/google-cloud-ruby/master/google-cloud-debugger/graphics/tracer.svg "Debugger Tracer Flow Diagram")
+flow](https://raw.githubusercontent.com/googleapis/google-cloud-ruby/master/google-cloud-debugger/graphics/tracer.svg "Debugger Tracer Flow Diagram")
 
 In this figure, the breakpoint is set on breakpoint.rb, line 3. The File
 TracePoint is responsible for turning on/off the line TracePoint and return

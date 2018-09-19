@@ -1,4 +1,4 @@
-# Ruby Client for Cloud Speech API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Speech API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
 
 [Cloud Speech API][Product Documentation]:
 Converts audio to text by applying powerful neural network models.
@@ -50,7 +50,7 @@ response = speech_client.recognize(config, audio)
   to see other available methods on the client.
 - Read the [Cloud Speech API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-speech/latest/google/cloud/speech/v1

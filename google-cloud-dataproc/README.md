@@ -1,4 +1,4 @@
-# Ruby Client for Google Cloud Dataproc API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+# Ruby Client for Google Cloud Dataproc API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
 
 [Google Cloud Dataproc API][Product Documentation]:
 Manages Hadoop-based clusters and jobs on Google Cloud Platform.
@@ -47,7 +47,7 @@ end
   to see other available methods on the client.
 - Read the [Google Cloud Dataproc API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest/google/cloud/dataproc/v1

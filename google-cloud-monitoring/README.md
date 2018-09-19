@@ -1,4 +1,4 @@
-# Ruby Client for Stackdriver Monitoring API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+# Ruby Client for Stackdriver Monitoring API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
 
 [Stackdriver Monitoring API][Product Documentation]:
 Manages your Stackdriver Monitoring data and configurations. Most projects
@@ -48,7 +48,7 @@ end
   to see other available methods on the client.
 - Read the [Stackdriver Monitoring API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3

@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["mike@blowmage.com", "quartzmo@gmail.com"]
   gem.description   = "google-cloud-spanner is the official library for Google Cloud Spanner API."
   gem.summary       = "API Client library for Google Cloud Spanner API"
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-spanner"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner"
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +

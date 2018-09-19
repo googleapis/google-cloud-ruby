@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "google-cloud-bigquery-data_transfer is the official library for BigQuery Data Transfer API."
   gem.summary       = "API Client library for BigQuery Data Transfer API"
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-bigquery-data_transfer"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-bigquery-data_transfer"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY

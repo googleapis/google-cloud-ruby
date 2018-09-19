@@ -21,7 +21,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Natural Language API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Google Cloud Natural Language API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
     #
     # [Google Cloud Natural Language API][Product Documentation]:
     # Google Cloud Natural Language API provides natural language understanding
@@ -58,7 +58,7 @@ module Google
     # ### Next Steps
     # - Read the [Google Cloud Natural Language API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+    # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
     #
     # [Product Documentation]: https://cloud.google.com/natural-language

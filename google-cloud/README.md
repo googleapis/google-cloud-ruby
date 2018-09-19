@@ -1,8 +1,8 @@
 # google-cloud
 
-The [google-cloud](https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud)
+The [google-cloud](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud)
 gem is a convenience package that lazily loads the vast majority of the
-[google-cloud-*](https://github.com/GoogleCloudPlatform/google-cloud-ruby) gems.
+[google-cloud-*](https://github.com/googleapis/google-cloud-ruby) gems.
 Because there are now so many google-cloud-* gems, instead of using this gem in
 your production application, we encourage you to directly require only the
 individual google-cloud-* gems that you need.
@@ -116,7 +116,7 @@ This library is licensed under Apache 2.0. Full license text is available in
 ## Support
 
 Please [report bugs at the project on
-Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues). Don't
+Github](https://github.com/googleapis/google-cloud-ruby/issues). Don't
 hesitate to [ask
 questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
 about the client or APIs on [StackOverflow](http://stackoverflow.com).

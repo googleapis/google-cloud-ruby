@@ -21,7 +21,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Google Container Engine API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+      # # Ruby Client for Google Container Engine API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
       #
       # [Google Container Engine API][Product Documentation]:
       # The Google Kubernetes Engine API is used for building and managing container
@@ -56,7 +56,7 @@ module Google
       # ### Next Steps
       # - Read the [Google Container Engine API Product documentation][Product Documentation]
       #   to learn more about the product and see How-to Guides.
-      # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+      # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
       #   to see the full list of Cloud APIs that we cover.
       #
       # [Product Documentation]: https://cloud.google.com/kubernetes-engine

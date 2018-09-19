@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["mike@blowmage.com", "quartzmo@gmail.com"]
   gem.description   = "google-cloud-bigquery is the official library for Google BigQuery."
   gem.summary       = "API Client library for Google BigQuery"
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-bigquery"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-bigquery"
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +

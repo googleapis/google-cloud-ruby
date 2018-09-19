@@ -1,4 +1,4 @@
-# Ruby Client for Cloud Video Intelligence API ([GA](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Video Intelligence API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
 
 [Cloud Video Intelligence API][Product Documentation]:
 Cloud Video Intelligence API.
@@ -62,7 +62,7 @@ operation.wait_until_done!
   to see other available methods on the client.
 - Read the [Cloud Video Intelligence API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest/google/cloud/videointelligence/v1

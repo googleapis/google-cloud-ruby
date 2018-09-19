@@ -1,4 +1,4 @@
-# Ruby Client for Cloud Asset API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Asset API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
 
 [Cloud Asset API][Product Documentation]:
 The cloud asset API manages the history and inventory of cloud resources.
@@ -24,7 +24,7 @@ $ gem install google-cloud-asset
   to see other available methods on the client.
 - Read the [Cloud Asset API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-asset/latest/google/cloud/asset/v1beta1
