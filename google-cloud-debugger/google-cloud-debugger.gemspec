@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["hexiong@google.com"]
   gem.description   = "google-cloud-debugger is the official library for Stackdriver Debugger."
   gem.summary       = "API Client and instrumentation library for Stackdriver Debugger"
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-debugger"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-debugger"
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/* ext/*`.split("\n") +

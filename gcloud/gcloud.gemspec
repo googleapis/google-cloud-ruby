@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["mike@blowmage.com", "quartzmo@gmail.com"]
   gem.description   = "gcloud is the legacy support library for the new google-cloud library."
   gem.summary       = "API Client library for Google Cloud"
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/gcloud"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/gcloud"
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +

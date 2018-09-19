@@ -12,7 +12,7 @@
 # curl -sSL https://get.rvm.io | bash -s stable --ruby
 # source $HOME/.rvm/scripts/rvm; gem install bundler
 # sudo apt-get install -y git
-# git clone https://github.com/GoogleCloudPlatform/google-cloud-ruby.git
+# git clone https://github.com/googleapis/google-cloud-ruby.git
 # cd google-cloud-ruby; bundle install
 
 source $HOME/.rvm/scripts/rvm

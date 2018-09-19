@@ -12,9 +12,9 @@ placeholders shown in the examples below with the appropriate numbers, e.g.
 name of the package, e.g. `google-cloud-datastore`.
 
 After all [pull
-requests](https://github.com/GoogleCloudPlatform/google-cloud-ruby/pulls) for a
+requests](https://github.com/googleapis/google-cloud-ruby/pulls) for a
 release have been merged and all Kokoro and [Circle CI
-builds](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) are
+builds](https://circleci.com/gh/googleapis/google-cloud-ruby) are
 green, you may create a release as follows:
 
 1. If you haven't already, switch to the master branch, ensure that you have no
@@ -68,7 +68,7 @@ green, you may create a release as follows:
    `.gemspec` file, changing the value to your new version number.
 
 9. If your package is new, ensure that it has been added to the [top-level
-   `Gemfile`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/Gemfile).
+   `Gemfile`](https://github.com/googleapis/google-cloud-ruby/blob/google-cloud/v0.52.0/Gemfile).
    Follow the steps in [Adding a new gem to
    meta-packages](#adding-a-new-gem-to-meta-packages), below.
 
@@ -85,7 +85,7 @@ green, you may create a release as follows:
 
 11. If your package is new, ensure that a nav link and a main entry including
     code example have been added to the [top-level
-    README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/README.md).
+    README](https://github.com/googleapis/google-cloud-ruby/blob/google-cloud/v0.52.0/README.md).
 
 12. In the root directory of the project, test that all the version dependencies
     are correct.
@@ -109,19 +109,19 @@ green, you may create a release as follows:
     ```
 
 15. Push the tag. This will trigger a build job on [Circle
-    CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby).
+    CI](https://circleci.com/gh/googleapis/google-cloud-ruby).
 
     ```sh
     $ git push <remote> <gem>/v<version>
     ```
 
 16. Wait until the [Circle CI
-    build](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) has
+    build](https://circleci.com/gh/googleapis/google-cloud-ruby) has
     passed for the tag.
 
 17. Confirm that the new version is displayed on the [google-cloud-ruby gh-pages
     doc
-    site](https://http://googlecloudplatform.github.io/google-cloud-ruby/docs/).
+    site](https://https://googleapis.github.io/google-cloud-ruby/docs/).
 
     If the gh-pages doc site has not been updated, inspect the build logs to
     confirm that the release task completed successfully, and that the docs
@@ -132,9 +132,9 @@ green, you may create a release as follows:
     [RubyGems.org](https://rubygems.org/gems/google-cloud).
 
 19. On the [google-cloud-ruby releases
-    page](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases),
+    page](https://github.com/googleapis/google-cloud-ruby/releases),
     click [Draft a new
-    release](https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/new).
+    release](https://github.com/googleapis/google-cloud-ruby/releases/new).
     Complete the form. Include the bullet-point lists of the major and minor
     changes from the gem's `CHANGELOG.md`. You can also add examples, fixes,
     thank yous, and anything else helpful or relevant. See google-cloud-node
@@ -153,7 +153,7 @@ green, you may create a release as follows:
 
 24. Wait until the last tag build job has successfully completed on Circle CI.
     Then push your commits to the master branch. This will trigger another
-    [Circle CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby)
+    [Circle CI](https://circleci.com/gh/googleapis/google-cloud-ruby)
     build on master branch.
 
     ```sh
@@ -162,9 +162,9 @@ green, you may create a release as follows:
 
 25. After the Circle CI master branch build has successfully completed, confirm
     that Kokoro and [Travis CI (Mac OS
-    X)](https://travis-ci.org/GoogleCloudPlatform/google-cloud-ruby) and
+    X)](https://travis-ci.org/googleapis/google-cloud-ruby) and
     [Appveyor CI
-    (Windows)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-ruby)
+    (Windows)](https://ci.appveyor.com/project/googleapis/google-cloud-ruby)
     master branch builds are also green.
 
 High fives all around!
@@ -176,8 +176,8 @@ There are extra steps required to add a new package to the `google-cloud` and/or
 gem.
 
 1. Add the gem to
-   [`google-cloud/Gemfile`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/google-cloud/Gemfile).
+   [`google-cloud/Gemfile`](https://github.com/googleapis/google-cloud-ruby/blob/google-cloud/v0.52.0/google-cloud/Gemfile).
 2. Add the gem to
-   [`google-cloud/google-cloud.gemspec`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/google-cloud/google-cloud.gemspec).
+   [`google-cloud/google-cloud.gemspec`](https://github.com/googleapis/google-cloud-ruby/blob/google-cloud/v0.52.0/google-cloud/google-cloud.gemspec).
 3. Add the gem to
-   [`gcloud/Gemfile`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/gcloud/Gemfile).
+   [`gcloud/Gemfile`](https://github.com/googleapis/google-cloud-ruby/blob/google-cloud/v0.52.0/gcloud/Gemfile).

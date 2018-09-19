@@ -21,7 +21,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Cloud Data Loss Prevention (DLP) API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+      # # Ruby Client for Cloud Data Loss Prevention (DLP) API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
       #
       # [Cloud Data Loss Prevention (DLP) API][Product Documentation]:
       # Provides methods for detection, risk analysis, and de-identification of
@@ -36,7 +36,7 @@ module Google
       # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
       # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
       # 3. [Enable the Cloud Data Loss Prevention (DLP) API.](https://console.cloud.google.com/apis/library/dlp.googleapis.com)
-      # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+      # 4. [Setup Authentication.](https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
       #
       # ### Installation
       # ```
@@ -46,7 +46,7 @@ module Google
       # ### Next Steps
       # - Read the [Cloud Data Loss Prevention (DLP) API Product documentation][Product Documentation]
       #   to learn more about the product and see How-to Guides.
-      # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+      # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
       #   to see the full list of Cloud APIs that we cover.
       #
       # [Product Documentation]: https://cloud.google.com/dlp
@@ -55,7 +55,7 @@ module Google
       #
       # To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
       # The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
-      # or a [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
+      # or a [`Google::Cloud::Logging::Logger`](https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
       # that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
       # and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
       #

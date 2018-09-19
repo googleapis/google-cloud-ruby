@@ -20,7 +20,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Stackdriver Trace API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Stackdriver Trace API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
     #
     # [Stackdriver Trace API][Product Documentation]:
     # Sends application trace data to Stackdriver Trace for viewing. Trace data is
@@ -35,7 +35,7 @@ module Google
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
     # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
     # 3. [Enable the Stackdriver Trace API.](https://console.cloud.google.com/apis/api/trace)
-    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+    # 4. [Setup Authentication.](https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Preview
     # #### TraceServiceClient
@@ -51,7 +51,7 @@ module Google
     # ### Next Steps
     # - Read the [Stackdriver Trace API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+    # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
     #
     # [Product Documentation]: https://cloud.google.com/trace

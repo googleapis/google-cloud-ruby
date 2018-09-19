@@ -8,7 +8,7 @@ your application, including test, development, and production. The Ruby
 debugger adds minimal request latency, typically less than 50ms, and only when
 application state is captured. In most cases, this is not noticeable by users.
 
-- [google-cloud-debugger documentation](http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest)
+- [google-cloud-debugger documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest)
 - [google-cloud-debugger on RubyGems](https://rubygems.org/gems/google-cloud-debugger)
 - [Stackdriver Debugger documentation](https://cloud.google.com/debugger/docs/)
 
@@ -175,7 +175,7 @@ Google::Cloud::Debugger.new(project_id: "your-project-id",
 
 This library also supports the other authentication methods provided by the
 `google-cloud-ruby` suite. Instructions and configuration options are covered
-in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.AUTHENTICATION).
+in the [Authentication Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.AUTHENTICATION).
 
 ### Using the Debugger
 
@@ -224,7 +224,7 @@ for a list of possible configuration options.
 
 ## Enabling Logging
 
-To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb) and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 
 Configuring a Ruby stdlib logger:
 
@@ -264,23 +264,23 @@ and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CONTRIBUTING)
+Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CONTRIBUTING)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CODE_OF_CONDUCT)
+Conduct](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CODE_OF_CONDUCT)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.LICENSE).
+[LICENSE](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.LICENSE).
 
 ## Support
 
 Please [report bugs at the project on
-Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues). Don't
+Github](https://github.com/googleapis/google-cloud-ruby/issues). Don't
 hesitate to [ask
 questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
 about the client or APIs on [StackOverflow](http://stackoverflow.com).

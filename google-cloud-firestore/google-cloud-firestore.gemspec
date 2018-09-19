@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "google-cloud-firestore is the official library for Google Cloud Firestore API."
   gem.summary       = "API Client library for Google Cloud Firestore API"
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-firestore"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-firestore"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY

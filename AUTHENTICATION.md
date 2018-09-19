@@ -13,7 +13,7 @@ recommended during development.
 
 General instructions, environment variables, and configuration options are
 covered in the general [Authentication
-guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/authentication)
+guide](https://googleapis.github.io/google-cloud-ruby/docs/authentication)
 for the `google-cloud` umbrella package. Specific instructions and environment
 variables for each individual service are linked from the README documents
 listed below for each service.
@@ -96,7 +96,7 @@ To configure your system for this, simply:
 ## Troubleshooting
 
 If you're having trouble authenticating open a [Github
-Issue](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues/new?title=Authentication+question)
+Issue](https://github.com/googleapis/google-cloud-ruby/issues/new?title=Authentication+question)
 to get help.  Also consider searching or asking
 [questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
 on [StackOverflow](http://stackoverflow.com).

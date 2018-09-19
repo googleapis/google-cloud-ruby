@@ -67,7 +67,7 @@ the Bigtable client library.
 
 View the [source code][instances_0_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/GoogleCloudPlatform/google-cloud-ruby&page=editor&open_in_editor=google-cloud-bigtable/samples/instances.rb,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-ruby&page=editor&open_in_editor=google-cloud-bigtable/samples/instances.rb,samples/README.md)
 
 __Usage:__ `bundle exec ruby instances.rb --help`
 
@@ -107,7 +107,7 @@ This sample showcases the basic table / column family operations:
 1. Delete a column family
 1. Delete a table
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/GoogleCloudPlatform/google-cloud-ruby&page=editor&page=editor&open_in_editor=google-cloud-bigtable/samples/tableadmin.rb,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-ruby&page=editor&page=editor&open_in_editor=google-cloud-bigtable/samples/tableadmin.rb,samples/README.md)
 
 __Usage:__ `bundle exec ruby tableadmin.rb --help`
 

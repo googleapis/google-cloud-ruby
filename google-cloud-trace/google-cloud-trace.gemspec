@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["dazuma@google.com"]
   gem.description   = "google-cloud-trace is the official library for Stackdriver Trace."
   gem.summary       = "Application Instrumentation and API Client library for Stackdriver Trace"
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-trace"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-trace"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY

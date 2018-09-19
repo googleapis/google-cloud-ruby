@@ -126,12 +126,12 @@ and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](http://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CONTRIBUTING)
+Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CONTRIBUTING)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](http://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CODE_OF_CONDUCT)
+Conduct](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.CODE_OF_CONDUCT)
 for more information.
 
 ## License
@@ -142,7 +142,7 @@ This library is licensed under Apache 2.0. Full license text is available in
 ## Support
 
 Please [report bugs at the project on
-Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues). Don't
+Github](https://github.com/googleapis/google-cloud-ruby/issues). Don't
 hesitate to [ask
 questions](http://stackoverflow.com/questions/tagged/google-cloud-ruby) about
 the client or APIs on [StackOverflow](http://stackoverflow.com).

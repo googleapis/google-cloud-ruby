@@ -39,7 +39,7 @@ module Google
         #   exceptions
         # @param [Hash] kwargs Hash of configuration settings. Used for backward
         #   API compatibility. See the [Configuration
-        #   Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+        #   Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
         #   for the prefered way to set configuration parameters.
         #
         # @return [Google::Cloud::ErrorReporting::Middleware] A new instance of

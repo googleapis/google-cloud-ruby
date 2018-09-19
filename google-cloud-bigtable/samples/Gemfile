@@ -5,7 +5,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 # TODO: Updated with GEM after alpha release
-github "GoogleCloudPlatform/google-cloud-ruby" do
+github "googleapis/google-cloud-ruby" do
   gem "google-cloud-bigtable"
 end
 

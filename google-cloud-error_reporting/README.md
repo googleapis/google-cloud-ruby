@@ -7,8 +7,8 @@ filtering capabilities. A dedicated view shows the error details: time chart,
 occurrences, affected user count, first and last seen dates and a cleaned
 exception stack trace. Opt-in to receive email and mobile alerts on new errors.
 
-- [google-cloud-error_reporting API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest)
-- [google-cloud-error_reporting instrumentation documentation](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest/file.INSTRUMENTATION)
+- [google-cloud-error_reporting API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest)
+- [google-cloud-error_reporting instrumentation documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-error_reporting/latest/file.INSTRUMENTATION)
 - [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
 - [Stackdriver ErrorReporting documentation](https://cloud.google.com/error-reporting/docs/)
 
@@ -35,7 +35,7 @@ $ bundle install
 ```
 
 Alternatively, check out the
-[`stackdriver`](http://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest)
+[`stackdriver`](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest)
 gem that includes the `google-cloud-error_reporting` gem.
 
 ## Enable Stackdriver Error Reporting API
@@ -92,7 +92,7 @@ end
 
 You can customize the behavior of the Stackdriver Error Reporting library for
 Ruby. See the [configuration
-guide](http://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
 for a list of possible configuration options.
 
 ## Running on Google Cloud Platform
@@ -177,7 +177,7 @@ end
 This library also supports the other authentication methods provided by the
 `google-cloud-ruby` suite. Instructions and configuration options are covered in
 the [Authentication
-Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.AUTHENTCATION).
+Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.AUTHENTCATION).
 
 ## Enabling Logging
 
@@ -186,7 +186,7 @@ To enable logging for this library, set the logger for the underlying
 that you set may be a Ruby stdlib
 [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as
 shown below, or a
-[`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger)
+[`Google::Cloud::Logging::Logger`](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-logging/latest/Google/Cloud/Logging/Logger)
 that will write logs to [Stackdriver
 Logging](https://cloud.google.com/logging/). See
 [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
@@ -235,23 +235,23 @@ change at any time and the public API should not be considered stable.
 Contributions to this library are always welcome and highly encouraged.
 
 See the [Contributing
-Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CONTRIBUTING)
+Guide](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CONTRIBUTING)
 for more information on how to get started.
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See [Code of
-Conduct](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CODE_OF_CONDUCT)
+Conduct](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.CODE_OF_CONDUCT)
 for more information.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](https://googlecloudplatform.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.LICENSE).
+[LICENSE](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-debugger/latest/file.LICENSE).
 
 ## Support
 
 Please [report bugs at the project on
-Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues). Don't
+Github](https://github.com/googleapis/google-cloud-ruby/issues). Don't
 hesitate to [ask
 questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
 about the client or APIs on [StackOverflow](http://stackoverflow.com).

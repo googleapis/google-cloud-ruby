@@ -58,7 +58,7 @@ you want to run on a non Google Cloud environment or you want to customize
 the default behavior.
 
 See the
-[Configuration Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+[Configuration Guide](https://googleapis.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
 for full configuration parameters.
 
 ### Using instrumentation with Ruby on Rails

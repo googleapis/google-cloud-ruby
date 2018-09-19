@@ -125,7 +125,7 @@ module Google
       #   should not be reported.
       #
       # See the [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
+      # Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
       # for full configuration parameters.
       #
       # @example
