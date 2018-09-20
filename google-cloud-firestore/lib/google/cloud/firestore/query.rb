@@ -921,32 +921,33 @@ module Google
           GREATER_THAN
           GREATER_THAN_OR_EQUAL
         ].freeze
-        ##
-        # @private
-        UNARY_NIL_VALUES = [nil, :null, :nil].freeze
-        ##
-        # @private
-        UNARY_NAN_VALUES = [:nan, Float::NAN].freeze
-        ##
-        # @private
-        UNARY_VALUES = (UNARY_NIL_VALUES + UNARY_NAN_VALUES).freeze
+
+        def value_nil? value
+          [nil, :null, :nil].include?(value)
+        end
+
+        def value_nan? value
+          # Comparing NaN values raises, so check for #nan? first.
+          return true if value.respond_to?(:nan?) && value.nan?
+          [:nan].include?(value)
+        end
+
+        def value_unary? value
+          value_nil?(value) || value_nan?(value)
+        end
 
         def filter name, op, value
           field = StructuredQuery::FieldReference.new field_path: name.to_s
           operator = FILTER_OPS[op.to_s.downcase]
           raise ArgumentError, "unknown operator #{op}" if operator.nil?
 
-          is_value_nan = value.respond_to?(:nan?) && value.nan?
-          if UNARY_VALUES.include?(value) || is_value_nan
+          if value_unary? value
             if operator != :EQUAL
               raise ArgumentError,
                     "can only check equality for #{value} values"
             end
 
-            operator = :IS_NULL
-            if UNARY_NAN_VALUES.include?(value) || is_value_nan
-              operator = :IS_NAN
-            end
+            operator = value_nan?(value) ? :IS_NAN : :IS_NULL
 
             return StructuredQuery::Filter.new(unary_filter:
               StructuredQuery::UnaryFilter.new(field: field, op: operator))
