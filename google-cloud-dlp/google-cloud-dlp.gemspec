@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-dlp"
-  gem.version       = "0.6.1"
+  gem.version       = "0.6.2"
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
