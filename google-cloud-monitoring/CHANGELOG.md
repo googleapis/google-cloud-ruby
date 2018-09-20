@@ -1,5 +1,12 @@
 # Release History
 
+### 0.29.2 / 2018-09-20
+
+* Update Monitoring generated files.
+  * Add MetricDescriptorMetadata.
+* Update documentation.
+  * Change documentation URL to googleapis GitHub org.
+
 ### 0.29.1 / 2018-09-10
 
 * Update documentation.
