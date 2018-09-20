@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-video_intelligence"
-  gem.version       = "1.1.1"
+  gem.version       = "1.1.2"
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
