@@ -19,22 +19,18 @@ require "bigtable_helper"
 
 describe "Table drop rows", :bigtable do
   it "delete all rows" do
-    skip "This test is failing with DeadlineExceededError: 4:Insufficient deadline for DropRowRange"
-
     table_id = "test-table-#{random_str}"
     table = create_table(table_id, row_count: 2)
-    table.delete_all_rows.must_equal true
+    table.delete_all_rows(timeout: 300).must_equal true
 
     rows = table.read_rows.to_a
     rows.must_be_empty
   end
 
   it "delete rows by prefix" do
-    skip "This test is failing with DeadlineExceededError: 4:Insufficient deadline for DropRowRange"
-
     table_id = "test-table-#{random_str}"
     table = create_table(table_id, row_count: 2)
-    table.delete_rows_by_prefix("test-1").must_equal true
+    table.delete_rows_by_prefix("test-1", timeout: 300).must_equal true
 
     rows = table.read_rows.to_a
     rows.length.must_equal 1
