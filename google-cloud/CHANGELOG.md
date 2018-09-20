@@ -1,5 +1,12 @@
 # Release History
 
+### 0.56.3 / 2018-09-20
+
+* Update documentation.
+  * Change documentation URL to googleapis GitHub org.
+  * Add links to dependency google-cloud-* gems to README.
+* Fix circular require warning.
+
 ### 0.56.2 / 2018-09-12
 
 * Add missing documentation files to package.
