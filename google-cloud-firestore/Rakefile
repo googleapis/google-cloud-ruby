@@ -39,7 +39,7 @@ namespace :test do
   end
 
   desc "Run conformance tests separately from other unit tests."
-  Rake::TestTask.new do |t|
+  Rake::TestTask.new :conformance do |t|
     t.libs << "test"
     t.test_files = ["test/google/cloud/firestore/conformance_test.rb"]
     t.warning = false

@@ -64,7 +64,14 @@ class ConformanceTest < MockFirestore
     elsif data.is_a? Hash
       Hash[data.map { |k, v| [k, convert_values(v)] }]
     elsif data.is_a? Array
-      data.map { |v| convert_values(v) }
+      head, *tail = data
+      if head == "ArrayUnion"
+        Google::Cloud::Firestore::FieldValue.array_union *convert_values(tail)
+      elsif head == "ArrayDelete" || head == "ArrayRemove"
+        Google::Cloud::Firestore::FieldValue.array_delete *convert_values(tail)
+      else
+        data.map { |v| convert_values(v) }
+      end
     else
       data
     end
@@ -74,45 +81,53 @@ end
 class ConformanceCreate < ConformanceTest
   def self.build_test_for description, test, index
     define_method("test_#{index}: #{description}") do
-      doc_ref = doc_ref_from_path test.doc_ref_path
-      data = data_from_json test.json_data
-
       if test.is_error
         expect do
-          doc_ref.create data
+          run_conformance_proto test
         end.must_raise ArgumentError
       else
         firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
 
-        doc_ref.create data
+        run_conformance_proto test
       end
     end
+  end
+
+  def run_conformance_proto test
+    doc_ref = doc_ref_from_path test.doc_ref_path
+    data = data_from_json test.json_data
+
+    doc_ref.create data
   end
 end
 
 class ConformanceSet < ConformanceTest
   def self.build_test_for description, test, index
     define_method("test_#{index}: #{description}") do
-      doc_ref = doc_ref_from_path test.doc_ref_path
-      data = data_from_json test.json_data
-      merge = if test.option && test.option.all
-                true
-              elsif test.option && !test.option.fields.empty?
-                test.option.fields.map do |fp|
-                  firestore.field_path fp.field
-                end
-              end
-
       if test.is_error
         expect do
-          doc_ref.set data, merge: merge
+          run_conformance_proto test
         end.must_raise ArgumentError
       else
         firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
 
-        doc_ref.set data, merge: merge
+        run_conformance_proto test
       end
     end
+  end
+
+  def run_conformance_proto test
+    doc_ref = doc_ref_from_path test.doc_ref_path
+    data = data_from_json test.json_data
+    merge = if test.option && test.option.all
+              true
+            elsif test.option && !test.option.fields.empty?
+              test.option.fields.map do |fp|
+                firestore.field_path fp.field
+              end
+            end
+
+    doc_ref.set data, merge: merge
   end
 end
 
@@ -123,22 +138,26 @@ class ConformanceUpdate < ConformanceTest
         fail "The ruby implementation does not allow exists on update"
       end
 
-      doc_ref = doc_ref_from_path test.doc_ref_path
-      data = data_from_json test.json_data
-      update_time = if test.precondition && test.precondition.update_time
-                      Time.at(test.precondition.update_time.seconds)
-                    end
-
       if test.is_error
         expect do
-          doc_ref.update data, update_time: update_time
+          run_conformance_proto test
         end.must_raise ArgumentError
       else
         firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
 
-        doc_ref.update data, update_time: update_time
+        run_conformance_proto test
       end
     end
+  end
+
+  def run_conformance_proto test
+    doc_ref = doc_ref_from_path test.doc_ref_path
+    data = data_from_json test.json_data
+    update_time = if test.precondition && test.precondition.update_time
+                    Time.at(test.precondition.update_time.seconds)
+                  end
+
+    doc_ref.update data, update_time: update_time
   end
 end
 
@@ -149,25 +168,27 @@ class ConformanceUpdatePaths < ConformanceTest
         fail "The ruby implementation does not allow exists on update"
       end
 
-      doc_ref = doc_ref_from_path test.doc_ref_path
-      update_time = if test.precondition && test.precondition.update_time
-                      Time.at(test.precondition.update_time.seconds)
-                    end
-
       if test.is_error
         expect do
-          data = data_from_field_paths_and_json test.field_paths, test.json_values
-
-          doc_ref.update data, update_time: update_time
+          run_conformance_proto test
         end.must_raise ArgumentError
       else
         firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
 
-        data = data_from_field_paths_and_json test.field_paths, test.json_values
-
-        doc_ref.update data, update_time: update_time
+        run_conformance_proto test
       end
     end
+  end
+
+  def run_conformance_proto test
+    doc_ref = doc_ref_from_path test.doc_ref_path
+    update_time = if test.precondition && test.precondition.update_time
+                    Time.at(test.precondition.update_time.seconds)
+                  end
+
+    data = data_from_field_paths_and_json test.field_paths, test.json_values
+
+    doc_ref.update data, update_time: update_time
   end
 
   def data_from_field_paths_and_json field_paths, json_values
