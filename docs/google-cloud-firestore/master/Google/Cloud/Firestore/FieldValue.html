@@ -373,7 +373,7 @@ with an array.</p>
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_array_delete'>array_delete</span> <span class='op'>*</span><span class='id identifier rubyid_values'>values</span>
   <span class='comment'># We can flatten the values because arrays don&#39;t support sub-arrays
 </span>  <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_flatten!'>flatten!</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>values must be provided</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>values must be provided</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
   <span class='comment'># verify the values are the correct types
 </span>  <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_raw_to_value'>raw_to_value</span> <span class='id identifier rubyid_values'>values</span>
 
@@ -495,7 +495,7 @@ with an array.</p>
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_array_union'>array_union</span> <span class='op'>*</span><span class='id identifier rubyid_values'>values</span>
   <span class='comment'># We can flatten the values because arrays don&#39;t support sub-arrays
 </span>  <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_flatten!'>flatten!</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>values must be provided</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>values must be provided</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
   <span class='comment'># verify the values are the correct types
 </span>  <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_raw_to_value'>raw_to_value</span> <span class='id identifier rubyid_values'>values</span>
 
