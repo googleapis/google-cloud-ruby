@@ -1,5 +1,10 @@
 # Release History
 
+### 1.3.3 / 2018-09-20
+
+* Update documentation.
+  * Change documentation URL to googleapis GitHub org.
+
 ### 1.3.2 / 2018-09-12
 
 * Add missing documentation files to package.
