@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Spanner::V1::ExecuteSqlRequest::QueryMode - Google"
+title: "Class: Google::Spanner::V1::TransactionOptions::PartitionedDml - Google"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Spanner::V1::ExecuteSqlRequest::QueryMode";
+  pathId = "Google::Spanner::V1::TransactionOptions::PartitionedDml";
   relpath = '../../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../_index.html">Index (Q)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../ExecuteSqlRequest.html" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
+    <a href="../../../../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../TransactionOptions.html" title="Google::Spanner::V1::TransactionOptions (class)">TransactionOptions</a></span></span>
      &raquo; 
-    <span class="title">QueryMode</span>
+    <span class="title">PartitionedDml</span>
   
 </div>
 
@@ -47,12 +47,28 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Spanner::V1::ExecuteSqlRequest::QueryMode
+  <div id="content"><h1>Class: Google::Spanner::V1::TransactionOptions::PartitionedDml
   
   
   
 </h1>
 <div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Spanner::V1::TransactionOptions::PartitionedDml</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
   
 
   
@@ -66,14 +82,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb</dd>
+    <dd>lib/google/cloud/spanner/v1/doc/google/spanner/v1/transaction.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Mode in which the statement must be processed.</p>
+    <p>Message type to initiate a Partitioned DML transaction.</p>
 
 
   </div>
@@ -82,64 +98,6 @@ js:
   
 
 </div>
-  
-    <h2>
-      Constant Summary
-      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
-    </h2>
-
-    <dl class="constants">
-      
-        <dt id="NORMAL-constant" class="">NORMAL =
-          <div class="docstring">
-  <div class="discussion">
-    <p>The default mode. Only the statement results are returned.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='int'>0</span></pre></dd>
-      
-        <dt id="PLAN-constant" class="">PLAN =
-          <div class="docstring">
-  <div class="discussion">
-    <p>This mode returns only the query plan, without any results or
-execution statistics information.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='int'>1</span></pre></dd>
-      
-        <dt id="PROFILE-constant" class="">PROFILE =
-          <div class="docstring">
-  <div class="discussion">
-    <p>This mode returns both the query plan and the execution statistics along
-with the results.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
-        </dt>
-        <dd><pre class="code"><span class='int'>2</span></pre></dd>
-      
-    </dl>
-  
-
 
 
 

@@ -161,7 +161,7 @@ ExecuteStreamingSql.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The SQL query string can contain parameter placeholders.</p>
+    <span class="summary_desc"><div class='inline'><p>The SQL string can contain parameter placeholders.</p>
 </div></span>
   
 </li>
@@ -239,7 +239,33 @@ ExecuteStreamingSql.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If this request is resuming a previously interrupted SQL query execution, <code>resume_token</code> should be copied from the last <span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption.</p>
+    <span class="summary_desc"><div class='inline'><p>If this request is resuming a previously interrupted SQL statement execution, <code>resume_token</code> should be copied from the last <span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#seqno-instance_method" title="#seqno (instance method)">#<strong>seqno</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A per-transaction sequence number used to identify this request.</p>
 </div></span>
   
 </li>
@@ -350,7 +376,7 @@ from a JSON value.  For example, values of type <code>BYTES</code> and values
 of type <code>STRING</code> both appear in <span class='object_link'><a href="#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
 <p>In these cases, <code>param_types</code> can be used to specify the exact
-SQL type for some or all of the SQL query parameters. See the
+SQL type for some or all of the SQL statement parameters. See the
 definition of <span class='object_link'><a href="Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> for more information
 about SQL types.</p>
 
@@ -375,7 +401,7 @@ from a JSON value.  For example, values of type <code>BYTES</code> and values
 of type <code>STRING</code> both appear in <span class='object_link'><a href="#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
 <p>In these cases, <code>param_types</code> can be used to specify the exact
-SQL type for some or all of the SQL query parameters. See the
+SQL type for some or all of the SQL statement parameters. See the
 definition of <span class='object_link'><a href="Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> for more information
 about SQL types.</p>
 </div>
@@ -390,39 +416,37 @@ about SQL types.</p>
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175</pre>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
-  <span class='comment'># Mode in which the query must be processed.
+  <span class='comment'># Mode in which the statement must be processed.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode (module)">QueryMode</a></span></span>
-    <span class='comment'># The default mode where only the query result, without any information
-</span>    <span class='comment'># about the query plan is returned.
+    <span class='comment'># The default mode. Only the statement results are returned.
 </span>    <span class='const'>NORMAL</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># This mode returns only the query plan, without any result rows or
+    <span class='comment'># This mode returns only the query plan, without any results or
 </span>    <span class='comment'># execution statistics information.
 </span>    <span class='const'>PLAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This mode returns both the query plan and the execution statistics along
-</span>    <span class='comment'># with the result rows.
+</span>    <span class='comment'># with the results.
 </span>    <span class='const'>PROFILE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -444,7 +468,7 @@ about SQL types.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The SQL query string can contain parameter placeholders. A parameter
+    <p>Returns The SQL string can contain parameter placeholders. A parameter
 placeholder consists of <code>&#39;@&#39;</code> followed by the parameter
 name. Parameter names consist of any combination of letters,
 numbers, and underscores.</p>
@@ -453,7 +477,7 @@ numbers, and underscores.</p>
 parameter name can be used more than once, for example:
   <code>&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;</code></p>
 
-<p>It is an error to execute an SQL query with unbound parameters.</p>
+<p>It is an error to execute an SQL statement with unbound parameters.</p>
 
 <p>Parameter values are specified using <code>params</code>, which is a JSON
 object whose keys are parameter names, and whose values are the
@@ -475,7 +499,7 @@ corresponding parameter values.</p>
       
       
         &mdash;
-        <div class='inline'><p>The SQL query string can contain parameter placeholders. A parameter
+        <div class='inline'><p>The SQL string can contain parameter placeholders. A parameter
 placeholder consists of <code>&#39;@&#39;</code> followed by the parameter
 name. Parameter names consist of any combination of letters,
 numbers, and underscores.</p>
@@ -484,7 +508,7 @@ numbers, and underscores.</p>
 parameter name can be used more than once, for example:
   <code>&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;</code></p>
 
-<p>It is an error to execute an SQL query with unbound parameters.</p>
+<p>It is an error to execute an SQL statement with unbound parameters.</p>
 
 <p>Parameter values are specified using <code>params</code>, which is a JSON
 object whose keys are parameter names, and whose values are the
@@ -501,39 +525,37 @@ corresponding parameter values.</p>
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175</pre>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
-  <span class='comment'># Mode in which the query must be processed.
+  <span class='comment'># Mode in which the statement must be processed.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode (module)">QueryMode</a></span></span>
-    <span class='comment'># The default mode where only the query result, without any information
-</span>    <span class='comment'># about the query plan is returned.
+    <span class='comment'># The default mode. Only the statement results are returned.
 </span>    <span class='const'>NORMAL</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># This mode returns only the query plan, without any result rows or
+    <span class='comment'># This mode returns only the query plan, without any results or
 </span>    <span class='comment'># execution statistics information.
 </span>    <span class='const'>PLAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This mode returns both the query plan and the execution statistics along
-</span>    <span class='comment'># with the result rows.
+</span>    <span class='comment'># with the results.
 </span>    <span class='const'>PROFILE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -592,39 +614,37 @@ PartitionQueryRequest message used to create this partition_token.</p>
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175</pre>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
-  <span class='comment'># Mode in which the query must be processed.
+  <span class='comment'># Mode in which the statement must be processed.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode (module)">QueryMode</a></span></span>
-    <span class='comment'># The default mode where only the query result, without any information
-</span>    <span class='comment'># about the query plan is returned.
+    <span class='comment'># The default mode. Only the statement results are returned.
 </span>    <span class='const'>NORMAL</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># This mode returns only the query plan, without any result rows or
+    <span class='comment'># This mode returns only the query plan, without any results or
 </span>    <span class='comment'># execution statistics information.
 </span>    <span class='const'>PLAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This mode returns both the query plan and the execution statistics along
-</span>    <span class='comment'># with the result rows.
+</span>    <span class='comment'># with the results.
 </span>    <span class='const'>PROFILE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -681,39 +701,37 @@ be set to <span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NO
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175</pre>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
-  <span class='comment'># Mode in which the query must be processed.
+  <span class='comment'># Mode in which the statement must be processed.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode (module)">QueryMode</a></span></span>
-    <span class='comment'># The default mode where only the query result, without any information
-</span>    <span class='comment'># about the query plan is returned.
+    <span class='comment'># The default mode. Only the statement results are returned.
 </span>    <span class='const'>NORMAL</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># This mode returns only the query plan, without any result rows or
+    <span class='comment'># This mode returns only the query plan, without any results or
 </span>    <span class='comment'># execution statistics information.
 </span>    <span class='const'>PLAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This mode returns both the query plan and the execution statistics along
-</span>    <span class='comment'># with the result rows.
+</span>    <span class='comment'># with the results.
 </span>    <span class='const'>PROFILE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -735,10 +753,10 @@ be set to <span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#NO
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns If this request is resuming a previously interrupted SQL query
+    <p>Returns If this request is resuming a previously interrupted SQL statement
 execution, <code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new SQL query execution to resume where the last one left
+enables the new SQL statement execution to resume where the last one left
 off. The rest of the request parameters must exactly match the
 request that yielded this token.</p>
 
@@ -758,10 +776,10 @@ request that yielded this token.</p>
       
       
         &mdash;
-        <div class='inline'><p>If this request is resuming a previously interrupted SQL query
+        <div class='inline'><p>If this request is resuming a previously interrupted SQL statement
 execution, <code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new SQL query execution to resume where the last one left
+enables the new SQL statement execution to resume where the last one left
 off. The rest of the request parameters must exactly match the
 request that yielded this token.</p>
 </div>
@@ -776,39 +794,138 @@ request that yielded this token.</p>
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175</pre>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
-  <span class='comment'># Mode in which the query must be processed.
+  <span class='comment'># Mode in which the statement must be processed.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode (module)">QueryMode</a></span></span>
-    <span class='comment'># The default mode where only the query result, without any information
-</span>    <span class='comment'># about the query plan is returned.
+    <span class='comment'># The default mode. Only the statement results are returned.
 </span>    <span class='const'>NORMAL</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># This mode returns only the query plan, without any result rows or
+    <span class='comment'># This mode returns only the query plan, without any results or
 </span>    <span class='comment'># execution statistics information.
 </span>    <span class='const'>PLAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This mode returns both the query plan and the execution statistics along
-</span>    <span class='comment'># with the result rows.
+</span>    <span class='comment'># with the results.
+</span>    <span class='const'>PROFILE</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="seqno=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="seqno-instance_method">
+  
+    #<strong>seqno</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A per-transaction sequence number used to identify this request. This
+makes each request idempotent such that if the request is received multiple
+times, at most one will succeed.</p>
+
+<p>The sequence number must be monotonically increasing within the
+transaction. If a request arrives for the first time with an out-of-order
+sequence number, the transaction may be aborted. Replays of previously
+handled requests will yield the same response as the first execution.</p>
+
+<p>Required for DML statements. Ignored for queries.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A per-transaction sequence number used to identify this request. This
+makes each request idempotent such that if the request is received multiple
+times, at most one will succeed.</p>
+
+<p>The sequence number must be monotonically increasing within the
+transaction. If a request arrives for the first time with an out-of-order
+sequence number, the transaction may be aborted. Replays of previously
+handled requests will yield the same response as the first execution.</p>
+
+<p>Required for DML statements. Ignored for queries.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
+  <span class='comment'># Mode in which the statement must be processed.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode (module)">QueryMode</a></span></span>
+    <span class='comment'># The default mode. Only the statement results are returned.
+</span>    <span class='const'>NORMAL</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># This mode returns only the query plan, without any results or
+</span>    <span class='comment'># execution statistics information.
+</span>    <span class='const'>PLAN</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># This mode returns both the query plan and the execution statistics along
+</span>    <span class='comment'># with the results.
 </span>    <span class='const'>PROFILE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -861,39 +978,37 @@ request that yielded this token.</p>
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175</pre>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
-  <span class='comment'># Mode in which the query must be processed.
+  <span class='comment'># Mode in which the statement must be processed.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode (module)">QueryMode</a></span></span>
-    <span class='comment'># The default mode where only the query result, without any information
-</span>    <span class='comment'># about the query plan is returned.
+    <span class='comment'># The default mode. Only the statement results are returned.
 </span>    <span class='const'>NORMAL</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># This mode returns only the query plan, without any result rows or
+    <span class='comment'># This mode returns only the query plan, without any results or
 </span>    <span class='comment'># execution statistics information.
 </span>    <span class='const'>PLAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This mode returns both the query plan and the execution statistics along
-</span>    <span class='comment'># with the result rows.
+</span>    <span class='comment'># with the results.
 </span>    <span class='const'>PROFILE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -915,7 +1030,7 @@ request that yielded this token.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The SQL query string.</p>
+    <p>Returns Required. The SQL string.</p>
 
 
   </div>
@@ -933,7 +1048,7 @@ request that yielded this token.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The SQL query string.</p>
+        <div class='inline'><p>Required. The SQL string.</p>
 </div>
       
     </li>
@@ -946,39 +1061,37 @@ request that yielded this token.</p>
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175</pre>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
-  <span class='comment'># Mode in which the query must be processed.
+  <span class='comment'># Mode in which the statement must be processed.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode (module)">QueryMode</a></span></span>
-    <span class='comment'># The default mode where only the query result, without any information
-</span>    <span class='comment'># about the query plan is returned.
+    <span class='comment'># The default mode. Only the statement results are returned.
 </span>    <span class='const'>NORMAL</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># This mode returns only the query plan, without any result rows or
+    <span class='comment'># This mode returns only the query plan, without any results or
 </span>    <span class='comment'># execution statistics information.
 </span>    <span class='const'>PLAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This mode returns both the query plan and the execution statistics along
-</span>    <span class='comment'># with the result rows.
+</span>    <span class='comment'># with the results.
 </span>    <span class='const'>PROFILE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -1003,6 +1116,17 @@ request that yielded this token.</p>
     <p>Returns The transaction to use. If none is provided, the default is a
 temporary read-only transaction with strong concurrency.</p>
 
+<p>The transaction to use.</p>
+
+<p>For queries, if none is provided, the default is a temporary read-only
+transaction with strong concurrency.</p>
+
+<p>Standard DML statements require a ReadWrite transaction. Single-use
+transactions are not supported (to avoid replay).  The caller must
+either supply an existing transaction ID or begin a new transaction.</p>
+
+<p>Partitioned DML requires an existing PartitionedDml transaction ID.</p>
+
 
   </div>
 </div>
@@ -1021,6 +1145,17 @@ temporary read-only transaction with strong concurrency.</p>
         &mdash;
         <div class='inline'><p>The transaction to use. If none is provided, the default is a
 temporary read-only transaction with strong concurrency.</p>
+
+<p>The transaction to use.</p>
+
+<p>For queries, if none is provided, the default is a temporary read-only
+transaction with strong concurrency.</p>
+
+<p>Standard DML statements require a ReadWrite transaction. Single-use
+transactions are not supported (to avoid replay).  The caller must
+either supply an existing transaction ID or begin a new transaction.</p>
+
+<p>Partitioned DML requires an existing PartitionedDml transaction ID.</p>
 </div>
       
     </li>
@@ -1033,39 +1168,37 @@ temporary read-only transaction with strong concurrency.</p>
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175</pre>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 183</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span>
-  <span class='comment'># Mode in which the query must be processed.
+  <span class='comment'># Mode in which the statement must be processed.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode (module)">QueryMode</a></span></span>
-    <span class='comment'># The default mode where only the query result, without any information
-</span>    <span class='comment'># about the query plan is returned.
+    <span class='comment'># The default mode. Only the statement results are returned.
 </span>    <span class='const'>NORMAL</span> <span class='op'>=</span> <span class='int'>0</span>
 
-    <span class='comment'># This mode returns only the query plan, without any result rows or
+    <span class='comment'># This mode returns only the query plan, without any results or
 </span>    <span class='comment'># execution statistics information.
 </span>    <span class='const'>PLAN</span> <span class='op'>=</span> <span class='int'>1</span>
 
     <span class='comment'># This mode returns both the query plan and the execution statistics along
-</span>    <span class='comment'># with the result rows.
+</span>    <span class='comment'># with the results.
 </span>    <span class='const'>PROFILE</span> <span class='op'>=</span> <span class='int'>2</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>

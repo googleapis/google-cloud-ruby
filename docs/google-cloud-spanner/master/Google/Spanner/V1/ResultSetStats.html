@@ -156,6 +156,58 @@ js:
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_count_exact-instance_method" title="#row_count_exact (instance method)">#<strong>row_count_exact</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Standard DML returns an exact count of rows that were modified.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row_count_lower_bound-instance_method" title="#row_count_lower_bound (instance method)">#<strong>row_count_lower_bound</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Partitioned DML does not offer exactly-once semantics, so it returns a lower bound of the rows modified.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -209,10 +261,10 @@ js:
       <pre class="lines">
 
 
-173</pre>
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 187</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -282,10 +334,122 @@ follows:</p>
       <pre class="lines">
 
 
-173</pre>
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 187</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="row_count_exact=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="row_count_exact-instance_method">
+  
+    #<strong>row_count_exact</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Standard DML returns an exact count of rows that were modified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Standard DML returns an exact count of rows that were modified.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+187</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 187</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="row_count_lower_bound=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="row_count_lower_bound-instance_method">
+  
+    #<strong>row_count_lower_bound</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Partitioned DML does not offer exactly-once semantics, so it
+returns a lower bound of the rows modified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Partitioned DML does not offer exactly-once semantics, so it
+returns a lower bound of the rows modified.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+187</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 187</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ResultSetStats (class)">ResultSetStats</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

@@ -345,7 +345,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#execute_sql-instance_method" title="#execute_sql (instance method)">#<strong>execute_sql</strong>(session, sql, transaction: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Spanner::V1::ResultSet </a>
+      <a href="#execute_sql-instance_method" title="#execute_sql (instance method)">#<strong>execute_sql</strong>(session, sql, transaction: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Spanner::V1::ResultSet </a>
     
 
     
@@ -359,7 +359,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Executes an SQL query, returning all rows in a single reply.</p>
+    <span class="summary_desc"><div class='inline'><p>Executes an SQL statement, returning all results in a single reply.</p>
 </div></span>
   
 </li>
@@ -368,7 +368,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#execute_streaming_sql-instance_method" title="#execute_streaming_sql (instance method)">#<strong>execute_streaming_sql</strong>(session, sql, transaction: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, options: nil)  &#x21d2; Enumerable&lt;Google::Spanner::V1::PartialResultSet&gt; </a>
+      <a href="#execute_streaming_sql-instance_method" title="#execute_streaming_sql (instance method)">#<strong>execute_streaming_sql</strong>(session, sql, transaction: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, options: nil)  &#x21d2; Enumerable&lt;Google::Spanner::V1::PartialResultSet&gt; </a>
     
 
     
@@ -1395,21 +1395,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-924
-925
-926
-927
-928
-929
-930
-931
-932
-933
-934
-935</pre>
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 924</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 972</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -1642,25 +1642,25 @@ retries, etc.</p>
       <pre class="lines">
 
 
-986
-987
-988
-989
-990
-991
-992
-993
-994
-995
-996
-997
-998
-999
-1000
-1001</pre>
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 986</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1034</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -2066,7 +2066,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="execute_sql-instance_method">
   
-    #<strong>execute_sql</strong>(session, sql, transaction: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Spanner/V1/ResultSet.html" title="Google::Spanner::V1::ResultSet (class)">Google::Spanner::V1::ResultSet</a></span></tt> 
+    #<strong>execute_sql</strong>(session, sql, transaction: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Spanner/V1/ResultSet.html" title="Google::Spanner::V1::ResultSet (class)">Google::Spanner::V1::ResultSet</a></span></tt> 
   
 
   
@@ -2074,12 +2074,12 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Executes an SQL query, returning all rows in a single reply. This
+    <p>Executes an SQL statement, returning all results in a single reply. This
 method cannot be used to return a result set larger than 10 MiB;
 if the query yields more data than that, the query fails with
 a <code>FAILED_PRECONDITION</code> error.</p>
 
-<p>Queries inside read-write transactions might return <code>ABORTED</code>. If
+<p>Operations inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
 the beginning. See <span class='object_link'><a href="../../../Spanner/V1/Transaction.html" title="Google::Spanner::V1::Transaction (class)">Transaction</a></span> for more details.</p>
 
@@ -2133,7 +2133,7 @@ ExecuteStreamingSql instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The SQL query string.</p>
+        <div class='inline'><p>Required. The SQL string.</p>
 </div>
       
     </li>
@@ -2149,7 +2149,18 @@ ExecuteStreamingSql instead.</p>
       
         &mdash;
         <div class='inline'><p>The transaction to use. If none is provided, the default is a
-temporary read-only transaction with strong concurrency.
+temporary read-only transaction with strong concurrency.</p>
+
+<p>The transaction to use.</p>
+
+<p>For queries, if none is provided, the default is a temporary read-only
+transaction with strong concurrency.</p>
+
+<p>Standard DML statements require a ReadWrite transaction. Single-use
+transactions are not supported (to avoid replay).  The caller must
+either supply an existing transaction ID or begin a new transaction.</p>
+
+<p>Partitioned DML requires an existing PartitionedDml transaction ID.
 A hash of the same form as <code>Google::Spanner::V1::TransactionSelector</code>
 can also be provided.</p>
 </div>
@@ -2166,7 +2177,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>The SQL query string can contain parameter placeholders. A parameter
+        <div class='inline'><p>The SQL string can contain parameter placeholders. A parameter
 placeholder consists of <code>&#39;@&#39;</code> followed by the parameter
 name. Parameter names consist of any combination of letters,
 numbers, and underscores.</p>
@@ -2175,7 +2186,7 @@ numbers, and underscores.</p>
 parameter name can be used more than once, for example:
   <code>&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;</code></p>
 
-<p>It is an error to execute an SQL query with unbound parameters.</p>
+<p>It is an error to execute an SQL statement with unbound parameters.</p>
 
 <p>Parameter values are specified using <code>params</code>, which is a JSON
 object whose keys are parameter names, and whose values are the
@@ -2201,7 +2212,7 @@ from a JSON value.  For example, values of type <code>BYTES</code> and values
 of type <code>STRING</code> both appear in <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
 <p>In these cases, <code>param_types</code> can be used to specify the exact
-SQL type for some or all of the SQL query parameters. See the
+SQL type for some or all of the SQL statement parameters. See the
 definition of <span class='object_link'><a href="../../../Spanner/V1/Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> for more information
 about SQL types.
 A hash of the same form as <code>Google::Spanner::V1::Type</code>
@@ -2220,10 +2231,10 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>If this request is resuming a previously interrupted SQL query
+        <div class='inline'><p>If this request is resuming a previously interrupted SQL statement
 execution, <code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new SQL query execution to resume where the last one left
+enables the new SQL statement execution to resume where the last one left
 off. The rest of the request parameters must exactly match the
 request that yielded this token.</p>
 </div>
@@ -2261,6 +2272,30 @@ be set to <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlReque
 previously created using PartitionQuery().  There must be an exact
 match for the values of fields common to this message and the
 PartitionQueryRequest message used to create this partition_token.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>seqno</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A per-transaction sequence number used to identify this request. This
+makes each request idempotent such that if the request is received multiple
+times, at most one will succeed.</p>
+
+<p>The sequence number must be monotonically increasing within the
+transaction. If a request arrives for the first time with an out-of-order
+sequence number, the transaction may be aborted. Replays of previously
+handled requests will yield the same response as the first execution.</p>
+
+<p>Required for DML statements. Ignored for queries.</p>
 </div>
       
     </li>
@@ -2363,33 +2398,35 @@ retries, etc.</p>
       <pre class="lines">
 
 
-552
-553
-554
-555
-556
-557
-558
-559
-560
-561
-562
-563
-564
-565
-566
-567
-568
-569
-570
-571
-572
-573
 574
-575</pre>
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 552</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 574</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_sql'>execute_sql</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -2400,6 +2437,7 @@ retries, etc.</p>
     <span class='label'>resume_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>query_mode:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>partition_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>seqno:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
@@ -2410,7 +2448,8 @@ retries, etc.</p>
     <span class='label'>param_types:</span> <span class='id identifier rubyid_param_types'>param_types</span><span class='comma'>,</span>
     <span class='label'>resume_token:</span> <span class='id identifier rubyid_resume_token'>resume_token</span><span class='comma'>,</span>
     <span class='label'>query_mode:</span> <span class='id identifier rubyid_query_mode'>query_mode</span><span class='comma'>,</span>
-    <span class='label'>partition_token:</span> <span class='id identifier rubyid_partition_token'>partition_token</span>
+    <span class='label'>partition_token:</span> <span class='id identifier rubyid_partition_token'>partition_token</span><span class='comma'>,</span>
+    <span class='label'>seqno:</span> <span class='id identifier rubyid_seqno'>seqno</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@execute_sql</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2423,7 +2462,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="execute_streaming_sql-instance_method">
   
-    #<strong>execute_streaming_sql</strong>(session, sql, transaction: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, options: nil)  &#x21d2; <tt>Enumerable&lt;<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">Google::Spanner::V1::PartialResultSet</a></span>&gt;</tt> 
+    #<strong>execute_streaming_sql</strong>(session, sql, transaction: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, options: nil)  &#x21d2; <tt>Enumerable&lt;<span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">Google::Spanner::V1::PartialResultSet</a></span>&gt;</tt> 
   
 
   
@@ -2486,7 +2525,7 @@ column value can exceed 10 MiB.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The SQL query string.</p>
+        <div class='inline'><p>Required. The SQL string.</p>
 </div>
       
     </li>
@@ -2502,7 +2541,18 @@ column value can exceed 10 MiB.</p>
       
         &mdash;
         <div class='inline'><p>The transaction to use. If none is provided, the default is a
-temporary read-only transaction with strong concurrency.
+temporary read-only transaction with strong concurrency.</p>
+
+<p>The transaction to use.</p>
+
+<p>For queries, if none is provided, the default is a temporary read-only
+transaction with strong concurrency.</p>
+
+<p>Standard DML statements require a ReadWrite transaction. Single-use
+transactions are not supported (to avoid replay).  The caller must
+either supply an existing transaction ID or begin a new transaction.</p>
+
+<p>Partitioned DML requires an existing PartitionedDml transaction ID.
 A hash of the same form as <code>Google::Spanner::V1::TransactionSelector</code>
 can also be provided.</p>
 </div>
@@ -2519,7 +2569,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>The SQL query string can contain parameter placeholders. A parameter
+        <div class='inline'><p>The SQL string can contain parameter placeholders. A parameter
 placeholder consists of <code>&#39;@&#39;</code> followed by the parameter
 name. Parameter names consist of any combination of letters,
 numbers, and underscores.</p>
@@ -2528,7 +2578,7 @@ numbers, and underscores.</p>
 parameter name can be used more than once, for example:
   <code>&quot;WHERE id &gt; @msg_id AND id &lt; @msg_id + 100&quot;</code></p>
 
-<p>It is an error to execute an SQL query with unbound parameters.</p>
+<p>It is an error to execute an SQL statement with unbound parameters.</p>
 
 <p>Parameter values are specified using <code>params</code>, which is a JSON
 object whose keys are parameter names, and whose values are the
@@ -2554,7 +2604,7 @@ from a JSON value.  For example, values of type <code>BYTES</code> and values
 of type <code>STRING</code> both appear in <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html#params-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#params (method)">params</a></span> as JSON strings.</p>
 
 <p>In these cases, <code>param_types</code> can be used to specify the exact
-SQL type for some or all of the SQL query parameters. See the
+SQL type for some or all of the SQL statement parameters. See the
 definition of <span class='object_link'><a href="../../../Spanner/V1/Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> for more information
 about SQL types.
 A hash of the same form as <code>Google::Spanner::V1::Type</code>
@@ -2573,10 +2623,10 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>If this request is resuming a previously interrupted SQL query
+        <div class='inline'><p>If this request is resuming a previously interrupted SQL statement
 execution, <code>resume_token</code> should be copied from the last
 <span class='object_link'><a href="../../../Spanner/V1/PartialResultSet.html" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span> yielded before the interruption. Doing this
-enables the new SQL query execution to resume where the last one left
+enables the new SQL statement execution to resume where the last one left
 off. The rest of the request parameters must exactly match the
 request that yielded this token.</p>
 </div>
@@ -2614,6 +2664,30 @@ be set to <span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlReque
 previously created using PartitionQuery().  There must be an exact
 match for the values of fields common to this message and the
 PartitionQueryRequest message used to create this partition_token.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>seqno</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A per-transaction sequence number used to identify this request. This
+makes each request idempotent such that if the request is received multiple
+times, at most one will succeed.</p>
+
+<p>The sequence number must be monotonically increasing within the
+transaction. If a request arrives for the first time with an out-of-order
+sequence number, the transaction may be aborted. Replays of previously
+handled requests will yield the same response as the first execution.</p>
+
+<p>Required for DML statements. Ignored for queries.</p>
 </div>
       
     </li>
@@ -2677,32 +2751,34 @@ retries, etc.</p>
       <pre class="lines">
 
 
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677</pre>
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 655</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 701</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_streaming_sql'>execute_streaming_sql</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -2713,6 +2789,7 @@ retries, etc.</p>
     <span class='label'>resume_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>query_mode:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>partition_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>seqno:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -2722,7 +2799,8 @@ retries, etc.</p>
     <span class='label'>param_types:</span> <span class='id identifier rubyid_param_types'>param_types</span><span class='comma'>,</span>
     <span class='label'>resume_token:</span> <span class='id identifier rubyid_resume_token'>resume_token</span><span class='comma'>,</span>
     <span class='label'>query_mode:</span> <span class='id identifier rubyid_query_mode'>query_mode</span><span class='comma'>,</span>
-    <span class='label'>partition_token:</span> <span class='id identifier rubyid_partition_token'>partition_token</span>
+    <span class='label'>partition_token:</span> <span class='id identifier rubyid_partition_token'>partition_token</span><span class='comma'>,</span>
+    <span class='label'>seqno:</span> <span class='id identifier rubyid_seqno'>seqno</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Spanner/V1/ExecuteSqlRequest.html" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@execute_streaming_sql</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -3175,9 +3253,12 @@ operation in parallel.  Each of the returned partition tokens can be used
 by ExecuteStreamingSql to specify a subset
 of the query result to read.  The same session and read-only transaction
 must be used by the PartitionQueryRequest used to create the
-partition tokens and the ExecuteSqlRequests that use the partition tokens.
-Partition tokens become invalid when the session used to create them
-is deleted or begins a new transaction.</p>
+partition tokens and the ExecuteSqlRequests that use the partition tokens.</p>
+
+<p>Partition tokens become invalid when the session used to create them
+is deleted, is idle for too long, begins a new transaction, or becomes too
+old.  When any of these happen, it is not possible to resume the query, and
+the whole operation must be restarted from the beginning.</p>
 
 
   </div>
@@ -3232,6 +3313,10 @@ partitionable query has a single distributed union operator. A distributed
 union operator conceptually divides one or more tables into multiple
 splits, remotely evaluates a subquery independently on each split, and
 then unions all results.</p>
+
+<p>This must not contain DML commands, such as INSERT, UPDATE, or
+DELETE. Use ExecuteStreamingSql with a
+PartitionedDml transaction for large, partition-friendly DML operations.</p>
 </div>
       
     </li>
@@ -3423,29 +3508,29 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1120
-1121
-1122
-1123
-1124
-1125
-1126
-1127
-1128
-1129
-1130
-1131
-1132
-1133
-1134
-1135
-1136
-1137
-1138
-1139</pre>
+1175
+1176
+1177
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185
+1186
+1187
+1188
+1189
+1190
+1191
+1192
+1193
+1194</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1175</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_query'>partition_query</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -3488,9 +3573,14 @@ operation in parallel.  Each of the returned partition tokens can be used
 by StreamingRead to specify a subset of the read
 result to read.  The same session and read-only transaction must be used by
 the PartitionReadRequest used to create the partition tokens and the
-ReadRequests that use the partition tokens.
-Partition tokens become invalid when the session used to create them
-is deleted or begins a new transaction.</p>
+ReadRequests that use the partition tokens.  There are no ordering
+guarantees on rows returned among the returned partition tokens, or even
+within each individual StreamingRead call issued with a partition_token.</p>
+
+<p>Partition tokens become invalid when the session used to create them
+is deleted, is idle for too long, begins a new transaction, or becomes too
+old.  When any of these happen, it is not possible to resume the read, and
+the whole operation must be restarted from the beginning.</p>
 
 
   </div>
@@ -3736,31 +3826,31 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1201
-1202
-1203
-1204
-1205
-1206
-1207
-1208
-1209
-1210
-1211
-1212
-1213
-1214
-1215
-1216
-1217
-1218
-1219
-1220
-1221
-1222</pre>
+1261
+1262
+1263
+1264
+1265
+1266
+1267
+1268
+1269
+1270
+1271
+1272
+1273
+1274
+1275
+1276
+1277
+1278
+1279
+1280
+1281
+1282</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1201</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1261</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_read'>partition_read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4104,35 +4194,35 @@ retries, etc.</p>
       <pre class="lines">
 
 
-764
-765
-766
-767
-768
-769
-770
-771
-772
-773
-774
-775
-776
-777
-778
-779
-780
-781
-782
-783
-784
-785
-786
-787
-788
-789</pre>
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 764</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 812</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4326,22 +4416,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1033
-1034
-1035
-1036
-1037
-1038
-1039
-1040
-1041
-1042
-1043
-1044
-1045</pre>
+1081
+1082
+1083
+1084
+1085
+1086
+1087
+1088
+1089
+1090
+1091
+1092
+1093</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1033</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 1081</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>
@@ -4631,34 +4721,34 @@ retries, etc.</p>
       <pre class="lines">
 
 
-869
-870
-871
-872
-873
-874
-875
-876
-877
-878
-879
-880
-881
-882
-883
-884
-885
-886
-887
-888
-889
-890
-891
-892
-893</pre>
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 869</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/spanner_client.rb', line 917</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_read'>streaming_read</span> \
     <span class='id identifier rubyid_session'>session</span><span class='comma'>,</span>

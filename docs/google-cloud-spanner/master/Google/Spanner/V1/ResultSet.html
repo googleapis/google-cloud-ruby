@@ -177,7 +177,7 @@ ExecuteSql.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Query plan and execution statistics for the query that produced this result set.</p>
+    <span class="summary_desc"><div class='inline'><p>Query plan and execution statistics for the SQL statement that produced this result set.</p>
 </div></span>
   
 </li>
@@ -236,10 +236,10 @@ ExecuteSql.</p>
       <pre class="lines">
 
 
-37</pre>
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 42</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ResultSet (class)">ResultSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -301,10 +301,10 @@ encoded based on type as described
       <pre class="lines">
 
 
-37</pre>
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 42</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ResultSet (class)">ResultSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -325,8 +325,13 @@ encoded based on type as described
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Query plan and execution statistics for the query that produced this
-result set. These can be requested by setting
+    <p>Returns Query plan and execution statistics for the SQL statement that
+produced this result set. These can be requested by setting
+<span class='object_link'><a href="ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">ExecuteSqlRequest#query_mode</a></span>.
+DML statements always produce stats containing the number of rows
+modified, unless executed using the
+<span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#PLAN-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::PLAN (constant)">ExecuteSqlRequest::QueryMode::PLAN</a></span> <span class='object_link'><a href="ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">ExecuteSqlRequest#query_mode</a></span>.
+Other fields may or may not be populated, based on the
 <span class='object_link'><a href="ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">ExecuteSqlRequest#query_mode</a></span>.</p>
 
 
@@ -345,8 +350,13 @@ result set. These can be requested by setting
       
       
         &mdash;
-        <div class='inline'><p>Query plan and execution statistics for the query that produced this
-result set. These can be requested by setting
+        <div class='inline'><p>Query plan and execution statistics for the SQL statement that
+produced this result set. These can be requested by setting
+<span class='object_link'><a href="ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">ExecuteSqlRequest#query_mode</a></span>.
+DML statements always produce stats containing the number of rows
+modified, unless executed using the
+<span class='object_link'><a href="ExecuteSqlRequest/QueryMode.html#PLAN-constant" title="Google::Spanner::V1::ExecuteSqlRequest::QueryMode::PLAN (constant)">ExecuteSqlRequest::QueryMode::PLAN</a></span> <span class='object_link'><a href="ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">ExecuteSqlRequest#query_mode</a></span>.
+Other fields may or may not be populated, based on the
 <span class='object_link'><a href="ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">ExecuteSqlRequest#query_mode</a></span>.</p>
 </div>
       
@@ -360,10 +370,10 @@ result set. These can be requested by setting
       <pre class="lines">
 
 
-37</pre>
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 42</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::ResultSet (class)">ResultSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

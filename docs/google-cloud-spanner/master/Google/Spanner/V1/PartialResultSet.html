@@ -204,7 +204,7 @@ values, but are a little trickier to consume.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Query plan and execution statistics for the query that produced this streaming result set.</p>
+    <span class="summary_desc"><div class='inline'><p>Query plan and execution statistics for the statement that produced this streaming result set.</p>
 </div></span>
   
 </li>
@@ -293,10 +293,10 @@ to obtain a complete field value.</p>
       <pre class="lines">
 
 
-139</pre>
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 146</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -350,10 +350,10 @@ Only present in the first response.</p>
       <pre class="lines">
 
 
-139</pre>
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 146</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -413,10 +413,10 @@ same session invalidates the token.</p>
       <pre class="lines">
 
 
-139</pre>
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 146</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -437,10 +437,12 @@ same session invalidates the token.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Query plan and execution statistics for the query that produced this
+    <p>Returns Query plan and execution statistics for the statement that produced this
 streaming result set. These can be requested by setting
 <span class='object_link'><a href="ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">ExecuteSqlRequest#query_mode</a></span> and are sent
-only once with the last response in the stream.</p>
+only once with the last response in the stream.
+This field will also be present in the last response for DML
+statements.</p>
 
 
   </div>
@@ -458,10 +460,12 @@ only once with the last response in the stream.</p>
       
       
         &mdash;
-        <div class='inline'><p>Query plan and execution statistics for the query that produced this
+        <div class='inline'><p>Query plan and execution statistics for the statement that produced this
 streaming result set. These can be requested by setting
 <span class='object_link'><a href="ExecuteSqlRequest.html#query_mode-instance_method" title="Google::Spanner::V1::ExecuteSqlRequest#query_mode (method)">ExecuteSqlRequest#query_mode</a></span> and are sent
-only once with the last response in the stream.</p>
+only once with the last response in the stream.
+This field will also be present in the last response for DML
+statements.</p>
 </div>
       
     </li>
@@ -474,10 +478,10 @@ only once with the last response in the stream.</p>
       <pre class="lines">
 
 
-139</pre>
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 146</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -685,10 +689,10 @@ field value <code>&quot;World&quot; = &quot;W&quot; + &quot;orl&quot; + &quot;d&
       <pre class="lines">
 
 
-139</pre>
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/result_set.rb', line 146</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartialResultSet (class)">PartialResultSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

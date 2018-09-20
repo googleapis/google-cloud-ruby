@@ -98,7 +98,7 @@ new session for each transaction.</p>
 
 <p>= Transaction Modes</p>
 
-<p>Cloud Spanner supports two transaction modes:</p>
+<p>Cloud Spanner supports three transaction modes:</p>
 
 <ol>
 <li><p>Locking read-write. This type of transaction is the only way
@@ -111,6 +111,12 @@ new session for each transaction.</p>
  writes. Snapshot read-only transactions can be configured to
  read at timestamps in the past. Snapshot read-only
  transactions do not need to be committed.</p></li>
+<li><p>Partitioned DML. This type of transaction is used to execute
+ a single Partitioned DML statement. Partitioned DML partitions
+ the key space and runs the DML statement over each partition
+ in parallel using separate, internal transactions that commit
+ independently. Partitioned DML transactions do not need to be
+ committed.</p></li>
 </ol>
 
 <p>For transactions that only read, snapshot read-only transactions
@@ -139,11 +145,8 @@ Rollback.  Long periods of
 inactivity at the client may cause Cloud Spanner to release a
 transaction&#39;s locks and abort it.</p>
 
-<p>Reads performed within a transaction acquire locks on the data
-being read. Writes can only be done at commit time, after all reads
-have been completed.
-Conceptually, a read-write transaction consists of zero or more
-reads or SQL queries followed by
+<p>Conceptually, a read-write transaction consists of zero or more
+reads or SQL statements followed by
 Commit. At any time before
 Commit, the client can send a
 Rollback request to abort the
@@ -312,6 +315,59 @@ restriction also applies to in-progress reads and/or SQL queries whose
 timestamp become too old while executing. Reads and SQL queries with
 too-old read timestamps fail with the error <code>FAILED_PRECONDITION</code>.</p>
 
+<p>== Partitioned DML Transactions</p>
+
+<p>Partitioned DML transactions are used to execute DML statements with a
+different execution strategy that provides different, and often better,
+scalability properties for large, table-wide operations than DML in a
+ReadWrite transaction. Smaller scoped statements, such as an OLTP workload,
+should prefer using ReadWrite transactions.</p>
+
+<p>Partitioned DML partitions the keyspace and runs the DML statement on each
+partition in separate, internal transactions. These transactions commit
+automatically when complete, and run independently from one another.</p>
+
+<p>To reduce lock contention, this execution strategy only acquires read locks
+on rows that match the WHERE clause of the statement. Additionally, the
+smaller per-partition transactions hold locks for less time.</p>
+
+<p>That said, Partitioned DML is not a drop-in replacement for standard DML used
+in ReadWrite transactions.</p>
+
+<ul>
+<li><p>The DML statement must be fully-partitionable. Specifically, the statement
+must be expressible as the union of many statements which each access only
+a single row of the table.</p></li>
+<li><p>The statement is not applied atomically to all rows of the table. Rather,
+the statement is applied atomically to partitions of the table, in
+independent transactions. Secondary index rows are updated atomically
+with the base table rows.</p></li>
+<li><p>Partitioned DML does not guarantee exactly-once execution semantics
+against a partition. The statement will be applied at least once to each
+partition. It is strongly recommended that the DML statement should be
+idempotent to avoid unexpected results. For instance, it is potentially
+dangerous to run a statement such as
+<code>UPDATE table SET column = column + 1</code> as it could be run multiple times
+against some rows.</p></li>
+<li><p>The partitions are committed automatically - there is no support for
+Commit or Rollback. If the call returns an error, or if the client issuing
+the ExecuteSql call dies, it is possible that some rows had the statement
+executed on them successfully. It is also possible that statement was
+never executed against other rows.</p></li>
+<li><p>Partitioned DML transactions may only contain the execution of a single
+DML statement via ExecuteSql or ExecuteStreamingSql.</p></li>
+<li><p>If any error is encountered during the execution of the partitioned DML
+operation (for instance, a UNIQUE INDEX violation, division by zero, or a
+value that cannot be stored due to schema constraints), then the
+operation is stopped at that point and an error is returned. It is
+possible that at this point, some partitions have been committed (or even
+committed multiple times), and other partitions have not been run at all.</p></li>
+</ul>
+
+<p>Given the above, Partitioned DML is good fit for large, database-wide,
+operations that are idempotent, such as deleting old rows from a very large
+table.</p>
+
 
   </div>
 </div>
@@ -324,7 +380,7 @@ too-old read timestamps fail with the error <code>FAILED_PRECONDITION</code>.</p
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="TransactionOptions/ReadOnly.html" title="Google::Spanner::V1::TransactionOptions::ReadOnly (class)">ReadOnly</a></span>, <span class='object_link'><a href="TransactionOptions/ReadWrite.html" title="Google::Spanner::V1::TransactionOptions::ReadWrite (class)">ReadWrite</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="TransactionOptions/PartitionedDml.html" title="Google::Spanner::V1::TransactionOptions::PartitionedDml (class)">PartitionedDml</a></span>, <span class='object_link'><a href="TransactionOptions/ReadOnly.html" title="Google::Spanner::V1::TransactionOptions::ReadOnly (class)">ReadOnly</a></span>, <span class='object_link'><a href="TransactionOptions/ReadWrite.html" title="Google::Spanner::V1::TransactionOptions::ReadWrite (class)">ReadWrite</a></span>
     
   
 </p>
@@ -334,6 +390,32 @@ too-old read timestamps fail with the error <code>FAILED_PRECONDITION</code>.</p
 
   <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#partitioned_dml-instance_method" title="#partitioned_dml (instance method)">#<strong>partitioned_dml</strong>  &#x21d2; Google::Spanner::V1::TransactionOptions::PartitionedDml </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Partitioned DML transaction.</p>
+</div></span>
+  
+</li>
+
     
       <li class="public ">
   <span class="summary_signature">
@@ -397,9 +479,216 @@ too-old read timestamps fail with the error <code>FAILED_PRECONDITION</code>.</p
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="read_only=-instance_method"></span>
+      <span id="partitioned_dml=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="read_only-instance_method">
+  <h3 class="signature first" id="partitioned_dml-instance_method">
+  
+    #<strong>partitioned_dml</strong>  &#x21d2; <tt><span class='object_link'><a href="TransactionOptions/PartitionedDml.html" title="Google::Spanner::V1::TransactionOptions::PartitionedDml (class)">Google::Spanner::V1::TransactionOptions::PartitionedDml</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Partitioned DML transaction.</p>
+
+<p>Authorization to begin a Partitioned DML transaction requires
+<code>spanner.databases.beginPartitionedDmlTransaction</code> permission
+on the <code>session</code> resource.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TransactionOptions/PartitionedDml.html" title="Google::Spanner::V1::TransactionOptions::PartitionedDml (class)">Google::Spanner::V1::TransactionOptions::PartitionedDml</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Partitioned DML transaction.</p>
+
+<p>Authorization to begin a Partitioned DML transaction requires
+<code>spanner.databases.beginPartitionedDmlTransaction</code> permission
+on the <code>session</code> resource.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/transaction.rb', line 316</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::TransactionOptions (class)">TransactionOptions</a></span></span>
+  <span class='comment'># Message type to initiate a read-write transaction. Currently this
+</span>  <span class='comment'># transaction type has no options.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TransactionOptions/ReadWrite.html" title="Google::Spanner::V1::TransactionOptions::ReadWrite (class)">ReadWrite</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message type to initiate a Partitioned DML transaction.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TransactionOptions/PartitionedDml.html" title="Google::Spanner::V1::TransactionOptions::PartitionedDml (class)">PartitionedDml</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message type to initiate a read-only transaction.
+</span>  <span class='comment'># @!attribute [rw] strong
+</span>  <span class='comment'>#   @return [true, false]
+</span>  <span class='comment'>#     Read at a timestamp where all previously committed transactions
+</span>  <span class='comment'>#     are visible.
+</span>  <span class='comment'># @!attribute [rw] min_read_timestamp
+</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#     Executes all reads at a timestamp &gt;= `min_read_timestamp`.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     This is useful for requesting fresher data than some previous
+</span>  <span class='comment'>#     read, or data that is fresh enough to observe the effects of some
+</span>  <span class='comment'>#     previously committed transaction whose timestamp is known.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Note that this option can only be used in single-use transactions.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
+</span>  <span class='comment'>#     Example: `&quot;2014-10-02T15:01:23.045123456Z&quot;`.
+</span>  <span class='comment'># @!attribute [rw] max_staleness
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     Read data at a timestamp &gt;= `NOW - max_staleness`
+</span>  <span class='comment'>#     seconds. Guarantees that all writes that have committed more
+</span>  <span class='comment'>#     than the specified number of seconds ago are visible. Because
+</span>  <span class='comment'>#     Cloud Spanner chooses the exact timestamp, this mode works even if
+</span>  <span class='comment'>#     the client&#39;s local clock is substantially skewed from Cloud Spanner
+</span>  <span class='comment'>#     commit timestamps.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Useful for reading the freshest data available at a nearby
+</span>  <span class='comment'>#     replica, while bounding the possible staleness if the local
+</span>  <span class='comment'>#     replica has fallen behind.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Note that this option can only be used in single-use
+</span>  <span class='comment'>#     transactions.
+</span>  <span class='comment'># @!attribute [rw] read_timestamp
+</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#     Executes all reads at the given timestamp. Unlike other modes,
+</span>  <span class='comment'>#     reads at a specific timestamp are repeatable; the same read at
+</span>  <span class='comment'>#     the same timestamp always returns the same data. If the
+</span>  <span class='comment'>#     timestamp is in the future, the read will block until the
+</span>  <span class='comment'>#     specified timestamp, modulo the read&#39;s deadline.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Useful for large scale consistent reads such as mapreduces, or
+</span>  <span class='comment'>#     for coordinating many reads against a consistent snapshot of the
+</span>  <span class='comment'>#     data.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     A timestamp in RFC3339 UTC \&quot;Zulu\&quot; format, accurate to nanoseconds.
+</span>  <span class='comment'>#     Example: `&quot;2014-10-02T15:01:23.045123456Z&quot;`.
+</span>  <span class='comment'># @!attribute [rw] exact_staleness
+</span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
+</span>  <span class='comment'>#     Executes all reads at a timestamp that is `exact_staleness`
+</span>  <span class='comment'>#     old. The timestamp is chosen soon after the read is started.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Guarantees that all writes that have committed more than the
+</span>  <span class='comment'>#     specified number of seconds ago are visible. Because Cloud Spanner
+</span>  <span class='comment'>#     chooses the exact timestamp, this mode works even if the client&#39;s
+</span>  <span class='comment'>#     local clock is substantially skewed from Cloud Spanner commit
+</span>  <span class='comment'>#     timestamps.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Useful for reading at nearby replicas without the distributed
+</span>  <span class='comment'>#     timestamp negotiation overhead of `max_staleness`.
+</span>  <span class='comment'># @!attribute [rw] return_read_timestamp
+</span>  <span class='comment'>#   @return [true, false]
+</span>  <span class='comment'>#     If true, the Cloud Spanner-selected read timestamp is included in
+</span>  <span class='comment'>#     the {Google::Spanner::V1::Transaction Transaction} message that describes the transaction.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TransactionOptions/ReadOnly.html" title="Google::Spanner::V1::TransactionOptions::ReadOnly (class)">ReadOnly</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="read_only=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="read_only-instance_method">
   
     #<strong>read_only</strong>  &#x21d2; <tt><span class='object_link'><a href="TransactionOptions/ReadOnly.html" title="Google::Spanner::V1::TransactionOptions::ReadOnly (class)">Google::Spanner::V1::TransactionOptions::ReadOnly</a></span></tt> 
   
@@ -448,84 +737,90 @@ on the <code>session</code> resource.</p>
       <pre class="lines">
 
 
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
 316
 317
-318</pre>
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/transaction.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/transaction.rb', line 316</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::TransactionOptions (class)">TransactionOptions</a></span></span>
   <span class='comment'># Message type to initiate a read-write transaction. Currently this
 </span>  <span class='comment'># transaction type has no options.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TransactionOptions/ReadWrite.html" title="Google::Spanner::V1::TransactionOptions::ReadWrite (class)">ReadWrite</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message type to initiate a Partitioned DML transaction.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TransactionOptions/PartitionedDml.html" title="Google::Spanner::V1::TransactionOptions::PartitionedDml (class)">PartitionedDml</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message type to initiate a read-only transaction.
 </span>  <span class='comment'># @!attribute [rw] strong
@@ -649,84 +944,90 @@ on the <code>session</code> resource.</p>
       <pre class="lines">
 
 
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
 316
 317
-318</pre>
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/transaction.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/transaction.rb', line 316</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::TransactionOptions (class)">TransactionOptions</a></span></span>
   <span class='comment'># Message type to initiate a read-write transaction. Currently this
 </span>  <span class='comment'># transaction type has no options.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TransactionOptions/ReadWrite.html" title="Google::Spanner::V1::TransactionOptions::ReadWrite (class)">ReadWrite</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message type to initiate a Partitioned DML transaction.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="TransactionOptions/PartitionedDml.html" title="Google::Spanner::V1::TransactionOptions::PartitionedDml (class)">PartitionedDml</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># Message type to initiate a read-only transaction.
 </span>  <span class='comment'># @!attribute [rw] strong
