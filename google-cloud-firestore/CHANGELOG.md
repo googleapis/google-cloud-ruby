@@ -1,5 +1,13 @@
 # Release History
 
+### 0.24.2 / 2018-09-20
+
+* Add fix for comparing NaN values
+  * NaN values should not be compared, as this may raise with Active Support.
+* Update documentation.
+  * Change documentation URL to googleapis GitHub org.
+* Fix circular require warning.
+
 ### 0.24.1 / 2018-09-12
 
 * Add missing documentation files to package.

@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-tasks"
-  gem.version       = "0.2.3"
+  gem.version       = "0.2.4"
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

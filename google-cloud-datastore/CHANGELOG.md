@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.4 / 2018-09-20
+
+* Update documentation.
+  * Change documentation URL to googleapis GitHub org.
+* Fix circular require warning.
+
 ### 1.4.3 / 2018-09-12
 
 * Update documentation.

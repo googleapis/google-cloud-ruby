@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.2 / 2018-09-20
+
+* Update documentation.
+  * Change documentation URL to googleapis GitHub org.
+* Fix circular require warning.
+
 ### 1.8.1 / 2018-09-12
 
 * Add missing documentation files to package.

@@ -1,5 +1,14 @@
 # Release History
 
+### 1.5.5 / 2018-09-20
+
+* Make Logger thread-safe.
+* Update Logging generated files.
+  * Add Metric's MetricDescriptorMetadata.
+* Update documentation.
+  * Change documentation URL to googleapis GitHub org.
+* Fix circular require warning.
+
 ### 1.5.4 / 2018-09-12
 
 * Add missing documentation files to package.

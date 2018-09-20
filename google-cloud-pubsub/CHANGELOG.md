@@ -1,5 +1,12 @@
 # Release History
 
+### 0.33.0 / 2018-09-20
+
+* Add support for user labels to Snapshot, Subscription and Topic.
+* Update documentation.
+  * Change documentation URL to googleapis GitHub org.
+* Fix circular require warning.
+
 ### 0.32.2 / 2018-09-12
 
 * Add missing documentation files to package.
