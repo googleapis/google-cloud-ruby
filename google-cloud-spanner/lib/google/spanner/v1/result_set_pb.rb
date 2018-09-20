@@ -29,6 +29,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.spanner.v1.ResultSetStats" do
     optional :query_plan, :message, 1, "google.spanner.v1.QueryPlan"
     optional :query_stats, :message, 2, "google.protobuf.Struct"
+    oneof :row_count do
+      optional :row_count_exact, :int64, 3
+      optional :row_count_lower_bound, :int64, 4
+    end
   end
 end
 

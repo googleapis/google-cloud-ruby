@@ -11,10 +11,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.spanner.v1.TransactionOptions" do
     oneof :mode do
       optional :read_write, :message, 1, "google.spanner.v1.TransactionOptions.ReadWrite"
+      optional :partitioned_dml, :message, 3, "google.spanner.v1.TransactionOptions.PartitionedDml"
       optional :read_only, :message, 2, "google.spanner.v1.TransactionOptions.ReadOnly"
     end
   end
   add_message "google.spanner.v1.TransactionOptions.ReadWrite" do
+  end
+  add_message "google.spanner.v1.TransactionOptions.PartitionedDml" do
   end
   add_message "google.spanner.v1.TransactionOptions.ReadOnly" do
     optional :return_read_timestamp, :bool, 6
@@ -44,6 +47,7 @@ module Google
     module V1
       TransactionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions").msgclass
       TransactionOptions::ReadWrite = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.ReadWrite").msgclass
+      TransactionOptions::PartitionedDml = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.PartitionedDml").msgclass
       TransactionOptions::ReadOnly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionOptions.ReadOnly").msgclass
       Transaction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Transaction").msgclass
       TransactionSelector = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.TransactionSelector").msgclass

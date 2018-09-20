@@ -31,8 +31,13 @@ module Google
       #     {Google::Spanner::V1::TypeCode here}.
       # @!attribute [rw] stats
       #   @return [Google::Spanner::V1::ResultSetStats]
-      #     Query plan and execution statistics for the query that produced this
-      #     result set. These can be requested by setting
+      #     Query plan and execution statistics for the SQL statement that
+      #     produced this result set. These can be requested by setting
+      #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode}.
+      #     DML statements always produce stats containing the number of rows
+      #     modified, unless executed using the
+      #     {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::PLAN ExecuteSqlRequest::QueryMode::PLAN} {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode}.
+      #     Other fields may or may not be populated, based on the
       #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode}.
       class ResultSet; end
 
@@ -132,10 +137,12 @@ module Google
       #     same session invalidates the token.
       # @!attribute [rw] stats
       #   @return [Google::Spanner::V1::ResultSetStats]
-      #     Query plan and execution statistics for the query that produced this
+      #     Query plan and execution statistics for the statement that produced this
       #     streaming result set. These can be requested by setting
       #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode} and are sent
       #     only once with the last response in the stream.
+      #     This field will also be present in the last response for DML
+      #     statements.
       class PartialResultSet; end
 
       # Metadata about a {Google::Spanner::V1::ResultSet ResultSet} or {Google::Spanner::V1::PartialResultSet PartialResultSet}.
@@ -170,6 +177,13 @@ module Google
       #           "elapsed_time": "1.22 secs",
       #           "cpu_time": "1.19 secs"
       #         }
+      # @!attribute [rw] row_count_exact
+      #   @return [Integer]
+      #     Standard DML returns an exact count of rows that were modified.
+      # @!attribute [rw] row_count_lower_bound
+      #   @return [Integer]
+      #     Partitioned DML does not offer exactly-once semantics, so it
+      #     returns a lower bound of the rows modified.
       class ResultSetStats; end
     end
   end
