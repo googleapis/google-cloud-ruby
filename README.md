@@ -4,7 +4,7 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/)
 services.
 
 [![CircleCI Build Status](https://circleci.com/gh/googleapis/google-cloud-ruby.svg?&style=shield)](https://circleci.com/gh/googleapis/google-cloud-ruby)
-[![Coverage Status](https://codecov.io/gh/googleapis/google-cloud-ruby/branch/master/graph/badge.svg)](https://codecov.io/gh/googleapis/google-cloud-ruby/branch/master/graph/badge.svg)
+[![Coverage Status](https://codecov.io/gh/googleapis/google-cloud-ruby/branch/master/graph/badge.svg)](https://codecov.io/gh/googleapis/google-cloud-ruby)
 [![Gem Version](https://badge.fury.io/rb/google-cloud.svg)](http://badge.fury.io/rb/google-cloud)
 
 * [Homepage](https://googleapis.github.io/google-cloud-ruby/)
