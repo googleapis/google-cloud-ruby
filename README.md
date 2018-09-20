@@ -1,5 +1,7 @@
 # Google Cloud Ruby Client
 
+## Be Your Best Self
+
 Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/)
 services.
 
