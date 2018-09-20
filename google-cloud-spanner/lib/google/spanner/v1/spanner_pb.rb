@@ -49,6 +49,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :resume_token, :bytes, 6
     optional :query_mode, :enum, 7, "google.spanner.v1.ExecuteSqlRequest.QueryMode"
     optional :partition_token, :bytes, 8
+    optional :seqno, :int64, 9
   end
   add_enum "google.spanner.v1.ExecuteSqlRequest.QueryMode" do
     value :NORMAL, 0
