@@ -16,28 +16,6 @@ jobs:
 workflows:
   version: 2
 
-  tests:
-    jobs:
-      - test-ruby-2.5: &test-filters
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-                - gcloud-jsondoc
-                - gcloud-rdoc
-                - yard-gcloud
-      - test-ruby-2.4:
-          <<: *test-filters
-      - test-ruby-2.3:
-          <<: *test-filters
-
-  post-build:
-    jobs:
-      - post:
-          filters:
-            branches:
-              only: master
-
   gem-release:
     jobs:
       - release:
