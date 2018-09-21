@@ -418,6 +418,7 @@ google-cloud-tasks:
 - v0.2.0
 - v0.1.0
 google-cloud-text_to_speech:
+- v0.1.3
 - v0.1.2
 - v0.1.1
 - v0.1.0
