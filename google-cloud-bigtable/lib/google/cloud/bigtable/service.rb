@@ -29,7 +29,7 @@ module Google
       # Represents the gRPC Bigtable service, including all the API methods.
       class Service
         # @private
-        attr_accessor :project_id, :credentials, :timeout, :client_config
+        attr_accessor :project_id, :credentials, :host, :timeout, :client_config
 
         # @private
         # Creates a new Service instance.
@@ -57,11 +57,25 @@ module Google
         #   this data. Falls back to the default config if not specified
         #   or the specified config is missing data points.
 
-        def initialize project_id, credentials, timeout: nil, client_config: nil
+        def initialize project_id, credentials, host: nil, timeout: nil,
+                       client_config: nil
           @project_id = project_id
           @credentials = credentials
+          @host = host
           @timeout = timeout
           @client_config = client_config || {}
+        end
+
+        def channel default_host
+          require "grpc"
+          GRPC::Core::Channel.new((host || default_host), nil, chan_creds)
+        end
+
+        def chan_creds
+          return credentials if insecure?
+          require "grpc"
+          GRPC::Core::ChannelCredentials.new.compose \
+            GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         # Create or return existing instance of instance admin client.
@@ -69,14 +83,18 @@ module Google
         # @return [Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient]
 
         def instances
-          @instances ||= \
+          @instances ||= begin
+            instances_channel = channel(
+              Admin::V2::BigtableInstanceAdminClient::SERVICE_ADDRESS
+            )
             Admin::V2::BigtableInstanceAdminClient.new(
-              credentials: credentials,
+              credentials: instances_channel,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
               lib_version: Google::Cloud::Bigtable::VERSION
             )
+          end
         end
 
         # Create or return existing instance of table admin client.
@@ -84,14 +102,18 @@ module Google
         # @return [Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient]
 
         def tables
-          @tables ||= \
+          @tables ||= begin
+            tables_channel = channel(
+              Admin::V2::BigtableTableAdminClient::SERVICE_ADDRESS
+            )
             Admin::V2::BigtableTableAdminClient.new(
-              credentials: credentials,
+              credentials: tables_channel,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
               lib_version: Google::Cloud::Bigtable::VERSION
             )
+          end
         end
 
         # Create instance of data client.
@@ -101,12 +123,16 @@ module Google
         def client
           @client ||= \
             V2::BigtableClient.new(
-              credentials: credentials,
+              credentials: channel(V2::BigtableClient::SERVICE_ADDRESS),
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
               lib_version: Google::Cloud::Bigtable::VERSION
             )
+        end
+
+        def insecure?
+          credentials == :this_channel_is_insecure
         end
 
         # Create an instance within a project.

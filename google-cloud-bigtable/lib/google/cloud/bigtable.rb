@@ -46,6 +46,8 @@ module Google
       #   should already be composed with a `GRPC::Core::CallCredentials` object.
       #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
       #   metadata for requests, generally, to give OAuth credentials.
+      # @param [String] emulator_host Bigtable emulator host. Optional.
+      #   If the param is nil, uses the value of the `emulator_host` config.
       # @param scope [Array<String>]
       #   The OAuth 2.0 scopes controlling the set of resources and operations
       #   that the connection can access. See [Using OAuth 2.0 to Access Google
@@ -69,18 +71,28 @@ module Google
       def self.new \
           project_id: nil,
           credentials: nil,
+          emulator_host: nil,
           scope: nil,
           client_config: nil,
           timeout: nil
         project_id = (project_id || default_project_id).to_s
-
-        raise InvalidArgumentError, "project_id is required" unless project_id
+        raise ArgumentError, "project_id is required" if project_id.empty?
 
         scope ||= configure.scope
         timeout ||= configure.timeout
         client_config ||= configure.client_config
-        credentials ||= default_credentials(scope: scope)
+        emulator_host ||= configure.emulator_host
+        if emulator_host
+          return Bigtable::Project.new(
+            Bigtable::Service.new(
+              project_id, :this_channel_is_insecure,
+              host: emulator_host, timeout: timeout,
+              client_config: client_config
+            )
+          )
+        end
 
+        credentials ||= default_credentials(scope: scope)
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Bigtable::Credentials.new credentials, scope: scope
         end

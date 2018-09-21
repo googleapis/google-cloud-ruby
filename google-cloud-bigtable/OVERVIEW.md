@@ -24,7 +24,8 @@ steps:
 
 ## Additional information
 
-Google Bigtable can be configured to use gRPC's logging. To learn more, see the
+Google Bigtable can be configured to use an emulator or to enable gRPC's
+logging. To learn more, see the {file:EMULATOR.md Emulator guide} and
 {file:LOGGING.md Logging guide}.
 
 [Product Documentation]: https://cloud.google.com/bigtable
