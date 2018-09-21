@@ -1,0 +1,4899 @@
+---
+layout: yard_main
+title: "Class: Google::Container::V1::Cluster - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Container::V1::Cluster";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Container.html" title="Google::Container (module)">Container</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Container::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">Cluster</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Container::V1::Cluster
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Container::V1::Cluster</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A Google Container Engine cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#addons_config-instance_method" title="#addons_config (instance method)">#<strong>addons_config</strong>  &#x21d2; Google::Container::V1::AddonsConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configurations for the various addons available to run in the cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cluster_ipv4_cidr-instance_method" title="#cluster_ipv4_cidr (instance method)">#<strong>cluster_ipv4_cidr</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The IP address range of the container pods in this cluster, in <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a> notation (e.g. <code>10.96.0.0/14</code>).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_time-instance_method" title="#create_time (instance method)">#<strong>create_time</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The time the cluster was created, in <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text format.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_master_version-instance_method" title="#current_master_version (instance method)">#<strong>current_master_version</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The current software version of the master endpoint.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_node_count-instance_method" title="#current_node_count (instance method)">#<strong>current_node_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The number of nodes currently in the cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_node_version-instance_method" title="#current_node_version (instance method)">#<strong>current_node_version</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The current version of the node software components.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>An optional description of this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#enable_kubernetes_alpha-instance_method" title="#enable_kubernetes_alpha (instance method)">#<strong>enable_kubernetes_alpha</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Kubernetes alpha features are enabled on this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#endpoint-instance_method" title="#endpoint (instance method)">#<strong>endpoint</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The IP address of this cluster&#39;s master endpoint.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#expire_time-instance_method" title="#expire_time (instance method)">#<strong>expire_time</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The time the cluster will be automatically deleted in <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text format.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initial_cluster_version-instance_method" title="#initial_cluster_version (instance method)">#<strong>initial_cluster_version</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The initial Kubernetes version for this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initial_node_count-instance_method" title="#initial_node_count (instance method)">#<strong>initial_node_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of nodes to create in this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#instance_group_urls-instance_method" title="#instance_group_urls (instance method)">#<strong>instance_group_urls</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ip_allocation_policy-instance_method" title="#ip_allocation_policy (instance method)">#<strong>ip_allocation_policy</strong>  &#x21d2; Google::Container::V1::IPAllocationPolicy </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configuration for cluster IP allocation.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#label_fingerprint-instance_method" title="#label_fingerprint (instance method)">#<strong>label_fingerprint</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The fingerprint of the set of labels for this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#legacy_abac-instance_method" title="#legacy_abac (instance method)">#<strong>legacy_abac</strong>  &#x21d2; Google::Container::V1::LegacyAbac </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configuration for the legacy ABAC authorization mode.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#locations-instance_method" title="#locations (instance method)">#<strong>locations</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The list of Google Compute Engine <a href="https://cloud.google.com/compute/docs/zones#available">locations</a> in which the cluster&#39;s nodes should be located.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logging_service-instance_method" title="#logging_service (instance method)">#<strong>logging_service</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The logging service the cluster should use to write logs.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maintenance_policy-instance_method" title="#maintenance_policy (instance method)">#<strong>maintenance_policy</strong>  &#x21d2; Google::Container::V1::MaintenancePolicy </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configure the maintenance policy for this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#master_auth-instance_method" title="#master_auth (instance method)">#<strong>master_auth</strong>  &#x21d2; Google::Container::V1::MasterAuth </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The authentication information for accessing the master endpoint.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#master_authorized_networks_config-instance_method" title="#master_authorized_networks_config (instance method)">#<strong>master_authorized_networks_config</strong>  &#x21d2; Google::Container::V1::MasterAuthorizedNetworksConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Master authorized networks is a Beta feature.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#monitoring_service-instance_method" title="#monitoring_service (instance method)">#<strong>monitoring_service</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The monitoring service the cluster should use to write metrics.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#network-instance_method" title="#network (instance method)">#<strong>network</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/networks-and-firewalls#networks">network</a> to which the cluster is connected.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#network_policy-instance_method" title="#network_policy (instance method)">#<strong>network_policy</strong>  &#x21d2; Google::Container::V1::NetworkPolicy </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configuration options for the NetworkPolicy feature.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#node_config-instance_method" title="#node_config (instance method)">#<strong>node_config</strong>  &#x21d2; Google::Container::V1::NodeConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parameters used in creating the cluster&#39;s nodes.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#node_ipv4_cidr_size-instance_method" title="#node_ipv4_cidr_size (instance method)">#<strong>node_ipv4_cidr_size</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The size of the address space on each node for hosting containers.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#node_pools-instance_method" title="#node_pools (instance method)">#<strong>node_pools</strong>  &#x21d2; Array&lt;Google::Container::V1::NodePool&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The node pools associated with this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource_labels-instance_method" title="#resource_labels (instance method)">#<strong>resource_labels</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The resource labels for the cluster to use to annotate any related Google Compute Engine resources.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#self_link-instance_method" title="#self_link (instance method)">#<strong>self_link</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] Server-defined URL for the resource.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#services_ipv4_cidr-instance_method" title="#services_ipv4_cidr (instance method)">#<strong>services_ipv4_cidr</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The IP address range of the Kubernetes services in this cluster, in <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a> notation (e.g. <code>1.2.3.4/29</code>).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status-instance_method" title="#status (instance method)">#<strong>status</strong>  &#x21d2; Google::Container::V1::Cluster::Status </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The current status of this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status_message-instance_method" title="#status_message (instance method)">#<strong>status_message</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] Additional information about the current status of this cluster, if available.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#subnetwork-instance_method" title="#subnetwork (instance method)">#<strong>subnetwork</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/subnetworks">subnetwork</a> to which the cluster is connected.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#zone-instance_method" title="#zone (instance method)">#<strong>zone</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster resides.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="addons_config=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="addons_config-instance_method">
+  
+    #<strong>addons_config</strong>  &#x21d2; <tt><span class='object_link'><a href="AddonsConfig.html" title="Google::Container::V1::AddonsConfig (class)">Google::Container::V1::AddonsConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Configurations for the various addons available to run in the cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AddonsConfig.html" title="Google::Container::V1::AddonsConfig (class)">Google::Container::V1::AddonsConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Configurations for the various addons available to run in the cluster.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="cluster_ipv4_cidr=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="cluster_ipv4_cidr-instance_method">
+  
+    #<strong>cluster_ipv4_cidr</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The IP address range of the container pods in this cluster, in
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. <code>10.96.0.0/14</code>). Leave blank to have
+one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The IP address range of the container pods in this cluster, in
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. <code>10.96.0.0/14</code>). Leave blank to have
+one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="create_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="create_time-instance_method">
+  
+    #<strong>create_time</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The time the cluster was created, in
+<a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The time the cluster was created, in
+<a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text format.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="current_master_version=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="current_master_version-instance_method">
+  
+    #<strong>current_master_version</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The current software version of the master endpoint.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The current software version of the master endpoint.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="current_node_count=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="current_node_count-instance_method">
+  
+    #<strong>current_node_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The number of nodes currently in the cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The number of nodes currently in the cluster.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="current_node_version=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="current_node_version-instance_method">
+  
+    #<strong>current_node_version</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The current version of the node software components.
+If they are currently at multiple versions because they&#39;re in the process
+of being upgraded, this reflects the minimum version of all nodes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The current version of the node software components.
+If they are currently at multiple versions because they&#39;re in the process
+of being upgraded, this reflects the minimum version of all nodes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="description=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="description-instance_method">
+  
+    #<strong>description</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns An optional description of this cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An optional description of this cluster.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="enable_kubernetes_alpha=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="enable_kubernetes_alpha-instance_method">
+  
+    #<strong>enable_kubernetes_alpha</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Kubernetes alpha features are enabled on this cluster. This includes alpha
+API groups (e.g. v1alpha1) and features that may not be production ready in
+the kubernetes version of the master and nodes.
+The cluster has no SLA for uptime and master/node upgrades are disabled.
+Alpha enabled clusters are automatically deleted thirty days after
+creation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Kubernetes alpha features are enabled on this cluster. This includes alpha
+API groups (e.g. v1alpha1) and features that may not be production ready in
+the kubernetes version of the master and nodes.
+The cluster has no SLA for uptime and master/node upgrades are disabled.
+Alpha enabled clusters are automatically deleted thirty days after
+creation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="endpoint=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="endpoint-instance_method">
+  
+    #<strong>endpoint</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The IP address of this cluster&#39;s master endpoint.
+The endpoint can be accessed from the internet at
+<code>https://username:password@endpoint/</code>.</p>
+
+<p>See the <code>masterAuth</code> property of this resource for username and
+password information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The IP address of this cluster&#39;s master endpoint.
+The endpoint can be accessed from the internet at
+<code>https://username:password@endpoint/</code>.</p>
+
+<p>See the <code>masterAuth</code> property of this resource for username and
+password information.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="expire_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="expire_time-instance_method">
+  
+    #<strong>expire_time</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The time the cluster will be automatically
+deleted in <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The time the cluster will be automatically
+deleted in <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text format.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="initial_cluster_version=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="initial_cluster_version-instance_method">
+  
+    #<strong>initial_cluster_version</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The initial Kubernetes version for this cluster.  Valid versions are those
+found in validMasterVersions returned by getServerConfig.  The version can
+be upgraded over time; such upgrades are reflected in
+currentMasterVersion and currentNodeVersion.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The initial Kubernetes version for this cluster.  Valid versions are those
+found in validMasterVersions returned by getServerConfig.  The version can
+be upgraded over time; such upgrades are reflected in
+currentMasterVersion and currentNodeVersion.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="initial_node_count=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="initial_node_count-instance_method">
+  
+    #<strong>initial_node_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The number of nodes to create in this cluster. You must ensure that your
+Compute Engine <a href="/compute/docs/resource-quotas">resource quota</a>
+is sufficient for this number of instances. You must also have available
+firewall and routes quota.
+For requests, this field should only be used in lieu of a
+&quot;node_pool&quot; object, since this configuration (along with the
+&quot;node_config&quot;) will be used to create a &quot;NodePool&quot; object with an
+auto-generated name. Do not use this and a node_pool at the same time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of nodes to create in this cluster. You must ensure that your
+Compute Engine <a href="/compute/docs/resource-quotas">resource quota</a>
+is sufficient for this number of instances. You must also have available
+firewall and routes quota.
+For requests, this field should only be used in lieu of a
+&quot;node_pool&quot; object, since this configuration (along with the
+&quot;node_config&quot;) will be used to create a &quot;NodePool&quot; object with an
+auto-generated name. Do not use this and a node_pool at the same time.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="instance_group_urls=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="instance_group_urls-instance_method">
+  
+    #<strong>instance_group_urls</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Deprecated. Use node_pools.instance_group_urls.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Deprecated. Use node_pools.instance_group_urls.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="ip_allocation_policy=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="ip_allocation_policy-instance_method">
+  
+    #<strong>ip_allocation_policy</strong>  &#x21d2; <tt><span class='object_link'><a href="IPAllocationPolicy.html" title="Google::Container::V1::IPAllocationPolicy (class)">Google::Container::V1::IPAllocationPolicy</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Configuration for cluster IP allocation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="IPAllocationPolicy.html" title="Google::Container::V1::IPAllocationPolicy (class)">Google::Container::V1::IPAllocationPolicy</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Configuration for cluster IP allocation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="label_fingerprint=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="label_fingerprint-instance_method">
+  
+    #<strong>label_fingerprint</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The fingerprint of the set of labels for this cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The fingerprint of the set of labels for this cluster.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="legacy_abac=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="legacy_abac-instance_method">
+  
+    #<strong>legacy_abac</strong>  &#x21d2; <tt><span class='object_link'><a href="LegacyAbac.html" title="Google::Container::V1::LegacyAbac (class)">Google::Container::V1::LegacyAbac</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Configuration for the legacy ABAC authorization mode.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="LegacyAbac.html" title="Google::Container::V1::LegacyAbac (class)">Google::Container::V1::LegacyAbac</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Configuration for the legacy ABAC authorization mode.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="locations=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="locations-instance_method">
+  
+    #<strong>locations</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The list of Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/zones#available">locations</a> in which the cluster&#39;s nodes
+should be located.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The list of Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/zones#available">locations</a> in which the cluster&#39;s nodes
+should be located.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="logging_service=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="logging_service-instance_method">
+  
+    #<strong>logging_service</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The logging service the cluster should use to write logs.
+Currently available options:</p>
+
+<ul>
+<li><code>logging.googleapis.com</code> - the Google Cloud Logging service.</li>
+<li><code>none</code> - no logs will be exported from the cluster.</li>
+<li>if left as an empty string,<code>logging.googleapis.com</code> will be used.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The logging service the cluster should use to write logs.
+Currently available options:</p>
+
+<ul>
+<li><code>logging.googleapis.com</code> - the Google Cloud Logging service.</li>
+<li><code>none</code> - no logs will be exported from the cluster.</li>
+<li>if left as an empty string,<code>logging.googleapis.com</code> will be used.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="maintenance_policy=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="maintenance_policy-instance_method">
+  
+    #<strong>maintenance_policy</strong>  &#x21d2; <tt><span class='object_link'><a href="MaintenancePolicy.html" title="Google::Container::V1::MaintenancePolicy (class)">Google::Container::V1::MaintenancePolicy</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Configure the maintenance policy for this cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MaintenancePolicy.html" title="Google::Container::V1::MaintenancePolicy (class)">Google::Container::V1::MaintenancePolicy</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Configure the maintenance policy for this cluster.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="master_auth=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="master_auth-instance_method">
+  
+    #<strong>master_auth</strong>  &#x21d2; <tt><span class='object_link'><a href="MasterAuth.html" title="Google::Container::V1::MasterAuth (class)">Google::Container::V1::MasterAuth</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The authentication information for accessing the master endpoint.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MasterAuth.html" title="Google::Container::V1::MasterAuth (class)">Google::Container::V1::MasterAuth</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The authentication information for accessing the master endpoint.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="master_authorized_networks_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="master_authorized_networks_config-instance_method">
+  
+    #<strong>master_authorized_networks_config</strong>  &#x21d2; <tt><span class='object_link'><a href="MasterAuthorizedNetworksConfig.html" title="Google::Container::V1::MasterAuthorizedNetworksConfig (class)">Google::Container::V1::MasterAuthorizedNetworksConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Master authorized networks is a Beta feature.
+The configuration options for master authorized networks feature.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MasterAuthorizedNetworksConfig.html" title="Google::Container::V1::MasterAuthorizedNetworksConfig (class)">Google::Container::V1::MasterAuthorizedNetworksConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Master authorized networks is a Beta feature.
+The configuration options for master authorized networks feature.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="monitoring_service=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="monitoring_service-instance_method">
+  
+    #<strong>monitoring_service</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The monitoring service the cluster should use to write metrics.
+Currently available options:</p>
+
+<ul>
+<li><code>monitoring.googleapis.com</code> - the Google Cloud Monitoring service.</li>
+<li><code>none</code> - no metrics will be exported from the cluster.</li>
+<li>if left as an empty string, <code>monitoring.googleapis.com</code> will be used.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The monitoring service the cluster should use to write metrics.
+Currently available options:</p>
+
+<ul>
+<li><code>monitoring.googleapis.com</code> - the Google Cloud Monitoring service.</li>
+<li><code>none</code> - no metrics will be exported from the cluster.</li>
+<li>if left as an empty string, <code>monitoring.googleapis.com</code> will be used.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name of this cluster. The name must be unique within this project
+and zone, and can be up to 40 characters with the following restrictions:</p>
+
+<ul>
+<li>Lowercase letters, numbers, and hyphens only.</li>
+<li>Must start with a letter.</li>
+<li>Must end with a number or a letter.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of this cluster. The name must be unique within this project
+and zone, and can be up to 40 characters with the following restrictions:</p>
+
+<ul>
+<li>Lowercase letters, numbers, and hyphens only.</li>
+<li>Must start with a letter.</li>
+<li>Must end with a number or a letter.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="network=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="network-instance_method">
+  
+    #<strong>network</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/networks-and-firewalls#networks">network</a> to which the
+cluster is connected. If left unspecified, the <code>default</code> network
+will be used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/networks-and-firewalls#networks">network</a> to which the
+cluster is connected. If left unspecified, the <code>default</code> network
+will be used.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="network_policy=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="network_policy-instance_method">
+  
+    #<strong>network_policy</strong>  &#x21d2; <tt><span class='object_link'><a href="NetworkPolicy.html" title="Google::Container::V1::NetworkPolicy (class)">Google::Container::V1::NetworkPolicy</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Configuration options for the NetworkPolicy feature.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="NetworkPolicy.html" title="Google::Container::V1::NetworkPolicy (class)">Google::Container::V1::NetworkPolicy</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Configuration options for the NetworkPolicy feature.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="node_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="node_config-instance_method">
+  
+    #<strong>node_config</strong>  &#x21d2; <tt><span class='object_link'><a href="NodeConfig.html" title="Google::Container::V1::NodeConfig (class)">Google::Container::V1::NodeConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Parameters used in creating the cluster&#39;s nodes.
+See <code>nodeConfig</code> for the description of its properties.
+For requests, this field should only be used in lieu of a
+&quot;node_pool&quot; object, since this configuration (along with the
+&quot;initial_node_count&quot;) will be used to create a &quot;NodePool&quot; object with an
+auto-generated name. Do not use this and a node_pool at the same time.
+For responses, this field will be populated with the node configuration of
+the first node pool.</p>
+
+<p>If unspecified, the defaults are used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="NodeConfig.html" title="Google::Container::V1::NodeConfig (class)">Google::Container::V1::NodeConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parameters used in creating the cluster&#39;s nodes.
+See <code>nodeConfig</code> for the description of its properties.
+For requests, this field should only be used in lieu of a
+&quot;node_pool&quot; object, since this configuration (along with the
+&quot;initial_node_count&quot;) will be used to create a &quot;NodePool&quot; object with an
+auto-generated name. Do not use this and a node_pool at the same time.
+For responses, this field will be populated with the node configuration of
+the first node pool.</p>
+
+<p>If unspecified, the defaults are used.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="node_ipv4_cidr_size=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="node_ipv4_cidr_size-instance_method">
+  
+    #<strong>node_ipv4_cidr_size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The size of the address space on each node for hosting
+containers. This is provisioned from within the <code>container_ipv4_cidr</code>
+range.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The size of the address space on each node for hosting
+containers. This is provisioned from within the <code>container_ipv4_cidr</code>
+range.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="node_pools=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="node_pools-instance_method">
+  
+    #<strong>node_pools</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="NodePool.html" title="Google::Container::V1::NodePool (class)">Google::Container::V1::NodePool</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The node pools associated with this cluster.
+This field should not be set if &quot;node_config&quot; or &quot;initial_node_count&quot; are
+specified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="NodePool.html" title="Google::Container::V1::NodePool (class)">Google::Container::V1::NodePool</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The node pools associated with this cluster.
+This field should not be set if &quot;node_config&quot; or &quot;initial_node_count&quot; are
+specified.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="resource_labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="resource_labels-instance_method">
+  
+    #<strong>resource_labels</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The resource labels for the cluster to use to annotate any related
+Google Compute Engine resources.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The resource labels for the cluster to use to annotate any related
+Google Compute Engine resources.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="self_link=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="self_link-instance_method">
+  
+    #<strong>self_link</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] Server-defined URL for the resource.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] Server-defined URL for the resource.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="services_ipv4_cidr=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="services_ipv4_cidr-instance_method">
+  
+    #<strong>services_ipv4_cidr</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The IP address range of the Kubernetes services in
+this cluster, in
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. <code>1.2.3.4/29</code>). Service addresses are
+typically put in the last <code>/16</code> from the container CIDR.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The IP address range of the Kubernetes services in
+this cluster, in
+<a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a>
+notation (e.g. <code>1.2.3.4/29</code>). Service addresses are
+typically put in the last <code>/16</code> from the container CIDR.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="status=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status-instance_method">
+  
+    #<strong>status</strong>  &#x21d2; <tt><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Google::Container::V1::Cluster::Status</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The current status of this cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Google::Container::V1::Cluster::Status</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The current status of this cluster.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="status_message=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status_message-instance_method">
+  
+    #<strong>status_message</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] Additional information about the current status of this
+cluster, if available.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] Additional information about the current status of this
+cluster, if available.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="subnetwork=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="subnetwork-instance_method">
+  
+    #<strong>subnetwork</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/subnetworks">subnetwork</a> to which the
+cluster is connected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/subnetworks">subnetwork</a> to which the
+cluster is connected.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="zone=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="zone-instance_method">
+  
+    #<strong>zone</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
+resides.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
+resides.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
