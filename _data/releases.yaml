@@ -498,6 +498,7 @@ google-cloud-vision:
 - v0.20.1
 - v0.20.0
 stackdriver:
+- v0.15.3
 - v0.15.2
 - v0.15.1
 - v0.15.0
