@@ -93,6 +93,7 @@ google-cloud-container:
 - v0.2.0
 - v0.1.0
 google-cloud-core:
+- v1.2.7
 - v1.2.6
 - v1.2.5
 - v1.2.4
