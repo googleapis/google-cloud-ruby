@@ -1,0 +1,1730 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Bigtable::RowFilter::SimpleFilter - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigtable::RowFilter::SimpleFilter";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../RowFilter.html" title="Google::Cloud::Bigtable::RowFilter (module)">RowFilter</a></span></span>
+     &raquo; 
+    <span class="title">SimpleFilter</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Bigtable::RowFilter::SimpleFilter
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Bigtable::RowFilter::SimpleFilter</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigtable/row_filter/simple_filter.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>SimpleFilter</h1>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#block-instance_method" title="#block (instance method)">#<strong>block</strong>  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Does not match any cells, regardless of input.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cells_per_column-instance_method" title="#cells_per_column (instance method)">#<strong>cells_per_column</strong>(limit)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches only the most recent N cells within each column.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cells_per_row-instance_method" title="#cells_per_row (instance method)">#<strong>cells_per_row</strong>(limit)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches only the first N cells of each row.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cells_per_row_offset-instance_method" title="#cells_per_row_offset (instance method)">#<strong>cells_per_row_offset</strong>(offset)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Skips the first N cells of each row, matching all subsequent cells.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#column_range-instance_method" title="#column_range (instance method)">#<strong>column_range</strong>(range)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches only cells from columns within the given range.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#family-instance_method" title="#family (instance method)">#<strong>family</strong>(regex)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches only cells from columns whose families satisfy the given RE2 regex.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#key-instance_method" title="#key (instance method)">#<strong>key</strong>(regex)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches only cells from rows whose keys satisfy the given RE2 regex.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#label-instance_method" title="#label (instance method)">#<strong>label</strong>(value)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Applies the given label to all cells in the output row.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pass-instance_method" title="#pass (instance method)">#<strong>pass</strong>  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches all cells, regardless of input.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#qualifier-instance_method" title="#qualifier (instance method)">#<strong>qualifier</strong>(regex)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches only cells from columns whose qualifiers satisfy the given RE2 regex.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sample-instance_method" title="#sample (instance method)">#<strong>sample</strong>(probability)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches all cells from a row with probability p, and matches no cells from the row with probability 1-p.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sink-instance_method" title="#sink (instance method)">#<strong>sink</strong>  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Outputs all cells directly to the output of the read rather than to any parent filter.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strip_value-instance_method" title="#strip_value (instance method)">#<strong>strip_value</strong>  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Replaces each cell&#39;s value with the empty string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timestamp_range-instance_method" title="#timestamp_range (instance method)">#<strong>timestamp_range</strong>(from, to)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create timestamp range filter instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value-instance_method" title="#value (instance method)">#<strong>value</strong>(regex)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches only cells with values that satisfy the given regular expression.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_range-instance_method" title="#value_range (instance method)">#<strong>value_range</strong>(range)  &#x21d2; Google::Cloud::Bigtable::RowFilter::SimpleFilter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Matches only cells with values that fall within the given range.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="block-instance_method">
+  
+    #<strong>block</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Does not match any cells, regardless of input. Useful for temporarily
+disabling just part of a filter.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_block_all_filter'>block_all_filter</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cells_per_column-instance_method">
+  
+    #<strong>cells_per_column</strong>(limit)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches only the most recent N cells within each column. For example,
+if N=2, this filter would match column <code>foo:bar</code> at timestamps 10 and 9,
+skip all earlier cells in <code>foo:bar</code>, and then begin matching again in
+column <code>foo:bar2</code>.
+If duplicate cells are present, as is possible when using an Interleave,
+each copy of the cell is counted separately.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Max cell match per column limit</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+207
+208
+209
+210</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 207</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cells_per_column'>cells_per_column</span> <span class='id identifier rubyid_limit'>limit</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_cells_per_column_limit_filter'>cells_per_column_limit_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_limit'>limit</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cells_per_row-instance_method">
+  
+    #<strong>cells_per_row</strong>(limit)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches only the first N cells of each row.
+If duplicate cells are present, as is possible when using an Interleave,
+each copy of the cell is counted separately.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Max cell match per row limit</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+192
+193
+194
+195</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 192</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cells_per_row'>cells_per_row</span> <span class='id identifier rubyid_limit'>limit</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_cells_per_row_limit_filter'>cells_per_row_limit_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_limit'>limit</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="cells_per_row_offset-instance_method">
+  
+    #<strong>cells_per_row_offset</strong>(offset)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Skips the first N cells of each row, matching all subsequent cells.
+If duplicate cells are present, as is possible when using an Interleave,
+each copy of the cell is counted separately.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Offset value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+180
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 180</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cells_per_row_offset'>cells_per_row_offset</span> <span class='id identifier rubyid_offset'>offset</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_cells_per_row_offset_filter'>cells_per_row_offset_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_offset'>offset</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="column_range-instance_method">
+  
+    #<strong>column_range</strong>(range)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches only cells from columns within the given range.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>range</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../ColumnRange.html" title="Google::Cloud::Bigtable::ColumnRange (class)">Google::Cloud::Bigtable::ColumnRange</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+253
+254
+255
+256
+257
+258
+259</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 253</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_column_range'>column_range</span> <span class='id identifier rubyid_range'>range</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_range'>range</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ColumnRange.html" title="Google::Cloud::Bigtable::ColumnRange (class)">ColumnRange</a></span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../RowFilterError.html" title="Google::Cloud::Bigtable::RowFilterError (class)">RowFilterError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Range type mustbe ColumnRange</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_column_range_filter'>column_range_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_range'>range</span><span class='period'>.</span><span class='id identifier rubyid_to_grpc'>to_grpc</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="family-instance_method">
+  
+    #<strong>family</strong>(regex)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches only cells from columns whose families satisfy the given RE2
+regex. For technical reasons, the regex must not contain the <code>:</code>
+character, even if it is not being used as a literal.
+Note that, since column families cannot contain the new line character
+<code>\n</code>, it is sufficient to use <code>.</code> as a full wildcard when matching
+column family names.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>regex</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Regex to match family name.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+117
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 117</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_family'>family</span> <span class='id identifier rubyid_regex'>regex</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_family_name_regex_filter'>family_name_regex_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_regex'>regex</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="key-instance_method">
+  
+    #<strong>key</strong>(regex)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches only cells from rows whose keys satisfy the given RE2 regex. In
+other words, passes through the entire row when the key matches, and
+otherwise produces an empty row.
+Note that, since row keys can contain arbitrary bytes, the <code>\C</code> escape
+sequence must be used if a true wildcard is desired. The <code>.</code> character
+will not match the new line character <code>\n</code>, which may be present in a
+binary key.</p>
+
+<p>For Regex syntax:</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>regex</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Regex to match row keys.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://github.com/google/re2/wiki/Syntax" target="_parent" title="https://github.com/google/re2/wiki/Syntax">https://github.com/google/re2/wiki/Syntax</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_key'>key</span> <span class='id identifier rubyid_regex'>regex</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_row_key_regex_filter'>row_key_regex_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_regex'>regex</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="label-instance_method">
+  
+    #<strong>label</strong>(value)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Applies the given label to all cells in the output row. This allows
+the client to determine which results were produced from which part of
+the filter.</p>
+
+<p>Values must be at most 15 characters in length, and match the RE2
+pattern <code>[a-z0-9\\-]+</code></p>
+
+<p>Due to a technical limitation, it is not currently possible to apply
+multiple labels to a cell. As a result, a Chain may have no more than
+one sub-filter which contains a <code>apply_label_transformer</code>. It is okay for
+an Interleave to contain multiple <code>apply_label_transformers</code>, as they
+will be applied to separate copies of the input. This may be relaxed in
+the future.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Label name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+168
+169
+170
+171</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 168</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_apply_label_transformer'>apply_label_transformer</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pass-instance_method">
+  
+    #<strong>pass</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches all cells, regardless of input. Functionally equivalent to
+leaving <code>filter</code> unset, but included for completeness.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 47</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_pass'>pass</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_pass_all_filter'>pass_all_filter</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="qualifier-instance_method">
+  
+    #<strong>qualifier</strong>(regex)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches only cells from columns whose qualifiers satisfy the given RE2
+regex.
+Note that, since column qualifiers can contain arbitrary bytes, the <code>\C</code>
+escape sequence must be used if a true wildcard is desired. The <code>.</code>
+character will not match the new line character <code>\n</code>, which may be
+present in a binary qualifier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>regex</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Regex to match column qualifier name.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_qualifier'>qualifier</span> <span class='id identifier rubyid_regex'>regex</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_column_qualifier_regex_filter'>column_qualifier_regex_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_regex'>regex</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sample-instance_method">
+  
+    #<strong>sample</strong>(probability)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches all cells from a row with probability p, and matches no cells
+from the row with probability 1-p.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>probability</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sample'>sample</span> <span class='id identifier rubyid_probability'>probability</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_probability'>probability</span> <span class='op'>&gt;=</span> <span class='int'>1</span> <span class='op'>||</span> <span class='id identifier rubyid_probability'>probability</span> <span class='op'>&lt;=</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span>
+      <span class='const'><span class='object_link'><a href="../RowFilterError.html" title="Google::Cloud::Bigtable::RowFilterError (class)">RowFilterError</a></span></span><span class='comma'>,</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Probability must be greather then 0 and less then 1.0</span><span class='tstring_end'>&quot;</span></span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_row_sample_filter'>row_sample_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_probability'>probability</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sink-instance_method">
+  
+    #<strong>sink</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Outputs all cells directly to the output of the read rather than to any parent filter.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 37</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sink'>sink</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_sink'>sink</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="strip_value-instance_method">
+  
+    #<strong>strip_value</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Replaces each cell&#39;s value with the empty string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_strip_value'>strip_value</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_strip_value_transformer'>strip_value_transformer</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="timestamp_range-instance_method">
+  
+    #<strong>timestamp_range</strong>(from, to)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create timestamp range filter instance</p>
+
+<p>Matches only cells with timestamps within the given range.
+Specified a contiguous range of timestamps.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>from</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Inclusive lower bound. If left empty, interpreted as 0.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>to</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Exclusive upper bound. If left empty, interpreted as infinity.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+221
+222
+223
+224
+225
+226
+227</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 221</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_timestamp_range'>timestamp_range</span> <span class='id identifier rubyid_from'>from</span><span class='comma'>,</span> <span class='id identifier rubyid_to'>to</span>
+  <span class='id identifier rubyid_range_grpc'>range_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable/V2.html" title="Google::Bigtable::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Bigtable/V2/TimestampRange.html" title="Google::Bigtable::V2::TimestampRange (class)">TimestampRange</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_range_grpc'>range_grpc</span><span class='period'>.</span><span class='id identifier rubyid_start_timestamp_micros'>start_timestamp_micros</span> <span class='op'>=</span> <span class='id identifier rubyid_from'>from</span> <span class='kw'>if</span> <span class='id identifier rubyid_from'>from</span>
+  <span class='id identifier rubyid_range_grpc'>range_grpc</span><span class='period'>.</span><span class='id identifier rubyid_end_timestamp_micros'>end_timestamp_micros</span> <span class='op'>=</span> <span class='id identifier rubyid_to'>to</span> <span class='kw'>if</span> <span class='id identifier rubyid_to'>to</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_timestamp_range_filter'>timestamp_range_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_range_grpc'>range_grpc</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value-instance_method">
+  
+    #<strong>value</strong>(regex)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches only cells with values that satisfy the given regular expression.
+Note that, since cell values can contain arbitrary bytes, the <code>\C</code> escape
+sequence must be used if a true wildcard is desired. The <code>.</code> character
+will not match the new line character <code>\n</code>, which may be present in a
+binary value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>regex</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Regex to match cell value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+146
+147
+148
+149</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 146</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_value'>value</span> <span class='id identifier rubyid_regex'>regex</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_value_regex_filter'>value_regex_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_regex'>regex</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="value_range-instance_method">
+  
+    #<strong>value_range</strong>(range)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Matches only cells with values that fall within the given range.</p>
+
+<p>See <span class='object_link'><a href="../ValueRange.html#from-instance_method" title="Google::Cloud::Bigtable::ValueRange#from (method)">ValueRange#from</a></span> and { Google::Cloud::Bigtable::ValueRange#to} for range
+option inclusive/exclusive options</p>
+
+<ul>
+<li>The value at which to start the range.If neither field is set, interpreted as the empty string, inclusive.</li>
+<li>The value at which to end the range. If neither field is set, interpreted as the infinite string, exclusive.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>range</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../ValueRange.html" title="Google::Cloud::Bigtable::ValueRange (class)">Google::Cloud::Bigtable::ValueRange</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">Google::Cloud::Bigtable::RowFilter::SimpleFilter</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+240
+241
+242
+243
+244
+245
+246</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter/simple_filter.rb', line 240</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_value_range'>value_range</span> <span class='id identifier rubyid_range'>range</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_range'>range</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../ValueRange.html" title="Google::Cloud::Bigtable::ValueRange (class)">ValueRange</a></span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../RowFilterError.html" title="Google::Cloud::Bigtable::RowFilterError (class)">RowFilterError</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Range type mustbe ValueRange</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_value_range_filter'>value_range_filter</span> <span class='op'>=</span> <span class='id identifier rubyid_range'>range</span><span class='period'>.</span><span class='id identifier rubyid_to_grpc'>to_grpc</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

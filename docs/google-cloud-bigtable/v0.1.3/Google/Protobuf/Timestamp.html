@@ -1,0 +1,399 @@
+---
+layout: yard_main
+title: "Class: Google::Protobuf::Timestamp - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Protobuf::Timestamp";
+  relpath = '../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Protobuf.html" title="Google::Protobuf (module)">Protobuf</a></span></span>
+     &raquo; 
+    <span class="title">Timestamp</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Protobuf::Timestamp
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Protobuf::Timestamp</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigtable/admin/v2/doc/google/protobuf/timestamp.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A Timestamp represents a point in time independent of any time zone
+or calendar, represented as seconds and fractions of seconds at
+nanosecond resolution in UTC Epoch time. It is encoded using the
+Proleptic Gregorian Calendar which extends the Gregorian calendar
+backwards to year one. It is encoded assuming all minutes are 60
+seconds long, i.e. leap seconds are &quot;smeared&quot; so that no leap second
+table is needed for interpretation. Range is from
+0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z.
+By restricting to that range, we ensure that we can convert to
+and from  RFC 3339 date strings.
+See <a href="https://www.ietf.org/rfc/rfc3339.txt">https://www.ietf.org/rfc/rfc3339.txt</a>.</p>
+
+<p>= Examples</p>
+
+<p>Example 1: Compute Timestamp from POSIX <code>time()</code>.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Timestamp</span> <span class='id identifier rubyid_timestamp'>timestamp</span><span class='semicolon'>;</span>
+<span class='id identifier rubyid_timestamp'>timestamp</span><span class='period'>.</span><span class='id identifier rubyid_set_seconds'>set_seconds</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='lparen'>(</span><span class='const'>NULL</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+<span class='id identifier rubyid_timestamp'>timestamp</span><span class='period'>.</span><span class='id identifier rubyid_set_nanos'>set_nanos</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+</code></pre>
+
+<p>Example 2: Compute Timestamp from POSIX <code>gettimeofday()</code>.</p>
+
+<pre class="code ruby"><code class="ruby">struct timeval tv;
+gettimeofday(&amp;tv, NULL);
+
+Timestamp timestamp;
+timestamp.set_seconds(tv.tv_sec);
+timestamp.set_nanos(tv.tv_usec * 1000);
+</code></pre>
+
+<p>Example 3: Compute Timestamp from Win32 <code>GetSystemTimeAsFileTime()</code>.</p>
+
+<pre class="code ruby"><code class="ruby">FILETIME ft;
+GetSystemTimeAsFileTime(&amp;ft);
+UINT64 ticks = (((UINT64)ft.dwHighDateTime) &lt;&lt; 32) | ft.dwLowDateTime;
+
+// A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+// is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+Timestamp timestamp;
+timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+</code></pre>
+
+<p>Example 4: Compute Timestamp from Java <code>System.currentTimeMillis()</code>.</p>
+
+<pre class="code ruby"><code class="ruby">long millis = System.currentTimeMillis();
+
+Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+    .setNanos((int) ((millis % 1000) * 1000000)).build();
+</code></pre>
+
+<p>Example 5: Compute Timestamp from current time in Python.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_timestamp'>timestamp</span> <span class='op'>=</span> <span class='const'>Timestamp</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_timestamp'>timestamp</span><span class='period'>.</span><span class='const'>GetCurrentTime</span><span class='lparen'>(</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>= JSON Mapping</p>
+
+<p>In JSON format, the Timestamp type is encoded as a string in the
+<a href="https://www.ietf.org/rfc/rfc3339.txt">RFC 3339</a> format. That is, the
+format is &quot;{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z&quot;
+where {year} is always expressed using four digits while {month}, {day},
+{hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
+seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
+are optional. The &quot;Z&quot; suffix indicates the timezone (&quot;UTC&quot;); the timezone
+is required. A proto3 JSON serializer should always use UTC (as indicated by
+&quot;Z&quot;) when printing the Timestamp type and a proto3 JSON parser should be
+able to accept both UTC and other timezones (as indicated by an offset).</p>
+
+<p>For example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past
+01:30 UTC on January 15, 2017.</p>
+
+<p>In JavaScript, one can convert a Date object to this format using the
+standard <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString%5D%0Amethod.%20In%20Python,%20a%20standard%20%60datetime.datetime%60%20object%20can%20be%20converted%0Ato%20this%20format%20using%20%5B%60strftime%60%5D(https://docs.python.org/2/library/time.html#time.strftime)%0Awith%20the%20time%20format%20spec%20&#x27;%Y-%m-%dT%H:%M:%S.%fZ&#x27;.%20Likewise,%20in%20Java,%20one%0Acan%20use%20the%20Joda%20Time&#x27;s%20%5B%60ISODateTimeFormat.dateTime(">toISOString()</a>`](
+<a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--">http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--</a>
+) to obtain a formatter capable of generating timestamps in this format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nanos-instance_method" title="#nanos (instance method)">#<strong>nanos</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Non-negative fractions of a second at nanosecond resolution.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#seconds-instance_method" title="#seconds (instance method)">#<strong>seconds</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="nanos=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="nanos-instance_method">
+  
+    #<strong>nanos</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Non-negative fractions of a second at nanosecond resolution. Negative
+second values with fractions must still have non-negative nanos values
+that count forward in time. Must be from 0 to 999,999,999
+inclusive.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Non-negative fractions of a second at nanosecond resolution. Negative
+second values with fractions must still have non-negative nanos values
+that count forward in time. Must be from 0 to 999,999,999
+inclusive.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/protobuf/timestamp.rb', line 107</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Protobuf::Timestamp (class)">Timestamp</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="seconds=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="seconds-instance_method">
+  
+    #<strong>seconds</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Represents seconds of UTC time since Unix epoch
+1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
+9999-12-31T23:59:59Z inclusive.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Represents seconds of UTC time since Unix epoch
+1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
+9999-12-31T23:59:59Z inclusive.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/protobuf/timestamp.rb', line 107</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Protobuf::Timestamp (class)">Timestamp</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

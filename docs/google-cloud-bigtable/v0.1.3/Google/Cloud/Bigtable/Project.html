@@ -1,0 +1,1983 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Bigtable::Project - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigtable::Project";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span>
+     &raquo; 
+    <span class="title">Project</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Bigtable::Project
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Bigtable::Project</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigtable/project.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Project</h1>
+
+<p>Projects are top-level containers in Google Cloud Platform. They store
+information about billing and authorized users, and they contain
+Cloud Bigtable data. Each project has a friendly name and a unique ID.</p>
+
+<p>Google::Cloud::Bigtable::Project is the main object for interacting with
+Cloud Bigtable.</p>
+
+<p><span class='object_link'><a href="Cluster.html" title="Google::Cloud::Bigtable::Cluster (class)">Cluster</a></span> and <span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Instance</a></span>
+objects are created, accessed, and managed by Google::Cloud::Bigtable::Project.</p>
+
+<p>To create an instance, use <span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span> or
+<span class='object_link'><a href="../../Cloud.html#bigtable-instance_method" title="Google::Cloud#bigtable (method)">Google::Cloud#bigtable</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Obtaining an instance and the clusters from a project.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_clusters'>clusters</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_clusters'>clusters</span> <span class='comment'># All clusters in the project</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clusters-instance_method" title="#clusters (instance method)">#<strong>clusters</strong>(token: nil)  &#x21d2; Array&lt;Google::Cloud::Bigtable::Cluster&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List all clusters in project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_instance-instance_method" title="#create_instance (instance method)">#<strong>create_instance</strong>(instance_id, display_name: nil, type: nil, labels: nil, clusters: nil) {|clusters| ... } &#x21d2; Google::Cloud::Bigtable::Instance::Job </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a Bigtable instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_table-instance_method" title="#create_table (instance method)">#<strong>create_table</strong>(instance_id, table_id, column_families: nil, granularity: nil, initial_splits: nil) {|column_families| ... } &#x21d2; Google::Cloud::Bigtable::Table </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new table in the specified instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_table-instance_method" title="#delete_table (instance method)">#<strong>delete_table</strong>(instance_id, table_id)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Permanently deletes a specified table and all of its data.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#instance-instance_method" title="#instance (instance method)">#<strong>instance</strong>(instance_id)  &#x21d2; Google::Cloud::Bigtable::Instance<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get existing Bigtable instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#instances-instance_method" title="#instances (instance method)">#<strong>instances</strong>(token: nil)  &#x21d2; Array&lt;Google::Cloud::Bigtable::Instance&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the list of Bigtable instances for the project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modify_column_families-instance_method" title="#modify_column_families (instance method)">#<strong>modify_column_families</strong>(instance_id, table_id, modifications)  &#x21d2; Google::Cloud::Bigtable::Table </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Performs a series of column family modifications on the specified table.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_id-instance_method" title="#project_id (instance method)">#<strong>project_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The identifier for the Cloud Bigtable project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#table-instance_method" title="#table (instance method)">#<strong>table</strong>(instance_id, table_id, view: nil, perform_lookup: nil, app_profile_id: nil)  &#x21d2; Google::Cloud::Bigtable::Table<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get table information.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tables-instance_method" title="#tables (instance method)">#<strong>tables</strong>(instance_id)  &#x21d2; Array&lt;Google::Cloud::Bigtable::Table&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List all tables for given instance.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="clusters-instance_method">
+  
+    #<strong>clusters</strong>(token: nil)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Cluster.html" title="Google::Cloud::Bigtable::Cluster (class)">Google::Cloud::Bigtable::Cluster</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>List all clusters in project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_clusters'>clusters</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_cluster'>cluster</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_cluster_id'>cluster_id</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_ready?'>ready?</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <code>token</code> value returned by the last call to
+<code>clusters</code>; indicates that this is a continuation of a call,
+and that the system should return the next page of data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Cluster.html" title="Google::Cloud::Bigtable::Cluster (class)">Google::Cloud::Bigtable::Cluster</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(See <span class='object_link'><a href="Cluster/List.html" title="Google::Cloud::Bigtable::Cluster::List (class)">Cluster::List</a></span>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+271
+272
+273
+274
+275</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 271</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clusters'>clusters</span> <span class='label'>token:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_clusters'>list_clusters</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Cluster.html" title="Google::Cloud::Bigtable::Cluster (class)">Cluster</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cluster/List.html" title="Google::Cloud::Bigtable::Cluster::List (class)">List</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span><span class='lparen'>(</span><span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>instance_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_instance-instance_method">
+  
+    #<strong>create_instance</strong>(instance_id, display_name: nil, type: nil, labels: nil, clusters: nil) {|clusters| ... } &#x21d2; <tt><span class='object_link'><a href="Instance/Job.html" title="Google::Cloud::Bigtable::Instance::Job (class)">Google::Cloud::Bigtable::Instance::Job</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a Bigtable instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Create development instance.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_create_instance'>create_instance</span><span class='lparen'>(</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>display_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Instance for user data</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>type:</span> <span class='symbol'>:DEVELOPMENT</span><span class='comma'>,</span>
+  <span class='label'>labels:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>env</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dev</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+<span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_clusters'>clusters</span><span class='op'>|</span>
+  <span class='id identifier rubyid_clusters'>clusters</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test-cluster</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>us-east1-b</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>nodes:</span> <span class='int'>1</span><span class='rparen'>)</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; false
+</span>
+<span class='comment'># Reload job until completion.
+</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done'>wait_until_done</span>
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; true
+</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_error'>error</span>
+<span class='kw'>else</span>
+  <span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Create production instance.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_create_instance'>create_instance</span><span class='lparen'>(</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>display_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Instance for user data</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>labels:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>env</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dev</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+<span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_clusters'>clusters</span><span class='op'>|</span>
+  <span class='id identifier rubyid_clusters'>clusters</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test-cluster</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>us-east1-b</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>nodes:</span> <span class='int'>3</span><span class='comma'>,</span> <span class='label'>storage_type:</span> <span class='symbol'>:SSD</span><span class='rparen'>)</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; false
+</span>
+<span class='comment'># To block until the operation completes.
+</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done'>wait_until_done</span>
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; true
+</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_error'>error</span>
+<span class='kw'>else</span>
+  <span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the instance,
+which cannot be changed after the instance is created. Values are of
+the form <code>[a-z][-a-z0-9]*[a-z0-9]</code> and must be between 6 and 30
+characters in length. Required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>display_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The descriptive name for this instance as it
+appears in UIs. Must be unique per project and between 4 and 30
+characters in length.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The type of the instance.
+Valid values are <code>:DEVELOPMENT</code> or <code>:PRODUCTION</code>.
+Default <code>:PRODUCTION</code> instance will created if left blank.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Hash{String=&gt;String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>labels Cloud Labels are a flexible and lightweight
+mechanism for organizing cloud resources into groups that reflect a
+customer&#39;s organizational needs and deployment strategies. Cloud
+Labels can be used to filter collections of resources. They can be
+used to control how resource metrics are aggregated. And they can be
+used as arguments to policy management rules (e.g. route, firewall,
+load balancing, etc.).</p>
+
+<ul>
+<li>Label keys must be between 1 and 63 characters long and must
+conform to the following regular expression:
+<code>[a-z]([-a-z0-9]*[a-z0-9])?</code>.</li>
+<li>Label values must be between 0 and 63 characters long and must
+conform to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.</li>
+<li>No more than 64 labels can be associated with a given resource.</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>clusters</span>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; <span class='object_link'><a href="Cluster.html" title="Google::Cloud::Bigtable::Cluster (class)">Google::Cloud::Bigtable::Cluster</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(See <span class='object_link'><a href="Instance/ClusterMap.html" title="Google::Cloud::Bigtable::Instance::ClusterMap (class)">Instance::ClusterMap</a></span>)
+If unspecified, you may use a code block to add clusters.
+Minimum one cluster must be specified.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#clusters-instance_method" title="Google::Cloud::Bigtable::Project#clusters (method)">clusters</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A block for adding clusters.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>Cluster</span>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; <span class='object_link'><a href="Cluster.html" title="Google::Cloud::Bigtable::Cluster (class)">Google::Cloud::Bigtable::Cluster</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>map of cluster name and cluster object.
+(See <span class='object_link'><a href="Instance/ClusterMap.html" title="Google::Cloud::Bigtable::Instance::ClusterMap (class)">Instance::ClusterMap</a></span>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Instance/Job.html" title="Google::Cloud::Bigtable::Instance::Job (class)">Google::Cloud::Bigtable::Instance::Job</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The job representing the long-running, asynchronous processing of
+an instance create operation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/compute/docs/regions-zones" target="_parent" title="Cluster zone locations">Cluster zone locations</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 223</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_instance'>create_instance</span> \
+    <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
+    <span class='label'>display_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>clusters:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='const'>String</span><span class='lparen'>(</span><span class='id identifier rubyid_k'>k</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='const'>String</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='rbrace'>}</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_labels'>labels</span>
+
+  <span class='id identifier rubyid_instance_attrs'>instance_attrs</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>display_name:</span> <span class='id identifier rubyid_display_name'>display_name</span><span class='comma'>,</span>
+    <span class='label'>type:</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span>
+    <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable.html" title="Google::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin.html" title="Google::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2.html" title="Google::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2/Instance.html" title="Google::Bigtable::Admin::V2::Instance (class)">Instance</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_attrs'>instance_attrs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_clusters'>clusters</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance/ClusterMap.html" title="Google::Cloud::Bigtable::Instance::ClusterMap (class)">ClusterMap</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>yield</span> <span class='id identifier rubyid_clusters'>clusters</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='id identifier rubyid_clusters'>clusters</span><span class='period'>.</span><span class='id identifier rubyid_each_value'>each_value</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_cluster'>cluster</span><span class='op'>|</span>
+    <span class='kw'>unless</span> <span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+      <span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_location_path'>location_path</span><span class='lparen'>(</span><span class='id identifier rubyid_cluster'>cluster</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_create_instance'>create_instance</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_clusters'>clusters</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance/Job.html" title="Google::Cloud::Bigtable::Instance::Job (class)">Job</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span><span class='lparen'>(</span><span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_table-instance_method">
+  
+    #<strong>create_table</strong>(instance_id, table_id, column_families: nil, granularity: nil, initial_splits: nil) {|column_families| ... } &#x21d2; <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new table in the specified instance.
+The table can be created with a full set of initial column families,
+specified in the request.</p>
+
+<p>(See Instance::ColumnFamilyMap)
+  GC Rules for column family see <span class='object_link'><a href="GcRule.html" title="Google::Cloud::Bigtable::GcRule (class)">GcRule</a></span>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Create table without column family</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_create_table'>create_table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Create table with column families and initial splits.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_initial_splits'>initial_splits</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user-00001</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user-100000</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>others</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_create_table'>create_table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>initial_splits:</span> <span class='id identifier rubyid_initial_splits'>initial_splits</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_column_families'>column_families</span><span class='op'>|</span>
+  <span class='id identifier rubyid_column_families'>column_families</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>cf1</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GcRule.html" title="Google::Cloud::Bigtable::GcRule (class)">GcRule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_max_versions'><span class='object_link'><a href="GcRule.html#max_versions-class_method" title="Google::Cloud::Bigtable::GcRule.max_versions (method)">max_versions</a></span></span><span class='lparen'>(</span><span class='int'>5</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_column_families'>column_families</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>cf2</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GcRule.html" title="Google::Cloud::Bigtable::GcRule (class)">GcRule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_max_age'><span class='object_link'><a href="GcRule.html#max_age-class_method" title="Google::Cloud::Bigtable::GcRule.max_age (method)">max_age</a></span></span><span class='lparen'>(</span><span class='int'>600</span><span class='rparen'>)</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_gc_rule'>gc_rule</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GcRule.html" title="Google::Cloud::Bigtable::GcRule (class)">GcRule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_union'><span class='object_link'><a href="GcRule.html#union-class_method" title="Google::Cloud::Bigtable::GcRule.union (method)">union</a></span></span><span class='lparen'>(</span>
+    <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GcRule.html" title="Google::Cloud::Bigtable::GcRule (class)">GcRule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_max_age'><span class='object_link'><a href="GcRule.html#max_age-class_method" title="Google::Cloud::Bigtable::GcRule.max_age (method)">max_age</a></span></span><span class='lparen'>(</span><span class='int'>1800</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GcRule.html" title="Google::Cloud::Bigtable::GcRule (class)">GcRule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_max_versions'><span class='object_link'><a href="GcRule.html#max_versions-class_method" title="Google::Cloud::Bigtable::GcRule.max_versions (method)">max_versions</a></span></span><span class='lparen'>(</span><span class='int'>3</span><span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_column_families'>column_families</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>cf3</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='rparen'>)</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_table'>table</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique Id of the instance in which to create the table.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>table_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name by which the new table should be referred to within the parent
+instance, e.g., <code>foobar</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>column_families</span>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; <span class='object_link'><a href="ColumnFamily.html" title="Google::Cloud::Bigtable::ColumnFamily (class)">Google::Cloud::Bigtable::ColumnFamily</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(See <span class='object_link'><a href="Table/ColumnFamilyMap.html" title="Google::Cloud::Bigtable::Table::ColumnFamilyMap (class)">Table::ColumnFamilyMap</a></span>)
+If unspecified, you may use a code block to add column families.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>granularity</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The granularity at which timestamps are stored in this table.
+Timestamps not matching the granularity will be rejected.
+Valid values are <code>:MILLIS</code>.
+If unspecified, the value will be set to <code>:MILLIS</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>initial_splits</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The optional list of row keys that will be used to initially split the
+table into several tablets (tablets are similar to HBase regions).
+Given two split keys, <code>s1</code> and <code>s2</code>, three tablets will be created,
+spanning the key ranges: <code>[, s1), [s1, s2), [s2, )</code>.</p>
+
+<p>Example:</p>
+
+<ul>
+<li>Row keys := <code>[&quot;a&quot;, &quot;apple&quot;, &quot;custom&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;, &quot;zz&quot;]</code></li>
+<li>initial_split_keys := <code>[&quot;apple&quot;, &quot;customer_1&quot;, &quot;customer_2&quot;, &quot;other&quot;]</code></li>
+<li>Key assignment:
+
+<ul>
+<li>Tablet 1 : <code>[, apple)                =&gt; {&quot;a&quot;}</code></li>
+<li>Tablet 2 : <code>[apple, customer_1)      =&gt; {&quot;apple&quot;, &quot;custom&quot;}</code></li>
+<li>Tablet 3 : <code>[customer_1, customer_2) =&gt; {&quot;customer_1&quot;}</code></li>
+<li>Tablet 4 : <code>[customer_2, other)      =&gt; {&quot;customer_2&quot;}</code></li>
+<li>Tablet 5 : <code>[other, )                =&gt; {&quot;other&quot;, &quot;zz&quot;}</code>
+A hash of the same form as <code>Google::Bigtable::Admin::V2::CreateTableRequest::Split</code>
+can also be provided.</li>
+</ul></li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>column_families</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A block for adding column_families.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>Map</span>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; <span class='object_link'><a href="ColumnFamily.html" title="Google::Cloud::Bigtable::ColumnFamily (class)">Google::Cloud::Bigtable::ColumnFamily</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>of family name and column family object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 472</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_table'>create_table</span> \
+    <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span>
+    <span class='label'>column_families:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>granularity:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>initial_splits:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='const'><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Table</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span>
+    <span class='label'>column_families:</span> <span class='id identifier rubyid_column_families'>column_families</span><span class='comma'>,</span>
+    <span class='label'>granularity:</span> <span class='id identifier rubyid_granularity'>granularity</span><span class='comma'>,</span>
+    <span class='label'>initial_splits:</span> <span class='id identifier rubyid_initial_splits'>initial_splits</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_table-instance_method">
+  
+    #<strong>delete_table</strong>(instance_id, table_id)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Permanently deletes a specified table and all of its data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Create table with column families and initial splits.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_delete_table'>delete_table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique Id of the instance in which table is exists.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>table_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique name of the table to be deleted.
+e.g., <code>foobar</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+506
+507
+508
+509</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 506</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_table'>delete_table</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_table_id'>table_id</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_delete_table'>delete_table</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='rparen'>)</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="instance-instance_method">
+  
+    #<strong>instance</strong>(instance_id)  &#x21d2; <tt><span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Google::Cloud::Bigtable::Instance</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get existing Bigtable instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='kw'>if</span> <span class='id identifier rubyid_instance'>instance</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_instance_id'>instance_id</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Existing instance id.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Google::Cloud::Bigtable::Instance</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+124
+125
+126
+127
+128
+129
+130</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 124</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_instance'>instance</span> <span class='id identifier rubyid_instance_id'>instance_id</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_instance'>get_instance</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_id'>instance_id</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Instance</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span><span class='lparen'>(</span><span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
+<span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>NotFoundError</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="instances-instance_method">
+  
+    #<strong>instances</strong>(token: nil)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Google::Cloud::Bigtable::Instance</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the list of Bigtable instances for the project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instances'>instances</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_instances'>instances</span>
+<span class='id identifier rubyid_instances'>instances</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_instance'>instance</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_instance_id'>instance_id</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <code>token</code> value returned by the last call to
+<code>instances</code>; indicates that this is a continuation of a call,
+and that the system should return the next page of data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Google::Cloud::Bigtable::Instance</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The list of instances.
+(See <span class='object_link'><a href="Instance/List.html" title="Google::Cloud::Bigtable::Instance::List (class)">Instance::List</a></span>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105
+106</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_instances'>instances</span> <span class='label'>token:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_instances'>list_instances</span><span class='lparen'>(</span><span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Bigtable::Instance (class)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance/List.html" title="Google::Cloud::Bigtable::Instance::List (class)">List</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span><span class='lparen'>(</span><span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="modify_column_families-instance_method">
+  
+    #<strong>modify_column_families</strong>(instance_id, table_id, modifications)  &#x21d2; <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Performs a series of column family modifications on the specified table.
+Either all or none of the modifications will occur before this method
+returns, but data requests received prior to that point may see a table
+where only some modifications have taken effect.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>require &quot;google/cloud/bigtable&quot;
+
+bigtable = Google::Cloud::Bigtable.new
+
+modifications = []
+modifications &lt;&lt; Google::Cloud::Bigtable::ColumnFamily.create_modification(
+  &quot;cf1&quot;, Google::Cloud::Bigtable::GcRule.max_age(600))
+)
+
+modifications &lt;&lt; Google::Cloud::Bigtable::ColumnFamily.update_modification(
+  &quot;cf2&quot;, Google::Cloud::Bigtable::GcRule.max_versions(5)
+)
+
+gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
+gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
+modifications &lt;&lt; Google::Cloud::Bigtable::ColumnFamily.update_modification(
+  &quot;cf3&quot;, Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
+)
+
+max_age_gc_rule = Google::Cloud::Bigtable::GcRule.max_age(300)
+modifications &lt;&lt; Google::Cloud::Bigtable::ColumnFamily.update_modification(
+  &quot;cf4&quot;, Google::Cloud::Bigtable::GcRule.union(max_version_gc_rule)
+)
+
+modifications &lt;&lt; Google::Cloud::Bigtable::ColumnFamily.drop_modification(&quot;cf5&quot;)
+
+table = bigtable.modify_column_families(&quot;my-instance&quot;, &quot;my-table&quot;, modifications)
+
+p table.column_families</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique Id of the instance in which table is exists.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>table_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique Id of the table whose families should be modified.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>modifications</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../Bigtable/Admin/V2/ModifyColumnFamiliesRequest/Modification.html" title="Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification (class)">Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification</a></span>&gt; | <span class='object_link'><a href="../../Bigtable/Admin/V2/ModifyColumnFamiliesRequest/Modification.html" title="Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification (class)">Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Modifications to be atomically applied to the specified table&#39;s families.
+Entries are applied in order, meaning that earlier modifications can be
+masked by later ones (in the case of repeated updates to the same family,
+for example).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Table with updated column families.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+558
+559
+560
+561
+562
+563
+564
+565
+566</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 558</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_column_families'>modify_column_families</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span> <span class='id identifier rubyid_modifications'>modifications</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='const'><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Table</a></span></span><span class='period'>.</span><span class='id identifier rubyid_modify_column_families'>modify_column_families</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_modifications'>modifications</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project_id-instance_method">
+  
+    #<strong>project_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The identifier for the Cloud Bigtable project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='label'>project_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>credentials:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='rparen'>)</span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='comment'>#=&gt; &quot;my-project&quot;</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Project id.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 79</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project_id'>project_id</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="table-instance_method">
+  
+    #<strong>table</strong>(instance_id, table_id, view: nil, perform_lookup: nil, app_profile_id: nil)  &#x21d2; <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get table information.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Get table with schema only view</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>perform_lookup:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>view:</span> <span class='symbol'>:SCHEMA_VIEW</span><span class='rparen'>)</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_table'>table</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_column_families'>column_families</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Get table object without calling get table admin api.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Get table with all fields. Clusters states, column families</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>view:</span> <span class='symbol'>:FULL</span><span class='comma'>,</span> <span class='label'>perform_lookup:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_table'>table</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_column_families'>column_families</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_cluster_states'>cluster_states</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Mutate rows</p>
+</div></p>
+      
+      <pre class="example code"><code>require &quot;google/cloud/bigtable&quot;
+
+bigtable = Google::Cloud::Bigtable.new
+
+table = bigtable.table(&quot;my-instance&quot;, &quot;my-table&quot;)
+
+entry = table.new_mutation_entry(&quot;user-1&quot;)
+entry.set_cell(
+  &quot;cf-1&quot;,
+  &quot;field-1&quot;,
+  &quot;XYZ&quot;
+  timestamp: Time.now.to_i * 1000  # Timestamp in milliseconds.
+).delete_from_column(&quot;cf2&quot;, &quot;field02&quot;)
+
+table.mutate_row(entry)</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Read rows using app profile routing</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>app_profile_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-app-profile</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_read_rows'>read_rows</span><span class='lparen'>(</span><span class='label'>limit:</span> <span class='int'>5</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_row'>row</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Existing instance Id.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>table_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Existing table Id.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>view</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Table view type. Default <code>:SCHEMA_VIEW</code>
+Valid view types are.</p>
+
+<ul>
+<li><code>:NAME_ONLY</code> - Only populates <code>name</code></li>
+<li><code>:SCHEMA_VIEW</code> - Only populates <code>name</code> and fields related to the table&#39;s schema</li>
+<li><code>:REPLICATION_VIEW</code> - Only populates <code>name</code> and fields related to the table&#39;s replication state.</li>
+<li><code>:FULL</code> - Populates all fields</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>perform_lookup</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Get table object without verifying that the table resource exists.
+Calls made on this object will raise errors if the table does not exist.
+Default value is <code>false</code>. Optional.
+It helps to reduce admin apis calls.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>app_profile_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the app profile. Optional.
+It is used only in data operations.
+This value specifies routing for replication. If not specified, the
+&quot;default&quot; application profile will be used.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 378</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_table'>table</span> \
+    <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span>
+    <span class='label'>view:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>perform_lookup:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>app_profile_id:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+
+  <span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_perform_lookup'>perform_lookup</span>
+            <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_table'>get_table</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span> <span class='label'>view:</span> <span class='id identifier rubyid_view'>view</span><span class='rparen'>)</span>
+            <span class='const'><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Table</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span><span class='lparen'>(</span><span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>view:</span> <span class='id identifier rubyid_view'>view</span><span class='rparen'>)</span>
+          <span class='kw'>else</span>
+            <span class='const'><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Table</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_path'>from_path</span><span class='lparen'>(</span>
+              <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_table_path'>table_path</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='rparen'>)</span><span class='comma'>,</span>
+              <span class='id identifier rubyid_service'>service</span>
+            <span class='rparen'>)</span>
+          <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_app_profile_id'>app_profile_id</span> <span class='op'>=</span> <span class='id identifier rubyid_app_profile_id'>app_profile_id</span>
+  <span class='id identifier rubyid_table'>table</span>
+<span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>NotFoundError</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="tables-instance_method">
+  
+    #<strong>tables</strong>(instance_id)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>List all tables for given instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Get tables</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_tables'>tables</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_table'>table</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_column_families'>column_families</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Existing instance Id.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(See <span class='object_link'><a href="Table/List.html" title="Google::Cloud::Bigtable::Table::List (class)">Table::List</a></span>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+293
+294
+295
+296
+297</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/project.rb', line 293</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tables'>tables</span> <span class='id identifier rubyid_instance_id'>instance_id</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_tables'>list_tables</span><span class='lparen'>(</span><span class='id identifier rubyid_instance_id'>instance_id</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Table</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Table/List.html" title="Google::Cloud::Bigtable::Table::List (class)">List</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span><span class='lparen'>(</span><span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
