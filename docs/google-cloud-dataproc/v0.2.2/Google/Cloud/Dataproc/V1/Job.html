@@ -1,0 +1,1399 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Dataproc::V1::Job - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Dataproc::V1::Job";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (J)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Dataproc::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">Job</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Dataproc::V1::Job
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Dataproc::V1::Job</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A Cloud Dataproc job resource.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#driver_control_files_uri-instance_method" title="#driver_control_files_uri (instance method)">#<strong>driver_control_files_uri</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#driver_output_resource_uri-instance_method" title="#driver_output_resource_uri (instance method)">#<strong>driver_output_resource_uri</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hadoop_job-instance_method" title="#hadoop_job (instance method)">#<strong>hadoop_job</strong>  &#x21d2; Google::Cloud::Dataproc::V1::HadoopJob </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Job is a Hadoop job.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hive_job-instance_method" title="#hive_job (instance method)">#<strong>hive_job</strong>  &#x21d2; Google::Cloud::Dataproc::V1::HiveJob </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Job is a Hive job.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pig_job-instance_method" title="#pig_job (instance method)">#<strong>pig_job</strong>  &#x21d2; Google::Cloud::Dataproc::V1::PigJob </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Job is a Pig job.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#placement-instance_method" title="#placement (instance method)">#<strong>placement</strong>  &#x21d2; Google::Cloud::Dataproc::V1::JobPlacement </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pyspark_job-instance_method" title="#pyspark_job (instance method)">#<strong>pyspark_job</strong>  &#x21d2; Google::Cloud::Dataproc::V1::PySparkJob </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Job is a Pyspark job.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reference-instance_method" title="#reference (instance method)">#<strong>reference</strong>  &#x21d2; Google::Cloud::Dataproc::V1::JobReference </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scheduling-instance_method" title="#scheduling (instance method)">#<strong>scheduling</strong>  &#x21d2; Google::Cloud::Dataproc::V1::JobScheduling </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spark_job-instance_method" title="#spark_job (instance method)">#<strong>spark_job</strong>  &#x21d2; Google::Cloud::Dataproc::V1::SparkJob </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Job is a Spark job.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spark_sql_job-instance_method" title="#spark_sql_job (instance method)">#<strong>spark_sql_job</strong>  &#x21d2; Google::Cloud::Dataproc::V1::SparkSqlJob </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Job is a SparkSql job.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status-instance_method" title="#status (instance method)">#<strong>status</strong>  &#x21d2; Google::Cloud::Dataproc::V1::JobStatus </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status_history-instance_method" title="#status_history (instance method)">#<strong>status_history</strong>  &#x21d2; Array&lt;Google::Cloud::Dataproc::V1::JobStatus&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#yarn_applications-instance_method" title="#yarn_applications (instance method)">#<strong>yarn_applications</strong>  &#x21d2; Array&lt;Google::Cloud::Dataproc::V1::YarnApplication&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="driver_control_files_uri=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="driver_control_files_uri-instance_method">
+  
+    #<strong>driver_control_files_uri</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output-only. If present, the location of miscellaneous control files
+which may be used as part of job setup and handling. If not present,
+control files may be placed in the same location as <code>driver_output_uri</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output-only. If present, the location of miscellaneous control files
+which may be used as part of job setup and handling. If not present,
+control files may be placed in the same location as <code>driver_output_uri</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="driver_output_resource_uri=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="driver_output_resource_uri-instance_method">
+  
+    #<strong>driver_output_resource_uri</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output-only. A URI pointing to the location of the stdout of the job&#39;s
+driver program.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output-only. A URI pointing to the location of the stdout of the job&#39;s
+driver program.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="hadoop_job=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="hadoop_job-instance_method">
+  
+    #<strong>hadoop_job</strong>  &#x21d2; <tt><span class='object_link'><a href="HadoopJob.html" title="Google::Cloud::Dataproc::V1::HadoopJob (class)">Google::Cloud::Dataproc::V1::HadoopJob</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Job is a Hadoop job.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HadoopJob.html" title="Google::Cloud::Dataproc::V1::HadoopJob (class)">Google::Cloud::Dataproc::V1::HadoopJob</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Job is a Hadoop job.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="hive_job=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="hive_job-instance_method">
+  
+    #<strong>hive_job</strong>  &#x21d2; <tt><span class='object_link'><a href="HiveJob.html" title="Google::Cloud::Dataproc::V1::HiveJob (class)">Google::Cloud::Dataproc::V1::HiveJob</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Job is a Hive job.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HiveJob.html" title="Google::Cloud::Dataproc::V1::HiveJob (class)">Google::Cloud::Dataproc::V1::HiveJob</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Job is a Hive job.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. The labels to associate with this job.
+Label <strong>keys</strong> must contain 1 to 63 characters, and must conform to
+<a href="https://www.ietf.org/rfc/rfc1035.txt">RFC 1035</a>.
+Label <strong>values</strong> may be empty, but, if present, must contain 1 to 63
+characters, and must conform to <a href="https://www.ietf.org/rfc/rfc1035.txt">RFC 1035</a>.
+No more than 32 labels can be associated with a job.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. The labels to associate with this job.
+Label <strong>keys</strong> must contain 1 to 63 characters, and must conform to
+<a href="https://www.ietf.org/rfc/rfc1035.txt">RFC 1035</a>.
+Label <strong>values</strong> may be empty, but, if present, must contain 1 to 63
+characters, and must conform to <a href="https://www.ietf.org/rfc/rfc1035.txt">RFC 1035</a>.
+No more than 32 labels can be associated with a job.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="pig_job=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="pig_job-instance_method">
+  
+    #<strong>pig_job</strong>  &#x21d2; <tt><span class='object_link'><a href="PigJob.html" title="Google::Cloud::Dataproc::V1::PigJob (class)">Google::Cloud::Dataproc::V1::PigJob</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Job is a Pig job.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PigJob.html" title="Google::Cloud::Dataproc::V1::PigJob (class)">Google::Cloud::Dataproc::V1::PigJob</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Job is a Pig job.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="placement=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="placement-instance_method">
+  
+    #<strong>placement</strong>  &#x21d2; <tt><span class='object_link'><a href="JobPlacement.html" title="Google::Cloud::Dataproc::V1::JobPlacement (class)">Google::Cloud::Dataproc::V1::JobPlacement</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required. Job information, including how, when, and where to
+run the job.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="JobPlacement.html" title="Google::Cloud::Dataproc::V1::JobPlacement (class)">Google::Cloud::Dataproc::V1::JobPlacement</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. Job information, including how, when, and where to
+run the job.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="pyspark_job=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="pyspark_job-instance_method">
+  
+    #<strong>pyspark_job</strong>  &#x21d2; <tt><span class='object_link'><a href="PySparkJob.html" title="Google::Cloud::Dataproc::V1::PySparkJob (class)">Google::Cloud::Dataproc::V1::PySparkJob</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Job is a Pyspark job.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PySparkJob.html" title="Google::Cloud::Dataproc::V1::PySparkJob (class)">Google::Cloud::Dataproc::V1::PySparkJob</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Job is a Pyspark job.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="reference=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="reference-instance_method">
+  
+    #<strong>reference</strong>  &#x21d2; <tt><span class='object_link'><a href="JobReference.html" title="Google::Cloud::Dataproc::V1::JobReference (class)">Google::Cloud::Dataproc::V1::JobReference</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. The fully qualified reference to the job, which can be used to
+obtain the equivalent REST path of the job resource. If this property
+is not specified when a job is created, the server generates a
+<code>job_id</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="JobReference.html" title="Google::Cloud::Dataproc::V1::JobReference (class)">Google::Cloud::Dataproc::V1::JobReference</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. The fully qualified reference to the job, which can be used to
+obtain the equivalent REST path of the job resource. If this property
+is not specified when a job is created, the server generates a
+<code>job_id</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="scheduling=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="scheduling-instance_method">
+  
+    #<strong>scheduling</strong>  &#x21d2; <tt><span class='object_link'><a href="JobScheduling.html" title="Google::Cloud::Dataproc::V1::JobScheduling (class)">Google::Cloud::Dataproc::V1::JobScheduling</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. Job scheduling configuration.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="JobScheduling.html" title="Google::Cloud::Dataproc::V1::JobScheduling (class)">Google::Cloud::Dataproc::V1::JobScheduling</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Job scheduling configuration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="spark_job=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="spark_job-instance_method">
+  
+    #<strong>spark_job</strong>  &#x21d2; <tt><span class='object_link'><a href="SparkJob.html" title="Google::Cloud::Dataproc::V1::SparkJob (class)">Google::Cloud::Dataproc::V1::SparkJob</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Job is a Spark job.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SparkJob.html" title="Google::Cloud::Dataproc::V1::SparkJob (class)">Google::Cloud::Dataproc::V1::SparkJob</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Job is a Spark job.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="spark_sql_job=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="spark_sql_job-instance_method">
+  
+    #<strong>spark_sql_job</strong>  &#x21d2; <tt><span class='object_link'><a href="SparkSqlJob.html" title="Google::Cloud::Dataproc::V1::SparkSqlJob (class)">Google::Cloud::Dataproc::V1::SparkSqlJob</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Job is a SparkSql job.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SparkSqlJob.html" title="Google::Cloud::Dataproc::V1::SparkSqlJob (class)">Google::Cloud::Dataproc::V1::SparkSqlJob</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Job is a SparkSql job.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="status=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status-instance_method">
+  
+    #<strong>status</strong>  &#x21d2; <tt><span class='object_link'><a href="JobStatus.html" title="Google::Cloud::Dataproc::V1::JobStatus (class)">Google::Cloud::Dataproc::V1::JobStatus</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output-only. The job status. Additional application-specific
+status information may be contained in the <code>type_job</code>
+and <code>yarn_applications</code> fields.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="JobStatus.html" title="Google::Cloud::Dataproc::V1::JobStatus (class)">Google::Cloud::Dataproc::V1::JobStatus</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output-only. The job status. Additional application-specific
+status information may be contained in the <code>type_job</code>
+and <code>yarn_applications</code> fields.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="status_history=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status_history-instance_method">
+  
+    #<strong>status_history</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="JobStatus.html" title="Google::Cloud::Dataproc::V1::JobStatus (class)">Google::Cloud::Dataproc::V1::JobStatus</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output-only. The previous job status.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="JobStatus.html" title="Google::Cloud::Dataproc::V1::JobStatus (class)">Google::Cloud::Dataproc::V1::JobStatus</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output-only. The previous job status.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="yarn_applications=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="yarn_applications-instance_method">
+  
+    #<strong>yarn_applications</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="YarnApplication.html" title="Google::Cloud::Dataproc::V1::YarnApplication (class)">Google::Cloud::Dataproc::V1::YarnApplication</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output-only. The collection of YARN applications spun up by this job.</p>
+
+<p><strong>Beta</strong> Feature: This report is available for testing purposes only. It may
+be changed before final release.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="YarnApplication.html" title="Google::Cloud::Dataproc::V1::YarnApplication (class)">Google::Cloud::Dataproc::V1::YarnApplication</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output-only. The collection of YARN applications spun up by this job.</p>
+
+<p><strong>Beta</strong> Feature: This report is available for testing purposes only. It may
+be changed before final release.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+507</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 507</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
