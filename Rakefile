@@ -659,12 +659,23 @@ namespace :kokoro do
       end
     end
   end
+
+  task :nightly do
+    header_2 ENV["JOB_TYPE"]
+    Dir.chdir ENV["PACKAGE"] do
+      Bundler.with_clean_env do
+        header "Using Ruby - #{RUBY_VERSION}"
+        sh "bundle update"
+        sh "bundle exec rake ci:acceptance"
+      end
+    end
+  end
 end
 
 def generate_kokoro_configs
   gems.each do |gem|
     [:linux, :windows, :osx].each do |os_version|
-      [:presubmit, :continuous].each do |build_type|
+      [:presubmit, :continuous, :nightly].each do |build_type|
         file_path = "./.kokoro/#{build_type}/"
         file_path += "#{os_version}-" unless os_version == :linux
         file_path += "#{gem}.cfg"
