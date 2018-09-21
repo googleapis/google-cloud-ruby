@@ -1,54 +1,6 @@
 version: 2
 
 jobs:
-  test-ruby-2.5:
-    docker:
-    - image: circleci/ruby:2.5.1-stretch
-    working_directory: ~/googleapis/google-cloud-ruby
-    shell: /bin/bash --login -eo pipefail
-    steps:
-    - checkout
-    - run:
-        name: Install bundle
-        command: gem update --system && gem install bundler && bundle update
-    - run: bundle exec rake circleci:build
-
-  test-ruby-2.4:
-    docker:
-    - image: circleci/ruby:2.4.4-stretch
-    working_directory: ~/googleapis/google-cloud-ruby
-    shell: /bin/bash --login -eo pipefail
-    steps:
-    - checkout
-    - run:
-        name: Install bundle
-        command: gem update --system && gem install bundler && bundle update
-    - run: bundle exec rake circleci:build
-
-  test-ruby-2.3:
-    docker:
-    - image: circleci/ruby:2.3.7-stretch
-    working_directory: ~/googleapis/google-cloud-ruby
-    shell: /bin/bash --login -eo pipefail
-    steps:
-    - checkout
-    - run:
-        name: Install bundle
-        command: gem update --system && gem install bundler && bundle update
-    - run: bundle exec rake circleci:build
-
-  post:
-    docker:
-    - image: circleci/ruby:2.5.1-stretch
-    working_directory: ~/googleapis/google-cloud-ruby
-    shell: /bin/bash --login -eo pipefail
-    steps:
-    - checkout
-    - run:
-        name: Install bundle
-        command: gem update --system && gem install bundler && bundle update
-    - run: bundle exec rake circleci:post
-
   release:
     working_directory: ~/googleapis/google-cloud-ruby
     shell: /bin/bash --login -eo pipefail

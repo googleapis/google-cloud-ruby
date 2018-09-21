@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# This file runs tests for merges PRs.
+# This file runs tests for merges and PRs.
 # There are a few rules for what tests are run:
-#  * Only the latest Ruby version runs E2E and Spanner tests (for nightly and PR builds).
-#    - This is indicated by setting RUN_ALL_TESTS before starting this script.
-#  * PRs only run tests in modified directories, unless the `spec` or `.kokoro` directories
-#    are modified, in which case all tests will be run.
-#  * Nightly runs will run all tests.
+#  * PRs run all non-acceptance tests for every library.
+#  * Merges run all non-acceptance tests for every library, and acceptance tests for all altered libraries.
 
 set -eo pipefail
 
