@@ -1,0 +1,2354 @@
+---
+layout: yard_main
+title: "Class: Google::Devtools::Clouddebugger::V2::Breakpoint - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Devtools::Clouddebugger::V2::Breakpoint";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">Breakpoint</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Devtools::Clouddebugger::V2::Breakpoint
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Devtools::Clouddebugger::V2::Breakpoint</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Represents the breakpoint specification, status and results.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span>, <span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action-instance_method" title="#action (instance method)">#<strong>action</strong>  &#x21d2; Google::Devtools::Clouddebugger::V2::Breakpoint::Action </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Action that the agent should perform when the code at the breakpoint location is hit.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#condition-instance_method" title="#condition (instance method)">#<strong>condition</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Condition that triggers the breakpoint.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_time-instance_method" title="#create_time (instance method)">#<strong>create_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Time this breakpoint was created by the server in seconds resolution.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#evaluated_expressions-instance_method" title="#evaluated_expressions (instance method)">#<strong>evaluated_expressions</strong>  &#x21d2; Array&lt;Google::Devtools::Clouddebugger::V2::Variable&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Values of evaluated expressions at breakpoint time.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#expressions-instance_method" title="#expressions (instance method)">#<strong>expressions</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of read-only expressions to evaluate at the breakpoint location.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#final_time-instance_method" title="#final_time (instance method)">#<strong>final_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Time this breakpoint was finalized as seen by the server in seconds resolution.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id-instance_method" title="#id (instance method)">#<strong>id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Breakpoint identifier, unique in the scope of the debuggee.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_final_state-instance_method" title="#is_final_state (instance method)">#<strong>is_final_state</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When true, indicates that this is a final result and the breakpoint state will not change from here on.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A set of custom breakpoint properties, populated by the agent, to be displayed to the user.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#location-instance_method" title="#location (instance method)">#<strong>location</strong>  &#x21d2; Google::Devtools::Clouddebugger::V2::SourceLocation </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Breakpoint source location.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#log_level-instance_method" title="#log_level (instance method)">#<strong>log_level</strong>  &#x21d2; Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Indicates the severity of the log.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#log_message_format-instance_method" title="#log_message_format (instance method)">#<strong>log_message_format</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Only relevant when action is <code>LOG</code>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stack_frames-instance_method" title="#stack_frames (instance method)">#<strong>stack_frames</strong>  &#x21d2; Array&lt;Google::Devtools::Clouddebugger::V2::StackFrame&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The stack at breakpoint time.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status-instance_method" title="#status (instance method)">#<strong>status</strong>  &#x21d2; Google::Devtools::Clouddebugger::V2::StatusMessage </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Breakpoint status.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user_email-instance_method" title="#user_email (instance method)">#<strong>user_email</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>E-mail address of the user that created this breakpoint.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#variable_table-instance_method" title="#variable_table (instance method)">#<strong>variable_table</strong>  &#x21d2; Array&lt;Google::Devtools::Clouddebugger::V2::Variable&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The <code>variable_table</code> exists to aid with computation, memory and network traffic optimization.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="action=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="action-instance_method">
+  
+    #<strong>action</strong>  &#x21d2; <tt><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Google::Devtools::Clouddebugger::V2::Breakpoint::Action</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Action that the agent should perform when the code at the
+breakpoint location is hit.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Google::Devtools::Clouddebugger::V2::Breakpoint::Action</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Action that the agent should perform when the code at the
+breakpoint location is hit.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="condition=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="condition-instance_method">
+  
+    #<strong>condition</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Condition that triggers the breakpoint.
+The condition is a compound boolean expression composed using expressions
+in a programming language at the source location.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Condition that triggers the breakpoint.
+The condition is a compound boolean expression composed using expressions
+in a programming language at the source location.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="create_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="create_time-instance_method">
+  
+    #<strong>create_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Time this breakpoint was created by the server in seconds resolution.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Time this breakpoint was created by the server in seconds resolution.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="evaluated_expressions=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="evaluated_expressions-instance_method">
+  
+    #<strong>evaluated_expressions</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Variable.html" title="Google::Devtools::Clouddebugger::V2::Variable (class)">Google::Devtools::Clouddebugger::V2::Variable</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Values of evaluated expressions at breakpoint time.
+The evaluated expressions appear in exactly the same order they
+are listed in the <code>expressions</code> field.
+The <code>name</code> field holds the original expression text, the <code>value</code> or
+<code>members</code> field holds the result of the evaluated expression.
+If the expression cannot be evaluated, the <code>status</code> inside the <code>Variable</code>
+will indicate an error and contain the error text.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Variable.html" title="Google::Devtools::Clouddebugger::V2::Variable (class)">Google::Devtools::Clouddebugger::V2::Variable</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Values of evaluated expressions at breakpoint time.
+The evaluated expressions appear in exactly the same order they
+are listed in the <code>expressions</code> field.
+The <code>name</code> field holds the original expression text, the <code>value</code> or
+<code>members</code> field holds the result of the evaluated expression.
+If the expression cannot be evaluated, the <code>status</code> inside the <code>Variable</code>
+will indicate an error and contain the error text.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="expressions=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="expressions-instance_method">
+  
+    #<strong>expressions</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns List of read-only expressions to evaluate at the breakpoint location.
+The expressions are composed using expressions in the programming language
+at the source location. If the breakpoint action is <code>LOG</code>, the evaluated
+expressions are included in log statements.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of read-only expressions to evaluate at the breakpoint location.
+The expressions are composed using expressions in the programming language
+at the source location. If the breakpoint action is <code>LOG</code>, the evaluated
+expressions are included in log statements.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="final_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="final_time-instance_method">
+  
+    #<strong>final_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Time this breakpoint was finalized as seen by the server in seconds
+resolution.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Time this breakpoint was finalized as seen by the server in seconds
+resolution.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="id-instance_method">
+  
+    #<strong>id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Breakpoint identifier, unique in the scope of the debuggee.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Breakpoint identifier, unique in the scope of the debuggee.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="is_final_state=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="is_final_state-instance_method">
+  
+    #<strong>is_final_state</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns When true, indicates that this is a final result and the
+breakpoint state will not change from here on.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>When true, indicates that this is a final result and the
+breakpoint state will not change from here on.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A set of custom breakpoint properties, populated by the agent, to be
+displayed to the user.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A set of custom breakpoint properties, populated by the agent, to be
+displayed to the user.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="location=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="location-instance_method">
+  
+    #<strong>location</strong>  &#x21d2; <tt><span class='object_link'><a href="SourceLocation.html" title="Google::Devtools::Clouddebugger::V2::SourceLocation (class)">Google::Devtools::Clouddebugger::V2::SourceLocation</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Breakpoint source location.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SourceLocation.html" title="Google::Devtools::Clouddebugger::V2::SourceLocation (class)">Google::Devtools::Clouddebugger::V2::SourceLocation</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Breakpoint source location.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="log_level=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="log_level-instance_method">
+  
+    #<strong>log_level</strong>  &#x21d2; <tt><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Indicates the severity of the log. Only relevant when action is <code>LOG</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Indicates the severity of the log. Only relevant when action is <code>LOG</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="log_message_format=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="log_message_format-instance_method">
+  
+    #<strong>log_message_format</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Only relevant when action is <code>LOG</code>. Defines the message to log when
+the breakpoint hits. The message may include parameter placeholders <code>$0</code>,
+<code>$1</code>, etc. These placeholders are replaced with the evaluated value
+of the appropriate expression. Expressions not referenced in
+<code>log_message_format</code> are not logged.</p>
+
+<p>Example: <code>Message received, id = $0, count = $1</code> with
+<code>expressions</code> = <code>[ message.id, message.count ]</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Only relevant when action is <code>LOG</code>. Defines the message to log when
+the breakpoint hits. The message may include parameter placeholders <code>$0</code>,
+<code>$1</code>, etc. These placeholders are replaced with the evaluated value
+of the appropriate expression. Expressions not referenced in
+<code>log_message_format</code> are not logged.</p>
+
+<p>Example: <code>Message received, id = $0, count = $1</code> with
+<code>expressions</code> = <code>[ message.id, message.count ]</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="stack_frames=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="stack_frames-instance_method">
+  
+    #<strong>stack_frames</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="StackFrame.html" title="Google::Devtools::Clouddebugger::V2::StackFrame (class)">Google::Devtools::Clouddebugger::V2::StackFrame</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The stack at breakpoint time.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="StackFrame.html" title="Google::Devtools::Clouddebugger::V2::StackFrame (class)">Google::Devtools::Clouddebugger::V2::StackFrame</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The stack at breakpoint time.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="status=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status-instance_method">
+  
+    #<strong>status</strong>  &#x21d2; <tt><span class='object_link'><a href="StatusMessage.html" title="Google::Devtools::Clouddebugger::V2::StatusMessage (class)">Google::Devtools::Clouddebugger::V2::StatusMessage</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Breakpoint status.</p>
+
+<p>The status includes an error flag and a human readable message.
+This field is usually unset. The message can be either
+informational or an error message. Regardless, clients should always
+display the text message back to the user.</p>
+
+<p>Error status indicates complete failure of the breakpoint.</p>
+
+<p>Example (non-final state): <code>Still loading symbols...</code></p>
+
+<p>Examples (final state):</p>
+
+<ul>
+<li><code>Invalid line number</code> referring to location</li>
+<li><code>Field f not found in class C</code> referring to condition</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StatusMessage.html" title="Google::Devtools::Clouddebugger::V2::StatusMessage (class)">Google::Devtools::Clouddebugger::V2::StatusMessage</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Breakpoint status.</p>
+
+<p>The status includes an error flag and a human readable message.
+This field is usually unset. The message can be either
+informational or an error message. Regardless, clients should always
+display the text message back to the user.</p>
+
+<p>Error status indicates complete failure of the breakpoint.</p>
+
+<p>Example (non-final state): <code>Still loading symbols...</code></p>
+
+<p>Examples (final state):</p>
+
+<ul>
+<li><code>Invalid line number</code> referring to location</li>
+<li><code>Field f not found in class C</code> referring to condition</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="user_email=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="user_email-instance_method">
+  
+    #<strong>user_email</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns E-mail address of the user that created this breakpoint</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>E-mail address of the user that created this breakpoint</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="variable_table=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="variable_table-instance_method">
+  
+    #<strong>variable_table</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Variable.html" title="Google::Devtools::Clouddebugger::V2::Variable (class)">Google::Devtools::Clouddebugger::V2::Variable</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The <code>variable_table</code> exists to aid with computation, memory and network
+traffic optimization.  It enables storing a variable once and reference
+it from multiple variables, including variables stored in the
+<code>variable_table</code> itself.
+For example, the same <code>this</code> object, which may appear at many levels of
+the stack, can have all of its data stored once in this table.  The
+stack frame variables then would hold only a reference to it.</p>
+
+<p>The variable <code>var_table_index</code> field is an index into this repeated field.
+The stored objects are nameless and get their name from the referencing
+variable. The effective variable is a merge of the referencing variable
+and the referenced variable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Variable.html" title="Google::Devtools::Clouddebugger::V2::Variable (class)">Google::Devtools::Clouddebugger::V2::Variable</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <code>variable_table</code> exists to aid with computation, memory and network
+traffic optimization.  It enables storing a variable once and reference
+it from multiple variables, including variables stored in the
+<code>variable_table</code> itself.
+For example, the same <code>this</code> object, which may appear at many levels of
+the stack, can have all of its data stored once in this table.  The
+stack frame variables then would hold only a reference to it.</p>
+
+<p>The variable <code>var_table_index</code> field is an index into this repeated field.
+The stored objects are nameless and get their name from the referencing
+variable. The effective variable is a merge of the referencing variable
+and the referenced variable.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/data.rb', line 351</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+  <span class='comment'># Actions that can be taken when a breakpoint hits.
+</span>  <span class='comment'># Agents should reject breakpoints with unsupported or unknown action values.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/Action.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::Action (module)">Action</a></span></span>
+    <span class='comment'># Capture stack frame and variables and update the breakpoint.
+</span>    <span class='comment'># The data is only captured once. After that the breakpoint is set
+</span>    <span class='comment'># in a final state.
+</span>    <span class='const'>CAPTURE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Log each breakpoint hit. The breakpoint remains active until
+</span>    <span class='comment'># deleted or expired.
+</span>    <span class='const'>LOG</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Log severity levels.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Breakpoint/LogLevel.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint::LogLevel (module)">LogLevel</a></span></span>
+    <span class='comment'># Information log message.
+</span>    <span class='const'>INFO</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Warning log message.
+</span>    <span class='const'>WARNING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Error log message.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
