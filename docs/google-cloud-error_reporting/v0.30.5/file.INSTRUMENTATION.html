@@ -1,0 +1,167 @@
+---
+layout: yard_main
+title: "File: INSTRUMENTATION - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "INSTRUMENTATION";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="file_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: INSTRUMENTATION</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>Stackdriver Error Reporting Instrumentation</h1>
+
+<p>The google-cloud-error_reporting gem provides framework instrumentation features
+to make it easy to report exceptions from your application.</p>
+
+<h2>Quick Start</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Insert a Rack Middleware to report unhanded exceptions
+</span><span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting/Middleware.html" title="Google::Cloud::ErrorReporting::Middleware (class)">Middleware</a></span></span>
+
+<span class='comment'># Or explicitly submit exceptions
+</span><span class='kw'>begin</span>
+  <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Boom!</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exception'>exception</span>
+  <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='period'>.</span><span class='id identifier rubyid_report'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html#report-class_method" title="Google::Cloud::ErrorReporting.report (method)">report</a></span></span> <span class='id identifier rubyid_exception'>exception</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Configuration</h2>
+
+<p>The default configuration enables Stackdriver instrumentation features to run on
+Google Cloud Platform. You can easily configure the instrumentation library  if
+you want to run on a non Google Cloud environment or you want to customize  the
+default behavior.</p>
+
+<p>See the <a href="https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION">Configuration
+Guide</a>
+for full configuration parameters.</p>
+
+<h2>Rack Middleware and Railtie</h2>
+
+<p>The google-cloud-error_reporting gem provides a Rack Middleware class that can
+easily integrate with Rack based application frameworks, such as Rails and
+Sinatra. When enabled, it automatically gathers application exceptions from
+requests and submits the information to the Stackdriver Error Reporting service.
+On top of that, the google-cloud-error_reporting also implements a Railtie class
+that automatically enables the Rack Middleware in Rails applications when used.</p>
+
+<h3>Rails Integration</h3>
+
+<p>To use the Stackdriver Error Reporting Railtie for Ruby on Rails applications,
+simply add this line to <code>config/application.rb</code>:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting/rails</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Alternatively, check out the
+<a href="https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest">stackdriver</a>
+gem, which enables this Railtie by default.</p>
+
+<h3>Rack Integration</h3>
+
+<p>Other Rack-based framework can also directly leverage the Middleware directly:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting/Middleware.html" title="Google::Cloud::ErrorReporting::Middleware (class)">Middleware</a></span></span>
+</code></pre>
+
+<h2>Report Captured Exceptions</h2>
+
+<p>Captured Ruby exceptions can be reported directly to Stackdriver Error Reporting
+by using <span class='object_link'><a href="Google/Cloud/ErrorReporting.html#report-class_method" title="Google::Cloud::ErrorReporting.report (method)">Google::Cloud::ErrorReporting.report</a></span>:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='kw'>begin</span>
+  <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Boom!</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exception'>exception</span>
+  <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='period'>.</span><span class='id identifier rubyid_report'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html#report-class_method" title="Google::Cloud::ErrorReporting.report (method)">report</a></span></span> <span class='id identifier rubyid_exception'>exception</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>The reported error event can also be customized:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='kw'>begin</span>
+  <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Boom!</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exception'>exception</span>
+  <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='period'>.</span><span class='id identifier rubyid_report'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html#report-class_method" title="Google::Cloud::ErrorReporting.report (method)">report</a></span></span> <span class='id identifier rubyid_exception'>exception</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_error_event'>error_event</span><span class='op'>|</span>
+    <span class='comment'># Directly modify the Google::Cloud::ErrorReporting::ErrorEvent object before submission
+</span>    <span class='id identifier rubyid_error_event'>error_event</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span>     <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Custom error message</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_error_event'>error_event</span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span>        <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>johndoh@example.com</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_error_event'>error_event</span><span class='period'>.</span><span class='id identifier rubyid_http_status'>http_status</span> <span class='op'>=</span> <span class='int'>502</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>See <span class='object_link'><a href="Google/Cloud/ErrorReporting/ErrorEvent.html" title="Google::Cloud::ErrorReporting::ErrorEvent (class)">Google::Cloud::ErrorReporting::ErrorEvent</a></span> class for all options.</p>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
