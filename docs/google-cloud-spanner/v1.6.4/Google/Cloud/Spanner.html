@@ -1,0 +1,559 @@
+---
+layout: yard_main
+title: "Module: Google::Cloud::Spanner - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Spanner";
+  relpath = '../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span>
+     &raquo; 
+    <span class="title">Spanner</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Cloud::Spanner
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/spanner.rb<span class="defines">,<br />
+  lib/google/cloud/spanner/data.rb,<br /> lib/google/cloud/spanner/pool.rb,<br /> lib/google/cloud/spanner/range.rb,<br /> lib/google/cloud/spanner/client.rb,<br /> lib/google/cloud/spanner/commit.rb,<br /> lib/google/cloud/spanner/errors.rb,<br /> lib/google/cloud/spanner/fields.rb,<br /> lib/google/cloud/spanner/policy.rb,<br /> lib/google/cloud/spanner/status.rb,<br /> lib/google/cloud/spanner/convert.rb,<br /> lib/google/cloud/spanner/project.rb,<br /> lib/google/cloud/spanner/results.rb,<br /> lib/google/cloud/spanner/service.rb,<br /> lib/google/cloud/spanner/session.rb,<br /> lib/google/cloud/spanner/version.rb,<br /> lib/google/cloud/spanner/database.rb,<br /> lib/google/cloud/spanner/instance.rb,<br /> lib/google/cloud/spanner/snapshot.rb,<br /> lib/google/cloud/spanner/partition.rb,<br /> lib/google/cloud/spanner/credentials.rb,<br /> lib/google/cloud/spanner/transaction.rb,<br /> lib/google/cloud/spanner/batch_client.rb,<br /> lib/google/cloud/spanner/column_value.rb,<br /> lib/google/cloud/spanner/database/job.rb,<br /> lib/google/cloud/spanner/instance/job.rb,<br /> lib/google/cloud/spanner/database/list.rb,<br /> lib/google/cloud/spanner/instance/list.rb,<br /> lib/google/cloud/spanner/admin/database.rb,<br /> lib/google/cloud/spanner/admin/instance.rb,<br /> lib/google/cloud/spanner/batch_snapshot.rb,<br /> lib/google/cloud/spanner/v1/credentials.rb,<br /> lib/google/cloud/spanner/instance/config.rb,<br /> lib/google/cloud/spanner/admin/database/v1.rb,<br /> lib/google/cloud/spanner/admin/instance/v1.rb,<br /> lib/google/cloud/spanner/v1/spanner_client.rb,<br /> lib/google/cloud/spanner/instance/config/list.rb,<br /> lib/google/cloud/spanner/admin/database/credentials.rb,<br /> lib/google/cloud/spanner/admin/instance/credentials.rb,<br /> lib/google/cloud/spanner/admin/database/v1/credentials.rb,<br /> lib/google/cloud/spanner/admin/instance/v1/credentials.rb,<br /> lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb,<br /> lib/google/cloud/spanner/admin/instance/v1/instance_admin_client.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Cloud Spanner</h1>
+
+<p>Cloud Spanner is a fully managed, mission-critical, relational database
+service that offers transactional consistency at global scale, schemas,
+SQL (ANSI 2011 with extensions), and automatic, synchronous replication
+for high availability.</p>
+
+<p>For more information about Cloud Spanner, read the <a href="https://cloud.google.com/spanner/docs/">Cloud
+Spanner Documentation</a>.</p>
+
+<p>See <a href="../../index.html" title="Spanner Overview">Spanner Overview</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Spanner/Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span>, <span class='object_link'><a href="Spanner/V1.html" title="Google::Cloud::Spanner::V1 (module)">V1</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Spanner/BatchClient.html" title="Google::Cloud::Spanner::BatchClient (class)">BatchClient</a></span>, <span class='object_link'><a href="Spanner/BatchSnapshot.html" title="Google::Cloud::Spanner::BatchSnapshot (class)">BatchSnapshot</a></span>, <span class='object_link'><a href="Spanner/Client.html" title="Google::Cloud::Spanner::Client (class)">Client</a></span>, <span class='object_link'><a href="Spanner/ClientClosedError.html" title="Google::Cloud::Spanner::ClientClosedError (class)">ClientClosedError</a></span>, <span class='object_link'><a href="Spanner/ColumnValue.html" title="Google::Cloud::Spanner::ColumnValue (class)">ColumnValue</a></span>, <span class='object_link'><a href="Spanner/Commit.html" title="Google::Cloud::Spanner::Commit (class)">Commit</a></span>, <span class='object_link'><a href="Spanner/Credentials.html" title="Google::Cloud::Spanner::Credentials (class)">Credentials</a></span>, <span class='object_link'><a href="Spanner/Data.html" title="Google::Cloud::Spanner::Data (class)">Data</a></span>, <span class='object_link'><a href="Spanner/Database.html" title="Google::Cloud::Spanner::Database (class)">Database</a></span>, <span class='object_link'><a href="Spanner/DuplicateNameError.html" title="Google::Cloud::Spanner::DuplicateNameError (class)">DuplicateNameError</a></span>, <span class='object_link'><a href="Spanner/Fields.html" title="Google::Cloud::Spanner::Fields (class)">Fields</a></span>, <span class='object_link'><a href="Spanner/Instance.html" title="Google::Cloud::Spanner::Instance (class)">Instance</a></span>, <span class='object_link'><a href="Spanner/Partition.html" title="Google::Cloud::Spanner::Partition (class)">Partition</a></span>, <span class='object_link'><a href="Spanner/Policy.html" title="Google::Cloud::Spanner::Policy (class)">Policy</a></span>, <span class='object_link'><a href="Spanner/Project.html" title="Google::Cloud::Spanner::Project (class)">Project</a></span>, <span class='object_link'><a href="Spanner/Range.html" title="Google::Cloud::Spanner::Range (class)">Range</a></span>, <span class='object_link'><a href="Spanner/Results.html" title="Google::Cloud::Spanner::Results (class)">Results</a></span>, <span class='object_link'><a href="Spanner/Rollback.html" title="Google::Cloud::Spanner::Rollback (class)">Rollback</a></span>, <span class='object_link'><a href="Spanner/SessionLimitError.html" title="Google::Cloud::Spanner::SessionLimitError (class)">SessionLimitError</a></span>, <span class='object_link'><a href="Spanner/Snapshot.html" title="Google::Cloud::Spanner::Snapshot (class)">Snapshot</a></span>, <span class='object_link'><a href="Spanner/Status.html" title="Google::Cloud::Spanner::Status (class)">Status</a></span>, <span class='object_link'><a href="Spanner/Transaction.html" title="Google::Cloud::Spanner::Transaction (class)">Transaction</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1.6.4</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#configure-class_method" title="configure (class method)">.<strong>configure</strong> {|Google::Cloud.configure.spanner| ... } &#x21d2; Google::Cloud::Config </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configure the Google Cloud Spanner library.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil, project: nil, keyfile: nil)  &#x21d2; Google::Cloud::Spanner::Project </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new object for connecting to the Spanner service.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="configure-class_method">
+  
+    .<strong>configure</strong> {|Google::Cloud.configure.spanner| ... } &#x21d2; <tt>Google::Cloud::Config</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Configure the Google Cloud Spanner library.</p>
+
+<p>The following Spanner configuration parameters are supported:</p>
+
+<ul>
+<li><code>project_id</code> - (String) Identifier for a Spanner project. (The
+parameter <code>project</code> is considered deprecated, but may also be used.)</li>
+<li><code>credentials</code> - (String, Hash, Google::Auth::Credentials) The path to
+the keyfile as a String, the contents of the keyfile as a Hash, or a
+Google::Auth::Credentials object. (See <span class='object_link'><a href="Spanner/Credentials.html" title="Google::Cloud::Spanner::Credentials (class)">Credentials</a></span>) (The
+parameter <code>keyfile</code> is considered deprecated, but may also be used.)</li>
+<li><code>scope</code> - (String, Array<String>) The OAuth 2.0 scopes controlling
+the set of resources and operations that the connection can access.</li>
+<li><code>timeout</code> - (Integer) Default timeout to use in requests.</li>
+<li><code>client_config</code> - (Hash) A hash of values to override the default
+behavior of the API client.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Google::Cloud</a></span>.<span class='object_link'><a href="#configure-class_method" title="Google::Cloud::Spanner.configure (method)">configure</a></span>.<span class='object_link'><a href="../Cloud.html#spanner-class_method" title="Google::Cloud.spanner (method)">spanner</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Cloud::Config</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The configuration object the
+Google::Cloud::Spanner library uses.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118
+119</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
+  <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_spanner'>spanner</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_spanner'>spanner</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-class_method">
+  
+    .<strong>new</strong>(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil, project: nil, keyfile: nil)  &#x21d2; <tt><span class='object_link'><a href="Spanner/Project.html" title="Google::Cloud::Spanner::Project (class)">Google::Cloud::Spanner::Project</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new object for connecting to the Spanner service.
+Each call creates a new connection.</p>
+
+<p>For more information on connecting to Google Cloud see the
+<a href="../../file.AUTHENTICATION.html" title="Authentication Guide">Authentication Guide</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Project identifier for the Spanner service
+you are connecting to. If not present, the default project for the
+credentials is used.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>credentials</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>, <tt>Google::Auth::Credentials</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The path to
+the keyfile as a String, the contents of the keyfile as a Hash, or a
+Google::Auth::Credentials object. (See <span class='object_link'><a href="Spanner/Credentials.html" title="Google::Cloud::Spanner::Credentials (class)">Credentials</a></span>)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth 2.0 scopes controlling
+the set of resources and operations that the connection can access.
+See <a href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scopes are:</p>
+
+<ul>
+<li><code>https://www.googleapis.com/auth/spanner</code></li>
+<li><code>https://www.googleapis.com/auth/spanner.data</code></li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default timeout to use in requests. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of values to override the default
+behavior of the API client. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Alias for the <code>project_id</code> argument. Deprecated.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keyfile</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Alias for the <code>credentials</code> argument.
+Deprecated.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Spanner/Project.html" title="Google::Cloud::Spanner::Project (class)">Google::Cloud::Spanner::Project</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+             <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span> <span class='op'>||</span> <span class='id identifier rubyid_default_project_id'>default_project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
+</span>  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_scope'>scope</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span>
+  <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span>
+  <span class='id identifier rubyid_client_config'>client_config</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_client_config'>client_config</span>
+  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>||</span> <span class='id identifier rubyid_default_credentials'>default_credentials</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span>
+    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Spanner/Credentials.html" title="Google::Cloud::Spanner::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span>
+  <span class='kw'>end</span>
+
+  <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Spanner/Project.html" title="Google::Cloud::Spanner::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+                               <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span>
+    <span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
