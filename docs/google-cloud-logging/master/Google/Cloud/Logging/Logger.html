@@ -75,11 +75,6 @@ js:
   
   
   
-  <dl>
-      <dt>Includes:</dt>
-      <dd>MonitorMixin</dd>
-  </dl>
-  
   
 
   
@@ -999,8 +994,7 @@ Stackdriver Logging Service.</p>
     </ul>
   
 
-
-  <div id="constructor_details" class="method_details_list">
+<div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
     <div class="method_details first">
@@ -1124,7 +1118,6 @@ written log entries.</p>
       <pre class="lines">
 
 
-169
 170
 171
 172
@@ -1141,11 +1134,10 @@ written log entries.</p>
 183
 184
 185
-186
-187</pre>
+186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 169</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 170</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_writer'>writer</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='ivar'>@writer</span> <span class='op'>=</span> <span class='id identifier rubyid_writer'>writer</span>
@@ -1153,7 +1145,7 @@ written log entries.</p>
   <span class='ivar'>@resource</span> <span class='op'>=</span> <span class='id identifier rubyid_resource'>resource</span>
   <span class='ivar'>@labels</span> <span class='op'>=</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='ivar'>@level</span> <span class='op'>=</span> <span class='int'>0</span> <span class='comment'># DEBUG is the default behavior
-</span>  <span class='ivar'>@request_info_map</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+</span>  <span class='ivar'>@request_info_var</span> <span class='op'>=</span> <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>ThreadLocalVar</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
   <span class='ivar'>@closed</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='comment'># Unused, but present for API compatibility
 </span>  <span class='ivar'>@formatter</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>Formatter</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -1163,9 +1155,7 @@ written log entries.</p>
   <span class='comment'># The writer is usually a Project or AsyncWriter.
 </span>  <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='ivar'>@writer</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:logging</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='ivar'>@writer</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span> <span class='op'>:</span> <span class='ivar'>@writer</span>
   <span class='ivar'>@project</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='kw'>if</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:project</span>
-
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='comment'># to init MonitorMixin
-</span><span class='kw'>end</span></pre>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1204,12 +1194,12 @@ attribute for API compatibility with the standard Logger.</p>
       <pre class="lines">
 
 
-107
-108
-109</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_datetime_format'>datetime_format</span>
   <span class='ivar'>@datetime_format</span>
@@ -1247,12 +1237,12 @@ Logger::Formatter for API compatibility with the standard Logger.</p>
       <pre class="lines">
 
 
-102
-103
-104</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_formatter'>formatter</span>
   <span class='ivar'>@formatter</span>
@@ -1289,12 +1279,12 @@ Logger::Formatter for API compatibility with the standard Logger.</p>
       <pre class="lines">
 
 
-86
-87
-88</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
   <span class='ivar'>@labels</span>
@@ -1335,12 +1325,12 @@ Logger::Formatter for API compatibility with the standard Logger.</p>
       <pre class="lines">
 
 
-90
-91
-92</pre>
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_level'>level</span>
   <span class='ivar'>@level</span>
@@ -1381,12 +1371,12 @@ Logger::Formatter for API compatibility with the standard Logger.</p>
       <pre class="lines">
 
 
-77
-78
-79</pre>
+75
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_log_name'>log_name</span>
   <span class='ivar'>@log_name</span>
@@ -1424,12 +1414,12 @@ used to set the trace field of log entries.</p>
       <pre class="lines">
 
 
-112
-113
-114</pre>
+110
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_project'>project</span>
   <span class='ivar'>@project</span>
@@ -1466,12 +1456,12 @@ used to set the trace field of log entries.</p>
       <pre class="lines">
 
 
-82
-83
-84</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource'>resource</span>
   <span class='ivar'>@resource</span>
@@ -1509,12 +1499,12 @@ not.</p>
       <pre class="lines">
 
 
-97
-98
-99</pre>
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_silencer'>silencer</span>
   <span class='ivar'>@silencer</span>
@@ -1552,12 +1542,12 @@ on. Either an AsyncWriter or Project object.</p>
       <pre class="lines">
 
 
-73
-74
-75</pre>
+71
+72
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_writer'>writer</span>
   <span class='ivar'>@writer</span>
@@ -1618,13 +1608,13 @@ on. Either an AsyncWriter or Project object.</p>
       <pre class="lines">
 
 
+336
 337
 338
-339
-340</pre>
+339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 337</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 336</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_msg'>msg</span>
   <span class='id identifier rubyid_unknown'>unknown</span> <span class='id identifier rubyid_msg'>msg</span>
@@ -1724,6 +1714,7 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+311
 312
 313
 314
@@ -1740,11 +1731,10 @@ called when the logger is configured to show them.</p>
 325
 326
 327
-328
-329</pre>
+328</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 312</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 311</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add'>add</span> <span class='id identifier rubyid_severity'>severity</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@closed</span>
@@ -1865,35 +1855,21 @@ available.</p>
       <pre class="lines">
 
 
+460
 461
 462
 463
 464
 465
-466
-467
-468
-469
-470
-471
-472
-473
-474</pre>
+466</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 461</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 460</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_request_info'>add_request_info</span> <span class='label'>info:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>trace_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>log_name:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_info'>info</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Logging::Logger#initialize (method)">new</a></span></span> <span class='id identifier rubyid_trace_id'>trace_id</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_env'>env</span>
 
-  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
-    <span class='ivar'>@request_info_map</span><span class='lbracket'>[</span><span class='id identifier rubyid_current_thread_id'>current_thread_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_info'>info</span>
-
-    <span class='comment'># Start removing old entries if hash gets too large.
-</span>    <span class='comment'># This should never happen, because middleware should automatically
-</span>    <span class='comment'># remove entries when a request is finished
-</span>    <span class='ivar'>@request_info_map</span><span class='period'>.</span><span class='id identifier rubyid_shift'>shift</span> <span class='kw'>while</span> <span class='ivar'>@request_info_map</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>10_000</span>
-  <span class='kw'>end</span>
+  <span class='ivar'>@request_info_var</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_info'>info</span>
 
   <span class='id identifier rubyid_info'>info</span>
 <span class='kw'>end</span></pre>
@@ -1930,12 +1906,12 @@ Thread</p>
       <pre class="lines">
 
 
+441
 442
-443
-444</pre>
+443</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 442</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 441</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_trace_id'>add_trace_id</span> <span class='id identifier rubyid_trace_id'>trace_id</span>
   <span class='id identifier rubyid_add_request_info'>add_request_info</span> <span class='label'>trace_id:</span> <span class='id identifier rubyid_trace_id'>trace_id</span>
@@ -1972,13 +1948,13 @@ logger may be re-enabled by calling #reopen.</p>
       <pre class="lines">
 
 
+418
 419
 420
-421
-422</pre>
+421</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 419</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 418</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span>
   <span class='ivar'>@closed</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -2056,16 +2032,16 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+198
 199
 200
 201
 202
 203
-204
-205</pre>
+204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 198</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_debug'>debug</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -2118,12 +2094,12 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+344
 345
-346
-347</pre>
+346</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 345</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 344</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_debug?'>debug?</span>
   <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>DEBUG</span>
@@ -2179,15 +2155,15 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
-491
-492
-493</pre>
+483
+484
+485</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 491</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 483</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_request_info'>delete_request_info</span>
-  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@request_info_map</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_current_thread_id'>current_thread_id</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@request_info_var</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='kw'>nil</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2261,16 +2237,16 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+252
 253
 254
 255
 256
 257
-258
-259</pre>
+258</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 252</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error'>error</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -2323,12 +2299,12 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+365
 366
-367
-368</pre>
+367</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 366</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 365</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error?'>error?</span>
   <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>ERROR</span>
@@ -2405,16 +2381,16 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+270
 271
 272
 273
 274
 275
-276
-277</pre>
+276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 271</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 270</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fatal'>fatal</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -2467,12 +2443,12 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+372
 373
-374
-375</pre>
+374</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 373</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 372</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fatal?'>fatal?</span>
   <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>FATAL</span>
@@ -2508,12 +2484,12 @@ method when used in Rails application.</p>
       <pre class="lines">
 
 
-502
-503
-504</pre>
+494
+495
+496</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 502</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 494</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flush'>flush</span>
   <span class='kw'>self</span>
@@ -2590,16 +2566,16 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+216
 217
 218
 219
 220
 221
-222
-223</pre>
+222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 216</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_info'>info</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -2652,12 +2628,12 @@ messages.</p>
       <pre class="lines">
 
 
+351
 352
-353
-354</pre>
+353</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 352</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 351</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_info?'>info?</span>
   <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>INFO</span>
@@ -2692,12 +2668,12 @@ messages.</p>
       <pre class="lines">
 
 
-116
-117
-118</pre>
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_progname='>progname=</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@log_name</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
@@ -2736,13 +2712,13 @@ ignored because this logger does not use a log device.</p>
       <pre class="lines">
 
 
+430
 431
 432
-433
-434</pre>
+433</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 431</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 430</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reopen'>reopen</span> <span class='id identifier rubyid__logdev'>_logdev</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='ivar'>@closed</span> <span class='op'>=</span> <span class='kw'>false</span>
@@ -2796,15 +2772,15 @@ or <code>nil</code> if there is no data set.</p>
       <pre class="lines">
 
 
-482
-483
-484</pre>
+474
+475
+476</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 482</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 474</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_request_info'>request_info</span>
-  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@request_info_map</span><span class='lbracket'>[</span><span class='id identifier rubyid_current_thread_id'>current_thread_id</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+  <span class='ivar'>@request_info_var</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2880,23 +2856,23 @@ block. Messages with lower severity will be blocked. Default
       <pre class="lines">
 
 
+520
+521
+522
+523
+524
+525
+526
+527
 528
 529
 530
 531
 532
-533
-534
-535
-536
-537
-538
-539
-540
-541</pre>
+533</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 528</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 520</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_silence'>silence</span> <span class='id identifier rubyid_temp_level'>temp_level</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>ERROR</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_silencer'>silencer</span>
@@ -2934,6 +2910,9 @@ block. Messages with lower severity will be blocked. Default
 Stackdriver trace ID is a shared request identifier across all
 Stackdriver services.</p>
 
+<p>This method is deprecated and returns a Hash containing only the
+current Thread ID/trace_id now.</p>
+
 
   </div>
 </div>
@@ -2946,19 +2925,19 @@ Stackdriver services.</p>
       <pre class="lines">
 
 
-127
 128
 129
 130
-131</pre>
+131
+132</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_trace_ids'>trace_ids</span>
-  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
-    <span class='ivar'>@request_info_map</span><span class='period'>.</span><span class='id identifier rubyid_inject'>inject</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span><span class='op'>|</span> <span class='id identifier rubyid_r'>r</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_trace_id'>trace_id</span> <span class='rbrace'>}</span>
-  <span class='kw'>end</span>
+  <span class='id identifier rubyid_current_request_info'>current_request_info</span> <span class='op'>=</span> <span class='id identifier rubyid_request_info'>request_info</span>
+  <span class='kw'>return</span> <span class='lbrace'>{</span><span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_request_info'>current_request_info</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='lbrace'>{</span> <span class='id identifier rubyid_current_thread_id'>current_thread_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_current_request_info'>current_request_info</span><span class='period'>.</span><span class='id identifier rubyid_trace_id'>trace_id</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3033,16 +3012,16 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+289
 290
 291
 292
 293
 294
-295
-296</pre>
+295</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 289</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unknown'>unknown</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -3095,12 +3074,12 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+379
 380
-381
-382</pre>
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 380</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 379</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unknown?'>unknown?</span>
   <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>UNKNOWN</span>
@@ -3177,16 +3156,16 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
+234
 235
 236
 237
 238
 239
-240
-241</pre>
+240</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 235</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 234</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_warn'>warn</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -3239,12 +3218,12 @@ messages.</p>
       <pre class="lines">
 
 
+358
 359
-360
-361</pre>
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 359</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 358</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_warn?'>warn?</span>
   <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>WARN</span>
