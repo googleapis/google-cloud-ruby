@@ -166,25 +166,6 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       logger.request_info.must_equal request_info
     end
 
-    it "doesn't record more than 10_000 RequestInfo records" do
-      last_thread_id = first_thread_id = 1
-      stubbed_thread_id = ->(){
-        last_thread_id += 1
-      }
-
-      # Stubbing Thread.current breaks minitest APIs. So record result and
-      # evaluate outside the block
-      logger.stub :current_thread_id, stubbed_thread_id do
-        10_001.times do
-          logger.add_request_info info: request_info
-        end
-        request_info_map = logger.instance_variable_get :@request_info_map
-        request_info_map.size.must_equal 10_000
-        request_info_map[first_thread_id].must_be_nil
-        request_info_map[last_thread_id].must_equal request_info
-      end
-    end
-
     it "passes request info to log writes" do
       mock = Minitest::Mock.new
       trace_id = "my_trace_id"

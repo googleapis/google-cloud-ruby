@@ -14,8 +14,8 @@
 
 
 require "logger"
-require "monitor"
 require "thread"
+require "concurrent"
 
 module Google
   module Cloud
@@ -53,8 +53,6 @@ module Google
       #   logger.info payload
       #
       class Logger
-        include MonitorMixin
-
         ##
         # A RequestInfo represents data about the request being handled by the
         # current thread. It is used to configure logs coming from that thread.
@@ -122,12 +120,15 @@ module Google
         # Stackdriver trace ID is a shared request identifier across all
         # Stackdriver services.
         #
+        # This method is deprecated and returns a Hash containing only the
+        # current Thread ID/trace_id now.
+        #
         # @deprecated Use request_info
         #
         def trace_ids
-          synchronize do
-            @request_info_map.inject({}) { |r, (k, v)| r[k] = v.trace_id }
-          end
+          current_request_info = request_info
+          return {} if current_request_info.nil?
+          { current_thread_id => current_request_info.trace_id }
         end
 
         ##
@@ -172,7 +173,7 @@ module Google
           @resource = resource
           @labels = labels || {}
           @level = 0 # DEBUG is the default behavior
-          @request_info_map = {}
+          @request_info_var = Concurrent::ThreadLocalVar.new
           @closed = false
           # Unused, but present for API compatibility
           @formatter = ::Logger::Formatter.new
@@ -182,8 +183,6 @@ module Google
           # The writer is usually a Project or AsyncWriter.
           logging = @writer.respond_to?(:logging) ? @writer.logging : @writer
           @project = logging.project if logging.respond_to? :project
-
-          super() # to init MonitorMixin
         end
 
         ##
@@ -461,14 +460,7 @@ module Google
         def add_request_info info: nil, env: nil, trace_id: nil, log_name: nil
           info ||= RequestInfo.new trace_id, log_name, env
 
-          synchronize do
-            @request_info_map[current_thread_id] = info
-
-            # Start removing old entries if hash gets too large.
-            # This should never happen, because middleware should automatically
-            # remove entries when a request is finished
-            @request_info_map.shift while @request_info_map.size > 10_000
-          end
+          @request_info_var.value = info
 
           info
         end
@@ -480,7 +472,7 @@ module Google
         #     or `nil` if there is no data set.
         #
         def request_info
-          synchronize { @request_info_map[current_thread_id] }
+          @request_info_var.value
         end
 
         ##
@@ -489,7 +481,7 @@ module Google
         # @return [RequestInfo] The info that's being deleted
         #
         def delete_request_info
-          synchronize { @request_info_map.delete current_thread_id }
+          @request_info_var.value = nil
         end
 
         ##
