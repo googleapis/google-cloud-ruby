@@ -67,7 +67,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google/cloud/vision.rb<span class="defines">,<br />
-  lib/google/cloud/vision/v1.rb,<br /> lib/google/cloud/vision/image.rb,<br /> lib/google/cloud/vision/project.rb,<br /> lib/google/cloud/vision/service.rb,<br /> lib/google/cloud/vision/version.rb,<br /> lib/google/cloud/vision/annotate.rb,<br /> lib/google/cloud/vision/location.rb,<br /> lib/google/cloud/vision/annotation.rb,<br /> lib/google/cloud/vision/credentials.rb,<br /> lib/google/cloud/vision/annotation/web.rb,<br /> lib/google/cloud/vision/v1/credentials.rb,<br /> lib/google/cloud/vision/annotation/face.rb,<br /> lib/google/cloud/vision/annotation/text.rb,<br /> lib/google/cloud/vision/annotation/entity.rb,<br /> lib/google/cloud/vision/annotation/vertex.rb,<br /> lib/google/cloud/vision/annotation/crop_hint.rb,<br /> lib/google/cloud/vision/annotation/properties.rb,<br /> lib/google/cloud/vision/annotation/safe_search.rb,<br /> lib/google/cloud/vision/v1/image_annotator_client.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/geometry.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/web_detection.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/image_annotator.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/text_annotation.rb</span>
+  lib/google/cloud/vision/v1.rb,<br /> lib/google/cloud/vision/image.rb,<br /> lib/google/cloud/vision/project.rb,<br /> lib/google/cloud/vision/service.rb,<br /> lib/google/cloud/vision/version.rb,<br /> lib/google/cloud/vision/annotate.rb,<br /> lib/google/cloud/vision/location.rb,<br /> lib/google/cloud/vision/annotation.rb,<br /> lib/google/cloud/vision/credentials.rb,<br /> lib/google/cloud/vision/annotation/web.rb,<br /> lib/google/cloud/vision/v1/credentials.rb,<br /> lib/google/cloud/vision/annotation/face.rb,<br /> lib/google/cloud/vision/annotation/text.rb,<br /> lib/google/cloud/vision/annotation/entity.rb,<br /> lib/google/cloud/vision/annotation/vertex.rb,<br /> lib/google/cloud/vision/annotation/crop_hint.rb,<br /> lib/google/cloud/vision/annotation/properties.rb,<br /> lib/google/cloud/vision/annotation/safe_search.rb,<br /> lib/google/cloud/vision/v1/image_annotator_client.rb,<br /> lib/google/cloud/vision/annotation/normalized_vertex.rb,<br /> lib/google/cloud/vision/annotation/object_localization.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/geometry.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/web_detection.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/image_annotator.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/text_annotation.rb</span>
 </dd>
   </dl>
   
@@ -392,6 +392,50 @@ Documentation</a>.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#default_max_object_localizations-class_method" title="default_max_object_localizations (class method)">.<strong>default_max_object_localizations</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_max_object_localizations=-class_method" title="default_max_object_localizations= (class method)">.<strong>default_max_object_localizations=</strong>(value)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#default_max_web-class_method" title="default_max_web (class method)">.<strong>default_max_web</strong>  &#x21d2; Object </a>
     
 
@@ -552,14 +596,14 @@ Google::Cloud::Vision library uses.</p>
       <pre class="lines">
 
 
-539
-540
-541
-542
-543</pre>
+547
+548
+549
+550
+551</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision.rb', line 539</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision.rb', line 547</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_vision'>vision</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -1321,6 +1365,66 @@ used on <span class='object_link'><a href="Vision/Project.html#annotate-instance
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="default_max_object_localizations-class_method">
+  
+    .<strong>default_max_object_localizations</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+450
+451
+452</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision.rb', line 450</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_default_max_object_localizations'>default_max_object_localizations</span>
+  <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_default_max_object_localizations'>default_max_object_localizations</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_max_object_localizations=-class_method">
+  
+    .<strong>default_max_object_localizations=</strong>(value)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+446
+447
+448</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision.rb', line 446</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_default_max_object_localizations='>default_max_object_localizations=</span> <span class='id identifier rubyid_value'>value</span>
+  <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_default_max_object_localizations'>default_max_object_localizations</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="default_max_web-class_method">
   
     .<strong>default_max_web</strong>  &#x21d2; <tt>Object</tt> 
@@ -1662,14 +1766,6 @@ Deprecated.</p>
       <pre class="lines">
 
 
-484
-485
-486
-487
-488
-489
-490
-491
 492
 493
 494
@@ -1682,10 +1778,18 @@ Deprecated.</p>
 501
 502
 503
-504</pre>
+504
+505
+506
+507
+508
+509
+510
+511
+512</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision.rb', line 484</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision.rb', line 492</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>

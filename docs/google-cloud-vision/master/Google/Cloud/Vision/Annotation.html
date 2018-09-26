@@ -83,7 +83,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google/cloud/vision/annotation.rb<span class="defines">,<br />
-  lib/google/cloud/vision/annotation/web.rb,<br /> lib/google/cloud/vision/annotation/face.rb,<br /> lib/google/cloud/vision/annotation/text.rb,<br /> lib/google/cloud/vision/annotation/entity.rb,<br /> lib/google/cloud/vision/annotation/vertex.rb,<br /> lib/google/cloud/vision/annotation/crop_hint.rb,<br /> lib/google/cloud/vision/annotation/properties.rb,<br /> lib/google/cloud/vision/annotation/safe_search.rb</span>
+  lib/google/cloud/vision/annotation/web.rb,<br /> lib/google/cloud/vision/annotation/face.rb,<br /> lib/google/cloud/vision/annotation/text.rb,<br /> lib/google/cloud/vision/annotation/entity.rb,<br /> lib/google/cloud/vision/annotation/vertex.rb,<br /> lib/google/cloud/vision/annotation/crop_hint.rb,<br /> lib/google/cloud/vision/annotation/properties.rb,<br /> lib/google/cloud/vision/annotation/safe_search.rb,<br /> lib/google/cloud/vision/annotation/normalized_vertex.rb,<br /> lib/google/cloud/vision/annotation/object_localization.rb</span>
 </dd>
   </dl>
   
@@ -125,7 +125,7 @@ js:
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Annotation/CropHint.html" title="Google::Cloud::Vision::Annotation::CropHint (class)">CropHint</a></span>, <span class='object_link'><a href="Annotation/Entity.html" title="Google::Cloud::Vision::Annotation::Entity (class)">Entity</a></span>, <span class='object_link'><a href="Annotation/Face.html" title="Google::Cloud::Vision::Annotation::Face (class)">Face</a></span>, <span class='object_link'><a href="Annotation/Properties.html" title="Google::Cloud::Vision::Annotation::Properties (class)">Properties</a></span>, <span class='object_link'><a href="Annotation/SafeSearch.html" title="Google::Cloud::Vision::Annotation::SafeSearch (class)">SafeSearch</a></span>, <span class='object_link'><a href="Annotation/Text.html" title="Google::Cloud::Vision::Annotation::Text (class)">Text</a></span>, <span class='object_link'><a href="Annotation/Vertex.html" title="Google::Cloud::Vision::Annotation::Vertex (class)">Vertex</a></span>, <span class='object_link'><a href="Annotation/Web.html" title="Google::Cloud::Vision::Annotation::Web (class)">Web</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Annotation/CropHint.html" title="Google::Cloud::Vision::Annotation::CropHint (class)">CropHint</a></span>, <span class='object_link'><a href="Annotation/Entity.html" title="Google::Cloud::Vision::Annotation::Entity (class)">Entity</a></span>, <span class='object_link'><a href="Annotation/Face.html" title="Google::Cloud::Vision::Annotation::Face (class)">Face</a></span>, <span class='object_link'><a href="Annotation/NormalizedVertex.html" title="Google::Cloud::Vision::Annotation::NormalizedVertex (class)">NormalizedVertex</a></span>, <span class='object_link'><a href="Annotation/ObjectLocalization.html" title="Google::Cloud::Vision::Annotation::ObjectLocalization (class)">ObjectLocalization</a></span>, <span class='object_link'><a href="Annotation/Properties.html" title="Google::Cloud::Vision::Annotation::Properties (class)">Properties</a></span>, <span class='object_link'><a href="Annotation/SafeSearch.html" title="Google::Cloud::Vision::Annotation::SafeSearch (class)">SafeSearch</a></span>, <span class='object_link'><a href="Annotation/Text.html" title="Google::Cloud::Vision::Annotation::Text (class)">Text</a></span>, <span class='object_link'><a href="Annotation/Vertex.html" title="Google::Cloud::Vision::Annotation::Vertex (class)">Vertex</a></span>, <span class='object_link'><a href="Annotation/Web.html" title="Google::Cloud::Vision::Annotation::Web (class)">Web</a></span>
     
   
 </p>
@@ -469,6 +469,52 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#object_localizations-instance_method" title="#object_localizations (instance method)">#<strong>object_localizations</strong>  &#x21d2; Array&lt;ObjectLocalization&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The results of object localizations detection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#object_localizations%3F-instance_method" title="#object_localizations? (instance method)">#<strong>object_localizations?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether there is a result for object localizations detection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#properties-instance_method" title="#properties (instance method)">#<strong>properties</strong>  &#x21d2; Properties<sup>?</sup> </a>
     
 
@@ -734,16 +780,16 @@ js:
       <pre class="lines">
 
 
-415
 416
 417
 418
 419
 420
-421</pre>
+421
+422</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 415</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 416</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_crop_hints'>crop_hints</span>
   <span class='kw'>return</span> <span class='lbracket'>[</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_crop_hints_annotation'>crop_hints_annotation</span>
@@ -809,12 +855,12 @@ js:
       <pre class="lines">
 
 
-437
 438
-439</pre>
+439
+440</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 437</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 438</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_crop_hints?'>crop_hints?</span>
   <span class='id identifier rubyid_crop_hints'>crop_hints</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -876,12 +922,12 @@ js:
       <pre class="lines">
 
 
-91
 92
-93</pre>
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_face'>face</span>
   <span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -943,12 +989,12 @@ js:
       <pre class="lines">
 
 
-109
 110
-111</pre>
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_face?'>face?</span>
   <span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -1011,14 +1057,14 @@ js:
       <pre class="lines">
 
 
-71
 72
 73
 74
-75</pre>
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_faces'>faces</span>
   <span class='ivar'>@faces</span> <span class='op'>||=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_face_annotations'>face_annotations</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fa'>fa</span><span class='op'>|</span>
@@ -1082,12 +1128,12 @@ js:
       <pre class="lines">
 
 
-264
 265
-266</pre>
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 265</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
   <span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -1150,12 +1196,12 @@ detection.</p>
       <pre class="lines">
 
 
-283
 284
-285</pre>
+285
+286</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 284</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_label?'>label?</span>
   <span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -1218,14 +1264,14 @@ detection.</p>
       <pre class="lines">
 
 
-244
 245
 246
 247
-248</pre>
+248
+249</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
   <span class='ivar'>@labels</span> <span class='op'>||=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_label_annotations'>label_annotations</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_lb'>lb</span><span class='op'>|</span>
@@ -1289,12 +1335,12 @@ detection.</p>
       <pre class="lines">
 
 
-148
 149
-150</pre>
+150
+151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_landmark'>landmark</span>
   <span class='id identifier rubyid_landmarks'>landmarks</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -1357,12 +1403,12 @@ detection.</p>
       <pre class="lines">
 
 
-167
 168
-169</pre>
+169
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 167</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 168</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_landmark?'>landmark?</span>
   <span class='id identifier rubyid_landmarks'>landmarks</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -1425,14 +1471,14 @@ detection.</p>
       <pre class="lines">
 
 
-128
 129
 130
 131
-132</pre>
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_landmarks'>landmarks</span>
   <span class='ivar'>@landmarks</span> <span class='op'>||=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_landmark_annotations'>landmark_annotations</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_lm'>lm</span><span class='op'>|</span>
@@ -1496,12 +1542,12 @@ detection.</p>
       <pre class="lines">
 
 
-206
 207
-208</pre>
+208
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 207</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logo'>logo</span>
   <span class='id identifier rubyid_logos'>logos</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
@@ -1564,12 +1610,12 @@ detection.</p>
       <pre class="lines">
 
 
-225
 226
-227</pre>
+227
+228</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 225</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 226</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logo?'>logo?</span>
   <span class='id identifier rubyid_logos'>logos</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -1632,19 +1678,157 @@ detection.</p>
       <pre class="lines">
 
 
-186
 187
 188
 189
-190</pre>
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 186</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logos'>logos</span>
   <span class='ivar'>@logos</span> <span class='op'>||=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_logo_annotations'>logo_annotations</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_lg'>lg</span><span class='op'>|</span>
     <span class='const'><span class='object_link'><a href="Annotation/Entity.html" title="Google::Cloud::Vision::Annotation::Entity (class)">Entity</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_lg'>lg</span>
   <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="object_localizations-instance_method">
+  
+    #<strong>object_localizations</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Annotation/ObjectLocalization.html" title="Google::Cloud::Vision::Annotation::ObjectLocalization (class)">ObjectLocalization</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The results of object localizations detection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_annotation'>annotation</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='label'>object_localizations:</span> <span class='kw'>true</span>
+<span class='id identifier rubyid_object_localizations'>object_localizations</span> <span class='op'>=</span> <span class='id identifier rubyid_annotation'>annotation</span><span class='period'>.</span><span class='id identifier rubyid_object_localizations'>object_localizations</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Annotation/ObjectLocalization.html" title="Google::Cloud::Vision::Annotation::ObjectLocalization (class)">ObjectLocalization</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+493
+494
+495
+496
+497</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 493</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_object_localizations'>object_localizations</span>
+  <span class='ivar'>@ol</span> <span class='op'>||=</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_localized_object_annotations'>localized_object_annotations</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ol'>ol</span><span class='op'>|</span>
+    <span class='const'><span class='object_link'><a href="Annotation/ObjectLocalization.html" title="Google::Cloud::Vision::Annotation::ObjectLocalization (class)">ObjectLocalization</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_ol'>ol</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="object_localizations?-instance_method">
+  
+    #<strong>object_localizations?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether there is a result for object localizations detection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_annotation'>annotation</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='label'>object_localizations:</span> <span class='kw'>true</span>
+<span class='id identifier rubyid_annotation'>annotation</span><span class='period'>.</span><span class='id identifier rubyid_object_localizations?'>object_localizations?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+513
+514
+515</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 513</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_object_localizations?'>object_localizations?</span>
+  <span class='op'>!</span><span class='id identifier rubyid_object_localizations'>object_localizations</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1703,15 +1887,15 @@ detection.</p>
       <pre class="lines">
 
 
-376
 377
 378
 379
 380
-381</pre>
+381
+382</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 377</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_properties'>properties</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_image_properties_annotation'>image_properties_annotation</span>
@@ -1776,12 +1960,12 @@ detection.</p>
       <pre class="lines">
 
 
-397
 398
-399</pre>
+399
+400</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 397</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 398</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_properties?'>properties?</span>
   <span class='op'>!</span><span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1843,13 +2027,13 @@ detection.</p>
       <pre class="lines">
 
 
-338
 339
 340
-341</pre>
+341
+342</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 338</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 339</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_safe_search'>safe_search</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_safe_search_annotation'>safe_search_annotation</span>
@@ -1913,12 +2097,12 @@ detection.</p>
       <pre class="lines">
 
 
-358
 359
-360</pre>
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 358</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 359</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_safe_search?'>safe_search?</span>
   <span class='op'>!</span><span class='id identifier rubyid_safe_search'>safe_search</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1980,13 +2164,13 @@ detection.</p>
       <pre class="lines">
 
 
-301
 302
 303
-304</pre>
+304
+305</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 301</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 302</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_text'>text</span>
   <span class='ivar'>@text</span> <span class='op'>||=</span> \
@@ -2049,12 +2233,12 @@ detection.</p>
       <pre class="lines">
 
 
-320
 321
-322</pre>
+322
+323</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 320</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 321</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_text?'>text?</span>
   <span class='op'>!</span><span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2102,23 +2286,23 @@ detection.</p>
       <pre class="lines">
 
 
-483
-484
-485
-486
-487
-488
-489</pre>
+522
+523
+524
+525
+526
+527
+528</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 483</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 522</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
   <span class='lbrace'>{</span> <span class='label'>faces:</span> <span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_h</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>landmarks:</span> <span class='id identifier rubyid_landmarks'>landmarks</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_h</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='label'>logos:</span> <span class='id identifier rubyid_logos'>logos</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_h</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_h</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='label'>text:</span> <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='comma'>,</span> <span class='label'>safe_search:</span> <span class='id identifier rubyid_safe_search'>safe_search</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='comma'>,</span>
     <span class='label'>properties:</span> <span class='id identifier rubyid_properties'>properties</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='comma'>,</span> <span class='label'>crop_hints:</span> <span class='id identifier rubyid_crop_hints'>crop_hints</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_h</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='label'>web:</span> <span class='id identifier rubyid_web'>web</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span> <span class='rbrace'>}</span>
+    <span class='label'>web:</span> <span class='id identifier rubyid_web'>web</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='comma'>,</span> <span class='label'>object_localizations:</span> <span class='id identifier rubyid_object_localizations'>object_localizations</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2177,13 +2361,13 @@ detection.</p>
       <pre class="lines">
 
 
-455
 456
 457
-458</pre>
+458
+459</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 455</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 456</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_web'>web</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_web_detection'>web_detection</span>
@@ -2246,12 +2430,12 @@ detection.</p>
       <pre class="lines">
 
 
-474
 475
-476</pre>
+476
+477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 474</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 475</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_web?'>web?</span>
   <span class='op'>!</span><span class='id identifier rubyid_web'>web</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>

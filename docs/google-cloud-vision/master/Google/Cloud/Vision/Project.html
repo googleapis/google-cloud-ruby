@@ -140,7 +140,7 @@ of explicit content.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#annotate-instance_method" title="#annotate (instance method)">#<strong>annotate</strong>(*images, faces: false, landmarks: false, logos: false, labels: false, text: false, document: false, safe_search: false, properties: false, crop_hints: false, web: false) {|annotate| ... } &#x21d2; Annotation<sup>+</sup> </a>
+      <a href="#annotate-instance_method" title="#annotate (instance method)">#<strong>annotate</strong>(*images, faces: false, landmarks: false, logos: false, labels: false, text: false, document: false, safe_search: false, properties: false, crop_hints: false, web: false, object_localizations: false) {|annotate| ... } &#x21d2; Annotation<sup>+</sup> </a>
     
 
     
@@ -245,7 +245,7 @@ of explicit content.</p>
       <div class="method_details first">
   <h3 class="signature first" id="annotate-instance_method">
   
-    #<strong>annotate</strong>(*images, faces: false, landmarks: false, logos: false, labels: false, text: false, document: false, safe_search: false, properties: false, crop_hints: false, web: false) {|annotate| ... } &#x21d2; <tt><span class='object_link'><a href="Annotation.html" title="Google::Cloud::Vision::Annotation (class)">Annotation</a></span></tt><sup>+</sup> 
+    #<strong>annotate</strong>(*images, faces: false, landmarks: false, logos: false, labels: false, text: false, document: false, safe_search: false, properties: false, crop_hints: false, web: false, object_localizations: false) {|annotate| ... } &#x21d2; <tt><span class='object_link'><a href="Annotation.html" title="Google::Cloud::Vision::Annotation (class)">Annotation</a></span></tt><sup>+</sup> 
   
 
   
@@ -546,6 +546,22 @@ feature. Optional.</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>object_localizations</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to perform the
+object localizations feature. Optional.</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 <p class="tag_title">Yields:</p>
@@ -623,8 +639,6 @@ multiple images.</p>
       <pre class="lines">
 
 
-257
-258
 259
 260
 261
@@ -642,20 +656,24 @@ multiple images.</p>
 273
 274
 275
-276</pre>
+276
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/project.rb', line 257</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/project.rb', line 259</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_annotate'>annotate</span> <span class='op'>*</span><span class='id identifier rubyid_images'>images</span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>landmarks:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>logos:</span> <span class='kw'>false</span><span class='comma'>,</span>
              <span class='label'>labels:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>text:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>document:</span> <span class='kw'>false</span><span class='comma'>,</span>
              <span class='label'>safe_search:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>properties:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>crop_hints:</span> <span class='kw'>false</span><span class='comma'>,</span>
-             <span class='label'>web:</span> <span class='kw'>false</span>
+             <span class='label'>web:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>object_localizations:</span> <span class='kw'>false</span>
   <span class='id identifier rubyid_a'>a</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Annotate.html" title="Google::Cloud::Vision::Annotate (class)">Annotate</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span> <span class='kw'>self</span>
   <span class='id identifier rubyid_a'>a</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_images'>images</span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='id identifier rubyid_faces'>faces</span><span class='comma'>,</span> <span class='label'>landmarks:</span> <span class='id identifier rubyid_landmarks'>landmarks</span><span class='comma'>,</span> <span class='label'>logos:</span> <span class='id identifier rubyid_logos'>logos</span><span class='comma'>,</span>
                       <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span><span class='comma'>,</span> <span class='label'>text:</span> <span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
                       <span class='label'>safe_search:</span> <span class='id identifier rubyid_safe_search'>safe_search</span><span class='comma'>,</span> <span class='label'>properties:</span> <span class='id identifier rubyid_properties'>properties</span><span class='comma'>,</span>
-                      <span class='label'>crop_hints:</span> <span class='id identifier rubyid_crop_hints'>crop_hints</span><span class='comma'>,</span> <span class='label'>web:</span> <span class='id identifier rubyid_web'>web</span><span class='rparen'>)</span>
+                      <span class='label'>crop_hints:</span> <span class='id identifier rubyid_crop_hints'>crop_hints</span><span class='comma'>,</span> <span class='label'>web:</span> <span class='id identifier rubyid_web'>web</span><span class='comma'>,</span>
+                      <span class='label'>object_localizations:</span> <span class='id identifier rubyid_object_localizations'>object_localizations</span><span class='rparen'>)</span>
 
   <span class='kw'>yield</span> <span class='id identifier rubyid_a'>a</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
 
@@ -823,12 +841,12 @@ retries, etc.</p>
       <pre class="lines">
 
 
-345
-346
-347</pre>
+348
+349
+350</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/project.rb', line 345</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/project.rb', line 348</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_async_batch_annotate_files'>async_batch_annotate_files</span> <span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_async_batch_annotate_files'>async_batch_annotate_files</span> <span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span>

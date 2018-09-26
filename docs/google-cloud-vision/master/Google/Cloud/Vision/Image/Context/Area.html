@@ -305,12 +305,12 @@ js:
       <pre class="lines">
 
 
-727
-728
-729</pre>
+758
+759
+760</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 727</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 758</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max'>max</span>
   <span class='ivar'>@max</span>
@@ -360,12 +360,12 @@ js:
       <pre class="lines">
 
 
-723
-724
-725</pre>
+754
+755
+756</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 723</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 754</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min'>min</span>
   <span class='ivar'>@min</span>
@@ -420,13 +420,13 @@ js:
       <pre class="lines">
 
 
-775
-776
-777
-778</pre>
+806
+807
+808
+809</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 775</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 806</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
   <span class='id identifier rubyid_min'>min</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:nil?</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>||</span>
@@ -452,16 +452,16 @@ js:
       <pre class="lines">
 
 
-789
-790
-791
-792
-793
-794
-795</pre>
+820
+821
+822
+823
+824
+825
+826</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 789</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 820</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_grpc'>to_grpc</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_empty?'>empty?</span>
@@ -513,12 +513,12 @@ js:
       <pre class="lines">
 
 
-785
-786
-787</pre>
+816
+817
+818</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 785</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/image.rb', line 816</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
   <span class='lbrace'>{</span> <span class='label'>min_lat_lng:</span> <span class='id identifier rubyid_min'>min</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='comma'>,</span> <span class='label'>max_lat_lng:</span> <span class='id identifier rubyid_max'>max</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span> <span class='rbrace'>}</span>
