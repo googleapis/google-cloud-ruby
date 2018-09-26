@@ -154,7 +154,7 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(project_id: nil, credentials: nil, scope: nil, client_config: nil, timeout: nil)  &#x21d2; Google::Cloud::Bigtable::Project </a>
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(project_id: nil, credentials: nil, emulator_host: nil, scope: nil, client_config: nil, timeout: nil)  &#x21d2; Google::Cloud::Bigtable::Project </a>
     
 
     
@@ -256,14 +256,14 @@ Google::Cloud::Bigtable library uses.</p>
       <pre class="lines">
 
 
-117
-118
-119
-120
-121</pre>
+129
+130
+131
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_bigtable'>bigtable</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -278,7 +278,7 @@ Google::Cloud::Bigtable library uses.</p>
       <div class="method_details ">
   <h3 class="signature " id="new-class_method">
   
-    .<strong>new</strong>(project_id: nil, credentials: nil, scope: nil, client_config: nil, timeout: nil)  &#x21d2; <tt><span class='object_link'><a href="Bigtable/Project.html" title="Google::Cloud::Bigtable::Project (class)">Google::Cloud::Bigtable::Project</a></span></tt> 
+    .<strong>new</strong>(project_id: nil, credentials: nil, emulator_host: nil, scope: nil, client_config: nil, timeout: nil)  &#x21d2; <tt><span class='object_link'><a href="Bigtable/Project.html" title="Google::Cloud::Bigtable::Project (class)">Google::Cloud::Bigtable::Project</a></span></tt> 
   
 
   
@@ -345,6 +345,22 @@ A <code>GRPC::Core::ChannelCredentials</code> for the setting up the RPC client.
 should already be composed with a <code>GRPC::Core::CallCredentials</code> object.
 A <code>Proc</code> will be used as an updater_proc for the Grpc channel. The proc transforms the
 metadata for requests, generally, to give OAuth credentials.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>emulator_host</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Bigtable emulator host. Optional.
+If the param is nil, uses the value of the <code>emulator_host</code> config.</p>
 </div>
       
     </li>
@@ -422,7 +438,7 @@ or the specified config is missing data points.</p>
     <li>
       
       
-        <span class='type'>(<tt>InvalidArgumentError</tt>)</span>
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
       
       
       
@@ -436,8 +452,6 @@ or the specified config is missing data points.</p>
       <pre class="lines">
 
 
-69
-70
 71
 72
 73
@@ -462,26 +476,48 @@ or the specified config is missing data points.</p>
 92
 93
 94
-95</pre>
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
     <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>emulator_host:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_default_project_id'>default_project_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
-
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>InvalidArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is required</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_project_id'>project_id</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is required</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
   <span class='id identifier rubyid_scope'>scope</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span>
   <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span>
   <span class='id identifier rubyid_client_config'>client_config</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_client_config'>client_config</span>
-  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='id identifier rubyid_default_credentials'>default_credentials</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_emulator_host'>emulator_host</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_emulator_host'>emulator_host</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_emulator_host'>emulator_host</span>
+    <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bigtable/Project.html" title="Google::Cloud::Bigtable::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+        <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='symbol'>:this_channel_is_insecure</span><span class='comma'>,</span>
+        <span class='label'>host:</span> <span class='id identifier rubyid_emulator_host'>emulator_host</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+        <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span>
+      <span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
 
+  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='id identifier rubyid_default_credentials'>default_credentials</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span>
     <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Bigtable/Credentials.html" title="Google::Cloud::Bigtable::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span>
   <span class='kw'>end</span>
