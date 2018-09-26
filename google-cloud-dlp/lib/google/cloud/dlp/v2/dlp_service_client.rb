@@ -894,6 +894,20 @@ module Google
           #   parameter does not affect the return value. If page streaming is
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
+          # @param order_by [String]
+          #   Optional comma separated list of fields to order by,
+          #   followed by `asc` or `desc` postfix. This list is case-insensitive,
+          #   default sorting order is ascending, redundant space characters are
+          #   insignificant.
+          #
+          #   Example: `name asc,update_time, create_time desc`
+          #
+          #   Supported fields are:
+          #
+          #   * `create_time`: corresponds to time the template was created.
+          #   * `update_time`: corresponds to time the template was last updated.
+          #   * `name`: corresponds to template's name.
+          #   * `display_name`: corresponds to template's display name.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -928,11 +942,13 @@ module Google
           def list_inspect_templates \
               parent,
               page_size: nil,
+              order_by: nil,
               options: nil,
               &block
             req = {
               parent: parent,
-              page_size: page_size
+              page_size: page_size,
+              order_by: order_by
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListInspectTemplatesRequest)
             @list_inspect_templates.call(req, options, &block)
@@ -1111,6 +1127,20 @@ module Google
           #   parameter does not affect the return value. If page streaming is
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
+          # @param order_by [String]
+          #   Optional comma separated list of fields to order by,
+          #   followed by `asc` or `desc` postfix. This list is case-insensitive,
+          #   default sorting order is ascending, redundant space characters are
+          #   insignificant.
+          #
+          #   Example: `name asc,update_time, create_time desc`
+          #
+          #   Supported fields are:
+          #
+          #   * `create_time`: corresponds to time the template was created.
+          #   * `update_time`: corresponds to time the template was last updated.
+          #   * `name`: corresponds to template's name.
+          #   * `display_name`: corresponds to template's display name.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1145,11 +1175,13 @@ module Google
           def list_deidentify_templates \
               parent,
               page_size: nil,
+              order_by: nil,
               options: nil,
               &block
             req = {
               parent: parent,
-              page_size: page_size
+              page_size: page_size,
+              order_by: order_by
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListDeidentifyTemplatesRequest)
             @list_deidentify_templates.call(req, options, &block)
@@ -1449,9 +1481,11 @@ module Google
           #
           #   Supported fields are:
           #
-          #   * `create_time`: corresponds to time the triggeredJob was created.
-          #   * `update_time`: corresponds to time the triggeredJob was last updated.
+          #   * `create_time`: corresponds to time the JobTrigger was created.
+          #   * `update_time`: corresponds to time the JobTrigger was last updated.
           #   * `name`: corresponds to JobTrigger's name.
+          #   * `display_name`: corresponds to JobTrigger's display name.
+          #   * `status`: corresponds to JobTrigger's status.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

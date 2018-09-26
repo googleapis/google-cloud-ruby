@@ -42,8 +42,12 @@ module Google
         # sensitive information configurable to the data in question.
         # @!attribute [rw] info_type
         #   @return [Google::Privacy::Dlp::V2::InfoType]
-        #     All CustomInfoTypes must have a name
-        #     that does not conflict with built-in InfoTypes or other CustomInfoTypes.
+        #     CustomInfoType can either be a new infoType, or an extension of built-in
+        #     infoType, when the name matches one of existing infoTypes and that infoType
+        #     is specified in `InspectContent.info_types` field. Specifying the latter
+        #     adds findings to the one detected by the system. If built-in info type is
+        #     not specified in `InspectContent.info_types` list then the name is treated
+        #     as a custom info type.
         # @!attribute [rw] likelihood
         #   @return [Google::Privacy::Dlp::V2::Likelihood]
         #     Likelihood to return for this CustomInfoType. This base value can be
@@ -68,6 +72,10 @@ module Google
         #     Set of detection rules to apply to all findings of this CustomInfoType.
         #     Rules are applied in order that they are specified. Not supported for the
         #     `surrogate_type` CustomInfoType.
+        # @!attribute [rw] exclusion_type
+        #   @return [Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType]
+        #     If set to EXCLUSION_TYPE_EXCLUDE this infoType will not cause a finding
+        #     to be returned. It still can be used for rules matching.
         class CustomInfoType
           # Custom information type based on a dictionary of words or phrases. This can
           # be used to match sensitive information specific to the data, such as a list
@@ -112,7 +120,9 @@ module Google
           # Message defining a custom regular expression.
           # @!attribute [rw] pattern
           #   @return [String]
-          #     Pattern defining the regular expression.
+          #     Pattern defining the regular expression. Its syntax
+          #     (https://github.com/google/re2/wiki/Syntax) can be found under the
+          #     google/re2 repository on GitHub.
           class Regex; end
 
           # Message for detecting output from deidentification transformations
@@ -179,6 +189,15 @@ module Google
             #     Likelihood adjustment to apply to all matching findings.
             class HotwordRule; end
           end
+
+          module ExclusionType
+            # A finding of this custom info type will not be excluded from results.
+            EXCLUSION_TYPE_UNSPECIFIED = 0
+
+            # A finding of this custom info type will be excluded from final results,
+            # but can still affect rule execution.
+            EXCLUSION_TYPE_EXCLUDE = 1
+          end
         end
 
         # General identifier of a data field in a storage service.
@@ -217,10 +236,11 @@ module Google
         #     The kind to process.
         class DatastoreOptions; end
 
-        # Options defining a file or a set of files (path ending with *) within
-        # a Google Cloud Storage bucket.
+        # Options defining a file or a set of files within a Google Cloud Storage
+        # bucket.
         # @!attribute [rw] file_set
         #   @return [Google::Privacy::Dlp::V2::CloudStorageOptions::FileSet]
+        #     The set of one or more files to scan.
         # @!attribute [rw] bytes_limit_per_file
         #   @return [Integer]
         #     Max number of bytes to scan from a file. If a scanned file's size is bigger
@@ -248,8 +268,8 @@ module Google
           # Set of files to scan.
           # @!attribute [rw] url
           #   @return [String]
-          #     The url, in the format `gs://<bucket>/<path>`. Trailing wildcard in the
-          #     path is allowed.
+          #     The Cloud Storage url of the file(s) to scan, in the format
+          #     `gs://<bucket>/<path>`. Trailing wildcard in the path is allowed.
           class FileSet; end
 
           # How to sample bytes if not all bytes are scanned. Meaningful only when used

@@ -17,6 +17,55 @@ module Google
   module Privacy
     module Dlp
       module V2
+        # List of exclude infoTypes.
+        # @!attribute [rw] info_types
+        #   @return [Array<Google::Privacy::Dlp::V2::InfoType>]
+        #     InfoType list in ExclusionRule rule drops a finding when it overlaps or
+        #     contained within with a finding of an infoType from this list. For
+        #     example, for `InspectionRuleSet.info_types` containing "PHONE_NUMBER"` and
+        #     `exclusion_rule` containing `exclude_info_types.info_types` with
+        #     "EMAIL_ADDRESS" the phone number findings are dropped if they overlap
+        #     with EMAIL_ADDRESS finding.
+        #     That leads to "555-222-2222@example.org" to generate only a single
+        #     finding, namely email address.
+        class ExcludeInfoTypes; end
+
+        # The rule that specifies conditions when findings of infoTypes specified in
+        # `InspectionRuleSet` are removed from results.
+        # @!attribute [rw] dictionary
+        #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary]
+        #     Dictionary which defines the rule.
+        # @!attribute [rw] regex
+        #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+        #     Regular expression which defines the rule.
+        # @!attribute [rw] exclude_info_types
+        #   @return [Google::Privacy::Dlp::V2::ExcludeInfoTypes]
+        #     Set of infoTypes for which findings would affect this rule.
+        # @!attribute [rw] matching_type
+        #   @return [Google::Privacy::Dlp::V2::MatchingType]
+        #     How the rule is applied, see MatchingType documentation for details.
+        class ExclusionRule; end
+
+        # A single inspection rule to be applied to infoTypes, specified in
+        # `InspectionRuleSet`.
+        # @!attribute [rw] hotword_rule
+        #   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+        #     Hotword-based detection rule.
+        # @!attribute [rw] exclusion_rule
+        #   @return [Google::Privacy::Dlp::V2::ExclusionRule]
+        #     Exclusion rule.
+        class InspectionRule; end
+
+        # Rule set for modifying a set of infoTypes to alter behavior under certain
+        # circumstances, depending on the specific details of the rules within the set.
+        # @!attribute [rw] info_types
+        #   @return [Array<Google::Privacy::Dlp::V2::InfoType>]
+        #     List of infoTypes this rule set is applied to.
+        # @!attribute [rw] rules
+        #   @return [Array<Google::Privacy::Dlp::V2::InspectionRule>]
+        #     Set of rules to be applied to infoTypes. The rules are applied in order.
+        class InspectionRuleSet; end
+
         # Configuration description of the scanning process.
         # When used with redactContent only info_types and min_likelihood are currently
         # used.
@@ -56,6 +105,11 @@ module Google
         #   @return [Array<Google::Privacy::Dlp::V2::ContentOption>]
         #     List of options defining data content to scan.
         #     If empty, text, images, and other content will be included.
+        # @!attribute [rw] rule_set
+        #   @return [Array<Google::Privacy::Dlp::V2::InspectionRuleSet>]
+        #     Set of rules to apply to the findings for this InspectConfig.
+        #     Exclusion rules, contained in the set are executed in the end, other
+        #     rules are executed in the order they are specified for each info type.
         class InspectConfig
           # @!attribute [rw] max_findings_per_item
           #   @return [Integer]
@@ -1887,6 +1941,21 @@ module Google
         #   @return [Integer]
         #     Optional size of the page, can be limited by server. If zero server returns
         #     a page of max size 100.
+        # @!attribute [rw] order_by
+        #   @return [String]
+        #     Optional comma separated list of fields to order by,
+        #     followed by `asc` or `desc` postfix. This list is case-insensitive,
+        #     default sorting order is ascending, redundant space characters are
+        #     insignificant.
+        #
+        #     Example: `name asc,update_time, create_time desc`
+        #
+        #     Supported fields are:
+        #
+        #     * `create_time`: corresponds to time the template was created.
+        #     * `update_time`: corresponds to time the template was last updated.
+        #     * `name`: corresponds to template's name.
+        #     * `display_name`: corresponds to template's display name.
         class ListInspectTemplatesRequest; end
 
         # Response message for ListInspectTemplates.
@@ -1983,9 +2052,11 @@ module Google
         #
         #     Supported fields are:
         #
-        #     * `create_time`: corresponds to time the triggeredJob was created.
-        #     * `update_time`: corresponds to time the triggeredJob was last updated.
+        #     * `create_time`: corresponds to time the JobTrigger was created.
+        #     * `update_time`: corresponds to time the JobTrigger was last updated.
         #     * `name`: corresponds to JobTrigger's name.
+        #     * `display_name`: corresponds to JobTrigger's display name.
+        #     * `status`: corresponds to JobTrigger's status.
         class ListJobTriggersRequest; end
 
         # Response message for ListJobTriggers.
@@ -2193,6 +2264,21 @@ module Google
         #   @return [Integer]
         #     Optional size of the page, can be limited by server. If zero server returns
         #     a page of max size 100.
+        # @!attribute [rw] order_by
+        #   @return [String]
+        #     Optional comma separated list of fields to order by,
+        #     followed by `asc` or `desc` postfix. This list is case-insensitive,
+        #     default sorting order is ascending, redundant space characters are
+        #     insignificant.
+        #
+        #     Example: `name asc,update_time, create_time desc`
+        #
+        #     Supported fields are:
+        #
+        #     * `create_time`: corresponds to time the template was created.
+        #     * `update_time`: corresponds to time the template was last updated.
+        #     * `name`: corresponds to template's name.
+        #     * `display_name`: corresponds to template's display name.
         class ListDeidentifyTemplatesRequest; end
 
         # Response message for ListDeidentifyTemplates.
@@ -2341,6 +2427,22 @@ module Google
         #   @return [Integer]
         #     Optional size of the page, can be limited by server. If zero server returns
         #     a page of max size 100.
+        # @!attribute [rw] order_by
+        #   @return [String]
+        #     Optional comma separated list of fields to order by,
+        #     followed by `asc` or `desc` postfix. This list is case-insensitive,
+        #     default sorting order is ascending, redundant space characters are
+        #     insignificant.
+        #
+        #     Example: `name asc, display_name, create_time desc`
+        #
+        #     Supported fields are:
+        #
+        #     * `create_time`: corresponds to time the most recent version of the
+        #       resource was created.
+        #     * `state`: corresponds to the state of the resource.
+        #     * `name`: corresponds to resource name.
+        #     * `display_name`: corresponds to info type's display name.
         class ListStoredInfoTypesRequest; end
 
         # Response message for ListStoredInfoTypes.
@@ -2371,6 +2473,35 @@ module Google
 
           # Images found in the data.
           CONTENT_IMAGE = 2
+        end
+
+        # Type of the match which can be applied to different ways of matching, like
+        # Dictionary, regular expression and intersecting with findings of another
+        # info type.
+        module MatchingType
+          # Invalid.
+          MATCHING_TYPE_UNSPECIFIED = 0
+
+          # Full match.
+          #
+          # * Dictionary: join of Dictionary results matched complete finding quote
+          # * Regex: all regex matches fill a finding quote start to end
+          # * Exclude info type: completely inside affecting info types findings
+          MATCHING_TYPE_FULL_MATCH = 1
+
+          # Partial match.
+          #
+          # * Dictionary: at least one of the tokens in the finding matches
+          # * Regex: substring of the finding matches
+          # * Exclude info type: intersects with affecting info types findings
+          MATCHING_TYPE_PARTIAL_MATCH = 2
+
+          # Inverse match.
+          #
+          # * Dictionary: no tokens in the finding match the dictionary
+          # * Regex: finding doesn't match the regex
+          # * Exclude info type: no intersection with affecting info types findings
+          MATCHING_TYPE_INVERSE_MATCH = 3
         end
 
         # Parts of the APIs which use certain infoTypes.
