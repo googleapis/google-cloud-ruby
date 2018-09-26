@@ -592,10 +592,6 @@ namespace :kokoro do
     Dir.chdir ENV["PACKAGE"] do
       Bundler.with_clean_env do
         Rake::Task["kokoro:load_env_vars"].invoke
-
-        # DELETE THIS LINE
-        puts ENV['GREAT_VAR']
-
         header "Using Ruby - #{RUBY_VERSION}"
         sh "bundle update"
         sh "bundle exec rake ci"
@@ -643,8 +639,7 @@ namespace :kokoro do
   end
 
   task :load_env_vars do
-    filename = "#{ENV['KOKORO_GFILE_DIR']}/ruby_env_vars.json"
-    filename = "#{ENV['KOKORO_GFILE_DIR']}/ruby_env_var_test.json"
+    filename = "#{ENV['KOKORO_GFILE_DIR']}/env_vars.json"
     env_vars = JSON.parse(File.read(filename))
     env_vars.each { |k, v| ENV[k] = v }
   end
