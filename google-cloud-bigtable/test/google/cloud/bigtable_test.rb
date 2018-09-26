@@ -218,6 +218,41 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "uses BIGTABLE_EMULATOR_HOST environment variable" do
+      emulator_host = "localhost:4567"
+      emulator_check = ->(name) { (name == "BIGTABLE_EMULATOR_HOST") ? emulator_host : nil }
+      # Clear all environment variables, except BIGTABLE_EMULATOR_HOST
+      ENV.stub :[], emulator_check do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Bigtable::Credentials.stub :default, default_credentials do
+            bigtable = Google::Cloud::Bigtable.new
+            bigtable.must_be_kind_of Google::Cloud::Bigtable::Project
+            bigtable.project_id.must_equal "project-id"
+            bigtable.service.credentials.must_equal :this_channel_is_insecure
+            bigtable.service.host.must_equal emulator_host
+          end
+        end
+      end
+    end
+
+    it "allows emulator_host to be set" do
+      emulator_host = "localhost:4567"
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Bigtable::Credentials.stub :default, default_credentials do
+            bigtable = Google::Cloud::Bigtable.new emulator_host: emulator_host
+            bigtable.must_be_kind_of Google::Cloud::Bigtable::Project
+            bigtable.project_id.must_equal "project-id"
+            bigtable.service.credentials.must_equal :this_channel_is_insecure
+            bigtable.service.host.must_equal emulator_host
+          end
+        end
+      end
+    end
   end
 
   describe "bigtable.configure" do
