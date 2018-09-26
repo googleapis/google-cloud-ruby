@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Vision::Annotation, :mock_vision do
   let(:filepath) { "acceptance/data/face.jpg" }
-  let(:annotation_keys) { [:faces, :landmarks, :logos, :labels, :text, :safe_search, :properties, :crop_hints, :web] }
+  let(:annotation_keys) { [:faces, :landmarks, :logos, :labels, :text, :safe_search, :properties, :crop_hints, :web, :object_localizations] }
   let(:entity_keys) { [:mid, :locale, :description, :score, :confidence, :topicality, :bounds, :locations, :properties] }
 
   it "returns a deep hash copy of itself" do
@@ -33,7 +33,8 @@ describe Google::Cloud::Vision::Annotation, :mock_vision do
           Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 100),
-          Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 100)
+          Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 100),
+          Google::Cloud::Vision::V1::Feature.new(type: :OBJECT_LOCALIZATION, max_results: 100)
         ]
       )
     ]

@@ -186,6 +186,8 @@ module Google
         #   feature. Optional.
         # @param [Boolean, Integer] web Whether to perform the web annotation
         #   feature. Optional.
+        # @param [Boolean, Integer] object_localizations Whether to perform the
+        #   object localizations feature. Optional.
         #
         # @yield [annotate] A block for requests that involve multiple feature
         #   configurations. See {Annotate#annotate}.
@@ -257,12 +259,13 @@ module Google
         def annotate *images, faces: false, landmarks: false, logos: false,
                      labels: false, text: false, document: false,
                      safe_search: false, properties: false, crop_hints: false,
-                     web: false
+                     web: false, object_localizations: false
           a = Annotate.new self
           a.annotate(*images, faces: faces, landmarks: landmarks, logos: logos,
                               labels: labels, text: text, document: document,
                               safe_search: safe_search, properties: properties,
-                              crop_hints: crop_hints, web: web)
+                              crop_hints: crop_hints, web: web,
+                              object_localizations: object_localizations)
 
           yield a if block_given?
 

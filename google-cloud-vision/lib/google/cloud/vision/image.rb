@@ -435,6 +435,34 @@ module Google
         end
 
         ##
+        # Performs the `OBJECT_LOCALIZATION` feature on the image.
+        #
+        # @see https://cloud.google.com/vision/docs/pricing Cloud Vision Pricing
+        #
+        # @return [Array<Annotation::ObjectLocalization>] The results of object
+        #   localizations detection.
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/bicycle.jpg"
+        #
+        #   object_localizations = image.object_localizations
+        #   object_localizations.count #=> 6
+        #   object_localization = object_localizations.first
+        #
+        #   object_localization.name #=> "Bicycle wheel"
+        #   object_localization.bounds.count #=> 4
+        #
+        def object_localizations max_results = \
+                                Vision.default_max_object_localizations
+          ensure_vision!
+          annotation = @vision.mark self, object_localizations: max_results
+          annotation.object_localizations
+        end
+
+        ##
         # Performs detection of Cloud Vision
         # [features](https://cloud.google.com/vision/reference/rest/v1/images/annotate#Feature)
         # on the image. If no options for features are provided, **all** image
@@ -480,6 +508,8 @@ module Google
         #   feature. Optional.
         # @param [Boolean, Integer] web Whether to perform the web annotation
         #   feature. Optional.
+        # @param [Boolean, Integer] object_localizations Whether to perform the
+        #   object localizations feature. Optional.
         #
         # @return [Annotation] The results for all image detections, returned as
         #   a single {Annotation} instance.
@@ -514,12 +544,13 @@ module Google
         def annotate faces: false, landmarks: false, logos: false,
                      labels: false, text: false, document: false,
                      safe_search: false, properties: false, crop_hints: false,
-                     web: false
+                     web: false, object_localizations: false
           @vision.annotate(self, faces: faces, landmarks: landmarks,
                                  logos: logos, labels: labels, text: text,
                                  document: document, safe_search: safe_search,
                                  properties: properties, crop_hints: crop_hints,
-                                 web: web)
+                                 web: web,
+                                 object_localizations: object_localizations)
         end
         alias mark annotate
         alias detect annotate

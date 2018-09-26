@@ -442,6 +442,14 @@ module Google
         def default_max_web
           configure.default_max_web
         end
+
+        def default_max_object_localizations= value
+          configure.default_max_object_localizations = value
+        end
+
+        def default_max_object_localizations
+          configure.default_max_object_localizations
+        end
       end
 
       ##
