@@ -20,6 +20,7 @@ require "google/cloud/vision/annotation/safe_search"
 require "google/cloud/vision/annotation/properties"
 require "google/cloud/vision/annotation/crop_hint"
 require "google/cloud/vision/annotation/web"
+require "google/cloud/vision/annotation/object_localization"
 
 module Google
   module Cloud
@@ -476,6 +477,44 @@ module Google
         end
 
         ##
+        # The results of object localizations detection.
+        #
+        # @return [Array<ObjectLocalization>]
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/face.jpg"
+        #
+        #   annotation = vision.annotate image, object_localizations: true
+        #   object_localizations = annotation.object_localizations
+        #
+        def object_localizations
+          @ol ||= @grpc.localized_object_annotations.map do |ol|
+            ObjectLocalization.from_grpc ol
+          end
+        end
+
+        ##
+        # Whether there is a result for object localizations detection.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/vision"
+        #
+        #   vision = Google::Cloud::Vision.new
+        #   image = vision.image "path/to/face.jpg"
+        #
+        #   annotation = vision.annotate image, object_localizations: true
+        #   annotation.object_localizations? #=> true
+        #
+        def object_localizations?
+          !object_localizations.empty?
+        end
+
+        ##
         # Deeply converts object to a hash. All keys will be symbolized.
         #
         # @return [Hash]
@@ -485,16 +524,17 @@ module Google
             logos: logos.map(&:to_h), labels: labels.map(&:to_h),
             text: text.to_h, safe_search: safe_search.to_h,
             properties: properties.to_h, crop_hints: crop_hints.map(&:to_h),
-            web: web.to_h }
+            web: web.to_h, object_localizations: object_localizations.to_h }
         end
 
         # @private
         def to_s
           tmplt = "(faces: %i, landmarks: %i, logos: %i, labels: %i," \
                   " text: %s, safe_search: %s, properties: %s," \
-                  " crop_hints: %s, web: %s)"
+                  " crop_hints: %s, web: %s, object_localizations: %i)"
           format tmplt, faces.count, landmarks.count, logos.count, labels.count,
-                 text?, safe_search?, properties?, crop_hints?, web?
+                 text?, safe_search?, properties?, crop_hints?, web?,
+                 object_localizations.count
         end
 
         # @private

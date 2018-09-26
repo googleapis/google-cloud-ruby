@@ -20,15 +20,15 @@ Style/TrivialAccessors:
 Style/FormatStringToken: # we have many uses of this, we don't want to change
   Enabled: false
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 15
 Metrics/PerceivedComplexity:
-  Max: 10
+  Max: 15
 Metrics/AbcSize:
   Max: 25
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
-  Max: 20
+  Max: 26
   Exclude:
     - "lib/google/cloud/vision.rb"
 Metrics/ParameterLists:

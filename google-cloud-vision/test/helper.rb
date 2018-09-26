@@ -409,6 +409,75 @@ class MockVision < Minitest::Spec
       ]
     )
   end
+
+  def normalized_bounding_poly
+    Google::Cloud::Vision::V1::BoundingPoly.new(
+      normalized_vertices: [
+        Google::Cloud::Vision::V1::NormalizedVertex.new(x: 0.31, y: 0.66),
+        Google::Cloud::Vision::V1::NormalizedVertex.new(x: 0.63, y: 0.66),
+        Google::Cloud::Vision::V1::NormalizedVertex.new(x: 0.63, y: 0.97),
+        Google::Cloud::Vision::V1::NormalizedVertex.new(x: 0.31, y: 0.97)
+      ]
+    )
+  end
+
+  def object_localizations_annotation_response
+    [
+      Google::Cloud::Vision::V1::LocalizedObjectAnnotation.new(
+        mid: "/m/01bqk0",
+        language_code: "en-US",
+        name: "Bicycle wheel",
+        score: 0.89648587,
+        bounding_poly: normalized_bounding_poly
+      ),
+      Google::Cloud::Vision::V1::LocalizedObjectAnnotation.new(
+        mid: "/m/0199g",
+        language_code: "en-US",
+        name: "Bicycle",
+        score: 0.886761,
+        bounding_poly: normalized_bounding_poly
+      ),
+      Google::Cloud::Vision::V1::LocalizedObjectAnnotation.new(
+        mid: "/m/01bqk0",
+        language_code: "en-US",
+        name: "Bicycle wheel",
+        score: 0.6345275,
+        bounding_poly: normalized_bounding_poly
+      ),
+      Google::Cloud::Vision::V1::LocalizedObjectAnnotation.new(
+        mid: "/m/06z37_",
+        language_code: "en-US",
+        name: "Picture frame",
+        score: 0.6207608,
+        bounding_poly: normalized_bounding_poly
+      ),
+      Google::Cloud::Vision::V1::LocalizedObjectAnnotation.new(
+        mid: "/m/0h9mv",
+        language_code: "en-US",
+        name: "Tire",
+        score: 0.55886006,
+        bounding_poly: normalized_bounding_poly
+      ),
+      Google::Cloud::Vision::V1::LocalizedObjectAnnotation.new(
+        mid: "/m/02dgv",
+        language_code: "en-US",
+        name: "Door",
+        score: 0.5160098,
+        bounding_poly: normalized_bounding_poly
+      )
+    ]
+  end
+
+  def object_localizations_annotation_response_grpc
+    Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new(
+      responses: [
+        Google::Cloud::Vision::V1::AnnotateImageResponse.new(
+          localized_object_annotations: localized_object_annotations_response
+        )
+      ]
+    )
+  end
+
 end
 
 module MiniTest::Expectations

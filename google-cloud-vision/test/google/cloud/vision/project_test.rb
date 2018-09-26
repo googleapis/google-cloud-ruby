@@ -79,7 +79,8 @@ describe Google::Cloud::Vision::Project, :mock_vision do
           Google::Cloud::Vision::V1::Feature.new(type: :SAFE_SEARCH_DETECTION, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :IMAGE_PROPERTIES, max_results: 1),
           Google::Cloud::Vision::V1::Feature.new(type: :CROP_HINTS, max_results: 100),
-          Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 100)
+          Google::Cloud::Vision::V1::Feature.new(type: :WEB_DETECTION, max_results: 100),
+          Google::Cloud::Vision::V1::Feature.new(type: :OBJECT_LOCALIZATION, max_results: 100)
         ]
       )
     ]

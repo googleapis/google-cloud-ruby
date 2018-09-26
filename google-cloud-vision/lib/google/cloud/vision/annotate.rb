@@ -116,6 +116,7 @@ module Google
         #   feature. Optional.
         # @param [Boolean, Integer] web Whether to perform the web annotation
         #   feature. Optional.
+        # @param [Boolean, Integer] object_localizations TODO! Optional.
         #
         # @return [Annotation, Array<Annotation>] The results for all image
         #   detections, returned as a single {Annotation} instance for one
@@ -145,9 +146,10 @@ module Google
         def annotate *images, faces: false, landmarks: false, logos: false,
                      labels: false, text: false, document: false,
                      safe_search: false, properties: false, crop_hints: false,
-                     web: false
+                     web: false, object_localizations: false
           add_requests(images, faces, landmarks, logos, labels, text, document,
-                       safe_search, properties, crop_hints, web)
+                       safe_search, properties, crop_hints, web,
+                       object_localizations)
         end
 
         protected
@@ -158,10 +160,11 @@ module Google
         end
 
         def add_requests images, faces, landmarks, logos, labels, text,
-                         document, safe_search, properties, crop_hints, web
+                         document, safe_search, properties, crop_hints, web,
+                         object_localizations
           features = annotate_features(faces, landmarks, logos, labels, text,
                                        document, safe_search, properties,
-                                       crop_hints, web)
+                                       crop_hints, web, object_localizations)
 
           Array(images).flatten.each do |img|
             i = image(img)
@@ -174,38 +177,54 @@ module Google
         end
 
         def annotate_features faces, landmarks, logos, labels, text, document,
-                              safe_search, properties, crop_hints, web
+                              safe_search, properties, crop_hints, web,
+                              object_localizations
           return default_features if default_features?(
             faces, landmarks, logos, labels, text, document, safe_search,
-            properties, crop_hints, web
+            properties, crop_hints, web, object_localizations
           )
 
-          faces, landmarks, logos, labels, crop_hints, web = validate_max_args(
-            faces, landmarks, logos, labels, crop_hints, web
-          )
+          faces, landmarks, logos, labels, crop_hints, web, \
+            object_localizations = validate_max_args(
+              faces, landmarks, logos, labels, crop_hints, web,
+              object_localizations
+            )
 
-          f = value_features faces, landmarks, logos, labels, crop_hints, web
+          f = value_features faces, landmarks, logos, labels, crop_hints, web,
+                             object_localizations
           f + boolean_features(text, document, safe_search, properties)
         end
 
-        def value_features faces, landmarks, logos, labels, crop_hints, web
-          f = []
-          f << feature(:FACE_DETECTION, faces) unless faces.zero?
-          f << feature(:LANDMARK_DETECTION, landmarks) unless landmarks.zero?
-          f << feature(:LOGO_DETECTION, logos) unless logos.zero?
-          f << feature(:LABEL_DETECTION, labels) unless labels.zero?
-          f << feature(:CROP_HINTS, crop_hints) unless crop_hints.zero?
-          f << feature(:WEB_DETECTION, web) unless web.zero?
-          f
+        def value_features faces, landmarks, logos, labels, crop_hints, web,
+                           object_localizations
+          [
+            value_feature(:FACE_DETECTION, faces),
+            value_feature(:LANDMARK_DETECTION, landmarks),
+            value_feature(:LOGO_DETECTION, logos),
+            value_feature(:LABEL_DETECTION, labels),
+            value_feature(:CROP_HINTS, crop_hints),
+            value_feature(:WEB_DETECTION, web),
+            value_feature(:OBJECT_LOCALIZATION, object_localizations)
+          ].compact
+        end
+
+        def value_feature type, value
+          return if value.zero?
+          feature type, value
         end
 
         def boolean_features text, document, safe_search, properties
-          f = []
-          f << feature(:TEXT_DETECTION, 1) if text
-          f << feature(:DOCUMENT_TEXT_DETECTION, 1) if document
-          f << feature(:SAFE_SEARCH_DETECTION, 1) if safe_search
-          f << feature(:IMAGE_PROPERTIES, 1) if properties
-          f
+          [
+            boolean_feature(:TEXT_DETECTION, text),
+            boolean_feature(:DOCUMENT_TEXT_DETECTION, document),
+            boolean_feature(:SAFE_SEARCH_DETECTION, safe_search),
+            boolean_feature(:IMAGE_PROPERTIES, properties)
+          ].compact
+        end
+
+        def boolean_feature type, value
+          return unless value
+          feature type, 1
         end
 
         def feature type, max_results
@@ -215,11 +234,12 @@ module Google
         end
 
         def default_features? faces, landmarks, logos, labels, text, document,
-                              safe_search, properties, crop_hints, web
+                              safe_search, properties, crop_hints, web,
+                              object_localizations
           faces == false && landmarks == false && logos == false &&
             labels == false && text == false && document == false &&
             safe_search == false && properties == false &&
-            crop_hints == false && web == false
+            crop_hints == false && web == false && object_localizations == false
         end
 
         def default_features
@@ -235,11 +255,14 @@ module Google
             feature(:SAFE_SEARCH_DETECTION, 1),
             feature(:IMAGE_PROPERTIES, 1),
             feature(:CROP_HINTS, Google::Cloud::Vision.default_max_crop_hints),
-            feature(:WEB_DETECTION, Google::Cloud::Vision.default_max_web)
+            feature(:WEB_DETECTION, Google::Cloud::Vision.default_max_web),
+            feature(:OBJECT_LOCALIZATION,
+                    Google::Cloud::Vision.default_max_object_localizations)
           ]
         end
 
-        def validate_max_args faces, landmarks, logos, labels, crop_hints, web
+        def validate_max_args faces, landmarks, logos, labels, crop_hints, web,
+                              object_localizations
           faces = validate_max_value(
             faces, Google::Cloud::Vision.default_max_faces
           )
@@ -258,7 +281,15 @@ module Google
           web = validate_max_value(
             web, Google::Cloud::Vision.default_max_web
           )
-          [faces, landmarks, logos, labels, crop_hints, web]
+          object_localizations = validate_max_value(
+            object_localizations,
+            Google::Cloud::Vision.default_max_object_localizations
+          )
+
+          [
+            faces, landmarks, logos, labels, crop_hints, web,
+            object_localizations
+          ]
         end
 
         def validate_max_value value, default_value

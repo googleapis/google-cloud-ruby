@@ -142,4 +142,5 @@ Google::Cloud.configure.add_config! :vision do |config|
   config.add_field! :default_max_labels, 100
   config.add_field! :default_max_crop_hints, 100
   config.add_field! :default_max_web, 100
+  config.add_field! :default_max_object_localizations, 100
 end

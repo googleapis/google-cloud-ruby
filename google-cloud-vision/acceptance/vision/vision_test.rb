@@ -22,6 +22,7 @@ describe "Vision", :vision do
   let(:logo_image)     { "acceptance/data/logo.jpg" }
   let(:landmark_image) { "acceptance/data/landmark.jpg" }
   let(:text_image)     { "acceptance/data/text.png" }
+  let(:bicycle_image)  { "acceptance/data/bicycle.jpg" }
 
   let(:https_url)  { "https://raw.githubusercontent.com/googleapis/google-cloud-ruby/master/acceptance/data/face.jpg" }
 
@@ -42,6 +43,7 @@ describe "Vision", :vision do
       annotation.must_be :properties?
       annotation.must_be :crop_hints?
       annotation.must_be :web?
+      annotation.wont_be :object_localizations?
     end
 
     it "runs all annotations on an HTTPS URL" do
@@ -56,6 +58,7 @@ describe "Vision", :vision do
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
+      annotation.wont_be :object_localizations?
     end
 
     it "runs all annotations on a Storage File" do
@@ -69,6 +72,7 @@ describe "Vision", :vision do
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
+      annotation.wont_be :object_localizations?
     end
 
     it "runs all annotations on a GCS URL" do
@@ -83,6 +87,7 @@ describe "Vision", :vision do
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
+      annotation.wont_be :object_localizations?
     end
   end
 
@@ -108,6 +113,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
       annotation.wont_be :web?
+      annotation.wont_be :object_localizations?
 
       face = annotation.face
       annotation.face.must_be_kind_of Google::Cloud::Vision::Annotation::Face
@@ -237,6 +243,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
       annotation.wont_be :web?
+      annotation.wont_be :object_localizations?
 
       landmark = annotation.landmark
       landmark.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -292,6 +299,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
       annotation.wont_be :web?
+      annotation.wont_be :object_localizations?
 
       logo = annotation.logo
       logo.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -345,6 +353,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
       annotation.wont_be :web?
+      annotation.wont_be :object_localizations?
 
       label = annotation.label
       label.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
@@ -390,6 +399,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
       annotation.wont_be :web?
+      annotation.wont_be :object_localizations?
 
       text = annotation.text
       text.must_be_kind_of Google::Cloud::Vision::Annotation::Text
@@ -500,6 +510,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
       annotation.wont_be :web?
+      annotation.wont_be :object_localizations?
 
       text = annotation.text
       text.must_be_kind_of Google::Cloud::Vision::Annotation::Text
@@ -610,6 +621,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
       annotation.wont_be :web?
+      annotation.wont_be :object_localizations?
 
       annotation.safe_search.wont_be :nil?
       annotation.safe_search.wont_be :adult?
@@ -656,6 +668,7 @@ describe "Vision", :vision do
       annotation.must_be :properties?
       # annotation.wont_be :crop_hints?
       annotation.wont_be :web?
+      annotation.wont_be :object_localizations?
 
       annotation.properties.wont_be :nil?
       annotation.properties.colors.count.must_equal 10
@@ -704,6 +717,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
       annotation.must_be :crop_hints?
       annotation.wont_be :web?
+      annotation.wont_be :object_localizations?
 
       crop_hints = annotation.crop_hints
       crop_hints.count.must_equal 1
@@ -759,6 +773,7 @@ describe "Vision", :vision do
       annotation.wont_be :properties?
       annotation.wont_be :crop_hints?
       annotation.must_be :web?
+      annotation.wont_be :object_localizations?
 
       annotation.web.wont_be :nil?
 
@@ -804,6 +819,48 @@ describe "Vision", :vision do
       annotations[0].web.wont_be :nil?
       annotations[1].web.wont_be :nil?
       annotations[2].web.wont_be :nil?
+    end
+  end
+focus
+  describe "object_localizations" do
+    it "detects detects from an image" do
+      annotation = vision.annotate bicycle_image, object_localizations: true
+
+      annotation.wont_be :face?
+      annotation.wont_be :landmark?
+      annotation.wont_be :logo?
+      annotation.wont_be :label?
+      annotation.wont_be :text?
+      annotation.wont_be :safe_search?
+      annotation.wont_be :properties?
+      annotation.wont_be :crop_hints?
+      annotation.wont_be :web?
+      annotation.must_be :object_localizations?
+
+      object_localizations = annotation.object_localizations
+      object_localizations.count.must_equal 4
+      object_localization = object_localizations.first
+      object_localization.must_be_kind_of Google::Cloud::Vision::Annotation::ObjectLocalization
+
+      object_localization.mid.must_be_kind_of String
+      object_localization.code.must_be_kind_of String
+      object_localization.name.must_be_kind_of String
+      object_localization.score.must_be_kind_of Float
+
+      object_localization.bounds.count.must_equal 4
+      object_localization.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::NormalizedVertex
+    end
+focus
+    it "detects object localizations from multiple images" do
+      annotations = vision.annotate bicycle_image,
+                             face_image,
+                             logo_image,
+                             object_localizations: 10
+
+      annotations.count.must_equal 3
+      annotations[0].object_localizations.wont_be :nil?
+      annotations[1].object_localizations.wont_be :nil?
+      annotations[2].object_localizations.wont_be :nil?
     end
   end
 
@@ -979,6 +1036,23 @@ describe "Vision", :vision do
         web.full_matching_images.count.must_equal 10
         web.partial_matching_images.count.must_equal 10
         web.pages_with_matching_images.count.must_equal 10
+      end
+    end
+focus
+    describe "object_localizations" do
+      it "detects object localizations" do
+        object_localizations = vision.image(bicycle_image).object_localizations
+
+        object_localizations.count.must_equal 4
+        object_localization = object_localizations.first
+        object_localization.must_be_kind_of Google::Cloud::Vision::Annotation::ObjectLocalization
+
+        object_localization.mid.must_be_kind_of String
+        object_localization.code.must_be_kind_of String
+        object_localization.name.must_be_kind_of String
+        object_localization.score.must_be_kind_of Float
+        object_localization.bounds.count.must_equal 4
+        object_localization.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::NormalizedVertex
       end
     end
   end
