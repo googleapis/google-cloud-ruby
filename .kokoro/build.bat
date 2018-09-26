@@ -4,6 +4,8 @@ REM  * PRs run all non-acceptance tests for every library.
 REM  * Merges run all non-acceptance tests for every library, and acceptance tests for all altered libraries.
 REM  * Nightlies run all acceptance tests for every library.
 
+REM Currently only runs tests on 2.5.1
+
 CALL cd github/google-cloud-ruby/
 CALL ruby --version
 
