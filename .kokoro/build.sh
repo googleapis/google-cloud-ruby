@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# This file runs tests for merges and PRs.
+# This file runs tests for merges, PRs, and nightlies.
 # There are a few rules for what tests are run:
 #  * PRs run all non-acceptance tests for every library.
 #  * Merges run all non-acceptance tests for every library, and acceptance tests for all altered libraries.
+#  * Nightlies run all acceptance tests for every library.
 set -eo pipefail
 
 # Debug: show build environment
@@ -25,9 +26,6 @@ EXIT_STATUS=0 # everything passed
 function set_failed_status {
   EXIT_STATUS=1
 }
-
-# Setup service account credentials.
-export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 
 if [ "$PACKAGE" = "post" ]; then
   rbenv global "2.5.1"

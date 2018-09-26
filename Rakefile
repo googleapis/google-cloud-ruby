@@ -639,6 +639,8 @@ namespace :kokoro do
   end
 
   task :load_env_vars do
+    service_account = "#{ENV['KOKORO_GFILE_DIR']}/service-account.json"
+    ENV['GOOGLE_APPLICATION_CREDENTIALS'] = service_account
     filename = "#{ENV['KOKORO_GFILE_DIR']}/env_vars.json"
     env_vars = JSON.parse(File.read(filename))
     env_vars.each { |k, v| ENV[k] = v }
