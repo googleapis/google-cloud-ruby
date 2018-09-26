@@ -594,7 +594,7 @@ namespace :kokoro do
         Rake::Task["kokoro:load_env_vars"].invoke
 
         # DELETE THIS LINE
-        ENV.each { |k, v| "#{k} = #{v}" }
+        puts ENV['GREAT_VAR']
 
         header "Using Ruby - #{RUBY_VERSION}"
         sh "bundle update"
