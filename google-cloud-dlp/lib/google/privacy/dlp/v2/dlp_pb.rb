@@ -15,6 +15,27 @@ require 'google/type/date_pb'
 require 'google/type/dayofweek_pb'
 require 'google/type/timeofday_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.privacy.dlp.v2.ExcludeInfoTypes" do
+    repeated :info_types, :message, 1, "google.privacy.dlp.v2.InfoType"
+  end
+  add_message "google.privacy.dlp.v2.ExclusionRule" do
+    optional :matching_type, :enum, 4, "google.privacy.dlp.v2.MatchingType"
+    oneof :type do
+      optional :dictionary, :message, 1, "google.privacy.dlp.v2.CustomInfoType.Dictionary"
+      optional :regex, :message, 2, "google.privacy.dlp.v2.CustomInfoType.Regex"
+      optional :exclude_info_types, :message, 3, "google.privacy.dlp.v2.ExcludeInfoTypes"
+    end
+  end
+  add_message "google.privacy.dlp.v2.InspectionRule" do
+    oneof :type do
+      optional :hotword_rule, :message, 1, "google.privacy.dlp.v2.CustomInfoType.DetectionRule.HotwordRule"
+      optional :exclusion_rule, :message, 2, "google.privacy.dlp.v2.ExclusionRule"
+    end
+  end
+  add_message "google.privacy.dlp.v2.InspectionRuleSet" do
+    repeated :info_types, :message, 1, "google.privacy.dlp.v2.InfoType"
+    repeated :rules, :message, 2, "google.privacy.dlp.v2.InspectionRule"
+  end
   add_message "google.privacy.dlp.v2.InspectConfig" do
     repeated :info_types, :message, 1, "google.privacy.dlp.v2.InfoType"
     optional :min_likelihood, :enum, 2, "google.privacy.dlp.v2.Likelihood"
@@ -23,6 +44,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :exclude_info_types, :bool, 5
     repeated :custom_info_types, :message, 6, "google.privacy.dlp.v2.CustomInfoType"
     repeated :content_options, :enum, 8, "google.privacy.dlp.v2.ContentOption"
+    repeated :rule_set, :message, 10, "google.privacy.dlp.v2.InspectionRuleSet"
   end
   add_message "google.privacy.dlp.v2.InspectConfig.FindingLimits" do
     optional :max_findings_per_item, :int32, 1
@@ -664,6 +686,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :parent, :string, 1
     optional :page_token, :string, 2
     optional :page_size, :int32, 3
+    optional :order_by, :string, 4
   end
   add_message "google.privacy.dlp.v2.ListInspectTemplatesResponse" do
     repeated :inspect_templates, :message, 1, "google.privacy.dlp.v2.InspectTemplate"
@@ -771,6 +794,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :parent, :string, 1
     optional :page_token, :string, 2
     optional :page_size, :int32, 3
+    optional :order_by, :string, 4
   end
   add_message "google.privacy.dlp.v2.ListDeidentifyTemplatesResponse" do
     repeated :deidentify_templates, :message, 1, "google.privacy.dlp.v2.DeidentifyTemplate"
@@ -821,6 +845,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :parent, :string, 1
     optional :page_token, :string, 2
     optional :page_size, :int32, 3
+    optional :order_by, :string, 4
   end
   add_message "google.privacy.dlp.v2.ListStoredInfoTypesResponse" do
     repeated :stored_info_types, :message, 1, "google.privacy.dlp.v2.StoredInfoType"
@@ -833,6 +858,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :CONTENT_UNSPECIFIED, 0
     value :CONTENT_TEXT, 1
     value :CONTENT_IMAGE, 2
+  end
+  add_enum "google.privacy.dlp.v2.MatchingType" do
+    value :MATCHING_TYPE_UNSPECIFIED, 0
+    value :MATCHING_TYPE_FULL_MATCH, 1
+    value :MATCHING_TYPE_PARTIAL_MATCH, 2
+    value :MATCHING_TYPE_INVERSE_MATCH, 3
   end
   add_enum "google.privacy.dlp.v2.InfoTypeSupportedBy" do
     value :ENUM_TYPE_UNSPECIFIED, 0
@@ -867,6 +898,10 @@ module Google
   module Privacy
     module Dlp
       module V2
+        ExcludeInfoTypes = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ExcludeInfoTypes").msgclass
+        ExclusionRule = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ExclusionRule").msgclass
+        InspectionRule = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectionRule").msgclass
+        InspectionRuleSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectionRuleSet").msgclass
         InspectConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectConfig").msgclass
         InspectConfig::FindingLimits = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectConfig.FindingLimits").msgclass
         InspectConfig::FindingLimits::InfoTypeLimit = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectConfig.FindingLimits.InfoTypeLimit").msgclass
@@ -1023,6 +1058,7 @@ module Google
         ListStoredInfoTypesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListStoredInfoTypesResponse").msgclass
         DeleteStoredInfoTypeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DeleteStoredInfoTypeRequest").msgclass
         ContentOption = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ContentOption").enummodule
+        MatchingType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.MatchingType").enummodule
         InfoTypeSupportedBy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeSupportedBy").enummodule
         RelationalOperator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RelationalOperator").enummodule
         DlpJobType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DlpJobType").enummodule

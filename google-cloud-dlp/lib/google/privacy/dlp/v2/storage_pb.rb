@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :info_type, :message, 1, "google.privacy.dlp.v2.InfoType"
     optional :likelihood, :enum, 6, "google.privacy.dlp.v2.Likelihood"
     repeated :detection_rules, :message, 7, "google.privacy.dlp.v2.CustomInfoType.DetectionRule"
+    optional :exclusion_type, :enum, 8, "google.privacy.dlp.v2.CustomInfoType.ExclusionType"
     oneof :type do
       optional :dictionary, :message, 2, "google.privacy.dlp.v2.CustomInfoType.Dictionary"
       optional :regex, :message, 3, "google.privacy.dlp.v2.CustomInfoType.Regex"
@@ -58,6 +59,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :hotword_regex, :message, 1, "google.privacy.dlp.v2.CustomInfoType.Regex"
     optional :proximity, :message, 2, "google.privacy.dlp.v2.CustomInfoType.DetectionRule.Proximity"
     optional :likelihood_adjustment, :message, 3, "google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment"
+  end
+  add_enum "google.privacy.dlp.v2.CustomInfoType.ExclusionType" do
+    value :EXCLUSION_TYPE_UNSPECIFIED, 0
+    value :EXCLUSION_TYPE_EXCLUDE, 1
   end
   add_message "google.privacy.dlp.v2.FieldId" do
     optional :name, :string, 1
@@ -187,6 +192,7 @@ module Google
         CustomInfoType::DetectionRule::Proximity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CustomInfoType.DetectionRule.Proximity").msgclass
         CustomInfoType::DetectionRule::LikelihoodAdjustment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment").msgclass
         CustomInfoType::DetectionRule::HotwordRule = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CustomInfoType.DetectionRule.HotwordRule").msgclass
+        CustomInfoType::ExclusionType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CustomInfoType.ExclusionType").enummodule
         FieldId = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.FieldId").msgclass
         PartitionId = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PartitionId").msgclass
         KindExpression = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.KindExpression").msgclass
