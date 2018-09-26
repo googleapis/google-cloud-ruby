@@ -1,0 +1,835 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Vision::Annotation::SafeSearch - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Vision::Annotation::SafeSearch";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Annotation.html" title="Google::Cloud::Vision::Annotation (class)">Annotation</a></span></span>
+     &raquo; 
+    <span class="title">SafeSearch</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Vision::Annotation::SafeSearch
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Vision::Annotation::SafeSearch</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/vision/annotation/safe_search.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>SafeSearch</h1>
+
+<p>A set of features pertaining to the image, computed by various
+computer vision methods over safe-search verticals (for example,
+adult, spoof, medical, violence).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_safe_search'>safe_search</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_safe_search'>safe_search</span>
+<span class='id identifier rubyid_safe_search'>safe_search</span><span class='period'>.</span><span class='id identifier rubyid_spoof?'>spoof?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_safe_search'>safe_search</span><span class='period'>.</span><span class='id identifier rubyid_spoof'>spoof</span> <span class='comment'>#=&gt; :VERY_UNLIKELY</span></code></pre>
+    
+  </div>
+
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="POSITIVE_RATINGS-constant" class="">POSITIVE_RATINGS =
+          
+        </dt>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='tstring_content'>POSSIBLE</span><span class='words_sep'> </span><span class='tstring_content'>LIKELY</span><span class='words_sep'> </span><span class='tstring_content'>VERY_LIKELY</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#adult-instance_method" title="#adult (instance method)">#<strong>adult</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adult likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#adult%3F-instance_method" title="#adult? (instance method)">#<strong>adult?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adult likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#medical-instance_method" title="#medical (instance method)">#<strong>medical</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Medical likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#medical%3F-instance_method" title="#medical? (instance method)">#<strong>medical?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Medical likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spoof-instance_method" title="#spoof (instance method)">#<strong>spoof</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Spoof likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#spoof%3F-instance_method" title="#spoof? (instance method)">#<strong>spoof?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Spoof likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_h-instance_method" title="#to_h (instance method)">#<strong>to_h</strong>  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts object to a hash.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#violence-instance_method" title="#violence (instance method)">#<strong>violence</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Violence likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#violence%3F-instance_method" title="#violence? (instance method)">#<strong>violence?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Violence likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="adult-instance_method">
+  
+    #<strong>adult</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adult likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/safe_search.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_adult'>adult</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_adult'>adult</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="adult?-instance_method">
+  
+    #<strong>adult?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adult likelihood. Returns <code>true</code> if <span class='object_link'><a href="#adult-instance_method" title="Google::Cloud::Vision::Annotation::SafeSearch#adult (method)">#adult</a></span> is <code>POSSIBLE</code>,
+<code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/safe_search.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_adult?'>adult?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::SafeSearch::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_adult'>adult</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="medical-instance_method">
+  
+    #<strong>medical</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Medical likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/safe_search.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_medical'>medical</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_medical'>medical</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="medical?-instance_method">
+  
+    #<strong>medical?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Medical likelihood. Returns <code>true</code> if <span class='object_link'><a href="#medical-instance_method" title="Google::Cloud::Vision::Annotation::SafeSearch#medical (method)">#medical</a></span> is <code>POSSIBLE</code>,
+<code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+100
+101
+102</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/safe_search.rb', line 100</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_medical?'>medical?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::SafeSearch::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_medical'>medical</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spoof-instance_method">
+  
+    #<strong>spoof</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Spoof likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/safe_search.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_spoof'>spoof</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_spoof'>spoof</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="spoof?-instance_method">
+  
+    #<strong>spoof?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Spoof likelihood. Returns <code>true</code> if <span class='object_link'><a href="#spoof-instance_method" title="Google::Cloud::Vision::Annotation::SafeSearch#spoof (method)">#spoof</a></span> is <code>POSSIBLE</code>,
+<code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/safe_search.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_spoof?'>spoof?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::SafeSearch::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_spoof'>spoof</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_h-instance_method">
+  
+    #<strong>to_h</strong>  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts object to a hash. All keys will be symbolized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+126
+127
+128
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/safe_search.rb', line 126</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='lbrace'>{</span> <span class='label'>adult:</span> <span class='id identifier rubyid_adult?'>adult?</span><span class='comma'>,</span> <span class='label'>spoof:</span> <span class='id identifier rubyid_spoof?'>spoof?</span><span class='comma'>,</span> <span class='label'>medical:</span> <span class='id identifier rubyid_medical?'>medical?</span><span class='comma'>,</span>
+    <span class='label'>violence:</span> <span class='id identifier rubyid_violence?'>violence?</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="violence-instance_method">
+  
+    #<strong>violence</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Violence likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/safe_search.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_violence'>violence</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_violence'>violence</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="violence?-instance_method">
+  
+    #<strong>violence?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Violence likelihood. Returns <code>true</code> if <span class='object_link'><a href="#violence-instance_method" title="Google::Cloud::Vision::Annotation::SafeSearch#violence (method)">#violence</a></span> is <code>POSSIBLE</code>,
+<code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+117
+118
+119</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/safe_search.rb', line 117</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_violence?'>violence?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::SafeSearch::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_violence'>violence</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
