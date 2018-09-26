@@ -1,0 +1,19 @@
+<!-- Template for writing Kokoro cfg -->
+
+# Format: //devtools/kokoro/config/proto/job.proto
+
+type: RELEASE
+
+scm {
+  github_scm {
+    owner: googleapis
+    repository: google-cloud-ruby
+    name: google-cloud-ruby
+    build_config_dir: ".kokoro/<%%= type %>"
+    branch: master
+    as_if_merged: true
+    authorized_group: ORGANIZATION_MEMBER
+    commit_status_context: "<%= name %>"
+    use_webhook: false
+  }
+}
