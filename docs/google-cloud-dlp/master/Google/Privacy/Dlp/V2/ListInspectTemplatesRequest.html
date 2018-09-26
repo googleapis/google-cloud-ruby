@@ -107,6 +107,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#order_by-instance_method" title="#order_by (instance method)">#<strong>order_by</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional comma separated list of fields to order by, followed by <code>asc</code> or <code>desc</code> postfix.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#page_size-instance_method" title="#page_size (instance method)">#<strong>page_size</strong>  &#x21d2; Integer </a>
     
 
@@ -192,9 +218,92 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="page_size=-instance_method"></span>
+      <span id="order_by=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="page_size-instance_method">
+  <h3 class="signature first" id="order_by-instance_method">
+  
+    #<strong>order_by</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional comma separated list of fields to order by,
+followed by <code>asc</code> or <code>desc</code> postfix. This list is case-insensitive,
+default sorting order is ascending, redundant space characters are
+insignificant.</p>
+
+<p>Example: <code>name asc,update_time, create_time desc</code></p>
+
+<p>Supported fields are:</p>
+
+<ul>
+<li><code>create_time</code>: corresponds to time the template was created.</li>
+<li><code>update_time</code>: corresponds to time the template was last updated.</li>
+<li><code>name</code>: corresponds to template&#39;s name.</li>
+<li><code>display_name</code>: corresponds to template&#39;s display name.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional comma separated list of fields to order by,
+followed by <code>asc</code> or <code>desc</code> postfix. This list is case-insensitive,
+default sorting order is ascending, redundant space characters are
+insignificant.</p>
+
+<p>Example: <code>name asc,update_time, create_time desc</code></p>
+
+<p>Supported fields are:</p>
+
+<ul>
+<li><code>create_time</code>: corresponds to time the template was created.</li>
+<li><code>update_time</code>: corresponds to time the template was last updated.</li>
+<li><code>name</code>: corresponds to template&#39;s name.</li>
+<li><code>display_name</code>: corresponds to template&#39;s display name.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1959</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1959</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListInspectTemplatesRequest (class)">ListInspectTemplatesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="page_size=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="page_size-instance_method">
   
     #<strong>page_size</strong>  &#x21d2; <tt>Integer</tt> 
   
@@ -237,10 +346,10 @@ a page of max size 100.</p>
       <pre class="lines">
 
 
-1890</pre>
+1959</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1890</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1959</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListInspectTemplatesRequest (class)">ListInspectTemplatesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -294,10 +403,10 @@ to <code>ListInspectTemplates</code>.</p>
       <pre class="lines">
 
 
-1890</pre>
+1959</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1890</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1959</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListInspectTemplatesRequest (class)">ListInspectTemplatesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -351,10 +460,10 @@ organizations/my-org-id.</p>
       <pre class="lines">
 
 
-1890</pre>
+1959</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1890</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1959</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ListInspectTemplatesRequest (class)">ListInspectTemplatesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

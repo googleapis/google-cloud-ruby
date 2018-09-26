@@ -89,8 +89,8 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Options defining a file or a set of files (path ending with *) within
-a Google Cloud Storage bucket.</p>
+    <p>Options defining a file or a set of files within a Google Cloud Storage
+bucket.</p>
 
 
   </div>
@@ -189,7 +189,8 @@ a Google Cloud Storage bucket.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>The set of one or more files to scan.</p>
+</div></span>
   
 </li>
 
@@ -328,38 +329,38 @@ of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.</p>
       <pre class="lines">
 
 
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
 267
-268</pre>
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 247</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 267</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The url, in the format `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the
-</span>  <span class='comment'>#     path is allowed.
+</span>  <span class='comment'>#     The Cloud Storage url of the file(s) to scan, in the format
+</span>  <span class='comment'>#     `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the path is allowed.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CloudStorageOptions/FileSet.html" title="Google::Privacy::Dlp::V2::CloudStorageOptions::FileSet (class)">FileSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># How to sample bytes if not all bytes are scanned. Meaningful only when used
@@ -431,38 +432,38 @@ of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.</p>
       <pre class="lines">
 
 
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
 267
-268</pre>
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 247</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 267</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The url, in the format `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the
-</span>  <span class='comment'>#     path is allowed.
+</span>  <span class='comment'>#     The Cloud Storage url of the file(s) to scan, in the format
+</span>  <span class='comment'>#     `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the path is allowed.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CloudStorageOptions/FileSet.html" title="Google::Privacy::Dlp::V2::CloudStorageOptions::FileSet (class)">FileSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># How to sample bytes if not all bytes are scanned. Meaningful only when used
@@ -497,7 +498,8 @@ of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Returns The set of one or more files to scan.</p>
+
 
   </div>
 </div>
@@ -513,6 +515,10 @@ of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>The set of one or more files to scan.</p>
+</div>
+      
     </li>
   
 </ul>
@@ -523,38 +529,38 @@ of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.</p>
       <pre class="lines">
 
 
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
 267
-268</pre>
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 247</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 267</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The url, in the format `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the
-</span>  <span class='comment'>#     path is allowed.
+</span>  <span class='comment'>#     The Cloud Storage url of the file(s) to scan, in the format
+</span>  <span class='comment'>#     `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the path is allowed.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CloudStorageOptions/FileSet.html" title="Google::Privacy::Dlp::V2::CloudStorageOptions::FileSet (class)">FileSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># How to sample bytes if not all bytes are scanned. Meaningful only when used
@@ -624,38 +630,38 @@ are applied.</p>
       <pre class="lines">
 
 
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
 267
-268</pre>
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 247</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 267</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The url, in the format `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the
-</span>  <span class='comment'>#     path is allowed.
+</span>  <span class='comment'>#     The Cloud Storage url of the file(s) to scan, in the format
+</span>  <span class='comment'>#     `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the path is allowed.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CloudStorageOptions/FileSet.html" title="Google::Privacy::Dlp::V2::CloudStorageOptions::FileSet (class)">FileSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># How to sample bytes if not all bytes are scanned. Meaningful only when used
@@ -725,38 +731,38 @@ inclusively. Both 0 and 100 means no limit. Defaults to 0.</p>
       <pre class="lines">
 
 
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
 267
-268</pre>
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 247</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 267</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The url, in the format `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the
-</span>  <span class='comment'>#     path is allowed.
+</span>  <span class='comment'>#     The Cloud Storage url of the file(s) to scan, in the format
+</span>  <span class='comment'>#     `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the path is allowed.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CloudStorageOptions/FileSet.html" title="Google::Privacy::Dlp::V2::CloudStorageOptions::FileSet (class)">FileSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># How to sample bytes if not all bytes are scanned. Meaningful only when used
@@ -817,38 +823,38 @@ inclusively. Both 0 and 100 means no limit. Defaults to 0.</p>
       <pre class="lines">
 
 
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
 267
-268</pre>
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 247</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 267</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
 </span>  <span class='comment'># @!attribute [rw] url
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The url, in the format `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the
-</span>  <span class='comment'>#     path is allowed.
+</span>  <span class='comment'>#     The Cloud Storage url of the file(s) to scan, in the format
+</span>  <span class='comment'>#     `gs://&lt;bucket&gt;/&lt;path&gt;`. Trailing wildcard in the path is allowed.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CloudStorageOptions/FileSet.html" title="Google::Privacy::Dlp::V2::CloudStorageOptions::FileSet (class)">FileSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
   <span class='comment'># How to sample bytes if not all bytes are scanned. Meaningful only when used
