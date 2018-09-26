@@ -36,7 +36,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 
 if [ "$PACKAGE" = "post" ]; then
   rbenv global "2.5.1"
-  (bundle update && bundle exec rake circleci:post) || set_failed_status
+  (bundle update && bundle exec rake kokoro:post) || set_failed_status
 elif [ "$JOB_TYPE" = "nightly" ]; then
   for version in "${RUBY_VERSIONS[@]}"; do
     rbenv global "$version"
