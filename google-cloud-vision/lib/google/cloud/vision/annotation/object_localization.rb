@@ -60,7 +60,7 @@ module Google
           end
 
           ##
-          # The tcore of the result. Range [0, 1].
+          # The score of the result. Range [0, 1].
           #
           # @return [Float] A value in the range [0, 1].
           #
