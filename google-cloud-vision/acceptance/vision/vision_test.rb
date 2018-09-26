@@ -43,7 +43,7 @@ describe "Vision", :vision do
       annotation.must_be :properties?
       annotation.must_be :crop_hints?
       annotation.must_be :web?
-      annotation.wont_be :object_localizations?
+      annotation.must_be :object_localizations?
     end
 
     it "runs all annotations on an HTTPS URL" do
@@ -58,7 +58,7 @@ describe "Vision", :vision do
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
-      annotation.wont_be :object_localizations?
+      annotation.must_be :object_localizations?
     end
 
     it "runs all annotations on a Storage File" do
@@ -72,7 +72,7 @@ describe "Vision", :vision do
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
-      annotation.wont_be :object_localizations?
+      annotation.must_be :object_localizations?
     end
 
     it "runs all annotations on a GCS URL" do
@@ -87,7 +87,7 @@ describe "Vision", :vision do
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
-      annotation.wont_be :object_localizations?
+      annotation.must_be :object_localizations?
     end
   end
 
@@ -821,7 +821,7 @@ describe "Vision", :vision do
       annotations[2].web.wont_be :nil?
     end
   end
-focus
+
   describe "object_localizations" do
     it "detects detects from an image" do
       annotation = vision.annotate bicycle_image, object_localizations: true
@@ -850,7 +850,7 @@ focus
       object_localization.bounds.count.must_equal 4
       object_localization.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::NormalizedVertex
     end
-focus
+
     it "detects object localizations from multiple images" do
       annotations = vision.annotate bicycle_image,
                              face_image,
@@ -1038,7 +1038,7 @@ focus
         web.pages_with_matching_images.count.must_equal 10
       end
     end
-focus
+
     describe "object_localizations" do
       it "detects object localizations" do
         object_localizations = vision.image(bicycle_image).object_localizations
