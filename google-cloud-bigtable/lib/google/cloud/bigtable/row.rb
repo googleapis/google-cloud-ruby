@@ -83,7 +83,7 @@ module Google
         # @return [String] Row key
         attr_accessor :key
 
-        # @return [Hash{String => Google::Cloud::Bigtable::Row::Cell}] Row cells
+        # @return [Hash{String => Array<Google::Cloud::Bigtable::Row::Cell>}] Row cells
         attr_accessor :cells
 
         # Create flat row object
