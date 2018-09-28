@@ -668,6 +668,29 @@ name-value pairs that describe various qualities of the data.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#event_based_hold%3F-instance_method" title="#event_based_hold? (instance method)">#<strong>event_based_hold?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether there is an event-based hold on the file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#exists%3F-instance_method" title="#exists? (instance method)">#<strong>exists?</strong>  &#x21d2; Boolean </a>
     
 
@@ -969,6 +992,52 @@ name-value pairs that describe various qualities of the data.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#release_event_based_hold!-instance_method" title="#release_event_based_hold! (instance method)">#<strong>release_event_based_hold!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the event-based hold property of the file to <code>false</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#release_temporary_hold!-instance_method" title="#release_temporary_hold! (instance method)">#<strong>release_temporary_hold!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the temporary hold property of the file to <code>false</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#reload!-instance_method" title="#reload! (instance method)">#<strong>reload!</strong>(generation: nil)  &#x21d2; Object </a>
     
 
@@ -986,6 +1055,29 @@ name-value pairs that describe various qualities of the data.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Reloads the file with current data from the Storage service.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#retention_expires_at-instance_method" title="#retention_expires_at (instance method)">#<strong>retention_expires_at</strong>  &#x21d2; DateTime<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The retention expiration time of the file.</p>
 </div></span>
   
 </li>
@@ -1032,6 +1124,52 @@ name-value pairs that describe various qualities of the data.</p>
 
   
     <span class="summary_desc"><div class='inline'><p><a href="https://cloud.google.com/storage/docs/json_api/v1/objects/rewrite">Rewrites</a> the file to the same <span class='object_link'><a href="#bucket-instance_method" title="Google::Cloud::Storage::File#bucket (method)">#bucket</a></span> and <span class='object_link'><a href="#name-instance_method" title="Google::Cloud::Storage::File#name (method)">#name</a></span> with a new <a href="https://cloud.google.com/storage/docs/encryption#customer-supplied">customer-supplied encryption key</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_event_based_hold!-instance_method" title="#set_event_based_hold! (instance method)">#<strong>set_event_based_hold!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the event-based hold property of the file to <code>true</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_temporary_hold!-instance_method" title="#set_temporary_hold! (instance method)">#<strong>set_temporary_hold!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the temporary hold property of the file to <code>true</code>.</p>
 </div></span>
   
 </li>
@@ -1124,6 +1262,29 @@ name-value pairs that describe various qualities of the data.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Rewrites the file with a new storage class, which determines the SLA and the cost of storage.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#temporary_hold%3F-instance_method" title="#temporary_hold? (instance method)">#<strong>temporary_hold?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether there is a temporary hold on the file.</p>
 </div></span>
   
 </li>
@@ -1362,12 +1523,12 @@ as many predefined lists.</p>
       <pre class="lines">
 
 
-1279
-1280
-1281</pre>
+1539
+1540
+1541</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1279</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1539</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_acl'>acl</span>
   <span class='ivar'>@acl</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Storage::File (class)">File</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="File/Acl.html" title="Google::Cloud::Storage::File::Acl (class)">Acl</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>self</span>
@@ -2298,18 +2459,18 @@ to <span class='object_link'><a href="Bucket.html#create_file-instance_method" t
       <pre class="lines">
 
 
-783
-784
-785
-786
-787
-788
-789
-790
-791</pre>
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 783</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1038</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_copy'>copy</span> <span class='id identifier rubyid_dest_bucket_or_path'>dest_bucket_or_path</span><span class='comma'>,</span> <span class='id identifier rubyid_dest_path'>dest_path</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span>
          <span class='label'>acl:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>generation:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>encryption_key:</span> <span class='kw'>nil</span>
@@ -2446,6 +2607,11 @@ Encoded using base64 in big-endian byte order.</p>
   <div class="discussion">
     <p>Permanently deletes the file.</p>
 
+<p>Raises PermissionDeniedError if the object is subject to an active
+retention policy or hold. (See <span class='object_link'><a href="#retention_expires_at-instance_method" title="Google::Cloud::Storage::File#retention_expires_at (method)">#retention_expires_at</a></span>,
+<span class='object_link'><a href="Bucket.html#retention_period-instance_method" title="Google::Cloud::Storage::Bucket#retention_period (method)">Bucket#retention_period</a></span>, <span class='object_link'><a href="#temporary_hold%3F-instance_method" title="Google::Cloud::Storage::File#temporary_hold? (method)">#temporary_hold?</a></span> and
+<span class='object_link'><a href="#event_based_hold%3F-instance_method" title="Google::Cloud::Storage::File#event_based_hold? (method)">#event_based_hold?</a></span>.)</p>
+
 
   </div>
 </div>
@@ -2539,16 +2705,16 @@ which is the version returned by <span class='object_link'><a href="#generation-
       <pre class="lines">
 
 
-1081
-1082
-1083
-1084
-1085
-1086
-1087</pre>
+1341
+1342
+1343
+1344
+1345
+1346
+1347</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1081</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1341</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span> <span class='label'>generation:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_generation'>generation</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_generation'>generation</span> <span class='kw'>if</span> <span class='id identifier rubyid_generation'>generation</span> <span class='op'>==</span> <span class='kw'>true</span>
@@ -2851,30 +3017,30 @@ File-like object, then that object will be returned.</p>
       <pre class="lines">
 
 
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696</pre>
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 676</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 931</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_download'>download</span> <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>verify:</span> <span class='symbol'>:md5</span><span class='comma'>,</span> <span class='label'>encryption_key:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>range:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>skip_decompress:</span> <span class='kw'>nil</span>
@@ -3016,6 +3182,121 @@ encryption key required to decrypt this file.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="event_based_hold?-instance_method">
+  
+    #<strong>event_based_hold?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether there is an event-based hold on the file. An event-based
+hold will be enforced on the file as long as this property is <code>true</code>,
+even if the bucket-level retention policy would normally allow
+deletion. Removing the event-based hold extends the retention duration
+of the file to the current date plus the bucket-level policy duration.
+Removing the event-based hold represents that a retention-related
+event has occurred, and thus the retention clock ticks from the moment
+of the event as opposed to the creation date of the object. The
+default value is configured at the bucket level (which defaults to
+<code>false</code>), and is assigned to newly-created objects.</p>
+
+<p>See <span class='object_link'><a href="#set_event_based_hold!-instance_method" title="Google::Cloud::Storage::File#set_event_based_hold! (method)">#set_event_based_hold!</a></span>, <span class='object_link'><a href="#release_event_based_hold!-instance_method" title="Google::Cloud::Storage::File#release_event_based_hold! (method)">#release_event_based_hold!</a></span>,
+<span class='object_link'><a href="Bucket.html#default_event_based_hold%3F-instance_method" title="Google::Cloud::Storage::Bucket#default_event_based_hold? (method)">Bucket#default_event_based_hold?</a></span> and
+<span class='object_link'><a href="Bucket.html#default_event_based_hold=-instance_method" title="Google::Cloud::Storage::Bucket#default_event_based_hold= (method)">Bucket#default_event_based_hold=</a></span>.</p>
+
+<p>If a bucket&#39;s retention policy duration is modified after the
+event-based hold flag is unset, the updated retention duration applies
+retroactively to objects that previously had event-based holds.  For
+example:</p>
+
+<ul>
+<li>If the bucket&#39;s [unlocked] retention policy is removed, objects with
+event-based holds may be deleted immediately after the hold is
+removed (the duration of a nonexistent policy for the purpose of
+event-based holds is considered to be zero).</li>
+<li>If the bucket&#39;s [unlocked] policy is reduced, objects with
+previously released event-based holds will be have their retention
+expiration dates reduced accordingly.</li>
+<li>If the bucket&#39;s policy is extended, objects with previously released
+event-based holds will have their retention expiration dates
+extended accordingly.  However, note that objects with event-based
+holds released prior to the effective date of the new policy may
+have already been deleted by the user.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Storage.html" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Storage.html#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_retention_period'>retention_period</span> <span class='op'>=</span> <span class='int'>2592000</span> <span class='comment'># 30 days in seconds
+</span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold?'>event_based_hold?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_set_event_based_hold!'>set_event_based_hold!</span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='comment'># raises Google::Cloud::PermissionDeniedError
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_release_event_based_hold!'>release_event_based_hold!</span>
+
+<span class='comment'># The end of the retention period is calculated from the time that
+</span><span class='comment'># the event-based hold was released.
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_retention_expires_at'>retention_expires_at</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns <code>true</code> if there is an event-based hold on
+the file, otherwise <code>false</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+587
+588
+589</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 587</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_event_based_hold?'>event_based_hold?</span>
+  <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold'>event_based_hold</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold'>event_based_hold</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="exists?-instance_method">
   
     #<strong>exists?</strong>  &#x21d2; <tt>Boolean</tt> 
@@ -3053,19 +3334,19 @@ encryption key required to decrypt this file.</p>
       <pre class="lines">
 
 
-1335
-1336
-1337
-1338
-1339
-1340
-1341
-1342
-1343
-1344</pre>
+1595
+1596
+1597
+1598
+1599
+1600
+1601
+1602
+1603
+1604</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1335</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1595</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span>
   <span class='comment'># Always true if we have a grpc object
@@ -3212,17 +3493,17 @@ archived object versions. (See <span class='object_link'><a href="Bucket.html#ve
       <pre class="lines">
 
 
-480
-481
-482
-483
-484
-485
-486
-487</pre>
+735
+736
+737
+738
+739
+740
+741
+742</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 480</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 735</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_generations'>generations</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3846,15 +4127,160 @@ the URL will return an error. (See <span class='object_link'><a href="File/Acl.h
       <pre class="lines">
 
 
-1121
-1122
-1123</pre>
+1381
+1382
+1383</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1381</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_public_url'>public_url</span> <span class='label'>protocol:</span> <span class='symbol'>:https</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_protocol'>protocol</span><span class='embexpr_end'>}</span><span class='tstring_content'>://storage.googleapis.com/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_bucket'>bucket</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="release_event_based_hold!-instance_method">
+  
+    #<strong>release_event_based_hold!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the event-based hold property of the file to <code>false</code>. Removing
+the event-based hold extends the retention duration of the file to the
+current date plus the bucket-level policy duration. Removing the
+event-based hold represents that a retention-related event has
+occurred, and thus the retention clock ticks from the moment of the
+event as opposed to the creation date of the object. The default value
+is configured at the bucket level (which defaults to <code>false</code>), and is
+assigned to newly-created objects.</p>
+
+<p>See <span class='object_link'><a href="#event_based_hold%3F-instance_method" title="Google::Cloud::Storage::File#event_based_hold? (method)">#event_based_hold?</a></span>, <span class='object_link'><a href="#set_event_based_hold!-instance_method" title="Google::Cloud::Storage::File#set_event_based_hold! (method)">#set_event_based_hold!</a></span>,
+<span class='object_link'><a href="Bucket.html#default_event_based_hold%3F-instance_method" title="Google::Cloud::Storage::Bucket#default_event_based_hold? (method)">Bucket#default_event_based_hold?</a></span> and
+<span class='object_link'><a href="Bucket.html#default_event_based_hold=-instance_method" title="Google::Cloud::Storage::Bucket#default_event_based_hold= (method)">Bucket#default_event_based_hold=</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Storage.html" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Storage.html#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_retention_period'>retention_period</span> <span class='op'>=</span> <span class='int'>2592000</span> <span class='comment'># 30 days in seconds
+</span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold?'>event_based_hold?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_set_event_based_hold!'>set_event_based_hold!</span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='comment'># raises Google::Cloud::PermissionDeniedError
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_release_event_based_hold!'>release_event_based_hold!</span>
+
+<span class='comment'># The end of the retention period is calculated from the time that
+</span><span class='comment'># the event-based hold was released.
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_retention_expires_at'>retention_expires_at</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+678
+679
+680
+681</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 678</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_release_event_based_hold!'>release_event_based_hold!</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold'>event_based_hold</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_update_gapi!'>update_gapi!</span> <span class='symbol'>:event_based_hold</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="release_temporary_hold!-instance_method">
+  
+    #<strong>release_temporary_hold!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the temporary hold property of the file to <code>false</code>. This property
+is used to enforce a temporary hold on a file. While it is set to
+<code>true</code>, the file is protected against deletion and overwrites. Once
+removed, the file&#39;s <code>retention_expires_at</code> date is not changed. The
+default value is <code>false</code>.</p>
+
+<p>See <span class='object_link'><a href="#retention_expires_at-instance_method" title="Google::Cloud::Storage::File#retention_expires_at (method)">#retention_expires_at</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Storage.html" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Storage.html#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold?'>temporary_hold?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_set_temporary_hold!'>set_temporary_hold!</span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='comment'># raises Google::Cloud::PermissionDeniedError
+</span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_release_temporary_hold!'>release_temporary_hold!</span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+526
+527
+528
+529</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 526</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_release_temporary_hold!'>release_temporary_hold!</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold'>temporary_hold</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_update_gapi!'>update_gapi!</span> <span class='symbol'>:temporary_hold</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3954,18 +4380,18 @@ set, which is the version returned by <span class='object_link'><a href="#genera
       <pre class="lines">
 
 
-1322
-1323
-1324
-1325
-1326
-1327
-1328
-1329
-1330</pre>
+1582
+1583
+1584
+1585
+1586
+1587
+1588
+1589
+1590</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1322</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1582</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span> <span class='label'>generation:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_generation'>generation</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_generation'>generation</span> <span class='kw'>if</span> <span class='id identifier rubyid_generation'>generation</span> <span class='op'>==</span> <span class='kw'>true</span>
@@ -3975,6 +4401,78 @@ set, which is the version returned by <span class='object_link'><a href="#genera
   <span class='comment'># If NotFound then lazy will never be unset
 </span>  <span class='ivar'>@lazy</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="retention_expires_at-instance_method">
+  
+    #<strong>retention_expires_at</strong>  &#x21d2; <tt>DateTime</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The retention expiration time of the file. This field is indirectly
+mutable when the retention policy applicable to the object changes.
+The date represents the earliest time that the object could be
+deleted, assuming no temporary hold is set. (See <span class='object_link'><a href="#temporary_hold%3F-instance_method" title="Google::Cloud::Storage::File#temporary_hold? (method)">#temporary_hold?</a></span>.)
+It is provided when both of the following are true:</p>
+
+<ul>
+<li>There is a retention policy on the bucket.</li>
+<li>The eventBasedHold flag is unset on the object.</li>
+</ul>
+
+<p>Note that it can be provided even when <span class='object_link'><a href="#temporary_hold%3F-instance_method" title="Google::Cloud::Storage::File#temporary_hold? (method)">#temporary_hold?</a></span> is <code>true</code>
+(so that the user can reason about policy without having to first
+unset the temporary hold).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>DateTime</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A DateTime representing the earliest time at
+which the object can be deleted, or <code>nil</code> if there are no
+restrictions on deleting the object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+701
+702
+703</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 701</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_retention_expires_at'>retention_expires_at</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_retention_expiration_time'>retention_expiration_time</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -4302,37 +4800,37 @@ if <code>new_encryption_key</code> is used.</p>
       <pre class="lines">
 
 
-937
-938
-939
-940
-941
-942
-943
-944
-945
-946
-947
-948
-949
-950
-951
-952
-953
-954
-955
-956
-957
-958
-959
-960
-961
-962
-963
-964</pre>
+1192
+1193
+1194
+1195
+1196
+1197
+1198
+1199
+1200
+1201
+1202
+1203
+1204
+1205
+1206
+1207
+1208
+1209
+1210
+1211
+1212
+1213
+1214
+1215
+1216
+1217
+1218
+1219</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 937</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1192</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rewrite'>rewrite</span> <span class='id identifier rubyid_dest_bucket_or_path'>dest_bucket_or_path</span><span class='comma'>,</span> <span class='id identifier rubyid_dest_path'>dest_path</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span>
             <span class='label'>acl:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>generation:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -4529,21 +5027,181 @@ if <code>new_encryption_key</code> is used.</p>
       <pre class="lines">
 
 
-1034
-1035
-1036
-1037
-1038
-1039</pre>
+1289
+1290
+1291
+1292
+1293
+1294</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1034</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1289</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_rotate'>rotate</span> <span class='label'>encryption_key:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>new_encryption_key:</span> <span class='kw'>nil</span><span class='comma'>,</span>
            <span class='label'>new_kms_key:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_rewrite'>rewrite</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>encryption_key:</span> <span class='id identifier rubyid_encryption_key'>encryption_key</span><span class='comma'>,</span>
                         <span class='label'>new_encryption_key:</span> <span class='id identifier rubyid_new_encryption_key'>new_encryption_key</span><span class='comma'>,</span>
                         <span class='label'>new_kms_key:</span> <span class='id identifier rubyid_new_kms_key'>new_kms_key</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_event_based_hold!-instance_method">
+  
+    #<strong>set_event_based_hold!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the event-based hold property of the file to <code>true</code>. This
+property enforces an event-based hold on the file as long as this
+property is <code>true</code>, even if the bucket-level retention policy would
+normally allow deletion. The default value is configured at the
+bucket level (which defaults to <code>false</code>), and is assigned to
+newly-created objects.</p>
+
+<p>See <span class='object_link'><a href="#event_based_hold%3F-instance_method" title="Google::Cloud::Storage::File#event_based_hold? (method)">#event_based_hold?</a></span>, <span class='object_link'><a href="#release_event_based_hold!-instance_method" title="Google::Cloud::Storage::File#release_event_based_hold! (method)">#release_event_based_hold!</a></span>,
+<span class='object_link'><a href="Bucket.html#default_event_based_hold%3F-instance_method" title="Google::Cloud::Storage::Bucket#default_event_based_hold? (method)">Bucket#default_event_based_hold?</a></span> and
+<span class='object_link'><a href="Bucket.html#default_event_based_hold=-instance_method" title="Google::Cloud::Storage::Bucket#default_event_based_hold= (method)">Bucket#default_event_based_hold=</a></span>.</p>
+
+<p>If a bucket&#39;s retention policy duration is modified after the
+event-based hold is removed, the updated retention duration applies
+retroactively to objects that previously had event-based holds.  For
+example:</p>
+
+<ul>
+<li>If the bucket&#39;s [unlocked] retention policy is removed, objects with
+event-based holds may be deleted immediately after the hold is
+removed (the duration of a nonexistent policy for the purpose of
+event-based holds is considered to be zero).</li>
+<li>If the bucket&#39;s [unlocked] policy is reduced, objects with
+previously released event-based holds will be have their retention
+expiration dates reduced accordingly.</li>
+<li>If the bucket&#39;s policy is extended, objects with previously released
+event-based holds will have their retention expiration dates
+extended accordingly.  However, note that objects with event-based
+holds released prior to the effective date of the new policy may
+have already been deleted by the user.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Storage.html" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Storage.html#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_retention_period'>retention_period</span> <span class='op'>=</span> <span class='int'>2592000</span> <span class='comment'># 30 days in seconds
+</span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold?'>event_based_hold?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_set_event_based_hold!'>set_event_based_hold!</span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='comment'># raises Google::Cloud::PermissionDeniedError
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_release_event_based_hold!'>release_event_based_hold!</span>
+
+<span class='comment'># The end of the retention period is calculated from the time that
+</span><span class='comment'># the event-based hold was released.
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_retention_expires_at'>retention_expires_at</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+640
+641
+642
+643</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 640</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_event_based_hold!'>set_event_based_hold!</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_event_based_hold'>event_based_hold</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_update_gapi!'>update_gapi!</span> <span class='symbol'>:event_based_hold</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_temporary_hold!-instance_method">
+  
+    #<strong>set_temporary_hold!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the temporary hold property of the file to <code>true</code>. This property
+is used to enforce a temporary hold on a file. While it is set to
+<code>true</code>, the file is protected against deletion and overwrites. Once
+removed, the file&#39;s <code>retention_expires_at</code> date is not changed. The
+default value is <code>false</code>.</p>
+
+<p>See <span class='object_link'><a href="#retention_expires_at-instance_method" title="Google::Cloud::Storage::File#retention_expires_at (method)">#retention_expires_at</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Storage.html" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Storage.html#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold?'>temporary_hold?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_set_temporary_hold!'>set_temporary_hold!</span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='comment'># raises Google::Cloud::PermissionDeniedError</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+497
+498
+499
+500</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 497</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_temporary_hold!'>set_temporary_hold!</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold'>temporary_hold</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_update_gapi!'>update_gapi!</span> <span class='symbol'>:temporary_hold</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -4838,22 +5496,22 @@ corresponding values. (These values can be permanently set using
       <pre class="lines">
 
 
-1221
-1222
-1223
-1224
-1225
-1226
-1227
-1228
-1229
-1230
-1231
-1232
-1233</pre>
+1481
+1482
+1483
+1484
+1485
+1486
+1487
+1488
+1489
+1490
+1491
+1492
+1493</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1221</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 1481</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_signed_url'>signed_url</span> <span class='label'>method:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>expires:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>content_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                <span class='label'>content_md5:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>headers:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>issuer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -5062,6 +5720,85 @@ The  default value is the default storage class for the bucket. See
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="temporary_hold?-instance_method">
+  
+    #<strong>temporary_hold?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether there is a temporary hold on the file. A temporary hold will
+be enforced on the file as long as this property is <code>true</code>, even if
+the bucket-level retention policy would normally allow deletion. When
+the temporary hold is removed, the normal bucket-level policy rules
+once again apply. The default value is <code>false</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Storage.html" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Storage.html#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold?'>temporary_hold?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_set_temporary_hold!'>set_temporary_hold!</span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='comment'># raises Google::Cloud::PermissionDeniedError</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns <code>true</code> if there is a temporary hold on the
+file, otherwise <code>false</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+472
+473
+474</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 472</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_temporary_hold?'>temporary_hold?</span>
+  <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold'>temporary_hold</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_temporary_hold'>temporary_hold</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="update-instance_method">
   
     #<strong>update</strong> {|file| ... } &#x21d2; <tt>Object</tt> 
@@ -5131,15 +5868,15 @@ the block is completely mutable and will be included in the request.</p>
       <pre class="lines">
 
 
-517
-518
-519
-520
-521
-522</pre>
+772
+773
+774
+775
+776
+777</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage/file.rb', line 772</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='id identifier rubyid_updater'>updater</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="File/Updater.html" title="Google::Cloud::Storage::File::Updater (class)">Updater</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_gapi'>gapi</span>
