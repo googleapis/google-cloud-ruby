@@ -1,5 +1,10 @@
 # Release History
 
+### 0.6.3 / 2018-09-28
+
+* Update google-cloud-dlp generated files (#2481)
+* Re-generate library using google-cloud-dlp/synth.py (#2478)
+
 ### 0.6.2 / 2018-09-20
 
 * Update documentation.
