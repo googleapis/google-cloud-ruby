@@ -317,6 +317,44 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "creates a file with temporary_hold" do
+    new_file_name = random_file_path
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+                  [bucket.name, empty_file_gapi(temporary_hold: true), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", kms_key_name: nil, user_project: nil, options: {}]
+
+      bucket.service.mocked_service = mock
+
+      bucket.create_file tmpfile, new_file_name, temporary_hold: true
+
+      mock.verify
+    end
+  end
+
+  it "creates a file with event_based_hold" do
+    new_file_name = random_file_path
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+                  [bucket.name, empty_file_gapi(event_based_hold: true), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", kms_key_name: nil, user_project: nil, options: {}]
+
+      bucket.service.mocked_service = mock
+
+      bucket.create_file tmpfile, new_file_name, event_based_hold: true
+
+      mock.verify
+    end
+  end
+
   it "creates a file with user_project set to true" do
     new_file_name = random_file_path
 
@@ -1044,13 +1082,15 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   def empty_file_gapi cache_control: nil, content_disposition: nil,
                       content_encoding: nil, content_language: nil,
                       content_type: nil, crc32c: nil, md5: nil, metadata: nil,
-                      storage_class: nil
+                      storage_class: nil, temporary_hold: nil,
+                      event_based_hold: nil
     Google::Apis::StorageV1::Object.new({
       cache_control: cache_control, content_type: content_type,
       content_disposition: content_disposition, md5_hash: md5,
       content_encoding: content_encoding, crc32c: crc32c,
       content_language: content_language, metadata: metadata,
-      storage_class: storage_class }.delete_if { |_k, v| v.nil? })
+      storage_class: storage_class, temporary_hold: temporary_hold,
+      event_based_hold: event_based_hold }.delete_if { |_k, v| v.nil? })
   end
 
   def find_file_gapi bucket=nil, name = nil

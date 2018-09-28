@@ -85,6 +85,11 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.requester_pays.must_be :nil?
     bucket.labels.must_be :empty?
 
+    bucket.retention_period.must_be :nil?
+    bucket.retention_effective_at.must_be :nil?
+    bucket.retention_policy_locked?.must_equal false
+    bucket.default_event_based_hold?.must_equal false
+
     bucket.cors.each do |cors|
       cors.must_be_kind_of Google::Cloud::Storage::Bucket::Cors::Rule
       cors.frozen?.must_equal true

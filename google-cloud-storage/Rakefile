@@ -103,7 +103,10 @@ namespace :acceptance do
     puts "Cleaning up Storage buckets and files"
     Google::Cloud.storage.buckets.all do |b|
       begin
+        b.retention_period = nil if b.retention_period
         b.files(versions: true).all do |file|
+          file.release_temporary_hold! if file.temporary_hold?
+          file.release_event_based_hold! if file.event_based_hold?
           file.delete generation: true
         end
         # Add one second delay between bucket deletes to avoid rate limiting errors

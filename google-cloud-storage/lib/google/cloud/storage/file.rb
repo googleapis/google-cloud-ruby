@@ -448,6 +448,261 @@ module Google
         end
 
         ##
+        # Whether there is a temporary hold on the file. A temporary hold will
+        # be enforced on the file as long as this property is `true`, even if
+        # the bucket-level retention policy would normally allow deletion. When
+        # the temporary hold is removed, the normal bucket-level policy rules
+        # once again apply. The default value is `false`.
+        #
+        # @return [Boolean] Returns `true` if there is a temporary hold on the
+        #   file, otherwise `false`.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.temporary_hold? #=> false
+        #   file.set_temporary_hold!
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
+        def temporary_hold?
+          !@gapi.temporary_hold.nil? && @gapi.temporary_hold
+        end
+
+        ##
+        # Sets the temporary hold property of the file to `true`. This property
+        # is used to enforce a temporary hold on a file. While it is set to
+        # `true`, the file is protected against deletion and overwrites. Once
+        # removed, the file's `retention_expires_at` date is not changed. The
+        # default value is `false`.
+        #
+        # See {#retention_expires_at}.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.temporary_hold? #=> false
+        #   file.set_temporary_hold!
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
+        def set_temporary_hold!
+          @gapi.temporary_hold = true
+          update_gapi! :temporary_hold
+        end
+
+        ##
+        # Sets the temporary hold property of the file to `false`. This property
+        # is used to enforce a temporary hold on a file. While it is set to
+        # `true`, the file is protected against deletion and overwrites. Once
+        # removed, the file's `retention_expires_at` date is not changed. The
+        # default value is `false`.
+        #
+        # See {#retention_expires_at}.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.temporary_hold? #=> false
+        #   file.set_temporary_hold!
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
+        #   file.release_temporary_hold!
+        #   file.delete
+        #
+        def release_temporary_hold!
+          @gapi.temporary_hold = false
+          update_gapi! :temporary_hold
+        end
+
+        ##
+        # Whether there is an event-based hold on the file. An event-based
+        # hold will be enforced on the file as long as this property is `true`,
+        # even if the bucket-level retention policy would normally allow
+        # deletion. Removing the event-based hold extends the retention duration
+        # of the file to the current date plus the bucket-level policy duration.
+        # Removing the event-based hold represents that a retention-related
+        # event has occurred, and thus the retention clock ticks from the moment
+        # of the event as opposed to the creation date of the object. The
+        # default value is configured at the bucket level (which defaults to
+        # `false`), and is assigned to newly-created objects.
+        #
+        # See {#set_event_based_hold!}, {#release_event_based_hold!},
+        # {Bucket#default_event_based_hold?} and
+        # {Bucket#default_event_based_hold=}.
+        #
+        # If a bucket's retention policy duration is modified after the
+        # event-based hold flag is unset, the updated retention duration applies
+        # retroactively to objects that previously had event-based holds.  For
+        # example:
+        #
+        # * If the bucket's [unlocked] retention policy is removed, objects with
+        #   event-based holds may be deleted immediately after the hold is
+        #   removed (the duration of a nonexistent policy for the purpose of
+        #   event-based holds is considered to be zero).
+        # * If the bucket's [unlocked] policy is reduced, objects with
+        #   previously released event-based holds will be have their retention
+        #   expiration dates reduced accordingly.
+        # * If the bucket's policy is extended, objects with previously released
+        #   event-based holds will have their retention expiration dates
+        #   extended accordingly.  However, note that objects with event-based
+        #   holds released prior to the effective date of the new policy may
+        #   have already been deleted by the user.
+        #
+        # @return [Boolean] Returns `true` if there is an event-based hold on
+        #   the file, otherwise `false`.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.event_based_hold? #=> false
+        #   file.set_event_based_hold!
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #   file.release_event_based_hold!
+        #
+        #   # The end of the retention period is calculated from the time that
+        #   # the event-based hold was released.
+        #   file.retention_expires_at
+        #
+        def event_based_hold?
+          !@gapi.event_based_hold.nil? && @gapi.event_based_hold
+        end
+
+        ##
+        # Sets the event-based hold property of the file to `true`. This
+        # property enforces an event-based hold on the file as long as this
+        # property is `true`, even if the bucket-level retention policy would
+        # normally allow deletion. The default value is configured at the
+        # bucket level (which defaults to `false`), and is assigned to
+        # newly-created objects.
+        #
+        # See {#event_based_hold?}, {#release_event_based_hold!},
+        # {Bucket#default_event_based_hold?} and
+        # {Bucket#default_event_based_hold=}.
+        #
+        # If a bucket's retention policy duration is modified after the
+        # event-based hold is removed, the updated retention duration applies
+        # retroactively to objects that previously had event-based holds.  For
+        # example:
+        #
+        # * If the bucket's [unlocked] retention policy is removed, objects with
+        #   event-based holds may be deleted immediately after the hold is
+        #   removed (the duration of a nonexistent policy for the purpose of
+        #   event-based holds is considered to be zero).
+        # * If the bucket's [unlocked] policy is reduced, objects with
+        #   previously released event-based holds will be have their retention
+        #   expiration dates reduced accordingly.
+        # * If the bucket's policy is extended, objects with previously released
+        #   event-based holds will have their retention expiration dates
+        #   extended accordingly.  However, note that objects with event-based
+        #   holds released prior to the effective date of the new policy may
+        #   have already been deleted by the user.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.event_based_hold? #=> false
+        #   file.set_event_based_hold!
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #   file.release_event_based_hold!
+        #
+        #   # The end of the retention period is calculated from the time that
+        #   # the event-based hold was released.
+        #   file.retention_expires_at
+        #
+        def set_event_based_hold!
+          @gapi.event_based_hold = true
+          update_gapi! :event_based_hold
+        end
+
+        ##
+        # Sets the event-based hold property of the file to `false`. Removing
+        # the event-based hold extends the retention duration of the file to the
+        # current date plus the bucket-level policy duration. Removing the
+        # event-based hold represents that a retention-related event has
+        # occurred, and thus the retention clock ticks from the moment of the
+        # event as opposed to the creation date of the object. The default value
+        # is configured at the bucket level (which defaults to `false`), and is
+        # assigned to newly-created objects.
+        #
+        # See {#event_based_hold?}, {#set_event_based_hold!},
+        # {Bucket#default_event_based_hold?} and
+        # {Bucket#default_event_based_hold=}.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.event_based_hold? #=> false
+        #   file.set_event_based_hold!
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #   file.release_event_based_hold!
+        #
+        #   # The end of the retention period is calculated from the time that
+        #   # the event-based hold was released.
+        #   file.retention_expires_at
+        #
+        def release_event_based_hold!
+          @gapi.event_based_hold = false
+          update_gapi! :event_based_hold
+        end
+
+        ##
+        # The retention expiration time of the file. This field is indirectly
+        # mutable when the retention policy applicable to the object changes.
+        # The date represents the earliest time that the object could be
+        # deleted, assuming no temporary hold is set. (See {#temporary_hold?}.)
+        # It is provided when both of the following are true:
+        #
+        # * There is a retention policy on the bucket.
+        # * The eventBasedHold flag is unset on the object.
+        #
+        # Note that it can be provided even when {#temporary_hold?} is `true`
+        # (so that the user can reason about policy without having to first
+        # unset the temporary hold).
+        #
+        # @return [DateTime, nil] A DateTime representing the earliest time at
+        #   which the object can be deleted, or `nil` if there are no
+        #   restrictions on deleting the object.
+        #
+        def retention_expires_at
+          @gapi.retention_expiration_time
+        end
+
+        ##
         # Retrieves a list of versioned files for the current object.
         #
         # Useful for listing archived versions of the file, restoring the live
@@ -1040,6 +1295,11 @@ module Google
 
         ##
         # Permanently deletes the file.
+        #
+        # Raises PermissionDeniedError if the object is subject to an active
+        # retention policy or hold. (See {#retention_expires_at},
+        # {Bucket#retention_period}, {#temporary_hold?} and
+        # {#event_based_hold?}.)
         #
         # @param [Boolean, Integer] generation Specify a version of the file to
         #   delete. When `true`, it will delete the version returned by

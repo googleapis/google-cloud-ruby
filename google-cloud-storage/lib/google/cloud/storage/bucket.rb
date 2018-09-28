@@ -133,6 +133,15 @@ module Google
         end
 
         ##
+        # The metadata generation of the bucket.
+        #
+        # @return [Integer] The metageneration.
+        #
+        def metageneration
+          @gapi.metageneration
+        end
+
+        ##
         # Returns the current CORS configuration for a static website served
         # from the bucket.
         #
@@ -546,6 +555,209 @@ module Google
         end
 
         ##
+        # The period of time (in seconds) that files in the bucket must be
+        # retained, and cannot be deleted, overwritten, or archived.
+        # The value must be between 0 and 100 years (in seconds.)
+        #
+        # See also: {#retention_period=}, {#retention_effective_at}, and
+        # {#retention_policy_locked?}.
+        #
+        # @return [Integer, nil] The retention period defined in seconds, if a
+        #   retention policy exists for the bucket.
+        #
+        def retention_period
+          @gapi.retention_policy && @gapi.retention_policy.retention_period
+        end
+
+        ##
+        # The period of time (in seconds) that files in the bucket must be
+        # retained, and cannot be deleted, overwritten, or archived. Passing a
+        # valid Integer value will add a new retention policy to the bucket
+        # if none exists. Passing `nil` will remove the retention policy from
+        # the bucket if it exists, unless the policy is locked.
+        #
+        # Locked policies can be extended in duration by using this method
+        # to set a higher value. Such an extension is permanent, and it cannot
+        # later be reduced.  The extended duration will apply retroactively to
+        # all files currently in the bucket.
+        #
+        # See also: {#lock_retention_policy!}, {#retention_period},
+        # {#retention_effective_at}, and {#retention_policy_locked?}.
+        #
+        # @param [Integer, nil] new_retention_period The retention period
+        #   defined in seconds. The value must be between 0 and 100 years (in
+        #   seconds), or `nil`.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #
+        #   file = bucket.create_file "path/to/local.file.ext"
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
+        def retention_period= new_retention_period
+          if new_retention_period.nil?
+            @gapi.retention_policy = nil
+          else
+            @gapi.retention_policy ||= \
+              Google::Apis::StorageV1::Bucket::RetentionPolicy.new
+            @gapi.retention_policy.retention_period = new_retention_period
+          end
+
+          patch_gapi! :retention_policy
+        end
+
+        ##
+        # The time from which the retention policy was effective. Whenever a
+        # retention policy is created or extended, GCS updates the effective
+        # date of the policy. The effective date signals the date starting from
+        # which objects were guaranteed to be retained for the full duration of
+        # the policy.
+        #
+        # This field is updated when the retention policy is created or
+        # modified, including extension of a locked policy.
+        #
+        # @return [DateTime, nil] The effective date of the bucket's retention
+        #   policy, if a policy exists.
+        #
+        def retention_effective_at
+          @gapi.retention_policy && @gapi.retention_policy.effective_time
+        end
+
+        ##
+        # Whether the bucket's file retention policy is locked and its retention
+        # period cannot be reduced. See {#retention_period=} and
+        # {#lock_retention_policy!}.
+        #
+        # This value can only be set to `true` by calling
+        # {Bucket#lock_retention_policy!}.
+        #
+        # @return [Boolean] Returns `false` if there is no retention policy or
+        #   if the retention policy is unlocked and the retention period can be
+        #   reduced. Returns `true` if the retention policy is locked and the
+        #   retention period cannot be reduced.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #   bucket.lock_retention_policy!
+        #   bucket.retention_policy_locked? # true
+        #
+        #   file = bucket.create_file "path/to/local.file.ext"
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
+        def retention_policy_locked?
+          return false unless @gapi.retention_policy
+          !@gapi.retention_policy.is_locked.nil? &&
+            @gapi.retention_policy.is_locked
+        end
+
+        ##
+        # Whether the `event_based_hold` field for newly-created files in the
+        # bucket will be initially set to `true`. See
+        # {#default_event_based_hold=}, {File#event_based_hold?} and
+        # {File#set_event_based_hold!}.
+        #
+        # @return [Boolean] Returns `true` if the `event_based_hold` field for
+        #   newly-created files in the bucket will be initially set to `true`,
+        #   otherwise `false`.
+        #
+        def default_event_based_hold?
+          !@gapi.default_event_based_hold.nil? && @gapi.default_event_based_hold
+        end
+
+        ##
+        # Updates the default event-based hold field for the bucket. This field
+        # controls the initial state of the `event_based_hold` field for
+        # newly-created files in the bucket.
+        #
+        # See {File#event_based_hold?} and {File#set_event_based_hold!}.
+        #
+        # @param [Boolean] new_default_event_based_hold The default event-based
+        #   hold field for the bucket.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.update do |b|
+        #     b.retention_period = 2592000 # 30 days in seconds
+        #     b.default_event_based_hold = true
+        #   end
+        #
+        #   file = bucket.create_file "path/to/local.file.ext"
+        #   file.event_based_hold? # true
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #   file.release_event_based_hold!
+        #
+        #   # The end of the retention period is calculated from the time that
+        #   # the event-based hold was released.
+        #   file.retention_expires_at
+        #
+        def default_event_based_hold= new_default_event_based_hold
+          @gapi.default_event_based_hold = new_default_event_based_hold
+          patch_gapi! :default_event_based_hold
+        end
+
+        ##
+        # PERMANENTLY locks the retention policy (see {#retention_period=}) on
+        # the bucket if one exists. The policy is transitioned to a locked state
+        # in which its duration cannot be reduced.
+        #
+        # Locked policies can be extended in duration by setting
+        # {#retention_period=} to a higher value. Such an extension is
+        # permanent, and it cannot later be reduced.  The extended duration will
+        # apply retroactively to all files currently in the bucket.
+        #
+        # This method also [creates a
+        # lien](https://cloud.google.com/resource-manager/reference/rest/v1/liens/create)
+        # on the `resourcemanager.projects.delete` permission for the project
+        # containing the bucket.
+        #
+        # The bucket's metageneration value is required for the lock policy API
+        # call. Attempting to call this method on a bucket that was loaded with
+        # the `skip_lookup: true` option will result in an error.
+        #
+        # @return [Boolean] Returns `true` if the lock operation is successful.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #   bucket.lock_retention_policy!
+        #   bucket.retention_policy_locked? # true
+        #
+        #   file = bucket.create_file "path/to/local.file.ext"
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
+        #   # Locked policies can be extended in duration
+        #   bucket.retention_period = 7776000 # 90 days in seconds
+        #
+        def lock_retention_policy!
+          ensure_service!
+          @gapi = service.lock_bucket_retention_policy \
+            name, metageneration, user_project: user_project
+          true
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
@@ -909,7 +1121,8 @@ module Google
                         content_disposition: nil, content_encoding: nil,
                         content_language: nil, content_type: nil,
                         crc32c: nil, md5: nil, metadata: nil,
-                        storage_class: nil, encryption_key: nil, kms_key: nil
+                        storage_class: nil, encryption_key: nil, kms_key: nil,
+                        temporary_hold: nil, event_based_hold: nil
           ensure_service!
           options = { acl: File::Acl.predefined_rule_for(acl), md5: md5,
                       cache_control: cache_control, content_type: content_type,
@@ -918,6 +1131,8 @@ module Google
                       content_language: content_language, key: encryption_key,
                       kms_key: kms_key,
                       storage_class: storage_class_for(storage_class),
+                      temporary_hold: temporary_hold,
+                      event_based_hold: event_based_hold,
                       user_project: user_project }
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path

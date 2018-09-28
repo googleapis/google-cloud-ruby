@@ -34,6 +34,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
                          response_header: ["X-My-Custom-Header"] }] }
   let(:bucket_cors_gapi) { bucket_cors.map { |c| Google::Apis::StorageV1::Bucket::CorsConfiguration.new c } }
   let(:kms_key) { "path/to/encryption_key_name" }
+  let(:bucket_retention_period) { 86400 }
 
   it "gets and memoizes its service_account_email" do
     mock = Minitest::Mock.new
@@ -324,6 +325,56 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     bucket.must_be_kind_of Google::Cloud::Storage::Bucket
     bucket.name.must_equal bucket_name
+  end
+
+  it "creates a bucket with retention_period" do
+    mock = Minitest::Mock.new
+
+    created_bucket = create_bucket_gapi bucket_name
+    created_bucket.retention_policy = Google::Apis::StorageV1::Bucket::RetentionPolicy.new(
+      retention_period: bucket_retention_period
+    )
+
+    bucket_retention_effective_at = Time.now
+    resp_bucket = create_bucket_gapi bucket_name
+    resp_bucket.retention_policy = Google::Apis::StorageV1::Bucket::RetentionPolicy.new(
+        retention_period: bucket_retention_period,
+        effective_time: bucket_retention_effective_at
+    )
+    mock.expect :insert_bucket, resp_bucket, [project, created_bucket, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name do |b|
+      b.retention_period = bucket_retention_period
+    end
+
+    mock.verify
+
+    bucket.retention_period.must_equal bucket_retention_period
+    bucket.retention_effective_at.must_be_within_delta bucket_retention_effective_at
+    bucket.retention_policy_locked?.must_equal false
+    bucket.default_event_based_hold?.must_equal false
+  end
+
+  it "creates a bucket with default_event_based_hold" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name
+    created_bucket.default_event_based_hold = true
+    mock.expect :insert_bucket, created_bucket, [project, created_bucket, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name do |b|
+      b.default_event_based_hold = true
+    end
+
+    mock.verify
+
+    bucket.retention_period.must_be :nil?
+    bucket.retention_effective_at.must_be :nil?
+    bucket.retention_policy_locked?.must_equal false
+    bucket.default_event_based_hold?.must_equal true
   end
 
   it "raises when creating a bucket with a blank name" do

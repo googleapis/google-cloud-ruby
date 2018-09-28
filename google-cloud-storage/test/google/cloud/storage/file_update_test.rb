@@ -193,6 +193,34 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     mock.verify
   end
 
+  it "updates its temporary_hold" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new temporary_hold: false
+    mock.expect :patch_object, file_gapi,
+                [bucket_name, file.name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+
+    file.service.mocked_service = mock
+
+    file.temporary_hold?.must_equal true
+    file.release_temporary_hold!
+
+    mock.verify
+  end
+
+  it "updates its event_based_hold" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new event_based_hold: false
+    mock.expect :patch_object, file_gapi,
+                [bucket_name, file.name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+
+    file.service.mocked_service = mock
+
+    file.event_based_hold?.must_equal true
+    file.release_event_based_hold!
+
+    mock.verify
+  end
+
   it "updates multiple attributes in a block" do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new(
