@@ -1,5 +1,9 @@
 # Release History
 
+### 0.29.3 / 2018-09-28
+
+* Re-generate library using google-cloud-monitoring/synth.py (#2479)
+
 ### 0.29.2 / 2018-09-20
 
 * Update Monitoring generated files.
