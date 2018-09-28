@@ -1,5 +1,9 @@
 # Release History
 
+### 0.31.1 / 2018-09-28
+
+* Remove focus from acceptance tests (#2490)
+
 ### 0.31.0 / 2018-09-26
 
 * Add Object Localization.
