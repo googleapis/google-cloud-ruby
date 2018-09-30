@@ -20,9 +20,10 @@ class HelloWorld
     @instance_id = instance_id
     @keyfile = keyfile
 
-    # Init bigtable
+    # [START connecting_to_bigtable]
     gcloud = Google::Cloud.new(project_id, keyfile)
     @bigtable = gcloud.bigtable
+    # [END connecting_to_bigtable]
   end
 
   # # Create table
@@ -35,6 +36,8 @@ class HelloWorld
   def create_table table_id, column_family
     puts "Creating table '#{table_id}'"
 
+    # [START creating_a_table]
+    # Create a table with a single column family
     if bigtable.table(instance_id, table_id).exists?
       puts " '#{table_id}' is already exists."
     else
@@ -45,6 +48,7 @@ class HelloWorld
         )
       end
     end
+    # [END creating_a_table]
   end
 
   # Write and Read rows.
@@ -66,6 +70,7 @@ class HelloWorld
   # @param column_family [String] Column family name
   #
   def write_and_read table_id, column_family, column_qualifier
+    # [START writing_rows]
     table = bigtable.table(instance_id, table_id)
 
     puts "Write some greetings to the table '#{table_id}'"
@@ -86,11 +91,18 @@ class HelloWorld
 
       table.mutate_row(entry)
     end
+    # [END writing_rows]
 
+    # [START getting_a_row]
+    p table.read_row("greeting0")
+    # [END getting_a_row]
+
+    # [START scanning_all_rows]
     puts "Reading rows"
     table.read_rows.each do |row|
       p "  Row key: #{row.key}, Value: #{row.cells["cf"].first.value}"
     end
+    # [END scanning_all_rows]
   end
 
   # # Delete table
@@ -99,11 +111,14 @@ class HelloWorld
   # @param table_id [String] Table name
   #
   def delete_table table_id
+    # [START deleting_a_table]
     puts "Deleting the table '#{table_id}'"
 
     bigtable.delete_table(instance_id, table_id)
+    # [END deleting_a_table]
   end
 
+  # Connects to Cloud Bigtable, runs some basic operations and prints the results.
   def do_hello_world
     table_id = "Hello-Bigtable"
     column_family = "cf"
