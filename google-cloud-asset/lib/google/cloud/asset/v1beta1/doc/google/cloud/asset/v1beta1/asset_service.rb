@@ -20,9 +20,9 @@ module Google
         # Export asset request.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. The relative name of the root asset. Can only be an organization
-        #     number (such as "organizations/123"), or a project id (such as
-        #     "projects/my-project-id") or a project number (such as "projects/12345").
+        #     Required. The relative name of the root asset. This can only be an organization
+        #     number (such as "organizations/123"), a project ID (such as
+        #     "projects/my-project-id"), or a project number (such as "projects/12345").
         # @!attribute [rw] read_time
         #   @return [Google::Protobuf::Timestamp]
         #     Timestamp to take an asset snapshot. This can only be set to a timestamp in
@@ -32,7 +32,7 @@ module Google
         #     results.
         # @!attribute [rw] asset_types
         #   @return [Array<String>]
-        #     A list of asset types of which to take a snapshot for. Example:
+        #     A list of asset types of which to take a snapshot for. For example:
         #     "google.compute.disk". If specified, only matching assets will be returned.
         # @!attribute [rw] content_type
         #   @return [Google::Cloud::Asset::V1beta1::ContentType]
@@ -60,14 +60,14 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The relative name of the root asset. It can only be an
-        #     organization number (such as "organizations/123"), or a project id (such as
-        #     "projects/my-project-id")"or a project number (such as "projects/12345").
+        #     organization number (such as "organizations/123"), a project ID (such as
+        #     "projects/my-project-id")", or a project number (such as "projects/12345").
         # @!attribute [rw] asset_names
         #   @return [Array<String>]
-        #     A list of the full names of the assets. See:
-        #     https://cloud.google.com/apis/design/resource_names#full_resource_name
-        #     Example:
-        #     "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1".
+        #     A list of the full names of the assets. For example:
+        #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
+        #     See [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+        #     for more info.
         #
         #     The request becomes a no-op if the asset name list is empty, and the max
         #     size of the asset name list is 100 in one request.
@@ -90,16 +90,15 @@ module Google
         # Output configuration for export assets destination.
         # @!attribute [rw] gcs_destination
         #   @return [Google::Cloud::Asset::V1beta1::GcsDestination]
-        #     Destination on Google Cloud Storage (GCS).
+        #     Destination on Cloud Storage.
         class OutputConfig; end
 
-        # A Google Cloud Storage (GCS) location.
+        # A Cloud Storage location.
         # @!attribute [rw] uri
         #   @return [String]
-        #     The path of the GCS objects. It's the same path that is used by gsutil, for
-        #     example: "gs://bucket_name/object_path". See:
-        #     https://cloud.google.com/storage/docs/viewing-editing-metadata for more
-        #     information.
+        #     The path of the Cloud Storage objects. It's the same path that is used by
+        #      gsutil. For example: "gs://bucket_name/object_path". See [Viewing and Editing Object Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
+        #     for more information.
         class GcsDestination; end
 
         # Asset content type.

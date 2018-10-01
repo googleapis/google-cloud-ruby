@@ -40,14 +40,13 @@ module Google
         #     Current timestamp if not specified.
         class TimeWindow; end
 
-        # Cloud asset. This include all Google Cloud Platform resources, as well as
-        # IAM policies and other non-GCP assets.
+        # Cloud asset. This includes all Google Cloud Platform resources,
+        # Cloud IAM policies, and other non-GCP assets.
         # @!attribute [rw] name
         #   @return [String]
-        #     The full name of the asset. See:
-        #     https://cloud.google.com/apis/design/resource_names#full_resource_name
-        #     Example:
-        #     "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1".
+        #     The full name of the asset. For example: `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
+        #     See [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+        #     for more information.
         # @!attribute [rw] asset_type
         #   @return [String]
         #     Type of the asset. Example: "google.compute.disk".
@@ -56,8 +55,8 @@ module Google
         #     Representation of the resource.
         # @!attribute [rw] iam_policy
         #   @return [Google::Iam::V1::Policy]
-        #     Representation of the actual IAM policy set on a cloud resource. For each
-        #     resource, there must be at most one IAM policy set on it.
+        #     Representation of the actual Cloud IAM policy set on a cloud resource. For each
+        #     resource, there must be at most one Cloud IAM policy set on it.
         class Asset; end
 
         # Representation of a cloud resource.
@@ -67,8 +66,8 @@ module Google
         # @!attribute [rw] discovery_document_uri
         #   @return [String]
         #     The URL of the discovery document containing the resource's JSON schema.
-        #     Example:
-        #     "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest".
+        #     For example:
+        #     `"https://www.googleapis.com/discovery/v1/apis/compute/v1/rest"`.
         #     It will be left unspecified for resources without a discovery-based API,
         #     such as Cloud Bigtable.
         # @!attribute [rw] discovery_name
@@ -85,12 +84,13 @@ module Google
         #     It will be left unspecified for resources without a REST API.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The full name of the immediate parent of this resource. See:
-        #     https://cloud.google.com/apis/design/resource_names#full_resource_name
+        #     The full name of the immediate parent of this resource. See
+        #     [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+        #     for more information.
         #
-        #     For GCP assets, it is the parent resource defined in the IAM policy
-        #     hierarchy: https://cloud.google.com/iam/docs/overview#policy_hierarchy.
-        #     Example: "//cloudresourcemanager.googleapis.com/projects/my_project_123".
+        #     For GCP assets, it is the parent resource defined in the [Cloud IAM policy
+        #     hierarchy](https://cloud.google.com/iam/docs/overview#policy_hierarchy).
+        #     For example: `"//cloudresourcemanager.googleapis.com/projects/my_project_123"`.
         #
         #     For third-party assets, it is up to the users to define.
         # @!attribute [rw] data
