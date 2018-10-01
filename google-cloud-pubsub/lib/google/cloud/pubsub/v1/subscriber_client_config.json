@@ -7,7 +7,6 @@
           "UNAVAILABLE"
         ],
         "pull": [
-          "CANCELLED",
           "DEADLINE_EXCEEDED",
           "INTERNAL",
           "RESOURCE_EXHAUSTED",
