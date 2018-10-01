@@ -1,5 +1,10 @@
 # Release History
 
+### 0.33.1 / 2018-10-01
+
+* Re-generate library using google-cloud-pubsub/synth.py (#2497)
+* Re-generate library using google-cloud-pubsub/synth.py (#2480)
+
 ### 0.33.0 / 2018-09-20
 
 * Add support for user labels to Snapshot, Subscription and Topic.
