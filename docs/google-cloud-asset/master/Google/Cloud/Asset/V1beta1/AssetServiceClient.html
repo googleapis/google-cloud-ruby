@@ -240,7 +240,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Batch gets assets update history that overlaps a time window.</p>
+    <span class="summary_desc"><div class='inline'><p>Batch gets the update history of assets that overlap a time window.</p>
 </div></span>
   
 </li>
@@ -263,7 +263,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Exports assets with time and resource types to a given Google Cloud Storage location.</p>
+    <span class="summary_desc"><div class='inline'><p>Exports assets with time and resource types to a given Cloud Storage location.</p>
 </div></span>
   
 </li>
@@ -727,11 +727,11 @@ custom error handling.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Batch gets assets update history that overlaps a time window.
+    <p>Batch gets the update history of assets that overlap a time window.
 For RESOURCE content, this API outputs history with asset in both
 non-delete or deleted status.
-For IAM_POLICY content, this API only outputs history when asset and its
-attached IAM POLICY both exist. So there may be gaps in the output history.</p>
+For IAM_POLICY content, this API outputs history when the asset and its
+attached IAM POLICY both exist. This can create gaps in the output history.</p>
 
 
   </div>
@@ -769,8 +769,8 @@ attached IAM POLICY both exist. So there may be gaps in the output history.</p>
       
         &mdash;
         <div class='inline'><p>Required. The relative name of the root asset. It can only be an
-organization number (such as &quot;organizations/123&quot;), or a project id (such as
-&quot;projects/my-project-id&quot;)&quot;or a project number (such as &quot;projects/12345&quot;).</p>
+organization number (such as &quot;organizations/123&quot;), a project ID (such as
+&quot;projects/my-project-id&quot;)&quot;, or a project number (such as &quot;projects/12345&quot;).</p>
 </div>
       
     </li>
@@ -819,10 +819,10 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>A list of the full names of the assets. See:
-<a href="https://cloud.google.com/apis/design/resource_names#full_resource_name">https://cloud.google.com/apis/design/resource_names#full_resource_name</a>
-Example:
-&quot;//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1&quot;.</p>
+        <div class='inline'><p>A list of the full names of the assets. For example:
+<code>//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1</code>.
+See <a href="https://cloud.google.com/apis/design/resource_names#full_resource_name">Resource Names</a>
+for more info.</p>
 
 <p>The request becomes a no-op if the asset name list is empty, and the max
 size of the asset name list is 100 in one request.</p>
@@ -980,9 +980,9 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Exports assets with time and resource types to a given Google Cloud Storage
+    <p>Exports assets with time and resource types to a given Cloud Storage
 location. The output format is newline-delimited JSON.
-This API implements the <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> API allowing users
+This API implements the <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> API allowing you
 to keep track of the export.</p>
 
 
@@ -1043,9 +1043,9 @@ to keep track of the export.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The relative name of the root asset. Can only be an organization
-number (such as &quot;organizations/123&quot;), or a project id (such as
-&quot;projects/my-project-id&quot;) or a project number (such as &quot;projects/12345&quot;).</p>
+        <div class='inline'><p>Required. The relative name of the root asset. This can only be an organization
+number (such as &quot;organizations/123&quot;), a project ID (such as
+&quot;projects/my-project-id&quot;), or a project number (such as &quot;projects/12345&quot;).</p>
 </div>
       
     </li>
@@ -1099,7 +1099,7 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>A list of asset types of which to take a snapshot for. Example:
+        <div class='inline'><p>A list of asset types of which to take a snapshot for. For example:
 &quot;google.compute.disk&quot;. If specified, only matching assets will be returned.</p>
 </div>
       
