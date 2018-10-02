@@ -240,6 +240,29 @@ retried when possible. See <span class='object_link'><a href="Client.html#transa
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#execute_update-instance_method" title="#execute_update (instance method)">#<strong>execute_update</strong>(sql, params: nil, types: nil)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Executes a DML statement.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#fields-instance_method" title="#fields (instance method)">#<strong>fields</strong>(types)  &#x21d2; Fields </a>
     
 
@@ -481,13 +504,15 @@ retried when possible. See <span class='object_link'><a href="Client.html#transa
 
 80
 81
-82</pre>
+82
+83</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='ivar'>@commit</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Commit.html" title="Google::Cloud::Spanner::Commit (class)">Commit</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+  <span class='ivar'>@seqno</span> <span class='op'>=</span> <span class='int'>0</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -565,12 +590,12 @@ have set the option &quot;(allow_commit_timestamp=true)&quot; in the schema.</p>
       <pre class="lines">
 
 
-668
-669
-670</pre>
+768
+769
+770</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 668</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 768</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_commit_timestamp'>commit_timestamp</span>
   <span class='const'><span class='object_link'><a href="ColumnValue.html" title="Google::Cloud::Spanner::ColumnValue (class)">ColumnValue</a></span></span><span class='period'>.</span><span class='id identifier rubyid_commit_timestamp'><span class='object_link'><a href="ColumnValue.html#commit_timestamp-class_method" title="Google::Cloud::Spanner::ColumnValue.commit_timestamp (method)">commit_timestamp</a></span></span>
@@ -661,13 +686,13 @@ elements as there are columns in the primary key.</p>
       <pre class="lines">
 
 
-504
-505
-506
-507</pre>
+604
+605
+606
+607</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 504</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 604</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
@@ -979,25 +1004,279 @@ execution.</p>
       <pre class="lines">
 
 
-245
 246
 247
 248
 249
 250
 251
-252</pre>
+252
+253
+254
+255</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 245</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 246</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute'>execute</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
 
+  <span class='ivar'>@seqno</span> <span class='op'>+=</span> <span class='int'>1</span>
+
   <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_types'>types</span> <span class='op'>=</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_to_input_params_and_types'>to_input_params_and_types</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_types'>types</span>
 
   <span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='id identifier rubyid_types'>types</span><span class='comma'>,</span>
-                       <span class='label'>transaction:</span> <span class='id identifier rubyid_tx_selector'>tx_selector</span>
+                       <span class='label'>transaction:</span> <span class='id identifier rubyid_tx_selector'>tx_selector</span><span class='comma'>,</span> <span class='label'>seqno:</span> <span class='ivar'>@seqno</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="execute_update-instance_method">
+  
+    #<strong>execute_update</strong>(sql, params: nil, types: nil)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Executes a DML statement.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+<span class='id identifier rubyid_db'>db</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_db'>db</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_row_count'>row_count</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_execute_update'>execute_update</span><span class='lparen'>(</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>UPDATE users SET name = &#39;Charlie&#39; WHERE id = 1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Update using SQL parameters:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+<span class='id identifier rubyid_db'>db</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_db'>db</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_row_count'>row_count</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_execute_update'>execute_update</span><span class='lparen'>(</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>UPDATE users SET name = @name WHERE id = @id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>params:</span> <span class='lbrace'>{</span> <span class='label'>id:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Charlie</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>sql</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The DML statement string. See <a href="https://cloud.google.com/spanner/docs/query-syntax">Query
+syntax</a>.</p>
+
+<p>The DML statement string can contain parameter placeholders. A
+parameter placeholder consists of &quot;@&quot; followed by the parameter
+name. Parameter names consist of any combination of letters,
+numbers, and underscores.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parameters for the DML statement string. The
+parameter placeholders, minus the &quot;@&quot;, are the the hash keys, and
+the literal values are the hash values. If the query string contains
+something like &quot;WHERE id &gt; @msg_id&quot;, then the params must contain
+something like <code>:msg_id =&gt; 1</code>.</p>
+
+<p>Ruby types are mapped to Spanner types as follows:</p>
+
+<table><thead>
+<tr>
+<th>Spanner</th>
+<th>Ruby</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>BOOL</code></td>
+<td><code>true</code>/<code>false</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>INT64</code></td>
+<td><code>Integer</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>FLOAT64</code></td>
+<td><code>Float</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>STRING</code></td>
+<td><code>String</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>DATE</code></td>
+<td><code>Date</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>TIMESTAMP</code></td>
+<td><code>Time</code>, <code>DateTime</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>BYTES</code></td>
+<td><code>File</code>, <code>IO</code>, <code>StringIO</code>, or similar</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ARRAY</code></td>
+<td><code>Array</code></td>
+<td>Nested arrays are not supported.</td>
+</tr>
+<tr>
+<td><code>STRUCT</code></td>
+<td><code>Hash</code>, <span class='object_link'><a href="Data.html" title="Google::Cloud::Spanner::Data (class)">Data</a></span></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>See <a href="https://cloud.google.com/spanner/docs/data-definition-language#data_types">Data
+types</a>.</p>
+
+<p>See <a href="https://cloud.google.com/spanner/docs/data-types#constructing-a-struct">Data Types - Constructing a
+STRUCT</a>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>types</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Types of the SQL parameters in <code>params</code>. It is not
+always possible for Cloud Spanner to infer the right SQL type from a
+value in <code>params</code>. In these cases, the <code>types</code> hash can be used to
+specify the exact SQL type for some or all of the SQL query
+parameters.</p>
+
+<p>The keys of the hash should be query string parameter placeholders,
+minus the &quot;@&quot;. The values of the hash should be Cloud Spanner type
+codes from the following list:</p>
+
+<ul>
+<li><code>:BOOL</code></li>
+<li><code>:BYTES</code></li>
+<li><code>:DATE</code></li>
+<li><code>:FLOAT64</code></li>
+<li><code>:INT64</code></li>
+<li><code>:STRING</code></li>
+<li><code>:TIMESTAMP</code></li>
+<li><code>Array</code> - Lists are specified by providing the type code in an
+array. For example, an array of integers are specified as
+<code>[:INT64]</code>.</li>
+<li><span class='object_link'><a href="Fields.html" title="Google::Cloud::Spanner::Fields (class)">Fields</a></span> - Nested Structs are specified by providing a Fields
+object.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The exact number of rows that were modified.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 343</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_execute_update'>execute_update</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_execute'>execute</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='id identifier rubyid_types'>types</span>
+  <span class='comment'># Stream all PartialResultSet to get ResultSetStats
+</span>  <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
+  <span class='comment'># Raise an error if there is not a row count returned
+</span>  <span class='kw'>if</span> <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_row_count'>row_count</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>InvalidArgumentError</span><span class='comma'>,</span>
+          <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DML statement is invalid.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_row_count'>row_count</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1145,12 +1424,12 @@ object.</li>
       <pre class="lines">
 
 
-607
-608
-609</pre>
+707
+708
+709</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 607</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 707</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fields'>fields</span> <span class='id identifier rubyid_types'>types</span>
   <span class='const'><span class='object_link'><a href="Fields.html" title="Google::Cloud::Spanner::Fields (class)">Fields</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_types'>types</span>
@@ -1296,13 +1575,13 @@ types</a>.</p>
       <pre class="lines">
 
 
-386
-387
-388
-389</pre>
+486
+487
+488
+489</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 386</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 486</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert'>insert</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_rows'>rows</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
@@ -1443,14 +1722,14 @@ ending value. Default is <code>false</code>.</p>
       <pre class="lines">
 
 
-640
-641
-642
-643
-644</pre>
+740
+741
+742
+743
+744</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 640</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 740</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_range'>range</span> <span class='id identifier rubyid_beginning'>beginning</span><span class='comma'>,</span> <span class='id identifier rubyid_ending'>ending</span><span class='comma'>,</span> <span class='label'>exclude_begin:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>exclude_end:</span> <span class='kw'>false</span>
   <span class='const'><span class='object_link'><a href="Range.html" title="Google::Cloud::Spanner::Range (class)">Range</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span> <span class='id identifier rubyid_beginning'>beginning</span><span class='comma'>,</span> <span class='id identifier rubyid_ending'>ending</span><span class='comma'>,</span>
@@ -1611,18 +1890,18 @@ operation.</p>
       <pre class="lines">
 
 
-289
-290
-291
-292
-293
-294
-295
-296
-297</pre>
+389
+390
+391
+392
+393
+394
+395
+396
+397</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 289</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 389</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span> <span class='label'>keys:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>index:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
@@ -1776,13 +2055,13 @@ types</a>.</p>
       <pre class="lines">
 
 
-478
-479
-480
-481</pre>
+578
+579
+580
+581</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 478</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 578</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_rows'>rows</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
@@ -1835,13 +2114,13 @@ types</a>.</p>
       <pre class="lines">
 
 
-87
 88
 89
-90</pre>
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_transaction_id'>transaction_id</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1988,13 +2267,13 @@ types</a>.</p>
       <pre class="lines">
 
 
-431
-432
-433
-434</pre>
+531
+532
+533
+534</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 431</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 531</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_rows'>rows</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
@@ -2146,13 +2425,13 @@ types</a>.</p>
       <pre class="lines">
 
 
-340
-341
-342
-343</pre>
+440
+441
+442
+443</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 340</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/transaction.rb', line 440</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upsert'>upsert</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_rows'>rows</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
