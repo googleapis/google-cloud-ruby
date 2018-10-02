@@ -79,6 +79,7 @@ module Google
 
         def initialize
           @commit = Commit.new
+          @seqno = 0
         end
 
         ##
@@ -245,12 +246,111 @@ module Google
         def execute sql, params: nil, types: nil
           ensure_session!
 
+          @seqno += 1
+
           params, types = Convert.to_input_params_and_types params, types
 
           session.execute sql, params: params, types: types,
-                               transaction: tx_selector
+                               transaction: tx_selector, seqno: @seqno
         end
         alias query execute
+
+        ##
+        # Executes a DML statement.
+        #
+        # @param [String] sql The DML statement string. See [Query
+        #   syntax](https://cloud.google.com/spanner/docs/query-syntax).
+        #
+        #   The DML statement string can contain parameter placeholders. A
+        #   parameter placeholder consists of "@" followed by the parameter
+        #   name. Parameter names consist of any combination of letters,
+        #   numbers, and underscores.
+        # @param [Hash] params Parameters for the DML statement string. The
+        #   parameter placeholders, minus the "@", are the the hash keys, and
+        #   the literal values are the hash values. If the query string contains
+        #   something like "WHERE id > @msg_id", then the params must contain
+        #   something like `:msg_id => 1`.
+        #
+        #   Ruby types are mapped to Spanner types as follows:
+        #
+        #   | Spanner     | Ruby           | Notes  |
+        #   |-------------|----------------|---|
+        #   | `BOOL`      | `true`/`false` | |
+        #   | `INT64`     | `Integer`      | |
+        #   | `FLOAT64`   | `Float`        | |
+        #   | `STRING`    | `String`       | |
+        #   | `DATE`      | `Date`         | |
+        #   | `TIMESTAMP` | `Time`, `DateTime` | |
+        #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #   | `STRUCT`    | `Hash`, {Data} | |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
+        #   See [Data Types - Constructing a
+        #   STRUCT](https://cloud.google.com/spanner/docs/data-types#constructing-a-struct).
+        # @param [Hash] types Types of the SQL parameters in `params`. It is not
+        #   always possible for Cloud Spanner to infer the right SQL type from a
+        #   value in `params`. In these cases, the `types` hash can be used to
+        #   specify the exact SQL type for some or all of the SQL query
+        #   parameters.
+        #
+        #   The keys of the hash should be query string parameter placeholders,
+        #   minus the "@". The values of the hash should be Cloud Spanner type
+        #   codes from the following list:
+        #
+        #   * `:BOOL`
+        #   * `:BYTES`
+        #   * `:DATE`
+        #   * `:FLOAT64`
+        #   * `:INT64`
+        #   * `:STRING`
+        #   * `:TIMESTAMP`
+        #   * `Array` - Lists are specified by providing the type code in an
+        #     array. For example, an array of integers are specified as
+        #     `[:INT64]`.
+        #   * {Fields} - Nested Structs are specified by providing a Fields
+        #     object.
+        #
+        # @return [Integer] The exact number of rows that were modified.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     row_count = tx.execute_update(
+        #       "UPDATE users SET name = 'Charlie' WHERE id = 1",
+        #     )
+        #   end
+        #
+        # @example Update using SQL parameters:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     row_count = tx.execute_update(
+        #       "UPDATE users SET name = @name WHERE id = @id",
+        #       params: { id: 1, name: "Charlie" }
+        #     )
+        #   end
+        #
+        def execute_update sql, params: nil, types: nil
+          results = execute sql, params: params, types: types
+          # Stream all PartialResultSet to get ResultSetStats
+          results.rows.to_a
+          # Raise an error if there is not a row count returned
+          if results.row_count.nil?
+            raise Google::Cloud::InvalidArgumentError,
+                  "DML statement is invalid."
+          end
+          results.row_count
+        end
 
         ##
         # Read rows from a database table, as a simple alternative to

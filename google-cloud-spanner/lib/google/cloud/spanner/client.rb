@@ -315,6 +315,185 @@ module Google
         alias query execute
 
         ##
+        # Executes a Partitioned DML SQL statement.
+        #
+        # Partitioned DML is an alternate implementation with looser semantics
+        # to enable large-scale changes without running into transaction size
+        # limits or (accidentally) locking the entire table in one large
+        # transaction. At a high level, it partitions the keyspace and executes
+        # the statement on each partition in separate internal transactions.
+        #
+        # Partitioned DML does not guarantee database-wide atomicity of the
+        # statement - it guarantees row-based atomicity, which includes updates
+        # to any indices. Additionally, it does not guarantee that it will
+        # execute exactly one time against each row - it guarantees "at least
+        # once" semantics.
+        #
+        # Where DML statements must be executed using Transaction (see
+        # {Transaction#execute_update}), Paritioned DML statements are executed
+        # outside of a read/write transaction.
+        #
+        # Not all DML statements can be executed in the Partitioned DML mode and
+        # the backend will return an error for the statements which are not
+        # supported.
+        #
+        # DML statements must be fully-partitionable. Specifically, the
+        # statement must be expressible as the union of many statements which
+        # each access only a single row of the table.
+        # {Google::Cloud::InvalidArgumentError} is raised if the statement does
+        # not qualify.
+        #
+        # The method will block until the update is complete. Running a DML
+        # statement with this method does not offer exactly once semantics, and
+        # therefore the DML statement should be idempotent. The DML statement
+        # must be fully-partitionable. Specifically, the statement must be
+        # expressible as the union of many statements which each access only a
+        # single row of the table. This is a Partitioned DML transaction in
+        # which a single Partitioned DML statement is executed. Partitioned DML
+        # partitions the and runs the DML statement over each partition in
+        # parallel using separate, internal transactions that commit
+        # independently. Partitioned DML transactions do not need to be
+        # committed.
+        #
+        # Partitioned DML updates are used to execute a single DML statement
+        # with a different execution strategy that provides different, and often
+        # better, scalability properties for large, table-wide operations than
+        # DML in a {Transaction#execute_update} transaction. Smaller scoped
+        # statements, such as an OLTP workload, should prefer using
+        # {Transaction#execute_update}.
+        #
+        # That said, Partitioned DML is not a drop-in replacement for standard
+        # DML used in {Transaction#execute_update}.
+        #
+        # * The DML statement must be fully-partitionable. Specifically, the
+        #   statement must be expressible as the union of many statements which
+        #   each access only a single row of the table.
+        # * The statement is not applied atomically to all rows of the table.
+        #   Rather, the statement is applied atomically to partitions of the
+        #   table, in independent internal transactions. Secondary index rows
+        #   are updated atomically with the base table rows.
+        # * Partitioned DML does not guarantee exactly-once execution semantics
+        #   against a partition. The statement will be applied at least once to
+        #   each partition. It is strongly recommended that the DML statement
+        #   should be idempotent to avoid unexpected results. For instance, it
+        #   is potentially dangerous to run a statement such as `UPDATE table
+        #   SET column = column + 1` as it could be run multiple times against
+        #   some rows.
+        # * The partitions are committed automatically - there is no support for
+        #   Commit or Rollback. If the call returns an error, or if the client
+        #   issuing the DML statement dies, it is possible that some rows had
+        #   the statement executed on them successfully. It is also possible
+        #   that statement was never executed against other rows.
+        # * If any error is encountered during the execution of the partitioned
+        #   DML operation (for instance, a UNIQUE INDEX violation, division by
+        #   zero, or a value that cannot be stored due to schema constraints),
+        #   then the operation is stopped at that point and an error is
+        #   returned. It is possible that at this point, some partitions have
+        #   been committed (or even committed multiple times), and other
+        #   partitions have not been run at all.
+        #
+        # Given the above, Partitioned DML is good fit for large, database-wide,
+        # operations that are idempotent, such as deleting old rows from a very
+        # large table.
+        #
+        # @param [String] sql The Partitioned DML statement string. See [Query
+        #   syntax](https://cloud.google.com/spanner/docs/query-syntax).
+        #
+        #   The Partitioned DML statement string can contain parameter
+        #   placeholders. A parameter placeholder consists of "@" followed by
+        #   the parameter name. Parameter names consist of any combination of
+        #   letters, numbers, and underscores.
+        # @param [Hash] params Parameters for the Partitioned DML statement
+        #   string. The parameter placeholders, minus the "@", are the the hash
+        #   keys, and the literal values are the hash values. If the query
+        #   string contains something like "WHERE id > @msg_id", then the params
+        #   must contain something like `:msg_id => 1`.
+        #
+        #   Ruby types are mapped to Spanner types as follows:
+        #
+        #   | Spanner     | Ruby           | Notes  |
+        #   |-------------|----------------|---|
+        #   | `BOOL`      | `true`/`false` | |
+        #   | `INT64`     | `Integer`      | |
+        #   | `FLOAT64`   | `Float`        | |
+        #   | `STRING`    | `String`       | |
+        #   | `DATE`      | `Date`         | |
+        #   | `TIMESTAMP` | `Time`, `DateTime` | |
+        #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #   | `STRUCT`    | `Hash`, {Data} | |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
+        #   See [Data Types - Constructing a
+        #   STRUCT](https://cloud.google.com/spanner/docs/data-types#constructing-a-struct).
+        # @param [Hash] types Types of the SQL parameters in `params`. It is not
+        #   always possible for Cloud Spanner to infer the right SQL type from a
+        #   value in `params`. In these cases, the `types` hash can be used to
+        #   specify the exact SQL type for some or all of the SQL query
+        #   parameters.
+        #
+        #   The keys of the hash should be query string parameter placeholders,
+        #   minus the "@". The values of the hash should be Cloud Spanner type
+        #   codes from the following list:
+        #
+        #   * `:BOOL`
+        #   * `:BYTES`
+        #   * `:DATE`
+        #   * `:FLOAT64`
+        #   * `:INT64`
+        #   * `:STRING`
+        #   * `:TIMESTAMP`
+        #   * `Array` - Lists are specified by providing the type code in an
+        #     array. For example, an array of integers are specified as
+        #     `[:INT64]`.
+        #   * {Fields} - Nested Structs are specified by providing a Fields
+        #     object.
+        # @return [Integer] The lower bound number of rows that were modified.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   row_count = db.execute_partition_update \
+        #    "UPDATE users SET friends = NULL WHERE active = false"
+        #
+        # @example Query using query parameters:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   row_count = db.execute_partition_update \
+        #    "UPDATE users SET friends = NULL WHERE active = @active",
+        #    params: { active: false }
+        #
+        def execute_partition_update sql, params: nil, types: nil
+          ensure_service!
+
+          params, types = Convert.to_input_params_and_types params, types
+
+          results = nil
+          @pool.with_session do |session|
+            results = session.execute \
+              sql, params: params, types: types,
+                   transaction: pdml_transaction(session)
+          end
+          # Stream all PartialResultSet to get ResultSetStats
+          results.rows.to_a
+          # Raise an error if there is not a row count returned
+          if results.row_count.nil?
+            raise Google::Cloud::InvalidArgumentError,
+                  "Partitioned DML statement is invalid."
+          end
+          results.row_count
+        end
+        alias execute_pdml execute_partition_update
+
+        ##
         # Read rows from a database table, as a simple alternative to
         # {#execute}.
         #
@@ -1157,6 +1336,11 @@ module Google
                 max_staleness: bounded_staleness,
                 return_read_timestamp: true
               }.delete_if { |_, v| v.nil? })))
+        end
+
+        def pdml_transaction session
+          pdml_tx_grpc = @project.service.create_pdml session.path
+          Google::Spanner::V1::TransactionSelector.new id: pdml_tx_grpc.id
         end
 
         ##

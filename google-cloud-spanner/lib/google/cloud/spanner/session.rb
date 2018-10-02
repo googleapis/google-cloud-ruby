@@ -151,6 +151,8 @@ module Google
         # @param [Google::Spanner::V1::TransactionSelector] transaction The
         #   transaction selector value to send. Only used for single-use
         #   transactions.
+        # @param [Integer] seqno A per-transaction sequence number used to
+        #   identify this request.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -243,13 +245,14 @@ module Google
         #   end
         #
         def execute sql, params: nil, types: nil, transaction: nil,
-                    partition_token: nil
+                    partition_token: nil, seqno: nil
           ensure_service!
 
           results = Results.execute service, path, sql,
                                     params: params, types: types,
                                     transaction: transaction,
-                                    partition_token: partition_token
+                                    partition_token: partition_token,
+                                    seqno: seqno
           @last_updated_at = Time.now
           results
         end

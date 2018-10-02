@@ -259,14 +259,17 @@ module Google
 
         def streaming_execute_sql session_name, sql, transaction: nil,
                                   params: nil, types: nil, resume_token: nil,
-                                  partition_token: nil
+                                  partition_token: nil, seqno: nil
           opts = default_options_from_session session_name
           execute do
             service.execute_streaming_sql \
-              session_name, sql, transaction: transaction, params: params,
+              session_name, sql, transaction: transaction,
+                                 params: params,
                                  param_types: types,
                                  resume_token: resume_token,
-                                 partition_token: partition_token, options: opts
+                                 partition_token: partition_token,
+                                 seqno: seqno,
+                                 options: opts
           end
         end
 
@@ -360,6 +363,17 @@ module Google
                 return_read_timestamp: true
               }.delete_if { |_, v| v.nil? }
             )
+          )
+          opts = default_options_from_session session_name
+          execute do
+            service.begin_transaction session_name, tx_opts, options: opts
+          end
+        end
+
+        def create_pdml session_name
+          tx_opts = Google::Spanner::V1::TransactionOptions.new(
+            partitioned_dml: \
+              Google::Spanner::V1::TransactionOptions::PartitionedDml.new
           )
           opts = default_options_from_session session_name
           execute do

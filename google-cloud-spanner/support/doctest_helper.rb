@@ -417,6 +417,30 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Spanner::Client#execute_partition_update" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      20.times do
+        mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      end
+      6.times do
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      end
+      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Client#execute_pdml" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      20.times do
+        mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      end
+      5.times do
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      end
+      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Spanner::Client#transaction" do
     mock_spanner do |mock, mock_instances, mock_databases|
       20.times do
@@ -718,6 +742,19 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Spanner::Transaction#execute_update" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      20.times do
+        mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      end
+      5.times do
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      end
+      mock.expect :execute_streaming_sql, results_enum, ["session-name", String, Hash]
+      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Spanner::Transaction#range" do
     mock_spanner do |mock, mock_instances, mock_databases|
       20.times do
@@ -925,6 +962,9 @@ def results_hash1
                                          arrayElementType: { code: "INT64" } } }
         ]
       }
+    },
+    stats: {
+      row_count_exact: 1
     }
   }
 end
