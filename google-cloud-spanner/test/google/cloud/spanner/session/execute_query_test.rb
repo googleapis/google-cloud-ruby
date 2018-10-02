@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
+describe Google::Cloud::Spanner::Session, :execute_query, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -63,7 +63,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     session.service.mocked_service = mock
 
-    results = session.execute "SELECT * FROM users"
+    results = session.execute_query "SELECT * FROM users"
 
     mock.verify
 
@@ -76,7 +76,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ active: true })
-    results = session.execute "SELECT * FROM users WHERE active = @active", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE active = @active", params: params, types: types
 
     mock.verify
 
@@ -89,7 +89,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ age: 29 })
-    results = session.execute "SELECT * FROM users WHERE age = @age", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE age = @age", params: params, types: types
 
     mock.verify
 
@@ -102,7 +102,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ score: 0.9 })
-    results = session.execute "SELECT * FROM users WHERE score = @score", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE score = @score", params: params, types: types
 
     mock.verify
 
@@ -117,7 +117,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ updated_at: timestamp })
-    results = session.execute "SELECT * FROM users WHERE updated_at = @updated_at", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE updated_at = @updated_at", params: params, types: types
 
     mock.verify
 
@@ -132,7 +132,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ birthday: date })
-    results = session.execute "SELECT * FROM users WHERE birthday = @birthday", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE birthday = @birthday", params: params, types: types
 
     mock.verify
 
@@ -145,7 +145,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ name: "Charlie" })
-    results = session.execute "SELECT * FROM users WHERE name = @name", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE name = @name", params: params, types: types
 
     mock.verify
 
@@ -160,7 +160,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ avatar: file })
-    results = session.execute "SELECT * FROM users WHERE avatar = @avatar", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE avatar = @avatar", params: params, types: types
 
     mock.verify
 
@@ -173,7 +173,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ list: [1,2,3] })
-    results = session.execute "SELECT * FROM users WHERE project_ids = @list", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE project_ids = @list", params: params, types: types
 
     mock.verify
 
@@ -186,7 +186,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ list: [] }, { list: [:INT64] })
-    results = session.execute "SELECT * FROM users WHERE project_ids = @list", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE project_ids = @list", params: params, types: types
 
     mock.verify
 
@@ -199,7 +199,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ dict: { env: :production } })
-    results = session.execute "SELECT * FROM users WHERE settings = @dict", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE settings = @dict", params: params, types: types
 
     mock.verify
 
@@ -212,7 +212,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ dict: { env: "production", score: 0.9, project_ids: [1,2,3] } })
-    results = session.execute "SELECT * FROM users WHERE settings = @dict", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE settings = @dict", params: params, types: types
 
     mock.verify
 
@@ -225,7 +225,7 @@ describe Google::Cloud::Spanner::Session, :execute, :mock_spanner do
     session.service.mocked_service = mock
 
     params, types = params_types({ dict: { } })
-    results = session.execute "SELECT * FROM users WHERE settings = @dict", params: params, types: types
+    results = session.execute_query "SELECT * FROM users WHERE settings = @dict", params: params, types: types
 
     mock.verify
 

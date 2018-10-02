@@ -164,7 +164,7 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.execute "SELECT * FROM users"
+        #   results = db.execute_query "SELECT * FROM users"
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -177,8 +177,10 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.execute "SELECT * FROM users WHERE active = @active",
-        #                        params: { active: true }
+        #   results = db.execute_query(
+        #     "SELECT * FROM users WHERE active = @active",
+        #     params: { active: true }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -193,11 +195,13 @@ module Google
         #
         #   user_hash = { id: 1, name: "Charlie", active: false }
         #
-        #   results = db.execute "SELECT * FROM users WHERE " \
-        #                        "ID = @user_struct.id " \
-        #                        "AND name = @user_struct.name " \
-        #                        "AND active = @user_struct.active",
-        #                        params: { user_struct: user_hash }
+        #   results = db.execute_query(
+        #     "SELECT * FROM users WHERE " \
+        #     "ID = @user_struct.id " \
+        #     "AND name = @user_struct.name " \
+        #     "AND active = @user_struct.active",
+        #     params: { user_struct: user_hash }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -213,12 +217,14 @@ module Google
         #   user_type = db.fields id: :INT64, name: :STRING, active: :BOOL
         #   user_hash = { id: 1, name: nil, active: false }
         #
-        #   results = db.execute "SELECT * FROM users WHERE " \
-        #                        "ID = @user_struct.id " \
-        #                        "AND name = @user_struct.name " \
-        #                        "AND active = @user_struct.active",
-        #                        params: { user_struct: user_hash },
-        #                        types: { user_struct: user_type }
+        #   results = db.execute_query(
+        #     "SELECT * FROM users WHERE " \
+        #     "ID = @user_struct.id " \
+        #     "AND name = @user_struct.name " \
+        #     "AND active = @user_struct.active",
+        #     params: { user_struct: user_hash },
+        #     types: { user_struct: user_type }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -234,32 +240,35 @@ module Google
         #   user_type = db.fields id: :INT64, name: :STRING, active: :BOOL
         #   user_data = user_type.struct id: 1, name: nil, active: false
         #
-        #   results = db.execute "SELECT * FROM users WHERE " \
-        #                        "ID = @user_struct.id " \
-        #                        "AND name = @user_struct.name " \
-        #                        "AND active = @user_struct.active",
-        #                        params: { user_struct: user_struct }
+        #   results = db.execute_query(
+        #     "SELECT * FROM users WHERE " \
+        #     "ID = @user_struct.id " \
+        #     "AND name = @user_struct.name " \
+        #     "AND active = @user_struct.active",
+        #     params: { user_struct: user_struct }
+        #   )
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute sql, params: nil, types: nil, transaction: nil,
-                    partition_token: nil, seqno: nil
+        def execute_query sql, params: nil, types: nil, transaction: nil,
+                          partition_token: nil, seqno: nil
           ensure_service!
 
-          results = Results.execute service, path, sql,
-                                    params: params, types: types,
-                                    transaction: transaction,
-                                    partition_token: partition_token,
-                                    seqno: seqno
+          results = Results.execute_query service, path, sql,
+                                          params: params,
+                                          types: types,
+                                          transaction: transaction,
+                                          partition_token: partition_token,
+                                          seqno: seqno
           @last_updated_at = Time.now
           results
         end
 
         ##
         # Read rows from a database table, as a simple alternative to
-        # {#execute}.
+        # {#execute_query}.
         #
         # @param [String] table The name of the table in the database to be
         #   read.
@@ -615,7 +624,7 @@ module Google
         # Keeps the session alive by executing `"SELECT 1"`.
         def keepalive!
           ensure_service!
-          execute "SELECT 1"
+          execute_query "SELECT 1"
           return true
         rescue Google::Cloud::NotFoundError
           labels = @grpc.labels.to_h unless @grpc.labels.to_h.empty?

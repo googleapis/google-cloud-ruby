@@ -85,7 +85,7 @@ describe "Spanner Client", :large_data, :spanner do
   it "writes and queries bytes" do
     my_row = random_row
     db.upsert table_name, my_row
-    results = db.execute "SELECT id, string, byte, strings, bytes FROM #{table_name} WHERE id = @id", params: { id: my_row[:id] }
+    results = db.execute_sql "SELECT id, string, byte, strings, bytes FROM #{table_name} WHERE id = @id", params: { id: my_row[:id] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING], bytes: [:BYTES] })

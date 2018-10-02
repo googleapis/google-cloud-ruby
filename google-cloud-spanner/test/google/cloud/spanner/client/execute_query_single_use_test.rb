@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
+describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -61,7 +61,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
   let(:timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp time_obj }
   let(:duration) { Google::Cloud::Spanner::Convert.number_to_duration 120 }
 
-  it "executes with strong" do
+  it "execute_querys with strong" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
         read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
@@ -75,7 +75,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users", single_use: { strong: true }
+    results = client.execute_query "SELECT * FROM users", single_use: { strong: true }
 
     shutdown_client! client
 
@@ -84,7 +84,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     assert_results results
   end
 
-  it "executes with timestamp" do
+  it "execute_querys with timestamp" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
         read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
@@ -98,7 +98,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users", single_use: { timestamp: time_obj }
+    results = client.execute_query "SELECT * FROM users", single_use: { timestamp: time_obj }
 
     shutdown_client! client
 
@@ -107,7 +107,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     assert_results results
   end
 
-  it "executes with read_timestamp" do
+  it "execute_querys with read_timestamp" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
         read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
@@ -121,7 +121,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users", single_use: { read_timestamp: time_obj }
+    results = client.execute_query "SELECT * FROM users", single_use: { read_timestamp: time_obj }
 
     shutdown_client! client
 
@@ -130,7 +130,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     assert_results results
   end
 
-  it "executes with staleness" do
+  it "execute_querys with staleness" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
         read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
@@ -144,7 +144,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users", single_use: { staleness: 120 }
+    results = client.execute_query "SELECT * FROM users", single_use: { staleness: 120 }
 
     shutdown_client! client
 
@@ -153,7 +153,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     assert_results results
   end
 
-  it "executes with exact_staleness" do
+  it "execute_querys with exact_staleness" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
         read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
@@ -167,7 +167,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users", single_use: { exact_staleness: 120 }
+    results = client.execute_query "SELECT * FROM users", single_use: { exact_staleness: 120 }
 
     shutdown_client! client
 
@@ -176,7 +176,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     assert_results results
   end
 
-  it "executes with bounded_timestamp" do
+  it "execute_querys with bounded_timestamp" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
         read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
@@ -190,7 +190,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users", single_use: { bounded_timestamp: time_obj }
+    results = client.execute_query "SELECT * FROM users", single_use: { bounded_timestamp: time_obj }
 
     shutdown_client! client
 
@@ -199,7 +199,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     assert_results results
   end
 
-  it "executes with min_read_timestamp" do
+  it "execute_querys with min_read_timestamp" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
         read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
@@ -213,7 +213,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users", single_use: { min_read_timestamp: time_obj }
+    results = client.execute_query "SELECT * FROM users", single_use: { min_read_timestamp: time_obj }
 
     shutdown_client! client
 
@@ -222,7 +222,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     assert_results results
   end
 
-  it "executes with bounded_staleness" do
+  it "execute_querys with bounded_staleness" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
         read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
@@ -236,7 +236,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users", single_use: { bounded_staleness: 120 }
+    results = client.execute_query "SELECT * FROM users", single_use: { bounded_staleness: 120 }
 
     shutdown_client! client
 
@@ -245,7 +245,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     assert_results results
   end
 
-  it "executes with max_staleness" do
+  it "execute_querys with max_staleness" do
     transaction = Google::Spanner::V1::TransactionSelector.new(
       single_use: Google::Spanner::V1::TransactionOptions.new(
         read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
@@ -259,7 +259,7 @@ describe Google::Cloud::Spanner::Client, :execute, :single_use, :mock_spanner do
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
 
-    results = client.execute "SELECT * FROM users", single_use: { max_staleness: 120 }
+    results = client.execute_query "SELECT * FROM users", single_use: { max_staleness: 120 }
 
     shutdown_client! client
 

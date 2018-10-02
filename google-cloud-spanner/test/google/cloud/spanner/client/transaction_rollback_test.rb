@@ -77,7 +77,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     results = nil
     timestamp = client.transaction do |tx|
       tx.must_be_kind_of Google::Cloud::Spanner::Transaction
-      results = tx.execute "SELECT * FROM users"
+      results = tx.execute_query "SELECT * FROM users"
       # This mutation will never be committed, so no mocks for it.
       tx.update "users", [{ id: 1, name: "Charlie", active: false }]
       # Cause an error
@@ -106,7 +106,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
     assert_raises ZeroDivisionError do
       client.transaction do |tx|
         tx.must_be_kind_of Google::Cloud::Spanner::Transaction
-        results = tx.execute "SELECT * FROM users"
+        results = tx.execute_query "SELECT * FROM users"
         # This mutation will never be committed, so no mocks for it.
         tx.update "users", [{ id: 1, name: "Charlie", active: false }]
         # Cause an error

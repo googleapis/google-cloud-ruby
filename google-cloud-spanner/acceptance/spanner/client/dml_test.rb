@@ -30,7 +30,7 @@ describe "Spanner Client", :dml, :spanner do
   end
 
   it "executes multiple DML statements in a transaction" do
-    prior_results = db.execute "SELECT * FROM accounts"
+    prior_results = db.execute_sql "SELECT * FROM accounts"
     prior_results.rows.count.must_equal 3
 
     timestamp = db.transaction do |tx|
@@ -42,7 +42,7 @@ describe "Spanner Client", :dml, :spanner do
         params: { account_id: 4, username: "inserted", active: true, reputation: 88.8 }
       insert_row_count.must_equal 1
 
-      insert_results = tx.execute \
+      insert_results = tx.execute_sql \
         "SELECT username FROM accounts WHERE account_id = @account_id",
         params: { account_id: 4 }
       insert_rows = insert_results.rows.to_a
@@ -50,14 +50,14 @@ describe "Spanner Client", :dml, :spanner do
       insert_rows.first[:username].must_equal "inserted"
 
       # Execute a DML using execute_sql and make sure data is updated and correct count is returned.
-      update_results = tx.execute \
+      update_results = tx.execute_sql \
         "UPDATE accounts SET username = @username, active = @active WHERE account_id = @account_id",
         params: { account_id: 4, username: "updated", active: false }
       update_results.rows.to_a # fetch all the results
       update_results.must_be :row_count_exact?
       update_results.row_count.must_equal 1
 
-      update_results = tx.execute \
+      update_results = tx.execute_sql \
         "SELECT username FROM accounts WHERE account_id = @account_id",
         params: { account_id: 4 }
       update_rows = update_results.rows.to_a
@@ -66,12 +66,12 @@ describe "Spanner Client", :dml, :spanner do
     end
     timestamp.must_be_kind_of Time
 
-    post_results = db.execute "SELECT * FROM accounts", single_use: { timestamp: timestamp }
+    post_results = db.execute_sql "SELECT * FROM accounts", single_use: { timestamp: timestamp }
     post_results.rows.count.must_equal 4
   end
 
   it "executes a DML statement, then rollback the transaction" do
-    prior_results = db.execute "SELECT * FROM accounts"
+    prior_results = db.execute_sql "SELECT * FROM accounts"
     prior_results.rows.count.must_equal 3
 
     timestamp = db.transaction do |tx|
@@ -83,7 +83,7 @@ describe "Spanner Client", :dml, :spanner do
         params: { account_id: 4, username: "inserted", active: true, reputation: 88.8 }
       insert_row_count.must_equal 1
 
-      insert_results = tx.execute \
+      insert_results = tx.execute_sql \
         "SELECT username FROM accounts WHERE account_id = @account_id",
         params: { account_id: 4 }
       insert_rows = insert_results.rows.to_a
@@ -95,12 +95,12 @@ describe "Spanner Client", :dml, :spanner do
     end
     timestamp.must_be :nil? # because the transaction was rolled back
 
-    post_results = db.execute "SELECT * FROM accounts"
+    post_results = db.execute_sql "SELECT * FROM accounts"
     post_results.rows.count.must_equal 3
   end
 
   it "executes a DML statement, then a mutation" do
-    prior_results = db.execute "SELECT * FROM accounts"
+    prior_results = db.execute_sql "SELECT * FROM accounts"
     prior_results.rows.count.must_equal 3
 
     timestamp = db.transaction do |tx|
@@ -117,7 +117,7 @@ describe "Spanner Client", :dml, :spanner do
     end
     timestamp.must_be_kind_of Time
 
-    post_results = db.execute "SELECT * FROM accounts", single_use: { timestamp: timestamp }
+    post_results = db.execute_sql "SELECT * FROM accounts", single_use: { timestamp: timestamp }
     post_results.rows.count.must_equal 5
   end
 end

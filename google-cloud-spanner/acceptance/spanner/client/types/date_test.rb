@@ -31,7 +31,7 @@ describe "Spanner Client", :types, :date, :spanner do
   it "writes and queries date" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, date: Date.parse("2017-01-01") }
-    results = db.execute "SELECT id, date FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, date FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, date: :DATE })
@@ -51,7 +51,7 @@ describe "Spanner Client", :types, :date, :spanner do
   it "writes and queries NULL date" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, date: nil }
-    results = db.execute "SELECT id, date FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, date FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, date: :DATE })
@@ -71,7 +71,7 @@ describe "Spanner Client", :types, :date, :spanner do
   it "writes and queries array of date" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
-    results = db.execute "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
@@ -91,7 +91,7 @@ describe "Spanner Client", :types, :date, :spanner do
   it "writes and queries array of date with NULL" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
-    results = db.execute "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
@@ -111,7 +111,7 @@ describe "Spanner Client", :types, :date, :spanner do
   it "writes and queries empty array of date" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, dates: [] }
-    results = db.execute "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
@@ -131,7 +131,7 @@ describe "Spanner Client", :types, :date, :spanner do
   it "writes and queries NULL array of date" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, dates: nil }
-    results = db.execute "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })

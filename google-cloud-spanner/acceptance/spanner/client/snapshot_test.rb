@@ -37,7 +37,7 @@ describe "Spanner Client", :snapshot, :spanner do
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 60
 
-      results = snp.execute "SELECT * FROM accounts"
+      results = snp.execute_sql "SELECT * FROM accounts"
     end
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -71,7 +71,7 @@ describe "Spanner Client", :snapshot, :spanner do
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 60
 
-      results = snp.execute "SELECT * FROM accounts"
+      results = snp.execute_sql "SELECT * FROM accounts"
     end
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -105,7 +105,7 @@ describe "Spanner Client", :snapshot, :spanner do
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 60
 
-      results = snp.execute "SELECT * FROM accounts"
+      results = snp.execute_sql "SELECT * FROM accounts"
     end
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -139,7 +139,7 @@ describe "Spanner Client", :snapshot, :spanner do
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 60
 
-      results = snp.execute "SELECT * FROM accounts"
+      results = snp.execute_sql "SELECT * FROM accounts"
     end
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -199,14 +199,14 @@ describe "Spanner Client", :snapshot, :spanner do
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 60
 
-      results = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
+      results = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
       # verify we got the row we were expecting
       results.rows.first.to_h.must_equal sample_row
 
       # outside of the snapshot, update the row!
       db.update "accounts", modified_row
 
-      results2 = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
+      results2 = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
       # verify we got the previous row, not the modified row
       results2.rows.first.to_h.must_equal sample_row
     end
@@ -245,14 +245,14 @@ describe "Spanner Client", :snapshot, :spanner do
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 60
 
-      results = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
+      results = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
       # verify we got the row we were expecting
       results.rows.first.to_h.must_equal sample_row
 
       # outside of the snapshot, update the row!
       db.update "accounts", modified_row
 
-      results2 = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
+      results2 = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
       # verify we got the previous row, not the modified row
       results2.rows.first.to_h.must_equal sample_row
     end
@@ -291,14 +291,14 @@ describe "Spanner Client", :snapshot, :spanner do
       snp.timestamp.wont_be :nil?
       snp.timestamp.must_be_close_to Time.now, 60
 
-      results = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
+      results = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
       # verify we got the row we were expecting
       results.rows.first.to_h.must_equal sample_row
 
       # outside of the snapshot, update the row!
       db.update "accounts", modified_row
 
-      results2 = snp.execute "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
+      results2 = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
       # verify we got the previous row, not the modified row
       results2.rows.first.to_h.must_equal sample_row
     end

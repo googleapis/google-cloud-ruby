@@ -75,7 +75,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     results = nil
     client.snapshot do |snp|
       snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
-      results = snp.execute "SELECT * FROM users"
+      results = snp.execute_query "SELECT * FROM users"
     end
 
     shutdown_client! client
@@ -91,7 +91,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     assert_raises ArgumentError do
       client.snapshot strong: true, timestamp: Time.now do |snp|
-        snp.execute "SELECT * FROM users"
+        snp.execute_query "SELECT * FROM users"
       end
     end
 
@@ -113,7 +113,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       results = nil
       client.snapshot strong: true do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
-        results = snp.execute "SELECT * FROM users"
+        results = snp.execute_query "SELECT * FROM users"
       end
 
       shutdown_client! client
@@ -140,7 +140,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       results = nil
       client.snapshot timestamp: snapshot_time do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
-        results = snp.execute "SELECT * FROM users"
+        results = snp.execute_query "SELECT * FROM users"
       end
 
       shutdown_client! client
@@ -160,7 +160,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       results = nil
       client.snapshot read_timestamp: snapshot_time do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
-        results = snp.execute "SELECT * FROM users"
+        results = snp.execute_query "SELECT * FROM users"
       end
 
       shutdown_client! client
@@ -180,7 +180,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       results = nil
       client.snapshot timestamp: snapshot_datetime do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
-        results = snp.execute "SELECT * FROM users"
+        results = snp.execute_query "SELECT * FROM users"
       end
 
       shutdown_client! client
@@ -200,7 +200,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       results = nil
       client.snapshot read_timestamp: snapshot_datetime do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
-        results = snp.execute "SELECT * FROM users"
+        results = snp.execute_query "SELECT * FROM users"
       end
 
       shutdown_client! client
@@ -226,7 +226,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       results = nil
       client.snapshot staleness: snapshot_staleness do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
-        results = snp.execute "SELECT * FROM users"
+        results = snp.execute_query "SELECT * FROM users"
       end
 
       shutdown_client! client
@@ -246,7 +246,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
       results = nil
       client.snapshot exact_staleness: snapshot_staleness do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
-        results = snp.execute "SELECT * FROM users"
+        results = snp.execute_query "SELECT * FROM users"
       end
 
       shutdown_client! client
@@ -270,11 +270,11 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     nested_error = assert_raises RuntimeError do
       client.snapshot do |snp|
         snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
-        results = snp.execute "SELECT * FROM users"
+        results = snp.execute_query "SELECT * FROM users"
 
         client.snapshot do |snp2|
           snp2.must_be_kind_of Google::Cloud::Spanner::Snapshot
-          results2 = snp2.execute "SELECT * FROM other_users"
+          results2 = snp2.execute_query "SELECT * FROM other_users"
         end
       end
     end

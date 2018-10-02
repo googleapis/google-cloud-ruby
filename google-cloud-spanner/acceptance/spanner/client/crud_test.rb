@@ -36,7 +36,7 @@ describe "Spanner Client", :crud, :spanner do
 
     active_count_sql = "SELECT COUNT(*) AS count FROM accounts WHERE active = true"
 
-    results = db.execute active_count_sql, single_use: { timestamp: timestamp }
+    results = db.execute_query active_count_sql, single_use: { timestamp: timestamp }
     results.rows.first[:count].must_equal 2
     results.timestamp.wont_be :nil?
 
@@ -44,7 +44,7 @@ describe "Spanner Client", :crud, :spanner do
 
     timestamp = db.upsert "accounts", activate_inactive_account
 
-    results = db.execute active_count_sql, single_use: { timestamp: timestamp }
+    results = db.execute_query active_count_sql, single_use: { timestamp: timestamp }
     results.rows.first[:count].must_equal 3
     results.timestamp.wont_be :nil?
 
@@ -72,7 +72,7 @@ describe "Spanner Client", :crud, :spanner do
 
     active_count_sql = "SELECT COUNT(*) AS count FROM accounts WHERE active = true"
 
-    results = db.execute active_count_sql, single_use: { timestamp: timestamp }
+    results = db.execute_query active_count_sql, single_use: { timestamp: timestamp }
     results.rows.first[:count].must_equal 2
     results.timestamp.wont_be :nil?
 
@@ -82,7 +82,7 @@ describe "Spanner Client", :crud, :spanner do
       c.upsert "accounts", activate_inactive_account
     end
 
-    results = db.execute active_count_sql, single_use: { timestamp: timestamp }
+    results = db.execute_query active_count_sql, single_use: { timestamp: timestamp }
     results.rows.first[:count].must_equal 3
     results.timestamp.wont_be :nil?
 
@@ -110,7 +110,7 @@ describe "Spanner Client", :crud, :spanner do
     timestamp = db.transaction do |tx|
       db.read("accounts", ["account_id"]).rows.count.must_equal 3
 
-      tx.execute(active_count_sql).rows.first[:count].must_equal 2
+      tx.execute_query(active_count_sql).rows.first[:count].must_equal 2
 
       activate_inactive_account = { account_id: 3, active: true }
 
@@ -118,7 +118,7 @@ describe "Spanner Client", :crud, :spanner do
     end
 
     timestamp = db.transaction do |tx|
-      tx.execute(active_count_sql).rows.first[:count].must_equal 3
+      tx.execute_query(active_count_sql).rows.first[:count].must_equal 3
 
       tx.delete "accounts", [1, 2, 3]
     end

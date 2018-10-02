@@ -257,7 +257,7 @@ module Google
           end
         end
 
-        def streaming_execute_sql session_name, sql, transaction: nil,
+        def execute_streaming_sql session_name, sql, transaction: nil,
                                   params: nil, types: nil, resume_token: nil,
                                   partition_token: nil, seqno: nil
           opts = default_options_from_session session_name

@@ -18,7 +18,7 @@ describe "Spanner Client", :params, :int64, :spanner do
   let(:db) { spanner_client }
 
   it "queries and returns a int64 parameter" do
-    results = db.execute "SELECT @value AS value", params: { value: 99 }
+    results = db.execute_query "SELECT @value AS value", params: { value: 99 }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal :INT64
@@ -26,7 +26,7 @@ describe "Spanner Client", :params, :int64, :spanner do
   end
 
   it "queries and returns a NULL int64 parameter" do
-    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: :INT64 }
+    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: :INT64 }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal :INT64
@@ -34,7 +34,7 @@ describe "Spanner Client", :params, :int64, :spanner do
   end
 
   it "queries and returns an array of int64 parameters" do
-    results = db.execute "SELECT @value AS value", params: { value: [1, 2, 3] }
+    results = db.execute_query "SELECT @value AS value", params: { value: [1, 2, 3] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:INT64]
@@ -42,7 +42,7 @@ describe "Spanner Client", :params, :int64, :spanner do
   end
 
   it "queries and returns an array of int64 parameters with a nil value" do
-    results = db.execute "SELECT @value AS value", params: { value: [nil, 1, 2, 3] }
+    results = db.execute_query "SELECT @value AS value", params: { value: [nil, 1, 2, 3] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:INT64]
@@ -50,7 +50,7 @@ describe "Spanner Client", :params, :int64, :spanner do
   end
 
   it "queries and returns an empty array of int64 parameters" do
-    results = db.execute "SELECT @value AS value", params: { value: [] }, types: { value: [:INT64] }
+    results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: { value: [:INT64] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:INT64]
@@ -58,7 +58,7 @@ describe "Spanner Client", :params, :int64, :spanner do
   end
 
   it "queries and returns a NULL array of int64 parameters" do
-    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: [:INT64] }
+    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: [:INT64] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:INT64]

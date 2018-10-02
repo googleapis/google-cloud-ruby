@@ -24,7 +24,7 @@ module Google
       #
       # Represents the result set from an operation returning data.
       #
-      # See {Google::Cloud::Spanner::Client#execute} and
+      # See {Google::Cloud::Spanner::Client#execute_query} and
       # {Google::Cloud::Spanner::Client#read}.
       #
       # @example
@@ -34,7 +34,7 @@ module Google
       #
       #   db = spanner.client "my-instance", "my-database"
       #
-      #   results = db.execute "SELECT * FROM users"
+      #   results = db.execute_query "SELECT * FROM users"
       #
       #   results.fields.pairs.each do |name, type|
       #     puts "Column #{name} is type #{type}"
@@ -63,7 +63,7 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.execute "SELECT * FROM users"
+        #   results = db.execute_query "SELECT * FROM users"
         #
         #   results.fields.pairs.each do |name, type|
         #     puts "Column #{name} is type #{type}"
@@ -88,7 +88,7 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   results = db.execute "SELECT * FROM users"
+        #   results = db.execute_query "SELECT * FROM users"
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -151,10 +151,10 @@ module Google
               end
 
               # Resume the stream from the last known resume_token
-              if @execute_options
-                @enum = @service.streaming_execute_sql \
+              if @execute_query_options
+                @enum = @service.execute_streaming_sql \
                   @session_path, @sql,
-                  @execute_options.merge(resume_token: resume_token)
+                  @execute_query_options.merge(resume_token: resume_token)
               else
                 @enum = @service.streaming_read_table \
                   @session_path, @table, @columns,
@@ -237,17 +237,21 @@ module Google
         end
 
         # @private
-        def self.execute service, session_path, sql, params: nil, types: nil,
-                         transaction: nil, partition_token: nil, seqno: nil
-          execute_options = { transaction: transaction, params: params,
-                              types: types, partition_token: partition_token,
-                              seqno: seqno }
-          enum = service.streaming_execute_sql session_path, sql,
-                                               execute_options
+
+        def self.execute_query service, session_path, sql, params: nil,
+                               types: nil, transaction: nil,
+                               partition_token: nil, seqno: nil
+          execute_query_options = {
+            transaction: transaction, params: params, types: types,
+            partition_token: partition_token, seqno: seqno
+          }
+          enum = service.execute_streaming_sql session_path, sql,
+                                               execute_query_options
           from_enum(enum, service).tap do |results|
-            results.instance_variable_set :@session_path,    session_path
-            results.instance_variable_set :@sql,             sql
-            results.instance_variable_set :@execute_options, execute_options
+            results.instance_variable_set :@session_path, session_path
+            results.instance_variable_set :@sql,          sql
+            results.instance_variable_set :@execute_query_options,
+                                          execute_query_options
           end
         end
 

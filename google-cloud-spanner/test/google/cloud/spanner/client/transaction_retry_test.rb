@@ -107,7 +107,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     results = nil
     client.transaction do |tx|
       tx.must_be_kind_of Google::Cloud::Spanner::Transaction
-      results = tx.execute "SELECT * FROM users"
+      results = tx.execute_query "SELECT * FROM users"
       tx.update "users", [{ id: 1, name: "Charlie", active: false }]
     end
 
@@ -161,7 +161,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     results = nil
     client.transaction do |tx|
       tx.must_be_kind_of Google::Cloud::Spanner::Transaction
-      results = tx.execute "SELECT * FROM users"
+      results = tx.execute_query "SELECT * FROM users"
       tx.update "users", [{ id: 1, name: "Charlie", active: false }]
     end
 
@@ -215,7 +215,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     results = nil
     client.transaction do |tx|
       tx.must_be_kind_of Google::Cloud::Spanner::Transaction
-      results = tx.execute "SELECT * FROM users"
+      results = tx.execute_query "SELECT * FROM users"
       tx.update "users", [{ id: 1, name: "Charlie", active: false }]
     end
 
@@ -279,7 +279,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     results = nil
     client.transaction do |tx|
       tx.must_be_kind_of Google::Cloud::Spanner::Transaction
-      results = tx.execute "SELECT * FROM users"
+      results = tx.execute_query "SELECT * FROM users"
       tx.update "users", [{ id: 1, name: "Charlie", active: false }]
     end
 
@@ -350,7 +350,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     assert_raises Google::Cloud::AbortedError do
       client.transaction do |tx|
         tx.must_be_kind_of Google::Cloud::Spanner::Transaction
-        results = tx.execute "SELECT * FROM users"
+        results = tx.execute_query "SELECT * FROM users"
         tx.update "users", [{ id: 1, name: "Charlie", active: false }]
       end
     end

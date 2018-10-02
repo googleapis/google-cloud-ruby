@@ -18,7 +18,7 @@ describe "Spanner Client", :params, :bytes, :spanner do
   let(:db) { spanner_client }
 
   it "queries and returns a bytes parameter" do
-    results = db.execute "SELECT @value AS value", params: { value: StringIO.new("hello world!") }
+    results = db.execute_query "SELECT @value AS value", params: { value: StringIO.new("hello world!") }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal :BYTES
@@ -28,7 +28,7 @@ describe "Spanner Client", :params, :bytes, :spanner do
   end
 
   it "queries and returns a NULL bytes parameter" do
-    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: :BYTES }
+    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: :BYTES }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal :BYTES
@@ -36,7 +36,7 @@ describe "Spanner Client", :params, :bytes, :spanner do
   end
 
   it "queries and returns an array of bytes parameters" do
-    results = db.execute "SELECT @value AS value", params: { value: [StringIO.new("foo"), StringIO.new("bar"), StringIO.new("baz")] }
+    results = db.execute_query "SELECT @value AS value", params: { value: [StringIO.new("foo"), StringIO.new("bar"), StringIO.new("baz")] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:BYTES]
@@ -48,7 +48,7 @@ describe "Spanner Client", :params, :bytes, :spanner do
   end
 
   it "queries and returns an array of bytes parameters with a nil value" do
-    results = db.execute "SELECT @value AS value", params: { value: [nil, StringIO.new("foo"), StringIO.new("bar"), StringIO.new("baz")] }
+    results = db.execute_query "SELECT @value AS value", params: { value: [nil, StringIO.new("foo"), StringIO.new("bar"), StringIO.new("baz")] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:BYTES]
@@ -61,7 +61,7 @@ describe "Spanner Client", :params, :bytes, :spanner do
   end
 
   it "queries and returns an empty array of bytes parameters" do
-    results = db.execute "SELECT @value AS value", params: { value: [] }, types: { value: [:BYTES] }
+    results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: { value: [:BYTES] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:BYTES]
@@ -69,7 +69,7 @@ describe "Spanner Client", :params, :bytes, :spanner do
   end
 
   it "queries and returns a NULL array of bytes parameters" do
-    results = db.execute "SELECT @value AS value", params: { value: nil }, types: { value: [:BYTES] }
+    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: [:BYTES] }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields[:value].must_equal [:BYTES]

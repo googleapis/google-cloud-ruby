@@ -32,7 +32,7 @@ describe "Spanner Client", :types, :string, :spanner do
   it "writes and queries string" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, string: "hello" }
-    results = db.execute "SELECT id, string FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, string FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, string: :STRING })
@@ -52,7 +52,7 @@ describe "Spanner Client", :types, :string, :spanner do
   it "writes and queries NULL string" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, string: nil }
-    results = db.execute "SELECT id, string FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, string FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, string: :STRING })
@@ -72,7 +72,7 @@ describe "Spanner Client", :types, :string, :spanner do
   it "writes and queries array of string" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, strings: ["howdy", "hola", "hello"] }
-    results = db.execute "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
@@ -92,7 +92,7 @@ describe "Spanner Client", :types, :string, :spanner do
   it "writes and queries array of string with NULL" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, strings: [nil, "howdy", "hola", "hello"] }
-    results = db.execute "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
@@ -112,7 +112,7 @@ describe "Spanner Client", :types, :string, :spanner do
   it "writes and queries empty array of string" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, strings: [] }
-    results = db.execute "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
@@ -132,7 +132,7 @@ describe "Spanner Client", :types, :string, :spanner do
   it "writes and queries NULL array of string" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, strings: nil }
-    results = db.execute "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
+    results = db.execute_query "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
