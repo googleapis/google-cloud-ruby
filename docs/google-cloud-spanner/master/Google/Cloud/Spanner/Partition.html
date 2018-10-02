@@ -259,9 +259,11 @@ machines or processes.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#execute%3F-instance_method" title="#execute? (instance method)">#<strong>execute?</strong>  &#x21d2; Boolean </a>
+      <a href="#execute_query%3F-instance_method" title="#execute_query? (instance method)">#<strong>execute_query?</strong>  &#x21d2; Boolean </a>
     
 
+    
+      (also: #execute?, #execute_sql?, #query?)
     
   </span>
   
@@ -273,7 +275,7 @@ machines or processes.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Whether the partition was created for an execute/query operation.</p>
+    <span class="summary_desc"><div class='inline'><p>Whether the partition was created for an execute_query/query operation.</p>
 </div></span>
   
 </li>
@@ -489,11 +491,6 @@ batch partition. See <span class='object_link'><a href="#dump-instance_method" t
       <pre class="lines">
 
 
-163
-164
-165
-166
-167
 168
 169
 170
@@ -505,20 +502,29 @@ batch partition. See <span class='object_link'><a href="#dump-instance_method" t
 176
 177
 178
-179</pre>
+179
+180
+181
+182
+183
+184
+185
+186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/partition.rb', line 163</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/partition.rb', line 168</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span> <span class='id identifier rubyid_data'>data</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>symbolize_names:</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Hash</span>
 
-  <span class='comment'># TODO: raise if hash[:execute].nil? &amp;&amp; hash[:read].nil?
+  <span class='comment'># TODO: raise if hash[:execute_query].nil? &amp;&amp; hash[:read].nil?
 </span>  <span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='symbol'>:execute</span><span class='rbracket'>]</span>
-      <span class='id identifier rubyid_execute_grpc'>execute_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1/ExecuteSqlRequest.html" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_decode'>decode</span> \
-        <span class='const'>Base64</span><span class='period'>.</span><span class='id identifier rubyid_decode64'>decode64</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='symbol'>:execute</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span> <span class='symbol'>:@execute</span><span class='comma'>,</span> <span class='id identifier rubyid_execute_grpc'>execute_grpc</span>
+      <span class='id identifier rubyid_execute_sql_grpc'>execute_sql_grpc</span> <span class='op'>=</span> \
+        <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1/ExecuteSqlRequest.html" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_decode'>decode</span><span class='lparen'>(</span>
+          <span class='const'>Base64</span><span class='period'>.</span><span class='id identifier rubyid_decode64'>decode64</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='symbol'>:execute</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+        <span class='rparen'>)</span>
+      <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span> <span class='symbol'>:@execute</span><span class='comma'>,</span> <span class='id identifier rubyid_execute_sql_grpc'>execute_sql_grpc</span>
     <span class='kw'>end</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='symbol'>:read</span><span class='rbracket'>]</span>
       <span class='id identifier rubyid_read_grpc'>read_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1/ReadRequest.html" title="Google::Spanner::V1::ReadRequest (class)">ReadRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_decode'>decode</span> \
@@ -617,12 +623,12 @@ another process. See <span class='object_link'><a href="#load-class_method" titl
       <pre class="lines">
 
 
-124
-125
-126</pre>
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/partition.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/partition.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dump'>dump</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span> <span class='id identifier rubyid_to_h'>to_h</span>
@@ -633,17 +639,22 @@ another process. See <span class='object_link'><a href="#load-class_method" titl
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="execute?-instance_method">
+  <h3 class="signature " id="execute_query?-instance_method">
   
-    #<strong>execute?</strong>  &#x21d2; <tt>Boolean</tt> 
+    #<strong>execute_query?</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='execute?-instance_method'>execute?</span>, <span id='execute_sql?-instance_method'>execute_sql?</span>, <span id='query?-instance_method'>query?</span></span>
+    </span>
   
 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Whether the partition was created for an execute/query operation.</p>
+    <p>Whether the partition was created for an execute_query/query
+operation.</p>
 
 
   </div>
@@ -670,14 +681,14 @@ another process. See <span class='object_link'><a href="#load-class_method" titl
       <pre class="lines">
 
 
-57
 58
-59</pre>
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/partition.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/partition.rb', line 58</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_execute?'>execute?</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_execute_query?'>execute_query?</span>
   <span class='op'>!</span><span class='ivar'>@execute</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -723,12 +734,12 @@ another process. See <span class='object_link'><a href="#load-class_method" titl
       <pre class="lines">
 
 
-64
-65
-66</pre>
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/partition.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/partition.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read?'>read?</span>
   <span class='op'>!</span><span class='ivar'>@read</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>

@@ -200,31 +200,6 @@ in practice.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#execute-instance_method" title="#execute (instance method)">#<strong>execute</strong>(sql, params: nil, types: nil)  &#x21d2; Google::Cloud::Spanner::Results </a>
-    
-
-    
-      (also: #query)
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Executes a SQL query.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#execute_partition-instance_method" title="#execute_partition (instance method)">#<strong>execute_partition</strong>(partition)  &#x21d2; Object </a>
     
 
@@ -240,6 +215,31 @@ in practice.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Execute the partition to return a <span class='object_link'><a href="Results.html" title="Google::Cloud::Spanner::Results (class)">Results</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#execute_query-instance_method" title="#execute_query (instance method)">#<strong>execute_query</strong>(sql, params: nil, types: nil)  &#x21d2; Google::Cloud::Spanner::Results </a>
+    
+
+    
+      (also: #execute, #query, #execute_sql)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Executes a SQL query.</p>
 </div></span>
   
 </li>
@@ -308,7 +308,7 @@ in practice.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Read rows from a database table, as a simple alternative to <span class='object_link'><a href="#execute-instance_method" title="Google::Cloud::Spanner::BatchSnapshot#execute (method)">#execute</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>Read rows from a database table, as a simple alternative to <span class='object_link'><a href="#execute_query-instance_method" title="Google::Cloud::Spanner::BatchSnapshot#execute_query (method)">#execute_query</a></span>.</p>
 </div></span>
   
 </li>
@@ -516,12 +516,12 @@ process. See <span class='object_link'><a href="BatchClient.html#load_batch_snap
       <pre class="lines">
 
 
-613
-614
-615</pre>
+623
+624
+625</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 613</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 623</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dump'>dump</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span> <span class='id identifier rubyid_to_h'>to_h</span>
@@ -532,14 +532,120 @@ process. See <span class='object_link'><a href="BatchClient.html#load_batch_snap
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="execute-instance_method">
+  <h3 class="signature " id="execute_partition-instance_method">
   
-    #<strong>execute</strong>(sql, params: nil, types: nil)  &#x21d2; <tt><span class='object_link'><a href="Results.html" title="Google::Cloud::Spanner::Results (class)">Google::Cloud::Spanner::Results</a></span></tt> 
+    #<strong>execute_partition</strong>(partition)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Execute the partition to return a <span class='object_link'><a href="Results.html" title="Google::Cloud::Spanner::Results (class)">Results</a></span>. The result returned
+could be zero or more rows. The row metadata may be absent if no rows
+are returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_batch_client'>batch_client</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_batch_client'>batch_client</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_client'>batch_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span>
+
+<span class='id identifier rubyid_partitions'>partitions</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_partition_read'>partition_read</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>users</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='symbol'>:id</span><span class='comma'>,</span> <span class='symbol'>:name</span><span class='rbracket'>]</span>
+
+<span class='id identifier rubyid_partition'>partition</span> <span class='op'>=</span> <span class='id identifier rubyid_partitions'>partitions</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute_partition'>execute_partition</span> <span class='id identifier rubyid_partition'>partition</span>
+
+<span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>partition</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Partition.html" title="Google::Cloud::Spanner::Partition (class)">Google::Cloud::Spanner::Partition</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The partition to
+be executed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 315</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_execute_partition'>execute_partition</span> <span class='id identifier rubyid_partition'>partition</span>
+  <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
+
+  <span class='id identifier rubyid_partition'>partition</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Partition.html" title="Google::Cloud::Spanner::Partition (class)">Partition</a></span></span><span class='period'>.</span><span class='id identifier rubyid_load'><span class='object_link'><a href="Partition.html#load-class_method" title="Google::Cloud::Spanner::Partition.load (method)">load</a></span></span> <span class='id identifier rubyid_partition'>partition</span> <span class='kw'>unless</span> <span class='id identifier rubyid_partition'>partition</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="Partition.html" title="Google::Cloud::Spanner::Partition (class)">Partition</a></span></span>
+  <span class='comment'># TODO: raise if partition.empty?
+</span>
+  <span class='comment'># TODO: raise if session.path != partition.session
+</span>  <span class='comment'># TODO: raise if grpc.transaction != partition.transaction
+</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_partition'>partition</span><span class='period'>.</span><span class='id identifier rubyid_execute?'>execute?</span>
+    <span class='id identifier rubyid_execute_partition_query'>execute_partition_query</span> <span class='id identifier rubyid_partition'>partition</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_partition'>partition</span><span class='period'>.</span><span class='id identifier rubyid_read?'>read?</span>
+    <span class='id identifier rubyid_execute_partition_read'>execute_partition_read</span> <span class='id identifier rubyid_partition'>partition</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="execute_query-instance_method">
+  
+    #<strong>execute_query</strong>(sql, params: nil, types: nil)  &#x21d2; <tt><span class='object_link'><a href="Results.html" title="Google::Cloud::Spanner::Results (class)">Google::Cloud::Spanner::Results</a></span></tt> 
   
 
   
     <span class="aliases">Also known as:
-    <span class="names"><span id='query-instance_method'>query</span></span>
+    <span class="names"><span id='execute-instance_method'>execute</span>, <span id='query-instance_method'>query</span>, <span id='execute_sql-instance_method'>execute_sql</span></span>
     </span>
   
 
@@ -563,7 +669,7 @@ process. See <span class='object_link'><a href="BatchClient.html#load_batch_snap
 <span class='id identifier rubyid_batch_client'>batch_client</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_batch_client'>batch_client</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_client'>batch_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span>
 
-<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute_query'>execute_query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -579,9 +685,11 @@ process. See <span class='object_link'><a href="BatchClient.html#load_batch_snap
 <span class='id identifier rubyid_batch_client'>batch_client</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_batch_client'>batch_client</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_client'>batch_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span>
 
-<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WHERE active = @active</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                                 <span class='label'>params:</span> <span class='lbrace'>{</span> <span class='label'>active:</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute_query'>execute_query</span><span class='lparen'>(</span>
+   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users </span><span class='tstring_end'>&quot;</span></span> \
+   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WHERE active = @active</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+   <span class='label'>params:</span> <span class='lbrace'>{</span> <span class='label'>active:</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+<span class='rparen'>)</span>
 
 <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -599,11 +707,13 @@ process. See <span class='object_link'><a href="BatchClient.html#load_batch_snap
 
 <span class='id identifier rubyid_user_hash'>user_hash</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>id:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Charlie</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>false</span> <span class='rbrace'>}</span>
 
-<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users WHERE </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ID = @user_struct.id </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND name = @user_struct.name </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND active = @user_struct.active</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                                 <span class='label'>params:</span> <span class='lbrace'>{</span> <span class='label'>user_struct:</span> <span class='id identifier rubyid_user_hash'>user_hash</span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute_query'>execute_query</span><span class='lparen'>(</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users WHERE </span><span class='tstring_end'>&quot;</span></span> \
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ID = @user_struct.id </span><span class='tstring_end'>&quot;</span></span> \
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND name = @user_struct.name </span><span class='tstring_end'>&quot;</span></span> \
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND active = @user_struct.active</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>params:</span> <span class='lbrace'>{</span> <span class='label'>user_struct:</span> <span class='id identifier rubyid_user_hash'>user_hash</span> <span class='rbrace'>}</span>
+<span class='rparen'>)</span>
 
 <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -624,12 +734,14 @@ process. See <span class='object_link'><a href="BatchClient.html#load_batch_snap
 <span class='rparen'>)</span>
 <span class='id identifier rubyid_user_hash'>user_hash</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>id:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>false</span> <span class='rbrace'>}</span>
 
-<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users WHERE </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ID = @user_struct.id </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND name = @user_struct.name </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND active = @user_struct.active</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                                 <span class='label'>params:</span> <span class='lbrace'>{</span> <span class='label'>user_struct:</span> <span class='id identifier rubyid_user_hash'>user_hash</span> <span class='rbrace'>}</span><span class='comma'>,</span>
-                                 <span class='label'>types:</span> <span class='lbrace'>{</span> <span class='label'>user_struct:</span> <span class='id identifier rubyid_user_type'>user_type</span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute_query'>execute_query</span><span class='lparen'>(</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users WHERE </span><span class='tstring_end'>&quot;</span></span> \
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ID = @user_struct.id </span><span class='tstring_end'>&quot;</span></span> \
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND name = @user_struct.name </span><span class='tstring_end'>&quot;</span></span> \
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND active = @user_struct.active</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>params:</span> <span class='lbrace'>{</span> <span class='label'>user_struct:</span> <span class='id identifier rubyid_user_hash'>user_hash</span> <span class='rbrace'>}</span><span class='comma'>,</span>
+  <span class='label'>types:</span> <span class='lbrace'>{</span> <span class='label'>user_struct:</span> <span class='id identifier rubyid_user_type'>user_type</span> <span class='rbrace'>}</span>
+<span class='rparen'>)</span>
 
 <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -650,11 +762,13 @@ process. See <span class='object_link'><a href="BatchClient.html#load_batch_snap
 <span class='rparen'>)</span>
 <span class='id identifier rubyid_user_data'>user_data</span> <span class='op'>=</span> <span class='id identifier rubyid_user_type'>user_type</span><span class='period'>.</span><span class='id identifier rubyid_struct'>struct</span> <span class='label'>id:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>active:</span> <span class='kw'>false</span>
 
-<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users WHERE </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ID = @user_struct.id </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND name = @user_struct.name </span><span class='tstring_end'>&quot;</span></span> \
-                                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND active = @user_struct.active</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-                                 <span class='label'>params:</span> <span class='lbrace'>{</span> <span class='label'>user_struct:</span> <span class='id identifier rubyid_user_data'>user_data</span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute_query'>execute_query</span><span class='lparen'>(</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users WHERE </span><span class='tstring_end'>&quot;</span></span> \
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ID = @user_struct.id </span><span class='tstring_end'>&quot;</span></span> \
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND name = @user_struct.name </span><span class='tstring_end'>&quot;</span></span> \
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AND active = @user_struct.active</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>params:</span> <span class='lbrace'>{</span> <span class='label'>user_struct:</span> <span class='id identifier rubyid_user_data'>user_data</span> <span class='rbrace'>}</span>
+<span class='rparen'>)</span>
 
 <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -832,131 +946,25 @@ execution.</p>
       <pre class="lines">
 
 
-513
-514
-515
-516
-517
-518
-519
-520</pre>
+521
+522
+523
+524
+525
+526
+527
+528</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 513</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 521</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_execute'>execute</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_execute_query'>execute_query</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
 
   <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_types'>types</span> <span class='op'>=</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_to_input_params_and_types'>to_input_params_and_types</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_types'>types</span>
 
-  <span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='id identifier rubyid_types'>types</span><span class='comma'>,</span>
-                       <span class='label'>transaction:</span> <span class='id identifier rubyid_tx_selector'>tx_selector</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="execute_partition-instance_method">
-  
-    #<strong>execute_partition</strong>(partition)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Execute the partition to return a <span class='object_link'><a href="Results.html" title="Google::Cloud::Spanner::Results (class)">Results</a></span>. The result returned
-could be zero or more rows. The row metadata may be absent if no rows
-are returned.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-  <div class="examples">
-    <p class="tag_title">Examples:</p>
-    
-      
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
-
-<span class='id identifier rubyid_batch_client'>batch_client</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_batch_client'>batch_client</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_client'>batch_client</span><span class='period'>.</span><span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span>
-
-<span class='id identifier rubyid_partitions'>partitions</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_partition_read'>partition_read</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>users</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='symbol'>:id</span><span class='comma'>,</span> <span class='symbol'>:name</span><span class='rbracket'>]</span>
-
-<span class='id identifier rubyid_partition'>partition</span> <span class='op'>=</span> <span class='id identifier rubyid_partitions'>partitions</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
-<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_execute_partition'>execute_partition</span> <span class='id identifier rubyid_partition'>partition</span>
-
-<span class='id identifier rubyid_batch_snapshot'>batch_snapshot</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span></code></pre>
-    
-  </div>
-<p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>partition</span>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Partition.html" title="Google::Cloud::Spanner::Partition (class)">Google::Cloud::Spanner::Partition</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>The partition to
-be executed.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 315</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_execute_partition'>execute_partition</span> <span class='id identifier rubyid_partition'>partition</span>
-  <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
-
-  <span class='id identifier rubyid_partition'>partition</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Partition.html" title="Google::Cloud::Spanner::Partition (class)">Partition</a></span></span><span class='period'>.</span><span class='id identifier rubyid_load'><span class='object_link'><a href="Partition.html#load-class_method" title="Google::Cloud::Spanner::Partition.load (method)">load</a></span></span> <span class='id identifier rubyid_partition'>partition</span> <span class='kw'>unless</span> <span class='id identifier rubyid_partition'>partition</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="Partition.html" title="Google::Cloud::Spanner::Partition (class)">Partition</a></span></span>
-  <span class='comment'># TODO: raise if partition.empty?
-</span>
-  <span class='comment'># TODO: raise if session.path != partition.session
-</span>  <span class='comment'># TODO: raise if grpc.transaction != partition.transaction
-</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_partition'>partition</span><span class='period'>.</span><span class='id identifier rubyid_execute?'>execute?</span>
-    <span class='id identifier rubyid_execute_partition_query'>execute_partition_query</span> <span class='id identifier rubyid_partition'>partition</span>
-  <span class='kw'>elsif</span> <span class='id identifier rubyid_partition'>partition</span><span class='period'>.</span><span class='id identifier rubyid_read?'>read?</span>
-    <span class='id identifier rubyid_execute_partition_read'>execute_partition_read</span> <span class='id identifier rubyid_partition'>partition</span>
-  <span class='kw'>end</span>
+  <span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_execute_query'>execute_query</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='id identifier rubyid_types'>types</span><span class='comma'>,</span>
+                             <span class='label'>transaction:</span> <span class='id identifier rubyid_tx_selector'>tx_selector</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1264,7 +1272,7 @@ created by the query partition.</p>
 
   <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_partitions'>partitions</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_grpc'>grpc</span><span class='op'>|</span>
     <span class='comment'># Convert partition protos to execute sql request protos
-</span>    <span class='id identifier rubyid_execute_grpc'>execute_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1/ExecuteSqlRequest.html" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+</span>    <span class='id identifier rubyid_execute_sql_grpc'>execute_sql_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Spanner/V1/ExecuteSqlRequest.html" title="Google::Spanner::V1::ExecuteSqlRequest (class)">ExecuteSqlRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
       <span class='lbrace'>{</span>
         <span class='label'>session:</span> <span class='id identifier rubyid_session'>session</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span>
         <span class='label'>sql:</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span>
@@ -1274,7 +1282,7 @@ created by the query partition.</p>
         <span class='label'>partition_token:</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='period'>.</span><span class='id identifier rubyid_partition_token'>partition_token</span>
       <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
     <span class='rparen'>)</span>
-    <span class='const'><span class='object_link'><a href="Partition.html" title="Google::Cloud::Spanner::Partition (class)">Partition</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_execute_grpc'>from_execute_grpc</span> <span class='id identifier rubyid_execute_grpc'>execute_grpc</span>
+    <span class='const'><span class='object_link'><a href="Partition.html" title="Google::Cloud::Spanner::Partition (class)">Partition</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_execute_sql_grpc'>from_execute_sql_grpc</span> <span class='id identifier rubyid_execute_sql_grpc'>execute_sql_grpc</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1535,7 +1543,7 @@ created by the read partition.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Read rows from a database table, as a simple alternative to
-<span class='object_link'><a href="#execute-instance_method" title="Google::Cloud::Spanner::BatchSnapshot#execute (method)">#execute</a></span>.</p>
+<span class='object_link'><a href="#execute_query-instance_method" title="Google::Cloud::Spanner::BatchSnapshot#execute_query (method)">#execute_query</a></span>.</p>
 
 
   </div>
@@ -1671,18 +1679,18 @@ operation.</p>
       <pre class="lines">
 
 
-556
-557
-558
-559
-560
-561
-562
-563
-564</pre>
+566
+567
+568
+569
+570
+571
+572
+573
+574</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 556</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 566</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span> <span class='label'>keys:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>index:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
