@@ -1,0 +1,302 @@
+---
+layout: yard_main
+title: "Module: Google::Spanner::V1::TypeCode - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Spanner::V1::TypeCode";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Spanner.html" title="Google::Spanner (module)">Spanner</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Spanner::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">TypeCode</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Spanner::V1::TypeCode
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/spanner/v1/doc/google/spanner/v1/type.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p><code>TypeCode</code> is used as part of <span class='object_link'><a href="Type.html" title="Google::Spanner::V1::Type (class)">Type</a></span> to
+indicate the type of a Cloud Spanner value.</p>
+
+<p>Each legal value of a type can be encoded to or decoded from a JSON
+value, using the encodings described below. All Cloud Spanner values can
+be <code>null</code>, regardless of type; <code>null</code>s are always encoded as a JSON
+<code>null</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="TYPE_CODE_UNSPECIFIED-constant" class="">TYPE_CODE_UNSPECIFIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Not specified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="BOOL-constant" class="">BOOL =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Encoded as JSON <code>true</code> or <code>false</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
+      
+        <dt id="INT64-constant" class="">INT64 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Encoded as <code>string</code>, in decimal format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="FLOAT64-constant" class="">FLOAT64 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Encoded as <code>number</code>, or the strings <code>&quot;NaN&quot;</code>, <code>&quot;Infinity&quot;</code>, or
+<code>&quot;-Infinity&quot;</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+        <dt id="TIMESTAMP-constant" class="">TIMESTAMP =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Encoded as <code>string</code> in RFC 3339 timestamp format. The time zone
+must be present, and must be <code>&quot;Z&quot;</code>.</p>
+
+<p>If the schema has the column option
+<code>allow_commit_timestamp=true</code>, the placeholder string
+<code>&quot;spanner.commit_timestamp()&quot;</code> can be used to instruct the system
+to insert the commit timestamp associated with the transaction
+commit.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="DATE-constant" class="">DATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Encoded as <code>string</code> in RFC 3339 date format.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span></pre></dd>
+      
+        <dt id="STRING-constant" class="">STRING =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Encoded as <code>string</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span></pre></dd>
+      
+        <dt id="BYTES-constant" class="">BYTES =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Encoded as a base64-encoded <code>string</code>, as described in RFC 4648,
+section 4.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span></pre></dd>
+      
+        <dt id="ARRAY-constant" class="">ARRAY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Encoded as <code>list</code>, where the list elements are represented
+according to <span class='object_link'><a href="Type.html#array_element_type-instance_method" title="Google::Spanner::V1::Type#array_element_type (method)">array_element_type</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span></pre></dd>
+      
+        <dt id="STRUCT-constant" class="">STRUCT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Encoded as <code>list</code>, where list element <code>i</code> is represented according
+to [struct_type.fields[i]][google.spanner.v1.StructType.fields].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
