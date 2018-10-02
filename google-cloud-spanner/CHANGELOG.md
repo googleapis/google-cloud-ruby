@@ -1,5 +1,14 @@
 # Release History
 
+### 1.7.0 / 2018-10-02
+
+* Add DML and Partitioned DML support
+  * Add execute_update to process DML statements
+  * Add execute_partition_update for Partitioned DML
+* Rename execute_query method
+  * Maintain naming consistency with execute_update method.
+  * Maintain compatibility by adding query, execute and execute_sql aliases.
+
 ### 1.6.4 / 2018-09-20
 
 * Update Spanner generated files.
