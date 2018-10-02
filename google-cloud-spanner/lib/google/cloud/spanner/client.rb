@@ -398,18 +398,18 @@ module Google
         # operations that are idempotent, such as deleting old rows from a very
         # large table.
         #
-        # @param [String] sql The SQL query string. See [Query
+        # @param [String] sql The Partitioned DML statement string. See [Query
         #   syntax](https://cloud.google.com/spanner/docs/query-syntax).
         #
-        #   The SQL query string can contain parameter placeholders. A parameter
-        #   placeholder consists of "@" followed by the parameter name.
-        #   Parameter names consist of any combination of letters, numbers, and
-        #   underscores.
-        # @param [Hash] params SQL parameters for the query string. The
-        #   parameter placeholders, minus the "@", are the the hash keys, and
-        #   the literal values are the hash values. If the query string contains
-        #   something like "WHERE id > @msg_id", then the params must contain
-        #   something like `:msg_id => 1`.
+        #   The Partitioned DML statement string can contain parameter
+        #   placeholders. A parameter placeholder consists of "@" followed by
+        #   the parameter name. Parameter names consist of any combination of
+        #   letters, numbers, and underscores.
+        # @param [Hash] params Parameters for the Partitioned DML statement
+        #   string. The parameter placeholders, minus the "@", are the the hash
+        #   keys, and the literal values are the hash values. If the query
+        #   string contains something like "WHERE id > @msg_id", then the params
+        #   must contain something like `:msg_id => 1`.
         #
         #   Ruby types are mapped to Spanner types as follows:
         #
@@ -487,7 +487,10 @@ module Google
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
           # Raise an error if there is not a row count returned
-          raise Google::Cloud::InvalidArgumentError if results.row_count.nil?
+          if results.row_count.nil?
+            raise Google::Cloud::InvalidArgumentError,
+                  "Partitioned DML statement is invalid."
+          end
           results.row_count
         end
         alias execute_pdml execute_partition_update

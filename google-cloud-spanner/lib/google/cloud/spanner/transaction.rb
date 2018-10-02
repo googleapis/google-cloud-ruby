@@ -265,7 +265,7 @@ module Google
         #   parameter placeholder consists of "@" followed by the parameter
         #   name. Parameter names consist of any combination of letters,
         #   numbers, and underscores.
-        # @param [Hash] params SQL parameters for the query string. The
+        # @param [Hash] params Parameters for the DML statement string. The
         #   parameter placeholders, minus the "@", are the the hash keys, and
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
@@ -345,7 +345,10 @@ module Google
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
           # Raise an error if there is not a row count returned
-          raise Google::Cloud::InvalidArgumentError if results.row_count.nil?
+          if results.row_count.nil?
+            raise Google::Cloud::InvalidArgumentError,
+                  "DML statement is invalid."
+          end
           results.row_count
         end
 
