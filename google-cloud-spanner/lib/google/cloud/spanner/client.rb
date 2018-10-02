@@ -325,7 +325,7 @@ module Google
         #
         # Partitioned DML does not guarantee database-wide atomicity of the
         # statement - it guarantees row-based atomicity, which includes updates
-        # to any indices. Additionally,  it does not guarantee that it will
+        # to any indices. Additionally, it does not guarantee that it will
         # execute exactly one time against each row - it guarantees "at least
         # once" semantics.
         #
@@ -343,11 +343,9 @@ module Google
         # {Google::Cloud::InvalidArgumentError} is raised if the statement does
         # not qualify.
         #
-        # Returns the lower bound of rows modified by this DML statement.
-        #
         # The method will block until the update is complete. Running a DML
         # statement with this method does not offer exactly once semantics, and
-        # therfore the DML statement should be idempotent. The DML statement
+        # therefore the DML statement should be idempotent. The DML statement
         # must be fully-partitionable. Specifically, the statement must be
         # expressible as the union of many statements which each access only a
         # single row of the table. This is a Partitioned DML transaction in
