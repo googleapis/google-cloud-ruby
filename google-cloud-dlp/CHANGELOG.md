@@ -1,5 +1,21 @@
 # Release History
 
+### 0.7.0 / 2018-10-03
+
+* Add order_by argument to the following methods and resources:
+  * DlpServiceClient#list_inspect_templates
+  * DlpServiceClient#list_deidentify_templates
+  * ListInspectTemplatesRequest#order_by
+  * ListDeidentifyTemplatesRequest#order_by
+  * ListStoredInfoTypesRequest#order_by
+* Add InspectConfig#rule_set
+  * Add InspectionRuleSet, InspectionRule, ExclusionRule,
+    ExcludeInfoTypes, and MatchingType resources.
+* Add CustomInfoType#exclusion_type
+  * Add ExclusionType resource.
+* Update documentation.
+* Add new GAPIC config, which is not yet used.
+
 ### 0.6.2 / 2018-09-20
 
 * Update documentation.
