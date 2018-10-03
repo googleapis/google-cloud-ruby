@@ -1,5 +1,10 @@
 # Release History
 
+### 0.33.1 / 2018-10-03
+
+* Update connection configuration.
+  * Treat Acknowledge as idempotent.
+
 ### 0.33.0 / 2018-09-20
 
 * Add support for user labels to Snapshot, Subscription and Topic.
