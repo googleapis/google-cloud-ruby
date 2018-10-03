@@ -1,5 +1,16 @@
 # Release History
 
+### 1.15.0 / 2018-10-03
+
+* Add Bucket retention policy
+  * Add retention_policy fields and default_event_based_hold to Bucket.
+  * Add retention_policy and hold fields to File.
+  * Add Bucket#lock_retention_policy!
+  * Add Bucket#metageneration.
+  * Add Bucket#retention_policy_locked?
+  * Add File#(set|release)_temporary_hold!
+  * Add File#(set|release)_event_based_hold!
+
 ### 1.14.2 / 2018-09-20
 
 * Update documentation.
