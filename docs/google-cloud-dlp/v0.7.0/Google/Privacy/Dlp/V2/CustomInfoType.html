@@ -1,0 +1,2787 @@
+---
+layout: yard_main
+title: "Class: Google::Privacy::Dlp::V2::CustomInfoType - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Privacy::Dlp::V2::CustomInfoType";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Privacy.html" title="Google::Privacy (module)">Privacy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dlp.html" title="Google::Privacy::Dlp (module)">Dlp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Privacy::Dlp::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">CustomInfoType</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Privacy::Dlp::V2::CustomInfoType
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Privacy::Dlp::V2::CustomInfoType</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Custom information type provided by the user. Used to find domain-specific
+sensitive information configurable to the data in question.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">ExclusionType</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span>, <span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span>, <span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span>, <span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#detection_rules-instance_method" title="#detection_rules (instance method)">#<strong>detection_rules</strong>  &#x21d2; Array&lt;Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set of detection rules to apply to all findings of this CustomInfoType.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dictionary-instance_method" title="#dictionary (instance method)">#<strong>dictionary</strong>  &#x21d2; Google::Privacy::Dlp::V2::CustomInfoType::Dictionary </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A list of phrases to detect as a CustomInfoType.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exclusion_type-instance_method" title="#exclusion_type (instance method)">#<strong>exclusion_type</strong>  &#x21d2; Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If set to EXCLUSION_TYPE_EXCLUDE this infoType will not cause a finding to be returned.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#info_type-instance_method" title="#info_type (instance method)">#<strong>info_type</strong>  &#x21d2; Google::Privacy::Dlp::V2::InfoType </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>CustomInfoType can either be a new infoType, or an extension of built-in infoType, when the name matches one of existing infoTypes and that infoType is specified in <code>InspectContent.info_types</code> field.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#likelihood-instance_method" title="#likelihood (instance method)">#<strong>likelihood</strong>  &#x21d2; Google::Privacy::Dlp::V2::Likelihood </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Likelihood to return for this CustomInfoType.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#regex-instance_method" title="#regex (instance method)">#<strong>regex</strong>  &#x21d2; Google::Privacy::Dlp::V2::CustomInfoType::Regex </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Regular expression based CustomInfoType.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stored_type-instance_method" title="#stored_type (instance method)">#<strong>stored_type</strong>  &#x21d2; Google::Privacy::Dlp::V2::StoredType </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Load an existing <code>StoredInfoType</code> resource for use in <code>InspectDataSource</code>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#surrogate_type-instance_method" title="#surrogate_type (instance method)">#<strong>surrogate_type</strong>  &#x21d2; Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Message for detecting output from deidentification transformations that support reversing.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="detection_rules=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="detection_rules-instance_method">
+  
+    #<strong>detection_rules</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Set of detection rules to apply to all findings of this CustomInfoType.
+Rules are applied in order that they are specified. Not supported for the
+<code>surrogate_type</code> CustomInfoType.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Set of detection rules to apply to all findings of this CustomInfoType.
+Rules are applied in order that they are specified. Not supported for the
+<code>surrogate_type</code> CustomInfoType.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">CustomInfoType</a></span></span>
+  <span class='comment'># Custom information type based on a dictionary of words or phrases. This can
+</span>  <span class='comment'># be used to match sensitive information specific to the data, such as a list
+</span>  <span class='comment'># of employee IDs or job titles.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words are case-insensitive and all characters other than letters
+</span>  <span class='comment'># and digits in the unicode [Basic Multilingual
+</span>  <span class='comment'># Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+</span>  <span class='comment'># will be replaced with whitespace when scanning for matches, so the
+</span>  <span class='comment'># dictionary phrase &quot;Sam Johnson&quot; will match all three phrases &quot;sam johnson&quot;,
+</span>  <span class='comment'># &quot;Sam, Johnson&quot;, and &quot;Sam (Johnson)&quot;. Additionally, the characters
+</span>  <span class='comment'># surrounding any match must be of a different type than the adjacent
+</span>  <span class='comment'># characters within the word, so letters must be next to non-letters and
+</span>  <span class='comment'># digits next to non-digits. For example, the dictionary word &quot;jen&quot; will
+</span>  <span class='comment'># match the first three letters of the text &quot;jen123&quot; but will return no
+</span>  <span class='comment'># matches for &quot;jennifer&quot;.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words containing a large number of characters that are not
+</span>  <span class='comment'># letters or digits may result in unexpected findings because such characters
+</span>  <span class='comment'># are treated as whitespace. The
+</span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
+</span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
+</span>  <span class='comment'># @!attribute [rw] word_list
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
+</span>  <span class='comment'>#     List of words or phrases to search for.
+</span>  <span class='comment'># @!attribute [rw] cloud_storage_path
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
+</span>  <span class='comment'>#     Newline-delimited file of words in Cloud Storage. Only a single file
+</span>  <span class='comment'>#     is accepted.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
+    <span class='comment'># Message defining a list of words or phrases to search for in the data.
+</span>    <span class='comment'># @!attribute [rw] words
+</span>    <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>    <span class='comment'>#     Words or phrases defining the dictionary. The dictionary must contain
+</span>    <span class='comment'>#     at least one phrase and every phrase must contain at least 2 characters
+</span>    <span class='comment'>#     that are letters or digits. [required]
+</span>    <span class='kw'>class</span> <span class='const'>WordList</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Message defining a custom regular expression.
+</span>  <span class='comment'># @!attribute [rw] pattern
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
+</span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
+</span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message for detecting output from deidentification transformations
+</span>  <span class='comment'># such as
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># These types of transformations are
+</span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
+</span>  <span class='comment'># output. This should be used in conjunction with a field on the
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
+</span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
+</span>  <span class='comment'># @!attribute [rw] hotword_rule
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+</span>  <span class='comment'>#     Hotword-based detection rule.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span></span>
+    <span class='comment'># Message for specifying a window around a finding to apply a detection
+</span>    <span class='comment'># rule.
+</span>    <span class='comment'># @!attribute [rw] window_before
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters before the finding to consider.
+</span>    <span class='comment'># @!attribute [rw] window_after
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters after the finding to consider.
+</span>    <span class='kw'>class</span> <span class='const'>Proximity</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Message for specifying an adjustment to the likelihood of a finding as
+</span>    <span class='comment'># part of a detection rule.
+</span>    <span class='comment'># @!attribute [rw] fixed_likelihood
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::Likelihood]
+</span>    <span class='comment'>#     Set the likelihood of a finding to a fixed value.
+</span>    <span class='comment'># @!attribute [rw] relative_likelihood
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
+</span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># The rule that adjusts the likelihood of findings within a certain
+</span>    <span class='comment'># proximity of hotwords.
+</span>    <span class='comment'># @!attribute [rw] hotword_regex
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+</span>    <span class='comment'>#     Regular expression pattern defining what qualifies as a hotword.
+</span>    <span class='comment'># @!attribute [rw] proximity
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+</span>    <span class='comment'>#     Proximity of the finding within which the entire hotword must reside.
+</span>    <span class='comment'>#     The total length of the window cannot exceed 1000 characters. Note that
+</span>    <span class='comment'>#     the finding itself will be included in the window, so that hotwords may
+</span>    <span class='comment'>#     be used to match substrings of the finding itself. For example, the
+</span>    <span class='comment'>#     certainty of a phone number regex &quot;\(\d\\{3}\) \d\\{3}-\d\\{4}&quot; could be
+</span>    <span class='comment'>#     adjusted upwards if the area code is known to be the local area code of
+</span>    <span class='comment'>#     a company office using the hotword regex &quot;\(xxx\)&quot;, where &quot;xxx&quot;
+</span>    <span class='comment'>#     is the area code in question.
+</span>    <span class='comment'># @!attribute [rw] likelihood_adjustment
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+</span>    <span class='comment'>#     Likelihood adjustment to apply to all matching findings.
+</span>    <span class='kw'>class</span> <span class='const'>HotwordRule</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">ExclusionType</a></span></span>
+    <span class='comment'># A finding of this custom info type will not be excluded from results.
+</span>    <span class='const'>EXCLUSION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># A finding of this custom info type will be excluded from final results,
+</span>    <span class='comment'># but can still affect rule execution.
+</span>    <span class='const'>EXCLUSION_TYPE_EXCLUDE</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="dictionary=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="dictionary-instance_method">
+  
+    #<strong>dictionary</strong>  &#x21d2; <tt><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Google::Privacy::Dlp::V2::CustomInfoType::Dictionary</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A list of phrases to detect as a CustomInfoType.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Google::Privacy::Dlp::V2::CustomInfoType::Dictionary</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of phrases to detect as a CustomInfoType.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">CustomInfoType</a></span></span>
+  <span class='comment'># Custom information type based on a dictionary of words or phrases. This can
+</span>  <span class='comment'># be used to match sensitive information specific to the data, such as a list
+</span>  <span class='comment'># of employee IDs or job titles.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words are case-insensitive and all characters other than letters
+</span>  <span class='comment'># and digits in the unicode [Basic Multilingual
+</span>  <span class='comment'># Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+</span>  <span class='comment'># will be replaced with whitespace when scanning for matches, so the
+</span>  <span class='comment'># dictionary phrase &quot;Sam Johnson&quot; will match all three phrases &quot;sam johnson&quot;,
+</span>  <span class='comment'># &quot;Sam, Johnson&quot;, and &quot;Sam (Johnson)&quot;. Additionally, the characters
+</span>  <span class='comment'># surrounding any match must be of a different type than the adjacent
+</span>  <span class='comment'># characters within the word, so letters must be next to non-letters and
+</span>  <span class='comment'># digits next to non-digits. For example, the dictionary word &quot;jen&quot; will
+</span>  <span class='comment'># match the first three letters of the text &quot;jen123&quot; but will return no
+</span>  <span class='comment'># matches for &quot;jennifer&quot;.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words containing a large number of characters that are not
+</span>  <span class='comment'># letters or digits may result in unexpected findings because such characters
+</span>  <span class='comment'># are treated as whitespace. The
+</span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
+</span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
+</span>  <span class='comment'># @!attribute [rw] word_list
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
+</span>  <span class='comment'>#     List of words or phrases to search for.
+</span>  <span class='comment'># @!attribute [rw] cloud_storage_path
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
+</span>  <span class='comment'>#     Newline-delimited file of words in Cloud Storage. Only a single file
+</span>  <span class='comment'>#     is accepted.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
+    <span class='comment'># Message defining a list of words or phrases to search for in the data.
+</span>    <span class='comment'># @!attribute [rw] words
+</span>    <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>    <span class='comment'>#     Words or phrases defining the dictionary. The dictionary must contain
+</span>    <span class='comment'>#     at least one phrase and every phrase must contain at least 2 characters
+</span>    <span class='comment'>#     that are letters or digits. [required]
+</span>    <span class='kw'>class</span> <span class='const'>WordList</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Message defining a custom regular expression.
+</span>  <span class='comment'># @!attribute [rw] pattern
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
+</span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
+</span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message for detecting output from deidentification transformations
+</span>  <span class='comment'># such as
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># These types of transformations are
+</span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
+</span>  <span class='comment'># output. This should be used in conjunction with a field on the
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
+</span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
+</span>  <span class='comment'># @!attribute [rw] hotword_rule
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+</span>  <span class='comment'>#     Hotword-based detection rule.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span></span>
+    <span class='comment'># Message for specifying a window around a finding to apply a detection
+</span>    <span class='comment'># rule.
+</span>    <span class='comment'># @!attribute [rw] window_before
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters before the finding to consider.
+</span>    <span class='comment'># @!attribute [rw] window_after
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters after the finding to consider.
+</span>    <span class='kw'>class</span> <span class='const'>Proximity</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Message for specifying an adjustment to the likelihood of a finding as
+</span>    <span class='comment'># part of a detection rule.
+</span>    <span class='comment'># @!attribute [rw] fixed_likelihood
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::Likelihood]
+</span>    <span class='comment'>#     Set the likelihood of a finding to a fixed value.
+</span>    <span class='comment'># @!attribute [rw] relative_likelihood
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
+</span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># The rule that adjusts the likelihood of findings within a certain
+</span>    <span class='comment'># proximity of hotwords.
+</span>    <span class='comment'># @!attribute [rw] hotword_regex
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+</span>    <span class='comment'>#     Regular expression pattern defining what qualifies as a hotword.
+</span>    <span class='comment'># @!attribute [rw] proximity
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+</span>    <span class='comment'>#     Proximity of the finding within which the entire hotword must reside.
+</span>    <span class='comment'>#     The total length of the window cannot exceed 1000 characters. Note that
+</span>    <span class='comment'>#     the finding itself will be included in the window, so that hotwords may
+</span>    <span class='comment'>#     be used to match substrings of the finding itself. For example, the
+</span>    <span class='comment'>#     certainty of a phone number regex &quot;\(\d\\{3}\) \d\\{3}-\d\\{4}&quot; could be
+</span>    <span class='comment'>#     adjusted upwards if the area code is known to be the local area code of
+</span>    <span class='comment'>#     a company office using the hotword regex &quot;\(xxx\)&quot;, where &quot;xxx&quot;
+</span>    <span class='comment'>#     is the area code in question.
+</span>    <span class='comment'># @!attribute [rw] likelihood_adjustment
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+</span>    <span class='comment'>#     Likelihood adjustment to apply to all matching findings.
+</span>    <span class='kw'>class</span> <span class='const'>HotwordRule</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">ExclusionType</a></span></span>
+    <span class='comment'># A finding of this custom info type will not be excluded from results.
+</span>    <span class='const'>EXCLUSION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># A finding of this custom info type will be excluded from final results,
+</span>    <span class='comment'># but can still affect rule execution.
+</span>    <span class='const'>EXCLUSION_TYPE_EXCLUDE</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="exclusion_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="exclusion_type-instance_method">
+  
+    #<strong>exclusion_type</strong>  &#x21d2; <tt><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If set to EXCLUSION_TYPE_EXCLUDE this infoType will not cause a finding
+to be returned. It still can be used for rules matching.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If set to EXCLUSION_TYPE_EXCLUDE this infoType will not cause a finding
+to be returned. It still can be used for rules matching.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">CustomInfoType</a></span></span>
+  <span class='comment'># Custom information type based on a dictionary of words or phrases. This can
+</span>  <span class='comment'># be used to match sensitive information specific to the data, such as a list
+</span>  <span class='comment'># of employee IDs or job titles.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words are case-insensitive and all characters other than letters
+</span>  <span class='comment'># and digits in the unicode [Basic Multilingual
+</span>  <span class='comment'># Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+</span>  <span class='comment'># will be replaced with whitespace when scanning for matches, so the
+</span>  <span class='comment'># dictionary phrase &quot;Sam Johnson&quot; will match all three phrases &quot;sam johnson&quot;,
+</span>  <span class='comment'># &quot;Sam, Johnson&quot;, and &quot;Sam (Johnson)&quot;. Additionally, the characters
+</span>  <span class='comment'># surrounding any match must be of a different type than the adjacent
+</span>  <span class='comment'># characters within the word, so letters must be next to non-letters and
+</span>  <span class='comment'># digits next to non-digits. For example, the dictionary word &quot;jen&quot; will
+</span>  <span class='comment'># match the first three letters of the text &quot;jen123&quot; but will return no
+</span>  <span class='comment'># matches for &quot;jennifer&quot;.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words containing a large number of characters that are not
+</span>  <span class='comment'># letters or digits may result in unexpected findings because such characters
+</span>  <span class='comment'># are treated as whitespace. The
+</span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
+</span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
+</span>  <span class='comment'># @!attribute [rw] word_list
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
+</span>  <span class='comment'>#     List of words or phrases to search for.
+</span>  <span class='comment'># @!attribute [rw] cloud_storage_path
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
+</span>  <span class='comment'>#     Newline-delimited file of words in Cloud Storage. Only a single file
+</span>  <span class='comment'>#     is accepted.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
+    <span class='comment'># Message defining a list of words or phrases to search for in the data.
+</span>    <span class='comment'># @!attribute [rw] words
+</span>    <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>    <span class='comment'>#     Words or phrases defining the dictionary. The dictionary must contain
+</span>    <span class='comment'>#     at least one phrase and every phrase must contain at least 2 characters
+</span>    <span class='comment'>#     that are letters or digits. [required]
+</span>    <span class='kw'>class</span> <span class='const'>WordList</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Message defining a custom regular expression.
+</span>  <span class='comment'># @!attribute [rw] pattern
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
+</span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
+</span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message for detecting output from deidentification transformations
+</span>  <span class='comment'># such as
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># These types of transformations are
+</span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
+</span>  <span class='comment'># output. This should be used in conjunction with a field on the
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
+</span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
+</span>  <span class='comment'># @!attribute [rw] hotword_rule
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+</span>  <span class='comment'>#     Hotword-based detection rule.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span></span>
+    <span class='comment'># Message for specifying a window around a finding to apply a detection
+</span>    <span class='comment'># rule.
+</span>    <span class='comment'># @!attribute [rw] window_before
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters before the finding to consider.
+</span>    <span class='comment'># @!attribute [rw] window_after
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters after the finding to consider.
+</span>    <span class='kw'>class</span> <span class='const'>Proximity</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Message for specifying an adjustment to the likelihood of a finding as
+</span>    <span class='comment'># part of a detection rule.
+</span>    <span class='comment'># @!attribute [rw] fixed_likelihood
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::Likelihood]
+</span>    <span class='comment'>#     Set the likelihood of a finding to a fixed value.
+</span>    <span class='comment'># @!attribute [rw] relative_likelihood
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
+</span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># The rule that adjusts the likelihood of findings within a certain
+</span>    <span class='comment'># proximity of hotwords.
+</span>    <span class='comment'># @!attribute [rw] hotword_regex
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+</span>    <span class='comment'>#     Regular expression pattern defining what qualifies as a hotword.
+</span>    <span class='comment'># @!attribute [rw] proximity
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+</span>    <span class='comment'>#     Proximity of the finding within which the entire hotword must reside.
+</span>    <span class='comment'>#     The total length of the window cannot exceed 1000 characters. Note that
+</span>    <span class='comment'>#     the finding itself will be included in the window, so that hotwords may
+</span>    <span class='comment'>#     be used to match substrings of the finding itself. For example, the
+</span>    <span class='comment'>#     certainty of a phone number regex &quot;\(\d\\{3}\) \d\\{3}-\d\\{4}&quot; could be
+</span>    <span class='comment'>#     adjusted upwards if the area code is known to be the local area code of
+</span>    <span class='comment'>#     a company office using the hotword regex &quot;\(xxx\)&quot;, where &quot;xxx&quot;
+</span>    <span class='comment'>#     is the area code in question.
+</span>    <span class='comment'># @!attribute [rw] likelihood_adjustment
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+</span>    <span class='comment'>#     Likelihood adjustment to apply to all matching findings.
+</span>    <span class='kw'>class</span> <span class='const'>HotwordRule</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">ExclusionType</a></span></span>
+    <span class='comment'># A finding of this custom info type will not be excluded from results.
+</span>    <span class='const'>EXCLUSION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># A finding of this custom info type will be excluded from final results,
+</span>    <span class='comment'># but can still affect rule execution.
+</span>    <span class='const'>EXCLUSION_TYPE_EXCLUDE</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="info_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="info_type-instance_method">
+  
+    #<strong>info_type</strong>  &#x21d2; <tt><span class='object_link'><a href="InfoType.html" title="Google::Privacy::Dlp::V2::InfoType (class)">Google::Privacy::Dlp::V2::InfoType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns CustomInfoType can either be a new infoType, or an extension of built-in
+infoType, when the name matches one of existing infoTypes and that infoType
+is specified in <code>InspectContent.info_types</code> field. Specifying the latter
+adds findings to the one detected by the system. If built-in info type is
+not specified in <code>InspectContent.info_types</code> list then the name is treated
+as a custom info type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InfoType.html" title="Google::Privacy::Dlp::V2::InfoType (class)">Google::Privacy::Dlp::V2::InfoType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>CustomInfoType can either be a new infoType, or an extension of built-in
+infoType, when the name matches one of existing infoTypes and that infoType
+is specified in <code>InspectContent.info_types</code> field. Specifying the latter
+adds findings to the one detected by the system. If built-in info type is
+not specified in <code>InspectContent.info_types</code> list then the name is treated
+as a custom info type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">CustomInfoType</a></span></span>
+  <span class='comment'># Custom information type based on a dictionary of words or phrases. This can
+</span>  <span class='comment'># be used to match sensitive information specific to the data, such as a list
+</span>  <span class='comment'># of employee IDs or job titles.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words are case-insensitive and all characters other than letters
+</span>  <span class='comment'># and digits in the unicode [Basic Multilingual
+</span>  <span class='comment'># Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+</span>  <span class='comment'># will be replaced with whitespace when scanning for matches, so the
+</span>  <span class='comment'># dictionary phrase &quot;Sam Johnson&quot; will match all three phrases &quot;sam johnson&quot;,
+</span>  <span class='comment'># &quot;Sam, Johnson&quot;, and &quot;Sam (Johnson)&quot;. Additionally, the characters
+</span>  <span class='comment'># surrounding any match must be of a different type than the adjacent
+</span>  <span class='comment'># characters within the word, so letters must be next to non-letters and
+</span>  <span class='comment'># digits next to non-digits. For example, the dictionary word &quot;jen&quot; will
+</span>  <span class='comment'># match the first three letters of the text &quot;jen123&quot; but will return no
+</span>  <span class='comment'># matches for &quot;jennifer&quot;.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words containing a large number of characters that are not
+</span>  <span class='comment'># letters or digits may result in unexpected findings because such characters
+</span>  <span class='comment'># are treated as whitespace. The
+</span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
+</span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
+</span>  <span class='comment'># @!attribute [rw] word_list
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
+</span>  <span class='comment'>#     List of words or phrases to search for.
+</span>  <span class='comment'># @!attribute [rw] cloud_storage_path
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
+</span>  <span class='comment'>#     Newline-delimited file of words in Cloud Storage. Only a single file
+</span>  <span class='comment'>#     is accepted.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
+    <span class='comment'># Message defining a list of words or phrases to search for in the data.
+</span>    <span class='comment'># @!attribute [rw] words
+</span>    <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>    <span class='comment'>#     Words or phrases defining the dictionary. The dictionary must contain
+</span>    <span class='comment'>#     at least one phrase and every phrase must contain at least 2 characters
+</span>    <span class='comment'>#     that are letters or digits. [required]
+</span>    <span class='kw'>class</span> <span class='const'>WordList</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Message defining a custom regular expression.
+</span>  <span class='comment'># @!attribute [rw] pattern
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
+</span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
+</span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message for detecting output from deidentification transformations
+</span>  <span class='comment'># such as
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># These types of transformations are
+</span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
+</span>  <span class='comment'># output. This should be used in conjunction with a field on the
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
+</span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
+</span>  <span class='comment'># @!attribute [rw] hotword_rule
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+</span>  <span class='comment'>#     Hotword-based detection rule.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span></span>
+    <span class='comment'># Message for specifying a window around a finding to apply a detection
+</span>    <span class='comment'># rule.
+</span>    <span class='comment'># @!attribute [rw] window_before
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters before the finding to consider.
+</span>    <span class='comment'># @!attribute [rw] window_after
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters after the finding to consider.
+</span>    <span class='kw'>class</span> <span class='const'>Proximity</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Message for specifying an adjustment to the likelihood of a finding as
+</span>    <span class='comment'># part of a detection rule.
+</span>    <span class='comment'># @!attribute [rw] fixed_likelihood
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::Likelihood]
+</span>    <span class='comment'>#     Set the likelihood of a finding to a fixed value.
+</span>    <span class='comment'># @!attribute [rw] relative_likelihood
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
+</span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># The rule that adjusts the likelihood of findings within a certain
+</span>    <span class='comment'># proximity of hotwords.
+</span>    <span class='comment'># @!attribute [rw] hotword_regex
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+</span>    <span class='comment'>#     Regular expression pattern defining what qualifies as a hotword.
+</span>    <span class='comment'># @!attribute [rw] proximity
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+</span>    <span class='comment'>#     Proximity of the finding within which the entire hotword must reside.
+</span>    <span class='comment'>#     The total length of the window cannot exceed 1000 characters. Note that
+</span>    <span class='comment'>#     the finding itself will be included in the window, so that hotwords may
+</span>    <span class='comment'>#     be used to match substrings of the finding itself. For example, the
+</span>    <span class='comment'>#     certainty of a phone number regex &quot;\(\d\\{3}\) \d\\{3}-\d\\{4}&quot; could be
+</span>    <span class='comment'>#     adjusted upwards if the area code is known to be the local area code of
+</span>    <span class='comment'>#     a company office using the hotword regex &quot;\(xxx\)&quot;, where &quot;xxx&quot;
+</span>    <span class='comment'>#     is the area code in question.
+</span>    <span class='comment'># @!attribute [rw] likelihood_adjustment
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+</span>    <span class='comment'>#     Likelihood adjustment to apply to all matching findings.
+</span>    <span class='kw'>class</span> <span class='const'>HotwordRule</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">ExclusionType</a></span></span>
+    <span class='comment'># A finding of this custom info type will not be excluded from results.
+</span>    <span class='const'>EXCLUSION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># A finding of this custom info type will be excluded from final results,
+</span>    <span class='comment'># but can still affect rule execution.
+</span>    <span class='const'>EXCLUSION_TYPE_EXCLUDE</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="likelihood=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="likelihood-instance_method">
+  
+    #<strong>likelihood</strong>  &#x21d2; <tt><span class='object_link'><a href="Likelihood.html" title="Google::Privacy::Dlp::V2::Likelihood (module)">Google::Privacy::Dlp::V2::Likelihood</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Likelihood to return for this CustomInfoType. This base value can be
+altered by a detection rule if the finding meets the criteria specified by
+the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Likelihood.html" title="Google::Privacy::Dlp::V2::Likelihood (module)">Google::Privacy::Dlp::V2::Likelihood</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Likelihood to return for this CustomInfoType. This base value can be
+altered by a detection rule if the finding meets the criteria specified by
+the rule. Defaults to <code>VERY_LIKELY</code> if not specified.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">CustomInfoType</a></span></span>
+  <span class='comment'># Custom information type based on a dictionary of words or phrases. This can
+</span>  <span class='comment'># be used to match sensitive information specific to the data, such as a list
+</span>  <span class='comment'># of employee IDs or job titles.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words are case-insensitive and all characters other than letters
+</span>  <span class='comment'># and digits in the unicode [Basic Multilingual
+</span>  <span class='comment'># Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+</span>  <span class='comment'># will be replaced with whitespace when scanning for matches, so the
+</span>  <span class='comment'># dictionary phrase &quot;Sam Johnson&quot; will match all three phrases &quot;sam johnson&quot;,
+</span>  <span class='comment'># &quot;Sam, Johnson&quot;, and &quot;Sam (Johnson)&quot;. Additionally, the characters
+</span>  <span class='comment'># surrounding any match must be of a different type than the adjacent
+</span>  <span class='comment'># characters within the word, so letters must be next to non-letters and
+</span>  <span class='comment'># digits next to non-digits. For example, the dictionary word &quot;jen&quot; will
+</span>  <span class='comment'># match the first three letters of the text &quot;jen123&quot; but will return no
+</span>  <span class='comment'># matches for &quot;jennifer&quot;.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words containing a large number of characters that are not
+</span>  <span class='comment'># letters or digits may result in unexpected findings because such characters
+</span>  <span class='comment'># are treated as whitespace. The
+</span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
+</span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
+</span>  <span class='comment'># @!attribute [rw] word_list
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
+</span>  <span class='comment'>#     List of words or phrases to search for.
+</span>  <span class='comment'># @!attribute [rw] cloud_storage_path
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
+</span>  <span class='comment'>#     Newline-delimited file of words in Cloud Storage. Only a single file
+</span>  <span class='comment'>#     is accepted.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
+    <span class='comment'># Message defining a list of words or phrases to search for in the data.
+</span>    <span class='comment'># @!attribute [rw] words
+</span>    <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>    <span class='comment'>#     Words or phrases defining the dictionary. The dictionary must contain
+</span>    <span class='comment'>#     at least one phrase and every phrase must contain at least 2 characters
+</span>    <span class='comment'>#     that are letters or digits. [required]
+</span>    <span class='kw'>class</span> <span class='const'>WordList</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Message defining a custom regular expression.
+</span>  <span class='comment'># @!attribute [rw] pattern
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
+</span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
+</span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message for detecting output from deidentification transformations
+</span>  <span class='comment'># such as
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># These types of transformations are
+</span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
+</span>  <span class='comment'># output. This should be used in conjunction with a field on the
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
+</span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
+</span>  <span class='comment'># @!attribute [rw] hotword_rule
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+</span>  <span class='comment'>#     Hotword-based detection rule.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span></span>
+    <span class='comment'># Message for specifying a window around a finding to apply a detection
+</span>    <span class='comment'># rule.
+</span>    <span class='comment'># @!attribute [rw] window_before
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters before the finding to consider.
+</span>    <span class='comment'># @!attribute [rw] window_after
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters after the finding to consider.
+</span>    <span class='kw'>class</span> <span class='const'>Proximity</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Message for specifying an adjustment to the likelihood of a finding as
+</span>    <span class='comment'># part of a detection rule.
+</span>    <span class='comment'># @!attribute [rw] fixed_likelihood
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::Likelihood]
+</span>    <span class='comment'>#     Set the likelihood of a finding to a fixed value.
+</span>    <span class='comment'># @!attribute [rw] relative_likelihood
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
+</span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># The rule that adjusts the likelihood of findings within a certain
+</span>    <span class='comment'># proximity of hotwords.
+</span>    <span class='comment'># @!attribute [rw] hotword_regex
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+</span>    <span class='comment'>#     Regular expression pattern defining what qualifies as a hotword.
+</span>    <span class='comment'># @!attribute [rw] proximity
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+</span>    <span class='comment'>#     Proximity of the finding within which the entire hotword must reside.
+</span>    <span class='comment'>#     The total length of the window cannot exceed 1000 characters. Note that
+</span>    <span class='comment'>#     the finding itself will be included in the window, so that hotwords may
+</span>    <span class='comment'>#     be used to match substrings of the finding itself. For example, the
+</span>    <span class='comment'>#     certainty of a phone number regex &quot;\(\d\\{3}\) \d\\{3}-\d\\{4}&quot; could be
+</span>    <span class='comment'>#     adjusted upwards if the area code is known to be the local area code of
+</span>    <span class='comment'>#     a company office using the hotword regex &quot;\(xxx\)&quot;, where &quot;xxx&quot;
+</span>    <span class='comment'>#     is the area code in question.
+</span>    <span class='comment'># @!attribute [rw] likelihood_adjustment
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+</span>    <span class='comment'>#     Likelihood adjustment to apply to all matching findings.
+</span>    <span class='kw'>class</span> <span class='const'>HotwordRule</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">ExclusionType</a></span></span>
+    <span class='comment'># A finding of this custom info type will not be excluded from results.
+</span>    <span class='const'>EXCLUSION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># A finding of this custom info type will be excluded from final results,
+</span>    <span class='comment'># but can still affect rule execution.
+</span>    <span class='const'>EXCLUSION_TYPE_EXCLUDE</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="regex=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="regex-instance_method">
+  
+    #<strong>regex</strong>  &#x21d2; <tt><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Google::Privacy::Dlp::V2::CustomInfoType::Regex</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Regular expression based CustomInfoType.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Google::Privacy::Dlp::V2::CustomInfoType::Regex</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Regular expression based CustomInfoType.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">CustomInfoType</a></span></span>
+  <span class='comment'># Custom information type based on a dictionary of words or phrases. This can
+</span>  <span class='comment'># be used to match sensitive information specific to the data, such as a list
+</span>  <span class='comment'># of employee IDs or job titles.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words are case-insensitive and all characters other than letters
+</span>  <span class='comment'># and digits in the unicode [Basic Multilingual
+</span>  <span class='comment'># Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+</span>  <span class='comment'># will be replaced with whitespace when scanning for matches, so the
+</span>  <span class='comment'># dictionary phrase &quot;Sam Johnson&quot; will match all three phrases &quot;sam johnson&quot;,
+</span>  <span class='comment'># &quot;Sam, Johnson&quot;, and &quot;Sam (Johnson)&quot;. Additionally, the characters
+</span>  <span class='comment'># surrounding any match must be of a different type than the adjacent
+</span>  <span class='comment'># characters within the word, so letters must be next to non-letters and
+</span>  <span class='comment'># digits next to non-digits. For example, the dictionary word &quot;jen&quot; will
+</span>  <span class='comment'># match the first three letters of the text &quot;jen123&quot; but will return no
+</span>  <span class='comment'># matches for &quot;jennifer&quot;.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words containing a large number of characters that are not
+</span>  <span class='comment'># letters or digits may result in unexpected findings because such characters
+</span>  <span class='comment'># are treated as whitespace. The
+</span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
+</span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
+</span>  <span class='comment'># @!attribute [rw] word_list
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
+</span>  <span class='comment'>#     List of words or phrases to search for.
+</span>  <span class='comment'># @!attribute [rw] cloud_storage_path
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
+</span>  <span class='comment'>#     Newline-delimited file of words in Cloud Storage. Only a single file
+</span>  <span class='comment'>#     is accepted.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
+    <span class='comment'># Message defining a list of words or phrases to search for in the data.
+</span>    <span class='comment'># @!attribute [rw] words
+</span>    <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>    <span class='comment'>#     Words or phrases defining the dictionary. The dictionary must contain
+</span>    <span class='comment'>#     at least one phrase and every phrase must contain at least 2 characters
+</span>    <span class='comment'>#     that are letters or digits. [required]
+</span>    <span class='kw'>class</span> <span class='const'>WordList</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Message defining a custom regular expression.
+</span>  <span class='comment'># @!attribute [rw] pattern
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
+</span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
+</span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message for detecting output from deidentification transformations
+</span>  <span class='comment'># such as
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># These types of transformations are
+</span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
+</span>  <span class='comment'># output. This should be used in conjunction with a field on the
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
+</span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
+</span>  <span class='comment'># @!attribute [rw] hotword_rule
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+</span>  <span class='comment'>#     Hotword-based detection rule.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span></span>
+    <span class='comment'># Message for specifying a window around a finding to apply a detection
+</span>    <span class='comment'># rule.
+</span>    <span class='comment'># @!attribute [rw] window_before
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters before the finding to consider.
+</span>    <span class='comment'># @!attribute [rw] window_after
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters after the finding to consider.
+</span>    <span class='kw'>class</span> <span class='const'>Proximity</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Message for specifying an adjustment to the likelihood of a finding as
+</span>    <span class='comment'># part of a detection rule.
+</span>    <span class='comment'># @!attribute [rw] fixed_likelihood
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::Likelihood]
+</span>    <span class='comment'>#     Set the likelihood of a finding to a fixed value.
+</span>    <span class='comment'># @!attribute [rw] relative_likelihood
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
+</span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># The rule that adjusts the likelihood of findings within a certain
+</span>    <span class='comment'># proximity of hotwords.
+</span>    <span class='comment'># @!attribute [rw] hotword_regex
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+</span>    <span class='comment'>#     Regular expression pattern defining what qualifies as a hotword.
+</span>    <span class='comment'># @!attribute [rw] proximity
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+</span>    <span class='comment'>#     Proximity of the finding within which the entire hotword must reside.
+</span>    <span class='comment'>#     The total length of the window cannot exceed 1000 characters. Note that
+</span>    <span class='comment'>#     the finding itself will be included in the window, so that hotwords may
+</span>    <span class='comment'>#     be used to match substrings of the finding itself. For example, the
+</span>    <span class='comment'>#     certainty of a phone number regex &quot;\(\d\\{3}\) \d\\{3}-\d\\{4}&quot; could be
+</span>    <span class='comment'>#     adjusted upwards if the area code is known to be the local area code of
+</span>    <span class='comment'>#     a company office using the hotword regex &quot;\(xxx\)&quot;, where &quot;xxx&quot;
+</span>    <span class='comment'>#     is the area code in question.
+</span>    <span class='comment'># @!attribute [rw] likelihood_adjustment
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+</span>    <span class='comment'>#     Likelihood adjustment to apply to all matching findings.
+</span>    <span class='kw'>class</span> <span class='const'>HotwordRule</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">ExclusionType</a></span></span>
+    <span class='comment'># A finding of this custom info type will not be excluded from results.
+</span>    <span class='const'>EXCLUSION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># A finding of this custom info type will be excluded from final results,
+</span>    <span class='comment'># but can still affect rule execution.
+</span>    <span class='const'>EXCLUSION_TYPE_EXCLUDE</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="stored_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="stored_type-instance_method">
+  
+    #<strong>stored_type</strong>  &#x21d2; <tt><span class='object_link'><a href="StoredType.html" title="Google::Privacy::Dlp::V2::StoredType (class)">Google::Privacy::Dlp::V2::StoredType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Load an existing <code>StoredInfoType</code> resource for use in
+<code>InspectDataSource</code>. Not currently supported in <code>InspectContent</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StoredType.html" title="Google::Privacy::Dlp::V2::StoredType (class)">Google::Privacy::Dlp::V2::StoredType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Load an existing <code>StoredInfoType</code> resource for use in
+<code>InspectDataSource</code>. Not currently supported in <code>InspectContent</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">CustomInfoType</a></span></span>
+  <span class='comment'># Custom information type based on a dictionary of words or phrases. This can
+</span>  <span class='comment'># be used to match sensitive information specific to the data, such as a list
+</span>  <span class='comment'># of employee IDs or job titles.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words are case-insensitive and all characters other than letters
+</span>  <span class='comment'># and digits in the unicode [Basic Multilingual
+</span>  <span class='comment'># Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+</span>  <span class='comment'># will be replaced with whitespace when scanning for matches, so the
+</span>  <span class='comment'># dictionary phrase &quot;Sam Johnson&quot; will match all three phrases &quot;sam johnson&quot;,
+</span>  <span class='comment'># &quot;Sam, Johnson&quot;, and &quot;Sam (Johnson)&quot;. Additionally, the characters
+</span>  <span class='comment'># surrounding any match must be of a different type than the adjacent
+</span>  <span class='comment'># characters within the word, so letters must be next to non-letters and
+</span>  <span class='comment'># digits next to non-digits. For example, the dictionary word &quot;jen&quot; will
+</span>  <span class='comment'># match the first three letters of the text &quot;jen123&quot; but will return no
+</span>  <span class='comment'># matches for &quot;jennifer&quot;.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words containing a large number of characters that are not
+</span>  <span class='comment'># letters or digits may result in unexpected findings because such characters
+</span>  <span class='comment'># are treated as whitespace. The
+</span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
+</span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
+</span>  <span class='comment'># @!attribute [rw] word_list
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
+</span>  <span class='comment'>#     List of words or phrases to search for.
+</span>  <span class='comment'># @!attribute [rw] cloud_storage_path
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
+</span>  <span class='comment'>#     Newline-delimited file of words in Cloud Storage. Only a single file
+</span>  <span class='comment'>#     is accepted.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
+    <span class='comment'># Message defining a list of words or phrases to search for in the data.
+</span>    <span class='comment'># @!attribute [rw] words
+</span>    <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>    <span class='comment'>#     Words or phrases defining the dictionary. The dictionary must contain
+</span>    <span class='comment'>#     at least one phrase and every phrase must contain at least 2 characters
+</span>    <span class='comment'>#     that are letters or digits. [required]
+</span>    <span class='kw'>class</span> <span class='const'>WordList</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Message defining a custom regular expression.
+</span>  <span class='comment'># @!attribute [rw] pattern
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
+</span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
+</span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message for detecting output from deidentification transformations
+</span>  <span class='comment'># such as
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># These types of transformations are
+</span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
+</span>  <span class='comment'># output. This should be used in conjunction with a field on the
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
+</span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
+</span>  <span class='comment'># @!attribute [rw] hotword_rule
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+</span>  <span class='comment'>#     Hotword-based detection rule.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span></span>
+    <span class='comment'># Message for specifying a window around a finding to apply a detection
+</span>    <span class='comment'># rule.
+</span>    <span class='comment'># @!attribute [rw] window_before
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters before the finding to consider.
+</span>    <span class='comment'># @!attribute [rw] window_after
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters after the finding to consider.
+</span>    <span class='kw'>class</span> <span class='const'>Proximity</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Message for specifying an adjustment to the likelihood of a finding as
+</span>    <span class='comment'># part of a detection rule.
+</span>    <span class='comment'># @!attribute [rw] fixed_likelihood
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::Likelihood]
+</span>    <span class='comment'>#     Set the likelihood of a finding to a fixed value.
+</span>    <span class='comment'># @!attribute [rw] relative_likelihood
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
+</span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># The rule that adjusts the likelihood of findings within a certain
+</span>    <span class='comment'># proximity of hotwords.
+</span>    <span class='comment'># @!attribute [rw] hotword_regex
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+</span>    <span class='comment'>#     Regular expression pattern defining what qualifies as a hotword.
+</span>    <span class='comment'># @!attribute [rw] proximity
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+</span>    <span class='comment'>#     Proximity of the finding within which the entire hotword must reside.
+</span>    <span class='comment'>#     The total length of the window cannot exceed 1000 characters. Note that
+</span>    <span class='comment'>#     the finding itself will be included in the window, so that hotwords may
+</span>    <span class='comment'>#     be used to match substrings of the finding itself. For example, the
+</span>    <span class='comment'>#     certainty of a phone number regex &quot;\(\d\\{3}\) \d\\{3}-\d\\{4}&quot; could be
+</span>    <span class='comment'>#     adjusted upwards if the area code is known to be the local area code of
+</span>    <span class='comment'>#     a company office using the hotword regex &quot;\(xxx\)&quot;, where &quot;xxx&quot;
+</span>    <span class='comment'>#     is the area code in question.
+</span>    <span class='comment'># @!attribute [rw] likelihood_adjustment
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+</span>    <span class='comment'>#     Likelihood adjustment to apply to all matching findings.
+</span>    <span class='kw'>class</span> <span class='const'>HotwordRule</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">ExclusionType</a></span></span>
+    <span class='comment'># A finding of this custom info type will not be excluded from results.
+</span>    <span class='const'>EXCLUSION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># A finding of this custom info type will be excluded from final results,
+</span>    <span class='comment'># but can still affect rule execution.
+</span>    <span class='const'>EXCLUSION_TYPE_EXCLUDE</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="surrogate_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="surrogate_type-instance_method">
+  
+    #<strong>surrogate_type</strong>  &#x21d2; <tt><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Message for detecting output from deidentification transformations that
+support reversing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Message for detecting output from deidentification transformations that
+support reversing.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 79</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType (class)">CustomInfoType</a></span></span>
+  <span class='comment'># Custom information type based on a dictionary of words or phrases. This can
+</span>  <span class='comment'># be used to match sensitive information specific to the data, such as a list
+</span>  <span class='comment'># of employee IDs or job titles.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words are case-insensitive and all characters other than letters
+</span>  <span class='comment'># and digits in the unicode [Basic Multilingual
+</span>  <span class='comment'># Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+</span>  <span class='comment'># will be replaced with whitespace when scanning for matches, so the
+</span>  <span class='comment'># dictionary phrase &quot;Sam Johnson&quot; will match all three phrases &quot;sam johnson&quot;,
+</span>  <span class='comment'># &quot;Sam, Johnson&quot;, and &quot;Sam (Johnson)&quot;. Additionally, the characters
+</span>  <span class='comment'># surrounding any match must be of a different type than the adjacent
+</span>  <span class='comment'># characters within the word, so letters must be next to non-letters and
+</span>  <span class='comment'># digits next to non-digits. For example, the dictionary word &quot;jen&quot; will
+</span>  <span class='comment'># match the first three letters of the text &quot;jen123&quot; but will return no
+</span>  <span class='comment'># matches for &quot;jennifer&quot;.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Dictionary words containing a large number of characters that are not
+</span>  <span class='comment'># letters or digits may result in unexpected findings because such characters
+</span>  <span class='comment'># are treated as whitespace. The
+</span>  <span class='comment'># [limits](https://cloud.google.com/dlp/limits) page contains details about
+</span>  <span class='comment'># the size limits of dictionaries. For dictionaries that do not fit within
+</span>  <span class='comment'># these constraints, consider using `LargeCustomDictionaryConfig` in the
+</span>  <span class='comment'># `StoredInfoType` API.
+</span>  <span class='comment'># @!attribute [rw] word_list
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
+</span>  <span class='comment'>#     List of words or phrases to search for.
+</span>  <span class='comment'># @!attribute [rw] cloud_storage_path
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
+</span>  <span class='comment'>#     Newline-delimited file of words in Cloud Storage. Only a single file
+</span>  <span class='comment'>#     is accepted.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Dictionary.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
+    <span class='comment'># Message defining a list of words or phrases to search for in the data.
+</span>    <span class='comment'># @!attribute [rw] words
+</span>    <span class='comment'>#   @return [Array&lt;String&gt;]
+</span>    <span class='comment'>#     Words or phrases defining the dictionary. The dictionary must contain
+</span>    <span class='comment'>#     at least one phrase and every phrase must contain at least 2 characters
+</span>    <span class='comment'>#     that are letters or digits. [required]
+</span>    <span class='kw'>class</span> <span class='const'>WordList</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Message defining a custom regular expression.
+</span>  <span class='comment'># @!attribute [rw] pattern
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     Pattern defining the regular expression. Its syntax
+</span>  <span class='comment'>#     (https://github.com/google/re2/wiki/Syntax) can be found under the
+</span>  <span class='comment'>#     google/re2 repository on GitHub.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/Regex.html" title="Google::Privacy::Dlp::V2::CustomInfoType::Regex (class)">Regex</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Message for detecting output from deidentification transformations
+</span>  <span class='comment'># such as
+</span>  <span class='comment'># [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+</span>  <span class='comment'># These types of transformations are
+</span>  <span class='comment'># those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
+</span>  <span class='comment'># output. This should be used in conjunction with a field on the
+</span>  <span class='comment'># transformation such as `surrogate_info_type`. This CustomInfoType does
+</span>  <span class='comment'># not support the use of `detection_rules`.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/SurrogateType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType (class)">SurrogateType</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Rule for modifying a CustomInfoType to alter behavior under certain
+</span>  <span class='comment'># circumstances, depending on the specific details of the rule. Not supported
+</span>  <span class='comment'># for the `surrogate_type` custom info type.
+</span>  <span class='comment'># @!attribute [rw] hotword_rule
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+</span>  <span class='comment'>#     Hotword-based detection rule.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CustomInfoType/DetectionRule.html" title="Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule (class)">DetectionRule</a></span></span>
+    <span class='comment'># Message for specifying a window around a finding to apply a detection
+</span>    <span class='comment'># rule.
+</span>    <span class='comment'># @!attribute [rw] window_before
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters before the finding to consider.
+</span>    <span class='comment'># @!attribute [rw] window_after
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Number of characters after the finding to consider.
+</span>    <span class='kw'>class</span> <span class='const'>Proximity</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Message for specifying an adjustment to the likelihood of a finding as
+</span>    <span class='comment'># part of a detection rule.
+</span>    <span class='comment'># @!attribute [rw] fixed_likelihood
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::Likelihood]
+</span>    <span class='comment'>#     Set the likelihood of a finding to a fixed value.
+</span>    <span class='comment'># @!attribute [rw] relative_likelihood
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Increase or decrease the likelihood by the specified number of
+</span>    <span class='comment'>#     levels. For example, if a finding would be `POSSIBLE` without the
+</span>    <span class='comment'>#     detection rule and `relative_likelihood` is 1, then it is upgraded to
+</span>    <span class='comment'>#     `LIKELY`, while a value of -1 would downgrade it to `UNLIKELY`.
+</span>    <span class='comment'>#     Likelihood may never drop below `VERY_UNLIKELY` or exceed
+</span>    <span class='comment'>#     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
+</span>    <span class='comment'>#     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
+</span>    <span class='comment'>#     a final likelihood of `LIKELY`.
+</span>    <span class='kw'>class</span> <span class='const'>LikelihoodAdjustment</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># The rule that adjusts the likelihood of findings within a certain
+</span>    <span class='comment'># proximity of hotwords.
+</span>    <span class='comment'># @!attribute [rw] hotword_regex
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+</span>    <span class='comment'>#     Regular expression pattern defining what qualifies as a hotword.
+</span>    <span class='comment'># @!attribute [rw] proximity
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+</span>    <span class='comment'>#     Proximity of the finding within which the entire hotword must reside.
+</span>    <span class='comment'>#     The total length of the window cannot exceed 1000 characters. Note that
+</span>    <span class='comment'>#     the finding itself will be included in the window, so that hotwords may
+</span>    <span class='comment'>#     be used to match substrings of the finding itself. For example, the
+</span>    <span class='comment'>#     certainty of a phone number regex &quot;\(\d\\{3}\) \d\\{3}-\d\\{4}&quot; could be
+</span>    <span class='comment'>#     adjusted upwards if the area code is known to be the local area code of
+</span>    <span class='comment'>#     a company office using the hotword regex &quot;\(xxx\)&quot;, where &quot;xxx&quot;
+</span>    <span class='comment'>#     is the area code in question.
+</span>    <span class='comment'># @!attribute [rw] likelihood_adjustment
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+</span>    <span class='comment'>#     Likelihood adjustment to apply to all matching findings.
+</span>    <span class='kw'>class</span> <span class='const'>HotwordRule</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CustomInfoType/ExclusionType.html" title="Google::Privacy::Dlp::V2::CustomInfoType::ExclusionType (module)">ExclusionType</a></span></span>
+    <span class='comment'># A finding of this custom info type will not be excluded from results.
+</span>    <span class='const'>EXCLUSION_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># A finding of this custom info type will be excluded from final results,
+</span>    <span class='comment'># but can still affect rule execution.
+</span>    <span class='const'>EXCLUSION_TYPE_EXCLUDE</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

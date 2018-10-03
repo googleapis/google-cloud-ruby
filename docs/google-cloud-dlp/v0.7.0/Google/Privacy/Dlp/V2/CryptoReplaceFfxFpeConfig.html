@@ -1,0 +1,983 @@
+---
+layout: yard_main
+title: "Class: Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Privacy.html" title="Google::Privacy (module)">Privacy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dlp.html" title="Google::Privacy::Dlp (module)">Dlp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Privacy::Dlp::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">CryptoReplaceFfxFpeConfig</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Replaces an identifier with a surrogate using FPE with the FFX
+mode of operation; however when used in the <code>ReidentifyContent</code> API method,
+it serves the opposite function by reversing the surrogate back into
+the original identifier.
+The identifier must be encoded as ASCII.
+For a given crypto key and context, the same identifier will be
+replaced with the same surrogate.
+Identifiers must be at least two characters long.
+In the case that the identifier is the empty string, it will be skipped.
+See <a href="https://cloud.google.com/dlp/docs/pseudonymization">https://cloud.google.com/dlp/docs/pseudonymization</a> to learn more.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="CryptoReplaceFfxFpeConfig/FfxCommonNativeAlphabet.html" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet (module)">FfxCommonNativeAlphabet</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#common_alphabet-instance_method" title="#common_alphabet (instance method)">#<strong>common_alphabet</strong>  &#x21d2; Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context-instance_method" title="#context (instance method)">#<strong>context</strong>  &#x21d2; Google::Privacy::Dlp::V2::FieldId </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The &#39;tweak&#39;, a context may be used for higher security since the same identifier in two different contexts won&#39;t be given the same surrogate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#crypto_key-instance_method" title="#crypto_key (instance method)">#<strong>crypto_key</strong>  &#x21d2; Google::Privacy::Dlp::V2::CryptoKey </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The key used by the encryption algorithm.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#custom_alphabet-instance_method" title="#custom_alphabet (instance method)">#<strong>custom_alphabet</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This is supported by mapping these to the alphanumeric characters that the FFX mode natively supports.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#radix-instance_method" title="#radix (instance method)">#<strong>radix</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The native way to select the alphabet.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#surrogate_info_type-instance_method" title="#surrogate_info_type (instance method)">#<strong>surrogate_info_type</strong>  &#x21d2; Google::Privacy::Dlp::V2::InfoType </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The custom infoType to annotate the surrogate with.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="common_alphabet=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="common_alphabet-instance_method">
+  
+    #<strong>common_alphabet</strong>  &#x21d2; <tt><span class='object_link'><a href="CryptoReplaceFfxFpeConfig/FfxCommonNativeAlphabet.html" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet (module)">Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CryptoReplaceFfxFpeConfig/FfxCommonNativeAlphabet.html" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet (module)">Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1441
+1442
+1443
+1444
+1445
+1446
+1447
+1448
+1449
+1450
+1451
+1452
+1453
+1454
+1455
+1456
+1457
+1458
+1459
+1460</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1441</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
+  <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
+</span>  <span class='comment'># natively supports. In the algorithm, the alphabet is selected using
+</span>  <span class='comment'># the &quot;radix&quot;. Therefore each corresponds to particular radix.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoReplaceFfxFpeConfig/FfxCommonNativeAlphabet.html" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet (module)">FfxCommonNativeAlphabet</a></span></span>
+    <span class='const'>FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># [0-9] (radix of 10)
+</span>    <span class='const'>NUMERIC</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># [0-9A-F] (radix of 16)
+</span>    <span class='const'>HEXADECIMAL</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># [0-9A-Z] (radix of 36)
+</span>    <span class='const'>UPPER_CASE_ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># [0-9A-Za-z] (radix of 62)
+</span>    <span class='const'>ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="context=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="context-instance_method">
+  
+    #<strong>context</strong>  &#x21d2; <tt><span class='object_link'><a href="FieldId.html" title="Google::Privacy::Dlp::V2::FieldId (class)">Google::Privacy::Dlp::V2::FieldId</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The &#39;tweak&#39;, a context may be used for higher security since the same
+identifier in two different contexts won&#39;t be given the same surrogate. If
+the context is not set, a default tweak will be used.</p>
+
+<p>If the context is set but:</p>
+
+<ol>
+<li>there is no record present when transforming a given value or</li>
+<li>the field is not present when transforming a given value,</li>
+</ol>
+
+<p>a default tweak will be used.</p>
+
+<p>Note that case (1) is expected when an <code>InfoTypeTransformation</code> is
+applied to both structured and non-structured <code>ContentItem</code>s.
+Currently, the referenced field may be of value type integer or string.</p>
+
+<p>The tweak is constructed as a sequence of bytes in big endian byte order
+such that:</p>
+
+<ul>
+<li>a 64 bit integer is encoded followed by a single byte of value 1</li>
+<li>a string is encoded in UTF-8 format followed by a single byte of value 2</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FieldId.html" title="Google::Privacy::Dlp::V2::FieldId (class)">Google::Privacy::Dlp::V2::FieldId</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The &#39;tweak&#39;, a context may be used for higher security since the same
+identifier in two different contexts won&#39;t be given the same surrogate. If
+the context is not set, a default tweak will be used.</p>
+
+<p>If the context is set but:</p>
+
+<ol>
+<li>there is no record present when transforming a given value or</li>
+<li>the field is not present when transforming a given value,</li>
+</ol>
+
+<p>a default tweak will be used.</p>
+
+<p>Note that case (1) is expected when an <code>InfoTypeTransformation</code> is
+applied to both structured and non-structured <code>ContentItem</code>s.
+Currently, the referenced field may be of value type integer or string.</p>
+
+<p>The tweak is constructed as a sequence of bytes in big endian byte order
+such that:</p>
+
+<ul>
+<li>a 64 bit integer is encoded followed by a single byte of value 1</li>
+<li>a string is encoded in UTF-8 format followed by a single byte of value 2</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1441
+1442
+1443
+1444
+1445
+1446
+1447
+1448
+1449
+1450
+1451
+1452
+1453
+1454
+1455
+1456
+1457
+1458
+1459
+1460</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1441</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
+  <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
+</span>  <span class='comment'># natively supports. In the algorithm, the alphabet is selected using
+</span>  <span class='comment'># the &quot;radix&quot;. Therefore each corresponds to particular radix.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoReplaceFfxFpeConfig/FfxCommonNativeAlphabet.html" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet (module)">FfxCommonNativeAlphabet</a></span></span>
+    <span class='const'>FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># [0-9] (radix of 10)
+</span>    <span class='const'>NUMERIC</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># [0-9A-F] (radix of 16)
+</span>    <span class='const'>HEXADECIMAL</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># [0-9A-Z] (radix of 36)
+</span>    <span class='const'>UPPER_CASE_ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># [0-9A-Za-z] (radix of 62)
+</span>    <span class='const'>ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="crypto_key=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="crypto_key-instance_method">
+  
+    #<strong>crypto_key</strong>  &#x21d2; <tt><span class='object_link'><a href="CryptoKey.html" title="Google::Privacy::Dlp::V2::CryptoKey (class)">Google::Privacy::Dlp::V2::CryptoKey</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The key used by the encryption algorithm. [required]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CryptoKey.html" title="Google::Privacy::Dlp::V2::CryptoKey (class)">Google::Privacy::Dlp::V2::CryptoKey</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The key used by the encryption algorithm. [required]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1441
+1442
+1443
+1444
+1445
+1446
+1447
+1448
+1449
+1450
+1451
+1452
+1453
+1454
+1455
+1456
+1457
+1458
+1459
+1460</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1441</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
+  <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
+</span>  <span class='comment'># natively supports. In the algorithm, the alphabet is selected using
+</span>  <span class='comment'># the &quot;radix&quot;. Therefore each corresponds to particular radix.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoReplaceFfxFpeConfig/FfxCommonNativeAlphabet.html" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet (module)">FfxCommonNativeAlphabet</a></span></span>
+    <span class='const'>FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># [0-9] (radix of 10)
+</span>    <span class='const'>NUMERIC</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># [0-9A-F] (radix of 16)
+</span>    <span class='const'>HEXADECIMAL</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># [0-9A-Z] (radix of 36)
+</span>    <span class='const'>UPPER_CASE_ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># [0-9A-Za-z] (radix of 62)
+</span>    <span class='const'>ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="custom_alphabet=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="custom_alphabet-instance_method">
+  
+    #<strong>custom_alphabet</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns This is supported by mapping these to the alphanumeric characters
+that the FFX mode natively supports. This happens before/after
+encryption/decryption.
+Each character listed must appear only once.
+Number of characters must be in the range [2, 62].
+This must be encoded as ASCII.
+The order of characters does not matter.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>This is supported by mapping these to the alphanumeric characters
+that the FFX mode natively supports. This happens before/after
+encryption/decryption.
+Each character listed must appear only once.
+Number of characters must be in the range [2, 62].
+This must be encoded as ASCII.
+The order of characters does not matter.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1441
+1442
+1443
+1444
+1445
+1446
+1447
+1448
+1449
+1450
+1451
+1452
+1453
+1454
+1455
+1456
+1457
+1458
+1459
+1460</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1441</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
+  <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
+</span>  <span class='comment'># natively supports. In the algorithm, the alphabet is selected using
+</span>  <span class='comment'># the &quot;radix&quot;. Therefore each corresponds to particular radix.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoReplaceFfxFpeConfig/FfxCommonNativeAlphabet.html" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet (module)">FfxCommonNativeAlphabet</a></span></span>
+    <span class='const'>FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># [0-9] (radix of 10)
+</span>    <span class='const'>NUMERIC</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># [0-9A-F] (radix of 16)
+</span>    <span class='const'>HEXADECIMAL</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># [0-9A-Z] (radix of 36)
+</span>    <span class='const'>UPPER_CASE_ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># [0-9A-Za-z] (radix of 62)
+</span>    <span class='const'>ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="radix=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="radix-instance_method">
+  
+    #<strong>radix</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The native way to select the alphabet. Must be in the range [2, 62].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The native way to select the alphabet. Must be in the range [2, 62].</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1441
+1442
+1443
+1444
+1445
+1446
+1447
+1448
+1449
+1450
+1451
+1452
+1453
+1454
+1455
+1456
+1457
+1458
+1459
+1460</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1441</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
+  <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
+</span>  <span class='comment'># natively supports. In the algorithm, the alphabet is selected using
+</span>  <span class='comment'># the &quot;radix&quot;. Therefore each corresponds to particular radix.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoReplaceFfxFpeConfig/FfxCommonNativeAlphabet.html" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet (module)">FfxCommonNativeAlphabet</a></span></span>
+    <span class='const'>FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># [0-9] (radix of 10)
+</span>    <span class='const'>NUMERIC</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># [0-9A-F] (radix of 16)
+</span>    <span class='const'>HEXADECIMAL</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># [0-9A-Z] (radix of 36)
+</span>    <span class='const'>UPPER_CASE_ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># [0-9A-Za-z] (radix of 62)
+</span>    <span class='const'>ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="surrogate_info_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="surrogate_info_type-instance_method">
+  
+    #<strong>surrogate_info_type</strong>  &#x21d2; <tt><span class='object_link'><a href="InfoType.html" title="Google::Privacy::Dlp::V2::InfoType (class)">Google::Privacy::Dlp::V2::InfoType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The custom infoType to annotate the surrogate with.
+This annotation will be applied to the surrogate by prefixing it with
+the name of the custom infoType followed by the number of
+characters comprising the surrogate. The following scheme defines the
+format: info_type_name(surrogate_character_count):surrogate</p>
+
+<p>For example, if the name of custom infoType is &#39;MY_TOKEN_INFO_TYPE&#39; and
+the surrogate is &#39;abc&#39;, the full replacement value
+will be: &#39;MY_TOKEN_INFO_TYPE(3):abc&#39;</p>
+
+<p>This annotation identifies the surrogate when inspecting content using the
+custom infoType
+<a href="https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype"><code>SurrogateType</code></a>.
+This facilitates reversal of the surrogate when it occurs in free text.</p>
+
+<p>In order for inspection to work properly, the name of this infoType must
+not occur naturally anywhere in your data; otherwise, inspection may
+find a surrogate that does not correspond to an actual identifier.
+Therefore, choose your custom infoType name carefully after considering
+what your data looks like. One way to select a name that has a high chance
+of yielding reliable detection is to include one or more unicode characters
+that are highly improbable to exist in your data.
+For example, assuming your data is entered from a regular ASCII keyboard,
+the symbol with the hex code point 29DD might be used like so:
+⧝MY_TOKEN_TYPE</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InfoType.html" title="Google::Privacy::Dlp::V2::InfoType (class)">Google::Privacy::Dlp::V2::InfoType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The custom infoType to annotate the surrogate with.
+This annotation will be applied to the surrogate by prefixing it with
+the name of the custom infoType followed by the number of
+characters comprising the surrogate. The following scheme defines the
+format: info_type_name(surrogate_character_count):surrogate</p>
+
+<p>For example, if the name of custom infoType is &#39;MY_TOKEN_INFO_TYPE&#39; and
+the surrogate is &#39;abc&#39;, the full replacement value
+will be: &#39;MY_TOKEN_INFO_TYPE(3):abc&#39;</p>
+
+<p>This annotation identifies the surrogate when inspecting content using the
+custom infoType
+<a href="https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype"><code>SurrogateType</code></a>.
+This facilitates reversal of the surrogate when it occurs in free text.</p>
+
+<p>In order for inspection to work properly, the name of this infoType must
+not occur naturally anywhere in your data; otherwise, inspection may
+find a surrogate that does not correspond to an actual identifier.
+Therefore, choose your custom infoType name carefully after considering
+what your data looks like. One way to select a name that has a high chance
+of yielding reliable detection is to include one or more unicode characters
+that are highly improbable to exist in your data.
+For example, assuming your data is entered from a regular ASCII keyboard,
+the symbol with the hex code point 29DD might be used like so:
+⧝MY_TOKEN_TYPE</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1441
+1442
+1443
+1444
+1445
+1446
+1447
+1448
+1449
+1450
+1451
+1452
+1453
+1454
+1455
+1456
+1457
+1458
+1459
+1460</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 1441</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig (class)">CryptoReplaceFfxFpeConfig</a></span></span>
+  <span class='comment'># These are commonly used subsets of the alphabet that the FFX mode
+</span>  <span class='comment'># natively supports. In the algorithm, the alphabet is selected using
+</span>  <span class='comment'># the &quot;radix&quot;. Therefore each corresponds to particular radix.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CryptoReplaceFfxFpeConfig/FfxCommonNativeAlphabet.html" title="Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet (module)">FfxCommonNativeAlphabet</a></span></span>
+    <span class='const'>FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># [0-9] (radix of 10)
+</span>    <span class='const'>NUMERIC</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># [0-9A-F] (radix of 16)
+</span>    <span class='const'>HEXADECIMAL</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># [0-9A-Z] (radix of 36)
+</span>    <span class='const'>UPPER_CASE_ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># [0-9A-Za-z] (radix of 62)
+</span>    <span class='const'>ALPHA_NUMERIC</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

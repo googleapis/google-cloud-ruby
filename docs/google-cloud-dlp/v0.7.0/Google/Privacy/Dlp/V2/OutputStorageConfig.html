@@ -1,0 +1,446 @@
+---
+layout: yard_main
+title: "Class: Google::Privacy::Dlp::V2::OutputStorageConfig - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Privacy::Dlp::V2::OutputStorageConfig";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (O)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Privacy.html" title="Google::Privacy (module)">Privacy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dlp.html" title="Google::Privacy::Dlp (module)">Dlp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Privacy::Dlp::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">OutputStorageConfig</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Privacy::Dlp::V2::OutputStorageConfig
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Privacy::Dlp::V2::OutputStorageConfig</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Cloud repository for storing output.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="OutputStorageConfig/OutputSchema.html" title="Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema (module)">OutputSchema</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#output_schema-instance_method" title="#output_schema (instance method)">#<strong>output_schema</strong>  &#x21d2; Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Schema used for writing the findings for Inspect jobs.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#table-instance_method" title="#table (instance method)">#<strong>table</strong>  &#x21d2; Google::Privacy::Dlp::V2::BigQueryTable </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Store findings in an existing table or a new table in an existing dataset.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="output_schema=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="output_schema-instance_method">
+  
+    #<strong>output_schema</strong>  &#x21d2; <tt><span class='object_link'><a href="OutputStorageConfig/OutputSchema.html" title="Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema (module)">Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Schema used for writing the findings for Inspect jobs. This field is only
+used for Inspect and must be unspecified for Risk jobs. Columns are derived
+from the <code>Finding</code> object. If appending to an existing table, any columns
+from the predefined schema that are missing will be added. No columns in
+the existing table will be deleted.</p>
+
+<p>If unspecified, then all available columns will be used for a new table,
+and no changes will be made to an existing table.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="OutputStorageConfig/OutputSchema.html" title="Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema (module)">Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Schema used for writing the findings for Inspect jobs. This field is only
+used for Inspect and must be unspecified for Risk jobs. Columns are derived
+from the <code>Finding</code> object. If appending to an existing table, any columns
+from the predefined schema that are missing will be added. No columns in
+the existing table will be deleted.</p>
+
+<p>If unspecified, then all available columns will be used for a new table,
+and no changes will be made to an existing table.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 545</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::OutputStorageConfig (class)">OutputStorageConfig</a></span></span>
+  <span class='comment'># Predefined schemas for storing findings.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="OutputStorageConfig/OutputSchema.html" title="Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema (module)">OutputSchema</a></span></span>
+    <span class='const'>OUTPUT_SCHEMA_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Basic schema including only `info_type`, `quote`, `certainty`, and
+</span>    <span class='comment'># `timestamp`.
+</span>    <span class='const'>BASIC_COLUMNS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Schema tailored to findings from scanning Google Cloud Storage.
+</span>    <span class='const'>GCS_COLUMNS</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Schema tailored to findings from scanning Google Datastore.
+</span>    <span class='const'>DATASTORE_COLUMNS</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Schema tailored to findings from scanning Google BigQuery.
+</span>    <span class='const'>BIG_QUERY_COLUMNS</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Schema containing all columns.
+</span>    <span class='const'>ALL_COLUMNS</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="table=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="table-instance_method">
+  
+    #<strong>table</strong>  &#x21d2; <tt><span class='object_link'><a href="BigQueryTable.html" title="Google::Privacy::Dlp::V2::BigQueryTable (class)">Google::Privacy::Dlp::V2::BigQueryTable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Store findings in an existing table or a new table in an existing
+dataset. If table_id is not set a new one will be generated
+for you with the following format:
+dlp_googleapis_yyyy_mm_dd_[dlp_job_id]. Pacific timezone will be used for
+generating the date details.</p>
+
+<p>For Inspect, each column in an existing output table must have the same
+name, type, and mode of a field in the <code>Finding</code> object.</p>
+
+<p>For Risk, an existing output table should be the output of a previous
+Risk analysis job run on the same source table, with the same privacy
+metric and quasi-identifiers. Risk jobs that analyze the same table but
+compute a different privacy metric, or use different sets of
+quasi-identifiers, cannot store their results in the same table.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BigQueryTable.html" title="Google::Privacy::Dlp::V2::BigQueryTable (class)">Google::Privacy::Dlp::V2::BigQueryTable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Store findings in an existing table or a new table in an existing
+dataset. If table_id is not set a new one will be generated
+for you with the following format:
+dlp_googleapis_yyyy_mm_dd_[dlp_job_id]. Pacific timezone will be used for
+generating the date details.</p>
+
+<p>For Inspect, each column in an existing output table must have the same
+name, type, and mode of a field in the <code>Finding</code> object.</p>
+
+<p>For Risk, an existing output table should be the output of a previous
+Risk analysis job run on the same source table, with the same privacy
+metric and quasi-identifiers. Risk jobs that analyze the same table but
+compute a different privacy metric, or use different sets of
+quasi-identifiers, cannot store their results in the same table.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 545</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::OutputStorageConfig (class)">OutputStorageConfig</a></span></span>
+  <span class='comment'># Predefined schemas for storing findings.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="OutputStorageConfig/OutputSchema.html" title="Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema (module)">OutputSchema</a></span></span>
+    <span class='const'>OUTPUT_SCHEMA_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Basic schema including only `info_type`, `quote`, `certainty`, and
+</span>    <span class='comment'># `timestamp`.
+</span>    <span class='const'>BASIC_COLUMNS</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Schema tailored to findings from scanning Google Cloud Storage.
+</span>    <span class='const'>GCS_COLUMNS</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Schema tailored to findings from scanning Google Datastore.
+</span>    <span class='const'>DATASTORE_COLUMNS</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Schema tailored to findings from scanning Google BigQuery.
+</span>    <span class='const'>BIG_QUERY_COLUMNS</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Schema containing all columns.
+</span>    <span class='const'>ALL_COLUMNS</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
