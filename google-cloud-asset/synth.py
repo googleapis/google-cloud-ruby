@@ -29,13 +29,13 @@ v1beta1_library = gapic.ruby_library(
     'asset', 'v1beta1', artman_output_name='google-cloud-ruby/google-cloud-asset',
     config_path='artman_cloudasset_v1beta1.yaml'
 )
-# s.copy(v1beta1_library / 'lib')
-# s.copy(v1beta1_library / 'test')
-# s.copy(v1beta1_library / 'README.md')
-# s.copy(v1beta1_library / 'LICENSE')
-# s.copy(v1beta1_library / '.gitignore')
-# s.copy(v1beta1_library / '.yardopts')
-# s.copy(v1beta1_library / 'google-cloud-asset.gemspec', merge=ruby.merge_gemspec)
+s.copy(v1beta1_library / 'lib')
+s.copy(v1beta1_library / 'test')
+s.copy(v1beta1_library / 'README.md')
+s.copy(v1beta1_library / 'LICENSE')
+s.copy(v1beta1_library / '.gitignore')
+s.copy(v1beta1_library / '.yardopts')
+s.copy(v1beta1_library / 'google-cloud-asset.gemspec', merge=ruby.merge_gemspec)
 
 # https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
