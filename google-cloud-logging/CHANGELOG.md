@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.6 / 2018-10-03
+
+* Use concurrent-ruby and ThreadLocalVar in Logger.
+  * Remove Monitor and synchronize blocks.
+  * Logger#thread_ids now only returns the current thread.
+
 ### 1.5.5 / 2018-09-20
 
 * Make Logger thread-safe.
