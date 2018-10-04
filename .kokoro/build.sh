@@ -5,6 +5,7 @@
 #  * PRs run all non-acceptance tests for every library.
 #  * Merges run all non-acceptance tests for every library, and acceptance tests for all altered libraries.
 #  * Nightlies run all acceptance tests for every library.
+
 set -eo pipefail
 
 # Debug: show build environment
