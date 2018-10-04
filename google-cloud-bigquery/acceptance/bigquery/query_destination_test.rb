@@ -63,7 +63,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   it "sends query results to a time partitioned destination table" do
     job = bigquery.query_job "SELECT * FROM UNNEST(" \
                              "GENERATE_TIMESTAMP_ARRAY(" \
-                             "'2018-10-01 00:00:00', '2018-10-10 00:00:00', " \
+                             "'2099-10-01 00:00:00', '2099-10-10 00:00:00', " \
                              "INTERVAL 1 DAY)) AS dob" do |job|
       job.write = :truncate
       job.table = timestamp_table
