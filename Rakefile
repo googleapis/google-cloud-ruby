@@ -652,7 +652,7 @@ def generate_kokoro_configs
     gem = gem.split('google-cloud-').last
     [:linux, :windows, :osx].each do |os_version|
       [:presubmit, :continuous, :nightly].each do |build_type|
-        unless File.exist?(".kokoro/#{build_type}/#{gem}")
+        if !File.exist?(".kokoro/#{build_type}/#{gem}")
           Dir.mkdir(File.join(Dir.pwd, ".kokoro/#{build_type}/#{gem}"), 0700)
         end
         file_path = "./.kokoro/#{build_type}/"
