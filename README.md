@@ -25,6 +25,7 @@ Availability (GA)](#versioning) quality level:
 This client supports the following Google Cloud Platform services at a
 [Beta](#versioning) quality level:
 
+* [Cloud Asset](#cloud-asset-beta) (Beta)
 * [BigQuery Data Transfer](#bigquery-data-transfer-api-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
@@ -36,7 +37,6 @@ This client supports the following Google Cloud Platform services at a
 This client supports the following Google Cloud Platform services at an
 [Alpha](#versioning) quality level:
 
-* [Cloud Asset](#cloud-asset-alpha) (Alpha)
 * [Cloud Bigtable](#cloud-bigtable-alpha) (Alpha)
 * [Container Engine](#container-engine-alpha) (Alpha)
 * [Cloud Dataproc](#cloud-dataproc-alpha) (Alpha)
@@ -93,7 +93,7 @@ listed below for each service.
 The preview examples below demonstrate how to provide the **Project ID** and
 **Credentials JSON file path** directly in code.
 
-### Cloud Asset API (Alpha)
+### Cloud Asset API (Beta)
 
 - [google-cloud-asset README](google-cloud-asset/README.md)
 - [google-cloud-asset API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-asset/latest)
