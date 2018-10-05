@@ -5,7 +5,7 @@
 #  * PRs run all non-acceptance tests for every library.
 #  * Merges run all non-acceptance tests for every library, and acceptance tests for all altered libraries.
 #  * Nightlies run all acceptance tests for every library.
-#  * Currently only runs tests on 2.5.0
+#  * Currently only runs tests on 2.5.1
 
 set -eo pipefail
 
@@ -26,8 +26,6 @@ EXIT_STATUS=0 # everything passed
 function set_failed_status {
     EXIT_STATUS=1
 }
-
-gem install bundle
 
 if [ "$JOB_TYPE" = "nightly" ]; then
     (bundle update && bundle exec rake kokoro:nightly) || set_failed_status

@@ -5,16 +5,4 @@ REM  * Merges run all non-acceptance tests for every library, and acceptance tes
 REM  * Nightlies run all acceptance tests for every library.
 REM Currently only runs tests on 2.5.1
 
-CALL cd github/google-cloud-ruby/
-CALL ruby --version
-
-IF "%JOB_TYPE%"=="nightly" (
-    CALL bundle update && bundle exec rake kokoro:nightly
-) ELSE (
-    IF "%JOB_TYPE%"=="continuous" (
-        CALL git fetch --depth=10000
-        CALL bundle update && bundle exec rake kokoro:continuous
-    ) ELSE (
-        CALL bundle update && bundle exec rake kokoro:presubmit
-    )
-)
+"C:\Program Files\Git\bin\bash.exe" github/google-cloud-ruby/.kokoro/windows.sh
