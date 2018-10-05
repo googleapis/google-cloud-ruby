@@ -27,6 +27,8 @@ function set_failed_status {
     EXIT_STATUS=1
 }
 
+gem install bundle
+
 if [ "$JOB_TYPE" = "nightly" ]; then
     (bundle update && bundle exec rake kokoro:nightly) || set_failed_status
 elif [ "$JOB_TYPE" = "continuous" ]; then
