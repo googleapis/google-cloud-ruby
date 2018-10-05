@@ -652,8 +652,7 @@ def generate_kokoro_configs
     name = gem.split('google-cloud-').last
     [:linux, :windows, :osx].each do |os_version|
       [:presubmit, :continuous, :nightly].each do |build_type|
-        file_path = "./.kokoro/#{build_type}/"
-        file_path += "#{name}-#{os_version}.cfg"
+        file_path = "./.kokoro/configs/#{build_type}-#{name}-#{os_version}.cfg"
         File.open(file_path, "w") do |f|
           config = ERB.new(File.read("./.kokoro/templates/#{os_version}.cfg.erb"))
           f.write(config.result(binding))

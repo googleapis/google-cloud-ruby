@@ -6,4 +6,9 @@ env_vars: {
     value: "<%= gem %>"
 }
 
+env_vars: {
+    key: "JOB_TYPE"
+    value: "<=% build_type %>"
+}
+
 build_file: "github/google-cloud-ruby/.kokoro/osx-build.sh"
