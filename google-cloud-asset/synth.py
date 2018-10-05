@@ -50,6 +50,8 @@ s.replace(
     '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
 
 # https://github.com/googleapis/gapic-generator/issues/2242
+
+
 def escape_braces(match):
     expr = re.compile('^([^`]*(`[^`]*`[^`]*)*)([^`#\\$\\\\])\\{([\\w,]+)\\}')
     content = match.group(0)
@@ -57,6 +59,8 @@ def escape_braces(match):
         content, count = expr.subn('\\1\\3\\\\\\\\{\\4}', content)
         if count == 0:
             return content
+
+
 s.replace(
     'lib/google/cloud/asset/v1beta1/**/*.rb',
     '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',

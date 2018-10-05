@@ -7,6 +7,8 @@ env_vars: {
 }
 
 env_vars: {
-    key: "TRAMPOLINE_BUILD_FILE"
-    value: "github/google-cloud-ruby/.kokoro/build.sh"
+    key: "JOB_TYPE"
+    value: "<=% build_type %>"
 }
+
+build_file: "google-cloud-ruby/.kokoro/osx.sh"

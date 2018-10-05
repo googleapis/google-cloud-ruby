@@ -277,12 +277,6 @@ namespace :circleci do
     end
   end
 
-  desc "Runs post-build logic on CircleCI."
-  task :post do
-    Rake::Task["docs:build_master"].invoke
-    Rake::Task["test:codecov"].invoke
-  end
-
   task :release do
     tag = ENV["CIRCLE_TAG"]
     if tag.nil?
@@ -309,42 +303,6 @@ namespace :travis do
           sh "bundle update"
 
           if run_acceptance
-            sh "bundle exec rake ci:acceptance"
-          else
-            sh "bundle exec rake ci"
-          end
-        end
-      end
-    end
-  end
-end
-
-namespace :appveyor do
-  desc "Build for AppVeyor"
-  task :build do
-    # Retrieve the SSL certificate from google-api-client gem
-    ssl_cert_file = Gem.loaded_specs["google-api-client"].full_gem_path + "/lib/cacerts.pem"
-
-    run_acceptance = false
-    if ENV["APPVEYOR_REPO_BRANCH"] == "master" && !ENV["APPVEYOR_PULL_REQUEST_NUMBER"]
-      run_acceptance = true
-    end
-
-    valid_gems.each do |gem|
-      Dir.chdir gem do
-        Bundler.with_clean_env do
-          # Fix acceptance/data symlinks on windows
-          require "fileutils"
-          FileUtils.mkdir_p "acceptance"
-          FileUtils.rm_f "acceptance/data"
-          sh "call mklink /j acceptance\\data ..\\acceptance\\data"
-
-          sh "bundle update"
-
-          if run_acceptance
-            # Set the SSL certificate so connections can be made
-            ENV["SSL_CERT_FILE"] = ssl_cert_file
-
             sh "bundle exec rake ci:acceptance"
           else
             sh "bundle exec rake ci"
@@ -633,6 +591,7 @@ namespace :kokoro do
     header_2 ENV["JOB_TYPE"]
     Dir.chdir ENV["PACKAGE"] do
       Bundler.with_clean_env do
+        Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         sh "bundle update"
         sh "bundle exec rake ci"
@@ -646,6 +605,7 @@ namespace :kokoro do
     updated_gems.each { |gem| header_2 "#{gem} has been updated" }
     Dir.chdir ENV["PACKAGE"] do
       Bundler.with_clean_env do
+        Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         if updated
           header "Gem Updated - Running Acceptance"
@@ -670,15 +630,29 @@ namespace :kokoro do
       end
     end
   end
+
+  desc "Runs post-build logic on kokoro."
+  task :post do
+    Rake::Task["kokoro:load_env_vars"].invoke
+    Rake::Task["docs:build_master"].invoke
+    Rake::Task["test:codecov"].invoke
+  end
+
+  task :load_env_vars do
+    service_account = "#{ENV['KOKORO_GFILE_DIR']}/service-account.json"
+    ENV['GOOGLE_APPLICATION_CREDENTIALS'] = service_account
+    filename = "#{ENV['KOKORO_GFILE_DIR']}/env_vars.json"
+    env_vars = JSON.parse(File.read(filename))
+    env_vars.each { |k, v| ENV[k] = v }
+  end
 end
 
 def generate_kokoro_configs
   gems.each do |gem|
+    name = gem.split('google-cloud-').last
     [:linux, :windows, :osx].each do |os_version|
       [:presubmit, :continuous, :nightly].each do |build_type|
-        file_path = "./.kokoro/#{build_type}/"
-        file_path += "#{os_version}-" unless os_version == :linux
-        file_path += "#{gem}.cfg"
+        file_path = "./.kokoro/#{build_type}/#{name}-#{os_version}.cfg"
         File.open(file_path, "w") do |f|
           config = ERB.new(File.read("./.kokoro/templates/#{os_version}.cfg.erb"))
           f.write(config.result(binding))
@@ -690,7 +664,7 @@ def generate_kokoro_configs
   # generate post-build config
   gem = "post"
   os_version = :linux
-  File.open("./.kokoro/continuous/#{gem}.cfg", "w") do |f|
+  File.open("./.kokoro/#{gem}.cfg", "w") do |f|
     config = ERB.new(File.read("./.kokoro/templates/linux.cfg.erb"))
     f.write(config.result(binding))
   end
