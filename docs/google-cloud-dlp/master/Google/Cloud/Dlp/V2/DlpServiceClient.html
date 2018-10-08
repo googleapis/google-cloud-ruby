@@ -788,7 +788,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#list_dlp_jobs-instance_method" title="#list_dlp_jobs (instance method)">#<strong>list_dlp_jobs</strong>(parent, filter: nil, page_size: nil, type: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Privacy::Dlp::V2::DlpJob&gt; </a>
+      <a href="#list_dlp_jobs-instance_method" title="#list_dlp_jobs (instance method)">#<strong>list_dlp_jobs</strong>(parent, filter: nil, page_size: nil, type: nil, order_by: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Privacy::Dlp::V2::DlpJob&gt; </a>
     
 
     
@@ -2350,20 +2350,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1451
-1452
-1453
-1454
-1455
-1456
-1457
-1458
-1459
-1460
-1461</pre>
+1467
+1468
+1469
+1470
+1471
+1472
+1473
+1474
+1475
+1476
+1477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1451</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1467</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_dlp_job'>cancel_dlp_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3246,23 +3246,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1675
-1676
-1677
-1678
-1679
-1680
-1681
-1682
-1683
-1684
-1685
-1686
-1687
-1688</pre>
+1691
+1692
+1693
+1694
+1695
+1696
+1697
+1698
+1699
+1700
+1701
+1702
+1703
+1704</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1675</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1691</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_job_trigger'>create_job_trigger</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3888,20 +3888,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1417
-1418
-1419
-1420
-1421
-1422
-1423
-1424
-1425
-1426
-1427</pre>
+1433
+1434
+1435
+1436
+1437
+1438
+1439
+1440
+1441
+1442
+1443</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1417</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1433</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_dlp_job'>delete_dlp_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4229,20 +4229,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1589
-1590
-1591
-1592
-1593
-1594
-1595
-1596
-1597
-1598
-1599</pre>
+1605
+1606
+1607
+1608
+1609
+1610
+1611
+1612
+1613
+1614
+1615</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1589</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1605</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_job_trigger'>delete_job_trigger</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4585,19 +4585,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1384
-1385
-1386
-1387
-1388
-1389
-1390
-1391
-1392
-1393</pre>
+1400
+1401
+1402
+1403
+1404
+1405
+1406
+1407
+1408
+1409</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1384</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1400</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_dlp_job'>get_dlp_job</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -4937,19 +4937,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1556
-1557
-1558
-1559
-1560
-1561
-1562
-1563
-1564
-1565</pre>
+1572
+1573
+1574
+1575
+1576
+1577
+1578
+1579
+1580
+1581</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1556</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1572</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_job_trigger'>get_job_trigger</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -5469,7 +5469,7 @@ object.</p>
       <div class="method_details ">
   <h3 class="signature " id="list_dlp_jobs-instance_method">
   
-    #<strong>list_dlp_jobs</strong>(parent, filter: nil, page_size: nil, type: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Privacy/Dlp/V2/DlpJob.html" title="Google::Privacy::Dlp::V2::DlpJob (class)">Google::Privacy::Dlp::V2::DlpJob</a></span>&gt;</tt> 
+    #<strong>list_dlp_jobs</strong>(parent, filter: nil, page_size: nil, type: nil, order_by: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Privacy/Dlp/V2/DlpJob.html" title="Google::Privacy::Dlp::V2::DlpJob (class)">Google::Privacy::Dlp::V2::DlpJob</a></span>&gt;</tt> 
   
 
   
@@ -5607,6 +5607,35 @@ resources in a page.</p>
   
     <li>
       
+        <span class='name'>order_by</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional comma separated list of fields to order by,
+followed by <code>asc</code> or <code>desc</code> postfix. This list is case-insensitive,
+default sorting order is ascending, redundant space characters are
+insignificant.</p>
+
+<p>Example: <code>name asc, end_time asc, create_time desc</code></p>
+
+<p>Supported fields are:</p>
+
+<ul>
+<li><code>create_time</code>: corresponds to time the job was created.</li>
+<li><code>end_time</code>: corresponds to time the job ended.</li>
+<li><code>name</code>: corresponds to job&#39;s name.</li>
+<li><code>state</code>: corresponds to <code>state</code></li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>options</span>
       
       
@@ -5710,38 +5739,42 @@ object.</p>
       <pre class="lines">
 
 
-1346
-1347
-1348
-1349
-1350
-1351
-1352
-1353
-1354
-1355
-1356
-1357
-1358
-1359
 1360
-1361</pre>
+1361
+1362
+1363
+1364
+1365
+1366
+1367
+1368
+1369
+1370
+1371
+1372
+1373
+1374
+1375
+1376
+1377</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1346</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1360</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_dlp_jobs'>list_dlp_jobs</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
     <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>order_by:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>parent:</span> <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
     <span class='label'>filter:</span> <span class='id identifier rubyid_filter'>filter</span><span class='comma'>,</span>
     <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='comma'>,</span>
-    <span class='label'>type:</span> <span class='id identifier rubyid_type'>type</span>
+    <span class='label'>type:</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span>
+    <span class='label'>order_by:</span> <span class='id identifier rubyid_order_by'>order_by</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Privacy.html" title="Google::Privacy (module)">Privacy</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Privacy/Dlp.html" title="Google::Privacy::Dlp (module)">Dlp</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Privacy/Dlp/V2.html" title="Google::Privacy::Dlp::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Privacy/Dlp/V2/ListDlpJobsRequest.html" title="Google::Privacy::Dlp::V2::ListDlpJobsRequest (class)">ListDlpJobsRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@list_dlp_jobs</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -6413,23 +6446,23 @@ object.</p>
       <pre class="lines">
 
 
-1520
-1521
-1522
-1523
-1524
-1525
-1526
-1527
-1528
-1529
-1530
-1531
-1532
-1533</pre>
+1536
+1537
+1538
+1539
+1540
+1541
+1542
+1543
+1544
+1545
+1546
+1547
+1548
+1549</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1520</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1536</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_job_triggers'>list_job_triggers</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -7631,23 +7664,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1630
-1631
-1632
-1633
-1634
-1635
-1636
-1637
-1638
-1639
-1640
-1641
-1642
-1643</pre>
+1646
+1647
+1648
+1649
+1650
+1651
+1652
+1653
+1654
+1655
+1656
+1657
+1658
+1659</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1630</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/dlp_service_client.rb', line 1646</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_job_trigger'>update_job_trigger</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>

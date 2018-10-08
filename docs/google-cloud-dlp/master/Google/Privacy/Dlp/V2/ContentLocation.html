@@ -283,9 +283,17 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Name of the container where the finding is located.
-The top level name is the source file name or table name. Nested names
-could be absent if the embedded object has no string identifier
-(for an example an image contained within a document).</p>
+The top level name is the source file name or table name. Names of some
+common storage containers are formatted as follows:</p>
+
+<ul>
+<li>BigQuery tables:  <code>&lt;project_id&gt;:&lt;dataset_id&gt;.&lt;table_id&gt;</code></li>
+<li>Cloud Storage files: <code>gs://&lt;bucket&gt;/&lt;path&gt;</code></li>
+<li>Datastore namespace: <namespace></li>
+</ul>
+
+<p>Nested names could be absent if the embedded object has no string
+identifier (for an example an image contained within a document).</p>
 
 
   </div>
@@ -304,9 +312,17 @@ could be absent if the embedded object has no string identifier
       
         &mdash;
         <div class='inline'><p>Name of the container where the finding is located.
-The top level name is the source file name or table name. Nested names
-could be absent if the embedded object has no string identifier
-(for an example an image contained within a document).</p>
+The top level name is the source file name or table name. Names of some
+common storage containers are formatted as follows:</p>
+
+<ul>
+<li>BigQuery tables:  <code>&lt;project_id&gt;:&lt;dataset_id&gt;.&lt;table_id&gt;</code></li>
+<li>Cloud Storage files: <code>gs://&lt;bucket&gt;/&lt;path&gt;</code></li>
+<li>Datastore namespace: <namespace></li>
+</ul>
+
+<p>Nested names could be absent if the embedded object has no string
+identifier (for an example an image contained within a document).</p>
 </div>
       
     </li>
@@ -319,10 +335,10 @@ could be absent if the embedded object has no string identifier
       <pre class="lines">
 
 
-283</pre>
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 289</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ContentLocation (class)">ContentLocation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -380,10 +396,10 @@ For Datastore - not populated.</p>
       <pre class="lines">
 
 
-283</pre>
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 289</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ContentLocation (class)">ContentLocation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -437,10 +453,10 @@ For Datastore - not populated.</p>
       <pre class="lines">
 
 
-283</pre>
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 289</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ContentLocation (class)">ContentLocation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -492,10 +508,10 @@ For Datastore - not populated.</p>
       <pre class="lines">
 
 
-283</pre>
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 289</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ContentLocation (class)">ContentLocation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -547,10 +563,10 @@ For Datastore - not populated.</p>
       <pre class="lines">
 
 
-283</pre>
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 289</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ContentLocation (class)">ContentLocation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -602,10 +618,10 @@ For Datastore - not populated.</p>
       <pre class="lines">
 
 
-283</pre>
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 289</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::ContentLocation (class)">ContentLocation</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
