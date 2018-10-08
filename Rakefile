@@ -301,11 +301,7 @@ namespace :travis do
         Bundler.with_clean_env do
           sh "gem install bundler"
           sh "bundle update"
-
-          if run_acceptance
-            sh "bundle exec rake ci:acceptance"
-          else
-            sh "bundle exec rake ci"
+          sh "bundle exec rake ci"
           end
         end
       end
