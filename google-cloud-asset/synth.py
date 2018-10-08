@@ -95,3 +95,8 @@ s.replace(
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
 )
+s.replace(
+    'README.md',
+    '# Ruby Client for Cloud Asset API \(\[Alpha\]\(https:\/\/github\.com\/googleapis\/google-cloud-ruby#versioning\)\)',
+    '# Ruby Client for Cloud Asset API \([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))'
+)
