@@ -287,32 +287,6 @@ namespace :circleci do
   end
 end
 
-namespace :travis do
-  desc "Build for Travis-CI"
-  task :build do
-    run_acceptance = false
-    if ENV["TRAVIS_BRANCH"] == "master" &&
-       ENV["TRAVIS_PULL_REQUEST"] == "false"
-      run_acceptance = true
-    end
-
-    valid_gems.each do |gem|
-      Dir.chdir gem do
-        Bundler.with_clean_env do
-          sh "gem install bundler"
-          sh "bundle update"
-
-          if run_acceptance
-            sh "bundle exec rake ci:acceptance"
-          else
-            sh "bundle exec rake ci"
-          end
-        end
-      end
-    end
-  end
-end
-
 desc "Run the CI build for all gems."
 task :ci, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
