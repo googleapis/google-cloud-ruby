@@ -664,7 +664,7 @@ def generate_kokoro_configs
   # generate post-build config
   gem = "post"
   os_version = :linux
-  File.open("./.kokoro/#{gem}.cfg", "w") do |f|
+  File.open("./.kokoro/continuous/#{gem}.cfg", "w") do |f|
     config = ERB.new(File.read("./.kokoro/templates/linux.cfg.erb"))
     f.write(config.result(binding))
   end
