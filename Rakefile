@@ -287,22 +287,6 @@ namespace :circleci do
   end
 end
 
-namespace :travis do
-  desc "Build for Travis-CI"
-  task :build do
-    valid_gems.each do |gem|
-      Dir.chdir gem do
-        Bundler.with_clean_env do
-          sh "gem install bundler"
-          sh "bundle update"
-          sh "bundle exec rake ci"
-          end
-        end
-      end
-    end
-  end
-end
-
 desc "Run the CI build for all gems."
 task :ci, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
