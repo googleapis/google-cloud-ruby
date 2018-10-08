@@ -290,12 +290,6 @@ end
 namespace :travis do
   desc "Build for Travis-CI"
   task :build do
-    run_acceptance = false
-    if ENV["TRAVIS_BRANCH"] == "master" &&
-       ENV["TRAVIS_PULL_REQUEST"] == "false"
-      run_acceptance = true
-    end
-
     valid_gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
