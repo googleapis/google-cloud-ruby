@@ -1312,6 +1312,20 @@ module Google
           #   resources in a page.
           # @param type [Google::Privacy::Dlp::V2::DlpJobType]
           #   The type of job. Defaults to `DlpJobType.INSPECT`
+          # @param order_by [String]
+          #   Optional comma separated list of fields to order by,
+          #   followed by `asc` or `desc` postfix. This list is case-insensitive,
+          #   default sorting order is ascending, redundant space characters are
+          #   insignificant.
+          #
+          #   Example: `name asc, end_time asc, create_time desc`
+          #
+          #   Supported fields are:
+          #
+          #   * `create_time`: corresponds to time the job was created.
+          #   * `end_time`: corresponds to time the job ended.
+          #   * `name`: corresponds to job's name.
+          #   * `state`: corresponds to `state`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1348,13 +1362,15 @@ module Google
               filter: nil,
               page_size: nil,
               type: nil,
+              order_by: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               filter: filter,
               page_size: page_size,
-              type: type
+              type: type,
+              order_by: order_by
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListDlpJobsRequest)
             @list_dlp_jobs.call(req, options, &block)

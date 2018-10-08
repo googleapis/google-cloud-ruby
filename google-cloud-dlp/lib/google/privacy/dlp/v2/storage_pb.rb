@@ -78,6 +78,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :partition_id, :message, 1, "google.privacy.dlp.v2.PartitionId"
     optional :kind, :message, 2, "google.privacy.dlp.v2.KindExpression"
   end
+  add_message "google.privacy.dlp.v2.CloudStorageRegexFileSet" do
+    optional :bucket_name, :string, 1
+    repeated :include_regex, :string, 2
+    repeated :exclude_regex, :string, 3
+  end
   add_message "google.privacy.dlp.v2.CloudStorageOptions" do
     optional :file_set, :message, 1, "google.privacy.dlp.v2.CloudStorageOptions.FileSet"
     optional :bytes_limit_per_file, :int64, 4
@@ -88,6 +93,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.privacy.dlp.v2.CloudStorageOptions.FileSet" do
     optional :url, :string, 1
+    optional :regex_file_set, :message, 2, "google.privacy.dlp.v2.CloudStorageRegexFileSet"
   end
   add_enum "google.privacy.dlp.v2.CloudStorageOptions.SampleMethod" do
     value :SAMPLE_METHOD_UNSPECIFIED, 0
@@ -197,6 +203,7 @@ module Google
         PartitionId = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PartitionId").msgclass
         KindExpression = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.KindExpression").msgclass
         DatastoreOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DatastoreOptions").msgclass
+        CloudStorageRegexFileSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CloudStorageRegexFileSet").msgclass
         CloudStorageOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CloudStorageOptions").msgclass
         CloudStorageOptions::FileSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CloudStorageOptions.FileSet").msgclass
         CloudStorageOptions::SampleMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CloudStorageOptions.SampleMethod").enummodule

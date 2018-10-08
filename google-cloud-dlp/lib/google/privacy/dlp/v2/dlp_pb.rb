@@ -766,6 +766,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :page_size, :int32, 2
     optional :page_token, :string, 3
     optional :type, :enum, 5, "google.privacy.dlp.v2.DlpJobType"
+    optional :order_by, :string, 6
   end
   add_message "google.privacy.dlp.v2.ListDlpJobsResponse" do
     repeated :jobs, :message, 1, "google.privacy.dlp.v2.DlpJob"
