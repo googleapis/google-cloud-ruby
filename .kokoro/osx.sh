@@ -17,6 +17,8 @@ cd github/google-cloud-ruby/
 # Print out Ruby version
 ruby --version
 
+echo "LANG="$LANG
+
 # Temporary workaround for a known bundler+docker issue:
 # https://github.com/bundler/bundler/issues/6154
 export BUNDLE_GEMFILE=
