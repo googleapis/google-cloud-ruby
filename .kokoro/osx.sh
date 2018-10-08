@@ -11,6 +11,7 @@ set -eo pipefail
 
 # Debug: show build environment
 env | grep KOKORO
+echo $LANG
 
 cd github/google-cloud-ruby/
 
