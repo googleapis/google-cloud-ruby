@@ -98,5 +98,5 @@ s.replace(
 s.replace(
     'README.md',
     '# Ruby Client for Cloud Asset API \(\[Alpha\]\(https:\/\/github\.com\/googleapis\/google-cloud-ruby#versioning\)\)',
-    '# Ruby Client for Cloud Asset API \([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))'
+    '# Ruby Client for Cloud Asset API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))'
 )
