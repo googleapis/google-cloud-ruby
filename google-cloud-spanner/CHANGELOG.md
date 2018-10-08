@@ -1,6 +1,6 @@
 # Release History
 
-### 1.7.0 / 2018-10-02
+### 1.7.1 / 2018-10-08
 
 * Add DML and Partitioned DML support
   * Add execute_update to process DML statements
