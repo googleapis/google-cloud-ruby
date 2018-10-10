@@ -192,10 +192,6 @@ module Google
         # the example below. BigQuery does not allow you to change partitioning
         # on an existing table.
         #
-        # If the table is not a full resource representation (see
-        # {#resource_full?}), the full representation will be retrieved before
-        # the update to comply with ETag-based optimistic concurrency control.
-        #
         # @param [String] type The partition type. Currently the only
         #   supported value is "DAY".
         #
@@ -248,10 +244,6 @@ module Google
         # You can only set the partitioning field while creating a table as in
         # the example below. BigQuery does not allow you to change partitioning
         # on an existing table.
-        #
-        # If the table is not a full resource representation (see
-        # {#resource_full?}), the full representation will be retrieved before
-        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [String] field The partition field. The field must be a
         #   top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or

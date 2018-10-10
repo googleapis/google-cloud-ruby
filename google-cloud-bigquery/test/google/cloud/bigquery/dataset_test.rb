@@ -24,6 +24,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:table_description) { "This is my table" }
+  let(:time_partitioning_gapi) do
+    Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 5000
+  end
   let(:table_schema) {
     {
       fields: [
@@ -172,6 +175,30 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     table.schema.must_be :empty?
     table.must_be :table?
     table.wont_be :view?
+  end
+
+  it "creates a table with time partitioning in a block" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      time_partitioning: time_partitioning_gapi)
+    mock.expect :insert_table, insert_table, [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_table table_id do |t|
+      t.time_partitioning_type = "DAY"
+      t.time_partitioning_field = "dob"
+      t.time_partitioning_expiration = 5
+    end
+
+    mock.verify
+
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.table_id.must_equal table_id
+    table.time_partitioning_type.must_equal "DAY"
+    table.time_partitioning_field.must_equal "dob"
+    table.time_partitioning_expiration.must_equal 5
   end
 
   it "creates a table with a schema inline" do

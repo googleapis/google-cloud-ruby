@@ -337,25 +337,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "gets and sets time partitioning" do
-    partitioned_table = dataset.table "weekly_kittens"
-    if partitioned_table.nil?
-      partitioned_table = dataset.create_table "weekly_kittens" do |updater|
-        updater.time_partitioning_type = "DAY"
-        updater.time_partitioning_expiration = seven_days
-      end
-    end
-
-    partitioned_table.time_partitioning_expiration = 1
-
-    partitioned_table.reload!
-    partitioned_table.table_id.must_equal "weekly_kittens"
-    partitioned_table.time_partitioning_type.must_equal "DAY"
-    partitioned_table.time_partitioning_field.must_be_nil
-    partitioned_table.time_partitioning_expiration.must_equal 1
-  end
-
-  it "gets and sets time partitioning by field" do
+  it "updates time partitioning expiration" do
     partitioned_table = dataset.table "kittens_field_reference"
     if partitioned_table.nil?
       partitioned_table = dataset.create_table "kittens_field_reference" do |updater|
