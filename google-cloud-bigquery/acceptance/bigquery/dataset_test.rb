@@ -83,6 +83,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
 
   let(:schema_update_options) { ["ALLOW_FIELD_ADDITION", "ALLOW_FIELD_RELAXATION"] }
+  let(:clustering_fields) { ["breed", "name"] }
 
   before do
     table
@@ -184,16 +185,20 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       job.time_partitioning_field = "dob"
       job.time_partitioning_expiration = 86_400
       job.time_partitioning_require_filter = true
+      job.clustering_fields = clustering_fields
     end
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.job_id.must_equal job_id
     job.wait_until_done!
     job.output_rows.must_equal 3
     job.schema_update_options.must_equal schema_update_options
+    job.time_partitioning?.must_equal true
     job.time_partitioning_type.must_equal "DAY"
     job.time_partitioning_field.must_equal "dob"
     job.time_partitioning_expiration.must_equal 86_400
     job.time_partitioning_require_filter?.must_equal true
+    job.clustering?.must_equal true
+    job.clustering_fields.must_equal clustering_fields
   end
 
   it "imports data from a local file and creates a new table with specified schema as an option with load_job" do

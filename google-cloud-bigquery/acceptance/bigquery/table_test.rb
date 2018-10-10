@@ -891,6 +891,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     load_job.time_partitioning_field.must_be :nil?
     load_job.time_partitioning_expiration.must_be :nil?
     load_job.time_partitioning_require_filter?.must_equal false
+    load_job.clustering?.must_equal false
+    load_job.clustering_fields.must_be :nil?
     load_job.input_files.must_equal 1
     load_job.input_file_bytes.must_be :>, 0
     load_job.output_rows.must_be :>, 0

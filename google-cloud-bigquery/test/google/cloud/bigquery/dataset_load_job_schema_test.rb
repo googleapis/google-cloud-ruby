@@ -56,7 +56,13 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
   end
 
   let(:schema_update_options) { ["ALLOW_FIELD_ADDITION", "ALLOW_FIELD_RELAXATION"] }
-  let(:time_partitioning) { Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 86_400_000, require_partition_filter: true }
+  let(:time_partitioning) do
+    Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 86_400_000, require_partition_filter: true
+  end
+  let(:clustering_fields) { ["last_name", "first_name"] }
+  let(:clustering) do
+    Google::Apis::BigqueryV2::Clustering.new fields: clustering_fields
+  end
 
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
@@ -70,10 +76,12 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
     job_gapi.configuration.load.schema_update_options = schema_update_options
     job_gapi.configuration.load.time_partitioning = time_partitioning
+    job_gapi.configuration.load.clustering = clustering
 
     job_resp_gapi = load_job_resp_gapi(load_url)
     job_resp_gapi.configuration.load.schema_update_options = schema_update_options
     job_resp_gapi.configuration.load.time_partitioning = time_partitioning
+    job_resp_gapi.configuration.load.clustering = clustering
 
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
     dataset.service.mocked_service = mock
@@ -90,6 +98,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       job.time_partitioning_field = "dob"
       job.time_partitioning_expiration = 86_400
       job.time_partitioning_require_filter = true
+      job.clustering_fields = clustering_fields
     end
 
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -99,6 +108,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job.time_partitioning_field.must_equal "dob"
     job.time_partitioning_expiration.must_equal 86_400
     job.time_partitioning_require_filter?.must_equal true
+    job.clustering?.must_equal true
+    job.clustering_fields.must_equal clustering_fields
 
     mock.verify
   end
@@ -129,6 +140,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job.time_partitioning_field.must_be :nil?
     job.time_partitioning_expiration.must_be :nil?
     job.time_partitioning_require_filter?.must_equal false
+    job.clustering?.must_equal false
+    job.clustering_fields.must_be :nil?
 
     mock.verify
   end
