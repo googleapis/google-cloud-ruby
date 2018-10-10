@@ -38,6 +38,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
   let(:time_partitioned_table_id) { "daily_kittens"}
   let(:seven_days) { 7 * 24 * 60 * 60 }
+  let(:clustering_fields) { ["last_name", "first_name"] }
   let(:time_partitioned_table) do
     t = dataset.table time_partitioned_table_id
     if t.nil?
@@ -45,8 +46,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         updater.time_partitioning_type = "DAY"
         updater.time_partitioning_field = "dob"
         updater.time_partitioning_expiration = seven_days
+        updater.clustering_fields = clustering_fields
         updater.schema do |schema|
           schema.timestamp "dob",   description: "dob description",   mode: :required
+          schema.string "first_name",   description: "first_name description",   mode: :required
+          schema.string "last_name",   description: "last_name description",   mode: :required
         end
       end
     end
@@ -446,11 +450,12 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "allows tables to be created with time_partioning enabled" do
+  it "allows tables to be created with time_partitioning and clustering" do
     table = time_partitioned_table
     table.time_partitioning_type.must_equal "DAY"
     table.time_partitioning_field.must_equal "dob"
     table.time_partitioning_expiration.must_equal seven_days
+    table.clustering_fields.must_equal clustering_fields
   end
 
   it "inserts rows directly and gets its data" do

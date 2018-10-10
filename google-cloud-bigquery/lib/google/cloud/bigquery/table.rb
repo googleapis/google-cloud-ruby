@@ -324,6 +324,50 @@ module Google
           patch_gapi! :time_partitioning
         end
 
+        ###
+        # Checks if the table is clustered.
+        #
+        # @see https://cloud.google.com/bigquery/docs/clustered-tables
+        #   Introduction to Clustered Tables
+        #
+        # @return [Boolean, nil] `true` when the table is clustered, or
+        #   `false` otherwise, if the object is a resource (see {#resource?});
+        #   `nil` if the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def clustering?
+          return nil if reference?
+          !@gapi.clustering.nil?
+        end
+
+        ###
+        # One or more fields on which data should be clustered. Must be
+        # specified with time-based partitioning, data in the table will be
+        # first partitioned and subsequently clustered. The order of the
+        # returned fields determines the sort order of the data.
+        #
+        # See {Table::Updater#clustering_fields=}.
+        #
+        # @see https://cloud.google.com/bigquery/docs/partitioned-tables
+        #   Partitioned Tables
+        # @see https://cloud.google.com/bigquery/docs/clustered-tables
+        #   Introduction to Clustered Tables
+        # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
+        #   Creating and Using Clustered Tables
+        #
+        # @return [Array<String>, nil] The clustering fields, or `nil` if the
+        #   table is not clustered or if the table is a reference (see
+        #   {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def clustering_fields
+          return nil if reference?
+          ensure_full_data!
+          @gapi.clustering.fields if clustering?
+        end
+
         ##
         # The combined Project ID, Dataset ID, and Table ID for this table, in
         # the format specified by the [Legacy SQL Query
@@ -2437,6 +2481,56 @@ module Google
             @updates = []
             @gapi = gapi
             @schema = nil
+          end
+
+          ##
+          # Sets one or more fields on which data should be clustered. Must be
+          # specified with time-based partitioning, data in the table will be
+          # first partitioned and subsequently clustered.
+          #
+          # Only top-level, non-repeated, simple-type fields are supported. When
+          # you cluster a table using multiple columns, the order of columns you
+          # specify is important. The order of the specified columns determines
+          # the sort order of the data.
+          #
+          # You can only set the clustering fields while creating a table as in
+          # the example below. BigQuery does not allow you to change clustering
+          # on an existing table.
+          #
+          # See {Table#clustering_fields}.
+          #
+          # @see https://cloud.google.com/bigquery/docs/partitioned-tables
+          #   Partitioned Tables
+          # @see https://cloud.google.com/bigquery/docs/clustered-tables
+          #   Introduction to Clustered Tables
+          # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
+          #   Creating and Using Clustered Tables
+          #
+          # @param [Array<String>] fields The clustering fields. Only top-level,
+          #   non-repeated, simple-type fields are supported.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.create_table "my_table" do |table|
+          #     table.time_partitioning_type  = "DAY"
+          #     table.time_partitioning_field = "dob"
+          #     table.schema do |schema|
+          #       schema.timestamp "dob", mode: :required
+          #       schema.string "first_name", mode: :required
+          #       schema.string "last_name", mode: :required
+          #     end
+          #     table.clustering_fields = ["last_name", "first_name"]
+          #   end
+          #
+          # @!group Attributes
+          #
+          def clustering_fields= fields
+            @gapi.clustering ||= Google::Apis::BigqueryV2::Clustering.new
+            @gapi.clustering.fields = fields
+            patch_gapi! :clustering
           end
 
           ##
