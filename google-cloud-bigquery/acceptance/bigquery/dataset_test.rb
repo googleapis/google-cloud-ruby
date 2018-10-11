@@ -278,9 +278,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "imports data from GCS Avro file and creates a new table with encryption with load" do
-    encrypt_config = bigquery.encryption(
-      kms_key: "projects/cloud-samples-tests/locations/us-central1" +
-                "/keyRings/test/cryptoKeys/test")
+    encrypt_config = bigquery.encryption(kms_key: kms_key)
     result = dataset.load(
       table_avro_id,
       "gs://cloud-samples-data/bigquery/us-states/us-states.avro") do |load|

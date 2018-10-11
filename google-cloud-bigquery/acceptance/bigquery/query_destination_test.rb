@@ -43,9 +43,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   it "sends query results to destination table with encryption" do
-    encrypt_config = bigquery.encryption(
-      kms_key: "projects/cloud-samples-tests/locations/us-central1" +
-                "/keyRings/test/cryptoKeys/test")
+    encrypt_config = bigquery.encryption(kms_key: kms_key)
     rows = bigquery.query "SELECT 456 AS value", standard_sql: true do |query|
       query.write = :truncate
       query.table = table
