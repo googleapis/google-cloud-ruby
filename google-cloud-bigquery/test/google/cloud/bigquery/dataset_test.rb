@@ -706,6 +706,29 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     table.table_id.must_equal found_table_id
   end
 
+  it "finds a table with skip_lookup option" do
+    table_id = "found_table"
+    # No HTTP mock needed, since the lookup is not made
+
+    table = dataset.table table_id, skip_lookup: true
+
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.must_be :reference?
+    table.wont_be :resource?
+    table.wont_be :resource_partial?
+    table.wont_be :resource_full?
+  end
+
+  it "finds a table with skip_lookup option if table_id is nil" do
+    table_id = nil
+    # No HTTP mock needed, since the lookup is not made
+
+    error = expect do
+      dataset.table table_id, skip_lookup: true
+    end.must_raise ArgumentError
+    error.message.must_equal "table_id must be a String"
+  end
+
   def create_table_gapi id, name = nil, description = nil
     Google::Apis::BigqueryV2::Table.from_json random_table_hash(dataset_id, id, name, description).to_json
   end
