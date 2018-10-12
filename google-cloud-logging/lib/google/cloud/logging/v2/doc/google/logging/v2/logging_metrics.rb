@@ -122,12 +122,12 @@ module Google
       #     Deprecated. The API version that created or updated this metric.
       #     The v2 format is used by default and cannot be changed.
       class LogMetric
-        # Stackdriver Logging API version.
+        # Logging API version.
         module ApiVersion
-          # Stackdriver Logging API v2.
+          # Logging API v2.
           V2 = 0
 
-          # Stackdriver Logging API v1.
+          # Logging API v1.
           V1 = 1
         end
       end

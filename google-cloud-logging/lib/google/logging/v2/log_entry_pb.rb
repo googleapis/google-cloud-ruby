@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :operation, :message, 15, "google.logging.v2.LogEntryOperation"
     optional :trace, :string, 22
     optional :span_id, :string, 27
+    optional :trace_sampled, :bool, 30
     optional :source_location, :message, 23, "google.logging.v2.LogEntrySourceLocation"
     oneof :payload do
       optional :proto_payload, :message, 2, "google.protobuf.Any"
