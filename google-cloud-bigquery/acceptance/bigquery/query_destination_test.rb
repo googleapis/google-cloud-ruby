@@ -84,4 +84,25 @@ describe Google::Cloud::Bigquery, :bigquery do
     rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 10
   end
+
+  it "sends query results to a clustered destination table" do
+    job = bigquery.query_job "SELECT * FROM UNNEST(" \
+                             "GENERATE_TIMESTAMP_ARRAY(" \
+                             "'2099-10-01 00:00:00', '2099-10-10 00:00:00', " \
+                             "INTERVAL 1 DAY)) AS dob, 'foo' as name" do |job|
+      job.write = :truncate
+      job.table = timestamp_table
+      job.time_partitioning_type = "DAY"
+      job.time_partitioning_field = "dob"
+      job.clustering_fields = ["name"]
+    end
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.wait_until_done!
+
+    job.time_partitioning_type.must_equal "DAY"
+    job.time_partitioning_field.must_equal "dob"
+    job.clustering?.must_equal true
+    job.clustering_fields.must_equal ["name"]
+  end
 end

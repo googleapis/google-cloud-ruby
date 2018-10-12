@@ -26,7 +26,13 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
-  let(:time_partitioning) { Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 86_400_000, require_partition_filter: true }
+  let(:time_partitioning) do
+    Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 86_400_000, require_partition_filter: true
+  end
+  let(:clustering_fields) { ["last_name", "first_name"] }
+  let(:clustering) do
+    Google::Apis::BigqueryV2::Clustering.new fields: clustering_fields
+  end
 
   it "queries the data with default dataset option set" do
     mock = Minitest::Mock.new
@@ -101,9 +107,11 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job.time_partitioning_field.must_be :nil?
     job.time_partitioning_expiration.must_be :nil?
     job.time_partitioning_require_filter?.must_equal false
+    job.clustering?.must_equal false
+    job.clustering_fields.must_be :nil?
   end
 
-  it "queries the data with time_partitioning options" do
+  it "queries the data with time_partitioning and clustering" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
@@ -118,6 +126,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
         table_id:   table_id
     )
     job_gapi.configuration.query.time_partitioning = time_partitioning
+    job_gapi.configuration.query.clustering = clustering
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
@@ -126,6 +135,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
       job.time_partitioning_field = "dob"
       job.time_partitioning_expiration = 86_400
       job.time_partitioning_require_filter = true
+      job.clustering_fields = clustering_fields
     end
     mock.verify
 
@@ -135,6 +145,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job.time_partitioning_field.must_equal "dob"
     job.time_partitioning_expiration.must_equal 86_400
     job.time_partitioning_require_filter?.must_equal true
+    job.clustering?.must_equal true
+    job.clustering_fields.must_equal clustering_fields
   end
 
   it "queries the data with job_id option" do
