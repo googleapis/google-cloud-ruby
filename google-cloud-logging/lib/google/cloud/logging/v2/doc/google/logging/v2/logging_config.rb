@@ -55,7 +55,7 @@ module Google
       # @!attribute [rw] writer_identity
       #   @return [String]
       #     Output only. An IAM identity&mdash;a service account or group&mdash;under
-      #     which Stackdriver Logging writes the exported log entries to the sink's
+      #     which Logging writes the exported log entries to the sink's
       #     destination.  This field is set by
       #     [sinks.create](https://cloud.google.com/logging/docs/api/reference/rest/v2/projects.sinks/create)
       #     and
@@ -90,7 +90,7 @@ module Google
       #   @return [Google::Protobuf::Timestamp]
       #     Deprecated. This field is ignored when creating or updating sinks.
       class LogSink
-        # Available log entry formats. Log entries can be written to Stackdriver
+        # Available log entry formats. Log entries can be written to
         # Logging in either format and can be exported in either format.
         # Version 2 is the preferred format.
         module VersionFormat
@@ -171,7 +171,7 @@ module Google
       #     Optional. Determines the kind of IAM identity returned as `writer_identity`
       #     in the new sink.  If this value is omitted or set to false, and if the
       #     sink's parent is a project, then the value returned as `writer_identity` is
-      #     the same group or service account used by Stackdriver Logging before the
+      #     the same group or service account used by Logging before the
       #     addition of writer identities to this API. The sink's destination must be
       #     in the same project as the sink itself.
       #
@@ -224,7 +224,7 @@ module Google
       #     empty updateMask will be an error.
       #
       #     For a detailed `FieldMask` definition, see
-      #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+      #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
       #
       #     Example: `updateMask=filter`.
       class UpdateSinkRequest; end
@@ -243,7 +243,7 @@ module Google
       #     Example: `"projects/my-project-id/sinks/my-sink-id"`.
       class DeleteSinkRequest; end
 
-      # Specifies a set of log entries that are not to be stored in Stackdriver
+      # Specifies a set of log entries that are not to be stored in
       # Logging. If your project receives a large volume of logs, you might be able
       # to use exclusions to reduce your chargeable logs. Exclusions are processed
       # after log sinks, so you can export log entries before they are excluded.

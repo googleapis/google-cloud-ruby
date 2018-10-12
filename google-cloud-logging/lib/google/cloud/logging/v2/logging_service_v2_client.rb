@@ -300,17 +300,16 @@ module Google
             nil
           end
 
-          # Writes log entries to Stackdriver Logging. This API method is the
-          # only way to send log entries to Stackdriver Logging. This method
-          # is used, directly or indirectly, by the Stackdriver Logging agent
-          # (fluentd) and all logging libraries configured to use Stackdriver
-          # Logging.
+          # Writes log entries to Logging. This API method is the
+          # only way to send log entries to Logging. This method
+          # is used, directly or indirectly, by the Logging agent
+          # (fluentd) and all logging libraries configured to use Logging.
           # A single request may contain log entries for a maximum of 1000
           # different resources (projects, organizations, billing accounts or
           # folders)
           #
           # @param entries [Array<Google::Logging::V2::LogEntry | Hash>]
-          #   Required. The log entries to send to Stackdriver Logging. The order of log
+          #   Required. The log entries to send to Logging. The order of log
           #   entries in this list does not matter. Values supplied in this method's
           #   `log_name`, `resource`, and `labels` fields are copied into those log
           #   entries in this list that do not include values for their corresponding
@@ -344,11 +343,15 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
           #       "folders/[FOLDER_ID]/logs/[LOG_ID]"
           #
-          #   `[LOG_ID]` must be URL-encoded. For example,
-          #   `"projects/my-project-id/logs/syslog"` or
-          #   `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
-          #   For more information about log names, see
-          #   {Google::Logging::V2::LogEntry LogEntry}.
+          #   `[LOG_ID]` must be URL-encoded. For example:
+          #
+          #       "projects/my-project-id/logs/syslog"
+          #       "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
+          #
+          #   The permission <code>logging.logEntries.create</code> is needed on each
+          #   project, organization, billing account, or folder that is receiving
+          #   new log entries, whether the resource is specified in
+          #   <code>logName</code> or in an individual log entry.
           # @param resource [Google::Api::MonitoredResource | Hash]
           #   Optional. A default monitored resource object that is assigned to all log
           #   entries in `entries` that do not specify a value for `resource`. Example:
@@ -414,7 +417,7 @@ module Google
           end
 
           # Lists log entries.  Use this method to retrieve log entries from
-          # Stackdriver Logging.  For ways to export log entries, see
+          # Logging.  For ways to export log entries, see
           # [Exporting Logs](https://cloud.google.com/logging/docs/export).
           #
           # @param resource_names [Array<String>]
@@ -506,8 +509,7 @@ module Google
             @list_log_entries.call(req, options, &block)
           end
 
-          # Lists the descriptors for monitored resource types used by Stackdriver
-          # Logging.
+          # Lists the descriptors for monitored resource types used by Logging.
           #
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
