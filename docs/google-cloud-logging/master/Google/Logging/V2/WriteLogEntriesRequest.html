@@ -317,10 +317,10 @@ logging API endpoints are working properly before sending valuable data.</p>
       <pre class="lines">
 
 
-105</pre>
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 109</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -341,7 +341,7 @@ logging API endpoints are working properly before sending valuable data.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The log entries to send to Stackdriver Logging. The order of log
+    <p>Returns Required. The log entries to send to Logging. The order of log
 entries in this list does not matter. Values supplied in this method&#39;s
 <code>log_name</code>, <code>resource</code>, and <code>labels</code> fields are copied into those log
 entries in this list that do not include values for their corresponding
@@ -381,7 +381,7 @@ rather than calling this method for each individual log entry.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The log entries to send to Stackdriver Logging. The order of log
+        <div class='inline'><p>Required. The log entries to send to Logging. The order of log
 entries in this list does not matter. Values supplied in this method&#39;s
 <code>log_name</code>, <code>resource</code>, and <code>labels</code> fields are copied into those log
 entries in this list that do not include values for their corresponding
@@ -416,10 +416,10 @@ rather than calling this method for each individual log entry.</p>
       <pre class="lines">
 
 
-105</pre>
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 109</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -477,10 +477,10 @@ See <span class='object_link'><a href="LogEntry.html" title="Google::Logging::V2
       <pre class="lines">
 
 
-105</pre>
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 109</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -510,11 +510,16 @@ in <code>entries</code> that do not specify a value for <code>log_name</code>:</
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p><code>[LOG_ID]</code> must be URL-encoded. For example,
-<code>&quot;projects/my-project-id/logs/syslog&quot;</code> or
-<code>&quot;organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity&quot;</code>.
-For more information about log names, see
-<span class='object_link'><a href="LogEntry.html" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span>.</p>
+<p><code>[LOG_ID]</code> must be URL-encoded. For example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/my-project-id/logs/syslog</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>The permission <code>logging.logEntries.create</code> is needed on each
+project, organization, billing account, or folder that is receiving
+new log entries, whether the resource is specified in
+<code>logName</code> or in an individual log entry.</p>
 
 
   </div>
@@ -541,11 +546,16 @@ in <code>entries</code> that do not specify a value for <code>log_name</code>:</
 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folders/[FOLDER_ID]/logs/[LOG_ID]</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p><code>[LOG_ID]</code> must be URL-encoded. For example,
-<code>&quot;projects/my-project-id/logs/syslog&quot;</code> or
-<code>&quot;organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity&quot;</code>.
-For more information about log names, see
-<span class='object_link'><a href="LogEntry.html" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span>.</p>
+<p><code>[LOG_ID]</code> must be URL-encoded. For example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>projects/my-project-id/logs/syslog</span><span class='tstring_end'>&quot;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>The permission <code>logging.logEntries.create</code> is needed on each
+project, organization, billing account, or folder that is receiving
+new log entries, whether the resource is specified in
+<code>logName</code> or in an individual log entry.</p>
 </div>
       
     </li>
@@ -558,10 +568,10 @@ For more information about log names, see
       <pre class="lines">
 
 
-105</pre>
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 109</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -621,10 +631,10 @@ keyed by the entries&#39; zero-based index in the <code>entries.write</code> met
       <pre class="lines">
 
 
-105</pre>
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 109</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -692,10 +702,10 @@ entries in <code>entries</code> that do not specify a value for <code>resource</
       <pre class="lines">
 
 
-105</pre>
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 109</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

@@ -89,8 +89,8 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Service for configuring sinks used to export log entries outside of
-Stackdriver Logging.</p>
+    <p>Service for configuring sinks used to export log entries out of
+Logging.</p>
 
 
   </div>
@@ -1486,7 +1486,7 @@ can also be provided.</p>
         <div class='inline'><p>Optional. Determines the kind of IAM identity returned as <code>writer_identity</code>
 in the new sink.  If this value is omitted or set to false, and if the
 sink&#39;s parent is a project, then the value returned as <code>writer_identity</code> is
-the same group or service account used by Stackdriver Logging before the
+the same group or service account used by Logging before the
 addition of writer identities to this API. The sink&#39;s destination must be
 in the same project as the sink itself.</p>
 
@@ -3159,7 +3159,7 @@ At some point in the future, behavior will be removed and specifying an
 empty updateMask will be an error.</p>
 
 <p>For a detailed <code>FieldMask</code> definition, see
-<a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask">https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask</a></p>
+<a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask">https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask</a></p>
 
 <p>Example: <code>updateMask=filter</code>.
 A hash of the same form as <code>Google::Protobuf::FieldMask</code>
