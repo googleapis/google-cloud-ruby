@@ -53,5 +53,3 @@ gem "google-cloud", path: "google-cloud"
 gem "gcloud", path: "gcloud"
 gem "stackdriver-core", path: "stackdriver-core"
 gem "stackdriver", path: "stackdriver"
-
-gem "os", "~> 1.0"
