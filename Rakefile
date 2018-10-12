@@ -2,6 +2,7 @@ require "bundler/setup"
 require "open3"
 require "json"
 require "erb"
+require "os"
 
 task :bundleupdate do
   valid_gems.each do |gem|
@@ -568,6 +569,7 @@ namespace :kokoro do
         Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         sh "bundle update"
+        return unless OS.windows?
         sh "bundle exec rake ci:acceptance"
       end
     end
