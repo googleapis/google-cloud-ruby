@@ -726,7 +726,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     error = expect do
       dataset.table table_id, skip_lookup: true
     end.must_raise ArgumentError
-    error.message.must_equal "table_id must be a String"
+    error.message.must_equal "table_id is required"
   end
 
   def create_table_gapi id, name = nil, description = nil
