@@ -568,6 +568,7 @@ namespace :kokoro do
         Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         sh "bundle update"
+        sh "bundle exec rake ci" unless ENV['OS'] == 'windows'
         sh "bundle exec rake ci:acceptance" if ENV['OS'] == 'windows'
       end
     end
