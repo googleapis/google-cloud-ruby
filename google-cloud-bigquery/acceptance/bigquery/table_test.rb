@@ -166,9 +166,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "create table with cmek sets encryption" do
     begin
-      encrypt_config = bigquery.encryption(
-        kms_key: "projects/cloud-samples-tests/locations/us-central1" +
-                 "/keyRings/test/cryptoKeys/test")
+      encrypt_config = bigquery.encryption(kms_key: kms_key)
       cmek_table = dataset.create_table "cmek_kittens" do |updater|
         updater.encryption = encrypt_config
       end
@@ -177,9 +175,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       cmek_table.table_id.must_equal "cmek_kittens"
       cmek_table.encryption.must_equal encrypt_config
 
-      new_encrypt_config = bigquery.encryption(
-        kms_key: "projects/cloud-samples-tests/locations/us-central1" +
-                 "/keyRings/test/cryptoKeys/otherkey")
+      new_encrypt_config = bigquery.encryption(kms_key: kms_key_2)
       cmek_table.encryption = new_encrypt_config
 
       cmek_table.reload!
@@ -853,10 +849,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "copies itself to another table with copy with encryption" do
-    encrypt_config = bigquery.encryption(
-      kms_key: "projects/cloud-samples-tests/locations/us-central1" +
-                "/keyRings/test/cryptoKeys/test")
-
+    encrypt_config = bigquery.encryption(kms_key: kms_key)
     result = table.copy target_table_4_id, create: :needed,
                                            write: :truncate do |copy|
       copy.encryption = encrypt_config

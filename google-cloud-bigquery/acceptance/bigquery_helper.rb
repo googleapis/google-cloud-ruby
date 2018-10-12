@@ -47,6 +47,17 @@ end
 
 $bucket = safe_gcs_execute { $storage.create_bucket "#{$prefix}_bucket" }
 
+# Allow overriding the KMS key used for tests via an environment variable.
+# These keys are public, but access may be restricted when tests are run from a
+# VPC project.
+$kms_key = ENV["GCLOUD_TEST_KMS_KEY"] || (
+  "projects/cloud-samples-tests/locations/us-central1" +
+  "/keyRings/test/cryptoKeys/test")
+
+$kms_key_2 = ENV["GCLOUD_TEST_KMS_KEY_2"] || (
+  "projects/cloud-samples-tests/locations/us-central1" +
+  "/keyRings/test/cryptoKeys/otherkey")
+
 module Acceptance
   ##
   # Test class for running against a BigQuery instance.
@@ -65,6 +76,8 @@ module Acceptance
     attr_accessor :prefix
     attr_accessor :storage
     attr_accessor :bucket
+    attr_accessor :kms_key
+    attr_accessor :kms_key_2
 
     ##
     # Setup project based on available ENV variables
@@ -73,11 +86,15 @@ module Acceptance
       @prefix = $prefix
       @storage = $storage
       @bucket = $bucket
+      @kms_key = $kms_key
+      @kms_key_2 = $kms_key_2
 
       refute_nil @bigquery, "You do not have an active bigquery to run the tests."
       refute_nil @prefix, "You do not have an bigquery prefix to name the datasets and tables with."
       refute_nil @storage, "You do not have an active storage to run the tests."
       refute_nil @bucket, "You do not have a storage bucket to run the tests."
+      refute_nil @kms_key, "You do not have a kms key to run the tests."
+      refute_nil @kms_key_2, "You do not have a second kms key to run the tests."
 
       super
     end
