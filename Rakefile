@@ -568,7 +568,7 @@ namespace :kokoro do
         Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         sh "bundle update"
-        sh "bundle exec rake ci"
+        sh "bundle exec rake ci:acceptance"
       end
     end
   end
