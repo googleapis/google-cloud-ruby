@@ -569,7 +569,7 @@ namespace :kokoro do
         Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         sh "bundle update"
-        if ENV['OS'] == windows
+        if ENV['OS'] == 'windows'
           FileUtils.mkdir_p "acceptance"
           FileUtils.rm_f "acceptance/data"
           sh "call mklink /j acceptance\\data ..\\acceptance\\data"
