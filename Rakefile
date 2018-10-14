@@ -573,7 +573,7 @@ namespace :kokoro do
           FileUtils.mkdir_p "acceptance"
           FileUtils.rm_f "acceptance/data"
           sh "call mklink /j acceptance\\data ..\\acceptance\\data"
-          sh "bundle exec rake ci:acceptance"
+          sh "bundle exec rake ci:acceptance --trace"
         end
         sh "bundle exec rake ci" unless ENV['OS'] == 'windows'
       end
