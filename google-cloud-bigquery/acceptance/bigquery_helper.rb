@@ -47,6 +47,11 @@ end
 
 $bucket = safe_gcs_execute { $storage.create_bucket "#{$prefix}_bucket" }
 
+# Allow overriding the samples bucket used for tests via an environment
+# variable. This bucket is public, but access may be restricted when tests are
+# run from a VPC project.
+$samples_bucket = ENV["GCLOUD_TEST_SAMPLES_BUCKET"] || "cloud-samples-data"
+
 # Allow overriding the KMS key used for tests via an environment variable.
 # These keys are public, but access may be restricted when tests are run from a
 # VPC project.
@@ -86,6 +91,7 @@ module Acceptance
       @prefix = $prefix
       @storage = $storage
       @bucket = $bucket
+      @samples_bucket = $samples_bucket
       @kms_key = $kms_key
       @kms_key_2 = $kms_key_2
 
@@ -93,6 +99,7 @@ module Acceptance
       refute_nil @prefix, "You do not have an bigquery prefix to name the datasets and tables with."
       refute_nil @storage, "You do not have an active storage to run the tests."
       refute_nil @bucket, "You do not have a storage bucket to run the tests."
+      refute_nil @samples_bucket, "You do not have a bucket with sample data to run the tests."
       refute_nil @kms_key, "You do not have a kms key to run the tests."
       refute_nil @kms_key_2, "You do not have a second kms key to run the tests."
 

@@ -273,7 +273,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   it "imports data from GCS Avro file and creates a new table with load" do
     result = dataset.load(
       table_avro_id,
-      "gs://cloud-samples-data/bigquery/us-states/us-states.avro")
+      "gs://#{samples_bucket}/bigquery/us-states/us-states.avro")
     result.must_equal true
   end
 
@@ -281,7 +281,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     encrypt_config = bigquery.encryption(kms_key: kms_key)
     result = dataset.load(
       table_avro_id,
-      "gs://cloud-samples-data/bigquery/us-states/us-states.avro") do |load|
+      "gs://#{samples_bucket}/bigquery/us-states/us-states.avro") do |load|
       load.write = :truncate
       load.encryption = encrypt_config
     end
@@ -298,7 +298,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   it "imports data from GCS ORC file and creates a new table with load" do
     result = dataset.load(
         table_orc_id,
-        "gs://cloud-samples-data/bigquery/us-states/us-states.orc")
+        "gs://#{samples_bucket}/bigquery/us-states/us-states.orc")
     result.must_equal true
   end
 
@@ -310,7 +310,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   it "imports data from GCS Parquet file and creates a new table with load" do
     result = dataset.load(
         table_parquet_id,
-        "gs://cloud-samples-data/bigquery/us-states/us-states.parquet")
+        "gs://#{samples_bucket}/bigquery/us-states/us-states.parquet")
     result.must_equal true
   end
 
