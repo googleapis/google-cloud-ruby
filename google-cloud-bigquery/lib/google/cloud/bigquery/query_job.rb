@@ -393,6 +393,45 @@ module Google
           tp.require_partition_filter
         end
 
+        ###
+        # Checks if the destination table will be clustered.
+        #
+        # @see https://cloud.google.com/bigquery/docs/clustered-tables
+        #   Introduction to Clustered Tables
+        #
+        # @return [Boolean, nil] `true` when the table will be clustered,
+        #   or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def clustering?
+          !@gapi.configuration.query.clustering.nil?
+        end
+
+        ###
+        # One or more fields on which the destination table should be clustered.
+        # Must be specified with time-based partitioning, data in the table will
+        # be first partitioned and subsequently clustered. The order of the
+        # returned fields determines the sort order of the data.
+        #
+        # See {QueryJob::Updater#clustering_fields=}.
+        #
+        # @see https://cloud.google.com/bigquery/docs/partitioned-tables
+        #   Partitioned Tables
+        # @see https://cloud.google.com/bigquery/docs/clustered-tables
+        #   Introduction to Clustered Tables
+        # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
+        #   Creating and Using Clustered Tables
+        #
+        # @return [Array<String>, nil] The clustering fields, or `nil` if the
+        #   destination table will not be clustered.
+        #
+        # @!group Attributes
+        #
+        def clustering_fields
+          @gapi.configuration.query.clustering.fields if clustering?
+        end
+
         ##
         # Refreshes the job until the job is `DONE`.
         # The delay between refreshes will incrementally increase.
@@ -800,9 +839,9 @@ module Google
           #
           #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
           #   encrypt_config = bigquery.encryption kms_key: key_name
-          #   job = bigquery.query_job "SELECT 1;" do |query|
-          #     query.table = dataset.table "my_table", skip_lookup: true
-          #     query.encryption = encrypt_config
+          #   job = bigquery.query_job "SELECT 1;" do |job|
+          #     job.table = dataset.table "my_table", skip_lookup: true
+          #     job.encryption = encrypt_config
           #   end
           #
           # @!group Attributes
@@ -828,12 +867,15 @@ module Google
           #
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
+          #   destination_table = dataset.table "my_destination_table",
+          #                                     skip_lookup: true
           #
           #   job = dataset.query_job "SELECT * FROM UNNEST(" \
           #                           "GENERATE_TIMESTAMP_ARRAY(" \
           #                           "'2018-10-01 00:00:00', " \
           #                           "'2018-10-10 00:00:00', " \
           #                           "INTERVAL 1 DAY)) AS dob" do |job|
+          #     job.table = destination_table
           #     job.time_partitioning_type = "DAY"
           #   end
           #
@@ -871,12 +913,15 @@ module Google
           #
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
+          #   destination_table = dataset.table "my_destination_table",
+          #                                     skip_lookup: true
           #
           #   job = dataset.query_job "SELECT * FROM UNNEST(" \
           #                           "GENERATE_TIMESTAMP_ARRAY(" \
           #                           "'2018-10-01 00:00:00', " \
           #                           "'2018-10-10 00:00:00', " \
           #                           "INTERVAL 1 DAY)) AS dob" do |job|
+          #     job.table = destination_table
           #     job.time_partitioning_type  = "DAY"
           #     job.time_partitioning_field = "dob"
           #   end
@@ -908,12 +953,15 @@ module Google
           #
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
+          #   destination_table = dataset.table "my_destination_table",
+          #                                     skip_lookup: true
           #
           #   job = dataset.query_job "SELECT * FROM UNNEST(" \
           #                           "GENERATE_TIMESTAMP_ARRAY(" \
           #                           "'2018-10-01 00:00:00', " \
           #                           "'2018-10-10 00:00:00', " \
           #                           "INTERVAL 1 DAY)) AS dob" do |job|
+          #     job.table = destination_table
           #     job.time_partitioning_type = "DAY"
           #     job.time_partitioning_expiration = 86_400
           #   end
@@ -946,6 +994,54 @@ module Google
               Google::Apis::BigqueryV2::TimePartitioning.new
             @gapi.configuration.query.time_partitioning.update! \
               require_partition_filter: val
+          end
+
+          ##
+          # Sets one or more fields on which the destination table should be
+          # clustered. Must be specified with time-based partitioning, data in
+          # the table will be first partitioned and subsequently clustered.
+          #
+          # Only top-level, non-repeated, simple-type fields are supported. When
+          # you cluster a table using multiple columns, the order of columns you
+          # specify is important. The order of the specified columns determines
+          # the sort order of the data.
+          #
+          # See {QueryJob#clustering_fields}.
+          #
+          # @see https://cloud.google.com/bigquery/docs/partitioned-tables
+          #   Partitioned Tables
+          # @see https://cloud.google.com/bigquery/docs/clustered-tables
+          #   Introduction to Clustered Tables
+          # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
+          #   Creating and Using Clustered Tables
+          #
+          # @param [Array<String>] fields The clustering fields. Only top-level,
+          #   non-repeated, simple-type fields are supported.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   destination_table = dataset.table "my_destination_table",
+          #                                     skip_lookup: true
+          #
+          #   job = dataset.query_job "SELECT * FROM my_table" do |job|
+          #     job.table = destination_table
+          #     job.time_partitioning_type = "DAY"
+          #     job.time_partitioning_field = "dob"
+          #     job.clustering_fields = ["last_name", "first_name"]
+          #   end
+          #
+          #   job.wait_until_done!
+          #   job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def clustering_fields= fields
+            @gapi.configuration.query.clustering ||= \
+              Google::Apis::BigqueryV2::Clustering.new
+            @gapi.configuration.query.clustering.fields = fields
           end
 
           ##

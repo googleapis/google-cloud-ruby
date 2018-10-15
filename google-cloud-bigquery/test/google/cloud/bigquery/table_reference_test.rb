@@ -68,6 +68,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_be_nil
+    table.clustering_fields.must_be_nil
     table.id.must_be_nil
     table.name.must_be_nil
     table.etag.must_be_nil

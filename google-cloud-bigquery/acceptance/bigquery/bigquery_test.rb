@@ -132,6 +132,8 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.time_partitioning_field.must_be :nil?
     job.time_partitioning_expiration.must_be :nil?
     job.time_partitioning_require_filter?.must_equal false
+    job.clustering?.must_equal false
+    job.clustering_fields.must_be :nil?
 
     job.wait_until_done!
     rows = job.data
