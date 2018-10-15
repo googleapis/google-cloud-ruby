@@ -2220,7 +2220,8 @@ module Google
         ##
         # @private New lazy Table object without making an HTTP request.
         def self.new_reference project_id, dataset_id, table_id, service
-          # TODO: raise if dataset_id or table_id is nil?
+          raise ArgumentError, "dataset_id is required" unless dataset_id
+          raise ArgumentError, "table_id is required" unless table_id
           new.tap do |b|
             reference_gapi = Google::Apis::BigqueryV2::TableReference.new(
               project_id: project_id,

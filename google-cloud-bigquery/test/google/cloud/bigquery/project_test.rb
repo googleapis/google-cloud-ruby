@@ -571,6 +571,15 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
   end
 
+  it "finds a dataset with skip_lookup option if dataset_id is nil" do
+    dataset_id = nil
+
+    error = expect do
+      bigquery.dataset dataset_id, skip_lookup: true
+    end.must_raise ArgumentError
+    error.message.must_equal "dataset_id is required"
+  end
+
   it "lists jobs" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3),
