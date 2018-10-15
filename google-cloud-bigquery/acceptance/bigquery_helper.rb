@@ -81,6 +81,7 @@ module Acceptance
     attr_accessor :prefix
     attr_accessor :storage
     attr_accessor :bucket
+    attr_accessor :samples_bucket
     attr_accessor :kms_key
     attr_accessor :kms_key_2
 
