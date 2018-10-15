@@ -165,6 +165,52 @@ on a <span class='object_link'><a href="Table.html" title="Google::Cloud::Bigque
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#clustering%3F-instance_method" title="#clustering? (instance method)">#<strong>clustering?</strong>  &#x21d2; Boolean<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the destination table will be clustered.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clustering_fields-instance_method" title="#clustering_fields (instance method)">#<strong>clustering_fields</strong>  &#x21d2; Array&lt;String&gt;<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>One or more fields on which the destination table should be clustered.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#data-instance_method" title="#data (instance method)">#<strong>data</strong>(token: nil, max: nil, start: nil)  &#x21d2; Google::Cloud::Bigquery::Data </a>
     
 
@@ -1014,6 +1060,145 @@ otherwise.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="clustering?-instance_method">
+  
+    #<strong>clustering?</strong>  &#x21d2; <tt>Boolean</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the destination table will be clustered.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when the table will be clustered,
+or <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/clustered-tables" target="_parent" title="Introduction to Clustered Tables">Introduction to Clustered Tables</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+407
+408
+409</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 407</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clustering?'>clustering?</span>
+  <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_clustering'>clustering</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clustering_fields-instance_method">
+  
+    #<strong>clustering_fields</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>One or more fields on which the destination table should be clustered.
+Must be specified with time-based partitioning, data in the table will
+be first partitioned and subsequently clustered. The order of the
+returned fields determines the sort order of the data.</p>
+
+<p>See <span class='object_link'><a href="QueryJob/Updater.html#clustering_fields=-instance_method" title="Google::Cloud::Bigquery::QueryJob::Updater#clustering_fields= (method)">Google::Cloud::Bigquery::QueryJob::Updater#clustering_fields=</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The clustering fields, or <code>nil</code> if the
+destination table will not be clustered.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/partitioned-tables" target="_parent" title="Partitioned Tables">Partitioned Tables</a></li>
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/clustered-tables" target="_parent" title="Introduction to Clustered Tables">Introduction to Clustered Tables</a></li>
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/creating-clustered-tables" target="_parent" title="Creating and Using Clustered Tables">Creating and Using Clustered Tables</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+431
+432
+433</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 431</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clustering_fields'>clustering_fields</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_clustering'>clustering</span><span class='period'>.</span><span class='id identifier rubyid_fields'>fields</span> <span class='kw'>if</span> <span class='id identifier rubyid_clustering?'>clustering?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="data-instance_method">
   
     #<strong>data</strong>(token: nil, max: nil, start: nil)  &#x21d2; <tt><span class='object_link'><a href="Data.html" title="Google::Cloud::Bigquery::Data (class)">Google::Cloud::Bigquery::Data</a></span></tt> 
@@ -1130,21 +1315,21 @@ data read from the destination table for the job.</p>
       <pre class="lines">
 
 
-452
-453
-454
-455
-456
-457
-458
-459
-460
-461
-462
-463</pre>
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 452</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 491</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_data'>data</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>start:</span> <span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id identifier rubyid_done?'>done?</span>
@@ -2447,23 +2632,23 @@ The delay between refreshes will incrementally increase.</p>
       <pre class="lines">
 
 
-411
-412
-413
-414
-415
-416
-417
-418
-419
-420
-421
-422
-423
-424</pre>
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 411</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 450</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='id identifier rubyid_done?'>done?</span>

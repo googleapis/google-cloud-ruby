@@ -167,6 +167,52 @@ on a <span class='object_link'><a href="Table.html" title="Google::Cloud::Bigque
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#clustering%3F-instance_method" title="#clustering? (instance method)">#<strong>clustering?</strong>  &#x21d2; Boolean<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the destination table will be clustered.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clustering_fields-instance_method" title="#clustering_fields (instance method)">#<strong>clustering_fields</strong>  &#x21d2; Array&lt;String&gt;<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>One or more fields on which the destination table should be clustered.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#encryption-instance_method" title="#encryption (instance method)">#<strong>encryption</strong>  &#x21d2; Google::Cloud::BigQuery::EncryptionConfiguration </a>
     
 
@@ -1020,6 +1066,145 @@ otherwise.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_backup?'>backup?</span>
   <span class='id identifier rubyid_val'>val</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span>
   <span class='id identifier rubyid_val'>val</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DATASTORE_BACKUP</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clustering?-instance_method">
+  
+    #<strong>clustering?</strong>  &#x21d2; <tt>Boolean</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the destination table will be clustered.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when the table will be clustered,
+or <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/clustered-tables" target="_parent" title="Introduction to Clustered Tables">Introduction to Clustered Tables</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+438
+439
+440</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/load_job.rb', line 438</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clustering?'>clustering?</span>
+  <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_clustering'>clustering</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clustering_fields-instance_method">
+  
+    #<strong>clustering_fields</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>One or more fields on which the destination table should be clustered.
+Must be specified with time-based partitioning, data in the table will
+be first partitioned and subsequently clustered. The order of the
+returned fields determines the sort order of the data.</p>
+
+<p>See <span class='object_link'><a href="LoadJob/Updater.html#clustering_fields=-instance_method" title="Google::Cloud::Bigquery::LoadJob::Updater#clustering_fields= (method)">Google::Cloud::Bigquery::LoadJob::Updater#clustering_fields=</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The clustering fields, or <code>nil</code> if the
+destination table will not be clustered.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/partitioned-tables" target="_parent" title="Partitioned Tables">Partitioned Tables</a></li>
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/clustered-tables" target="_parent" title="Introduction to Clustered Tables">Introduction to Clustered Tables</a></li>
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/creating-clustered-tables" target="_parent" title="Creating and Using Clustered Tables">Creating and Using Clustered Tables</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+462
+463
+464</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/load_job.rb', line 462</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clustering_fields'>clustering_fields</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_clustering'>clustering</span><span class='period'>.</span><span class='id identifier rubyid_fields'>fields</span> <span class='kw'>if</span> <span class='id identifier rubyid_clustering?'>clustering?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
