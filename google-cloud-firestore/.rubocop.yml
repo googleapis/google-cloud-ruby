@@ -44,3 +44,5 @@ Naming/FileName:
 Style/RescueStandardError:
   Exclude:
   - "lib/google/cloud/firestore/client.rb"
+Naming/UncommunicativeMethodParamName:
+  Enabled: false

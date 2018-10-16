@@ -43,3 +43,5 @@ Layout/EmptyLines: # for the extra line between copyright and code
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-spanner.rb"
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
