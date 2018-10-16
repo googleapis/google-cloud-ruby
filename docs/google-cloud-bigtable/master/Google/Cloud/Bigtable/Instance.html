@@ -696,7 +696,7 @@ serving and storage resources to be used by Bigtable tables.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#table-instance_method" title="#table (instance method)">#<strong>table</strong>(table_id, view: nil, perform_lookup: nil, app_profile_id: nil)  &#x21d2; Object </a>
+      <a href="#table-instance_method" title="#table (instance method)">#<strong>table</strong>(table_id, view: nil, perform_lookup: nil, app_profile_id: nil)  &#x21d2; Google::Cloud::Bigtable::Table </a>
     
 
     
@@ -710,7 +710,8 @@ serving and storage resources to be used by Bigtable tables.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Get metadata information of table.</p>
+</div></span>
   
 </li>
 
@@ -919,16 +920,16 @@ serving and storage resources to be used by Bigtable tables.</p>
       <pre class="lines">
 
 
+741
 742
 743
 744
 745
 746
-747
-748</pre>
+747</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 742</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 741</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_app_profile'>app_profile</span> <span class='id identifier rubyid_app_profile_id'>app_profile_id</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1003,14 +1004,14 @@ serving and storage resources to be used by Bigtable tables.</p>
       <pre class="lines">
 
 
+768
 769
 770
 771
-772
-773</pre>
+772</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 769</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 768</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_app_profiles'>app_profiles</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1427,6 +1428,7 @@ Default value is <code>false</code></p>
       <pre class="lines">
 
 
+689
 690
 691
 692
@@ -1455,11 +1457,10 @@ Default value is <code>false</code></p>
 715
 716
 717
-718
-719</pre>
+718</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 690</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 689</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_app_profile'>create_app_profile</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1885,6 +1886,7 @@ GC Rules for column family see <span class='object_link'><a href="GcRule.html" t
       <pre class="lines">
 
 
+587
 588
 589
 590
@@ -1900,11 +1902,10 @@ GC Rules for column family see <span class='object_link'><a href="GcRule.html" t
 600
 601
 602
-603
-604</pre>
+603</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 588</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 587</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_table'>create_table</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2592,17 +2593,17 @@ instance</p>
       <pre class="lines">
 
 
+806
 807
 808
 809
 810
 811
 812
-813
-814</pre>
+813</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 807</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 806</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_policy'>policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3000,18 +3001,148 @@ an instance update operation.</p>
       <div class="method_details ">
   <h3 class="signature " id="table-instance_method">
   
-    #<strong>table</strong>(table_id, view: nil, perform_lookup: nil, app_profile_id: nil)  &#x21d2; <tt>Object</tt> 
+    #<strong>table</strong>(table_id, view: nil, perform_lookup: nil, app_profile_id: nil)  &#x21d2; <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get metadata information of table.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigtable'>bigtable</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># Default view is full view
+</span><span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>perform_lookup:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_column_families'>column_families</span>
+
+<span class='comment'># Name only view
+</span><span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>view:</span> <span class='symbol'>:NAME_ONLY</span><span class='comma'>,</span> <span class='label'>perform_lookup:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Mutate rows</p>
+</div></p>
+      
+      <pre class="example code"><code>require &quot;google/cloud/bigtable&quot;
+
+bigtable = Google::Cloud::Bigtable.new
+
+table = bigtable.table(&quot;my-instance&quot;, &quot;my-table&quot;)
+
+entry = table.new_mutation_entry(&quot;user-1&quot;)
+entry.set_cell(
+  &quot;cf-1&quot;,
+  &quot;field-1&quot;,
+  &quot;XYZ&quot;
+  timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
+).delete_from_column(&quot;cf2&quot;, &quot;field02&quot;)
+
+table.mutate_row(entry)</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>view</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The view to be applied to the returned tables&#39; fields
+Defaults to <code>SCHEMA_VIEW</code> if unspecified.
+Valid view types are.</p>
+
+<ul>
+<li><code>:NAME_ONLY</code> - Only populates <code>name</code></li>
+<li><code>:SCHEMA_VIEW</code> - Only populates <code>name</code> and fields related to the table&#39;s schema</li>
+<li><code>:REPLICATION_VIEW</code> - Only populates <code>name</code> and fields related to the table&#39;s replication state.</li>
+<li><code>:FULL</code> - Populates all fields</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>perform_lookup</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Create table object without verifying
+that the table resource exists.
+Calls made on this object will raise errors if the table.
+does not exist. Default value is <code>false</code>. Optional.
+It helps to reduce admin apis calls.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>app_profile_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the app profile. Optional.
+It is used only in data operations.
+This value specifies routing for replication. If not specified, the
+&quot;default&quot; application profile will be used.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigtable::Table (class)">Google::Cloud::Bigtable::Table</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
+495
 496
 497
 498
@@ -3028,11 +3159,10 @@ an instance update operation.</p>
 509
 510
 511
-512
-513</pre>
+512</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 496</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 495</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_table'>table</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span> <span class='label'>view:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>perform_lookup:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>app_profile_id:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3247,17 +3377,17 @@ See (<a href="https://cloud.google.com/bigtable/docs/access-control">https://clo
       <pre class="lines">
 
 
+884
 885
 886
 887
 888
 889
 890
-891
-892</pre>
+891</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 885</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 884</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> <span class='op'>*</span><span class='id identifier rubyid_permissions'>permissions</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3477,14 +3607,14 @@ instance</p>
       <pre class="lines">
 
 
+841
 842
 843
 844
-845
-846</pre>
+845</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 842</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 841</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_policy'>update_policy</span> <span class='id identifier rubyid_new_policy'>new_policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
