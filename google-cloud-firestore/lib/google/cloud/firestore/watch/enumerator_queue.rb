@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-require "thread"
-
 module Google
   module Cloud
     module Firestore

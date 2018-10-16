@@ -82,7 +82,7 @@ module Google
           ##
           # @private Predefined regex. Saves time during runtime.
           FULL_BYTE_CODE_BLACKLIST_REGEX = /^\d+ #{
-              [*BYTE_CODE_BLACKLIST, *LOCAL_BYTE_CODE_BLACKLIST].join '|'
+            [*BYTE_CODE_BLACKLIST, *LOCAL_BYTE_CODE_BLACKLIST].join '|'
           }/
 
           ##
@@ -953,6 +953,8 @@ module Google
             """
           end
 
+          # rubocop:disable Layout/RescueEnsureAlignment
+
           ##
           # @private Evaluation tracing callback function. This is called
           # everytime a Ruby function is called during evaluation of
@@ -990,6 +992,8 @@ module Google
               Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV
             )
           end
+
+          # rubocop:enable Layout/RescueEnsureAlignment
 
           ##
           # @private Evaluation tracing callback function. This is called

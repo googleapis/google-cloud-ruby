@@ -34,11 +34,15 @@ Metrics/MethodLength:
   Max: 25
 Metrics/ParameterLists:
   Enabled: false
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
 Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-firestore.rb"
-Lint/RescueWithoutErrorClass:
+Style/RescueStandardError:
   Exclude:
   - "lib/google/cloud/firestore/client.rb"
+Naming/UncommunicativeMethodParamName:
+  Enabled: false

@@ -14,7 +14,6 @@
 
 
 require "logger"
-require "thread"
 require "concurrent"
 
 module Google

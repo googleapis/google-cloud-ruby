@@ -29,6 +29,8 @@ Metrics/MethodLength:
   Max: 25
 Metrics/ParameterLists:
   Enabled: false
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
 Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
 Naming/VariableNumber:
@@ -36,6 +38,6 @@ Naming/VariableNumber:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-storage.rb"
-Lint/RescueWithoutErrorClass:
+Style/RescueStandardError:
   Exclude:
   - "lib/google/cloud/storage/policy.rb"

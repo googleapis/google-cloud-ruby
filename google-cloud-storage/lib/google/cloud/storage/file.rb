@@ -1720,6 +1720,8 @@ module Google
           [dest_bucket, dest_path]
         end
 
+        # rubocop:disable Style/MultipleComparison
+
         def verify_file! file, verify = :md5
           verify_md5    = verify == :md5    || verify == :all
           verify_crc32c = verify == :crc32c || verify == :all
@@ -1727,6 +1729,8 @@ module Google
           Verifier.verify_crc32c! self, file if verify_crc32c && crc32c
           file
         end
+
+        # rubocop:enable Style/MultipleComparison
 
         # @return [IO] Returns an IO object representing the file data. This
         #   will either be a `::File` object referencing the local file

@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "thread"
 require "concurrent"
 require "google/cloud/spanner/errors"
 require "google/cloud/spanner/session"

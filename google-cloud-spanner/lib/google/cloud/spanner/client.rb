@@ -1396,7 +1396,7 @@ module Google
           delay_from_aborted(err.cause)
         rescue StandardError
           # Any error indicates the backoff should be handled elsewhere
-          return nil
+          nil
         end
       end
     end

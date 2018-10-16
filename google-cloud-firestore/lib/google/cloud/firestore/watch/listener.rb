@@ -18,7 +18,6 @@ require "google/cloud/firestore/convert"
 require "google/cloud/firestore/watch/enumerator_queue"
 require "google/cloud/firestore/watch/inventory"
 require "monitor"
-require "thread"
 
 module Google
   module Cloud

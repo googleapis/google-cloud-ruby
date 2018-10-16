@@ -38,7 +38,7 @@ module Google
 
         def cloud_debugger
           return mocked_debugger if mocked_debugger
-          @debugger ||=
+          @cloud_debugger ||=
             V2::Controller2Client.new(
               credentials: credentials,
               timeout: timeout,

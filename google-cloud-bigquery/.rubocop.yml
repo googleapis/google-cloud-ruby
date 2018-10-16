@@ -30,8 +30,12 @@ Metrics/MethodLength:
   Max: 30
 Metrics/ParameterLists:
   Enabled: false
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
 Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery.rb"
+Naming/UncommunicativeMethodParamName:
+  Enabled: false

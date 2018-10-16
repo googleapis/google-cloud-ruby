@@ -491,9 +491,10 @@ module Google
         #   object_localizations = annotation.object_localizations
         #
         def object_localizations
-          @ol ||= @grpc.localized_object_annotations.map do |ol|
-            ObjectLocalization.from_grpc ol
-          end
+          @object_localizations ||= \
+            @grpc.localized_object_annotations.map do |ol|
+              ObjectLocalization.from_grpc ol
+            end
         end
 
         ##

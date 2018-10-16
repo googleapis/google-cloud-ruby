@@ -1035,7 +1035,7 @@ module Google
           inequality_paths = inequality_filter_field_paths query
           orig_order = order_by_field_paths query
 
-          inequality_paths.reverse.each do |field_path|
+          inequality_paths.reverse_each do |field_path|
             next if orig_order.include? field_path
 
             query.order_by.unshift StructuredQuery::Order.new(

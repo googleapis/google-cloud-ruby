@@ -118,7 +118,7 @@ module Google
           ttls = zf_records.map do |zf_record|
             ttl_to_i(zf_record[:ttl])
           end
-          min_ttl = ttls.compact.sort.first
+          min_ttl = ttls.compact.min
           min_ttl || ttl_to_i(@zonefile.ttl)
         end
 
