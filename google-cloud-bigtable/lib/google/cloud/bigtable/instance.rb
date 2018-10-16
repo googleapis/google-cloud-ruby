@@ -491,7 +491,6 @@ module Google
         #   ).delete_from_column("cf2", "field02")
         #
         #   table.mutate_row(entry)
-
         #
         def table table_id, view: nil, perform_lookup: nil, app_profile_id: nil
           ensure_service!
