@@ -1753,15 +1753,17 @@ detection.</p>
 494
 495
 496
-497</pre>
+497
+498</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 493</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_object_localizations'>object_localizations</span>
-  <span class='ivar'>@ol</span> <span class='op'>||=</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_localized_object_annotations'>localized_object_annotations</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ol'>ol</span><span class='op'>|</span>
-    <span class='const'><span class='object_link'><a href="Annotation/ObjectLocalization.html" title="Google::Cloud::Vision::Annotation::ObjectLocalization (class)">ObjectLocalization</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_ol'>ol</span>
-  <span class='kw'>end</span>
+  <span class='ivar'>@object_localizations</span> <span class='op'>||=</span> \
+    <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_localized_object_annotations'>localized_object_annotations</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ol'>ol</span><span class='op'>|</span>
+      <span class='const'><span class='object_link'><a href="Annotation/ObjectLocalization.html" title="Google::Cloud::Vision::Annotation::ObjectLocalization (class)">ObjectLocalization</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_ol'>ol</span>
+    <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1820,12 +1822,12 @@ detection.</p>
       <pre class="lines">
 
 
-513
 514
-515</pre>
+515
+516</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 513</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 514</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_object_localizations?'>object_localizations?</span>
   <span class='op'>!</span><span class='id identifier rubyid_object_localizations'>object_localizations</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -2286,16 +2288,16 @@ detection.</p>
       <pre class="lines">
 
 
-522
 523
 524
 525
 526
 527
-528</pre>
+528
+529</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 522</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation.rb', line 523</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
   <span class='lbrace'>{</span> <span class='label'>faces:</span> <span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_h</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>landmarks:</span> <span class='id identifier rubyid_landmarks'>landmarks</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_h</span><span class='rparen'>)</span><span class='comma'>,</span>
