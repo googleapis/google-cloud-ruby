@@ -434,10 +434,10 @@ module Google
           str = data.strip
           return str if ::File.file? str
           json = begin
-            ::JSON.parse str
-          rescue ::StandardError
-            nil
-          end
+                   ::JSON.parse str
+                 rescue ::StandardError
+                   nil
+                 end
           return json if json.is_a? ::Hash
         end
         nil
