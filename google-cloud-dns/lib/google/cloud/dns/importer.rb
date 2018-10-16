@@ -112,19 +112,16 @@ module Google
           @zone.record zf_soa[:origin], "SOA", ttl, data
         end
 
-        # rubocop:disable Performance/UnneededSort
-
         ##
         # From a collection of records, take the lowest ttl
         def ttl_from_zonefile_records zf_records
           ttls = zf_records.map do |zf_record|
             ttl_to_i(zf_record[:ttl])
           end
-          min_ttl = ttls.compact.sort.first
+          min_ttl = ttls.compact.min
           min_ttl || ttl_to_i(@zonefile.ttl)
         end
 
-        # rubocop:enable Performance/UnneededSort
         # rubocop:disable all
 
         ##
