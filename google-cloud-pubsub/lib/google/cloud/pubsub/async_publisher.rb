@@ -189,6 +189,8 @@ module Google
 
         protected
 
+        # rubocop:disable Naming/MemoizedInstanceVariableName
+
         def init_resources!
           @first_published_at   ||= Time.now
           @publish_thread_pool  ||= Concurrent::FixedThreadPool.new \
@@ -197,6 +199,8 @@ module Google
             @callback_threads
           @thread ||= Thread.new { run_background }
         end
+
+        # rubocop:enable Naming/MemoizedInstanceVariableName
 
         def run_background
           synchronize do

@@ -476,6 +476,8 @@ module Google
           !web.nil?
         end
 
+        # rubocop:disable Naming/MemoizedInstanceVariableName
+
         ##
         # The results of object localizations detection.
         #
@@ -495,6 +497,8 @@ module Google
             ObjectLocalization.from_grpc ol
           end
         end
+
+        # rubocop:enable Naming/MemoizedInstanceVariableName
 
         ##
         # Whether there is a result for object localizations detection.
