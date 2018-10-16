@@ -1916,4 +1916,367 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       end
     end
   end
+
+  describe 'create_stored_info_type' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#create_stored_info_type."
+
+    it 'invokes create_stored_info_type without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
+
+      # Create expected grpc response
+      name = "name3373707"
+      expected_response = { name: name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Privacy::Dlp::V2::StoredInfoType)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::CreateStoredInfoTypeRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:create_stored_info_type, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_stored_info_type")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          response = client.create_stored_info_type(formatted_parent)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_stored_info_type(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes create_stored_info_type with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::CreateStoredInfoTypeRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:create_stored_info_type, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_stored_info_type")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.create_stored_info_type(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_stored_info_type' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#update_stored_info_type."
+
+    it 'invokes update_stored_info_type without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      expected_response = { name: name_2 }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Privacy::Dlp::V2::StoredInfoType)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::UpdateStoredInfoTypeRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:update_stored_info_type, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("update_stored_info_type")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          response = client.update_stored_info_type(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_stored_info_type(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes update_stored_info_type with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::UpdateStoredInfoTypeRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:update_stored_info_type, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("update_stored_info_type")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.update_stored_info_type(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_stored_info_type' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#get_stored_info_type."
+
+    it 'invokes get_stored_info_type without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      expected_response = { name: name_2 }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Privacy::Dlp::V2::StoredInfoType)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::GetStoredInfoTypeRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:get_stored_info_type, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_stored_info_type")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          response = client.get_stored_info_type(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_stored_info_type(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_stored_info_type with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::GetStoredInfoTypeRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:get_stored_info_type, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_stored_info_type")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.get_stored_info_type(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_stored_info_types' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_stored_info_types."
+
+    it 'invokes list_stored_info_types without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
+
+      # Create expected grpc response
+      next_page_token = ""
+      stored_info_types_element = {}
+      stored_info_types = [stored_info_types_element]
+      expected_response = { next_page_token: next_page_token, stored_info_types: stored_info_types }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Privacy::Dlp::V2::ListStoredInfoTypesResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::ListStoredInfoTypesRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:list_stored_info_types, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_stored_info_types")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          response = client.list_stored_info_types(formatted_parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.stored_info_types.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_stored_info_types with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::ListStoredInfoTypesRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:list_stored_info_types, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_stored_info_types")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.list_stored_info_types(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'delete_stored_info_type' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#delete_stored_info_type."
+
+    it 'invokes delete_stored_info_type without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::DeleteStoredInfoTypeRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:delete_stored_info_type, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_stored_info_type")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          response = client.delete_stored_info_type(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_stored_info_type(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_stored_info_type with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::DeleteStoredInfoTypeRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:delete_stored_info_type, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_stored_info_type")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError do
+            client.delete_stored_info_type(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end

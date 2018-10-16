@@ -75,7 +75,11 @@ module Google
             "list_job_triggers" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "job_triggers")
+              "job_triggers"),
+            "list_stored_info_types" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "stored_info_types")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
@@ -134,6 +138,18 @@ module Google
           )
 
           private_constant :DLP_JOB_PATH_TEMPLATE
+
+          ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/storedInfoTypes/{stored_info_type}"
+          )
+
+          private_constant :ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE
+
+          PROJECT_STORED_INFO_TYPE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/storedInfoTypes/{stored_info_type}"
+          )
+
+          private_constant :PROJECT_STORED_INFO_TYPE_PATH_TEMPLATE
 
           # Returns a fully-qualified organization resource name string.
           # @param organization [String]
@@ -216,6 +232,28 @@ module Google
             DLP_JOB_PATH_TEMPLATE.render(
               :"project" => project,
               :"dlp_job" => dlp_job
+            )
+          end
+
+          # Returns a fully-qualified organization_stored_info_type resource name string.
+          # @param organization [String]
+          # @param stored_info_type [String]
+          # @return [String]
+          def self.organization_stored_info_type_path organization, stored_info_type
+            ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"stored_info_type" => stored_info_type
+            )
+          end
+
+          # Returns a fully-qualified project_stored_info_type resource name string.
+          # @param project [String]
+          # @param stored_info_type [String]
+          # @return [String]
+          def self.project_stored_info_type_path project, stored_info_type
+            PROJECT_STORED_INFO_TYPE_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"stored_info_type" => stored_info_type
             )
           end
 
@@ -445,6 +483,31 @@ module Google
             @create_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_job_trigger),
               defaults["create_job_trigger"],
+              exception_transformer: exception_transformer
+            )
+            @create_stored_info_type = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:create_stored_info_type),
+              defaults["create_stored_info_type"],
+              exception_transformer: exception_transformer
+            )
+            @update_stored_info_type = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:update_stored_info_type),
+              defaults["update_stored_info_type"],
+              exception_transformer: exception_transformer
+            )
+            @get_stored_info_type = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:get_stored_info_type),
+              defaults["get_stored_info_type"],
+              exception_transformer: exception_transformer
+            )
+            @list_stored_info_types = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:list_stored_info_types),
+              defaults["list_stored_info_types"],
+              exception_transformer: exception_transformer
+            )
+            @delete_stored_info_type = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:delete_stored_info_type),
+              defaults["delete_stored_info_type"],
               exception_transformer: exception_transformer
             )
           end
@@ -1701,6 +1764,243 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateJobTriggerRequest)
             @create_job_trigger.call(req, options, &block)
+          end
+
+          # Creates a pre-built stored infoType to be used for inspection.
+          # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+          # learn more.
+          #
+          # @param parent [String]
+          #   The parent resource name, for example projects/my-project-id or
+          #   organizations/my-org-id.
+          # @param config [Google::Privacy::Dlp::V2::StoredInfoTypeConfig | Hash]
+          #   Configuration of the storedInfoType to create.
+          #   A hash of the same form as `Google::Privacy::Dlp::V2::StoredInfoTypeConfig`
+          #   can also be provided.
+          # @param stored_info_type_id [String]
+          #   The storedInfoType ID can contain uppercase and lowercase letters,
+          #   numbers, and hyphens; that is, it must match the regular
+          #   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          #   characters. Can be empty to allow the system to generate one.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::StoredInfoType]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::StoredInfoType]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
+          #   response = dlp_service_client.create_stored_info_type(formatted_parent)
+
+          def create_stored_info_type \
+              parent,
+              config: nil,
+              stored_info_type_id: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              config: config,
+              stored_info_type_id: stored_info_type_id
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateStoredInfoTypeRequest)
+            @create_stored_info_type.call(req, options, &block)
+          end
+
+          # Updates the stored infoType by creating a new version. The existing version
+          # will continue to be used until the new version is ready.
+          # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+          # learn more.
+          #
+          # @param name [String]
+          #   Resource name of organization and storedInfoType to be updated, for
+          #   example `organizations/433245324/storedInfoTypes/432452342` or
+          #   projects/project-id/storedInfoTypes/432452342.
+          # @param config [Google::Privacy::Dlp::V2::StoredInfoTypeConfig | Hash]
+          #   Updated configuration for the storedInfoType. If not provided, a new
+          #   version of the storedInfoType will be created with the existing
+          #   configuration.
+          #   A hash of the same form as `Google::Privacy::Dlp::V2::StoredInfoTypeConfig`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Mask to control which fields get updated.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::StoredInfoType]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::StoredInfoType]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
+          #   response = dlp_service_client.update_stored_info_type(formatted_name)
+
+          def update_stored_info_type \
+              name,
+              config: nil,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              config: config,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::UpdateStoredInfoTypeRequest)
+            @update_stored_info_type.call(req, options, &block)
+          end
+
+          # Gets a stored infoType.
+          # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+          # learn more.
+          #
+          # @param name [String]
+          #   Resource name of the organization and storedInfoType to be read, for
+          #   example `organizations/433245324/storedInfoTypes/432452342` or
+          #   projects/project-id/storedInfoTypes/432452342.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::StoredInfoType]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::StoredInfoType]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
+          #   response = dlp_service_client.get_stored_info_type(formatted_name)
+
+          def get_stored_info_type \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::GetStoredInfoTypeRequest)
+            @get_stored_info_type.call(req, options, &block)
+          end
+
+          # Lists stored infoTypes.
+          # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+          # learn more.
+          #
+          # @param parent [String]
+          #   The parent resource name, for example projects/my-project-id or
+          #   organizations/my-org-id.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param order_by [String]
+          #   Optional comma separated list of fields to order by,
+          #   followed by `asc` or `desc` postfix. This list is case-insensitive,
+          #   default sorting order is ascending, redundant space characters are
+          #   insignificant.
+          #
+          #   Example: `name asc, display_name, create_time desc`
+          #
+          #   Supported fields are:
+          #
+          #   * `create_time`: corresponds to time the most recent version of the
+          #     resource was created.
+          #   * `state`: corresponds to the state of the resource.
+          #   * `name`: corresponds to resource name.
+          #   * `display_name`: corresponds to info type's display name.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::StoredInfoType>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::StoredInfoType>]
+          #   An enumerable of Google::Privacy::Dlp::V2::StoredInfoType instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
+          #
+          #   # Iterate over all results.
+          #   dlp_service_client.list_stored_info_types(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   dlp_service_client.list_stored_info_types(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_stored_info_types \
+              parent,
+              page_size: nil,
+              order_by: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              page_size: page_size,
+              order_by: order_by
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListStoredInfoTypesRequest)
+            @list_stored_info_types.call(req, options, &block)
+          end
+
+          # Deletes a stored infoType.
+          # See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+          # learn more.
+          #
+          # @param name [String]
+          #   Resource name of the organization and storedInfoType to be deleted, for
+          #   example `organizations/433245324/storedInfoTypes/432452342` or
+          #   projects/project-id/storedInfoTypes/432452342.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_stored_info_type_path("[ORGANIZATION]", "[STORED_INFO_TYPE]")
+          #   dlp_service_client.delete_stored_info_type(formatted_name)
+
+          def delete_stored_info_type \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeleteStoredInfoTypeRequest)
+            @delete_stored_info_type.call(req, options, &block)
+            nil
           end
         end
       end
