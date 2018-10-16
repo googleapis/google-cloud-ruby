@@ -30,6 +30,8 @@ Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
   Max: 20
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
 Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
 Naming/FileName:

@@ -27,6 +27,8 @@ Metrics/MethodLength:
     - "lib/google/cloud/translate.rb"
 Metrics/ParameterLists:
   Enabled: false
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
 Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
 Naming/FileName:
