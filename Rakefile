@@ -569,13 +569,7 @@ namespace :kokoro do
         Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         sh "bundle update"
-        if ENV['OS'] == 'windows'
-          FileUtils.mkdir_p "acceptance"
-          FileUtils.rm_f "acceptance/data"
-          sh "call mklink /j acceptance\\data ..\\acceptance\\data"
-          sh "bundle exec rake ci:acceptance --trace"
-        end
-        sh "bundle exec rake ci" unless ENV['OS'] == 'windows'
+        sh "bundle exec rake ci"
       end
     end
   end
@@ -592,6 +586,11 @@ namespace :kokoro do
           header "Gem Updated - Running Acceptance"
         else
           header "Gem Unchanged - Skipping Acceptance"
+        end
+        if ENV['OS'] == 'windows'
+          FileUtils.mkdir_p "acceptance"
+          FileUtils.rm_f "acceptance/data"
+          sh "call mklink /j acceptance\\data ..\\acceptance\\data"
         end
         sh "bundle update"
         command = "bundle exec rake ci"
