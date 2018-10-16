@@ -76,6 +76,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :retain_acked_messages, :bool, 7
     optional :message_retention_duration, :message, 8, "google.protobuf.Duration"
     map :labels, :string, :string, 9
+    optional :expiration_policy, :message, 11, "google.pubsub.v1.ExpirationPolicy"
+  end
+  add_message "google.pubsub.v1.ExpirationPolicy" do
+    optional :ttl, :message, 1, "google.protobuf.Duration"
   end
   add_message "google.pubsub.v1.PushConfig" do
     optional :push_endpoint, :string, 1
@@ -194,6 +198,7 @@ module Google
       ListTopicSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsResponse").msgclass
       DeleteTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteTopicRequest").msgclass
       Subscription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Subscription").msgclass
+      ExpirationPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ExpirationPolicy").msgclass
       PushConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig").msgclass
       ReceivedMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ReceivedMessage").msgclass
       GetSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSubscriptionRequest").msgclass
