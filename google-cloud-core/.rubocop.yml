@@ -35,6 +35,6 @@ Layout/EmptyLines: # for the extra line between copyright and code
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-core.rb"
-Lint/RescueWithoutErrorClass:
+Style/RescueStandardError:
   Exclude:
     - "lib/google/cloud/credentials.rb"
