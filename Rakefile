@@ -2,6 +2,7 @@ require "bundler/setup"
 require "open3"
 require "json"
 require "erb"
+require "fileutils"
 
 task :bundleupdate do
   valid_gems.each do |gem|
@@ -585,6 +586,11 @@ namespace :kokoro do
           header "Gem Updated - Running Acceptance"
         else
           header "Gem Unchanged - Skipping Acceptance"
+        end
+        if ENV['OS'] == 'windows'
+          FileUtils.mkdir_p "acceptance"
+          FileUtils.rm_f "acceptance/data"
+          sh "call mklink /j acceptance\\data ..\\acceptance\\data"
         end
         sh "bundle update"
         command = "bundle exec rake ci"
