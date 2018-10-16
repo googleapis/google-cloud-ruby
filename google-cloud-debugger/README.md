@@ -219,7 +219,7 @@ agent.
 You can customize the behavior of the Stackdriver Debugger agent. This includes
 setting the Google Cloud project and authentication, and customizing the
 behavior of the debugger itself, such as side effect protection and data
-size limits. See [agent configuration](../stackdriver/CONFIGURATION.md)
+size limits. See [agent configuration](../stackdriver/INSTRUMENTATION_CONFIGURATION.md)
 for a list of possible configuration options.
 
 ## Enabling Logging
