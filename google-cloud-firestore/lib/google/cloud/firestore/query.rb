@@ -1031,6 +1031,8 @@ module Google
           values_to_cursor values, query
         end
 
+        # rubocop:disable Performance/ReverseEach
+
         def ensure_inequality_field_paths_in_order_by! query
           inequality_paths = inequality_filter_field_paths query
           orig_order = order_by_field_paths query
@@ -1046,6 +1048,8 @@ module Google
             )
           end
         end
+
+        # rubocop:enable Performance/ReverseEach
 
         def ensure_document_id_in_order_by! query
           return if order_by_field_paths(query).include? doc_id_path
