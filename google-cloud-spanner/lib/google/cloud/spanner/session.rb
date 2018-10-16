@@ -607,7 +607,7 @@ module Google
           ensure_service!
           @grpc = service.get_session path
           @last_updated_at = Time.now
-          return self
+          self
         rescue Google::Cloud::NotFoundError
           labels = @grpc.labels.to_h unless @grpc.labels.to_h.empty?
           @grpc = service.create_session \
@@ -616,7 +616,7 @@ module Google
             ),
             labels: labels
           @last_updated_at = Time.now
-          return self
+          self
         end
 
         ##
@@ -625,7 +625,7 @@ module Google
         def keepalive!
           ensure_service!
           execute_query "SELECT 1"
-          return true
+          true
         rescue Google::Cloud::NotFoundError
           labels = @grpc.labels.to_h unless @grpc.labels.to_h.empty?
           @grpc = service.create_session \
@@ -633,7 +633,7 @@ module Google
               project_id, instance_id, database_id
             ),
             labels: labels
-          return false
+          false
         end
 
         ##
