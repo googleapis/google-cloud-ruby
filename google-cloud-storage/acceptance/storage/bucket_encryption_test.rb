@@ -17,8 +17,14 @@ require "storage_helper"
 describe Google::Cloud::Storage::Bucket, :encryption, :storage do
   let(:bucket_name) { "#{$bucket_names[1]}-encryption" }
   let(:bucket_location) { "us-central1" }
-  let(:kms_key) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1" }
-  let(:kms_key_2) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2" }
+  let(:kms_key) {
+    ENV["GCLOUD_RUBY_TEST_KEY_1"] ||
+      "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1"
+  }
+  let(:kms_key_2) {
+    ENV["GCLOUD_RUBY_TEST_KEY_2"] ||
+      "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2"
+  }
   let :bucket do
     b = safe_gcs_execute { storage.create_bucket(bucket_name, location: bucket_location) }
     b.default_kms_key = kms_key
