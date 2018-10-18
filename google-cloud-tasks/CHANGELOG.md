@@ -1,6 +1,6 @@
 # Release History
 
-### 0.2.5 / 2018-09-20
+### 0.2.5 / 2018-10-18
 
 * Release v2beta3.
 
