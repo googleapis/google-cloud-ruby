@@ -101,3 +101,8 @@ s.replace(
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
 )
+s.replace(
+    'google-cloud-tasks.gemspec',
+    'gem.add_development_dependency "rubocop".*$',
+    'gem.add_development_dependency "rubocop", "~> 0.59.2"'
+)
