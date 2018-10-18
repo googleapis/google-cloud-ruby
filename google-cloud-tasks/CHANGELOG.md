@@ -1,9 +1,13 @@
 # Release History
 
+### 0.2.5 / 2018-09-20
+
+* Release v2beta3.
+
 ### 0.2.4 / 2018-09-20
 
 * Update documentation.
-  * Change documentation URL to googleapis GitHub org.
+* Change documentation URL to googleapis GitHub org.
 
 ### 0.2.3 / 2018-09-10
 
