@@ -161,11 +161,11 @@ describe Google::Cloud::Storage::File, :storage do
   describe "KMS customer-managed encryption key (CMEK)" do
     let(:kms_key) {
       ENV["GCLOUD_TEST_STORAGE_KMS_KEY_1"] ||
-        "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1"
+        "projects/#{storage.project_id}/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1"
     }
     let(:kms_key_2) {
       ENV["GCLOUD_TEST_STORAGE_KMS_KEY_2"] ||
-        "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2"
+        "projects/#{storage.project_id}/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2"
     }
 
     it "should upload and download a file with default_kms_key" do
