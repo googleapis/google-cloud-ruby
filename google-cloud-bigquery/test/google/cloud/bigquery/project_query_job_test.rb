@@ -47,6 +47,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job.statement_type.must_be :nil?
     job.ddl_operation_performed.must_be :nil?
     job.ddl_target_table.must_be :nil?
+    job.num_dml_affected_rows.must_be :nil?
   end
 
   it "queries the data with options set" do

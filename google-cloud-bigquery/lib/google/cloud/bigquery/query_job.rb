@@ -254,6 +254,18 @@ module Google
         end
 
         ##
+        # The number of rows affected by a DML statement. Present only for DML
+        # statements `INSERT`, `UPDATE` or `DELETE`. (See {#statement_type}.)
+        #
+        # @return [Integer, nil] The number of rows affected by a DML statement,
+        #   or `nil` if the query is not a DML statement.
+        #
+        def num_dml_affected_rows
+          return nil unless @gapi.statistics.query
+          @gapi.statistics.query.num_dml_affected_rows
+        end
+
+        ##
         # The table in which the query results are stored.
         #
         # @return [Table] A table instance.

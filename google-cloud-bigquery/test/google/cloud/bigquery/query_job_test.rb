@@ -59,6 +59,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.ddl_target_table.project_id.must_equal "target_project_id"
     job.ddl_target_table.dataset_id.must_equal "target_dataset_id"
     job.ddl_target_table.table_id.must_equal "target_table_id"
+    job.num_dml_affected_rows.must_equal 50
     job.statement_type.must_equal "CREATE_TABLE"
   end
 
@@ -165,6 +166,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
         dataset_id: "target_dataset_id",
         table_id: "target_table_id"
       ),
+      num_dml_affected_rows: 50, # Present only for DML statements INSERT, UPDATE or DELETE.
       query_plan: [
         Google::Apis::BigqueryV2::ExplainQueryStage.new(
           compute_ratio_avg: 1.0,
