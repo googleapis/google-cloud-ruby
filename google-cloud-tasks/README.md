@@ -27,7 +27,7 @@ $ gem install google-cloud-tasks
 - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
-[Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-tasks/latest/google/cloud/tasks/v2beta2
+[Client Library Documentation]: https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-tasks/latest/google/cloud/tasks/v2beta3
 [Product Documentation]: https://cloud.google.com/tasks
 
 ## Enabling Logging
