@@ -674,6 +674,8 @@ module Google
         ##
         # Queries data by creating a [query
         # job](https://cloud.google.com/bigquery/docs/query-overview#query_jobs).
+        # Use this method rather than {#query} for executing DDL/DML statements,
+        # since this method does not automatically return table data.
         #
         # Sets the current dataset as the default dataset in the query. Useful
         # for using unqualified table names.
@@ -874,6 +876,32 @@ module Google
         #     end
         #   end
         #
+        # @example Execute a DDL statement:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "CREATE TABLE my_table (x INT64)"
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     table_ref = job.ddl_target_table
+        #   end
+        #
+        # @example Execute a DML statement:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "UPDATE my_table " \
+        #                            "SET x = x + 1 " \
+        #                            "WHERE x IS NOT NULL"
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     puts job.num_dml_affected_rows
+        #   end
+        #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
@@ -930,7 +958,9 @@ module Google
         # Queries data and waits for the results. In this method, a {QueryJob}
         # is created and its results are saved to a temporary table, then read
         # from the table. Timeouts and transient errors are generally handled
-        # as needed to complete the query.
+        # as needed to complete the query. Use {#query_job} rather than this
+        # method for executing DDL/DML statements, since this method
+        # automatically returns table data.
         #
         # Sets the current dataset as the default dataset in the query. Useful
         # for using unqualified table names.
