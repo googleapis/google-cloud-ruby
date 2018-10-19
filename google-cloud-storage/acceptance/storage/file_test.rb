@@ -29,7 +29,9 @@ describe Google::Cloud::Storage::File, :storage do
       big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
 
-  let(:bucket_public_test_name) { "storage-library-test-bucket" }
+  let(:bucket_public_test_name) {
+    ENV["GCLOUD_TEST_STORAGE_BUCKET"] || "storage-library-test-bucket"
+  }
   let(:file_public_test_gzip_name) { "gzipped-text.txt" }  # content is "hello world"
 
   before do
