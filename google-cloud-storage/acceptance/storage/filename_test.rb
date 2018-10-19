@@ -15,7 +15,9 @@
 require "storage_helper"
 
 describe Google::Cloud::Storage::File, :storage do
-  let(:bucket_name) { "storage-library-test-bucket" }
+  let(:bucket_name) {
+    ENV["GCLOUD_TEST_STORAGE_BUCKET"] || "storage-library-test-bucket"
+  }
   let :bucket do
     storage.bucket(bucket_name)
   end
