@@ -29,20 +29,17 @@ v2beta2_library = gapic.ruby_library(
     'tasks', 'v2beta2', artman_output_name='google-cloud-ruby/google-cloud-tasks',
     config_path='artman_cloudtasks_v2beta2.yaml'
 )
-s.copy(v2beta2_library / 'lib')
-s.copy(v2beta2_library / 'test')
-s.copy(v2beta2_library / 'README.md')
-s.copy(v2beta2_library / 'LICENSE')
-s.copy(v2beta2_library / '.gitignore')
-s.copy(v2beta2_library / '.yardopts')
-s.copy(v2beta2_library / 'google-cloud-tasks.gemspec', merge=ruby.merge_gemspec)
+s.copy(v2beta2_library / 'lib/google/cloud/tasks/v2beta2')
+s.copy(v2beta2_library / 'lib/google/cloud/tasks/v2beta2.rb')
+s.copy(v2beta2_library / 'test/google/cloud/tasks/v2beta2')
 
 v2beta3_library = gapic.ruby_library(
     'tasks', 'v2beta3', artman_output_name='google-cloud-ruby/google-cloud-tasks',
     config_path='artman_cloudtasks_v2beta3.yaml'
 )
-s.copy(v2beta3_library / 'lib')
-s.copy(v2beta3_library / 'test')
+s.copy(v2beta3_library / 'lib/google/cloud/tasks/v2beta3')
+s.copy(v2beta3_library / 'lib/google/cloud/tasks/v2beta3.rb')
+s.copy(v2beta3_library / 'test/google/cloud/tasks/v2beta3')
 s.copy(v2beta3_library / 'README.md')
 s.copy(v2beta3_library / 'LICENSE')
 s.copy(v2beta3_library / '.gitignore')
