@@ -37,6 +37,7 @@ v2beta3_library = gapic.ruby_library(
     'tasks', 'v2beta3', artman_output_name='google-cloud-ruby/google-cloud-tasks',
     config_path='artman_cloudtasks_v2beta3.yaml'
 )
+s.copy(v2beta3_library / 'lib/google/cloud/tasks.rb')
 s.copy(v2beta3_library / 'lib/google/cloud/tasks/v2beta3')
 s.copy(v2beta3_library / 'lib/google/cloud/tasks/v2beta3.rb')
 s.copy(v2beta3_library / 'test/google/cloud/tasks/v2beta3')
