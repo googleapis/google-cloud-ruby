@@ -217,6 +217,15 @@ module Google
           @gapi.statistics.query.statement_type
         end
 
+        def ddl?
+          %w[CREATE_TABLE CREATE_TABLE_AS_SELECT DROP_TABLE CREATE_VIEW \
+             DROP_VIEW].include? statement_type
+        end
+
+        def dml?
+          %w[INSERT UPDATE DELETE].include? statement_type
+        end
+
         ##
         # The DDL operation performed, possibly dependent on the pre-existence
         # of the DDL target. (See {#ddl_target_table}.) Possible values (new
@@ -502,7 +511,10 @@ module Google
         #
         def data token: nil, max: nil, start: nil
           return nil unless done?
-
+          if ddl? || dml?
+            data_hash = { totalRows: "0", rows: [] }
+            return Data.from_gapi_json data_hash, nil, @gapi, service
+          end
           ensure_schema!
 
           options = { token: token, max: max, start: start }
@@ -510,7 +522,7 @@ module Google
             destination_table_dataset_id,
             destination_table_table_id,
             options
-          Data.from_gapi_json data_hash, destination_table_gapi, service
+          Data.from_gapi_json data_hash, destination_table_gapi, @gapi, service
         end
         alias query_results data
 
