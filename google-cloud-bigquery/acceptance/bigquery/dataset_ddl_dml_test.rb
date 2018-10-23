@@ -71,7 +71,7 @@ describe Google::Cloud::Bigquery::Dataset, :ddl_dml, :bigquery do
     create_data.dml?.must_equal false
     create_data.ddl_operation_performed.must_equal "CREATE"
     create_data.num_dml_affected_rows.must_be :nil?
-    create_data.total.must_equal 0
+    create_data.total.must_be :nil?
     create_data.next?.must_equal false
     create_data.next.must_be :nil?
     create_data.all.must_be_kind_of Enumerator
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::Dataset, :ddl_dml, :bigquery do
     insert_data.dml?.must_equal true
     insert_data.ddl_operation_performed.must_be :nil?
     insert_data.num_dml_affected_rows.must_equal 2
-    insert_data.total.must_equal 0
+    insert_data.total.must_be :nil?
     insert_data.next?.must_equal false
     insert_data.next.must_be :nil?
     insert_data.all.must_be_kind_of Enumerator

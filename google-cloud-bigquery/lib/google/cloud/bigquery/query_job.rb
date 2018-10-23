@@ -558,7 +558,7 @@ module Google
         def data token: nil, max: nil, start: nil
           return nil unless done?
           if ddl? || dml?
-            data_hash = { totalRows: "0", rows: [] }
+            data_hash = { totalRows: nil, rows: [] }
             return Data.from_gapi_json data_hash, nil, @gapi, service
           end
           ensure_schema!

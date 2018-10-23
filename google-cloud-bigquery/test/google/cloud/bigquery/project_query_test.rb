@@ -77,7 +77,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     # data.must_be_kind_of Google::Cloud::Bigquery::Data
     data.class.must_equal Google::Cloud::Bigquery::Data
     data.count.must_equal 0
-    data.total.must_equal 0
+    data.total.must_be :nil?
 
     data.statement_type.must_equal "CREATE_TABLE"
     data.ddl?.must_equal true
@@ -100,7 +100,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     # data.must_be_kind_of Google::Cloud::Bigquery::Data
     data.class.must_equal Google::Cloud::Bigquery::Data
     data.count.must_equal 0
-    data.total.must_equal 0
+    data.total.must_be :nil?
 
     data.statement_type.must_equal "UPDATE"
     data.ddl?.must_equal false
