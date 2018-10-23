@@ -41,10 +41,12 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
 
     # Sometimes statistics.query is nil in the returned job, test for that behavior here.
-    job.cache_hit?.must_equal false
-    job.bytes_processed.must_be :nil?
-    job.query_plan.must_be :nil?
-    job.statement_type.must_be :nil?
+    job.cache_hit?.must_equal true
+    job.bytes_processed.must_equal 123456
+    job.query_plan.wont_be :nil?
+    job.statement_type.must_equal "SELECT"
+    job.ddl?.must_equal false
+    job.dml?.must_equal false
     job.ddl_operation_performed.must_be :nil?
     job.ddl_target_table.must_be :nil?
     job.num_dml_affected_rows.must_be :nil?

@@ -130,6 +130,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Data#dml?" do
+    mock_bigquery do |mock|
+      mock.expect :insert_job, query_job_gapi(statement_type: "UPDATE"), ["my-project", Google::Apis::BigqueryV2::Job]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::Data#fields" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
@@ -583,6 +589,13 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
       mock.expect :get_job_query_results, query_data_gapi(token: nil), ["my-project", "1234567890", Hash]
       mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "target_dataset_id", "target_table_id", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::QueryJob#dml?" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_job, query_job_gapi(statement_type: "UPDATE"), ["my-project", Google::Apis::BigqueryV2::Job]
     end
   end
 
@@ -1166,11 +1179,11 @@ def query_data_hash token: "token1234567890"
   }
 end
 
-def query_job_gapi
-  Google::Apis::BigqueryV2::Job.from_json query_job_hash.to_json
+def query_job_gapi statement_type: "CREATE_TABLE"
+  Google::Apis::BigqueryV2::Job.from_json query_job_hash(statement_type: statement_type).to_json
 end
 
-def query_job_hash
+def query_job_hash statement_type: "CREATE_TABLE"
   hash = random_job_hash
   hash["configuration"]["query"] = {
     "query" => "SELECT name, age, score, active FROM `users`",
@@ -1205,7 +1218,8 @@ def query_job_hash
           }
         ]
       }
-    ]
+    ],
+    "statementType" => statement_type
   }
   hash
 end

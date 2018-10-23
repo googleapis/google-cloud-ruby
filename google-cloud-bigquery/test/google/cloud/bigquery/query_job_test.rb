@@ -17,7 +17,8 @@ require "json"
 require "uri"
 
 describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
-  let(:job) { Google::Cloud::Bigquery::Job.from_gapi query_job_gapi,
+  let(:job_gapi) { query_job_gapi target_table: true, statement_type: "CREATE_TABLE", num_dml_affected_rows: 50, ddl_operation_performed: "CREATE" }
+  let(:job) { Google::Cloud::Bigquery::Job.from_gapi job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
 
@@ -61,6 +62,8 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.ddl_target_table.table_id.must_equal "target_table_id"
     job.num_dml_affected_rows.must_equal 50
     job.statement_type.must_equal "CREATE_TABLE"
+    job.ddl?.must_equal true
+    job.dml?.must_equal false
   end
 
   it "knows its query config" do
@@ -109,9 +112,12 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.udfs.last.must_equal "gs://my-bucket/my-lib.js"
   end
 
-  def query_job_gapi
+  def query_job_gapi target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
     gapi = Google::Apis::BigqueryV2::Job.from_json query_job_hash.to_json
-    gapi.statistics.query = statistics_query_gapi
+    gapi.statistics.query = statistics_query_gapi target_table: target_table,
+                                                  statement_type: statement_type,
+                                                  num_dml_affected_rows: num_dml_affected_rows,
+                                                  ddl_operation_performed: ddl_operation_performed
     gapi
   end
 
@@ -154,47 +160,5 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
       "tableId"   => "target_table_id"
     }
     hash.to_json
-  end
-
-  def statistics_query_gapi
-    Google::Apis::BigqueryV2::JobStatistics2.new(
-      billing_tier: 1,
-      cache_hit: true,
-      ddl_operation_performed: "CREATE",
-      ddl_target_table: Google::Apis::BigqueryV2::TableReference.new(
-        project_id: "target_project_id",
-        dataset_id: "target_dataset_id",
-        table_id: "target_table_id"
-      ),
-      num_dml_affected_rows: 50, # Present only for DML statements INSERT, UPDATE or DELETE.
-      query_plan: [
-        Google::Apis::BigqueryV2::ExplainQueryStage.new(
-          compute_ratio_avg: 1.0,
-          compute_ratio_max: 1.0,
-          id: 1,
-          name: "Stage 1",
-          read_ratio_avg: 0.2710832227382326,
-          read_ratio_max: 0.2710832227382326,
-          records_read: 164656,
-          records_written: 1,
-          status: "COMPLETE",
-          steps: [
-            Google::Apis::BigqueryV2::ExplainQueryStep.new(
-              kind: "READ",
-              substeps: [
-                "word",
-                "FROM bigquery-public-data:samples.shakespeare"
-              ]
-            )
-          ],
-          wait_ratio_avg: 0.007876711656047392,
-          wait_ratio_max: 0.007876711656047392,
-          write_ratio_avg: 0.05389444608201358,
-          write_ratio_max: 0.05389444608201358
-        )
-      ],
-      statement_type: "CREATE_TABLE",
-      total_bytes_processed: 123456
-    )
   end
 end

@@ -98,8 +98,6 @@ module Google
         ##
         # Queries data by creating a [query
         # job](https://cloud.google.com/bigquery/docs/query-overview#query_jobs).
-        # Use this method rather than {#query} for executing DDL/DML statements,
-        # since this method does not automatically return table data.
         #
         # When using standard SQL and passing arguments using `params`, Ruby
         # types are mapped to BigQuery types as follows:
@@ -387,9 +385,8 @@ module Google
         # Queries data and waits for the results. In this method, a {QueryJob}
         # is created and its results are saved to a temporary table, then read
         # from the table. Timeouts and transient errors are generally handled
-        # as needed to complete the query. Use {#query_job} rather than this
-        # method for executing DDL/DML statements, since this method
-        # automatically returns table data.
+        # as needed to complete the query. When used for executing DDL/DML
+        # statements, this method does not return row data.
         #
         # When using standard SQL and passing arguments using `params`, Ruby
         # types are mapped to BigQuery types as follows:
@@ -537,6 +534,26 @@ module Google
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #
+        # @example Execute a DDL statement:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "CREATE TABLE `my_dataset.my_table` (x INT64)"
+        #
+        #   table_ref = data.ddl_target_table
+        #
+        # @example Execute a DML statement:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "UPDATE `my_dataset.my_table` " \
+        #                         "SET x = x + 1 " \
+        #                         "WHERE x IS NOT NULL"
+        #
+        #   puts data.num_dml_affected_rows
         #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"

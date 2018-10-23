@@ -203,15 +203,25 @@ module Google
         # The type of query statement, if valid. Possible values (new values
         # might be added in the future):
         #
-        # * "SELECT": `SELECT` query.
-        # * "INSERT": `INSERT` query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
-        # * "UPDATE": `UPDATE` query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
-        # * "DELETE": `DELETE` query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
-        # * "CREATE_TABLE": `CREATE [OR REPLACE] TABLE` without `AS SELECT`.
-        # * "CREATE_TABLE_AS_SELECT": `CREATE [OR REPLACE] TABLE ... AS SELECT`.
-        # * "DROP_TABLE": `DROP TABLE` query.
-        # * "CREATE_VIEW": `CREATE [OR REPLACE] VIEW ... AS SELECT ...`.
-        # * "DROP_VIEW": `DROP VIEW` query.
+        # * "CREATE_MODEL": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "CREATE_TABLE": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "CREATE_TABLE_AS_SELECT": DDL statement, see [Using Data Definition
+        #   Language Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "CREATE_VIEW": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "DELETE": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        # * "DROP_MODEL": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "DROP_TABLE": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "DROP_VIEW": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "INSERT": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        # * "MERGE": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        # * "SELECT": SQL query, see [Standard SQL Query Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
+        # * "UPDATE": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
         #
         # @return [String, nil] The type of query statement.
         #
@@ -220,13 +230,49 @@ module Google
           job_gapi.statistics.query.statement_type
         end
 
+        ##
+        # Whether the query that created this data was a DDL statement.
+        #
+        # @see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
+        #   Using Data Definition Language Statements
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   data = bigquery.query "CREATE TABLE my_table (x INT64)"
+        #
+        #   data.statement_type #=> "CREATE_TABLE"
+        #   data.ddl? #=> true
+        #
         def ddl?
-          %w[CREATE_TABLE CREATE_TABLE_AS_SELECT DROP_TABLE CREATE_VIEW \
-             DROP_VIEW].include? statement_type
+          %w[CREATE_MODEL CREATE_TABLE CREATE_TABLE_AS_SELECT CREATE_VIEW \
+             DROP_MODEL DROP_TABLE DROP_VIEW].include? statement_type
         end
 
+        ##
+        # Whether the query that created this data was a DML statement.
+        #
+        # @see https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax
+        #   Data Manipulation Language Syntax
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   data = bigquery.query "UPDATE my_table " \
+        #                         "SET x = x + 1 " \
+        #                         "WHERE x IS NOT NULL"
+        #
+        #   data.statement_type #=> "UPDATE"
+        #   data.dml? #=> true
+        #
         def dml?
-          %w[INSERT UPDATE DELETE].include? statement_type
+          %w[INSERT UPDATE MERGE DELETE].include? statement_type
         end
 
         ##
