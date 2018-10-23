@@ -36,7 +36,7 @@ module Google
       #   # Range that includes all qualifiers including "user-001" up until "user-010"
       #   table.new_column_range("cf").from("user-001").to("user-010")
       #
-      #   # Range that includes all qualifiers including "user-001" up incluing "user-005"
+      #   # Range that includes all qualifiers including "user-001" up to and including "user-005"
       #   table.new_column_range("cf").from("user-001").to("user-005", inclusive: true)
       #
       #   # Range that includes all qualifiers until end of the row key "user-001".
@@ -45,7 +45,7 @@ module Google
       #   # Range with unbounded start and the inclusive end "user-100"
       #   table.new_column_range("cf").to("user-100", inclusive: true)
       #
-      #   # Range that includes all qualifiers including "user-001" up to including "user-100"
+      #   # Range that includes all qualifiers including "user-001" up to and including "user-100"
       #   table.new_column_range("cf").between("user-001", "user-100")
       #
       class ColumnRange
@@ -77,7 +77,7 @@ module Google
         #
         # @param qualifier [String] Column qualifier name. Required
         # @param inclusive [String] Lower bound flag. Inclusive/Exclusive.
-        #   Default it is an inclusive lower bound.
+        #   Default is an inclusive lower bound.
         # @return [Google::Cloud::Bigtable::ColumnRange]
         #
         # @example Inclusive lower bound.
@@ -107,9 +107,9 @@ module Google
 
         # Set column range with the upper bound.
         #
-        # @param qualifier [String] Column qualifier name. Required
-        # @param inclusive [String] Upper bound flag. Inclusive/Exclusive..
-        #   Default it is an inclusive upper bound.
+        # @param qualifier [String] Column qualifier name. Required.
+        # @param inclusive [String] Upper bound flag. Inclusive/Exclusive.
+        #   Default is an inclusive upper bound.
         # @return [Google::Cloud::Bigtable::ColumnRange]
         #
         # @example Inclusive upper bound.
@@ -139,8 +139,8 @@ module Google
 
         # Set column range with the inclusive upper and lower bound.
         #
-        # @param from_qualifier [String] Inclusive from qualifier. Required
-        # @param to_qualifier [String] Inclusive to qualifier. Required
+        # @param from_qualifier [String] Inclusive from qualifier. Required.
+        # @param to_qualifier [String] Inclusive to qualifier. Required.
         # @return [Google::Cloud::Bigtable::ColumnRange]
         #
         # @example

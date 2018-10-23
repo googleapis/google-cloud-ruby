@@ -35,12 +35,12 @@ module Google
       #
       class ReadModifyWriteRule
         # @private
-        # Create instance of ReadModifyWriteRule
+        # Create an instance of ReadModifyWriteRule
         #
         # @param family [String]
         #   The name of the family to which the read/modify/write should be applied.
         # @param qualifier [String]
-        #   The qualifier of the column to which the read/modify/write should be
+        #   The qualifier of the column to which the read/modify/write should be applied.
         #
         def initialize family, qualifier
           @grpc = Google::Bigtable::V2::ReadModifyWriteRule.new
@@ -48,7 +48,7 @@ module Google
           @grpc.column_qualifier = qualifier
         end
 
-        # Create append value rule instance.
+        # Create an instance of an append-value rule .
         #
         # @param family [String]
         #   The name of the family to which the read/modify/write should be applied.
@@ -56,7 +56,7 @@ module Google
         #   The qualifier of the column to which the read/modify/write should be applied.
         # @param value [String]
         #  Rule specifying that `append_value` be appended to the existing value.
-        #  If the targeted cell is unset, it will be treated as containing the empty string.
+        #  If the targeted cell is unset, it will be treated as if it contains an empty string.
         # @return [Google::Cloud::Bigtable::ReadModifyWriteRule]
         #
         # @example Append value rule
@@ -70,7 +70,7 @@ module Google
           rule
         end
 
-        # Create increment amount rule instance.
+        # Create an instance of an increment-amount rule.
         #
         # @param family [String]
         #   The name of the family to which the read/modify/write should be applied.
@@ -78,7 +78,7 @@ module Google
         #   The qualifier of the column to which the read/modify/write should be applied.
         # @param amount [String]
         #   Rule specifying that `increment_amount` be added to the existing value.
-        #   If the targeted cell is unset, it will be treated as containing a zero.
+        #   If the targeted cell is unset, it will be treated as if it contains a zero.
         #   Otherwise, the targeted cell must contain an 8-byte value (interpreted
         #   as a 64-bit big-endian signed integer), or the entire request will fail.
         # @return [Google::Cloud::Bigtable::ReadModifyWriteRule]

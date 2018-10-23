@@ -27,7 +27,7 @@ module Google
       # # Instance
       #
       # Represents a Bigtable instance. Instances are dedicated Bigtable
-      # serving and storage resources to be used by Bigtable tables.
+      # storage resources that Bigtable tables.
       #
       # See {Google::Cloud::Bigtable::Project#instances},
       # {Google::Cloud::Bigtable::Project#instance}, and
@@ -89,7 +89,7 @@ module Google
         end
 
         # The descriptive name for this instance as it appears in UIs. Must be
-        # unique per project and between 4 and 30 characters in length.
+        # unique per project and between 4 and 30 characters ong.
         #
         # @return [String]
 
@@ -126,7 +126,7 @@ module Google
         end
 
         # The instance has been successfully created and can serve requests
-        # to its tables
+        # to its tables.
         #
         # @return [Boolean]
 
@@ -134,7 +134,7 @@ module Google
           state == :READY
         end
 
-        # The instance is currently being created, and may be destroyed if the
+        # The instance is currently being created and may be destroyed if the
         # creation process encounters an error.
         #
         # @return [Boolean]
@@ -178,8 +178,8 @@ module Google
         # Set instance type.
         #
         # Valid values are `:DEVELOPMENT`, `:PRODUCTION`.
-        # If instance already created then After a development instance is
-        # created, it can be upgraded by updating the instance to type `PRODUCTION`.
+        # After a development instance iscreated, it can be upgraded
+        # by updating the instance to type `PRODUCTION`.
         # An instance created as a production instance cannot be changed to a
         # development instance.
         #
@@ -194,9 +194,9 @@ module Google
         # Cloud Labels are a flexible and lightweight mechanism for organizing
         # cloud resources into groups that reflect a customer's organizational
         # needs and deployment strategies. Cloud Labels can be used to filter
-        # collections of resources. They can be used to control how resource
-        # metrics are aggregated. And they can be used as arguments to policy
-        # management rules (e.g. route, firewall, load balancing, etc.).
+        # collections of resources, to control how resource
+        # metrics are aggregated, and as arguments to policy
+        # management rules (e.g., route, firewall, load balancing, etc.).
         #
         # * Label keys must be between 1 and 63 characters long and must conform
         #   to the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])?`.
@@ -300,7 +300,7 @@ module Google
         #  cluster {Google::Cloud::Bigtable::Cluster#save}.
         #
         # @param token [String] The `token` value returned by the last call to
-        #   `clusters`; indicates that this is a continuation of a call,
+        #   `clusters`; indicates that this is a continuation of a call
         #   and that the system should return the next page of data.
         # @return [Array<Google::Cloud::Bigtable::Cluster>]
         #  See({Google::Cloud::Bigtable::Cluster::List})
@@ -356,11 +356,10 @@ module Google
         # @param location [String]
         #   The location where this cluster's nodes and storage reside. For best
         #   performance, clients should be located as close as possible to this
-        #   cluster. Currently only zones are supported.
-        #   i.e "us-east-1b"
+        #   cluster. Example: "us-east-1b"
         # @param nodes [Integer] The number of nodes allocated to this cluster.
         #   More nodes enable higher throughput and more consistent performance.
-        # @param storage_type [Symbol] Type of storage type.
+        # @param storage_type [Symbol] Storage type.
         #   The type of storage used by this cluster to serve its
         #   parent instance's tables.
         #   Valid types are:
@@ -421,7 +420,7 @@ module Google
         #
         #   instance = bigtable.instance("my-instance")
         #
-        #   # Default name only view
+        #   # Default name-only view
         #   instance.tables.all do |table|
         #     puts table.name
         #   end
@@ -448,13 +447,13 @@ module Google
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
         #   * `:FULL` - Populates all fields
-        # @param perform_lookup [Boolean] Create table object without verifying
+        # @param perform_lookup [Boolean] Creates table object without verifying
         #   that the table resource exists.
-        #   Calls made on this object will raise errors if the table.
+        #   Calls made on this object will raise errors if the table
         #   does not exist. Default value is `false`. Optional.
-        #   It helps to reduce admin apis calls.
+        #   Helps to reduce admin API calls.
         # @param app_profile_id [String] The unique identifier for the app profile. Optional.
-        #   It is used only in data operations.
+        #   Used only in data operations.
         #   This value specifies routing for replication. If not specified, the
         #   "default" application profile will be used.
         # @return [Google::Cloud::Bigtable::Table]
@@ -471,7 +470,7 @@ module Google
         #   puts table.name
         #   puts table.column_families
         #
-        #   # Name only view
+        #   # Name-only view
         #   table = instance.table("my-table", view: :NAME_ONLY, perform_lookup: true)
         #   puts table.name
         #
@@ -521,12 +520,12 @@ module Google
         #   instance, e.g., `foobar`
         # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
         #   (See {Google::Cloud::Bigtable::Table::ColumnFamilyMap})
-        #   If passed as an empty use code block to add column families.
+        #   If passed as an empty, use a code block to add column families.
         # @param granularity [Symbol]
         #   The granularity at which timestamps are stored in this table.
         #   Timestamps not matching the granularity will be rejected.
-        #   Valid values are `:MILLIS`.
-        #   If unspecified, the value will be set to `:MILLIS`
+        #   Valid value is `:MILLIS`.
+        #   If unspecified, the value will be set to `:MILLIS`.
         # @param initial_splits [Array<String>]
         #   The optional list of row keys that will be used to initially split the
         #   table into several tablets (tablets are similar to HBase regions).
@@ -543,13 +542,13 @@ module Google
         #     * Tablet 3 : `[customer_1, customer_2) => {"customer_1"}`
         #     * Tablet 4 : `[customer_2, other)      => {"customer_2"}`
         #     * Tablet 5 : `[other, )                => {"other", "zz"}`
-        #   A hash of the same form as `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
+        #   A hash in the form of `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
         #   can also be provided.
         # @yield [column_families] A block for adding column_families.
         # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
         #   Cluster map of cluster name and cluster object.
         #   (See {Google::Cloud::Bigtable::Instance::ClusterMap})
-        #   GC Rules for column family see {Google::Cloud::Bigtable::GcRule})
+        #   See rules for column families at {Google::Cloud::Bigtable::GcRule})
         #
         # @return [Google::Cloud::Bigtable::Table]
         #
@@ -602,29 +601,29 @@ module Google
           )
         end
 
-        # Create app profile of instance with routing policy.
-        # Only one routing policy can applied to app profile. It can be
-        # multi cluster routing or single cluster routing
+        # Create app profile for an instance with a routing policy.
+        # Only one routing policy can applied to app profile. The policy can be
+        # multi-cluster routing or single cluster routing.
         #
         # @param name [String] Unique Id of the app profile
         # @param routing_policy [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting | Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
-        #   The routing policy for all read/write requests which use this app profile.
+        #   The routing policy for all read/write requests that use this app profile.
         #   A value must be explicitly set.
         #
         #   Routing Policies:
         #   * `multi_cluster_routing` - Read/write requests may be routed to any
-        #     cluster in the instance, and will fail over to another cluster in the event
+        #     cluster in the instance and will fail over to another cluster in the event
         #     of transient errors or delays. Choosing this option sacrifices
         #     read-your-writes consistency to improve availability.
         #   * `single_cluster_routing` - Unconditionally routes all read/write requests
-        #     to a specific cluster. This option preserves read-your-writes consistency,
+        #     to a specific cluster. This option preserves read-your-writes consistency
         #     but does not improve availability.
-        #     Value contain `cluster_id` and optional field `allow_transactional_writes`.
-        # @param description [String] Description of the use case for this AppProfile
+        #     Value contains `cluster_id` and optional field `allow_transactional_writes`.
+        # @param description [String] Description of the use case for this app profile
         # @param etag [String]
         #   Strongly validated etag for optimistic concurrency control. Preserve the
         #   value returned from `GetAppProfile` when calling `UpdateAppProfile` to
-        #   fail the request if there has been a modification in the mean time. The
+        #   fail the request if there has been a modification in the meantime. The
         #   `update_mask` of the request need not include `etag` for this protection
         #   to apply.
         #   See [Wikipedia](https://en.wikipedia.org/wiki/HTTP_ETag) and
@@ -634,7 +633,7 @@ module Google
         #   Default value is `false`
         # @return [Google::Cloud::Bigtable::AppProfile]
         #
-        # @example Create app profile with single cluster routing policy
+        # @example Create an app profile with a single cluster routing policy
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -653,7 +652,7 @@ module Google
         #   )
         #   puts app_profile.name
         #
-        # @example Create app profile with multi cluster routing policy
+        # @example Create an app profile with multi-cluster routing policy
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new

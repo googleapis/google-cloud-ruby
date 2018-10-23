@@ -21,7 +21,7 @@ module Google
       # @private
       # # RowsMutator
       #
-      # Read chunk and merge based on states and build rows and cells
+      # Read a chunk of data and merge it based on states and build rows and cells
       #
       class ChunkProcessor
         # Row states
@@ -56,7 +56,7 @@ module Google
           if chunk.commit_row
             raise_if(
               chunk.value_size > 0,
-              "A row cant not have value_size and commit_row"
+              "A row must have value_size and commit_row"
             )
           end
 
@@ -89,9 +89,9 @@ module Google
         # Validate chunk has new row state
         #
         # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
-        #   If row has already set key, chunk has emoty row key, chunk state is
-        #   reset, new row key same as last read key, family name or column
-        #   qualifier is empty
+        #   If row already has a set key, chunk has an empty row key, chunk 
+        #   state is reset, new row key is the same as the last-read key, 
+        #   or if family name or column qualifier are empty
         #
         def validate_new_row
           raise_if(row.key, "A new row cannot have existing state")
@@ -124,7 +124,7 @@ module Google
           validate_reset_row
         end
 
-        # Process new row by setting valus from current chunk.
+        # Process new row by setting values from current chunk.
         #
         # @return [Google::Cloud::Bigtable::Row]
         #

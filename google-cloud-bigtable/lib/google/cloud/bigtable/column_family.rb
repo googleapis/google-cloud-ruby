@@ -22,7 +22,7 @@ module Google
     module Bigtable
       # # ColumnFamily
       #
-      # A set of columns within a table which share a common configuration.
+      # A set of columns within a table that share a common configuration.
       #
       # @example
       #   require "google/cloud/bigtable"
@@ -72,7 +72,7 @@ module Google
           @name = name
         end
 
-        # Set GC rule
+        # Set GC rule.
         #
         # @param rule [Google::Cloud::Bigtable::GcRule]
         #
@@ -80,7 +80,7 @@ module Google
           @grpc.gc_rule = rule.to_grpc
         end
 
-        # Get GC rule
+        # Get GC rule.
         #
         # @return [Google::Cloud::Bigtable::GcRule]
         #
@@ -131,7 +131,7 @@ module Google
 
         # Permanently delete column family from table.
         #
-        # @return [Boolean] Whether the column family was deleted.
+        # @return [Boolean] Returns true if the column family was deleted.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -148,7 +148,7 @@ module Google
           modify_column_family(self.class.drop_modification(name)).nil?
         end
 
-        # Create gPRC instance to create column family modification
+        # Create gPRC instance to create column family modification.
         #
         # @param name [String] Column family name
         # @param gc_rule [Google::Cloud::Bigtable::GcRule] GC Rule

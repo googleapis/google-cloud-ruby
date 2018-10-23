@@ -84,7 +84,7 @@ module Google
         # Retrieves the list of Bigtable instances for the project.
         #
         # @param token [String] The `token` value returned by the last call to
-        #   `instances`; indicates that this is a continuation of a call,
+        #   `instances`; indicates that this is a continuation of a call
         #   and that the system should return the next page of data.
         # @return [Array<Google::Cloud::Bigtable::Instance>] The list of instances.
         #   (See {Google::Cloud::Bigtable::Instance::List})
@@ -105,7 +105,7 @@ module Google
           Instance::List.from_grpc(grpc, service)
         end
 
-        # Get existing Bigtable instance.
+        # Get an existing Bigtable instance.
         #
         # @param instance_id [String] Existing instance id.
         # @return [Google::Cloud::Bigtable::Instance, nil]
@@ -136,10 +136,10 @@ module Google
         # @param instance_id [String] The unique identifier for the instance,
         #   which cannot be changed after the instance is created. Values are of
         #   the form `[a-z][-a-z0-9]*[a-z0-9]` and must be between 6 and 30
-        #   characters in length. Required.
+        #   characters. Required.
         # @param display_name [String] The descriptive name for this instance as it
         #   appears in UIs. Must be unique per project and between 4 and 30
-        #   characters in length.
+        #   characters.
         # @param type [Symbol] The type of the instance.
         #   Valid values are `:DEVELOPMENT` or `:PRODUCTION`.
         #   Default `:PRODUCTION` instance will created if left blank.
@@ -147,20 +147,20 @@ module Google
         #   mechanism for organizing cloud resources into groups that reflect a
         #   customer's organizational needs and deployment strategies. Cloud
         #   Labels can be used to filter collections of resources. They can be
-        #   used to control how resource metrics are aggregated. And they can be
-        #   used as arguments to policy management rules (e.g. route, firewall,
-        #   load balancing, etc.).
+        #   used to control how resource metrics are aggregated. Cloud Labels can be
+        #   used as arguments to policy management rules (e.g., route, firewall, or
+        #   load balancing).
         #
-        #   * Label keys must be between 1 and 63 characters long and must
+        #   * Label keys must be between 1 and 63 characters and must
         #     conform to the following regular expression:
         #     `[a-z]([-a-z0-9]*[a-z0-9])?`.
-        #   * Label values must be between 0 and 63 characters long and must
+        #   * Label values must be between 0 and 63 characters and must
         #     conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
         #   * No more than 64 labels can be associated with a given resource.
         # @param clusters [Hash{String => Google::Cloud::Bigtable::Cluster}]
         #   (See {Google::Cloud::Bigtable::Instance::ClusterMap})
         #   If unspecified, you may use a code block to add clusters.
-        #   Minimum one cluster must be specified.
+        #   Minimum of one cluster must be specified.
         # @yield [clusters] A block for adding clusters.
         # @yieldparam [Hash{String => Google::Cloud::Bigtable::Cluster}]
         #   Cluster map of cluster name and cluster object.
@@ -254,8 +254,8 @@ module Google
         # List all clusters in project.
         #
         # @param token [String] The `token` value returned by the last call to
-        #   `clusters`; indicates that this is a continuation of a call,
-        #   and that the system should return the next page of data.
+        #   `clusters` indicates that this is a continuation of a call
+        #   and the system should return the next page of data.
         # @return [Array<Google::Cloud::Bigtable::Cluster>]
         #   (See {Google::Cloud::Bigtable::Cluster::List})
         # @example
@@ -302,7 +302,7 @@ module Google
         # @param instance_id [String] Existing instance Id.
         # @param table_id [String] Existing table Id.
         # @param view [Symbol] Optional. Table view type. Default `:SCHEMA_VIEW`
-        #   Valid view types are.
+        #   Valid view types are the following:
         #   * `:NAME_ONLY` - Only populates `name`
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
@@ -311,9 +311,9 @@ module Google
         #   Get table object without verifying that the table resource exists.
         #   Calls made on this object will raise errors if the table does not exist.
         #   Default value is `false`. Optional.
-        #   It helps to reduce admin apis calls.
+        #   Helps to reduce admin API calls.
         # @param app_profile_id [String] The unique identifier for the app profile. Optional.
-        #   It is used only in data operations.
+        #   Used only in data operations.
         #   This value specifies routing for replication. If not specified, the
         #   "default" application profile will be used.
         # @return [Google::Cloud::Bigtable::Table, nil]
@@ -336,7 +336,7 @@ module Google
         #
         #   table = bigtable.table("my-instance", "my-table")
         #
-        # @example Get table with all fields. Clusters states, column families
+        # @example Get table with all fields, cluster states, and column families.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -404,17 +404,17 @@ module Google
         # specified in the request.
         #
         # @param instance_id [String]
-        #   The unique Id of the instance in which to create the table.
+        #   The unique ID of the instance in which to create the table.
         # @param table_id [String]
-        #   The name by which the new table should be referred to within the parent
-        #   instance, e.g., `foobar`
+        #   The ID by which the new table should be referred to within the 
+        #   instance, e.g., `foobar`.
         # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
         #   (See {Google::Cloud::Bigtable::Table::ColumnFamilyMap})
         #   If unspecified, you may use a code block to add column families.
         # @param granularity [Symbol]
         #   The granularity at which timestamps are stored in this table.
         #   Timestamps not matching the granularity will be rejected.
-        #   Valid values are `:MILLIS`.
+        #   Valid value is `:MILLIS`.
         #   If unspecified, the value will be set to `:MILLIS`.
         # @param initial_splits [Array<String>]
         #   The optional list of row keys that will be used to initially split the
@@ -432,17 +432,17 @@ module Google
         #     * Tablet 3 : `[customer_1, customer_2) => {"customer_1"}`
         #     * Tablet 4 : `[customer_2, other)      => {"customer_2"}`
         #     * Tablet 5 : `[other, )                => {"other", "zz"}`
-        #   A hash of the same form as `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
+        #   A hash in the form of `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
         #   can also be provided.
         # @yield [column_families] A block for adding column_families.
         # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
         #    Map of family name and column family object.
         #   (See {Google::Cloud::Bigtable::Instance::ColumnFamilyMap})
-        #   GC Rules for column family see {Google::Cloud::Bigtable::GcRule})
+        #   (Read the GC Rules for column families at {Google::Cloud::Bigtable::GcRule})
         #
         # @return [Google::Cloud::Bigtable::Table]
         #
-        # @example Create table without column family
+        # @example Create a table without a column family
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -491,9 +491,9 @@ module Google
         # Permanently deletes a specified table and all of its data.
         #
         # @param instance_id [String]
-        #  The unique Id of the instance in which table is exists.
+        #  The unique ID of the instance the table is in.
         # @param table_id [String]
-        #   The unique name of the table to be deleted.
+        #   The unique ID of the table to be deleted,
         #   e.g., `foobar`
         #
         # @example Create table with column families and initial splits.
@@ -514,7 +514,7 @@ module Google
         # where only some modifications have taken effect.
         #
         # @param instance_id [String]
-        #   The unique Id of the instance in which table is exists.
+        #   The unique ID of the instance the table is in.
         # @param table_id [String]
         #   The unique Id of the table whose families should be modified.
         # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification> | Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
