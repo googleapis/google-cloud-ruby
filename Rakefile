@@ -568,6 +568,7 @@ namespace :kokoro do
       Bundler.with_clean_env do
         Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
+        Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
         sh "bundle exec rake ci"
       end
@@ -587,11 +588,7 @@ namespace :kokoro do
         else
           header "Gem Unchanged - Skipping Acceptance"
         end
-        if ENV['OS'] == 'windows'
-          FileUtils.mkdir_p "acceptance"
-          FileUtils.rm_f "acceptance/data"
-          sh "call mklink /j acceptance\\data ..\\acceptance\\data"
-        end
+        Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
         command = "bundle exec rake ci"
         command += ":acceptance" if updated
@@ -606,6 +603,7 @@ namespace :kokoro do
       Bundler.with_clean_env do
         Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
+        Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
         sh "bundle exec rake ci:acceptance"
       end
@@ -619,12 +617,20 @@ namespace :kokoro do
     Rake::Task["test:codecov"].invoke
   end
 
-  task :load_env_vars do
+  task :prepare_environment do
     service_account = "#{ENV['KOKORO_GFILE_DIR']}/service-account.json"
     ENV['GOOGLE_APPLICATION_CREDENTIALS'] = service_account
     filename = "#{ENV['KOKORO_GFILE_DIR']}/env_vars.json"
     env_vars = JSON.parse(File.read(filename))
     env_vars.each { |k, v| ENV[k] = v }
+  end
+
+  task :windows_acceptance_fix do
+    if ENV['OS'] == 'windows'
+      FileUtils.mkdir_p "acceptance"
+      FileUtils.rm_f "acceptance/data"
+      sh "call mklink /j acceptance\\data ..\\acceptance\\data"
+    end
   end
 end
 
