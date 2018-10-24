@@ -933,36 +933,36 @@ accepting rules</p>
       <pre class="lines">
 
 
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712</pre>
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 686</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 736</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_dataset'>create_dataset</span> <span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>description:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                    <span class='label'>expiration:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>location:</span> <span class='kw'>nil</span>
@@ -1099,19 +1099,19 @@ dataset does not exist.</p>
       <pre class="lines">
 
 
-629
-630
-631
-632
-633
-634
-635
-636
-637
-638</pre>
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 629</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 679</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dataset'>dataset</span> <span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1279,15 +1279,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-758
-759
-760
-761
-762
-763</pre>
+808
+809
+810
+811
+812
+813</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 758</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 808</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_datasets'>datasets</span> <span class='label'>all:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1433,14 +1433,14 @@ encryption key.</p>
       <pre class="lines">
 
 
-1043
-1044
-1045
-1046
-1047</pre>
+1093
+1094
+1095
+1096
+1097</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1043</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1093</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_encryption'>encryption</span> <span class='label'>kms_key:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_encrypt_config'>encrypt_config</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="EncryptionConfiguration.html" title="Google::Cloud::Bigquery::EncryptionConfiguration (class)">EncryptionConfiguration</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
@@ -1589,14 +1589,14 @@ Optional.</p>
       <pre class="lines">
 
 
-596
-597
-598
-599
-600</pre>
+646
+647
+648
+649
+650</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 596</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 646</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ext'>ext</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="External.html" title="Google::Cloud::Bigquery::External (module)">External</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_urls'>from_urls</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span>
@@ -1698,16 +1698,16 @@ does not exist.</p>
       <pre class="lines">
 
 
-782
-783
-784
-785
-786
-787
-788</pre>
+832
+833
+834
+835
+836
+837
+838</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 782</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 832</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_job'>job</span> <span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='label'>location:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1879,15 +1879,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-839
-840
-841
-842
-843
-844</pre>
+889
+890
+891
+892
+893
+894</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 839</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 889</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_jobs'>jobs</span> <span class='label'>all:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2076,15 +2076,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-887
-888
-889
-890
-891
-892</pre>
+937
+938
+939
+940
+941
+942</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 887</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 937</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_projects'>projects</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2111,7 +2111,8 @@ part of the larger set of results to view.</p>
     <p>Queries data and waits for the results. In this method, a <span class='object_link'><a href="QueryJob.html" title="Google::Cloud::Bigquery::QueryJob (class)">QueryJob</a></span>
 is created and its results are saved to a temporary table, then read
 from the table. Timeouts and transient errors are generally handled
-as needed to complete the query.</p>
+as needed to complete the query. When used for executing DDL/DML
+statements, this method does not return row data.</p>
 
 <p>When using standard SQL and passing arguments using <code>params</code>, Ruby
 types are mapped to BigQuery types as follows:</p>
@@ -2276,6 +2277,32 @@ for an overview of each BigQuery data type, including allowed values.</p>
 <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Execute a DDL statement:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CREATE TABLE `my_dataset.my_table` (x INT64)</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_table_ref'>table_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_ddl_target_table'>ddl_target_table</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Execute a DML statement:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>UPDATE `my_dataset.my_table` </span><span class='tstring_end'>&quot;</span></span> \
+                      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SET x = x + 1 </span><span class='tstring_end'>&quot;</span></span> \
+                      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WHERE x IS NOT NULL</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_num_dml_affected_rows'>num_dml_affected_rows</span></code></pre>
     
       
         <p class="example_title"><div class='inline'><p>Query using external data source, set destination:</p>
@@ -2549,30 +2576,30 @@ configuration object for setting additional options for the query.</p>
       <pre class="lines">
 
 
-529
-530
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549</pre>
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 529</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 579</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query'>query</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>external:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='kw'>true</span><span class='comma'>,</span>
           <span class='label'>dataset:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>standard_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -2775,6 +2802,41 @@ for an overview of each BigQuery data type, including allowed values.</p>
   <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
     <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span>
   <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Execute a DDL statement:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query_job'>query_job</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CREATE TABLE </span><span class='tstring_end'>&quot;</span></span> \
+                         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>`my_dataset.my_table` </span><span class='tstring_end'>&quot;</span></span> \
+                         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(x INT64)</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_failed?'>failed?</span>
+  <span class='id identifier rubyid_table_ref'>table_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_ddl_target_table'>ddl_target_table</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Execute a DML statement:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query_job'>query_job</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>UPDATE </span><span class='tstring_end'>&quot;</span></span> \
+                         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>`my_dataset.my_table` </span><span class='tstring_end'>&quot;</span></span> \
+                         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SET x = x + 1 </span><span class='tstring_end'>&quot;</span></span> \
+                         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WHERE x IS NOT NULL</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_failed?'>failed?</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_num_dml_affected_rows'>num_dml_affected_rows</span>
 <span class='kw'>end</span></code></pre>
     
       
@@ -3259,34 +3321,34 @@ configuration object for setting query options.</p>
       <pre class="lines">
 
 
-329
-330
-331
-332
-333
-334
-335
-336
-337
-338
-339
-340
-341
-342
-343
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353</pre>
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 329</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 358</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_job'>query_job</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>external:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>priority:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>INTERACTIVE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>table:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -3422,14 +3484,14 @@ for the destination table.</p>
       <pre class="lines">
 
 
-972
-973
-974
-975
-976</pre>
+1022
+1023
+1024
+1025
+1026</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 972</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1022</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_schema'>schema</span>
   <span class='id identifier rubyid_s'>s</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Schema.html" title="Google::Cloud::Bigquery::Schema (class)">Schema</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span>
@@ -3628,12 +3690,12 @@ contain microsecond precision.</p>
       <pre class="lines">
 
 
-935
-936
-937</pre>
+985
+986
+987</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 935</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 985</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time'>time</span> <span class='id identifier rubyid_hour'>hour</span><span class='comma'>,</span> <span class='id identifier rubyid_minute'>minute</span><span class='comma'>,</span> <span class='id identifier rubyid_second'>second</span>
   <span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Time.html" title="Google::Cloud::Bigquery::Time (class)">Time</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_hour'>hour</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_minute'>minute</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_second'>second</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
