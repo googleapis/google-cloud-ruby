@@ -16,6 +16,8 @@ require "helper"
 
 describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active FROM `some_project.some_dataset.users`" }
+  let(:ddl_query) { "CREATE TABLE `my_dataset.my_table` (x INT64)" }
+  let(:dml_query) { "UPDATE `my_dataset.my_table` SET x = x + 1 WHERE x IS NOT NULL" }
 
   let(:job_id) { "job_9876543210" }
   let(:dataset_id) { "my_dataset" }
@@ -60,6 +62,51 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     data[2][:age].must_be :nil?
     data[2][:score].must_be :nil?
     data[2][:active].must_be :nil?
+  end
+
+  it "executes a DDL statement" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi ddl_query, location: nil
+    resp_gapi = query_job_resp_gapi ddl_query, job_id: job_id, target_table: true, statement_type: "CREATE_TABLE", ddl_operation_performed: "CREATE"
+    mock.expect :insert_job, resp_gapi, [project, job_gapi]
+
+    data = bigquery.query ddl_query
+    mock.verify
+    # data.must_be_kind_of Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.count.must_equal 0
+    data.total.must_be :nil?
+
+    data.statement_type.must_equal "CREATE_TABLE"
+    data.ddl?.must_equal true
+    data.dml?.must_equal false
+    data.ddl_operation_performed.must_equal "CREATE"
+    data.ddl_target_table.wont_be :nil?
+    data.num_dml_affected_rows.must_be :nil?
+  end
+
+  it "executes a DML statement" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi dml_query, location: nil
+    resp_gapi = query_job_resp_gapi ddl_query, job_id: job_id, statement_type: "UPDATE", num_dml_affected_rows: 50
+    mock.expect :insert_job, resp_gapi, [project, job_gapi]
+
+    data = bigquery.query dml_query
+    mock.verify
+    # data.must_be_kind_of Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.count.must_equal 0
+    data.total.must_be :nil?
+
+    data.statement_type.must_equal "UPDATE"
+    data.ddl?.must_equal false
+    data.dml?.must_equal true
+    data.ddl_operation_performed.must_be :nil?
+    data.num_dml_affected_rows.must_equal 50
   end
 
   it "paginates the data" do

@@ -455,8 +455,10 @@ class MockBigquery < Minitest::Spec
     job_ref
   end
 
-  def query_job_resp_gapi query, job_id: nil
-    Google::Apis::BigqueryV2::Job.from_json query_job_resp_json(query, job_id: job_id)
+  def query_job_resp_gapi query, job_id: nil, target_table: false, statement_type: "SELECT", num_dml_affected_rows: nil, ddl_operation_performed: nil
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_resp_json query, job_id: job_id
+    gapi.statistics.query = statistics_query_gapi target_table: target_table, statement_type: statement_type, num_dml_affected_rows: num_dml_affected_rows, ddl_operation_performed: ddl_operation_performed
+    gapi
   end
 
   def query_job_resp_json query, job_id: "job_9876543210", location: "US"
@@ -484,6 +486,51 @@ class MockBigquery < Minitest::Spec
       "maximumBytesBilled" => nil
     }
     hash.to_json
+  end
+
+  def statistics_query_gapi target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
+    ddl_target_table = if target_table
+      Google::Apis::BigqueryV2::TableReference.new(
+        project_id: "target_project_id",
+        dataset_id: "target_dataset_id",
+        table_id: "target_table_id"
+      )
+    end
+    Google::Apis::BigqueryV2::JobStatistics2.new(
+      billing_tier: 1,
+      cache_hit: true,
+      ddl_operation_performed: ddl_operation_performed,
+      ddl_target_table: ddl_target_table,
+      num_dml_affected_rows: num_dml_affected_rows,
+      query_plan: [
+        Google::Apis::BigqueryV2::ExplainQueryStage.new(
+          compute_ratio_avg: 1.0,
+          compute_ratio_max: 1.0,
+          id: 1,
+          name: "Stage 1",
+          read_ratio_avg: 0.2710832227382326,
+          read_ratio_max: 0.2710832227382326,
+          records_read: 164656,
+          records_written: 1,
+          status: "COMPLETE",
+          steps: [
+            Google::Apis::BigqueryV2::ExplainQueryStep.new(
+              kind: "READ",
+              substeps: [
+                "word",
+                "FROM bigquery-public-data:samples.shakespeare"
+              ]
+            )
+          ],
+          wait_ratio_avg: 0.007876711656047392,
+          wait_ratio_max: 0.007876711656047392,
+          write_ratio_avg: 0.05389444608201358,
+          write_ratio_max: 0.05389444608201358
+        )
+      ],
+      statement_type: statement_type,
+      total_bytes_processed: 123456
+    )
   end
 
   def failed_query_job_resp_gapi query, job_id: nil, reason: "accessDenied", location: "US"

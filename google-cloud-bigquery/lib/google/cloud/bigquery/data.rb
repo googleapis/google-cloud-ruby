@@ -59,6 +59,10 @@ module Google
         # @private The Google API Client object in JSON Hash.
         attr_accessor :gapi_json
 
+        ##
+        # @private The query Job gapi object, or nil if from Table#data.
+        attr_accessor :job_gapi
+
         # @private
         def initialize arr = []
           @service = nil
@@ -196,6 +200,130 @@ module Google
         end
 
         ##
+        # The type of query statement, if valid. Possible values (new values
+        # might be added in the future):
+        #
+        # * "CREATE_MODEL": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "CREATE_TABLE": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "CREATE_TABLE_AS_SELECT": DDL statement, see [Using Data Definition
+        #   Language Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "CREATE_VIEW": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "DELETE": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        # * "DROP_MODEL": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "DROP_TABLE": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "DROP_VIEW": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "INSERT": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        # * "MERGE": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        # * "SELECT": SQL query, see [Standard SQL Query Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
+        # * "UPDATE": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        #
+        # @return [String, nil] The type of query statement.
+        #
+        def statement_type
+          return nil unless job_gapi && job_gapi.statistics.query
+          job_gapi.statistics.query.statement_type
+        end
+
+        ##
+        # Whether the query that created this data was a DDL statement.
+        #
+        # @see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
+        #   Using Data Definition Language Statements
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   data = bigquery.query "CREATE TABLE my_table (x INT64)"
+        #
+        #   data.statement_type #=> "CREATE_TABLE"
+        #   data.ddl? #=> true
+        #
+        def ddl?
+          %w[CREATE_MODEL CREATE_TABLE CREATE_TABLE_AS_SELECT CREATE_VIEW \
+             DROP_MODEL DROP_TABLE DROP_VIEW].include? statement_type
+        end
+
+        ##
+        # Whether the query that created this data was a DML statement.
+        #
+        # @see https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax
+        #   Data Manipulation Language Syntax
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   data = bigquery.query "UPDATE my_table " \
+        #                         "SET x = x + 1 " \
+        #                         "WHERE x IS NOT NULL"
+        #
+        #   data.statement_type #=> "UPDATE"
+        #   data.dml? #=> true
+        #
+        def dml?
+          %w[INSERT UPDATE MERGE DELETE].include? statement_type
+        end
+
+        ##
+        # The DDL operation performed, possibly dependent on the pre-existence
+        # of the DDL target. (See {#ddl_target_table}.) Possible values (new
+        # values might be added in the future):
+        #
+        # * "CREATE": The query created the DDL target.
+        # * "SKIP": No-op. Example cases: the query is
+        #   `CREATE TABLE IF NOT EXISTS` while the table already exists, or the
+        #   query is `DROP TABLE IF EXISTS` while the table does not exist.
+        # * "REPLACE": The query replaced the DDL target. Example case: the
+        #   query is `CREATE OR REPLACE TABLE`, and the table already exists.
+        # * "DROP": The query deleted the DDL target.
+        #
+        # @return [String, nil] The DDL operation performed.
+        #
+        def ddl_operation_performed
+          return nil unless job_gapi && job_gapi.statistics.query
+          job_gapi.statistics.query.ddl_operation_performed
+        end
+
+        ##
+        # The DDL target table, in reference state. (See {Table#reference?}.)
+        # Present only for `CREATE/DROP TABLE/VIEW` queries. (See
+        # {#statement_type}.)
+        #
+        # @return [Google::Cloud::Bigquery::Table, nil] The DDL target table, in
+        #   reference state.
+        #
+        def ddl_target_table
+          return nil unless job_gapi && job_gapi.statistics.query
+          ensure_service!
+          table = job_gapi.statistics.query.ddl_target_table
+          return nil unless table
+          Google::Cloud::Bigquery::Table.new_reference_from_gapi table, service
+        end
+
+        ##
+        # The number of rows affected by a DML statement. Present only for DML
+        # statements `INSERT`, `UPDATE` or `DELETE`. (See {#statement_type}.)
+        #
+        # @return [Integer, nil] The number of rows affected by a DML statement,
+        #   or `nil` if the query is not a DML statement.
+        #
+        def num_dml_affected_rows
+          return nil unless job_gapi && job_gapi.statistics.query
+          job_gapi.statistics.query.num_dml_affected_rows
+        end
+
+        ##
         # Whether there is a next page of data.
         #
         # @return [Boolean] `true` when there is a next page, `false` otherwise.
@@ -252,7 +380,7 @@ module Google
             @table_gapi.table_reference.dataset_id,
             @table_gapi.table_reference.table_id,
             token: token
-          self.class.from_gapi_json data_json, @table_gapi, @service
+          self.class.from_gapi_json data_json, @table_gapi, job_gapi, @service
         end
 
         ##
@@ -327,13 +455,16 @@ module Google
 
         ##
         # @private New Data from a response object.
-        def self.from_gapi_json gapi_json, table_gapi, service
-          formatted_rows = Convert.format_rows(gapi_json[:rows],
-                                               table_gapi.schema.fields)
+        def self.from_gapi_json gapi_json, table_gapi, job_gapi, service
+          rows = gapi_json[:rows] || []
+          unless rows.empty?
+            rows = Convert.format_rows rows, table_gapi.schema.fields
+          end
 
-          data = new formatted_rows
+          data = new rows
           data.table_gapi = table_gapi
           data.gapi_json = gapi_json
+          data.job_gapi = job_gapi
           data.service = service
           data
         end

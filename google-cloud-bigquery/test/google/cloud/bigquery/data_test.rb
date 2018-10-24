@@ -88,6 +88,13 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data.etag.must_equal "etag1234567890"
     data.token.must_equal "token1234567890"
     data.total.must_equal 3
+
+    data.statement_type.must_be :nil?
+    data.ddl?.must_equal false
+    data.dml?.must_equal false
+    data.ddl_operation_performed.must_be :nil?
+    data.ddl_target_table.must_be :nil?
+    data.num_dml_affected_rows.must_be :nil?
   end
 
   it "knows schema, fields, and headers" do

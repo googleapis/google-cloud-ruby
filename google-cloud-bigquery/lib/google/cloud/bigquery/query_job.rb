@@ -200,21 +200,76 @@ module Google
         # The type of query statement, if valid. Possible values (new values
         # might be added in the future):
         #
-        # * "SELECT": `SELECT` query.
-        # * "INSERT": `INSERT` query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
-        # * "UPDATE": `UPDATE` query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
-        # * "DELETE": `DELETE` query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
-        # * "CREATE_TABLE": `CREATE [OR REPLACE] TABLE` without `AS SELECT`.
-        # * "CREATE_TABLE_AS_SELECT": `CREATE [OR REPLACE] TABLE ... AS SELECT`.
-        # * "DROP_TABLE": `DROP TABLE` query.
-        # * "CREATE_VIEW": `CREATE [OR REPLACE] VIEW ... AS SELECT ...`.
-        # * "DROP_VIEW": `DROP VIEW` query.
+        # * "CREATE_MODEL": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "CREATE_TABLE": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "CREATE_TABLE_AS_SELECT": DDL statement, see [Using Data Definition
+        #   Language Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "CREATE_VIEW": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "DELETE": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        # * "DROP_MODEL": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "DROP_TABLE": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "DROP_VIEW": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+        # * "INSERT": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        # * "MERGE": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
+        # * "SELECT": SQL query, see [Standard SQL Query Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
+        # * "UPDATE": DML statement, see [Data Manipulation Language Syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
         #
         # @return [String, nil] The type of query statement.
         #
         def statement_type
           return nil unless @gapi.statistics.query
           @gapi.statistics.query.statement_type
+        end
+
+        ##
+        # Whether the query is a DDL statement.
+        #
+        # @see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
+        #   Using Data Definition Language Statements
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   query_job = bigquery.query_job "CREATE TABLE my_table (x INT64)"
+        #
+        #   query_job.statement_type #=> "CREATE_TABLE"
+        #   query_job.ddl? #=> true
+        #
+        def ddl?
+          %w[CREATE_MODEL CREATE_TABLE CREATE_TABLE_AS_SELECT CREATE_VIEW \
+             DROP_MODEL DROP_TABLE DROP_VIEW].include? statement_type
+        end
+
+        ##
+        # Whether the query is a DML statement.
+        #
+        # @see https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax
+        #   Data Manipulation Language Syntax
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   query_job = bigquery.query_job "UPDATE my_table " \
+        #                                  "SET x = x + 1 " \
+        #                                  "WHERE x IS NOT NULL"
+        #
+        #   query_job.statement_type #=> "UPDATE"
+        #   query_job.dml? #=> true
+        #
+        def dml?
+          %w[INSERT UPDATE MERGE DELETE].include? statement_type
         end
 
         ##
@@ -251,6 +306,18 @@ module Google
           table = @gapi.statistics.query.ddl_target_table
           return nil unless table
           Google::Cloud::Bigquery::Table.new_reference_from_gapi table, service
+        end
+
+        ##
+        # The number of rows affected by a DML statement. Present only for DML
+        # statements `INSERT`, `UPDATE` or `DELETE`. (See {#statement_type}.)
+        #
+        # @return [Integer, nil] The number of rows affected by a DML statement,
+        #   or `nil` if the query is not a DML statement.
+        #
+        def num_dml_affected_rows
+          return nil unless @gapi.statistics.query
+          @gapi.statistics.query.num_dml_affected_rows
         end
 
         ##
@@ -490,7 +557,10 @@ module Google
         #
         def data token: nil, max: nil, start: nil
           return nil unless done?
-
+          if ddl? || dml?
+            data_hash = { totalRows: nil, rows: [] }
+            return Data.from_gapi_json data_hash, nil, @gapi, service
+          end
           ensure_schema!
 
           options = { token: token, max: max, start: start }
@@ -498,7 +568,7 @@ module Google
             destination_table_dataset_id,
             destination_table_table_id,
             options
-          Data.from_gapi_json data_hash, destination_table_gapi, service
+          Data.from_gapi_json data_hash, destination_table_gapi, @gapi, service
         end
         alias query_results data
 

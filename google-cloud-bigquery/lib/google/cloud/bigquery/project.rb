@@ -302,6 +302,35 @@ module Google
         #     end
         #   end
         #
+        # @example Execute a DDL statement:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "CREATE TABLE " \
+        #                            "`my_dataset.my_table` " \
+        #                            "(x INT64)"
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     table_ref = job.ddl_target_table
+        #   end
+        #
+        # @example Execute a DML statement:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.query_job "UPDATE " \
+        #                            "`my_dataset.my_table` " \
+        #                            "SET x = x + 1 " \
+        #                            "WHERE x IS NOT NULL"
+        #
+        #   job.wait_until_done!
+        #   if !job.failed?
+        #     puts job.num_dml_affected_rows
+        #   end
+        #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
@@ -356,7 +385,8 @@ module Google
         # Queries data and waits for the results. In this method, a {QueryJob}
         # is created and its results are saved to a temporary table, then read
         # from the table. Timeouts and transient errors are generally handled
-        # as needed to complete the query.
+        # as needed to complete the query. When used for executing DDL/DML
+        # statements, this method does not return row data.
         #
         # When using standard SQL and passing arguments using `params`, Ruby
         # types are mapped to BigQuery types as follows:
@@ -504,6 +534,26 @@ module Google
         #   data.each do |row|
         #     puts row[:name]
         #   end
+        #
+        # @example Execute a DDL statement:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "CREATE TABLE `my_dataset.my_table` (x INT64)"
+        #
+        #   table_ref = data.ddl_target_table
+        #
+        # @example Execute a DML statement:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   data = bigquery.query "UPDATE `my_dataset.my_table` " \
+        #                         "SET x = x + 1 " \
+        #                         "WHERE x IS NOT NULL"
+        #
+        #   puts data.num_dml_affected_rows
         #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"

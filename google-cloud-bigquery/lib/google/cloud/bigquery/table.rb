@@ -1173,7 +1173,7 @@ module Google
           options = { token: token, max: max, start: start }
           data_json = service.list_tabledata \
             dataset_id, table_id, options
-          Data.from_gapi_json data_json, gapi, service
+          Data.from_gapi_json data_json, gapi, nil, service
         end
 
         ##
