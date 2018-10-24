@@ -56,7 +56,7 @@ module Google
           if chunk.commit_row
             raise_if(
               chunk.value_size > 0,
-              "A row must have value_size and commit_row"
+              "Commit rows cannot have a non-zero value_size.
             )
           end
 
@@ -89,8 +89,8 @@ module Google
         # Validate chunk has new row state
         #
         # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
-        #   If row already has a set key, chunk has an empty row key, chunk 
-        #   state is reset, new row key is the same as the last-read key, 
+        #   If row already has a set key, chunk has an empty row key, chunk
+        #   state is reset, new row key is the same as the last-read key,
         #   or if family name or column qualifier are empty
         #
         def validate_new_row

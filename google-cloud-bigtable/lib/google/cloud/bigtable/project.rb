@@ -64,7 +64,7 @@ module Google
 
         # The identifier for the Cloud Bigtable project.
         #
-        # @return [String] Project id.
+        # @return [String] Project ID.
         #
         # @example
         #   require "google/cloud"
@@ -406,7 +406,7 @@ module Google
         # @param instance_id [String]
         #   The unique ID of the instance in which to create the table.
         # @param table_id [String]
-        #   The ID by which the new table should be referred to within the 
+        #   The ID by which the new table should be referred to within the
         #   instance, e.g., `foobar`.
         # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
         #   (See {Google::Cloud::Bigtable::Table::ColumnFamilyMap})

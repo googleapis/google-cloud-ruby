@@ -22,7 +22,7 @@ module Google
       #
       # A common pattern for updating a resource's metadata, such as its policy,
       # is to read the current data from the service, update the data locally,
-      # and then write the modified data back to the resource. This pattern may 
+      # and then write the modified data back to the resource. This pattern may
       # result in a conflict if two or more processes attempt the sequence simultaneously.
       # IAM solves this problem with the {Google::Cloud::Bigtable::Policy#etag}
       # property, which is used to verify whether the policy has changed since

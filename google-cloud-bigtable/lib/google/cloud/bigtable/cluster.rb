@@ -169,7 +169,7 @@ module Google
 
         # Update cluster.
         #
-        # Updatable field is the number of nodes.
+        # `serve_nodes` is the only updatable field
         #
         # @return [Google::Cloud::Bigtable::Cluster::Job]
         #   The job representing the long-running, asynchronous processing of

@@ -138,11 +138,11 @@ module Google
         #
         # @param instance_id [String]
         #   The permanent identifier to be used for the new instance.
-        #   
+        #
         # @param instance [Google::Bigtable::Admin::V2::Instance | Hash]
         # @param clusters [Hash{String => Google::Bigtable::Admin::V2::Cluster | Hash}]
-        #   The clusters to be created in the instance. 
-        #   Note that the cluster ID is the last segment of a cluster name. In the 
+        #   The clusters to be created in the instance.
+        #   Note that the cluster ID is the last segment of a cluster name. In the
         #   following cluster name, 'mycluster' is the cluster ID:
         #   +projects/myproject/instances/myinstance/clusters/mycluster+.
         #   Alternatively, provide a hash in the form of `Google::Bigtable::Admin::V2::Cluster`
@@ -226,11 +226,11 @@ module Google
         # @param instance_id [String]
         #   Unique ID of the instance in which to create the new cluster
         # @param cluster_id [String]
-        #   Unique permanent identifier for the new cluster 
+        #   Unique permanent identifier for the new cluster
         # @param cluster [Google::Bigtable::Admin::V2::Cluster | Hash]
         #   The cluster to be created.
         #   Alternatively, provide a hash in the form of `Google::Bigtable::Admin::V2::Cluster`
-      
+        #
         # @return [Google::Gax::Operation]
 
         def create_cluster instance_id, cluster_id, cluster
@@ -348,7 +348,7 @@ module Google
         #       * Tablet 3 +[customer_1, customer_2) => {"customer_1"}.+
         #       * Tablet 4 +[customer_2, other)      => {"customer_2"}.+
         #       * Tablet 5 +[other, )                => {"other", "zz"}.+
-        #   Alternatively, provide a hash in the form of 
+        #   Alternatively, provide a hash in the form of
         #   `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
         # @return [Google::Bigtable::Admin::V2::Table]
 
@@ -441,7 +441,7 @@ module Google
         #   Entries are applied in order, meaning that earlier modifications can be
         #   masked by later ones (in the case of repeated updates to the same family,
         #   for example).
-        #   Alternatively, provide a hash in the form of 
+        #   Alternatively, provide a hash in the form of
         #    `Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification`.
         # @return [Google::Bigtable::Admin::V2::Table]
 
@@ -455,8 +455,8 @@ module Google
         end
 
         # Generates a consistency token for a table.
-        # The consistency token can be be used in CheckConsistency to check whether 
-        # mutations to the table that finished before this call started have been replicated. 
+        # The consistency token can be be used in CheckConsistency to check whether
+        # mutations to the table that finished before this call started have been replicated.
         # The token will be available for 90 days.
         #
         # @param instance_id [String]
@@ -518,7 +518,7 @@ module Google
              timeout: nil
           call_options = nil
 
-          # Pass a timeout with a larger value if the drop operation throws 
+          # Pass a timeout with a larger value if the drop operation throws
           # an error for timeout time.
           if timeout
             retry_options = Google::Gax::RetryOptions.new(
@@ -606,7 +606,7 @@ module Google
         #
         # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
         #   The app profile that will (partially) replace the current value.
-        #   Alternatively, provide a hash in the form of 
+        #   Alternatively, provide a hash in the form of
         #   `Google::Bigtable::Admin::V2::AppProfile`.
         # @param update_mask [Google::Protobuf::FieldMask | Hash]
         #   The subset of app profile fields that should be replaced.

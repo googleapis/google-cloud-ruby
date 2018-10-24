@@ -188,14 +188,14 @@ module Google
         #   on whether or not any results are yielded, either +true_mutations+ or
         #   +false_mutations+ will be executed. If unset, checks that the row contains
         #   any values.
-        # @param on_match [Google::Cloud::Bigtable::MutationEntry] Mutation entry 
+        # @param on_match [Google::Cloud::Bigtable::MutationEntry] Mutation entry
         #   applied to predicate filter match.
         #   Changes to be atomically applied to the specified row if +predicate_filter+
         #   yields at least one cell when applied to +row_key+. Entries are applied in
         #   order, meaning that earlier mutations can be masked by later ones.
         #   Must contain at least one entry if +false_mutations+ is empty and at most
         #   100,000 entries.
-        # @param otherwise [Google::Cloud::Bigtable::MutationEntry] Mutation entry applied 
+        # @param otherwise [Google::Cloud::Bigtable::MutationEntry] Mutation entry applied
         #   when predicate filter does not match.
         #   Changes to be atomically applied to the specified row if +predicate_filter+
         #   does not yield any cells when applied to +row_key+. Entries are applied in

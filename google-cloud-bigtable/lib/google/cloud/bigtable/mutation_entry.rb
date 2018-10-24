@@ -20,7 +20,7 @@ module Google
     module Bigtable
       # # MutationEntry
       #
-      # MutationEntry is a chainable structure that holds data for diffrent
+      # MutationEntry is a chainable structure that holds data for different
       # type of mutations.
       # MutationEntry is used in following data operations:
       #
