@@ -176,7 +176,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.schema_update_options.must_equal schema_update_options
 
-    #mock.verify
+    mock.verify
   end
 
 
