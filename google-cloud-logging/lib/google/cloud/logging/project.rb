@@ -341,8 +341,11 @@ module Google
         #                       resource: resource,
         #                       labels: labels
         #
-        def async_writer max_queue_size: AsyncWriter::DEFAULT_MAX_QUEUE_SIZE
-          AsyncWriter.new self, max_queue_size
+        def async_writer max_queue_size: 10000, max_queue_bytes: 10000000,
+                         interval: 5, threads: 2
+          AsyncWriter.new self, max_count: max_queue_size,
+                                max_bytes: max_queue_bytes,
+                                interval: interval, threads: threads
         end
 
         ##

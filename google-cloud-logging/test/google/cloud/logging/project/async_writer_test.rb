@@ -19,16 +19,21 @@ describe Google::Cloud::Logging::Project, :async_writer, :mock_logging do
     async = logging.async_writer
     async.must_be_kind_of Google::Cloud::Logging::AsyncWriter
     async.logging.must_be_same_as logging
-    async.max_queue_size.must_equal \
-      Google::Cloud::Logging::AsyncWriter::DEFAULT_MAX_QUEUE_SIZE
-    async.state.must_be_nil
+    async.max_count.must_equal 10000
+    async.max_bytes.must_equal 10000000
+    async.interval.must_equal 5
+    async.threads.must_equal 2
+    async.must_be :started?
   end
 
-  it "creates an async writer object with a max queue size" do
-    async = logging.async_writer max_queue_size: 42
+  it "creates an async writer object with custom options" do
+    async = logging.async_writer max_queue_size: 42, max_queue_bytes: 5000000, interval:10, threads: 1
     async.must_be_kind_of Google::Cloud::Logging::AsyncWriter
     async.logging.must_be_same_as logging
-    async.max_queue_size.must_equal 42
-    async.state.must_be_nil
+    async.max_count.must_equal 42
+    async.max_bytes.must_equal 5000000
+    async.interval.must_equal 10
+    async.threads.must_equal 1
+    async.must_be :started?
   end
 end

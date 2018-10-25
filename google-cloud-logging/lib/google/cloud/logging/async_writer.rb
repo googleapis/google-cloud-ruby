@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-require "set"
-require "stackdriver/core/async_actor"
+require "monitor"
+require "concurrent"
 
 module Google
   module Cloud
@@ -22,7 +22,8 @@ module Google
       ##
       # # AsyncWriter
       #
-      # An object that batches and transmits log entries asynchronously.
+      # An object that buffers, batches, and transmits log entries
+      # asynchronously.
       #
       # Use this object to transmit log entries efficiently. It keeps a queue
       # of log entries, and runs a background thread that transmits them to
@@ -54,58 +55,30 @@ module Google
       #                       labels: labels
       #
       class AsyncWriter
-        include Stackdriver::Core::AsyncActor
-
-        DEFAULT_MAX_QUEUE_SIZE = 10000
-        CLEANUP_TIMEOUT = Stackdriver::Core::AsyncActor::CLEANUP_TIMEOUT
-        WAIT_INTERVAL = Stackdriver::Core::AsyncActor::WAIT_INTERVAL
+        include MonitorMixin
 
         ##
-        # @private Item in the log entries queue.
-        QueueItem = Struct.new(:entries, :log_name, :resource, :labels) do
-          def try_combine next_item
-            if log_name == next_item.log_name &&
-               resource == next_item.resource &&
-               labels == next_item.labels
-              entries.concat(next_item.entries)
-              true
-            else
-              false
-            end
-          end
-        end
-
-        ##
-        # @private The logging object.
-        attr_accessor :logging
-
-        ##
-        # @private The maximum size of the entries queue, or nil if not set.
-        attr_accessor :max_queue_size
-
-        ##
-        # The current state. Either :running, :suspended, :stopping, or :stopped
-        #
-        # DEPRECATED. Use #async_state instead.
-        alias state async_state
-
-        ##
-        # The last exception thrown by the background thread, or nil if nothing
-        # has been thrown.
-        attr_reader :last_exception
+        # @private Implementation accessors
+        attr_reader :logging, :max_bytes, :max_count, :interval,
+                    :threads
 
         ##
         # @private Creates a new AsyncWriter instance.
-        def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE,
-                       partial_success = false
-          super()
-
+        def initialize logging, max_count: 10000, max_bytes: 10000000,
+                       interval: 5, threads: 2
           @logging = logging
-          @max_queue_size = max_queue_size
-          @partial_success = partial_success
-          @queue_resource = new_cond
-          @queue = []
-          @queue_size = 0
+
+          @max_count = max_count
+          @max_bytes = max_bytes
+          @interval  = interval
+          @threads   = threads.to_i
+
+          @error_callbacks = []
+
+          @cond = new_cond
+
+          # init MonitorMixin
+          super()
         end
 
         ##
@@ -148,23 +121,41 @@ module Google
         #
         #   async.write_entries entry
         #
-        def write_entries entries, log_name: nil, resource: nil, labels: nil
-          ensure_thread
-          entries = Array(entries)
+        def write_entries entries, log_name: nil, resource: nil, labels: nil,
+                          partial_success: nil
           synchronize do
-            raise "AsyncWriter has been stopped" unless writable?
-            queue_item = QueueItem.new entries, log_name, resource, labels
-            if @queue.empty? || !@queue.last.try_combine(queue_item)
-              @queue.push queue_item
+            raise "AsyncWriter has been stopped" if @stopped
+
+            @batch ||= Batch.new self
+            unless @batch.try_add(entries, log_name: log_name,
+                                           resource: resource, labels: labels,
+                                           partial_success: partial_success)
+              publish_batch!
+              @batch = Batch.new self
+              @batch.add(entries, log_name: log_name, resource: resource,
+                                  labels: labels,
+                                  partial_success: partial_success)
             end
-            @queue_size += entries.size
-            @queue_resource.broadcast
-            while @max_queue_size && @queue_size > @max_queue_size
-              @queue_resource.wait
-            end
+
+            init_resources!
+
+            publish_batch! if @batch.ready?
+
+            @cond.signal
           end
           self
         end
+
+        def noop
+          # do nothing
+        end
+        alias state noop
+        alias async_state noop
+        alias suspend noop
+        alias resume noop
+        alias async_suspend noop
+        alias async_resume noop
+        alias async_suspended? noop
 
         ##
         # Creates a logger instance that is API-compatible with Ruby's standard
@@ -201,96 +192,47 @@ module Google
         end
 
         ##
-        # Stops this asynchronous writer.
+        # Begins the process of stopping the writer. Entries already in the
+        # queue will be published, but no new entries can be added. Use {#wait!}
+        # to block until the writer is fully stopped and all pending entries
+        # have been published.
         #
-        # After this call succeeds, the state will change to :stopping, and
-        # you may not issue any additional write_entries calls. Any previously
-        # issued writes will complete. Once any existing backlog has been
-        # cleared, the state will change to :stopped.
-        #
-        # DEPRECATED. Use #async_stop instead.
-        #
-        # @return [Boolean] Returns true if the writer was running, or false
-        #   if the writer had already been stopped.
-        #
-        alias stop async_stop
+        # @return [AsyncWriter] returns self so calls can be chained.
+        def stop
+          synchronize do
+            break if @stopped
+
+            @stopped = true
+            publish_batch!
+            @cond.signal
+            @thread_pool.shutdown if @thread_pool
+          end
+
+          self
+        end
+        alias async_stop stop
 
         ##
-        # Suspends this asynchronous writer.
+        # Blocks until the writer is fully stopped, all pending entries have
+        # been published, and all callbacks have completed. Does not stop the
+        # writer. To stop the writer, first call {#stop} and then call {#wait!}
+        # to block until the writer is stopped.
         #
-        # After this call succeeds, the state will change to :suspended, and
-        # the writer will stop sending RPCs until resumed.
-        #
-        # DEPRECATED. Use #async_suspend instead.
-        #
-        # @return [Boolean] Returns true if the writer had been running and was
-        #   suspended, otherwise false.
-        #
-        alias suspend async_suspend
+        # @return [AsyncWriter] returns self so calls can be chained.
+        def wait! timeout = nil
+          synchronize do
+            if @thread_pool
+              @thread_pool.shutdown
+              @thread_pool.wait_for_termination timeout
+            end
+          end
 
-        ##
-        # Resumes this suspended asynchronous writer.
-        #
-        # After this call succeeds, the state will change to :running, and
-        # the writer will resume sending RPCs.
-        #
-        # DEPRECATED. Use #async_resume instead.
-        #
-        # @return [Boolean] Returns true if the writer had been suspended and
-        #   is now running, otherwise false.
-        #
-        alias resume async_resume
+          self
+        end
+        alias wait_until_async_stopped wait!
+        alias wait_until_stopped wait!
 
-        ##
-        # Returns true if this writer is running.
-        #
-        # DEPRECATED. Use #async_running? instead.
-        #
-        # @return [Boolean] Returns true if the writer is currently running.
-        #
-        alias running? async_running?
-
-        ##
-        # Returns true if this writer is suspended.
-        #
-        # DEPRECATED. Use #async_suspended? instead.
-        #
-        # @return [Boolean] Returns true if the writer is currently suspended.
-        #
-        alias suspended? async_suspended?
-
-        ##
-        # Returns true if this writer is still accepting writes. This means
-        # it is either running or suspended.
-        #
-        # DEPRECATED. Use #async_working? instead.
-        #
-        # @return [Boolean] Returns true if the writer is accepting writes.
-        #
-        alias writable? async_working?
-
-        ##
-        # Returns true if this writer is fully stopped.
-        #
-        # DEPRECATED. Use #async_stopped? instead.
-        #
-        # @return [Boolean] Returns true if the writer is fully stopped.
-        #
-        alias stopped? async_stopped?
-
-        ##
-        # Blocks until this asynchronous writer has been stopped, or the given
-        # timeout (if present) has elapsed.
-        #
-        # DEPRECATED. Use #wait_until_async_stopped instead.
-        #
-        # @param [Number, nil] timeout Timeout in seconds, or `nil` for no
-        #     timeout.
-        #
-        # @return [Boolean] Returns true if the writer is stopped, or false
-        #   if the timeout expired.
-        #
-        alias wait_until_stopped wait_until_async_stopped
+        # rubocop:disable Lint/UnusedMethodArgument
 
         ##
         # Stop this asynchronous writer and block until it has been stopped.
@@ -308,75 +250,307 @@ module Google
         #     during the timeout period, `:timeout` if it is still running
         #     after the timeout, or `:forced` if it was forcibly killed.
         #
-        def stop! timeout, force: false
-          @cleanup_options[:timeout] = timeout unless timeout.nil?
-          @cleanup_options[:force] = force unless force.nil?
+        def stop! timeout = nil, force: nil
+          stop
+          wait! timeout
 
-          async_stop!
+          # TODO: match the return type
+        end
+
+        # rubocop:enable Lint/UnusedMethodArgument
+
+        ##
+        # Forces all entries in the current batch to be published
+        # immediately.
+        #
+        # @return [AsyncWriter] returns self so calls can be chained.
+        def flush
+          synchronize do
+            publish_batch!
+            @cond.signal
+          end
+
+          self
         end
 
         ##
-        # @private Callback function when the async actor thread state changes
-        def on_async_state_change
+        # Whether the writer has been started.
+        #
+        # @return [boolean] `true` when started, `false` otherwise.
+        def started?
+          !stopped?
+        end
+        alias running? started?
+        alias writable? started?
+        alias async_running? started?
+        alias async_working? started?
+
+        ##
+        # Whether the writer has been stopped.
+        #
+        # @return [boolean] `true` when stopped, `false` otherwise.
+        def stopped?
+          synchronize { @stopped }
+        end
+        alias async_stopped? stopped?
+
+        ##
+        # Register to be notified of errors when raised.
+        #
+        # If an unhandled error has occurred the writer will attempt to
+        # recover from the error and resume buffering, batching, and
+        # transmitting log entries
+        #
+        # Multiple error handlers can be added.
+        #
+        # @yield [callback] The block to be called when an error is raised.
+        # @yieldparam [Exception] error The error raised.
+        #
+        # @example
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
+        #
+        #   async = logging.async_writer
+        #
+        #   # Register to be notified when unhandled errors occur.
+        #   async.on_error do |error|
+        #     # log error
+        #     puts error
+        #   end
+        #
+        #   logger = async.logger "my_app_log", resource, env: :production
+        #   logger.info "Job started."
+        #
+        def on_error &block
           synchronize do
-            @queue_resource.broadcast
+            @error_callbacks << block
           end
         end
+
+        ##
+        # The most recent unhandled error to occur while transmitting log
+        # entries.
+        #
+        # If an unhandled error has occurred the subscriber will attempt to
+        # recover from the error and resume buffering, batching, and
+        # transmitting log entries.
+        #
+        # @return [Exception, nil] error The most recent error raised.
+        #
+        # @example
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
+        #
+        #   async = logging.async_writer
+        #
+        #   logger = async.logger "my_app_log", resource, env: :production
+        #   logger.info "Job started."
+        #
+        #   # If an error was raised, it can be retrieved here:
+        #   async.last_error #=> nil
+        #
+        def last_error
+          synchronize { @last_error }
+        end
+        alias last_exception last_error
 
         protected
 
+        def init_resources!
+          @thread_pool ||= Concurrent::FixedThreadPool.new @threads
+          @thread ||= Thread.new { run_background }
+          nil # returning nil because of rubocop...
+        end
+
+        def run_background
+          synchronize do
+            until @stopped
+              if @batch.nil?
+                @cond.wait
+                next
+              end
+
+              if @batch.ready?
+                # interval met, publish the batch...
+                publish_batch!
+                @cond.wait
+              else
+                # still waiting for the interval to publish the batch...
+                @cond.wait(@batch.publish_wait)
+              end
+            end
+          end
+        end
+
+        def publish_batch!
+          return unless @batch
+
+          publish_batch_async @batch
+          @batch = nil
+        end
+
+        # Sets the last_error and calls all error callbacks.
+        def error! error
+          error_callbacks = synchronize do
+            @last_error = error
+            @error_callbacks
+          end
+          error_callbacks.each { |error_callback| error_callback.call error }
+        end
+
+        def publish_batch_async batch
+          return unless @thread_pool.running?
+
+          batch.values.each do |value|
+            Concurrent::Future.new(executor: @thread_pool) do
+              begin
+                logging.write_entries(
+                  value.entries,
+                  log_name: value.log_name,
+                  resource: value.resource,
+                  labels: value.labels,
+                  partial_success: value.partial_success
+                )
+              rescue StandardError => e
+                error! e
+              end
+            end.execute
+          end
+        end
+
         ##
-        # @private The background thread implementation, which continuously
-        # waits for and performs work, and returns only when fully stopped.
-        #
-        def run_backgrounder
-          queue_item = wait_next_item
-          return unless queue_item
-          begin
-            logging.write_entries(
-              queue_item.entries,
-              log_name: queue_item.log_name,
-              resource: queue_item.resource,
-              labels: queue_item.labels,
-              partial_success: @partial_success
+        # @private
+        class Batch
+          attr_reader :created_at, :entries
+
+          def initialize writer
+            @writer = writer
+            @entries = {}
+            @total_message_bytes = 0
+            @created_at = nil
+          end
+
+          def add entries, log_name: nil, resource: nil, labels: nil,
+                  partial_success: nil
+            entries_key = [log_name, resource, labels, partial_success]
+            @entries[entries_key] ||= Batch::EntryGroup.new(
+              log_name: log_name, resource: resource, labels: labels,
+              partial_success: partial_success
             )
-          rescue StandardError => e
-            # Ignore any exceptions thrown from the background thread, but
-            # keep running to ensure its state behavior remains consistent.
-            @last_exception = e
+            bytes_added = @entries[entries_key].add entries
+            @total_message_bytes += bytes_added
+            @created_at ||= Time.now
+            nil
           end
-        end
 
-        ##
-        # @private Wait for and dequeue the next set of log entries to transmit.
-        #
-        # @return [QueueItem, nil] Returns the next set of entries. If
-        #   the writer has been stopped and no more entries are left in the
-        #   queue, returns `nil`.
-        #
-        def wait_next_item
-          synchronize do
-            while state == :suspended ||
-                  (state == :running && @queue.empty?)
-              @queue_resource.wait
+          def try_add entries, log_name: nil, resource: nil, labels: nil,
+                      partial_success: nil
+            new_message_count = total_message_count + 1
+            addl_message_bytes = \
+              estimated_bytes_for entries, log_name: log_name,
+                                           resource: resource,
+                                           labels: labels,
+                                           partial_success: partial_success
+            new_message_bytes = total_message_bytes + addl_message_bytes
+            if new_message_count > @writer.max_count ||
+               new_message_bytes >= @writer.max_bytes
+              return false
             end
-            queue_item = nil
-            unless @queue.empty?
-              queue_item = @queue.shift
-              @queue_size -= queue_item.entries.size
-            end
-            @queue_resource.broadcast
-            queue_item
+            add entries, log_name: log_name, resource: resource, labels: labels,
+                         partial_success: partial_success
+            true
           end
-        end
 
-        ##
-        # @private Override the #backgrounder_stoppable? method from AsyncActor
-        # module. The actor can be gracefully stopped when queue is
-        # empty.
-        def backgrounder_stoppable?
-          synchronize do
-            @queue.empty?
+          def ready?
+            total_message_count >= @writer.max_count ||
+              total_message_bytes >= @writer.max_bytes ||
+              (@created_at.nil? || (publish_at < Time.now))
+          end
+
+          def publish_at
+            return nil if @created_at.nil?
+            @created_at + @writer.interval
+          end
+
+          def publish_wait
+            publish_wait = publish_at - Time.now
+            return 0 if publish_wait < 0
+            publish_wait
+          end
+
+          def total_message_count
+            @entries.values.map(&:count).sum
+          end
+
+          def total_message_bytes
+            @entries.values.map(&:message_bytes).sum
+          end
+
+          def estimated_bytes_for entries, log_name: nil, resource: nil,
+                                  labels: nil, partial_success: nil
+            entries = Array(entries).map(&:to_grpc)
+            resource = resource.to_grpc if resource
+            if labels
+              labels = Hash[labels.map { |k, v| [String(k), String(v)] }]
+            end
+            Google::Logging::V2::WriteLogEntriesRequest.new({
+              entries: entries,
+              log_name: log_name,
+              resource: resource,
+              labels: labels,
+              partial_success: partial_success
+            }.delete_if { |_, v| v.nil? }).to_proto.bytesize
+          end
+
+          def values
+            @entries.values
+          end
+
+          class EntryGroup
+            attr_reader :log_name, :resource, :labels, :partial_success,
+                        :message_bytes, :entries
+
+            def initialize log_name: nil, resource: nil, labels: nil,
+                           partial_success: nil
+              @log_name = log_name
+              @resource = resource
+              @labels = labels
+              @partial_success = partial_success
+              @message_bytes = 0
+              @message_bytes += log_name.bytesize if log_name
+              @message_bytes += resource.to_grpc.to_proto.bytesize if resource
+              if labels
+                labels_dup = Hash[labels.map { |k, v| [String(k), String(v)] }]
+                @message_bytes += labels_dup.to_a.to_s.bytesize # estimate
+              end
+
+              @entries = []
+            end
+
+            def add entries
+              entries = Array entries
+              added_bytes = entries.map(&:to_grpc)
+                                   .map(&:to_proto)
+                                   .map(&:bytesize)
+                                   .sum
+              @entries += entries
+              @message_bytes += added_bytes
+              added_bytes
+            end
+
+            def count
+              @entries.count
+            end
           end
         end
       end
