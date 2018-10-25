@@ -1,5 +1,13 @@
 # Release History
 
+### 1.9.0 / 2018-10-25
+
+* Add clustering fields to LoadJob, QueryJob and Table
+* Add DDL/DML support
+  * Update QueryJob#data to not return table rows for DDL/DML
+  * Add DDL/DML statistics attrs to QueryJob and Data
+* Add #numeric to Table::Updater and LoadJob::Updater (@leklund)
+
 ### 1.8.2 / 2018-09-20
 
 * Update documentation.
