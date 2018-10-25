@@ -56,7 +56,7 @@ module Google
           if chunk.commit_row
             raise_if(
               chunk.value_size > 0,
-              "Commit rows cannot have a non-zero value_size.
+              "Commit rows cannot have a non-zero value_size."
             )
           end
 
