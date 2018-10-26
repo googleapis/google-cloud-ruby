@@ -24,11 +24,11 @@ module Google
       class Row
         # Cell
         #
-        # Row cell build from data chunks.
+        # Row cell built from data chunks.
         class Cell
           attr_reader :family, :qualifier, :value, :labels, :timestamp
 
-          # Create row cell instance
+          # Creates a row cell instance.
           #
           # @param family [String] Column family name
           # @param qualifier [String] Column cell qualifier name
@@ -44,11 +44,11 @@ module Google
             @labels = labels
           end
 
-          # Convert timestamp to Time instance
+          # Converts timestamp to Time instance.
           #
           # @param granularity [Symbol] Optional
           #   Valid granularity types are `:micros`, `millis`
-          #   DEfault granularity is a millis.
+          #   Default granularity is a millis.
           # @return [Time | nil]
           #
           def to_time granularity = nil
@@ -57,7 +57,7 @@ module Google
             Time.at(@timestamp / 1000.0)
           end
 
-          # Convert value to integer
+          # Converts a value to aninteger.
           #
           # @return [Integer]
           #
@@ -86,7 +86,7 @@ module Google
         # @return [Hash{String => Array<Google::Cloud::Bigtable::Row::Cell>}] Row cells
         attr_accessor :cells
 
-        # Create flat row object
+        # Creates a flat row object.
         #
         # @param key [String] Row key name
         #
