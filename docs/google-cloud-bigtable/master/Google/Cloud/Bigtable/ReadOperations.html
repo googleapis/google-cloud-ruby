@@ -80,7 +80,7 @@ js:
   <div class="discussion">
     <h1>ReadOperations</h1>
 
-<p>Collection of read rows apis.</p>
+<p>Collection of read-rows APIs.</p>
 
 <ul>
 <li>Sample row key</li>
@@ -149,7 +149,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get new instance of ColumnRange.</p>
+    <span class="summary_desc"><div class='inline'><p>Get a new instance of ColumnRange.</p>
 </div></span>
   
 </li>
@@ -172,7 +172,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get new instance of RowRange.</p>
+    <span class="summary_desc"><div class='inline'><p>Get a new instance of RowRange.</p>
 </div></span>
   
 </li>
@@ -195,7 +195,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create new instance of ValueRange.</p>
+    <span class="summary_desc"><div class='inline'><p>Create a new instance of ValueRange.</p>
 </div></span>
   
 </li>
@@ -218,7 +218,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Read single row by key.</p>
+    <span class="summary_desc"><div class='inline'><p>Read single row by row key.</p>
 </div></span>
   
 </li>
@@ -356,7 +356,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get new instance of ColumnRange.</p>
+    <p>Get a new instance of ColumnRange.</p>
 
 
   </div>
@@ -457,7 +457,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get new instance of RowRange.</p>
+    <p>Get a new instance of RowRange.</p>
 
 
   </div>
@@ -539,7 +539,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create new instance of ValueRange.</p>
+    <p>Create a new instance of ValueRange.</p>
 
 
   </div>
@@ -621,7 +621,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Read single row by key</p>
+    <p>Read single row by row key</p>
 
 
   </div>
@@ -756,7 +756,7 @@ applying the same Reader filter to each.
     <p class="tag_title">Examples:</p>
     
       
-        <p class="example_title"><div class='inline'><p>Read with Limit</p>
+        <p class="example_title"><div class='inline'><p>Read with limit</p>
 </div></p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
@@ -1020,8 +1020,8 @@ The default (zero) is to return all results.</p>
     <p>Read sample row keys.</p>
 
 <p>Returns a sample of row keys in the table. The returned row keys will
-delimit contiguous sections of the table of approximately equal size,
-which can be used to break up the data for distributed tasks like
+delimit contiguous sections of the table of approximately equal size. The
+sections can be used to break up the data for distributed tasks like
 mapreduces.</p>
 
 

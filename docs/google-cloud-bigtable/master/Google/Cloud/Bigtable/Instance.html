@@ -94,7 +94,7 @@ js:
     <h1>Instance</h1>
 
 <p>Represents a Bigtable instance. Instances are dedicated Bigtable
-serving and storage resources to be used by Bigtable tables.</p>
+storage resources that Bigtable tables.</p>
 
 <p>See <span class='object_link'><a href="Project.html#instances-instance_method" title="Google::Cloud::Bigtable::Project#instances (method)">Project#instances</a></span>,
 <span class='object_link'><a href="Project.html#instance-instance_method" title="Google::Cloud::Bigtable::Project#instance (method)">Project#instance</a></span>, and
@@ -271,7 +271,7 @@ serving and storage resources to be used by Bigtable tables.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create app profile of instance with routing policy.</p>
+    <span class="summary_desc"><div class='inline'><p>Create app profile for an instance with a routing policy.</p>
 </div></span>
   
 </li>
@@ -340,7 +340,7 @@ serving and storage resources to be used by Bigtable tables.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The instance is currently being created, and may be destroyed if the creation process encounters an error.</p>
+    <span class="summary_desc"><div class='inline'><p>The instance is currently being created and may be destroyed if the creation process encounters an error.</p>
 </div></span>
   
 </li>
@@ -920,16 +920,16 @@ serving and storage resources to be used by Bigtable tables.</p>
       <pre class="lines">
 
 
+740
 741
 742
 743
 744
 745
-746
-747</pre>
+746</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 741</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 740</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_app_profile'>app_profile</span> <span class='id identifier rubyid_app_profile_id'>app_profile_id</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1004,14 +1004,14 @@ serving and storage resources to be used by Bigtable tables.</p>
       <pre class="lines">
 
 
+767
 768
 769
 770
-771
-772</pre>
+771</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 768</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 767</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_app_profiles'>app_profiles</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1171,7 +1171,7 @@ serving and storage resources to be used by Bigtable tables.</p>
       
         &mdash;
         <div class='inline'><p>The <code>token</code> value returned by the last call to
-<code>clusters</code>; indicates that this is a continuation of a call,
+<code>clusters</code>; indicates that this is a continuation of a call
 and that the system should return the next page of data.</p>
 </div>
       
@@ -1233,9 +1233,9 @@ and that the system should return the next page of data.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create app profile of instance with routing policy.
-Only one routing policy can applied to app profile. It can be
-multi cluster routing or single cluster routing</p>
+    <p>Create app profile for an instance with a routing policy.
+Only one routing policy can applied to app profile. The policy can be
+multi-cluster routing or single cluster routing.</p>
 
 
   </div>
@@ -1246,7 +1246,7 @@ multi cluster routing or single cluster routing</p>
     <p class="tag_title">Examples:</p>
     
       
-        <p class="example_title"><div class='inline'><p>Create app profile with single cluster routing policy</p>
+        <p class="example_title"><div class='inline'><p>Create an app profile with a single cluster routing policy</p>
 </div></p>
       
       <pre class="example code"><code>require &quot;google/cloud/bigtable&quot;
@@ -1268,7 +1268,7 @@ app_profile = instance.create_app_profile(
 puts app_profile.name</code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Create app profile with multi cluster routing policy</p>
+        <p class="example_title"><div class='inline'><p>Create an app profile with multi-cluster routing policy</p>
 </div></p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
@@ -1335,20 +1335,20 @@ puts app_profile.name</code></pre>
       
       
         &mdash;
-        <div class='inline'><p>The routing policy for all read/write requests which use this app profile.
+        <div class='inline'><p>The routing policy for all read/write requests that use this app profile.
 A value must be explicitly set.</p>
 
 <p>Routing Policies:</p>
 
 <ul>
 <li><code>multi_cluster_routing</code> - Read/write requests may be routed to any
-cluster in the instance, and will fail over to another cluster in the event
+cluster in the instance and will fail over to another cluster in the event
 of transient errors or delays. Choosing this option sacrifices
 read-your-writes consistency to improve availability.</li>
 <li><code>single_cluster_routing</code> - Unconditionally routes all read/write requests
-to a specific cluster. This option preserves read-your-writes consistency,
+to a specific cluster. This option preserves read-your-writes consistency
 but does not improve availability.
-Value contain <code>cluster_id</code> and optional field <code>allow_transactional_writes</code>.</li>
+Value contains <code>cluster_id</code> and optional field <code>allow_transactional_writes</code>.</li>
 </ul>
 </div>
       
@@ -1364,7 +1364,7 @@ Value contain <code>cluster_id</code> and optional field <code>allow_transaction
       
       
         &mdash;
-        <div class='inline'><p>Description of the use case for this AppProfile</p>
+        <div class='inline'><p>Description of the use case for this app profile</p>
 </div>
       
     </li>
@@ -1381,7 +1381,7 @@ Value contain <code>cluster_id</code> and optional field <code>allow_transaction
         &mdash;
         <div class='inline'><p>Strongly validated etag for optimistic concurrency control. Preserve the
 value returned from <code>GetAppProfile</code> when calling <code>UpdateAppProfile</code> to
-fail the request if there has been a modification in the mean time. The
+fail the request if there has been a modification in the meantime. The
 <code>update_mask</code> of the request need not include <code>etag</code> for this protection
 to apply.
 See <a href="https://en.wikipedia.org/wiki/HTTP_ETag">Wikipedia</a> and
@@ -1428,6 +1428,7 @@ Default value is <code>false</code></p>
       <pre class="lines">
 
 
+688
 689
 690
 691
@@ -1456,11 +1457,10 @@ Default value is <code>false</code></p>
 714
 715
 716
-717
-718</pre>
+717</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 689</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 688</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_app_profile'>create_app_profile</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1575,8 +1575,7 @@ e.g., just <code>mycluster</code></p>
         &mdash;
         <div class='inline'><p>The location where this cluster&#39;s nodes and storage reside. For best
 performance, clients should be located as close as possible to this
-cluster. Currently only zones are supported.
-i.e &quot;us-east-1b&quot;</p>
+cluster. Example: &quot;us-east-1b&quot;</p>
 </div>
       
     </li>
@@ -1607,7 +1606,7 @@ More nodes enable higher throughput and more consistent performance.</p>
       
       
         &mdash;
-        <div class='inline'><p>Type of storage type.
+        <div class='inline'><p>Storage type.
 The type of storage used by this cluster to serve its
 parent instance&#39;s tables.
 Valid types are:</p>
@@ -1642,6 +1641,7 @@ Valid types are:</p>
       <pre class="lines">
 
 
+395
 396
 397
 398
@@ -1652,11 +1652,10 @@ Valid types are:</p>
 403
 404
 405
-406
-407</pre>
+406</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 396</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 395</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_cluster'>create_cluster</span> <span class='id identifier rubyid_cluster_id'>cluster_id</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='label'>nodes:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>storage_type:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1767,7 +1766,7 @@ instance, e.g., <code>foobar</code></p>
       
         &mdash;
         <div class='inline'><p>(See <span class='object_link'><a href="Table/ColumnFamilyMap.html" title="Google::Cloud::Bigtable::Table::ColumnFamilyMap (class)">Table::ColumnFamilyMap</a></span>)
-If passed as an empty use code block to add column families.</p>
+If passed as an empty, use a code block to add column families.</p>
 </div>
       
     </li>
@@ -1784,8 +1783,8 @@ If passed as an empty use code block to add column families.</p>
         &mdash;
         <div class='inline'><p>The granularity at which timestamps are stored in this table.
 Timestamps not matching the granularity will be rejected.
-Valid values are <code>:MILLIS</code>.
-If unspecified, the value will be set to <code>:MILLIS</code></p>
+Valid value is <code>:MILLIS</code>.
+If unspecified, the value will be set to <code>:MILLIS</code>.</p>
 </div>
       
     </li>
@@ -1818,7 +1817,7 @@ spanning the key ranges: <code>[, s1), [s1, s2), [s2, )</code>.</p>
 <li>Tablet 3 : <code>[customer_1, customer_2) =&gt; {&quot;customer_1&quot;}</code></li>
 <li>Tablet 4 : <code>[customer_2, other)      =&gt; {&quot;customer_2&quot;}</code></li>
 <li>Tablet 5 : <code>[other, )                =&gt; {&quot;other&quot;, &quot;zz&quot;}</code>
-A hash of the same form as <code>Google::Bigtable::Admin::V2::CreateTableRequest::Split</code>
+A hash in the form of <code>Google::Bigtable::Admin::V2::CreateTableRequest::Split</code>
 can also be provided.</li>
 </ul></li>
 </ul>
@@ -1860,7 +1859,7 @@ can also be provided.</li>
         &mdash;
         <div class='inline'><p>map of cluster name and cluster object.
 (See <span class='object_link'><a href="Instance/ClusterMap.html" title="Google::Cloud::Bigtable::Instance::ClusterMap (class)">ClusterMap</a></span>)
-GC Rules for column family see <span class='object_link'><a href="GcRule.html" title="Google::Cloud::Bigtable::GcRule (class)">GcRule</a></span>)</p>
+See rules for column families at <span class='object_link'><a href="GcRule.html" title="Google::Cloud::Bigtable::GcRule (class)">GcRule</a></span>)</p>
 </div>
       
     </li>
@@ -1886,6 +1885,7 @@ GC Rules for column family see <span class='object_link'><a href="GcRule.html" t
       <pre class="lines">
 
 
+586
 587
 588
 589
@@ -1901,11 +1901,10 @@ GC Rules for column family see <span class='object_link'><a href="GcRule.html" t
 599
 600
 601
-602
-603</pre>
+602</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 587</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 586</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_table'>create_table</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -1940,7 +1939,7 @@ GC Rules for column family see <span class='object_link'><a href="GcRule.html" t
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The instance is currently being created, and may be destroyed if the
+    <p>The instance is currently being created and may be destroyed if the
 creation process encounters an error.</p>
 
 
@@ -2128,7 +2127,7 @@ not be set.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The descriptive name for this instance as it appears in UIs. Must be
-unique per project and between 4 and 30 characters in length.</p>
+unique per project and between 4 and 30 characters long.</p>
 
 
   </div>
@@ -2300,9 +2299,9 @@ to avoid confusion.</p>
 <p>Cloud Labels are a flexible and lightweight mechanism for organizing
 cloud resources into groups that reflect a customer&#39;s organizational
 needs and deployment strategies. Cloud Labels can be used to filter
-collections of resources. They can be used to control how resource
-metrics are aggregated. And they can be used as arguments to policy
-management rules (e.g. route, firewall, load balancing, etc.).</p>
+collections of resources, to control how resource
+metrics are aggregated, and as arguments to policy
+management rules (e.g., route, firewall, load balancing, etc.).</p>
 
 <ul>
 <li>Label keys must be between 1 and 63 characters long and must conform
@@ -2593,17 +2592,17 @@ instance</p>
       <pre class="lines">
 
 
+805
 806
 807
 808
 809
 810
 811
-812
-813</pre>
+812</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 806</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 805</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_policy'>policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2737,7 +2736,7 @@ on the cluster.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The instance has been successfully created and can serve requests
-to its tables</p>
+to its tables.</p>
 
 
   </div>
@@ -3031,7 +3030,7 @@ an instance update operation.</p>
 <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
 <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_column_families'>column_families</span>
 
-<span class='comment'># Name only view
+<span class='comment'># Name-only view
 </span><span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>view:</span> <span class='symbol'>:NAME_ONLY</span><span class='comma'>,</span> <span class='label'>perform_lookup:</span> <span class='kw'>true</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span></code></pre>
     
@@ -3093,11 +3092,11 @@ Valid view types are.</p>
       
       
         &mdash;
-        <div class='inline'><p>Create table object without verifying
+        <div class='inline'><p>Creates table object without verifying
 that the table resource exists.
-Calls made on this object will raise errors if the table.
+Calls made on this object will raise errors if the table
 does not exist. Default value is <code>false</code>. Optional.
-It helps to reduce admin apis calls.</p>
+Helps to reduce admin API calls.</p>
 </div>
       
     </li>
@@ -3113,7 +3112,7 @@ It helps to reduce admin apis calls.</p>
       
         &mdash;
         <div class='inline'><p>The unique identifier for the app profile. Optional.
-It is used only in data operations.
+Used only in data operations.
 This value specifies routing for replication. If not specified, the
 &quot;default&quot; application profile will be used.</p>
 </div>
@@ -3142,6 +3141,7 @@ This value specifies routing for replication. If not specified, the
       <pre class="lines">
 
 
+494
 495
 496
 497
@@ -3158,11 +3158,10 @@ This value specifies routing for replication. If not specified, the
 508
 509
 510
-511
-512</pre>
+511</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 495</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 494</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_table'>table</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span> <span class='label'>view:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>perform_lookup:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>app_profile_id:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3218,7 +3217,7 @@ This value specifies routing for replication. If not specified, the
 
 <span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_bigtable'>bigtable</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='comment'># Default name only view
+<span class='comment'># Default name-only view
 </span><span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_tables'>tables</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_table'>table</span><span class='op'>|</span>
   <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
 <span class='kw'>end</span>
@@ -3255,14 +3254,14 @@ This value specifies routing for replication. If not specified, the
       <pre class="lines">
 
 
+434
 435
 436
 437
-438
-439</pre>
+438</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 435</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 434</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tables'>tables</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3377,17 +3376,17 @@ See (<a href="https://cloud.google.com/bigtable/docs/access-control">https://clo
       <pre class="lines">
 
 
+883
 884
 885
 886
 887
 888
 889
-890
-891</pre>
+890</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 884</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 883</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> <span class='op'>*</span><span class='id identifier rubyid_permissions'>permissions</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3470,8 +3469,8 @@ See (<a href="https://cloud.google.com/bigtable/docs/access-control">https://clo
     <p>Set instance type.</p>
 
 <p>Valid values are <code>:DEVELOPMENT</code>, <code>:PRODUCTION</code>.
-If instance already created then After a development instance is
-created, it can be upgraded by updating the instance to type <code>PRODUCTION</code>.
+After a development instance is created, it can be upgraded
+by updating the instance to type <code>PRODUCTION</code>.
 An instance created as a production instance cannot be changed to a
 development instance.</p>
 
@@ -3607,14 +3606,14 @@ instance</p>
       <pre class="lines">
 
 
+840
 841
 842
 843
-844
-845</pre>
+844</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 841</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/instance.rb', line 840</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_policy'>update_policy</span> <span class='id identifier rubyid_new_policy'>new_policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>

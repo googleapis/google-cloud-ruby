@@ -80,7 +80,7 @@ js:
   <div class="discussion">
     <h1>MutationOperations</h1>
 
-<p>Collection of mutations apis.</p>
+<p>Collection of mutations APIs.</p>
 
 <ul>
 <li>Mutate single row</li>
@@ -127,7 +127,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Mutates a row atomically based on the output of a predicate Reader filter.</p>
+    <span class="summary_desc"><div class='inline'><p>Mutates a row atomically based on the output of a predicate reader filter.</p>
 </div></span>
   
 </li>
@@ -196,7 +196,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create instance of mutation_entry.</p>
+    <span class="summary_desc"><div class='inline'><p>Create an instance of mutation_entry.</p>
 </div></span>
   
 </li>
@@ -219,7 +219,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create instance of ReadModifyWriteRule to append or increment value of the cell qualifier.</p>
+    <span class="summary_desc"><div class='inline'><p>Create an instance of ReadModifyWriteRule to append or increment the value of the cell qualifier.</p>
 </div></span>
   
 </li>
@@ -291,7 +291,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Mutates a row atomically based on the output of a predicate Reader filter.</p>
+    <p>Mutates a row atomically based on the output of a predicate reader filter.</p>
 
 <p>NOTE: Condition predicate filter is not supported.</p>
 
@@ -347,7 +347,7 @@ js:
       
         &mdash;
         <div class='inline'><p>Row key.
-The key of the row to which the conditional mutation should be applied.</p>
+The row key of the row to which the conditional mutation should be applied.</p>
 </div>
       
     </li>
@@ -366,7 +366,7 @@ The key of the row to which the conditional mutation should be applied.</p>
 The filter to be applied to the contents of the specified row. Depending
 on whether or not any results are yielded, either +true_mutations+ or
 +false_mutations+ will be executed. If unset, checks that the row contains
-any values at all.</p>
+any values.</p>
 </div>
       
     </li>
@@ -381,12 +381,13 @@ any values at all.</p>
       
       
         &mdash;
-        <div class='inline'><p>Mutation entry apply on predicate filter match.
+        <div class='inline'><p>Mutation entry
+applied to predicate filter match.
 Changes to be atomically applied to the specified row if +predicate_filter+
 yields at least one cell when applied to +row_key+. Entries are applied in
 order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one entry if +false_mutations+ is empty, and at most
-100000.</p>
+Must contain at least one entry if +false_mutations+ is empty and at most
+100,000 entries.</p>
 </div>
       
     </li>
@@ -401,12 +402,13 @@ Must contain at least one entry if +false_mutations+ is empty, and at most
       
       
         &mdash;
-        <div class='inline'><p>Mutation entry apply on predicate filter do not match.
+        <div class='inline'><p>Mutation entry applied
+when predicate filter does not match.
 Changes to be atomically applied to the specified row if +predicate_filter+
 does not yield any cells when applied to +row_key+. Entries are applied in
 order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one entry if +true_mutations+ is empty, and at most
-100000.</p>
+Must contain at least one entry if +true_mutations+ is empty and at most
+100,000 entries.</p>
 </div>
       
     </li>
@@ -437,8 +439,6 @@ Must contain at least one entry if +true_mutations+ is empty, and at most
       <pre class="lines">
 
 
-234
-235
 236
 237
 238
@@ -453,10 +453,12 @@ Must contain at least one entry if +true_mutations+ is empty, and at most
 247
 248
 249
-250</pre>
+250
+251
+252</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/mutation_operations.rb', line 234</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/mutation_operations.rb', line 236</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_check_and_mutate_row'>check_and_mutate_row</span> \
     <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span>
@@ -493,11 +495,11 @@ Must contain at least one entry if +true_mutations+ is empty, and at most
   <div class="discussion">
     <p>Mutate row.</p>
 
-<p>Mutates a row atomically. Cells already present in the row are left
+<p>Mutates a row atomically. Cells in the row are left
 unchanged unless explicitly changed by +mutation+.
 Changes to be atomically applied to the specified row. Entries are applied
-in order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one mutation entry and at most 100000.</p>
+in order, meaning that earlier mutations can be masked by later mutations.
+Must contain at least one mutation entry and at most 100,000.</p>
 
 
   </div>
@@ -662,7 +664,7 @@ atomically.</p>
 Each entry is applied as an atomic mutation, but the entries may be
 applied in arbitrary order (even between entries for the same row).
 At least one entry must be specified, and in total the entries can
-contain at most 100000 mutations.</p>
+contain a maximum of 100,000 mutations.</p>
 </div>
       
     </li>
@@ -715,7 +717,7 @@ contain at most 100000 mutations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create instance of mutation_entry</p>
+    <p>Create an instance of mutation_entry</p>
 
 
   </div>
@@ -753,7 +755,7 @@ contain at most 100000 mutations.</p>
       
         &mdash;
         <div class='inline'><p>Row key. Optional
-The key of the row to which the mutation should be applied.</p>
+The row key of the row to which the mutation should be applied.</p>
 </div>
       
     </li>
@@ -780,12 +782,12 @@ The key of the row to which the mutation should be applied.</p>
       <pre class="lines">
 
 
-303
-304
-305</pre>
+305
+306
+307</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/mutation_operations.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/mutation_operations.rb', line 305</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_mutation_entry'>new_mutation_entry</span> <span class='id identifier rubyid_row_key'>row_key</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="MutationEntry.html" title="Google::Cloud::Bigtable::MutationEntry (class)">MutationEntry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_row_key'>row_key</span><span class='rparen'>)</span>
@@ -806,7 +808,7 @@ The key of the row to which the mutation should be applied.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create instance of ReadModifyWriteRule to append or increment value
+    <p>Create an instance of ReadModifyWriteRule to append or increment the value
 of the cell qualifier.</p>
 
 
@@ -853,7 +855,7 @@ of the cell qualifier.</p>
       
       
         &mdash;
-        <div class='inline'><p>The name of the family to which the read/modify/write should be applied.</p>
+        <div class='inline'><p>The name of the column family to which the read/modify/write should be applied.</p>
 </div>
       
     </li>
@@ -868,7 +870,7 @@ of the cell qualifier.</p>
       
       
         &mdash;
-        <div class='inline'><p>The qualifier of the column to which the read/modify/write should be</p>
+        <div class='inline'><p>The qualifier of the column to which the read/modify/write should be applied.</p>
 </div>
       
     </li>
@@ -895,12 +897,12 @@ of the cell qualifier.</p>
       <pre class="lines">
 
 
-332
-333
-334</pre>
+334
+335
+336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/mutation_operations.rb', line 332</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/mutation_operations.rb', line 334</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_read_modify_write_rule'>new_read_modify_write_rule</span> <span class='id identifier rubyid_family'>family</span><span class='comma'>,</span> <span class='id identifier rubyid_qualifier'>qualifier</span>
   <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ReadModifyWriteRule.html" title="Google::Cloud::Bigtable::ReadModifyWriteRule (class)">ReadModifyWriteRule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigtable.html#new-class_method" title="Google::Cloud::Bigtable.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_family'>family</span><span class='comma'>,</span> <span class='id identifier rubyid_qualifier'>qualifier</span><span class='rparen'>)</span>
@@ -983,7 +985,7 @@ time. The method returns the new contents of all modified cells.</p>
       
       
         &mdash;
-        <div class='inline'><p>The key of the row to which the read/modify/write rules should be applied.</p>
+        <div class='inline'><p>The row key of the row to which the read/modify/write rules should be applied.</p>
 </div>
       
     </li>
@@ -1100,8 +1102,8 @@ affect the results of later ones.</p>
     <p>Read sample row keys.</p>
 
 <p>Returns a sample of row keys in the table. The returned row keys will
-delimit contiguous sections of the table of approximately equal size,
-which can be used to break up the data for distributed tasks like
+delimit contiguous sections of the table of approximately equal size. The
+sections can be used to break up the data for distributed tasks like
 mapreduces.</p>
 
 
@@ -1162,8 +1164,6 @@ mapreduces.</p>
       <pre class="lines">
 
 
-274
-275
 276
 277
 278
@@ -1172,10 +1172,12 @@ mapreduces.</p>
 281
 282
 283
-284</pre>
+284
+285
+286</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/mutation_operations.rb', line 274</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/mutation_operations.rb', line 276</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sample_row_keys'>sample_row_keys</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:sample_row_keys</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>

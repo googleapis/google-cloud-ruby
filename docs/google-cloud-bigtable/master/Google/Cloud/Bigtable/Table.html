@@ -212,7 +212,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Mutates a row atomically based on the output of a predicate Reader filter.</p>
+    <span class="summary_desc"><div class='inline'><p>Mutates a row atomically based on the output of a predicate reader filter.</p>
 </div></span>
   
 </li>
@@ -671,7 +671,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get new instance of ColumnRange.</p>
+    <span class="summary_desc"><div class='inline'><p>Get a new instance of ColumnRange.</p>
 </div></span>
   
 </li>
@@ -699,7 +699,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create instance of mutation_entry.</p>
+    <span class="summary_desc"><div class='inline'><p>Create an instance of mutation_entry.</p>
 </div></span>
   
 </li>
@@ -727,7 +727,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create instance of ReadModifyWriteRule to append or increment value of the cell qualifier.</p>
+    <span class="summary_desc"><div class='inline'><p>Create an instance of ReadModifyWriteRule to append or increment the value of the cell qualifier.</p>
 </div></span>
   
 </li>
@@ -755,7 +755,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Get new instance of RowRange.</p>
+    <span class="summary_desc"><div class='inline'><p>Get a new instance of RowRange.</p>
 </div></span>
   
 </li>
@@ -783,7 +783,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create new instance of ValueRange.</p>
+    <span class="summary_desc"><div class='inline'><p>Create a new instance of ValueRange.</p>
 </div></span>
   
 </li>
@@ -885,7 +885,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Read single row by key.</p>
+    <span class="summary_desc"><div class='inline'><p>Read single row by row key.</p>
 </div></span>
   
 </li>
@@ -1086,7 +1086,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Mutates a row atomically based on the output of a predicate Reader filter.</p>
+    <p>Mutates a row atomically based on the output of a predicate reader filter.</p>
 
 <p>NOTE: Condition predicate filter is not supported.</p>
 
@@ -1142,7 +1142,7 @@ Each table is served using the resources of its parent cluster.</p>
       
         &mdash;
         <div class='inline'><p>Row key.
-The key of the row to which the conditional mutation should be applied.</p>
+The row key of the row to which the conditional mutation should be applied.</p>
 </div>
       
     </li>
@@ -1161,7 +1161,7 @@ The key of the row to which the conditional mutation should be applied.</p>
 The filter to be applied to the contents of the specified row. Depending
 on whether or not any results are yielded, either +true_mutations+ or
 +false_mutations+ will be executed. If unset, checks that the row contains
-any values at all.</p>
+any values.</p>
 </div>
       
     </li>
@@ -1176,12 +1176,13 @@ any values at all.</p>
       
       
         &mdash;
-        <div class='inline'><p>Mutation entry apply on predicate filter match.
+        <div class='inline'><p>Mutation entry
+applied to predicate filter match.
 Changes to be atomically applied to the specified row if +predicate_filter+
 yields at least one cell when applied to +row_key+. Entries are applied in
 order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one entry if +false_mutations+ is empty, and at most
-100000.</p>
+Must contain at least one entry if +false_mutations+ is empty and at most
+100,000 entries.</p>
 </div>
       
     </li>
@@ -1196,12 +1197,13 @@ Must contain at least one entry if +false_mutations+ is empty, and at most
       
       
         &mdash;
-        <div class='inline'><p>Mutation entry apply on predicate filter do not match.
+        <div class='inline'><p>Mutation entry applied
+when predicate filter does not match.
 Changes to be atomically applied to the specified row if +predicate_filter+
 does not yield any cells when applied to +row_key+. Entries are applied in
 order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one entry if +true_mutations+ is empty, and at most
-100000.</p>
+Must contain at least one entry if +true_mutations+ is empty and at most
+100,000 entries.</p>
 </div>
       
     </li>
@@ -2548,11 +2550,11 @@ for example).</p>
   <div class="discussion">
     <p>Mutate row.</p>
 
-<p>Mutates a row atomically. Cells already present in the row are left
+<p>Mutates a row atomically. Cells in the row are left
 unchanged unless explicitly changed by +mutation+.
 Changes to be atomically applied to the specified row. Entries are applied
-in order, meaning that earlier mutations can be masked by later ones.
-Must contain at least one mutation entry and at most 100000.</p>
+in order, meaning that earlier mutations can be masked by later mutations.
+Must contain at least one mutation entry and at most 100,000.</p>
 
 
   </div>
@@ -2692,7 +2694,7 @@ atomically.</p>
 Each entry is applied as an atomic mutation, but the entries may be
 applied in arbitrary order (even between entries for the same row).
 At least one entry must be specified, and in total the entries can
-contain at most 100000 mutations.</p>
+contain a maximum of 100,000 mutations.</p>
 </div>
       
     </li>
@@ -2789,7 +2791,7 @@ contain at most 100000 mutations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get new instance of ColumnRange.</p>
+    <p>Get a new instance of ColumnRange.</p>
 
 
   </div>
@@ -2877,7 +2879,7 @@ contain at most 100000 mutations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create instance of mutation_entry</p>
+    <p>Create an instance of mutation_entry</p>
 
 
   </div>
@@ -2915,7 +2917,7 @@ contain at most 100000 mutations.</p>
       
         &mdash;
         <div class='inline'><p>Row key. Optional
-The key of the row to which the mutation should be applied.</p>
+The row key of the row to which the mutation should be applied.</p>
 </div>
       
     </li>
@@ -2955,7 +2957,7 @@ The key of the row to which the mutation should be applied.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create instance of ReadModifyWriteRule to append or increment value
+    <p>Create an instance of ReadModifyWriteRule to append or increment the value
 of the cell qualifier.</p>
 
 
@@ -3002,7 +3004,7 @@ of the cell qualifier.</p>
       
       
         &mdash;
-        <div class='inline'><p>The name of the family to which the read/modify/write should be applied.</p>
+        <div class='inline'><p>The name of the column family to which the read/modify/write should be applied.</p>
 </div>
       
     </li>
@@ -3017,7 +3019,7 @@ of the cell qualifier.</p>
       
       
         &mdash;
-        <div class='inline'><p>The qualifier of the column to which the read/modify/write should be</p>
+        <div class='inline'><p>The qualifier of the column to which the read/modify/write should be applied.</p>
 </div>
       
     </li>
@@ -3057,7 +3059,7 @@ of the cell qualifier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Get new instance of RowRange.</p>
+    <p>Get a new instance of RowRange.</p>
 
 
   </div>
@@ -3126,7 +3128,7 @@ of the cell qualifier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create new instance of ValueRange.</p>
+    <p>Create a new instance of ValueRange.</p>
 
 
   </div>
@@ -3364,7 +3366,7 @@ time. The method returns the new contents of all modified cells.</p>
       
       
         &mdash;
-        <div class='inline'><p>The key of the row to which the read/modify/write rules should be applied.</p>
+        <div class='inline'><p>The row key of the row to which the read/modify/write rules should be applied.</p>
 </div>
       
     </li>
@@ -3421,7 +3423,7 @@ affect the results of later ones.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Read single row by key</p>
+    <p>Read single row by row key</p>
 
 
   </div>
@@ -3543,7 +3545,7 @@ applying the same Reader filter to each.
     <p class="tag_title">Examples:</p>
     
       
-        <p class="example_title"><div class='inline'><p>Read with Limit</p>
+        <p class="example_title"><div class='inline'><p>Read with limit</p>
 </div></p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
@@ -3813,8 +3815,8 @@ Valid view types are.</p>
     <p>Read sample row keys.</p>
 
 <p>Returns a sample of row keys in the table. The returned row keys will
-delimit contiguous sections of the table of approximately equal size,
-which can be used to break up the data for distributed tasks like
+delimit contiguous sections of the table of approximately equal size. The
+sections can be used to break up the data for distributed tasks like
 mapreduces.</p>
 
 

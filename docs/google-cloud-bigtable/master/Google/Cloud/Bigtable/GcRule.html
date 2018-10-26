@@ -92,7 +92,7 @@ js:
     <h1>GcRule</h1>
 
 <p>Rule for determining which cells to delete during garbage collection.
-Garbage collection executes opportunistically in the background, and
+Garbage collection (GC) executes opportunistically in the background,
 so it&#39;s possible for reads to return a cell even if it matches the active
 GC expression for its family.</p>
 
@@ -105,7 +105,7 @@ GC Rule types:</p>
 <li><code>union</code> - Delete cells that would be deleted by every nested rule.
   It can have mutiple chainable GC Rules.</li>
 <li><code>intersection</code> - Delete cells that would be deleted by any nested rule.
-  It can have mutiple chainable GC Rules.</li>
+  It can have multiple chainable GC Rules.</li>
 </ul>
 
 

@@ -91,15 +91,15 @@ js:
   <div class="discussion">
     <h1>Policy</h1>
 
-<p>Represents a Cloud IAM Policy for the Bigtable instance resources.</p>
+<p>Represents a Cloud IAM Policy for Bigtable instance resources.</p>
 
-<p>A common pattern for updating a resource&#39;s metadata, such as its Policy,
+<p>A common pattern for updating a resource&#39;s metadata, such as its policy,
 is to read the current data from the service, update the data locally,
-and then send the modified data for writing. This pattern may result in
-a conflict if two or more processes attempt the sequence simultaneously.
+and then write the modified data back to the resource. This pattern may
+result in a conflict if two or more processes attempt the sequence simultaneously.
 IAM solves this problem with the <span class='object_link'><a href="#etag-instance_method" title="Google::Cloud::Bigtable::Policy#etag (method)">#etag</a></span>
 property, which is used to verify whether the policy has changed since
-the last request. When you make a request to with an <code>etag</code> value, Cloud
+the last request. When you make a request with an <code>etag</code> value, Cloud
 IAM compares the <code>etag</code> value in the request with the existing <code>etag</code>
 value associated with the policy. It writes the policy only if the
 <code>etag</code> values match.</p>
@@ -160,7 +160,7 @@ value associated with the policy. It writes the policy only if the
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Used to verify whether the policy has changed since the last request.</p>
+    <span class="summary_desc"><div class='inline'><p>Used to check if the policy has changed since the last request.</p>
 </div></span>
   
 </li>
@@ -293,7 +293,7 @@ value associated with the policy. It writes the policy only if the
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Convenience method returning the array of members bound to a role in this policy, or an empty array if no value is present for the role in <span class='object_link'><a href="#roles-instance_method" title="Google::Cloud::Bigtable::Policy#roles (method)">#roles</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>Convenience method returning the array of members bound to a role in this policy.</p>
 </div></span>
   
 </li>
@@ -393,7 +393,7 @@ value associated with the policy. It writes the policy only if the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Used to verify whether the policy has changed since
+    <p>Used to check if the policy has changed since
 the last request. The policy will be written only if the <code>etag</code> values
 match.</p>
 
@@ -524,9 +524,9 @@ listing of primitive and curated roles.</p>
     <p>Convenience method for adding a member to a binding on this policy.
 See <a href="https://cloud.google.com/iam/docs/understanding-roles">Understanding
 Roles</a> for a
-listing of primitive and curated roles. See
+list of primitive and curated roles. See
 <a href="https://cloud.google.com/bigtable/docs/access-control">Binding</a>
-for a listing of values and patterns for members.</p>
+for a list of values and patterns for members.</p>
 
 
   </div>
@@ -619,9 +619,9 @@ for a listing of values and patterns for members.</p>
     <p>Convenience method for removing a member from a binding on this
 policy. See <a href="https://cloud.google.com/iam/docs/understanding-roles">Understanding
 Roles</a> for a
-listing of primitive and curated roles.See
+list of primitive and curated roles.See
 <a href="https://cloud.google.com/bigtable/docs/access-control">Binding</a>
-for a listing of values and patterns for members.</p>
+for a list of values and patterns for members.</p>
 
 
   </div>
@@ -712,12 +712,12 @@ for a listing of values and patterns for members.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Convenience method returning the array of members bound to a role in
-this policy, or an empty array if no value is present for the role in
+this policy. Returns an empty array if no value is present for the role in
 <span class='object_link'><a href="#roles-instance_method" title="Google::Cloud::Bigtable::Policy#roles (method)">#roles</a></span>. See <a href="https://cloud.google.com/iam/docs/understanding-roles">Understanding
 Roles</a> for a
-listing of primitive and curated roles. See
+list of primitive and curated roles. See
 <a href="https://cloud.google.com/bigtable/docs/access-control">Binding</a>
-for a listing of values and patterns for members.</p>
+for a list of values and patterns for members.</p>
 
 
   </div>
