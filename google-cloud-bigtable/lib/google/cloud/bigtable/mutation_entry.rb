@@ -101,7 +101,7 @@ module Google
         #   )
         #
         def set_cell family, qualifier, value, timestamp: nil
-          # If value is integer, covert it to sign 64 bit int big-endian.
+          # If value is integer, covert it to a 64-bit signed big-endian integer.
           value = [value].pack("q>") if value.is_a?(Integer)
           options = {
             family_name: family,

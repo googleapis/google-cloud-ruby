@@ -89,7 +89,7 @@ module Google
         end
 
         # The descriptive name for this instance as it appears in UIs. Must be
-        # unique per project and between 4 and 30 characters ong.
+        # unique per project and between 4 and 30 characters long.
         #
         # @return [String]
 
@@ -178,7 +178,7 @@ module Google
         # Set instance type.
         #
         # Valid values are `:DEVELOPMENT`, `:PRODUCTION`.
-        # After a development instance iscreated, it can be upgraded
+        # After a development instance is created, it can be upgraded
         # by updating the instance to type `PRODUCTION`.
         # An instance created as a production instance cannot be changed to a
         # development instance.

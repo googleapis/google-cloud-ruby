@@ -78,7 +78,7 @@ module Google
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
-        # Create or return an instance of an instance admin client.
+        # Creates or returns an instance of an instance admin client.
         #
         # @return [Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient]
 
@@ -97,7 +97,7 @@ module Google
           end
         end
 
-        # Create or return an instance of a table admin client.
+        # Creates or returns an instance of a table admin client.
         #
         # @return [Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient]
 
@@ -116,7 +116,7 @@ module Google
           end
         end
 
-        # Create an instance of a data client.
+        # Creates an instance of a data client.
         #
         # @return [Google::Cloud::Bigtable::V2::BigtableClient]
 
@@ -134,7 +134,7 @@ module Google
         def insecure?
           credentials == :this_channel_is_insecure
         end
-        # Create an instance within a project.
+        # Creates an instance within a project.
         #
         # @param instance_id [String]
         #   The permanent identifier to be used for the new instance.
@@ -322,7 +322,7 @@ module Google
         end
 
         # Creates a new table in the specified instance.
-        # Optionally, create the table with a full set of initial column families.
+        # Optionally, creates the table with a full set of initial column families.
         #
         # @param instance_id [String]
         #   Unique ID of the instance to create the table in.
@@ -701,7 +701,7 @@ module Google
           end
         end
 
-        # Execute the API call and wrap errors to {Google::Cloud::Error}.
+        # Executes the API call and wrap errors to {Google::Cloud::Error}.
         #
         # @raise [Google::Cloud::Error]
 
@@ -713,7 +713,7 @@ module Google
           raise Google::Cloud::Error.from_error(e)
         end
 
-        # Create a formatted project path
+        # Creates a formatted project path.
         #
         # @return [String]
         #   Formatted project path
@@ -723,7 +723,7 @@ module Google
           Admin::V2::BigtableInstanceAdminClient.project_path(project_id)
         end
 
-        # Create a formatted instance path
+        # Creates a formatted instance path.
         #
         # @param instance_id [String]
         # @return [String]
@@ -737,7 +737,7 @@ module Google
           )
         end
 
-        # Create a formatted cluster path
+        # Creates a formatted cluster path.
         #
         # @param instance_id [String]
         # @param cluster_id [String]
@@ -753,7 +753,7 @@ module Google
           )
         end
 
-        # Create a formatted location path
+        # Creates a formatted location path.
         #
         # @param location [String]
         #   zone name i.e us-east1-b
@@ -768,7 +768,7 @@ module Google
           )
         end
 
-        # Create a formatted table path
+        # Creates a formatted table path.
         #
         # @param table_id [String]
         # @return [String]
@@ -783,7 +783,7 @@ module Google
           )
         end
 
-        # Create a formatted snapshot path
+        # Creates a formatted snapshot path.
         #
         # @param instance_id [String]
         # @param cluster_id [String]
@@ -801,7 +801,7 @@ module Google
           )
         end
 
-        # Create a formatted app profile path
+        # Creates a formatted app profile path.
         #
         # @param instance_id [String]
         # @param app_profile_id [String]
@@ -817,7 +817,7 @@ module Google
           )
         end
 
-        # Inspect service object
+        # Inspects the service object.
         # @return [String]
 
         def inspect

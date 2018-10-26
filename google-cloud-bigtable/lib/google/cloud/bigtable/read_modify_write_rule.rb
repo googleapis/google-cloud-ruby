@@ -48,7 +48,7 @@ module Google
           @grpc.column_qualifier = qualifier
         end
 
-        # Create an instance of an append-value rule .
+        # Create an instance of an append-value rule.
         #
         # @param family [String]
         #   The name of the family to which the read/modify/write should be applied.
