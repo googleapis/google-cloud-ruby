@@ -26,7 +26,7 @@ module Google
     module Bigtable
       # # ReadOperations
       #
-      # Collection of read rows apis.
+      # Collection of read-rows APIs.
       #
       #   * Sample row key
       #   * Read row
@@ -36,8 +36,8 @@ module Google
         # Read sample row keys.
         #
         # Returns a sample of row keys in the table. The returned row keys will
-        # delimit contiguous sections of the table of approximately equal size,
-        # which can be used to break up the data for distributed tasks like
+        # delimit contiguous sections of the table of approximately equal size. The
+        # sections can be used to break up the data for distributed tasks like
         # mapreduces.
         #
         # @yieldreturn [Google::Cloud::Bigtable::SampleRowKey]
@@ -86,7 +86,7 @@ module Google
         #   The default (zero) is to return all results.
         # @return [Array<Google::Cloud::Bigtable::Row> | :yields: row]
         #   Array of row or yield block for each processed row.
-        # @example Read with Limit
+        # @example Read with limit
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -185,7 +185,7 @@ module Google
           end
         end
 
-        # Read single row by key
+        # Read single row by row key
         #
         # @param key [String] Row key. Required
         # @param filter [Google::Cloud::Bigtable::RowFilter]
@@ -216,7 +216,7 @@ module Google
           read_rows(keys: [key], filter: filter).first
         end
 
-        # Create new instance of ValueRange.
+        # Create a new instance of ValueRange.
         #
         # @return [Google::Cloud::Bigtable::ValueRange]
         #
@@ -245,7 +245,7 @@ module Google
           Google::Cloud::Bigtable::ValueRange.new
         end
 
-        # Get new instance of ColumnRange.
+        # Get a new instance of ColumnRange.
         #
         # @param family [String] Column family name
         # @return [Google::Cloud::Bigtable::ColumnRange]
@@ -275,7 +275,7 @@ module Google
           Google::Cloud::Bigtable::ColumnRange.new(family)
         end
 
-        # Get new instance of RowRange.
+        # Get a new instance of RowRange.
         #
         # @return [Google::Cloud::Bigtable::RowRange]
         #
@@ -322,7 +322,7 @@ module Google
 
         private
 
-        # Build RowSet object from row keys and ranges
+        # Build RowSet object from row keys and row ranges
         #
         # @param row_keys [Array<String>]
         # @param row_ranges [Google::Cloud::Bigtable::RowRange | Array<Google::Cloud::Bigtable::RowRange>]

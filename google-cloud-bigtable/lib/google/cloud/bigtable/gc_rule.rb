@@ -21,7 +21,7 @@ module Google
       # # GcRule
       #
       # Rule for determining which cells to delete during garbage collection.
-      # Garbage collection executes opportunistically in the background, and
+      # Garbage collection (GC) executes opportunistically in the background,
       # so it's possible for reads to return a cell even if it matches the active
       # GC expression for its family.
       #
@@ -32,7 +32,7 @@ module Google
       #   * `union` - Delete cells that would be deleted by every nested rule.
       #       It can have mutiple chainable GC Rules.
       #   * `intersection` - Delete cells that would be deleted by any nested rule.
-      #       It can have mutiple chainable GC Rules.
+      #       It can have multiple chainable GC Rules.
       #
       # @example Create GC rule instance with max version.
       #
