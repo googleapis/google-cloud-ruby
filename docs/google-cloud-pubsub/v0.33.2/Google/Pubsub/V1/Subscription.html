@@ -1,0 +1,803 @@
+---
+layout: yard_main
+title: "Class: Google::Pubsub::V1::Subscription - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Pubsub::V1::Subscription";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Pubsub.html" title="Google::Pubsub (module)">Pubsub</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Pubsub::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">Subscription</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Pubsub::V1::Subscription
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Pubsub::V1::Subscription</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A subscription resource.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ack_deadline_seconds-instance_method" title="#ack_deadline_seconds (instance method)">#<strong>ack_deadline_seconds</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This value is the maximum time after a subscriber receives a message before the subscriber should acknowledge the message.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>User labels.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#message_retention_duration-instance_method" title="#message_retention_duration (instance method)">#<strong>message_retention_duration</strong>  &#x21d2; Google::Protobuf::Duration </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>How long to retain unacknowledged messages in the subscription&#39;s backlog, from the moment a message is published.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the subscription.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_config-instance_method" title="#push_config (instance method)">#<strong>push_config</strong>  &#x21d2; Google::Pubsub::V1::PushConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If push delivery is used with this subscription, this field is used to configure it.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#retain_acked_messages-instance_method" title="#retain_acked_messages (instance method)">#<strong>retain_acked_messages</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Indicates whether to retain acknowledged messages.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#topic-instance_method" title="#topic (instance method)">#<strong>topic</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name of the topic from which this subscription is receiving messages.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="ack_deadline_seconds=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="ack_deadline_seconds-instance_method">
+  
+    #<strong>ack_deadline_seconds</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns This value is the maximum time after a subscriber receives a message
+before the subscriber should acknowledge the message. After message
+delivery but before the ack deadline expires and before the message is
+acknowledged, it is an outstanding message and will not be delivered
+again during that time (on a best-effort basis).</p>
+
+<p>For pull subscriptions, this value is used as the initial value for the ack
+deadline. To override this value for a given message, call
+<code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
+non-streaming pull or send the <code>ack_id</code> in a
+<code>StreamingModifyAckDeadlineRequest</code> if using streaming pull.
+The minimum custom deadline you can specify is 10 seconds.
+The maximum custom deadline you can specify is 600 seconds (10 minutes).
+If this parameter is 0, a default value of 10 seconds is used.</p>
+
+<p>For push delivery, this value is also used to set the request timeout for
+the call to the push endpoint.</p>
+
+<p>If the subscriber never acknowledges the message, the Pub/Sub
+system will eventually redeliver the message.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>This value is the maximum time after a subscriber receives a message
+before the subscriber should acknowledge the message. After message
+delivery but before the ack deadline expires and before the message is
+acknowledged, it is an outstanding message and will not be delivered
+again during that time (on a best-effort basis).</p>
+
+<p>For pull subscriptions, this value is used as the initial value for the ack
+deadline. To override this value for a given message, call
+<code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
+non-streaming pull or send the <code>ack_id</code> in a
+<code>StreamingModifyAckDeadlineRequest</code> if using streaming pull.
+The minimum custom deadline you can specify is 10 seconds.
+The maximum custom deadline you can specify is 600 seconds (10 minutes).
+If this parameter is 0, a default value of 10 seconds is used.</p>
+
+<p>For push delivery, this value is also used to set the request timeout for
+the call to the push endpoint.</p>
+
+<p>If the subscriber never acknowledges the message, the Pub/Sub
+system will eventually redeliver the message.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns User labels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>User labels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="message_retention_duration=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="message_retention_duration-instance_method">
+  
+    #<strong>message_retention_duration</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns How long to retain unacknowledged messages in the subscription&#39;s backlog,
+from the moment a message is published.
+If <code>retain_acked_messages</code> is true, then this also configures the retention
+of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
+can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
+minutes.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>How long to retain unacknowledged messages in the subscription&#39;s backlog,
+from the moment a message is published.
+If <code>retain_acked_messages</code> is true, then this also configures the retention
+of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
+can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
+minutes.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name of the subscription. It must have the format
+<code>&quot;projects/{project}/subscriptions/{subscription}&quot;</code>. <code>{subscription}</code> must
+start with a letter, and contain only letters (<code>[A-Za-z]</code>), numbers
+(<code>[0-9]</code>), dashes (<code>-</code>), underscores (<code>_</code>), periods (<code>.</code>), tildes (<code>~</code>),
+plus (<code>+</code>) or percent signs (<code>%</code>). It must be between 3 and 255 characters
+in length, and it must not start with <code>&quot;goog&quot;</code></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of the subscription. It must have the format
+<code>&quot;projects/{project}/subscriptions/{subscription}&quot;</code>. <code>{subscription}</code> must
+start with a letter, and contain only letters (<code>[A-Za-z]</code>), numbers
+(<code>[0-9]</code>), dashes (<code>-</code>), underscores (<code>_</code>), periods (<code>.</code>), tildes (<code>~</code>),
+plus (<code>+</code>) or percent signs (<code>%</code>). It must be between 3 and 255 characters
+in length, and it must not start with <code>&quot;goog&quot;</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="push_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="push_config-instance_method">
+  
+    #<strong>push_config</strong>  &#x21d2; <tt><span class='object_link'><a href="PushConfig.html" title="Google::Pubsub::V1::PushConfig (class)">Google::Pubsub::V1::PushConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If push delivery is used with this subscription, this field is
+used to configure it. An empty <code>pushConfig</code> signifies that the subscriber
+will pull and ack messages using API methods.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PushConfig.html" title="Google::Pubsub::V1::PushConfig (class)">Google::Pubsub::V1::PushConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If push delivery is used with this subscription, this field is
+used to configure it. An empty <code>pushConfig</code> signifies that the subscriber
+will pull and ack messages using API methods.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="retain_acked_messages=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="retain_acked_messages-instance_method">
+  
+    #<strong>retain_acked_messages</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Indicates whether to retain acknowledged messages. If true, then
+messages are not expunged from the subscription&#39;s backlog, even if they are
+acknowledged, until they fall out of the <code>message_retention_duration</code>
+window.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Indicates whether to retain acknowledged messages. If true, then
+messages are not expunged from the subscription&#39;s backlog, even if they are
+acknowledged, until they fall out of the <code>message_retention_duration</code>
+window.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="topic=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="topic-instance_method">
+  
+    #<strong>topic</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name of the topic from which this subscription is receiving messages.
+Format is <code>projects/{project}/topics/{topic}</code>.
+The value of this field will be <code>_deleted-topic_</code> if the topic has been
+deleted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of the topic from which this subscription is receiving messages.
+Format is <code>projects/{project}/topics/{topic}</code>.
+The value of this field will be <code>_deleted-topic_</code> if the topic has been
+deleted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

@@ -1,0 +1,339 @@
+---
+layout: yard_main
+title: "File: CHANGELOG - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "CHANGELOG";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="file_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: CHANGELOG</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>Release History</h1>
+
+<h3>0.33.2 / 2018-10-29</h3>
+
+<ul>
+<li>Rename delay methods to modify_ack_deadline
+
+<ul>
+<li>Rename modify_ack_deadling aliases to delay</li>
+<li>This maintains backwards compatibility</li>
+</ul></li>
+</ul>
+
+<h3>0.33.1 / 2018-10-03</h3>
+
+<ul>
+<li>Update connection configuration.
+
+<ul>
+<li>Treat Acknowledge as idempotent.</li>
+</ul></li>
+</ul>
+
+<h3>0.33.0 / 2018-09-20</h3>
+
+<ul>
+<li>Add support for user labels to Snapshot, Subscription and Topic.</li>
+<li>Update documentation.
+
+<ul>
+<li>Change documentation URL to googleapis GitHub org.</li>
+</ul></li>
+<li>Fix circular require warning.</li>
+</ul>
+
+<h3>0.32.2 / 2018-09-12</h3>
+
+<ul>
+<li>Add missing documentation files to package.</li>
+</ul>
+
+<h3>0.32.1 / 2018-09-10</h3>
+
+<ul>
+<li>Fix issue where client_config was not being used on publisher API calls.</li>
+<li>Update documentation.</li>
+</ul>
+
+<h3>0.32.0 / 2018-08-14</h3>
+
+<ul>
+<li>Updated Subscriber implementation
+
+<ul>
+<li>Revised shutdown mechanics</li>
+<li>Fixes stop and wait! would hanging indefinitely.</li>
+<li>Reduce the number of GRPC warnings printed.</li>
+<li>Added error callbacks to the API</li>
+<li> Use error handler to be notified when unhandled errors
+occur on a subscriber&#39;s stream thread.</li>
+</ul></li>
+<li>Documentation updates.</li>
+</ul>
+
+<h3>0.31.1 / 2018-08-14</h3>
+
+<ul>
+<li>Fix bug in AsyncUnaryPusher,
+
+<ul>
+<li>The modify_ack_deadline requests were malformed.</li>
+</ul></li>
+</ul>
+
+<h3>0.31.0 / 2018-06-12</h3>
+
+<ul>
+<li>Switch Subscriber to use unary RPC calls for ack/modack.</li>
+<li>Reduce number of String objects that are garbage collected.</li>
+<li>Documentation updates.</li>
+</ul>
+
+<h3>0.30.2 / 2018-04-02</h3>
+
+<ul>
+<li>Subscriber stability enhancements.</li>
+<li>Subscriber performance enhancements.</li>
+</ul>
+
+<h3>0.30.1 / 2018-03-08</h3>
+
+<ul>
+<li>Fix Subscriber thread leak.</li>
+</ul>
+
+<h3>0.30.0 / 2018-02-27</h3>
+
+<ul>
+<li>Support Shared Configuration.</li>
+<li>Fix issue with IAM Policy not refreshing properly.</li>
+</ul>
+
+<h3>0.29.0 / 2017-12-19</h3>
+
+<ul>
+<li>Update Subscriber&#39;s receipt of received messages.</li>
+<li>Refactor Subscriber implementation to fix some threading bugs.</li>
+<li>Update google-gax dependency to 1.0.</li>
+</ul>
+
+<h3>0.28.1 / 2017-11-21</h3>
+
+<ul>
+<li>Remove warning when connecting to Pub/Sub Emulator.</li>
+</ul>
+
+<h3>0.28.0 / 2017-11-14</h3>
+
+<ul>
+<li>Add <code>Google::Cloud::Pubsub::Credentials</code> class.</li>
+<li>Rename constructor arguments to <code>project_id</code> and <code>credentials</code>.
+(The previous arguments <code>project</code> and <code>keyfile</code> are still supported.)</li>
+<li>Document <code>Google::Auth::Credentials</code> as <code>credentials</code> value.</li>
+<li>Update generated low level GAPIC code.</li>
+<li>Updated <code>google-gax</code> (<code>grpc</code>, <code>google-protobuf</code>), <code>googleauth</code> dependencies.</li>
+</ul>
+
+<h3>0.27.2 / 2017-10-18</h3>
+
+<ul>
+<li>Update documentation</li>
+</ul>
+
+<h3>0.27.1 / 2017-10-11</h3>
+
+<ul>
+<li>Add keepalive to gRPC connections.</li>
+<li>Update Subscriber Streaming Messages error handling</li>
+<li>Fix link in README</li>
+</ul>
+
+<h3>0.27.0 / 2017-08-10</h3>
+
+<p>This is a major release that offers new functionality. It adds the ability to asynchronously publish batches of messages when a threshold is met (batch message count, total batch size, batch age). It also adds the ability to receive and acknowledge messages via multiple streams.</p>
+
+<ul>
+<li>Publishing Messages Asynchronously
+
+<ul>
+<li><code>Topic#publish_async</code> and <code>AsyncPublisher</code> added</li>
+<li><code>AsyncPublisher</code> can be stopped</li>
+<li><code>PublishResult</code> object is yielded from <code>Topic#publish_async</code></li>
+</ul></li>
+<li>Subscriber Streaming Messages
+
+<ul>
+<li><code>Subscription#listen</code> changed to return a <code>Subscriber</code> object</li>
+<li><code>Subscriber</code> can open multiple streams to pull messages</li>
+<li><code>Subscriber</code> must be started to begin streaming messages</li>
+<li><code>Subscriber</code> can be stopped</li>
+<li><code>Subscriber</code>&#39;s received messages are leased until acknowledged or rejected</li>
+</ul></li>
+<li>Other Additions
+
+<ul>
+<li><code>ReceivedMessage#reject!</code> method added (aliased as <code>nack!</code> and <code>ignore!</code>)</li>
+<li><code>Message#published_at</code> attribute was added</li>
+</ul></li>
+<li>Removals
+
+<ul>
+<li><code>Project#publish</code> method has been removed</li>
+<li><code>Project#subscribe</code> method has been removed</li>
+<li><code>Project#topic</code> method argument <code>autocreate</code> was removed</li>
+<li><code>Subscription#pull</code> method argument <code>autoack</code> was removed</li>
+<li><code>Subscription#wait_for_messages</code> method argument <code>autoack</code> was removed</li>
+</ul></li>
+</ul>
+
+<h3>0.26.0 / 2017-07-11</h3>
+
+<ul>
+<li>Update GAPIC configuration to exclude <code>UNAVAILABLE</code> errors from automatic retry.</li>
+<li>Update initialization to raise a better error if project ID is not specified.</li>
+</ul>
+
+<h3>0.25.0 / 2017-06-01</h3>
+
+<ul>
+<li>Add Snapshot and Subscription#seek.</li>
+<li>Add Subscription#retain_acked and Subscription#retention.</li>
+<li>Update gem spec homepage links.</li>
+<li>Remove memoization of Policy.</li>
+<li>Remove force parameter from Subscription#policy and Topic#policy.</li>
+<li>Remove Policy#deep_dup.</li>
+<li>Configure gRPC max_send_message_length and max_receive_message_length
+to accommodate max message size &gt; 4 MB.</li>
+</ul>
+
+<h3>0.24.0 / 2017-03-31</h3>
+
+<ul>
+<li>Updated documentation</li>
+<li>Updated retry configuration for pull requests</li>
+<li>Automatic retry on <code>UNAVAILABLE</code> errors</li>
+</ul>
+
+<h3>0.23.2 / 2017-03-03</h3>
+
+<ul>
+<li>No public API changes.</li>
+<li>Update GRPC header value sent to the Pub/Sub API.</li>
+</ul>
+
+<h3>0.23.1 / 2017-03-01</h3>
+
+<ul>
+<li>No public API changes.</li>
+<li>Update GRPC header value sent to the Pub/Sub API.</li>
+<li>Low level API adds new Protobuf types and GAPIC methods.</li>
+</ul>
+
+<h3>0.23.0 / 2017-02-21</h3>
+
+<ul>
+<li>Add emulator_host parameter</li>
+<li>Fix GRPC retry bug</li>
+<li>The client_config data structure has replaced retry_codes/retry_codes_def with retry_codes</li>
+<li>Update GRPC/Protobuf/GAX dependencies</li>
+</ul>
+
+<h3>0.22.0 / 2017-01-26</h3>
+
+<ul>
+<li>Change class names in low-level API (GAPIC)</li>
+<li>Change method parameters in low-level API (GAPIC)</li>
+<li>Add LICENSE to package.</li>
+</ul>
+
+<h3>0.21.0 / 2016-10-20</h3>
+
+<ul>
+<li>New service constructor Google::Cloud::Pubsub.new</li>
+<li>New constructor argument client_config</li>
+</ul>
+
+<h3>0.20.1 / 2016-09-02</h3>
+
+<ul>
+<li>Fix an issue with the GRPC client and forked sub-processes</li>
+</ul>
+
+<h3>0.20.0 / 2016-08-26</h3>
+
+<p>This gem contains the Google Cloud Pub/Sub service implementation for the <code>google-cloud</code> gem. The <code>google-cloud</code> gem replaces the old <code>gcloud</code> gem. Legacy code can continue to use the <code>gcloud</code> gem.</p>
+
+<ul>
+<li>Namespace is now <code>Google::Cloud</code></li>
+<li>The <code>google-cloud</code> gem is now an umbrella package for individual gems</li>
+</ul>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

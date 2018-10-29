@@ -1,0 +1,486 @@
+---
+layout: yard_main
+title: "File: OVERVIEW - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "OVERVIEW";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: OVERVIEW</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>Google Cloud Pub/Sub</h1>
+
+<p>Google Cloud Pub/Sub is designed to provide reliable, many-to-many, asynchronous
+messaging between applications. Publisher applications can send messages to a
+&quot;topic&quot; and other applications can subscribe to that topic to receive the
+messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows
+developers to communicate between independently written applications.</p>
+
+<p>The goal of google-cloud is to provide an API that is comfortable to Rubyists.
+Your authentication credentials are detected automatically in Google Cloud
+Platform environments such as Google Compute Engine, Google App Engine and
+Google Kubernetes Engine. In other environments you can configure authentication
+easily, either directly in your code or via environment variables. Read more
+about the options for connecting in the <a href="file.AUTHENTICATION.html" title="Authentication Guide">Authentication Guide</a>.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task completed</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>To learn more about Pub/Sub, read the <a href="https://cloud.google.com/pubsub/overview">Google Cloud Pub/Sub Overview
+</a>.</p>
+
+<h2>Retrieving Topics</h2>
+
+<p>A Topic is a named resource to which messages are sent by publishers. A Topic is
+found by its name. (See <span class='object_link'><a href="Google/Cloud/Pubsub/Project.html#topic-instance_method" title="Google::Cloud::Pubsub::Project#topic (method)">Project#topic</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<h2>Creating a Topic</h2>
+
+<p>A Topic is created from a Project. (See
+<span class='object_link'><a href="Google/Cloud/Pubsub/Project.html#create_topic-instance_method" title="Google::Cloud::Pubsub::Project#create_topic (method)">Project#create_topic</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_create_topic'>create_topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<h2>Retrieving Subscriptions</h2>
+
+<p>A Subscription is a named resource representing the stream of messages from a
+single, specific Topic, to be delivered to the subscribing application. A
+Subscription is found by its name. (See
+<span class='object_link'><a href="Google/Cloud/Pubsub/Topic.html#subscription-instance_method" title="Google::Cloud::Pubsub::Topic#subscription (method)">Topic#subscription</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_subscription'>subscription</span> <span class='op'>=</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-subscription</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+</code></pre>
+
+<h2>Creating a Subscription</h2>
+
+<p>A Subscription is created from a Topic. (See
+<span class='object_link'><a href="Google/Cloud/Pubsub/Topic.html#subscribe-instance_method" title="Google::Cloud::Pubsub::Topic#subscribe (method)">Topic#subscribe</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_subscribe'>subscribe</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='comment'># =&gt; &quot;my-topic-sub&quot;
+</span></code></pre>
+
+<p>The subscription can be created that specifies the number of seconds to wait to
+be acknowledged as well as an endpoint URL to push the messages to:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_subscribe'>subscribe</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                      <span class='label'>deadline:</span> <span class='int'>120</span><span class='comma'>,</span>
+                      <span class='label'>endpoint:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://example.com/push</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<h2>Publishing Messages</h2>
+
+<p>Messages are published to a topic. Any message published to a topic without a
+subscription will be lost. Ensure the topic has a subscription before
+publishing. (See <span class='object_link'><a href="Google/Cloud/Pubsub/Topic.html#publish-instance_method" title="Google::Cloud::Pubsub::Topic#publish (method)">Topic#publish</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_msg'>msg</span> <span class='op'>=</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task completed</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Messages can also be published with attributes:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_msg'>msg</span> <span class='op'>=</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                    <span class='label'>foo:</span> <span class='symbol'>:bar</span><span class='comma'>,</span>
+                    <span class='label'>this:</span> <span class='symbol'>:that</span>
+</code></pre>
+
+<p>Messages can also be published in batches asynchronously using <code>publish_async</code>.
+(See <span class='object_link'><a href="Google/Cloud/Pubsub/Topic.html#publish_async-instance_method" title="Google::Cloud::Pubsub::Topic#publish_async (method)">Topic#publish_async</a></span> and
+<span class='object_link'><a href="Google/Cloud/Pubsub/AsyncPublisher.html" title="Google::Cloud::Pubsub::AsyncPublisher (class)">AsyncPublisher</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish_async'>publish_async</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task completed</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_succeeded?'>succeeded?</span>
+    <span class='id identifier rubyid_log_publish_success'>log_publish_success</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_log_publish_failure'>log_publish_failure</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_error'>error</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_async_publisher'>async_publisher</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span>
+</code></pre>
+
+<p>Or multiple messages can be published in batches at the same time by passing a
+block to <code>publish</code>. (See <span class='object_link'><a href="Google/Cloud/Pubsub/BatchPublisher.html" title="Google::Cloud::Pubsub::BatchPublisher (class)">BatchPublisher</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_msgs'>msgs</span> <span class='op'>=</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_batch'>batch</span><span class='op'>|</span>
+  <span class='id identifier rubyid_batch'>batch</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task 1 completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>foo:</span> <span class='symbol'>:bar</span>
+  <span class='id identifier rubyid_batch'>batch</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task 2 completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>foo:</span> <span class='symbol'>:baz</span>
+  <span class='id identifier rubyid_batch'>batch</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>task 3 completed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>foo:</span> <span class='symbol'>:bif</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Receiving messages</h2>
+
+<p>Messages can be streamed from a subscription with a subscriber object that is
+created using <code>listen</code>. (See <span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#listen-instance_method" title="Google::Cloud::Pubsub::Subscription#listen (method)">Subscription#listen</a></span> and <span class='object_link'><a href="Google/Cloud/Pubsub/Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='comment'># process message
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge!'>acknowledge!</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start background threads that will call the block passed to listen.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span>
+</code></pre>
+
+<p>Messages also can be pulled directly in a one-time operation. (See
+<span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#pull-instance_method" title="Google::Cloud::Pubsub::Subscription#pull (method)">Subscription#pull</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_received_messages'>received_messages</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_pull'>pull</span>
+</code></pre>
+
+<p>A maximum number of messages to pull can be specified:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_received_messages'>received_messages</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_pull'>pull</span> <span class='label'>max:</span> <span class='int'>10</span>
+</code></pre>
+
+<h2>Acknowledging a Message</h2>
+
+<p>Messages that are received can be acknowledged in Pub/Sub, marking the message
+to be removed so it cannot be pulled again.</p>
+
+<p>A Message that can be acknowledged is called a ReceivedMessage. ReceivedMessages
+can be acknowledged one at a time: (See
+<span class='object_link'><a href="Google/Cloud/Pubsub/ReceivedMessage.html#acknowledge!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#acknowledge! (method)">ReceivedMessage#acknowledge!</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='comment'># process message
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge!'>acknowledge!</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start background threads that will call the block passed to listen.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span>
+</code></pre>
+
+<p>Or, multiple messages can be acknowledged in a single API call: (See
+<span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#acknowledge-instance_method" title="Google::Cloud::Pubsub::Subscription#acknowledge (method)">Subscription#acknowledge</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_received_messages'>received_messages</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_pull'>pull</span>
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge'>acknowledge</span> <span class='id identifier rubyid_received_messages'>received_messages</span>
+</code></pre>
+
+<h2>Modifying a Deadline</h2>
+
+<p>A message must be acknowledged after it is pulled, or Pub/Sub will mark the
+message for redelivery. The message acknowledgement deadline can delayed if more
+time is needed. This will allow more time to process the message before the
+message is marked for redelivery. (See
+<span class='object_link'><a href="Google/Cloud/Pubsub/ReceivedMessage.html#modify_ack_deadline!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline! (method)">ReceivedMessage#modify_ack_deadline!</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
+
+  <span class='comment'># Delay for 2 minutes
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline!'>modify_ack_deadline!</span> <span class='int'>120</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start background threads that will call the block passed to listen.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span>
+</code></pre>
+
+<p>The message can also be made available for immediate redelivery:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
+
+  <span class='comment'># Mark for redelivery
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_reject!'>reject!</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start background threads that will call the block passed to listen.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span>
+</code></pre>
+
+<p>Multiple messages can be delayed or made available for immediate redelivery:
+(See <span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#modify_ack_deadline-instance_method" title="Google::Cloud::Pubsub::Subscription#modify_ack_deadline (method)">Subscription#modify_ack_deadline</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_received_messages'>received_messages</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_pull'>pull</span>
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> <span class='int'>120</span><span class='comma'>,</span> <span class='id identifier rubyid_received_messages'>received_messages</span>
+</code></pre>
+
+<h2>Creating a snapshot and using seek</h2>
+
+<p>You can create a snapshot to retain the existing backlog on a subscription. The
+snapshot will hold the messages in the subscription&#39;s backlog that are
+unacknowledged upon the successful completion of the <code>create_snapshot</code>
+operation.</p>
+
+<p>Later, you can use <code>seek</code> to reset the subscription&#39;s backlog to the snapshot.</p>
+
+<p>(See <span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#create_snapshot-instance_method" title="Google::Cloud::Pubsub::Subscription#create_snapshot (method)">Subscription#create_snapshot</a></span> and <span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#seek-instance_method" title="Google::Cloud::Pubsub::Subscription#seek (method)">Subscription#seek</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_snapshot'>snapshot</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_create_snapshot'>create_snapshot</span>
+
+<span class='id identifier rubyid_received_messages'>received_messages</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_pull'>pull</span>
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge'>acknowledge</span> <span class='id identifier rubyid_received_messages'>received_messages</span>
+
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_seek'>seek</span> <span class='id identifier rubyid_snapshot'>snapshot</span>
+</code></pre>
+
+<h2>Listening for Messages</h2>
+
+<p>A subscriber object can be created using <code>listen</code>, which streams messages from
+the backend and processes them as they are received. (See
+<span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#listen-instance_method" title="Google::Cloud::Pubsub::Subscription#listen (method)">Subscription#listen</a></span> and
+<span class='object_link'><a href="Google/Cloud/Pubsub/Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='comment'># process message
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge!'>acknowledge!</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start background threads that will call the block passed to listen.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span>
+</code></pre>
+
+<p>The subscriber object can be configured to control the number of concurrent
+streams to open, the number of received messages to be collected, and the number
+of threads each stream opens for concurrent calls made to handle the received
+messages.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='label'>threads:</span> <span class='lbrace'>{</span> <span class='label'>callback:</span> <span class='int'>16</span> <span class='rbrace'>}</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='comment'># store the message somewhere before acknowledging
+</span>  <span class='id identifier rubyid_store_in_backend'>store_in_backend</span> <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span> <span class='comment'># takes a few seconds
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge!'>acknowledge!</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start background threads that will call the block passed to listen.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+</code></pre>
+
+<h2>Working Across Projects</h2>
+
+<p>All calls to the Pub/Sub service use the same project and credentials provided
+to the <span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">Pubsub.new</a></span> method. However, it is common to
+reference topics or subscriptions in other projects, which can be achieved by
+using the <code>project</code> option. The main credentials must have permissions to the
+topics and subscriptions in other projects.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span> <span class='comment'># my-project
+</span>
+<span class='comment'># Get a topic in the current project
+</span><span class='id identifier rubyid_my_topic'>my_topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_my_topic'>my_topic</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='comment'>#=&gt; &quot;projects/my-project/topics/my-topic&quot;
+</span><span class='comment'># Get a topic in another project
+</span><span class='id identifier rubyid_other_topic'>other_topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>other-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>project:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>other-project-id</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_other_topic'>other_topic</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='comment'>#=&gt; &quot;projects/other-project-id/topics/other-topic&quot;
+</span></code></pre>
+
+<p>It is possible to create a subscription in the current project that pulls
+from a topic in another project:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span> <span class='comment'># my-project
+</span>
+<span class='comment'># Get a topic in another project
+</span><span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>other-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>project:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>other-project-id</span><span class='tstring_end'>&quot;</span></span>
+<span class='comment'># Create a subscription in the current project that pulls from
+</span><span class='comment'># the topic in another project
+</span><span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_subscribe'>subscribe</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='comment'>#=&gt; &quot;projects/my-project/subscriptions/my-sub&quot;
+</span><span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='comment'>#=&gt; &quot;projects/other-project-id/topics/other-topic&quot;
+</span></code></pre>
+
+<h2>Additional information</h2>
+
+<p>Google Cloud Pub/Sub can be configured to use an emulator or to enable gRPC&#39;s
+logging. To learn more, see the <a href="file.EMULATOR.html" title="Emulator guide">Emulator guide</a> and
+<a href="file.LOGGING.html" title="Logging guide">Logging guide</a>.</p>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
