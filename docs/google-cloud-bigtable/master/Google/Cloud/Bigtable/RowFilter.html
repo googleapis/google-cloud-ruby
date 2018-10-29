@@ -83,33 +83,33 @@ just the cells from columns matching a given regular expression, or it might
 return all the cells of a row but not their values. More complicated filters
 can be composed out of these components to express requests such as, &quot;within
 every column of a particular family, give just the two most recent cells
-which are older than timestamp X.&quot;</p>
+that are older than timestamp X.&quot;</p>
 
-<p>There are two broad categories of RowFilters (true filters and transformers),
-as well as two ways to compose simple filters into more complex ones
-(chains and interleaves). They work as follows:</p>
+<p>Two broad categories of RowFilters are <code>true filters</code> and <code>transformers</code>.
+Two ways to compose simple filters into more complex ones are 
+<code>chains</code> and <code>interleaves</code>. They work as follows:</p>
 
 <ul>
 <li><p>True filters alter the input row by excluding some of its cells wholesale
 from the output row. An example of a true filter is the <code>value_regex_filter</code>,
 which excludes cells whose values don&#39;t match the specified pattern. All
 regex true filters use RE2 syntax (https:#github.com/google/re2/wiki/Syntax)
-in raw byte mode (RE2::Latin1), and are evaluated as full matches. An
+in raw byte mode (RE2::Latin1) and are evaluated as full matches. An
 important point to keep in mind is that <code>RE2(.)</code> is equivalent by default to
 <code>RE2([^\n])</code>, meaning that it does not match newlines. When attempting to
 match an arbitrary byte, you should therefore use the escape sequence <code>\C</code>,
-which may need to be further escaped as <code>\\C</code> in your client language.</p></li>
+which should be further escaped as <code>\\C</code> in Ruby.</p></li>
 <li><p>Transformers alter the input row by changing the values of some of its
 cells in the output, without excluding them completely. Currently, the only
 supported transformer is the <code>strip_value_transformer</code>, which replaces every
-cell&#39;s value with the empty string.</p></li>
+cell&#39;s value with an empty string.</p></li>
 <li><p>Chains and interleaves are described in more detail in the
 RowFilter.Chain and RowFilter.Interleave documentation.</p></li>
 </ul>
 
 <p>The total serialized size of a RowFilter message must not
 exceed 4096 bytes, and RowFilters may not be nested within each other
-(in Chains or Interleaves) to a depth of more than 20.</p>
+(in chains or interleaves) to a depth of more than 20.</p>
 
 <p>ADVANCED USE:.
 Hook for introspection into the RowFilter. Outputs all cells directly to
@@ -162,11 +162,11 @@ following example:</p>
 <p>Despite being excluded by the qualifier filter, a copy of every cell
 that reaches the sink is present in the final result.</p>
 
-<p>As with an Interleave filter duplicate cells are possible,
+<p>As with an interleave filter, duplicate cells are possible
 and appear in an unspecified mutual order.
-In this case we have a duplicate with column &quot;A:B&quot; and timestamp 2,
-because one copy passed through the all filter while the other was
-passed through the label and sink. Note that one copy has label &quot;foo&quot;,
+In this case we have a duplicate with column &quot;A:B&quot; and timestamp 2
+because one copy passed through the All filter while the other was
+passed through the Label and Sink filters. Note that one copy has the label &quot;foo&quot;,
 while the other does not.</p>
 
 
@@ -233,7 +233,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create block all filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a block-all filter instance.</p>
 </div></span>
   
 </li>
@@ -256,7 +256,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create cells per column filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates cells-per-column filter instance.</p>
 </div></span>
   
 </li>
@@ -279,7 +279,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create cells per row limit filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Create a cells-per-row limit filter instance.</p>
 </div></span>
   
 </li>
@@ -302,7 +302,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create cell per row offset filter instance to skip first N cells.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a cell-per-row offset filter instance to skip the first N cells.</p>
 </div></span>
   
 </li>
@@ -325,7 +325,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create chain filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a chain filter instance.</p>
 </div></span>
   
 </li>
@@ -348,7 +348,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create column range filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a column-range filter instance.</p>
 </div></span>
   
 </li>
@@ -371,7 +371,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create condition filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a condition filter instance.</p>
 </div></span>
   
 </li>
@@ -394,7 +394,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create family name match filter using regex.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a family name match filter using a regular expression.</p>
 </div></span>
   
 </li>
@@ -417,7 +417,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create interleave filter.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates an interleave filter.</p>
 </div></span>
   
 </li>
@@ -440,7 +440,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create key filter instance to match key using regular expression.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a key filter instance to match a row key using a regular expression.</p>
 </div></span>
   
 </li>
@@ -463,7 +463,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create label filter instance to apply label on result of read rows.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a label filter instance to apply a label based on the result of read rows.</p>
 </div></span>
   
 </li>
@@ -486,7 +486,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create pass filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a pass filter instance.</p>
 </div></span>
   
 </li>
@@ -509,7 +509,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create column qualifier match filter using regex.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a column qualifier match filter using a regular expression.</p>
 </div></span>
   
 </li>
@@ -532,7 +532,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create sample probability filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a sample probability filter instance.</p>
 </div></span>
   
 </li>
@@ -555,7 +555,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create sink filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a sink filter instance.</p>
 </div></span>
   
 </li>
@@ -578,7 +578,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create strip value filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a strip value filter instance.</p>
 </div></span>
   
 </li>
@@ -601,7 +601,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create timestamp range filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a timestamp-range filter instance.</p>
 </div></span>
   
 </li>
@@ -624,7 +624,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create value match filter using regex.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a value match filter using a regular expression.</p>
 </div></span>
   
 </li>
@@ -647,7 +647,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create value range filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a value-range filter instance.</p>
 </div></span>
   
 </li>
@@ -673,7 +673,7 @@ while the other does not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create block all filter instance</p>
+    <p>Creates a block-all filter instance.</p>
 
 <p>Does not match any cells, regardless of input. Useful for temporarily
 disabling just part of a filter.</p>
@@ -738,13 +738,10 @@ disabling just part of a filter.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create cells per column filter instance</p>
+    <p>Creates cells-per-column filter instance.</p>
 
-<p>Matches only the most recent N cells within each column. For example,
-if N=2, this filter would match column <code>foo:bar</code> at timestamps 10 and 9,
-skip all earlier cells in <code>foo:bar</code>, and then begin matching again in
-column <code>foo:bar2</code>.
-If duplicate cells are present, as is possible when using an Interleave,
+<p>Matches only the most recent N cells within each column. 
+If duplicate cells are present, as is possible when using an interleave,
 each copy of the cell is counted separately.</p>
 
 
@@ -800,12 +797,12 @@ each copy of the cell is counted separately.</p>
       <pre class="lines">
 
 
-517
-518
-519</pre>
+515
+516
+517</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 517</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 515</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_cells_per_column'>cells_per_column</span> <span class='id identifier rubyid_limit'>limit</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_cells_per_column'><span class='object_link'><a href="RowFilter/SimpleFilter.html#cells_per_column-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#cells_per_column (method)">cells_per_column</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_limit'>limit</span><span class='rparen'>)</span>
@@ -826,10 +823,10 @@ each copy of the cell is counted separately.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create cells per row limit filter instance</p>
+    <p>Create a cells-per-row limit filter instance.</p>
 
 <p>Matches only the first N cells of each row.
-If duplicate cells are present, as is possible when using an Interleave,
+If duplicate cells are present, as is possible when using an interleave,
 each copy of the cell is counted separately.</p>
 
 
@@ -885,12 +882,12 @@ each copy of the cell is counted separately.</p>
       <pre class="lines">
 
 
-497
 498
-499</pre>
+499
+500</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 497</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 498</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_cells_per_row'>cells_per_row</span> <span class='id identifier rubyid_limit'>limit</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_cells_per_row'><span class='object_link'><a href="RowFilter/SimpleFilter.html#cells_per_row-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#cells_per_row (method)">cells_per_row</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_limit'>limit</span><span class='rparen'>)</span>
@@ -911,10 +908,10 @@ each copy of the cell is counted separately.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create cell per row offset filter instance to skip first N cells.</p>
+    <p>Creates a cell-per-row offset filter instance to skip the first N cells.</p>
 
 <p>Skips the first N cells of each row, matching all subsequent cells.
-If duplicate cells are present, as is possible when using an Interleave,
+If duplicate cells are present, as is possible when using an interleave,
 each copy of the cell is counted separately.</p>
 
 
@@ -970,12 +967,12 @@ each copy of the cell is counted separately.</p>
       <pre class="lines">
 
 
-480
 481
-482</pre>
+482
+483</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 480</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 481</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_cells_per_row_offset'>cells_per_row_offset</span> <span class='id identifier rubyid_offset'>offset</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_cells_per_row_offset'><span class='object_link'><a href="RowFilter/SimpleFilter.html#cells_per_row_offset-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#cells_per_row_offset (method)">cells_per_row_offset</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_offset'>offset</span><span class='rparen'>)</span>
@@ -996,9 +993,9 @@ each copy of the cell is counted separately.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create chain filter instance.</p>
+    <p>Creates a chain filter instance.</p>
 
-<p>A Chain RowFilter which sends rows through several RowFilters in sequence.</p>
+<p>A chain RowFilter that sends rows through several RowFilters in sequence.</p>
 
 <p>See <span class='object_link'><a href="RowFilter/ChainFilter.html" title="Google::Cloud::Bigtable::RowFilter::ChainFilter (class)">ChainFilter</a></span></p>
 
@@ -1089,7 +1086,7 @@ chain.chain(chain_1).value(&quot;xyz*).key(&quot;user-*&quot;)</code></pre>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create column range filter instance.</p>
+    <p>Creates a column-range filter instance.</p>
 
 <p>Matches only cells from columns within the given range.</p>
 
@@ -1170,14 +1167,14 @@ chain.chain(chain_1).value(&quot;xyz*).key(&quot;user-*&quot;)</code></pre>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create condition filter instance</p>
+    <p>Creates a condition filter instance.</p>
 
-<p>A RowFilter which evaluates one of two possible RowFilters, depending on
+<p>A RowFilter that evaluates one of two possible RowFilters, depending on
 whether or not a predicate RowFilter outputs any cells from the input row.</p>
 
 <p>IMPORTANT NOTE: The predicate filter does not execute atomically with the
 true and false filters, which may lead to inconsistent or unexpected
-results. Additionally, Condition filters have poor performance, especially
+results. Additionally, condition filters have poor performance, especially
 when filters are set for the false condition.</p>
 
 <p>Cannot be used within the <code>predicate_filter</code>, <code>true_filter</code>, or <code>false_filter</code></p>
@@ -1198,7 +1195,7 @@ when filters are set for the false condition.</p>
 <span class='id identifier rubyid_label'>label</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter (module)">RowFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_label'><span class='object_link'><a href="#label-class_method" title="Google::Cloud::Bigtable::RowFilter.label (method)">label</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_strip_value'>strip_value</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigtable::RowFilter (module)">RowFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_strip_value'><span class='object_link'><a href="#strip_value-class_method" title="Google::Cloud::Bigtable::RowFilter.strip_value (method)">strip_value</a></span></span>
 
-<span class='comment'># On match apply lable else strip cell values
+<span class='comment'># On match apply label, else strip cell values
 </span><span class='id identifier rubyid_condition'>condition</span><span class='period'>.</span><span class='id identifier rubyid_on_match'>on_match</span><span class='lparen'>(</span><span class='id identifier rubyid_label'>label</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_otherwise'>otherwise</span><span class='lparen'>(</span><span class='id identifier rubyid_strip_value'>strip_value</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1264,7 +1261,7 @@ when filters are set for the false condition.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create family name match filter using regex</p>
+    <p>Creates a family name match filter using a regular expression.</p>
 
 <p>Matches only cells from columns whose families satisfy the given RE2
 regex. For technical reasons, the regex must not contain the <code>:</code>
@@ -1335,12 +1332,12 @@ column family names.</p>
       <pre class="lines">
 
 
-391
 392
-393</pre>
+393
+394</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 391</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 392</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_family'>family</span> <span class='id identifier rubyid_regex'>regex</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_family'><span class='object_link'><a href="RowFilter/SimpleFilter.html#family-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#family (method)">family</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_regex'>regex</span><span class='rparen'>)</span>
@@ -1361,9 +1358,9 @@ column family names.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create interleave filter.</p>
+    <p>Creates an interleave filter.</p>
 
-<p>A RowFilter which sends each row to each of several component
+<p>A RowFilter that sends each row to each of several component
 RowFilters and interleaves the results.</p>
 
 <p>The elements of &quot;filters&quot; all process a copy of the input row, and the
@@ -1402,7 +1399,7 @@ Consider the following example, with three filters:</p>
     <p class="tag_title">Examples:</p>
     
       
-        <p class="example_title"><div class='inline'><p>Create interleave filter with simple filter.</p>
+        <p class="example_title"><div class='inline'><p>Create an interleave filter with simple filter.</p>
 </div></p>
       
       <pre class="example code"><code>
@@ -1476,9 +1473,9 @@ interleave.chain(chain_1).value(&quot;xyz*).key(&quot;user-*&quot;)</code></pre>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create key filter instance to match key using regular expression.</p>
+    <p>Creates a key filter instance to match a row key using a regular expression.</p>
 
-<p>Matches only cells from rows whose keys satisfy the given RE2 regex. In
+<p>Matches only cells from rows whose row keys satisfy the given RE2 regex. In
 other words, passes through the entire row when the key matches, and
 otherwise produces an empty row.
 Note that, since row keys can contain arbitrary bytes, the <code>\C</code> escape
@@ -1548,12 +1545,12 @@ binary key.</p>
       <pre class="lines">
 
 
-351
 352
-353</pre>
+353
+354</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 351</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 352</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='id identifier rubyid_regex'>regex</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_key'><span class='object_link'><a href="RowFilter/SimpleFilter.html#key-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#key (method)">key</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_regex'>regex</span><span class='rparen'>)</span>
@@ -1574,21 +1571,21 @@ binary key.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create label filter instance to apply label on result of read rows.</p>
+    <p>Creates a label filter instance to apply a label based on the result of
+read rows.</p>
 
 <p>Applies the given label to all cells in the output row. This allows
 the client to determine which results were produced from which part of
 the filter.</p>
 
-<p>Values must be at most 15 characters in length, and match the RE2
+<p>Values must be at most 15 characters and match the RE2
 pattern <code>[a-z0-9\\-]+</code></p>
 
 <p>Due to a technical limitation, it is not currently possible to apply
-multiple labels to a cell. As a result, a Chain may have no more than
-one sub-filter which contains a <code>apply_label_transformer</code>. It is okay for
-an Interleave to contain multiple <code>apply_label_transformers</code>, as they
-will be applied to separate copies of the input. This may be relaxed in
-the future.</p>
+multiple labels to a cell. As a result, a chain may have no more than
+one sub-filter that contains a <code>self.label value</code>. In contrast,
+an interleave may contain more than one because the filters
+will be applied to separate copies of the input.</p>
 
 
   </div>
@@ -1643,12 +1640,12 @@ the future.</p>
       <pre class="lines">
 
 
-463
 464
-465</pre>
+465
+466</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 463</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 464</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_label'>label</span> <span class='id identifier rubyid_value'>value</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_label'><span class='object_link'><a href="RowFilter/SimpleFilter.html#label-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#label (method)">label</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
@@ -1669,7 +1666,7 @@ the future.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create pass filter instance</p>
+    <p>Creates a pass filter instance.</p>
 
 <p>Matches all cells, regardless of input. Functionally equivalent to
 leaving <code>filter</code> unset, but included for completeness.</p>
@@ -1734,7 +1731,7 @@ leaving <code>filter</code> unset, but included for completeness.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create column qualifier match filter using regex</p>
+    <p>Creates a column qualifier match filter using a regular expression.</p>
 
 <p>Matches only cells from columns whose qualifiers satisfy the given RE2
 regex.
@@ -1805,12 +1802,12 @@ present in a binary qualifier.</p>
       <pre class="lines">
 
 
-414
 415
-416</pre>
+416
+417</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 414</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 415</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_qualifier'>qualifier</span> <span class='id identifier rubyid_regex'>regex</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_qualifier'><span class='object_link'><a href="RowFilter/SimpleFilter.html#qualifier-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#qualifier (method)">qualifier</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_regex'>regex</span><span class='rparen'>)</span>
@@ -1831,7 +1828,7 @@ present in a binary qualifier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create sample probability filter instance</p>
+    <p>Creates a sample probability filter instance.</p>
 
 <p>Matches all cells from a row with probability p, and matches no cells
 from the row with probability 1-p.</p>
@@ -1890,12 +1887,12 @@ Probability must be greather then 0 and less then 1.0</p>
       <pre class="lines">
 
 
-368
 369
-370</pre>
+370
+371</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 368</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 369</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sample'>sample</span> <span class='id identifier rubyid_probability'>probability</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_sample'><span class='object_link'><a href="RowFilter/SimpleFilter.html#sample-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#sample (method)">sample</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_probability'>probability</span><span class='rparen'>)</span>
@@ -1916,9 +1913,10 @@ Probability must be greather then 0 and less then 1.0</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create sink filter instance</p>
+    <p>Creates a sink filter instance.</p>
 
-<p>Outputs all cells directly to the output of the read rather than to any parent filter</p>
+<p>Outputs all cells directly to the output of the read rather than to any
+parent filter</p>
 
 
   </div>
@@ -1954,12 +1952,12 @@ Probability must be greather then 0 and less then 1.0</p>
       <pre class="lines">
 
 
-313
 314
-315</pre>
+315
+316</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 313</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 314</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sink'>sink</span>
   <span class='const'>SINK</span>
@@ -1980,9 +1978,9 @@ Probability must be greather then 0 and less then 1.0</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create strip value filter instance</p>
+    <p>Creates a strip value filter instance.</p>
 
-<p>Replaces each cell&#39;s value with the empty string.</p>
+<p>Replaces each cell&#39;s value with an empty string.</p>
 
 
   </div>
@@ -2018,12 +2016,12 @@ Probability must be greather then 0 and less then 1.0</p>
       <pre class="lines">
 
 
-327
 328
-329</pre>
+329
+330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 327</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 328</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_strip_value'>strip_value</span>
   <span class='const'>STRIP_VALUE</span>
@@ -2044,10 +2042,10 @@ Probability must be greather then 0 and less then 1.0</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create timestamp range filter instance</p>
+    <p>Creates a timestamp-range filter instance.</p>
 
 <p>Matches only cells with timestamps within the given range.
-Specified a contiguous range of timestamps.</p>
+Specifies a contiguous range of timestamps.</p>
 
 
   </div>
@@ -2126,12 +2124,12 @@ Specified a contiguous range of timestamps.</p>
       <pre class="lines">
 
 
-543
-544
-545</pre>
+541
+542
+543</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 543</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 541</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_timestamp_range'>timestamp_range</span> <span class='label'>from:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>to:</span> <span class='kw'>nil</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_timestamp_range'><span class='object_link'><a href="RowFilter/SimpleFilter.html#timestamp_range-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#timestamp_range (method)">timestamp_range</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_from'>from</span><span class='comma'>,</span> <span class='id identifier rubyid_to'>to</span><span class='rparen'>)</span>
@@ -2152,7 +2150,7 @@ Specified a contiguous range of timestamps.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create value match filter using regex</p>
+    <p>Creates a value match filter using a regular expression.</p>
 
 <p>Matches only cells with values that satisfy the given regular expression.
 Note that, since cell values can contain arbitrary bytes, the <code>\C</code> escape
@@ -2222,12 +2220,12 @@ binary value.</p>
       <pre class="lines">
 
 
-436
 437
-438</pre>
+438
+439</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 436</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/row_filter.rb', line 437</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='id identifier rubyid_regex'>regex</span>
   <span class='const'><span class='object_link'><a href="RowFilter/SimpleFilter.html" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter (class)">SimpleFilter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_value'><span class='object_link'><a href="RowFilter/SimpleFilter.html#value-instance_method" title="Google::Cloud::Bigtable::RowFilter::SimpleFilter#value (method)">value</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_regex'>regex</span><span class='rparen'>)</span>
@@ -2248,7 +2246,7 @@ binary value.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create value range filter instance</p>
+    <p>Creates a value-range filter instance.</p>
 
 <p>Matches only cells with values that fall within the given range.</p>
 
@@ -2256,8 +2254,10 @@ binary value.</p>
 option inclusive/exclusive options</p>
 
 <ul>
-<li>The value at which to start the range.If neither field is set, interpreted as the empty string, inclusive.</li>
-<li>The value at which to end the range. If neither field is set, interpreted as the infinite string, exclusive.</li>
+<li>The value at which to start the range. If neither field is set, interpreted
+as an empty string, inclusive.</li>
+<li>The value at which to end the range. If neither field is set, interpreted
+as the infinite string, exclusive.</li>
 </ul>
 
 
