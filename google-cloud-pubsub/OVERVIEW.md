@@ -269,7 +269,7 @@ subscriber = sub.listen do |received_message|
   puts received_message.message.data
 
   # Delay for 2 minutes
-  received_message.delay! 120
+  received_message.modify_ack_deadline! 120
 end
 
 # Start background threads that will call the block passed to listen.
@@ -311,7 +311,7 @@ pubsub = Google::Cloud::Pubsub.new
 
 sub = pubsub.subscription "my-topic-sub"
 received_messages = sub.pull
-sub.delay 120, received_messages
+sub.modify_ack_deadline 120, received_messages
 ```
 
 ## Creating a snapshot and using seek
