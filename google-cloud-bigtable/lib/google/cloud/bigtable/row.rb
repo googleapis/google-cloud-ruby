@@ -57,7 +57,7 @@ module Google
             Time.at(@timestamp / 1000.0)
           end
 
-          # Converts a value to aninteger.
+          # Converts a value to an integer.
           #
           # @return [Integer]
           #
