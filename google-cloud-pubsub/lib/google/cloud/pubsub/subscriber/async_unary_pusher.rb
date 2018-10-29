@@ -68,7 +68,7 @@ module Google
             nil
           end
 
-          def delay deadline, ack_ids
+          def modify_ack_deadline deadline, ack_ids
             return true if ack_ids.empty?
 
             synchronize do
@@ -93,6 +93,7 @@ module Google
 
             nil
           end
+          alias delay modify_ack_deadline
 
           def start
             synchronize do
