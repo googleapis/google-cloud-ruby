@@ -20,8 +20,8 @@ module Google
       #
       # Specifies a contiguous range of rows.
       #
-      # * from key bound : The row key at which to from the range.
-      #   If neither field is set, interpreted as the empty string, inclusive.
+      # * From key bound : The row key at which to begin the range.
+      #   If neither field is set, interpreted as an empty string, inclusive.
       # * End key bound: The row key at which to end the range.
       #   If neither field is set, interpreted as the infinite row key, exclusive.
       #
@@ -54,16 +54,16 @@ module Google
       #
       class RowRange
         # @private
-        # Create row range instance.
+        # Creates a row range instance.
         def initialize
           @grpc = Google::Bigtable::V2::RowRange.new
         end
 
-        # Set row range with the lower bound.
+        # Sets a row range with a lower bound.
         #
-        # @param key [String] Row key. Required
-        # @param inclusive [String] Inclusive/Exclusive lower bound.
-        #   Default it is an inclusive lower bound.
+        # @param key [String] Row key. Required.
+        # @param inclusive [String] Inclusive/exclusive lower bound.
+        #   Default is an inclusive lower bound.
         # @return [Google::Cloud::Bigtable::RowRange]
         #
         # @example Inclusive lower bound.
@@ -91,9 +91,9 @@ module Google
           self
         end
 
-        # Set row range with the upper bound.
+        # Sets a row range with an upper bound.
         #
-        # @param key [String] Row key. Required
+        # @param key [String] Row key. Required.
         # @param inclusive [String] Inclusive/Exclusive upper bound.
         #   Default it is an exclusive upper bound.
         # @return [Google::Cloud::Bigtable::RowRange]
@@ -123,12 +123,12 @@ module Google
           self
         end
 
-        # Set row range with the inclusive upper and lower bounds.
+        # Sets a row range with inclusive upper and lower bounds.
         #
-        # @param from_key [String] Inclusive from row key. Required
-        # @param to_key [String] Inclusive end row key. Required
+        # @param from_key [String] Inclusive from row key. Required.
+        # @param to_key [String] Inclusive end row key. Required.
         # @return [Google::Cloud::Bigtable::RowRange]
-        #   Range with inclusive from and end row key.
+        #   Range with inclusive from and end row keys.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -142,10 +142,10 @@ module Google
           from(from_key).to(to_key, inclusive: true)
         end
 
-        # Set row range with the inclusive lower and the exclusive upper bound.
+        # Sets a row range with an inclusive lower bound and an exclusive upper bound.
         #
-        # @param from_key [String] Inclusive from row key
-        # @param to_key [String] Exclusive end row key
+        # @param from_key [String] Inclusive from row key.
+        # @param to_key [String] Exclusive end row key.
         # @return [Google::Cloud::Bigtable::RowRange]
         #   Range with inclusive from and exclusive end row key.
         #

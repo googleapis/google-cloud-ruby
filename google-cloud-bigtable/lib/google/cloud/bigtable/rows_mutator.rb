@@ -40,7 +40,7 @@ module Google
 
         # @private
         #
-        # Create mutate rows instance
+        # Creates a mutate rows instance.
         #
         # @param table [Google::Cloud::Bigtable::TableDataOperations]
         # @param entries [Array<Google::Cloud::Bigtable::MutationEntry>]
@@ -50,7 +50,7 @@ module Google
           @entries = entries
         end
 
-        # Apply mutations.
+        # Applies mutations.
         #
         # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
         #
@@ -58,7 +58,7 @@ module Google
           @req_entries = @entries.map(&:to_grpc)
           statuses = mutate_rows(@req_entries)
 
-          # Collect retryable mutations indices
+          # Collects retryable mutations indices.
           indices = statuses.each_with_object([]) do |e, r|
             if @entries[e.index].retryable? && RETRYABLE_CODES[e.status.code]
               r << e.index
@@ -77,7 +77,7 @@ module Google
 
         private
 
-        # Mutate rows
+        # Mutates rows.
         #
         # @param entries [Array<Google::Cloud::Bigtable::MutationEntry>]
         # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
@@ -97,7 +97,7 @@ module Google
           raise Google::Cloud::Error.from_error(e)
         end
 
-        # Collected failed entries, retry mutation and update status
+        # Collects failed entries, retries mutation, and updates status.
         #
         # @param statuses [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
         # @param indices [Array<Integer>]
