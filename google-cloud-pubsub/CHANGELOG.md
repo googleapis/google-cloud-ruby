@@ -1,5 +1,11 @@
 # Release History
 
+### 0.33.2 / 2018-10-29
+
+* Rename delay methods to modify_ack_deadline
+  * Rename modify_ack_deadling aliases to delay
+  * This maintains backwards compatibility
+
 ### 0.33.1 / 2018-10-03
 
 * Update connection configuration.
