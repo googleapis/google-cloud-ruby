@@ -286,7 +286,7 @@ can be acknowledged one at a time: (See
 message for redelivery. The message acknowledgement deadline can delayed if more
 time is needed. This will allow more time to process the message before the
 message is marked for redelivery. (See
-<span class='object_link'><a href="Google/Cloud/Pubsub/ReceivedMessage.html#delay!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#delay! (method)">ReceivedMessage#delay!</a></span>)</p>
+<span class='object_link'><a href="Google/Cloud/Pubsub/ReceivedMessage.html#modify_ack_deadline!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline! (method)">ReceivedMessage#modify_ack_deadline!</a></span>)</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
 
@@ -297,7 +297,7 @@ message is marked for redelivery. (See
   <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
 
   <span class='comment'># Delay for 2 minutes
-</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_delay!'>delay!</span> <span class='int'>120</span>
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline!'>modify_ack_deadline!</span> <span class='int'>120</span>
 <span class='kw'>end</span>
 
 <span class='comment'># Start background threads that will call the block passed to listen.
@@ -329,7 +329,7 @@ message is marked for redelivery. (See
 </code></pre>
 
 <p>Multiple messages can be delayed or made available for immediate redelivery:
-(See <span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#delay-instance_method" title="Google::Cloud::Pubsub::Subscription#delay (method)">Subscription#delay</a></span>)</p>
+(See <span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#modify_ack_deadline-instance_method" title="Google::Cloud::Pubsub::Subscription#modify_ack_deadline (method)">Subscription#modify_ack_deadline</a></span>)</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
 
@@ -337,7 +337,7 @@ message is marked for redelivery. (See
 
 <span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_received_messages'>received_messages</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_pull'>pull</span>
-<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_delay'>delay</span> <span class='int'>120</span><span class='comma'>,</span> <span class='id identifier rubyid_received_messages'>received_messages</span>
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> <span class='int'>120</span><span class='comma'>,</span> <span class='id identifier rubyid_received_messages'>received_messages</span>
 </code></pre>
 
 <h2>Creating a snapshot and using seek</h2>

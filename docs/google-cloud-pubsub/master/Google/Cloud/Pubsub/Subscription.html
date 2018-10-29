@@ -247,31 +247,6 @@ specific <span class='object_link'><a href="Topic.html" title="Google::Cloud::Pu
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#delay-instance_method" title="#delay (instance method)">#<strong>delay</strong>(new_deadline, *messages)  &#x21d2; Object </a>
-    
-
-    
-      (also: #modify_ack_deadline)
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Modifies the acknowledge deadline for messages.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#delete-instance_method" title="#delete (instance method)">#<strong>delete</strong>  &#x21d2; Boolean </a>
     
 
@@ -425,6 +400,31 @@ specific <span class='object_link'><a href="Topic.html" title="Google::Cloud::Pu
 
   
     <span class="summary_desc"><div class='inline'><p>Create a <span class='object_link'><a href="Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span> object that receives  and processes messages using the code provided in the callback.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modify_ack_deadline-instance_method" title="#modify_ack_deadline (instance method)">#<strong>modify_ack_deadline</strong>(new_deadline, *messages)  &#x21d2; Object </a>
+    
+
+    
+      (also: #delay)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Modifies the acknowledge deadline for messages.</p>
 </div></span>
   
 </li>
@@ -1031,115 +1031,6 @@ message.</p>
   <span class='ivar'>@grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_update_subscription'>update_subscription</span> <span class='id identifier rubyid_update_grpc'>update_grpc</span><span class='comma'>,</span>
                                       <span class='symbol'>:ack_deadline_seconds</span>
   <span class='ivar'>@lazy</span> <span class='op'>=</span> <span class='kw'>nil</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="delay-instance_method">
-  
-    #<strong>delay</strong>(new_deadline, *messages)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-    <span class="aliases">Also known as:
-    <span class="names"><span id='modify_ack_deadline-instance_method'>modify_ack_deadline</span></span>
-    </span>
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Modifies the acknowledge deadline for messages.</p>
-
-<p>This indicates that more time is needed to process the messages, or to
-make the messages available for redelivery if the processing was
-interrupted.</p>
-
-<p>See also <span class='object_link'><a href="ReceivedMessage.html#delay!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#delay! (method)">ReceivedMessage#delay!</a></span>.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-  <div class="examples">
-    <p class="tag_title">Examples:</p>
-    
-      
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
-
-<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_received_messages'>received_messages</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_pull'>pull</span>
-<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_delay'>delay</span> <span class='int'>120</span><span class='comma'>,</span> <span class='id identifier rubyid_received_messages'>received_messages</span></code></pre>
-    
-  </div>
-<p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>new_deadline</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>The new ack deadline in seconds from the
-time this request is sent to the Pub/Sub system. Must be &gt;= 0. For
-example, if the value is <code>10</code>, the new ack deadline will expire 10
-seconds after the call is made. Specifying <code>0</code> may immediately make
-the message available for another pull request.</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>messages</span>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="ReceivedMessage.html" title="Google::Cloud::Pubsub::ReceivedMessage (class)">ReceivedMessage</a></span></tt>, <tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>One or more
-<span class='object_link'><a href="ReceivedMessage.html" title="Google::Cloud::Pubsub::ReceivedMessage (class)">ReceivedMessage</a></span> objects or ack_id values.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-496
-497
-498
-499
-500
-501</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 496</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_delay'>delay</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_messages'>messages</span>
-  <span class='id identifier rubyid_ack_ids'>ack_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_coerce_ack_ids'>coerce_ack_ids</span> <span class='id identifier rubyid_messages'>messages</span>
-  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
-  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_ack_ids'>ack_ids</span><span class='comma'>,</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span>
-  <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1773,6 +1664,115 @@ message</p>
   <span class='const'><span class='object_link'><a href="Subscriber.html" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='comma'>,</span> <span class='label'>deadline:</span> <span class='id identifier rubyid_deadline'>deadline</span><span class='comma'>,</span> <span class='label'>streams:</span> <span class='id identifier rubyid_streams'>streams</span><span class='comma'>,</span>
                               <span class='label'>inventory:</span> <span class='id identifier rubyid_inventory'>inventory</span><span class='comma'>,</span> <span class='label'>threads:</span> <span class='id identifier rubyid_threads'>threads</span><span class='comma'>,</span>
                               <span class='label'>service:</span> <span class='id identifier rubyid_service'>service</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="modify_ack_deadline-instance_method">
+  
+    #<strong>modify_ack_deadline</strong>(new_deadline, *messages)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='delay-instance_method'>delay</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Modifies the acknowledge deadline for messages.</p>
+
+<p>This indicates that more time is needed to process the messages, or to
+make the messages available for redelivery if the processing was
+interrupted.</p>
+
+<p>See also <span class='object_link'><a href="ReceivedMessage.html#delay!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#delay! (method)">ReceivedMessage#delay!</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_received_messages'>received_messages</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_pull'>pull</span>
+<span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> <span class='int'>120</span><span class='comma'>,</span> <span class='id identifier rubyid_received_messages'>received_messages</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_deadline</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The new ack deadline in seconds from the
+time this request is sent to the Pub/Sub system. Must be &gt;= 0. For
+example, if the value is <code>10</code>, the new ack deadline will expire 10
+seconds after the call is made. Specifying <code>0</code> may immediately make
+the message available for another pull request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>messages</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ReceivedMessage.html" title="Google::Cloud::Pubsub::ReceivedMessage (class)">ReceivedMessage</a></span></tt>, <tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>One or more
+<span class='object_link'><a href="ReceivedMessage.html" title="Google::Cloud::Pubsub::ReceivedMessage (class)">ReceivedMessage</a></span> objects or ack_id values.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+496
+497
+498
+499
+500
+501</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 496</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_messages'>messages</span>
+  <span class='id identifier rubyid_ack_ids'>ack_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_coerce_ack_ids'>coerce_ack_ids</span> <span class='id identifier rubyid_messages'>messages</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_ack_ids'>ack_ids</span><span class='comma'>,</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span>
+  <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

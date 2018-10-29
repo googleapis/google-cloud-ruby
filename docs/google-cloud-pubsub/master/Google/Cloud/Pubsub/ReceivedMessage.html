@@ -233,31 +233,6 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#delay!-instance_method" title="#delay! (instance method)">#<strong>delay!</strong>(new_deadline)  &#x21d2; Object </a>
-    
-
-    
-      (also: #modify_ack_deadline!)
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>Modifies the acknowledge deadline for the message.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#message-instance_method" title="#message (instance method)">#<strong>message</strong>  &#x21d2; Object </a>
     
 
@@ -300,6 +275,31 @@ js:
 
   
     <span class="summary_desc"><div class='inline'><p>The ID of the received message, assigned by the server at publication time.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modify_ack_deadline!-instance_method" title="#modify_ack_deadline! (instance method)">#<strong>modify_ack_deadline!</strong>(new_deadline)  &#x21d2; Object </a>
+    
+
+    
+      (also: #delay!)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Modifies the acknowledge deadline for the message.</p>
 </div></span>
   
 </li>
@@ -555,102 +555,6 @@ ASCII-8BIT.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="delay!-instance_method">
-  
-    #<strong>delay!</strong>(new_deadline)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-    <span class="aliases">Also known as:
-    <span class="names"><span id='modify_ack_deadline!-instance_method'>modify_ack_deadline!</span></span>
-    </span>
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Modifies the acknowledge deadline for the message.</p>
-
-<p>This indicates that more time is needed to process the message, or to
-make the message available for redelivery.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-  <div class="examples">
-    <p class="tag_title">Examples:</p>
-    
-      
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
-
-<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
-
-<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
-<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
-
-  <span class='comment'># Delay for 2 minutes
-</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_delay!'>delay!</span> <span class='int'>120</span>
-<span class='kw'>end</span>
-
-<span class='comment'># Start background threads that will call block passed to listen.
-</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
-
-<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
-</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span></code></pre>
-    
-  </div>
-<p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>new_deadline</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>The new ack deadline in seconds from the
-time this request is sent to the Pub/Sub system. Must be &gt;= 0. For
-example, if the value is <code>10</code>, the new ack deadline will expire 10
-seconds after the call is made. Specifying <code>0</code> may immediately make
-the message available for another pull request.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-159
-160
-161
-162</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/received_message.rb', line 159</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_delay!'>delay!</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span>
-  <span class='id identifier rubyid_ensure_subscription!'>ensure_subscription!</span>
-  <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_delay'>delay</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span><span class='comma'>,</span> <span class='id identifier rubyid_ack_id'>ack_id</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
   <h3 class="signature " id="message-instance_method">
   
     #<strong>message</strong>  &#x21d2; <tt>Object</tt> 
@@ -733,6 +637,102 @@ time. Guaranteed to be unique within the topic.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_message_id'>message_id</span>
   <span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_message_id'>message_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="modify_ack_deadline!-instance_method">
+  
+    #<strong>modify_ack_deadline!</strong>(new_deadline)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='delay!-instance_method'>delay!</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Modifies the acknowledge deadline for the message.</p>
+
+<p>This indicates that more time is needed to process the message, or to
+make the message available for redelivery.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span>
+
+  <span class='comment'># Delay for 2 minutes
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline!'>modify_ack_deadline!</span> <span class='int'>120</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start background threads that will call block passed to listen.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_deadline</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The new ack deadline in seconds from the
+time this request is sent to the Pub/Sub system. Must be &gt;= 0. For
+example, if the value is <code>10</code>, the new ack deadline will expire 10
+seconds after the call is made. Specifying <code>0</code> may immediately make
+the message available for another pull request.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+159
+160
+161
+162</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/received_message.rb', line 159</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_ack_deadline!'>modify_ack_deadline!</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span>
+  <span class='id identifier rubyid_ensure_subscription!'>ensure_subscription!</span>
+  <span class='id identifier rubyid_subscription'>subscription</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> <span class='id identifier rubyid_new_deadline'>new_deadline</span><span class='comma'>,</span> <span class='id identifier rubyid_ack_id'>ack_id</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

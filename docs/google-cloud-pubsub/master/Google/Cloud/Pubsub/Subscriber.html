@@ -269,7 +269,7 @@ Subscription. See <span class='object_link'><a href="Subscription.html#listen-in
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The number of threads to handle acknowledgement (<span class='object_link'><a href="ReceivedMessage.html#ack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#ack! (method)">ReceivedMessage#ack!</a></span>) and delay messages (<span class='object_link'><a href="ReceivedMessage.html#nack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#nack! (method)">ReceivedMessage#nack!</a></span>, <span class='object_link'><a href="ReceivedMessage.html#delay!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#delay! (method)">ReceivedMessage#delay!</a></span>).</p>
+    <span class="summary_desc"><div class='inline'><p>The number of threads to handle acknowledgement (<span class='object_link'><a href="ReceivedMessage.html#ack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#ack! (method)">ReceivedMessage#ack!</a></span>) and delay messages (<span class='object_link'><a href="ReceivedMessage.html#nack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#nack! (method)">ReceivedMessage#nack!</a></span>, <span class='object_link'><a href="ReceivedMessage.html#modify_ack_deadline!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline! (method)">ReceivedMessage#modify_ack_deadline!</a></span>).</p>
 </div></span>
   
 </li>
@@ -558,12 +558,12 @@ received from the subscription.</p>
       <pre class="lines">
 
 
-62
 63
-64</pre>
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callback'>callback</span>
   <span class='ivar'>@callback</span>
@@ -618,12 +618,12 @@ handle the received messages. Default is 8.</p>
       <pre class="lines">
 
 
-62
 63
-64</pre>
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callback_threads'>callback_threads</span>
   <span class='ivar'>@callback_threads</span>
@@ -679,12 +679,12 @@ deadline. The minimum is 10, the maximum is 600. Default is 60.</p>
       <pre class="lines">
 
 
-62
 63
-64</pre>
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deadline'>deadline</span>
   <span class='ivar'>@deadline</span>
@@ -739,12 +739,12 @@ collected by subscriber. Default is 1,000.</p>
       <pre class="lines">
 
 
-62
 63
-64</pre>
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inventory'>inventory</span>
   <span class='ivar'>@inventory</span>
@@ -769,7 +769,8 @@ collected by subscriber. Default is 1,000.</p>
   <div class="discussion">
     <p>The number of threads to handle
 acknowledgement (<span class='object_link'><a href="ReceivedMessage.html#ack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#ack! (method)">ReceivedMessage#ack!</a></span>) and delay messages
-(<span class='object_link'><a href="ReceivedMessage.html#nack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#nack! (method)">ReceivedMessage#nack!</a></span>, <span class='object_link'><a href="ReceivedMessage.html#delay!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#delay! (method)">ReceivedMessage#delay!</a></span>). Default is 4.</p>
+(<span class='object_link'><a href="ReceivedMessage.html#nack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#nack! (method)">ReceivedMessage#nack!</a></span>, <span class='object_link'><a href="ReceivedMessage.html#modify_ack_deadline!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline! (method)">ReceivedMessage#modify_ack_deadline!</a></span>).
+Default is 4.</p>
 
 
   </div>
@@ -800,12 +801,12 @@ acknowledgement (<span class='object_link'><a href="ReceivedMessage.html#ack!-in
       <pre class="lines">
 
 
-62
 63
-64</pre>
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_push_threads'>push_threads</span>
   <span class='ivar'>@push_threads</span>
@@ -860,12 +861,12 @@ to pull messages from the subscription. Default is 4.</p>
       <pre class="lines">
 
 
-62
 63
-64</pre>
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streams'>streams</span>
   <span class='ivar'>@streams</span>
@@ -920,12 +921,12 @@ messages are pulled from.</p>
       <pre class="lines">
 
 
-62
 63
-64</pre>
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span>
   <span class='ivar'>@subscription_name</span>
@@ -1014,12 +1015,12 @@ recover from the error and resume listening.</p>
       <pre class="lines">
 
 
-244
 245
-246</pre>
+246
+247</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 245</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_last_error'>last_error</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@last_error</span> <span class='rbrace'>}</span>
@@ -1124,14 +1125,14 @@ recover from the error and resume listening.</p>
       <pre class="lines">
 
 
-208
 209
 210
 211
-212</pre>
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_error'>on_error</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1186,7 +1187,6 @@ received messages.</p>
       <pre class="lines">
 
 
-104
 105
 106
 107
@@ -1198,10 +1198,11 @@ received messages.</p>
 113
 114
 115
-116</pre>
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start'>start</span>
   <span class='id identifier rubyid_start_pool'>start_pool</span> <span class='op'>=</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1263,12 +1264,12 @@ received messages.</p>
       <pre class="lines">
 
 
-161
 162
-163</pre>
+163
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 162</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_started?'>started?</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@started</span> <span class='rbrace'>}</span>
@@ -1323,7 +1324,6 @@ stopped and all received messages have been processed.</p>
       <pre class="lines">
 
 
-125
 126
 127
 128
@@ -1335,10 +1335,11 @@ stopped and all received messages have been processed.</p>
 134
 135
 136
-137</pre>
+137
+138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
   <span class='id identifier rubyid_stop_pool'>stop_pool</span> <span class='op'>=</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1400,12 +1401,12 @@ stopped and all received messages have been processed.</p>
       <pre class="lines">
 
 
-169
 170
-171</pre>
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 169</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 170</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stopped?'>stopped?</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@stopped</span> <span class='rbrace'>}</span>
@@ -1460,7 +1461,6 @@ the subscriber is stopped.</p>
       <pre class="lines">
 
 
-146
 147
 148
 149
@@ -1469,10 +1469,11 @@ the subscriber is stopped.</p>
 152
 153
 154
-155</pre>
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait!'>wait!</span>
   <span class='id identifier rubyid_wait_pool'>wait_pool</span> <span class='op'>=</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
