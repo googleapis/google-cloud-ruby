@@ -33,12 +33,12 @@ module Google
       #   * Read rows
       #
       module ReadOperations
-        # Read sample row keys.
+        # Reads sample row keys.
         #
         # Returns a sample of row keys in the table. The returned row keys will
         # delimit contiguous sections of the table of approximately equal size. The
         # sections can be used to break up the data for distributed tasks like
-        # mapreduces.
+        # MapReduces.
         #
         # @yieldreturn [Google::Cloud::Bigtable::SampleRowKey]
         # @return [:yields: sample_row_key]
@@ -67,7 +67,7 @@ module Google
           end
         end
 
-        # Read rows
+        # Reads rows.
         #
         # Streams back the contents of all requested rows in key order, optionally
         # applying the same Reader filter to each.
@@ -185,7 +185,7 @@ module Google
           end
         end
 
-        # Read single row by row key
+        # Reads a single row by row key.
         #
         # @param key [String] Row key. Required
         # @param filter [Google::Cloud::Bigtable::RowFilter]
@@ -216,7 +216,7 @@ module Google
           read_rows(keys: [key], filter: filter).first
         end
 
-        # Create a new instance of ValueRange.
+        # Creates a new instance of ValueRange.
         #
         # @return [Google::Cloud::Bigtable::ValueRange]
         #
@@ -304,7 +304,7 @@ module Google
           Google::Cloud::Bigtable::RowRange.new
         end
 
-        # Get row filter
+        # Gets a row filter.
         #
         # @return [Google::Cloud::Bigtable::RowRange]
         #
@@ -322,7 +322,7 @@ module Google
 
         private
 
-        # Build RowSet object from row keys and row ranges
+        # Builds a RowSet object from row keys and row ranges.
         #
         # @param row_keys [Array<String>]
         # @param row_ranges [Google::Cloud::Bigtable::RowRange | Array<Google::Cloud::Bigtable::RowRange>]

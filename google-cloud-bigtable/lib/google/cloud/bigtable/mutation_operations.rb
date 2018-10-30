@@ -256,7 +256,7 @@ module Google
         # Returns a sample of row keys in the table. The returned row keys will
         # delimit contiguous sections of the table of approximately equal size. The
         # sections can be used to break up the data for distributed tasks like
-        # mapreduces.
+        # MapReduces.
         #
         # @yieldreturn [Google::Cloud::Bigtable::SampleRowKey]
         # @return [:yields: sample_row_key]

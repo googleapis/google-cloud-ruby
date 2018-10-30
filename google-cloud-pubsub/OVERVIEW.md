@@ -257,7 +257,8 @@ A message must be acknowledged after it is pulled, or Pub/Sub will mark the
 message for redelivery. The message acknowledgement deadline can delayed if more
 time is needed. This will allow more time to process the message before the
 message is marked for redelivery. (See
-{Google::Cloud::Pubsub::ReceivedMessage#delay! ReceivedMessage#delay!})
+{Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline!
+ReceivedMessage#modify_ack_deadline!})
 
 ```ruby
 require "google/cloud/pubsub"
@@ -269,7 +270,7 @@ subscriber = sub.listen do |received_message|
   puts received_message.message.data
 
   # Delay for 2 minutes
-  received_message.delay! 120
+  received_message.modify_ack_deadline! 120
 end
 
 # Start background threads that will call the block passed to listen.
@@ -302,7 +303,8 @@ subscriber.stop.wait!
 ```
 
 Multiple messages can be delayed or made available for immediate redelivery:
-(See {Google::Cloud::Pubsub::Subscription#delay Subscription#delay})
+(See {Google::Cloud::Pubsub::Subscription#modify_ack_deadline
+Subscription#modify_ack_deadline})
 
 ```ruby
 require "google/cloud/pubsub"
@@ -311,7 +313,7 @@ pubsub = Google::Cloud::Pubsub.new
 
 sub = pubsub.subscription "my-topic-sub"
 received_messages = sub.pull
-sub.delay 120, received_messages
+sub.modify_ack_deadline 120, received_messages
 ```
 
 ## Creating a snapshot and using seek

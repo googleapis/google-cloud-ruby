@@ -34,33 +34,33 @@ module Google
       # return all the cells of a row but not their values. More complicated filters
       # can be composed out of these components to express requests such as, "within
       # every column of a particular family, give just the two most recent cells
-      # which are older than timestamp X."
+      # that are older than timestamp X."
       #
-      # There are two broad categories of RowFilters (true filters and transformers),
-      # as well as two ways to compose simple filters into more complex ones
-      # (chains and interleaves). They work as follows:
+      # Two broad categories of RowFilters are `true filters` and `transformers`.
+      # Two ways to compose simple filters into more complex ones are 
+      # `chains` and `interleaves`. They work as follows:
       #
       # * True filters alter the input row by excluding some of its cells wholesale
       # from the output row. An example of a true filter is the `value_regex_filter`,
       # which excludes cells whose values don't match the specified pattern. All
       # regex true filters use RE2 syntax (https:#github.com/google/re2/wiki/Syntax)
-      # in raw byte mode (RE2::Latin1), and are evaluated as full matches. An
+      # in raw byte mode (RE2::Latin1) and are evaluated as full matches. An
       # important point to keep in mind is that `RE2(.)` is equivalent by default to
       # `RE2([^\n])`, meaning that it does not match newlines. When attempting to
       # match an arbitrary byte, you should therefore use the escape sequence `\C`,
-      # which may need to be further escaped as `\\C` in your client language.
+      # which should be further escaped as `\\C` in Ruby.
       #
       # * Transformers alter the input row by changing the values of some of its
       # cells in the output, without excluding them completely. Currently, the only
       # supported transformer is the `strip_value_transformer`, which replaces every
-      # cell's value with the empty string.
+      # cell's value with an empty string.
       #
       # * Chains and interleaves are described in more detail in the
       # RowFilter.Chain and RowFilter.Interleave documentation.
       #
       # The total serialized size of a RowFilter message must not
       # exceed 4096 bytes, and RowFilters may not be nested within each other
-      # (in Chains or Interleaves) to a depth of more than 20.
+      # (in chains or interleaves) to a depth of more than 20.
       #
       # ADVANCED USE:.
       # Hook for introspection into the RowFilter. Outputs all cells directly to
@@ -112,11 +112,11 @@ module Google
       # Despite being excluded by the qualifier filter, a copy of every cell
       # that reaches the sink is present in the final result.
       #
-      # As with an Interleave filter duplicate cells are possible,
+      # As with an interleave filter, duplicate cells are possible
       # and appear in an unspecified mutual order.
-      # In this case we have a duplicate with column "A:B" and timestamp 2,
-      # because one copy passed through the all filter while the other was
-      # passed through the label and sink. Note that one copy has label "foo",
+      # In this case we have a duplicate with column "A:B" and timestamp 2
+      # because one copy passed through the All filter while the other was
+      # passed through the Label and Sink filters. Note that one copy has the label "foo",
       # while the other does not.
       #
       # @example
@@ -145,9 +145,9 @@ module Google
 
         private_constant :PASS, :BLOCK, :SINK, :STRIP_VALUE
 
-        # Create chain filter instance.
+        # Creates a chain filter instance.
         #
-        # A Chain RowFilter which sends rows through several RowFilters in sequence.
+        # A chain RowFilter that sends rows through several RowFilters in sequence.
         #
         # See {Google::Cloud::Bigtable::RowFilter::ChainFilter}
         #
@@ -182,9 +182,9 @@ module Google
           ChainFilter.new
         end
 
-        # Create interleave filter.
+        # Creates an interleave filter.
         #
-        # A RowFilter which sends each row to each of several component
+        # A RowFilter that sends each row to each of several component
         # RowFilters and interleaves the results.
         #
         # The elements of "filters" all process a copy of the input row, and the
@@ -215,7 +215,7 @@ module Google
         #
         # @return [Google::Cloud::Bigtable::RowFilter::InterleaveFilter]
         #
-        # @example Create interleave filter with simple filter.
+        # @example Create an interleave filter with simple filter.
         #
         #   interleave = Google::Cloud::Bigtable::RowFilter.interleave
         #
@@ -240,14 +240,14 @@ module Google
           InterleaveFilter.new
         end
 
-        # Create condition filter instance
+        # Creates a condition filter instance.
         #
-        # A RowFilter which evaluates one of two possible RowFilters, depending on
+        # A RowFilter that evaluates one of two possible RowFilters, depending on
         # whether or not a predicate RowFilter outputs any cells from the input row.
         #
         # IMPORTANT NOTE: The predicate filter does not execute atomically with the
         # true and false filters, which may lead to inconsistent or unexpected
-        # results. Additionally, Condition filters have poor performance, especially
+        # results. Additionally, condition filters have poor performance, especially
         # when filters are set for the false condition.
         #
         # Cannot be used within the `predicate_filter`, `true_filter`, or `false_filter`
@@ -263,14 +263,14 @@ module Google
         #   label = Google::Cloud::Bigtable::RowFilter.label("user")
         #   strip_value = Google::Cloud::Bigtable::RowFilter.strip_value
         #
-        #   # On match apply lable else strip cell values
+        #   # On match apply label, else strip cell values
         #   condition.on_match(label).otherwise(strip_value)
         #
         def self.condition predicate
           ConditionFilter.new(predicate)
         end
 
-        # Create pass filter instance
+        # Creates a pass filter instance.
         #
         # Matches all cells, regardless of input. Functionally equivalent to
         # leaving `filter` unset, but included for completeness.
@@ -285,7 +285,7 @@ module Google
           PASS
         end
 
-        # Create block all filter instance
+        # Creates a block-all filter instance.
         #
         # Does not match any cells, regardless of input. Useful for temporarily
         # disabling just part of a filter.
@@ -300,9 +300,10 @@ module Google
           BLOCK
         end
 
-        # Create sink filter instance
+        # Creates a sink filter instance.
         #
-        # Outputs all cells directly to the output of the read rather than to any parent filter
+        # Outputs all cells directly to the output of the read rather than to any
+        # parent filter
         #
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
@@ -314,9 +315,9 @@ module Google
           SINK
         end
 
-        # Create strip value filter instance
+        # Creates a strip value filter instance.
         #
-        # Replaces each cell's value with the empty string.
+        # Replaces each cell's value with an empty string.
         #
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
         #
@@ -328,9 +329,9 @@ module Google
           STRIP_VALUE
         end
 
-        # Create key filter instance to match key using regular expression.
+        # Creates a key filter instance to match a row key using a regular expression.
         #
-        # Matches only cells from rows whose keys satisfy the given RE2 regex. In
+        # Matches only cells from rows whose row keys satisfy the given RE2 regex. In
         # other words, passes through the entire row when the key matches, and
         # otherwise produces an empty row.
         # Note that, since row keys can contain arbitrary bytes, the `\C` escape
@@ -352,7 +353,7 @@ module Google
           SimpleFilter.new.key(regex)
         end
 
-        # Create sample probability filter instance
+        # Creates a sample probability filter instance.
         #
         # Matches all cells from a row with probability p, and matches no cells
         # from the row with probability 1-p.
@@ -369,7 +370,7 @@ module Google
           SimpleFilter.new.sample(probability)
         end
 
-        # Create family name match filter using regex
+        # Creates a family name match filter using a regular expression.
         #
         # Matches only cells from columns whose families satisfy the given RE2
         # regex. For technical reasons, the regex must not contain the `:`
@@ -392,7 +393,7 @@ module Google
           SimpleFilter.new.family(regex)
         end
 
-        # Create column qualifier match filter using regex
+        # Creates a column qualifier match filter using a regular expression.
         #
         # Matches only cells from columns whose qualifiers satisfy the given RE2
         # regex.
@@ -415,7 +416,7 @@ module Google
           SimpleFilter.new.qualifier(regex)
         end
 
-        # Create value match filter using regex
+        # Creates a value match filter using a regular expression.
         #
         # Matches only cells with values that satisfy the given regular expression.
         # Note that, since cell values can contain arbitrary bytes, the `\C` escape
@@ -437,20 +438,21 @@ module Google
           SimpleFilter.new.value(regex)
         end
 
-        # Create label filter instance to apply label on result of read rows.
+        # Creates a label filter instance to apply a label based on the result of
+        # read rows.
         #
         # Applies the given label to all cells in the output row. This allows
         # the client to determine which results were produced from which part of
         # the filter.
         #
-        # Values must be at most 15 characters in length, and match the RE2
+        # Values must be at most 15 characters and match the RE2
         # pattern `[a-z0-9\\-]+`
         #
         # Due to a technical limitation, it is not currently possible to apply
-        # multiple labels to a cell. As a result, a Chain may have no more than
-        # one sub-filter that contains an `apply_label_transformer`. It is okay for
-        # an Interleave to contain multiple `apply_label_transformers`, as they
-        # will be applied to separate copies of the input. 
+        # multiple labels to a cell. As a result, a chain may have no more than
+        # one sub-filter that contains a `self.label value`. In contrast,
+        # an interleave may contain more than one because the filters
+        # will be applied to separate copies of the input.
         #
         # @param value [String] Label name
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
@@ -463,10 +465,10 @@ module Google
           SimpleFilter.new.label(value)
         end
 
-        # Creates a cell per row offset filter instance to skip first N cells.
+        # Creates a cell-per-row offset filter instance to skip the first N cells.
         #
         # Skips the first N cells of each row, matching all subsequent cells.
-        # If duplicate cells are present, as is possible when using an Interleave,
+        # If duplicate cells are present, as is possible when using an interleave,
         # each copy of the cell is counted separately.
         #
         # @param offset [Integer] Offset value.
@@ -480,10 +482,10 @@ module Google
           SimpleFilter.new.cells_per_row_offset(offset)
         end
 
-        # Create cells per row limit filter instance
+        # Create a cells-per-row limit filter instance.
         #
         # Matches only the first N cells of each row.
-        # If duplicate cells are present, as is possible when using an Interleave,
+        # If duplicate cells are present, as is possible when using an interleave,
         # each copy of the cell is counted separately.
         #
         # @param limit [String] Max cell match per row limit
@@ -497,13 +499,10 @@ module Google
           SimpleFilter.new.cells_per_row(limit)
         end
 
-        # Create cells per column filter instance
+        # Creates cells-per-column filter instance.
         #
-        # Matches only the most recent N cells within each column. For example,
-        # if N=2, this filter would match column `foo:bar` at timestamps 10 and 9,
-        # skip all earlier cells in `foo:bar`, and then begin matching again in
-        # column `foo:bar2`.
-        # If duplicate cells are present, as is possible when using an Interleave,
+        # Matches only the most recent N cells within each column. 
+        # If duplicate cells are present, as is possible when using an interleave,
         # each copy of the cell is counted separately.
         #
         # @param limit [String] Max cell match per column limit
@@ -517,10 +516,10 @@ module Google
           SimpleFilter.new.cells_per_column(limit)
         end
 
-        # Create timestamp range filter instance
+        # Creates a timestamp-range filter instance.
         #
         # Matches only cells with timestamps within the given range.
-        # Specified a contiguous range of timestamps.
+        # Specifies a contiguous range of timestamps.
         #
         # @param from [Integer] Inclusive lower bound. If left empty, interpreted as 0.
         # @param to [Integer] Exclusive upper bound. If left empty, interpreted as infinity.
@@ -543,15 +542,17 @@ module Google
           SimpleFilter.new.timestamp_range(from, to)
         end
 
-        # Create value range filter instance
+        # Creates a value-range filter instance.
         #
         # Matches only cells with values that fall within the given range.
         #
         # See {Google::Cloud::Bigtable::ValueRange#from} and { Google::Cloud::Bigtable::ValueRange#to} for range
         # option inclusive/exclusive options
         #
-        # * The value at which to start the range.If neither field is set, interpreted as the empty string, inclusive.
-        # * The value at which to end the range. If neither field is set, interpreted as the infinite string, exclusive.
+        # * The value at which to start the range. If neither field is set, interpreted
+        # as an empty string, inclusive.
+        # * The value at which to end the range. If neither field is set, interpreted
+        #  as the infinite string, exclusive.
         #
         # @param range [Google::Cloud::Bigtable::ValueRange]
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
@@ -570,7 +571,7 @@ module Google
           SimpleFilter.new.value_range(range)
         end
 
-        # Create column range filter instance.
+        # Creates a column-range filter instance.
         #
         # Matches only cells from columns within the given range.
         #

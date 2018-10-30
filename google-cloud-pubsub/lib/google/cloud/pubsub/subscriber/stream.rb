@@ -144,7 +144,7 @@ module Google
 
           ##
           # @private
-          def delay deadline, *messages
+          def modify_ack_deadline deadline, *messages
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
@@ -157,6 +157,7 @@ module Google
 
             true
           end
+          alias delay modify_ack_deadline
 
           def async_pusher
             synchronize { @async_pusher }

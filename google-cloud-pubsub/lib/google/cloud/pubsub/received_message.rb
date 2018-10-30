@@ -147,7 +147,7 @@ module Google
         #     puts received_message.message.data
         #
         #     # Delay for 2 minutes
-        #     received_message.delay! 120
+        #     received_message.modify_ack_deadline! 120
         #   end
         #
         #   # Start background threads that will call block passed to listen.
@@ -156,11 +156,11 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   subscriber.stop.wait!
         #
-        def delay! new_deadline
+        def modify_ack_deadline! new_deadline
           ensure_subscription!
-          subscription.delay new_deadline, ack_id
+          subscription.modify_ack_deadline new_deadline, ack_id
         end
-        alias modify_ack_deadline! delay!
+        alias delay! modify_ack_deadline!
 
         ##
         # Resets the acknowledge deadline for the message without acknowledging
