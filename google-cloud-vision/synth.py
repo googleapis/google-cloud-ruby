@@ -16,7 +16,11 @@
 
 import synthtool as s
 import synthtool.gcp as gcp
+import synthtool.languages.ruby as ruby
 import logging
+from textwrap import dedent
+from os import listdir
+from os.path import isfile, join
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -26,28 +30,57 @@ v1_library = gapic.ruby_library(
     'vision', 'v1', artman_output_name='google-cloud-ruby/google-cloud-vision'
 )
 
+s.copy(v1_library / 'lib/google/cloud/vision.rb')
 s.copy(v1_library / 'lib/google/cloud/vision/v1')
 s.copy(v1_library / 'lib/google/cloud/vision/v1.rb')
+s.copy(v1_library / 'acceptance')
 s.copy(v1_library / 'test/google/cloud/vision/v1')
+s.copy(v1_library / 'README.md')
+s.copy(v1_library / 'LICENSE')
+s.copy(v1_library / '.gitignore')
+s.copy(v1_library / '.yardopts')
+s.copy(v1_library / 'google-cloud-vision.gemspec', merge=ruby.merge_gemspec)
 
-# PERMANENT: Handwritten layer owns Vision.new so low-level clients need to
-# use Vision::V1.new instead of Vision.new(version: :v1). Update the examples
-# and tests.
-# REMOVE when we migrate to gapic-only.
+# PERMANENT: Add migration guide to docs
 s.replace(
-    [
-      'lib/google/cloud/vision/v1/image_annotator_client.rb',
-      'test/google/cloud/vision/v1/image_annotator_client_test.rb'
-    ],
-    'require "google/cloud/vision"',
-    'require "google/cloud/vision/v1"')
+    'lib/google/cloud/vision.rb',
+    '# ### Preview',
+    dedent("""\
+      # ### Migration Guide
+          #
+          # The 0.32.0 release introduced breaking changes relative to the previous
+          # release, 0.31.0. For more details and instructions to migrate your code,
+          # please visit the [migration
+          # guide](https://cloud.google.com/vision/docs/ruby-client-migration).
+          #
+          # ### Preview"""))
+
+# PERMANENT: Add migration guide to readme
 s.replace(
-    [
-      'lib/google/cloud/vision/v1/image_annotator_client.rb',
-      'test/google/cloud/vision/v1/image_annotator_client_test.rb'
-    ],
-    'Google::Cloud::Vision\\.new\\(version: :v1\\)',
-    'Google::Cloud::Vision::V1.new')
+    'README.md',
+    '### Preview\n',
+    dedent("""\
+      ### Migration Guide
+
+      The 0.32.0 release introduced breaking changes relative to the previous release,
+      0.31.0. For more details and instructions to migrate your code, please visit the
+      [migration
+      guide](https://cloud.google.com/vision/docs/ruby-client-migration).
+
+      ### Preview\n"""))
+
+# PERMANENT: Add post-install message
+s.replace(
+    'google-cloud-vision.gemspec',
+    'gem.platform(\s+)= Gem::Platform::RUBY',
+    dedent("""\
+      gem.post_install_message =
+          "The 0.32.0 release introduced breaking changes relative to the "\\
+          "previous release, 0.31.0. For more details and instructions to migrate "\\
+          "your code, please visit the migration guide: "\\
+          "https://cloud.google.com/vision/docs/ruby-client-migration."
+
+        gem.platform\\1= Gem::Platform::RUBY"""))
 
 # https://github.com/googleapis/gapic-generator/issues/2232
 s.replace(
@@ -77,4 +110,15 @@ s.replace(
     'lib/**/*.rb',
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
+)
+s.replace(
+    'google-cloud-vision.gemspec',
+    'gem.add_development_dependency "rubocop".*$',
+    'gem.add_development_dependency "rubocop", "~> 0.59.2"'
+)
+# Adds LICENSE to .yardopts
+s.replace(
+    '.yardopts',
+    'README.md',
+    '\n'.join(['README.md', 'LICENSE'])
 )

@@ -17,7 +17,7 @@ require "minitest/spec"
 
 require "google/gax"
 
-require "google/cloud/vision/v1"
+require "google/cloud/vision"
 require "google/cloud/vision/v1/image_annotator_client"
 require "google/cloud/vision/v1/image_annotator_services_pb"
 require "google/longrunning/operations_pb"
@@ -95,7 +95,7 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::V1.new
+          client = Google::Cloud::Vision.new(version: :v1)
 
           # Call method
           response = client.batch_annotate_images(requests)
@@ -133,7 +133,7 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::V1.new
+          client = Google::Cloud::Vision.new(version: :v1)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -181,7 +181,7 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::V1.new
+          client = Google::Cloud::Vision.new(version: :v1)
 
           # Call method
           response = client.async_batch_annotate_files(requests)
@@ -222,7 +222,7 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::V1.new
+          client = Google::Cloud::Vision.new(version: :v1)
 
           # Call method
           response = client.async_batch_annotate_files(requests)
@@ -254,7 +254,7 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Vision::V1.new
+          client = Google::Cloud::Vision.new(version: :v1)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do

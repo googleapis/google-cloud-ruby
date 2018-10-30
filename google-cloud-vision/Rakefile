@@ -1,3 +1,16 @@
+# Copyright 2018 Google LLC
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 require "bundler/setup"
 require "bundler/gem_tasks"
 
@@ -48,16 +61,9 @@ task :acceptance, :project, :keyfile do |t, args|
    Google::Cloud::Vision::V1::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
-  require "google/cloud/storage/credentials"
-  (Google::Cloud::Storage::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Storage::Credentials::JSON_ENV_VARS).each do |path|
-    ENV[path] = nil
-  end
   # always overwrite when running tests
   ENV["VISION_PROJECT"] = project
   ENV["VISION_KEYFILE_JSON"] = keyfile
-  ENV["STORAGE_PROJECT"] = project
-  ENV["STORAGE_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end

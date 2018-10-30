@@ -2,8 +2,4 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "google-cloud-core", path: "../google-cloud-core"
-gem "google-cloud-env", path: "../google-cloud-env"
-gem "google-cloud-storage", path: "../google-cloud-storage"
-
 gem "rake", "~> 12.3"

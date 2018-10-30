@@ -1,17 +1,10 @@
 --no-private
---title=Google Cloud Vision
+--title=Cloud Vision API
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
---main OVERVIEW.md
 
 ./lib/**/*.rb
 -
-OVERVIEW.md
-AUTHENTICATION.md
-LOGGING.md
-CONTRIBUTING.md
-TROUBLESHOOTING.md
-CHANGELOG.md
-CODE_OF_CONDUCT.md
+README.md
 LICENSE
