@@ -449,10 +449,17 @@ module Google
         # pattern `[a-z0-9\\-]+`
         #
         # Due to a technical limitation, it is not currently possible to apply
+<<<<<<< HEAD
         # multiple labels to a cell. As a result, a chain may have no more than
         # one sub-filter that contains a `self.label value`. In contrast,
         # an interleave may contain more than one because the filters
         # will be applied to separate copies of the input.
+=======
+        # multiple labels to a cell. As a result, a Chain may have no more than
+        # one sub-filter that contains an `apply_label_transformer`. It is okay for
+        # an Interleave to contain multiple `apply_label_transformers`, as they
+        # will be applied to separate copies of the input. 
+>>>>>>> Additional batch of edits.
         #
         # @param value [String] Label name
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
@@ -465,7 +472,11 @@ module Google
           SimpleFilter.new.label(value)
         end
 
+<<<<<<< HEAD
         # Creates a cell-per-row offset filter instance to skip the first N cells.
+=======
+        # Creates a cell per row offset filter instance to skip first N cells.
+>>>>>>> Additional batch of edits.
         #
         # Skips the first N cells of each row, matching all subsequent cells.
         # If duplicate cells are present, as is possible when using an interleave,

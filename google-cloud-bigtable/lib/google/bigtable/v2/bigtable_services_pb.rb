@@ -33,7 +33,7 @@ module Google
           self.unmarshal_class_method = :decode
           self.service_name = 'google.bigtable.v2.Bigtable'
 
-          # Streams back the contents of all requested rows in key order, optionally
+          # Streams back the contents of all requested rows in row key order, optionally
           # applying the same Reader filter to each. Depending on their size,
           # rows and cells may be broken up across multiple responses, but
           # atomicity of each row will still be preserved. See the
@@ -42,9 +42,9 @@ module Google
           # Returns a sample of row keys in the table. The returned row keys will
           # delimit contiguous sections of the table of approximately equal size,
           # which can be used to break up the data for distributed tasks like
-          # mapreduces.
+          # {MapReduces}.
           rpc :SampleRowKeys, SampleRowKeysRequest, stream(SampleRowKeysResponse)
-          # Mutates a row atomically. Cells already present in the row are left
+          # Mutates a row atomically. Cells already in the row are left
           # unchanged unless explicitly changed by `mutation`.
           rpc :MutateRow, MutateRowRequest, MutateRowResponse
           # Mutates multiple rows in a batch. Each individual row is mutated
@@ -54,9 +54,9 @@ module Google
           # Mutates a row atomically based on the output of a predicate Reader filter.
           rpc :CheckAndMutateRow, CheckAndMutateRowRequest, CheckAndMutateRowResponse
           # Modifies a row atomically on the server. The method reads the latest
-          # existing timestamp and value from the specified columns and writes a new
+          # timestamp and value from the specified columns and writes a new
           # entry based on pre-defined read/modify/write rules. The new value for the
-          # timestamp is the greater of the existing timestamp or the current server
+          # timestamp is the greater of either the existing timestamp or the current server
           # time. The method returns the new contents of all modified cells.
           rpc :ReadModifyWriteRow, ReadModifyWriteRowRequest, ReadModifyWriteRowResponse
         end
