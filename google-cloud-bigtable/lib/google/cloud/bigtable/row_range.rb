@@ -59,7 +59,7 @@ module Google
           @grpc = Google::Bigtable::V2::RowRange.new
         end
 
-        # Set row range with the lower bound.
+        # Sets row range with the lower bound.
         #
         # @param key [String] Row key. Required
         # @param inclusive [String] Inclusive/Exclusive lower bound.
@@ -91,7 +91,7 @@ module Google
           self
         end
 
-        # Set row range with the upper bound.
+        # Sets row range with the upper bound.
         #
         # @param key [String] Row key. Required
         # @param inclusive [String] Inclusive/Exclusive upper bound.
@@ -123,7 +123,7 @@ module Google
           self
         end
 
-        # Set row range with the inclusive upper and lower bounds.
+        # Sets row range with the inclusive upper and lower bounds.
         #
         # @param from_key [String] Inclusive from row key. Required
         # @param to_key [String] Inclusive end row key. Required
@@ -142,7 +142,7 @@ module Google
           from(from_key).to(to_key, inclusive: true)
         end
 
-        # Set row range with the inclusive lower and the exclusive upper bound.
+        # Sets row range with the inclusive lower and the exclusive upper bound.
         #
         # @param from_key [String] Inclusive from row key
         # @param to_key [String] Exclusive end row key

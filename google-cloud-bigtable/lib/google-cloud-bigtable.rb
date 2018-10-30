@@ -26,9 +26,9 @@ require "google/cloud/config"
 
 module Google
   module Cloud
-    # Creates a new object for connecting to the Bigtable service.
+    # Creates a new object for connecting to the Cloud Bigtable service.
     #
-    # For more information on connecting to Google Cloud see the
+    # For more information on connecting to Google Cloud Platform, see the
     # {file:AUTHENTICATION.md Authentication Guide}.
     #
     # @param scope [Array<String>]
@@ -41,20 +41,20 @@ module Google
     #   The default timeout, in seconds, for calls made through this client.
     # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
     #   Provides the means for authenticating requests made by the client. This parameter can
-    #   be many types.
-    #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+    #   be one of the following types.
+    #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
     #   authenticating requests made by this client.
-    #   A `String` will be treated as the path to the keyfile to be used for the construction of
+    #   `String` will be treated as the path to the keyfile to use to construct
     #   credentials for this client.
-    #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+    #   `Hash` will be treated as the contents of a keyfile to use to construct
     #   credentials for this client.
-    #   A `GRPC::Core::Channel` will be used to make calls through.
-    #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+    #   `GRPC::Core::Channel` will be used to make calls through.
+    #   `GRPC::Core::ChannelCredentials` will be used to set up the gRPC client. The channel credentials
     #   should already be composed with a `GRPC::Core::CallCredentials` object.
-    #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+    #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
     #   metadata for requests, generally, to give OAuth credentials.
     # @param client_config [Hash]
-    #   A Hash for call options for each method.
+    #   A hash for call options for each method.
     #   See Google::Gax#construct_settings for the structure of
     #   this data. Falls back to the default config if not specified
     #   or the specified config is missing data points.
@@ -78,27 +78,28 @@ module Google
       )
     end
 
-    # Create bigtable client instance for data, table admin and instance admin
-    # operartions.
+    # Creates a Cloud Bigtable client instance for data, table admin and instance admin
+    # operations.
     #
     # @param project_id [String]
     #   Project identifier for the Bigtable service you
     #   are connecting to. If not present, the default project for the
     #   credentials is used.
     # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-    #   Provides the means for authenticating requests made by the client. This parameter can
-    #   be many types.
-    #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+    #   The means for authenticating requests made by the client. This parameter can
+    #   be one of the following types.
+    #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
     #   authenticating requests made by this client.
-    #   A `String` will be treated as the path to the keyfile to be used for the construction of
+    #   `String` will be treated as the path to the keyfile to use to construct
     #   credentials for this client.
-    #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+    #   `Hash` will be treated as the contents of a keyfile to use to construct
     #   credentials for this client.
-    #   A `GRPC::Core::Channel` will be used to make calls through.
-    #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+    #   `GRPC::Core::Channel` will be used to make calls through.
+    #   `GRPC::Core::ChannelCredentials` will be used to set up the gRPC client. The channel credentials
     #   should already be composed with a `GRPC::Core::CallCredentials` object.
-    #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+    #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
     #   metadata for requests, generally, to give OAuth credentials.
+    # @param timeout [Integer]
     # @param scope [Array<String>]
     #   The OAuth 2.0 scopes controlling the set of resources and operations
     #   that the connection can access. See [Using OAuth 2.0 to Access Google
@@ -108,7 +109,7 @@ module Google
     # @param timeout [Integer]
     #   The default timeout, in seconds, for calls made through this client.
     # @param client_config [Hash]
-    #   A Hash for call options for each method.
+    #   A hash for call options for each method.
     #   See Google::Gax#construct_settings for the structure of
     #   this data. Falls back to the default config if not specified
     #   or the specified config is missing data points. Optional.
@@ -137,7 +138,7 @@ module Google
   end
 end
 
-# Set the default BIGTABLE configuration
+# Sets the default Bigtable configuration
 Google::Cloud.configure.add_config! :bigtable do |config|
   default_project = Google::Cloud::Config.deferred do
     ENV["BIGTABLE_PROJECT"]

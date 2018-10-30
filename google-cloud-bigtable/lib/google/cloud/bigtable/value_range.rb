@@ -22,10 +22,10 @@ module Google
       #
       # Specifies a contiguous range of string values.
       #
-      # * from value bound : The value at which to from the range.
-      #   If neither field is set, interpreted as the empty string, inclusive.
+      # * from value bound : The value at which to begin the range.
+      #   If neither field is set, interpreted as an empty string, inclusive.
       # * End value bound: The value at which to end the range.
-      #   If neither field is set, interpreted as the infinite string value, exclusive.
+      #   If neither field is set, interpreted as an infinite string value, exclusive.
       #
       # @example
       #   require "google/cloud/bigtable"
@@ -56,12 +56,12 @@ module Google
       #
       class ValueRange
         # @private
-        # Create value range instance.
+        # Creates a value range instance.
         def initialize
           @grpc = Google::Bigtable::V2::ValueRange.new
         end
 
-        # Ser row range with the lower bound.
+        # Sets the row range with the lower bound.
         #
         # @param value [String] value. Required
         # @param inclusive [String] Inclusive/Exclusive lower bound.
@@ -93,7 +93,7 @@ module Google
           self
         end
 
-        # Set value range with upper bound.
+        # Sets the value range with upper bound.
         #
         # @param value [String] value. Required
         # @param inclusive [String] Inclusive/Exclusive upper bound.
@@ -125,7 +125,7 @@ module Google
           self
         end
 
-        # Set value range with the inclusive lower and upper bound.
+        # Sets the value range with the inclusive lower and upper bound.
         #
         # @param from_value [String] Inclusive from value. Required
         # @param to_value [String] Inclusive end value. Required

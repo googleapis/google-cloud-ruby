@@ -55,7 +55,7 @@ module Google
         #   end
         #
         class Job < LongrunningJob
-          # Get the cluster object from job results
+          # Gets the cluster object from job results
           #
           # @return [Google::Cloud::Bigtable::Cluster, nil] The cluster instance, or
           #   `nil` if the operation is not complete.

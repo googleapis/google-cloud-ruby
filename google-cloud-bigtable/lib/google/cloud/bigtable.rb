@@ -26,28 +26,28 @@ module Google
     # See {file:OVERVIEW.md Bigtable Overview}.
     #
     module Bigtable
-      # Service for managing Bigtable instance, tables and reading from and
-      # writing to existing Bigtable tables.
+      # Service for managing Cloud Bigtable instances and tables and for reading from and
+      # writing to Bigtable tables.
       #
       # @param project_id [String]
       #   Project identifier for the Bigtable service you are connecting to.
       #   If not present, the default project for the credentials is used.
       # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
       #   Provides the means for authenticating requests made by the client. This parameter can
-      #   be many types.
-      #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+      #   be one of the following types:
+      #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
       #   authenticating requests made by this client.
-      #   A `String` will be treated as the path to the keyfile to be used for the construction of
+      #   `String` will be treated as the path to the keyfile to use to construct
       #   credentials for this client.
-      #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+      #   `Hash` will be treated as the contents of a keyfile to use to construct
       #   credentials for this client.
-      #   A `GRPC::Core::Channel` will be used to make calls through.
-      #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+      #   `GRPC::Core::Channel` will be used to make calls through.
+      #   `GRPC::Core::ChannelCredentials` for the setting up the gRPC client. The channel credentials
       #   should already be composed with a `GRPC::Core::CallCredentials` object.
-      #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+      #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
       #   metadata for requests, generally, to give OAuth credentials.
       # @param [String] emulator_host Bigtable emulator host. Optional.
-      #   If the param is nil, uses the value of the `emulator_host` config.
+      #   If the parameter is nil, uses the value of the `emulator_host` config.
       # @param scope [Array<String>]
       #   The OAuth 2.0 scopes controlling the set of resources and operations
       #   that the connection can access. See [Using OAuth 2.0 to Access Google
@@ -55,7 +55,7 @@ module Google
       #   The OAuth scopes for this service. This parameter is ignored if an
       #   updater_proc is supplied.
       # @param client_config [Hash]
-      #   A Hash for call options for each method.
+      #   A hash for call options for each method.
       #   See Google::Gax#construct_settings for the structure of
       #   this data. Falls back to the default config if not specified
       #   or the specified config is missing data points.

@@ -29,16 +29,16 @@ module Google
           attr_accessor :service
 
           # @private
-          # Instance id
+          # Instance ID
           attr_accessor :instance_id
 
           # If not empty, indicates that there are more records that match
           # the request and this value should be passed to continue.
           attr_accessor :token
 
-          # Locations from which Cluster information could not be retrieved,
+          # Locations from which cluster information could not be retrieved,
           # due to an outage or some other transient condition.
-          # Clusters from these locations may be missing from `clusters`,
+          # Clusters from these locations may be missing from `clusters`
           # or may only have partial information returned.
           attr_accessor :failed_locations
 
@@ -98,11 +98,11 @@ module Google
           # {#next?} returns `false`. Calls the given block once for each
           # result, which is passed as the argument to the block.
           #
-          # An Enumerator is returned if no block is given.
+          # An enumerator is returned if no block is given.
           #
           # This method will make repeated API calls until all remaining results
-          # are retrieved. (Unlike `#each`, for example, which merely iterates
-          # over the results returned by a single API call.) Use with caution.
+          # are retrieved (unlike `#each`, for example, which merely iterates
+          # over the results returned by a single API call). Use with caution.
           #
           # @yield [cluster] The block for accessing each cluster.
           # @yieldparam [Cluster] cluster The cluster object.

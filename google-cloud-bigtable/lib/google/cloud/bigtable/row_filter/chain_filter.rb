@@ -21,7 +21,7 @@ module Google
       module RowFilter
         # # ChainFilter
         #
-        # A RowFilter which sends rows through several RowFilters in sequence.
+        # A RowFilter that sends rows through several RowFilters in sequence.
         #
         # The elements of "filters" are chained together to process the input row:
         # in row -> f(0) -> intermediate row -> f(1) -> ... -> f(N) -> out row
@@ -35,14 +35,14 @@ module Google
         #
         class ChainFilter
           # @private
-          # Create instance of chain filter.
+          # Creates an instance of a chain filter.
           def initialize
             @grpc = Google::Bigtable::V2::RowFilter::Chain.new
           end
 
-          # Add chain filter instance.
+          # Adds a chain filter instance.
           #
-          # A Chain RowFilter which sends rows through several RowFilters in sequence.
+          # A Chain RowFilter that sends rows through several RowFilters in sequence.
           #
           # The elements of "filters" are chained together to process the input row:
           # in row -> f(0) -> intermediate row -> f(1) -> ... -> f(N) -> out row
@@ -52,7 +52,7 @@ module Google
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
           #   `self` instance of chain filter.
           #
-          # @example Create chain filter and add chain filter.
+          # @example Create a chain filter and add a chain filter.
           #
           #   chain_1 = Google::Cloud::Bigtable::RowFilter.chain
           #
@@ -74,7 +74,7 @@ module Google
 
           # Add interleave filter.
           #
-          # A RowFilter which sends each row to each of several component
+          # A RowFilter that sends each row to each of several component
           # RowFilters and interleaves the results.
           #
           # The elements of "filters" all process a copy of the input row, and the
@@ -125,17 +125,17 @@ module Google
             add(filter)
           end
 
-          # Add condition filter instance
+          # Adds a condition filter instance.
           #
-          # A RowFilter which evaluates one of two possible RowFilters, depending on
+          # A RowFilter that evaluates one of two possible RowFilters, depending on
           # whether or not a predicate RowFilter outputs any cells from the input row.
           #
           # IMPORTANT NOTE: The predicate filter does not execute atomically with the
           # true and false filters, which may lead to inconsistent or unexpected
-          # results. Additionally, Condition filters have poor performance, especially
+          # results. Additionally, condition filters have poor performance, especially
           # when filters are set for the false condition.
           #
-          # Cannot be used within the `predicate_filter`, `true_filter`, or `false_filter`
+          # Cannot be used within the `predicate_filter`, `true_filter`, or `false_filter`.
           #
           # @param filter [Google::Cloud::Bigtable::RowFilter::ConditionFilter]
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
@@ -159,7 +159,7 @@ module Google
             add(filter)
           end
 
-          # Add pass filter instance
+          # Adds a pass filter instance.
           #
           # Matches all cells, regardless of input. Functionally equivalent to
           # leaving `filter` unset, but included for completeness.
@@ -175,7 +175,7 @@ module Google
             add(RowFilter.pass)
           end
 
-          # Add block all filter instance
+          # Adds a block-all filter instance.
           #
           # Does not match any cells, regardless of input. Useful for temporarily
           # disabling just part of a filter.
@@ -191,9 +191,9 @@ module Google
             add(RowFilter.block)
           end
 
-          # Add sink filter instance
+          # Adds a sink filter instance.
           #
-          # Outputs all cells directly to the output of the read rather than to any parent filter
+          # Outputs all cells directly to the output of the read rather than to any parent filter.
           #
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
           #   `self` instance of chain filter.
@@ -206,9 +206,9 @@ module Google
             add(RowFilter.sink)
           end
 
-          # Add strip value filter instance
+          # Adds a strip-value filter instance
           #
-          # Replaces each cell's value with the empty string.
+          # Replaces each cell's value with an empty string.
           #
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
           #   `self` instance of chain filter.
@@ -221,7 +221,7 @@ module Google
             add(RowFilter.strip_value)
           end
 
-          # Add key filter instance to match key using regular expression.
+          # Adds a key filter instance to match keys using regular expression.
           #
           # Matches only cells from rows whose keys satisfy the given RE2 regex. In
           # other words, passes through the entire row when the key matches, and
@@ -246,13 +246,13 @@ module Google
             add(RowFilter.key(regex))
           end
 
-          # Add sample probability filter instance
+          # Adds a sample probability filter instance.
           #
           # Matches all cells from a row with probability p, and matches no cells
           # from the row with probability 1-p.
           #
           # @param probability [Float] Probability value
-          #   Probability must be greather then 0 and less then 1.0
+          #   Probability must be greather then 0 and less then 1.0.
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
           #   `self` instance of chain filter.
           #
@@ -264,7 +264,7 @@ module Google
             add(RowFilter.sample(probability))
           end
 
-          # Add family name match filter using regex
+          # Adds a family name match filter using a regular expression.
           #
           # Matches only cells from columns whose families satisfy the given RE2
           # regex. For technical reasons, the regex must not contain the `:`
@@ -288,7 +288,7 @@ module Google
             add(RowFilter.family(regex))
           end
 
-          # Add column qualifier match filter using regex
+          # Add a column qualifier match filter using a regular expression
           #
           # Matches only cells from columns whose qualifiers satisfy the given RE2
           # regex.
@@ -312,7 +312,7 @@ module Google
             add(RowFilter.qualifier(regex))
           end
 
-          # Add value match filter using regex
+          # Adds a value match filter using a regular expression
           #
           # Matches only cells with values that satisfy the given regular expression.
           # Note that, since cell values can contain arbitrary bytes, the `\C` escape
@@ -335,21 +335,20 @@ module Google
             add(RowFilter.value(regex))
           end
 
-          # Add label filter instance to apply label on result of read rows.
+          # Adds a label filter instance to apply a label based on the result of read rows.
           #
           # Applies the given label to all cells in the output row. This allows
           # the client to determine which results were produced from which part of
           # the filter.
           #
-          # Values must be at most 15 characters in length, and match the RE2
+          # Values must be at most 15 characters and match the RE2
           # pattern `[a-z0-9\\-]+`
           #
           # Due to a technical limitation, it is not currently possible to apply
-          # multiple labels to a cell. As a result, a Chain may have no more than
-          # one sub-filter which contains a `apply_label_transformer`. It is okay for
+          # multiple labels to a cell. As a result, a chain may have no more than
+          # one sub-filter that contains an `apply_label_transformer`. It is okay for
           # an Interleave to contain multiple `apply_label_transformers`, as they
-          # will be applied to separate copies of the input. This may be relaxed in
-          # the future.
+          # will be applied to separate copies of the input. 
           #
           # @param value [String] Label name
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
@@ -363,7 +362,7 @@ module Google
             add(RowFilter.label(value))
           end
 
-          # Add cell per row offset filter instance to skip first N cells.
+          # Adds a cell per row offset filter instance to skip first N cells.
           #
           # Skips the first N cells of each row, matching all subsequent cells.
           # If duplicate cells are present, as is possible when using an Interleave,
@@ -381,7 +380,7 @@ module Google
             add(RowFilter.cells_per_row_offset(offset))
           end
 
-          # Add cells per row limit filter instance
+          # Adds a cells per row limit filter instance
           #
           # Matches only the first N cells of each row.
           # If duplicate cells are present, as is possible when using an Interleave,
@@ -399,7 +398,7 @@ module Google
             add(RowFilter.cells_per_row(limit))
           end
 
-          # Add cells per column filter instance
+          # Adds a cells per column filter instance
           #
           # Matches only the most recent N cells within each column. For example,
           # if N=2, this filter would match column `foo:bar` at timestamps 10 and 9,
@@ -420,10 +419,10 @@ module Google
             add(RowFilter.cells_per_column(limit))
           end
 
-          # Add timestamp range filter instance
+          # Adds a timestamp range filter instance
           #
           # Matches only cells with timestamps within the given range.
-          # Specified a contiguous range of timestamps.
+          # Specifies a contiguous range of timestamps.
           #
           # @param from [Integer] Inclusive lower bound.
           #   If left empty, interpreted as 0.
@@ -443,14 +442,14 @@ module Google
             add(RowFilter.timestamp_range(from: from, to: to))
           end
 
-          # Add value range filter instance
+          # Adds a value range filter instance
           #
           # Matches only cells with values that fall within the given range.
           #
           # See {Google::Cloud::Bigtable::ValueRange#from} and { Google::Cloud::Bigtable::ValueRange#to} for range
           # option inclusive/exclusive options
           #
-          # * The value at which to start the range.If neither field is set, interpreted as the empty string, inclusive.
+          # * The value at which to start the range. If neither field is set, interpreted as an empty string, inclusive.
           # * The value at which to end the range. If neither field is set, interpreted as the infinite string, exclusive.
           #
           # @param range [Google::Cloud::Bigtable::ValueRange]
@@ -471,7 +470,7 @@ module Google
             add(RowFilter.value_range(range))
           end
 
-          # Add column range filter instance.
+          # Adds a column-range filter instance.
           #
           # Matches only cells from columns within the given range.
           #
@@ -489,7 +488,7 @@ module Google
             add(RowFilter.column_range(range))
           end
 
-          # Get number of filter count in chain filters
+          # Gets number of filter count in chain filters.
           #
           # @return [Integer]
           #
@@ -502,7 +501,7 @@ module Google
             @grpc.filters.length
           end
 
-          # Get list of filters
+          # Gets a list of filters.
           #
           # @return [Array<Google::Bigtable::V2::RowFilter>]
           #
@@ -512,7 +511,7 @@ module Google
 
           # @private
           #
-          # Get gRPC object of RowFilter with chain filter
+          # Gets an gRPC object of RowFilter with a chain filter.
           #
           # @return [Google::Bigtable::V2::RowFilter]
           #
@@ -524,7 +523,7 @@ module Google
           private
 
           # @private
-          # Add filter to chain.
+          # Adds a filter to a chain.
           #
           # @param filter [SimpleFilter, ChainFilter, InterleaveFilter, ConditionFilter]
           #
