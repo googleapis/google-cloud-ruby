@@ -24,8 +24,8 @@ module Google
       # # Ruby Client for Cloud Bigtable API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
       #
       # [Cloud Bigtable API][Product Documentation]:
-      # API for reading and writing the contents of Cloud Bigtable tables associated with a
-      # Google Cloud Platform project.
+      # API for reading and writing the contents of Bigtables associated with a
+      # cloud project.
       # - [Product Documentation][]
       #
       # ## Quick Start
@@ -84,17 +84,17 @@ module Google
         #
         # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
         #   Provides the means for authenticating requests made by the client. This parameter can
-        #   be one of the following types:
-        #   `Google::Auth::Credentials` uses the properties of its represented keyfile for
+        #   be many types.
+        #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
         #   authenticating requests made by this client.
-        #   `String` will be treated as the path to the keyfile to use to construct
+        #   A `String` will be treated as the path to the keyfile to be used for the construction of
         #   credentials for this client.
-        #   `Hash` will be treated as the contents of a keyfile to use to construct
+        #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
         #   credentials for this client.
-        #   `GRPC::Core::Channel` will be used to make calls through.
-        #   `GRPC::Core::ChannelCredentials` for the setting up the gRPC client. The channel credentials
+        #   A `GRPC::Core::Channel` will be used to make calls through.
+        #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
         #   should already be composed with a `GRPC::Core::CallCredentials` object.
-        #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
+        #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
         #   metadata for requests, generally, to give OAuth credentials.
         # @param scopes [Array<String>]
         #   The OAuth scopes for this service. This parameter is ignored if
@@ -107,7 +107,7 @@ module Google
         # @param timeout [Numeric]
         #   The default timeout, in seconds, for calls made through this client.
         # @param metadata [Hash]
-        #   Default metadata to be sent with each request. This can be overridden on a per-call basis.
+        #   Default metadata to be sent with each request. This can be overridden on a per call basis.
         # @param exception_transformer [Proc]
         #   An optional proc that intercepts any exceptions raised during an API call to inject
         #   custom error handling.

@@ -63,16 +63,16 @@ module Google
             # returns, but data requests received prior to that point may see a table
             # where only some modifications have taken effect.
             rpc :ModifyColumnFamilies, ModifyColumnFamiliesRequest, Table
-            # Permanently drops/deletes a row range from a specified table. The request can
-            # specify whether to delete all rows in a table or only those that match a
-            # particular row key prefix.
+            # Permanently drop/delete a row range from a specified table. The request can
+            # specify whether to delete all rows in a table, or only those that match a
+            # particular prefix.
             rpc :DropRowRange, DropRowRangeRequest, Google::Protobuf::Empty
             # Generates a consistency token for a Table, which can be used in
             # CheckConsistency to check whether mutations to the table that finished
             # before this call started have been replicated. The tokens will be available
             # for 90 days.
             rpc :GenerateConsistencyToken, GenerateConsistencyTokenRequest, GenerateConsistencyTokenResponse
-            # Checks replication consistency based on a consistency token. Determines if
+            # Checks replication consistency based on a consistency token, that is, if
             # replication has caught up based on the conditions specified in the token
             # and the check request.
             rpc :CheckConsistency, CheckConsistencyRequest, CheckConsistencyResponse
