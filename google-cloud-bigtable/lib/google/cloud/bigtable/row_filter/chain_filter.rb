@@ -344,11 +344,11 @@ module Google
           # Values must be at most 15 characters and match the RE2
           # pattern `[a-z0-9\\-]+`
           #
-          # Due to a technical limitation, it is not currently possible to apply
+          # Due to a technical limitation, it is not possible to apply
           # multiple labels to a cell. As a result, a chain may have no more than
           # one sub-filter that contains an `apply_label_transformer`. It is okay for
           # an Interleave to contain multiple `apply_label_transformers`, as they
-          # will be applied to separate copies of the input. 
+          # will be applied to separate copies of the input.
           #
           # @param value [String] Label name
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
