@@ -116,28 +116,28 @@ module Google
           @grpc.multi_cluster_routing_use_any
         end
 
-        # Get value of single cluster routing policy
+        # Get value of single cluster routing policy.
         #
         # @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
         def single_cluster_routing
           @grpc.single_cluster_routing
         end
 
-        # Set routing policy
+        # Set routing policy.
         #
         # @param policy [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting | Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
-        #   The routing policy for all read/write requests which use this app profile.
+        #   The routing policy for all read/write requests that use this app profile.
         #   A value must be explicitly set.
         #
         #   Routing Policies:
         #   * `multi_cluster_routing` - Read/write requests may be routed to any
-        #     cluster in the instance, and will fail over to another cluster in the event
+        #     cluster in the instance and will fail over to another cluster in the event
         #     of transient errors or delays. Choosing this option sacrifices
         #     read-your-writes consistency to improve availability.
         #   * `single_cluster_routing` - Unconditionally routes all read/write requests
-        #     to a specific cluster. This option preserves read-your-writes consistency,
+        #     to a specific cluster. This option preserves read-your-writes consistency
         #     but does not improve availability.
-        #     Value contain `cluster_id` and optional field `allow_transactional_writes`.
+        #     The value contains `cluster_id` and optional field `allow_transactional_writes`.
         #
         # @example Set multi cluster routing policy
         #   require "google/cloud/bigtable"
@@ -173,7 +173,7 @@ module Google
           end
         end
 
-        # Get routing policy
+        # Get routing policy.
         #
         # @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting, Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
         #
@@ -300,10 +300,10 @@ module Google
 
         # Create instance of multi cluster routing policy.
         #
-        # Read/write requests may be routed to any cluster in the instance, and will
-        # Fail over to another cluster in the event of transient errors or delays.
+        # Read/write requests may be routed to any cluster in the instance and will
+        # fail over to another cluster in the event of transient errors or delays.
         # Choosing this option sacrifices read-your-writes consistency to improve
-        # availability
+        # availability.
         # @return [Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
         #
         # @example Create instance of multi cluster routing
@@ -314,19 +314,19 @@ module Google
           Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny.new
         end
 
-        # Create instance of single cluster routing
+        # Create instance of single cluster routing.
         #
         # Unconditionally routes all read/write requests to a specific cluster.
-        # This option preserves read-your-writes consistency, but does not improve
+        # This option preserves read-your-writes consistency but does not improve
         # availability.
         #
         # @param cluster_id [String]
         #   The cluster to which read/write requests should be routed.
         # @param allow_transactional_writes [Boolean]
-        #   Whether or not `CheckAndMutateRow` and `ReadModifyWriteRow` requests are
+        #   If true, `CheckAndMutateRow` and `ReadModifyWriteRow` requests are
         #   allowed by this app profile. It is unsafe to send these requests to
         #   the same table/row/column in multiple clusters.
-        #    Default value is false.
+        #   Default value is false.
         # @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
         #
         # @example Create instance of single cluster routing

@@ -491,15 +491,15 @@ module Google
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   received_messages = sub.pull
-        #   sub.delay 120, received_messages
+        #   sub.modify_ack_deadline 120, received_messages
         #
-        def delay new_deadline, *messages
+        def modify_ack_deadline new_deadline, *messages
           ack_ids = coerce_ack_ids messages
           ensure_service!
           service.modify_ack_deadline name, ack_ids, new_deadline
           true
         end
-        alias modify_ack_deadline delay
+        alias delay modify_ack_deadline
 
         ##
         # Creates a new {Snapshot} from the subscription. The created snapshot

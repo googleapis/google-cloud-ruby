@@ -22,7 +22,7 @@ module Google
     module Bigtable
       # # ColumnFamily
       #
-      # A set of columns within a table which share a common configuration.
+      # A set of columns within a table that share a common configuration.
       #
       # @example
       #   require "google/cloud/bigtable"
@@ -47,7 +47,7 @@ module Google
       #
       class ColumnFamily
         # @private
-        # The gRPC Service object.
+        # The gRPC Service object
         attr_accessor :service
 
         # @private
@@ -72,7 +72,7 @@ module Google
           @name = name
         end
 
-        # Set GC rule
+        # Set Column Family garbage collection rules
         #
         # @param rule [Google::Cloud::Bigtable::GcRule]
         #
@@ -80,7 +80,7 @@ module Google
           @grpc.gc_rule = rule.to_grpc
         end
 
-        # Get GC rule
+        # Get garbage collection rule
         #
         # @return [Google::Cloud::Bigtable::GcRule]
         #
@@ -88,7 +88,7 @@ module Google
           GcRule.from_grpc(@grpc.gc_rule) if @grpc.gc_rule
         end
 
-        # Create column family.
+        # Create column family
         #
         # @return [Google::Cloud::Bigtable::ColumnFamily]
         #
@@ -108,7 +108,7 @@ module Google
           modify_column_family(self.class.create_modification(name, gc_rule))
         end
 
-        # Update column family.
+        # Update column family
         #
         # @return [Google::Cloud::Bigtable::ColumnFamily]
         #
@@ -129,9 +129,9 @@ module Google
         end
         alias update save
 
-        # Permanently delete column family from table.
+        # Permanently delete column family from table
         #
-        # @return [Boolean] Whether the column family was deleted.
+        # @return [Boolean] Returns true if the column family was deleted.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -198,7 +198,7 @@ module Google
 
         # @private
         #
-        # Creates a new ColumnFamily instance from a
+        # Create a new ColumnFamily instance from a
         # Google::Bigtable::Admin::V2::ColumnFamily.
         #
         # @param grpc [Google::Bigtable::Admin::V2::ColumnFamily]
@@ -222,7 +222,7 @@ module Google
 
         # @private
         #
-        # Create column family modification gRPC instance.
+        # Create column family modification gRPC instance
         #
         # @param type [Symbol] Type of modification.
         #   Valid values are `:create`, `:update`, `drop`
@@ -250,7 +250,7 @@ module Google
 
         # @private
         #
-        # Create/Update/Delete column_family.
+        # Create/Update/Delete column_family
         #
         # @param modification [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
         # @return [Google::Cloud::Bigtable::ColumnFamily]
@@ -269,7 +269,7 @@ module Google
         # @private
         #
         # Raise an error unless an active connection to the service is
-        # available.
+        # available
         #
         def ensure_service!
           raise "Must have active connection to service" unless service

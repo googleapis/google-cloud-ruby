@@ -21,14 +21,14 @@ module Google
   module Cloud
     module Bigtable
       class Instance
-        # Instance::List is a special case Array with additional
-        # values and failed_locations
+        # Instance::List is a special-case array with additional
+        # values and failed_locations.
         class List < DelegateClass(::Array)
           # @private
           # The gRPC Service object.
           attr_accessor :service
 
-          # If not empty, indicates that there are more records that match
+          # If not empty, indicates that more records match
           # the request and this value should be passed to continue.
           attr_accessor :token
 
@@ -40,7 +40,7 @@ module Google
           attr_accessor :failed_locations
 
           # @private
-          # Create a new Instance::List with an array of
+          # Creates a new Instance::List with an array of
           # Instance instances.
           def initialize arr = []
             super(arr)
@@ -63,7 +63,7 @@ module Google
             !token.nil?
           end
 
-          # Retrieve the next page of instances.
+          # Retrieves the next page of instances.
           #
           # @return [Instance::List] The list of instances.
           #
@@ -92,11 +92,11 @@ module Google
           # {#next?} returns `false`. Calls the given block once for each
           # result, which is passed as the argument to the block.
           #
-          # An Enumerator is returned if no block is given.
+          # An enumerator is returned if no block is given.
           #
           # This method will make repeated API calls until all remaining results
-          # are retrieved. (Unlike `#each`, for example, which merely iterates
-          # over the results returned by a single API call.) Use with caution.
+          # are retrieved (unlike `#each`, for example, which merely iterates
+          # over the results returned by a single API call). Use with caution.
           #
           # @yield [instance] The block for accessing each instance.
           # @yieldparam [Instance] instance The instance object.
@@ -148,7 +148,7 @@ module Google
 
           protected
 
-          # Raise an error unless an active service is available.
+          # Raises an error unless an active service is available.
           def ensure_service!
             raise "Must have active connection" unless service
           end

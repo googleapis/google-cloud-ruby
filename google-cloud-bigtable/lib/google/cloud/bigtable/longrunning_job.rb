@@ -63,7 +63,7 @@ module Google
         end
 
         ##
-        # The status if the operation associated with this job produced an
+        # The status when the operation associated with this job produced an
         # error.
         #
         # @return [Object, Google::Rpc::Status, nil] A status object with

@@ -25,7 +25,7 @@ module Google
     module Bigtable
       # # MutationOperations
       #
-      # Collection of mutations apis.
+      # Collection of mutations APIs.
       #
       #   * Mutate single row
       #   * Mutate multiple rows
@@ -35,11 +35,11 @@ module Google
       module MutationOperations
         # Mutate row.
         #
-        # Mutates a row atomically. Cells already present in the row are left
+        # Mutates a row atomically. Cells in the row are left
         # unchanged unless explicitly changed by +mutation+.
         # Changes to be atomically applied to the specified row. Entries are applied
-        # in order, meaning that earlier mutations can be masked by later ones.
-        # Must contain at least one mutation entry and at most 100000.
+        # in order, meaning that earlier mutations can be masked by later mutations.
+        # Must contain at least one mutation entry and at most 100,000.
         #
         # @param entry [Google::Cloud::Bigtable::MutationEntry]
         #   Mutation entry with row key and list of mutations.
@@ -91,7 +91,7 @@ module Google
         #   Each entry is applied as an atomic mutation, but the entries may be
         #   applied in arbitrary order (even between entries for the same row).
         #   At least one entry must be specified, and in total the entries can
-        #   contain at most 100000 mutations.
+        #   contain a maximum of 100,000 mutations.
         # @return [Array<Google::Bigtable::V2::MutateRowsResponse::Entry>]
         #
         # @example
@@ -117,7 +117,7 @@ module Google
         # time. The method returns the new contents of all modified cells.
         #
         # @param key [String]
-        #   The key of the row to which the read/modify/write rules should be applied.
+        #   The row key of the row to which the read/modify/write rules should be applied.
         # @param rules [Google::Cloud::Bigtable::ReadModifyWriteRule, Array<Google::Cloud::Bigtable::ReadModifyWriteRule>]
         #   Rules specifying how the specified row's contents are to be transformed
         #   into writes. Entries are applied in order, meaning that earlier rules will
@@ -177,29 +177,31 @@ module Google
           row
         end
 
-        # Mutates a row atomically based on the output of a predicate Reader filter.
+        # Mutates a row atomically based on the output of a predicate reader filter.
         #
         # NOTE: Condition predicate filter is not supported.
         #
         # @param key [String] Row key.
-        #   The key of the row to which the conditional mutation should be applied.
+        #   The row key of the row to which the conditional mutation should be applied.
         # @param predicate [SimpleFilter, ChainFilter, InterleaveFilter] Predicate filter.
         #   The filter to be applied to the contents of the specified row. Depending
         #   on whether or not any results are yielded, either +true_mutations+ or
         #   +false_mutations+ will be executed. If unset, checks that the row contains
-        #   any values at all.
-        # @param on_match [Google::Cloud::Bigtable::MutationEntry] Mutation entry apply on predicate filter match.
+        #   any values.
+        # @param on_match [Google::Cloud::Bigtable::MutationEntry] Mutation entry
+        #   applied to predicate filter match.
         #   Changes to be atomically applied to the specified row if +predicate_filter+
         #   yields at least one cell when applied to +row_key+. Entries are applied in
         #   order, meaning that earlier mutations can be masked by later ones.
-        #   Must contain at least one entry if +false_mutations+ is empty, and at most
-        #   100000.
-        # @param otherwise [Google::Cloud::Bigtable::MutationEntry] Mutation entry apply on predicate filter do not match.
+        #   Must contain at least one entry if +false_mutations+ is empty and at most
+        #   100,000 entries.
+        # @param otherwise [Google::Cloud::Bigtable::MutationEntry] Mutation entry applied
+        #   when predicate filter does not match.
         #   Changes to be atomically applied to the specified row if +predicate_filter+
         #   does not yield any cells when applied to +row_key+. Entries are applied in
         #   order, meaning that earlier mutations can be masked by later ones.
-        #   Must contain at least one entry if +true_mutations+ is empty, and at most
-        #   100000.
+        #   Must contain at least one entry if +true_mutations+ is empty and at most
+        #   100,000 entries.
         # @return [Boolean]
         #   Predicate match or not status
         # @example
@@ -252,9 +254,9 @@ module Google
         # Read sample row keys.
         #
         # Returns a sample of row keys in the table. The returned row keys will
-        # delimit contiguous sections of the table of approximately equal size,
-        # which can be used to break up the data for distributed tasks like
-        # mapreduces.
+        # delimit contiguous sections of the table of approximately equal size. The
+        # sections can be used to break up the data for distributed tasks like
+        # MapReduces.
         #
         # @yieldreturn [Google::Cloud::Bigtable::SampleRowKey]
         # @return [:yields: sample_row_key]
@@ -283,10 +285,10 @@ module Google
           end
         end
 
-        # Create instance of mutation_entry
+        # Create an instance of mutation_entry
         #
         # @param row_key [String] Row key. Optional
-        #   The key of the row to which the mutation should be applied.
+        #   The row key of the row to which the mutation should be applied.
         # @return [Google::Cloud::Bigtable::MutationEntry]
         #
         # @example
@@ -304,13 +306,13 @@ module Google
           Google::Cloud::Bigtable::MutationEntry.new(row_key)
         end
 
-        # Create instance of ReadModifyWriteRule to append or increment value
+        # Create an instance of ReadModifyWriteRule to append or increment the value
         # of the cell qualifier.
         #
         # @param family [String]
-        #   The name of the family to which the read/modify/write should be applied.
+        #   The name of the column family to which the read/modify/write should be applied.
         # @param qualifier [String]
-        #   The qualifier of the column to which the read/modify/write should be
+        #   The qualifier of the column to which the read/modify/write should be applied.
         # @return [Google::Cloud::Bigtable::ReadModifyWriteRule]
         #
         # @example Create rule to append to qualifier value.

@@ -19,7 +19,7 @@ module Google
   module Cloud
     module Bigtable
       class AppProfile
-        # AppProfile::List is a special case Array with additional
+        # AppProfile::List is a special-case array with additional
         # values.
         class List < DelegateClass(::Array)
           # @private
@@ -27,11 +27,11 @@ module Google
           attr_accessor :service
 
           # @private
-          # The gRPC page enumbrable object.
+          # The gRPC page enumerable object.
           attr_accessor :grpc
 
           # @private
-          # Create a new AppProfile::List with an array of Snapshot instances.
+          # Creates a new AppProfile::List with an array of snapshot instances.
           def initialize arr = []
             super(arr)
           end
@@ -55,7 +55,7 @@ module Google
             grpc.next_page?
           end
 
-          # Retrieve the next page of app_profiles.
+          # Retrieves the next page of app_profiles.
           #
           # @return [AppProfile::List] The list of instances.
           #
@@ -82,11 +82,11 @@ module Google
           # {#next?} returns `false`. Calls the given block once for each
           # result, which is passed as the argument to the block.
           #
-          # An Enumerator is returned if no block is given.
+          # An enumerator is returned if no block is given.
           #
           # This method will make repeated API calls until all remaining results
-          # are retrieved. (Unlike `#each`, for example, which merely iterates
-          # over the results returned by a single API call.) Use with caution.
+          # are retrieved (unlike `#each`, for example, which merely iterates
+          # over the results returned by a single API call). Use with caution.
           #
           # @yield [app_profile] The block for accessing each instance.
           # @yieldparam [AppProfile] instance The instance object.
@@ -148,9 +148,9 @@ module Google
 
           # @private
           #
-          # Raise an error if active grpc call is not available.
+          # Raises an error if an active gRPC call is not available.
           def ensure_grpc!
-            raise "Must have active grpc call" unless grpc
+            raise "Must have active gRPC call" unless grpc
           end
         end
       end

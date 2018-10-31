@@ -20,14 +20,14 @@ module Google
     module Bigtable
       # # MutationEntry
       #
-      # MutationEntry is a chainable structure, which holds data for diffrent
+      # MutationEntry is a chainable structure that holds data for different
       # type of mutations.
-      # MutationEntry is used in following data operations
+      # MutationEntry is used in following data operations:
       #
       #   * Mutate row. See {Google::Cloud::Bigtable::Table#mutate_row}
       #   * Mutate rows. See {Google::Cloud::Bigtable::Table#mutate_rows}
       #   * Check and mutate row using a predicate.
-      #     see {Google::Cloud::Bigtable::Table#check_and_mutate_row}
+      #     See {Google::Cloud::Bigtable::Table#check_and_mutate_row}
       #
       # @example
       #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
@@ -69,14 +69,14 @@ module Google
 
         # Add SetCell mutation to list of mutations.
         #
-        # A Mutation which sets the value of the specified cell.
+        # A mutation that sets the value of the specified cell.
         #
         # @param family [String] Table column family name.
         #   The name of the family into which new data should be written.
         #   Must match `[-_.a-zA-Z0-9]+`
         # @param qualifier [String] Column qualifier name.
         #   The qualifier of the column into which new data should be written.
-        #   Can be any byte string, including the empty string.
+        #   Can be any byte string, including an empty string.
         # @param value [String, Integer] Cell value data.
         #   The value to be written into the specified cell.
         # @param timestamp [Time, Integer] Timestamp value.
@@ -84,7 +84,7 @@ module Google
         #   Use -1 for current Bigtable server time.
         #   Otherwise, the client should set this value itself, noting that the
         #   default value is a timestamp of zero if the field is left unspecified.
-        #   Values must match the granularity of the table (e.g. micros, millis).
+        #   Values must match the granularity of the table (micros or millis, for example).
         # @return [MutationEntry]  `self` object of entry for chaining.
         #
         # @example
@@ -101,7 +101,7 @@ module Google
         #   )
         #
         def set_cell family, qualifier, value, timestamp: nil
-          # If value is integer then covert it to sign 64 bit int big-endian.
+          # If value is integer, covert it to a 64-bit signed big-endian integer.
           value = [value].pack("q>") if value.is_a?(Integer)
           options = {
             family_name: family,
@@ -119,19 +119,19 @@ module Google
 
         # Add DeleteFromColumn entry to list of mutations.
         #
-        # A Mutation which deletes cells from the specified column, optionally
+        # A mutation that deletes cells from the specified column, optionally
         # restricting the deletions to a given timestamp range.
         #
         # @param family [String] Table column family name.
-        #   The name of the family from which cells should be deleted.
+        #   The name of the column family from which cells should be deleted.
         #   Must match `[-_.a-zA-Z0-9]+`
         # @param qualifier [String] Column qualifier name.
         #   The qualifier of the column from which cells should be deleted.
-        #   Can be any byte string, including the empty string.
-        # @param timestamp_from [Integer] Timestamp lower bound. Optional.
-        #   The range of timestamps within which cells should be deleted.
-        # @param timestamp_to [Integer] Timestamp upper bound. Optional.
-        #   The range of timestamps within which cells should be deleted.
+        #   Can be any byte string, including an empty string.
+        # @param timestamp_from [Integer] Timestamp lower boundary. Optional.
+        #   The range of timestamps from which cells should be deleted.
+        # @param timestamp_to [Integer] Timestamp upper boundary. Optional.
+        #   The range of timestamps from which cells should be deleted.
         # @return [MutationEntry] `self` object of entry for chaining.
         #
         # @example Without timestamp range
@@ -146,7 +146,7 @@ module Google
         #     timestamp_from: (Time.now.to_i - 1800) * 1000,
         #     timestamp_to: (Time.now.to_i * 1000)
         #   )
-        # @example With lower bound timestamp range
+        # @example With timestamp range with lower boundary only
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   entry.delete_cells(
         #     "cf1",
@@ -177,10 +177,10 @@ module Google
 
         # Add DeleteFromFamily to list of mutations.
         #
-        # A Mutation which deletes all cells from the specified column family.
+        # A mutation that deletes all cells from the specified column family.
         #
         # @param family [String] Table column family name.
-        #   The name of the family from which cells should be deleted.
+        #   The name of the column family from which cells should be deleted.
         #   Must match `[-_.a-zA-Z0-9]+`
         # @return [MutationEntry] `self` object of entry for chaining.
         #
@@ -218,7 +218,7 @@ module Google
           @retryable
         end
 
-        # No of mutations
+        # Number of mutations
         #
         # @return [Integer]
 

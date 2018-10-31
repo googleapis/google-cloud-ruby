@@ -110,7 +110,7 @@ module Google
         # The cluster is currently being resized, and may revert to its previous
         # node count if the process encounters an error.
         # A cluster is still capable of serving requests while being resized,
-        # but may exhibit performance as if its number of allocated nodes is
+        # but may perform as if its number of allocated nodes is
         # between the starting and requested states.
         #
         # @return [Boolean]
@@ -152,7 +152,7 @@ module Google
         end
 
         # Cluster location.
-        # i.e "us-east-1b"
+        # For example, "us-east1-b"
         #
         # @return [String]
         def location
@@ -169,7 +169,7 @@ module Google
 
         # Update cluster.
         #
-        # Updatable fields are no of nodes.
+        # `serve_nodes` is the only updatable field
         #
         # @return [Google::Cloud::Bigtable::Cluster::Job]
         #   The job representing the long-running, asynchronous processing of
@@ -209,7 +209,7 @@ module Google
         end
         alias update save
 
-        # Reload cluster information.
+        # Reloads cluster information.
         #
         # @return [Google::Cloud::Bigtable::Cluster]
 
@@ -218,7 +218,7 @@ module Google
           self
         end
 
-        # Permanently deletes the cluster
+        # Permanently deletes the cluster.
         #
         # @return [Boolean] Returns `true` if the cluster was deleted.
         #

@@ -64,7 +64,7 @@ module Google
         # The gRPC Service object.
         attr_accessor :service
 
-        # @return [String] App profile id for request routing.
+        # @return [String] App profile ID for request routing.
         attr_accessor :app_profile_id
 
         # @private
@@ -110,7 +110,7 @@ module Google
         #
         # @param view [Symbol] Table view type.
         #   Default view type is `:SCHEMA_VIEW`
-        #   Valid view types are.
+        #   Valid view types are:
         #
         #   * `:NAME_ONLY` - Only populates `name`
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
@@ -140,7 +140,7 @@ module Google
         end
 
         # The column families configured for this table, mapped by column family ID.
-        # Available column families data only in table view types: `SCHEMA_VIEW`, `FULL`
+        # Column-families data only available in table view types `SCHEMA_VIEW`, `FULL`.
         #
         #
         # @return [Array<Google::Bigtable::ColumnFamily>]
@@ -170,7 +170,7 @@ module Google
           @grpc.granularity
         end
 
-        # The table keeps data versioned at a granularity of 1ms.
+        # The table keeps data versioned at a granularity of 1 ms.
         #
         # @return [Boolean]
         #
@@ -196,7 +196,7 @@ module Google
           true
         end
 
-        # Check table existence.
+        # Checks to see if table exists.
         #
         # @return [Boolean]
         #
@@ -213,7 +213,7 @@ module Google
         #     p "Table does not exist"
         #   end
         #
-        # @example Using bigtable instance
+        # @example Using Cloud Bigtable instance
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -292,7 +292,7 @@ module Google
           )
         end
 
-        # Apply multitple column modifications
+        # Applies multitple column modifications.
         # Performs a series of column family modifications on the specified table.
         # Either all or none of the modifications will occur before this method
         # returns, but data requests received prior to that point may see a table
@@ -358,9 +358,9 @@ module Google
         #
         # @param service [Google::Cloud::Bigtable::Service]
         # @param instance_id [String]
-        #   The unique Id of the instance in which table is exists.
+        #   The unique ID of the instance the table is in.
         # @param table_id [String]
-        #   The unique Id of the table whose families should be modified.
+        #   The unique ID of the table whose families should be modified.
         # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification> | Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
         #   Modifications to be atomically applied to the specified table's families.
         #   Entries are applied in order, meaning that earlier modifications can be
@@ -419,7 +419,7 @@ module Google
           from_grpc(grpc, service)
         end
 
-        # Generates a consistency token for a Table, which can be used in
+        # Generates a consistency token for a table. The token can be used in
         # CheckConsistency to check whether mutations to the table that finished
         # before this call started have been replicated. The tokens will be available
         # for 90 days.
@@ -442,9 +442,9 @@ module Google
           response.consistency_token
         end
 
-        # Checks replication consistency based on a consistency token, that is, if
-        # replication has caught up based on the conditions specified in the token
-        # and the check request.
+        # Checks replication consistency based on a consistency token. Replication is
+        # considered consistent if replication has caught up based on the conditions
+        # specified in the token and the check request.
         # @param token [String] Consistency token
         # @return [Boolean] Replication is consistent or not.
         #
@@ -470,7 +470,7 @@ module Google
 
         # Wait for replication to check replication consistency.
         # Checks replication consistency by generating a consistency token and
-        # calling the `check_consistency` api call 5 times (by default).
+        # making the `check_consistency` API call 5 times (by default).
         # If the response is consistent, returns true. Otherwise tries again
         # repeatedly until the timeout. If the check does not succeed by the
         # timeout, returns `false`.
@@ -518,7 +518,7 @@ module Google
         end
 
         # @private
-        # Get Data client instance
+        # Gets data client instance.
         #
         # @return [Google::Cloud::Bigtable::V2::BigtableClient]
         #
@@ -526,10 +526,10 @@ module Google
           service.client
         end
 
-        # Delete all rows
+        # Deletes all rows.
         #
         # @param timeout [Integer] Call timeout in seconds
-        #   Use in case of : Insufficient deadline for DropRowRange then
+        #   Use in case of insufficient deadline for DropRowRange, then
         #   try again with a longer request deadline.
         # @return [Boolean]
         #
@@ -549,9 +549,9 @@ module Google
           drop_row_range(delete_all_data: true, timeout: timeout)
         end
 
-        # Delete rows using row key prefix.
+        # Deletes rows using row key prefix.
         #
-        # @param prefix [String] Row key prefix. i.e "user"
+        # @param prefix [String] Row key prefix (for example, "user")
         # @param timeout [Integer] Call timeout in seconds
         # @return [Boolean]
         # @example
@@ -570,9 +570,9 @@ module Google
           drop_row_range(row_key_prefix: prefix, timeout: timeout)
         end
 
-        # Drop row range by row key prefix or delete all.
+        # Drops row range by row key prefix or deletes all.
         #
-        # @param row_key_prefix [String] Row key prefix. i.e "user"
+        # @param row_key_prefix [String] Row key prefix (for example, "user")
         # @param delete_all_data [Boolean]
         # @return [Boolean]
         #
@@ -633,7 +633,7 @@ module Google
         protected
 
         # @private
-        # Raise an error unless an active connection to the service is
+        # Raises an error unless an active connection to the service is
         # available.
         #
         def ensure_service!
@@ -648,7 +648,7 @@ module Google
 
         # @private
         #
-        # Check and reload table with expected view and set fields
+        # Checks and reloads table with expected view and sets fields.
         # @param view [Symbol] Expected view type.
         #
         def check_view_and_load view

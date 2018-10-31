@@ -57,7 +57,8 @@ module Google
       #   handle the received messages. Default is 8.
       # @attr_reader [Integer] push_threads The number of threads to handle
       #   acknowledgement ({ReceivedMessage#ack!}) and delay messages
-      #   ({ReceivedMessage#nack!}, {ReceivedMessage#delay!}). Default is 4.
+      #   ({ReceivedMessage#nack!}, {ReceivedMessage#modify_ack_deadline!}).
+      #   Default is 4.
       #
       class Subscriber
         include MonitorMixin

@@ -45,7 +45,7 @@ module Google
 
         # @private
         #
-        # Create read rows instance
+        # Creates a read rows instance.
         #
         # @param table [Google::Cloud::Bigtable::TableDataOperations]
         #
@@ -61,12 +61,11 @@ module Google
         # @param rows [Google::Bigtable::V2::RowSet]
         #   The row keys and/or ranges to read.
         #   If not specified, reads from all rows.
-        #   A hash of the same form as `Google::Bigtable::V2::RowSet`
-        #   can also be provided.
+        #   Alternatively, provide a hash in the form of `Google::Bigtable::V2::RowSet`.
         # @param filter [Google::Bigtable::V2::RowFilter | Hash]
         #   The filter to apply to the contents of the specified row(s). If unset,
         #   reads the entirety of each row.
-        #   A hash of the same form as `Google::Bigtable::V2::RowFilter`
+        #   A hash in the form of `Google::Bigtable::V2::RowFilter`
         #   can also be provided.
         # @param rows_limit [Integer]
         #   The read will terminate after committing to N rows' worth of results.
@@ -98,7 +97,7 @@ module Google
           @chunk_processor.validate_last_row_complete
         end
 
-        # Last read row key
+        # Last read row key.
         #
         # @return [String]
 
@@ -106,7 +105,7 @@ module Google
           @chunk_processor.last_key
         end
 
-        # Calucate and return read rows limit and row set based on last read key
+        # Calucates and returns the read rows limit and row set based on last read key.
         #
         # @param rows_limit [Integer]
         #   The read will terminate after committing to N rows' worth of results.
@@ -152,7 +151,7 @@ module Google
           [rows_limit, row_set]
         end
 
-        # Check if read operation is retryable.
+        # Checks if a read operation is retryable.
         #
         # @return [Boolean]
         def retryable?
@@ -161,7 +160,7 @@ module Google
 
         private
 
-        # Check start key already read for range
+        # Checks if the start key was already read for the range.
         #
         # @param range [Google::Bigtable::V2::RowRange]
         # @return [Boolean]
@@ -176,7 +175,7 @@ module Google
           start_key.empty? || last_key >= start_key
         end
 
-        # Check end key already read for range
+        # Checks if the end key was already read for the range.
         #
         # @param range [Google::Bigtable::V2::RowRange]
         # @return [Boolean]
