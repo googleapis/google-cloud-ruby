@@ -87,3 +87,10 @@ s.replace(
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
 )
+
+# https://github.com/googleapis/gapic-generator/issues/2393
+s.replace(
+    'google-cloud-monitoring.gemspec',
+    'gem.add_development_dependency "rubocop".*$',
+    'gem.add_development_dependency "rubocop", "~> 0.59.2"'
+)

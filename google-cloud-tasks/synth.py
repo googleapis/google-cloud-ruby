@@ -54,8 +54,6 @@ s.replace(
     '\n  gem.add_dependency "google-gax", "~> \\1"\n  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"\n\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2242
-
-
 def escape_braces(match):
     expr = re.compile('^([^`]*(`[^`]*`[^`]*)*)([^`#\\$\\\\])\\{([\\w,]+)\\}')
     content = match.group(0)
@@ -63,8 +61,6 @@ def escape_braces(match):
         content, count = expr.subn('\\1\\3\\\\\\\\{\\4}', content)
         if count == 0:
             return content
-
-
 s.replace(
     'lib/google/cloud/**/*.rb',
     '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
@@ -99,6 +95,8 @@ s.replace(
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
 )
+
+# https://github.com/googleapis/gapic-generator/issues/2393
 s.replace(
     'google-cloud-tasks.gemspec',
     'gem.add_development_dependency "rubocop".*$',
