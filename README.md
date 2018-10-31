@@ -892,15 +892,17 @@ image = { source: source }
 type = :FACE_DETECTION
 feature = { type: type }
 request = { image: image, features: [feature] }
+
 response = image_annotator_client.batch_annotate_images([request])
-  response.responses.each do |res|
-    res.face_annotations.each do |face|
-      puts "Joy:      #{face.joy_likelihood}"
-      puts "Anger:    #{face.anger_likelihood}"
-      puts "Sorrow:   #{face.sorrow_likelihood}"
-      puts "Surprise: #{face.surprise_likelihood}"
-    end
+
+response.responses.each do |res|
+  res.face_annotations.each do |face|
+    puts "Joy:      #{face.joy_likelihood}"
+    puts "Anger:    #{face.anger_likelihood}"
+    puts "Sorrow:   #{face.sorrow_likelihood}"
+    puts "Surprise: #{face.surprise_likelihood}"
   end
+end
 ```
 
 ### Stackdriver Monitoring API (Beta)
