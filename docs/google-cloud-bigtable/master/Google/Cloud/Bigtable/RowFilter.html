@@ -86,7 +86,7 @@ every column of a particular family, give just the two most recent cells
 that are older than timestamp X.&quot;</p>
 
 <p>Two broad categories of RowFilters are <code>true filters</code> and <code>transformers</code>.
-Two ways to compose simple filters into more complex ones are 
+Two ways to compose simple filters into more complex ones are
 <code>chains</code> and <code>interleaves</code>. They work as follows:</p>
 
 <ul>
@@ -601,7 +601,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a timestamp-range filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a-timestamp range filter instance.</p>
 </div></span>
   
 </li>
@@ -740,7 +740,7 @@ disabling just part of a filter.</p>
   <div class="discussion">
     <p>Creates cells-per-column filter instance.</p>
 
-<p>Matches only the most recent N cells within each column. 
+<p>Matches only the most recent N cells within each column.
 If duplicate cells are present, as is possible when using an interleave,
 each copy of the cell is counted separately.</p>
 
@@ -2042,7 +2042,7 @@ parent filter</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a timestamp-range filter instance.</p>
+    <p>Creates a-timestamp range filter instance.</p>
 
 <p>Matches only cells with timestamps within the given range.
 Specifies a contiguous range of timestamps.</p>
@@ -2257,7 +2257,7 @@ option inclusive/exclusive options</p>
 <li>The value at which to start the range. If neither field is set, interpreted
 as an empty string, inclusive.</li>
 <li>The value at which to end the range. If neither field is set, interpreted
-as the infinite string, exclusive.</li>
+as an infinite string, exclusive.</li>
 </ul>
 
 

@@ -91,12 +91,12 @@ js:
   <div class="discussion">
     <h1>ConditionFilter</h1>
 
-<p>A RowFilter which evaluates one of two possible RowFilters, depending on
+<p>A RowFilter that evaluates one of two possible RowFilters, depending on
 whether or not a predicate RowFilter outputs any cells from the input row.</p>
 
 <p>IMPORTANT NOTE: The predicate filter does not execute atomically with the
 true and false filters, which may lead to inconsistent or unexpected
-results. Additionally, Condition filters have poor performance, especially
+results. Additionally, condition filters have poor performance, especially
 when filters are set for the false condition.</p>
 
 <p>If <code>predicate_filter</code> outputs any cells, then <code>true_filter</code> will be

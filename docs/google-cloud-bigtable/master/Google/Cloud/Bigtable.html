@@ -168,7 +168,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Service for managing Bigtable instance, tables and reading from and writing to existing Bigtable tables.</p>
+    <span class="summary_desc"><div class='inline'><p>Service for managing Cloud Bigtable instances and tables and for reading from and writing to Bigtable tables.</p>
 </div></span>
   
 </li>
@@ -286,8 +286,8 @@ Google::Cloud::Bigtable library uses.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Service for managing Bigtable instance, tables and reading from and
-writing to existing Bigtable tables.</p>
+    <p>Service for managing Cloud Bigtable instances and tables and for reading from and
+writing to Bigtable tables.</p>
 
 
   </div>
@@ -333,17 +333,17 @@ If not present, the default project for the credentials is used.</p>
       
         &mdash;
         <div class='inline'><p>Provides the means for authenticating requests made by the client. This parameter can
-be many types.
-A <code>Google::Auth::Credentials</code> uses a the properties of its represented keyfile for
+be one of the following types:
+<code>Google::Auth::Credentials</code> uses the properties of its represented keyfile for
 authenticating requests made by this client.
-A <code>String</code> will be treated as the path to the keyfile to be used for the construction of
+<code>String</code> will be treated as the path to the keyfile to use to construct
 credentials for this client.
-A <code>Hash</code> will be treated as the contents of a keyfile to be used for the construction of
+<code>Hash</code> will be treated as the contents of a keyfile to use to construct
 credentials for this client.
-A <code>GRPC::Core::Channel</code> will be used to make calls through.
-A <code>GRPC::Core::ChannelCredentials</code> for the setting up the RPC client. The channel credentials
+<code>GRPC::Core::Channel</code> will be used to make calls through.
+<code>GRPC::Core::ChannelCredentials</code> for the setting up the gRPC client. The channel credentials
 should already be composed with a <code>GRPC::Core::CallCredentials</code> object.
-A <code>Proc</code> will be used as an updater_proc for the Grpc channel. The proc transforms the
+<code>Proc</code> will be used as an updater_proc for the gRPC channel. The proc transforms the
 metadata for requests, generally, to give OAuth credentials.</p>
 </div>
       
@@ -360,7 +360,7 @@ metadata for requests, generally, to give OAuth credentials.</p>
       
         &mdash;
         <div class='inline'><p>Bigtable emulator host. Optional.
-If the param is nil, uses the value of the <code>emulator_host</code> config.</p>
+If the parameter is nil, uses the value of the <code>emulator_host</code> config.</p>
 </div>
       
     </li>
@@ -394,7 +394,7 @@ updater_proc is supplied.</p>
       
       
         &mdash;
-        <div class='inline'><p>A Hash for call options for each method.
+        <div class='inline'><p>A hash for call options for each method.
 See Google::Gax#construct_settings for the structure of
 this data. Falls back to the default config if not specified
 or the specified config is missing data points.</p>

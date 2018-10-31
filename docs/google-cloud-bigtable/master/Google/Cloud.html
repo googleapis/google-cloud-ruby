@@ -115,7 +115,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Create bigtable client instance for data, table admin and instance admin operartions.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a Cloud Bigtable client instance for data, table admin and instance admin operations.</p>
 </div></span>
   
 </li>
@@ -147,7 +147,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a new object for connecting to the Bigtable service.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a new object for connecting to the Cloud Bigtable service.</p>
 </div></span>
   
 </li>
@@ -173,8 +173,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Create bigtable client instance for data, table admin and instance admin
-operartions.</p>
+    <p>Creates a Cloud Bigtable client instance for data, table admin and instance admin
+operations.</p>
 
 
   </div>
@@ -220,20 +220,31 @@ credentials is used.</p>
       
       
         &mdash;
-        <div class='inline'><p>Provides the means for authenticating requests made by the client. This parameter can
-be many types.
-A <code>Google::Auth::Credentials</code> uses a the properties of its represented keyfile for
+        <div class='inline'><p>The means for authenticating requests made by the client. This parameter can
+be one of the following types.
+<code>Google::Auth::Credentials</code> uses the properties of its represented keyfile for
 authenticating requests made by this client.
-A <code>String</code> will be treated as the path to the keyfile to be used for the construction of
+<code>String</code> will be treated as the path to the keyfile to use to construct
 credentials for this client.
-A <code>Hash</code> will be treated as the contents of a keyfile to be used for the construction of
+<code>Hash</code> will be treated as the contents of a keyfile to use to construct
 credentials for this client.
-A <code>GRPC::Core::Channel</code> will be used to make calls through.
-A <code>GRPC::Core::ChannelCredentials</code> for the setting up the RPC client. The channel credentials
+<code>GRPC::Core::Channel</code> will be used to make calls through.
+<code>GRPC::Core::ChannelCredentials</code> will be used to set up the gRPC client. The channel credentials
 should already be composed with a <code>GRPC::Core::CallCredentials</code> object.
-A <code>Proc</code> will be used as an updater_proc for the Grpc channel. The proc transforms the
+<code>Proc</code> will be used as an updater_proc for the gRPC channel. The proc transforms the
 metadata for requests, generally, to give OAuth credentials.</p>
 </div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
       
     </li>
   
@@ -281,7 +292,7 @@ updater_proc is supplied.</p>
       
       
         &mdash;
-        <div class='inline'><p>A Hash for call options for each method.
+        <div class='inline'><p>A hash for call options for each method.
 See Google::Gax#construct_settings for the structure of
 this data. Falls back to the default config if not specified
 or the specified config is missing data points. Optional.</p>
@@ -311,7 +322,6 @@ or the specified config is missing data points. Optional.</p>
       <pre class="lines">
 
 
-122
 123
 124
 125
@@ -325,10 +335,11 @@ or the specified config is missing data points. Optional.</p>
 133
 134
 135
-136</pre>
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google-cloud-bigtable.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/google-cloud-bigtable.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_bigtable'>bigtable</span> \
     <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -367,9 +378,9 @@ or the specified config is missing data points. Optional.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new object for connecting to the Bigtable service.</p>
+    <p>Creates a new object for connecting to the Cloud Bigtable service.</p>
 
-<p>For more information on connecting to Google Cloud see the
+<p>For more information on connecting to Google Cloud Platform, see the
 <a href="../file.AUTHENTICATION.html" title="Authentication Guide">Authentication Guide</a>.</p>
 
 
@@ -436,17 +447,17 @@ updater_proc is supplied.</p>
       
         &mdash;
         <div class='inline'><p>Provides the means for authenticating requests made by the client. This parameter can
-be many types.
-A <code>Google::Auth::Credentials</code> uses a the properties of its represented keyfile for
+be one of the following types.
+<code>Google::Auth::Credentials</code> uses the properties of its represented keyfile for
 authenticating requests made by this client.
-A <code>String</code> will be treated as the path to the keyfile to be used for the construction of
+<code>String</code> will be treated as the path to the keyfile to use to construct
 credentials for this client.
-A <code>Hash</code> will be treated as the contents of a keyfile to be used for the construction of
+<code>Hash</code> will be treated as the contents of a keyfile to use to construct
 credentials for this client.
-A <code>GRPC::Core::Channel</code> will be used to make calls through.
-A <code>GRPC::Core::ChannelCredentials</code> for the setting up the RPC client. The channel credentials
+<code>GRPC::Core::Channel</code> will be used to make calls through.
+<code>GRPC::Core::ChannelCredentials</code> will be used to set up the gRPC client. The channel credentials
 should already be composed with a <code>GRPC::Core::CallCredentials</code> object.
-A <code>Proc</code> will be used as an updater_proc for the Grpc channel. The proc transforms the
+<code>Proc</code> will be used as an updater_proc for the gRPC channel. The proc transforms the
 metadata for requests, generally, to give OAuth credentials.</p>
 </div>
       
@@ -462,7 +473,7 @@ metadata for requests, generally, to give OAuth credentials.</p>
       
       
         &mdash;
-        <div class='inline'><p>A Hash for call options for each method.
+        <div class='inline'><p>A hash for call options for each method.
 See Google::Gax#construct_settings for the structure of
 this data. Falls back to the default config if not specified
 or the specified config is missing data points.</p>

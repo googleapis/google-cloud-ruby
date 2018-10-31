@@ -171,7 +171,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>App profile id for request routing.</p>
+    <span class="summary_desc"><div class='inline'><p>App profile ID for request routing.</p>
 </div></span>
   
 </li>
@@ -235,7 +235,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Checks replication consistency based on a consistency token, that is, if replication has caught up based on the conditions specified in the token and the check request.</p>
+    <span class="summary_desc"><div class='inline'><p>Checks replication consistency based on a consistency token.</p>
 </div></span>
   
 </li>
@@ -350,7 +350,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Delete all rows.</p>
+    <span class="summary_desc"><div class='inline'><p>Deletes all rows.</p>
 </div></span>
   
 </li>
@@ -373,7 +373,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Delete rows using row key prefix.</p>
+    <span class="summary_desc"><div class='inline'><p>Deletes rows using row key prefix.</p>
 </div></span>
   
 </li>
@@ -396,7 +396,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Drop row range by row key prefix or delete all.</p>
+    <span class="summary_desc"><div class='inline'><p>Drops row range by row key prefix or deletes all.</p>
 </div></span>
   
 </li>
@@ -419,7 +419,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Check table existence.</p>
+    <span class="summary_desc"><div class='inline'><p>Checks to see if table exists.</p>
 </div></span>
   
 </li>
@@ -470,7 +470,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Generates a consistency token for a Table, which can be used in CheckConsistency to check whether mutations to the table that finished before this call started have been replicated.</p>
+    <span class="summary_desc"><div class='inline'><p>Generates a consistency token for a table.</p>
 </div></span>
   
 </li>
@@ -516,7 +516,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The table keeps data versioned at a granularity of 1ms.</p>
+    <span class="summary_desc"><div class='inline'><p>The table keeps data versioned at a granularity of 1 ms.</p>
 </div></span>
   
 </li>
@@ -562,7 +562,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Apply multitple column modifications Performs a series of column family modifications on the specified table.</p>
+    <span class="summary_desc"><div class='inline'><p>Applies multitple column modifications.</p>
 </div></span>
   
 </li>
@@ -1017,7 +1017,7 @@ Each table is served using the resources of its parent cluster.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns App profile id for request routing.</p>
+    <p>Returns App profile ID for request routing.</p>
 
 
   </div>
@@ -1035,7 +1035,7 @@ Each table is served using the resources of its parent cluster.</p>
       
       
         &mdash;
-        <div class='inline'><p>App profile id for request routing.</p>
+        <div class='inline'><p>App profile ID for request routing.</p>
 </div>
       
     </li>
@@ -1242,9 +1242,9 @@ Must contain at least one entry if +true_mutations+ is empty and at most
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks replication consistency based on a consistency token, that is, if
-replication has caught up based on the conditions specified in the token
-and the check request.</p>
+    <p>Checks replication consistency based on a consistency token. Replication is
+considered consistent if replication has caught up based on the conditions
+specified in the token and the check request.</p>
 
 
   </div>
@@ -1407,7 +1407,7 @@ Views: <code>FULL</code></p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The column families configured for this table, mapped by column family ID.
-Available column families data only in table view types: <code>SCHEMA_VIEW</code>, <code>FULL</code></p>
+Column-families data only available in table view types <code>SCHEMA_VIEW</code>, <code>FULL</code>.</p>
 
 
   </div>
@@ -1700,7 +1700,7 @@ Required for create and update operations.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Delete all rows</p>
+    <p>Deletes all rows.</p>
 
 
   </div>
@@ -1737,7 +1737,7 @@ Required for create and update operations.</p>
       
         &mdash;
         <div class='inline'><p>Call timeout in seconds
-Use in case of : Insufficient deadline for DropRowRange then
+Use in case of insufficient deadline for DropRowRange, then
 try again with a longer request deadline.</p>
 </div>
       
@@ -1791,7 +1791,7 @@ try again with a longer request deadline.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Delete rows using row key prefix.</p>
+    <p>Deletes rows using row key prefix.</p>
 
 
   </div>
@@ -1827,7 +1827,7 @@ try again with a longer request deadline.</p>
       
       
         &mdash;
-        <div class='inline'><p>Row key prefix. i.e &quot;user&quot;</p>
+        <div class='inline'><p>Row key prefix (for example, &quot;user&quot;)</p>
 </div>
       
     </li>
@@ -1895,7 +1895,7 @@ try again with a longer request deadline.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Drop row range by row key prefix or delete all.</p>
+    <p>Drops row range by row key prefix or deletes all.</p>
 
 
   </div>
@@ -1932,7 +1932,7 @@ try again with a longer request deadline.</p>
       
       
         &mdash;
-        <div class='inline'><p>Row key prefix. i.e &quot;user&quot;</p>
+        <div class='inline'><p>Row key prefix (for example, &quot;user&quot;)</p>
 </div>
       
     </li>
@@ -2018,7 +2018,7 @@ try again with a longer request deadline.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Check table existence.</p>
+    <p>Checks to see if table exists.</p>
 
 
   </div>
@@ -2042,7 +2042,7 @@ try again with a longer request deadline.</p>
 <span class='kw'>end</span></code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Using bigtable instance</p>
+        <p class="example_title"><div class='inline'><p>Using Cloud Bigtable instance</p>
 </div></p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigtable</span><span class='tstring_end'>&quot;</span></span>
@@ -2163,7 +2163,7 @@ try again with a longer request deadline.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Generates a consistency token for a Table, which can be used in
+    <p>Generates a consistency token for a table. The token can be used in
 CheckConsistency to check whether mutations to the table that finished
 before this call started have been replicated. The tokens will be available
 for 90 days.</p>
@@ -2300,7 +2300,7 @@ Views: <code>SCHEMA_VIEW</code>, <code>FULL</code></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The table keeps data versioned at a granularity of 1ms.</p>
+    <p>The table keeps data versioned at a granularity of 1 ms.</p>
 
 
   </div>
@@ -2406,7 +2406,7 @@ Views: <code>SCHEMA_VIEW</code>, <code>FULL</code></p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Apply multitple column modifications
+    <p>Applies multitple column modifications.
 Performs a series of column family modifications on the specified table.
 Either all or none of the modifications will occur before this method
 returns, but data requests received prior to that point may see a table
@@ -3743,7 +3743,7 @@ The default (zero) is to return all results.</p>
         &mdash;
         <div class='inline'><p>Table view type.
 Default view type is <code>:SCHEMA_VIEW</code>
-Valid view types are.</p>
+Valid view types are:</p>
 
 <ul>
 <li><code>:NAME_ONLY</code> - Only populates <code>name</code></li>
@@ -3887,7 +3887,7 @@ MapReduces.</p>
   <div class="discussion">
     <p>Wait for replication to check replication consistency.
 Checks replication consistency by generating a consistency token and
-calling the <code>check_consistency</code> api call 5 times (by default).
+making the <code>check_consistency</code> API call 5 times (by default).
 If the response is consistent, returns true. Otherwise tries again
 repeatedly until the timeout. If the check does not succeed by the
 timeout, returns <code>false</code>.</p>
