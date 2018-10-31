@@ -19,12 +19,12 @@ module Google
   module Cloud
     module Bigtable
       class Table
-        # Table::ClusterState is a The state of a table's data in a particular cluster.
+        # Table::ClusterState is the state of a table's data in a particular cluster.
         class ClusterState
           attr_reader :cluster_name
 
           # @private
-          # Create a new Table::ClusterState
+          # Creates a new Table::ClusterState
           #
           def initialize grpc, cluster_name
             @grpc = grpc

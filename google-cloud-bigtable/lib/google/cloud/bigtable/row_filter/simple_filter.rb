@@ -24,7 +24,7 @@ module Google
         #
         class SimpleFilter
           # @private
-          # Create simple filter instance.
+          # Creates a simple filter instance.
           #
           def initialize
             @grpc = Google::Bigtable::V2::RowFilter.new
@@ -59,7 +59,7 @@ module Google
             self
           end
 
-          # Replaces each cell's value with the empty string.
+          # Replaces each cell's value with an empty string.
           #
           # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
           #
@@ -155,12 +155,11 @@ module Google
           # Values must be at most 15 characters in length, and match the RE2
           # pattern `[a-z0-9\\-]+`
           #
-          # Due to a technical limitation, it is not currently possible to apply
-          # multiple labels to a cell. As a result, a Chain may have no more than
-          # one sub-filter which contains a `apply_label_transformer`. It is okay for
-          # an Interleave to contain multiple `apply_label_transformers`, as they
-          # will be applied to separate copies of the input. This may be relaxed in
-          # the future.
+          # Due to a technical limitation, it is not possible to apply
+          # multiple labels to a cell. As a result, a chain may have no more than
+          # one sub-filter whithatch contains an `apply_label_transformer`. It is okay for
+          # an interleave to contain multiple `apply_label_transformers`, as they
+          # will be applied to separate copies of the input.
           #
           # @param value [String] Label name
           # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
@@ -171,7 +170,7 @@ module Google
           end
 
           # Skips the first N cells of each row, matching all subsequent cells.
-          # If duplicate cells are present, as is possible when using an Interleave,
+          # If duplicate cells are present, as is possible when using an interleave,
           # each copy of the cell is counted separately.
           #
           # @param offset [Integer] Offset value.
@@ -198,7 +197,7 @@ module Google
           # if N=2, this filter would match column `foo:bar` at timestamps 10 and 9,
           # skip all earlier cells in `foo:bar`, and then begin matching again in
           # column `foo:bar2`.
-          # If duplicate cells are present, as is possible when using an Interleave,
+          # If duplicate cells are present, as is possible when using an interleave,
           # each copy of the cell is counted separately.
           #
           # @param limit [String] Max cell match per column limit
@@ -209,10 +208,10 @@ module Google
             self
           end
 
-          # Create timestamp range filter instance
+          # Creates a timestamp range filter instance.
           #
           # Matches only cells with timestamps within the given range.
-          # Specified a contiguous range of timestamps.
+          # Specifies a contiguous range of timestamps.
           #
           # @param from [Integer] Inclusive lower bound. If left empty, interpreted as 0.
           # @param to [Integer] Exclusive upper bound. If left empty, interpreted as infinity.
@@ -231,8 +230,8 @@ module Google
           # See {Google::Cloud::Bigtable::ValueRange#from} and { Google::Cloud::Bigtable::ValueRange#to} for range
           # option inclusive/exclusive options
           #
-          # * The value at which to start the range.If neither field is set, interpreted as the empty string, inclusive.
-          # * The value at which to end the range. If neither field is set, interpreted as the infinite string, exclusive.
+          # * The value at which to start the range. If neither field is set, interpreted as an empty string, inclusive.
+          # * The value at which to end the range. If neither field is set, interpreted as an infinite string, exclusive.
           #
           # @param range [Google::Cloud::Bigtable::ValueRange]
           # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
@@ -260,7 +259,7 @@ module Google
 
           # @private
           #
-          # Convet to gRPC row filter instance.
+          # Converts to a gRPC row filter instance.
           #
           # @return [Google::Bigtable::V2::RowFilter]
           def to_grpc
