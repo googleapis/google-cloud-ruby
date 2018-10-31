@@ -89,29 +89,21 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A Distribution may optionally contain a histogram of the values in the
-population.  The histogram is given in <code>bucket_counts</code> as counts of values
-that fall into one of a sequence of non-overlapping buckets.  The sequence
-of buckets is described by <code>bucket_options</code>.</p>
+    <p><code>BucketOptions</code> describes the bucket boundaries used to create a histogram
+for the distribution. The buckets can be in a linear sequence, an
+exponential sequence, or each bucket can be specified explicitly.
+<code>BucketOptions</code> does not include the number of values in each bucket.</p>
 
-<p>A bucket specifies an inclusive lower bound and exclusive upper bound for
-the values that are counted for that bucket.  The upper bound of a bucket
-is strictly greater than the lower bound.</p>
-
-<p>The sequence of N buckets for a Distribution consists of an underflow
-bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
-an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
-bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
-The buckets span the whole range of finite values: lower bound of the
-underflow bucket is -infinity and the upper bound of the overflow bucket is
-+infinity.  The finite buckets are so-called because both bounds are
-finite.</p>
-
-<p><code>BucketOptions</code> describes bucket boundaries in one of three ways.  Two
-describe the boundaries by giving parameters for a formula to generate
-boundaries and one gives the bucket boundaries explicitly.</p>
-
-<p>If <code>bucket_boundaries</code> is not given, then no <code>bucket_counts</code> may be given.</p>
+<p>A bucket has an inclusive lower bound and exclusive upper bound for the
+values that are counted for that bucket. The upper bound of a bucket must
+be strictly greater than the lower bound. The sequence of N buckets for a
+distribution consists of an underflow bucket (number 0), zero or more
+finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+same as the upper bound of bucket i - 1. The buckets span the whole range
+of finite values: lower bound of the underflow bucket is -infinity and the
+upper bound of the overflow bucket is +infinity. The finite buckets are
+so-called because both bounds are finite.</p>
 
 
   </div>
@@ -329,12 +321,12 @@ boundaries and one gives the bucket boundaries explicitly.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 114</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
-  <span class='comment'># Specify a sequence of buckets that all have the same width (except
-</span>  <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
-</span>  <span class='comment'># uncertainty on the specific value in the bucket.
+  <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>  <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>  <span class='comment'># absolute uncertainty on the specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket `i`:
+</span>  <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>  <span class='comment'># following boundaries:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -349,12 +341,12 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'>#     Lower bound of the first bucket.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Linear.html" title="Google::Api::Distribution::BucketOptions::Linear (class)">Linear</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
-</span>  <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
-</span>  <span class='comment'># uncertainty on a specific value in the bucket.
+  <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>  <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>  <span class='comment'># constant relative uncertainty on a specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>  <span class='comment'># following boundaries:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
@@ -369,17 +361,17 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'>#     Must be greater than 0.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Exponential.html" title="Google::Api::Distribution::BucketOptions::Exponential (class)">Exponential</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A set of buckets with arbitrary widths.
+  <span class='comment'># Specifies a set of buckets with arbitrary widths.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>  <span class='comment'># boundaries:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>  <span class='comment'>#
-</span>  <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
-</span>  <span class='comment'># element, there are no finite buckets, and that single element is the
-</span>  <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>  <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>  <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>  <span class='comment'># element is the common boundary of the overflow and underflow buckets.
 </span>  <span class='comment'># @!attribute [rw] bounds
 </span>  <span class='comment'>#   @return [Array&lt;Float&gt;]
 </span>  <span class='comment'>#     The values must be monotonically increasing.
@@ -496,12 +488,12 @@ boundaries and one gives the bucket boundaries explicitly.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 114</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
-  <span class='comment'># Specify a sequence of buckets that all have the same width (except
-</span>  <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
-</span>  <span class='comment'># uncertainty on the specific value in the bucket.
+  <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>  <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>  <span class='comment'># absolute uncertainty on the specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket `i`:
+</span>  <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>  <span class='comment'># following boundaries:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -516,12 +508,12 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'>#     Lower bound of the first bucket.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Linear.html" title="Google::Api::Distribution::BucketOptions::Linear (class)">Linear</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
-</span>  <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
-</span>  <span class='comment'># uncertainty on a specific value in the bucket.
+  <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>  <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>  <span class='comment'># constant relative uncertainty on a specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>  <span class='comment'># following boundaries:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
@@ -536,17 +528,17 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'>#     Must be greater than 0.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Exponential.html" title="Google::Api::Distribution::BucketOptions::Exponential (class)">Exponential</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A set of buckets with arbitrary widths.
+  <span class='comment'># Specifies a set of buckets with arbitrary widths.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>  <span class='comment'># boundaries:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>  <span class='comment'>#
-</span>  <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
-</span>  <span class='comment'># element, there are no finite buckets, and that single element is the
-</span>  <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>  <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>  <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>  <span class='comment'># element is the common boundary of the overflow and underflow buckets.
 </span>  <span class='comment'># @!attribute [rw] bounds
 </span>  <span class='comment'>#   @return [Array&lt;Float&gt;]
 </span>  <span class='comment'>#     The values must be monotonically increasing.
@@ -663,12 +655,12 @@ boundaries and one gives the bucket boundaries explicitly.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 114</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
-  <span class='comment'># Specify a sequence of buckets that all have the same width (except
-</span>  <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
-</span>  <span class='comment'># uncertainty on the specific value in the bucket.
+  <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>  <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>  <span class='comment'># absolute uncertainty on the specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket `i`:
+</span>  <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>  <span class='comment'># following boundaries:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -683,12 +675,12 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'>#     Lower bound of the first bucket.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Linear.html" title="Google::Api::Distribution::BucketOptions::Linear (class)">Linear</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
-</span>  <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
-</span>  <span class='comment'># uncertainty on a specific value in the bucket.
+  <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>  <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>  <span class='comment'># constant relative uncertainty on a specific value in the bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>  <span class='comment'># following boundaries:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
@@ -703,17 +695,17 @@ boundaries and one gives the bucket boundaries explicitly.</p>
 </span>  <span class='comment'>#     Must be greater than 0.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="BucketOptions/Exponential.html" title="Google::Api::Distribution::BucketOptions::Exponential (class)">Exponential</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A set of buckets with arbitrary widths.
+  <span class='comment'># Specifies a set of buckets with arbitrary widths.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
-</span>  <span class='comment'># bucket i:
+</span>  <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>  <span class='comment'># boundaries:
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>  <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>  <span class='comment'>#
-</span>  <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
-</span>  <span class='comment'># element, there are no finite buckets, and that single element is the
-</span>  <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>  <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>  <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>  <span class='comment'># element is the common boundary of the overflow and underflow buckets.
 </span>  <span class='comment'># @!attribute [rw] bounds
 </span>  <span class='comment'>#   @return [Array&lt;Float&gt;]
 </span>  <span class='comment'>#     The values must be monotonically increasing.

@@ -89,17 +89,16 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Distribution contains summary statistics for a population of values and,
-optionally, a histogram representing the distribution of those values across
-a specified set of histogram buckets.</p>
+    <p><code>Distribution</code> contains summary statistics for a population of values. It
+optionally contains a histogram representing the distribution of those values
+across a set of buckets.</p>
 
 <p>The summary statistics are the count, mean, sum of the squared deviation from
-the mean, the minimum, and the maximum of the set of population of values.</p>
-
-<p>The histogram is based on a sequence of buckets and gives a count of values
-that fall into each bucket.  The boundaries of the buckets are given either
-explicitly or by specifying parameters for a method of computing them
-(buckets of fixed width or buckets of exponentially increasing width).</p>
+the mean, the minimum, and the maximum of the set of population of values.
+The histogram is based on a sequence of buckets and gives a count of values
+that fall into each bucket. The boundaries of the buckets are given either
+explicitly or by formulas for buckets of fixed or exponentially increasing
+widths.</p>
 
 <p>Although it is not forbidden, it is generally a bad idea to include
 non-finite values (infinities or NaNs) in the population of values, as this
@@ -117,7 +116,7 @@ will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fiel
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span>, <span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span>, <span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span>, <span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span>
     
   
 </p>
@@ -148,7 +147,7 @@ will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fiel
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If <code>bucket_options</code> is given, then the sum of the values in <code>bucket_counts</code> must equal the value in <code>count</code>.</p>
+    <span class="summary_desc"><div class='inline'><p>The number of values in each bucket of the histogram, as described in <code>bucket_options</code>.</p>
 </div></span>
   
 </li>
@@ -201,6 +200,32 @@ will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fiel
 
   
     <span class="summary_desc"><div class='inline'><p>The number of values in the population.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exemplars-instance_method" title="#exemplars (instance method)">#<strong>exemplars</strong>  &#x21d2; Array&lt;Google::Api::Distribution::Exemplar&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Must be in increasing order of <code>value</code> field.</p>
 </div></span>
   
 </li>
@@ -306,18 +331,21 @@ will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fiel
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns If <code>bucket_options</code> is given, then the sum of the values in <code>bucket_counts</code>
-must equal the value in <code>count</code>.  If <code>bucket_options</code> is not given, no
-<code>bucket_counts</code> fields may be given.</p>
+    <p>Returns The number of values in each bucket of the histogram, as described in
+<code>bucket_options</code>. If the distribution does not have a histogram, then omit
+this field. If there is a histogram, then the sum of the values in
+<code>bucket_counts</code> must equal the value in the <code>count</code> field of the
+distribution.</p>
 
-<p>Bucket counts are given in order under the numbering scheme described
-above (the underflow bucket has number 0; the finite buckets, if any,
-have numbers 1 through N-2; the overflow bucket has number N-1).</p>
+<p>If present, <code>bucket_counts</code> should contain N values, where N is the number
+of buckets specified in <code>bucket_options</code>. If you supply fewer than N
+values, the remaining values are assumed to be 0.</p>
 
-<p>The size of <code>bucket_counts</code> must be no greater than N as defined in
-<code>bucket_options</code>.</p>
-
-<p>Any suffix of trailing zero bucket_count fields may be omitted.</p>
+<p>The order of the values in <code>bucket_counts</code> follows the bucket numbering
+schemes described for the three bucket types. The first value must be the
+count for the underflow bucket (number 0). The next N-2 values are the
+counts for the finite buckets (number 1 through N-2). The N&#39;th value in
+<code>bucket_counts</code> is the count for the overflow bucket (number N-1).</p>
 
 
   </div>
@@ -335,18 +363,21 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
       
       
         &mdash;
-        <div class='inline'><p>If <code>bucket_options</code> is given, then the sum of the values in <code>bucket_counts</code>
-must equal the value in <code>count</code>.  If <code>bucket_options</code> is not given, no
-<code>bucket_counts</code> fields may be given.</p>
+        <div class='inline'><p>The number of values in each bucket of the histogram, as described in
+<code>bucket_options</code>. If the distribution does not have a histogram, then omit
+this field. If there is a histogram, then the sum of the values in
+<code>bucket_counts</code> must equal the value in the <code>count</code> field of the
+distribution.</p>
 
-<p>Bucket counts are given in order under the numbering scheme described
-above (the underflow bucket has number 0; the finite buckets, if any,
-have numbers 1 through N-2; the overflow bucket has number N-1).</p>
+<p>If present, <code>bucket_counts</code> should contain N values, where N is the number
+of buckets specified in <code>bucket_options</code>. If you supply fewer than N
+values, the remaining values are assumed to be 0.</p>
 
-<p>The size of <code>bucket_counts</code> must be no greater than N as defined in
-<code>bucket_options</code>.</p>
-
-<p>Any suffix of trailing zero bucket_count fields may be omitted.</p>
+<p>The order of the values in <code>bucket_counts</code> follows the bucket numbering
+schemes described for the three bucket types. The first value must be the
+count for the underflow bucket (number 0). The next N-2 values are the
+counts for the finite buckets (number 1 through N-2). The N&#39;th value in
+<code>bucket_counts</code> is the count for the overflow bucket (number N-1).</p>
 </div>
       
     </li>
@@ -359,14 +390,6 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
 80
 81
 82
@@ -458,10 +481,37 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 168
 169
 170
-171</pre>
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
   <span class='comment'># The range of the population values.
@@ -473,29 +523,21 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>  <span class='comment'>#     The maximum of the population values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A Distribution may optionally contain a histogram of the values in the
-</span>  <span class='comment'># population.  The histogram is given in `bucket_counts` as counts of values
-</span>  <span class='comment'># that fall into one of a sequence of non-overlapping buckets.  The sequence
-</span>  <span class='comment'># of buckets is described by `bucket_options`.
+  <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
+</span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
+</span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
+</span>  <span class='comment'># `BucketOptions` does not include the number of values in each bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># A bucket specifies an inclusive lower bound and exclusive upper bound for
-</span>  <span class='comment'># the values that are counted for that bucket.  The upper bound of a bucket
-</span>  <span class='comment'># is strictly greater than the lower bound.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># The sequence of N buckets for a Distribution consists of an underflow
-</span>  <span class='comment'># bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
-</span>  <span class='comment'># an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
-</span>  <span class='comment'># bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
-</span>  <span class='comment'># The buckets span the whole range of finite values: lower bound of the
-</span>  <span class='comment'># underflow bucket is -infinity and the upper bound of the overflow bucket is
-</span>  <span class='comment'># +infinity.  The finite buckets are so-called because both bounds are
-</span>  <span class='comment'># finite.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># `BucketOptions` describes bucket boundaries in one of three ways.  Two
-</span>  <span class='comment'># describe the boundaries by giving parameters for a formula to generate
-</span>  <span class='comment'># boundaries and one gives the bucket boundaries explicitly.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># If `bucket_boundaries` is not given, then no `bucket_counts` may be given.
+</span>  <span class='comment'># A bucket has an inclusive lower bound and exclusive upper bound for the
+</span>  <span class='comment'># values that are counted for that bucket. The upper bound of a bucket must
+</span>  <span class='comment'># be strictly greater than the lower bound. The sequence of N buckets for a
+</span>  <span class='comment'># distribution consists of an underflow bucket (number 0), zero or more
+</span>  <span class='comment'># finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+</span>  <span class='comment'># 1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+</span>  <span class='comment'># same as the upper bound of bucket i - 1. The buckets span the whole range
+</span>  <span class='comment'># of finite values: lower bound of the underflow bucket is -infinity and the
+</span>  <span class='comment'># upper bound of the overflow bucket is +infinity. The finite buckets are
+</span>  <span class='comment'># so-called because both bounds are finite.
 </span>  <span class='comment'># @!attribute [rw] linear_buckets
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Linear]
 </span>  <span class='comment'>#     The linear bucket.
@@ -506,12 +548,12 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Explicit]
 </span>  <span class='comment'>#     The explicit buckets.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
-    <span class='comment'># Specify a sequence of buckets that all have the same width (except
-</span>    <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
-</span>    <span class='comment'># uncertainty on the specific value in the bucket.
+    <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>    <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>    <span class='comment'># absolute uncertainty on the specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket `i`:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -526,12 +568,12 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>    <span class='comment'>#     Lower bound of the first bucket.
 </span>    <span class='kw'>class</span> <span class='const'>Linear</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
-</span>    <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
-</span>    <span class='comment'># uncertainty on a specific value in the bucket.
+    <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>    <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>    <span class='comment'># constant relative uncertainty on a specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
@@ -546,22 +588,49 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>    <span class='comment'>#     Must be greater than 0.
 </span>    <span class='kw'>class</span> <span class='const'>Exponential</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># A set of buckets with arbitrary widths.
+    <span class='comment'># Specifies a set of buckets with arbitrary widths.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>    <span class='comment'># boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>    <span class='comment'>#
-</span>    <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
-</span>    <span class='comment'># element, there are no finite buckets, and that single element is the
-</span>    <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>    <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>    <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>    <span class='comment'># element is the common boundary of the overflow and underflow buckets.
 </span>    <span class='comment'># @!attribute [rw] bounds
 </span>    <span class='comment'>#   @return [Array&lt;Float&gt;]
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
+
+  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
+</span>  <span class='comment'># distribution values. They are metadata that gives information about a
+</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
+</span>  <span class='comment'># was active when a value was added. They may contain further information,
+</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
+</span>  <span class='comment'># @!attribute [rw] value
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
+</span>  <span class='comment'>#     exemplar belongs.
+</span>  <span class='comment'># @!attribute [rw] timestamp
+</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#     The observation (sampling) time of the above value.
+</span>  <span class='comment'># @!attribute [rw] attachments
+</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
+</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Labels dropped during aggregation:
+</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
+</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -581,7 +650,8 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Defines the histogram bucket boundaries.</p>
+    <p>Returns Defines the histogram bucket boundaries. If the distribution does not
+contain a histogram, then omit this field.</p>
 
 
   </div>
@@ -599,7 +669,8 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
       
       
         &mdash;
-        <div class='inline'><p>Defines the histogram bucket boundaries.</p>
+        <div class='inline'><p>Defines the histogram bucket boundaries. If the distribution does not
+contain a histogram, then omit this field.</p>
 </div>
       
     </li>
@@ -612,14 +683,6 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
 80
 81
 82
@@ -711,10 +774,37 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 168
 169
 170
-171</pre>
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
   <span class='comment'># The range of the population values.
@@ -726,29 +816,21 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>  <span class='comment'>#     The maximum of the population values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A Distribution may optionally contain a histogram of the values in the
-</span>  <span class='comment'># population.  The histogram is given in `bucket_counts` as counts of values
-</span>  <span class='comment'># that fall into one of a sequence of non-overlapping buckets.  The sequence
-</span>  <span class='comment'># of buckets is described by `bucket_options`.
+  <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
+</span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
+</span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
+</span>  <span class='comment'># `BucketOptions` does not include the number of values in each bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># A bucket specifies an inclusive lower bound and exclusive upper bound for
-</span>  <span class='comment'># the values that are counted for that bucket.  The upper bound of a bucket
-</span>  <span class='comment'># is strictly greater than the lower bound.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># The sequence of N buckets for a Distribution consists of an underflow
-</span>  <span class='comment'># bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
-</span>  <span class='comment'># an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
-</span>  <span class='comment'># bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
-</span>  <span class='comment'># The buckets span the whole range of finite values: lower bound of the
-</span>  <span class='comment'># underflow bucket is -infinity and the upper bound of the overflow bucket is
-</span>  <span class='comment'># +infinity.  The finite buckets are so-called because both bounds are
-</span>  <span class='comment'># finite.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># `BucketOptions` describes bucket boundaries in one of three ways.  Two
-</span>  <span class='comment'># describe the boundaries by giving parameters for a formula to generate
-</span>  <span class='comment'># boundaries and one gives the bucket boundaries explicitly.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># If `bucket_boundaries` is not given, then no `bucket_counts` may be given.
+</span>  <span class='comment'># A bucket has an inclusive lower bound and exclusive upper bound for the
+</span>  <span class='comment'># values that are counted for that bucket. The upper bound of a bucket must
+</span>  <span class='comment'># be strictly greater than the lower bound. The sequence of N buckets for a
+</span>  <span class='comment'># distribution consists of an underflow bucket (number 0), zero or more
+</span>  <span class='comment'># finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+</span>  <span class='comment'># 1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+</span>  <span class='comment'># same as the upper bound of bucket i - 1. The buckets span the whole range
+</span>  <span class='comment'># of finite values: lower bound of the underflow bucket is -infinity and the
+</span>  <span class='comment'># upper bound of the overflow bucket is +infinity. The finite buckets are
+</span>  <span class='comment'># so-called because both bounds are finite.
 </span>  <span class='comment'># @!attribute [rw] linear_buckets
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Linear]
 </span>  <span class='comment'>#     The linear bucket.
@@ -759,12 +841,12 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Explicit]
 </span>  <span class='comment'>#     The explicit buckets.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
-    <span class='comment'># Specify a sequence of buckets that all have the same width (except
-</span>    <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
-</span>    <span class='comment'># uncertainty on the specific value in the bucket.
+    <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>    <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>    <span class='comment'># absolute uncertainty on the specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket `i`:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -779,12 +861,12 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>    <span class='comment'>#     Lower bound of the first bucket.
 </span>    <span class='kw'>class</span> <span class='const'>Linear</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
-</span>    <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
-</span>    <span class='comment'># uncertainty on a specific value in the bucket.
+    <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>    <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>    <span class='comment'># constant relative uncertainty on a specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
@@ -799,22 +881,49 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>    <span class='comment'>#     Must be greater than 0.
 </span>    <span class='kw'>class</span> <span class='const'>Exponential</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># A set of buckets with arbitrary widths.
+    <span class='comment'># Specifies a set of buckets with arbitrary widths.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>    <span class='comment'># boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>    <span class='comment'>#
-</span>    <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
-</span>    <span class='comment'># element, there are no finite buckets, and that single element is the
-</span>    <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>    <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>    <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>    <span class='comment'># element is the common boundary of the overflow and underflow buckets.
 </span>    <span class='comment'># @!attribute [rw] bounds
 </span>    <span class='comment'>#   @return [Array&lt;Float&gt;]
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
+
+  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
+</span>  <span class='comment'># distribution values. They are metadata that gives information about a
+</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
+</span>  <span class='comment'># was active when a value was added. They may contain further information,
+</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
+</span>  <span class='comment'># @!attribute [rw] value
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
+</span>  <span class='comment'>#     exemplar belongs.
+</span>  <span class='comment'># @!attribute [rw] timestamp
+</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#     The observation (sampling) time of the above value.
+</span>  <span class='comment'># @!attribute [rw] attachments
+</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
+</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Labels dropped during aggregation:
+</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
+</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -834,7 +943,9 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The number of values in the population. Must be non-negative.</p>
+    <p>Returns The number of values in the population. Must be non-negative. This value
+must equal the sum of the values in <code>bucket_counts</code> if a histogram is
+provided.</p>
 
 
   </div>
@@ -852,7 +963,9 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
       
       
         &mdash;
-        <div class='inline'><p>The number of values in the population. Must be non-negative.</p>
+        <div class='inline'><p>The number of values in the population. Must be non-negative. This value
+must equal the sum of the values in <code>bucket_counts</code> if a histogram is
+provided.</p>
 </div>
       
     </li>
@@ -865,14 +978,6 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
 80
 81
 82
@@ -964,10 +1069,37 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 168
 169
 170
-171</pre>
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
   <span class='comment'># The range of the population values.
@@ -979,29 +1111,21 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>  <span class='comment'>#     The maximum of the population values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A Distribution may optionally contain a histogram of the values in the
-</span>  <span class='comment'># population.  The histogram is given in `bucket_counts` as counts of values
-</span>  <span class='comment'># that fall into one of a sequence of non-overlapping buckets.  The sequence
-</span>  <span class='comment'># of buckets is described by `bucket_options`.
+  <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
+</span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
+</span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
+</span>  <span class='comment'># `BucketOptions` does not include the number of values in each bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># A bucket specifies an inclusive lower bound and exclusive upper bound for
-</span>  <span class='comment'># the values that are counted for that bucket.  The upper bound of a bucket
-</span>  <span class='comment'># is strictly greater than the lower bound.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># The sequence of N buckets for a Distribution consists of an underflow
-</span>  <span class='comment'># bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
-</span>  <span class='comment'># an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
-</span>  <span class='comment'># bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
-</span>  <span class='comment'># The buckets span the whole range of finite values: lower bound of the
-</span>  <span class='comment'># underflow bucket is -infinity and the upper bound of the overflow bucket is
-</span>  <span class='comment'># +infinity.  The finite buckets are so-called because both bounds are
-</span>  <span class='comment'># finite.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># `BucketOptions` describes bucket boundaries in one of three ways.  Two
-</span>  <span class='comment'># describe the boundaries by giving parameters for a formula to generate
-</span>  <span class='comment'># boundaries and one gives the bucket boundaries explicitly.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># If `bucket_boundaries` is not given, then no `bucket_counts` may be given.
+</span>  <span class='comment'># A bucket has an inclusive lower bound and exclusive upper bound for the
+</span>  <span class='comment'># values that are counted for that bucket. The upper bound of a bucket must
+</span>  <span class='comment'># be strictly greater than the lower bound. The sequence of N buckets for a
+</span>  <span class='comment'># distribution consists of an underflow bucket (number 0), zero or more
+</span>  <span class='comment'># finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+</span>  <span class='comment'># 1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+</span>  <span class='comment'># same as the upper bound of bucket i - 1. The buckets span the whole range
+</span>  <span class='comment'># of finite values: lower bound of the underflow bucket is -infinity and the
+</span>  <span class='comment'># upper bound of the overflow bucket is +infinity. The finite buckets are
+</span>  <span class='comment'># so-called because both bounds are finite.
 </span>  <span class='comment'># @!attribute [rw] linear_buckets
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Linear]
 </span>  <span class='comment'>#     The linear bucket.
@@ -1012,12 +1136,12 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Explicit]
 </span>  <span class='comment'>#     The explicit buckets.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
-    <span class='comment'># Specify a sequence of buckets that all have the same width (except
-</span>    <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
-</span>    <span class='comment'># uncertainty on the specific value in the bucket.
+    <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>    <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>    <span class='comment'># absolute uncertainty on the specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket `i`:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -1032,12 +1156,12 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>    <span class='comment'>#     Lower bound of the first bucket.
 </span>    <span class='kw'>class</span> <span class='const'>Linear</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
-</span>    <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
-</span>    <span class='comment'># uncertainty on a specific value in the bucket.
+    <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>    <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>    <span class='comment'># constant relative uncertainty on a specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
@@ -1052,22 +1176,340 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
 </span>    <span class='comment'>#     Must be greater than 0.
 </span>    <span class='kw'>class</span> <span class='const'>Exponential</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># A set of buckets with arbitrary widths.
+    <span class='comment'># Specifies a set of buckets with arbitrary widths.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>    <span class='comment'># boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>    <span class='comment'>#
-</span>    <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
-</span>    <span class='comment'># element, there are no finite buckets, and that single element is the
-</span>    <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>    <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>    <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>    <span class='comment'># element is the common boundary of the overflow and underflow buckets.
 </span>    <span class='comment'># @!attribute [rw] bounds
 </span>    <span class='comment'>#   @return [Array&lt;Float&gt;]
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
+
+  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
+</span>  <span class='comment'># distribution values. They are metadata that gives information about a
+</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
+</span>  <span class='comment'># was active when a value was added. They may contain further information,
+</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
+</span>  <span class='comment'># @!attribute [rw] value
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
+</span>  <span class='comment'>#     exemplar belongs.
+</span>  <span class='comment'># @!attribute [rw] timestamp
+</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#     The observation (sampling) time of the above value.
+</span>  <span class='comment'># @!attribute [rw] attachments
+</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
+</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Labels dropped during aggregation:
+</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
+</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="exemplars=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="exemplars-instance_method">
+  
+    #<strong>exemplars</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Google::Api::Distribution::Exemplar</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Must be in increasing order of <code>value</code> field.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Google::Api::Distribution::Exemplar</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Must be in increasing order of <code>value</code> field.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
+  <span class='comment'># The range of the population values.
+</span>  <span class='comment'># @!attribute [rw] min
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     The minimum of the population values.
+</span>  <span class='comment'># @!attribute [rw] max
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     The maximum of the population values.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
+</span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
+</span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
+</span>  <span class='comment'># `BucketOptions` does not include the number of values in each bucket.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># A bucket has an inclusive lower bound and exclusive upper bound for the
+</span>  <span class='comment'># values that are counted for that bucket. The upper bound of a bucket must
+</span>  <span class='comment'># be strictly greater than the lower bound. The sequence of N buckets for a
+</span>  <span class='comment'># distribution consists of an underflow bucket (number 0), zero or more
+</span>  <span class='comment'># finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+</span>  <span class='comment'># 1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+</span>  <span class='comment'># same as the upper bound of bucket i - 1. The buckets span the whole range
+</span>  <span class='comment'># of finite values: lower bound of the underflow bucket is -infinity and the
+</span>  <span class='comment'># upper bound of the overflow bucket is +infinity. The finite buckets are
+</span>  <span class='comment'># so-called because both bounds are finite.
+</span>  <span class='comment'># @!attribute [rw] linear_buckets
+</span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Linear]
+</span>  <span class='comment'>#     The linear bucket.
+</span>  <span class='comment'># @!attribute [rw] exponential_buckets
+</span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Exponential]
+</span>  <span class='comment'>#     The exponential buckets.
+</span>  <span class='comment'># @!attribute [rw] explicit_buckets
+</span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Explicit]
+</span>  <span class='comment'>#     The explicit buckets.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
+    <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>    <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>    <span class='comment'># absolute uncertainty on the specific value in the bucket.
+</span>    <span class='comment'>#
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
+</span>    <span class='comment'>#
+</span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
+</span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
+</span>    <span class='comment'># @!attribute [rw] num_finite_buckets
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Must be greater than 0.
+</span>    <span class='comment'># @!attribute [rw] width
+</span>    <span class='comment'>#   @return [Float]
+</span>    <span class='comment'>#     Must be greater than 0.
+</span>    <span class='comment'># @!attribute [rw] offset
+</span>    <span class='comment'>#   @return [Float]
+</span>    <span class='comment'>#     Lower bound of the first bucket.
+</span>    <span class='kw'>class</span> <span class='const'>Linear</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>    <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>    <span class='comment'># constant relative uncertainty on a specific value in the bucket.
+</span>    <span class='comment'>#
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
+</span>    <span class='comment'>#
+</span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
+</span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
+</span>    <span class='comment'># @!attribute [rw] num_finite_buckets
+</span>    <span class='comment'>#   @return [Integer]
+</span>    <span class='comment'>#     Must be greater than 0.
+</span>    <span class='comment'># @!attribute [rw] growth_factor
+</span>    <span class='comment'>#   @return [Float]
+</span>    <span class='comment'>#     Must be greater than 1.
+</span>    <span class='comment'># @!attribute [rw] scale
+</span>    <span class='comment'>#   @return [Float]
+</span>    <span class='comment'>#     Must be greater than 0.
+</span>    <span class='kw'>class</span> <span class='const'>Exponential</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+    <span class='comment'># Specifies a set of buckets with arbitrary widths.
+</span>    <span class='comment'>#
+</span>    <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>    <span class='comment'># boundaries:
+</span>    <span class='comment'>#
+</span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
+</span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
+</span>    <span class='comment'>#
+</span>    <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>    <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>    <span class='comment'># element is the common boundary of the overflow and underflow buckets.
+</span>    <span class='comment'># @!attribute [rw] bounds
+</span>    <span class='comment'>#   @return [Array&lt;Float&gt;]
+</span>    <span class='comment'>#     The values must be monotonically increasing.
+</span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
+</span>  <span class='comment'># distribution values. They are metadata that gives information about a
+</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
+</span>  <span class='comment'># was active when a value was added. They may contain further information,
+</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
+</span>  <span class='comment'># @!attribute [rw] value
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
+</span>  <span class='comment'>#     exemplar belongs.
+</span>  <span class='comment'># @!attribute [rw] timestamp
+</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#     The observation (sampling) time of the above value.
+</span>  <span class='comment'># @!attribute [rw] attachments
+</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
+</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Labels dropped during aggregation:
+</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
+</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1120,14 +1562,6 @@ then this field must be zero.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
 80
 81
 82
@@ -1219,10 +1653,37 @@ then this field must be zero.</p>
 168
 169
 170
-171</pre>
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
   <span class='comment'># The range of the population values.
@@ -1234,29 +1695,21 @@ then this field must be zero.</p>
 </span>  <span class='comment'>#     The maximum of the population values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A Distribution may optionally contain a histogram of the values in the
-</span>  <span class='comment'># population.  The histogram is given in `bucket_counts` as counts of values
-</span>  <span class='comment'># that fall into one of a sequence of non-overlapping buckets.  The sequence
-</span>  <span class='comment'># of buckets is described by `bucket_options`.
+  <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
+</span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
+</span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
+</span>  <span class='comment'># `BucketOptions` does not include the number of values in each bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># A bucket specifies an inclusive lower bound and exclusive upper bound for
-</span>  <span class='comment'># the values that are counted for that bucket.  The upper bound of a bucket
-</span>  <span class='comment'># is strictly greater than the lower bound.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># The sequence of N buckets for a Distribution consists of an underflow
-</span>  <span class='comment'># bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
-</span>  <span class='comment'># an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
-</span>  <span class='comment'># bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
-</span>  <span class='comment'># The buckets span the whole range of finite values: lower bound of the
-</span>  <span class='comment'># underflow bucket is -infinity and the upper bound of the overflow bucket is
-</span>  <span class='comment'># +infinity.  The finite buckets are so-called because both bounds are
-</span>  <span class='comment'># finite.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># `BucketOptions` describes bucket boundaries in one of three ways.  Two
-</span>  <span class='comment'># describe the boundaries by giving parameters for a formula to generate
-</span>  <span class='comment'># boundaries and one gives the bucket boundaries explicitly.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># If `bucket_boundaries` is not given, then no `bucket_counts` may be given.
+</span>  <span class='comment'># A bucket has an inclusive lower bound and exclusive upper bound for the
+</span>  <span class='comment'># values that are counted for that bucket. The upper bound of a bucket must
+</span>  <span class='comment'># be strictly greater than the lower bound. The sequence of N buckets for a
+</span>  <span class='comment'># distribution consists of an underflow bucket (number 0), zero or more
+</span>  <span class='comment'># finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+</span>  <span class='comment'># 1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+</span>  <span class='comment'># same as the upper bound of bucket i - 1. The buckets span the whole range
+</span>  <span class='comment'># of finite values: lower bound of the underflow bucket is -infinity and the
+</span>  <span class='comment'># upper bound of the overflow bucket is +infinity. The finite buckets are
+</span>  <span class='comment'># so-called because both bounds are finite.
 </span>  <span class='comment'># @!attribute [rw] linear_buckets
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Linear]
 </span>  <span class='comment'>#     The linear bucket.
@@ -1267,12 +1720,12 @@ then this field must be zero.</p>
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Explicit]
 </span>  <span class='comment'>#     The explicit buckets.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
-    <span class='comment'># Specify a sequence of buckets that all have the same width (except
-</span>    <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
-</span>    <span class='comment'># uncertainty on the specific value in the bucket.
+    <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>    <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>    <span class='comment'># absolute uncertainty on the specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket `i`:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -1287,12 +1740,12 @@ then this field must be zero.</p>
 </span>    <span class='comment'>#     Lower bound of the first bucket.
 </span>    <span class='kw'>class</span> <span class='const'>Linear</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
-</span>    <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
-</span>    <span class='comment'># uncertainty on a specific value in the bucket.
+    <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>    <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>    <span class='comment'># constant relative uncertainty on a specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
@@ -1307,22 +1760,49 @@ then this field must be zero.</p>
 </span>    <span class='comment'>#     Must be greater than 0.
 </span>    <span class='kw'>class</span> <span class='const'>Exponential</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># A set of buckets with arbitrary widths.
+    <span class='comment'># Specifies a set of buckets with arbitrary widths.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>    <span class='comment'># boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>    <span class='comment'>#
-</span>    <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
-</span>    <span class='comment'># element, there are no finite buckets, and that single element is the
-</span>    <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>    <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>    <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>    <span class='comment'># element is the common boundary of the overflow and underflow buckets.
 </span>    <span class='comment'># @!attribute [rw] bounds
 </span>    <span class='comment'>#   @return [Array&lt;Float&gt;]
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
+
+  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
+</span>  <span class='comment'># distribution values. They are metadata that gives information about a
+</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
+</span>  <span class='comment'># was active when a value was added. They may contain further information,
+</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
+</span>  <span class='comment'># @!attribute [rw] value
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
+</span>  <span class='comment'>#     exemplar belongs.
+</span>  <span class='comment'># @!attribute [rw] timestamp
+</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#     The observation (sampling) time of the above value.
+</span>  <span class='comment'># @!attribute [rw] attachments
+</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
+</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Labels dropped during aggregation:
+</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
+</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1375,14 +1855,6 @@ must not be present if the <code>count</code> is zero.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
 80
 81
 82
@@ -1474,10 +1946,37 @@ must not be present if the <code>count</code> is zero.</p>
 168
 169
 170
-171</pre>
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
   <span class='comment'># The range of the population values.
@@ -1489,29 +1988,21 @@ must not be present if the <code>count</code> is zero.</p>
 </span>  <span class='comment'>#     The maximum of the population values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A Distribution may optionally contain a histogram of the values in the
-</span>  <span class='comment'># population.  The histogram is given in `bucket_counts` as counts of values
-</span>  <span class='comment'># that fall into one of a sequence of non-overlapping buckets.  The sequence
-</span>  <span class='comment'># of buckets is described by `bucket_options`.
+  <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
+</span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
+</span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
+</span>  <span class='comment'># `BucketOptions` does not include the number of values in each bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># A bucket specifies an inclusive lower bound and exclusive upper bound for
-</span>  <span class='comment'># the values that are counted for that bucket.  The upper bound of a bucket
-</span>  <span class='comment'># is strictly greater than the lower bound.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># The sequence of N buckets for a Distribution consists of an underflow
-</span>  <span class='comment'># bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
-</span>  <span class='comment'># an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
-</span>  <span class='comment'># bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
-</span>  <span class='comment'># The buckets span the whole range of finite values: lower bound of the
-</span>  <span class='comment'># underflow bucket is -infinity and the upper bound of the overflow bucket is
-</span>  <span class='comment'># +infinity.  The finite buckets are so-called because both bounds are
-</span>  <span class='comment'># finite.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># `BucketOptions` describes bucket boundaries in one of three ways.  Two
-</span>  <span class='comment'># describe the boundaries by giving parameters for a formula to generate
-</span>  <span class='comment'># boundaries and one gives the bucket boundaries explicitly.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># If `bucket_boundaries` is not given, then no `bucket_counts` may be given.
+</span>  <span class='comment'># A bucket has an inclusive lower bound and exclusive upper bound for the
+</span>  <span class='comment'># values that are counted for that bucket. The upper bound of a bucket must
+</span>  <span class='comment'># be strictly greater than the lower bound. The sequence of N buckets for a
+</span>  <span class='comment'># distribution consists of an underflow bucket (number 0), zero or more
+</span>  <span class='comment'># finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+</span>  <span class='comment'># 1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+</span>  <span class='comment'># same as the upper bound of bucket i - 1. The buckets span the whole range
+</span>  <span class='comment'># of finite values: lower bound of the underflow bucket is -infinity and the
+</span>  <span class='comment'># upper bound of the overflow bucket is +infinity. The finite buckets are
+</span>  <span class='comment'># so-called because both bounds are finite.
 </span>  <span class='comment'># @!attribute [rw] linear_buckets
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Linear]
 </span>  <span class='comment'>#     The linear bucket.
@@ -1522,12 +2013,12 @@ must not be present if the <code>count</code> is zero.</p>
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Explicit]
 </span>  <span class='comment'>#     The explicit buckets.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
-    <span class='comment'># Specify a sequence of buckets that all have the same width (except
-</span>    <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
-</span>    <span class='comment'># uncertainty on the specific value in the bucket.
+    <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>    <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>    <span class='comment'># absolute uncertainty on the specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket `i`:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -1542,12 +2033,12 @@ must not be present if the <code>count</code> is zero.</p>
 </span>    <span class='comment'>#     Lower bound of the first bucket.
 </span>    <span class='kw'>class</span> <span class='const'>Linear</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
-</span>    <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
-</span>    <span class='comment'># uncertainty on a specific value in the bucket.
+    <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>    <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>    <span class='comment'># constant relative uncertainty on a specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
@@ -1562,22 +2053,49 @@ must not be present if the <code>count</code> is zero.</p>
 </span>    <span class='comment'>#     Must be greater than 0.
 </span>    <span class='kw'>class</span> <span class='const'>Exponential</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># A set of buckets with arbitrary widths.
+    <span class='comment'># Specifies a set of buckets with arbitrary widths.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>    <span class='comment'># boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>    <span class='comment'>#
-</span>    <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
-</span>    <span class='comment'># element, there are no finite buckets, and that single element is the
-</span>    <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>    <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>    <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>    <span class='comment'># element is the common boundary of the overflow and underflow buckets.
 </span>    <span class='comment'># @!attribute [rw] bounds
 </span>    <span class='comment'>#   @return [Array&lt;Float&gt;]
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
+
+  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
+</span>  <span class='comment'># distribution values. They are metadata that gives information about a
+</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
+</span>  <span class='comment'># was active when a value was added. They may contain further information,
+</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
+</span>  <span class='comment'># @!attribute [rw] value
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
+</span>  <span class='comment'>#     exemplar belongs.
+</span>  <span class='comment'># @!attribute [rw] timestamp
+</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#     The observation (sampling) time of the above value.
+</span>  <span class='comment'># @!attribute [rw] attachments
+</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
+</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Labels dropped during aggregation:
+</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
+</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1598,7 +2116,7 @@ must not be present if the <code>count</code> is zero.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The sum of squared deviations from the mean of the values in the
-population.  For values x_i this is:</p>
+population. For values x_i this is:</p>
 
 <pre class="code ruby"><code class="ruby">Sum[i=1..n](https://cloud.google.com(x_i - mean)^2)
 </code></pre>
@@ -1625,7 +2143,7 @@ describes Welford&#39;s method for accumulating this sum in one pass.</p>
       
         &mdash;
         <div class='inline'><p>The sum of squared deviations from the mean of the values in the
-population.  For values x_i this is:</p>
+population. For values x_i this is:</p>
 
 <pre class="code ruby"><code class="ruby">Sum[i=1..n](https://cloud.google.com(x_i - mean)^2)
 </code></pre>
@@ -1646,14 +2164,6 @@ describes Welford&#39;s method for accumulating this sum in one pass.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
 80
 81
 82
@@ -1745,10 +2255,37 @@ describes Welford&#39;s method for accumulating this sum in one pass.</p>
 168
 169
 170
-171</pre>
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
   <span class='comment'># The range of the population values.
@@ -1760,29 +2297,21 @@ describes Welford&#39;s method for accumulating this sum in one pass.</p>
 </span>  <span class='comment'>#     The maximum of the population values.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-  <span class='comment'># A Distribution may optionally contain a histogram of the values in the
-</span>  <span class='comment'># population.  The histogram is given in `bucket_counts` as counts of values
-</span>  <span class='comment'># that fall into one of a sequence of non-overlapping buckets.  The sequence
-</span>  <span class='comment'># of buckets is described by `bucket_options`.
+  <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
+</span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
+</span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
+</span>  <span class='comment'># `BucketOptions` does not include the number of values in each bucket.
 </span>  <span class='comment'>#
-</span>  <span class='comment'># A bucket specifies an inclusive lower bound and exclusive upper bound for
-</span>  <span class='comment'># the values that are counted for that bucket.  The upper bound of a bucket
-</span>  <span class='comment'># is strictly greater than the lower bound.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># The sequence of N buckets for a Distribution consists of an underflow
-</span>  <span class='comment'># bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
-</span>  <span class='comment'># an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
-</span>  <span class='comment'># bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
-</span>  <span class='comment'># The buckets span the whole range of finite values: lower bound of the
-</span>  <span class='comment'># underflow bucket is -infinity and the upper bound of the overflow bucket is
-</span>  <span class='comment'># +infinity.  The finite buckets are so-called because both bounds are
-</span>  <span class='comment'># finite.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># `BucketOptions` describes bucket boundaries in one of three ways.  Two
-</span>  <span class='comment'># describe the boundaries by giving parameters for a formula to generate
-</span>  <span class='comment'># boundaries and one gives the bucket boundaries explicitly.
-</span>  <span class='comment'>#
-</span>  <span class='comment'># If `bucket_boundaries` is not given, then no `bucket_counts` may be given.
+</span>  <span class='comment'># A bucket has an inclusive lower bound and exclusive upper bound for the
+</span>  <span class='comment'># values that are counted for that bucket. The upper bound of a bucket must
+</span>  <span class='comment'># be strictly greater than the lower bound. The sequence of N buckets for a
+</span>  <span class='comment'># distribution consists of an underflow bucket (number 0), zero or more
+</span>  <span class='comment'># finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+</span>  <span class='comment'># 1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+</span>  <span class='comment'># same as the upper bound of bucket i - 1. The buckets span the whole range
+</span>  <span class='comment'># of finite values: lower bound of the underflow bucket is -infinity and the
+</span>  <span class='comment'># upper bound of the overflow bucket is +infinity. The finite buckets are
+</span>  <span class='comment'># so-called because both bounds are finite.
 </span>  <span class='comment'># @!attribute [rw] linear_buckets
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Linear]
 </span>  <span class='comment'>#     The linear bucket.
@@ -1793,12 +2322,12 @@ describes Welford&#39;s method for accumulating this sum in one pass.</p>
 </span>  <span class='comment'>#   @return [Google::Api::Distribution::BucketOptions::Explicit]
 </span>  <span class='comment'>#     The explicit buckets.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span></span>
-    <span class='comment'># Specify a sequence of buckets that all have the same width (except
-</span>    <span class='comment'># overflow and underflow).  Each bucket represents a constant absolute
-</span>    <span class='comment'># uncertainty on the specific value in the bucket.
+    <span class='comment'># Specifies a linear sequence of buckets that all have the same width
+</span>    <span class='comment'># (except overflow and underflow). Each bucket represents a constant
+</span>    <span class='comment'># absolute uncertainty on the specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket `i`:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).
@@ -1813,12 +2342,12 @@ describes Welford&#39;s method for accumulating this sum in one pass.</p>
 </span>    <span class='comment'>#     Lower bound of the first bucket.
 </span>    <span class='kw'>class</span> <span class='const'>Linear</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># Specify a sequence of buckets that have a width that is proportional to
-</span>    <span class='comment'># the value of the lower bound.  Each bucket represents a constant relative
-</span>    <span class='comment'># uncertainty on a specific value in the bucket.
+    <span class='comment'># Specifies an exponential sequence of buckets that have a width that is
+</span>    <span class='comment'># proportional to the value of the lower bound. Each bucket represents a
+</span>    <span class='comment'># constant relative uncertainty on a specific value in the bucket.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `num_finite_buckets + 2` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the
+</span>    <span class='comment'># following boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).
@@ -1833,22 +2362,49 @@ describes Welford&#39;s method for accumulating this sum in one pass.</p>
 </span>    <span class='comment'>#     Must be greater than 0.
 </span>    <span class='kw'>class</span> <span class='const'>Exponential</span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
-    <span class='comment'># A set of buckets with arbitrary widths.
+    <span class='comment'># Specifies a set of buckets with arbitrary widths.
 </span>    <span class='comment'>#
-</span>    <span class='comment'># Defines `size(bounds) + 1` (= N) buckets with these boundaries for
-</span>    <span class='comment'># bucket i:
+</span>    <span class='comment'># There are `size(bounds) + 1` (= N) buckets. Bucket `i` has the following
+</span>    <span class='comment'># boundaries:
 </span>    <span class='comment'>#
 </span>    <span class='comment'>#    Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 </span>    <span class='comment'>#    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]
 </span>    <span class='comment'>#
-</span>    <span class='comment'># There must be at least one element in `bounds`.  If `bounds` has only one
-</span>    <span class='comment'># element, there are no finite buckets, and that single element is the
-</span>    <span class='comment'># common boundary of the overflow and underflow buckets.
+</span>    <span class='comment'># The `bounds` field must contain at least one element. If `bounds` has
+</span>    <span class='comment'># only one element, then there are no finite buckets, and that single
+</span>    <span class='comment'># element is the common boundary of the overflow and underflow buckets.
 </span>    <span class='comment'># @!attribute [rw] bounds
 </span>    <span class='comment'>#   @return [Array&lt;Float&gt;]
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
+
+  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
+</span>  <span class='comment'># distribution values. They are metadata that gives information about a
+</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
+</span>  <span class='comment'># was active when a value was added. They may contain further information,
+</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
+</span>  <span class='comment'># @!attribute [rw] value
+</span>  <span class='comment'>#   @return [Float]
+</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
+</span>  <span class='comment'>#     exemplar belongs.
+</span>  <span class='comment'># @!attribute [rw] timestamp
+</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#     The observation (sampling) time of the above value.
+</span>  <span class='comment'># @!attribute [rw] attachments
+</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
+</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#       Labels dropped during aggregation:
+</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
+</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
