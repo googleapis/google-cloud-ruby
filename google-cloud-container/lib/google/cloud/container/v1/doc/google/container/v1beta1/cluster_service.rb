@@ -15,7 +15,7 @@
 
 module Google
   module Container
-    module V1
+    module V1beta1
       # Parameters that describe the nodes in a cluster.
       # @!attribute [rw] machine_type
       #   @return [String]
@@ -63,9 +63,9 @@ module Google
       #      "cluster-name"
       #      "cluster-uid"
       #      "configure-sh"
-      #      "enable-os-login"
-      #      "gci-update-strategy"
+      #      "enable-oslogin"
       #      "gci-ensure-gke-docker"
+      #      "gci-update-strategy"
       #      "instance-template"
       #      "kube-env"
       #      "startup-script"
@@ -108,9 +108,9 @@ module Google
       #   @return [true, false]
       #     Whether the nodes are created as preemptible VM instances. See:
       #     https://cloud.google.com/compute/docs/instances/preemptible for more
-      #     information about preemptible VM instances.
+      #     inforamtion about preemptible VM instances.
       # @!attribute [rw] accelerators
-      #   @return [Array<Google::Container::V1::AcceleratorConfig>]
+      #   @return [Array<Google::Container::V1beta1::AcceleratorConfig>]
       #     A list of hardware accelerators to be attached to each node.
       #     See https://cloud.google.com/compute/docs/gpus for more information about
       #     support for GPUs.
@@ -128,7 +128,47 @@ module Google
       #     <code>minCpuPlatform: &quot;Intel Sandy Bridge&quot;</code>. For more
       #     information, read [how to specify min CPU
       #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
+      # @!attribute [rw] workload_metadata_config
+      #   @return [Google::Container::V1beta1::WorkloadMetadataConfig]
+      #     The workload metadata configuration for this node.
+      # @!attribute [rw] taints
+      #   @return [Array<Google::Container::V1beta1::NodeTaint>]
+      #     List of kubernetes taints to be applied to each node.
+      #
+      #     For more information, including usage and the valid values, see:
+      #     https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       class NodeConfig; end
+
+      # Kubernetes taint is comprised of three fields: key, value, and effect. Effect
+      # can only be one of three types:  NoSchedule, PreferNoSchedule or NoExecute.
+      #
+      # For more information, including usage and the valid values, see:
+      # https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+      # @!attribute [rw] key
+      #   @return [String]
+      #     Key for taint.
+      # @!attribute [rw] value
+      #   @return [String]
+      #     Value for taint.
+      # @!attribute [rw] effect
+      #   @return [Google::Container::V1beta1::NodeTaint::Effect]
+      #     Effect for taint.
+      class NodeTaint
+        # Possible values for Effect in taint.
+        module Effect
+          # Not set
+          EFFECT_UNSPECIFIED = 0
+
+          # NoSchedule
+          NO_SCHEDULE = 1
+
+          # PreferNoSchedule
+          PREFER_NO_SCHEDULE = 2
+
+          # NoExecute
+          NO_EXECUTE = 3
+        end
+      end
 
       # The authentication information for accessing the master endpoint.
       # Authentication can be done using HTTP basic auth or using client
@@ -145,7 +185,7 @@ module Google
       #     strong password.  If a password is provided for cluster creation, username
       #     must be non-empty.
       # @!attribute [rw] client_certificate_config
-      #   @return [Google::Container::V1::ClientCertificateConfig]
+      #   @return [Google::Container::V1beta1::ClientCertificateConfig]
       #     Configuration for client certificate authentication on the cluster. For
       #     clusters before v1.12, if no configuration is specified, a client
       #     certificate is issued.
@@ -172,19 +212,19 @@ module Google
       # Configuration for the addons that can be automatically spun up in the
       # cluster, enabling additional functionality.
       # @!attribute [rw] http_load_balancing
-      #   @return [Google::Container::V1::HttpLoadBalancing]
+      #   @return [Google::Container::V1beta1::HttpLoadBalancing]
       #     Configuration for the HTTP (L7) load balancing controller addon, which
       #     makes it easy to set up HTTP load balancers for services in a cluster.
       # @!attribute [rw] horizontal_pod_autoscaling
-      #   @return [Google::Container::V1::HorizontalPodAutoscaling]
+      #   @return [Google::Container::V1beta1::HorizontalPodAutoscaling]
       #     Configuration for the horizontal pod autoscaling feature, which
       #     increases or decreases the number of replica pods a replication controller
       #     has based on the resource usage of the existing pods.
       # @!attribute [rw] kubernetes_dashboard
-      #   @return [Google::Container::V1::KubernetesDashboard]
+      #   @return [Google::Container::V1beta1::KubernetesDashboard]
       #     Configuration for the Kubernetes Dashboard.
       # @!attribute [rw] network_policy_config
-      #   @return [Google::Container::V1::NetworkPolicyConfig]
+      #   @return [Google::Container::V1beta1::NetworkPolicyConfig]
       #     Configuration for NetworkPolicy. This only tracks whether the addon
       #     is enabled or not on the Master, it does not track whether network policy
       #     is enabled for the nodes.
@@ -223,6 +263,27 @@ module Google
       #     Whether NetworkPolicy is enabled for this cluster.
       class NetworkPolicyConfig; end
 
+      # Configuration options for private clusters.
+      # @!attribute [rw] enable_private_nodes
+      #   @return [true, false]
+      #     Whether nodes have only private IP addresses, and communicate with the
+      #     master via private networking.
+      # @!attribute [rw] enable_private_endpoint
+      #   @return [true, false]
+      #     Whether the master's internal IP address is used as the cluster endpoint.
+      # @!attribute [rw] master_ipv4_cidr_block
+      #   @return [String]
+      #     The IP prefix in CIDR notation to use for the hosted master network. This
+      #     prefix will be used for assigning private IP addresses to the master or
+      #     set of masters, as well as the ILB VIP.
+      # @!attribute [rw] private_endpoint
+      #   @return [String]
+      #     Output only. The internal IP address of this cluster's master endpoint.
+      # @!attribute [rw] public_endpoint
+      #   @return [String]
+      #     Output only. The external IP address of this cluster's master endpoint.
+      class PrivateClusterConfig; end
+
       # Configuration options for the master authorized networks feature. Enabled
       # master authorized networks will disallow all external traffic to access
       # Kubernetes master through HTTPS except traffic from the given CIDR blocks,
@@ -231,7 +292,7 @@ module Google
       #   @return [true, false]
       #     Whether or not master authorized networks is enabled.
       # @!attribute [rw] cidr_blocks
-      #   @return [Array<Google::Container::V1::MasterAuthorizedNetworksConfig::CidrBlock>]
+      #   @return [Array<Google::Container::V1beta1::MasterAuthorizedNetworksConfig::CidrBlock>]
       #     cidr_blocks define up to 10 external networks that could access
       #     Kubernetes master through HTTPS.
       class MasterAuthorizedNetworksConfig
@@ -258,7 +319,7 @@ module Google
       # Configuration options for the NetworkPolicy feature.
       # https://kubernetes.io/docs/concepts/services-networking/networkpolicies/
       # @!attribute [rw] provider
-      #   @return [Google::Container::V1::NetworkPolicy::Provider]
+      #   @return [Google::Container::V1beta1::NetworkPolicy::Provider]
       #     The selected network policy provider.
       # @!attribute [rw] enabled
       #   @return [true, false]
@@ -304,7 +365,7 @@ module Google
       #     addresses. This must be an existing secondary range associated
       #     with the cluster subnetwork.
       #
-      #     This field is only applicable with use_ip_aliases is true and
+      #     This field is only applicable with use_ip_aliases and
       #     create_subnetwork is false.
       # @!attribute [rw] services_secondary_range_name
       #   @return [String]
@@ -313,7 +374,7 @@ module Google
       #     ClusterIPs. This must be an existing secondary range associated
       #     with the cluster subnetwork.
       #
-      #     This field is only applicable with use_ip_aliases is true and
+      #     This field is only applicable with use_ip_aliases and
       #     create_subnetwork is false.
       # @!attribute [rw] cluster_ipv4_cidr_block
       #   @return [String]
@@ -365,7 +426,52 @@ module Google
       #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
       #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
       #     to use.
+      # @!attribute [rw] allow_route_overlap
+      #   @return [true, false]
+      #     If true, allow allocation of cluster CIDR ranges that overlap with certain
+      #     kinds of network routes. By default we do not allow cluster CIDR ranges to
+      #     intersect with any user declared routes. With allow_route_overlap == true,
+      #     we allow overlapping with CIDR ranges that are larger than the cluster CIDR
+      #     range.
+      #
+      #     If this field is set to true, then cluster and services CIDRs must be
+      #     fully-specified (e.g. `10.96.0.0/14`, but not `/14`), which means:
+      #     1) When `use_ip_aliases` is true, `cluster_ipv4_cidr_block` and
+      #        `services_ipv4_cidr_block` must be fully-specified.
+      #     2) When `use_ip_aliases` is false, `cluster.cluster_ipv4_cidr` muse be
+      #        fully-specified.
+      # @!attribute [rw] tpu_ipv4_cidr_block
+      #   @return [String]
+      #     The IP address range of the Cloud TPUs in this cluster. If unspecified, a
+      #     range will be automatically chosen with the default size.
+      #
+      #     This field is only applicable when `use_ip_aliases` is true.
+      #
+      #     If unspecified, the range will use the default size.
+      #
+      #     Set to /netmask (e.g. `/14`) to have a range chosen with a specific
+      #     netmask.
+      #
+      #     Set to a
+      #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+      #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
+      #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
+      #     to use.
       class IPAllocationPolicy; end
+
+      # Configuration for Binary Authorization.
+      # @!attribute [rw] enabled
+      #   @return [true, false]
+      #     Enable Binary Authorization for this cluster. If enabled, all container
+      #     images will be validated by Google Binauthz.
+      class BinaryAuthorization; end
+
+      # Configuration for the PodSecurityPolicy feature.
+      # @!attribute [rw] enabled
+      #   @return [true, false]
+      #     Enable the PodSecurityPolicy controller for this cluster. If enabled, pods
+      #     must be valid under a PodSecurityPolicy to be created.
+      class PodSecurityPolicyConfig; end
 
       # A Google Kubernetes Engine cluster.
       # @!attribute [rw] name
@@ -390,7 +496,7 @@ module Google
       #     "node_config") will be used to create a "NodePool" object with an
       #     auto-generated name. Do not use this and a node_pool at the same time.
       # @!attribute [rw] node_config
-      #   @return [Google::Container::V1::NodeConfig]
+      #   @return [Google::Container::V1beta1::NodeConfig]
       #     Parameters used in creating the cluster's nodes.
       #     See `nodeConfig` for the description of its properties.
       #     For requests, this field should only be used in lieu of a
@@ -402,7 +508,7 @@ module Google
       #
       #     If unspecified, the defaults are used.
       # @!attribute [rw] master_auth
-      #   @return [Google::Container::V1::MasterAuth]
+      #   @return [Google::Container::V1beta1::MasterAuth]
       #     The authentication information for accessing the master endpoint.
       # @!attribute [rw] logging_service
       #   @return [String]
@@ -425,7 +531,8 @@ module Google
       #     The name of the Google Compute Engine
       #     [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the
       #     cluster is connected. If left unspecified, the `default` network
-      #     will be used.
+      #     will be used. On output this shows the network ID instead of
+      #     the name.
       # @!attribute [rw] cluster_ipv4_cidr
       #   @return [String]
       #     The IP address range of the container pods in this cluster, in
@@ -433,15 +540,16 @@ module Google
       #     notation (e.g. `10.96.0.0/14`). Leave blank to have
       #     one automatically chosen or specify a `/14` block in `10.0.0.0/8`.
       # @!attribute [rw] addons_config
-      #   @return [Google::Container::V1::AddonsConfig]
+      #   @return [Google::Container::V1beta1::AddonsConfig]
       #     Configurations for the various addons available to run in the cluster.
       # @!attribute [rw] subnetwork
       #   @return [String]
       #     The name of the Google Compute Engine
       #     [subnetwork](https://cloud.google.com/compute/docs/subnetworks) to which the
-      #     cluster is connected.
+      #     cluster is connected. On output this shows the subnetwork ID instead of
+      #     the name.
       # @!attribute [rw] node_pools
-      #   @return [Array<Google::Container::V1::NodePool>]
+      #   @return [Array<Google::Container::V1beta1::NodePool>]
       #     The node pools associated with this cluster.
       #     This field should not be set if "node_config" or "initial_node_count" are
       #     specified.
@@ -453,7 +561,7 @@ module Google
       # @!attribute [rw] enable_kubernetes_alpha
       #   @return [true, false]
       #     Kubernetes alpha features are enabled on this cluster. This includes alpha
-      #     API groups (e.g. v1alpha1) and features that may not be production ready in
+      #     API groups (e.g. v1beta1) and features that may not be production ready in
       #     the kubernetes version of the master and nodes.
       #     The cluster has no SLA for uptime and master/node upgrades are disabled.
       #     Alpha enabled clusters are automatically deleted thirty days after
@@ -466,23 +574,53 @@ module Google
       #   @return [String]
       #     The fingerprint of the set of labels for this cluster.
       # @!attribute [rw] legacy_abac
-      #   @return [Google::Container::V1::LegacyAbac]
+      #   @return [Google::Container::V1beta1::LegacyAbac]
       #     Configuration for the legacy ABAC authorization mode.
       # @!attribute [rw] network_policy
-      #   @return [Google::Container::V1::NetworkPolicy]
+      #   @return [Google::Container::V1beta1::NetworkPolicy]
       #     Configuration options for the NetworkPolicy feature.
       # @!attribute [rw] ip_allocation_policy
-      #   @return [Google::Container::V1::IPAllocationPolicy]
+      #   @return [Google::Container::V1beta1::IPAllocationPolicy]
       #     Configuration for cluster IP allocation.
       # @!attribute [rw] master_authorized_networks_config
-      #   @return [Google::Container::V1::MasterAuthorizedNetworksConfig]
+      #   @return [Google::Container::V1beta1::MasterAuthorizedNetworksConfig]
       #     The configuration options for master authorized networks feature.
       # @!attribute [rw] maintenance_policy
-      #   @return [Google::Container::V1::MaintenancePolicy]
+      #   @return [Google::Container::V1beta1::MaintenancePolicy]
       #     Configure the maintenance policy for this cluster.
+      # @!attribute [rw] binary_authorization
+      #   @return [Google::Container::V1beta1::BinaryAuthorization]
+      #     Configuration for Binary Authorization.
+      # @!attribute [rw] pod_security_policy_config
+      #   @return [Google::Container::V1beta1::PodSecurityPolicyConfig]
+      #     Configuration for the PodSecurityPolicy feature.
+      # @!attribute [rw] autoscaling
+      #   @return [Google::Container::V1beta1::ClusterAutoscaling]
+      #     Cluster-level autoscaling configuration.
       # @!attribute [rw] network_config
-      #   @return [Google::Container::V1::NetworkConfig]
+      #   @return [Google::Container::V1beta1::NetworkConfig]
       #     Configuration for cluster networking.
+      # @!attribute [rw] private_cluster
+      #   @return [true, false]
+      #     If this is a private cluster setup. Private clusters are clusters that, by
+      #     default have no external IP addresses on the nodes and where nodes and the
+      #     master communicate over private IP addresses.
+      #     This field is deprecated, use private_cluster_config.enabled instead.
+      # @!attribute [rw] master_ipv4_cidr_block
+      #   @return [String]
+      #     The IP prefix in CIDR notation to use for the hosted master network.
+      #     This prefix will be used for assigning private IP addresses to the
+      #     master or set of masters, as well as the ILB VIP.
+      #     This field is deprecated, use
+      #     private_cluster_config.master_ipv4_cidr_block instead.
+      # @!attribute [rw] default_max_pods_constraint
+      #   @return [Google::Container::V1beta1::MaxPodsConstraint]
+      #     The default constraint on the maximum number of pods that can be run
+      #     simultaneously on a node in the node pool of this cluster. Only honored
+      #     if cluster created with IP Alias support.
+      # @!attribute [rw] private_cluster_config
+      #   @return [Google::Container::V1beta1::PrivateClusterConfig]
+      #     Configuration for private cluster.
       # @!attribute [rw] self_link
       #   @return [String]
       #     [Output only] Server-defined URL for the resource.
@@ -521,16 +659,16 @@ module Google
       # @!attribute [rw] current_node_version
       #   @return [String]
       #     [Output only] Deprecated, use
-      #     [NodePool.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool)
-      #     instead. The current version of the node software components. If they are
-      #     currently at multiple versions because they're in the process of being
-      #     upgraded, this reflects the minimum version of all nodes.
+      #     [NodePool.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.zones.clusters.nodePool)
+      #     instead. The current version of the node software components.
+      #     If they are currently at multiple versions because they're in the process
+      #     of being upgraded, this reflects the minimum version of all nodes.
       # @!attribute [rw] create_time
       #   @return [String]
       #     [Output only] The time the cluster was created, in
       #     [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
       # @!attribute [rw] status
-      #   @return [Google::Container::V1::Cluster::Status]
+      #   @return [Google::Container::V1beta1::Cluster::Status]
       #     [Output only] The current status of this cluster.
       # @!attribute [rw] status_message
       #   @return [String]
@@ -564,6 +702,17 @@ module Google
       #     [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) or
       #     [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) in which
       #     the cluster resides.
+      # @!attribute [rw] enable_tpu
+      #   @return [true, false]
+      #     Enable the ability to use Cloud TPUs in this cluster.
+      # @!attribute [rw] tpu_ipv4_cidr_block
+      #   @return [String]
+      #     [Output only] The IP address range of the Cloud TPUs in this cluster, in
+      #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+      #     notation (e.g. `1.2.3.4/29`).
+      # @!attribute [rw] conditions
+      #   @return [Array<Google::Container::V1beta1::StatusCondition>]
+      #     Which conditions caused the current cluster state.
       class Cluster
         # The current status of the cluster.
         module Status
@@ -616,10 +765,12 @@ module Google
       #     The monitoring service the cluster should use to write metrics.
       #     Currently available options:
       #
+      #     * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
+      #       service with Kubernetes-native resource model in Stackdriver
       #     * "monitoring.googleapis.com" - the Google Cloud Monitoring service
       #     * "none" - no metrics will be exported from the cluster
       # @!attribute [rw] desired_addons_config
-      #   @return [Google::Container::V1::AddonsConfig]
+      #   @return [Google::Container::V1beta1::AddonsConfig]
       #     Configurations for the various addons available to run in the cluster.
       # @!attribute [rw] desired_node_pool_id
       #   @return [String]
@@ -632,7 +783,7 @@ module Google
       #     The desired image type for the node pool.
       #     NOTE: Set the "desired_node_pool" field as well.
       # @!attribute [rw] desired_node_pool_autoscaling
-      #   @return [Google::Container::V1::NodePoolAutoscaling]
+      #   @return [Google::Container::V1beta1::NodePoolAutoscaling]
       #     Autoscaler configuration for the node pool specified in
       #     desired_node_pool_id. If there is only one pool in the
       #     cluster and desired_node_pool_id is not provided then
@@ -647,11 +798,30 @@ module Google
       #
       #     This list must always include the cluster's primary zone.
       # @!attribute [rw] desired_master_authorized_networks_config
-      #   @return [Google::Container::V1::MasterAuthorizedNetworksConfig]
+      #   @return [Google::Container::V1beta1::MasterAuthorizedNetworksConfig]
       #     The desired configuration options for master authorized networks feature.
+      # @!attribute [rw] desired_pod_security_policy_config
+      #   @return [Google::Container::V1beta1::PodSecurityPolicyConfig]
+      #     The desired configuration options for the PodSecurityPolicy feature.
+      # @!attribute [rw] desired_cluster_autoscaling
+      #   @return [Google::Container::V1beta1::ClusterAutoscaling]
+      #     Cluster-level autoscaling configuration.
+      # @!attribute [rw] desired_binary_authorization
+      #   @return [Google::Container::V1beta1::BinaryAuthorization]
+      #     The desired configuration options for the Binary Authorization feature.
+      # @!attribute [rw] desired_logging_service
+      #   @return [String]
+      #     The logging service the cluster should use to write metrics.
+      #     Currently available options:
+      #
+      #     * "logging.googleapis.com/kubernetes" - the Google Cloud Logging
+      #       service with Kubernetes-native resource model in Stackdriver
+      #     * "logging.googleapis.com" - the Google Cloud Logging service
+      #     * "none" - no logs will be exported from the cluster
       # @!attribute [rw] desired_master_version
       #   @return [String]
-      #     The Kubernetes version to change the master to.
+      #     The Kubernetes version to change the master to. The only valid value is the
+      #     latest supported version.
       #
       #     Users may specify either explicit versions offered by
       #     Kubernetes Engine or version aliases, which have the following behavior:
@@ -675,10 +845,10 @@ module Google
       #     is taking place.
       #     This field is deprecated, use location instead.
       # @!attribute [rw] operation_type
-      #   @return [Google::Container::V1::Operation::Type]
+      #   @return [Google::Container::V1beta1::Operation::Type]
       #     The operation type.
       # @!attribute [rw] status
-      #   @return [Google::Container::V1::Operation::Status]
+      #   @return [Google::Container::V1beta1::Operation::Status]
       #     The current status of the operation.
       # @!attribute [rw] detail
       #   @return [String]
@@ -706,6 +876,15 @@ module Google
       #   @return [String]
       #     [Output only] The time the operation completed, in
       #     [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+      # @!attribute [rw] progress
+      #   @return [Google::Container::V1beta1::OperationProgress]
+      #     [Output only] Progress information for an operation.
+      # @!attribute [rw] cluster_conditions
+      #   @return [Array<Google::Container::V1beta1::StatusCondition>]
+      #     Which conditions caused the current cluster state.
+      # @!attribute [rw] nodepool_conditions
+      #   @return [Array<Google::Container::V1beta1::StatusCondition>]
+      #     Which conditions caused the current node pool state.
       class Operation
         # Current status of the operation.
         module Status
@@ -780,6 +959,44 @@ module Google
         end
       end
 
+      # Information about operation (or operation stage) progress.
+      # @!attribute [rw] name
+      #   @return [String]
+      #     A non-parameterized string describing an operation stage.
+      #     Unset for single-stage operations.
+      # @!attribute [rw] status
+      #   @return [Google::Container::V1beta1::Operation::Status]
+      #     Status of an operation stage.
+      #     Unset for single-stage operations.
+      # @!attribute [rw] metrics
+      #   @return [Array<Google::Container::V1beta1::OperationProgress::Metric>]
+      #     Progress metric bundle, for example:
+      #       metrics: [{name: "nodes done",     int_value: 15},
+      #                 {name: "nodes total",    int_value: 32}]
+      #     or
+      #       metrics: [{name: "progress",       double_value: 0.56},
+      #                 {name: "progress scale", double_value: 1.0}]
+      # @!attribute [rw] stages
+      #   @return [Array<Google::Container::V1beta1::OperationProgress>]
+      #     Substages of an operation or a stage.
+      class OperationProgress
+        # Progress metric is (string, int|float|string) pair.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Metric name, required.
+        #     e.g., "nodes total", "percent done"
+        # @!attribute [rw] int_value
+        #   @return [Integer]
+        #     For metrics with integer value.
+        # @!attribute [rw] double_value
+        #   @return [Float]
+        #     For metrics with floating point value.
+        # @!attribute [rw] string_value
+        #   @return [String]
+        #     For metrics with custom values (ratios, visual progress, etc.).
+        class Metric; end
+      end
+
       # CreateClusterRequest creates a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
@@ -793,9 +1010,9 @@ module Google
       #     resides.
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] cluster
-      #   @return [Google::Container::V1::Cluster]
+      #   @return [Google::Container::V1beta1::Cluster]
       #     A [cluster
-      #     resource](/container-engine/reference/rest/v1/projects.zones.clusters)
+      #     resource](/container-engine/reference/rest/v1beta1/projects.zones.clusters)
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent (project and location) where the cluster will be created.
@@ -841,7 +1058,7 @@ module Google
       #     Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] update
-      #   @return [Google::Container::V1::ClusterUpdate]
+      #   @return [Google::Container::V1beta1::ClusterUpdate]
       #     A description of the update.
       # @!attribute [rw] name
       #   @return [String]
@@ -849,7 +1066,7 @@ module Google
       #     Specified in the format 'projects/*/locations/*/clusters/*'.
       class UpdateClusterRequest; end
 
-      # UpdateNodePoolRequests update a node pool's image and/or version.
+      # SetNodePoolVersionRequest updates the version of a node pool.
       # @!attribute [rw] project_id
       #   @return [String]
       #     Deprecated. The Google Developers Console [project ID or project
@@ -913,7 +1130,7 @@ module Google
       #     Deprecated. The name of the node pool to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] autoscaling
-      #   @return [Google::Container::V1::NodePoolAutoscaling]
+      #   @return [Google::Container::V1beta1::NodePoolAutoscaling]
       #     Autoscaling configuration for the node pool.
       # @!attribute [rw] name
       #   @return [String]
@@ -980,7 +1197,7 @@ module Google
       #     Specified in the format 'projects/*/locations/*/clusters/*'.
       class SetMonitoringServiceRequest; end
 
-      # SetAddonsConfigRequest sets the addons associated with the cluster.
+      # SetAddonsRequest sets the addons associated with the cluster.
       # @!attribute [rw] project_id
       #   @return [String]
       #     Deprecated. The Google Developers Console [project ID or project
@@ -997,7 +1214,7 @@ module Google
       #     Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] addons_config
-      #   @return [Google::Container::V1::AddonsConfig]
+      #   @return [Google::Container::V1beta1::AddonsConfig]
       #     The desired configurations for the various addons available to run in the
       #     cluster.
       # @!attribute [rw] name
@@ -1057,8 +1274,8 @@ module Google
       #   @return [String]
       #     The Kubernetes version to change the master to.
       #
-      #     Users may specify either explicit versions offered by Kubernetes Engine or
-      #     version aliases, which have the following behavior:
+      #     Users may specify either explicit versions offered by
+      #     Kubernetes Engine or version aliases, which have the following behavior:
       #
       #     * "latest": picks the highest valid Kubernetes version
       #     * "1.X": picks the highest valid patch+gke.N patch in the 1.X version
@@ -1088,10 +1305,10 @@ module Google
       #     Deprecated. The name of the cluster to upgrade.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] action
-      #   @return [Google::Container::V1::SetMasterAuthRequest::Action]
+      #   @return [Google::Container::V1beta1::SetMasterAuthRequest::Action]
       #     The exact form of action to be taken on the master auth.
       # @!attribute [rw] update
-      #   @return [Google::Container::V1::MasterAuth]
+      #   @return [Google::Container::V1beta1::MasterAuth]
       #     A description of the update.
       # @!attribute [rw] name
       #   @return [String]
@@ -1160,7 +1377,7 @@ module Google
 
       # ListClustersResponse is the result of ListClustersRequest.
       # @!attribute [rw] clusters
-      #   @return [Array<Google::Container::V1::Cluster>]
+      #   @return [Array<Google::Container::V1beta1::Cluster>]
       #     A list of clusters in the project in the specified zone, or
       #     across all ones.
       # @!attribute [rw] missing_zones
@@ -1232,7 +1449,7 @@ module Google
 
       # ListOperationsResponse is the result of ListOperationsRequest.
       # @!attribute [rw] operations
-      #   @return [Array<Google::Container::V1::Operation>]
+      #   @return [Array<Google::Container::V1beta1::Operation>]
       #     A list of operations in the project in the specified zone.
       # @!attribute [rw] missing_zones
       #   @return [Array<String>]
@@ -1292,7 +1509,7 @@ module Google
       #     Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the parent field.
       # @!attribute [rw] node_pool
-      #   @return [Google::Container::V1::NodePool]
+      #   @return [Google::Container::V1beta1::NodePool]
       #     The node pool to create.
       # @!attribute [rw] parent
       #   @return [String]
@@ -1387,7 +1604,7 @@ module Google
       #   @return [String]
       #     The name of the node pool.
       # @!attribute [rw] config
-      #   @return [Google::Container::V1::NodeConfig]
+      #   @return [Google::Container::V1beta1::NodeConfig]
       #     The node configuration of the pool.
       # @!attribute [rw] initial_node_count
       #   @return [Integer]
@@ -1407,19 +1624,26 @@ module Google
       #     groups](/compute/docs/instance-groups/creating-groups-of-managed-instances)
       #     associated with this node pool.
       # @!attribute [rw] status
-      #   @return [Google::Container::V1::NodePool::Status]
+      #   @return [Google::Container::V1beta1::NodePool::Status]
       #     [Output only] The status of the nodes in this pool instance.
       # @!attribute [rw] status_message
       #   @return [String]
       #     [Output only] Additional information about the current status of this
       #     node pool instance, if available.
       # @!attribute [rw] autoscaling
-      #   @return [Google::Container::V1::NodePoolAutoscaling]
+      #   @return [Google::Container::V1beta1::NodePoolAutoscaling]
       #     Autoscaler configuration for this NodePool. Autoscaler is enabled
       #     only if a valid configuration is present.
       # @!attribute [rw] management
-      #   @return [Google::Container::V1::NodeManagement]
+      #   @return [Google::Container::V1beta1::NodeManagement]
       #     NodeManagement configuration for this NodePool.
+      # @!attribute [rw] max_pods_constraint
+      #   @return [Google::Container::V1beta1::MaxPodsConstraint]
+      #     The constraint on the maximum number of pods that can be run
+      #     simultaneously on a node in the node pool.
+      # @!attribute [rw] conditions
+      #   @return [Array<Google::Container::V1beta1::StatusCondition>]
+      #     Which conditions caused the current node pool state.
       class NodePool
         # The current status of the node pool instance.
         module Status
@@ -1457,17 +1681,12 @@ module Google
       # node pool.
       # @!attribute [rw] auto_upgrade
       #   @return [true, false]
-      #     A flag that specifies whether node auto-upgrade is enabled for the node
-      #     pool. If enabled, node auto-upgrade helps keep the nodes in your node pool
-      #     up to date with the latest release version of Kubernetes.
+      #     Whether the nodes will be automatically upgraded.
       # @!attribute [rw] auto_repair
       #   @return [true, false]
-      #     A flag that specifies whether the node auto-repair is enabled for the node
-      #     pool. If enabled, the nodes in this node pool will be monitored and, if
-      #     they fail health checks too many times, an automatic repair action will be
-      #     triggered.
+      #     Whether the nodes will be automatically repaired.
       # @!attribute [rw] upgrade_options
-      #   @return [Google::Container::V1::AutoUpgradeOptions]
+      #   @return [Google::Container::V1beta1::AutoUpgradeOptions]
       #     Specifies the Auto Upgrade knobs for the node pool.
       class NodeManagement; end
 
@@ -1486,13 +1705,13 @@ module Google
 
       # MaintenancePolicy defines the maintenance policy to be used for the cluster.
       # @!attribute [rw] window
-      #   @return [Google::Container::V1::MaintenanceWindow]
+      #   @return [Google::Container::V1beta1::MaintenanceWindow]
       #     Specifies the maintenance window in which maintenance may be performed.
       class MaintenancePolicy; end
 
       # MaintenanceWindow defines the maintenance window to be used for the cluster.
       # @!attribute [rw] daily_maintenance_window
-      #   @return [Google::Container::V1::DailyMaintenanceWindow]
+      #   @return [Google::Container::V1beta1::DailyMaintenanceWindow]
       #     DailyMaintenanceWindow specifies a daily maintenance operation window.
       class MaintenanceWindow; end
 
@@ -1500,14 +1719,11 @@ module Google
       # @!attribute [rw] start_time
       #   @return [String]
       #     Time within the maintenance window to start the maintenance operations.
-      #     Time format should be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
-      #     format "HH:MM”, where HH : [00-23] and MM : [00-59] GMT.
+      #     It must be in format "HH:MM”, where HH : [00-23] and MM : [00-59] GMT.
       # @!attribute [rw] duration
       #   @return [String]
       #     [Output only] Duration of the time window, automatically chosen to be
       #     smallest possible in the given scenario.
-      #     Duration will be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
-      #     format "PTnHnMnS".
       class DailyMaintenanceWindow; end
 
       # SetNodePoolManagementRequest sets the node management properties of a node
@@ -1532,7 +1748,7 @@ module Google
       #     Deprecated. The name of the node pool to update.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] management
-      #   @return [Google::Container::V1::NodeManagement]
+      #   @return [Google::Container::V1beta1::NodeManagement]
       #     NodeManagement configuration for the node pool.
       # @!attribute [rw] name
       #   @return [String]
@@ -1603,9 +1819,35 @@ module Google
 
       # ListNodePoolsResponse is the result of ListNodePoolsRequest.
       # @!attribute [rw] node_pools
-      #   @return [Array<Google::Container::V1::NodePool>]
+      #   @return [Array<Google::Container::V1beta1::NodePool>]
       #     A list of node pools for a cluster.
       class ListNodePoolsResponse; end
+
+      # ClusterAutoscaling contains global, per-cluster information
+      # required by Cluster Autoscaler to automatically adjust
+      # the size of the cluster and create/delete
+      # node pools based on the current needs.
+      # @!attribute [rw] enable_node_autoprovisioning
+      #   @return [true, false]
+      #     Enables automatic node pool creation and deletion.
+      # @!attribute [rw] resource_limits
+      #   @return [Array<Google::Container::V1beta1::ResourceLimit>]
+      #     Contains global constraints regarding minimum and maximum
+      #     amount of resources in the cluster.
+      class ClusterAutoscaling; end
+
+      # Contains information about amount of some resource in the cluster.
+      # For memory, value should be in GB.
+      # @!attribute [rw] resource_type
+      #   @return [String]
+      #     Resource name "cpu", "memory" or gpu-specific string.
+      # @!attribute [rw] minimum
+      #   @return [Integer]
+      #     Minimum amount of the resource in the cluster.
+      # @!attribute [rw] maximum
+      #   @return [Integer]
+      #     Maximum amount of the resource in the cluster.
+      class ResourceLimit; end
 
       # NodePoolAutoscaling contains information required by cluster autoscaler to
       # adjust the size of the node pool to the current cluster usage.
@@ -1620,6 +1862,9 @@ module Google
       #   @return [Integer]
       #     Maximum number of nodes in the NodePool. Must be >= min_node_count. There
       #     has to enough quota to scale up the cluster.
+      # @!attribute [rw] autoprovisioned
+      #   @return [true, false]
+      #     Can this node pool be deleted automatically.
       class NodePoolAutoscaling; end
 
       # SetLabelsRequest sets the Google Cloud Platform labels on a Google Container
@@ -1741,6 +1986,34 @@ module Google
       #     [here](https://cloud.google.com/compute/docs/gpus/#Introduction)
       class AcceleratorConfig; end
 
+      # WorkloadMetadataConfig defines the metadata configuration to expose to
+      # workloads on the node pool.
+      # @!attribute [rw] node_metadata
+      #   @return [Google::Container::V1beta1::WorkloadMetadataConfig::NodeMetadata]
+      #     NodeMetadata is the configuration for how to expose the node metadata to
+      #     the workload running on the node.
+      class WorkloadMetadataConfig
+        # NodeMetadata is the configuration for if and how to expose the node
+        # metadata to the workload running on the node.
+        module NodeMetadata
+          # Not set.
+          UNSPECIFIED = 0
+
+          # Prevent workloads not in hostNetwork from accessing certain VM metadata,
+          # specifically kube-env, which contains Kubelet credentials, and the
+          # instance identity token.
+          #
+          # Metadata concealment is a temporary security solution available while the
+          # bootstrapping process for cluster nodes is being redesigned with
+          # significant security improvements.  This feature is scheduled to be
+          # deprecated in the future and later removed.
+          SECURE = 1
+
+          # Expose all VM metadata to pods.
+          EXPOSE = 2
+        end
+      end
+
       # SetNetworkPolicyRequest enables/disables network policy for a cluster.
       # @!attribute [rw] project_id
       #   @return [String]
@@ -1758,7 +2031,7 @@ module Google
       #     Deprecated. The name of the cluster.
       #     This field has been deprecated and replaced by the name field.
       # @!attribute [rw] network_policy
-      #   @return [Google::Container::V1::NetworkPolicy]
+      #   @return [Google::Container::V1beta1::NetworkPolicy]
       #     Configuration options for the NetworkPolicy feature.
       # @!attribute [rw] name
       #   @return [String]
@@ -1780,7 +2053,7 @@ module Google
       #   @return [String]
       #     The name of the cluster to update.
       # @!attribute [rw] maintenance_policy
-      #   @return [Google::Container::V1::MaintenancePolicy]
+      #   @return [Google::Container::V1beta1::MaintenancePolicy]
       #     The maintenance policy to be set for the cluster. An empty field
       #     clears the existing maintenance policy.
       # @!attribute [rw] name
@@ -1790,11 +2063,82 @@ module Google
       #     Specified in the format 'projects/*/locations/*/clusters/*'.
       class SetMaintenancePolicyRequest; end
 
+      # ListLocationsRequest is used to request the locations that offer GKE.
+      # @!attribute [rw] parent
+      #   @return [String]
+      #     Contains the name of the resource requested.
+      #     Specified in the format 'projects/*'.
+      class ListLocationsRequest; end
+
+      # ListLocationsResponse returns the list of all GKE locations and their
+      # recommendation state.
+      # @!attribute [rw] locations
+      #   @return [Array<Google::Container::V1beta1::Location>]
+      #     A full list of GKE locations.
+      # @!attribute [rw] next_page_token
+      #   @return [String]
+      #     Only return ListLocationsResponse that occur after the page_token. This
+      #     value should be populated from the ListLocationsResponse.next_page_token if
+      #     that response token was set (which happens when listing more Locations than
+      #     fit in a single ListLocationsResponse).
+      class ListLocationsResponse; end
+
+      # Location returns the location name, and if the location is recommended
+      # for GKE cluster scheduling.
+      # @!attribute [rw] type
+      #   @return [Google::Container::V1beta1::Location::LocationType]
+      #     Contains the type of location this Location is for.
+      #     Regional or Zonal.
+      # @!attribute [rw] name
+      #   @return [String]
+      #     Contains the name of the resource requested.
+      #     Specified in the format 'projects/*/locations/*'.
+      # @!attribute [rw] recommended
+      #   @return [true, false]
+      #     Whether the location is recomended for GKE cluster scheduling.
+      class Location
+        # LocationType is the type of GKE location, regional or zonal.
+        module LocationType
+          # LOCATION_TYPE_UNSPECIFIED means the location type was not determined.
+          LOCATION_TYPE_UNSPECIFIED = 0
+
+          # A GKE Location where Zonal clusters can be created.
+          ZONE = 1
+
+          # A GKE Location where Regional clusters can be created.
+          REGION = 2
+        end
+      end
+
+      # StatusCondition describes why a cluster or a node pool has a certain status
+      # (e.g., ERROR or DEGRADED).
+      # @!attribute [rw] code
+      #   @return [Google::Container::V1beta1::StatusCondition::Code]
+      #     Machine-friendly representation of the condition
+      # @!attribute [rw] message
+      #   @return [String]
+      #     Human-friendly representation of the condition
+      class StatusCondition
+        # Code for each condition
+        module Code
+          # UNKNOWN indicates a generic condition.
+          UNKNOWN = 0
+
+          # GCE_STOCKOUT indicates a GCE stockout.
+          GCE_STOCKOUT = 1
+
+          # GKE_SERVICE_ACCOUNT_DELETED indicates that the user deleted their robot
+          # service account.
+          # More codes TBA
+          GKE_SERVICE_ACCOUNT_DELETED = 2
+        end
+      end
+
       # NetworkConfig reports the relative names of network & subnetwork.
       # @!attribute [rw] network
       #   @return [String]
       #     Output only. The relative name of the Google Compute Engine
-      #     {Google::Container::V1::NetworkConfig#network network}(/compute/docs/networks-and-firewalls#networks) to which
+      #     {Google::Container::V1beta1::NetworkConfig#network network}(/compute/docs/networks-and-firewalls#networks) to which
       #     the cluster is connected.
       #     Example: projects/my-project/global/networks/my-network
       # @!attribute [rw] subnetwork
@@ -1803,6 +2147,108 @@ module Google
       #     [subnetwork](https://cloud.google.com/compute/docs/vpc) to which the cluster is connected.
       #     Example: projects/my-project/regions/us-central1/subnetworks/my-subnet
       class NetworkConfig; end
+
+      # ListUsableSubnetworksRequest requests the list of usable subnetworks.
+      # available to a user for creating clusters.
+      # @!attribute [rw] parent
+      #   @return [String]
+      #     The parent project where subnetworks are usable.
+      #     Specified in the format 'projects/*'.
+      # @!attribute [rw] filter
+      #   @return [String]
+      #     Filtering currently only supports equality on the networkProjectId and must
+      #     be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+      #     is the project which owns the listed subnetworks. This defaults to the
+      #     parent project ID.
+      # @!attribute [rw] page_size
+      #   @return [Integer]
+      #     The max number of results per page that should be returned. If the number
+      #     of available results is larger than `page_size`, a `next_page_token` is
+      #     returned which can be used to get the next page of results in subsequent
+      #     requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
+      # @!attribute [rw] page_token
+      #   @return [String]
+      #     Specifies a page token to use. Set this to the nextPageToken returned by
+      #     previous list requests to get the next page of results.
+      class ListUsableSubnetworksRequest; end
+
+      # ListUsableSubnetworksResponse is the response of
+      # ListUsableSubnetworksRequest.
+      # @!attribute [rw] subnetworks
+      #   @return [Array<Google::Container::V1beta1::UsableSubnetwork>]
+      #     A list of usable subnetworks in the specified network project.
+      # @!attribute [rw] next_page_token
+      #   @return [String]
+      #     This token allows you to get the next page of results for list requests.
+      #     If the number of results is larger than `page_size`, use the
+      #     `next_page_token` as a value for the query parameter `page_token` in the
+      #     next request. The value will become empty when there are no more pages.
+      class ListUsableSubnetworksResponse; end
+
+      # Secondary IP range of a usable subnetwork.
+      # @!attribute [rw] range_name
+      #   @return [String]
+      #     The name associated with this subnetwork secondary range, used when adding
+      #     an alias IP range to a VM instance.
+      # @!attribute [rw] ip_cidr_range
+      #   @return [String]
+      #     The range of IP addresses belonging to this subnetwork secondary range.
+      # @!attribute [rw] status
+      #   @return [Google::Container::V1beta1::UsableSubnetworkSecondaryRange::Status]
+      #     This field is to determine the status of the secondary range programmably.
+      class UsableSubnetworkSecondaryRange
+        # Status shows the current usage of a secondary IP range.
+        module Status
+          # UNKNOWN is the zero value of the Status enum. It's not a valid status.
+          UNKNOWN = 0
+
+          # UNUSED denotes that this range is unclaimed by any cluster.
+          UNUSED = 1
+
+          # IN_USE_SERVICE denotes that this range is claimed by a cluster for
+          # services. It cannot be used for other clusters.
+          IN_USE_SERVICE = 2
+
+          # IN_USE_SHAREABLE_POD denotes this range was created by the network admin
+          # and is currently claimed by a cluster for pods. It can only be used by
+          # other clusters as a pod range.
+          IN_USE_SHAREABLE_POD = 3
+
+          # IN_USE_MANAGED_POD denotes this range was created by GKE and is claimed
+          # for pods. It cannot be used for other clusters.
+          IN_USE_MANAGED_POD = 4
+        end
+      end
+
+      # UsableSubnetwork resource returns the subnetwork name, its associated network
+      # and the primary CIDR range.
+      # @!attribute [rw] subnetwork
+      #   @return [String]
+      #     Subnetwork Name.
+      #     Example: projects/my-project/regions/us-central1/subnetworks/my-subnet
+      # @!attribute [rw] network
+      #   @return [String]
+      #     Network Name.
+      #     Example: projects/my-project/global/networks/my-network
+      # @!attribute [rw] ip_cidr_range
+      #   @return [String]
+      #     The range of internal addresses that are owned by this subnetwork.
+      # @!attribute [rw] secondary_ip_ranges
+      #   @return [Array<Google::Container::V1beta1::UsableSubnetworkSecondaryRange>]
+      #     Secondary IP ranges.
+      # @!attribute [rw] status_message
+      #   @return [String]
+      #     A human readable status message representing the reasons for cases where
+      #     the caller cannot use the secondary ranges under the subnet. For example if
+      #     the secondary_ip_ranges is empty due to a permission issue, an insufficient
+      #     permission message will be given by status_message.
+      class UsableSubnetwork; end
+
+      # Constraints applied to pods.
+      # @!attribute [rw] max_pods_per_node
+      #   @return [Integer]
+      #     Constraint enforced on the max num of pods per node.
+      class MaxPodsConstraint; end
     end
   end
 end

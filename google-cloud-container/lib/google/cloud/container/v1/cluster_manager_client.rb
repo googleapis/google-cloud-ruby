@@ -14,7 +14,7 @@
 #
 # EDITING INSTRUCTIONS
 # This file was generated from the file
-# https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto,
+# https://github.com/googleapis/googleapis/blob/master/google/container/v1beta1/cluster_service.proto,
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
@@ -25,17 +25,17 @@ require "pathname"
 
 require "google/gax"
 
-require "google/container/v1/cluster_service_pb"
+require "google/container/v1beta1/cluster_service_pb"
 require "google/cloud/container/v1/credentials"
 
 module Google
   module Cloud
     module Container
       module V1
-        # Google Container Engine Cluster Manager v1
+        # Google Kubernetes Engine Cluster Manager v1beta1
         #
         # @!attribute [r] cluster_manager_stub
-        #   @return [Google::Container::V1::ClusterManager::Stub]
+        #   @return [Google::Container::V1beta1::ClusterManager::Stub]
         class ClusterManagerClient
           # @private
           attr_reader :cluster_manager_stub
@@ -51,12 +51,112 @@ module Google
 
           DEFAULT_TIMEOUT = 30
 
+          PAGE_DESCRIPTORS = {
+            "list_usable_subnetworks" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "subnetworks")
+          }.freeze
+
+          private_constant :PAGE_DESCRIPTORS
+
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
+
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
+
+          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}"
+          )
+
+          private_constant :LOCATION_PATH_TEMPLATE
+
+          CLUSTER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/clusters/{cluster}"
+          )
+
+          private_constant :CLUSTER_PATH_TEMPLATE
+
+          NODE_POOL_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/clusters/{cluster}/nodePools/{node_pool}"
+          )
+
+          private_constant :NODE_POOL_PATH_TEMPLATE
+
+          OPERATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/operations/{operation}"
+          )
+
+          private_constant :OPERATION_PATH_TEMPLATE
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
+            )
+          end
+
+          # Returns a fully-qualified location resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @return [String]
+          def self.location_path project, location
+            LOCATION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location
+            )
+          end
+
+          # Returns a fully-qualified cluster resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @param cluster [String]
+          # @return [String]
+          def self.cluster_path project, location, cluster
+            CLUSTER_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"cluster" => cluster
+            )
+          end
+
+          # Returns a fully-qualified node_pool resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @param cluster [String]
+          # @param node_pool [String]
+          # @return [String]
+          def self.node_pool_path project, location, cluster, node_pool
+            NODE_POOL_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"cluster" => cluster,
+              :"node_pool" => node_pool
+            )
+          end
+
+          # Returns a fully-qualified operation resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @param operation [String]
+          # @return [String]
+          def self.operation_path project, location, operation
+            OPERATION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"operation" => operation
+            )
+          end
 
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -100,7 +200,7 @@ module Google
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
-            require "google/container/v1/cluster_service_services_pb"
+            require "google/container/v1beta1/cluster_service_services_pb"
 
             credentials ||= Google::Cloud::Container::V1::Credentials.default
 
@@ -135,11 +235,12 @@ module Google
             )
             defaults = client_config_file.open do |f|
               Google::Gax.construct_settings(
-                "google.container.v1.ClusterManager",
+                "google.container.v1beta1.ClusterManager",
                 JSON.parse(f.read),
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
+                page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
                 metadata: headers
               )
@@ -157,7 +258,7 @@ module Google
               updater_proc: updater_proc,
               scopes: scopes,
               interceptors: interceptors,
-              &Google::Container::V1::ClusterManager::Stub.method(:new)
+              &Google::Container::V1beta1::ClusterManager::Stub.method(:new)
             )
 
             @list_clusters = Google::Gax.create_api_call(
@@ -310,6 +411,16 @@ module Google
               defaults["set_maintenance_policy"],
               exception_transformer: exception_transformer
             )
+            @list_usable_subnetworks = Google::Gax.create_api_call(
+              @cluster_manager_stub.method(:list_usable_subnetworks),
+              defaults["list_usable_subnetworks"],
+              exception_transformer: exception_transformer
+            )
+            @list_locations = Google::Gax.create_api_call(
+              @cluster_manager_stub.method(:list_locations),
+              defaults["list_locations"],
+              exception_transformer: exception_transformer
+            )
           end
 
           # Service calls
@@ -317,92 +428,95 @@ module Google
           # Lists all clusters owned by a project in either the specified zone or all
           # zones.
           #
+          # @param parent [String]
+          #   The parent (project and location) where the clusters will be listed.
+          #   Specified in the format 'projects/*/locations/*'.
+          #   Location "-" matches all zones and all regions.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides, or "-" for all zones.
+          #   This field has been deprecated and replaced by the parent field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::ListClustersResponse]
+          # @yieldparam result [Google::Container::V1beta1::ListClustersResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::ListClustersResponse]
+          # @return [Google::Container::V1beta1::ListClustersResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #   response = cluster_manager_client.list_clusters(project_id, zone)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Container::V1::ClusterManagerClient.location_path("[PROJECT]", "[LOCATION]")
+          #   response = cluster_manager_client.list_clusters(formatted_parent)
 
           def list_clusters \
-              project_id,
-              zone,
+              parent,
+              project_id: nil,
+              zone: nil,
               options: nil,
               &block
             req = {
+              parent: parent,
               project_id: project_id,
               zone: zone
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::ListClustersRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::ListClustersRequest)
             @list_clusters.call(req, options, &block)
           end
 
-          # Gets the details of a specific cluster.
+          # Gets the details for a specific cluster.
           #
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to retrieve.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to retrieve.
+          #   Deprecated. The name of the cluster to retrieve.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Cluster]
+          # @yieldparam result [Google::Container::V1beta1::Cluster]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Cluster]
+          # @return [Google::Container::V1beta1::Cluster]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.get_cluster(project_id, zone, cluster_id)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.get_cluster(formatted_name)
 
           def get_cluster \
-              project_id,
-              zone,
-              cluster_id,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::GetClusterRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::GetClusterRequest)
             @get_cluster.call(req, options, &block)
           end
 
@@ -420,441 +534,440 @@ module Google
           # Finally, an entry is added to the project's global metadata indicating
           # which CIDR range is being used by the cluster.
           #
+          # @param cluster [Google::Container::V1beta1::Cluster | Hash]
+          #   A [cluster
+          #   resource](/container-engine/reference/rest/v1beta1/projects.zones.clusters)
+          #   A hash of the same form as `Google::Container::V1beta1::Cluster`
+          #   can also be provided.
+          # @param parent [String]
+          #   The parent (project and location) where the cluster will be created.
+          #   Specified in the format 'projects/*/locations/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
-          # @param cluster [Google::Container::V1::Cluster | Hash]
-          #   A [cluster
-          #   resource](/container-engine/reference/rest/v1/projects.zones.clusters)
-          #   A hash of the same form as `Google::Container::V1::Cluster`
-          #   can also be provided.
+          #   This field has been deprecated and replaced by the parent field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `cluster`:
           #   cluster = {}
-          #   response = cluster_manager_client.create_cluster(project_id, zone, cluster)
+          #   formatted_parent = Google::Cloud::Container::V1::ClusterManagerClient.location_path("[PROJECT]", "[LOCATION]")
+          #   response = cluster_manager_client.create_cluster(cluster, formatted_parent)
 
           def create_cluster \
-              project_id,
-              zone,
               cluster,
+              parent,
+              project_id: nil,
+              zone: nil,
               options: nil,
               &block
             req = {
+              cluster: cluster,
+              parent: parent,
               project_id: project_id,
-              zone: zone,
-              cluster: cluster
+              zone: zone
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::CreateClusterRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::CreateClusterRequest)
             @create_cluster.call(req, options, &block)
           end
 
-          # Updates the settings of a specific cluster.
+          # Updates the settings for a specific cluster.
           #
+          # @param update [Google::Container::V1beta1::ClusterUpdate | Hash]
+          #   A description of the update.
+          #   A hash of the same form as `Google::Container::V1beta1::ClusterUpdate`
+          #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to update.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
-          # @param update [Google::Container::V1::ClusterUpdate | Hash]
-          #   A description of the update.
-          #   A hash of the same form as `Google::Container::V1::ClusterUpdate`
-          #   can also be provided.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `update`:
           #   update = {}
-          #   response = cluster_manager_client.update_cluster(project_id, zone, cluster_id, update)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.update_cluster(update, formatted_name)
 
           def update_cluster \
-              project_id,
-              zone,
-              cluster_id,
               update,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              update: update,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              update: update
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::UpdateClusterRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::UpdateClusterRequest)
             @update_cluster.call(req, options, &block)
           end
 
           # Updates the version and/or image type of a specific node pool.
           #
-          # @param project_id [String]
-          #   The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          # @param zone [String]
-          #   The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
-          # @param node_pool_id [String]
-          #   The name of the node pool to upgrade.
           # @param node_version [String]
           #   The Kubernetes version to change the nodes to (typically an
-          #   upgrade). Use `-` to upgrade to the latest version supported by
-          #   the server.
+          #   upgrade).
+          #
+          #   Users may specify either explicit versions offered by Kubernetes Engine or
+          #   version aliases, which have the following behavior:
+          #
+          #   * "latest": picks the highest valid Kubernetes version
+          #   * "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+          #   * "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+          #   * "1.X.Y-gke.N": picks an explicit Kubernetes version
+          #   * "-": picks the Kubernetes master version
           # @param image_type [String]
           #   The desired image type for the node pool.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool) of the node pool to
+          #   update. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
+          # @param node_pool_id [String]
+          #   Deprecated. The name of the node pool to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `node_version`:
           #   node_version = ''
           #
           #   # TODO: Initialize `image_type`:
           #   image_type = ''
-          #   response = cluster_manager_client.update_node_pool(project_id, zone, cluster_id, node_pool_id, node_version, image_type)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.node_pool_path("[PROJECT]", "[LOCATION]", "[CLUSTER]", "[NODE_POOL]")
+          #   response = cluster_manager_client.update_node_pool(node_version, image_type, formatted_name)
 
           def update_node_pool \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
               node_version,
               image_type,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               options: nil,
               &block
             req = {
+              node_version: node_version,
+              image_type: image_type,
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              node_pool_id: node_pool_id,
-              node_version: node_version,
-              image_type: image_type
+              node_pool_id: node_pool_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::UpdateNodePoolRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::UpdateNodePoolRequest)
             @update_node_pool.call(req, options, &block)
           end
 
           # Sets the autoscaling settings of a specific node pool.
           #
+          # @param autoscaling [Google::Container::V1beta1::NodePoolAutoscaling | Hash]
+          #   Autoscaling configuration for the node pool.
+          #   A hash of the same form as `Google::Container::V1beta1::NodePoolAutoscaling`
+          #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool) of the node pool to set
+          #   autoscaler settings. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to upgrade.
-          # @param autoscaling [Google::Container::V1::NodePoolAutoscaling | Hash]
-          #   Autoscaling configuration for the node pool.
-          #   A hash of the same form as `Google::Container::V1::NodePoolAutoscaling`
-          #   can also be provided.
+          #   Deprecated. The name of the node pool to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `autoscaling`:
           #   autoscaling = {}
-          #   response = cluster_manager_client.set_node_pool_autoscaling(project_id, zone, cluster_id, node_pool_id, autoscaling)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.node_pool_path("[PROJECT]", "[LOCATION]", "[CLUSTER]", "[NODE_POOL]")
+          #   response = cluster_manager_client.set_node_pool_autoscaling(autoscaling, formatted_name)
 
           def set_node_pool_autoscaling \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
               autoscaling,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               options: nil,
               &block
             req = {
+              autoscaling: autoscaling,
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              node_pool_id: node_pool_id,
-              autoscaling: autoscaling
+              node_pool_id: node_pool_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetNodePoolAutoscalingRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetNodePoolAutoscalingRequest)
             @set_node_pool_autoscaling.call(req, options, &block)
           end
 
-          # Sets the logging service of a specific cluster.
+          # Sets the logging service for a specific cluster.
           #
-          # @param project_id [String]
-          #   The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          # @param zone [String]
-          #   The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
           # @param logging_service [String]
           #   The logging service the cluster should use to write metrics.
           #   Currently available options:
           #
           #   * "logging.googleapis.com" - the Google Cloud Logging service
           #   * "none" - no metrics will be exported from the cluster
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set logging.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `logging_service`:
           #   logging_service = ''
-          #   response = cluster_manager_client.set_logging_service(project_id, zone, cluster_id, logging_service)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.set_logging_service(logging_service, formatted_name)
 
           def set_logging_service \
-              project_id,
-              zone,
-              cluster_id,
               logging_service,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              logging_service: logging_service,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              logging_service: logging_service
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetLoggingServiceRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetLoggingServiceRequest)
             @set_logging_service.call(req, options, &block)
           end
 
-          # Sets the monitoring service of a specific cluster.
+          # Sets the monitoring service for a specific cluster.
           #
-          # @param project_id [String]
-          #   The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          # @param zone [String]
-          #   The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
           # @param monitoring_service [String]
           #   The monitoring service the cluster should use to write metrics.
           #   Currently available options:
           #
           #   * "monitoring.googleapis.com" - the Google Cloud Monitoring service
           #   * "none" - no metrics will be exported from the cluster
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set monitoring.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `monitoring_service`:
           #   monitoring_service = ''
-          #   response = cluster_manager_client.set_monitoring_service(project_id, zone, cluster_id, monitoring_service)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.set_monitoring_service(monitoring_service, formatted_name)
 
           def set_monitoring_service \
-              project_id,
-              zone,
-              cluster_id,
               monitoring_service,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              monitoring_service: monitoring_service,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              monitoring_service: monitoring_service
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetMonitoringServiceRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetMonitoringServiceRequest)
             @set_monitoring_service.call(req, options, &block)
           end
 
-          # Sets the addons of a specific cluster.
+          # Sets the addons for a specific cluster.
           #
-          # @param project_id [String]
-          #   The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          # @param zone [String]
-          #   The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
-          # @param addons_config [Google::Container::V1::AddonsConfig | Hash]
+          # @param addons_config [Google::Container::V1beta1::AddonsConfig | Hash]
           #   The desired configurations for the various addons available to run in the
           #   cluster.
-          #   A hash of the same form as `Google::Container::V1::AddonsConfig`
+          #   A hash of the same form as `Google::Container::V1beta1::AddonsConfig`
           #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set addons.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `addons_config`:
           #   addons_config = {}
-          #   response = cluster_manager_client.set_addons_config(project_id, zone, cluster_id, addons_config)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.set_addons_config(addons_config, formatted_name)
 
           def set_addons_config \
-              project_id,
-              zone,
-              cluster_id,
               addons_config,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              addons_config: addons_config,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              addons_config: addons_config
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetAddonsConfigRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetAddonsConfigRequest)
             @set_addons_config.call(req, options, &block)
           end
 
-          # Sets the locations of a specific cluster.
+          # Sets the locations for a specific cluster.
           #
-          # @param project_id [String]
-          #   The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          # @param zone [String]
-          #   The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
           # @param locations [Array<String>]
           #   The desired list of Google Compute Engine
           #   [locations](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
@@ -863,171 +976,188 @@ module Google
           #   whether locations are being added or removed.
           #
           #   This list must always include the cluster's primary zone.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set locations.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `locations`:
           #   locations = []
-          #   response = cluster_manager_client.set_locations(project_id, zone, cluster_id, locations)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.set_locations(locations, formatted_name)
 
           def set_locations \
-              project_id,
-              zone,
-              cluster_id,
               locations,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              locations: locations,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              locations: locations
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetLocationsRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetLocationsRequest)
             @set_locations.call(req, options, &block)
           end
 
-          # Updates the master of a specific cluster.
+          # Updates the master for a specific cluster.
           #
+          # @param master_version [String]
+          #   The Kubernetes version to change the master to.
+          #
+          #   Users may specify either explicit versions offered by
+          #   Kubernetes Engine or version aliases, which have the following behavior:
+          #
+          #   * "latest": picks the highest valid Kubernetes version
+          #   * "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+          #   * "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+          #   * "1.X.Y-gke.N": picks an explicit Kubernetes version
+          #   * "-": picks the default Kubernetes version
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to update.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
-          # @param master_version [String]
-          #   The Kubernetes version to change the master to. The only valid value is the
-          #   latest supported version. Use "-" to have the server automatically select
-          #   the latest version.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `master_version`:
           #   master_version = ''
-          #   response = cluster_manager_client.update_master(project_id, zone, cluster_id, master_version)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.update_master(master_version, formatted_name)
 
           def update_master \
-              project_id,
-              zone,
-              cluster_id,
               master_version,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              master_version: master_version,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              master_version: master_version
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::UpdateMasterRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::UpdateMasterRequest)
             @update_master.call(req, options, &block)
           end
 
           # Used to set master auth materials. Currently supports :-
-          # Changing the admin password of a specific cluster.
-          # This can be either via password generation or explicitly set the password.
+          # Changing the admin password for a specific cluster.
+          # This can be either via password generation or explicitly set.
+          # Modify basic_auth.csv and reset the K8S API server.
           #
+          # @param action [Google::Container::V1beta1::SetMasterAuthRequest::Action]
+          #   The exact form of action to be taken on the master auth.
+          # @param update [Google::Container::V1beta1::MasterAuth | Hash]
+          #   A description of the update.
+          #   A hash of the same form as `Google::Container::V1beta1::MasterAuth`
+          #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set auth.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
-          # @param action [Google::Container::V1::SetMasterAuthRequest::Action]
-          #   The exact form of action to be taken on the master auth.
-          # @param update [Google::Container::V1::MasterAuth | Hash]
-          #   A description of the update.
-          #   A hash of the same form as `Google::Container::V1::MasterAuth`
-          #   can also be provided.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `action`:
           #   action = :UNKNOWN
           #
           #   # TODO: Initialize `update`:
           #   update = {}
-          #   response = cluster_manager_client.set_master_auth(project_id, zone, cluster_id, action, update)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.set_master_auth(action, update, formatted_name)
 
           def set_master_auth \
-              project_id,
-              zone,
-              cluster_id,
               action,
               update,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              action: action,
+              update: update,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              action: action,
-              update: update
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetMasterAuthRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetMasterAuthRequest)
             @set_master_auth.call(req, options, &block)
           end
 
@@ -1041,153 +1171,162 @@ module Google
           # (e.g. load balancer resources) will not be deleted if they weren't present
           # at the initial create time.
           #
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to delete.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to delete.
+          #   Deprecated. The name of the cluster to delete.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.delete_cluster(project_id, zone, cluster_id)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.delete_cluster(formatted_name)
 
           def delete_cluster \
-              project_id,
-              zone,
-              cluster_id,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::DeleteClusterRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::DeleteClusterRequest)
             @delete_cluster.call(req, options, &block)
           end
 
           # Lists all operations in a project in a specific zone or all zones.
           #
+          # @param parent [String]
+          #   The parent (project and location) where the operations will be listed.
+          #   Specified in the format 'projects/*/locations/*'.
+          #   Location "-" matches all zones and all regions.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available)
-          #   to return operations for, or `-` for all zones.
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
+          #   all zones. This field has been deprecated and replaced by the parent field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::ListOperationsResponse]
+          # @yieldparam result [Google::Container::V1beta1::ListOperationsResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::ListOperationsResponse]
+          # @return [Google::Container::V1beta1::ListOperationsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #   response = cluster_manager_client.list_operations(project_id, zone)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Container::V1::ClusterManagerClient.location_path("[PROJECT]", "[LOCATION]")
+          #   response = cluster_manager_client.list_operations(formatted_parent)
 
           def list_operations \
-              project_id,
-              zone,
+              parent,
+              project_id: nil,
+              zone: nil,
               options: nil,
               &block
             req = {
+              parent: parent,
               project_id: project_id,
               zone: zone
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::ListOperationsRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::ListOperationsRequest)
             @list_operations.call(req, options, &block)
           end
 
           # Gets the specified operation.
           #
+          # @param name [String]
+          #   The name (project, location, operation id) of the operation to get.
+          #   Specified in the format 'projects/*/locations/*/operations/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param operation_id [String]
-          #   The server-assigned `name` of the operation.
+          #   Deprecated. The server-assigned `name` of the operation.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `operation_id`:
-          #   operation_id = ''
-          #   response = cluster_manager_client.get_operation(project_id, zone, operation_id)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.operation_path("[PROJECT]", "[LOCATION]", "[OPERATION]")
+          #   response = cluster_manager_client.get_operation(formatted_name)
 
           def get_operation \
-              project_id,
-              zone,
-              operation_id,
+              name,
+              project_id: nil,
+              zone: nil,
+              operation_id: nil,
               options: nil,
               &block
             req = {
+              name: name,
               project_id: project_id,
               zone: zone,
               operation_id: operation_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::GetOperationRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::GetOperationRequest)
             @get_operation.call(req, options, &block)
           end
 
           # Cancels the specified operation.
           #
+          # @param name [String]
+          #   The name (project, location, operation id) of the operation to cancel.
+          #   Specified in the format 'projects/*/locations/*/operations/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param operation_id [String]
-          #   The server-assigned `name` of the operation.
+          #   Deprecated. The server-assigned `name` of the operation.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1198,761 +1337,769 @@ module Google
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `operation_id`:
-          #   operation_id = ''
-          #   cluster_manager_client.cancel_operation(project_id, zone, operation_id)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.operation_path("[PROJECT]", "[LOCATION]", "[OPERATION]")
+          #   cluster_manager_client.cancel_operation(formatted_name)
 
           def cancel_operation \
-              project_id,
-              zone,
-              operation_id,
+              name,
+              project_id: nil,
+              zone: nil,
+              operation_id: nil,
               options: nil,
               &block
             req = {
+              name: name,
               project_id: project_id,
               zone: zone,
               operation_id: operation_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::CancelOperationRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::CancelOperationRequest)
             @cancel_operation.call(req, options, &block)
             nil
           end
 
-          # Returns configuration info about the Container Engine service.
+          # Returns configuration info about the Kubernetes Engine service.
           #
+          # @param name [String]
+          #   The name (project and location) of the server config to get
+          #   Specified in the format 'projects/*/locations/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available)
-          #   to return operations for.
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::ServerConfig]
+          # @yieldparam result [Google::Container::V1beta1::ServerConfig]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::ServerConfig]
+          # @return [Google::Container::V1beta1::ServerConfig]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #   response = cluster_manager_client.get_server_config(project_id, zone)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.location_path("[PROJECT]", "[LOCATION]")
+          #   response = cluster_manager_client.get_server_config(formatted_name)
 
           def get_server_config \
-              project_id,
-              zone,
+              name,
+              project_id: nil,
+              zone: nil,
               options: nil,
               &block
             req = {
+              name: name,
               project_id: project_id,
               zone: zone
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::GetServerConfigRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::GetServerConfigRequest)
             @get_server_config.call(req, options, &block)
           end
 
           # Lists the node pools for a cluster.
           #
+          # @param parent [String]
+          #   The parent (project, location, cluster id) where the node pools will be
+          #   listed. Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the parent field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the parent field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::ListNodePoolsResponse]
+          # @yieldparam result [Google::Container::V1beta1::ListNodePoolsResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::ListNodePoolsResponse]
+          # @return [Google::Container::V1beta1::ListNodePoolsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.list_node_pools(project_id, zone, cluster_id)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.list_node_pools(formatted_parent)
 
           def list_node_pools \
-              project_id,
-              zone,
-              cluster_id,
+              parent,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              parent: parent,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::ListNodePoolsRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::ListNodePoolsRequest)
             @list_node_pools.call(req, options, &block)
           end
 
           # Retrieves the node pool requested.
           #
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node pool to
+          #   get. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool.
+          #   Deprecated. The name of the node pool.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::NodePool]
+          # @yieldparam result [Google::Container::V1beta1::NodePool]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::NodePool]
+          # @return [Google::Container::V1beta1::NodePool]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #   response = cluster_manager_client.get_node_pool(project_id, zone, cluster_id, node_pool_id)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.node_pool_path("[PROJECT]", "[LOCATION]", "[CLUSTER]", "[NODE_POOL]")
+          #   response = cluster_manager_client.get_node_pool(formatted_name)
 
           def get_node_pool \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               options: nil,
               &block
             req = {
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::GetNodePoolRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::GetNodePoolRequest)
             @get_node_pool.call(req, options, &block)
           end
 
           # Creates a node pool for a cluster.
           #
+          # @param node_pool [Google::Container::V1beta1::NodePool | Hash]
+          #   The node pool to create.
+          #   A hash of the same form as `Google::Container::V1beta1::NodePool`
+          #   can also be provided.
+          # @param parent [String]
+          #   The parent (project, location, cluster id) where the node pool will be
+          #   created. Specified in the format
+          #   'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the parent field.
           # @param cluster_id [String]
-          #   The name of the cluster.
-          # @param node_pool [Google::Container::V1::NodePool | Hash]
-          #   The node pool to create.
-          #   A hash of the same form as `Google::Container::V1::NodePool`
-          #   can also be provided.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the parent field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `node_pool`:
           #   node_pool = {}
-          #   response = cluster_manager_client.create_node_pool(project_id, zone, cluster_id, node_pool)
+          #   formatted_parent = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.create_node_pool(node_pool, formatted_parent)
 
           def create_node_pool \
-              project_id,
-              zone,
-              cluster_id,
               node_pool,
+              parent,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              node_pool: node_pool,
+              parent: parent,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              node_pool: node_pool
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::CreateNodePoolRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::CreateNodePoolRequest)
             @create_node_pool.call(req, options, &block)
           end
 
           # Deletes a node pool from a cluster.
           #
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node pool to
+          #   delete. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to delete.
+          #   Deprecated. The name of the node pool to delete.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #   response = cluster_manager_client.delete_node_pool(project_id, zone, cluster_id, node_pool_id)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.node_pool_path("[PROJECT]", "[LOCATION]", "[CLUSTER]", "[NODE_POOL]")
+          #   response = cluster_manager_client.delete_node_pool(formatted_name)
 
           def delete_node_pool \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               options: nil,
               &block
             req = {
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::DeleteNodePoolRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::DeleteNodePoolRequest)
             @delete_node_pool.call(req, options, &block)
           end
 
           # Roll back the previously Aborted or Failed NodePool upgrade.
           # This will be an no-op if the last upgrade successfully completed.
           #
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node poll to
+          #   rollback upgrade.
+          #   Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to rollback.
+          #   Deprecated. The name of the cluster to rollback.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to rollback.
+          #   Deprecated. The name of the node pool to rollback.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #   response = cluster_manager_client.rollback_node_pool_upgrade(project_id, zone, cluster_id, node_pool_id)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.node_pool_path("[PROJECT]", "[LOCATION]", "[CLUSTER]", "[NODE_POOL]")
+          #   response = cluster_manager_client.rollback_node_pool_upgrade(formatted_name)
 
           def rollback_node_pool_upgrade \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               options: nil,
               &block
             req = {
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::RollbackNodePoolUpgradeRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::RollbackNodePoolUpgradeRequest)
             @rollback_node_pool_upgrade.call(req, options, &block)
           end
 
           # Sets the NodeManagement options for a node pool.
           #
+          # @param management [Google::Container::V1beta1::NodeManagement | Hash]
+          #   NodeManagement configuration for the node pool.
+          #   A hash of the same form as `Google::Container::V1beta1::NodeManagement`
+          #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node pool to set
+          #   management properties. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to update.
+          #   Deprecated. The name of the cluster to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to update.
-          # @param management [Google::Container::V1::NodeManagement | Hash]
-          #   NodeManagement configuration for the node pool.
-          #   A hash of the same form as `Google::Container::V1::NodeManagement`
-          #   can also be provided.
+          #   Deprecated. The name of the node pool to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `management`:
           #   management = {}
-          #   response = cluster_manager_client.set_node_pool_management(project_id, zone, cluster_id, node_pool_id, management)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.node_pool_path("[PROJECT]", "[LOCATION]", "[CLUSTER]", "[NODE_POOL]")
+          #   response = cluster_manager_client.set_node_pool_management(management, formatted_name)
 
           def set_node_pool_management \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
               management,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               options: nil,
               &block
             req = {
+              management: management,
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              node_pool_id: node_pool_id,
-              management: management
+              node_pool_id: node_pool_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetNodePoolManagementRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetNodePoolManagementRequest)
             @set_node_pool_management.call(req, options, &block)
           end
 
           # Sets labels on a cluster.
           #
-          # @param project_id [String]
-          #   The Google Developers Console [project ID or project
-          #   number](https://developers.google.com/console/help/new/#projectnumber).
-          # @param zone [String]
-          #   The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          # @param cluster_id [String]
-          #   The name of the cluster.
           # @param resource_labels [Hash{String => String}]
           #   The labels to set for that cluster.
           # @param label_fingerprint [String]
           #   The fingerprint of the previous set of labels for this resource,
           #   used to detect conflicts. The fingerprint is initially generated by
-          #   Container Engine and changes after every request to modify or update
+          #   Kubernetes Engine and changes after every request to modify or update
           #   labels. You must always provide an up-to-date fingerprint hash when
           #   updating or changing labels. Make a <code>get()</code> request to the
           #   resource to get the latest fingerprint.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to set labels.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `resource_labels`:
           #   resource_labels = {}
           #
           #   # TODO: Initialize `label_fingerprint`:
           #   label_fingerprint = ''
-          #   response = cluster_manager_client.set_labels(project_id, zone, cluster_id, resource_labels, label_fingerprint)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.set_labels(resource_labels, label_fingerprint, formatted_name)
 
           def set_labels \
-              project_id,
-              zone,
-              cluster_id,
               resource_labels,
               label_fingerprint,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              resource_labels: resource_labels,
+              label_fingerprint: label_fingerprint,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              resource_labels: resource_labels,
-              label_fingerprint: label_fingerprint
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetLabelsRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetLabelsRequest)
             @set_labels.call(req, options, &block)
           end
 
           # Enables or disables the ABAC authorization mechanism on a cluster.
           #
-          # @param project_id [String]
-          #   The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          # @param zone [String]
-          #   The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          # @param cluster_id [String]
-          #   The name of the cluster to update.
           # @param enabled [true, false]
           #   Whether ABAC authorization will be enabled in the cluster.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to set legacy abac.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `enabled`:
           #   enabled = false
-          #   response = cluster_manager_client.set_legacy_abac(project_id, zone, cluster_id, enabled)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.set_legacy_abac(enabled, formatted_name)
 
           def set_legacy_abac \
-              project_id,
-              zone,
-              cluster_id,
               enabled,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              enabled: enabled,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              enabled: enabled
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetLegacyAbacRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetLegacyAbacRequest)
             @set_legacy_abac.call(req, options, &block)
           end
 
           # Start master IP rotation.
           #
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to start IP
+          #   rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
+          # @param rotate_credentials [true, false]
+          #   Whether to rotate credentials during IP rotation.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.start_ip_rotation(project_id, zone, cluster_id)
+          #   # TODO: Initialize `rotate_credentials`:
+          #   rotate_credentials = false
+          #   response = cluster_manager_client.start_ip_rotation(formatted_name, rotate_credentials)
 
           def start_ip_rotation \
-              project_id,
-              zone,
-              cluster_id,
+              name,
+              rotate_credentials,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              name: name,
+              rotate_credentials: rotate_credentials,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::StartIPRotationRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::StartIPRotationRequest)
             @start_ip_rotation.call(req, options, &block)
           end
 
           # Completes master IP rotation.
           #
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to complete IP
+          #   rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.complete_ip_rotation(project_id, zone, cluster_id)
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.complete_ip_rotation(formatted_name)
 
           def complete_ip_rotation \
-              project_id,
-              zone,
-              cluster_id,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::CompleteIPRotationRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::CompleteIPRotationRequest)
             @complete_ip_rotation.call(req, options, &block)
           end
 
-          # Sets the size of a specific node pool.
+          # Sets the size for a specific node pool.
           #
-          # @param project_id [String]
-          #   The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          # @param zone [String]
-          #   The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          # @param cluster_id [String]
-          #   The name of the cluster to update.
-          # @param node_pool_id [String]
-          #   The name of the node pool to update.
           # @param node_count [Integer]
           #   The desired node count for the pool.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node pool to set
+          #   size.
+          #   Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to update.
+          #   This field has been deprecated and replaced by the name field.
+          # @param node_pool_id [String]
+          #   Deprecated. The name of the node pool to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `node_count`:
           #   node_count = 0
-          #   response = cluster_manager_client.set_node_pool_size(project_id, zone, cluster_id, node_pool_id, node_count)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.node_pool_path("[PROJECT]", "[LOCATION]", "[CLUSTER]", "[NODE_POOL]")
+          #   response = cluster_manager_client.set_node_pool_size(node_count, formatted_name)
 
           def set_node_pool_size \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
               node_count,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               options: nil,
               &block
             req = {
+              node_count: node_count,
+              name: name,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              node_pool_id: node_pool_id,
-              node_count: node_count
+              node_pool_id: node_pool_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetNodePoolSizeRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetNodePoolSizeRequest)
             @set_node_pool_size.call(req, options, &block)
           end
 
           # Enables/Disables Network Policy for a cluster.
           #
+          # @param network_policy [Google::Container::V1beta1::NetworkPolicy | Hash]
+          #   Configuration options for the NetworkPolicy feature.
+          #   A hash of the same form as `Google::Container::V1beta1::NetworkPolicy`
+          #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to set networking
+          #   policy. Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
-          # @param network_policy [Google::Container::V1::NetworkPolicy | Hash]
-          #   Configuration options for the NetworkPolicy feature.
-          #   A hash of the same form as `Google::Container::V1::NetworkPolicy`
-          #   can also be provided.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `network_policy`:
           #   network_policy = {}
-          #   response = cluster_manager_client.set_network_policy(project_id, zone, cluster_id, network_policy)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.set_network_policy(network_policy, formatted_name)
 
           def set_network_policy \
-              project_id,
-              zone,
-              cluster_id,
               network_policy,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              network_policy: network_policy,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              network_policy: network_policy
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetNetworkPolicyRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetNetworkPolicyRequest)
             @set_network_policy.call(req, options, &block)
           end
 
           # Sets the maintenance policy for a cluster.
           #
+          # @param maintenance_policy [Google::Container::V1beta1::MaintenancePolicy | Hash]
+          #   The maintenance policy to be set for the cluster. An empty field
+          #   clears the existing maintenance policy.
+          #   A hash of the same form as `Google::Container::V1beta1::MaintenancePolicy`
+          #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to set maintenance
+          #   policy.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param project_id [String]
           #   The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
@@ -1962,52 +2109,137 @@ module Google
           #   resides.
           # @param cluster_id [String]
           #   The name of the cluster to update.
-          # @param maintenance_policy [Google::Container::V1::MaintenancePolicy | Hash]
-          #   The maintenance policy to be set for the cluster. An empty field
-          #   clears the existing maintenance policy.
-          #   A hash of the same form as `Google::Container::V1::MaintenancePolicy`
-          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Container::V1::Operation]
+          # @yieldparam result [Google::Container::V1beta1::Operation]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Container::V1::Operation]
+          # @return [Google::Container::V1beta1::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/container"
           #
-          #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
           #
           #   # TODO: Initialize `maintenance_policy`:
           #   maintenance_policy = {}
-          #   response = cluster_manager_client.set_maintenance_policy(project_id, zone, cluster_id, maintenance_policy)
+          #   formatted_name = Google::Cloud::Container::V1::ClusterManagerClient.cluster_path("[PROJECT]", "[LOCATION]", "[CLUSTER]")
+          #   response = cluster_manager_client.set_maintenance_policy(maintenance_policy, formatted_name)
 
           def set_maintenance_policy \
-              project_id,
-              zone,
-              cluster_id,
               maintenance_policy,
+              name,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               options: nil,
               &block
             req = {
+              maintenance_policy: maintenance_policy,
+              name: name,
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id,
-              maintenance_policy: maintenance_policy
+              cluster_id: cluster_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Container::V1::SetMaintenancePolicyRequest)
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::SetMaintenancePolicyRequest)
             @set_maintenance_policy.call(req, options, &block)
+          end
+
+          # Lists subnetworks that are usable for creating clusters in a project.
+          #
+          # @param parent [String]
+          #   The parent project where subnetworks are usable.
+          #   Specified in the format 'projects/*'.
+          # @param filter [String]
+          #   Filtering currently only supports equality on the networkProjectId and must
+          #   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+          #   is the project which owns the listed subnetworks. This defaults to the
+          #   parent project ID.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Container::V1beta1::UsableSubnetwork>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Container::V1beta1::UsableSubnetwork>]
+          #   An enumerable of Google::Container::V1beta1::UsableSubnetwork instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/container"
+          #
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Container::V1::ClusterManagerClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `filter`:
+          #   filter = ''
+          #
+          #   # Iterate over all results.
+          #   cluster_manager_client.list_usable_subnetworks(formatted_parent, filter).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   cluster_manager_client.list_usable_subnetworks(formatted_parent, filter).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_usable_subnetworks \
+              parent,
+              filter,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              filter: filter,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::ListUsableSubnetworksRequest)
+            @list_usable_subnetworks.call(req, options, &block)
+          end
+
+          # Used to fetch locations that offer GKE.
+          #
+          # @param parent [String]
+          #   Contains the name of the resource requested.
+          #   Specified in the format 'projects/*'.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Container::V1beta1::ListLocationsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Container::V1beta1::ListLocationsResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/container"
+          #
+          #   cluster_manager_client = Google::Cloud::Container::ClusterManager.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Container::V1::ClusterManagerClient.project_path("[PROJECT]")
+          #   response = cluster_manager_client.list_locations(formatted_parent)
+
+          def list_locations \
+              parent,
+              options: nil,
+              &block
+            req = {
+              parent: parent
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Container::V1beta1::ListLocationsRequest)
+            @list_locations.call(req, options, &block)
           end
         end
       end
