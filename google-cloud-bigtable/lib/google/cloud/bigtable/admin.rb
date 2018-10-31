@@ -89,8 +89,8 @@ module Google
 
         module BigtableInstanceAdmin
           ##
-          # Service for creating, configuring, and deleting Cloud Bigtable instances and
-          # clusters. Provides access to the Instance and Cluster schemas only, not the
+          # Service for creating, configuring, and deleting Cloud Bigtable Instances and
+          # Clusters. Provides access to the Instance and Cluster schemas only, not the
           # tables' metadata or data stored in those tables.
           #
           # @param version [Symbol, String]
@@ -99,30 +99,30 @@ module Google
           # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
           #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #     Provides the means for authenticating requests made by the client. This parameter can
-          #     be one of the following types:
-          #     `Google::Auth::Credentials` uses the properties of its represented keyfile to
-          #     authenticate requests made by this client.
-          #     `String` will be treated as the path to the keyfile to be used for the construction of
+          #     be many types.
+          #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #     authenticating requests made by this client.
+          #     A `String` will be treated as the path to the keyfile to be used for the construction of
           #     credentials for this client.
-          #     `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
           #     credentials for this client.
-          #     `GRPC::Core::Channel` will be used to make calls through.
-          #     `GRPC::Core::ChannelCredentials` is used to set up the gRPC client. The channel credentials
-          #     should be formatted as a `GRPC::Core::CallCredentials` object.
-          #     `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
+          #     A `GRPC::Core::Channel` will be used to make calls through.
+          #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #     should already be composed with a `GRPC::Core::CallCredentials` object.
+          #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
           #     metadata for requests, generally, to give OAuth credentials.
           #   @param scopes [Array<String>]
           #     The OAuth scopes for this service. This parameter is ignored if
           #     an updater_proc is supplied.
           #   @param client_config [Hash]
-          #     A hash for call options for each method. See
+          #     A Hash for call options for each method. See
           #     Google::Gax#construct_settings for the structure of
           #     this data. Falls back to the default config if not specified
           #     or the specified config is missing data points.
           #   @param timeout [Numeric]
           #     The default timeout, in seconds, for calls made through this client.
           #   @param metadata [Hash]
-          #     Default metadata to be sent with each request. This can be overridden on a per-call basis.
+          #     Default metadata to be sent with each request. This can be overridden on a per call basis.
           #   @param exception_transformer [Proc]
           #     An optional proc that intercepts any exceptions raised during an API call to inject
           #     custom error handling.
@@ -155,30 +155,30 @@ module Google
           # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
           #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #     Provides the means for authenticating requests made by the client. This parameter can
-          #     be one of the following types:
-          #     `Google::Auth::Credentials` uses the properties of its represented keyfile for
+          #     be many types.
+          #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
           #     authenticating requests made by this client.
-          #     `String` will be treated as the path to the keyfile to be used for the construction of
+          #     A `String` will be treated as the path to the keyfile to be used for the construction of
           #     credentials for this client.
-          #     `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
           #     credentials for this client.
-          #     `GRPC::Core::Channel` will be used to make calls through.
-          #     `GRPC::Core::ChannelCredentials` for the setting up the gRPC client. The channel credentials
+          #     A `GRPC::Core::Channel` will be used to make calls through.
+          #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
           #     should already be composed with a `GRPC::Core::CallCredentials` object.
-          #     `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
+          #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
           #     metadata for requests, generally, to give OAuth credentials.
           #   @param scopes [Array<String>]
           #     The OAuth scopes for this service. This parameter is ignored if
           #     an updater_proc is supplied.
           #   @param client_config [Hash]
-          #     A hash for call options for each method. See
+          #     A Hash for call options for each method. See
           #     Google::Gax#construct_settings for the structure of
           #     this data. Falls back to the default config if not specified
           #     or the specified config is missing data points.
           #   @param timeout [Numeric]
           #     The default timeout, in seconds, for calls made through this client.
           #   @param metadata [Hash]
-          #     Default metadata to be sent with each request. This can be overridden on a per-call basis.
+          #     Default metadata to be sent with each request. This can be overridden on a per call basis.
           #   @param exception_transformer [Proc]
           #     An optional proc that intercepts any exceptions raised during an API call to inject
           #     custom error handling.
