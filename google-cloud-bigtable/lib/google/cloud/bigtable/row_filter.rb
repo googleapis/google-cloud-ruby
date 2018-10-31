@@ -37,7 +37,7 @@ module Google
       # that are older than timestamp X."
       #
       # Two broad categories of RowFilters are `true filters` and `transformers`.
-      # Two ways to compose simple filters into more complex ones are 
+      # Two ways to compose simple filters into more complex ones are
       # `chains` and `interleaves`. They work as follows:
       #
       # * True filters alter the input row by excluding some of its cells wholesale
@@ -501,7 +501,7 @@ module Google
 
         # Creates cells-per-column filter instance.
         #
-        # Matches only the most recent N cells within each column. 
+        # Matches only the most recent N cells within each column.
         # If duplicate cells are present, as is possible when using an interleave,
         # each copy of the cell is counted separately.
         #
@@ -516,7 +516,7 @@ module Google
           SimpleFilter.new.cells_per_column(limit)
         end
 
-        # Creates a timestamp-range filter instance.
+        # Creates a-timestamp range filter instance.
         #
         # Matches only cells with timestamps within the given range.
         # Specifies a contiguous range of timestamps.
@@ -550,9 +550,9 @@ module Google
         # option inclusive/exclusive options
         #
         # * The value at which to start the range. If neither field is set, interpreted
-        # as an empty string, inclusive.
+        #   as an empty string, inclusive.
         # * The value at which to end the range. If neither field is set, interpreted
-        #  as the infinite string, exclusive.
+        #   as an infinite string, exclusive.
         #
         # @param range [Google::Cloud::Bigtable::ValueRange]
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]

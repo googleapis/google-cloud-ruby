@@ -21,15 +21,15 @@ module Google
       module RowFilter
         # # ConditionFilter
         #
-        # A RowFilter which evaluates one of two possible RowFilters, depending on
+        # A RowFilter that evaluates one of two possible RowFilters, depending on
         # whether or not a predicate RowFilter outputs any cells from the input row.
         #
         # IMPORTANT NOTE: The predicate filter does not execute atomically with the
         # true and false filters, which may lead to inconsistent or unexpected
-        # results. Additionally, Condition filters have poor performance, especially
+        # results. Additionally, condition filters have poor performance, especially
         # when filters are set for the false condition.
         #
-        #  If `predicate_filter` outputs any cells, then `true_filter` will be
+        # If `predicate_filter` outputs any cells, then `true_filter` will be
         # evaluated on the input row. Otherwise, `false_filter` will be evaluated.
         #
         # @example
@@ -42,7 +42,7 @@ module Google
         #
         class ConditionFilter
           # @private
-          # Create condition filter instance
+          # Creates a condition filter instance
           #
           # @param predicate [SimpleFilter, ChainFilter, InterleaveFilter, ConditionFilter]
           #

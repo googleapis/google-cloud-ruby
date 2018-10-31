@@ -19,8 +19,8 @@ module Google
   module Cloud
     module Bigtable
       class Instance
-        # Instance::ClusterMap is a Hash with cluster name and gRPC object.
-        # It is used to create instance.
+        # Instance::ClusterMap is a hash with cluster name and gRPC object.
+        # It is used to create an instance.
         # @example Create
         #
         #  clusters = Google::Cloud::Bigtable::Instance::ClusterMap.new
@@ -33,20 +33,20 @@ module Google
         class ClusterMap < DelegateClass(::Hash)
           # @private
           #
-          # Create a new Instance::ClusterMap with an hash of Cluster name and
+          # Creates a new Instance::ClusterMap with an hash of Cluster name and
           # cluster grpc instances.
           def initialize value = {}
             super(value)
           end
 
-          # Add cluster to map
+          # Adds a cluster to a map
           #
           # @param name [String] Cluster name
           # @param location [String]
           #   The location where this cluster's nodes and storage reside. For best
           #   performance, clients should be located as close as possible to this
           #   cluster. Currently only zones are supported.
-          # @param nodes [Integer] No of nodes
+          # @param nodes [Integer] Number of nodes
           # @param storage_type [Symbol]
           #   Valid values are:
           #   * `:SSD`(Flash (SSD) storage should be used),
