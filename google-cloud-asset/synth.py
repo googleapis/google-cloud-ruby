@@ -100,3 +100,10 @@ s.replace(
     '# Ruby Client for Cloud Asset API \(\[Alpha\]\(https:\/\/github\.com\/googleapis\/google-cloud-ruby#versioning\)\)',
     '# Ruby Client for Cloud Asset API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))'
 )
+
+# https://github.com/googleapis/gapic-generator/issues/2393
+s.replace(
+    'google-cloud-asset.gemspec',
+    'gem.add_development_dependency "rubocop".*$',
+    'gem.add_development_dependency "rubocop", "~> 0.59.2"'
+)
