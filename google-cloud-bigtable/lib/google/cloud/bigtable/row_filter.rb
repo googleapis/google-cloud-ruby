@@ -448,18 +448,11 @@ module Google
         # Values must be at most 15 characters and match the RE2
         # pattern `[a-z0-9\\-]+`
         #
-        # Due to a technical limitation, it is not currently possible to apply
-<<<<<<< HEAD
+        # Due to a technical limitation, it is not possible to apply
         # multiple labels to a cell. As a result, a chain may have no more than
-        # one sub-filter that contains a `self.label value`. In contrast,
-        # an interleave may contain more than one because the filters
-        # will be applied to separate copies of the input.
-=======
-        # multiple labels to a cell. As a result, a Chain may have no more than
         # one sub-filter that contains an `apply_label_transformer`. It is okay for
-        # an Interleave to contain multiple `apply_label_transformers`, as they
+        # an interleave to contain multiple `apply_label_transformers`, as they
         # will be applied to separate copies of the input. 
->>>>>>> Additional batch of edits.
         #
         # @param value [String] Label name
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
@@ -472,11 +465,7 @@ module Google
           SimpleFilter.new.label(value)
         end
 
-<<<<<<< HEAD
-        # Creates a cell-per-row offset filter instance to skip the first N cells.
-=======
-        # Creates a cell per row offset filter instance to skip first N cells.
->>>>>>> Additional batch of edits.
+        # Creates a cell-per-row-offset filter instance to skip first N cells.
         #
         # Skips the first N cells of each row, matching all subsequent cells.
         # If duplicate cells are present, as is possible when using an interleave,
@@ -527,7 +516,7 @@ module Google
           SimpleFilter.new.cells_per_column(limit)
         end
 
-        # Creates a-timestamp range filter instance.
+        # Creates a timestamp-range filter instance.
         #
         # Matches only cells with timestamps within the given range.
         # Specifies a contiguous range of timestamps.

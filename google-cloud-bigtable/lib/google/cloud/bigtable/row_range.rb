@@ -59,11 +59,7 @@ module Google
           @grpc = Google::Bigtable::V2::RowRange.new
         end
 
-<<<<<<< HEAD
         # Sets a row range with a lower bound.
-=======
-        # Sets row range with the lower bound.
->>>>>>> Additional batch of edits.
         #
         # @param key [String] Row key. Required.
         # @param inclusive [String] Inclusive/exclusive lower bound.
@@ -98,7 +94,7 @@ module Google
 <<<<<<< HEAD
         # Sets a row range with an upper bound.
 =======
-        # Sets row range with the upper bound.
+        # Sets a row range with the upper bound.
 >>>>>>> Additional batch of edits.
         #
         # @param key [String] Row key. Required.

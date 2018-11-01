@@ -208,7 +208,7 @@ module Google
             self
           end
 
-          # Creates a timestamp range filter instance.
+          # Creates a timestamp-range filter instance.
           #
           # Matches only cells with timestamps within the given range.
           # Specifies a contiguous range of timestamps.

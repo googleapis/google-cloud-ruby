@@ -196,7 +196,7 @@ module Google
           true
         end
 
-        # Checks to see if table exists.
+        # Checks to see if the table exists.
         #
         # @return [Boolean]
         #
@@ -518,7 +518,7 @@ module Google
         end
 
         # @private
-        # Gets data client instance.
+        # Gets the data client instance.
         #
         # @return [Google::Cloud::Bigtable::V2::BigtableClient]
         #

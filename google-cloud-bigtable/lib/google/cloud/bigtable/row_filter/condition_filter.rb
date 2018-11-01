@@ -42,7 +42,7 @@ module Google
         #
         class ConditionFilter
           # @private
-          # Creates a condition filter instance
+          # Creates a condition filter instance.
           #
           # @param predicate [SimpleFilter, ChainFilter, InterleaveFilter, ConditionFilter]
           #
@@ -51,7 +51,7 @@ module Google
             @grpc.predicate_filter = predicate.to_grpc
           end
 
-          # Set true filter on predicate filter match.
+          # Set a true filter on predicate-filter match.
           #
           # The filter to apply to the input row if `predicate_filter` returns any
           # results. If not provided, no results will be returned in the true case.
@@ -95,7 +95,7 @@ module Google
           end
 
           # @private
-          # Get row filter gRPC instance.
+          # Gets the row-filter gRPC instance.
           # @return [Google::Bigtable::V2::RowFilter]
           #
           def to_grpc

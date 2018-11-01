@@ -19,7 +19,7 @@ module Google
   module Cloud
     module Bigtable
       class Table
-        # Table::ColumnFamilyMap is a hash with a column_family name and gRPC object.
+        # Table::ColumnFamilyMap is a hash accepting string `ColumnFamily` names as keys and `GcRule` objects as values.
         # It is used to create an instance.
         # @example Add column family with name and garbage collection rule
         #
