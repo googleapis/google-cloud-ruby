@@ -112,6 +112,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :rows_limit, :int64, 3
     optional :rows_limit_percent, :int32, 6
     optional :sample_method, :enum, 4, "google.privacy.dlp.v2.BigQueryOptions.SampleMethod"
+    repeated :excluded_fields, :message, 5, "google.privacy.dlp.v2.FieldId"
   end
   add_enum "google.privacy.dlp.v2.BigQueryOptions.SampleMethod" do
     value :SAMPLE_METHOD_UNSPECIFIED, 0
