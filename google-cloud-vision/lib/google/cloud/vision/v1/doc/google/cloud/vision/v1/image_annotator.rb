@@ -73,6 +73,9 @@ module Google
             # Run web detection.
             WEB_DETECTION = 10
 
+            # Run Product Search.
+            PRODUCT_SEARCH = 12
+
             # Run localizer for object detection.
             OBJECT_LOCALIZATION = 19
           end
@@ -506,6 +509,9 @@ module Google
         # @!attribute [rw] crop_hints_params
         #   @return [Google::Cloud::Vision::V1::CropHintsParams]
         #     Parameters for crop hints annotation request.
+        # @!attribute [rw] product_search_params
+        #   @return [Google::Cloud::Vision::V1::ProductSearchParams]
+        #     Parameters for product search.
         # @!attribute [rw] web_detection_params
         #   @return [Google::Cloud::Vision::V1::WebDetectionParams]
         #     Parameters for web detection.
@@ -573,6 +579,9 @@ module Google
         # @!attribute [rw] web_detection
         #   @return [Google::Cloud::Vision::V1::WebDetection]
         #     If present, web detection has completed successfully.
+        # @!attribute [rw] product_search_results
+        #   @return [Google::Cloud::Vision::V1::ProductSearchResults]
+        #     If present, product search has completed successfully.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
         #     If set, represents the error message for the operation.
