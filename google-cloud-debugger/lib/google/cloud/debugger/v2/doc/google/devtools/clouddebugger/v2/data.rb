@@ -81,6 +81,11 @@ module Google
         # @!attribute [rw] line
         #   @return [Integer]
         #     Line inside the file. The first line in the file has the value `1`.
+        # @!attribute [rw] column
+        #   @return [Integer]
+        #     Column within a line. The first column in a line as the value `1`.
+        #     Agents that do not support setting breakpoints on specific columns ignore
+        #     this field.
         class SourceLocation; end
 
         # Represents a variable or an argument possibly of a compound object type.
@@ -320,7 +325,8 @@ module Google
         #     * `Field f not found in class C` referring to condition
         # @!attribute [rw] stack_frames
         #   @return [Array<Google::Devtools::Clouddebugger::V2::StackFrame>]
-        #     The stack at breakpoint time.
+        #     The stack at breakpoint time, where stack_frames[0] represents the most
+        #     recently entered function.
         # @!attribute [rw] evaluated_expressions
         #   @return [Array<Google::Devtools::Clouddebugger::V2::Variable>]
         #     Values of evaluated expressions at breakpoint time.
@@ -389,10 +395,10 @@ module Google
         #     Use project number or id when registering a Google Cloud Platform project.
         # @!attribute [rw] uniquifier
         #   @return [String]
-        #     Uniquifier to further distiguish the application.
+        #     Uniquifier to further distinguish the application.
         #     It is possible that different applications might have identical values in
         #     the debuggee message, thus, incorrectly identified as a single application
-        #     by the Controller service. This field adds salt to further distiguish the
+        #     by the Controller service. This field adds salt to further distinguish the
         #     application. Agents should consider seeding this field with value that
         #     identifies the code, binary, configuration and environment.
         # @!attribute [rw] description
@@ -426,8 +432,6 @@ module Google
         #   @return [Array<Google::Devtools::Source::V1::ExtendedSourceContext>]
         #     References to the locations and revisions of the source code used in the
         #     deployed application.
-        #
-        #     NOTE: this field is experimental and can be ignored.
         # @!attribute [rw] labels
         #   @return [Hash{String => String}]
         #     A set of custom debuggee properties, populated by the agent, to be
