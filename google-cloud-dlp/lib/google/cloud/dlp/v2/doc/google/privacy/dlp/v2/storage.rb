@@ -23,7 +23,8 @@ module Google
         #     Name of the information type. Either a name of your choosing when
         #     creating a CustomInfoType, or one of the names listed
         #     at https://cloud.google.com/dlp/docs/infotypes-reference when specifying
-        #     a built-in type.
+        #     a built-in type. InfoType names should conform to the pattern
+        #     [a-zA-Z0-9_]\\{1,64}.
         class InfoType; end
 
         # A reference to a StoredInfoType to use with scanning.
@@ -313,7 +314,8 @@ module Google
         #   @return [Array<Google::Privacy::Dlp::V2::FileType>]
         #     List of file type groups to include in the scan.
         #     If empty, all files are scanned and available data format processors
-        #     are applied.
+        #     are applied. In addition, the binary content of the selected files
+        #     is always scanned as well.
         # @!attribute [rw] sample_method
         #   @return [Google::Privacy::Dlp::V2::CloudStorageOptions::SampleMethod]
         # @!attribute [rw] files_limit_percent
@@ -386,6 +388,10 @@ module Google
         #     TimespanConfig.
         # @!attribute [rw] sample_method
         #   @return [Google::Privacy::Dlp::V2::BigQueryOptions::SampleMethod]
+        # @!attribute [rw] excluded_fields
+        #   @return [Array<Google::Privacy::Dlp::V2::FieldId>]
+        #     References to fields excluded from scanning. This allows you to skip
+        #     inspection of entire columns which you know have no findings.
         class BigQueryOptions
           # How to sample rows if not all rows are scanned. Meaningful only when used
           # in conjunction with rows_limit. If not specified, scanning would start
