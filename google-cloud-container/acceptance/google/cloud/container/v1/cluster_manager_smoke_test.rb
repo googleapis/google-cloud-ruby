@@ -27,8 +27,9 @@ describe "ClusterManagerSmokeTest v1" do
     project_id = ENV["CONTAINER_TEST_PROJECT"].freeze
 
     cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+    formatted_parent = Google::Cloud::Container::V1::ClusterManagerClient.location_path("[PROJECT]", "[LOCATION]")
     project_id_2 = project_id
     zone = "us-central1-a"
-    response = cluster_manager_client.list_clusters(project_id_2, zone)
+    response = cluster_manager_client.list_clusters(formatted_parent, project_id: project_id_2, zone: zone)
   end
 end

@@ -21,9 +21,9 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Container Engine API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
+    # # Ruby Client for Kubernetes Engine API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
     #
-    # [Google Container Engine API][Product Documentation]:
+    # [Kubernetes Engine API][Product Documentation]:
     # The Google Kubernetes Engine API is used for building and managing container
     # based applications, powered by the open source Kubernetes technology.
     # - [Product Documentation][]
@@ -34,7 +34,7 @@ module Google
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
     # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Google Container Engine API.](https://console.cloud.google.com/apis/library/container.googleapis.com)
+    # 3. [Enable the Kubernetes Engine API.](https://console.cloud.google.com/apis/library/container.googleapis.com)
     # 4. [Setup Authentication.](https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Installation
@@ -48,13 +48,14 @@ module Google
     # require "google/cloud/container"
     #
     # cluster_manager_client = Google::Cloud::Container.new
+    # formatted_parent = Google::Cloud::Container::V1::ClusterManagerClient.location_path("[PROJECT]", "[LOCATION]")
     # project_id_2 = project_id
     # zone = "us-central1-a"
-    # response = cluster_manager_client.list_clusters(project_id_2, zone)
+    # response = cluster_manager_client.list_clusters(formatted_parent, project_id: project_id_2, zone: zone)
     # ```
     #
     # ### Next Steps
-    # - Read the [Google Container Engine API Product documentation][Product Documentation]
+    # - Read the [Kubernetes Engine API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
     # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
@@ -99,7 +100,7 @@ module Google
         .map { |dir| File.basename(dir) }
 
       ##
-      # Google Container Engine Cluster Manager v1
+      # Google Kubernetes Engine Cluster Manager v1
       #
       # @param version [Symbol, String]
       #   The major version of the service to be used. By default :v1
