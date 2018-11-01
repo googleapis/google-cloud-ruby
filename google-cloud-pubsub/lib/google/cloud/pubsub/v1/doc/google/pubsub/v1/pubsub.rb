@@ -37,7 +37,7 @@ module Google
       #     must not start with `"goog"`.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
-      #     User labels.
+      #     See <a href="/pubsub/docs/labels"> Creating and managing labels</a>.
       # @!attribute [rw] message_storage_policy
       #   @return [Google::Pubsub::V1::MessageStoragePolicy]
       #     Policy constraining how messages published to the topic may be stored. It
@@ -48,11 +48,14 @@ module Google
       #     response, then no constraints are in effect.
       class Topic; end
 
-      # A message data and its attributes. The message payload must not be empty;
-      # it must contain either a non-empty data field, or at least one attribute.
+      # A message that is published by publishers and consumed by subscribers. The
+      # message must contain either a non-empty data field or at least one attribute.
+      # See <a href="/pubsub/quotas">Quotas and limits</a> for more information about
+      # message limits.
       # @!attribute [rw] data
       #   @return [String]
-      #     The message payload.
+      #     The message data field. If this field is empty, the message must contain
+      #     at least one attribute.
       # @!attribute [rw] attributes
       #   @return [Hash{String => String}]
       #     Optional attributes for this message.
@@ -110,8 +113,8 @@ module Google
       # Request for the `ListTopics` method.
       # @!attribute [rw] project
       #   @return [String]
-      #     The name of the cloud project that topics belong to.
-      #     Format is `projects/{project}`.
+      #     The name of the project in which to list topics.
+      #     Format is `projects/{project-id}`.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of topics to return.
@@ -261,8 +264,31 @@ module Google
       #     use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
-      #     User labels.
+      #     See <a href="/pubsub/docs/labels"> Creating and managing labels</a>.
+      # @!attribute [rw] expiration_policy
+      #   @return [Google::Pubsub::V1::ExpirationPolicy]
+      #     A policy that specifies the conditions for this subscription's expiration.
+      #     A subscription is considered active as long as any connected subscriber is
+      #     successfully consuming messages from the subscription or is issuing
+      #     operations on the subscription. If `expiration_policy` is not set, a
+      #     *default policy* with `ttl` of 31 days will be used. The minimum allowed
+      #     value for `expiration_policy.ttl` is 1 day.
+      #     <b>BETA:</b> This feature is part of a beta release. This API might be
+      #     changed in backward-incompatible ways and is not recommended for production
+      #     use. It is not subject to any SLA or deprecation policy.
       class Subscription; end
+
+      # A policy that specifies the conditions for resource expiration (i.e.,
+      # automatic resource deletion).
+      # @!attribute [rw] ttl
+      #   @return [Google::Protobuf::Duration]
+      #     Specifies the "time-to-live" duration for an associated resource. The
+      #     resource expires if it is not active for a period of `ttl`. The definition
+      #     of "activity" depends on the type of the associated resource. The minimum
+      #     and maximum allowed values for `ttl` depend on the type of the associated
+      #     resource, as well. If `ttl` is not set, the associated resource never
+      #     expires.
+      class ExpirationPolicy; end
 
       # Configuration for a push delivery endpoint.
       # @!attribute [rw] push_endpoint
@@ -323,8 +349,8 @@ module Google
       # Request for the `ListSubscriptions` method.
       # @!attribute [rw] project
       #   @return [String]
-      #     The name of the cloud project that subscriptions belong to.
-      #     Format is `projects/{project}`.
+      #     The name of the project in which to list subscriptions.
+      #     Format is `projects/{project-id}`.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of subscriptions to return.
@@ -378,9 +404,7 @@ module Google
       #     If this field set to true, the system will respond immediately even if
       #     it there are no messages available to return in the `Pull` response.
       #     Otherwise, the system may wait (for a bounded amount of time) until at
-      #     least one message is available, rather than returning no messages. The
-      #     client may cancel the request if it does not wish to wait any longer for
-      #     the response.
+      #     least one message is available, rather than returning no messages.
       # @!attribute [rw] max_messages
       #   @return [Integer]
       #     The maximum number of messages returned for this request. The Pub/Sub
@@ -390,10 +414,10 @@ module Google
       # Response for the `Pull` method.
       # @!attribute [rw] received_messages
       #   @return [Array<Google::Pubsub::V1::ReceivedMessage>]
-      #     Received Pub/Sub messages. The Pub/Sub system will return zero messages if
-      #     there are no more available in the backlog. The Pub/Sub system may return
-      #     fewer than the `maxMessages` requested even if there are more messages
-      #     available in the backlog.
+      #     Received Pub/Sub messages. The list will be empty if there are no more
+      #     messages available in the backlog. For JSON, the response can be entirely
+      #     empty. The Pub/Sub system may return fewer than the `maxMessages` requested
+      #     even if there are more messages available in the backlog.
       class PullResponse; end
 
       # Request for the ModifyAckDeadline method.
@@ -486,7 +510,8 @@ module Google
       #     Optional user-provided name for this snapshot.
       #     If the name is not provided in the request, the server will assign a random
       #     name for this snapshot on the same project as the subscription.
-      #     Note that for REST API requests, you must specify a name.
+      #     Note that for REST API requests, you must specify a name.  See the
+      #     <a href="/pubsub/docs/admin#resource_names">resource name rules</a>.
       #     Format is `projects/{project}/snapshots/{snap}`.
       # @!attribute [rw] subscription
       #   @return [String]
@@ -501,7 +526,7 @@ module Google
       #     Format is `projects/{project}/subscriptions/{sub}`.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
-      #     User labels.
+      #     See <a href="/pubsub/docs/labels"> Creating and managing labels</a>.
       class CreateSnapshotRequest; end
 
       # Request for the UpdateSnapshot method.<br><br>
@@ -541,7 +566,7 @@ module Google
       #     snapshot that would expire in less than 1 hour after creation.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
-      #     User labels.
+      #     See <a href="/pubsub/docs/labels"> Creating and managing labels</a>.
       class Snapshot; end
 
       # Request for the GetSnapshot method.<br><br>
@@ -560,8 +585,8 @@ module Google
       # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] project
       #   @return [String]
-      #     The name of the cloud project that snapshots belong to.
-      #     Format is `projects/{project}`.
+      #     The name of the project in which to list snapshots.
+      #     Format is `projects/{project-id}`.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     Maximum number of snapshots to return.
@@ -622,6 +647,7 @@ module Google
       #     Format is `projects/{project}/snapshots/{snap}`.
       class SeekRequest; end
 
+      # Response for the `Seek` method (this response is empty).
       class SeekResponse; end
     end
   end

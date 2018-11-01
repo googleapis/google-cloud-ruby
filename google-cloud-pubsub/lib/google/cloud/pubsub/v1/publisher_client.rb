@@ -299,7 +299,7 @@ module Google
           #   signs (`%`). It must be between 3 and 255 characters in length, and it
           #   must not start with `"goog"`.
           # @param labels [Hash{String => String}]
-          #   User labels.
+          #   See <a href="/pubsub/docs/labels"> Creating and managing labels</a>.
           # @param message_storage_policy [Google::Pubsub::V1::MessageStoragePolicy | Hash]
           #   Policy constraining how messages published to the topic may be stored. It
           #   is determined when the topic is created based on the policy configured at
@@ -388,8 +388,7 @@ module Google
           end
 
           # Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic
-          # does not exist. The message payload must not be empty; it must contain
-          #  either a non-empty data field, or at least one attribute.
+          # does not exist.
           #
           # @param topic [String]
           #   The messages in the request will be published on this topic.
@@ -463,8 +462,8 @@ module Google
           # Lists matching topics.
           #
           # @param project [String]
-          #   The name of the cloud project that topics belong to.
-          #   Format is `projects/{project}`.
+          #   The name of the project in which to list topics.
+          #   Format is `projects/{project-id}`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this

@@ -423,7 +423,19 @@ module Google
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
           # @param labels [Hash{String => String}]
-          #   User labels.
+          #   See <a href="/pubsub/docs/labels"> Creating and managing labels</a>.
+          # @param expiration_policy [Google::Pubsub::V1::ExpirationPolicy | Hash]
+          #   A policy that specifies the conditions for this subscription's expiration.
+          #   A subscription is considered active as long as any connected subscriber is
+          #   successfully consuming messages from the subscription or is issuing
+          #   operations on the subscription. If `expiration_policy` is not set, a
+          #   *default policy* with `ttl` of 31 days will be used. The minimum allowed
+          #   value for `expiration_policy.ttl` is 1 day.
+          #   <b>BETA:</b> This feature is part of a beta release. This API might be
+          #   changed in backward-incompatible ways and is not recommended for production
+          #   use. It is not subject to any SLA or deprecation policy.
+          #   A hash of the same form as `Google::Pubsub::V1::ExpirationPolicy`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -448,6 +460,7 @@ module Google
               retain_acked_messages: nil,
               message_retention_duration: nil,
               labels: nil,
+              expiration_policy: nil,
               options: nil,
               &block
             req = {
@@ -457,7 +470,8 @@ module Google
               ack_deadline_seconds: ack_deadline_seconds,
               retain_acked_messages: retain_acked_messages,
               message_retention_duration: message_retention_duration,
-              labels: labels
+              labels: labels,
+              expiration_policy: expiration_policy
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::Subscription)
             @create_subscription.call(req, options, &block)
@@ -541,8 +555,8 @@ module Google
           # Lists matching subscriptions.
           #
           # @param project [String]
-          #   The name of the cloud project that subscriptions belong to.
-          #   Format is `projects/{project}`.
+          #   The name of the project in which to list subscriptions.
+          #   Format is `projects/{project-id}`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -728,8 +742,7 @@ module Google
             nil
           end
 
-          # Pulls messages from the server. Returns an empty list if there are no
-          # messages available in the backlog. The server may return `UNAVAILABLE` if
+          # Pulls messages from the server. The server may return `UNAVAILABLE` if
           # there are too many concurrent pull requests pending for the given
           # subscription.
           #
@@ -743,9 +756,7 @@ module Google
           #   If this field set to true, the system will respond immediately even if
           #   it there are no messages available to return in the `Pull` response.
           #   Otherwise, the system may wait (for a bounded amount of time) until at
-          #   least one message is available, rather than returning no messages. The
-          #   client may cancel the request if it does not wish to wait any longer for
-          #   the response.
+          #   least one message is available, rather than returning no messages.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -879,8 +890,8 @@ module Google
           # use. It is not subject to any SLA or deprecation policy.
           #
           # @param project [String]
-          #   The name of the cloud project that snapshots belong to.
-          #   Format is `projects/{project}`.
+          #   The name of the project in which to list snapshots.
+          #   Format is `projects/{project-id}`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -934,7 +945,7 @@ module Google
           # Creates a snapshot from the requested subscription.<br><br>
           # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
           # changed in backward-incompatible ways and is not recommended for production
-          # use. It is not subject to any SLA or deprecation policy.
+          # use. It is not subject to any SLA or deprecation policy.<br><br>
           # If the snapshot already exists, returns `ALREADY_EXISTS`.
           # If the requested subscription doesn't exist, returns `NOT_FOUND`.
           # If the backlog in the subscription is too old -- and the resulting snapshot
@@ -951,7 +962,8 @@ module Google
           #   Optional user-provided name for this snapshot.
           #   If the name is not provided in the request, the server will assign a random
           #   name for this snapshot on the same project as the subscription.
-          #   Note that for REST API requests, you must specify a name.
+          #   Note that for REST API requests, you must specify a name.  See the
+          #   <a href="/pubsub/docs/admin#resource_names">resource name rules</a>.
           #   Format is `projects/{project}/snapshots/{snap}`.
           # @param subscription [String]
           #   The subscription whose backlog the snapshot retains.
@@ -964,7 +976,7 @@ module Google
           #        successful completion of the CreateSnapshot request.
           #   Format is `projects/{project}/subscriptions/{sub}`.
           # @param labels [Hash{String => String}]
-          #   User labels.
+          #   See <a href="/pubsub/docs/labels"> Creating and managing labels</a>.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
