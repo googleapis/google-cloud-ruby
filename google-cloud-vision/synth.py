@@ -30,11 +30,9 @@ v1_library = gapic.ruby_library(
     'vision', 'v1', artman_output_name='google-cloud-ruby/google-cloud-vision'
 )
 
-s.copy(v1_library / 'lib/google/cloud/vision.rb')
-s.copy(v1_library / 'lib/google/cloud/vision/v1')
-s.copy(v1_library / 'lib/google/cloud/vision/v1.rb')
+s.copy(v1_library / 'lib')
 s.copy(v1_library / 'acceptance')
-s.copy(v1_library / 'test/google/cloud/vision/v1')
+s.copy(v1_library / 'test')
 s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
@@ -102,12 +100,12 @@ s.replace(
 
 # https://github.com/googleapis/gapic-generator/issues/2323
 s.replace(
-    'lib/**/*.rb',
+    ['lib/**/*.rb', 'README.md'],
     'https://github\\.com/GoogleCloudPlatform/google-cloud-ruby',
     'https://github.com/googleapis/google-cloud-ruby'
 )
 s.replace(
-    'lib/**/*.rb',
+    ['lib/**/*.rb', 'README.md'],
     'https://googlecloudplatform\\.github\\.io/google-cloud-ruby',
     'https://googleapis.github.io/google-cloud-ruby'
 )

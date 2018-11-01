@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.Vertex" do
     optional :x, :int32, 1

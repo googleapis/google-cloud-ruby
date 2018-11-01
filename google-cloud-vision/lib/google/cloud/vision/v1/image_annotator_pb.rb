@@ -6,6 +6,7 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/cloud/vision/v1/geometry_pb'
+require 'google/cloud/vision/v1/product_search_pb'
 require 'google/cloud/vision/v1/text_annotation_pb'
 require 'google/cloud/vision/v1/web_detection_pb'
 require 'google/longrunning/operations_pb'
@@ -31,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :IMAGE_PROPERTIES, 7
     value :CROP_HINTS, 9
     value :WEB_DETECTION, 10
+    value :PRODUCT_SEARCH, 12
     value :OBJECT_LOCALIZATION, 19
   end
   add_message "google.cloud.vision.v1.ImageSource" do
@@ -165,6 +167,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :lat_long_rect, :message, 1, "google.cloud.vision.v1.LatLongRect"
     repeated :language_hints, :string, 2
     optional :crop_hints_params, :message, 4, "google.cloud.vision.v1.CropHintsParams"
+    optional :product_search_params, :message, 5, "google.cloud.vision.v1.ProductSearchParams"
     optional :web_detection_params, :message, 6, "google.cloud.vision.v1.WebDetectionParams"
   end
   add_message "google.cloud.vision.v1.AnnotateImageRequest" do
@@ -188,6 +191,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :image_properties_annotation, :message, 8, "google.cloud.vision.v1.ImageProperties"
     optional :crop_hints_annotation, :message, 11, "google.cloud.vision.v1.CropHintsAnnotation"
     optional :web_detection, :message, 13, "google.cloud.vision.v1.WebDetection"
+    optional :product_search_results, :message, 14, "google.cloud.vision.v1.ProductSearchResults"
     optional :error, :message, 9, "google.rpc.Status"
     optional :context, :message, 21, "google.cloud.vision.v1.ImageAnnotationContext"
   end

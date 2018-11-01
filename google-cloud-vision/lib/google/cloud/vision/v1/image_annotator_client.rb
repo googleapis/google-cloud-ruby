@@ -210,7 +210,7 @@ module Google
           # @example
           #   require "google/cloud/vision"
           #
-          #   image_annotator_client = Google::Cloud::Vision.new(version: :v1)
+          #   image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1)
           #
           #   # TODO: Initialize `requests`:
           #   requests = []
@@ -246,7 +246,7 @@ module Google
           # @example
           #   require "google/cloud/vision"
           #
-          #   image_annotator_client = Google::Cloud::Vision.new(version: :v1)
+          #   image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new(version: :v1)
           #
           #   # TODO: Initialize `requests`:
           #   requests = []
