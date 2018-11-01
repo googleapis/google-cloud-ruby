@@ -60,8 +60,8 @@ module Google
         # @!attribute [rw] segments
         #   @return [Array<Google::Cloud::Videointelligence::V1::VideoSegment>]
         #     Video segments to annotate. The segments may overlap and are not required
-        #     to be contiguous or span the whole video. If unspecified, each video
-        #     is treated as a single segment.
+        #     to be contiguous or span the whole video. If unspecified, each video is
+        #     treated as a single segment.
         # @!attribute [rw] label_detection_config
         #   @return [Google::Cloud::Videointelligence::V1::LabelDetectionConfig]
         #     Config for LABEL_DETECTION.
@@ -74,6 +74,9 @@ module Google
         # @!attribute [rw] face_detection_config
         #   @return [Google::Cloud::Videointelligence::V1::FaceDetectionConfig]
         #     Config for FACE_DETECTION.
+        # @!attribute [rw] speech_transcription_config
+        #   @return [Google::Cloud::Videointelligence::V1::SpeechTranscriptionConfig]
+        #     Config for SPEECH_TRANSCRIPTION.
         class VideoContext; end
 
         # Config for LABEL_DETECTION.
@@ -274,6 +277,9 @@ module Google
         # @!attribute [rw] explicit_annotation
         #   @return [Google::Cloud::Videointelligence::V1::ExplicitContentAnnotation]
         #     Explicit content annotation.
+        # @!attribute [rw] speech_transcriptions
+        #   @return [Array<Google::Cloud::Videointelligence::V1::SpeechTranscription>]
+        #     Speech transcription.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
         #     If set, indicates an error. Note that for a single `AnnotateVideoRequest`
@@ -295,8 +301,8 @@ module Google
         #     [Google Cloud Storage](https://cloud.google.com/storage/).
         # @!attribute [rw] progress_percent
         #   @return [Integer]
-        #     Approximate percentage processed thus far.
-        #     Guaranteed to be 100 when fully processed.
+        #     Approximate percentage processed thus far. Guaranteed to be
+        #     100 when fully processed.
         # @!attribute [rw] start_time
         #   @return [Google::Protobuf::Timestamp]
         #     Time when the request was received.
@@ -312,6 +318,142 @@ module Google
         #   @return [Array<Google::Cloud::Videointelligence::V1::VideoAnnotationProgress>]
         #     Progress metadata for all videos specified in `AnnotateVideoRequest`.
         class AnnotateVideoProgress; end
+
+        # Config for SPEECH_TRANSCRIPTION.
+        # @!attribute [rw] language_code
+        #   @return [String]
+        #     *Required* The language of the supplied audio as a
+        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+        #     Example: "en-US".
+        #     See [Language Support](https://cloud.google.com/speech/docs/languages)
+        #     for a list of the currently supported language codes.
+        # @!attribute [rw] max_alternatives
+        #   @return [Integer]
+        #     *Optional* Maximum number of recognition hypotheses to be returned.
+        #     Specifically, the maximum number of `SpeechRecognitionAlternative` messages
+        #     within each `SpeechTranscription`. The server may return fewer than
+        #     `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will
+        #     return a maximum of one. If omitted, will return a maximum of one.
+        # @!attribute [rw] filter_profanity
+        #   @return [true, false]
+        #     *Optional* If set to `true`, the server will attempt to filter out
+        #     profanities, replacing all but the initial character in each filtered word
+        #     with asterisks, e.g. "f***". If set to `false` or omitted, profanities
+        #     won't be filtered out.
+        # @!attribute [rw] speech_contexts
+        #   @return [Array<Google::Cloud::Videointelligence::V1::SpeechContext>]
+        #     *Optional* A means to provide context to assist the speech recognition.
+        # @!attribute [rw] enable_automatic_punctuation
+        #   @return [true, false]
+        #     *Optional* If 'true', adds punctuation to recognition result hypotheses.
+        #     This feature is only available in select languages. Setting this for
+        #     requests in other languages has no effect at all. The default 'false' value
+        #     does not add punctuation to result hypotheses. NOTE: "This is currently
+        #     offered as an experimental service, complimentary to all users. In the
+        #     future this may be exclusively available as a premium feature."
+        # @!attribute [rw] audio_tracks
+        #   @return [Array<Integer>]
+        #     *Optional* For file formats, such as MXF or MKV, supporting multiple audio
+        #     tracks, specify up to two tracks. Default: track 0.
+        # @!attribute [rw] enable_speaker_diarization
+        #   @return [true, false]
+        #     *Optional* If 'true', enables speaker detection for each recognized word in
+        #     the top alternative of the recognition result using a speaker_tag provided
+        #     in the WordInfo.
+        #     Note: When this is true, we send all the words from the beginning of the
+        #     audio for the top alternative in every consecutive responses.
+        #     This is done in order to improve our speaker tags as our models learn to
+        #     identify the speakers in the conversation over time.
+        # @!attribute [rw] diarization_speaker_count
+        #   @return [Integer]
+        #     *Optional*
+        #     If set, specifies the estimated number of speakers in the conversation.
+        #     If not set, defaults to '2'.
+        #     Ignored unless enable_speaker_diarization is set to true.
+        # @!attribute [rw] enable_word_confidence
+        #   @return [true, false]
+        #     *Optional* If `true`, the top result includes a list of words and the
+        #     confidence for those words. If `false`, no word-level confidence
+        #     information is returned. The default is `false`.
+        class SpeechTranscriptionConfig; end
+
+        # Provides "hints" to the speech recognizer to favor specific words and phrases
+        # in the results.
+        # @!attribute [rw] phrases
+        #   @return [Array<String>]
+        #     *Optional* A list of strings containing words and phrases "hints" so that
+        #     the speech recognition is more likely to recognize them. This can be used
+        #     to improve the accuracy for specific words and phrases, for example, if
+        #     specific commands are typically spoken by the user. This can also be used
+        #     to add additional words to the vocabulary of the recognizer. See
+        #     [usage limits](https://cloud.google.com/speech/limits#content).
+        class SpeechContext; end
+
+        # A speech recognition result corresponding to a portion of the audio.
+        # @!attribute [rw] alternatives
+        #   @return [Array<Google::Cloud::Videointelligence::V1::SpeechRecognitionAlternative>]
+        #     May contain one or more recognition hypotheses (up to the maximum specified
+        #     in `max_alternatives`).  These alternatives are ordered in terms of
+        #     accuracy, with the top (first) alternative being the most probable, as
+        #     ranked by the recognizer.
+        # @!attribute [rw] language_code
+        #   @return [String]
+        #     Output only. The
+        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+        #     language in this result. This language code was detected to have the most
+        #     likelihood of being spoken in the audio.
+        class SpeechTranscription; end
+
+        # Alternative hypotheses (a.k.a. n-best list).
+        # @!attribute [rw] transcript
+        #   @return [String]
+        #     Transcript text representing the words that the user spoke.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     The confidence estimate between 0.0 and 1.0. A higher number
+        #     indicates an estimated greater likelihood that the recognized words are
+        #     correct. This field is typically provided only for the top hypothesis, and
+        #     only for `is_final=true` results. Clients should not rely on the
+        #     `confidence` field as it is not guaranteed to be accurate or consistent.
+        #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        # @!attribute [rw] words
+        #   @return [Array<Google::Cloud::Videointelligence::V1::WordInfo>]
+        #     A list of word-specific information for each recognized word.
+        class SpeechRecognitionAlternative; end
+
+        # Word-specific information for recognized words. Word information is only
+        # included in the response when certain request parameters are set, such
+        # as `enable_word_time_offsets`.
+        # @!attribute [rw] start_time
+        #   @return [Google::Protobuf::Duration]
+        #     Time offset relative to the beginning of the audio, and
+        #     corresponding to the start of the spoken word. This field is only set if
+        #     `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+        #     experimental feature and the accuracy of the time offset can vary.
+        # @!attribute [rw] end_time
+        #   @return [Google::Protobuf::Duration]
+        #     Time offset relative to the beginning of the audio, and
+        #     corresponding to the end of the spoken word. This field is only set if
+        #     `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+        #     experimental feature and the accuracy of the time offset can vary.
+        # @!attribute [rw] word
+        #   @return [String]
+        #     The word corresponding to this set of information.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     Output only. The confidence estimate between 0.0 and 1.0. A higher number
+        #     indicates an estimated greater likelihood that the recognized words are
+        #     correct. This field is set only for the top alternative.
+        #     This field is not guaranteed to be accurate and users should not rely on it
+        #     to be always provided.
+        #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
+        # @!attribute [rw] speaker_tag
+        #   @return [Integer]
+        #     Output only. A distinct integer value is assigned for every speaker within
+        #     the audio. This field specifies which one of those speakers was detected to
+        #     have spoken this word. Value ranges from 1 up to diarization_speaker_count,
+        #     and is only set if speaker diarization is enabled.
+        class WordInfo; end
 
         # Video annotation feature.
         module Feature
@@ -329,6 +471,9 @@ module Google
 
           # Human face detection and tracking.
           FACE_DETECTION = 4
+
+          # Speech transcription.
+          SPEECH_TRANSCRIPTION = 6
         end
 
         # Label detection mode.
