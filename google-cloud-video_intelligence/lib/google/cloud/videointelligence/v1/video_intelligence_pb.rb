@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :shot_change_detection_config, :message, 3, "google.cloud.videointelligence.v1.ShotChangeDetectionConfig"
     optional :explicit_content_detection_config, :message, 4, "google.cloud.videointelligence.v1.ExplicitContentDetectionConfig"
     optional :face_detection_config, :message, 5, "google.cloud.videointelligence.v1.FaceDetectionConfig"
+    optional :speech_transcription_config, :message, 6, "google.cloud.videointelligence.v1.SpeechTranscriptionConfig"
   end
   add_message "google.cloud.videointelligence.v1.LabelDetectionConfig" do
     optional :label_detection_mode, :enum, 1, "google.cloud.videointelligence.v1.LabelDetectionMode"
@@ -96,6 +97,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :face_annotations, :message, 5, "google.cloud.videointelligence.v1.FaceAnnotation"
     repeated :shot_annotations, :message, 6, "google.cloud.videointelligence.v1.VideoSegment"
     optional :explicit_annotation, :message, 7, "google.cloud.videointelligence.v1.ExplicitContentAnnotation"
+    repeated :speech_transcriptions, :message, 11, "google.cloud.videointelligence.v1.SpeechTranscription"
     optional :error, :message, 9, "google.rpc.Status"
   end
   add_message "google.cloud.videointelligence.v1.AnnotateVideoResponse" do
@@ -110,12 +112,43 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.videointelligence.v1.AnnotateVideoProgress" do
     repeated :annotation_progress, :message, 1, "google.cloud.videointelligence.v1.VideoAnnotationProgress"
   end
+  add_message "google.cloud.videointelligence.v1.SpeechTranscriptionConfig" do
+    optional :language_code, :string, 1
+    optional :max_alternatives, :int32, 2
+    optional :filter_profanity, :bool, 3
+    repeated :speech_contexts, :message, 4, "google.cloud.videointelligence.v1.SpeechContext"
+    optional :enable_automatic_punctuation, :bool, 5
+    repeated :audio_tracks, :int32, 6
+    optional :enable_speaker_diarization, :bool, 7
+    optional :diarization_speaker_count, :int32, 8
+    optional :enable_word_confidence, :bool, 9
+  end
+  add_message "google.cloud.videointelligence.v1.SpeechContext" do
+    repeated :phrases, :string, 1
+  end
+  add_message "google.cloud.videointelligence.v1.SpeechTranscription" do
+    repeated :alternatives, :message, 1, "google.cloud.videointelligence.v1.SpeechRecognitionAlternative"
+    optional :language_code, :string, 2
+  end
+  add_message "google.cloud.videointelligence.v1.SpeechRecognitionAlternative" do
+    optional :transcript, :string, 1
+    optional :confidence, :float, 2
+    repeated :words, :message, 3, "google.cloud.videointelligence.v1.WordInfo"
+  end
+  add_message "google.cloud.videointelligence.v1.WordInfo" do
+    optional :start_time, :message, 1, "google.protobuf.Duration"
+    optional :end_time, :message, 2, "google.protobuf.Duration"
+    optional :word, :string, 3
+    optional :confidence, :float, 4
+    optional :speaker_tag, :int32, 5
+  end
   add_enum "google.cloud.videointelligence.v1.Feature" do
     value :FEATURE_UNSPECIFIED, 0
     value :LABEL_DETECTION, 1
     value :SHOT_CHANGE_DETECTION, 2
     value :EXPLICIT_CONTENT_DETECTION, 3
     value :FACE_DETECTION, 4
+    value :SPEECH_TRANSCRIPTION, 6
   end
   add_enum "google.cloud.videointelligence.v1.LabelDetectionMode" do
     value :LABEL_DETECTION_MODE_UNSPECIFIED, 0
@@ -158,6 +191,11 @@ module Google
         AnnotateVideoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.AnnotateVideoResponse").msgclass
         VideoAnnotationProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.VideoAnnotationProgress").msgclass
         AnnotateVideoProgress = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.AnnotateVideoProgress").msgclass
+        SpeechTranscriptionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.SpeechTranscriptionConfig").msgclass
+        SpeechContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.SpeechContext").msgclass
+        SpeechTranscription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.SpeechTranscription").msgclass
+        SpeechRecognitionAlternative = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.SpeechRecognitionAlternative").msgclass
+        WordInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.WordInfo").msgclass
         Feature = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.Feature").enummodule
         LabelDetectionMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.LabelDetectionMode").enummodule
         Likelihood = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.videointelligence.v1.Likelihood").enummodule
