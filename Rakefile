@@ -571,7 +571,7 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        run_command_with_timeout "bundle exec rake ci", 1200
+        run_command_with_timeout "bundle exec rake ci", 1800
       end
     end
   end
@@ -593,7 +593,7 @@ namespace :kokoro do
         sh "bundle update"
         command = "bundle exec rake ci"
         command += ":acceptance" if updated
-        run_command_with_timeout command, 1800
+        run_command_with_timeout command, 3600
       end
     end
   end
