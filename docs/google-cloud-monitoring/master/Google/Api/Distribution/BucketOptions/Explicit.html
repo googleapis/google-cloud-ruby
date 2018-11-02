@@ -89,17 +89,17 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A set of buckets with arbitrary widths.</p>
+    <p>Specifies a set of buckets with arbitrary widths.</p>
 
-<p>Defines <code>size(bounds) + 1</code> (= N) buckets with these boundaries for
-bucket i:</p>
+<p>There are <code>size(bounds) + 1</code> (= N) buckets. Bucket <code>i</code> has the following
+boundaries:</p>
 
 <p>Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
    Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]</p>
 
-<p>There must be at least one element in <code>bounds</code>.  If <code>bounds</code> has only one
-element, there are no finite buckets, and that single element is the
-common boundary of the overflow and underflow buckets.</p>
+<p>The <code>bounds</code> field must contain at least one element. If <code>bounds</code> has
+only one element, then there are no finite buckets, and that single
+element is the common boundary of the overflow and underflow buckets.</p>
 
 
   </div>

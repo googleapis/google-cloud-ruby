@@ -89,12 +89,12 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Specify a sequence of buckets that have a width that is proportional to
-the value of the lower bound.  Each bucket represents a constant relative
-uncertainty on a specific value in the bucket.</p>
+    <p>Specifies an exponential sequence of buckets that have a width that is
+proportional to the value of the lower bound. Each bucket represents a
+constant relative uncertainty on a specific value in the bucket.</p>
 
-<p>Defines <code>num_finite_buckets + 2</code> (= N) buckets with these boundaries for
-bucket i:</p>
+<p>There are <code>num_finite_buckets + 2</code> (= N) buckets. Bucket <code>i</code> has the
+following boundaries:</p>
 
 <p>Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
    Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).</p>
