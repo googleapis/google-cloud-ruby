@@ -567,7 +567,7 @@ namespace :kokoro do
     header_2 ENV["JOB_TYPE"]
     Dir.chdir ENV["PACKAGE"] do
       Bundler.with_clean_env do
-        # Rake::Task["kokoro:load_env_vars"].invoke
+        Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
