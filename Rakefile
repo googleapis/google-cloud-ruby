@@ -571,7 +571,8 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        run_command_with_timeout "bundle exec rake ci", 1800
+        exit_status = run_command_with_timeout "bundle exec rake ci", 1800
+        exit exit_status
       end
     end
   end
@@ -593,7 +594,8 @@ namespace :kokoro do
         sh "bundle update"
         command = "bundle exec rake ci"
         command += ":acceptance" if updated
-        run_command_with_timeout command, 3600
+        exit_status = run_command_with_timeout command, 3600
+        exit exit_status
       end
     end
   end
@@ -606,7 +608,8 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        run_command_with_timeout "bundle exec rake ci:acceptance", 3600
+        exit_status = run_command_with_timeout "bundle exec rake ci:acceptance", 3600
+        exit exit_status
       end
     end
   end
@@ -641,10 +644,12 @@ def run_command_with_timeout command, timeout
     Timeout.timeout(timeout) do
       Process.wait(job)
     end
+    return $?.exitstatus
   rescue Timeout::Error
     header_2 "TIMEOUT - #{timeout / 60} minute limit exceeded."
     Process.kill('TERM', job)
   end
+  1
 end
 
 def generate_kokoro_configs
