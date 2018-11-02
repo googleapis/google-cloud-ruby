@@ -567,11 +567,11 @@ namespace :kokoro do
     header_2 ENV["JOB_TYPE"]
     Dir.chdir ENV["PACKAGE"] do
       Bundler.with_clean_env do
-        Rake::Task["kokoro:load_env_vars"].invoke
+        # Rake::Task["kokoro:load_env_vars"].invoke
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        Timeout.timeout(1200) { sh "bundle exec rake ci" }
+        run_command_with_timeout "bundle exec rake ci", 1200
       end
     end
   end
@@ -593,7 +593,7 @@ namespace :kokoro do
         sh "bundle update"
         command = "bundle exec rake ci"
         command += ":acceptance" if updated
-        Timeout.timeout(1800) { sh command }
+        run_command_with_timeout command, 1800
       end
     end
   end
@@ -606,7 +606,7 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        Timeout.timeout(3600) { sh "bundle exec rake ci:acceptance" }
+        run_command_with_timeout "bundle exec rake ci:acceptance", 3600
       end
     end
   end
@@ -632,6 +632,18 @@ namespace :kokoro do
       FileUtils.rm_f "acceptance/data"
       sh "call mklink /j acceptance\\data ..\\acceptance\\data"
     end
+  end
+end
+
+def run_command_with_timeout command, timeout
+  job = Process.spawn(command)
+  begin
+    Timeout.timeout(timeout) do
+      Process.wait(job)
+    end
+  rescue Timeout::Error
+    header_2 "TIMEOUT - #{timeout / 60} minute limit exceeded."
+    Process.kill('TERM', job)
   end
 end
 
