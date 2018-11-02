@@ -3,6 +3,7 @@ require "open3"
 require "json"
 require "erb"
 require "fileutils"
+require "timeout"
 
 task :bundleupdate do
   valid_gems.each do |gem|
@@ -570,7 +571,7 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        sh "bundle exec rake ci"
+        Timeout.timeout(1200) { sh "bundle exec rake ci" }
       end
     end
   end
@@ -592,7 +593,7 @@ namespace :kokoro do
         sh "bundle update"
         command = "bundle exec rake ci"
         command += ":acceptance" if updated
-        sh command
+        Timeout.timeout(1800) { sh command }
       end
     end
   end
@@ -605,7 +606,7 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        sh "bundle exec rake ci:acceptance"
+        Timeout.timeout(3600) { sh "bundle exec rake ci:acceptance" }
       end
     end
   end
