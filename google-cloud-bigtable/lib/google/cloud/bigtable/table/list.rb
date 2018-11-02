@@ -19,7 +19,7 @@ module Google
   module Cloud
     module Bigtable
       class Table
-        # Table::List is a special case Array with additional
+        # Table::List is a special-case array with additional
         # values.
         class List < DelegateClass(::Array)
           # @private
@@ -27,11 +27,11 @@ module Google
           attr_accessor :service
 
           # @private
-          # The gRPC page enumbrable object.
+          # The gRPC page enumerable object.
           attr_accessor :grpc
 
           # @private
-          # Create a new Table::List with an array of table instances.
+          # Creates a new Table::List with an array of table instances.
           def initialize arr = []
             super(arr)
           end
@@ -53,7 +53,7 @@ module Google
             grpc.next_page?
           end
 
-          # Retrieve the next page of tables.
+          # Retrieves the next page of tables.
           #
           # @return [Table::List] The list of table instances.
           #
@@ -78,11 +78,11 @@ module Google
           # {#next?} returns `false`. Calls the given block once for each
           # result, which is passed as the argument to the block.
           #
-          # An Enumerator is returned if no block is given.
+          # An enumerator is returned if no block is given.
           #
           # This method will make repeated API calls until all remaining results
-          # are retrieved. (Unlike `#each`, for example, which merely iterates
-          # over the results returned by a single API call.) Use with caution.
+          # are retrieved (unlike `#each`, for example, which merely iterates
+          # over the results returned by a single API call). Use with caution.
           #
           # @yield [table] The block for accessing each table instance.
           # @yieldparam [Table] instance The table instance object.
@@ -135,7 +135,7 @@ module Google
 
           # @private
           #
-          # Raise an error unless an active grpc call is available.
+          # Raises an error unless an active grpc call is available.
           #
           def ensure_grpc!
             raise "Must have grpc call" unless grpc

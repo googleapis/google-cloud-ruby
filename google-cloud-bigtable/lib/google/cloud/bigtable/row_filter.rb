@@ -448,10 +448,10 @@ module Google
         # Values must be at most 15 characters and match the RE2
         # pattern `[a-z0-9\\-]+`
         #
-        # Due to a technical limitation, it is not currently possible to apply
+        # Due to a technical limitation, it is not possible to apply
         # multiple labels to a cell. As a result, a chain may have no more than
-        # one sub-filter that contains a `self.label value`. In contrast,
-        # an interleave may contain more than one because the filters
+        # one sub-filter that contains an `apply_label_transformer`. It is okay for
+        # an interleave to contain multiple `apply_label_transformers`, as they
         # will be applied to separate copies of the input.
         #
         # @param value [String] Label name
@@ -465,7 +465,7 @@ module Google
           SimpleFilter.new.label(value)
         end
 
-        # Creates a cell-per-row offset filter instance to skip the first N cells.
+        # Creates a cell-per-row-offset filter instance to skip first N cells.
         #
         # Skips the first N cells of each row, matching all subsequent cells.
         # If duplicate cells are present, as is possible when using an interleave,
@@ -516,7 +516,7 @@ module Google
           SimpleFilter.new.cells_per_column(limit)
         end
 
-        # Creates a-timestamp range filter instance.
+        # Creates a timestamp-range filter instance.
         #
         # Matches only cells with timestamps within the given range.
         # Specifies a contiguous range of timestamps.

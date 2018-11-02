@@ -19,9 +19,9 @@ module Google
   module Cloud
     module Bigtable
       class Table
-        # Table::ColumnFamilyMap is a Hash with column_family name and grpc object.
-        # It is used to create instance.
-        # @example Add column family with name and GC rule
+        # Table::ColumnFamilyMap is a hash accepting string `ColumnFamily` names as keys and `GcRule` objects as values.
+        # It is used to create an instance.
+        # @example Add column family with name and garbage collection rule
         #
         #  column_families = Google::Cloud::Bigtable::Instance::ColumnFamilyMap.new
         #
@@ -34,7 +34,7 @@ module Google
             super(value)
           end
 
-          # Add column family.
+          # Adds a column family.
           #
           # @param name [String] Column family name
           # @param gc_rule [Google::Bigtable::GcRule] GC Rule
@@ -53,7 +53,7 @@ module Google
             )
           end
 
-          # Remove column family from map.
+          # Removes a column family from the map.
           #
           # @param name [String] Column family name
           # @return [Google::Bigtable::Admin::V2::ColumnFamily]
