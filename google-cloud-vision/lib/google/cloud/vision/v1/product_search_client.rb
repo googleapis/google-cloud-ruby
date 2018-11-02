@@ -94,6 +94,7 @@ module Google
             "https://www.googleapis.com/auth/cloud-vision"
           ].freeze
 
+          # @private
           class OperationsClient < Google::Longrunning::OperationsClient
             self::SERVICE_ADDRESS = ProductSearchClient::SERVICE_ADDRESS
             self::GRPC_INTERCEPTORS = ProductSearchClient::GRPC_INTERCEPTORS
