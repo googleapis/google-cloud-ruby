@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Cloud::Videointelligence::V1::VideoSegment - Cloud"
+title: "Class: Google::Cloud::Videointelligence::V1::SpeechTranscription - Cloud"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/yard-main.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Videointelligence::V1::VideoSegment";
+  pathId = "Google::Cloud::Videointelligence::V1::SpeechTranscription";
   relpath = '../../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../_index.html">Index (V)</a> &raquo;
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Videointelligence.html" title="Google::Cloud::Videointelligence (module)">Videointelligence</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Videointelligence::V1 (module)">V1</a></span></span>
      &raquo; 
-    <span class="title">VideoSegment</span>
+    <span class="title">SpeechTranscription</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Cloud::Videointelligence::V1::VideoSegment
+  <div id="content"><h1>Class: Google::Cloud::Videointelligence::V1::SpeechTranscription
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Cloud::Videointelligence::V1::VideoSegment</li>
+            <li class="next">Google::Cloud::Videointelligence::V1::SpeechTranscription</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Video segment.</p>
+    <p>A speech recognition result corresponding to a portion of the audio.</p>
 
 
   </div>
@@ -107,7 +107,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#end_time_offset-instance_method" title="#end_time_offset (instance method)">#<strong>end_time_offset</strong>  &#x21d2; Google::Protobuf::Duration </a>
+      <a href="#alternatives-instance_method" title="#alternatives (instance method)">#<strong>alternatives</strong>  &#x21d2; Array&lt;Google::Cloud::Videointelligence::V1::SpeechRecognitionAlternative&gt; </a>
     
 
     
@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Time-offset, relative to the beginning of the video, corresponding to the end of the segment (inclusive).</p>
+    <span class="summary_desc"><div class='inline'><p>May contain one or more recognition hypotheses (up to the maximum specified in <code>max_alternatives</code>).</p>
 </div></span>
   
 </li>
@@ -133,7 +133,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#start_time_offset-instance_method" title="#start_time_offset (instance method)">#<strong>start_time_offset</strong>  &#x21d2; Google::Protobuf::Duration </a>
+      <a href="#language_code-instance_method" title="#language_code (instance method)">#<strong>language_code</strong>  &#x21d2; String </a>
     
 
     
@@ -150,7 +150,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Time-offset, relative to the beginning of the video, corresponding to the start of the segment (inclusive).</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -166,11 +166,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="end_time_offset=-instance_method"></span>
+      <span id="alternatives=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="end_time_offset-instance_method">
+  <h3 class="signature first" id="alternatives-instance_method">
   
-    #<strong>end_time_offset</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+    #<strong>alternatives</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="SpeechRecognitionAlternative.html" title="Google::Cloud::Videointelligence::V1::SpeechRecognitionAlternative (class)">Google::Cloud::Videointelligence::V1::SpeechRecognitionAlternative</a></span>&gt;</tt> 
   
 
   
@@ -178,8 +178,10 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Time-offset, relative to the beginning of the video,
-corresponding to the end of the segment (inclusive).</p>
+    <p>Returns May contain one or more recognition hypotheses (up to the maximum specified
+in <code>max_alternatives</code>).  These alternatives are ordered in terms of
+accuracy, with the top (first) alternative being the most probable, as
+ranked by the recognizer.</p>
 
 
   </div>
@@ -192,13 +194,15 @@ corresponding to the end of the segment (inclusive).</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="SpeechRecognitionAlternative.html" title="Google::Cloud::Videointelligence::V1::SpeechRecognitionAlternative (class)">Google::Cloud::Videointelligence::V1::SpeechRecognitionAlternative</a></span>&gt;</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>Time-offset, relative to the beginning of the video,
-corresponding to the end of the segment (inclusive).</p>
+        <div class='inline'><p>May contain one or more recognition hypotheses (up to the maximum specified
+in <code>max_alternatives</code>).  These alternatives are ordered in terms of
+accuracy, with the top (first) alternative being the most probable, as
+ranked by the recognizer.</p>
 </div>
       
     </li>
@@ -211,23 +215,23 @@ corresponding to the end of the segment (inclusive).</p>
       <pre class="lines">
 
 
-136</pre>
+405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 405</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::VideoSegment (class)">VideoSegment</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::SpeechTranscription (class)">SpeechTranscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
       
-      <span id="start_time_offset=-instance_method"></span>
+      <span id="language_code=-instance_method"></span>
       <div class="method_details ">
-  <h3 class="signature " id="start_time_offset-instance_method">
+  <h3 class="signature " id="language_code-instance_method">
   
-    #<strong>start_time_offset</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+    #<strong>language_code</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -235,8 +239,10 @@ corresponding to the end of the segment (inclusive).</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Time-offset, relative to the beginning of the video,
-corresponding to the start of the segment (inclusive).</p>
+    <p>Returns Output only. The
+<a href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</a> language tag of the
+language in this result. This language code was detected to have the most
+likelihood of being spoken in the audio.</p>
 
 
   </div>
@@ -249,13 +255,15 @@ corresponding to the start of the segment (inclusive).</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>Time-offset, relative to the beginning of the video,
-corresponding to the start of the segment (inclusive).</p>
+        <div class='inline'><p>Output only. The
+<a href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</a> language tag of the
+language in this result. This language code was detected to have the most
+likelihood of being spoken in the audio.</p>
 </div>
       
     </li>
@@ -268,12 +276,12 @@ corresponding to the start of the segment (inclusive).</p>
       <pre class="lines">
 
 
-136</pre>
+405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/video_intelligence/v1/doc/google/cloud/videointelligence/v1/video_intelligence.rb', line 405</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::VideoSegment (class)">VideoSegment</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Videointelligence::V1::SpeechTranscription (class)">SpeechTranscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
