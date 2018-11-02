@@ -194,8 +194,9 @@ from the <code>Finding</code> object. If appending to an existing table, any col
 from the predefined schema that are missing will be added. No columns in
 the existing table will be deleted.</p>
 
-<p>If unspecified, then all available columns will be used for a new table,
-and no changes will be made to an existing table.</p>
+<p>If unspecified, then all available columns will be used for a new table or
+an (existing) table with no schema, and no changes will be made to an
+existing table that has a schema.</p>
 
 
   </div>
@@ -219,8 +220,9 @@ from the <code>Finding</code> object. If appending to an existing table, any col
 from the predefined schema that are missing will be added. No columns in
 the existing table will be deleted.</p>
 
-<p>If unspecified, then all available columns will be used for a new table,
-and no changes will be made to an existing table.</p>
+<p>If unspecified, then all available columns will be used for a new table or
+an (existing) table with no schema, and no changes will be made to an
+existing table that has a schema.</p>
 </div>
       
     </li>
@@ -233,7 +235,6 @@ and no changes will be made to an existing table.</p>
       <pre class="lines">
 
 
-551
 552
 553
 554
@@ -254,10 +255,11 @@ and no changes will be made to an existing table.</p>
 569
 570
 571
-572</pre>
+572
+573</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 551</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 552</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::OutputStorageConfig (class)">OutputStorageConfig</a></span></span>
   <span class='comment'># Predefined schemas for storing findings.
@@ -356,7 +358,6 @@ quasi-identifiers, cannot store their results in the same table.</p>
       <pre class="lines">
 
 
-551
 552
 553
 554
@@ -377,10 +378,11 @@ quasi-identifiers, cannot store their results in the same table.</p>
 569
 570
 571
-572</pre>
+572
+573</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 551</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 552</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::OutputStorageConfig (class)">OutputStorageConfig</a></span></span>
   <span class='comment'># Predefined schemas for storing findings.

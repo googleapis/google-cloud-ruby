@@ -117,6 +117,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#excluded_fields-instance_method" title="#excluded_fields (instance method)">#<strong>excluded_fields</strong>  &#x21d2; Array&lt;Google::Privacy::Dlp::V2::FieldId&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>References to fields excluded from scanning.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#identifying_fields-instance_method" title="#identifying_fields (instance method)">#<strong>identifying_fields</strong>  &#x21d2; Array&lt;Google::Privacy::Dlp::V2::FieldId&gt; </a>
     
 
@@ -253,9 +279,92 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="identifying_fields=-instance_method"></span>
+      <span id="excluded_fields=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="identifying_fields-instance_method">
+  <h3 class="signature first" id="excluded_fields-instance_method">
+  
+    #<strong>excluded_fields</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="FieldId.html" title="Google::Privacy::Dlp::V2::FieldId (class)">Google::Privacy::Dlp::V2::FieldId</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns References to fields excluded from scanning. This allows you to skip
+inspection of entire columns which you know have no findings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="FieldId.html" title="Google::Privacy::Dlp::V2::FieldId (class)">Google::Privacy::Dlp::V2::FieldId</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>References to fields excluded from scanning. This allows you to skip
+inspection of entire columns which you know have no findings.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 395</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
+  <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
+</span>  <span class='comment'># in conjunction with rows_limit. If not specified, scanning would start
+</span>  <span class='comment'># from the top.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="BigQueryOptions/SampleMethod.html" title="Google::Privacy::Dlp::V2::BigQueryOptions::SampleMethod (module)">SampleMethod</a></span></span>
+    <span class='const'>SAMPLE_METHOD_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Scan from the top (default).
+</span>    <span class='const'>TOP</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Randomly pick the row to start scanning. The scanned rows are contiguous.
+</span>    <span class='const'>RANDOM_START</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="identifying_fields=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="identifying_fields-instance_method">
   
     #<strong>identifying_fields</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="FieldId.html" title="Google::Privacy::Dlp::V2::FieldId (class)">Google::Privacy::Dlp::V2::FieldId</a></span>&gt;</tt> 
   
@@ -298,12 +407,6 @@ Nested fields in the format, like <code>person.birthdate.year</code>, are allowe
       <pre class="lines">
 
 
-389
-390
-391
-392
-393
-394
 395
 396
 397
@@ -311,10 +414,16 @@ Nested fields in the format, like <code>person.birthdate.year</code>, are allowe
 399
 400
 401
-402</pre>
+402
+403
+404
+405
+406
+407
+408</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 389</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 395</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
   <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
@@ -385,12 +494,6 @@ Cannot be used in conjunction with TimespanConfig.</p>
       <pre class="lines">
 
 
-389
-390
-391
-392
-393
-394
 395
 396
 397
@@ -398,10 +501,16 @@ Cannot be used in conjunction with TimespanConfig.</p>
 399
 400
 401
-402</pre>
+402
+403
+404
+405
+406
+407
+408</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 389</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 395</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
   <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
@@ -474,12 +583,6 @@ TimespanConfig.</p>
       <pre class="lines">
 
 
-389
-390
-391
-392
-393
-394
 395
 396
 397
@@ -487,10 +590,16 @@ TimespanConfig.</p>
 399
 400
 401
-402</pre>
+402
+403
+404
+405
+406
+407
+408</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 389</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 395</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
   <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
@@ -550,12 +659,6 @@ TimespanConfig.</p>
       <pre class="lines">
 
 
-389
-390
-391
-392
-393
-394
 395
 396
 397
@@ -563,10 +666,16 @@ TimespanConfig.</p>
 399
 400
 401
-402</pre>
+402
+403
+404
+405
+406
+407
+408</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 389</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 395</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
   <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
@@ -631,12 +740,6 @@ TimespanConfig.</p>
       <pre class="lines">
 
 
-389
-390
-391
-392
-393
-394
 395
 396
 397
@@ -644,10 +747,16 @@ TimespanConfig.</p>
 399
 400
 401
-402</pre>
+402
+403
+404
+405
+406
+407
+408</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 389</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 395</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
   <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
