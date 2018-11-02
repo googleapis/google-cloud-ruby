@@ -884,12 +884,16 @@ $ gem install google-cloud-vision
 ```ruby
 require "google/cloud/vision"
 
-vision = Google::Cloud::Vision.new
-
-image = vision.image "path/to/landmark.jpg"
-
-landmark = image.landmark
-landmark.description #=> "Mount Rushmore"
+image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new
+gcs_image_uri = "gs://gapic-toolkit/President_Barack_Obama.jpg"
+source = { gcs_image_uri: gcs_image_uri }
+image = { source: source }
+type = :FACE_DETECTION
+features_element = { type: type }
+features = [features_element]
+requests_element = { image: image, features: features }
+requests = [requests_element]
+response = image_annotator_client.batch_annotate_images(requests)
 ```
 
 ### Stackdriver Monitoring API (Beta)

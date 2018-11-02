@@ -38,7 +38,8 @@ module Google
         #     The visually similar image results.
         # @!attribute [rw] best_guess_labels
         #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebLabel>]
-        #     Best guess text labels for the request image.
+        #     The service's best guess as to the topic of the request image.
+        #     Inferred from similar images on the open web.
         class WebDetection
           # Entity deduced from similar images on the Internet.
           # @!attribute [rw] entity_id
