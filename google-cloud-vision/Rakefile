@@ -1,6 +1,5 @@
 require "bundler/setup"
 require "bundler/gem_tasks"
-require "timeout"
 
 require "rubocop/rake_task"
 RuboCop::RakeTask.new
@@ -111,18 +110,16 @@ end
 
 desc "Run the CI build"
 task :ci do
-  Timeout.timeout(1) do
-    header "BUILDING google-cloud-vision"
-    header "google-cloud-vision rubocop", "*"
-    Rake::Task[:rubocop].invoke
-    header "google-cloud-vision yard", "*"
-    header "vision yard still had warnings", "!"
-    Rake::Task[:yard].invoke
-    header "google-cloud-vision doctest", "*"
-    Rake::Task[:doctest].invoke
-    header "google-cloud-vision test", "*"
-    Rake::Task[:test].invoke
-  end
+  header "BUILDING google-cloud-vision"
+  header "google-cloud-vision rubocop", "*"
+  Rake::Task[:rubocop].invoke
+  header "google-cloud-vision yard", "*"
+  header "vision yard still had warnings", "!"
+  Rake::Task[:yard].invoke
+  header "google-cloud-vision doctest", "*"
+  Rake::Task[:doctest].invoke
+  header "google-cloud-vision test", "*"
+  Rake::Task[:test].invoke
 end
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
