@@ -91,8 +91,8 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Table::ColumnFamilyMap is a Hash with column_family name and grpc object.
-It is used to create instance.</p>
+    <p>Table::ColumnFamilyMap is a hash accepting string <code>ColumnFamily</code> names as keys and <code>GcRule</code> objects as values.
+It is used to create an instance.</p>
 
 
   </div>
@@ -103,7 +103,7 @@ It is used to create instance.</p>
     <p class="tag_title">Examples:</p>
     
       
-        <p class="example_title"><div class='inline'><p>Add column family with name and GC rule</p>
+        <p class="example_title"><div class='inline'><p>Add column family with name and garbage collection rule</p>
 </div></p>
       
       <pre class="example code"><code>
@@ -146,7 +146,7 @@ It is used to create instance.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Add column family.</p>
+    <span class="summary_desc"><div class='inline'><p>Adds a column family.</p>
 </div></span>
   
 </li>
@@ -169,7 +169,7 @@ It is used to create instance.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Remove column family from map.</p>
+    <span class="summary_desc"><div class='inline'><p>Removes a column family from the map.</p>
 </div></span>
   
 </li>
@@ -196,7 +196,7 @@ It is used to create instance.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Add column family.</p>
+    <p>Adds a column family.</p>
 
 
   </div>
@@ -288,7 +288,7 @@ It is used to create instance.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Remove column family from map.</p>
+    <p>Removes a column family from the map.</p>
 
 
   </div>

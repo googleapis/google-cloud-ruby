@@ -302,7 +302,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a cell-per-row offset filter instance to skip the first N cells.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a cell-per-row-offset filter instance to skip first N cells.</p>
 </div></span>
   
 </li>
@@ -601,7 +601,7 @@ while the other does not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a-timestamp range filter instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a timestamp-range filter instance.</p>
 </div></span>
   
 </li>
@@ -908,7 +908,7 @@ each copy of the cell is counted separately.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a cell-per-row offset filter instance to skip the first N cells.</p>
+    <p>Creates a cell-per-row-offset filter instance to skip first N cells.</p>
 
 <p>Skips the first N cells of each row, matching all subsequent cells.
 If duplicate cells are present, as is possible when using an interleave,
@@ -1581,10 +1581,10 @@ the filter.</p>
 <p>Values must be at most 15 characters and match the RE2
 pattern <code>[a-z0-9\\-]+</code></p>
 
-<p>Due to a technical limitation, it is not currently possible to apply
+<p>Due to a technical limitation, it is not possible to apply
 multiple labels to a cell. As a result, a chain may have no more than
-one sub-filter that contains a <code>self.label value</code>. In contrast,
-an interleave may contain more than one because the filters
+one sub-filter that contains an <code>apply_label_transformer</code>. It is okay for
+an interleave to contain multiple <code>apply_label_transformers</code>, as they
 will be applied to separate copies of the input.</p>
 
 
@@ -2042,7 +2042,7 @@ parent filter</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a-timestamp range filter instance.</p>
+    <p>Creates a timestamp-range filter instance.</p>
 
 <p>Matches only cells with timestamps within the given range.
 Specifies a contiguous range of timestamps.</p>
