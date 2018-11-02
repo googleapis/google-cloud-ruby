@@ -452,7 +452,7 @@ module Google
         # multiple labels to a cell. As a result, a chain may have no more than
         # one sub-filter that contains an `apply_label_transformer`. It is okay for
         # an interleave to contain multiple `apply_label_transformers`, as they
-        # will be applied to separate copies of the input. 
+        # will be applied to separate copies of the input.
         #
         # @param value [String] Label name
         # @return [Google::Cloud::Bigtable::RowFilter::SimpleFilter]
