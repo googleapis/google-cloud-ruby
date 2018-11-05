@@ -634,7 +634,7 @@ namespace :kokoro do
       FileUtils.mkdir_p "acceptance"
       if File.file? "acceptance/data"
         FileUtils.rm_f "acceptance/data"
-        FileUtils.ln_s "acceptance\\data", "..\\acceptance\\data"
+        sh "call mklink /j acceptance\\data ..\\acceptance\\data"
       end
     end
   end
