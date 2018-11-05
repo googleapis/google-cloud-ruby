@@ -3,6 +3,7 @@ require "open3"
 require "json"
 require "erb"
 require "fileutils"
+require "timeout"
 
 task :bundleupdate do
   valid_gems.each do |gem|
@@ -570,7 +571,8 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        sh "bundle exec rake ci"
+        exit_status = run_command_with_timeout "bundle exec rake ci", 1800
+        exit exit_status
       end
     end
   end
@@ -592,7 +594,8 @@ namespace :kokoro do
         sh "bundle update"
         command = "bundle exec rake ci"
         command += ":acceptance" if updated
-        sh command
+        exit_status = run_command_with_timeout command, 3600
+        exit exit_status
       end
     end
   end
@@ -605,7 +608,8 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        sh "bundle exec rake ci:acceptance"
+        exit_status = run_command_with_timeout "bundle exec rake ci:acceptance", 3600
+        exit exit_status
       end
     end
   end
@@ -632,6 +636,20 @@ namespace :kokoro do
       sh "call mklink /j acceptance\\data ..\\acceptance\\data"
     end
   end
+end
+
+def run_command_with_timeout command, timeout
+  job = Process.spawn(command)
+  begin
+    Timeout.timeout(timeout) do
+      Process.wait(job)
+    end
+    return $?.exitstatus
+  rescue Timeout::Error
+    header_2 "TIMEOUT - #{timeout / 60} minute limit exceeded."
+    Process.kill('TERM', job)
+  end
+  1
 end
 
 def generate_kokoro_configs
