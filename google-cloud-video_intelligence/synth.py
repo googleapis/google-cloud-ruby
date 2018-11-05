@@ -50,6 +50,18 @@ s.copy(v1beta1_library / 'lib/google/cloud/video_intelligence/v1beta1.rb')
 s.copy(v1beta1_library / 'lib/google/cloud/videointelligence/v1beta1')
 s.copy(v1beta1_library / 'test/google/cloud/video_intelligence/v1beta1')
 
+v1p1beta1 = gapic.ruby_library(
+    'videointelligence', 'v1p1beta1',
+    artman_output_name='google-cloud-ruby/google-cloud-video_intelligence'
+)
+s.copy(v1p1beta1 / 'lib/google/cloud/videointelligence/v1p1beta1')
+
+v2p2beta1 = gapic.ruby_library(
+    'videointelligence', 'v1p2beta1',
+    artman_output_name='google-cloud-ruby/google-cloud-video_intelligence'
+)
+s.copy(v2p2beta1 / 'lib/google/cloud/videointelligence/v1p2beta1')
+
 v1beta2_library = gapic.ruby_library(
     'videointelligence', 'v1beta2',
     artman_output_name='google-cloud-ruby/google-cloud-video_intelligence'
