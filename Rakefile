@@ -632,7 +632,11 @@ namespace :kokoro do
   task :windows_acceptance_fix do
     if ENV['OS'] == 'windows'
       FileUtils.mkdir_p "acceptance"
-      FileUtils.rm_f "acceptance/data"
+      if File.file? "acceptance/data"
+        FileUtils.rm_f "acceptance/data"
+      else
+        FileUtils.rm_rf "acceptance/data"
+      end
       sh "call mklink /j acceptance\\data ..\\acceptance\\data"
     end
   end
