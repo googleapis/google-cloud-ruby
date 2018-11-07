@@ -20,7 +20,7 @@ ruby --version
 # https://github.com/bundler/bundler/issues/6154
 export BUNDLE_GEMFILE=
 
-RUBY_VERSIONS=("2.3.7" "2.4.4" "2.5.1")
+RUBY_VERSIONS=("2.3.8" "2.4.5" "2.5.3")
 
 # Capture failures
 EXIT_STATUS=0 # everything passed
@@ -29,7 +29,7 @@ function set_failed_status {
 }
 
 if [ "$PACKAGE" = "post" ]; then
-    rbenv global "2.5.1"
+    rbenv global "2.5.3"
     (bundle update && bundle exec rake kokoro:post) || set_failed_status
 elif [ "$JOB_TYPE" = "nightly" ]; then
     for version in "${RUBY_VERSIONS[@]}"; do

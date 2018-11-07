@@ -30,8 +30,8 @@ RUN git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ru
 # Install ruby
 ENV RUBY_CONFIGURE_OPTS --disable-install-doc
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
-RUN rbenv install 2.3.7 && rbenv global 2.3.7 && gem install bundle
-RUN rbenv install 2.4.4 && rbenv global 2.4.4 && gem install bundle
-RUN rbenv install 2.5.1 && rbenv global 2.5.1 && gem install bundle
+RUN rbenv install 2.3.8 && rbenv global 2.3.8 && gem install bundle
+RUN rbenv install 2.4.5 && rbenv global 2.4.5 && gem install bundle
+RUN rbenv install 2.5.3 && rbenv global 2.5.3 && gem install bundle
 
 RUN apt-get -y autoremove && apt-get -y autoclean
