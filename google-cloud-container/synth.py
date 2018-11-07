@@ -26,7 +26,7 @@ logging.basicConfig(level=logging.DEBUG)
 gapic = gcp.GAPICGenerator()
 
 v1_library = gapic.ruby_library(
-    'container', 'v1', config_path='/google/container/artman_container.yaml',
+    'container', 'v1', config_path='/google/container/artman_container_v1.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-container'
 )
 s.copy(v1_library / 'acceptance')
