@@ -4,10 +4,17 @@ AllCops:
     - "support/**/*"
     - "google-cloud-vision.gemspec"
     - "Rakefile"
+    - "lib/google/cloud/vision.rb"
     - "lib/google/cloud/vision/v1.rb"
     - "lib/google/cloud/vision/v1/**/*"
+    - "lib/google/cloud/vision/v1p1beta1.rb"
+    - "lib/google/cloud/vision/v1p1beta1/**/*"
+    - "lib/google/cloud/vision/v1p2beta1.rb"
+    - "lib/google/cloud/vision/v1p2beta1/**/*"
+    - "lib/google/cloud/vision/v1p3beta1.rb"
+    - "lib/google/cloud/vision/v1p3beta1/**/*"
     - "test/**/*"
-    - "lib/google/cloud/vision.rb"
+    
 
 Documentation:
   Enabled: false

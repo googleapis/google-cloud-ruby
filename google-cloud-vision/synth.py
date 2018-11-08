@@ -39,32 +39,26 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-vision.gemspec', merge=ruby.merge_gemspec)
 
-v1p1beta1_library = gapic.ruby_library(
-    'vision', 'v1p1beta1',
-    artman_output_name='google-cloud-ruby/google-cloud-vision'
-)
-s.copy(v1p1beta1_library / 'lib/google/cloud/vision/v1p1beta1')
-s.copy(v1p1beta1_library / 'lib/google/cloud/vision/v1p1beta1.rb')
-s.copy(v1p1beta1_library / 'acceptance/google/cloud/vision/v1p1beta1')
-s.copy(v1p1beta1_library / 'test/google/cloud/vision/v1p1beta1')
+for version in ['v1p1beta1', 'v1p2beta1', 'v1p3beta1']:
+    version_library = gapic.ruby_library(
+        'vision', version,
+        artman_output_name='google-cloud-ruby/google-cloud-vision'
+    )
+    s.copy(version_library / f'lib/google/cloud/vision/{version}')
+    s.copy(version_library / f'lib/google/cloud/vision/{version}.rb')
+    s.copy(version_library / f'acceptance/google/cloud/vision/{version}')
+    s.copy(version_library / f'test/google/cloud/vision/{version}')
 
-v1p2beta1_library = gapic.ruby_library(
-    'vision', 'v1p2beta1',
-    artman_output_name='google-cloud-ruby/google-cloud-vision'
-)
-s.copy(v1p2beta1_library / 'lib/google/cloud/vision/v1p2beta1')
-s.copy(v1p2beta1_library / 'lib/google/cloud/vision/v1p2beta1.rb')
-s.copy(v1p2beta1_library / 'acceptance/google/cloud/vision/v1p2beta1')
-s.copy(v1p2beta1_library / 'test/google/cloud/vision/v1p2beta1')
-
-v1p3beta1_library = gapic.ruby_library(
-    'vision', 'v1p3beta1',
-    artman_output_name='google-cloud-ruby/google-cloud-vision'
-)
-s.copy(v1p3beta1_library / 'lib/google/cloud/vision/v1p3beta1')
-s.copy(v1p3beta1_library / 'lib/google/cloud/vision/v1p3beta1.rb')
-s.copy(v1p3beta1_library / 'acceptance/google/cloud/vision/v1p3beta1')
-s.copy(v1p3beta1_library / 'test/google/cloud/vision/v1p3beta1')
+    # s.replace(
+    #     [
+    #         f'acceptance/google/cloud/vision/{version}/*.rb',
+    #         f'lib/google/cloud/vision/{version}.rb',
+    #         f'lib/google/cloud/vision/{version}/*.rb',
+    #         f'test/google/cloud/vision/{version}/*.rb'
+    #     ],
+    #     'Google::Cloud::Vision.new',
+    #     'Google::Cloud::Vision::ImageAnnotator.new'
+    # )
 
 # PERMANENT: Add migration guide to docs
 s.replace(
@@ -107,38 +101,22 @@ s.replace(
 
         gem.platform\\1= Gem::Platform::RUBY"""))
 
-# https://github.com/googleapis/gapic-generator/issues/2232
-s.replace(
-    [
-        'lib/google/cloud/vision/v1/image_annotator_client.rb',
-        'lib/google/cloud/vision/v1p1beta1/image_annotator_client.rb',
-        'lib/google/cloud/vision/v1p2beta1/image_annotator_client.rb',
-        'lib/google/cloud/vision/v1p3beta1/image_annotator_client.rb'
-    ],
-    '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
-    '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
+for version in ['v1', 'v1p1beta1', 'v1p2beta1', 'v1p3beta1']:
 
-# https://github.com/googleapis/gapic-generator/issues/2232
-s.replace(
-    [
-        'lib/google/cloud/vision/v1/product_search_client.rb',
-        'lib/google/cloud/vision/v1p1beta1/product_search_client.rb',
-        'lib/google/cloud/vision/v1p2beta1/product_search_client.rb',
-        'lib/google/cloud/vision/v1p3beta1/product_search_client.rb'
-    ],
-    '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
-    '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
+    # https://github.com/googleapis/gapic-generator/issues/2232
+    s.replace(
+        [
+            f'lib/google/cloud/vision/{version}/image_annotator_client.rb',
+            f'lib/google/cloud/vision/{version}/product_search_client.rb'
+        ],
+        '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
+        '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
 
-# https://github.com/googleapis/gapic-generator/issues/2243
-s.replace(
-    [
-        'lib/google/cloud/vision/v1/*_client.rb',
-        'lib/google/cloud/vision/v1p1beta1/*_client.rb',
-        'lib/google/cloud/vision/v1p2beta1/*_client.rb',
-        'lib/google/cloud/vision/v1p3beta1/*_client.rb'
-    ],
-    '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
-    '\\1\\2# @private\n\\2\\3')
+    # https://github.com/googleapis/gapic-generator/issues/2243
+    s.replace(
+        f'lib/google/cloud/vision/{version}/*_client.rb',
+        '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
+        '\\1\\2# @private\n\\2\\3')
 
 # https://github.com/googleapis/gapic-generator/issues/2279
 s.replace(
