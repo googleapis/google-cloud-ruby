@@ -50,6 +50,26 @@ s.copy(v1beta1_library / 'lib/google/cloud/video_intelligence/v1beta1.rb')
 s.copy(v1beta1_library / 'lib/google/cloud/videointelligence/v1beta1')
 s.copy(v1beta1_library / 'test/google/cloud/video_intelligence/v1beta1')
 
+v1p1beta1_library = gapic.ruby_library(
+    'videointelligence', 'v1p1beta1',
+    artman_output_name='google-cloud-ruby/google-cloud-video_intelligence'
+)
+s.copy(v1p1beta1_library / 'lib/google/cloud/videointelligence/v1p1beta1')
+s.copy(v1p1beta1_library / 'lib/google/cloud/video_intelligence/v1p1beta1')
+s.copy(v1p1beta1_library / 'lib/google/cloud/video_intelligence/v1p1beta1.rb')
+s.copy(v1p1beta1_library / 'acceptance/google/cloud/video_intelligence/v1p1beta1')
+s.copy(v1p1beta1_library / 'test/google/cloud/video_intelligence/v1p1beta1')
+
+v1p2beta1_library = gapic.ruby_library(
+    'videointelligence', 'v1p2beta1',
+    artman_output_name='google-cloud-ruby/google-cloud-video_intelligence'
+)
+s.copy(v1p2beta1_library / 'lib/google/cloud/videointelligence/v1p2beta1')
+s.copy(v1p2beta1_library / 'lib/google/cloud/video_intelligence/v1p2beta1')
+s.copy(v1p2beta1_library / 'lib/google/cloud/video_intelligence/v1p2beta1.rb')
+s.copy(v1p2beta1_library / 'acceptance/google/cloud/video_intelligence/v1p2beta1')
+s.copy(v1p2beta1_library / 'test/google/cloud/video_intelligence/v1p2beta1')
+
 v1beta2_library = gapic.ruby_library(
     'videointelligence', 'v1beta2',
     artman_output_name='google-cloud-ruby/google-cloud-video_intelligence'
@@ -66,6 +86,8 @@ s.replace(
       'lib/google/cloud/video_intelligence.rb',
       'lib/google/cloud/video_intelligence/v1.rb',
       'lib/google/cloud/video_intelligence/v1beta1.rb',
+      'lib/google/cloud/video_intelligence/v1p1beta1.rb',
+      'lib/google/cloud/video_intelligence/v1p2beta1.rb',
       'lib/google/cloud/video_intelligence/v1beta2.rb'
     ],
     '/video-intelligence\\.googleapis\\.com', '/videointelligence.googleapis.com')
@@ -75,6 +97,8 @@ s.replace(
     [
       'lib/google/cloud/video_intelligence/v1/video_intelligence_service_client.rb',
       'lib/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client.rb',
+      'lib/google/cloud/video_intelligence/v1p1beta1/video_intelligence_service_client.rb',
+      'lib/google/cloud/video_intelligence/v1p2beta1/video_intelligence_service_client.rb',
       'lib/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client.rb'
     ],
     '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
