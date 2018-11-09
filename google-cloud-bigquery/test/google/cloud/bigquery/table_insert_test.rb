@@ -209,7 +209,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     }
     inserted_row_hash = {
       insertId: insert_id,
-      json: {"id"=>2, "name"=>"Gandalf", "age"=>1000, "weight"=>198.6, "is_magic"=>true, "scores"=>[100.0, 99.0, 0.001], "spells"=>[{"name"=>"Skydragon", "discovered_by"=>"Firebreather", "properties"=>[{"name"=>"Flying", "power"=>1.0}, {"name"=>"Creature", "power"=>1.0}, {"name"=>"Explodey", "power"=>11.0}], "icon"=>"eyJuYW1lIjoibWlrZSIsImJyZWVkIjoidGhlY2F0a2luZCIsImlkIjoxLCJkb2IiOjE1Mjc4ODI2NTV9CnsibmFtZSI6ImNocmlzIiwiYnJlZWQiOiJnb2xkZW5yZXRyaWV2ZXI/IiwiaWQiOjIsImRvYiI6MTUyNzk2OTA1NX0KeyJuYW1lIjoiamoiLCJicmVlZCI6Imlka2FueWNhdGJyZWVkcyIsImlkIjozLCJkb2IiOjE1MjgwNTU0NTV9Cg==", "last_used"=>"2015-10-31 23:59:56.000000+00:00"}], "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06", "favorite_time"=>"2001-12-19 23:59:59.000000"}
+      json: {"id"=>2, "name"=>"Gandalf", "age"=>1000, "weight"=>198.6, "is_magic"=>true, "scores"=>[100.0, 99.0, 0.001], "spells"=>[{"name"=>"Skydragon", "discovered_by"=>"Firebreather", "properties"=>[{"name"=>"Flying", "power"=>1.0}, {"name"=>"Creature", "power"=>1.0}, {"name"=>"Explodey", "power"=>11.0}], "icon"=>Google::Cloud::Bigquery::Convert.to_json_value(File.open("acceptance/data/kitten-test-data.json", "rb")), "last_used"=>"2015-10-31 23:59:56.000000+00:00"}], "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06", "favorite_time"=>"2001-12-19 23:59:59.000000"}
     }
     mock = Minitest::Mock.new
     insert_req = {
