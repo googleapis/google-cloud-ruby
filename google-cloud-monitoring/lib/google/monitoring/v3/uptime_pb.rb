@@ -8,11 +8,11 @@ require 'google/api/monitored_resource_pb'
 require 'google/protobuf/duration_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.InternalChecker" do
-    optional :project_id, :string, 1
-    optional :network, :string, 2
-    optional :gcp_zone, :string, 3
-    optional :checker_id, :string, 4
-    optional :display_name, :string, 5
+    optional :name, :string, 1
+    optional :display_name, :string, 2
+    optional :network, :string, 3
+    optional :gcp_zone, :string, 4
+    optional :peer_project_id, :string, 6
   end
   add_message "google.monitoring.v3.UptimeCheckConfig" do
     optional :name, :string, 1

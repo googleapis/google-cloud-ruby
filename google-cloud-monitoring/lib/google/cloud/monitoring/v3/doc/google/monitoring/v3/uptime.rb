@@ -16,24 +16,34 @@
 module Google
   module Monitoring
     module V3
-      # Nimbus InternalCheckers.
-      # @!attribute [rw] project_id
+      # An internal checker allows uptime checks to run on private/internal GCP
+      # resources.
+      # @!attribute [rw] name
       #   @return [String]
-      #     The GCP project ID. Not necessarily the same as the project_id for the
-      #     config.
+      #     A unique resource name for this InternalChecker. The format is:
+      #
+      #
+      #       `projects/[PROJECT_ID]/internalCheckers/[INTERNAL_CHECKER_ID]`.
+      #
+      #     PROJECT_ID is the stackdriver workspace project for the
+      #     uptime check config associated with the internal checker.
+      # @!attribute [rw] display_name
+      #   @return [String]
+      #     The checker's human-readable name. The display name
+      #     should be unique within a Stackdriver Workspace in order to make it easier
+      #     to identify; however, uniqueness is not enforced.
       # @!attribute [rw] network
       #   @return [String]
-      #     The internal network to perform this uptime check on.
+      #     The [GCP VPC network](https://cloud.google.com/vpc/docs/vpc) where the
+      #     internal resource lives (ex: "default").
       # @!attribute [rw] gcp_zone
       #   @return [String]
       #     The GCP zone the uptime check should egress from. Only respected for
       #     internal uptime checks, where internal_network is specified.
-      # @!attribute [rw] checker_id
+      # @!attribute [rw] peer_project_id
       #   @return [String]
-      #     The checker ID.
-      # @!attribute [rw] display_name
-      #   @return [String]
-      #     The checker's human-readable name.
+      #     The GCP project_id where the internal checker lives. Not necessary
+      #     the same as the workspace project.
       class InternalChecker; end
 
       # This message configures which resources and services to monitor for
@@ -51,7 +61,7 @@ module Google
       # @!attribute [rw] display_name
       #   @return [String]
       #     A human-friendly name for the uptime check configuration. The display name
-      #     should be unique within a Stackdriver Account in order to make it easier
+      #     should be unique within a Stackdriver Workspace in order to make it easier
       #     to identify; however, uniqueness is not enforced. Required.
       # @!attribute [rw] monitored_resource
       #   @return [Google::Api::MonitoredResource]
@@ -93,17 +103,21 @@ module Google
       # @!attribute [rw] selected_regions
       #   @return [Array<Google::Monitoring::V3::UptimeCheckRegion>]
       #     The list of regions from which the check will be run.
+      #     Some regions contain one location, and others contain more than one.
       #     If this field is specified, enough regions to include a minimum of
       #     3 locations must be provided, or an error message is returned.
       #     Not specifying this field will result in uptime checks running from all
       #     regions.
       # @!attribute [rw] is_internal
       #   @return [true, false]
-      #     Denotes whether this is a check that egresses from InternalCheckers.
+      #     If this is true, then checks are made only from the 'internal_checkers'.
+      #     If it is false, then checks are made only from the 'selected_regions'.
+      #     It is an error to provide 'selected_regions' when is_internal is true,
+      #     or to provide 'internal_checkers' when is_internal is false.
       # @!attribute [rw] internal_checkers
       #   @return [Array<Google::Monitoring::V3::InternalChecker>]
       #     The internal checkers that this check will egress from. If `is_internal` is
-      #     true and this list is empty, the check will egress from all
+      #     true and this list is empty, the check will egress from all the
       #     InternalCheckers configured for the project that owns this CheckConfig.
       class UptimeCheckConfig
         # The resource submessage for group checks. It can be used instead of a
@@ -174,12 +188,11 @@ module Google
         #     Required.
         class TcpCheck; end
 
-        # Used to perform string matching. Currently, this matches on the exact
-        # content. In the future, it can be expanded to allow for regular expressions
-        # and more complex matching.
+        # Used to perform string matching. It allows substring and regular
+        # expressions, together with their negations.
         # @!attribute [rw] content
         #   @return [String]
-        #     String content to match (max 1024 bytes)
+        #     String or regex content to match (max 1024 bytes)
         class ContentMatcher; end
       end
 
