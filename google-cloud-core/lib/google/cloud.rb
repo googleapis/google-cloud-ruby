@@ -204,7 +204,10 @@ module Google
     #
     def self.loaded_files
       files = Array(caller).map do |backtrace_line|
-        backtrace_line.split(":").first
+        until backtrace_line.split(":").size == 1 || File.file?(backtrace_line)
+          backtrace_line = backtrace_line.split(":")[0..-2].join(":")
+        end
+        backtrace_line
       end
       files.uniq!
       files.select! { |file| File.file? file }
