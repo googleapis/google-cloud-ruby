@@ -204,7 +204,7 @@ module Google
     #
     def self.loaded_files
       files = Array(caller).map do |backtrace_line|
-        until backtrace_line.split(":").size == 1 || File.file?(backtrace_line)
+        until backtrace_line.split(":").size < 2 || File.file?(backtrace_line)
           backtrace_line = backtrace_line.split(":")[0..-2].join(":")
         end
         backtrace_line
