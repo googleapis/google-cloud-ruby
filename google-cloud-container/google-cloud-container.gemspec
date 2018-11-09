@@ -7,8 +7,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-container is the official library for Google Container Engine API."
-  gem.summary       = "API Client library for Google Container Engine API"
+  gem.description   = "google-cloud-container is the official library for Kubernetes Engine API."
+  gem.summary       = "API Client library for Kubernetes Engine API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-container"
   gem.license       = "Apache-2.0"
 
