@@ -466,7 +466,9 @@ the rows in the returned data.</p>
 192
 193
 194
-195</pre>
+195
+196
+197</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/results.rb', line 97</span>
@@ -520,7 +522,9 @@ the rows in the returned data.</p>
         <span class='comment'># Flush the buffered responses now that they are all handled
 </span>        <span class='id identifier rubyid_buffered_responses'>buffered_responses</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
       <span class='kw'>end</span>
-    <span class='kw'>rescue</span> <span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Unavailable</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_err'>err</span>
+    <span class='kw'>rescue</span> <span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Cancelled</span><span class='comma'>,</span> <span class='const'>GRPC</span><span class='op'>::</span><span class='const'>DeadlineExceeded</span><span class='comma'>,</span> <span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Internal</span><span class='comma'>,</span>
+           <span class='const'>GRPC</span><span class='op'>::</span><span class='const'>ResourceExhausted</span><span class='comma'>,</span> <span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Unauthenticated</span><span class='comma'>,</span>
+           <span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Unavailable</span><span class='comma'>,</span> <span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>CallError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_err'>err</span>
       <span class='kw'>if</span> <span class='id identifier rubyid_resume_token'>resume_token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_resume_token'>resume_token</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
         <span class='comment'># Re-raise if the resume_token is not a valid value.
 </span>        <span class='comment'># This can happen if the buffer was flushed.
