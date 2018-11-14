@@ -1,5 +1,10 @@
 # Release History
 
+### 1.1.3 / 2018-11-14
+
+* Update documentation.
+* Add support for V1P1Beta1 and V1P2Beta1 API's.
+
 ### 1.1.2 / 2018-09-20
 
 * Update documentation.
