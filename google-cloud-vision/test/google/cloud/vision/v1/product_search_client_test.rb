@@ -541,7 +541,7 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
 
     it 'invokes get_reference_image without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[IMAGE]")
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
@@ -582,7 +582,7 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
 
     it 'invokes get_reference_image with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[IMAGE]")
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -616,7 +616,7 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
 
     it 'invokes delete_reference_image without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[IMAGE]")
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -651,7 +651,7 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
 
     it 'invokes delete_reference_image with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[IMAGE]")
+      formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
