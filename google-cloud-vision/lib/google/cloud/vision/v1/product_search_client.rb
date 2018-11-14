@@ -106,23 +106,23 @@ module Google
 
           private_constant :LOCATION_PATH_TEMPLATE
 
-          PRODUCT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/products/{product}"
-          )
-
-          private_constant :PRODUCT_PATH_TEMPLATE
-
           PRODUCT_SET_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/productSets/{product_set}"
           )
 
           private_constant :PRODUCT_SET_PATH_TEMPLATE
 
-          IMAGE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/products/{product}/referenceImages/{image}"
+          PRODUCT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/products/{product}"
           )
 
-          private_constant :IMAGE_PATH_TEMPLATE
+          private_constant :PRODUCT_PATH_TEMPLATE
+
+          REFERENCE_IMAGE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/products/{product}/referenceImages/{reference_image}"
+          )
+
+          private_constant :REFERENCE_IMAGE_PATH_TEMPLATE
 
           # Returns a fully-qualified location resource name string.
           # @param project [String]
@@ -132,19 +132,6 @@ module Google
             LOCATION_PATH_TEMPLATE.render(
               :"project" => project,
               :"location" => location
-            )
-          end
-
-          # Returns a fully-qualified product resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @param product [String]
-          # @return [String]
-          def self.product_path project, location, product
-            PRODUCT_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location,
-              :"product" => product
             )
           end
 
@@ -161,18 +148,31 @@ module Google
             )
           end
 
-          # Returns a fully-qualified image resource name string.
+          # Returns a fully-qualified product resource name string.
           # @param project [String]
           # @param location [String]
           # @param product [String]
-          # @param image [String]
           # @return [String]
-          def self.image_path project, location, product, image
-            IMAGE_PATH_TEMPLATE.render(
+          def self.product_path project, location, product
+            PRODUCT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"product" => product
+            )
+          end
+
+          # Returns a fully-qualified reference_image resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @param product [String]
+          # @param reference_image [String]
+          # @return [String]
+          def self.reference_image_path project, location, product, reference_image
+            REFERENCE_IMAGE_PATH_TEMPLATE.render(
               :"project" => project,
               :"location" => location,
               :"product" => product,
-              :"image" => image
+              :"reference_image" => reference_image
             )
           end
 
@@ -723,7 +723,7 @@ module Google
           #   require "google/cloud/vision"
           #
           #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[IMAGE]")
+          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
           #   response = product_search_client.get_reference_image(formatted_name)
 
           def get_reference_image \
@@ -766,7 +766,7 @@ module Google
           #   require "google/cloud/vision"
           #
           #   product_search_client = Google::Cloud::Vision::ProductSearch.new(version: :v1)
-          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[IMAGE]")
+          #   formatted_name = Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path("[PROJECT]", "[LOCATION]", "[PRODUCT]", "[REFERENCE_IMAGE]")
           #   product_search_client.delete_reference_image(formatted_name)
 
           def delete_reference_image \
