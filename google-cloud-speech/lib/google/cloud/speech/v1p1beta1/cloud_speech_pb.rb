@@ -8,6 +8,7 @@ require 'google/api/annotations_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/duration_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -134,6 +135,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :alternatives, :message, 1, "google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative"
     optional :is_final, :bool, 2
     optional :stability, :float, 3
+    optional :result_end_time, :message, 4, "google.protobuf.Duration"
     optional :channel_tag, :int32, 5
     optional :language_code, :string, 6
   end
