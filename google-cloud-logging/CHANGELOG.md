@@ -1,5 +1,10 @@
 # Release History
 
+### 1.5.7 / 2018-11-15
+
+* Add Google::Logging::V2::LogEntry#trace_sampled.
+* Update low-level documentation.
+
 ### 1.5.6 / 2018-10-03
 
 * Use concurrent-ruby and ThreadLocalVar in Logger.
