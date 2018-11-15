@@ -32,7 +32,7 @@ module Google
   module Cloud
     module Container
       module V1
-        # Google Container Engine Cluster Manager v1
+        # Google Kubernetes Engine Cluster Manager v1
         #
         # @!attribute [r] cluster_manager_stub
         #   @return [Google::Container::V1::ClusterManager::Stub]
@@ -318,12 +318,18 @@ module Google
           # zones.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides, or "-" for all zones.
+          #   This field has been deprecated and replaced by the parent field.
+          # @param parent [String]
+          #   The parent (project and location) where the clusters will be listed.
+          #   Specified in the format 'projects/*/locations/*'.
+          #   Location "-" matches all zones and all regions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -347,11 +353,13 @@ module Google
           def list_clusters \
               project_id,
               zone,
+              parent: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
-              zone: zone
+              zone: zone,
+              parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::ListClustersRequest)
             @list_clusters.call(req, options, &block)
@@ -360,14 +368,20 @@ module Google
           # Gets the details of a specific cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to retrieve.
+          #   Deprecated. The name of the cluster to retrieve.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to retrieve.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -395,12 +409,14 @@ module Google
               project_id,
               zone,
               cluster_id,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id
+              cluster_id: cluster_id,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::GetClusterRequest)
             @get_cluster.call(req, options, &block)
@@ -421,17 +437,22 @@ module Google
           # which CIDR range is being used by the cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the parent field.
           # @param cluster [Google::Container::V1::Cluster | Hash]
           #   A [cluster
           #   resource](/container-engine/reference/rest/v1/projects.zones.clusters)
           #   A hash of the same form as `Google::Container::V1::Cluster`
           #   can also be provided.
+          # @param parent [String]
+          #   The parent (project and location) where the cluster will be created.
+          #   Specified in the format 'projects/*/locations/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -459,12 +480,14 @@ module Google
               project_id,
               zone,
               cluster,
+              parent: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
-              cluster: cluster
+              cluster: cluster,
+              parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::CreateClusterRequest)
             @create_cluster.call(req, options, &block)
@@ -473,18 +496,24 @@ module Google
           # Updates the settings of a specific cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param update [Google::Container::V1::ClusterUpdate | Hash]
           #   A description of the update.
           #   A hash of the same form as `Google::Container::V1::ClusterUpdate`
           #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to update.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -516,37 +545,55 @@ module Google
               zone,
               cluster_id,
               update,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              update: update
+              update: update,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::UpdateClusterRequest)
             @update_cluster.call(req, options, &block)
           end
 
-          # Updates the version and/or image type of a specific node pool.
+          # Updates the version and/or image type for a specific node pool.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to upgrade.
+          #   Deprecated. The name of the node pool to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_version [String]
           #   The Kubernetes version to change the nodes to (typically an
-          #   upgrade). Use `-` to upgrade to the latest version supported by
-          #   the server.
+          #   upgrade).
+          #
+          #   Users may specify either explicit versions offered by Kubernetes Engine or
+          #   version aliases, which have the following behavior:
+          #
+          #   * "latest": picks the highest valid Kubernetes version
+          #   * "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+          #   * "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+          #   * "1.X.Y-gke.N": picks an explicit Kubernetes version
+          #   * "-": picks the Kubernetes master version
           # @param image_type [String]
           #   The desired image type for the node pool.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool) of the node pool to
+          #   update. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -586,6 +633,7 @@ module Google
               node_pool_id,
               node_version,
               image_type,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -594,29 +642,38 @@ module Google
               cluster_id: cluster_id,
               node_pool_id: node_pool_id,
               node_version: node_version,
-              image_type: image_type
+              image_type: image_type,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::UpdateNodePoolRequest)
             @update_node_pool.call(req, options, &block)
           end
 
-          # Sets the autoscaling settings of a specific node pool.
+          # Sets the autoscaling settings for a specific node pool.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to upgrade.
+          #   Deprecated. The name of the node pool to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param autoscaling [Google::Container::V1::NodePoolAutoscaling | Hash]
           #   Autoscaling configuration for the node pool.
           #   A hash of the same form as `Google::Container::V1::NodePoolAutoscaling`
           #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool) of the node pool to set
+          #   autoscaler settings. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -652,6 +709,7 @@ module Google
               cluster_id,
               node_pool_id,
               autoscaling,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -659,29 +717,36 @@ module Google
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id,
-              autoscaling: autoscaling
+              autoscaling: autoscaling,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetNodePoolAutoscalingRequest)
             @set_node_pool_autoscaling.call(req, options, &block)
           end
 
-          # Sets the logging service of a specific cluster.
+          # Sets the logging service for a specific cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param logging_service [String]
           #   The logging service the cluster should use to write metrics.
           #   Currently available options:
           #
           #   * "logging.googleapis.com" - the Google Cloud Logging service
           #   * "none" - no metrics will be exported from the cluster
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set logging.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -713,35 +778,43 @@ module Google
               zone,
               cluster_id,
               logging_service,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              logging_service: logging_service
+              logging_service: logging_service,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetLoggingServiceRequest)
             @set_logging_service.call(req, options, &block)
           end
 
-          # Sets the monitoring service of a specific cluster.
+          # Sets the monitoring service for a specific cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param monitoring_service [String]
           #   The monitoring service the cluster should use to write metrics.
           #   Currently available options:
           #
           #   * "monitoring.googleapis.com" - the Google Cloud Monitoring service
           #   * "none" - no metrics will be exported from the cluster
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set monitoring.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -773,34 +846,42 @@ module Google
               zone,
               cluster_id,
               monitoring_service,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              monitoring_service: monitoring_service
+              monitoring_service: monitoring_service,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetMonitoringServiceRequest)
             @set_monitoring_service.call(req, options, &block)
           end
 
-          # Sets the addons of a specific cluster.
+          # Sets the addons for a specific cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param addons_config [Google::Container::V1::AddonsConfig | Hash]
           #   The desired configurations for the various addons available to run in the
           #   cluster.
           #   A hash of the same form as `Google::Container::V1::AddonsConfig`
           #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set addons.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -832,29 +913,34 @@ module Google
               zone,
               cluster_id,
               addons_config,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              addons_config: addons_config
+              addons_config: addons_config,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetAddonsConfigRequest)
             @set_addons_config.call(req, options, &block)
           end
 
-          # Sets the locations of a specific cluster.
+          # Sets the locations for a specific cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param locations [Array<String>]
           #   The desired list of Google Compute Engine
           #   [locations](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
@@ -863,6 +949,9 @@ module Google
           #   whether locations are being added or removed.
           #
           #   This list must always include the cluster's primary zone.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set locations.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -894,33 +983,48 @@ module Google
               zone,
               cluster_id,
               locations,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              locations: locations
+              locations: locations,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetLocationsRequest)
             @set_locations.call(req, options, &block)
           end
 
-          # Updates the master of a specific cluster.
+          # Updates the master for a specific cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param master_version [String]
-          #   The Kubernetes version to change the master to. The only valid value is the
-          #   latest supported version. Use "-" to have the server automatically select
-          #   the latest version.
+          #   The Kubernetes version to change the master to.
+          #
+          #   Users may specify either explicit versions offered by Kubernetes Engine or
+          #   version aliases, which have the following behavior:
+          #
+          #   * "latest": picks the highest valid Kubernetes version
+          #   * "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+          #   * "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+          #   * "1.X.Y-gke.N": picks an explicit Kubernetes version
+          #   * "-": picks the default Kubernetes version
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to update.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -952,37 +1056,45 @@ module Google
               zone,
               cluster_id,
               master_version,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              master_version: master_version
+              master_version: master_version,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::UpdateMasterRequest)
             @update_master.call(req, options, &block)
           end
 
           # Used to set master auth materials. Currently supports :-
-          # Changing the admin password of a specific cluster.
+          # Changing the admin password for a specific cluster.
           # This can be either via password generation or explicitly set the password.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to upgrade.
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param action [Google::Container::V1::SetMasterAuthRequest::Action]
           #   The exact form of action to be taken on the master auth.
           # @param update [Google::Container::V1::MasterAuth | Hash]
           #   A description of the update.
           #   A hash of the same form as `Google::Container::V1::MasterAuth`
           #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to set auth.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1018,6 +1130,7 @@ module Google
               cluster_id,
               action,
               update,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -1025,7 +1138,8 @@ module Google
               zone: zone,
               cluster_id: cluster_id,
               action: action,
-              update: update
+              update: update,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetMasterAuthRequest)
             @set_master_auth.call(req, options, &block)
@@ -1042,14 +1156,20 @@ module Google
           # at the initial create time.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to delete.
+          #   Deprecated. The name of the cluster to delete.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project, location, cluster) of the cluster to delete.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1077,12 +1197,14 @@ module Google
               project_id,
               zone,
               cluster_id,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id
+              cluster_id: cluster_id,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::DeleteClusterRequest)
             @delete_cluster.call(req, options, &block)
@@ -1091,11 +1213,17 @@ module Google
           # Lists all operations in a project in a specific zone or all zones.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available)
-          #   to return operations for, or `-` for all zones.
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
+          #   all zones. This field has been deprecated and replaced by the parent field.
+          # @param parent [String]
+          #   The parent (project and location) where the operations will be listed.
+          #   Specified in the format 'projects/*/locations/*'.
+          #   Location "-" matches all zones and all regions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1119,11 +1247,13 @@ module Google
           def list_operations \
               project_id,
               zone,
+              parent: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
-              zone: zone
+              zone: zone,
+              parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::ListOperationsRequest)
             @list_operations.call(req, options, &block)
@@ -1132,14 +1262,20 @@ module Google
           # Gets the specified operation.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param operation_id [String]
-          #   The server-assigned `name` of the operation.
+          #   Deprecated. The server-assigned `name` of the operation.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project, location, operation id) of the operation to get.
+          #   Specified in the format 'projects/*/locations/*/operations/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1167,12 +1303,14 @@ module Google
               project_id,
               zone,
               operation_id,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
-              operation_id: operation_id
+              operation_id: operation_id,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::GetOperationRequest)
             @get_operation.call(req, options, &block)
@@ -1181,13 +1319,19 @@ module Google
           # Cancels the specified operation.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param operation_id [String]
-          #   The server-assigned `name` of the operation.
+          #   Deprecated. The server-assigned `name` of the operation.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project, location, operation id) of the operation to cancel.
+          #   Specified in the format 'projects/*/locations/*/operations/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1214,26 +1358,33 @@ module Google
               project_id,
               zone,
               operation_id,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
-              operation_id: operation_id
+              operation_id: operation_id,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::CancelOperationRequest)
             @cancel_operation.call(req, options, &block)
             nil
           end
 
-          # Returns configuration info about the Container Engine service.
+          # Returns configuration info about the Kubernetes Engine service.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available)
-          #   to return operations for.
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project and location) of the server config to get
+          #   Specified in the format 'projects/*/locations/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1257,11 +1408,13 @@ module Google
           def get_server_config \
               project_id,
               zone,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
-              zone: zone
+              zone: zone,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::GetServerConfigRequest)
             @get_server_config.call(req, options, &block)
@@ -1270,14 +1423,20 @@ module Google
           # Lists the node pools for a cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the parent field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the parent field.
+          # @param parent [String]
+          #   The parent (project, location, cluster id) where the node pools will be
+          #   listed. Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1305,12 +1464,14 @@ module Google
               project_id,
               zone,
               cluster_id,
+              parent: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id
+              cluster_id: cluster_id,
+              parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::ListNodePoolsRequest)
             @list_node_pools.call(req, options, &block)
@@ -1319,16 +1480,24 @@ module Google
           # Retrieves the node pool requested.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool.
+          #   Deprecated. The name of the node pool.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node pool to
+          #   get. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1360,13 +1529,15 @@ module Google
               zone,
               cluster_id,
               node_pool_id,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              node_pool_id: node_pool_id
+              node_pool_id: node_pool_id,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::GetNodePoolRequest)
             @get_node_pool.call(req, options, &block)
@@ -1375,18 +1546,25 @@ module Google
           # Creates a node pool for a cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the parent field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the parent field.
           # @param node_pool [Google::Container::V1::NodePool | Hash]
           #   The node pool to create.
           #   A hash of the same form as `Google::Container::V1::NodePool`
           #   can also be provided.
+          # @param parent [String]
+          #   The parent (project, location, cluster id) where the node pool will be
+          #   created. Specified in the format
+          #   'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1418,13 +1596,15 @@ module Google
               zone,
               cluster_id,
               node_pool,
+              parent: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              node_pool: node_pool
+              node_pool: node_pool,
+              parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::CreateNodePoolRequest)
             @create_node_pool.call(req, options, &block)
@@ -1433,16 +1613,24 @@ module Google
           # Deletes a node pool from a cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to delete.
+          #   Deprecated. The name of the node pool to delete.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node pool to
+          #   delete. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1474,13 +1662,15 @@ module Google
               zone,
               cluster_id,
               node_pool_id,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              node_pool_id: node_pool_id
+              node_pool_id: node_pool_id,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::DeleteNodePoolRequest)
             @delete_node_pool.call(req, options, &block)
@@ -1490,16 +1680,24 @@ module Google
           # This will be an no-op if the last upgrade successfully completed.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to rollback.
+          #   Deprecated. The name of the cluster to rollback.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to rollback.
+          #   Deprecated. The name of the node pool to rollback.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node poll to
+          #   rollback upgrade.
+          #   Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1531,13 +1729,15 @@ module Google
               zone,
               cluster_id,
               node_pool_id,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              node_pool_id: node_pool_id
+              node_pool_id: node_pool_id,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::RollbackNodePoolUpgradeRequest)
             @rollback_node_pool_upgrade.call(req, options, &block)
@@ -1546,20 +1746,28 @@ module Google
           # Sets the NodeManagement options for a node pool.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to update.
+          #   Deprecated. The name of the cluster to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to update.
+          #   Deprecated. The name of the node pool to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param management [Google::Container::V1::NodeManagement | Hash]
           #   NodeManagement configuration for the node pool.
           #   A hash of the same form as `Google::Container::V1::NodeManagement`
           #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node pool to set
+          #   management properties. Specified in the format
+          #   'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1595,6 +1803,7 @@ module Google
               cluster_id,
               node_pool_id,
               management,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -1602,7 +1811,8 @@ module Google
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id,
-              management: management
+              management: management,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetNodePoolManagementRequest)
             @set_node_pool_management.call(req, options, &block)
@@ -1611,23 +1821,29 @@ module Google
           # Sets labels on a cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param resource_labels [Hash{String => String}]
           #   The labels to set for that cluster.
           # @param label_fingerprint [String]
           #   The fingerprint of the previous set of labels for this resource,
           #   used to detect conflicts. The fingerprint is initially generated by
-          #   Container Engine and changes after every request to modify or update
+          #   Kubernetes Engine and changes after every request to modify or update
           #   labels. You must always provide an up-to-date fingerprint hash when
           #   updating or changing labels. Make a <code>get()</code> request to the
           #   resource to get the latest fingerprint.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to set labels.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1663,6 +1879,7 @@ module Google
               cluster_id,
               resource_labels,
               label_fingerprint,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -1670,7 +1887,8 @@ module Google
               zone: zone,
               cluster_id: cluster_id,
               resource_labels: resource_labels,
-              label_fingerprint: label_fingerprint
+              label_fingerprint: label_fingerprint,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetLabelsRequest)
             @set_labels.call(req, options, &block)
@@ -1679,16 +1897,22 @@ module Google
           # Enables or disables the ABAC authorization mechanism on a cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to update.
+          #   Deprecated. The name of the cluster to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param enabled [true, false]
           #   Whether ABAC authorization will be enabled in the cluster.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to set legacy abac.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1720,13 +1944,15 @@ module Google
               zone,
               cluster_id,
               enabled,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              enabled: enabled
+              enabled: enabled,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetLegacyAbacRequest)
             @set_legacy_abac.call(req, options, &block)
@@ -1735,14 +1961,22 @@ module Google
           # Start master IP rotation.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to start IP
+          #   rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
+          # @param rotate_credentials [true, false]
+          #   Whether to rotate credentials during IP rotation.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1770,12 +2004,16 @@ module Google
               project_id,
               zone,
               cluster_id,
+              name: nil,
+              rotate_credentials: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id
+              cluster_id: cluster_id,
+              name: name,
+              rotate_credentials: rotate_credentials
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::StartIPRotationRequest)
             @start_ip_rotation.call(req, options, &block)
@@ -1784,14 +2022,20 @@ module Google
           # Completes master IP rotation.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to complete IP
+          #   rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1819,32 +2063,42 @@ module Google
               project_id,
               zone,
               cluster_id,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
-              cluster_id: cluster_id
+              cluster_id: cluster_id,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::CompleteIPRotationRequest)
             @complete_ip_rotation.call(req, options, &block)
           end
 
-          # Sets the size of a specific node pool.
+          # Sets the size for a specific node pool.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster to update.
+          #   Deprecated. The name of the cluster to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   The name of the node pool to update.
+          #   Deprecated. The name of the node pool to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param node_count [Integer]
           #   The desired node count for the pool.
+          # @param name [String]
+          #   The name (project, location, cluster, node pool id) of the node pool to set
+          #   size.
+          #   Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1880,6 +2134,7 @@ module Google
               cluster_id,
               node_pool_id,
               node_count,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -1887,7 +2142,8 @@ module Google
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id,
-              node_count: node_count
+              node_count: node_count,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetNodePoolSizeRequest)
             @set_node_pool_size.call(req, options, &block)
@@ -1896,18 +2152,24 @@ module Google
           # Enables/Disables Network Policy for a cluster.
           #
           # @param project_id [String]
-          #   The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
+          #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   The name of the cluster.
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param network_policy [Google::Container::V1::NetworkPolicy | Hash]
           #   Configuration options for the NetworkPolicy feature.
           #   A hash of the same form as `Google::Container::V1::NetworkPolicy`
           #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to set networking
+          #   policy. Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1939,13 +2201,15 @@ module Google
               zone,
               cluster_id,
               network_policy,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              network_policy: network_policy
+              network_policy: network_policy,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetNetworkPolicyRequest)
             @set_network_policy.call(req, options, &block)
@@ -1967,6 +2231,10 @@ module Google
           #   clears the existing maintenance policy.
           #   A hash of the same form as `Google::Container::V1::MaintenancePolicy`
           #   can also be provided.
+          # @param name [String]
+          #   The name (project, location, cluster id) of the cluster to set maintenance
+          #   policy.
+          #   Specified in the format 'projects/*/locations/*/clusters/*'.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1998,13 +2266,15 @@ module Google
               zone,
               cluster_id,
               maintenance_policy,
+              name: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              maintenance_policy: maintenance_policy
+              maintenance_policy: maintenance_policy,
+              name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetMaintenancePolicyRequest)
             @set_maintenance_policy.call(req, options, &block)
