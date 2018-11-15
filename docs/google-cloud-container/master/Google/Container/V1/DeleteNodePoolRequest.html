@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Container::V1::DeleteNodePoolRequest - Google"
+title: "Class: Google::Container::V1::DeleteNodePoolRequest - Kubernetes"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -124,7 +124,33 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the cluster.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name (project, location, cluster, node pool id) of the node pool to delete.</p>
 </div></span>
   
 </li>
@@ -150,7 +176,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the node pool to delete.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -176,7 +202,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The Google Developers Console <a href="https://developers.google.com/console/help/new/#projectnumber">project ID or project number</a>.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -202,7 +228,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster resides.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -230,7 +256,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the cluster.</p>
+    <p>Returns Deprecated. The name of the cluster.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -248,7 +275,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The name of the cluster.</p>
+        <div class='inline'><p>Deprecated. The name of the cluster.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -261,10 +289,69 @@ js:
       <pre class="lines">
 
 
-1115</pre>
+1355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1115</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1355</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::DeleteNodePoolRequest (class)">DeleteNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name (project, location, cluster, node pool id) of the node pool to
+delete. Specified in the format
+&#39;projects/<em>/locations/</em>/clusters/<em>/nodePools/</em>&#39;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name (project, location, cluster, node pool id) of the node pool to
+delete. Specified in the format
+&#39;projects/<em>/locations/</em>/clusters/<em>/nodePools/</em>&#39;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1355</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1355</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::DeleteNodePoolRequest (class)">DeleteNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -285,7 +372,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the node pool to delete.</p>
+    <p>Returns Deprecated. The name of the node pool to delete.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -303,7 +391,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The name of the node pool to delete.</p>
+        <div class='inline'><p>Deprecated. The name of the node pool to delete.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -316,10 +405,10 @@ js:
       <pre class="lines">
 
 
-1115</pre>
+1355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1115</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1355</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::DeleteNodePoolRequest (class)">DeleteNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -340,8 +429,9 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The Google Developers Console <a href="https://developers.google.com/console/help/new/#projectnumber">project ID or project
-number</a>.</p>
+    <p>Returns Deprecated. The Google Developers Console <a href="https://developers.google.com/console/help/new/#projectnumber">project ID or project
+number</a>.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -359,8 +449,9 @@ number</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>The Google Developers Console <a href="https://developers.google.com/console/help/new/#projectnumber">project ID or project
-number</a>.</p>
+        <div class='inline'><p>Deprecated. The Google Developers Console <a href="https://developers.google.com/console/help/new/#projectnumber">project ID or project
+number</a>.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -373,10 +464,10 @@ number</a>.</p>
       <pre class="lines">
 
 
-1115</pre>
+1355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1115</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1355</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::DeleteNodePoolRequest (class)">DeleteNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -397,9 +488,10 @@ number</a>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the Google Compute Engine
+    <p>Returns Deprecated. The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.</p>
+resides.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -417,9 +509,10 @@ resides.</p>
       
       
         &mdash;
-        <div class='inline'><p>The name of the Google Compute Engine
+        <div class='inline'><p>Deprecated. The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.</p>
+resides.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -432,10 +525,10 @@ resides.</p>
       <pre class="lines">
 
 
-1115</pre>
+1355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1115</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1355</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::DeleteNodePoolRequest (class)">DeleteNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

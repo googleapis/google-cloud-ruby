@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Container::V1::SetLoggingServiceRequest - Google"
+title: "Class: Google::Container::V1::SetLoggingServiceRequest - Kubernetes"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the cluster to upgrade.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -159,6 +159,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name (project, location, cluster) of the cluster to set logging.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#project_id-instance_method" title="#project_id (instance method)">#<strong>project_id</strong>  &#x21d2; String </a>
     
 
@@ -176,7 +202,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project number</a>.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -202,7 +228,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster resides.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -230,7 +256,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the cluster to upgrade.</p>
+    <p>Returns Deprecated. The name of the cluster to upgrade.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -248,7 +275,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The name of the cluster to upgrade.</p>
+        <div class='inline'><p>Deprecated. The name of the cluster to upgrade.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -261,10 +289,10 @@ js:
       <pre class="lines">
 
 
-838</pre>
+978</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 838</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 978</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::SetLoggingServiceRequest (class)">SetLoggingServiceRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -328,10 +356,67 @@ Currently available options:</p>
       <pre class="lines">
 
 
-838</pre>
+978</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 838</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 978</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::SetLoggingServiceRequest (class)">SetLoggingServiceRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name (project, location, cluster) of the cluster to set logging.
+Specified in the format &#39;projects/<em>/locations/</em>/clusters/*&#39;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name (project, location, cluster) of the cluster to set logging.
+Specified in the format &#39;projects/<em>/locations/</em>/clusters/*&#39;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+978</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 978</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::SetLoggingServiceRequest (class)">SetLoggingServiceRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -352,8 +437,9 @@ Currently available options:</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
-number</a>.</p>
+    <p>Returns Deprecated. The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
+number</a>.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -371,8 +457,9 @@ number</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
-number</a>.</p>
+        <div class='inline'><p>Deprecated. The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
+number</a>.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -385,10 +472,10 @@ number</a>.</p>
       <pre class="lines">
 
 
-838</pre>
+978</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 838</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 978</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::SetLoggingServiceRequest (class)">SetLoggingServiceRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -409,9 +496,10 @@ number</a>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the Google Compute Engine
+    <p>Returns Deprecated. The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.</p>
+resides.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -429,9 +517,10 @@ resides.</p>
       
       
         &mdash;
-        <div class='inline'><p>The name of the Google Compute Engine
+        <div class='inline'><p>Deprecated. The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.</p>
+resides.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -444,10 +533,10 @@ resides.</p>
       <pre class="lines">
 
 
-838</pre>
+978</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 838</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 978</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::SetLoggingServiceRequest (class)">SetLoggingServiceRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

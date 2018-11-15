@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Container::V1::UpdateNodePoolRequest - Google"
+title: "Class: Google::Container::V1::UpdateNodePoolRequest - Kubernetes"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the cluster to upgrade.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -159,6 +159,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name (project, location, cluster, node pool) of the node pool to update.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#node_pool_id-instance_method" title="#node_pool_id (instance method)">#<strong>node_pool_id</strong>  &#x21d2; String </a>
     
 
@@ -176,7 +202,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the node pool to upgrade.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -228,7 +254,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project number</a>.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -254,7 +280,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster resides.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -282,7 +308,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the cluster to upgrade.</p>
+    <p>Returns Deprecated. The name of the cluster to upgrade.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -300,7 +327,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The name of the cluster to upgrade.</p>
+        <div class='inline'><p>Deprecated. The name of the cluster to upgrade.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -313,10 +341,10 @@ js:
       <pre class="lines">
 
 
-795</pre>
+919</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 795</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 919</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::UpdateNodePoolRequest (class)">UpdateNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -368,10 +396,69 @@ js:
       <pre class="lines">
 
 
-795</pre>
+919</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 795</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 919</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::UpdateNodePoolRequest (class)">UpdateNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The name (project, location, cluster, node pool) of the node pool to
+update. Specified in the format
+&#39;projects/<em>/locations/</em>/clusters/<em>/nodePools/</em>&#39;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name (project, location, cluster, node pool) of the node pool to
+update. Specified in the format
+&#39;projects/<em>/locations/</em>/clusters/<em>/nodePools/</em>&#39;.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+919</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 919</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::UpdateNodePoolRequest (class)">UpdateNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -392,7 +479,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the node pool to upgrade.</p>
+    <p>Returns Deprecated. The name of the node pool to upgrade.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -410,7 +498,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The name of the node pool to upgrade.</p>
+        <div class='inline'><p>Deprecated. The name of the node pool to upgrade.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -423,10 +512,10 @@ js:
       <pre class="lines">
 
 
-795</pre>
+919</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 795</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 919</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::UpdateNodePoolRequest (class)">UpdateNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -448,8 +537,18 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The Kubernetes version to change the nodes to (typically an
-upgrade). Use <code>-</code> to upgrade to the latest version supported by
-the server.</p>
+upgrade).</p>
+
+<p>Users may specify either explicit versions offered by Kubernetes Engine or
+version aliases, which have the following behavior:</p>
+
+<ul>
+<li>&quot;latest&quot;: picks the highest valid Kubernetes version</li>
+<li>&quot;1.X&quot;: picks the highest valid patch+gke.N patch in the 1.X version</li>
+<li>&quot;1.X.Y&quot;: picks the highest valid gke.N patch in the 1.X.Y version</li>
+<li>&quot;1.X.Y-gke.N&quot;: picks an explicit Kubernetes version</li>
+<li>&quot;-&quot;: picks the Kubernetes master version</li>
+</ul>
 
 
   </div>
@@ -468,8 +567,18 @@ the server.</p>
       
         &mdash;
         <div class='inline'><p>The Kubernetes version to change the nodes to (typically an
-upgrade). Use <code>-</code> to upgrade to the latest version supported by
-the server.</p>
+upgrade).</p>
+
+<p>Users may specify either explicit versions offered by Kubernetes Engine or
+version aliases, which have the following behavior:</p>
+
+<ul>
+<li>&quot;latest&quot;: picks the highest valid Kubernetes version</li>
+<li>&quot;1.X&quot;: picks the highest valid patch+gke.N patch in the 1.X version</li>
+<li>&quot;1.X.Y&quot;: picks the highest valid gke.N patch in the 1.X.Y version</li>
+<li>&quot;1.X.Y-gke.N&quot;: picks an explicit Kubernetes version</li>
+<li>&quot;-&quot;: picks the Kubernetes master version</li>
+</ul>
 </div>
       
     </li>
@@ -482,10 +591,10 @@ the server.</p>
       <pre class="lines">
 
 
-795</pre>
+919</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 795</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 919</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::UpdateNodePoolRequest (class)">UpdateNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -506,8 +615,9 @@ the server.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
-number</a>.</p>
+    <p>Returns Deprecated. The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
+number</a>.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -525,8 +635,9 @@ number</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
-number</a>.</p>
+        <div class='inline'><p>Deprecated. The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
+number</a>.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -539,10 +650,10 @@ number</a>.</p>
       <pre class="lines">
 
 
-795</pre>
+919</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 795</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 919</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::UpdateNodePoolRequest (class)">UpdateNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -563,9 +674,10 @@ number</a>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the Google Compute Engine
+    <p>Returns Deprecated. The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.</p>
+resides.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -583,9 +695,10 @@ resides.</p>
       
       
         &mdash;
-        <div class='inline'><p>The name of the Google Compute Engine
+        <div class='inline'><p>Deprecated. The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.</p>
+resides.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -598,10 +711,10 @@ resides.</p>
       <pre class="lines">
 
 
-795</pre>
+919</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 795</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 919</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::UpdateNodePoolRequest (class)">UpdateNodePoolRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

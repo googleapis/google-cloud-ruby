@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Container::V1::ClusterUpdate - Google"
+title: "Class: Google::Container::V1::ClusterUpdate - Kubernetes"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -204,7 +204,7 @@ provided.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Master authorized networks is a Beta feature.</p>
+    <span class="summary_desc"><div class='inline'><p>The desired configuration options for master authorized networks feature.</p>
 </div></span>
   
 </li>
@@ -393,10 +393,10 @@ provided.</p>
       <pre class="lines">
 
 
-610</pre>
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 690</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::ClusterUpdate (class)">ClusterUpdate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -450,10 +450,10 @@ NOTE: Set the &quot;desired_node_pool&quot; field as well.</p>
       <pre class="lines">
 
 
-610</pre>
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 690</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::ClusterUpdate (class)">ClusterUpdate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -517,10 +517,10 @@ whether locations are being added or removed.</p>
       <pre class="lines">
 
 
-610</pre>
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 690</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::ClusterUpdate (class)">ClusterUpdate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -541,8 +541,7 @@ whether locations are being added or removed.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Master authorized networks is a Beta feature.
-The desired configuration options for master authorized networks feature.</p>
+    <p>Returns The desired configuration options for master authorized networks feature.</p>
 
 
   </div>
@@ -560,8 +559,7 @@ The desired configuration options for master authorized networks feature.</p>
       
       
         &mdash;
-        <div class='inline'><p>Master authorized networks is a Beta feature.
-The desired configuration options for master authorized networks feature.</p>
+        <div class='inline'><p>The desired configuration options for master authorized networks feature.</p>
 </div>
       
     </li>
@@ -574,10 +572,10 @@ The desired configuration options for master authorized networks feature.</p>
       <pre class="lines">
 
 
-610</pre>
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 690</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::ClusterUpdate (class)">ClusterUpdate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -598,9 +596,18 @@ The desired configuration options for master authorized networks feature.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The Kubernetes version to change the master to. The only valid value is the
-latest supported version. Use &quot;-&quot; to have the server automatically select
-the latest version.</p>
+    <p>Returns The Kubernetes version to change the master to.</p>
+
+<p>Users may specify either explicit versions offered by
+Kubernetes Engine or version aliases, which have the following behavior:</p>
+
+<ul>
+<li>&quot;latest&quot;: picks the highest valid Kubernetes version</li>
+<li>&quot;1.X&quot;: picks the highest valid patch+gke.N patch in the 1.X version</li>
+<li>&quot;1.X.Y&quot;: picks the highest valid gke.N patch in the 1.X.Y version</li>
+<li>&quot;1.X.Y-gke.N&quot;: picks an explicit Kubernetes version</li>
+<li>&quot;-&quot;: picks the default Kubernetes version</li>
+</ul>
 
 
   </div>
@@ -618,9 +625,18 @@ the latest version.</p>
       
       
         &mdash;
-        <div class='inline'><p>The Kubernetes version to change the master to. The only valid value is the
-latest supported version. Use &quot;-&quot; to have the server automatically select
-the latest version.</p>
+        <div class='inline'><p>The Kubernetes version to change the master to.</p>
+
+<p>Users may specify either explicit versions offered by
+Kubernetes Engine or version aliases, which have the following behavior:</p>
+
+<ul>
+<li>&quot;latest&quot;: picks the highest valid Kubernetes version</li>
+<li>&quot;1.X&quot;: picks the highest valid patch+gke.N patch in the 1.X version</li>
+<li>&quot;1.X.Y&quot;: picks the highest valid gke.N patch in the 1.X.Y version</li>
+<li>&quot;1.X.Y-gke.N&quot;: picks an explicit Kubernetes version</li>
+<li>&quot;-&quot;: picks the default Kubernetes version</li>
+</ul>
 </div>
       
     </li>
@@ -633,10 +649,10 @@ the latest version.</p>
       <pre class="lines">
 
 
-610</pre>
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 690</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::ClusterUpdate (class)">ClusterUpdate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -700,10 +716,10 @@ Currently available options:</p>
       <pre class="lines">
 
 
-610</pre>
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 690</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::ClusterUpdate (class)">ClusterUpdate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -761,10 +777,10 @@ the change applies to that single node pool.</p>
       <pre class="lines">
 
 
-610</pre>
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 690</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::ClusterUpdate (class)">ClusterUpdate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -822,10 +838,10 @@ node pool on the cluster.</p>
       <pre class="lines">
 
 
-610</pre>
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 690</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::ClusterUpdate (class)">ClusterUpdate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -847,8 +863,18 @@ node pool on the cluster.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The Kubernetes version to change the nodes to (typically an
-upgrade). Use <code>-</code> to upgrade to the latest version supported by
-the server.</p>
+upgrade).</p>
+
+<p>Users may specify either explicit versions offered by
+Kubernetes Engine or version aliases, which have the following behavior:</p>
+
+<ul>
+<li>&quot;latest&quot;: picks the highest valid Kubernetes version</li>
+<li>&quot;1.X&quot;: picks the highest valid patch+gke.N patch in the 1.X version</li>
+<li>&quot;1.X.Y&quot;: picks the highest valid gke.N patch in the 1.X.Y version</li>
+<li>&quot;1.X.Y-gke.N&quot;: picks an explicit Kubernetes version</li>
+<li>&quot;-&quot;: picks the Kubernetes master version</li>
+</ul>
 
 
   </div>
@@ -867,8 +893,18 @@ the server.</p>
       
         &mdash;
         <div class='inline'><p>The Kubernetes version to change the nodes to (typically an
-upgrade). Use <code>-</code> to upgrade to the latest version supported by
-the server.</p>
+upgrade).</p>
+
+<p>Users may specify either explicit versions offered by
+Kubernetes Engine or version aliases, which have the following behavior:</p>
+
+<ul>
+<li>&quot;latest&quot;: picks the highest valid Kubernetes version</li>
+<li>&quot;1.X&quot;: picks the highest valid patch+gke.N patch in the 1.X version</li>
+<li>&quot;1.X.Y&quot;: picks the highest valid gke.N patch in the 1.X.Y version</li>
+<li>&quot;1.X.Y-gke.N&quot;: picks an explicit Kubernetes version</li>
+<li>&quot;-&quot;: picks the Kubernetes master version</li>
+</ul>
 </div>
       
     </li>
@@ -881,10 +917,10 @@ the server.</p>
       <pre class="lines">
 
 
-610</pre>
+690</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 610</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 690</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::ClusterUpdate (class)">ClusterUpdate</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

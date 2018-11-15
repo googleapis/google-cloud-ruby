@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Container::V1::Cluster - Google"
+title: "Class: Google::Container::V1::Cluster - Kubernetes"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A Google Container Engine cluster.</p>
+    <p>A Google Kubernetes Engine cluster.</p>
 
 
   </div>
@@ -264,7 +264,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>[Output only] The current version of the node software components.</p>
+    <span class="summary_desc"><div class='inline'><p>[Output only] Deprecated, use <a href="https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool">NodePool.version</a> instead.</p>
 </div></span>
   
 </li>
@@ -533,6 +533,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#location-instance_method" title="#location (instance method)">#<strong>location</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">zone</a> or <a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">region</a> in which the cluster resides.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#locations-instance_method" title="#locations (instance method)">#<strong>locations</strong>  &#x21d2; Array&lt;String&gt; </a>
     
 
@@ -654,7 +680,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Master authorized networks is a Beta feature.</p>
+    <span class="summary_desc"><div class='inline'><p>The configuration options for master authorized networks feature.</p>
 </div></span>
   
 </li>
@@ -733,6 +759,32 @@ js:
 
   
     <span class="summary_desc"><div class='inline'><p>The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/networks-and-firewalls#networks">network</a> to which the cluster is connected.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#network_config-instance_method" title="#network_config (instance method)">#<strong>network_config</strong>  &#x21d2; Google::Container::V1::NetworkConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configuration for cluster networking.</p>
 </div></span>
   
 </li>
@@ -837,6 +889,32 @@ js:
 
   
     <span class="summary_desc"><div class='inline'><p>The node pools associated with this cluster.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#private_cluster_config-instance_method" title="#private_cluster_config (instance method)">#<strong>private_cluster_config</strong>  &#x21d2; Google::Container::V1::PrivateClusterConfig </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configuration for private cluster.</p>
 </div></span>
   
 </li>
@@ -1077,35 +1155,39 @@ js:
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -1131,6 +1213,10 @@ js:
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1188,35 +1274,39 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -1242,6 +1332,10 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1295,35 +1389,39 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -1349,6 +1447,10 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1400,35 +1502,39 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -1454,6 +1560,10 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1505,35 +1615,39 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -1559,6 +1673,10 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1579,9 +1697,11 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns [Output only] The current version of the node software components.
-If they are currently at multiple versions because they&#39;re in the process
-of being upgraded, this reflects the minimum version of all nodes.</p>
+    <p>Returns [Output only] Deprecated, use
+<a href="https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool">NodePool.version</a>
+instead. The current version of the node software components. If they are
+currently at multiple versions because they&#39;re in the process of being
+upgraded, this reflects the minimum version of all nodes.</p>
 
 
   </div>
@@ -1599,9 +1719,11 @@ of being upgraded, this reflects the minimum version of all nodes.</p>
       
       
         &mdash;
-        <div class='inline'><p>[Output only] The current version of the node software components.
-If they are currently at multiple versions because they&#39;re in the process
-of being upgraded, this reflects the minimum version of all nodes.</p>
+        <div class='inline'><p>[Output only] Deprecated, use
+<a href="https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool">NodePool.version</a>
+instead. The current version of the node software components. If they are
+currently at multiple versions because they&#39;re in the process of being
+upgraded, this reflects the minimum version of all nodes.</p>
 </div>
       
     </li>
@@ -1614,35 +1736,39 @@ of being upgraded, this reflects the minimum version of all nodes.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -1668,6 +1794,10 @@ of being upgraded, this reflects the minimum version of all nodes.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1719,35 +1849,39 @@ of being upgraded, this reflects the minimum version of all nodes.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -1773,6 +1907,10 @@ of being upgraded, this reflects the minimum version of all nodes.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1834,35 +1972,39 @@ creation.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -1888,6 +2030,10 @@ creation.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1949,35 +2095,39 @@ password information.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2003,6 +2153,10 @@ password information.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2056,35 +2210,39 @@ deleted in <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text forma
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2110,6 +2268,10 @@ deleted in <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text forma
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2135,6 +2297,17 @@ found in validMasterVersions returned by getServerConfig.  The version can
 be upgraded over time; such upgrades are reflected in
 currentMasterVersion and currentNodeVersion.</p>
 
+<p>Users may specify either explicit versions offered by
+Kubernetes Engine or version aliases, which have the following behavior:</p>
+
+<ul>
+<li>&quot;latest&quot;: picks the highest valid Kubernetes version</li>
+<li>&quot;1.X&quot;: picks the highest valid patch+gke.N patch in the 1.X version</li>
+<li>&quot;1.X.Y&quot;: picks the highest valid gke.N patch in the 1.X.Y version</li>
+<li>&quot;1.X.Y-gke.N&quot;: picks an explicit Kubernetes version</li>
+<li>&quot;&quot;,&quot;-&quot;: picks the default Kubernetes version</li>
+</ul>
+
 
   </div>
 </div>
@@ -2155,6 +2328,17 @@ currentMasterVersion and currentNodeVersion.</p>
 found in validMasterVersions returned by getServerConfig.  The version can
 be upgraded over time; such upgrades are reflected in
 currentMasterVersion and currentNodeVersion.</p>
+
+<p>Users may specify either explicit versions offered by
+Kubernetes Engine or version aliases, which have the following behavior:</p>
+
+<ul>
+<li>&quot;latest&quot;: picks the highest valid Kubernetes version</li>
+<li>&quot;1.X&quot;: picks the highest valid patch+gke.N patch in the 1.X version</li>
+<li>&quot;1.X.Y&quot;: picks the highest valid gke.N patch in the 1.X.Y version</li>
+<li>&quot;1.X.Y-gke.N&quot;: picks an explicit Kubernetes version</li>
+<li>&quot;&quot;,&quot;-&quot;: picks the default Kubernetes version</li>
+</ul>
 </div>
       
     </li>
@@ -2167,35 +2351,39 @@ currentMasterVersion and currentNodeVersion.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2221,6 +2409,10 @@ currentMasterVersion and currentNodeVersion.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2286,35 +2478,39 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2340,6 +2536,10 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2391,35 +2591,39 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2445,6 +2649,10 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2496,35 +2704,39 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2550,6 +2762,10 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2601,35 +2817,39 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2655,6 +2875,10 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2706,35 +2930,39 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2760,6 +2988,129 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="location=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="location-instance_method">
+  
+    #<strong>location</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">zone</a> or
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">region</a> in which
+the cluster resides.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">zone</a> or
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">region</a> in which
+the cluster resides.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2815,35 +3166,39 @@ should be located.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2869,6 +3224,10 @@ should be located.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2934,35 +3293,39 @@ Currently available options:</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -2988,6 +3351,10 @@ Currently available options:</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3039,35 +3406,39 @@ Currently available options:</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -3093,6 +3464,10 @@ Currently available options:</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3144,35 +3519,39 @@ Currently available options:</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -3198,6 +3577,10 @@ Currently available options:</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3218,8 +3601,7 @@ Currently available options:</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Master authorized networks is a Beta feature.
-The configuration options for master authorized networks feature.</p>
+    <p>Returns The configuration options for master authorized networks feature.</p>
 
 
   </div>
@@ -3237,8 +3619,7 @@ The configuration options for master authorized networks feature.</p>
       
       
         &mdash;
-        <div class='inline'><p>Master authorized networks is a Beta feature.
-The configuration options for master authorized networks feature.</p>
+        <div class='inline'><p>The configuration options for master authorized networks feature.</p>
 </div>
       
     </li>
@@ -3251,35 +3632,39 @@ The configuration options for master authorized networks feature.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -3305,6 +3690,10 @@ The configuration options for master authorized networks feature.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3370,35 +3759,39 @@ Currently available options:</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -3424,6 +3817,10 @@ Currently available options:</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3489,35 +3886,39 @@ and zone, and can be up to 40 characters with the following restrictions:</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -3543,6 +3944,10 @@ and zone, and can be up to 40 characters with the following restrictions:</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3600,35 +4005,39 @@ will be used.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -3654,6 +4063,123 @@ will be used.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="network_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="network_config-instance_method">
+  
+    #<strong>network_config</strong>  &#x21d2; <tt><span class='object_link'><a href="NetworkConfig.html" title="Google::Container::V1::NetworkConfig (class)">Google::Container::V1::NetworkConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Configuration for cluster networking.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="NetworkConfig.html" title="Google::Container::V1::NetworkConfig (class)">Google::Container::V1::NetworkConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Configuration for cluster networking.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3705,35 +4231,39 @@ will be used.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -3759,6 +4289,10 @@ will be used.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3828,35 +4362,39 @@ the first node pool.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -3882,6 +4420,10 @@ the first node pool.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3937,35 +4479,39 @@ range.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -3991,6 +4537,10 @@ range.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4046,35 +4596,39 @@ specified.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -4100,6 +4654,123 @@ specified.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="private_cluster_config=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="private_cluster_config-instance_method">
+  
+    #<strong>private_cluster_config</strong>  &#x21d2; <tt><span class='object_link'><a href="PrivateClusterConfig.html" title="Google::Container::V1::PrivateClusterConfig (class)">Google::Container::V1::PrivateClusterConfig</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Configuration for private cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PrivateClusterConfig.html" title="Google::Container::V1::PrivateClusterConfig (class)">Google::Container::V1::PrivateClusterConfig</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Configuration for private cluster.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
+  <span class='comment'># The current status of the cluster.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Cluster/Status.html" title="Google::Container::V1::Cluster::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The PROVISIONING state indicates the cluster is being created.
+</span>    <span class='const'>PROVISIONING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The RUNNING state indicates the cluster has been created and is fully
+</span>    <span class='comment'># usable.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The RECONCILING state indicates that some work is actively being done on
+</span>    <span class='comment'># the cluster, such as upgrading the master or node software. Details can
+</span>    <span class='comment'># be found in the `statusMessage` field.
+</span>    <span class='const'>RECONCILING</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The STOPPING state indicates the cluster is being deleted.
+</span>    <span class='const'>STOPPING</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
+</span>    <span class='comment'># can be found in the `statusMessage` field.
+</span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4153,35 +4824,39 @@ Google Compute Engine resources.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -4207,6 +4882,10 @@ Google Compute Engine resources.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4258,35 +4937,39 @@ Google Compute Engine resources.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -4312,6 +4995,10 @@ Google Compute Engine resources.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4371,35 +5058,39 @@ typically put in the last <code>/16</code> from the container CIDR.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -4425,6 +5116,10 @@ typically put in the last <code>/16</code> from the container CIDR.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4476,35 +5171,39 @@ typically put in the last <code>/16</code> from the container CIDR.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -4530,6 +5229,10 @@ typically put in the last <code>/16</code> from the container CIDR.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4583,35 +5286,39 @@ cluster, if available.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -4637,6 +5344,10 @@ cluster, if available.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4692,35 +5403,39 @@ cluster is connected.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -4746,6 +5461,10 @@ cluster is connected.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4768,7 +5487,8 @@ cluster is connected.</p>
   <div class="discussion">
     <p>Returns [Output only] The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.</p>
+resides.
+This field is deprecated, use location instead.</p>
 
 
   </div>
@@ -4788,7 +5508,8 @@ resides.</p>
         &mdash;
         <div class='inline'><p>[Output only] The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.</p>
+resides.
+This field is deprecated, use location instead.</p>
 </div>
       
     </li>
@@ -4801,35 +5522,39 @@ resides.</p>
       <pre class="lines">
 
 
-531
-532
-533
-534
-535
-536
-537
-538
-539
-540
-541
-542
-543
-544
-545
-546
-547
-548
-549
-550
-551
-552
-553
-554
-555
-556</pre>
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 593</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Cluster (class)">Cluster</a></span></span>
   <span class='comment'># The current status of the cluster.
@@ -4855,6 +5580,10 @@ resides.</p>
     <span class='comment'># The ERROR state indicates the cluster may be unusable. Details
 </span>    <span class='comment'># can be found in the `statusMessage` field.
 </span>    <span class='const'>ERROR</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># The DEGRADED state indicates the cluster requires user action to restore
+</span>    <span class='comment'># full functionality. Details can be found in the `statusMessage` field.
+</span>    <span class='const'>DEGRADED</span> <span class='op'>=</span> <span class='int'>6</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>

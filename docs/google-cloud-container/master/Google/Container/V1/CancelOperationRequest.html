@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Container::V1::CancelOperationRequest - Google"
+title: "Class: Google::Container::V1::CancelOperationRequest - Kubernetes"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -107,6 +107,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The name (project, location, operation id) of the operation to cancel.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#operation_id-instance_method" title="#operation_id (instance method)">#<strong>operation_id</strong>  &#x21d2; String </a>
     
 
@@ -124,7 +150,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The server-assigned <code>name</code> of the operation.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -150,7 +176,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project number</a>.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -176,7 +202,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the operation resides.</p>
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
 </div></span>
   
 </li>
@@ -192,11 +218,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="operation_id=-instance_method"></span>
+      <span id="name=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="operation_id-instance_method">
+  <h3 class="signature first" id="name-instance_method">
   
-    #<strong>operation_id</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -204,7 +230,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The server-assigned <code>name</code> of the operation.</p>
+    <p>Returns The name (project, location, operation id) of the operation to cancel.
+Specified in the format &#39;projects/<em>/locations/</em>/operations/*&#39;.</p>
 
 
   </div>
@@ -222,7 +249,8 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The server-assigned <code>name</code> of the operation.</p>
+        <div class='inline'><p>The name (project, location, operation id) of the operation to cancel.
+Specified in the format &#39;projects/<em>/locations/</em>/operations/*&#39;.</p>
 </div>
       
     </li>
@@ -235,10 +263,67 @@ js:
       <pre class="lines">
 
 
-1040</pre>
+1257</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1040</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1257</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::CancelOperationRequest (class)">CancelOperationRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="operation_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="operation_id-instance_method">
+  
+    #<strong>operation_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Deprecated. The server-assigned <code>name</code> of the operation.
+This field has been deprecated and replaced by the name field.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Deprecated. The server-assigned <code>name</code> of the operation.
+This field has been deprecated and replaced by the name field.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1257</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1257</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::CancelOperationRequest (class)">CancelOperationRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -259,8 +344,9 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
-number</a>.</p>
+    <p>Returns Deprecated. The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
+number</a>.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -278,8 +364,9 @@ number</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
-number</a>.</p>
+        <div class='inline'><p>Deprecated. The Google Developers Console <a href="https://support.google.com/cloud/answer/6158840">project ID or project
+number</a>.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -292,10 +379,10 @@ number</a>.</p>
       <pre class="lines">
 
 
-1040</pre>
+1257</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1040</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1257</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::CancelOperationRequest (class)">CancelOperationRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -316,8 +403,9 @@ number</a>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the Google Compute Engine
-<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the operation resides.</p>
+    <p>Returns Deprecated. The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the operation resides.
+This field has been deprecated and replaced by the name field.</p>
 
 
   </div>
@@ -335,8 +423,9 @@ number</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>The name of the Google Compute Engine
-<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the operation resides.</p>
+        <div class='inline'><p>Deprecated. The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the operation resides.
+This field has been deprecated and replaced by the name field.</p>
 </div>
       
     </li>
@@ -349,10 +438,10 @@ number</a>.</p>
       <pre class="lines">
 
 
-1040</pre>
+1257</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1040</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 1257</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::CancelOperationRequest (class)">CancelOperationRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

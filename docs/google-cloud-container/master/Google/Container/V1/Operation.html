@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Container::V1::Operation - Google"
+title: "Class: Google::Container::V1::Operation - Kubernetes"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -162,6 +162,32 @@ happening on the cluster. All fields are output only.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>[Output only] The time the operation completed, in <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text format.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#location-instance_method" title="#location (instance method)">#<strong>location</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>[Output only] The name of the Google Compute Engine <a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">zone</a> or <a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">region</a> in which the cluster resides.</p>
 </div></span>
   
 </li>
@@ -428,82 +454,82 @@ happening on the cluster. All fields are output only.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
@@ -629,82 +655,287 @@ happening on the cluster. All fields are output only.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
+  <span class='comment'># Current status of the operation.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Operation/Status.html" title="Google::Container::V1::Operation::Status (module)">Status</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>STATUS_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The operation has been created.
+</span>    <span class='const'>PENDING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># The operation is currently running.
+</span>    <span class='const'>RUNNING</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># The operation is done, either cancelled or completed.
+</span>    <span class='const'>DONE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># The operation is aborting.
+</span>    <span class='const'>ABORTING</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Operation type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Operation/Type.html" title="Google::Container::V1::Operation::Type (module)">Type</a></span></span>
+    <span class='comment'># Not set.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Cluster create.
+</span>    <span class='const'>CREATE_CLUSTER</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Cluster delete.
+</span>    <span class='const'>DELETE_CLUSTER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># A master upgrade.
+</span>    <span class='const'>UPGRADE_MASTER</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># A node upgrade.
+</span>    <span class='const'>UPGRADE_NODES</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Cluster repair.
+</span>    <span class='const'>REPAIR_CLUSTER</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Cluster update.
+</span>    <span class='const'>UPDATE_CLUSTER</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Node pool create.
+</span>    <span class='const'>CREATE_NODE_POOL</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Node pool delete.
+</span>    <span class='const'>DELETE_NODE_POOL</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Set node pool management.
+</span>    <span class='const'>SET_NODE_POOL_MANAGEMENT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Automatic node pool repair.
+</span>    <span class='const'>AUTO_REPAIR_NODES</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Automatic node upgrade.
+</span>    <span class='const'>AUTO_UPGRADE_NODES</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Set labels.
+</span>    <span class='const'>SET_LABELS</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Set/generate master auth materials
+</span>    <span class='const'>SET_MASTER_AUTH</span> <span class='op'>=</span> <span class='int'>13</span>
+
+    <span class='comment'># Set node pool size.
+</span>    <span class='const'>SET_NODE_POOL_SIZE</span> <span class='op'>=</span> <span class='int'>14</span>
+
+    <span class='comment'># Updates network policy for a cluster.
+</span>    <span class='const'>SET_NETWORK_POLICY</span> <span class='op'>=</span> <span class='int'>15</span>
+
+    <span class='comment'># Set the maintenance policy.
+</span>    <span class='const'>SET_MAINTENANCE_POLICY</span> <span class='op'>=</span> <span class='int'>16</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="location=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="location-instance_method">
+  
+    #<strong>location</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns [Output only] The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">zone</a> or
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">region</a> in which
+the cluster resides.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[Output only] The name of the Google Compute Engine
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">zone</a> or
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">region</a> in which
+the cluster resides.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
@@ -828,82 +1059,82 @@ happening on the cluster. All fields are output only.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
@@ -1027,82 +1258,82 @@ happening on the cluster. All fields are output only.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
@@ -1226,82 +1457,82 @@ happening on the cluster. All fields are output only.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
@@ -1427,82 +1658,82 @@ happening on the cluster. All fields are output only.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
@@ -1626,82 +1857,82 @@ happening on the cluster. All fields are output only.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
@@ -1825,82 +2056,82 @@ happening on the cluster. All fields are output only.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
@@ -2024,82 +2255,82 @@ happening on the cluster. All fields are output only.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
@@ -2194,7 +2425,8 @@ happening on the cluster. All fields are output only.</p>
   <div class="discussion">
     <p>Returns The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the operation
-is taking place.</p>
+is taking place.
+This field is deprecated, use location instead.</p>
 
 
   </div>
@@ -2214,7 +2446,8 @@ is taking place.</p>
         &mdash;
         <div class='inline'><p>The name of the Google Compute Engine
 <a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the operation
-is taking place.</p>
+is taking place.
+This field is deprecated, use location instead.</p>
 </div>
       
     </li>
@@ -2227,82 +2460,82 @@ is taking place.</p>
       <pre class="lines">
 
 
-648
-649
-650
-651
-652
-653
-654
-655
-656
-657
-658
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688
-689
-690
-691
-692
-693
-694
-695
-696
-697
-698
-699
-700
-701
-702
-703
-704
-705
-706
-707
-708
-709
-710
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720</pre>
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 648</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb', line 735</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Container::V1::Operation (class)">Operation</a></span></span>
   <span class='comment'># Current status of the operation.
