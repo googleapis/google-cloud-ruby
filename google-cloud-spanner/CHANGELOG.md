@@ -1,5 +1,9 @@
 # Release History
 
+### 1.7.2 / 2018-11-15
+
+* Allow Spanner streams to recover from more errors.
+
 ### 1.7.1 / 2018-10-08
 
 * Add DML and Partitioned DML support
