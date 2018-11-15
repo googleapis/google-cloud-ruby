@@ -1,5 +1,20 @@
 # Release History
 
+### 0.8.0 / 2018-11-15
+
+* Add StoredInfoType CRUD+List access methods:
+  * DlpServiceClient#create_stored_info_type
+  * DlpServiceClient#get_stored_info_type
+  * DlpServiceClient#update_stored_info_type
+  * DlpServiceClient#delete_stored_info_type
+  * DlpServiceClient#list_stored_info_types
+* Add BigQueryOptions#excluded_fields value.
+* Add order_by argument to DlpServiceClient#list_dlp_jobs
+* Add ListDlpJobsRequest#order_by
+* Add CloudStorageOptions::FileSet#regex_file_set
+  * Returns newly added CloudStorageRegexFileSet object
+* Update documentation.
+
 ### 0.7.0 / 2018-10-03
 
 * Add order_by argument to the following methods and resources:
