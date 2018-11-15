@@ -1,0 +1,1276 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Bigtable::GcRule - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigtable::GcRule";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (G)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span>
+     &raquo; 
+    <span class="title">GcRule</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Bigtable::GcRule
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Bigtable::GcRule</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigtable/gc_rule.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>GcRule</h1>
+
+<p>Rule for determining which cells to delete during garbage collection.
+Garbage collection (GC) executes opportunistically in the background,
+so it&#39;s possible for reads to return a cell even if it matches the active
+GC expression for its family.</p>
+
+<p>NOTE: GC Rule can hold only one type at a time.
+GC Rule types:</p>
+
+<ul>
+<li><code>max_num_versions</code> - Delete all cells in a column except the most recent N</li>
+<li><code>max_age</code> - Delete cells in a column older than the given age.</li>
+<li><code>union</code> - Delete cells that would be deleted by every nested rule.
+  It can have mutiple chainable GC Rules.</li>
+<li><code>intersection</code> - Delete cells that would be deleted by any nested rule.
+  It can have multiple chainable GC Rules.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Create GC rule instance with max version.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='id identifier rubyid_gc_rule'>gc_rule</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'>GcRule</span><span class='period'>.</span><span class='id identifier rubyid_max_versions'><span class='object_link'><a href="#max_versions-class_method" title="Google::Cloud::Bigtable::GcRule.max_versions (method)">max_versions</a></span></span><span class='lparen'>(</span><span class='int'>3</span><span class='rparen'>)</span>
+
+<span class='comment'># Change max verions
+</span><span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='period'>.</span><span class='id identifier rubyid_max_versions'>max_versions</span> <span class='op'>=</span> <span class='int'>5</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Create GC rule instance with max age.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='id identifier rubyid_gc_rule'>gc_rule</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'>GcRule</span><span class='period'>.</span><span class='id identifier rubyid_max_age'><span class='object_link'><a href="#max_age-class_method" title="Google::Cloud::Bigtable::GcRule.max_age (method)">max_age</a></span></span><span class='lparen'>(</span><span class='int'>3</span><span class='rparen'>)</span>
+
+<span class='comment'># Change max age
+</span><span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='period'>.</span><span class='id identifier rubyid_max_age'>max_age</span> <span class='op'>=</span> <span class='int'>600</span> <span class='comment'># 10 minutes</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Create GC rule instance with union.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='id identifier rubyid_max_age_gc_rule'>max_age_gc_rule</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'>GcRule</span><span class='period'>.</span><span class='id identifier rubyid_max_age'><span class='object_link'><a href="#max_age-class_method" title="Google::Cloud::Bigtable::GcRule.max_age (method)">max_age</a></span></span><span class='lparen'>(</span><span class='int'>180</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_union_gc_rule'>union_gc_rule</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'>GcRule</span><span class='period'>.</span><span class='id identifier rubyid_union'><span class='object_link'><a href="#union-class_method" title="Google::Cloud::Bigtable::GcRule.union (method)">union</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_max_age_gc_rule'>max_age_gc_rule</span><span class='rparen'>)</span>
+
+<span class='comment'># Change union GC rule
+</span><span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='period'>.</span><span class='id identifier rubyid_union'>union</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'>GcRule</span><span class='period'>.</span><span class='id identifier rubyid_max_age'><span class='object_link'><a href="#max_age-class_method" title="Google::Cloud::Bigtable::GcRule.max_age (method)">max_age</a></span></span><span class='lparen'>(</span><span class='int'>600</span><span class='rparen'>)</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Create GC rule instance with intersection.</p>
+</div></p>
+      
+      <pre class="example code"><code>
+<span class='id identifier rubyid_max_versions_gc_rule'>max_versions_gc_rule</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'>GcRule</span><span class='period'>.</span><span class='id identifier rubyid_max_versions'><span class='object_link'><a href="#max_versions-class_method" title="Google::Cloud::Bigtable::GcRule.max_versions (method)">max_versions</a></span></span><span class='lparen'>(</span><span class='int'>3</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_gc_rule'>gc_rule</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'>GcRule</span><span class='period'>.</span><span class='id identifier rubyid_intersection'><span class='object_link'><a href="#intersection-class_method" title="Google::Cloud::Bigtable::GcRule.intersection (method)">intersection</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_max_versions_gc_rule'>max_versions_gc_rule</span><span class='rparen'>)</span>
+
+<span class='comment'># Change intersection GC rule
+</span><span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='period'>.</span><span class='id identifier rubyid_intersection'>intersection</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigtable.html" title="Google::Cloud::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'>GcRule</span><span class='period'>.</span><span class='id identifier rubyid_max_age'><span class='object_link'><a href="#max_age-class_method" title="Google::Cloud::Bigtable::GcRule.max_age (method)">max_age</a></span></span><span class='lparen'>(</span><span class='int'>600</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#intersection-class_method" title="intersection (class method)">.<strong>intersection</strong>(*rules)  &#x21d2; Google::Bigtable::Admin::V2::GcRule </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create intersection GCRule instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_age-class_method" title="max_age (class method)">.<strong>max_age</strong>(age)  &#x21d2; Google::Bigtable::Admin::V2::GcRule </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create GcRule instance with max age.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_versions-class_method" title="max_versions (class method)">.<strong>max_versions</strong>(versions)  &#x21d2; Google::Bigtable::Admin::V2::GcRule </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create GcRule instance with max number of versions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#union-class_method" title="union (class method)">.<strong>union</strong>(*rules)  &#x21d2; Google::Bigtable::Admin::V2::GcRule </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create union GcRule instance.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#intersection-instance_method" title="#intersection (instance method)">#<strong>intersection</strong>  &#x21d2; Google::Bigtable::Admin::V2::GcRule::Intersection<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get intersection GC rules.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#intersection=-instance_method" title="#intersection= (instance method)">#<strong>intersection=</strong>(rules)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Delete cells that would be deleted by every nested rule.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_age-instance_method" title="#max_age (instance method)">#<strong>max_age</strong>  &#x21d2; Integer<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Max age in seconds, if max age is set.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_age=-instance_method" title="#max_age= (instance method)">#<strong>max_age=</strong>(age)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Delete cells in a column older than the given age.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_versions-instance_method" title="#max_versions (instance method)">#<strong>max_versions</strong>  &#x21d2; Integer<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get max versions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_versions=-instance_method" title="#max_versions= (instance method)">#<strong>max_versions=</strong>(versions)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Delete all cells in a column except the most recent N.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#union-instance_method" title="#union (instance method)">#<strong>union</strong>  &#x21d2; Google::Bigtable::Admin::V2::GcRule::Union<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get union GC rules.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#union=-instance_method" title="#union= (instance method)">#<strong>union=</strong>(rules)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Delete cells that would be deleted by any nested rule.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="intersection-class_method">
+  
+    .<strong>intersection</strong>(*rules)  &#x21d2; <tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">Google::Bigtable::Admin::V2::GcRule</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create intersection GCRule instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rules</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::GcRule (class)">Google::Cloud::Bigtable::GcRule</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="" title="Google::Cloud::Bigtable::GcRule (class)">Google::Cloud::Bigtable::GcRule</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of GcRule with nested rules.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">Google::Bigtable::Admin::V2::GcRule</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+190
+191
+192
+193
+194</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 190</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_intersection'>intersection</span> <span class='op'>*</span><span class='id identifier rubyid_rules'>rules</span>
+  <span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='op'>|</span>
+    <span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='period'>.</span><span class='id identifier rubyid_intersection'>intersection</span> <span class='op'>=</span> <span class='id identifier rubyid_rules'>rules</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_age-class_method">
+  
+    .<strong>max_age</strong>(age)  &#x21d2; <tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">Google::Bigtable::Admin::V2::GcRule</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create GcRule instance with max age.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>age</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Max age in seconds.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">Google::Bigtable::Admin::V2::GcRule</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 166</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_max_age'>max_age</span> <span class='id identifier rubyid_age'>age</span>
+  <span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='op'>|</span>
+    <span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='period'>.</span><span class='id identifier rubyid_max_age'>max_age</span> <span class='op'>=</span> <span class='id identifier rubyid_age'>age</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_versions-class_method">
+  
+    .<strong>max_versions</strong>(versions)  &#x21d2; <tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">Google::Bigtable::Admin::V2::GcRule</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create GcRule instance with max number of versions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>versions</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Max number of versions</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">Google::Bigtable::Admin::V2::GcRule</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+155
+156
+157
+158
+159</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 155</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_max_versions'>max_versions</span> <span class='id identifier rubyid_versions'>versions</span>
+  <span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='op'>|</span>
+    <span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='period'>.</span><span class='id identifier rubyid_max_versions'>max_versions</span> <span class='op'>=</span> <span class='id identifier rubyid_versions'>versions</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="union-class_method">
+  
+    .<strong>union</strong>(*rules)  &#x21d2; <tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">Google::Bigtable::Admin::V2::GcRule</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create union GcRule instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rules</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Bigtable::GcRule (class)">Google::Cloud::Bigtable::GcRule</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="" title="Google::Cloud::Bigtable::GcRule (class)">Google::Cloud::Bigtable::GcRule</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of GcRule with nested rules.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">Google::Bigtable::Admin::V2::GcRule</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+178
+179
+180
+181
+182</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 178</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_union'>union</span> <span class='op'>*</span><span class='id identifier rubyid_rules'>rules</span>
+  <span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='op'>|</span>
+    <span class='id identifier rubyid_gc_rule'>gc_rule</span><span class='period'>.</span><span class='id identifier rubyid_union'>union</span> <span class='op'>=</span> <span class='id identifier rubyid_rules'>rules</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="intersection-instance_method">
+  
+    #<strong>intersection</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule/Intersection.html" title="Google::Bigtable::Admin::V2::GcRule::Intersection (class)">Google::Bigtable::Admin::V2::GcRule::Intersection</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get intersection GC rules</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule/Intersection.html" title="Google::Bigtable::Admin::V2::GcRule::Intersection (class)">Google::Bigtable::Admin::V2::GcRule::Intersection</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 127</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_intersection'>intersection</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_intersection'>intersection</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="intersection=-instance_method">
+  
+    #<strong>intersection=</strong>(rules)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Delete cells that would be deleted by every nested rule.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rules</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="Google::Cloud::Bigtable::GcRule (class)">Google::Cloud::Bigtable::GcRule</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of GcRule with nested rules.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 116</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_intersection='>intersection=</span> <span class='id identifier rubyid_rules'>rules</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_intersection'>intersection</span> <span class='op'>=</span> \
+    <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable.html" title="Google::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin.html" title="Google::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2.html" title="Google::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">GcRule</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule/Intersection.html" title="Google::Bigtable::Admin::V2::GcRule::Intersection (class)">Intersection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='label'>rules:</span> <span class='id identifier rubyid_rules'>rules</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_grpc</span><span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_age-instance_method">
+  
+    #<strong>max_age</strong>  &#x21d2; <tt>Integer</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Max age in seconds, if max age is set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Max age in seconds.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_age'>max_age</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_max_age'>max_age</span><span class='period'>.</span><span class='id identifier rubyid_seconds'>seconds</span> <span class='kw'>if</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_max_age'>max_age</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_age=-instance_method">
+  
+    #<strong>max_age=</strong>(age)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Delete cells in a column older than the given age.
+Values must be at least one millisecond, and will be truncated to
+microsecond granularity.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>age</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>age in seconds</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_age='>max_age=</span> <span class='id identifier rubyid_age'>age</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_max_age'>max_age</span> <span class='op'>=</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_number_to_duration'>number_to_duration</span><span class='lparen'>(</span><span class='id identifier rubyid_age'>age</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_versions-instance_method">
+  
+    #<strong>max_versions</strong>  &#x21d2; <tt>Integer</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get max versions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_versions'>max_versions</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_max_num_versions'>max_num_versions</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_versions=-instance_method">
+  
+    #<strong>max_versions=</strong>(versions)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Delete all cells in a column except the most recent N.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>versions</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_versions='>max_versions=</span> <span class='id identifier rubyid_versions'>versions</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_max_num_versions'>max_num_versions</span> <span class='op'>=</span> <span class='id identifier rubyid_versions'>versions</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="union-instance_method">
+  
+    #<strong>union</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule/Union.html" title="Google::Bigtable::Admin::V2::GcRule::Union (class)">Google::Bigtable::Admin::V2::GcRule::Union</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get union GC rules</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule/Union.html" title="Google::Bigtable::Admin::V2::GcRule::Union (class)">Google::Bigtable::Admin::V2::GcRule::Union</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+146
+147
+148</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 146</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_union'>union</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_union'>union</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="union=-instance_method">
+  
+    #<strong>union=</strong>(rules)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Delete cells that would be deleted by any nested rule.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rules</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="Google::Cloud::Bigtable::GcRule (class)">Google::Cloud::Bigtable::GcRule</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of GcRule with nested rules.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/gc_rule.rb', line 136</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_union='>union=</span> <span class='id identifier rubyid_rules'>rules</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_union'>union</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable.html" title="Google::Bigtable (module)">Bigtable</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin.html" title="Google::Bigtable::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2.html" title="Google::Bigtable::Admin::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule.html" title="Google::Bigtable::Admin::V2::GcRule (class)">GcRule</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigtable/Admin/V2/GcRule/Union.html" title="Google::Bigtable::Admin::V2::GcRule::Union (class)">Union</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='label'>rules:</span> <span class='id identifier rubyid_rules'>rules</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_grpc</span><span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
