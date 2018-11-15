@@ -154,6 +154,7 @@ google-cloud-debugger:
 - v0.24.1
 - v0.24.0
 google-cloud-dialogflow:
+- v0.2.3
 - v0.2.2
 - v0.2.1
 - v0.2.0
