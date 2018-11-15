@@ -1,0 +1,248 @@
+---
+layout: yard_main
+title: "File: CHANGELOG - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "CHANGELOG";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="file_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: CHANGELOG</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>Release History</h1>
+
+<h3>1.7.2 / 2018-11-15</h3>
+
+<ul>
+<li>Allow Spanner streams to recover from more errors.</li>
+</ul>
+
+<h3>1.7.1 / 2018-10-08</h3>
+
+<ul>
+<li>Add DML and Partitioned DML support
+
+<ul>
+<li>Add execute_update to process DML statements</li>
+<li>Add execute_partition_update for Partitioned DML</li>
+</ul></li>
+<li>Rename execute_query method
+
+<ul>
+<li>Maintain naming consistency with execute_update method.</li>
+<li>Maintain compatibility by adding query, execute and execute_sql aliases.</li>
+</ul></li>
+</ul>
+
+<h3>1.6.4 / 2018-09-20</h3>
+
+<ul>
+<li>Update Spanner generated files.
+
+<ul>
+<li>Add DML/PDML code structures.</li>
+</ul></li>
+<li>Update documentation.
+
+<ul>
+<li>Change documentation URL to googleapis GitHub org.</li>
+</ul></li>
+<li>Fix circular require warning.</li>
+</ul>
+
+<h3>1.6.3 / 2018-09-12</h3>
+
+<ul>
+<li>Add missing documentation files to package.</li>
+</ul>
+
+<h3>1.6.2 / 2018-09-10</h3>
+
+<ul>
+<li>Update documentation.</li>
+</ul>
+
+<h3>1.6.1 / 2018-08-21</h3>
+
+<ul>
+<li>Update documentation.</li>
+</ul>
+
+<h3>1.6.0 / 2018-06-28</h3>
+
+<ul>
+<li>Add Session labels
+
+<ul>
+<li>Add labels optional argument to Project#client and #batch_client.</li>
+<li>Add labels optional argument to Project#batch_client.</li>
+</ul></li>
+<li>Bug fix when an error is raised while returning results.</li>
+</ul>
+
+<h3>1.5.0 / 2018-06-12</h3>
+
+<ul>
+<li>Support STRUCT values in query parameters.
+
+<ul>
+<li>Add <code>Fields#struct</code> to create a <code>Data</code> object.</li>
+</ul></li>
+<li>Documentation updates.</li>
+</ul>
+
+<h3>1.4.0 / 2018-03-26</h3>
+
+<ul>
+<li>Add support for commit_timestamp.</li>
+</ul>
+
+<h3>1.3.1 / 2018-02-27</h3>
+
+<ul>
+<li>Add Batch Client
+
+<ul>
+<li>Support partitioned reads and queries.</li>
+</ul></li>
+<li>Support Shared Configuration.</li>
+<li>Fix issue with IAM Policy not refreshing properly.</li>
+<li>Fix issue when using Time objects as keys.</li>
+</ul>
+
+<h3>1.2.0 / 2017-12-19</h3>
+
+<ul>
+<li>Update Low Level API code
+
+<ul>
+<li>Remove deprecated constructor arguments.</li>
+<li>Update documentation.</li>
+</ul></li>
+<li>Update google-gax dependency to 1.0.</li>
+</ul>
+
+<h3>1.1.1 / 2017-11-15</h3>
+
+<ul>
+<li>Fix Admin Credentials (GAPIC) environment variable names.</li>
+</ul>
+
+<h3>1.1.0 / 2017-11-14</h3>
+
+<ul>
+<li>Add <code>Google::Cloud::Spanner::Credentials</code> class.</li>
+<li>Rename constructor arguments to <code>project_id</code> and <code>credentials</code>.
+(The previous arguments <code>project</code> and <code>keyfile</code> are still supported.)</li>
+<li>Document <code>Google::Auth::Credentials</code> as <code>credentials</code> value.</li>
+<li>Update generated low level GAPIC code.</li>
+<li>Updated <code>google-gax</code> (<code>grpc</code>, <code>google-protobuf</code>), <code>googleauth</code> dependencies.</li>
+</ul>
+
+<h3>1.0.0 / 2017-09-29</h3>
+
+<ul>
+<li>Release 1.0</li>
+</ul>
+
+<h3>0.23.2 / 2017-09-12</h3>
+
+<ul>
+<li>Update connection configuration.</li>
+</ul>
+
+<h3>0.23.1 / 2017-08-18</h3>
+
+<ul>
+<li>Update connection configuration.</li>
+</ul>
+
+<h3>0.23.0 / 2017-07-27</h3>
+
+<ul>
+<li>Add <code>Job#error</code> returning <code>Spanner::Status</code>.</li>
+</ul>
+
+<h3>0.22.0 / 2017-07-11</h3>
+
+<ul>
+<li>Remove <code>Policy#deep_dup</code>.</li>
+<li>Add thread pool size to <code>Session</code> pool configuration.</li>
+<li>Add error handling for some GRPC errors.</li>
+<li>Do not allow nested snapshots or transactions.</li>
+<li>Update initialization to raise a better error if project ID is not specified.</li>
+<li>Update GAPIC configuration to exclude <code>UNAVAILABLE</code> errors from automatic retry.</li>
+<li>Update example code in the API documentation and guide.</li>
+</ul>
+
+<h3>0.21.0 / 2017-06-08</h3>
+
+<p>Initial implementation of the Google Cloud Spanner API Ruby client.</p>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
