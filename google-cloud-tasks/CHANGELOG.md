@@ -1,5 +1,9 @@
 # Release History
 
+### 0.2.6 / 2018-11-15
+
+* Update network configuration.
+
 ### 0.2.5 / 2018-10-18
 
 * Release v2beta3.
