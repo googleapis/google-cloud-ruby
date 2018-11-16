@@ -106,6 +106,12 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     # fresh.location.must_equal "US"       TODO why nil? Set in dataset
   end
 
+  it "deletes itself and knows it no longer exists" do
+    dataset.tables.all(&:delete)
+    dataset.delete.must_equal true
+    dataset.exists?.must_equal false
+  end
+
   it "should set & get metadata" do
     new_name = "New name"
     new_desc = "New description!"

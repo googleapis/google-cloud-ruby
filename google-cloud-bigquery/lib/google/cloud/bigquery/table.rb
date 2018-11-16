@@ -2083,7 +2083,7 @@ module Google
         #
         def reload!
           ensure_service!
-          # The returned gapi may be nil if resource does not exist.
+          # The returned gapi will be nil if resource does not exist.
           gapi = service.get_table dataset_id, table_id
           #  If gapi is nil, @exists will be false for #exists?
           @exists = !gapi.nil?

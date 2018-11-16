@@ -89,7 +89,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       [project, dataset.dataset_id, delete_contents: nil]
     dataset.service.mocked_service = mock
 
-    dataset.delete
+    dataset.delete.must_equal true
+
+    dataset.exists?.must_equal false
 
     mock.verify
   end
@@ -100,7 +102,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       [project, dataset.dataset_id, delete_contents: true]
     dataset.service.mocked_service = mock
 
-    dataset.delete force: true
+    dataset.delete(force: true).must_equal true
+
+    dataset.exists?.must_equal false
 
     mock.verify
   end
