@@ -2058,6 +2058,8 @@ module Google
         def delete
           ensure_service!
           service.delete_table dataset_id, table_id
+          # Set flag for #exists?
+          @deleted = true
           true
         end
 
@@ -2081,14 +2083,19 @@ module Google
         #
         def reload!
           ensure_service!
+          # The returned gapi may be nil if resource does not exist.
           gapi = service.get_table dataset_id, table_id
+          #  If gapi is nil, @exists will be false for #exists?
+          @exists = !gapi.nil?
+          @deleted = nil
           @gapi = gapi
         end
         alias refresh! reload!
 
         ##
         # Determines whether the table exists in the BigQuery service. The
-        # result is cached locally.
+        # result is cached locally. To refresh state, call {#reload!} before
+        # making a subsequent call to this method.
         #
         # @return [Boolean] `true` when the table exists in the BigQuery
         #   service, `false` otherwise.
@@ -2103,8 +2110,10 @@ module Google
         #   table.exists? # true
         #
         def exists?
+          # false if #delete was called, unless followed by successful #reload!
+          return false if @deleted
           # Always true if we have a gapi object
-          return true unless reference?
+          return true if resource?
           # If we have a value, return it
           return @exists unless @exists.nil?
           ensure_gapi!

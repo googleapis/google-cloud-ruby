@@ -122,6 +122,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
+  it "deletes itself and knows it no longer exists" do
+    table.delete.must_equal true
+    table.exists?.must_equal false
+  end
+
   it "gets and sets metadata" do
     new_name = "New name"
     new_desc = "New description!"

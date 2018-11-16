@@ -69,7 +69,9 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
       [project, dataset, table_id]
     view.service.mocked_service = mock
 
-    view.delete
+    view.delete.must_equal true
+
+    view.exists?.must_equal false
 
     mock.verify
   end

@@ -418,6 +418,8 @@ module Google
         def delete force: nil
           ensure_service!
           service.delete_dataset dataset_id, force
+          # Set flag for #exists?
+          @deleted = true
           true
         end
 
@@ -1709,7 +1711,11 @@ module Google
         #
         def reload!
           ensure_service!
+          # The returned gapi will be nil if resource does not exist.
           reloaded_gapi = service.get_dataset dataset_id
+          #  If gapi is nil, @exists will be false for #exists?
+          @exists = !gapi.nil?
+          @deleted = nil
           @reference = nil
           @gapi = reloaded_gapi
           self
@@ -1718,7 +1724,8 @@ module Google
 
         ##
         # Determines whether the dataset exists in the BigQuery service. The
-        # result is cached locally.
+        # result is cached locally. To refresh state, call {#reload!} before
+        # making a subsequent call to this method.
         #
         # @return [Boolean] `true` when the dataset exists in the BigQuery
         #   service, `false` otherwise.
@@ -1732,8 +1739,10 @@ module Google
         #   dataset.exists? # true
         #
         def exists?
+          # false if #delete was called, unless followed by successful #reload!
+          return false if @deleted
           # Always true if we have a gapi object
-          return true unless reference?
+          return true if resource?
           # If we have a value, return it
           return @exists unless @exists.nil?
           ensure_gapi!
