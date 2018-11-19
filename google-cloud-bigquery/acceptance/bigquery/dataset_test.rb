@@ -107,9 +107,11 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "deletes itself and knows it no longer exists" do
+    dataset.exists?.must_equal true
     dataset.tables.all(&:delete)
     dataset.delete.must_equal true
     dataset.exists?.must_equal false
+    dataset.exists?(force: true).must_equal false
   end
 
   it "should set & get metadata" do

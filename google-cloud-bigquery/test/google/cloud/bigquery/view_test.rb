@@ -63,6 +63,20 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
     view.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
   end
 
+  it "can test its existence" do
+    view.exists?.must_equal true
+  end
+
+  it "can test its existence with force to load resource" do
+    mock = Minitest::Mock.new
+    mock.expect :get_table, view_gapi, [view.project_id, view.dataset_id, view.table_id]
+    view.service.mocked_service = mock
+
+    view.exists?(force: true).must_equal true
+
+    mock.verify
+  end
+
   it "can delete itself" do
     mock = Minitest::Mock.new
     mock.expect :delete_table, nil,

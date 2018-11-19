@@ -123,8 +123,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "deletes itself and knows it no longer exists" do
+    table.exists?.must_equal true
     table.delete.must_equal true
     table.exists?.must_equal false
+    table.exists?(force: true).must_equal false
   end
 
   it "gets and sets metadata" do

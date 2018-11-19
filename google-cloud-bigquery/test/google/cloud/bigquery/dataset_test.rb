@@ -83,6 +83,20 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     dataset.modified_at.must_be_close_to now, 0.1
   end
 
+  it "can test its existence without reloading" do
+    dataset.exists?.must_equal true
+  end
+
+  it "can test its existence with force reload" do
+    mock = Minitest::Mock.new
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
+    dataset.service.mocked_service = mock
+
+    dataset.exists?(force: true).must_equal true
+
+    mock.verify
+  end
+
   it "can delete itself" do
     mock = Minitest::Mock.new
     mock.expect :delete_dataset, nil,

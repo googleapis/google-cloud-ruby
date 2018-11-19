@@ -1724,8 +1724,12 @@ module Google
 
         ##
         # Determines whether the dataset exists in the BigQuery service. The
-        # result is cached locally. To refresh state, call {#reload!} before
-        # making a subsequent call to this method.
+        # result is cached locally. To refresh state, set `force` to `true`.
+        #
+        # @param [Boolean] force Force the latest resource representation to be
+        #   retrieved from the BigQuery service when `true`. Otherwise the
+        #   return value of this method will be memoized to reduce the number of
+        #   API calls made to the BigQuery service. The default is `false`.
         #
         # @return [Boolean] `true` when the dataset exists in the BigQuery
         #   service, `false` otherwise.
@@ -1738,17 +1742,15 @@ module Google
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #   dataset.exists? # true
         #
-        def exists?
+        def exists? force: nil
+          return gapi_exists? if force
           # false if #delete was called, unless followed by successful #reload!
           return false if @deleted
           # Always true if we have a gapi object
           return true if resource?
-          # If we have a value, return it
+          # If we have a memoized value, return it
           return @exists unless @exists.nil?
-          ensure_gapi!
-          @exists = true
-        rescue Google::Cloud::NotFoundError
-          @exists = false
+          gapi_exists?
         end
 
         ##
@@ -2063,6 +2065,15 @@ module Google
           ensure_service!
           return unless reference?
           reload!
+        end
+
+        ##
+        # Fetch gapi and memoize whether resource exists.
+        def gapi_exists?
+          reload!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
         end
 
         def patch_gapi! *attributes

@@ -351,6 +351,26 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     mock.verify
   end
 
+  it "can test its existence" do
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
+
+    table.exists?.must_equal true
+
+    mock.verify
+  end
+
+  it "can test its existence with force to load resource" do
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
+
+    table.exists?(force: true).must_equal true
+
+    mock.verify
+  end
+
   it "can delete itself" do
     mock = Minitest::Mock.new
     mock.expect :delete_table, nil,
