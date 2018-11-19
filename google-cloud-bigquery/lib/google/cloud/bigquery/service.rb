@@ -356,11 +356,11 @@ module Google
         # If no job_id or prefix is given, always generate a client-side job ID
         # anyway, for idempotent retry in the google-api-client layer.
         # See https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
-        def job_ref_from job_id, prefix, location: nil
+        def job_ref_from job_id, prefix, location: nil, project_id: nil
           prefix ||= "job_"
           job_id ||= "#{prefix}#{generate_id}"
           job_ref = API::JobReference.new(
-            project_id: @project,
+            project_id: (project_id || @project),
             job_id: job_id
           )
           # BigQuery does not allow nil location, but missing is ok.

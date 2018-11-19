@@ -184,14 +184,30 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result.must_equal true
   end
 
-  def extract_job_gapi table, extract_file, job_id: "job_9876543210", location: "US"
-    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id, location: location)
+  it "can extract itself and specify a different project for the job" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    project_id_2 = "other-project"
+    job_gapi = extract_job_gapi table, extract_file, project_id: project_id_2
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
+
+    mock.expect :insert_job, job_resp_gapi, [project_id_2, job_gapi]
+
+    result = table.extract extract_url, project_id: project_id_2
+    mock.verify
+
+    result.must_equal true
   end
 
-  def extract_job_json table, extract_file, job_id, location: "US"
+  def extract_job_gapi table, extract_file, job_id: "job_9876543210", location: "US", project_id: nil
+    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id, location: location, project_id: project_id)
+  end
+
+  def extract_job_json table, extract_file, job_id, location: "US", project_id: nil
     {
       "jobReference" => {
-        "projectId" => project,
+        "projectId" => (project_id || project),
         "jobId" => job_id,
         "location" => location
       },

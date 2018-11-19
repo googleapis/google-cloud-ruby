@@ -244,6 +244,21 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job.labels.must_equal labels
   end
 
+  it "can extract itself and specify a different project for the job" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    project_id_2 = "other-project"
+    job_gapi = extract_job_gapi table, extract_file, project_id: project_id_2
+
+    mock.expect :insert_job, job_gapi, [project_id_2, job_gapi]
+
+    job = table.extract_job extract_url, project_id: project_id_2
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.project_id.must_equal project_id_2
+  end
+
   # Borrowed from MockStorage, extract to a common module?
 
   def random_bucket_hash name=random_bucket_name

@@ -171,14 +171,13 @@ module Google
           # @return [Google::Cloud::Bigquery::ExtractJob::Updater] A job
           #   configuration object for setting query options.
           def self.from_options service, table, storage_files, options = {}
-            job_ref = service.job_ref_from options[:job_id], options[:prefix]
+            job_ref = service.job_ref_from options[:job_id],
+                                           options[:prefix],
+                                           project_id: options[:project_id]
             storage_urls = Array(storage_files).map do |url|
               url.respond_to?(:to_gs_url) ? url.to_gs_url : url
             end
-            dest_format = options[:format]
-            if dest_format.nil?
-              dest_format = Convert.derive_source_format storage_urls.first
-            end
+            dest_format = get_dest_format options[:format], storage_urls
             req = Google::Apis::BigqueryV2::Job.new(
               job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
@@ -197,6 +196,12 @@ module Google
             updater.header = options[:header]
             updater.labels = options[:labels] if options[:labels]
             updater
+          end
+
+          ##
+          # @private
+          def self.get_dest_format dest_format, storage_urls
+            dest_format || Convert.derive_source_format(storage_urls.first)
           end
 
           ##

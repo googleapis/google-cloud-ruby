@@ -597,14 +597,14 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def extract_job_gapi table, extract_file, job_id: "job_9876543210", location: "US"
-    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id, location: location)
+  def extract_job_gapi table, extract_file, job_id: "job_9876543210", location: "US", project_id: nil
+    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id, location: location, project_id: project_id)
   end
 
-  def extract_job_json table, extract_file, job_id, location: "US"
+  def extract_job_json table, extract_file, job_id, location: "US", project_id: nil
     hash = {
       "jobReference" => {
-        "projectId" => project,
+        "projectId" => (project_id || project),
         "jobId" => job_id
       },
       "configuration" => {

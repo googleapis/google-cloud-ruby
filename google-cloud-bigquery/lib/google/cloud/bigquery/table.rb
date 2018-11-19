@@ -1407,6 +1407,9 @@ module Google
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key.
+        # @param [String] project_id Identifier for an alternative BigQuery
+        #   project to be used to run the job. Optional. If not present, the
+        #   default project for the client is used.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1421,17 +1424,29 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   extract_job = table.extract_job "gs://my-bucket/file-name.json",
-        #                               format: "json"
+        #                                   format: "json"
+        #
+        # @example Extract from a read-only project using `project_id`:
+        #   require "google/cloud/bigquery"
+        #
+        #   readonly_project = "bigquery-public-data"
+        #   bigquery = Google::Cloud::Bigquery.new project_id: readonly_project
+        #   dataset = bigquery.dataset "samples"
+        #   table = dataset.table "shakespeare"
+        #
+        #   extract_job = table.extract_job "gs://my-bucket/shakespeare.csv",
+        #                                   project_id: "my-project"
         #
         # @!group Data
         #
         def extract_job extract_url, format: nil, compression: nil,
                         delimiter: nil, header: nil, dryrun: nil, job_id: nil,
-                        prefix: nil, labels: nil
+                        prefix: nil, labels: nil, project_id: nil
           ensure_service!
           options = { format: format, compression: compression,
                       delimiter: delimiter, header: header, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix, labels: labels }
+                      job_id: job_id, prefix: prefix, labels: labels,
+                      project_id: project_id }
           updater = ExtractJob::Updater.from_options service, table_ref,
                                                      extract_url, options
           updater.location = location if location # may be table reference
@@ -1439,8 +1454,13 @@ module Google
           yield updater if block_given?
 
           job_gapi = updater.to_gapi
-          gapi = service.extract_table job_gapi
-          Job.from_gapi gapi, service
+          if project_id
+            service2 = service.dup
+            service2.project = project_id
+            extract_table job_gapi, service2
+          else
+            extract_table job_gapi, service
+          end
         end
 
         ##
@@ -1476,6 +1496,9 @@ module Google
         #   exported data. Default is <code>,</code>.
         # @param [Boolean] header Whether to print out a header row in the
         #   results. Default is `true`.
+        # @param [String] project_id Identifier for an alternative BigQuery
+        #   project to be used to run the job. Optional. If not present, the
+        #   default project for the client is used.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1502,15 +1525,27 @@ module Google
         #     extract.labels = { "custom-label" => "custom-value" }
         #   end
         #
+        # @example Extract from a read-only project using `project_id`:
+        #   require "google/cloud/bigquery"
+        #
+        #   readonly_project = "bigquery-public-data"
+        #   bigquery = Google::Cloud::Bigquery.new project_id: readonly_project
+        #   dataset = bigquery.dataset "samples"
+        #   table = dataset.table "shakespeare"
+        #
+        #   table.extract "gs://my-bucket/shakespeare.csv",
+        #                 project_id: "my-project"
+        #
         # @!group Data
         #
         def extract extract_url, format: nil, compression: nil, delimiter: nil,
-                    header: nil, &block
+                    header: nil, project_id: nil, &block
           job = extract_job extract_url,
                             format: format,
                             compression: compression,
                             delimiter: delimiter,
                             header: header,
+                            project_id: project_id,
                             &block
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -2483,6 +2518,11 @@ module Google
           else
             Service.table_ref_from_s table, table_ref
           end
+        end
+
+        def extract_table job_gapi, extract_service
+          gapi = extract_service.extract_table job_gapi
+          Job.from_gapi gapi, extract_service
         end
 
         ##

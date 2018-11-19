@@ -953,6 +953,27 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
+  it "extracts read-only data to a url in your bucket with extract_job and project_id" do
+    public_bigquery = Google::Cloud::Bigquery.new project_id: "bigquery-public-data"
+    public_dataset = public_bigquery.dataset "samples"
+    public_table = public_dataset.table "shakespeare"
+
+    Tempfile.open "empty_extract_file.json" do |tmp|
+      dest_file_name = random_file_destination_name
+      extract_url = "gs://#{bucket.name}/#{dest_file_name}"
+
+      extract_job = public_table.extract_job extract_url, project_id: bigquery.project_id # The user's project, not the public data project
+      extract_job.wait_until_done!
+      extract_job.wait_until_done!
+      extract_job.wont_be :failed?
+      extract_job.source.table_id.must_equal public_table.table_id
+
+      extract_file = bucket.file dest_file_name
+      downloaded_file = extract_file.download tmp.path
+      downloaded_file.size.must_be :>, 0
+    end
+  end
+
   it "extracts data to a url in your bucket with extract" do
     # Make sure there is data to extract...
     result = table.load local_file
