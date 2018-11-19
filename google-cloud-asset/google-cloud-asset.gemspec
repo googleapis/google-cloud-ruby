@@ -3,13 +3,13 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-asset"
-  gem.version       = "0.1.0"
+  gem.version       = "0.1.1"
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "google-cloud-asset is the official library for Cloud Asset API."
   gem.summary       = "API Client library for Cloud Asset API"
-  gem.homepage      = "https://github.com/googleapis/googleapis"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-asset"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY
