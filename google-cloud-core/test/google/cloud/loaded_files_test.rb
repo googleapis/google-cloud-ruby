@@ -56,26 +56,12 @@ describe Google::Cloud, :loaded_files do
   end
 
   it "correctly parses windows file paths" do
-    original_file = File
-    begin
-      File = Class.new(File)
-      def File.file? file
-        [
-          "C:\\..\\..\\..\\lib\\google\\cloud.rb",
-          "C:\\..\\..\\..\\lib\\google\\cloud\\config.rb",
-          "C:\\..\\..\\..\\lib\\google\\cloud\\credentials.rb"
-        ].include? file
+    File.stub :file?, (proc { |file| expected_windows_files.include? file }) do
+      File.stub :realpath, (proc { |file| file }) do 
+        Google::Cloud.stub :caller, loaded_windows_files do
+          Google::Cloud.loaded_files.must_equal expected_windows_files
+        end
       end
-
-      def File.realpath file
-        file
-      end
-
-      Google::Cloud.stub :caller, loaded_windows_files do
-        Google::Cloud.loaded_files.must_equal expected_windows_files
-      end
-    ensure
-      File = original_file
     end
   end
 end
