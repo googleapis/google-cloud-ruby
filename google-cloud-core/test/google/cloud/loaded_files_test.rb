@@ -66,6 +66,7 @@ describe Google::Cloud, :loaded_files do
           "C:\\..\\..\\..\\lib\\google\\cloud\\credentials.rb"
         ].include? file
       end
+
       def File.realpath file
         file
       end
@@ -73,7 +74,6 @@ describe Google::Cloud, :loaded_files do
       Google::Cloud.stub :caller, loaded_windows_files do
         Google::Cloud.loaded_files.must_equal expected_windows_files
       end
-
     ensure
       File = original_file
     end
