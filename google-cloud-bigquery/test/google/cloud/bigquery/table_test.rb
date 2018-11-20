@@ -97,13 +97,29 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.buffer_oldest_at.must_be_close_to ::Time.now, 1
   end
 
+  it "can test its existence" do
+    table.exists?.must_equal true
+  end
+
+  it "can test its existence with force to load resource" do
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
+
+    table.exists?(force: true).must_equal true
+
+    mock.verify
+  end
+
   it "can delete itself" do
     mock = Minitest::Mock.new
     mock.expect :delete_table, nil,
       [project, dataset, table_id]
     table.service.mocked_service = mock
 
-    table.delete
+    table.delete.must_equal true
+
+    table.exists?.must_equal false
 
     mock.verify
   end

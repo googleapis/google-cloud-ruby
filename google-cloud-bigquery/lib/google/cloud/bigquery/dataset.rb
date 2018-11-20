@@ -418,6 +418,8 @@ module Google
         def delete force: nil
           ensure_service!
           service.delete_dataset dataset_id, force
+          # Set flag for #exists?
+          @exists = false
           true
         end
 
@@ -1709,16 +1711,21 @@ module Google
         #
         def reload!
           ensure_service!
-          reloaded_gapi = service.get_dataset dataset_id
+          @gapi = service.get_dataset dataset_id
           @reference = nil
-          @gapi = reloaded_gapi
+          @exists = nil
           self
         end
         alias refresh! reload!
 
         ##
         # Determines whether the dataset exists in the BigQuery service. The
-        # result is cached locally.
+        # result is cached locally. To refresh state, set `force` to `true`.
+        #
+        # @param [Boolean] force Force the latest resource representation to be
+        #   retrieved from the BigQuery service when `true`. Otherwise the
+        #   return value of this method will be memoized to reduce the number of
+        #   API calls made to the BigQuery service. The default is `false`.
         #
         # @return [Boolean] `true` when the dataset exists in the BigQuery
         #   service, `false` otherwise.
@@ -1731,15 +1738,13 @@ module Google
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #   dataset.exists? # true
         #
-        def exists?
-          # Always true if we have a gapi object
-          return true unless reference?
-          # If we have a value, return it
+        def exists? force: nil
+          return gapi_exists? if force
+          # If we have a memoized value, return it
           return @exists unless @exists.nil?
-          ensure_gapi!
-          @exists = true
-        rescue Google::Cloud::NotFoundError
-          @exists = false
+          # Always true if we have a gapi object
+          return true if resource?
+          gapi_exists?
         end
 
         ##
@@ -2054,6 +2059,15 @@ module Google
           ensure_service!
           return unless reference?
           reload!
+        end
+
+        ##
+        # Fetch gapi and memoize whether resource exists.
+        def gapi_exists?
+          reload!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
         end
 
         def patch_gapi! *attributes

@@ -88,6 +88,13 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     table.buffer_oldest_at.must_be_nil
   end
 
+  it "deletes itself and knows it no longer exists" do
+    table.exists?.must_equal true
+    table.delete.must_equal true
+    table.exists?.must_equal false
+    table.exists?(force: true).must_equal false
+  end
+
   it "gets and sets metadata" do
     new_name = "New name"
     new_desc = "New description!"

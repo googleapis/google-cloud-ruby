@@ -28,6 +28,9 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
   let(:query) { "SELECT * FROM [table]" }
   let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
 
+  let(:dataset_hash) { random_dataset_hash dataset_id }
+  let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
+
   it "knows its attributes" do
     dataset.dataset_id.must_equal dataset_id
     dataset.project_id.must_equal project
@@ -46,13 +49,35 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     dataset.modified_at.must_be_nil
   end
 
+  it "can test its existence" do
+    mock = Minitest::Mock.new
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
+    dataset.service.mocked_service = mock
+
+    dataset.exists?.must_equal true
+
+    mock.verify
+  end
+
+  it "can test its existence with force to load resource" do
+    mock = Minitest::Mock.new
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
+    dataset.service.mocked_service = mock
+
+    dataset.exists?(force: true).must_equal true
+
+    mock.verify
+  end
+
   it "can delete itself" do
     mock = Minitest::Mock.new
     mock.expect :delete_dataset, nil,
       [project, dataset.dataset_id, delete_contents: nil]
     dataset.service.mocked_service = mock
 
-    dataset.delete
+    dataset.delete.must_equal true
+
+    dataset.exists?.must_equal false
 
     mock.verify
   end
@@ -63,7 +88,9 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
       [project, dataset.dataset_id, delete_contents: true]
     dataset.service.mocked_service = mock
 
-    dataset.delete force: true
+    dataset.delete(force: true).must_equal true
+
+    dataset.exists?.must_equal false
 
     mock.verify
   end
