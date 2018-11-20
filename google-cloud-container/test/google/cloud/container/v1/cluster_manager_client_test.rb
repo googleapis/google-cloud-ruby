@@ -176,6 +176,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       services_ipv4_cidr = "servicesIpv4Cidr1966438125"
       current_node_count = 178977560
       expire_time = "expireTime-96179731"
+      location = "location1901043637"
       expected_response = {
         name: name,
         description: description,
@@ -198,7 +199,8 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         node_ipv4_cidr_size: node_ipv4_cidr_size,
         services_ipv4_cidr: services_ipv4_cidr,
         current_node_count: current_node_count,
-        expire_time: expire_time
+        expire_time: expire_time,
+        location: location
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Container::V1::Cluster)
 
@@ -298,6 +300,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -307,6 +310,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -409,6 +413,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -418,6 +423,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -528,6 +534,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -537,6 +544,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -658,6 +666,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -667,6 +676,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -781,6 +791,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -790,6 +801,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -898,6 +910,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -907,6 +920,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -1015,6 +1029,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -1024,6 +1039,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -1132,6 +1148,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -1141,6 +1158,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -1249,6 +1267,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -1258,6 +1277,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -1367,6 +1387,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -1376,6 +1397,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -1489,6 +1511,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -1498,6 +1521,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -1676,6 +1700,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -1685,6 +1710,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -2159,6 +2185,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -2168,6 +2195,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -2276,6 +2304,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -2285,6 +2314,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -2393,6 +2423,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -2402,6 +2433,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -2511,6 +2543,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -2520,6 +2553,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -2635,6 +2669,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -2644,6 +2679,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -2758,6 +2794,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -2767,6 +2804,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -2874,6 +2912,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -2883,6 +2922,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -2984,6 +3024,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -2993,6 +3034,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -3096,6 +3138,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -3105,6 +3148,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -3219,6 +3263,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -3228,6 +3273,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }
@@ -3336,6 +3382,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       status_message = "statusMessage-239442758"
       self_link = "selfLink-1691268851"
       target_link = "targetLink-2084812312"
+      location = "location1901043637"
       start_time = "startTime-1573145462"
       end_time = "endTime1725551537"
       expected_response = {
@@ -3345,6 +3392,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         status_message: status_message,
         self_link: self_link,
         target_link: target_link,
+        location: location,
         start_time: start_time,
         end_time: end_time
       }

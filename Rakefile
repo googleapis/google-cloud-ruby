@@ -482,6 +482,23 @@ task :changes, [:gem] do |t, args|
   end
 end
 namespace :changes do
+  desc "Print all the changes in lib since the last release"
+  task :lib do
+    valid_gems.each do |gem|
+      begin
+        tag = current_release_tag gem
+        stats = (`git diff --stat #{tag}..master #{gem}/lib`).split("\n")
+        if stats.empty?
+          puts "#{gem}: no changes in lib"
+        else
+          puts "#{gem}:#{stats.last} (#{oldest_commit_since_release gem, tag})"
+        end
+      rescue
+        puts "#{gem}: not yet released"
+      end
+    end
+  end
+
   desc "Print a diff of the changes since the last release."
   task :diff, [:gem] do |t, args|
     gem = args[:gem]

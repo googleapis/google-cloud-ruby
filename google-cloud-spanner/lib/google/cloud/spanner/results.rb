@@ -143,7 +143,9 @@ module Google
                 # Flush the buffered responses now that they are all handled
                 buffered_responses = []
               end
-            rescue GRPC::Unavailable => err
+            rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
+                   GRPC::ResourceExhausted, GRPC::Unauthenticated,
+                   GRPC::Unavailable, GRPC::Core::CallError => err
               if resume_token.nil? || resume_token.empty?
                 # Re-raise if the resume_token is not a valid value.
                 # This can happen if the buffer was flushed.

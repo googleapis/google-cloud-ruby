@@ -19,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :tags, :string, 8
     optional :preemptible, :bool, 10
     repeated :accelerators, :message, 11, "google.container.v1.AcceleratorConfig"
+    optional :disk_type, :string, 12
     optional :min_cpu_platform, :string, 13
   end
   add_message "google.container.v1.MasterAuth" do
@@ -49,6 +50,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.container.v1.NetworkPolicyConfig" do
     optional :disabled, :bool, 1
+  end
+  add_message "google.container.v1.PrivateClusterConfig" do
+    optional :enable_private_nodes, :bool, 1
+    optional :enable_private_endpoint, :bool, 2
+    optional :master_ipv4_cidr_block, :string, 3
+    optional :private_endpoint, :string, 4
+    optional :public_endpoint, :string, 5
   end
   add_message "google.container.v1.MasterAuthorizedNetworksConfig" do
     optional :enabled, :bool, 1
@@ -104,6 +112,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :ip_allocation_policy, :message, 20, "google.container.v1.IPAllocationPolicy"
     optional :master_authorized_networks_config, :message, 22, "google.container.v1.MasterAuthorizedNetworksConfig"
     optional :maintenance_policy, :message, 23, "google.container.v1.MaintenancePolicy"
+    optional :network_config, :message, 27, "google.container.v1.NetworkConfig"
+    optional :private_cluster_config, :message, 37, "google.container.v1.PrivateClusterConfig"
     optional :self_link, :string, 100
     optional :zone, :string, 101
     optional :endpoint, :string, 102
@@ -118,6 +128,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :instance_group_urls, :string, 111
     optional :current_node_count, :int32, 112
     optional :expire_time, :string, 113
+    optional :location, :string, 114
   end
   add_enum "google.container.v1.Cluster.Status" do
     value :STATUS_UNSPECIFIED, 0
@@ -126,6 +137,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :RECONCILING, 3
     value :STOPPING, 4
     value :ERROR, 5
+    value :DEGRADED, 6
   end
   add_message "google.container.v1.ClusterUpdate" do
     optional :desired_node_version, :string, 4
@@ -147,6 +159,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :status_message, :string, 5
     optional :self_link, :string, 6
     optional :target_link, :string, 7
+    optional :location, :string, 9
     optional :start_time, :string, 10
     optional :end_time, :string, 11
   end
@@ -180,17 +193,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster, :message, 3, "google.container.v1.Cluster"
+    optional :parent, :string, 5
   end
   add_message "google.container.v1.GetClusterRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
+    optional :name, :string, 5
   end
   add_message "google.container.v1.UpdateClusterRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :update, :message, 4, "google.container.v1.ClusterUpdate"
+    optional :name, :string, 5
   end
   add_message "google.container.v1.UpdateNodePoolRequest" do
     optional :project_id, :string, 1
@@ -199,6 +215,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :node_pool_id, :string, 4
     optional :node_version, :string, 5
     optional :image_type, :string, 6
+    optional :name, :string, 8
   end
   add_message "google.container.v1.SetNodePoolAutoscalingRequest" do
     optional :project_id, :string, 1
@@ -206,36 +223,42 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :cluster_id, :string, 3
     optional :node_pool_id, :string, 4
     optional :autoscaling, :message, 5, "google.container.v1.NodePoolAutoscaling"
+    optional :name, :string, 6
   end
   add_message "google.container.v1.SetLoggingServiceRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :logging_service, :string, 4
+    optional :name, :string, 5
   end
   add_message "google.container.v1.SetMonitoringServiceRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :monitoring_service, :string, 4
+    optional :name, :string, 6
   end
   add_message "google.container.v1.SetAddonsConfigRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :addons_config, :message, 4, "google.container.v1.AddonsConfig"
+    optional :name, :string, 6
   end
   add_message "google.container.v1.SetLocationsRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     repeated :locations, :string, 4
+    optional :name, :string, 6
   end
   add_message "google.container.v1.UpdateMasterRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :master_version, :string, 4
+    optional :name, :string, 7
   end
   add_message "google.container.v1.SetMasterAuthRequest" do
     optional :project_id, :string, 1
@@ -243,6 +266,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :cluster_id, :string, 3
     optional :action, :enum, 4, "google.container.v1.SetMasterAuthRequest.Action"
     optional :update, :message, 5, "google.container.v1.MasterAuth"
+    optional :name, :string, 7
   end
   add_enum "google.container.v1.SetMasterAuthRequest.Action" do
     value :UNKNOWN, 0
@@ -254,10 +278,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
+    optional :name, :string, 4
   end
   add_message "google.container.v1.ListClustersRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
+    optional :parent, :string, 4
   end
   add_message "google.container.v1.ListClustersResponse" do
     repeated :clusters, :message, 1, "google.container.v1.Cluster"
@@ -267,15 +293,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :operation_id, :string, 3
+    optional :name, :string, 5
   end
   add_message "google.container.v1.ListOperationsRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
+    optional :parent, :string, 4
   end
   add_message "google.container.v1.CancelOperationRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :operation_id, :string, 3
+    optional :name, :string, 4
   end
   add_message "google.container.v1.ListOperationsResponse" do
     repeated :operations, :message, 1, "google.container.v1.Operation"
@@ -284,6 +313,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.container.v1.GetServerConfigRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
+    optional :name, :string, 4
   end
   add_message "google.container.v1.ServerConfig" do
     optional :default_cluster_version, :string, 1
@@ -297,23 +327,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :node_pool, :message, 4, "google.container.v1.NodePool"
+    optional :parent, :string, 6
   end
   add_message "google.container.v1.DeleteNodePoolRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :node_pool_id, :string, 4
+    optional :name, :string, 6
   end
   add_message "google.container.v1.ListNodePoolsRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
+    optional :parent, :string, 5
   end
   add_message "google.container.v1.GetNodePoolRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :node_pool_id, :string, 4
+    optional :name, :string, 6
   end
   add_message "google.container.v1.NodePool" do
     optional :name, :string, 1
@@ -363,6 +397,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :cluster_id, :string, 3
     optional :node_pool_id, :string, 4
     optional :management, :message, 5, "google.container.v1.NodeManagement"
+    optional :name, :string, 7
   end
   add_message "google.container.v1.SetNodePoolSizeRequest" do
     optional :project_id, :string, 1
@@ -370,12 +405,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :cluster_id, :string, 3
     optional :node_pool_id, :string, 4
     optional :node_count, :int32, 5
+    optional :name, :string, 7
   end
   add_message "google.container.v1.RollbackNodePoolUpgradeRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :node_pool_id, :string, 4
+    optional :name, :string, 6
   end
   add_message "google.container.v1.ListNodePoolsResponse" do
     repeated :node_pools, :message, 1, "google.container.v1.NodePool"
@@ -391,22 +428,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :cluster_id, :string, 3
     map :resource_labels, :string, :string, 4
     optional :label_fingerprint, :string, 5
+    optional :name, :string, 7
   end
   add_message "google.container.v1.SetLegacyAbacRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :enabled, :bool, 4
+    optional :name, :string, 6
   end
   add_message "google.container.v1.StartIPRotationRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
+    optional :name, :string, 6
+    optional :rotate_credentials, :bool, 7
   end
   add_message "google.container.v1.CompleteIPRotationRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
+    optional :name, :string, 7
   end
   add_message "google.container.v1.AcceleratorConfig" do
     optional :accelerator_count, :int64, 1
@@ -417,12 +459,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :network_policy, :message, 4, "google.container.v1.NetworkPolicy"
+    optional :name, :string, 6
   end
   add_message "google.container.v1.SetMaintenancePolicyRequest" do
     optional :project_id, :string, 1
     optional :zone, :string, 2
     optional :cluster_id, :string, 3
     optional :maintenance_policy, :message, 4, "google.container.v1.MaintenancePolicy"
+    optional :name, :string, 5
+  end
+  add_message "google.container.v1.NetworkConfig" do
+    optional :network, :string, 1
+    optional :subnetwork, :string, 2
   end
 end
 
@@ -437,6 +485,7 @@ module Google
       HorizontalPodAutoscaling = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.HorizontalPodAutoscaling").msgclass
       KubernetesDashboard = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.KubernetesDashboard").msgclass
       NetworkPolicyConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NetworkPolicyConfig").msgclass
+      PrivateClusterConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.PrivateClusterConfig").msgclass
       MasterAuthorizedNetworksConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MasterAuthorizedNetworksConfig").msgclass
       MasterAuthorizedNetworksConfig::CidrBlock = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MasterAuthorizedNetworksConfig.CidrBlock").msgclass
       LegacyAbac = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LegacyAbac").msgclass
@@ -493,6 +542,7 @@ module Google
       AcceleratorConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.AcceleratorConfig").msgclass
       SetNetworkPolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.SetNetworkPolicyRequest").msgclass
       SetMaintenancePolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.SetMaintenancePolicyRequest").msgclass
+      NetworkConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NetworkConfig").msgclass
     end
   end
 end

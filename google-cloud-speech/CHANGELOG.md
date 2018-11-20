@@ -1,5 +1,11 @@
 # Release History
 
+### 0.32.0 / 2018-11-15
+
+* Add StreamingRecognitionResult#result_end_time value.
+* Update documentation.
+* Update network configuration.
+
 ### 0.31.1 / 2018-09-20
 
 * Update documentation.
