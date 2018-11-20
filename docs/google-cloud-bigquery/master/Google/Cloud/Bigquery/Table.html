@@ -1480,7 +1480,7 @@ and <span class='object_link'><a href="Dataset.html#create_view-instance_method"
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#exists%3F-instance_method" title="#exists? (instance method)">#<strong>exists?</strong>  &#x21d2; Boolean </a>
+      <a href="#exists%3F-instance_method" title="#exists? (instance method)">#<strong>exists?</strong>(force: nil)  &#x21d2; Boolean </a>
     
 
     
@@ -3009,7 +3009,9 @@ identifying the result set.</p>
 2059
 2060
 2061
-2062</pre>
+2062
+2063
+2064</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2058</span>
@@ -3017,6 +3019,8 @@ identifying the result set.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
   <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_delete_table'>delete_table</span> <span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span> <span class='id identifier rubyid_table_id'>table_id</span>
+  <span class='comment'># Set flag for #exists?
+</span>  <span class='ivar'>@exists</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='kw'>true</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3374,7 +3378,7 @@ reference (see <span class='object_link'><a href="#reference%3F-instance_method"
       <div class="method_details ">
   <h3 class="signature " id="exists?-instance_method">
   
-    #<strong>exists?</strong>  &#x21d2; <tt>Boolean</tt> 
+    #<strong>exists?</strong>(force: nil)  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -3383,7 +3387,7 @@ reference (see <span class='object_link'><a href="#reference%3F-instance_method"
 </h3><div class="docstring">
   <div class="discussion">
     <p>Determines whether the table exists in the BigQuery service. The
-result is cached locally.</p>
+result is cached locally. To refresh state, set <code>force</code> to <code>true</code>.</p>
 
 
   </div>
@@ -3403,6 +3407,28 @@ result is cached locally.</p>
 <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_exists?'>exists?</span> <span class='comment'># true</span></code></pre>
     
   </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>force</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Force the latest resource representation to be
+retrieved from the BigQuery service when <code>true</code>. Otherwise the
+return value of this method will be memoized to reduce the number of
+API calls made to the BigQuery service. The default is <code>false</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -3429,29 +3455,25 @@ service, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2105
-2106
-2107
-2108
-2109
-2110
-2111
-2112
-2113
-2114</pre>
+2114
+2115
+2116
+2117
+2118
+2119
+2120
+2121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2114</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span>
-  <span class='comment'># Always true if we have a gapi object
-</span>  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_reference?'>reference?</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span> <span class='label'>force:</span> <span class='kw'>nil</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_gapi_exists?'>gapi_exists?</span> <span class='kw'>if</span> <span class='id identifier rubyid_force'>force</span>
   <span class='comment'># If we have a value, return it
 </span>  <span class='kw'>return</span> <span class='ivar'>@exists</span> <span class='kw'>unless</span> <span class='ivar'>@exists</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_ensure_gapi!'>ensure_gapi!</span>
-  <span class='ivar'>@exists</span> <span class='op'>=</span> <span class='kw'>true</span>
-<span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>NotFoundError</span>
-  <span class='ivar'>@exists</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='comment'># Always true if we have a gapi object
+</span>  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource?'>resource?</span>
+  <span class='id identifier rubyid_gapi_exists?'>gapi_exists?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -7029,12 +7051,12 @@ object, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2135
-2136
-2137</pre>
+2142
+2143
+2144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2135</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reference?'>reference?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -7109,19 +7131,23 @@ table.</p>
       <pre class="lines">
 
 
-2082
-2083
 2084
 2085
-2086</pre>
+2086
+2087
+2088
+2089
+2090</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2082</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2084</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
-  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_table'>get_table</span> <span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span> <span class='id identifier rubyid_table_id'>table_id</span>
-  <span class='ivar'>@gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_gapi'>gapi</span>
+  <span class='ivar'>@gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_table'>get_table</span> <span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span> <span class='id identifier rubyid_table_id'>table_id</span>
+  <span class='ivar'>@reference</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@exists</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -7189,12 +7215,12 @@ representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2158
-2159
-2160</pre>
+2165
+2166
+2167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2158</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2165</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource?'>resource?</span>
   <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -7263,12 +7289,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2207
-2208
-2209</pre>
+2214
+2215
+2216</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2207</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2214</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_full?'>resource_full?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Apis</span><span class='op'>::</span><span class='const'>BigqueryV2</span><span class='op'>::</span><span class='const'>Table</span>
@@ -7344,12 +7370,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-2186
-2187
-2188</pre>
+2193
+2194
+2195</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2186</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/table.rb', line 2193</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_partial?'>resource_partial?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Apis</span><span class='op'>::</span><span class='const'>BigqueryV2</span><span class='op'>::</span><span class='const'>TableList</span><span class='op'>::</span><span class='const'>Table</span>
