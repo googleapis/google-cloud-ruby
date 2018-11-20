@@ -2059,7 +2059,7 @@ module Google
           ensure_service!
           service.delete_table dataset_id, table_id
           # Set flag for #exists?
-          @deleted = true
+          @exists = false
           true
         end
 
@@ -2083,12 +2083,10 @@ module Google
         #
         def reload!
           ensure_service!
-          # The returned gapi will be nil if resource does not exist.
-          gapi = service.get_table dataset_id, table_id
-          #  If gapi is nil, @exists will be false for #exists?
-          @exists = !gapi.nil?
-          @deleted = nil
-          @gapi = gapi
+          @gapi = service.get_table dataset_id, table_id
+          @reference = nil
+          @exists = nil
+          self
         end
         alias refresh! reload!
 
@@ -2115,12 +2113,10 @@ module Google
         #
         def exists? force: nil
           return gapi_exists? if force
-          # false if #delete was called, unless followed by successful #reload!
-          return false if @deleted
-          # Always true if we have a gapi object
-          return true if resource?
           # If we have a value, return it
           return @exists unless @exists.nil?
+          # Always true if we have a gapi object
+          return true if resource?
           gapi_exists?
         end
 
