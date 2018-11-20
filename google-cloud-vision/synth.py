@@ -39,26 +39,14 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-vision.gemspec', merge=ruby.merge_gemspec)
 
-for version in ['v1p1beta1', 'v1p2beta1', 'v1p3beta1']:
-    version_library = gapic.ruby_library(
-        'vision', version,
-        artman_output_name='google-cloud-ruby/google-cloud-vision'
-    )
-    s.copy(version_library / f'lib/google/cloud/vision/{version}')
-    s.copy(version_library / f'lib/google/cloud/vision/{version}.rb')
-    s.copy(version_library / f'acceptance/google/cloud/vision/{version}')
-    s.copy(version_library / f'test/google/cloud/vision/{version}')
-
-    # s.replace(
-    #     [
-    #         f'acceptance/google/cloud/vision/{version}/*.rb',
-    #         f'lib/google/cloud/vision/{version}.rb',
-    #         f'lib/google/cloud/vision/{version}/*.rb',
-    #         f'test/google/cloud/vision/{version}/*.rb'
-    #     ],
-    #     'Google::Cloud::Vision.new',
-    #     'Google::Cloud::Vision::ImageAnnotator.new'
-    # )
+v1p3beta1 = gapic.ruby_library(
+    'vision', 'v1p3beta1',
+    artman_output_name='google-cloud-ruby/google-cloud-vision'
+)
+s.copy(v1p3beta1 / 'lib/google/cloud/vision/v1p3beta1')
+s.copy(v1p3beta1 / 'lib/google/cloud/vision/v1p3beta1.rb')
+s.copy(v1p3beta1 / 'acceptance/google/cloud/vision/v1p3beta1')
+s.copy(v1p3beta1 / 'test/google/cloud/vision/v1p3beta1')
 
 # PERMANENT: Add migration guide to docs
 s.replace(
@@ -101,7 +89,7 @@ s.replace(
 
         gem.platform\\1= Gem::Platform::RUBY"""))
 
-for version in ['v1', 'v1p1beta1', 'v1p2beta1', 'v1p3beta1']:
+for version in ['v1', 'v1p3beta1']:
 
     # https://github.com/googleapis/gapic-generator/issues/2232
     s.replace(

@@ -22,7 +22,7 @@ require "google/cloud/vision"
 describe "ImageAnnotatorSmokeTest v1p2beta1" do
   it "runs one smoke test with batch_annotate_images" do
 
-    image_annotator_client = Google::Cloud::Vision.new(version: :v1p2beta1)
+    image_annotator_client = Google::Cloud::Vision::ImageAnnotatorClient.new(version: :v1p2beta1)
     gcs_image_uri = "gs://gapic-toolkit/President_Barack_Obama.jpg"
     source = { gcs_image_uri: gcs_image_uri }
     image = { source: source }
