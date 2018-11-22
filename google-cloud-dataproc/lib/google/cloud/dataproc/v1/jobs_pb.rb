@@ -150,6 +150,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :driver_control_files_uri, :string, 15
     map :labels, :string, :string, 18
     optional :scheduling, :message, 20, "google.cloud.dataproc.v1.JobScheduling"
+    optional :job_uuid, :string, 22
     oneof :type_job do
       optional :hadoop_job, :message, 3, "google.cloud.dataproc.v1.HadoopJob"
       optional :spark_job, :message, 4, "google.cloud.dataproc.v1.SparkJob"
@@ -166,6 +167,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :project_id, :string, 1
     optional :region, :string, 3
     optional :job, :message, 2, "google.cloud.dataproc.v1.Job"
+    optional :request_id, :string, 4
   end
   add_message "google.cloud.dataproc.v1.GetJobRequest" do
     optional :project_id, :string, 1

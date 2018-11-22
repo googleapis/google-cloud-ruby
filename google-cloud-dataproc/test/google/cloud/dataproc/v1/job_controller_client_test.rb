@@ -79,7 +79,12 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       # Create expected grpc response
       driver_output_resource_uri = "driverOutputResourceUri-542229086"
       driver_control_files_uri = "driverControlFilesUri207057643"
-      expected_response = { driver_output_resource_uri: driver_output_resource_uri, driver_control_files_uri: driver_control_files_uri }
+      job_uuid = "jobUuid-1615012099"
+      expected_response = {
+        driver_output_resource_uri: driver_output_resource_uri,
+        driver_control_files_uri: driver_control_files_uri,
+        job_uuid: job_uuid
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dataproc::V1::Job)
 
       # Mock Grpc layer
@@ -174,7 +179,12 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       # Create expected grpc response
       driver_output_resource_uri = "driverOutputResourceUri-542229086"
       driver_control_files_uri = "driverControlFilesUri207057643"
-      expected_response = { driver_output_resource_uri: driver_output_resource_uri, driver_control_files_uri: driver_control_files_uri }
+      job_uuid = "jobUuid-1615012099"
+      expected_response = {
+        driver_output_resource_uri: driver_output_resource_uri,
+        driver_control_files_uri: driver_control_files_uri,
+        job_uuid: job_uuid
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dataproc::V1::Job)
 
       # Mock Grpc layer
@@ -347,7 +357,12 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       # Create expected grpc response
       driver_output_resource_uri = "driverOutputResourceUri-542229086"
       driver_control_files_uri = "driverControlFilesUri207057643"
-      expected_response = { driver_output_resource_uri: driver_output_resource_uri, driver_control_files_uri: driver_control_files_uri }
+      job_uuid = "jobUuid-1615012099"
+      expected_response = {
+        driver_output_resource_uri: driver_output_resource_uri,
+        driver_control_files_uri: driver_control_files_uri,
+        job_uuid: job_uuid
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dataproc::V1::Job)
 
       # Mock Grpc layer
@@ -454,7 +469,12 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       # Create expected grpc response
       driver_output_resource_uri = "driverOutputResourceUri-542229086"
       driver_control_files_uri = "driverControlFilesUri207057643"
-      expected_response = { driver_output_resource_uri: driver_output_resource_uri, driver_control_files_uri: driver_control_files_uri }
+      job_uuid = "jobUuid-1615012099"
+      expected_response = {
+        driver_output_resource_uri: driver_output_resource_uri,
+        driver_control_files_uri: driver_control_files_uri,
+        job_uuid: job_uuid
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dataproc::V1::Job)
 
       # Mock Grpc layer

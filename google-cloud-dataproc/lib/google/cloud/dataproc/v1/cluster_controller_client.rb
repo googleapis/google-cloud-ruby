@@ -35,7 +35,7 @@ module Google
     module Dataproc
       module V1
         # The ClusterControllerService provides methods to manage clusters
-        # of Google Compute Engine instances.
+        # of Compute Engine instances.
         #
         # @!attribute [r] cluster_controller_stub
         #   @return [Google::Cloud::Dataproc::V1::ClusterController::Stub]
@@ -232,6 +232,18 @@ module Google
           #   Required. The cluster to create.
           #   A hash of the same form as `Google::Cloud::Dataproc::V1::Cluster`
           #   can also be provided.
+          # @param request_id [String]
+          #   Optional. A unique id used to identify the request. If the server
+          #   receives two {Google::Cloud::Dataproc::V1::CreateClusterRequest CreateClusterRequest} requests  with the same
+          #   id, then the second request will be ignored and the
+          #   first {Google::Longrunning::Operation} created and stored in the backend
+          #   is returned.
+          #
+          #   It is recommended to always set this value to a
+          #   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+          #
+          #   The id must contain only letters (a-z, A-Z), numbers (0-9),
+          #   underscores (_), and hyphens (-). The maximum length is 40 characters.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -282,11 +294,13 @@ module Google
               project_id,
               region,
               cluster,
+              request_id: nil,
               options: nil
             req = {
               project_id: project_id,
               region: region,
-              cluster: cluster
+              cluster: cluster,
+              request_id: request_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::CreateClusterRequest)
             operation = Google::Gax::Operation.new(
@@ -363,6 +377,29 @@ module Google
           #    </table>
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
+          # @param graceful_decommission_timeout [Google::Protobuf::Duration | Hash]
+          #   Optional. Timeout for graceful YARN decomissioning. Graceful
+          #   decommissioning allows removing nodes from the cluster without
+          #   interrupting jobs in progress. Timeout specifies how long to wait for jobs
+          #   in progress to finish before forcefully removing nodes (and potentially
+          #   interrupting jobs). Default timeout is 0 (for forceful decommission), and
+          #   the maximum allowed timeout is 1 day.
+          #
+          #   Only supported on Dataproc image versions 1.2 and higher.
+          #   A hash of the same form as `Google::Protobuf::Duration`
+          #   can also be provided.
+          # @param request_id [String]
+          #   Optional. A unique id used to identify the request. If the server
+          #   receives two {Google::Cloud::Dataproc::V1::UpdateClusterRequest UpdateClusterRequest} requests  with the same
+          #   id, then the second request will be ignored and the
+          #   first {Google::Longrunning::Operation} created and stored in the
+          #   backend is returned.
+          #
+          #   It is recommended to always set this value to a
+          #   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+          #
+          #   The id must contain only letters (a-z, A-Z), numbers (0-9),
+          #   underscores (_), and hyphens (-). The maximum length is 40 characters.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -421,13 +458,17 @@ module Google
               cluster_name,
               cluster,
               update_mask,
+              graceful_decommission_timeout: nil,
+              request_id: nil,
               options: nil
             req = {
               project_id: project_id,
               region: region,
               cluster_name: cluster_name,
               cluster: cluster,
-              update_mask: update_mask
+              update_mask: update_mask,
+              graceful_decommission_timeout: graceful_decommission_timeout,
+              request_id: request_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::UpdateClusterRequest)
             operation = Google::Gax::Operation.new(
@@ -450,6 +491,21 @@ module Google
           #   Required. The Cloud Dataproc region in which to handle the request.
           # @param cluster_name [String]
           #   Required. The cluster name.
+          # @param cluster_uuid [String]
+          #   Optional. Specifying the `cluster_uuid` means the RPC should fail
+          #   (with error NOT_FOUND) if cluster with specified UUID does not exist.
+          # @param request_id [String]
+          #   Optional. A unique id used to identify the request. If the server
+          #   receives two {Google::Cloud::Dataproc::V1::DeleteClusterRequest DeleteClusterRequest} requests  with the same
+          #   id, then the second request will be ignored and the
+          #   first {Google::Longrunning::Operation} created and stored in the
+          #   backend is returned.
+          #
+          #   It is recommended to always set this value to a
+          #   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+          #
+          #   The id must contain only letters (a-z, A-Z), numbers (0-9),
+          #   underscores (_), and hyphens (-). The maximum length is 40 characters.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -500,11 +556,15 @@ module Google
               project_id,
               region,
               cluster_name,
+              cluster_uuid: nil,
+              request_id: nil,
               options: nil
             req = {
               project_id: project_id,
               region: region,
-              cluster_name: cluster_name
+              cluster_name: cluster_name,
+              cluster_uuid: cluster_uuid,
+              request_id: request_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::DeleteClusterRequest)
             operation = Google::Gax::Operation.new(

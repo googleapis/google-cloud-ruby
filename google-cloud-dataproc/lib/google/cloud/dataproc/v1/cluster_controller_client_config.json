@@ -21,7 +21,7 @@
       },
       "methods": {
         "CreateCluster": {
-          "timeout_millis": 90000,
+          "timeout_millis": 30000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -31,22 +31,22 @@
           "retry_params_name": "default"
         },
         "DeleteCluster": {
-          "timeout_millis": 15000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetCluster": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListClusters": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DiagnoseCluster": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

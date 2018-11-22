@@ -5,7 +5,6 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/cloud/dataproc/v1/operations_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
@@ -29,6 +28,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :secondary_worker_config, :message, 12, "google.cloud.dataproc.v1.InstanceGroupConfig"
     optional :software_config, :message, 13, "google.cloud.dataproc.v1.SoftwareConfig"
     repeated :initialization_actions, :message, 11, "google.cloud.dataproc.v1.NodeInitializationAction"
+    optional :encryption_config, :message, 15, "google.cloud.dataproc.v1.EncryptionConfig"
+  end
+  add_message "google.cloud.dataproc.v1.EncryptionConfig" do
+    optional :gce_pd_kms_key_name, :string, 1
   end
   add_message "google.cloud.dataproc.v1.GceClusterConfig" do
     optional :zone_uri, :string, 1
@@ -59,6 +62,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :accelerator_count, :int32, 2
   end
   add_message "google.cloud.dataproc.v1.DiskConfig" do
+    optional :boot_disk_type, :string, 3
     optional :boot_disk_size_gb, :int32, 1
     optional :num_local_ssds, :int32, 2
   end
@@ -97,18 +101,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :project_id, :string, 1
     optional :region, :string, 3
     optional :cluster, :message, 2, "google.cloud.dataproc.v1.Cluster"
+    optional :request_id, :string, 4
   end
   add_message "google.cloud.dataproc.v1.UpdateClusterRequest" do
     optional :project_id, :string, 1
     optional :region, :string, 5
     optional :cluster_name, :string, 2
     optional :cluster, :message, 3, "google.cloud.dataproc.v1.Cluster"
+    optional :graceful_decommission_timeout, :message, 6, "google.protobuf.Duration"
     optional :update_mask, :message, 4, "google.protobuf.FieldMask"
+    optional :request_id, :string, 7
   end
   add_message "google.cloud.dataproc.v1.DeleteClusterRequest" do
     optional :project_id, :string, 1
     optional :region, :string, 3
     optional :cluster_name, :string, 2
+    optional :cluster_uuid, :string, 4
+    optional :request_id, :string, 5
   end
   add_message "google.cloud.dataproc.v1.GetClusterRequest" do
     optional :project_id, :string, 1
@@ -142,6 +151,7 @@ module Google
       module V1
         Cluster = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Cluster").msgclass
         ClusterConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterConfig").msgclass
+        EncryptionConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.EncryptionConfig").msgclass
         GceClusterConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GceClusterConfig").msgclass
         InstanceGroupConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.InstanceGroupConfig").msgclass
         ManagedGroupConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ManagedGroupConfig").msgclass

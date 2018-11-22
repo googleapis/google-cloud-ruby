@@ -215,6 +215,18 @@ module Google
           #   Required. The job resource.
           #   A hash of the same form as `Google::Cloud::Dataproc::V1::Job`
           #   can also be provided.
+          # @param request_id [String]
+          #   Optional. A unique id used to identify the request. If the server
+          #   receives two {Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest} requests  with the same
+          #   id, then the second request will be ignored and the
+          #   first {Google::Cloud::Dataproc::V1::Job Job} created and stored in the backend
+          #   is returned.
+          #
+          #   It is recommended to always set this value to a
+          #   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+          #
+          #   The id must contain only letters (a-z, A-Z), numbers (0-9),
+          #   underscores (_), and hyphens (-). The maximum length is 40 characters.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -242,12 +254,14 @@ module Google
               project_id,
               region,
               job,
+              request_id: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               region: region,
-              job: job
+              job: job,
+              request_id: request_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::SubmitJobRequest)
             @submit_job.call(req, options, &block)
