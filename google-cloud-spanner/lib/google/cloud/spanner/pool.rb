@@ -166,6 +166,7 @@ module Google
 
         def close
           @mutex.synchronize do
+            @futures = nil
             @closed = true
           end
           @keepalive_task.shutdown
@@ -173,13 +174,14 @@ module Google
           @resource.broadcast
           # Delete all sessions
           @mutex.synchronize do
-            @all_sessions.each { |s| future { s.release! } }
+            @futures = @all_sessions.map { |s| future { s.release! } }
             @all_sessions = []
             @session_queue = []
             @transaction_queue = []
           end
           # shutdown existing thread pool
           @thread_pool.shutdown
+          @futures.each(&:wait)
 
           true
         end
