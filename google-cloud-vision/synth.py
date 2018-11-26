@@ -106,6 +106,17 @@ for version in ['v1', 'v1p3beta1']:
         '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
         '\\1\\2# @private\n\\2\\3')
 
+    # Add helper methods
+    s.replace(
+        f'lib/google/cloud/vision/{version}.rb',
+        f'Google::Cloud::Vision::{version.capitalize()}::ImageAnnotatorClient.new.*$',
+        '\n'.join([
+            'require "google/cloud/vision/helpers"',
+            f'            client = Google::Cloud::Vision::{version.capitalize()}::ImageAnnotatorClient.new(**kwargs)',
+            f'            Google::Cloud::Vision.add_helper_methods(client, :{version.capitalize()})'
+        ])
+    )
+
 # https://github.com/googleapis/gapic-generator/issues/2279
 s.replace(
     'lib/**/*.rb',
@@ -134,23 +145,3 @@ s.replace(
     'README.md',
     '\n'.join(['README.md', 'LICENSE'])
 )
-# Add helper methods
-s.replace(
-    'lib/google/cloud/vision.rb',
-    'Google::Cloud::Vision.const_get\\(version_module\\)::ImageAnnotator.new.*$',
-    '\n'.join([
-        'client = Google::Cloud::Vision.const_get(version_module)::ImageAnnotator.new(*args, **kwargs)',
-        '          Google::Cloud::Vision.add_methods(client, version_module)'
-    ])
-)
-# require helper methods
-s.replace(
-    'lib/google/cloud/vision.rb',
-    'require "pathname"',
-    '\n'.join([
-        'require "pathname"',
-        '',
-        'require "google/cloud/vision/helpers"'
-    ])
-)
-

@@ -223,7 +223,9 @@ module Google
               lib_name: lib_name,
               lib_version: lib_version
             }.select { |_, v| v != nil }
-            Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient.new(**kwargs)
+            require "google/cloud/vision/helpers"
+            client = Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient.new(**kwargs)
+            Google::Cloud::Vision.add_helper_methods(client, :V1p3beta1)
           end
         end
       end
