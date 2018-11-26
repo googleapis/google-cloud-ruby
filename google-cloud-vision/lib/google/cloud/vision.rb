@@ -16,6 +16,8 @@
 require "google/gax"
 require "pathname"
 
+require "google/cloud/vision/helpers"
+
 module Google
   module Cloud
     # rubocop:disable LineLength
@@ -227,7 +229,8 @@ module Google
             .constants
             .select {|sym| sym.to_s.downcase == version.to_s.downcase}
             .first
-          Google::Cloud::Vision.const_get(version_module)::ImageAnnotator.new(*args, **kwargs)
+          client = Google::Cloud::Vision.const_get(version_module)::ImageAnnotator.new(*args, **kwargs)
+          Google::Cloud::Vision.add_helper_methods(client, version_module)
         end
       end
     end

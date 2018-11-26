@@ -128,7 +128,7 @@ module Google
         #       |    |
         #       1----0
         #
-        #       and the vertice order will still be (0, 1, 2, 3).
+        #       and the vertex order will still be (0, 1, 2, 3).
         # @!attribute [rw] paragraphs
         #   @return [Array<Google::Cloud::Vision::V1::Paragraph>]
         #     List of paragraphs in this block (if this blocks is of type text).
@@ -181,7 +181,7 @@ module Google
         #         2----3
         #         |    |
         #         1----0
-        #         and the vertice order will still be (0, 1, 2, 3).
+        #         and the vertex order will still be (0, 1, 2, 3).
         # @!attribute [rw] words
         #   @return [Array<Google::Cloud::Vision::V1::Word>]
         #     List of words in this paragraph.
@@ -210,7 +210,7 @@ module Google
         #         2----3
         #         |    |
         #         1----0
-        #         and the vertice order will still be (0, 1, 2, 3).
+        #         and the vertex order will still be (0, 1, 2, 3).
         # @!attribute [rw] symbols
         #   @return [Array<Google::Cloud::Vision::V1::Symbol>]
         #     List of symbols in the word.

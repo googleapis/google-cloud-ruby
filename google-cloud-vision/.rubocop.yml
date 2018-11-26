@@ -10,6 +10,9 @@ AllCops:
     - "lib/google/cloud/vision/v1p3beta1.rb"
     - "lib/google/cloud/vision/v1p3beta1/**/*"
     - "test/**/*"
+  Include:
+    - "lib/google/cloud/vision/v1/image_annotator_client_helpers.rb"
+    - "test/google/cloud/vision/v1/image_annotator_client_helpers_test.rb"
     
 
 Documentation:

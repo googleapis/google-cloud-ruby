@@ -77,8 +77,8 @@ module Google
             # * Returns INVALID_ARGUMENT if display_name is present in update_mask but
             #   missing from the request or longer than 4096 characters.
             rpc :UpdateProductSet, UpdateProductSetRequest, ProductSet
-            # Permanently deletes a ProductSet. All Products and ReferenceImages in the
-            # ProductSet will be deleted.
+            # Permanently deletes a ProductSet. Products and ReferenceImages in the
+            # ProductSet are not deleted.
             #
             # The actual image files are not deleted from Google Cloud Storage.
             #
