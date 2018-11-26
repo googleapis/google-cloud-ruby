@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/pubsub/subscriber/async_unary_pusher"
 require "google/cloud/pubsub/subscriber/enumerator_queue"
 require "google/cloud/pubsub/subscriber/inventory"
 require "google/cloud/pubsub/service"
@@ -32,7 +31,7 @@ module Google
 
           ##
           # @private Implementation attributes.
-          attr_reader :callback_thread_pool, :push_thread_pool
+          attr_reader :callback_thread_pool
 
           ##
           # Subscriber attributes.
@@ -51,8 +50,6 @@ module Google
             @inventory = Inventory.new self, subscriber.stream_inventory
             @callback_thread_pool = Concurrent::FixedThreadPool.new \
               subscriber.callback_threads
-            @push_thread_pool = Concurrent::FixedThreadPool.new \
-              subscriber.push_threads
 
             @stream_keepalive_task = Concurrent::TimerTask.new(
               execution_interval: 30
@@ -96,12 +93,6 @@ module Google
 
               # Once all the callbacks are stopped, we can stop the inventory.
               @inventory.stop
-
-              # Stop the publisher and send the final batch of changes.
-              @async_pusher.stop if @async_pusher # will push current batch
-
-              # Stop the push thread pool now that the pusher is stopped.
-              @push_thread_pool.shutdown
             end
 
             self
@@ -116,13 +107,6 @@ module Google
           end
 
           def wait!
-            synchronize do
-              # # Wait for the push thread pool to finish pushing all remaining
-              # changes. Do not wait indefinitely.
-              @push_thread_pool.wait_for_termination 60
-              @push_thread_pool.kill if @push_thread_pool.shuttingdown?
-            end
-
             self
           end
 
@@ -133,8 +117,7 @@ module Google
             return true if ack_ids.empty?
 
             synchronize do
-              @async_pusher ||= AsyncUnaryPusher.new(self).start
-              @async_pusher.acknowledge ack_ids
+              @subscriber.buffer.acknowledge ack_ids
               @inventory.remove ack_ids
               unpause_streaming!
             end
@@ -149,8 +132,7 @@ module Google
             return true if mod_ack_ids.empty?
 
             synchronize do
-              @async_pusher ||= AsyncUnaryPusher.new(self).start
-              @async_pusher.delay deadline, mod_ack_ids
+              @subscriber.buffer.delay deadline, mod_ack_ids
               @inventory.remove mod_ack_ids
               unpause_streaming!
             end
@@ -158,10 +140,6 @@ module Google
             true
           end
           alias delay modify_ack_deadline
-
-          def async_pusher
-            synchronize { @async_pusher }
-          end
 
           def push request
             synchronize { @request_queue.push request }
@@ -177,8 +155,7 @@ module Google
             synchronize do
               return true if @inventory.empty?
 
-              @async_pusher ||= AsyncUnaryPusher.new(self).start
-              @async_pusher.delay subscriber.deadline, @inventory.ack_ids
+              @subscriber.buffer.delay subscriber.deadline, @inventory.ack_ids
             end
 
             true
@@ -239,8 +216,7 @@ module Google
 
                 synchronize do
                   # Create receipt of received messages reception
-                  @async_pusher ||= AsyncUnaryPusher.new(self).start
-                  @async_pusher.delay subscriber.deadline, received_ack_ids
+                  @subscriber.buffer.delay subscriber.deadline, received_ack_ids
 
                   # Add received messages to inventory
                   @inventory.add received_ack_ids

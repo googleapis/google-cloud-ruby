@@ -40,6 +40,9 @@ describe Google::Cloud::Pubsub::Subscriber, :nack, :mock_pubsub do
 
     subscription.service.mocked_subscriber = stub
     subscriber = subscription.listen streams: 1 do |msg|
+      # flush the initial buffer before any callbacks are processed
+      subscriber.buffer.flush! unless called
+
       assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, msg
       assert_equal rec_message_msg, msg.data
       assert_equal "ack-id-#{rec_message_ack_id}", msg.ack_id
@@ -81,6 +84,9 @@ describe Google::Cloud::Pubsub::Subscriber, :nack, :mock_pubsub do
 
     subscription.service.mocked_subscriber = stub
     subscriber = subscription.listen streams: 1 do |msg|
+      # flush the initial buffer before any callbacks are processed
+      subscriber.buffer.flush! if called.zero?
+
       assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, msg
       msg.nack!
       called +=1
