@@ -117,8 +117,8 @@ module Google
             return true if ack_ids.empty?
 
             synchronize do
-              @subscriber.buffer.acknowledge ack_ids
               @inventory.remove ack_ids
+              @subscriber.buffer.acknowledge ack_ids
               unpause_streaming!
             end
 
@@ -132,8 +132,8 @@ module Google
             return true if mod_ack_ids.empty?
 
             synchronize do
-              @subscriber.buffer.delay deadline, mod_ack_ids
               @inventory.remove mod_ack_ids
+              @subscriber.buffer.delay deadline, mod_ack_ids
               unpause_streaming!
             end
 
