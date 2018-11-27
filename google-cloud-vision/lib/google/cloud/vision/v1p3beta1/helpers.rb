@@ -22,9 +22,9 @@ module Google
         class ImageAnnotatorClient
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -99,9 +99,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -176,9 +176,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -253,9 +253,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -330,9 +330,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -407,9 +407,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -484,9 +484,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -561,9 +561,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -638,9 +638,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -715,9 +715,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -792,9 +792,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -869,9 +869,9 @@ module Google
           end
 
           # @param images [Array<String>, Array<File>]
-          #   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
+          #   An array containing files, file paths, io objects, image urls, or Google Cloud Storage urls. Can be used with or instead of image.
           # @param image [File, String]
-          #   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
+          #   A file, file path, io object, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.
           # @param max_results [Integer]
           #   Optional. Defaults to 10.
           # @param options [Google::Gax::CallOptions]
@@ -948,24 +948,21 @@ module Google
           private
 
           def normalize_image image
-            formatted_image = {}
-            if File.file? image
+            formatted_image =
               if image.respond_to? :binmode
-                formatted_image = { content: image.dup.binmode.read }
-              else
-                formatted_image = { content: File.binread(image) }
+                { content: image.binmode.read }
+              elsif image.is_a? String
+                if File.file? image
+                  { content: File.binread image }
+                elsif image =~ URI::DEFAULT_PARSER.make_regexp
+                  if URI(image).scheme == "gs"
+                    { source: { gcs_image_uri: image } }
+                  else
+                    { source: { image_uri: image } }
+                  end
+                end
               end
-            elsif image =~ URI::DEFAULT_PARSER.make_regexp
-              if URI(image).scheme == "gs"
-                source = { gcs_image_uri: image }
-                formatted_image = { source: source }
-              else
-                source = { image_uri: image }
-                formatted_image = { source: source }
-              end
-            else
-              raise TypeError.new("Image must be a filepath, file, url, or Google Cloud Storage url")
-            end
+            raise TypeError.new("Image must be a filepath, url, or IO object") unless formatted_image
             formatted_image
           end
         end
