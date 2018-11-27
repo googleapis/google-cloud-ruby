@@ -10,9 +10,6 @@ AllCops:
     - "lib/google/cloud/vision/v1p3beta1.rb"
     - "lib/google/cloud/vision/v1p3beta1/**/*"
     - "test/**/*"
-  Include:
-    - "lib/google/cloud/vision/helpers.rb"
-    - "test/google/cloud/vision/helpers_test.rb"
     
 
 Documentation:
