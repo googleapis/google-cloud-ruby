@@ -89,7 +89,8 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Nimbus InternalCheckers.</p>
+    <p>An internal checker allows uptime checks to run on private/internal GCP
+resources.</p>
 
 
   </div>
@@ -103,32 +104,6 @@ js:
 
   <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#checker_id-instance_method" title="#checker_id (instance method)">#<strong>checker_id</strong>  &#x21d2; String </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>The checker ID.</p>
-</div></span>
-  
-</li>
-
     
       <li class="public ">
   <span class="summary_signature">
@@ -185,6 +160,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A unique resource name for this InternalChecker.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#network-instance_method" title="#network (instance method)">#<strong>network</strong>  &#x21d2; String </a>
     
 
@@ -202,7 +203,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The internal network to perform this uptime check on.</p>
+    <span class="summary_desc"><div class='inline'><p>The <a href="https://cloud.google.com/vpc/docs/vpc">GCP VPC network</a> where the internal resource lives (ex: &quot;default&quot;).</p>
 </div></span>
   
 </li>
@@ -211,7 +212,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#project_id-instance_method" title="#project_id (instance method)">#<strong>project_id</strong>  &#x21d2; String </a>
+      <a href="#peer_project_id-instance_method" title="#peer_project_id (instance method)">#<strong>peer_project_id</strong>  &#x21d2; String </a>
     
 
     
@@ -228,7 +229,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The GCP project ID.</p>
+    <span class="summary_desc"><div class='inline'><p>The GCP project_id where the internal checker lives.</p>
 </div></span>
   
 </li>
@@ -244,64 +245,9 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="checker_id=-instance_method"></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="checker_id-instance_method">
-  
-    #<strong>checker_id</strong>  &#x21d2; <tt>String</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns The checker ID.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>The checker ID.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-37</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 37</span>
-
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
       <span id="display_name=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="display_name-instance_method">
+      <div class="method_details first">
+  <h3 class="signature first" id="display_name-instance_method">
   
     #<strong>display_name</strong>  &#x21d2; <tt>String</tt> 
   
@@ -311,7 +257,9 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The checker&#39;s human-readable name.</p>
+    <p>Returns The checker&#39;s human-readable name. The display name
+should be unique within a Stackdriver Workspace in order to make it easier
+to identify; however, uniqueness is not enforced.</p>
 
 
   </div>
@@ -329,7 +277,9 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The checker&#39;s human-readable name.</p>
+        <div class='inline'><p>The checker&#39;s human-readable name. The display name
+should be unique within a Stackdriver Workspace in order to make it easier
+to identify; however, uniqueness is not enforced.</p>
 </div>
       
     </li>
@@ -342,10 +292,10 @@ js:
       <pre class="lines">
 
 
-37</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 47</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -399,10 +349,75 @@ internal uptime checks, where internal_network is specified.</p>
       <pre class="lines">
 
 
-37</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 47</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A unique resource name for this InternalChecker. The format is:</p>
+
+<p><code>projects/[PROJECT_ID]/internalCheckers/[INTERNAL_CHECKER_ID]</code>.</p>
+
+<p>PROJECT_ID is the stackdriver workspace project for the
+uptime check config associated with the internal checker.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A unique resource name for this InternalChecker. The format is:</p>
+
+<p><code>projects/[PROJECT_ID]/internalCheckers/[INTERNAL_CHECKER_ID]</code>.</p>
+
+<p>PROJECT_ID is the stackdriver workspace project for the
+uptime check config associated with the internal checker.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 47</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -423,7 +438,8 @@ internal uptime checks, where internal_network is specified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The internal network to perform this uptime check on.</p>
+    <p>Returns The <a href="https://cloud.google.com/vpc/docs/vpc">GCP VPC network</a> where the
+internal resource lives (ex: &quot;default&quot;).</p>
 
 
   </div>
@@ -441,7 +457,8 @@ internal uptime checks, where internal_network is specified.</p>
       
       
         &mdash;
-        <div class='inline'><p>The internal network to perform this uptime check on.</p>
+        <div class='inline'><p>The <a href="https://cloud.google.com/vpc/docs/vpc">GCP VPC network</a> where the
+internal resource lives (ex: &quot;default&quot;).</p>
 </div>
       
     </li>
@@ -454,10 +471,10 @@ internal uptime checks, where internal_network is specified.</p>
       <pre class="lines">
 
 
-37</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 47</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -466,11 +483,11 @@ internal uptime checks, where internal_network is specified.</p>
 </div>
     
       
-      <span id="project_id=-instance_method"></span>
+      <span id="peer_project_id=-instance_method"></span>
       <div class="method_details ">
-  <h3 class="signature " id="project_id-instance_method">
+  <h3 class="signature " id="peer_project_id-instance_method">
   
-    #<strong>project_id</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>peer_project_id</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -478,8 +495,8 @@ internal uptime checks, where internal_network is specified.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The GCP project ID. Not necessarily the same as the project_id for the
-config.</p>
+    <p>Returns The GCP project_id where the internal checker lives. Not necessary
+the same as the workspace project.</p>
 
 
   </div>
@@ -497,8 +514,8 @@ config.</p>
       
       
         &mdash;
-        <div class='inline'><p>The GCP project ID. Not necessarily the same as the project_id for the
-config.</p>
+        <div class='inline'><p>The GCP project_id where the internal checker lives. Not necessary
+the same as the workspace project.</p>
 </div>
       
     </li>
@@ -511,10 +528,10 @@ config.</p>
       <pre class="lines">
 
 
-37</pre>
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 47</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
