@@ -19,7 +19,7 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 from textwrap import dedent
-from os import listdir
+from os import listdir, system
 from os.path import isfile, join
 
 logging.basicConfig(level=logging.DEBUG)
@@ -109,11 +109,10 @@ for version in ['v1', 'v1p3beta1']:
     # Add helper methods
     s.replace(
         f'lib/google/cloud/vision/{version}.rb',
-        f'Google::Cloud::Vision::{version.capitalize()}::ImageAnnotatorClient.new.*$',
+        f'require "google/cloud/vision/{version}/image_annotator_client"',
         '\n'.join([
-            'require "google/cloud/vision/helpers"',
-            f'            client = Google::Cloud::Vision::{version.capitalize()}::ImageAnnotatorClient.new(**kwargs)',
-            f'            Google::Cloud::Vision.add_helper_methods(client, :{version.capitalize()})'
+            f'require "google/cloud/vision/{version}/image_annotator_client"',
+            f'require "google/cloud/vision/{version}/helpers"',
         ])
     )
 
@@ -145,3 +144,5 @@ s.replace(
     'README.md',
     '\n'.join(['README.md', 'LICENSE'])
 )
+# Generate the helper methods
+system('bundle update && bundle exec rake generate_partials')

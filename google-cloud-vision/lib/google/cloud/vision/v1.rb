@@ -15,6 +15,7 @@
 
 require "google/cloud/vision/v1/product_search_client"
 require "google/cloud/vision/v1/image_annotator_client"
+require "google/cloud/vision/v1/helpers"
 require "google/cloud/vision/v1/product_search_service_pb"
 require "google/cloud/vision/v1/image_annotator_pb"
 
@@ -223,9 +224,7 @@ module Google
               lib_name: lib_name,
               lib_version: lib_version
             }.select { |_, v| v != nil }
-            require "google/cloud/vision/helpers"
-            client = Google::Cloud::Vision::V1::ImageAnnotatorClient.new(**kwargs)
-            Google::Cloud::Vision.add_helper_methods(client, :V1)
+            Google::Cloud::Vision::V1::ImageAnnotatorClient.new(**kwargs)
           end
         end
       end

@@ -1,0 +1,132 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# # limitations under the License.
+
+
+require "uri"
+
+module Google
+  module Cloud
+    module Vision
+      module <%= version.capitalize %>
+        class ImageAnnotatorClient
+
+<%=
+  helper_hash.map do |method_name, feature_type|
+
+    [
+      "# @param images [Array<String>, Array<File>]",
+      "#   An array containing files, file paths, image urls, or Google Cloud Storage urls. Can be used with or instead of image.",
+      "# @param image [File, String]",
+      "#   An image file, file path, url pointing to an image, or Google Cloud Storage url. Can be used with or instead of images.",
+      "# @param max_results [Integer]",
+      "#   Optional. Defaults to 10.",
+      "# @param options [Google::Gax::CallOptions]",
+      "#   Optional. Overrides the default settings for this call, e.g, timeout,",
+      "#   retries, etc.",
+      "# @param async [Boolean]",
+      "#   Optional. Defaults to false. Specifies whether to preform the request synchronously and return a ",
+      "#   BatchAnnotateImagesResponse instance or to return a Google::Gax::Operation.",
+      "# @param mime_type [String]",
+      "#   Required only if async is true.",
+      "# @param batch_size [Integer]",
+      "#   Optional. Defaults to 10. When async is true, this specifies the number of input files per output json.",
+      "# @param destination [String]",
+      "#   Required only if async is true. A Google Cloud Storage location for storing the output.",
+      "# @yield [result, operation] Access the result along with the RPC operation",
+      "# @yieldparam result [Google::Cloud::Vision::V1p3beta1::BatchAnnotateImagesResponse]",
+      "# @yieldparam operation [GRPC::ActiveCall::Operation]",
+      "# @return [Google::Cloud::Vision::#{version.capitalize}::BatchAnnotateImagesResponse, Google::Gax::Operation]",
+      "# @example",
+      "#   require \"google/cloud/vision\"",
+      "#",
+      "#   image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new(version: :#{version})",
+      "#",
+      "#   response = image_annotator_client.#{method_name} image: \"path\\to\\image.png\"",
+      "#   response.responses.each do |res|",
+      "#     puts res",
+      "#   end",
+      "",
+      "def #{method_name} \\",
+      "  images: [], ",
+      "  image: nil,",
+      "  max_results: 10,",
+      "  options: nil,",
+      "  async: false,",
+      "  mime_type: nil,",
+      "  batch_size: 10,",
+      "  destination: nil,",
+      "  &blk",
+      "",
+      "  feature = { type: :#{feature_type} }",
+      "  feature[:max_results] = max_results",
+      "  images << image if image",
+      "",
+      "  formatted_images = images.map do |img|",
+      "    formatted_image = normalize_image img",
+      "    formatted_image[:mime_type] = mime_type if mime_type",
+      "    formatted_image",
+      "  end",
+      "",
+      "  requests = formatted_images.map do |img|",
+      "    {",
+      "      image: img,",
+      "      features: [feature]",
+      "    }",
+      "  end",
+      "",
+      "  if async",
+      "    requests.map! do |request|",
+      "      {",
+      "        input_config: request[:image],",
+      "        features: request[:features],",
+      "        output_config: {",
+      "          gcs_destination: destination,",
+      "          batch_size: batch_size",
+      "        }",
+      "      }",
+      "    end",
+      "    async_batch_annotate_files requests, options",
+      "  else",
+      "    batch_annotate_images requests, options, &blk",
+      "  end",
+      "end",
+      ""
+    ].map { |line| "          " + line unless line.size == 0 }.join("\n")
+
+  end.join("\n")
+%>
+          private
+
+          def normalize_image image
+            formatted_image = {}
+            if File.file? image
+              formatted_image = { content: File.binread(image) }
+            elsif image =~ URI::DEFAULT_PARSER.make_regexp
+              if URI(image).scheme == "gs"
+                source = { gcs_image_uri: image }
+                formatted_image = { source: source }
+              else
+                source = { image_uri: image }
+                formatted_image = { source: source }
+              end
+            else
+              raise TypeError.new("Image must be a filepath, file, url, or Google Cloud Storage url")
+            end
+            formatted_image
+          end
+        end
+      end
+    end
+  end
+end
