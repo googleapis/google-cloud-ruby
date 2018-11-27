@@ -953,7 +953,7 @@ module Google
                 { content: image.binmode.read }
               elsif image.is_a? String
                 if File.file? image
-                  { content: File.binread image }
+                  { content: File.binread(image) }
                 elsif image =~ URI::DEFAULT_PARSER.make_regexp
                   if URI(image).scheme == "gs"
                     { source: { gcs_image_uri: image } }
