@@ -46,14 +46,13 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
     end
     helper_hash
   end
-  let(:image_file) { File.new("acceptance/data/face.jpg", "r") }
-  let(:io_object) { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
   let(:image_uri) { "http://example.com/face.jpg" }
   let(:gcs_image_uri) { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
   let(:mock_credentials) { MockImageAnnotatorCredentials_<%= version %>.new("batch_annotate_images") }
 
   def image_object image
-    return { content: File.binread(image_file) } if File.file? image
+    return { content: image.binmode.read } if image.respond_to? :binmode
+    return { content: File.binread(image) } if File.file? image
     return { source: { image_uri: image_uri } } if image == image_uri
     { source: { gcs_image_uri: gcs_image_uri } }
   end
