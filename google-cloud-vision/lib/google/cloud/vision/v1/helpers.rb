@@ -950,7 +950,11 @@ module Google
           def normalize_image image
             formatted_image = {}
             if File.file? image
-              formatted_image = { content: File.binread(image) }
+              if image.respond_to? :binmode
+                formatted_image = { content: image.dup.binmode.read }
+              else
+                formatted_image = { content: File.binread(image) }
+              end
             elsif image =~ URI::DEFAULT_PARSER.make_regexp
               if URI(image).scheme == "gs"
                 source = { gcs_image_uri: image }

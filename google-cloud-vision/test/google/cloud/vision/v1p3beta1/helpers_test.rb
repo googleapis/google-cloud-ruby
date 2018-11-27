@@ -47,6 +47,7 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
     helper_hash
   end
   let(:image_file) { File.new("acceptance/data/face.jpg", "r") }
+  let(:io_object) { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
   let(:image_uri) { "http://example.com/face.jpg" }
   let(:gcs_image_uri) { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
   let(:mock_credentials) { MockImageAnnotatorCredentials_v1p3beta1.new("batch_annotate_images") }
@@ -114,6 +115,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
         stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :FACE_DETECTION
         client.stub(:batch_annotate_images, stub) do
           client.face_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :FACE_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.face_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :FACE_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.face_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end
@@ -215,6 +236,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :LANDMARK_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.landmark_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :LANDMARK_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.landmark_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single image path" do
       Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
@@ -308,6 +349,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
         stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :LOGO_DETECTION
         client.stub(:batch_annotate_images, stub) do
           client.logo_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :LOGO_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.logo_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :LOGO_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.logo_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end
@@ -409,6 +470,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single image path" do
       Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
@@ -502,6 +583,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
         stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
           client.text_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :TEXT_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.text_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :TEXT_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.text_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end
@@ -603,6 +704,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :DOCUMENT_TEXT_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.document_text_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :DOCUMENT_TEXT_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.document_text_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single image path" do
       Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
@@ -696,6 +817,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
         stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :SAFE_SEARCH_DETECTION
         client.stub(:batch_annotate_images, stub) do
           client.safe_search_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :SAFE_SEARCH_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.safe_search_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :SAFE_SEARCH_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.safe_search_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end
@@ -797,6 +938,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single image path" do
       Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
@@ -890,6 +1051,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
         stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :CROP_HINTS
         client.stub(:batch_annotate_images, stub) do
           client.crop_hints_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :CROP_HINTS
+        client.stub(:batch_annotate_images, stub) do
+          client.crop_hints_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :CROP_HINTS
+        client.stub(:batch_annotate_images, stub) do
+          client.crop_hints_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end
@@ -991,6 +1172,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :PRODUCT_SEARCH
+        client.stub(:batch_annotate_images, stub) do
+          client.product_search_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :PRODUCT_SEARCH
+        client.stub(:batch_annotate_images, stub) do
+          client.product_search_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single image path" do
       Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
@@ -1088,6 +1289,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :OBJECT_LOCALIZATION
+        client.stub(:batch_annotate_images, stub) do
+          client.object_localization_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :OBJECT_LOCALIZATION
+        client.stub(:batch_annotate_images, stub) do
+          client.object_localization_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single image path" do
       Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
@@ -1181,6 +1402,26 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
         stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :WEB_DETECTION
         client.stub(:batch_annotate_images, stub) do
           client.web_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1p3beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1p3beta1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end

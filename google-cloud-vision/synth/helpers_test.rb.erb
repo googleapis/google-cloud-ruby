@@ -47,6 +47,7 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
     helper_hash
   end
   let(:image_file) { File.new("acceptance/data/face.jpg", "r") }
+  let(:io_object) { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
   let(:image_uri) { "http://example.com/face.jpg" }
   let(:gcs_image_uri) { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
   let(:mock_credentials) { MockImageAnnotatorCredentials_<%= version %>.new("batch_annotate_images") }
@@ -104,6 +105,8 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
     {
       "single image file": 'File.new("acceptance/data/face.jpg", "r")',
       "list of image files": '(0..1).map { File.new("acceptance/data/face.jpg", "r") }',
+      "single io object": 'IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")',
+      "list of io objects": '(0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }',
       "single image path": '"acceptance/data/face.jpg"',
       "list of image paths": '(0..1).map { "acceptance/data/face.jpg" }',
       "single image uri": '"http://example.com/face.jpg"',
