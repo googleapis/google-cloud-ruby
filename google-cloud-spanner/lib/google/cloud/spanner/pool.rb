@@ -158,28 +158,15 @@ module Google
         end
 
         def reset
-          close
+          shutdown
           init
 
           true
         end
 
         def close
-          @mutex.synchronize do
-            @closed = true
-          end
-          @keepalive_task.shutdown
-          # Unblock all waiting threads
-          @resource.broadcast
-          # Delete all sessions
-          @mutex.synchronize do
-            @all_sessions.each { |s| future { s.release! } }
-            @all_sessions = []
-            @session_queue = []
-            @transaction_queue = []
-          end
-          # shutdown existing thread pool
-          @thread_pool.shutdown
+          shutdown
+          @thread_pool.wait_for_termination
 
           true
         end
@@ -233,6 +220,24 @@ module Google
           num_transactions.times.each do
             future { checkin_transaction new_transaction! }
           end
+        end
+
+        def shutdown
+          @mutex.synchronize do
+            @closed = true
+          end
+          @keepalive_task.shutdown
+          # Unblock all waiting threads
+          @resource.broadcast
+          # Delete all sessions
+          @mutex.synchronize do
+            @all_sessions.each { |s| future { s.release! } }
+            @all_sessions = []
+            @session_queue = []
+            @transaction_queue = []
+          end
+          # shutdown existing thread pool
+          @thread_pool.shutdown
         end
 
         def new_session!
