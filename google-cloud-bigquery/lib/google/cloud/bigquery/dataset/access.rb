@@ -923,7 +923,7 @@ module Google
             if view.respond_to? :table_ref
               view.table_ref
             else
-              Service.table_ref_from_s view, @dataset_reference
+              Service.table_ref_from_s view, default_ref: @dataset_reference
             end
           end
 

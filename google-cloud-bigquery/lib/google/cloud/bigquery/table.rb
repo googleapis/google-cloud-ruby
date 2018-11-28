@@ -1269,7 +1269,7 @@ module Google
           updater = CopyJob::Updater.from_options(
             service,
             table_ref,
-            get_table_ref(destination_table),
+            Service.get_table_ref(destination_table, default_ref: table_ref),
             options
           )
           updater.location = location if location # may be table reference
@@ -2472,16 +2472,6 @@ module Google
               resource.inline_code = uri_or_code
             end
             resource
-          end
-        end
-
-        private
-
-        def get_table_ref table
-          if table.respond_to? :table_ref
-            table.table_ref
-          else
-            Service.table_ref_from_s table, table_ref
           end
         end
 

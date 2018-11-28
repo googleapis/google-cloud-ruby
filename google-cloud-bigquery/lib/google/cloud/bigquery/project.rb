@@ -1097,6 +1097,160 @@ module Google
         end
 
         ##
+        # Extracts the data from the provided table to a Google Cloud Storage
+        # file using an asynchronous method. In this method, an {ExtractJob} is
+        # immediately returned. The caller may poll the service by repeatedly
+        # calling {Job#reload!} and {Job#done?} to detect when the job is done,
+        # or simply block until the job is done by calling
+        # #{Job#wait_until_done!}. See also {#extract}, {Table#extract} and
+        # {Table#extract_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {ExtractJob::Updater#location=} in a block passed to this method.
+        #
+        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
+        #   Exporting Data From BigQuery
+        #
+        # @param [String, Table] table The source table from which to extract
+        #   data. May be a table ID or a table object.
+        # @param [Google::Cloud::Storage::File, String, Array<String>]
+        #   extract_url The Google Storage file or file URI pattern(s) to which
+        #   BigQuery should extract the table data.
+        # @param [String] format The exported file format. The default value is
+        #   `csv`.
+        #
+        #   The following values are supported:
+        #
+        #   * `csv` - CSV
+        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `avro` - [Avro](http://avro.apache.org/)
+        # @param [String] compression The compression type to use for exported
+        #   files. Possible values include `GZIP` and `NONE`. The default value
+        #   is `NONE`.
+        # @param [String] delimiter Delimiter to use between fields in the
+        #   exported data. Default is <code>,</code>.
+        # @param [Boolean] header Whether to print out a header row in the
+        #   results. Default is `true`.
+        # @param [String] job_id A user-defined ID for the extract job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
+        #   configuration object for setting additional options.
+        #
+        # @return [Google::Cloud::Bigquery::ExtractJob]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   table_id = "bigquery-public-data.samples.shakespeare"
+        #   extract_job = bigquery.extract_job table_id,
+        #                                      "gs://my-bucket/shakespeare.csv"
+        #
+        # @!group Data
+        #
+        def extract_job table, extract_url, format: nil, compression: nil,
+                        delimiter: nil, header: nil, dryrun: nil, job_id: nil,
+                        prefix: nil, labels: nil
+          ensure_service!
+          options = { format: format, compression: compression,
+                      delimiter: delimiter, header: header, dryrun: dryrun,
+                      job_id: job_id, prefix: prefix, labels: labels }
+          table_ref = Service.get_table_ref table
+          updater = ExtractJob::Updater.from_options service, table_ref,
+                                                     extract_url, options
+
+          yield updater if block_given?
+
+          job_gapi = updater.to_gapi
+          gapi = service.extract_table job_gapi
+          Job.from_gapi gapi, service
+        end
+
+        ##
+        # Extracts the data from the provided table to a Google Cloud Storage
+        # file using a synchronous method that blocks for a response. Timeouts
+        # and transient errors are generally handled as needed to complete the
+        # job. See also {#extract_job}, {Table#extract} and {Table#extract_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {ExtractJob::Updater#location=} in a block passed to this method.
+        #
+        # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
+        #   Exporting Data From BigQuery
+        #
+        # @param [String, Table] table The source table from which to extract
+        #   data. May be a table ID or a table object.
+        # @param [Google::Cloud::Storage::File, String, Array<String>]
+        #   extract_url The Google Storage file or file URI pattern(s) to which
+        #   BigQuery should extract the table data.
+        # @param [String] format The exported file format. The default value is
+        #   `csv`.
+        #
+        #   The following values are supported:
+        #
+        #   * `csv` - CSV
+        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `avro` - [Avro](http://avro.apache.org/)
+        # @param [String] compression The compression type to use for exported
+        #   files. Possible values include `GZIP` and `NONE`. The default value
+        #   is `NONE`.
+        # @param [String] delimiter Delimiter to use between fields in the
+        #   exported data. Default is <code>,</code>.
+        # @param [Boolean] header Whether to print out a header row in the
+        #   results. Default is `true`.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
+        #   configuration object for setting additional options.
+        #
+        # @return [Boolean] Returns `true` if the extract operation succeeded.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   bigquery.extract "bigquery-public-data.samples.shakespeare",
+        #                    "gs://my-bucket/shakespeare.csv"
+        #
+        # @!group Data
+        #
+        def extract table, extract_url, format: nil, compression: nil,
+                    delimiter: nil, header: nil, &block
+          job = extract_job table,
+                            extract_url,
+                            format: format,
+                            compression: compression,
+                            delimiter: delimiter,
+                            header: header,
+                            &block
+          job.wait_until_done!
+          ensure_job_succeeded! job
+          true
+        end
+
+        ##
         # @private New Project from a Google API Client object, using the
         # same Credentials as this project.
         def self.from_gapi gapi, service
@@ -1121,6 +1275,17 @@ module Google
         # Raise an error unless an active service is available.
         def ensure_service!
           raise "Must have active connection" unless service
+        end
+
+        def ensure_job_succeeded! job
+          return unless job.failed?
+          begin
+            # raise to activate ruby exception cause handling
+            raise job.gapi_error
+          rescue StandardError => e
+            # wrap Google::Apis::Error with Google::Cloud::Error
+            raise Google::Cloud::Error.from_error(e)
+          end
         end
       end
     end
