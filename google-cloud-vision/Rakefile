@@ -140,6 +140,30 @@ namespace :ci do
   end
 end
 
+task :generate_partials do
+  require "google/cloud/vision"
+  Google::Cloud::Vision::AVAILABLE_VERSIONS.each do |version|
+    require "google/cloud/vision/#{version}/image_annotator_client"
+    helper_hash = {}
+    Google::Cloud::Vision.const_get(version.capitalize)::Feature::Type.constants.each do |feature_type|
+      next if feature_type == :TYPE_UNSPECIFIED
+      method_name = feature_type.to_s.downcase
+      method_name += "_detection" unless method_name.include? "detection"
+      helper_hash[method_name] = feature_type
+    end
+    file_path = "./lib/google/cloud/vision/#{version}/helpers.rb"
+    File.open(file_path, "w") do |f|
+      config = ERB.new(File.read("./synth/helpers.rb.erb"))
+      f.write(config.result(binding))
+    end
+    file_path = "./test/google/cloud/vision/#{version}/helpers_test.rb"
+    File.open(file_path, "w") do |f|
+      config = ERB.new(File.read("./synth/helpers_test.rb.erb"))
+      f.write(config.result(binding))
+    end
+  end
+end
+
 task :default => :test
 
 def header str, token = "#"

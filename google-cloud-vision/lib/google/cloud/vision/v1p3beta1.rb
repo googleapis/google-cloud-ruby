@@ -15,6 +15,7 @@
 
 require "google/cloud/vision/v1p3beta1/product_search_client"
 require "google/cloud/vision/v1p3beta1/image_annotator_client"
+require "google/cloud/vision/v1p3beta1/helpers"
 require "google/cloud/vision/v1p3beta1/image_annotator_pb"
 require "google/cloud/vision/v1p3beta1/product_search_service_pb"
 
