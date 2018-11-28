@@ -191,10 +191,12 @@ module Google
           ##
           # Add reader access to a view.
           #
-          # @param [Google::Cloud::Bigquery::Table, String] view A table object
-          #   or a string identifier as specified by the [Query
-          #   Reference](https://cloud.google.com/bigquery/query-reference#from):
-          #   `project_name:datasetId.tableId`.
+          # @param [Google::Cloud::Bigquery::Table, String] view A table object,
+          #   or a string identifier as specified by the [Standard SQL Query
+          #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+          #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+          #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+          #   (`project-name:dataset_id.table_id`).
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -450,10 +452,12 @@ module Google
           ##
           # Remove reader access from a view.
           #
-          # @param [Google::Cloud::Bigquery::Table, String] view A table object
-          #   or a string identifier as specified by the [Query
-          #   Reference](https://cloud.google.com/bigquery/query-reference#from):
-          #   `project_name:datasetId.tableId`.
+          # @param [Google::Cloud::Bigquery::Table, String] view A table object,
+          #   or a string identifier as specified by the [Standard SQL Query
+          #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+          #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+          #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+          #   (`project-name:dataset_id.table_id`).
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -705,10 +709,12 @@ module Google
           ##
           # Checks reader access for a view.
           #
-          # @param [Google::Cloud::Bigquery::Table, String] view A table object
-          #   or a string identifier as specified by the [Query
-          #   Reference](https://cloud.google.com/bigquery/query-reference#from):
-          #   `project_name:datasetId.tableId`.
+          # @param [Google::Cloud::Bigquery::Table, String] view A table object,
+          #   or a string identifier as specified by the [Standard SQL Query
+          #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+          #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+          #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+          #   (`project-name:dataset_id.table_id`).
           #
           # @example
           #   require "google/cloud/bigquery"

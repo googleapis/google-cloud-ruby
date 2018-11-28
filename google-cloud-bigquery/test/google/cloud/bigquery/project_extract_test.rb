@@ -41,7 +41,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table to a storage file using a Standard SQL table id" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
 
@@ -56,7 +56,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table to a storage file using a Legacy SQL table id" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
 
@@ -71,7 +71,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table to a storage file" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
 
@@ -86,7 +86,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table to a storage url" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
 
@@ -101,7 +101,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table and determine the csv format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "CSV"
     job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".csv"]
     job_resp_gapi = job_gapi.dup
@@ -118,7 +118,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table and specify the csv format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "CSV"
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
@@ -134,7 +134,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table and specify the csv format and options" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "CSV"
     job_gapi.configuration.extract.compression = "GZIP"
     job_gapi.configuration.extract.field_delimiter = "\t"
@@ -153,7 +153,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table and determine the json format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "NEWLINE_DELIMITED_JSON"
     job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".json"]
     job_resp_gapi = job_gapi.dup
@@ -170,7 +170,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table and specify the json format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "NEWLINE_DELIMITED_JSON"
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
@@ -186,7 +186,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table and determine the avro format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "AVRO"
     job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".avro"]
     job_resp_gapi = job_gapi.dup
@@ -203,7 +203,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   it "can extract a table and specify the avro format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "AVRO"
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
@@ -214,34 +214,6 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     mock.verify
 
     result.must_equal true
-  end
-
-  def extract_job_gapi table, extract_file, job_id: "job_9876543210", location: nil
-    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id, location: location)
-  end
-
-  def extract_job_json table, extract_file, job_id, location: nil
-    {
-      "jobReference" => {
-        "projectId" => project,
-        "jobId" => job_id
-      },
-      "configuration" => {
-        "extract" => {
-          "destinationUris" => [extract_file.to_gs_url],
-          "sourceTable" => {
-            "projectId" => table.project_id,
-            "datasetId" => table.dataset_id,
-            "tableId" => table.table_id
-          },
-          "printHeader" => nil,
-          "compression" => nil,
-          "fieldDelimiter" => nil,
-          "destinationFormat" => nil
-        },
-        "dryRun" => nil
-      }
-    }.to_json
   end
 
   # Borrowed from MockStorage, extract to a common module?

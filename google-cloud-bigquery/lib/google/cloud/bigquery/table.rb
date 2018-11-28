@@ -371,9 +371,10 @@ module Google
         ##
         # The combined Project ID, Dataset ID, and Table ID for this table, in
         # the format specified by the [Legacy SQL Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # `project_name:datasetId.tableId`. To use this value in queries see
-        # {#query_id}.
+        # Reference](https://cloud.google.com/bigquery/query-reference#from)
+        # (`project-name:dataset_id.table_id`). This is useful for referencing
+        # tables in other projects and datasets. To use this value in queries
+        # see {#query_id}.
         #
         # @return [String, nil] The combined ID, or `nil` if the object is a
         #   reference (see {#reference?}).
@@ -386,10 +387,9 @@ module Google
         end
 
         ##
-        # The value returned by {#id}, wrapped in square brackets if the Project
-        # ID contains dashes, as specified by the [Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from).
-        # Useful in queries.
+        # The value returned by {#id}, wrapped in backticks (Standard SQL) or s
+        # quare brackets (Legacy SQL) to accommodate project IDs
+        # containing dashes. Useful in queries.
         #
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
@@ -1191,9 +1191,11 @@ module Google
         #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
-        #   the [Query
-        #   Reference](https://cloud.google.com/bigquery/query-reference#from):
-        #   `project_name:datasetId.tableId`. This is useful for referencing
+        #   the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`). This is useful for referencing
         #   tables in other projects and datasets.
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.
@@ -1295,9 +1297,11 @@ module Google
         #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
-        #   the [Query
-        #   Reference](https://cloud.google.com/bigquery/query-reference#from):
-        #   `project_name:datasetId.tableId`. This is useful for referencing
+        #   the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`). This is useful for referencing
         #   tables in other projects and datasets.
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.

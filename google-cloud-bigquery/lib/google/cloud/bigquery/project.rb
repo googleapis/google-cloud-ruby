@@ -96,6 +96,180 @@ module Google
         end
 
         ##
+        # Copies the data from the source table to the destination table using
+        # an asynchronous method. In this method, a {CopyJob} is immediately
+        # returned. The caller may poll the service by repeatedly calling
+        # {Job#reload!} and {Job#done?} to detect when the job is done, or
+        # simply block until the job is done by calling #{Job#wait_until_done!}.
+        # See {#copy} for the synchronous version. Use this method instead of
+        # {Table#copy_job} to copy from source tables in other projects.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {CopyJob::Updater#location=} in a block passed to this method.
+        #
+        # @param [String, Table] source_table The source table for the
+        #   copied data. This can be a table object; or a string ID as specified
+        #   by the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`).
+        # @param [String, Table] destination_table The destination table for the
+        #   copied data. This can be a table object; or a string ID as specified
+        #   by the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`).
+        # @param [String] create Specifies whether the job is allowed to create
+        #   new tables. The default value is `needed`.
+        #
+        #   The following values are supported:
+        #
+        #   * `needed` - Create the table if it does not exist.
+        #   * `never` - The table must already exist. A 'notFound' error is
+        #     raised if the table does not exist.
+        # @param [String] write Specifies how to handle data already present in
+        #   the destination table. The default value is `empty`.
+        #
+        #   The following values are supported:
+        #
+        #   * `truncate` - BigQuery overwrites the table data.
+        #   * `append` - BigQuery appends the data to the table.
+        #   * `empty` - An error will be returned if the destination table
+        #     already contains data.
+        # @param [String] job_id A user-defined ID for the copy job. The ID
+        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   `job_id` is provided, then `prefix` will not be used.
+        #
+        #   See [Generating a job
+        #   ID](https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid).
+        # @param [String] prefix A string, usually human-readable, that will be
+        #   prepended to a generated value to produce a unique job ID. For
+        #   example, the prefix `daily_import_job_` can be given to generate a
+        #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
+        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
+        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
+        #   be used.
+        # @param [Hash] labels A hash of user-provided labels associated with
+        #   the job. You can use these to organize and group your jobs. Label
+        #   keys and values can be no longer than 63 characters, can only
+        #   contain lowercase letters, numeric characters, underscores and
+        #   dashes. International characters are allowed. Label values are
+        #   optional. Label keys must start with a letter and each label in the
+        #   list must have a different key.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
+        #   configuration object for setting additional options.
+        #
+        # @return [Google::Cloud::Bigquery::CopyJob]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   destination_table = dataset.table "my_destination_table"
+        #
+        #   bigquery.copy "bigquery-public-data.samples.shakespeare",
+        #                 destination_table
+        #
+        # @!group Data
+        #
+        def copy_job source_table, destination_table, create: nil, write: nil,
+                     dryrun: nil, job_id: nil, prefix: nil, labels: nil
+          ensure_service!
+          options = { create: create, write: write, dryrun: dryrun,
+                      labels: labels, job_id: job_id, prefix: prefix }
+
+          updater = CopyJob::Updater.from_options(
+            service,
+            Service.get_table_ref(source_table, default_ref: project_ref),
+            Service.get_table_ref(destination_table, default_ref: project_ref),
+            options
+          )
+
+          yield updater if block_given?
+
+          job_gapi = updater.to_gapi
+          gapi = service.copy_table job_gapi
+          Job.from_gapi gapi, service
+        end
+
+        ##
+        # Copies the data from the source table to the destination table using a
+        # synchronous method that blocks for a response. Timeouts and transient
+        # errors are generally handled as needed to complete the job. See
+        # {#copy_job} for the asynchronous version. Use this method instead of
+        # {Table#copy} to copy from source tables in other projects.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {CopyJob::Updater#location=} in a block passed to this method.
+        #
+        # @param [String, Table] source_table The source table for the
+        #   copied data. This can be a table object; or a string ID as specified
+        #   by the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`).
+        # @param [String, Table] destination_table The destination table for the
+        #   copied data. This can be a table object; or a string ID as specified
+        #   by the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`).
+        # @param [String] create Specifies whether the job is allowed to create
+        #   new tables. The default value is `needed`.
+        #
+        #   The following values are supported:
+        #
+        #   * `needed` - Create the table if it does not exist.
+        #   * `never` - The table must already exist. A 'notFound' error is
+        #     raised if the table does not exist.
+        # @param [String] write Specifies how to handle data already present in
+        #   the destination table. The default value is `empty`.
+        #
+        #   The following values are supported:
+        #
+        #   * `truncate` - BigQuery overwrites the table data.
+        #   * `append` - BigQuery appends the data to the table.
+        #   * `empty` - An error will be returned if the destination table
+        #     already contains data.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
+        #   configuration object for setting additional options.
+        #
+        # @return [Boolean] Returns `true` if the copy operation succeeded.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   destination_table = dataset.table "my_destination_table"
+        #
+        #   bigquery.copy "bigquery-public-data.samples.shakespeare",
+        #                 destination_table
+        #
+        # @!group Data
+        #
+        def copy source_table, destination_table, create: nil, write: nil,
+                 &block
+          job = copy_job source_table,
+                         destination_table,
+                         create: create,
+                         write: write,
+                         &block
+          job.wait_until_done!
+          ensure_job_succeeded! job
+          true
+        end
+
+        ##
         # Queries data by creating a [query
         # job](https://cloud.google.com/bigquery/docs/query-overview#query_jobs).
         #
@@ -1102,8 +1276,9 @@ module Google
         # immediately returned. The caller may poll the service by repeatedly
         # calling {Job#reload!} and {Job#done?} to detect when the job is done,
         # or simply block until the job is done by calling
-        # #{Job#wait_until_done!}. See also {#extract}, {Table#extract} and
-        # {Table#extract_job}.
+        # #{Job#wait_until_done!}. See {#extract} for the synchronous version.
+        # Use this method instead of {Table#extract_job} to extract data from
+        # source tables in other projects.
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method.
@@ -1112,7 +1287,12 @@ module Google
         #   Exporting Data From BigQuery
         #
         # @param [String, Table] table The source table from which to extract
-        #   data. May be a table ID or a table object.
+        #   data. This can be a table object; or a string ID as specified by the
+        #   [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`).
         # @param [Google::Cloud::Storage::File, String, Array<String>]
         #   extract_url The Google Storage file or file URI pattern(s) to which
         #   BigQuery should extract the table data.
@@ -1177,7 +1357,8 @@ module Google
           options = { format: format, compression: compression,
                       delimiter: delimiter, header: header, dryrun: dryrun,
                       job_id: job_id, prefix: prefix, labels: labels }
-          table_ref = Service.get_table_ref table
+
+          table_ref = Service.get_table_ref table, default_ref: project_ref
           updater = ExtractJob::Updater.from_options service, table_ref,
                                                      extract_url, options
 
@@ -1192,7 +1373,9 @@ module Google
         # Extracts the data from the provided table to a Google Cloud Storage
         # file using a synchronous method that blocks for a response. Timeouts
         # and transient errors are generally handled as needed to complete the
-        # job. See also {#extract_job}, {Table#extract} and {Table#extract_job}.
+        # job. See {#extract_job} for the asynchronous version. Use this method
+        # instead of {Table#extract} to extract data from source tables in other
+        # projects.
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
         # {ExtractJob::Updater#location=} in a block passed to this method.
@@ -1201,7 +1384,12 @@ module Google
         #   Exporting Data From BigQuery
         #
         # @param [String, Table] table The source table from which to extract
-        #   data. May be a table ID or a table object.
+        #   data. This can be a table object; or a string ID as specified by the
+        #   [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`).
         # @param [Google::Cloud::Storage::File, String, Array<String>]
         #   extract_url The Google Storage file or file URI pattern(s) to which
         #   BigQuery should extract the table data.
@@ -1286,6 +1474,10 @@ module Google
             # wrap Google::Apis::Error with Google::Cloud::Error
             raise Google::Cloud::Error.from_error(e)
           end
+        end
+
+        def project_ref
+          Google::Apis::BigqueryV2::ProjectReference.new project_id: project_id
         end
       end
     end

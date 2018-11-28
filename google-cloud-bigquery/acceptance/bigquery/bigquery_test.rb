@@ -190,7 +190,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     end
   end
 
-  it "extracts a readonly table object to a GCS url with extract" do
+  it "extracts a readonly table to a GCS url with extract" do
     public_table_id = "bigquery-public-data.samples.shakespeare"
 
     Tempfile.open "empty_extract_file.csv" do |tmp|
@@ -205,5 +205,13 @@ describe Google::Cloud::Bigquery, :bigquery do
       downloaded_file = extract_file.download tmp.path
       downloaded_file.size.must_be :>, 0
     end
+  end
+
+  it "copies a readonly table to another table with copy" do
+    public_table_id = "bigquery-public-data.samples.shakespeare"
+    result = bigquery.copy public_table_id, "#{dataset_id}.shakespeare_copy", create: :needed, write: :empty do |j|
+      j.location = "US"
+    end
+    result.must_equal true
   end
 end
