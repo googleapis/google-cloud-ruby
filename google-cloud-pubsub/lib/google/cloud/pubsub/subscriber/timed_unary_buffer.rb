@@ -65,24 +65,29 @@ module Google
             requests = flush_requests!
             return if requests.empty?
 
-            # Perform the RCP calls in order
-            requests[:acknowledge].each do |ack_req|
-              begin
-                @subscriber.service.acknowledge \
-                  ack_req.subscription, *ack_req.ack_ids
-              rescue StandardError => error
-                @subscriber.error! error
+            # Perform the RCP calls concurrently
+            threads = requests[:acknowledge].map do |ack_req|
+              Thread.new do
+                begin
+                  @subscriber.service.acknowledge \
+                    ack_req.subscription, *ack_req.ack_ids
+                rescue StandardError => error
+                  @subscriber.error! error
+                end
               end
             end
-            requests[:modify_ack_deadline].each do |mod_ack_req|
-              begin
-                @subscriber.service.modify_ack_deadline \
-                  mod_ack_req.subscription, mod_ack_req.ack_ids,
-                  mod_ack_req.ack_deadline_seconds
-              rescue StandardError => error
-                @subscriber.error! error
+            threads += requests[:modify_ack_deadline].map do |mod_ack_req|
+              Thread.new do
+                begin
+                  @subscriber.service.modify_ack_deadline \
+                    mod_ack_req.subscription, mod_ack_req.ack_ids,
+                    mod_ack_req.ack_deadline_seconds
+                rescue StandardError => error
+                  @subscriber.error! error
+                end
               end
             end
+            threads.map(&:join)
 
             true
           end
