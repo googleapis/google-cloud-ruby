@@ -7,3 +7,4 @@ gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-cloud-pubsub", path: "../google-cloud-pubsub"
 
 gem "rake", "~> 12.3"
+gem "minitest-reporters", "~> 1.3.5"
