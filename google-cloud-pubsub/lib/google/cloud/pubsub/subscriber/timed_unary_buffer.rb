@@ -66,28 +66,21 @@ module Google
             return if requests.empty?
 
             # Perform the RCP calls concurrently
-            threads = requests[:acknowledge].map do |ack_req|
-              Thread.new do
-                begin
+            with_threadpool do |pool|
+              requests[:acknowledge].each do |ack_req|
+                add_future pool do
                   @subscriber.service.acknowledge \
                     ack_req.subscription, *ack_req.ack_ids
-                rescue StandardError => error
-                  @subscriber.error! error
                 end
               end
-            end
-            threads += requests[:modify_ack_deadline].map do |mod_ack_req|
-              Thread.new do
-                begin
+              requests[:modify_ack_deadline].each do |mod_ack_req|
+                add_future pool do
                   @subscriber.service.modify_ack_deadline \
                     mod_ack_req.subscription, mod_ack_req.ack_ids,
                     mod_ack_req.ack_deadline_seconds
-                rescue StandardError => error
-                  @subscriber.error! error
                 end
               end
             end
-            threads.map(&:join)
 
             true
           end
@@ -172,6 +165,41 @@ module Google
 
           def subscription_name
             @subscriber.subscription_name
+          end
+
+          def push_threads
+            @subscriber.push_threads
+          end
+
+          def error! error
+            @subscriber.error! error
+          end
+
+          def with_threadpool
+            pool = Concurrent::FixedThreadPool.new @subscriber.push_threads
+
+            yield pool
+
+            pool.shutdown
+            pool.wait_for_termination 60
+            return if pool.shutdown?
+
+            pool.kill
+            begin
+              raise "Timeout making subscriber API calls"
+            rescue StandardError => error
+              error! error
+            end
+          end
+
+          def add_future pool
+            Concurrent::Future.new(executor: pool) do
+              begin
+                yield
+              rescue StandardError => error
+                error! error
+              end
+            end.execute
           end
         end
       end
