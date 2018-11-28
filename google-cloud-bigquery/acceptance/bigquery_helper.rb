@@ -15,9 +15,13 @@
 gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
+require "minitest/reporters"
 require "minitest/rg"
 require "google/cloud/bigquery"
 require "google/cloud/storage"
+
+# Generate JUnit format test reports
+Minitest::Reporters.use! [Minitest::Reporters::JUnitReporter.new]
 
 # Create shared bigquery object so we don't create new for each test
 $bigquery = Google::Cloud::Bigquery.new retries: 10
