@@ -20,9 +20,13 @@ gem "minitest"
 require "minitest/autorun"
 require "minitest/spec"
 require "minitest/focus"
+require "minitest/reporters"
 require "minitest/rg"
 require "google/cloud/bigtable"
 require "securerandom"
+
+# Generate JUnit format test reports
+Minitest::Reporters.use! [Minitest::Reporters::JUnitReporter.new]
 
 # Create shared bigtable object so we don't create new for each test
 $bigtable = Google::Cloud.new.bigtable
