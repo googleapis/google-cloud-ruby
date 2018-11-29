@@ -15,12 +15,14 @@
 gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
-require "minitest/reporters"
 require "minitest/rg"
 require "google/cloud/logging"
 
 # Generate JUnit format test reports
-Minitest::Reporters.use! [Minitest::Reporters::JUnitReporter.new]
+if ENV["GCLOUD_TEST_GENERATE_XML_REPORT"]
+  require "minitest/reporters"
+  Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::JUnitReporter.new]
+end
 
 # Create shared logging object so we don't create new for each test
 $logging = Google::Cloud::Logging.new
