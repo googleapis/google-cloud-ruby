@@ -19,8 +19,9 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 from textwrap import dedent
-from os import listdir, system
+from os import listdir
 from os.path import isfile, join
+from subprocess import call
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -145,4 +146,4 @@ s.replace(
     '\n'.join(['README.md', 'LICENSE'])
 )
 # Generate the helper methods
-system('bundle update && bundle exec rake generate_partials')
+call('bundle update && bundle exec rake generate_partials', shell=True)
