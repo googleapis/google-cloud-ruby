@@ -248,6 +248,13 @@ module Google
           end
         end
 
+        def log_path log_name
+          return nil if log_name.nil?
+          return log_name if log_name.empty?
+          return log_name if log_name.to_s.include? "/"
+          "#{project_path}/logs/#{log_name}"
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end
@@ -256,13 +263,6 @@ module Google
 
         def project_path
           "projects/#{@project}"
-        end
-
-        def log_path log_name
-          return nil if log_name.nil?
-          return log_name if log_name.empty?
-          return log_name if log_name.to_s.include? "/"
-          "#{project_path}/logs/#{log_name}"
         end
 
         def sink_path sink_name
