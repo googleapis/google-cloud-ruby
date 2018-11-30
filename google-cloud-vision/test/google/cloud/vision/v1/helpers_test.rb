@@ -80,14 +80,20 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
 
   def async_annotate_stub image, feature_type, destination
     feature = { type: feature_type, max_results: 10 }
-    input_config = image_object(image)
+    input_config = {
+      gcs_source: {
+        uri: image_object(image)[:source][:gcs_image_uri]
+      }
+    }
     input_config[:mime_type] = "application/pdf"
     expected_requests = [
       {
         input_config: input_config,
         features: [feature],
         output_config: {
-          gcs_destination: destination,
+          gcs_destination: {
+            uri: destination
+          },
           batch_size: 10
         }
       }

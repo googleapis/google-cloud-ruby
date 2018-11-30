@@ -84,17 +84,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -161,17 +168,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -238,17 +252,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -315,17 +336,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -392,17 +420,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -469,17 +504,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -546,17 +588,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -623,17 +672,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -700,17 +756,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -777,17 +840,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -854,17 +924,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -931,17 +1008,24 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
