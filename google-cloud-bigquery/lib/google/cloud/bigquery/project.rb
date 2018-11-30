@@ -1359,12 +1359,12 @@ module Google
         # @!group Data
         #
         def extract_job table, extract_url, format: nil, compression: nil,
-                        delimiter: nil, header: nil, dryrun: nil, job_id: nil,
-                        prefix: nil, labels: nil
+                        delimiter: nil, header: nil, job_id: nil, prefix: nil,
+                        labels: nil
           ensure_service!
           options = { format: format, compression: compression,
-                      delimiter: delimiter, header: header, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix, labels: labels }
+                      delimiter: delimiter, header: header, job_id: job_id,
+                      prefix: prefix, labels: labels }
 
           table_ref = Service.get_table_ref table, default_ref: project_ref
           updater = ExtractJob::Updater.from_options service, table_ref,

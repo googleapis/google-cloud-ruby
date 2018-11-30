@@ -92,20 +92,6 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
-  it "can extract a table as a dryrun" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi table, extract_file, location: nil
-    job_gapi.configuration.dry_run = true
-
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = bigquery.extract_job table, extract_url, dryrun: true
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-  end
-
   it "can extract a table and determine the csv format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock

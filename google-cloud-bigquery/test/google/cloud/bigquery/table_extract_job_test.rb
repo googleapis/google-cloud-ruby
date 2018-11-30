@@ -63,7 +63,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
-  it "can extract itself as a dryrun" do
+  it "can extract itself as a dryrun (deprecated)" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     job_gapi = extract_job_gapi(table, extract_file)

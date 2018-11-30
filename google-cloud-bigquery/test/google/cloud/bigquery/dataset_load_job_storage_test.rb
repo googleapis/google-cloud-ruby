@@ -248,7 +248,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     mock.verify
   end
 
-  it "can load itself as a dryrun" do
+  it "can load itself as a dryrun (deprecated)" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.dry_run = true

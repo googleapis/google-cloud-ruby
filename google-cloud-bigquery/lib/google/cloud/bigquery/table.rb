@@ -1396,6 +1396,9 @@ module Google
         #   exported data. Default is <code>,</code>.
         # @param [Boolean] header Whether to print out a header row in the
         #   results. Default is `true`.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
         # @param [String] job_id A user-defined ID for the extract job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If
@@ -1636,6 +1639,9 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
         # @param [String] job_id A user-defined ID for the load job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If

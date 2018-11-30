@@ -1315,6 +1315,9 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
         # @param [Google::Cloud::Bigquery::Schema] schema The schema for the
         #   destination table. Optional. The schema can be omitted if the
         #   destination table already exists, or if you're loading data from a
