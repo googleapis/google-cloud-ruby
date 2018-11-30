@@ -1,5 +1,8 @@
 # Release History
 
+### 0.32.1 / 2018-09-26
+* Fix argument issue with `ImageAnnotatorClient` helper methods.
+
 ### 0.32.0 / 2018-09-26
 
 #### Breaking Changes
