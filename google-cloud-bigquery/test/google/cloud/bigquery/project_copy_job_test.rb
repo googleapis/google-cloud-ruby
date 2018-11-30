@@ -1,4 +1,4 @@
-# Copyright 2015 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -89,8 +89,6 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
 
     job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
-  #<Google::Apis::BigqueryV2::Job:0x00007faf64d1a630 @configuration=#<Google::Apis::BigqueryV2::JobConfiguration:0x00007faf64d196b8 @copy=#<Google::Apis::BigqueryV2::JobConfigurationTableCopy:0x00007faf64d18f38 @create_disposition=nil, @destination_table=#<Google::Apis::BigqueryV2::TableReference:0x00007faf64d18010 @dataset_id="source_dataset", @project_id="test-project", @table_id="new_target_table_id">, @source_table=#<Google::Apis::BigqueryV2::TableReference:0x00007faf64d13268 @dataset_id="source_dataset", @project_id="test-project", @table_id="source_table_id">, @write_disposition=nil>, @dry_run=nil>, @job_reference=#<Google::Apis::BigqueryV2::JobReference:0x00007faf64d0b450 @job_id="job_9876543210", @project_id="test-project">>
-  #<Google::Apis::BigqueryV2::Job:0x00007faf64d08160 @configuration=#<Google::Apis::BigqueryV2::JobConfiguration:0x00007faf64d082a0 @copy=#<Google::Apis::BigqueryV2::JobConfigurationTableCopy:0x00007faf64d083e0 @create_disposition=nil, @destination_table=#<Google::Apis::BigqueryV2::TableReference:0x00007faf64d086d8 @project_id="test-project", @table_id="new_target_table_id">, @source_table=#<Google::Apis::BigqueryV2::TableReference:0x00007faf64d301d8 @dataset_id="source_dataset", @project_id="test-project", @table_id="source_table_id">, @write_disposition=nil>, @dry_run=nil>, @job_reference=#<Google::Apis::BigqueryV2::JobReference:0x00007faf64d08520 @job_id="job_9876543210", @project_id="test-project">>
 
   it "can copy a table as a dryrun" do
     mock = Minitest::Mock.new
