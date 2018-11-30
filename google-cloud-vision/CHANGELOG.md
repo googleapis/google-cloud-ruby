@@ -2,18 +2,30 @@
 
 ### 0.32.0 / 2018-09-26
 
-* Add `ImageAnnotatorClient#face_detection`
-* Add `ImageAnnotatorClient#landmark_detection`
-* Add `ImageAnnotatorClient#logo_detection`
-* Add `ImageAnnotatorClient#label_detection`
-* Add `ImageAnnotatorClient#text_detection`
-* Add `ImageAnnotatorClient#document_text_detection`
-* Add `ImageAnnotatorClient#safe_search_detection`
-* Add `ImageAnnotatorClient#image_properties_detection`
-* Add `ImageAnnotatorClient#crop_hints_detection`
-* Add `ImageAnnotatorClient#product_search_detection`
-* Add `ImageAnnotatorClient#object_localization_detection`
-* Add `ImageAnnotatorClient#web_detection`
+#### Breaking Changes
+
+* The 0.32.0 release introduced breaking changes relative to the previous
+  release, 0.31.0. For more details and instructions to migrate your code,
+  please visit the migration guide:
+
+  https://cloud.google.com/vision/docs/ruby-client-migration
+
+#### Enhancements
+
+* Add `V1p3beta1` API
+* Add `ImageAnnotatorClient` helper methods not generated from protobuf:
+  * `ImageAnnotatorClient#face_detection`
+  * `ImageAnnotatorClient#landmark_detection`
+  * `ImageAnnotatorClient#logo_detection`
+  * `ImageAnnotatorClient#label_detection`
+  * `ImageAnnotatorClient#text_detection`
+  * `ImageAnnotatorClient#document_text_detection`
+  * `ImageAnnotatorClient#safe_search_detection`
+  * `ImageAnnotatorClient#image_properties_detection`
+  * `ImageAnnotatorClient#crop_hints_detection`
+  * `ImageAnnotatorClient#product_search_detection`
+  * `ImageAnnotatorClient#object_localization_detection`
+  * `ImageAnnotatorClient#web_detection`
 
 ### 0.31.0 / 2018-09-26
 
