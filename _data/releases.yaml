@@ -497,6 +497,7 @@ google-cloud-video_intelligence:
 - v0.21.0
 - v0.20.0
 google-cloud-vision:
+- v0.32.1
 - v0.32.0
 - v0.31.0
 - v0.30.4
