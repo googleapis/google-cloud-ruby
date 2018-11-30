@@ -2,6 +2,16 @@
 
 ### 0.32.0 / 2018-09-26
 
+#### Breaking Changes
+
+* The 0.32.0 release introduced breaking changes relative to the previous
+  release, 0.31.0. For more details and instructions to migrate your code,
+  please visit the migration guide:
+
+  https://cloud.google.com/vision/docs/ruby-client-migration
+
+#### Enhancements
+
 * Add `V1p3beta1` API
 * Add `ImageAnnotatorClient` helper methods not generated from protobuf:
   * `ImageAnnotatorClient#face_detection`
