@@ -183,10 +183,10 @@ module Google
         # @!group Data
         #
         def copy_job source_table, destination_table, create: nil, write: nil,
-                     dryrun: nil, job_id: nil, prefix: nil, labels: nil
+                     job_id: nil, prefix: nil, labels: nil
           ensure_service!
-          options = { create: create, write: write, dryrun: dryrun,
-                      labels: labels, job_id: job_id, prefix: prefix }
+          options = { create: create, write: write, labels: labels,
+                      job_id: job_id, prefix: prefix }
 
           updater = CopyJob::Updater.from_options(
             service,

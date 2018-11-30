@@ -90,20 +90,6 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
-  it "can copy a table as a dryrun" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = copy_job_gapi(source_table, target_table, location: nil)
-    job_gapi.configuration.dry_run = true
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = bigquery.copy_job source_table, target_table, dryrun: true
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-  end
-
   it "can copy a table with create disposition" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock

@@ -89,7 +89,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
-  it "can copy itself as a dryrun" do
+  it "can copy itself as a dryrun (deprecated)" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 

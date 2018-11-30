@@ -1214,6 +1214,9 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
         # @param [String] job_id A user-defined ID for the copy job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If
