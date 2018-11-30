@@ -304,22 +304,32 @@ module Google
         end
 
         ##
-        # Creates an object that batches and transmits log entries
-        # asynchronously.
+        # Creates an object that buffers, batches, and transmits log entries
+        # efficiently. Writing log entries to this object is asynchronous and
+        # will not block.
         #
-        # Use this object to transmit log entries efficiently. It keeps a queue
-        # of log entries, and runs a background thread that transmits them to
-        # the logging service in batches. Generally, adding to the queue will
-        # not block.
+        # Batches that cannot be delivered immediately are queued. When the
+        # queue is full new batch requests will raise errors that can be
+        # consumed using the {#on_error} callback. This provides back pressure
+        # in case the writer keep up with requests.
         #
         # This object is thread-safe; it may accept write requests from
         # multiple threads simultaneously, and will serialize them when
         # executing in the background thread.
         #
-        # @param [Integer] max_queue_size The maximum number of log entries
-        #   that may be queued before write requests will begin to block.
-        #   This provides back pressure in case the transmitting thread cannot
-        #   keep up with requests.
+        # @param [Integer] max_batch_count The maximum number of log entries
+        #   that may be buffered and sent in a batch.
+        # @param [Integer] max_batch_bytes The maximum byte size of log entries
+        #   that may be buffered and sent in a batch.
+        # @param [Integer] max_queue_size The maximum number of pending
+        #   write_entries requests that may be queued.
+        # @param [Numeric] interval The number of seconds to buffer log entries
+        #   before a batch is written. Default is 5.
+        # @param [Integer] threads The number of threads used to make
+        #   batched write_entries requests. Default is 10.
+        #
+        # @return [Google::Cloud::Logging::AsyncWriter] an AsyncWriter object
+        #   that buffers, batches, and transmits log entries efficiently.
         #
         # @example
         #   require "google/cloud/logging"
@@ -341,10 +351,12 @@ module Google
         #                       resource: resource,
         #                       labels: labels
         #
-        def async_writer max_queue_size: 10000, max_queue_bytes: 10000000,
-                         interval: 5, threads: 2
-          AsyncWriter.new self, max_count: max_queue_size,
-                                max_bytes: max_queue_bytes,
+        def async_writer max_batch_count: 10000, max_batch_bytes: 10000000,
+                         max_queue_size: 100, interval: 5, threads: 10
+
+          AsyncWriter.new self, max_count: max_batch_count,
+                                max_bytes: max_batch_bytes,
+                                max_queue: max_queue_size,
                                 interval: interval, threads: threads
         end
 

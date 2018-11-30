@@ -15,6 +15,7 @@
 
 require "monitor"
 require "concurrent"
+require "google/cloud/logging/errors"
 
 module Google
   module Cloud
@@ -22,13 +23,13 @@ module Google
       ##
       # # AsyncWriter
       #
-      # An object that buffers, batches, and transmits log entries
-      # asynchronously.
+      # AsyncWriter buffers, batches, and transmits log entries efficiently.
+      # Writing log entries is asynchronous and will not block.
       #
-      # Use this object to transmit log entries efficiently. It keeps a queue
-      # of log entries, and runs a background thread that transmits them to
-      # the logging service in batches. Generally, adding to the queue will
-      # not block.
+      # Batches that cannot be delivered immediately are queued. When the queue
+      # is full new batch requests will raise errors that can be consumed using
+      # the {#on_error} callback. This provides back pressure in case the writer
+      # keep up with requests.
       #
       # This object is thread-safe; it may accept write requests from
       # multiple threads simultaneously, and will serialize them when
@@ -60,18 +61,19 @@ module Google
         ##
         # @private Implementation accessors
         attr_reader :logging, :max_bytes, :max_count, :interval,
-                    :threads
+                    :threads, :max_queue
 
         ##
         # @private Creates a new AsyncWriter instance.
         def initialize logging, max_count: 10000, max_bytes: 10000000,
-                       interval: 5, threads: 2
+                       max_queue: 100, interval: 5, threads: 10
           @logging = logging
 
           @max_count = max_count
           @max_bytes = max_bytes
+          @max_queue = max_queue
           @interval  = interval
-          @threads   = threads.to_i
+          @threads   = threads
 
           @error_callbacks = []
 
@@ -370,7 +372,8 @@ module Google
         protected
 
         def init_resources!
-          @thread_pool ||= Concurrent::FixedThreadPool.new @threads
+          @thread_pool ||= Concurrent::FixedThreadPool.new @threads,
+                                                           max_queue: @max_queue
           @thread ||= Thread.new { run_background }
           nil # returning nil because of rubocop...
         end
@@ -412,22 +415,40 @@ module Google
         end
 
         def publish_batch_async batch
-          return unless @thread_pool.running?
+          batch.values.each do |write_log_entries_request|
+            begin
+              write_entries_future write_log_entries_request
+            rescue Concurrent::RejectedExecutionError => e
+              async_error = AsyncWriterError.new(
+                "Error writing entries: #{e.message}",
+                write_log_entries_request.entries
+              )
+              # Manually set backtrace so we don't have to raise
+              async_error.set_backtrace backtrace
+              error! async_error
+            end
+          end
+        end
 
-          batch.values.each do |value|
-            Concurrent::Future.new(executor: @thread_pool) do
-              begin
-                logging.write_entries(
-                  value.entries,
-                  log_name: value.log_name,
-                  resource: value.resource,
-                  labels: value.labels,
-                  partial_success: value.partial_success
-                )
-              rescue StandardError => e
-                error! e
-              end
-            end.execute
+        def write_entries_future write_log_entries_request
+          Concurrent::Future.execute(executor: @thread_pool) do
+            begin
+              logging.write_entries(
+                write_log_entries_request.entries,
+                log_name: write_log_entries_request.log_name,
+                resource: write_log_entries_request.resource,
+                labels: write_log_entries_request.labels,
+                partial_success: write_log_entries_request.partial_success
+              )
+            rescue StandardError => e
+              write_error = AsyncWriteEntriesError.new(
+                "Error writing entries: #{e.message}",
+                write_log_entries_request.entries
+              )
+              # Manually set backtrace so we don't have to raise
+              write_error.set_backtrace backtrace
+              error! write_error
+            end
           end
         end
 
