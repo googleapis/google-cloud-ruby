@@ -372,8 +372,9 @@ module Google
         protected
 
         def init_resources!
-          @thread_pool ||= Concurrent::FixedThreadPool.new @threads,
-                                                           max_queue: @max_queue
+          @thread_pool ||= \
+            Concurrent::CachedThreadPool.new max_threads: @threads,
+                                             max_queue: @max_queue
           @thread ||= Thread.new { run_background }
           nil # returning nil because of rubocop...
         end
