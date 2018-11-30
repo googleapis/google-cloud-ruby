@@ -84,10 +84,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -161,10 +168,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -238,10 +252,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -315,10 +336,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -392,10 +420,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -469,10 +504,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -546,10 +588,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -623,10 +672,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -700,10 +756,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -777,10 +840,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -854,10 +924,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
@@ -931,10 +1008,17 @@ module Google
             if async
               requests.map! do |request|
                 {
-                  input_config: request[:image],
+                  input_config: {
+                    gcs_source: {
+                      uri: request[:image][:source][:gcs_image_uri]
+                    },
+                    mime_type: mime_type
+                  },
                   features: request[:features],
                   output_config: {
-                    gcs_destination: destination,
+                    gcs_destination: {
+                      uri: destination
+                    },
                     batch_size: batch_size
                   }
                 }
