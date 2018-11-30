@@ -92,9 +92,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -169,9 +169,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -246,9 +246,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -323,9 +323,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -400,9 +400,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -477,9 +477,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -554,9 +554,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -631,9 +631,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -708,9 +708,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -785,9 +785,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -862,9 +862,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
@@ -939,9 +939,9 @@ module Google
                   }
                 }
               end
-              async_batch_annotate_files requests, options
+              async_batch_annotate_files requests, options: options
             else
-              batch_annotate_images requests, options, &blk
+              batch_annotate_images requests, options: options, &blk
             end
           end
 
