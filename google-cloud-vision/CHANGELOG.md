@@ -1,5 +1,20 @@
 # Release History
 
+### 0.32.0 / 2018-09-26
+
+* Add `ImageAnnotatorClient#face_detection`
+* Add `ImageAnnotatorClient#landmark_detection`
+* Add `ImageAnnotatorClient#logo_detection`
+* Add `ImageAnnotatorClient#label_detection`
+* Add `ImageAnnotatorClient#text_detection`
+* Add `ImageAnnotatorClient#document_text_detection`
+* Add `ImageAnnotatorClient#safe_search_detection`
+* Add `ImageAnnotatorClient#image_properties_detection`
+* Add `ImageAnnotatorClient#crop_hints_detection`
+* Add `ImageAnnotatorClient#product_search_detection`
+* Add `ImageAnnotatorClient#object_localization_detection`
+* Add `ImageAnnotatorClient#web_detection`
+
 ### 0.31.0 / 2018-09-26
 
 * Add Object Localization.
