@@ -1261,6 +1261,9 @@ module Google
         #
         #   copy_job = table.copy_job "other-project:other_dataset.other_table"
         #
+        #   copy_job.wait_until_done!
+        #   copy_job.done? #=> true
+        #
         # @!group Data
         #
         def copy_job destination_table, create: nil, write: nil, dryrun: nil,
@@ -1425,7 +1428,9 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   extract_job = table.extract_job "gs://my-bucket/file-name.json",
-        #                               format: "json"
+        #                                   format: "json"
+        #   extract_job.wait_until_done!
+        #   extract_job.done? #=> true
         #
         # @!group Data
         #

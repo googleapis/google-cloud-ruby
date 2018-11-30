@@ -171,10 +171,13 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #   source_table_id = "bigquery-public-data.samples.shakespeare"
         #   destination_table = dataset.table "my_destination_table"
         #
-        #   bigquery.copy "bigquery-public-data.samples.shakespeare",
-        #                 destination_table
+        #   copy_job = bigquery.copy_job source_table_id, destination_table
+        #
+        #   copy_job.wait_until_done!
+        #   copy_job.done? #=> true
         #
         # @!group Data
         #
@@ -1347,6 +1350,8 @@ module Google
         #   table_id = "bigquery-public-data.samples.shakespeare"
         #   extract_job = bigquery.extract_job table_id,
         #                                      "gs://my-bucket/shakespeare.csv"
+        #   extract_job.wait_until_done!
+        #   extract_job.done? #=> true
         #
         # @!group Data
         #
