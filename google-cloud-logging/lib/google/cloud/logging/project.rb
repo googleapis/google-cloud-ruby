@@ -240,8 +240,8 @@ module Google
         #   `entries`, except when a log entry specifies its own `key:value`
         #   item with the same key. See also {Entry#labels=}.
         # @param [Boolean] partial_success Whether valid entries should be
-        #   written even if some other entries fail due to INVALID_ARGUMENT or
-        #   PERMISSION_DENIED errors when communicating to the Stackdriver
+        #   written even if some other entries fail due to `INVALID_ARGUMENT` or
+        #   `PERMISSION_DENIED` errors when communicating to the Stackdriver
         #   Logging API.
         #
         # @return [Boolean] Returns `true` if the entries were written.
@@ -327,6 +327,10 @@ module Google
         #   before a batch is written. Default is 5.
         # @param [Integer] threads The number of threads used to make
         #   batched write_entries requests. Default is 10.
+        # @param [Boolean] partial_success Whether valid entries should be
+        #   written even if some other entries fail due to `INVALID_ARGUMENT` or
+        #   `PERMISSION_DENIED` errors when communicating to the Stackdriver
+        #   Logging API.
         #
         # @return [Google::Cloud::Logging::AsyncWriter] an AsyncWriter object
         #   that buffers, batches, and transmits log entries efficiently.
@@ -352,12 +356,14 @@ module Google
         #                       labels: labels
         #
         def async_writer max_batch_count: 10000, max_batch_bytes: 10000000,
-                         max_queue_size: 100, interval: 5, threads: 10
+                         max_queue_size: 100, interval: 5, threads: 10,
+                         partial_success: false
 
           AsyncWriter.new self, max_count: max_batch_count,
                                 max_bytes: max_batch_bytes,
                                 max_queue: max_queue_size,
-                                interval: interval, threads: threads
+                                interval: interval, threads: threads,
+                                partial_success: partial_success
         end
 
         ##

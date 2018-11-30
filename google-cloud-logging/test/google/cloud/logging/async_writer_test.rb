@@ -27,7 +27,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
   let(:labels1) { { "env" => "production" } }
   let(:labels2) { { "env" => "staging" } }
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
-  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging }
+  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging, partial_success: true }
 
   def entries payload, labels = labels1
     Array(payload).map { |str|
@@ -41,7 +41,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     }
   end
 
-  def write_req_args payload, labels = labels1, partial_success = true
+  def write_req_args payload, labels = labels1
     full_log_name = "projects/test/logs/#{log_name}"
     entries = Array(payload).map do |str|
       Google::Logging::V2::LogEntry.new(
@@ -52,7 +52,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
         labels: labels
       )
     end
-    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, partial_success: partial_success, options: default_options]
+    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, partial_success: true, options: default_options]
   end
 
   it "writes a single entry" do
@@ -65,8 +65,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       entries("payload1"),
       log_name: log_name,
       resource: resource,
-      labels: labels1,
-      partial_success: true
+      labels: labels1
     )
     async_writer.stop! 1
 
@@ -84,15 +83,13 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       entries("payload1"),
       log_name: log_name,
       resource: resource,
-      labels: labels1,
-      partial_success: true
+      labels: labels1
     )
     async_writer.write_entries(
       entries("payload2"),
       log_name: log_name,
       resource: resource,
-      labels: labels1,
-      partial_success: true
+      labels: labels1
     )
     async_writer.resume
     async_writer.stop! 1
@@ -105,22 +102,20 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     logging.service.mocked_logging = mock
 
     mock.expect :write_log_entries, write_res, write_req_args(["payload1"], labels1)
-    mock.expect :write_log_entries, write_res, write_req_args("payload2", labels2, false)
+    mock.expect :write_log_entries, write_res, write_req_args("payload2", labels2)
 
     async_writer.suspend
     async_writer.write_entries(
       entries("payload1", labels1),
       log_name: log_name,
       resource: resource,
-      labels: labels1,
-      partial_success: true
+      labels: labels1
     )
     async_writer.write_entries(
       entries("payload2", labels2),
       log_name: log_name,
       resource: resource,
-      labels: labels2,
-      partial_success: false
+      labels: labels2
     )
     async_writer.resume
     async_writer.stop

@@ -61,12 +61,13 @@ module Google
         ##
         # @private Implementation accessors
         attr_reader :logging, :max_bytes, :max_count, :interval,
-                    :threads, :max_queue
+                    :threads, :max_queue, :partial_success
 
         ##
         # @private Creates a new AsyncWriter instance.
         def initialize logging, max_count: 10000, max_bytes: 10000000,
-                       max_queue: 100, interval: 5, threads: 10
+                       max_queue: 100, interval: 5, threads: 10,
+                       partial_success: false
           @logging = logging
 
           @max_count = max_count
@@ -74,6 +75,8 @@ module Google
           @max_queue = max_queue
           @interval  = interval
           @threads   = threads
+
+          @partial_success = partial_success
 
           @error_callbacks = []
 
@@ -126,20 +129,17 @@ module Google
         #
         #   async.write_entries entry
         #
-        def write_entries entries, log_name: nil, resource: nil, labels: nil,
-                          partial_success: nil
+        def write_entries entries, log_name: nil, resource: nil, labels: nil
           synchronize do
             raise "AsyncWriter has been stopped" if @stopped
 
             @batch ||= Batch.new self
             unless @batch.try_add(entries, log_name: log_name,
-                                           resource: resource, labels: labels,
-                                           partial_success: partial_success)
+                                           resource: resource, labels: labels)
               publish_batch!
               @batch = Batch.new self
               @batch.add(entries, log_name: log_name, resource: resource,
-                                  labels: labels,
-                                  partial_success: partial_success)
+                                  labels: labels)
             end
 
             init_resources!
@@ -439,7 +439,7 @@ module Google
                 log_name: write_log_entries_request.log_name,
                 resource: write_log_entries_request.resource,
                 labels: write_log_entries_request.labels,
-                partial_success: write_log_entries_request.partial_success
+                partial_success: partial_success
               )
             rescue StandardError => e
               write_error = AsyncWriteEntriesError.new(
@@ -465,12 +465,10 @@ module Google
             @created_at = nil
           end
 
-          def add entries, log_name: nil, resource: nil, labels: nil,
-                  partial_success: nil
-            entries_key = [log_name, resource, labels, partial_success]
+          def add entries, log_name: nil, resource: nil, labels: nil
+            entries_key = [log_name, resource, labels]
             @entries[entries_key] ||= Batch::EntryGroup.new(
-              log_name: log_name, resource: resource, labels: labels,
-              partial_success: partial_success
+              log_name: log_name, resource: resource, labels: labels
             )
             bytes_added = @entries[entries_key].add entries
             @total_message_bytes += bytes_added
@@ -478,21 +476,18 @@ module Google
             nil
           end
 
-          def try_add entries, log_name: nil, resource: nil, labels: nil,
-                      partial_success: nil
+          def try_add entries, log_name: nil, resource: nil, labels: nil
             new_message_count = total_message_count + 1
             addl_message_bytes = \
               estimated_bytes_for entries, log_name: log_name,
                                            resource: resource,
-                                           labels: labels,
-                                           partial_success: partial_success
+                                           labels: labels
             new_message_bytes = total_message_bytes + addl_message_bytes
             if new_message_count > @writer.max_count ||
                new_message_bytes >= @writer.max_bytes
               return false
             end
-            add entries, log_name: log_name, resource: resource, labels: labels,
-                         partial_success: partial_success
+            add entries, log_name: log_name, resource: resource, labels: labels
             true
           end
 
@@ -522,7 +517,7 @@ module Google
           end
 
           def estimated_bytes_for entries, log_name: nil, resource: nil,
-                                  labels: nil, partial_success: nil
+                                  labels: nil
             entries = Array(entries).map(&:to_grpc)
             resource = resource.to_grpc if resource
             if labels
@@ -533,7 +528,7 @@ module Google
               log_name: log_name,
               resource: resource,
               labels: labels,
-              partial_success: partial_success
+              partial_success: @writer.partial_success
             }.delete_if { |_, v| v.nil? }).to_proto.bytesize
           end
 
@@ -542,15 +537,12 @@ module Google
           end
 
           class EntryGroup
-            attr_reader :log_name, :resource, :labels, :partial_success,
-                        :message_bytes, :entries
+            attr_reader :log_name, :resource, :labels, :message_bytes, :entries
 
-            def initialize log_name: nil, resource: nil, labels: nil,
-                           partial_success: nil
+            def initialize log_name: nil, resource: nil, labels: nil
               @log_name = log_name
               @resource = resource
               @labels = labels
-              @partial_success = partial_success
               @message_bytes = 0
               @message_bytes += log_name.bytesize if log_name
               @message_bytes += resource.to_grpc.to_proto.bytesize if resource
