@@ -133,13 +133,22 @@ module Google
           synchronize do
             raise "AsyncWriter has been stopped" if @stopped
 
-            @batch ||= Batch.new self
-            unless @batch.try_add(entries, log_name: log_name,
-                                           resource: resource, labels: labels)
+            Array(entries).each do |entry|
+              # Update the entry to have all the data direclty on it
+              entry.log_name ||= log_name
+              if entry.resource.nil? || entry.resource.empty?
+                entry.resource = resource
+              end
+              entry.labels = labels if entry.labels.nil? || entry.labels.empty?
+
+              # Add the entry to the batch
+              @batch ||= Batch.new self
+              next if @batch.try_add entry
+
+              # If we can't add to the batch, publish and create a new batch
               publish_batch!
               @batch = Batch.new self
-              @batch.add(entries, log_name: log_name, resource: resource,
-                                  labels: labels)
+              @batch.add entry
             end
 
             init_resources!
@@ -403,8 +412,9 @@ module Google
         def publish_batch!
           return unless @batch
 
-          publish_batch_async @batch
+          batch_to_be_published = @batch
           @batch = nil
+          publish_batch_async batch_to_be_published
         end
 
         # Sets the last_error and calls all error callbacks.
@@ -417,35 +427,27 @@ module Google
         end
 
         def publish_batch_async batch
-          batch.values.each do |request|
-            begin
-              Concurrent::Promises.future_on(@thread_pool, request) do |req|
-                write_entries_with_request req
-              end
-            rescue Concurrent::RejectedExecutionError => e
-              async_error = AsyncWriterError.new(
-                "Error writing entries: #{e.message}",
-                request.entries
-              )
-              # Manually set backtrace so we don't have to raise
-              async_error.set_backtrace backtrace
-              error! async_error
-            end
+          Concurrent::Promises.future_on(
+            @thread_pool, batch.entries
+          ) do |entries|
+            write_entries_with entries
           end
+        rescue Concurrent::RejectedExecutionError => e
+          async_error = AsyncWriterError.new(
+            "Error writing entries: #{e.message}",
+            batch.entries
+          )
+          # Manually set backtrace so we don't have to raise
+          async_error.set_backtrace backtrace
+          error! async_error
         end
 
-        def write_entries_with_request write_log_entries_request
-          logging.write_entries(
-            write_log_entries_request.entries,
-            log_name: write_log_entries_request.log_name,
-            resource: write_log_entries_request.resource,
-            labels: write_log_entries_request.labels,
-            partial_success: partial_success
-          )
+        def write_entries_with entries
+          logging.write_entries entries, partial_success: partial_success
         rescue StandardError => e
           write_error = AsyncWriteEntriesError.new(
             "Error writing entries: #{e.message}",
-            write_log_entries_request.entries
+            entries
           )
           # Manually set backtrace so we don't have to raise
           write_error.set_backtrace backtrace
@@ -459,40 +461,34 @@ module Google
 
           def initialize writer
             @writer = writer
-            @entries = {}
-            @total_message_bytes = 0
+            @entries = Concurrent::Array.new
+            @entries_bytes = 2 # initial size w/ partial_success
             @created_at = nil
           end
 
-          def add entries, log_name: nil, resource: nil, labels: nil
-            entries_key = [log_name, resource, labels]
-            @entries[entries_key] ||= Batch::EntryGroup.new(
-              log_name: log_name, resource: resource, labels: labels
-            )
-            bytes_added = @entries[entries_key].add entries
-            @total_message_bytes += bytes_added
+          def add entry, addl_bytes: nil
+            addl_bytes ||= addl_bytes_for entry
+            @entries << entry
+            @entries_bytes += addl_bytes
             @created_at ||= Time.now
             nil
           end
 
-          def try_add entries, log_name: nil, resource: nil, labels: nil
-            new_message_count = total_message_count + 1
-            addl_message_bytes = \
-              estimated_bytes_for entries, log_name: log_name,
-                                           resource: resource,
-                                           labels: labels
-            new_message_bytes = total_message_bytes + addl_message_bytes
+          def try_add entry
+            addl_bytes = addl_bytes_for entry
+            new_message_count = @entries.count + 1
+            new_message_bytes = @entries_bytes + addl_bytes
             if new_message_count > @writer.max_count ||
                new_message_bytes >= @writer.max_bytes
               return false
             end
-            add entries, log_name: log_name, resource: resource, labels: labels
+            add entry, addl_bytes: addl_bytes
             true
           end
 
           def ready?
-            total_message_count >= @writer.max_count ||
-              total_message_bytes >= @writer.max_bytes ||
+            @entries.count >= @writer.max_count ||
+              @entries_bytes >= @writer.max_bytes ||
               (@created_at.nil? || (publish_at < Time.now))
           end
 
@@ -507,66 +503,8 @@ module Google
             publish_wait
           end
 
-          def total_message_count
-            @entries.values.map(&:count).sum
-          end
-
-          def total_message_bytes
-            @entries.values.map(&:message_bytes).sum
-          end
-
-          def estimated_bytes_for entries, log_name: nil, resource: nil,
-                                  labels: nil
-            entries = Array(entries).map(&:to_grpc)
-            resource = resource.to_grpc if resource
-            if labels
-              labels = Hash[labels.map { |k, v| [String(k), String(v)] }]
-            end
-            Google::Logging::V2::WriteLogEntriesRequest.new({
-              entries: entries,
-              log_name: log_name,
-              resource: resource,
-              labels: labels,
-              partial_success: @writer.partial_success
-            }.delete_if { |_, v| v.nil? }).to_proto.bytesize
-          end
-
-          def values
-            @entries.values
-          end
-
-          class EntryGroup
-            attr_reader :log_name, :resource, :labels, :message_bytes, :entries
-
-            def initialize log_name: nil, resource: nil, labels: nil
-              @log_name = log_name
-              @resource = resource
-              @labels = labels
-              @message_bytes = 0
-              @message_bytes += log_name.bytesize if log_name
-              @message_bytes += resource.to_grpc.to_proto.bytesize if resource
-              if labels
-                labels_dup = Hash[labels.map { |k, v| [String(k), String(v)] }]
-                @message_bytes += labels_dup.to_a.to_s.bytesize # estimate
-              end
-
-              @entries = []
-            end
-
-            def add entries
-              entries = Array entries
-              added_bytes = entries.map(&:to_grpc)
-                                   .map(&:to_proto)
-                                   .map(&:bytesize)
-                                   .sum
-              @entries += entries
-              @message_bytes += added_bytes
-              added_bytes
-            end
-
-            def count
-              @entries.count
-            end
+          def addl_bytes_for entry
+            entry.to_grpc.to_proto.bytesize + 2
           end
         end
       end

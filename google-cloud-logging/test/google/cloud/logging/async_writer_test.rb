@@ -52,7 +52,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
         labels: labels
       )
     end
-    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, partial_success: true, options: default_options]
+    [entries, log_name: nil, resource: nil, labels: nil, partial_success: true, options: default_options]
   end
 
   it "writes a single entry" do
@@ -97,12 +97,17 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     mock.verify
   end
 
-  it "separates unrelated entries" do
+  it "combines unrelated entries into a single request" do
     mock = Minitest::Mock.new
     logging.service.mocked_logging = mock
 
-    mock.expect :write_log_entries, write_res, write_req_args(["payload1"], labels1)
-    mock.expect :write_log_entries, write_res, write_req_args("payload2", labels2)
+    payload1_request = write_req_args(["payload1"], labels1)
+    payload2_request = write_req_args("payload2", labels2)
+    combined_request = payload1_request.dup.tap do |req|
+      req.first.concat payload2_request.first
+    end
+
+    mock.expect :write_log_entries, write_res, combined_request
 
     async_writer.suspend
     async_writer.write_entries(
