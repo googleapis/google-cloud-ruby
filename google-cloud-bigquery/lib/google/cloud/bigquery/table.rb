@@ -1235,7 +1235,8 @@ module Google
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key.
+        #   list must have a different key. See [Requirements for
+        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1413,7 +1414,8 @@ module Google
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key.
+        #   list must have a different key. See [Requirements for
+        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1652,7 +1654,8 @@ module Google
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key.
+        #   list must have a different key. See [Requirements for
+        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
         # @yield [load_job] a block for setting the load job
         # @yieldparam [LoadJob] load_job the load job object to be updated
         #

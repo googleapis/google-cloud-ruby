@@ -797,7 +797,8 @@ module Google
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key.
+        #   list must have a different key. See [Requirements for
+        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
         # @param [Array<String>, String] udfs User-defined function resources
         #   used in the query. May be either a code resource to load from a
         #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
@@ -1343,8 +1344,8 @@ module Google
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key.
-        #
+        #   list must have a different key. See [Requirements for
+        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
         #   destination table already exists, or if you're loading data from a
