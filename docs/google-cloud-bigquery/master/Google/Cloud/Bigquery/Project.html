@@ -201,11 +201,57 @@ accessed, and deleted by Google::Cloud::Bigquery::Project.</p>
 
   
     <h2>
-      Instance Method Summary
+      Data
       <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy-instance_method" title="#copy (instance method)">#<strong>copy</strong>(source_table, destination_table, create: nil, write: nil) {|job| ... } &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Copies the data from the source table to the destination table using a synchronous method that blocks for a response.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy_job-instance_method" title="#copy_job (instance method)">#<strong>copy_job</strong>(source_table, destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil) {|job| ... } &#x21d2; Google::Cloud::Bigquery::CopyJob </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Copies the data from the source table to the destination table using an asynchronous method.</p>
+</div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -325,14 +371,35 @@ accessed, and deleted by Google::Cloud::Bigquery::Project.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(service)  &#x21d2; Project </a>
+      <a href="#extract-instance_method" title="#extract (instance method)">#<strong>extract</strong>(table, extract_url, format: nil, compression: nil, delimiter: nil, header: nil) {|job| ... } &#x21d2; Boolean </a>
     
 
     
   </span>
   
   
-    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Extracts the data from the provided table to a Google Cloud Storage file using a synchronous method that blocks for a response.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#extract_job-instance_method" title="#extract_job (instance method)">#<strong>extract_job</strong>(table, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, job_id: nil, prefix: nil, labels: nil) {|job| ... } &#x21d2; Google::Cloud::Bigquery::ExtractJob </a>
+    
+
+    
+  </span>
+  
   
   
   
@@ -341,7 +408,7 @@ accessed, and deleted by Google::Cloud::Bigquery::Project.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a new Service instance.</p>
+    <span class="summary_desc"><div class='inline'><p>Extracts the data from the provided table to a Google Cloud Storage file using an asynchronous method.</p>
 </div></span>
   
 </li>
@@ -388,31 +455,6 @@ accessed, and deleted by Google::Cloud::Bigquery::Project.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Retrieves the list of jobs belonging to the project.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#project_id-instance_method" title="#project_id (instance method)">#<strong>project_id</strong>  &#x21d2; Object </a>
-    
-
-    
-      (also: #project)
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>The BigQuery project connected to.</p>
 </div></span>
   
 </li>
@@ -513,29 +555,6 @@ accessed, and deleted by Google::Cloud::Bigquery::Project.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#service_account_email-instance_method" title="#service_account_email (instance method)">#<strong>service_account_email</strong>  &#x21d2; String </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>The email address of the service account for the project used to connect to BigQuery.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#time-instance_method" title="#time (instance method)">#<strong>time</strong>(hour, minute, second)  &#x21d2; Bigquery::Time </a>
     
 
@@ -551,6 +570,88 @@ accessed, and deleted by Google::Cloud::Bigquery::Project.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Creates a Bigquery::Time object to represent a time, independent of a specific date.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(service)  &#x21d2; Project </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new Service instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_id-instance_method" title="#project_id (instance method)">#<strong>project_id</strong>  &#x21d2; Object </a>
+    
+
+    
+      (also: #project)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The BigQuery project connected to.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#service_account_email-instance_method" title="#service_account_email (instance method)">#<strong>service_account_email</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The email address of the service account for the project used to connect to BigQuery.</p>
 </div></span>
   
 </li>
@@ -737,7 +838,543 @@ Can only be present if the project was retrieved with <span class='object_link'>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="create_dataset-instance_method">
+  <h3 class="signature first" id="copy-instance_method">
+  
+    #<strong>copy</strong>(source_table, destination_table, create: nil, write: nil) {|job| ... } &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Copies the data from the source table to the destination table using a
+synchronous method that blocks for a response. Timeouts and transient
+errors are generally handled as needed to complete the job. See
+<span class='object_link'><a href="#copy_job-instance_method" title="Google::Cloud::Bigquery::Project#copy_job (method)">#copy_job</a></span> for the asynchronous version. Use this method instead of
+<span class='object_link'><a href="Table.html#copy-instance_method" title="Google::Cloud::Bigquery::Table#copy (method)">Table#copy</a></span> to copy from source tables in other projects.</p>
+
+<p>The geographic location for the job (&quot;US&quot;, &quot;EU&quot;, etc.) can be set via
+<span class='object_link'><a href="CopyJob/Updater.html#location=-instance_method" title="Google::Cloud::Bigquery::CopyJob::Updater#location= (method)">CopyJob::Updater#location=</a></span> in a block passed to this method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_destination_table'>destination_table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_destination_table</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bigquery-public-data.samples.shakespeare</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+              <span class='id identifier rubyid_destination_table'>destination_table</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_table</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The source table for the
+copied data. This can be a table object; or a string ID as specified
+by the <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause">Standard SQL Query
+Reference</a>
+(<code>project-name.dataset_id.table_id</code>) or the <a href="https://cloud.google.com/bigquery/query-reference#from">Legacy SQL Query
+Reference</a>
+(<code>project-name:dataset_id.table_id</code>).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>destination_table</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The destination table for the
+copied data. This can be a table object; or a string ID as specified
+by the <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause">Standard SQL Query
+Reference</a>
+(<code>project-name.dataset_id.table_id</code>) or the <a href="https://cloud.google.com/bigquery/query-reference#from">Legacy SQL Query
+Reference</a>
+(<code>project-name:dataset_id.table_id</code>).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>create</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Specifies whether the job is allowed to create
+new tables. The default value is <code>needed</code>.</p>
+
+<p>The following values are supported:</p>
+
+<ul>
+<li><code>needed</code> - Create the table if it does not exist.</li>
+<li><code>never</code> - The table must already exist. A &#39;notFound&#39; error is
+raised if the table does not exist.</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>write</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Specifies how to handle data already present in
+the destination table. The default value is <code>empty</code>.</p>
+
+<p>The following values are supported:</p>
+
+<ul>
+<li><code>truncate</code> - BigQuery overwrites the table data.</li>
+<li><code>append</code> - BigQuery appends the data to the table.</li>
+<li><code>empty</code> - An error will be returned if the destination table
+already contains data.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#job-instance_method" title="Google::Cloud::Bigquery::Project#job (method)">job</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a job configuration object</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>job</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CopyJob/Updater.html" title="Google::Cloud::Bigquery::CopyJob::Updater (class)">Google::Cloud::Bigquery::CopyJob::Updater</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a job
+configuration object for setting additional options.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns <code>true</code> if the copy operation succeeded.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 264</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_copy'>copy</span> <span class='id identifier rubyid_source_table'>source_table</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_table'>destination_table</span><span class='comma'>,</span> <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+         <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_copy_job'>copy_job</span> <span class='id identifier rubyid_source_table'>source_table</span><span class='comma'>,</span>
+                 <span class='id identifier rubyid_destination_table'>destination_table</span><span class='comma'>,</span>
+                 <span class='label'>create:</span> <span class='id identifier rubyid_create'>create</span><span class='comma'>,</span>
+                 <span class='label'>write:</span> <span class='id identifier rubyid_write'>write</span><span class='comma'>,</span>
+                 <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+  <span class='id identifier rubyid_ensure_job_succeeded!'>ensure_job_succeeded!</span> <span class='id identifier rubyid_job'>job</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy_job-instance_method">
+  
+    #<strong>copy_job</strong>(source_table, destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil) {|job| ... } &#x21d2; <tt><span class='object_link'><a href="CopyJob.html" title="Google::Cloud::Bigquery::CopyJob (class)">Google::Cloud::Bigquery::CopyJob</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Copies the data from the source table to the destination table using
+an asynchronous method. In this method, a <span class='object_link'><a href="CopyJob.html" title="Google::Cloud::Bigquery::CopyJob (class)">CopyJob</a></span> is immediately
+returned. The caller may poll the service by repeatedly calling
+<span class='object_link'><a href="Job.html#reload!-instance_method" title="Google::Cloud::Bigquery::Job#reload! (method)">Job#reload!</a></span> and <span class='object_link'><a href="Job.html#done%3F-instance_method" title="Google::Cloud::Bigquery::Job#done? (method)">Job#done?</a></span> to detect when the job is done, or
+simply block until the job is done by calling #<span class='object_link'><a href="Job.html#wait_until_done!-instance_method" title="Google::Cloud::Bigquery::Job#wait_until_done! (method)">Job#wait_until_done!</a></span>.
+See <span class='object_link'><a href="#copy-instance_method" title="Google::Cloud::Bigquery::Project#copy (method)">#copy</a></span> for the synchronous version. Use this method instead of
+<span class='object_link'><a href="Table.html#copy_job-instance_method" title="Google::Cloud::Bigquery::Table#copy_job (method)">Table#copy_job</a></span> to copy from source tables in other projects.</p>
+
+<p>The geographic location for the job (&quot;US&quot;, &quot;EU&quot;, etc.) can be set via
+<span class='object_link'><a href="CopyJob/Updater.html#location=-instance_method" title="Google::Cloud::Bigquery::CopyJob::Updater#location= (method)">CopyJob::Updater#location=</a></span> in a block passed to this method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_source_table_id'>source_table_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bigquery-public-data.samples.shakespeare</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_destination_table'>destination_table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_destination_table</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_copy_job'>copy_job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_copy_job'>copy_job</span> <span class='id identifier rubyid_source_table_id'>source_table_id</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_table'>destination_table</span>
+
+<span class='id identifier rubyid_copy_job'>copy_job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+<span class='id identifier rubyid_copy_job'>copy_job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source_table</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The source table for the
+copied data. This can be a table object; or a string ID as specified
+by the <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause">Standard SQL Query
+Reference</a>
+(<code>project-name.dataset_id.table_id</code>) or the <a href="https://cloud.google.com/bigquery/query-reference#from">Legacy SQL Query
+Reference</a>
+(<code>project-name:dataset_id.table_id</code>).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>destination_table</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The destination table for the
+copied data. This can be a table object; or a string ID as specified
+by the <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause">Standard SQL Query
+Reference</a>
+(<code>project-name.dataset_id.table_id</code>) or the <a href="https://cloud.google.com/bigquery/query-reference#from">Legacy SQL Query
+Reference</a>
+(<code>project-name:dataset_id.table_id</code>).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>create</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Specifies whether the job is allowed to create
+new tables. The default value is <code>needed</code>.</p>
+
+<p>The following values are supported:</p>
+
+<ul>
+<li><code>needed</code> - Create the table if it does not exist.</li>
+<li><code>never</code> - The table must already exist. A &#39;notFound&#39; error is
+raised if the table does not exist.</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>write</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Specifies how to handle data already present in
+the destination table. The default value is <code>empty</code>.</p>
+
+<p>The following values are supported:</p>
+
+<ul>
+<li><code>truncate</code> - BigQuery overwrites the table data.</li>
+<li><code>append</code> - BigQuery appends the data to the table.</li>
+<li><code>empty</code> - An error will be returned if the destination table
+already contains data.</li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>job_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A user-defined ID for the copy job. The ID
+must contain only letters (a-z, A-Z), numbers (0-9), underscores
+(_), or dashes (-). The maximum length is 1,024 characters. If
+<code>job_id</code> is provided, then <code>prefix</code> will not be used.</p>
+
+<p>See <a href="https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid">Generating a job
+ID</a>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prefix</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string, usually human-readable, that will be
+prepended to a generated value to produce a unique job ID. For
+example, the prefix <code>daily_import_job_</code> can be given to generate a
+job ID such as <code>daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh</code>. The
+prefix must contain only letters (a-z, A-Z), numbers (0-9),
+underscores (_), or dashes (-). The maximum length of the entire ID
+is 1,024 characters. If <code>job_id</code> is provided, then <code>prefix</code> will not
+be used.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of user-provided labels associated with
+the job. You can use these to organize and group your jobs. Label
+keys and values can be no longer than 63 characters, can only
+contain lowercase letters, numeric characters, underscores and
+dashes. International characters are allowed. Label values are
+optional. Label keys must start with a letter and each label in the
+list must have a different key. See <a href="https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements">Requirements for
+labels</a>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#job-instance_method" title="Google::Cloud::Bigquery::Project#job (method)">job</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a job configuration object</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>job</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CopyJob/Updater.html" title="Google::Cloud::Bigquery::CopyJob::Updater (class)">Google::Cloud::Bigquery::CopyJob::Updater</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a job
+configuration object for setting additional options.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CopyJob.html" title="Google::Cloud::Bigquery::CopyJob (class)">Google::Cloud::Bigquery::CopyJob</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 185</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_copy_job'>copy_job</span> <span class='id identifier rubyid_source_table'>source_table</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_table'>destination_table</span><span class='comma'>,</span> <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+             <span class='label'>job_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>create:</span> <span class='id identifier rubyid_create'>create</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='id identifier rubyid_write'>write</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span><span class='comma'>,</span>
+              <span class='label'>job_id:</span> <span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='id identifier rubyid_prefix'>prefix</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_updater'>updater</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="CopyJob.html" title="Google::Cloud::Bigquery::CopyJob (class)">CopyJob</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="CopyJob/Updater.html" title="Google::Cloud::Bigquery::CopyJob::Updater (class)">Updater</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_options'>from_options</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span>
+    <span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_get_table_ref'>get_table_ref</span><span class='lparen'>(</span><span class='id identifier rubyid_source_table'>source_table</span><span class='comma'>,</span> <span class='label'>default_ref:</span> <span class='id identifier rubyid_project_ref'>project_ref</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_get_table_ref'>get_table_ref</span><span class='lparen'>(</span><span class='id identifier rubyid_destination_table'>destination_table</span><span class='comma'>,</span> <span class='label'>default_ref:</span> <span class='id identifier rubyid_project_ref'>project_ref</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_options'>options</span>
+  <span class='rparen'>)</span>
+
+  <span class='kw'>yield</span> <span class='id identifier rubyid_updater'>updater</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='id identifier rubyid_job_gapi'>job_gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_updater'>updater</span><span class='period'>.</span><span class='id identifier rubyid_to_gapi'>to_gapi</span>
+  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_copy_table'>copy_table</span> <span class='id identifier rubyid_job_gapi'>job_gapi</span>
+  <span class='const'><span class='object_link'><a href="Job.html" title="Google::Cloud::Bigquery::Job (class)">Job</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_dataset-instance_method">
   
     #<strong>create_dataset</strong>(dataset_id, name: nil, description: nil, expiration: nil, location: nil) {|access| ... } &#x21d2; <tt><span class='object_link'><a href="Dataset.html" title="Google::Cloud::Bigquery::Dataset (class)">Google::Cloud::Bigquery::Dataset</a></span></tt> 
   
@@ -933,36 +1570,36 @@ accepting rules</p>
       <pre class="lines">
 
 
-736
-737
-738
-739
-740
-741
-742
-743
-744
-745
-746
-747
-748
-749
-750
-751
-752
-753
-754
-755
-756
-757
-758
-759
-760
-761
-762</pre>
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 736</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 915</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_dataset'>create_dataset</span> <span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>description:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                    <span class='label'>expiration:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>location:</span> <span class='kw'>nil</span>
@@ -1099,19 +1736,19 @@ dataset does not exist.</p>
       <pre class="lines">
 
 
-679
-680
-681
-682
-683
-684
-685
-686
-687
-688</pre>
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 679</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 858</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dataset'>dataset</span> <span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1279,15 +1916,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-808
-809
-810
-811
-812
-813</pre>
+987
+988
+989
+990
+991
+992</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 808</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 987</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_datasets'>datasets</span> <span class='label'>all:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1433,14 +2070,14 @@ encryption key.</p>
       <pre class="lines">
 
 
-1093
-1094
-1095
-1096
-1097</pre>
+1272
+1273
+1274
+1275
+1276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1093</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1272</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_encryption'>encryption</span> <span class='label'>kms_key:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_encrypt_config'>encrypt_config</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="EncryptionConfiguration.html" title="Google::Cloud::Bigquery::EncryptionConfiguration (class)">EncryptionConfiguration</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
@@ -1589,19 +2226,609 @@ Optional.</p>
       <pre class="lines">
 
 
-646
-647
-648
-649
-650</pre>
+825
+826
+827
+828
+829</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 646</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 825</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ext'>ext</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="External.html" title="Google::Cloud::Bigquery::External (module)">External</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_urls'>from_urls</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span>
   <span class='kw'>yield</span> <span class='id identifier rubyid_ext'>ext</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
   <span class='id identifier rubyid_ext'>ext</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="extract-instance_method">
+  
+    #<strong>extract</strong>(table, extract_url, format: nil, compression: nil, delimiter: nil, header: nil) {|job| ... } &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Extracts the data from the provided table to a Google Cloud Storage
+file using a synchronous method that blocks for a response. Timeouts
+and transient errors are generally handled as needed to complete the
+job. See <span class='object_link'><a href="#extract_job-instance_method" title="Google::Cloud::Bigquery::Project#extract_job (method)">#extract_job</a></span> for the asynchronous version. Use this method
+instead of <span class='object_link'><a href="Table.html#extract-instance_method" title="Google::Cloud::Bigquery::Table#extract (method)">Table#extract</a></span> to extract data from source tables in other
+projects.</p>
+
+<p>The geographic location for the job (&quot;US&quot;, &quot;EU&quot;, etc.) can be set via
+<span class='object_link'><a href="ExtractJob/Updater.html#location=-instance_method" title="Google::Cloud::Bigquery::ExtractJob::Updater#location= (method)">ExtractJob::Updater#location=</a></span> in a block passed to this method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_extract'>extract</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bigquery-public-data.samples.shakespeare</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                 <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://my-bucket/shakespeare.csv</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The source table from which to extract
+data. This can be a table object; or a string ID as specified by the
+<a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause">Standard SQL Query
+Reference</a>
+(<code>project-name.dataset_id.table_id</code>) or the <a href="https://cloud.google.com/bigquery/query-reference#from">Legacy SQL Query
+Reference</a>
+(<code>project-name:dataset_id.table_id</code>).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extract_url</span>
+      
+      
+        <span class='type'>(<tt>Google::Cloud::Storage::File</tt>, <tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Google Storage file or file URI pattern(s) to which
+BigQuery should extract the table data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The exported file format. The default value is
+<code>csv</code>.</p>
+
+<p>The following values are supported:</p>
+
+<ul>
+<li><code>csv</code> - CSV</li>
+<li><code>json</code> - <a href="http://jsonlines.org/">Newline-delimited JSON</a></li>
+<li><code>avro</code> - <a href="http://avro.apache.org/">Avro</a></li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>compression</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The compression type to use for exported
+files. Possible values include <code>GZIP</code> and <code>NONE</code>. The default value
+is <code>NONE</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>delimiter</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Delimiter to use between fields in the
+exported data. Default is <code>,</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>header</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to print out a header row in the
+results. Default is <code>true</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#job-instance_method" title="Google::Cloud::Bigquery::Project#job (method)">job</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a job configuration object</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>job</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ExtractJob/Updater.html" title="Google::Cloud::Bigquery::ExtractJob::Updater (class)">Google::Cloud::Bigquery::ExtractJob::Updater</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a job
+configuration object for setting additional options.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns <code>true</code> if the extract operation succeeded.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/bigquery/exporting-data-from-bigquery" target="_parent" title="Exporting Data From BigQuery">Exporting Data From BigQuery</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1435
+1436
+1437
+1438
+1439
+1440
+1441
+1442
+1443
+1444
+1445
+1446
+1447</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1435</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_extract'>extract</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_extract_url'>extract_url</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>compression:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+            <span class='label'>delimiter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>header:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_extract_job'>extract_job</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span>
+                    <span class='id identifier rubyid_extract_url'>extract_url</span><span class='comma'>,</span>
+                    <span class='label'>format:</span> <span class='id identifier rubyid_format'>format</span><span class='comma'>,</span>
+                    <span class='label'>compression:</span> <span class='id identifier rubyid_compression'>compression</span><span class='comma'>,</span>
+                    <span class='label'>delimiter:</span> <span class='id identifier rubyid_delimiter'>delimiter</span><span class='comma'>,</span>
+                    <span class='label'>header:</span> <span class='id identifier rubyid_header'>header</span><span class='comma'>,</span>
+                    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+  <span class='id identifier rubyid_ensure_job_succeeded!'>ensure_job_succeeded!</span> <span class='id identifier rubyid_job'>job</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="extract_job-instance_method">
+  
+    #<strong>extract_job</strong>(table, extract_url, format: nil, compression: nil, delimiter: nil, header: nil, job_id: nil, prefix: nil, labels: nil) {|job| ... } &#x21d2; <tt><span class='object_link'><a href="ExtractJob.html" title="Google::Cloud::Bigquery::ExtractJob (class)">Google::Cloud::Bigquery::ExtractJob</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Extracts the data from the provided table to a Google Cloud Storage
+file using an asynchronous method. In this method, an <span class='object_link'><a href="ExtractJob.html" title="Google::Cloud::Bigquery::ExtractJob (class)">ExtractJob</a></span> is
+immediately returned. The caller may poll the service by repeatedly
+calling <span class='object_link'><a href="Job.html#reload!-instance_method" title="Google::Cloud::Bigquery::Job#reload! (method)">Job#reload!</a></span> and <span class='object_link'><a href="Job.html#done%3F-instance_method" title="Google::Cloud::Bigquery::Job#done? (method)">Job#done?</a></span> to detect when the job is done,
+or simply block until the job is done by calling</p>
+
+<h1><span class='object_link'><a href="Job.html#wait_until_done!-instance_method" title="Google::Cloud::Bigquery::Job#wait_until_done! (method)">Job#wait_until_done!</a></span>. See <span class='object_link'><a href="#extract-instance_method" title="Google::Cloud::Bigquery::Project#extract (method)">#extract</a></span> for the synchronous version.</h1>
+
+<p>Use this method instead of <span class='object_link'><a href="Table.html#extract_job-instance_method" title="Google::Cloud::Bigquery::Table#extract_job (method)">Table#extract_job</a></span> to extract data from
+source tables in other projects.</p>
+
+<p>The geographic location for the job (&quot;US&quot;, &quot;EU&quot;, etc.) can be set via
+<span class='object_link'><a href="ExtractJob/Updater.html#location=-instance_method" title="Google::Cloud::Bigquery::ExtractJob::Updater#location= (method)">ExtractJob::Updater#location=</a></span> in a block passed to this method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_table_id'>table_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bigquery-public-data.samples.shakespeare</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_extract_job'>extract_job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_extract_job'>extract_job</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span>
+                                   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://my-bucket/shakespeare.csv</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_extract_job'>extract_job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+<span class='id identifier rubyid_extract_job'>extract_job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The source table from which to extract
+data. This can be a table object; or a string ID as specified by the
+<a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause">Standard SQL Query
+Reference</a>
+(<code>project-name.dataset_id.table_id</code>) or the <a href="https://cloud.google.com/bigquery/query-reference#from">Legacy SQL Query
+Reference</a>
+(<code>project-name:dataset_id.table_id</code>).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extract_url</span>
+      
+      
+        <span class='type'>(<tt>Google::Cloud::Storage::File</tt>, <tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Google Storage file or file URI pattern(s) to which
+BigQuery should extract the table data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>format</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The exported file format. The default value is
+<code>csv</code>.</p>
+
+<p>The following values are supported:</p>
+
+<ul>
+<li><code>csv</code> - CSV</li>
+<li><code>json</code> - <a href="http://jsonlines.org/">Newline-delimited JSON</a></li>
+<li><code>avro</code> - <a href="http://avro.apache.org/">Avro</a></li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>compression</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The compression type to use for exported
+files. Possible values include <code>GZIP</code> and <code>NONE</code>. The default value
+is <code>NONE</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>delimiter</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Delimiter to use between fields in the
+exported data. Default is <code>,</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>header</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to print out a header row in the
+results. Default is <code>true</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>job_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A user-defined ID for the extract job. The ID
+must contain only letters (a-z, A-Z), numbers (0-9), underscores
+(_), or dashes (-). The maximum length is 1,024 characters. If
+<code>job_id</code> is provided, then <code>prefix</code> will not be used.</p>
+
+<p>See <a href="https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid">Generating a job
+ID</a>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prefix</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string, usually human-readable, that will be
+prepended to a generated value to produce a unique job ID. For
+example, the prefix <code>daily_import_job_</code> can be given to generate a
+job ID such as <code>daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh</code>. The
+prefix must contain only letters (a-z, A-Z), numbers (0-9),
+underscores (_), or dashes (-). The maximum length of the entire ID
+is 1,024 characters. If <code>job_id</code> is provided, then <code>prefix</code> will not
+be used.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of user-provided labels associated with
+the job. You can use these to organize and group your jobs. Label
+keys and values can be no longer than 63 characters, can only
+contain lowercase letters, numeric characters, underscores and
+dashes. International characters are allowed. Label values are
+optional. Label keys must start with a letter and each label in the
+list must have a different key. See <a href="https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements">Requirements for
+labels</a>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#job-instance_method" title="Google::Cloud::Bigquery::Project#job (method)">job</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a job configuration object</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>job</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ExtractJob/Updater.html" title="Google::Cloud::Bigquery::ExtractJob::Updater (class)">Google::Cloud::Bigquery::ExtractJob::Updater</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a job
+configuration object for setting additional options.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ExtractJob.html" title="Google::Cloud::Bigquery::ExtractJob (class)">Google::Cloud::Bigquery::ExtractJob</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/bigquery/exporting-data-from-bigquery" target="_parent" title="Exporting Data From BigQuery">Exporting Data From BigQuery</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1361
+1362
+1363
+1364
+1365
+1366
+1367
+1368
+1369
+1370
+1371
+1372
+1373
+1374
+1375
+1376
+1377
+1378</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1361</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_extract_job'>extract_job</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_extract_url'>extract_url</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>compression:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                <span class='label'>delimiter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>header:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>job_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                <span class='label'>labels:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>format:</span> <span class='id identifier rubyid_format'>format</span><span class='comma'>,</span> <span class='label'>compression:</span> <span class='id identifier rubyid_compression'>compression</span><span class='comma'>,</span>
+              <span class='label'>delimiter:</span> <span class='id identifier rubyid_delimiter'>delimiter</span><span class='comma'>,</span> <span class='label'>header:</span> <span class='id identifier rubyid_header'>header</span><span class='comma'>,</span> <span class='label'>job_id:</span> <span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span>
+              <span class='label'>prefix:</span> <span class='id identifier rubyid_prefix'>prefix</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span> <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_table_ref'>table_ref</span> <span class='op'>=</span> <span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_get_table_ref'>get_table_ref</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='label'>default_ref:</span> <span class='id identifier rubyid_project_ref'>project_ref</span>
+  <span class='id identifier rubyid_updater'>updater</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ExtractJob.html" title="Google::Cloud::Bigquery::ExtractJob (class)">ExtractJob</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ExtractJob/Updater.html" title="Google::Cloud::Bigquery::ExtractJob::Updater (class)">Updater</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_options'>from_options</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='id identifier rubyid_table_ref'>table_ref</span><span class='comma'>,</span>
+                                             <span class='id identifier rubyid_extract_url'>extract_url</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span>
+
+  <span class='kw'>yield</span> <span class='id identifier rubyid_updater'>updater</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='id identifier rubyid_job_gapi'>job_gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_updater'>updater</span><span class='period'>.</span><span class='id identifier rubyid_to_gapi'>to_gapi</span>
+  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_extract_table'>extract_table</span> <span class='id identifier rubyid_job_gapi'>job_gapi</span>
+  <span class='const'><span class='object_link'><a href="Job.html" title="Google::Cloud::Bigquery::Job (class)">Job</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1698,16 +2925,16 @@ does not exist.</p>
       <pre class="lines">
 
 
-832
-833
-834
-835
-836
-837
-838</pre>
+1011
+1012
+1013
+1014
+1015
+1016
+1017</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 832</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1011</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_job'>job</span> <span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='label'>location:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1879,15 +3106,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-889
-890
-891
-892
-893
-894</pre>
+1068
+1069
+1070
+1071
+1072
+1073</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 889</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1068</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_jobs'>jobs</span> <span class='label'>all:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2076,15 +3303,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-937
-938
-939
-940
-941
-942</pre>
+1116
+1117
+1118
+1119
+1120
+1121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 937</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_projects'>projects</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2576,30 +3803,30 @@ configuration object for setting additional options for the query.</p>
       <pre class="lines">
 
 
-579
-580
-581
-582
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594
-595
-596
-597
-598
-599</pre>
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 579</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 758</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query'>query</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>external:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='kw'>true</span><span class='comma'>,</span>
           <span class='label'>dataset:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>standard_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -3220,7 +4447,8 @@ keys and values can be no longer than 63 characters, can only
 contain lowercase letters, numeric characters, underscores and
 dashes. International characters are allowed. Label values are
 optional. Label keys must start with a letter and each label in the
-list must have a different key.</p>
+list must have a different key. See <a href="https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements">Requirements for
+labels</a>.</p>
 </div>
       
     </li>
@@ -3321,34 +4549,34 @@ configuration object for setting query options.</p>
       <pre class="lines">
 
 
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382</pre>
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 358</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 537</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_job'>query_job</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>external:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>priority:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>INTERACTIVE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>table:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -3484,14 +4712,14 @@ for the destination table.</p>
       <pre class="lines">
 
 
-1022
-1023
-1024
-1025
-1026</pre>
+1201
+1202
+1203
+1204
+1205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1022</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1201</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_schema'>schema</span>
   <span class='id identifier rubyid_s'>s</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Schema.html" title="Google::Cloud::Bigquery::Schema (class)">Schema</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span>
@@ -3690,12 +4918,12 @@ contain microsecond precision.</p>
       <pre class="lines">
 
 
-985
-986
-987</pre>
+1164
+1165
+1166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 985</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1164</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time'>time</span> <span class='id identifier rubyid_hour'>hour</span><span class='comma'>,</span> <span class='id identifier rubyid_minute'>minute</span><span class='comma'>,</span> <span class='id identifier rubyid_second'>second</span>
   <span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Time.html" title="Google::Cloud::Bigquery::Time (class)">Time</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_hour'>hour</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_minute'>minute</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_second'>second</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>

@@ -2318,17 +2318,17 @@ service, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-1741
-1742
-1743
-1744
 1745
 1746
 1747
-1748</pre>
+1748
+1749
+1750
+1751
+1752</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1741</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1745</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span> <span class='label'>force:</span> <span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_gapi_exists?'>gapi_exists?</span> <span class='kw'>if</span> <span class='id identifier rubyid_force'>force</span>
@@ -2482,14 +2482,14 @@ Optional.</p>
       <pre class="lines">
 
 
-1199
 1200
 1201
 1202
-1203</pre>
+1203
+1204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1199</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1200</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ext'>ext</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="External.html" title="Google::Cloud::Bigquery::External (module)">External</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_urls'>from_urls</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span>
@@ -2710,10 +2710,6 @@ object.</p>
       <pre class="lines">
 
 
-1936
-1937
-1938
-1939
 1940
 1941
 1942
@@ -2745,10 +2741,14 @@ object.</p>
 1968
 1969
 1970
-1971</pre>
+1971
+1972
+1973
+1974
+1975</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1936</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1940</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert'>insert</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span> <span class='id identifier rubyid_rows'>rows</span><span class='comma'>,</span> <span class='label'>insert_ids:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>skip_invalid:</span> <span class='kw'>nil</span><span class='comma'>,</span>
            <span class='label'>ignore_unknown:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>autocreate:</span> <span class='kw'>nil</span>
@@ -2966,10 +2966,6 @@ asynchronous insert</p>
       <pre class="lines">
 
 
-2020
-2021
-2022
-2023
 2024
 2025
 2026
@@ -2979,10 +2975,14 @@ asynchronous insert</p>
 2030
 2031
 2032
-2033</pre>
+2033
+2034
+2035
+2036
+2037</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 2020</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 2024</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_async'>insert_async</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span> <span class='label'>skip_invalid:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>ignore_unknown:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                  <span class='label'>max_bytes:</span> <span class='int'>10000000</span><span class='comma'>,</span> <span class='label'>max_rows:</span> <span class='int'>500</span><span class='comma'>,</span> <span class='label'>interval:</span> <span class='int'>10</span><span class='comma'>,</span>
@@ -3719,10 +3719,6 @@ updater to modify the load job and its schema.</p>
       <pre class="lines">
 
 
-1676
-1677
-1678
-1679
 1680
 1681
 1682
@@ -3739,10 +3735,14 @@ updater to modify the load job and its schema.</p>
 1693
 1694
 1695
-1696</pre>
+1696
+1697
+1698
+1699
+1700</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1676</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1680</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_load'>load</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span> <span class='id identifier rubyid_files'>files</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span>
          <span class='label'>projection_fields:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>jagged_rows:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>quoted_newlines:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -4227,6 +4227,23 @@ file that should be skipped.</p>
   
     <li>
       
+        <span class='name'>dryrun</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If set, don&#39;t actually run this job. Behavior
+is undefined however for non-query jobs and may result in an error.
+Deprecated.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>schema</span>
       
       
@@ -4306,7 +4323,8 @@ keys and values can be no longer than 63 characters, can only
 contain lowercase letters, numeric characters, underscores and
 dashes. International characters are allowed. Label values are
 optional. Label keys must start with a letter and each label in the
-list must have a different key.</p>
+list must have a different key. See <a href="https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements">Requirements for
+labels</a>.</p>
 </div>
       
     </li>
@@ -4377,10 +4395,6 @@ updater to modify the load job and its schema.</p>
       <pre class="lines">
 
 
-1438
-1439
-1440
-1441
 1442
 1443
 1444
@@ -4404,10 +4418,14 @@ updater to modify the load job and its schema.</p>
 1462
 1463
 1464
-1465</pre>
+1465
+1466
+1467
+1468
+1469</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1438</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1442</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_load_job'>load_job</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span> <span class='id identifier rubyid_files'>files</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>projection_fields:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>jagged_rows:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -5201,7 +5219,6 @@ configuration object for setting additional options for the query.</p>
       <pre class="lines">
 
 
-1141
 1142
 1143
 1144
@@ -5210,10 +5227,11 @@ configuration object for setting additional options for the query.</p>
 1147
 1148
 1149
-1150</pre>
+1150
+1151</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1141</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query'>query</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>external:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='kw'>true</span><span class='comma'>,</span>
           <span class='label'>standard_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>legacy_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
@@ -5788,7 +5806,8 @@ keys and values can be no longer than 63 characters, can only
 contain lowercase letters, numeric characters, underscores and
 dashes. International characters are allowed. Label values are
 optional. Label keys must start with a letter and each label in the
-list must have a different key.</p>
+list must have a different key. See <a href="https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements">Requirements for
+labels</a>.</p>
 </div>
       
     </li>
@@ -5893,7 +5912,6 @@ configuration object for setting additional options for the query.</p>
       <pre class="lines">
 
 
-931
 932
 933
 934
@@ -5917,10 +5935,11 @@ configuration object for setting additional options for the query.</p>
 952
 953
 954
-955</pre>
+955
+956</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 931</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 932</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_job'>query_job</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>external:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>priority:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>INTERACTIVE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>table:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -6012,12 +6031,12 @@ object, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-1768
-1769
-1770</pre>
+1772
+1773
+1774</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1768</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1772</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reference?'>reference?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -6090,16 +6109,16 @@ dataset.</p>
       <pre class="lines">
 
 
-1712
-1713
-1714
-1715
 1716
 1717
-1718</pre>
+1718
+1719
+1720
+1721
+1722</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1712</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1716</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -6173,12 +6192,12 @@ representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-1790
-1791
-1792</pre>
+1794
+1795
+1796</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1790</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1794</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource?'>resource?</span>
   <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -6246,12 +6265,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-1837
-1838
-1839</pre>
+1841
+1842
+1843</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1837</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1841</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_full?'>resource_full?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Apis</span><span class='op'>::</span><span class='const'>BigqueryV2</span><span class='op'>::</span><span class='const'>Dataset</span>
@@ -6326,12 +6345,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-1817
-1818
-1819</pre>
+1821
+1822
+1823</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1817</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset.rb', line 1821</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_partial?'>resource_partial?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Apis</span><span class='op'>::</span><span class='const'>BigqueryV2</span><span class='op'>::</span><span class='const'>DatasetList</span><span class='op'>::</span><span class='const'>Dataset</span>

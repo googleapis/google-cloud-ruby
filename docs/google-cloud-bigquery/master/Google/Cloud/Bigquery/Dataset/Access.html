@@ -1105,12 +1105,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-348
-349
-350</pre>
+350
+351
+352</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 348</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 350</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_owner_domain'>add_owner_domain</span> <span class='id identifier rubyid_domain'>domain</span>
   <span class='id identifier rubyid_add_access_role_scope_value'>add_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:domain</span><span class='comma'>,</span> <span class='id identifier rubyid_domain'>domain</span>
@@ -1179,12 +1179,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-328
-329
-330</pre>
+330
+331
+332</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 328</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 330</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_owner_group'>add_owner_group</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_add_access_role_scope_value'>add_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:group</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -1254,12 +1254,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-368
-369
-370</pre>
+370
+371
+372</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 368</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 370</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_owner_special'>add_owner_special</span> <span class='id identifier rubyid_group'>group</span>
   <span class='id identifier rubyid_add_access_role_scope_value'>add_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:special</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span>
@@ -1328,12 +1328,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-309
-310
-311</pre>
+311
+312
+313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 309</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 311</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_owner_user'>add_owner_user</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_add_access_role_scope_value'>add_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:user</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -1689,10 +1689,12 @@ domain</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>A table object
-or a string identifier as specified by the <a href="https://cloud.google.com/bigquery/query-reference#from">Query
-Reference</a>:
-<code>project_name:datasetId.tableId</code>.</p>
+        <div class='inline'><p>A table object,
+or a string identifier as specified by the <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause">Standard SQL Query
+Reference</a>
+(<code>project-name.dataset_id.table_id</code>) or the <a href="https://cloud.google.com/bigquery/query-reference#from">Legacy SQL Query
+Reference</a>
+(<code>project-name:dataset_id.table_id</code>).</p>
 </div>
       
     </li>
@@ -1706,12 +1708,12 @@ Reference</a>:
       <pre class="lines">
 
 
-212
-213
-214</pre>
+214
+215
+216</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 212</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 214</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_reader_view'>add_reader_view</span> <span class='id identifier rubyid_view'>view</span>
   <span class='id identifier rubyid_add_access_view'>add_access_view</span> <span class='id identifier rubyid_view'>view</span>
@@ -1781,12 +1783,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-270
-271
-272</pre>
+272
+273
+274</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 270</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 272</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_writer_domain'>add_writer_domain</span> <span class='id identifier rubyid_domain'>domain</span>
   <span class='id identifier rubyid_add_access_role_scope_value'>add_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:domain</span><span class='comma'>,</span> <span class='id identifier rubyid_domain'>domain</span>
@@ -1855,12 +1857,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-250
-251
-252</pre>
+252
+253
+254</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 250</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 252</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_writer_group'>add_writer_group</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_add_access_role_scope_value'>add_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:group</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -1930,12 +1932,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-290
-291
-292</pre>
+292
+293
+294</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 292</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_writer_special'>add_writer_special</span> <span class='id identifier rubyid_group'>group</span>
   <span class='id identifier rubyid_add_access_role_scope_value'>add_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:special</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span>
@@ -2004,12 +2006,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-231
-232
-233</pre>
+233
+234
+235</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 231</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 233</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_writer_user'>add_writer_user</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_add_access_role_scope_value'>add_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:user</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -2091,12 +2093,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-854
-855
-856</pre>
+860
+861
+862</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 854</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 860</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_owner_domain?'>owner_domain?</span> <span class='id identifier rubyid_domain'>domain</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:domain</span><span class='comma'>,</span> <span class='id identifier rubyid_domain'>domain</span>
@@ -2177,12 +2179,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-835
-836
-837</pre>
+841
+842
+843</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 835</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 841</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_owner_group?'>owner_group?</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:group</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -2264,12 +2266,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-873
-874
-875</pre>
+879
+880
+881</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 873</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 879</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_owner_special?'>owner_special?</span> <span class='id identifier rubyid_group'>group</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:special</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span>
@@ -2350,12 +2352,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-817
-818
-819</pre>
+823
+824
+825</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 817</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 823</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_owner_user?'>owner_user?</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:user</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -2437,12 +2439,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-682
-683
-684</pre>
+686
+687
+688</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 682</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 686</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reader_domain?'>reader_domain?</span> <span class='id identifier rubyid_domain'>domain</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:reader</span><span class='comma'>,</span> <span class='symbol'>:domain</span><span class='comma'>,</span> <span class='id identifier rubyid_domain'>domain</span>
@@ -2523,12 +2525,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-663
-664
-665</pre>
+667
+668
+669</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 663</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 667</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reader_group?'>reader_group?</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:reader</span><span class='comma'>,</span> <span class='symbol'>:group</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -2610,12 +2612,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-701
-702
-703</pre>
+705
+706
+707</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 701</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 705</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reader_special?'>reader_special?</span> <span class='id identifier rubyid_group'>group</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:reader</span><span class='comma'>,</span> <span class='symbol'>:special</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span>
@@ -2696,12 +2698,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-645
-646
-647</pre>
+649
+650
+651</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 645</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 649</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reader_user?'>reader_user?</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:reader</span><span class='comma'>,</span> <span class='symbol'>:user</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -2758,10 +2760,12 @@ domain</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>A table object
-or a string identifier as specified by the <a href="https://cloud.google.com/bigquery/query-reference#from">Query
-Reference</a>:
-<code>project_name:datasetId.tableId</code>.</p>
+        <div class='inline'><p>A table object,
+or a string identifier as specified by the <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause">Standard SQL Query
+Reference</a>
+(<code>project-name.dataset_id.table_id</code>) or the <a href="https://cloud.google.com/bigquery/query-reference#from">Legacy SQL Query
+Reference</a>
+(<code>project-name:dataset_id.table_id</code>).</p>
 </div>
       
     </li>
@@ -2788,12 +2792,12 @@ Reference</a>:
       <pre class="lines">
 
 
-725
-726
-727</pre>
+731
+732
+733</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 725</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 731</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reader_view?'>reader_view?</span> <span class='id identifier rubyid_view'>view</span>
   <span class='id identifier rubyid_lookup_access_view'>lookup_access_view</span> <span class='id identifier rubyid_view'>view</span>
@@ -2863,12 +2867,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-607
-608
-609</pre>
+611
+612
+613</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 607</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 611</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_owner_domain'>remove_owner_domain</span> <span class='id identifier rubyid_domain'>domain</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:domain</span><span class='comma'>,</span> <span class='id identifier rubyid_domain'>domain</span>
@@ -2937,12 +2941,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-587
-588
-589</pre>
+591
+592
+593</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 587</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 591</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_owner_group'>remove_owner_group</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:group</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -3012,12 +3016,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-627
-628
-629</pre>
+631
+632
+633</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 627</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 631</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_owner_special'>remove_owner_special</span> <span class='id identifier rubyid_group'>group</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:special</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span>
@@ -3086,12 +3090,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-568
-569
-570</pre>
+572
+573
+574</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 568</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 572</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_owner_user'>remove_owner_user</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:owner</span><span class='comma'>,</span> <span class='symbol'>:user</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -3161,12 +3165,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-426
-427
-428</pre>
+428
+429
+430</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 426</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 428</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_reader_domain'>remove_reader_domain</span> <span class='id identifier rubyid_domain'>domain</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:reader</span><span class='comma'>,</span> <span class='symbol'>:domain</span><span class='comma'>,</span> <span class='id identifier rubyid_domain'>domain</span>
@@ -3235,12 +3239,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-406
-407
-408</pre>
+408
+409
+410</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 406</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 408</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_reader_group'>remove_reader_group</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:reader</span><span class='comma'>,</span> <span class='symbol'>:group</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -3310,12 +3314,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-446
-447
-448</pre>
+448
+449
+450</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 446</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 448</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_reader_special'>remove_reader_special</span> <span class='id identifier rubyid_group'>group</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:reader</span><span class='comma'>,</span> <span class='symbol'>:special</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span>
@@ -3384,12 +3388,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-387
-388
-389</pre>
+389
+390
+391</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 387</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 389</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_reader_user'>remove_reader_user</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:reader</span><span class='comma'>,</span> <span class='symbol'>:user</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -3447,10 +3451,12 @@ domain</a>.</p>
       
       
         &mdash;
-        <div class='inline'><p>A table object
-or a string identifier as specified by the <a href="https://cloud.google.com/bigquery/query-reference#from">Query
-Reference</a>:
-<code>project_name:datasetId.tableId</code>.</p>
+        <div class='inline'><p>A table object,
+or a string identifier as specified by the <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause">Standard SQL Query
+Reference</a>
+(<code>project-name.dataset_id.table_id</code>) or the <a href="https://cloud.google.com/bigquery/query-reference#from">Legacy SQL Query
+Reference</a>
+(<code>project-name:dataset_id.table_id</code>).</p>
 </div>
       
     </li>
@@ -3464,12 +3470,12 @@ Reference</a>:
       <pre class="lines">
 
 
-471
-472
-473</pre>
+475
+476
+477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 471</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 475</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_reader_view'>remove_reader_view</span> <span class='id identifier rubyid_view'>view</span>
   <span class='id identifier rubyid_remove_access_view'>remove_access_view</span> <span class='id identifier rubyid_view'>view</span>
@@ -3539,12 +3545,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-529
-530
-531</pre>
+533
+534
+535</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 529</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 533</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_writer_domain'>remove_writer_domain</span> <span class='id identifier rubyid_domain'>domain</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:domain</span><span class='comma'>,</span> <span class='id identifier rubyid_domain'>domain</span>
@@ -3613,12 +3619,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-509
-510
-511</pre>
+513
+514
+515</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 509</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 513</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_writer_group'>remove_writer_group</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:group</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -3688,12 +3694,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-549
-550
-551</pre>
+553
+554
+555</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 549</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 553</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_writer_special'>remove_writer_special</span> <span class='id identifier rubyid_group'>group</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:special</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span>
@@ -3762,12 +3768,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-490
-491
-492</pre>
+494
+495
+496</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 490</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 494</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_writer_user'>remove_writer_user</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_remove_access_role_scope_value'>remove_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:user</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -3849,12 +3855,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-780
-781
-782</pre>
+786
+787
+788</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 780</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 786</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_writer_domain?'>writer_domain?</span> <span class='id identifier rubyid_domain'>domain</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:domain</span><span class='comma'>,</span> <span class='id identifier rubyid_domain'>domain</span>
@@ -3935,12 +3941,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-761
-762
-763</pre>
+767
+768
+769</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 761</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 767</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_writer_group?'>writer_group?</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:group</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
@@ -4022,12 +4028,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-799
-800
-801</pre>
+805
+806
+807</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 799</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 805</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_writer_special?'>writer_special?</span> <span class='id identifier rubyid_group'>group</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:special</span><span class='comma'>,</span> <span class='id identifier rubyid_group'>group</span>
@@ -4108,12 +4114,12 @@ domain</a>.</p>
       <pre class="lines">
 
 
-743
-744
-745</pre>
+749
+750
+751</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 743</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/dataset/access.rb', line 749</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_writer_user?'>writer_user?</span> <span class='id identifier rubyid_email'>email</span>
   <span class='id identifier rubyid_lookup_access_role_scope_value'>lookup_access_role_scope_value</span> <span class='symbol'>:writer</span><span class='comma'>,</span> <span class='symbol'>:user</span><span class='comma'>,</span> <span class='id identifier rubyid_email'>email</span>
