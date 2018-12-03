@@ -102,19 +102,19 @@ describe Google::Cloud::Bigquery, :bigquery do
     assert fresh.access.writer_special? :all
   end
 
-  it "should run an query" do
+  it "should run a query" do
     rows = bigquery.query publicdata_query
     rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 100
   end
 
-  it "should run an query without legacy SQL syntax" do
+  it "should run a query without legacy SQL syntax" do
     rows = bigquery.query publicdata_query, legacy_sql: false
     rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 100
   end
 
-  it "should run an query with standard SQL syntax" do
+  it "should run a query with standard SQL syntax" do
     rows = bigquery.query publicdata_query, standard_sql: true
     rows.class.must_equal Google::Cloud::Bigquery::Data
     rows.count.must_equal 100
@@ -188,5 +188,30 @@ describe Google::Cloud::Bigquery, :bigquery do
         ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
       end
     end
+  end
+
+  it "extracts a readonly table to a GCS url with extract" do
+    public_table_id = "bigquery-public-data.samples.shakespeare"
+
+    Tempfile.open "empty_extract_file.csv" do |tmp|
+      dest_file_name = random_file_destination_name
+      extract_url = "gs://#{bucket.name}/#{dest_file_name}"
+      result = bigquery.extract public_table_id, extract_url do |j|
+        j.location = "US"
+      end
+      result.must_equal true
+
+      extract_file = bucket.file dest_file_name
+      downloaded_file = extract_file.download tmp.path
+      downloaded_file.size.must_be :>, 0
+    end
+  end
+
+  it "copies a readonly table to another table with copy" do
+    public_table_id = "bigquery-public-data.samples.shakespeare"
+    result = bigquery.copy public_table_id, "#{dataset_id}.shakespeare_copy", create: :needed, write: :empty do |j|
+      j.location = "US"
+    end
+    result.must_equal true
   end
 end

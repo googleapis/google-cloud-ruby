@@ -371,9 +371,10 @@ module Google
         ##
         # The combined Project ID, Dataset ID, and Table ID for this table, in
         # the format specified by the [Legacy SQL Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from):
-        # `project_name:datasetId.tableId`. To use this value in queries see
-        # {#query_id}.
+        # Reference](https://cloud.google.com/bigquery/query-reference#from)
+        # (`project-name:dataset_id.table_id`). This is useful for referencing
+        # tables in other projects and datasets. To use this value in queries
+        # see {#query_id}.
         #
         # @return [String, nil] The combined ID, or `nil` if the object is a
         #   reference (see {#reference?}).
@@ -386,10 +387,9 @@ module Google
         end
 
         ##
-        # The value returned by {#id}, wrapped in square brackets if the Project
-        # ID contains dashes, as specified by the [Query
-        # Reference](https://cloud.google.com/bigquery/query-reference#from).
-        # Useful in queries.
+        # The value returned by {#id}, wrapped in backticks (Standard SQL) or s
+        # quare brackets (Legacy SQL) to accommodate project IDs
+        # containing dashes. Useful in queries.
         #
         # @param [Boolean] standard_sql Specifies whether to use BigQuery's
         #   [standard
@@ -1191,9 +1191,11 @@ module Google
         #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
-        #   the [Query
-        #   Reference](https://cloud.google.com/bigquery/query-reference#from):
-        #   `project_name:datasetId.tableId`. This is useful for referencing
+        #   the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`). This is useful for referencing
         #   tables in other projects and datasets.
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.
@@ -1212,6 +1214,9 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
         # @param [String] job_id A user-defined ID for the copy job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If
@@ -1233,7 +1238,8 @@ module Google
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key.
+        #   list must have a different key. See [Requirements for
+        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1259,6 +1265,9 @@ module Google
         #
         #   copy_job = table.copy_job "other-project:other_dataset.other_table"
         #
+        #   copy_job.wait_until_done!
+        #   copy_job.done? #=> true
+        #
         # @!group Data
         #
         def copy_job destination_table, create: nil, write: nil, dryrun: nil,
@@ -1269,7 +1278,7 @@ module Google
           updater = CopyJob::Updater.from_options(
             service,
             table_ref,
-            get_table_ref(destination_table),
+            Service.get_table_ref(destination_table, default_ref: table_ref),
             options
           )
           updater.location = location if location # may be table reference
@@ -1295,9 +1304,11 @@ module Google
         #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
-        #   the [Query
-        #   Reference](https://cloud.google.com/bigquery/query-reference#from):
-        #   `project_name:datasetId.tableId`. This is useful for referencing
+        #   the [Standard SQL Query
+        #   Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from-clause)
+        #   (`project-name.dataset_id.table_id`) or the [Legacy SQL Query
+        #   Reference](https://cloud.google.com/bigquery/query-reference#from)
+        #   (`project-name:dataset_id.table_id`). This is useful for referencing
         #   tables in other projects and datasets.
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.
@@ -1385,6 +1396,9 @@ module Google
         #   exported data. Default is <code>,</code>.
         # @param [Boolean] header Whether to print out a header row in the
         #   results. Default is `true`.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
         # @param [String] job_id A user-defined ID for the extract job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If
@@ -1406,7 +1420,8 @@ module Google
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key.
+        #   list must have a different key. See [Requirements for
+        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1421,7 +1436,9 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   extract_job = table.extract_job "gs://my-bucket/file-name.json",
-        #                               format: "json"
+        #                                   format: "json"
+        #   extract_job.wait_until_done!
+        #   extract_job.done? #=> true
         #
         # @!group Data
         #
@@ -1622,6 +1639,9 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
         # @param [String] job_id A user-defined ID for the load job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If
@@ -1643,7 +1663,8 @@ module Google
         #   contain lowercase letters, numeric characters, underscores and
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
-        #   list must have a different key.
+        #   list must have a different key. See [Requirements for
+        #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
         # @yield [load_job] a block for setting the load job
         # @yieldparam [LoadJob] load_job the load job object to be updated
         #
@@ -2472,16 +2493,6 @@ module Google
               resource.inline_code = uri_or_code
             end
             resource
-          end
-        end
-
-        private
-
-        def get_table_ref table
-          if table.respond_to? :table_ref
-            table.table_ref
-          else
-            Service.table_ref_from_s table, table_ref
           end
         end
 

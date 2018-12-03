@@ -489,6 +489,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Project#copy" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_destination_table"]
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
+    end
+  end
+
   # Google::Cloud::Bigquery::Project#create_dataset
   # Google::Cloud::Bigquery::Project#create_dataset@A name and description can be provided:
   # Google::Cloud::Bigquery::Project#create_dataset@Access rules can be provided with the `access` option:
@@ -567,6 +575,14 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
       mock.expect :insert_table, table_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Table]
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Project#extract" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
     end
   end

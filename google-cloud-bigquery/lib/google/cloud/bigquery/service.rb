@@ -324,14 +324,26 @@ module Google
           end
         end
 
+        def self.get_table_ref table, default_ref: nil
+          if table.respond_to? :table_ref
+            table.table_ref
+          else
+            table_ref_from_s table, default_ref: default_ref
+          end
+        end
+
         ##
         # Extracts at least `tbl` group, and possibly `dts` and `prj` groups,
         # from strings in the formats: "my_table", "my_dataset.my_table", or
         # "my-project:my_dataset.my_table". Then merges project_id and
-        # dataset_id from the default table if they are missing.
-        def self.table_ref_from_s str, default_table_ref
+        # dataset_id from the default table ref if they are missing.
+        #
+        # The regex matches both Standard SQL
+        # ("bigquery-public-data.samples.shakespeare") and Legacy SQL
+        # ("bigquery-public-data:samples.shakespeare").
+        def self.table_ref_from_s str, default_ref: {}
           str = str.to_s
-          m = /\A(((?<prj>\S*):)?(?<dts>\S*)\.)?(?<tbl>\S*)\z/.match str
+          m = /\A(((?<prj>\S*)(:|\.))?(?<dts>\S*)\.)?(?<tbl>\S*)\z/.match str
           unless m
             raise ArgumentError, "unable to identify table from #{str.inspect}"
           end
@@ -340,8 +352,18 @@ module Google
             dataset_id: m["dts"],
             table_id:   m["tbl"]
           }.delete_if { |_, v| v.nil? }
-          new_table_ref_hash = default_table_ref.to_h.merge str_table_ref_hash
-          Google::Apis::BigqueryV2::TableReference.new new_table_ref_hash
+          str_table_ref_hash = default_ref.to_h.merge str_table_ref_hash
+          ref = Google::Apis::BigqueryV2::TableReference.new str_table_ref_hash
+          validate_table_ref ref
+          ref
+        end
+
+        def self.validate_table_ref table_ref
+          %i[project_id dataset_id table_id].each do |f|
+            if table_ref.send(f).nil?
+              raise ArgumentError, "TableReference is missing #{f}"
+            end
+          end
         end
 
         ##

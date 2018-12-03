@@ -1,4 +1,4 @@
-# Copyright 2015 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
+describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
   let(:extract_bucket_gapi) {  Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
@@ -35,213 +35,185 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
                                        description }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
                                                   bigquery.service }
-  let(:labels) { { "foo" => "bar" } }
+  let(:table_id_standard_sql) { "#{table.project_id}.#{table.dataset_id}.#{table.table_id}" }
+  let(:table_id_legacy_sql) { "#{table.project_id}:#{table.dataset_id}.#{table.table_id}" }
 
-  it "can extract itself to a storage file" do
+  it "can extract a table to a storage file using a Standard SQL table id" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job extract_file
+    result = bigquery.extract table_id_standard_sql, extract_file
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    result.must_equal true
   end
 
-  it "can extract itself to a storage url" do
+  it "can extract a table to a storage file using a Legacy SQL table id" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job extract_url
+    result = bigquery.extract table_id_legacy_sql, extract_file
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    result.must_equal true
   end
 
-  it "can extract itself as a dryrun (deprecated)" do
+  it "can extract a table to a storage file" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
-    job_gapi.configuration.dry_run = true
+    job_gapi = extract_job_gapi table, extract_file, location: nil
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job extract_url, dryrun: true
+    result = bigquery.extract table, extract_file
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    result.must_equal true
   end
 
-  it "can extract itself and determine the csv format" do
+  it "can extract a table to a storage url" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
+
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    result = bigquery.extract table, extract_url
+    mock.verify
+
+    result.must_equal true
+  end
+
+  it "can extract a table and determine the csv format" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "CSV"
     job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".csv"]
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job "#{extract_url}.csv"
+    result = bigquery.extract table, "#{extract_url}.csv"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    result.must_equal true
   end
 
-  it "can extract itself and specify the csv format" do
+  it "can extract a table and specify the csv format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "CSV"
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job extract_url, format: :csv
+    result = bigquery.extract table, extract_url, format: :csv
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    result.must_equal true
   end
 
-  it "can extract itself and specify the csv format and options" do
+  it "can extract a table and specify the csv format and options" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "CSV"
     job_gapi.configuration.extract.compression = "GZIP"
     job_gapi.configuration.extract.field_delimiter = "\t"
     job_gapi.configuration.extract.print_header = false
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
+    result = bigquery.extract table, extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    result.must_equal true
   end
 
-  it "can extract itself and determine the json format" do
+  it "can extract a table and determine the json format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "NEWLINE_DELIMITED_JSON"
     job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".json"]
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job "#{extract_url}.json"
+    result = bigquery.extract table, "#{extract_url}.json"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    result.must_equal true
   end
 
-  it "can extract itself and specify the json format" do
+  it "can extract a table and specify the json format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "NEWLINE_DELIMITED_JSON"
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job extract_url, format: :json
+    result = bigquery.extract table, extract_url, format: :json
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    result.must_equal true
   end
 
-  it "can extract itself and determine the avro format" do
+  it "can extract a table and determine the avro format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "AVRO"
     job_gapi.configuration.extract.destination_uris = [job_gapi.configuration.extract.destination_uris.first + ".avro"]
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job "#{extract_url}.avro"
+    result = bigquery.extract table, "#{extract_url}.avro"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    result.must_equal true
   end
 
-  it "can extract itself and specify the avro format" do
+  it "can extract a table and specify the avro format" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi = extract_job_gapi table, extract_file, location: nil
     job_gapi.configuration.extract.destination_format = "AVRO"
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    job = table.extract_job extract_url, format: :avro
+    result = bigquery.extract table, extract_url, format: :avro
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-  end
-
-  it "can extract itself with job_id option" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-    job_id = "my_test_job_id"
-    job_gapi = extract_job_gapi table, extract_file, job_id: job_id
-
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = table.extract_job extract_url, job_id: job_id
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
-  end
-
-  it "can extract itself with prefix option" do
-    generated_id = "9876543210"
-    prefix = "my_test_job_prefix_"
-    job_id = prefix + generated_id
-
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi table, extract_file, job_id: job_id
-
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = table.extract_job extract_url, prefix: prefix
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
-  end
-
-  it "can extract itself with job_id option if both job_id and prefix options are provided" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-    job_id = "my_test_job_id"
-    job_gapi = extract_job_gapi table, extract_file, job_id: job_id
-
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = table.extract_job extract_url, job_id: job_id, prefix: "IGNORED"
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
-  end
-
-  it "can extract itself with the job labels option" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
-    job_gapi.configuration.labels = labels
-
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = table.extract_job extract_file, labels: labels
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.labels.must_equal labels
+    result.must_equal true
   end
 
   # Borrowed from MockStorage, extract to a common module?
