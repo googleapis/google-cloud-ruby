@@ -90,14 +90,25 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
       end
     end
 
-    it "calls logger.add_request_info to track trace_id and log_name" do
+    it "calls logger.add_request_info to track trace_id" do
       stubbed_add_request_info = ->(args) {
         args[:trace_id].must_equal trace_id
-        args[:log_name].must_equal "ruby_health_check_log"
         args[:env].must_equal rack_env
       }
       logger.stub :add_request_info, stubbed_add_request_info do
         middleware.call rack_env
+      end
+    end
+
+    it "calls logger.add_request_info to log_name" do
+      ["/healthz", "/_ah/health"].each do |path|
+        rack_env = { "PATH_INFO" => path }
+        stubbed_add_request_info = ->(args) {
+          args[:log_name].must_equal "ruby_health_check_log"
+        }
+        logger.stub :add_request_info, stubbed_add_request_info do
+          middleware.call rack_env
+        end
       end
     end
 

@@ -28,7 +28,8 @@ module Google
         # A default value for the log_name_map argument. Directs health check
         # logs to a separate log name so they don't spam the main log.
         DEFAULT_LOG_NAME_MAP =
-          { "/_ah/health" => "ruby_health_check_log" }.freeze
+          { "/_ah/health" => "ruby_health_check_log",
+            "/healthz" => "ruby_health_check_log" }.freeze
 
         ##
         # The Google::Cloud::Logging::Logger instance
