@@ -311,7 +311,7 @@ module Google
         # Batches that cannot be delivered immediately are queued. When the
         # queue is full new batch requests will raise errors that can be
         # consumed using the {AsyncWriter#on_error} callback. This provides back
-        # pressure in case the writer keep up with requests.
+        # pressure in case the writer cannot keep up with requests.
         #
         # This object is thread-safe; it may accept write requests from
         # multiple threads simultaneously, and will serialize them when
