@@ -126,7 +126,8 @@ logs to a separate log name so they don&#39;t spam the main log.</p>
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/_ah/health</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby_health_check_log</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+        <dd><pre class="code"><span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/_ah/health</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby_health_check_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/healthz</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby_health_check_log</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
     </dl>
   
@@ -345,7 +346,6 @@ for the prefered way to set configuration parameters.</p>
       <pre class="lines">
 
 
-54
 55
 56
 57
@@ -362,10 +362,11 @@ for the prefered way to set configuration parameters.</p>
 68
 69
 70
-71</pre>
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_app'>app</span><span class='comma'>,</span> <span class='label'>logger:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span>
   <span class='ivar'>@app</span> <span class='op'>=</span> <span class='id identifier rubyid_app'>app</span>
@@ -422,12 +423,12 @@ for the prefered way to set configuration parameters.</p>
       <pre class="lines">
 
 
-35
 36
-37</pre>
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span>
   <span class='ivar'>@logger</span>
@@ -589,7 +590,6 @@ type and labels</p>
       <pre class="lines">
 
 
-177
 178
 179
 180
@@ -598,10 +598,11 @@ type and labels</p>
 183
 184
 185
-186</pre>
+186
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 177</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_build_monitored_resource'>build_monitored_resource</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_labels'>labels</span>
@@ -689,7 +690,6 @@ trace_id. Untrack the trace_id with this thread upon exiting.</p>
       <pre class="lines">
 
 
-84
 85
 86
 87
@@ -700,10 +700,11 @@ trace_id. Untrack the trace_id with this thread upon exiting.</p>
 92
 93
 94
-95</pre>
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span> <span class='id identifier rubyid_env'>env</span>
   <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rack.logger</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_logger'>logger</span>
