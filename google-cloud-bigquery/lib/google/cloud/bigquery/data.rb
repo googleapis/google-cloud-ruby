@@ -150,6 +150,7 @@ module Google
         #   field.required? #=> true
         #
         def schema
+          return nil unless @table_gapi
           Schema.from_gapi(@table_gapi.schema).freeze
         end
 

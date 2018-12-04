@@ -344,6 +344,10 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - A 'duplicate' error is returned in the job result if the
         #     table exists and contains data.
+        # @param [Boolean] dry_run If set to true, BigQuery doesn't run the job.
+        #   Instead, if the query is valid, BigQuery returns statistics about
+        #   the job such as how many bytes would be processed. If the query is
+        #   invalid, an error returns. The default value is false.
         # @param [Dataset, String] dataset The default dataset to use for
         #   unqualified table names in the query. Optional.
         # @param [String] project Specifies the default projectId to assume for
@@ -536,14 +540,14 @@ module Google
         #
         def query_job query, params: nil, external: nil,
                       priority: "INTERACTIVE", cache: true, table: nil,
-                      create: nil, write: nil, dataset: nil, project: nil,
-                      standard_sql: nil, legacy_sql: nil, large_results: nil,
-                      flatten: nil, maximum_billing_tier: nil,
-                      maximum_bytes_billed: nil, job_id: nil, prefix: nil,
-                      labels: nil, udfs: nil
+                      create: nil, write: nil, dry_run: nil, dataset: nil,
+                      project: nil, standard_sql: nil, legacy_sql: nil,
+                      large_results: nil, flatten: nil,
+                      maximum_billing_tier: nil, maximum_bytes_billed: nil,
+                      job_id: nil, prefix: nil, labels: nil, udfs: nil
           ensure_service!
           options = { priority: priority, cache: cache, table: table,
-                      create: create, write: write,
+                      create: create, write: write, dry_run: dry_run,
                       large_results: large_results, flatten: flatten,
                       dataset: dataset, project: (project || self.project),
                       legacy_sql: legacy_sql, standard_sql: standard_sql,

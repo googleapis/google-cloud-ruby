@@ -149,6 +149,24 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.ddl_target_table.must_be :nil?
   end
 
+  it "should run a query job with dry_run flag" do
+    job = bigquery.query_job publicdata_query, dry_run: true
+    job.dry_run?.must_equal true
+
+    job.wait_until_done!
+    data = job.data
+    data.count.must_equal 0
+    data.next?.must_equal false
+    data.total.must_be :nil?
+    data.schema.must_be :nil?
+    data.statement_type.must_equal "SELECT"
+
+    # @gapi.statistics.query
+    job.cache_hit?.must_equal false
+    job.bytes_processed.must_be :>, 0 # 155625782
+    job.query_plan.must_be :nil?
+  end
+
   it "should run a query job with job labels" do
     job = bigquery.query_job publicdata_query, labels: labels
     job.must_be_kind_of Google::Cloud::Bigquery::Job

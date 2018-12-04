@@ -560,8 +560,8 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210", location: "US"
-    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query, job_id: job_id, location: location)
+  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210", location: "US", dry_run: nil
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query, job_id: job_id, location: location, dry_run: dry_run)
     gapi.configuration.query.parameter_mode = parameter_mode if parameter_mode
     gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: dataset, project_id: project
@@ -569,7 +569,7 @@ class MockBigquery < Minitest::Spec
     gapi
   end
 
-  def query_job_json query, job_id: "job_9876543210", location: "US"
+  def query_job_json query, job_id: "job_9876543210", location: "US", dry_run: nil
     hash = {
       "jobReference" => {
         "projectId" => project,
@@ -590,7 +590,8 @@ class MockBigquery < Minitest::Spec
           "maximumBillingTier" => nil,
           "maximumBytesBilled" => nil,
           "userDefinedFunctionResources" => []
-        }
+        },
+        "dryRun" => dry_run
       }
     }
     hash["jobReference"]["location"] = location if location
