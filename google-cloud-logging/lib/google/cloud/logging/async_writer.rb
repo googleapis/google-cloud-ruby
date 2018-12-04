@@ -82,7 +82,7 @@ module Google
 
           @cond = new_cond
 
-          # Make sure all buffered messages are send when process exits.
+          # Make sure all buffered messages are sent when process exits.
           at_exit { stop }
 
           # init MonitorMixin
