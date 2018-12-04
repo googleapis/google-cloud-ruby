@@ -419,7 +419,9 @@ module Google
         def publish_batch_async batch
           batch.values.each do |write_log_entries_request|
             begin
-              write_entries_future write_log_entries_request
+              Concurrent::Future.execute(executor: @thread_pool) do
+                write_entries_with_request write_log_entries_request
+              end
             rescue Concurrent::RejectedExecutionError => e
               async_error = AsyncWriterError.new(
                 "Error writing entries: #{e.message}",
@@ -432,26 +434,22 @@ module Google
           end
         end
 
-        def write_entries_future write_log_entries_request
-          Concurrent::Future.execute(executor: @thread_pool) do
-            begin
-              logging.write_entries(
-                write_log_entries_request.entries,
-                log_name: write_log_entries_request.log_name,
-                resource: write_log_entries_request.resource,
-                labels: write_log_entries_request.labels,
-                partial_success: partial_success
-              )
-            rescue StandardError => e
-              write_error = AsyncWriteEntriesError.new(
-                "Error writing entries: #{e.message}",
-                write_log_entries_request.entries
-              )
-              # Manually set backtrace so we don't have to raise
-              write_error.set_backtrace backtrace
-              error! write_error
-            end
-          end
+        def write_entries_with_request write_log_entries_request
+          logging.write_entries(
+            write_log_entries_request.entries,
+            log_name: write_log_entries_request.log_name,
+            resource: write_log_entries_request.resource,
+            labels: write_log_entries_request.labels,
+            partial_success: partial_success
+          )
+        rescue StandardError => e
+          write_error = AsyncWriteEntriesError.new(
+            "Error writing entries: #{e.message}",
+            write_log_entries_request.entries
+          )
+          # Manually set backtrace so we don't have to raise
+          write_error.set_backtrace backtrace
+          error! write_error
         end
 
         ##
