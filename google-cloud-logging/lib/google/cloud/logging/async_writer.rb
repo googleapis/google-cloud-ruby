@@ -313,6 +313,7 @@ module Google
         #
         # @example
         #   require "google/cloud/logging"
+        #   require "google/cloud/error_reporting"
         #
         #   logging = Google::Cloud::Logging.new
         #
@@ -324,8 +325,8 @@ module Google
         #
         #   # Register to be notified when unhandled errors occur.
         #   async.on_error do |error|
-        #     # log error
-        #     puts error
+        #     # error can be a AsyncWriterError or AsyncWriteEntriesError
+        #     Google::Cloud::ErrorReporting.report error
         #   end
         #
         #   logger = async.logger "my_app_log", resource, env: :production
