@@ -146,7 +146,7 @@ module Google
 
             publish_batch! if @batch.ready?
 
-            @cond.signal
+            @cond.broadcast
           end
           self
         end
@@ -209,7 +209,7 @@ module Google
 
             @stopped = true
             publish_batch!
-            @cond.signal
+            @cond.broadcast
             @thread_pool.shutdown if @thread_pool
           end
 
@@ -272,7 +272,7 @@ module Google
         def flush
           synchronize do
             publish_batch!
-            @cond.signal
+            @cond.broadcast
           end
 
           self
