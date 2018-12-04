@@ -27,7 +27,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
   let(:labels1) { { "env" => "production" } }
   let(:labels2) { { "env" => "staging" } }
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
-  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging, Google::Cloud::Logging::AsyncWriter::DEFAULT_MAX_QUEUE_SIZE, true }
+  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging, partial_success: true }
 
   def entries payload, labels = labels1
     Array(payload).map { |str|
@@ -118,9 +118,10 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       labels: labels2
     )
     async_writer.resume
+    async_writer.stop
 
     wait_result = wait_until_true {
-      async_writer.instance_variable_get(:@queue).size == 0
+      async_writer.instance_variable_get(:@batch).nil?
     }
 
     wait_result.must_equal :completed
