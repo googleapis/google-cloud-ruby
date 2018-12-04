@@ -417,15 +417,15 @@ module Google
         end
 
         def publish_batch_async batch
-          batch.values.each do |write_log_entries_request|
+          batch.values.each do |request|
             begin
-              Concurrent::Future.execute(executor: @thread_pool) do
-                write_entries_with_request write_log_entries_request
+              Concurrent::Promises.future_on(@thread_pool, request) do |req|
+                write_entries_with_request req
               end
             rescue Concurrent::RejectedExecutionError => e
               async_error = AsyncWriterError.new(
                 "Error writing entries: #{e.message}",
-                write_log_entries_request.entries
+                request.entries
               )
               # Manually set backtrace so we don't have to raise
               async_error.set_backtrace backtrace
