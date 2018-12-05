@@ -145,6 +145,21 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job.job_id.must_equal job_id
   end
 
+  it "queries the data with dry_run flag" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, dry_run: true, location: nil
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query, dry_run: true
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.dry_run?.must_equal true
+  end
+
   it "queries the data with prefix option" do
     generated_id = "9876543210"
     prefix = "my_test_job_prefix_"

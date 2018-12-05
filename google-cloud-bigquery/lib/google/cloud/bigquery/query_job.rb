@@ -100,6 +100,19 @@ module Google
         end
 
         ##
+        # If set, don't actually run this job. A valid query will return a
+        # mostly empty response with some processing statistics, while an
+        # invalid query will return the same error it would if it wasn't a dry
+        # run.
+        #
+        # @return [Boolean] `true` when the dry run flag is set for the query
+        #   job, `false` otherwise.
+        #
+        def dry_run?
+          @gapi.configuration.dry_run
+        end
+
+        ##
         # Checks if the query job flattens nested and repeated fields in the
         # query results. The default is `true`. If the value is `false`,
         # #large_results? should return `true`.
@@ -557,6 +570,9 @@ module Google
         #
         def data token: nil, max: nil, start: nil
           return nil unless done?
+          if dry_run?
+            return Data.from_gapi_json({ rows: [] }, nil, @gapi, service)
+          end
           if ddl? || dml?
             data_hash = { totalRows: nil, rows: [] }
             return Data.from_gapi_json data_hash, nil, @gapi, service
@@ -609,6 +625,7 @@ module Google
             updater.create = options[:create]
             updater.write = options[:write]
             updater.table = options[:table]
+            updater.dry_run = options[:dry_run]
             updater.maximum_bytes_billed = options[:maximum_bytes_billed]
             updater.labels = options[:labels] if options[:labels]
             updater.legacy_sql = Convert.resolve_legacy_sql(
@@ -784,6 +801,19 @@ module Google
           def write= value
             @gapi.configuration.query.write_disposition =
               Convert.write_disposition value
+          end
+
+          ##
+          # Sets the dry run flag for the query job.
+          #
+          # @param [Boolean] value If set, don't actually run this job. A valid
+          #   query will return a mostly empty response with some processing
+          #   statistics, while an invalid query will return the same error it
+          #   would if it wasn't a dry run..
+          #
+          # @!group Attributes
+          def dry_run= value
+            @gapi.configuration.dry_run = value
           end
 
           ##
