@@ -122,7 +122,7 @@ module Google
             if ack_ids.any?
               requests[:acknowledge] = create_acknowledge_requests ack_ids
             end
-            requests[:modify_ack_deadline] = \
+            requests[:modify_ack_deadline] =
               req_hash.map do |mod_deadline, mod_ack_ids|
                 create_modify_ack_deadline_requests mod_deadline, mod_ack_ids
               end.flatten
