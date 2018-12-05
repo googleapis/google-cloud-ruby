@@ -509,7 +509,7 @@ accessed, and deleted by Google::Cloud::Bigquery::Project.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#query_job-instance_method" title="#query_job (instance method)">#<strong>query_job</strong>(query, params: nil, external: nil, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil) {|job| ... } &#x21d2; Google::Cloud::Bigquery::QueryJob </a>
+      <a href="#query_job-instance_method" title="#query_job (instance method)">#<strong>query_job</strong>(query, params: nil, external: nil, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, dry_run: nil, dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil) {|job| ... } &#x21d2; Google::Cloud::Bigquery::QueryJob </a>
     
 
     
@@ -1570,10 +1570,6 @@ accepting rules</p>
       <pre class="lines">
 
 
-915
-916
-917
-918
 919
 920
 921
@@ -1596,10 +1592,14 @@ accepting rules</p>
 938
 939
 940
-941</pre>
+941
+942
+943
+944
+945</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 915</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 919</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_dataset'>create_dataset</span> <span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>description:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                    <span class='label'>expiration:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>location:</span> <span class='kw'>nil</span>
@@ -1736,19 +1736,19 @@ dataset does not exist.</p>
       <pre class="lines">
 
 
-858
-859
-860
-861
 862
 863
 864
 865
 866
-867</pre>
+867
+868
+869
+870
+871</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 858</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 862</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dataset'>dataset</span> <span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1916,15 +1916,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-987
-988
-989
-990
 991
-992</pre>
+992
+993
+994
+995
+996</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 987</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 991</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_datasets'>datasets</span> <span class='label'>all:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2070,14 +2070,14 @@ encryption key.</p>
       <pre class="lines">
 
 
-1272
-1273
-1274
-1275
-1276</pre>
+1276
+1277
+1278
+1279
+1280</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1272</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1276</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_encryption'>encryption</span> <span class='label'>kms_key:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_encrypt_config'>encrypt_config</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="EncryptionConfiguration.html" title="Google::Cloud::Bigquery::EncryptionConfiguration (class)">EncryptionConfiguration</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
@@ -2226,14 +2226,14 @@ Optional.</p>
       <pre class="lines">
 
 
-825
-826
-827
-828
-829</pre>
+829
+830
+831
+832
+833</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 825</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 829</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ext'>ext</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="External.html" title="Google::Cloud::Bigquery::External (module)">External</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_urls'>from_urls</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span>
@@ -2466,10 +2466,6 @@ configuration object for setting additional options.</p>
       <pre class="lines">
 
 
-1435
-1436
-1437
-1438
 1439
 1440
 1441
@@ -2478,10 +2474,14 @@ configuration object for setting additional options.</p>
 1444
 1445
 1446
-1447</pre>
+1447
+1448
+1449
+1450
+1451</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1435</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1439</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_extract'>extract</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_extract_url'>extract_url</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>compression:</span> <span class='kw'>nil</span><span class='comma'>,</span>
             <span class='label'>delimiter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>header:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
@@ -2790,10 +2790,6 @@ configuration object for setting additional options.</p>
       <pre class="lines">
 
 
-1361
-1362
-1363
-1364
 1365
 1366
 1367
@@ -2807,10 +2803,14 @@ configuration object for setting additional options.</p>
 1375
 1376
 1377
-1378</pre>
+1378
+1379
+1380
+1381
+1382</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1361</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1365</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_extract_job'>extract_job</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_extract_url'>extract_url</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>compression:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                 <span class='label'>delimiter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>header:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>job_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -2925,16 +2925,16 @@ does not exist.</p>
       <pre class="lines">
 
 
-1011
-1012
-1013
-1014
 1015
 1016
-1017</pre>
+1017
+1018
+1019
+1020
+1021</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1011</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1015</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_job'>job</span> <span class='id identifier rubyid_job_id'>job_id</span><span class='comma'>,</span> <span class='label'>location:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3106,15 +3106,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-1068
-1069
-1070
-1071
 1072
-1073</pre>
+1073
+1074
+1075
+1076
+1077</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1068</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1072</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_jobs'>jobs</span> <span class='label'>all:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3303,15 +3303,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-1116
-1117
-1118
-1119
 1120
-1121</pre>
+1121
+1122
+1123
+1124
+1125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1120</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_projects'>projects</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -3803,10 +3803,6 @@ configuration object for setting additional options for the query.</p>
       <pre class="lines">
 
 
-758
-759
-760
-761
 762
 763
 764
@@ -3823,10 +3819,14 @@ configuration object for setting additional options for the query.</p>
 775
 776
 777
-778</pre>
+778
+779
+780
+781
+782</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 758</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 762</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query'>query</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>external:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='kw'>true</span><span class='comma'>,</span>
           <span class='label'>dataset:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>standard_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -3857,7 +3857,7 @@ configuration object for setting additional options for the query.</p>
       <div class="method_details ">
   <h3 class="signature " id="query_job-instance_method">
   
-    #<strong>query_job</strong>(query, params: nil, external: nil, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil) {|job| ... } &#x21d2; <tt><span class='object_link'><a href="QueryJob.html" title="Google::Cloud::Bigquery::QueryJob (class)">Google::Cloud::Bigquery::QueryJob</a></span></tt> 
+    #<strong>query_job</strong>(query, params: nil, external: nil, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, dry_run: nil, dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil) {|job| ... } &#x21d2; <tt><span class='object_link'><a href="QueryJob.html" title="Google::Cloud::Bigquery::QueryJob (class)">Google::Cloud::Bigquery::QueryJob</a></span></tt> 
   
 
   
@@ -4258,6 +4258,24 @@ table exists and contains data.</li>
   
     <li>
       
+        <span class='name'>dry_run</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If set to true, BigQuery doesn&#39;t run the job.
+Instead, if the query is valid, BigQuery returns statistics about
+the job such as how many bytes would be processed. If the query is
+invalid, an error returns. The default value is false.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>dataset</span>
       
       
@@ -4549,10 +4567,6 @@ configuration object for setting query options.</p>
       <pre class="lines">
 
 
-537
-538
-539
-540
 541
 542
 543
@@ -4573,21 +4587,25 @@ configuration object for setting query options.</p>
 558
 559
 560
-561</pre>
+561
+562
+563
+564
+565</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 537</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 541</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_job'>query_job</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>external:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>priority:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>INTERACTIVE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>table:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-              <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dataset:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-              <span class='label'>standard_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>legacy_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>large_results:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-              <span class='label'>flatten:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>maximum_billing_tier:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-              <span class='label'>maximum_bytes_billed:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>job_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-              <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>udfs:</span> <span class='kw'>nil</span>
+              <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dry_run:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dataset:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>standard_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>legacy_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>large_results:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>flatten:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>maximum_billing_tier:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>maximum_bytes_billed:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>job_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>udfs:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>priority:</span> <span class='id identifier rubyid_priority'>priority</span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='id identifier rubyid_cache'>cache</span><span class='comma'>,</span> <span class='label'>table:</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span>
-              <span class='label'>create:</span> <span class='id identifier rubyid_create'>create</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='id identifier rubyid_write'>write</span><span class='comma'>,</span>
+              <span class='label'>create:</span> <span class='id identifier rubyid_create'>create</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='id identifier rubyid_write'>write</span><span class='comma'>,</span> <span class='label'>dry_run:</span> <span class='id identifier rubyid_dry_run'>dry_run</span><span class='comma'>,</span>
               <span class='label'>large_results:</span> <span class='id identifier rubyid_large_results'>large_results</span><span class='comma'>,</span> <span class='label'>flatten:</span> <span class='id identifier rubyid_flatten'>flatten</span><span class='comma'>,</span>
               <span class='label'>dataset:</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span><span class='comma'>,</span>
               <span class='label'>legacy_sql:</span> <span class='id identifier rubyid_legacy_sql'>legacy_sql</span><span class='comma'>,</span> <span class='label'>standard_sql:</span> <span class='id identifier rubyid_standard_sql'>standard_sql</span><span class='comma'>,</span>
@@ -4712,14 +4730,14 @@ for the destination table.</p>
       <pre class="lines">
 
 
-1201
-1202
-1203
-1204
-1205</pre>
+1205
+1206
+1207
+1208
+1209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1201</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1205</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_schema'>schema</span>
   <span class='id identifier rubyid_s'>s</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Schema.html" title="Google::Cloud::Bigquery::Schema (class)">Schema</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span>
@@ -4918,12 +4936,12 @@ contain microsecond precision.</p>
       <pre class="lines">
 
 
-1164
-1165
-1166</pre>
+1168
+1169
+1170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1164</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/project.rb', line 1168</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time'>time</span> <span class='id identifier rubyid_hour'>hour</span><span class='comma'>,</span> <span class='id identifier rubyid_minute'>minute</span><span class='comma'>,</span> <span class='id identifier rubyid_second'>second</span>
   <span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Time.html" title="Google::Cloud::Bigquery::Time (class)">Time</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_hour'>hour</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_minute'>minute</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_second'>second</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
