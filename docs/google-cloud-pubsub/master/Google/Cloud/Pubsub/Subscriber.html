@@ -88,7 +88,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google/cloud/pubsub/subscriber.rb<span class="defines">,<br />
-  lib/google/cloud/pubsub/subscriber/stream.rb,<br /> lib/google/cloud/pubsub/subscriber/inventory.rb,<br /> lib/google/cloud/pubsub/subscriber/enumerator_queue.rb,<br /> lib/google/cloud/pubsub/subscriber/async_unary_pusher.rb,<br /> lib/google/cloud/pubsub/subscriber/async_stream_pusher.rb</span>
+  lib/google/cloud/pubsub/subscriber/stream.rb,<br /> lib/google/cloud/pubsub/subscriber/inventory.rb,<br /> lib/google/cloud/pubsub/subscriber/enumerator_queue.rb,<br /> lib/google/cloud/pubsub/subscriber/timed_unary_buffer.rb</span>
 </dd>
   </dl>
   
@@ -558,12 +558,12 @@ received from the subscription.</p>
       <pre class="lines">
 
 
-63
 64
-65</pre>
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callback'>callback</span>
   <span class='ivar'>@callback</span>
@@ -618,12 +618,12 @@ handle the received messages. Default is 8.</p>
       <pre class="lines">
 
 
-63
 64
-65</pre>
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callback_threads'>callback_threads</span>
   <span class='ivar'>@callback_threads</span>
@@ -679,12 +679,12 @@ deadline. The minimum is 10, the maximum is 600. Default is 60.</p>
       <pre class="lines">
 
 
-63
 64
-65</pre>
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deadline'>deadline</span>
   <span class='ivar'>@deadline</span>
@@ -739,12 +739,12 @@ collected by subscriber. Default is 1,000.</p>
       <pre class="lines">
 
 
-63
 64
-65</pre>
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inventory'>inventory</span>
   <span class='ivar'>@inventory</span>
@@ -801,12 +801,12 @@ Default is 4.</p>
       <pre class="lines">
 
 
-63
 64
-65</pre>
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_push_threads'>push_threads</span>
   <span class='ivar'>@push_threads</span>
@@ -861,12 +861,12 @@ to pull messages from the subscription. Default is 4.</p>
       <pre class="lines">
 
 
-63
 64
-65</pre>
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streams'>streams</span>
   <span class='ivar'>@streams</span>
@@ -921,12 +921,12 @@ messages are pulled from.</p>
       <pre class="lines">
 
 
-63
 64
-65</pre>
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span>
   <span class='ivar'>@subscription_name</span>
@@ -1015,12 +1015,12 @@ recover from the error and resume listening.</p>
       <pre class="lines">
 
 
-245
-246
-247</pre>
+253
+254
+255</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 245</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 253</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_last_error'>last_error</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@last_error</span> <span class='rbrace'>}</span>
@@ -1125,14 +1125,14 @@ recover from the error and resume listening.</p>
       <pre class="lines">
 
 
-209
-210
-211
-212
-213</pre>
+217
+218
+219
+220
+221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 209</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 217</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_error'>on_error</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1187,10 +1187,6 @@ received messages.</p>
       <pre class="lines">
 
 
-105
-106
-107
-108
 109
 110
 111
@@ -1199,16 +1195,24 @@ received messages.</p>
 114
 115
 116
-117</pre>
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start'>start</span>
   <span class='id identifier rubyid_start_pool'>start_pool</span> <span class='op'>=</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
     <span class='ivar'>@started</span> <span class='op'>=</span> <span class='kw'>true</span>
     <span class='ivar'>@stopped</span> <span class='op'>=</span> <span class='kw'>false</span>
 
+    <span class='comment'># Start the buffer before the streams are all started
+</span>    <span class='ivar'>@buffer</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
     <span class='ivar'>@stream_pool</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_stream'>stream</span><span class='op'>|</span>
       <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_stream'>stream</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span> <span class='rbrace'>}</span>
     <span class='kw'>end</span>
@@ -1264,12 +1268,12 @@ received messages.</p>
       <pre class="lines">
 
 
-162
-163
-164</pre>
+170
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 170</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_started?'>started?</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@started</span> <span class='rbrace'>}</span>
@@ -1324,22 +1328,24 @@ stopped and all received messages have been processed.</p>
       <pre class="lines">
 
 
-126
-127
-128
-129
-130
-131
 132
 133
 134
 135
 136
 137
-138</pre>
+138
+139
+140
+141
+142
+143
+144
+145
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
   <span class='id identifier rubyid_stop_pool'>stop_pool</span> <span class='op'>=</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1351,6 +1357,8 @@ stopped and all received messages have been processed.</p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_stop_pool'>stop_pool</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:join</span><span class='rparen'>)</span>
+  <span class='comment'># Stop the buffer after the streams are all stopped
+</span>  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@buffer</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span> <span class='rbrace'>}</span>
 
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
@@ -1401,12 +1409,12 @@ stopped and all received messages have been processed.</p>
       <pre class="lines">
 
 
-170
-171
-172</pre>
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stopped?'>stopped?</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@stopped</span> <span class='rbrace'>}</span>
@@ -1461,19 +1469,19 @@ the subscriber is stopped.</p>
       <pre class="lines">
 
 
-147
-148
-149
-150
-151
-152
-153
-154
 155
-156</pre>
+156
+157
+158
+159
+160
+161
+162
+163
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait!'>wait!</span>
   <span class='id identifier rubyid_wait_pool'>wait_pool</span> <span class='op'>=</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
