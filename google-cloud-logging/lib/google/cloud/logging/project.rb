@@ -206,8 +206,10 @@ module Google
         #
         def entry log_name: nil, resource: nil, timestamp: nil, severity: nil,
                   insert_id: nil, labels: nil, payload: nil
+          ensure_service!
+
           e = Entry.new
-          e.log_name = log_name if log_name
+          e.log_name = service.log_path(log_name) if log_name
           e.resource = resource if resource
           e.timestamp = timestamp if timestamp
           e.severity = severity if severity
