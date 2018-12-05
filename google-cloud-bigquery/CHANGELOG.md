@@ -1,5 +1,16 @@
 # Release History
 
+### 1.10.0 / 2018-12-06
+
+* Add dryrun param to Project#query_job and Dataset#query_job
+* Add copy and extract methods to Project
+  * Add Project#extract and Project#extract_job
+  * Add Project#copy and Project#copy_job
+  * Deprecate dryrun param in Table#copy_job, Table#extract_job and 
+    Table#load_job
+* Fix memoization in Dataset#exists? and Table#exists?
+  * Add force param to Dataset#exists? and Table#exists?
+
 ### 1.9.0 / 2018-10-25
 
 * Add clustering fields to LoadJob, QueryJob and Table
