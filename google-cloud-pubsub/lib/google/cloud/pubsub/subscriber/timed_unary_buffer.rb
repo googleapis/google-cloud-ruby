@@ -42,8 +42,8 @@ module Google
             return if ack_ids.empty?
 
             ack_ids.each do |ack_id|
-              # ack has no deadline set
-              @register[ack_id] = nil
+              # ack has no deadline set, use :ack indicate it is an ack
+              @register[ack_id] = :ack
             end
 
             true
@@ -118,7 +118,7 @@ module Google
             req_hash = Hash[groups.map { |k, v| [k, v.map(&:first)] }]
 
             requests = { acknowledge: [] }
-            ack_ids = Array(req_hash.delete(nil)) # ack has no deadline set
+            ack_ids = Array(req_hash.delete(:ack)) # ack has no deadline set
             if ack_ids.any?
               requests[:acknowledge] = create_acknowledge_requests ack_ids
             end
