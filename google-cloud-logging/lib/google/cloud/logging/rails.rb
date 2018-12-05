@@ -30,10 +30,12 @@ module Google
       # {Google::Cloud::Logging::Logger} instance to be used by the Rails
       # application.
       #
-      # The Middleware is only loaded when certain conditions are met. These
-      # conditions are when `Google::Cloud.configure.use_logging` is set to
-      # `true`, when `Rails.application.config.google_cloud.use_logging` is set
-      # to `true`, or when `Rails.env.production?` is `true`.
+      # The middleware is loaded only when certain conditions are met. These
+      # conditions are when the configuration
+      # `Google::Cloud.configure.use_logging` (also available as
+      # `Rails.application.config.google_cloud.use_logging` for a Rails
+      # application) is set to `true`, or, if the configuration is left unset
+      # but `Rails.env.production?` is `true`.
       #
       # When loaded, the {Google::Cloud::Logging::Middleware} will be inserted
       # before the `Rails::Rack::Logger Middleware`, which allows it to set the
