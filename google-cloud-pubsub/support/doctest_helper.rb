@@ -523,8 +523,8 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Pubsub::Topic#subscriptions" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :list_topic_subscriptions, list_subscriptions_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :list_topic_subscriptions, list_subscriptions_resp(nil), ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :list_topic_subscriptions, list_topic_subscriptions_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :list_topic_subscriptions, list_topic_subscriptions_resp(nil), ["projects/my-project/topics/my-topic", Hash]
     end
   end
 
@@ -688,6 +688,11 @@ end
 
 def list_subscriptions_resp token = "next_page_token"
   response = Google::Pubsub::V1::ListSubscriptionsResponse.decode_json subscriptions_json("my-topic", 3, token)
+  paged_enum_struct response
+end
+
+def list_topic_subscriptions_resp token = "next_page_token"
+  response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, token)
   paged_enum_struct response
 end
 
