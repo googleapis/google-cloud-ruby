@@ -461,7 +461,7 @@ module Google
 
           def initialize writer
             @writer = writer
-            @entries = Concurrent::Array.new
+            @entries = []
             @entries_bytes = 2 # initial size w/ partial_success
             @created_at = nil
           end
