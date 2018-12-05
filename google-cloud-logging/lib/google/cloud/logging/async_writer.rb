@@ -284,9 +284,6 @@ module Google
         #
         # DEPRECATED. Use #wait_until_async_stopped instead.
         #
-        # @param [Number, nil] timeout Timeout in seconds, or `nil` for no
-        #     timeout.
-        #
         # @return [Boolean] Returns true if the writer is stopped, or false
         #   if the timeout expired.
         #

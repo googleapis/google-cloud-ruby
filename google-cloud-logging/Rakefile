@@ -163,7 +163,7 @@ end
 require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new do |y|
-  # y.options << "--fail-on-warning"
+  y.options << "--fail-on-warning"
 end
 
 desc "Run the CI build"
@@ -172,7 +172,6 @@ task :ci do
   header "google-cloud-logging rubocop", "*"
   Rake::Task[:rubocop].invoke
   header "google-cloud-logging yard", "*"
-  header "logging yard still had warnings", "!"
   Rake::Task[:yard].invoke
   header "google-cloud-logging doctest", "*"
   Rake::Task[:doctest].invoke
