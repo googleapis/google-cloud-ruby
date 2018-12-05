@@ -134,7 +134,7 @@ module Google
             raise "AsyncWriter has been stopped" if @stopped
 
             Array(entries).each do |entry|
-              # Update the entry to have all the data direclty on it
+              # Update the entry to have all the data directly on it
               entry.log_name ||= log_name
               if entry.resource.nil? || entry.resource.empty?
                 entry.resource = resource
