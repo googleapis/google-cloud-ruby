@@ -15,6 +15,7 @@
 
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/subscriber/stream"
+require "google/cloud/pubsub/subscriber/timed_unary_buffer"
 require "monitor"
 
 module Google
@@ -68,7 +69,8 @@ module Google
 
         ##
         # @private Implementation attributes.
-        attr_reader :stream_inventory, :stream_pool, :thread_pool, :service
+        attr_reader :stream_inventory, :stream_pool, :thread_pool, :buffer,
+                    :service
 
         ##
         # @private Create an empty {Subscriber} object.
@@ -94,6 +96,8 @@ module Google
           end
           @stream_pool = stream_pool.map(&:value)
 
+          @buffer = TimedUnaryBuffer.new self
+
           super() # to init MonitorMixin
         end
 
@@ -107,6 +111,8 @@ module Google
             @started = true
             @stopped = false
 
+            # Start the buffer before the streams are all started
+            @buffer.start
             @stream_pool.map do |stream|
               Thread.new { stream.start }
             end
@@ -133,6 +139,8 @@ module Google
             end
           end
           stop_pool.map(&:join)
+          # Stop the buffer after the streams are all stopped
+          synchronize { @buffer.stop }
 
           self
         end
