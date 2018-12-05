@@ -557,15 +557,15 @@ after the timeout, or <code>:forced</code> if it was forcibly killed.</p>
       <pre class="lines">
 
 
+308
+309
+310
 311
 312
-313
-314
-315
-316</pre>
+313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 311</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 308</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop!'>stop!</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span> <span class='label'>force:</span> <span class='kw'>false</span>
   <span class='ivar'>@cleanup_options</span><span class='lbracket'>[</span><span class='symbol'>:timeout</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_timeout'>timeout</span> <span class='kw'>unless</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>

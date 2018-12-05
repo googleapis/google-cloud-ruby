@@ -98,8 +98,12 @@ environment. The middleware will set <code>env[&#39;rack.logger&#39;]</code> to 
 <span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span> instance to be used by the Rails
 application.</p>
 
-<p>The Middleware is only added when certain conditions are met. See
-use_logging? for details.</p>
+<p>The middleware is loaded only when certain conditions are met. These
+conditions are when the configuration
+<code>Google::Cloud.configure.use_logging</code> (also available as
+<code>Rails.application.config.google_cloud.use_logging</code> for a Rails
+application) is set to <code>true</code>, or, if the configuration is left unset
+but <code>Rails.env.production?</code> is <code>true</code>.</p>
 
 <p>When loaded, the <span class='object_link'><a href="Middleware.html" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span> will be inserted
 before the <code>Rails::Rack::Logger Middleware</code>, which allows it to set the
