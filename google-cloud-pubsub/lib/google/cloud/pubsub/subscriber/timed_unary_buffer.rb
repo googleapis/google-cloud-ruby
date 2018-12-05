@@ -60,6 +60,17 @@ module Google
           end
           alias delay modify_ack_deadline
 
+          def renew_lease deadline, ack_ids
+            return if ack_ids.empty?
+
+            ack_ids.each do |ack_id|
+              # Do not overwrite pending actions when renewing leased messages.
+              @register[ack_id] ||= deadline
+            end
+
+            true
+          end
+
           def flush!
             # Grab requests from the buffer and release synchronize ASAP
             requests = flush_requests!

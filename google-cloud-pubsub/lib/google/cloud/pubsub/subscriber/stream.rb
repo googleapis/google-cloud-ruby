@@ -151,11 +151,12 @@ module Google
 
           ##
           # @private
-          def delay_inventory!
+          def renew_lease!
             synchronize do
               return true if @inventory.empty?
 
-              @subscriber.buffer.delay subscriber.deadline, @inventory.ack_ids
+              @subscriber.buffer.renew_lease @subscriber.deadline,
+                                             @inventory.ack_ids
             end
 
             true
