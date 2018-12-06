@@ -47,6 +47,25 @@ js:
 
   <div id="content"><div id='filecontents'><h1>Release History</h1>
 
+<h3>1.10.0 / 2018-12-06</h3>
+
+<ul>
+<li>Add dryrun param to Project#query_job and Dataset#query_job</li>
+<li>Add copy and extract methods to Project
+
+<ul>
+<li>Add Project#extract and Project#extract_job</li>
+<li>Add Project#copy and Project#copy_job</li>
+<li>Deprecate dryrun param in Table#copy_job, Table#extract_job and 
+Table#load_job</li>
+</ul></li>
+<li>Fix memoization in Dataset#exists? and Table#exists?
+
+<ul>
+<li>Add force param to Dataset#exists? and Table#exists?</li>
+</ul></li>
+</ul>
+
 <h3>1.9.0 / 2018-10-25</h3>
 
 <ul>
