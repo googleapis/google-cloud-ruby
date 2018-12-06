@@ -149,9 +149,10 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.ddl_target_table.must_be :nil?
   end
 
-  it "should run a query job with dry_run flag" do
-    job = bigquery.query_job publicdata_query, dry_run: true
-    job.dry_run?.must_equal true
+  it "should run a query job with dryrun flag" do
+    job = bigquery.query_job publicdata_query, dryrun: true
+    job.dryrun?.must_equal true
+    job.dry_run?.must_equal true # alias
 
     job.wait_until_done!
     data = job.data
