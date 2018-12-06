@@ -59,7 +59,6 @@ module Google
 
             true
           end
-          alias delay modify_ack_deadline
 
           def renew_lease deadline, ack_ids
             return if ack_ids.empty?
