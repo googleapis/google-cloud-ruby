@@ -821,7 +821,7 @@ within a specific project.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#query_job-instance_method" title="#query_job (instance method)">#<strong>query_job</strong>(query, params: nil, external: nil, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, dry_run: nil, standard_sql: nil, legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil) {|job| ... } &#x21d2; Google::Cloud::Bigquery::QueryJob </a>
+      <a href="#query_job-instance_method" title="#query_job (instance method)">#<strong>query_job</strong>(query, params: nil, external: nil, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, dryrun: nil, standard_sql: nil, legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil) {|job| ... } &#x21d2; Google::Cloud::Bigquery::QueryJob </a>
     
 
     
@@ -5251,7 +5251,7 @@ configuration object for setting additional options for the query.</p>
       <div class="method_details ">
   <h3 class="signature " id="query_job-instance_method">
   
-    #<strong>query_job</strong>(query, params: nil, external: nil, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, dry_run: nil, standard_sql: nil, legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil) {|job| ... } &#x21d2; <tt><span class='object_link'><a href="QueryJob.html" title="Google::Cloud::Bigquery::QueryJob (class)">Google::Cloud::Bigquery::QueryJob</a></span></tt> 
+    #<strong>query_job</strong>(query, params: nil, external: nil, priority: &quot;INTERACTIVE&quot;, cache: true, table: nil, create: nil, write: nil, dryrun: nil, standard_sql: nil, legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil) {|job| ... } &#x21d2; <tt><span class='object_link'><a href="QueryJob.html" title="Google::Cloud::Bigquery::QueryJob (class)">Google::Cloud::Bigquery::QueryJob</a></span></tt> 
   
 
   
@@ -5653,7 +5653,7 @@ table exists and contains data.</li>
   
     <li>
       
-        <span class='name'>dry_run</span>
+        <span class='name'>dryrun</span>
       
       
         <span class='type'>(<tt>Boolean</tt>)</span>
@@ -5961,13 +5961,13 @@ configuration object for setting additional options for the query.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_job'>query_job</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>external:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>priority:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>INTERACTIVE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>table:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-              <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dry_run:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>standard_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+              <span class='label'>create:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dryrun:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>standard_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>legacy_sql:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>large_results:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>flatten:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>maximum_billing_tier:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>maximum_bytes_billed:</span> <span class='kw'>nil</span><span class='comma'>,</span>
               <span class='label'>job_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>udfs:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>priority:</span> <span class='id identifier rubyid_priority'>priority</span><span class='comma'>,</span> <span class='label'>cache:</span> <span class='id identifier rubyid_cache'>cache</span><span class='comma'>,</span> <span class='label'>table:</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span>
-              <span class='label'>create:</span> <span class='id identifier rubyid_create'>create</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='id identifier rubyid_write'>write</span><span class='comma'>,</span> <span class='label'>dry_run:</span> <span class='id identifier rubyid_dry_run'>dry_run</span><span class='comma'>,</span>
+              <span class='label'>create:</span> <span class='id identifier rubyid_create'>create</span><span class='comma'>,</span> <span class='label'>write:</span> <span class='id identifier rubyid_write'>write</span><span class='comma'>,</span> <span class='label'>dryrun:</span> <span class='id identifier rubyid_dryrun'>dryrun</span><span class='comma'>,</span>
               <span class='label'>large_results:</span> <span class='id identifier rubyid_large_results'>large_results</span><span class='comma'>,</span> <span class='label'>flatten:</span> <span class='id identifier rubyid_flatten'>flatten</span><span class='comma'>,</span>
               <span class='label'>legacy_sql:</span> <span class='id identifier rubyid_legacy_sql'>legacy_sql</span><span class='comma'>,</span> <span class='label'>standard_sql:</span> <span class='id identifier rubyid_standard_sql'>standard_sql</span><span class='comma'>,</span>
               <span class='label'>maximum_billing_tier:</span> <span class='id identifier rubyid_maximum_billing_tier'>maximum_billing_tier</span><span class='comma'>,</span>

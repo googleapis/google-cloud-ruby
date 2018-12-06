@@ -613,9 +613,11 @@ on a <span class='object_link'><a href="Table.html" title="Google::Cloud::Bigque
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#dry_run%3F-instance_method" title="#dry_run? (instance method)">#<strong>dry_run?</strong>  &#x21d2; Boolean </a>
+      <a href="#dryrun%3F-instance_method" title="#dryrun? (instance method)">#<strong>dryrun?</strong>  &#x21d2; Boolean </a>
     
 
+    
+      (also: #dryrun, #dry_run, #dry_run?)
     
   </span>
   
@@ -1008,14 +1010,14 @@ otherwise.</p>
       <pre class="lines">
 
 
-173
-174
-175
 176
-177</pre>
+177
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 176</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bytes_processed'>bytes_processed</span>
   <span class='const'>Integer</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_total_bytes_processed'>total_bytes_processed</span>
@@ -1134,13 +1136,13 @@ otherwise.</p>
       <pre class="lines">
 
 
-163
-164
-165
-166</pre>
+166
+167
+168
+169</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 163</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 166</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cache_hit?'>cache_hit?</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span>
@@ -1201,12 +1203,12 @@ or <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-487
-488
-489</pre>
+490
+491
+492</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 487</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 490</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clustering?'>clustering?</span>
   <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_clustering'>clustering</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1275,12 +1277,12 @@ destination table will not be clustered.</p>
       <pre class="lines">
 
 
-511
-512
-513</pre>
+514
+515
+516</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 511</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 514</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clustering_fields'>clustering_fields</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_clustering'>clustering</span><span class='period'>.</span><span class='id identifier rubyid_fields'>fields</span> <span class='kw'>if</span> <span class='id identifier rubyid_clustering?'>clustering?</span>
@@ -1407,9 +1409,6 @@ data read from the destination table for the job.</p>
       <pre class="lines">
 
 
-571
-572
-573
 574
 575
 576
@@ -1424,14 +1423,17 @@ data read from the destination table for the job.</p>
 585
 586
 587
-588</pre>
+588
+589
+590
+591</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 571</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 574</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_data'>data</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>start:</span> <span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id identifier rubyid_done?'>done?</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_dry_run?'>dry_run?</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_dryrun?'>dryrun?</span>
     <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="Data.html" title="Google::Cloud::Bigquery::Data (class)">Data</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi_json'>from_gapi_json</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>rows:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='ivar'>@gapi</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_ddl?'>ddl?</span> <span class='op'>||</span> <span class='id identifier rubyid_dml?'>dml?</span>
@@ -1511,13 +1513,13 @@ data read from the destination table for the job.</p>
       <pre class="lines">
 
 
-260
-261
-262
-263</pre>
+263
+264
+265
+266</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 263</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ddl?'>ddl?</span>
   <span class='qwords_beg'>%w[</span><span class='tstring_content'>CREATE_MODEL</span><span class='words_sep'> </span><span class='tstring_content'>CREATE_TABLE</span><span class='words_sep'> </span><span class='tstring_content'>CREATE_TABLE_AS_SELECT</span><span class='words_sep'> </span><span class='tstring_content'>CREATE_VIEW</span><span class='words_sep'> </span><span class='tstring_content'>\
@@ -1582,13 +1584,13 @@ query is <code>CREATE OR REPLACE TABLE</code>, and the table already exists.</li
       <pre class="lines">
 
 
-303
-304
-305
-306</pre>
+306
+307
+308
+309</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 306</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ddl_operation_performed'>ddl_operation_performed</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span>
@@ -1644,16 +1646,16 @@ reference state.</p>
       <pre class="lines">
 
 
-316
-317
-318
 319
 320
 321
-322</pre>
+322
+323
+324
+325</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 319</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ddl_target_table'>ddl_target_table</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span>
@@ -1709,16 +1711,16 @@ reference state.</p>
       <pre class="lines">
 
 
-341
-342
-343
 344
 345
 346
-347</pre>
+347
+348
+349
+350</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 344</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destination'>destination</span>
   <span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_destination_table'>destination_table</span>
@@ -1793,12 +1795,12 @@ reference state.</p>
       <pre class="lines">
 
 
-284
-285
-286</pre>
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 287</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dml?'>dml?</span>
   <span class='qwords_beg'>%w[</span><span class='tstring_content'>INSERT</span><span class='words_sep'> </span><span class='tstring_content'>UPDATE</span><span class='words_sep'> </span><span class='tstring_content'>MERGE</span><span class='words_sep'> </span><span class='tstring_content'>DELETE</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_statement_type'>statement_type</span>
@@ -1809,11 +1811,15 @@ reference state.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="dry_run?-instance_method">
+  <h3 class="signature " id="dryrun?-instance_method">
   
-    #<strong>dry_run?</strong>  &#x21d2; <tt>Boolean</tt> 
+    #<strong>dryrun?</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='dryrun-instance_method'>dryrun</span>, <span id='dry_run-instance_method'>dry_run</span>, <span id='dry_run?-instance_method'>dry_run?</span></span>
+    </span>
   
 
   
@@ -1861,7 +1867,7 @@ job, <code>false</code> otherwise.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 111</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_dry_run?'>dry_run?</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_dryrun?'>dryrun?</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_dry_run'>dry_run</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1912,14 +1918,14 @@ encryption configuration (e.g., Cloud KMS keys).</p>
       <pre class="lines">
 
 
-395
-396
-397
 398
-399</pre>
+399
+400
+401
+402</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 395</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 398</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_encryption'>encryption</span>
   <span class='const'><span class='object_link'><a href="EncryptionConfiguration.html" title="Google::Cloud::Bigquery::EncryptionConfiguration (class)">EncryptionConfiguration</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span><span class='lparen'>(</span>
@@ -1977,14 +1983,14 @@ otherwise.</p>
       <pre class="lines">
 
 
-123
-124
-125
 126
-127</pre>
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flatten?'>flatten?</span>
   <span class='id identifier rubyid_val'>val</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_flatten_results'>flatten_results</span>
@@ -2163,14 +2169,14 @@ otherwise.</p>
       <pre class="lines">
 
 
-354
-355
-356
 357
-358</pre>
+358
+359
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 354</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 357</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_legacy_sql?'>legacy_sql?</span>
   <span class='id identifier rubyid_val'>val</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_use_legacy_sql'>use_legacy_sql</span>
@@ -2229,12 +2235,12 @@ default.</p>
       <pre class="lines">
 
 
-139
-140
-141</pre>
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_maximum_billing_tier'>maximum_billing_tier</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_maximum_billing_tier'>maximum_billing_tier</span>
@@ -2289,14 +2295,14 @@ default.</p>
       <pre class="lines">
 
 
-151
-152
-153
 154
-155</pre>
+155
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_maximum_bytes_billed'>maximum_bytes_billed</span>
   <span class='const'>Integer</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_maximum_bytes_billed'>maximum_bytes_billed</span>
@@ -2352,13 +2358,13 @@ or <code>nil</code> if the query is not a DML statement.</p>
       <pre class="lines">
 
 
-331
-332
-333
-334</pre>
+334
+335
+336
+337</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 334</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_num_dml_affected_rows'>num_dml_affected_rows</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span>
@@ -2436,16 +2442,16 @@ array containing the stages of the execution plan.</p>
       <pre class="lines">
 
 
-204
-205
-206
 207
 208
 209
-210</pre>
+210
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 204</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 207</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query_plan'>query_plan</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='op'>&amp;&amp;</span>
@@ -2501,12 +2507,12 @@ array containing the stages of the execution plan.</p>
       <pre class="lines">
 
 
-365
-366
-367</pre>
+368
+369
+370</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 365</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 368</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_standard_sql?'>standard_sql?</span>
   <span class='op'>!</span><span class='id identifier rubyid_legacy_sql?'>legacy_sql?</span>
@@ -2581,13 +2587,13 @@ Statements</a></li>
       <pre class="lines">
 
 
-238
-239
-240
-241</pre>
+241
+242
+243
+244</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 238</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 241</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_statement_type'>statement_type</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_statistics'>statistics</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span>
@@ -2642,12 +2648,12 @@ or <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-410
-411
-412</pre>
+413
+414
+415</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 410</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 413</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time_partitioning?'>time_partitioning?</span>
   <span class='op'>!</span><span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_time_partitioning'>time_partitioning</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2702,13 +2708,13 @@ partitions, or <code>nil</code> if not present.</p>
       <pre class="lines">
 
 
-454
-455
-456
-457</pre>
+457
+458
+459
+460</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 454</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 457</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time_partitioning_expiration'>time_partitioning_expiration</span>
   <span class='id identifier rubyid_tp'>tp</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_time_partitioning'>time_partitioning</span>
@@ -2766,13 +2772,13 @@ See <a href="https://cloud.google.com/bigquery/docs/partitioned-tables">Partitio
       <pre class="lines">
 
 
-439
-440
-441
-442</pre>
+442
+443
+444
+445</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 439</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 442</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time_partitioning_field'>time_partitioning_field</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id identifier rubyid_time_partitioning?'>time_partitioning?</span>
@@ -2829,14 +2835,14 @@ or <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
-470
-471
-472
 473
-474</pre>
+474
+475
+476
+477</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 470</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 473</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time_partitioning_require_filter?'>time_partitioning_require_filter?</span>
   <span class='id identifier rubyid_tp'>tp</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_time_partitioning'>time_partitioning</span>
@@ -2892,12 +2898,12 @@ value is &quot;DAY&quot;, or <code>nil</code> if not present.</p>
       <pre class="lines">
 
 
-423
-424
-425</pre>
+426
+427
+428</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 423</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 426</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_time_partitioning_type'>time_partitioning_type</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_time_partitioning'>time_partitioning</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='kw'>if</span> <span class='id identifier rubyid_time_partitioning?'>time_partitioning?</span>
@@ -2955,16 +2961,16 @@ and/or inline source code.</p>
       <pre class="lines">
 
 
-380
-381
-382
 383
 384
 385
-386</pre>
+386
+387
+388
+389</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 380</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 383</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_udfs'>udfs</span>
   <span class='id identifier rubyid_udfs_gapi'>udfs_gapi</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_user_defined_function_resources'>user_defined_function_resources</span>
@@ -3020,9 +3026,6 @@ The delay between refreshes will incrementally increase.</p>
       <pre class="lines">
 
 
-530
-531
-532
 533
 534
 535
@@ -3033,10 +3036,13 @@ The delay between refreshes will incrementally increase.</p>
 540
 541
 542
-543</pre>
+543
+544
+545
+546</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 530</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 533</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='id identifier rubyid_done?'>done?</span>
