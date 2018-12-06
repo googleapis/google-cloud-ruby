@@ -157,6 +157,7 @@ module Google
 
               @subscriber.buffer.renew_lease @subscriber.deadline,
                                              @inventory.ack_ids
+              unpause_streaming!
             end
 
             true
