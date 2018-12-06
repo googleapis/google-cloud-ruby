@@ -163,7 +163,6 @@ describe Google::Cloud::Bigquery, :bigquery do
     data.statement_type.must_equal "SELECT"
 
     # @gapi.statistics.query
-    job.cache_hit?.must_equal false
     job.bytes_processed.must_be :>, 0 # 155625782
     job.query_plan.must_be :nil?
   end
