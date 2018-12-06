@@ -1214,9 +1214,6 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
-        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
-        #   is undefined however for non-query jobs and may result in an error.
-        #   Deprecated.
         # @param [String] job_id A user-defined ID for the copy job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If
@@ -1240,6 +1237,10 @@ module Google
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key. See [Requirements for
         #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1270,8 +1271,8 @@ module Google
         #
         # @!group Data
         #
-        def copy_job destination_table, create: nil, write: nil, dryrun: nil,
-                     job_id: nil, prefix: nil, labels: nil
+        def copy_job destination_table, create: nil, write: nil, job_id: nil,
+                     prefix: nil, labels: nil, dryrun: nil
           ensure_service!
           options = { create: create, write: write, dryrun: dryrun,
                       labels: labels, job_id: job_id, prefix: prefix }
@@ -1396,9 +1397,6 @@ module Google
         #   exported data. Default is <code>,</code>.
         # @param [Boolean] header Whether to print out a header row in the
         #   results. Default is `true`.
-        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
-        #   is undefined however for non-query jobs and may result in an error.
-        #   Deprecated.
         # @param [String] job_id A user-defined ID for the extract job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If
@@ -1422,6 +1420,10 @@ module Google
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key. See [Requirements for
         #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1443,8 +1445,8 @@ module Google
         # @!group Data
         #
         def extract_job extract_url, format: nil, compression: nil,
-                        delimiter: nil, header: nil, dryrun: nil, job_id: nil,
-                        prefix: nil, labels: nil
+                        delimiter: nil, header: nil, job_id: nil, prefix: nil,
+                        labels: nil, dryrun: nil
           ensure_service!
           options = { format: format, compression: compression,
                       delimiter: delimiter, header: header, dryrun: dryrun,
@@ -1639,9 +1641,6 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
-        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
-        #   is undefined however for non-query jobs and may result in an error.
-        #   Deprecated.
         # @param [String] job_id A user-defined ID for the load job. The ID
         #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #   (_), or dashes (-). The maximum length is 1,024 characters. If
@@ -1665,6 +1664,10 @@ module Google
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key. See [Requirements for
         #   labels](https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements).
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
+        #
         # @yield [load_job] a block for setting the load job
         # @yieldparam [LoadJob] load_job the load job object to be updated
         #
@@ -1721,8 +1724,8 @@ module Google
                      projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil,
                      ignore_unknown: nil, max_bad_records: nil, quote: nil,
-                     skip_leading: nil, dryrun: nil, job_id: nil, prefix: nil,
-                     labels: nil, autodetect: nil, null_marker: nil
+                     skip_leading: nil, job_id: nil, prefix: nil, labels: nil,
+                     autodetect: nil, null_marker: nil, dryrun: nil
           ensure_service!
 
           updater = load_job_updater format: format, create: create,

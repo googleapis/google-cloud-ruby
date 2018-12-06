@@ -1319,9 +1319,6 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
-        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
-        #   is undefined however for non-query jobs and may result in an error.
-        #   Deprecated.
         # @param [Google::Cloud::Bigquery::Schema] schema The schema for the
         #   destination table. Optional. The schema can be omitted if the
         #   destination table already exists, or if you're loading data from a
@@ -1359,6 +1356,9 @@ module Google
         #   Google Cloud Datastore backup.
         # @yieldparam [Google::Cloud::Bigquery::LoadJob::Updater] updater An
         #   updater to modify the load job and its schema.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
         #
         # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
         #
@@ -1447,8 +1447,8 @@ module Google
                      projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil,
                      ignore_unknown: nil, max_bad_records: nil, quote: nil,
-                     skip_leading: nil, dryrun: nil, schema: nil, job_id: nil,
-                     prefix: nil, labels: nil, autodetect: nil, null_marker: nil
+                     skip_leading: nil, schema: nil, job_id: nil, prefix: nil,
+                     labels: nil, autodetect: nil, null_marker: nil, dryrun: nil
           ensure_service!
 
           updater = load_job_updater table_id,
