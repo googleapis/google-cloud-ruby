@@ -47,9 +47,9 @@ module Google
             @paused  = nil
             @pause_cond = new_cond
 
-            @inventory = Inventory.new self, subscriber.stream_inventory
+            @inventory = Inventory.new self, @subscriber.stream_inventory
             @callback_thread_pool = Concurrent::FixedThreadPool.new \
-              subscriber.callback_threads
+              @subscriber.callback_threads
 
             @stream_keepalive_task = Concurrent::TimerTask.new(
               execution_interval: 30
@@ -133,13 +133,12 @@ module Google
 
             synchronize do
               @inventory.remove mod_ack_ids
-              @subscriber.buffer.delay deadline, mod_ack_ids
+              @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids
               unpause_streaming!
             end
 
             true
           end
-          alias delay modify_ack_deadline
 
           def push request
             synchronize { @request_queue.push request }
@@ -151,11 +150,13 @@ module Google
 
           ##
           # @private
-          def delay_inventory!
+          def renew_lease!
             synchronize do
               return true if @inventory.empty?
 
-              @subscriber.buffer.delay subscriber.deadline, @inventory.ack_ids
+              @subscriber.buffer.renew_lease @subscriber.deadline,
+                                             @inventory.ack_ids
+              unpause_streaming!
             end
 
             true
@@ -191,7 +192,7 @@ module Google
             @request_queue = EnumeratorQueue.new self
             @request_queue.push initial_input_request
             old_queue.each { |obj| @request_queue.push obj }
-            enum = subscriber.service.streaming_pull @request_queue.each
+            enum = @subscriber.service.streaming_pull @request_queue.each
 
             @stopped = nil
             @paused  = nil
@@ -216,7 +217,8 @@ module Google
 
                 synchronize do
                   # Create receipt of received messages reception
-                  @subscriber.buffer.delay subscriber.deadline, received_ack_ids
+                  @subscriber.buffer.modify_ack_deadline @subscriber.deadline,
+                                                         received_ack_ids
 
                   # Add received messages to inventory
                   @inventory.add received_ack_ids
@@ -252,7 +254,7 @@ module Google
             retry
           rescue StandardError => e
             synchronize do
-              subscriber.error! e
+              @subscriber.error! e
               start_streaming! unless @stopped
             end
 
@@ -266,9 +268,9 @@ module Google
 
             Concurrent::Future.new(executor: callback_thread_pool) do
               begin
-                subscriber.callback.call rec_msg
+                @subscriber.callback.call rec_msg
               rescue StandardError => callback_error
-                subscriber.error! callback_error
+                @subscriber.error! callback_error
               end
             end.execute
           end
@@ -316,11 +318,11 @@ module Google
 
           def initial_input_request
             Google::Pubsub::V1::StreamingPullRequest.new.tap do |req|
-              req.subscription = subscriber.subscription_name
-              req.stream_ack_deadline_seconds = subscriber.deadline
+              req.subscription = @subscriber.subscription_name
+              req.stream_ack_deadline_seconds = @subscriber.deadline
               req.modify_deadline_ack_ids += @inventory.ack_ids
               req.modify_deadline_seconds += \
-                @inventory.ack_ids.map { subscriber.deadline }
+                @inventory.ack_ids.map { @subscriber.deadline }
             end
           end
 

@@ -29,9 +29,10 @@ module Google
             @max_bytes = max_bytes
             @interval = interval
 
-            # Using a Map ensures there is only one entry for each ack_id in the
-            # buffer. Adding an entry again will overwrite the previous entry.
-            @register = Concurrent::Map.new
+            # Using a Hash ensures there is only one entry for each ack_id in
+            # the buffer. Adding an entry again will overwrite the previous
+            # entry.
+            @register = {}
 
             @task = Concurrent::TimerTask.new(execution_interval: interval) do
               flush!
@@ -58,7 +59,17 @@ module Google
 
             true
           end
-          alias delay modify_ack_deadline
+
+          def renew_lease deadline, ack_ids
+            return if ack_ids.empty?
+
+            ack_ids.each do |ack_id|
+              # Do not overwrite pending actions when renewing leased messages.
+              @register[ack_id] ||= deadline
+            end
+
+            true
+          end
 
           def flush!
             # Grab requests from the buffer and release synchronize ASAP
