@@ -185,7 +185,10 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.dry_run?.must_equal true
+    job.dryrun?.must_equal true
+    job.dryrun.must_equal true # alias
+    job.dry_run.must_equal true # alias
+    job.dry_run?.must_equal true # alias
   end
 
   it "queries the data with prefix option" do

@@ -108,12 +108,12 @@ module Google
         # @return [Boolean] `true` when the dry run flag is set for the query
         #   job, `false` otherwise.
         #
-        def dryrun
+        def dryrun?
           @gapi.configuration.dry_run
         end
-        alias dryrun? dryrun
-        alias dry_run dryrun
-        alias dry_run? dryrun
+        alias dryrun dryrun?
+        alias dry_run dryrun?
+        alias dry_run? dryrun?
 
         ##
         # Checks if the query job flattens nested and repeated fields in the
@@ -573,7 +573,7 @@ module Google
         #
         def data token: nil, max: nil, start: nil
           return nil unless done?
-          if dry_run?
+          if dryrun?
             return Data.from_gapi_json({ rows: [] }, nil, @gapi, service)
           end
           if ddl? || dml?
@@ -628,7 +628,7 @@ module Google
             updater.create = options[:create]
             updater.write = options[:write]
             updater.table = options[:table]
-            updater.dry_run = options[:dryrun]
+            updater.dryrun = options[:dryrun]
             updater.maximum_bytes_billed = options[:maximum_bytes_billed]
             updater.labels = options[:labels] if options[:labels]
             updater.legacy_sql = Convert.resolve_legacy_sql(
