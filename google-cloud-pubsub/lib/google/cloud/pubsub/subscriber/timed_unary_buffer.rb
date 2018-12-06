@@ -29,9 +29,10 @@ module Google
             @max_bytes = max_bytes
             @interval = interval
 
-            # Using a Map ensures there is only one entry for each ack_id in the
-            # buffer. Adding an entry again will overwrite the previous entry.
-            @register = Concurrent::Map.new
+            # Using a Hash ensures there is only one entry for each ack_id in
+            # the buffer. Adding an entry again will overwrite the previous
+            # entry.
+            @register = {}
 
             @task = Concurrent::TimerTask.new(execution_interval: interval) do
               flush!
