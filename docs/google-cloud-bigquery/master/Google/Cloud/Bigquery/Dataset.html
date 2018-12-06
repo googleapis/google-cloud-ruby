@@ -775,7 +775,7 @@ within a specific project.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#load_job-instance_method" title="#load_job (instance method)">#<strong>load_job</strong>(table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil, null_marker: nil) {|updater| ... } &#x21d2; Google::Cloud::Bigquery::LoadJob </a>
+      <a href="#load_job-instance_method" title="#load_job (instance method)">#<strong>load_job</strong>(table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil, skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil, null_marker: nil, dryrun: nil) {|updater| ... } &#x21d2; Google::Cloud::Bigquery::LoadJob </a>
     
 
     
@@ -3773,7 +3773,7 @@ updater to modify the load job and its schema.</p>
       <div class="method_details ">
   <h3 class="signature " id="load_job-instance_method">
   
-    #<strong>load_job</strong>(table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil, null_marker: nil) {|updater| ... } &#x21d2; <tt><span class='object_link'><a href="LoadJob.html" title="Google::Cloud::Bigquery::LoadJob (class)">Google::Cloud::Bigquery::LoadJob</a></span></tt> 
+    #<strong>load_job</strong>(table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil, skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil, null_marker: nil, dryrun: nil) {|updater| ... } &#x21d2; <tt><span class='object_link'><a href="LoadJob.html" title="Google::Cloud::Bigquery::LoadJob (class)">Google::Cloud::Bigquery::LoadJob</a></span></tt> 
   
 
   
@@ -4227,23 +4227,6 @@ file that should be skipped.</p>
   
     <li>
       
-        <span class='name'>dryrun</span>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>If set, don&#39;t actually run this job. Behavior
-is undefined however for non-query jobs and may result in an error.
-Deprecated.</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
         <span class='name'>schema</span>
       
       
@@ -4325,6 +4308,23 @@ dashes. International characters are allowed. Label values are
 optional. Label keys must start with a letter and each label in the
 list must have a different key. See <a href="https://cloud.google.com/bigquery/docs/creating-managing-labels#requirements">Requirements for
 labels</a>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dryrun</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If set, don&#39;t actually run this job. Behavior
+is undefined however for non-query jobs and may result in an error.
+Deprecated.</p>
 </div>
       
     </li>
@@ -4431,8 +4431,8 @@ updater to modify the load job and its schema.</p>
              <span class='label'>projection_fields:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>jagged_rows:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>quoted_newlines:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>encoding:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>delimiter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>ignore_unknown:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max_bad_records:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>quote:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-             <span class='label'>skip_leading:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dryrun:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>schema:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>job_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-             <span class='label'>prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>autodetect:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>null_marker:</span> <span class='kw'>nil</span>
+             <span class='label'>skip_leading:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>schema:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>job_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>prefix:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+             <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>autodetect:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>null_marker:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>dryrun:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
 
   <span class='id identifier rubyid_updater'>updater</span> <span class='op'>=</span> <span class='id identifier rubyid_load_job_updater'>load_job_updater</span> <span class='id identifier rubyid_table_id'>table_id</span><span class='comma'>,</span>
