@@ -16,6 +16,8 @@
 require "google/cloud/spanner/data"
 require "google/cloud/spanner/results"
 require "google/cloud/spanner/commit"
+require "google/cloud/spanner/batch_update"
+require "google/cloud/spanner/batch_update_results"
 
 module Google
   module Cloud
@@ -264,6 +266,39 @@ module Google
                                           seqno: seqno
           @last_updated_at = Time.now
           results
+        end
+
+        ##
+        # Executes DML statements in a batch.
+        #
+        # @param [Google::Spanner::V1::TransactionSelector] transaction The
+        #   transaction selector value to send. Only used for single-use
+        #   transactions.
+        # @param [Integer] seqno A per-transaction sequence number used to
+        #   identify this request.
+        # @yield [batch_update] a batch update object
+        # @yieldparam [Google::Cloud::Spanner::BatchUpdate] batch_update a batch
+        #   update object accepting DML statements and optional parameters and
+        #   types of the parameters.
+        #
+        # @return [Google::Cloud::Spanner::BatchUpdateResults] A result object
+        #   containing a status object with an error if one occurred, and a list
+        #   with the exact number of rows that were modified for each successful
+        #   DML statement.
+        #
+        def batch_update transaction, seqno
+          ensure_service!
+
+          raise ArgumentError, "block is required" unless block_given?
+          batch = BatchUpdate.new
+
+          yield batch
+
+          results = service.execute_batch_dml path, batch.statements,
+                                              transaction, seqno
+
+          @last_updated_at = Time.now
+          BatchUpdateResults.from_grpc results
         end
 
         ##

@@ -273,6 +273,18 @@ module Google
           end
         end
 
+        def execute_batch_dml session_name, statements, transaction, seqno
+          opts = default_options_from_session session_name
+          statements = statements.map(&:to_grpc)
+          execute do
+            service.execute_batch_dml session_name,
+                                      statements,
+                                      transaction: transaction,
+                                      seqno: seqno,
+                                      options: opts
+          end
+        end
+
         def streaming_read_table session_name, table_name, columns, keys: nil,
                                  index: nil, transaction: nil, limit: nil,
                                  resume_token: nil, partition_token: nil
