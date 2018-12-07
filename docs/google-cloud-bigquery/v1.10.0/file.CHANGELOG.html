@@ -1,0 +1,401 @@
+---
+layout: yard_main
+title: "File: CHANGELOG - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "CHANGELOG";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="file_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: CHANGELOG</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>Release History</h1>
+
+<h3>1.10.0 / 2018-12-06</h3>
+
+<ul>
+<li>Add dryrun param to Project#query_job and Dataset#query_job</li>
+<li>Add copy and extract methods to Project
+
+<ul>
+<li>Add Project#extract and Project#extract_job</li>
+<li>Add Project#copy and Project#copy_job</li>
+<li>Deprecate dryrun param in Table#copy_job, Table#extract_job and 
+Table#load_job</li>
+</ul></li>
+<li>Fix memoization in Dataset#exists? and Table#exists?
+
+<ul>
+<li>Add force param to Dataset#exists? and Table#exists?</li>
+</ul></li>
+</ul>
+
+<h3>1.9.0 / 2018-10-25</h3>
+
+<ul>
+<li>Add clustering fields to LoadJob, QueryJob and Table</li>
+<li>Add DDL/DML support
+
+<ul>
+<li>Update QueryJob#data to not return table rows for DDL/DML</li>
+<li>Add DDL/DML statistics attrs to QueryJob and Data</li>
+</ul></li>
+<li>Add #numeric to Table::Updater and LoadJob::Updater (@leklund)</li>
+</ul>
+
+<h3>1.8.2 / 2018-09-20</h3>
+
+<ul>
+<li>Update documentation.
+
+<ul>
+<li>Change documentation URL to googleapis GitHub org.</li>
+</ul></li>
+<li>Fix circular require warning.</li>
+</ul>
+
+<h3>1.8.1 / 2018-09-12</h3>
+
+<ul>
+<li>Add missing documentation files to package.</li>
+</ul>
+
+<h3>1.8.0 / 2018-09-10</h3>
+
+<ul>
+<li>Add support for OCR format.</li>
+<li>Update documentation.</li>
+</ul>
+
+<h3>1.7.1 / 2018-08-21</h3>
+
+<ul>
+<li>Update documentation.</li>
+</ul>
+
+<h3>1.7.0 / 2018-06-29</h3>
+
+<ul>
+<li>Add #schema_update_options to LoadJob and #schema_update_options= to LoadJob::Updater.</li>
+<li>Add time partitioning for the target table to LoadJob and QueryJob.</li>
+<li>Add #statement_type, #ddl_operation_performed, #ddl_target_table to QueryJob.</li>
+</ul>
+
+<h3>1.6.0 / 2018-06-22</h3>
+
+<ul>
+<li>Documentation updates.</li>
+<li>Updated dependencies.</li>
+</ul>
+
+<h3>1.5.0 / 2018-05-21</h3>
+
+<ul>
+<li>Add Schema.load and Schema.dump to read/write a table schema from/to a JSON file or other IO source. The JSON file schema is the same as for the bq CLI.</li>
+<li>Add support for the NUMERIC data type.</li>
+<li>Add documentation for enabling logging.</li>
+</ul>
+
+<h3>1.4.0 / 2018-05-07</h3>
+
+<ul>
+<li>Add Parquet support to #load and #load_job.</li>
+</ul>
+
+<h3>1.3.0 / 2018-04-05</h3>
+
+<ul>
+<li>Add insert_ids option to #insert in Dataset, Table, and AsyncInserter.</li>
+<li>Add BigQuery Project#service_account_email.</li>
+<li>Add support for setting Job location to nil in blocks for Job properties.</li>
+</ul>
+
+<h3>1.2.0 / 2018-03-31</h3>
+
+<ul>
+<li>Add geo-regionalization (location) support to Jobs.</li>
+<li>Add Project#encryption support to Jobs.</li>
+<li>Rename Encryption to EncryptionConfiguration.</li>
+<li>Add blocks for setting Job properties to all Job creation methods.</li>
+<li>Add support for lists of URLs to #load and #load_job. (jeremywadsack)</li>
+<li>Fix Schema::Field type helpers.</li>
+<li>Fix Table#load example in README.</li>
+</ul>
+
+<h3>1.1.0 / 2018-02-27</h3>
+
+<ul>
+<li>Support table partitioning by field.</li>
+<li>Support Shared Configuration.</li>
+<li>Improve AsyncInserter performance.</li>
+</ul>
+
+<h3>1.0.0 / 2018-01-10</h3>
+
+<ul>
+<li>Release 1.0.0</li>
+<li>Update authentication documentation
+
+<ul>
+<li>Update Data documentation and code examples</li>
+<li>Remove reference to sync and async queries</li>
+</ul></li>
+<li>Allow use of URI objects for Dataset#load, Table#load, and Table#load_job</li>
+</ul>
+
+<h3>0.30.0 / 2017-11-14</h3>
+
+<ul>
+<li>Add <code>Google::Cloud::Bigquery::Credentials</code> class.</li>
+<li>Rename constructor arguments to <code>project_id</code> and <code>credentials</code>.
+(The previous arguments <code>project</code> and <code>keyfile</code> are still supported.)</li>
+<li>Support creating <code>Dataset</code> and <code>Table</code> objects without making API calls using
+<code>skip_lookup</code> argument.
+
+<ul>
+<li>Add <code>Dataset#reference?</code> and <code>Dataset#resource?</code> helper method.</li>
+<li>Add <code>Table#reference?</code> and <code>Table#resource?</code> and <code>Table#resource_partial?</code>
+and <code>Table#resource_full?</code> helper methods.</li>
+</ul></li>
+<li><code>Dataset#insert_async</code> and <code>Dataset#insert_async</code> now yields a
+<code>Table::AsyncInserter::Result</code> object.</li>
+<li><code>View</code> is removed, now uses <code>Table</code> class.
+
+<ul>
+<li>Needed to support <code>skip_lookup</code> argument.</li>
+<li>Calling <code>Table#data</code> on a view now raises (breaking change).</li>
+</ul></li>
+<li>Performance improvements for queries.</li>
+<li>Updated <code>google-api-client</code>, <code>googleauth</code> dependencies.</li>
+</ul>
+
+<h3>0.29.0 / 2017-10-09</h3>
+
+<p>This is a major release with many new features and several breaking changes.</p>
+
+<h4>Major Changes</h4>
+
+<ul>
+<li>All queries now use a new implementation, using a job and polling for results.</li>
+<li>The copy, load, extract methods now all have high-level and low-level versions, similar to <code>query</code> and <code>query_job</code>.</li>
+<li>Added asynchronous row insertion, allowing data to be collected and inserted in batches.</li>
+<li>Support external data sources for both queries and table views.</li>
+<li>Added create-on-insert support for tables.</li>
+<li>Allow for customizing job IDs to aid in organizing jobs.</li>
+</ul>
+
+<h4>Change Details</h4>
+
+<ul>
+<li>Update high-level queries as follows:
+
+<ul>
+<li>Update <code>QueryJob#wait_until_done!</code> to use <code>getQueryResults</code>.</li>
+<li>Update <code>Project#query</code> and <code>Dataset#query</code> with breaking changes:</li>
+<li>Remove <code>timeout</code> and <code>dryrun</code> parameters.</li>
+<li>Change return type from <code>QueryData</code> to <code>Data</code>.</li>
+<li>Add <code>QueryJob#data</code></li>
+<li>Alias <code>QueryJob#query_results</code> to <code>QueryJob#data</code> with breaking changes:</li>
+<li>Remove the <code>timeout</code> parameter.</li>
+<li>Change the return type from <code>QueryData</code> to <code>Data</code>.</li>
+<li>Update <code>View#data</code> with breaking changes:</li>
+<li>Remove the <code>timeout</code> and <code>dryrun</code> parameters.</li>
+<li>Change the return type from <code>QueryData</code> to <code>Data</code>.</li>
+<li>Remove <code>QueryData</code>.</li>
+<li>Update <code>Project#query</code> and <code>Dataset#query</code> with improved errors, replacing the previous simple error with one that contains all available information for why the job failed.</li>
+</ul></li>
+<li>Rename <code>Dataset#load</code> to <code>Dataset#load_job</code>; add high-level, synchronous version as <code>Dataset#load</code>.</li>
+<li>Rename <code>Table#copy</code> to <code>Table#copy_job</code>; add high-level, synchronous version as <code>Table#copy</code>.</li>
+<li>Rename <code>Table#extract</code> to <code>Table#extract_job</code>; add high-level, synchronous version as <code>Table#extract</code>.</li>
+<li>Rename <code>Table#load</code> to <code>Table#load_job</code>; add high-level, synchronous version as <code>Table#load</code>.</li>
+<li>Add support for querying external data sources with <code>External</code>.</li>
+<li>Add <code>Table::AsyncInserter</code>, <code>Dataset#insert_async</code> and <code>Table#insert_async</code> to collect and insert rows in batches.</li>
+<li>Add <code>Dataset#insert</code> to support creating a table while inserting rows if the table does not exist.</li>
+<li>Update retry logic to conform to the <a href="https://cloud.google.com/bigquery/sla">BigQuery SLA</a>.
+
+<ul>
+<li>Use a minimum back-off interval of 1 second; for each consecutive error, increase the back-off interval exponentially up to 32 seconds.</li>
+<li>Retry if all error reasons are retriable, not if any of the error reasons are retriable.</li>
+</ul></li>
+<li>Add support for labels to <code>Dataset</code>, <code>Table</code>, <code>View</code> and <code>Job</code>.
+
+<ul>
+<li>Add <code>filter</code> option to <code>Project#datasets</code> and <code>Project#jobs</code>.</li>
+</ul></li>
+<li>Add support for user-defined functions to <code>Project#query_job</code>, <code>Dataset#query_job</code>, <code>QueryJob</code> and <code>View</code>.</li>
+<li>In <code>Dataset</code>, <code>Table</code>, and <code>View</code> updates, add the use of ETags for optimistic concurrency control.</li>
+<li>Update <code>Dataset#load</code> and <code>Table#load</code>:
+
+<ul>
+<li>Add <code>null_marker</code> option and <code>LoadJob#null_marker</code>.</li>
+<li>Add <code>autodetect</code> option and <code>LoadJob#autodetect?</code>.</li>
+</ul></li>
+<li>Fix the default value for <code>LoadJob#quoted_newlines?</code>.</li>
+<li>Add <code>job_id</code> and <code>prefix</code> options for controlling client-side job ID generation to <code>Project#query_job</code>, <code>Dataset#load</code>, <code>Dataset#query_job</code>, <code>Table#copy</code>, <code>Table#extract</code>, and <code>Table#load</code>.</li>
+<li>Add <code>Job#user_email</code>.</li>
+<li>Set the maximum delay of <code>Job#wait_until_done!</code> polling to 60 seconds.</li>
+<li>Automatically retry <code>Job#cancel</code>.</li>
+<li>Allow users to specify if a <code>View</code> query is using Standard vs. Legacy SQL.</li>
+<li>Add <code>project</code> option to <code>Project#query_job</code>.</li>
+<li>Add <code>QueryJob#query_plan</code>, <code>QueryJob::Stage</code> and <code>QueryJob::Step</code> to expose query plan information.</li>
+<li>Add <code>Table#buffer_bytes</code>, <code>Table#buffer_rows</code> and <code>Table#buffer_oldest_at</code> to expose streaming buffer information.</li>
+<li>Update <code>Dataset#insert</code> and <code>Table#insert</code> to raise an error if <code>rows</code> is empty.</li>
+<li>Update <code>Error</code> with a mapping from code 412 to <code>FailedPreconditionError</code>.</li>
+<li>Update <code>Data#schema</code> to freeze the returned <code>Schema</code> object (as in <code>View</code> and <code>LoadJob</code>.)</li>
+</ul>
+
+<h3>0.28.0 / 2017-09-28</h3>
+
+<ul>
+<li>Update Google API Client dependency to 0.14.x.</li>
+</ul>
+
+<h3>0.27.1 / 2017-07-11</h3>
+
+<ul>
+<li>Add <code>InsertResponse::InsertError#index</code> (zedalaye)</li>
+</ul>
+
+<h3>0.27.0 / 2017-06-28</h3>
+
+<ul>
+<li>Add <code>maximum_billing_tier</code> and <code>maximum_bytes_billed</code> to <code>QueryJob</code>, <code>Project#query_job</code> and <code>Dataset#query_job</code>.</li>
+<li>Add <code>Dataset#load</code> to support creating, configuring and loading a table in one API call.</li>
+<li>Add <code>Project#schema</code>.</li>
+<li>Upgrade dependency on Google API Client.</li>
+<li>Update gem spec homepage links.</li>
+<li>Update examples of field access to use symbols instead of strings in the documentation.</li>
+</ul>
+
+<h3>0.26.0 / 2017-04-05</h3>
+
+<ul>
+<li>Upgrade dependency on Google API Client</li>
+</ul>
+
+<h3>0.25.0 / 2017-03-31</h3>
+
+<ul>
+<li>Add <code>#cancel</code> to <code>Job</code></li>
+<li>Updated documentation</li>
+</ul>
+
+<h3>0.24.0 / 2017-03-03</h3>
+
+<p>Major release, several new features, some breaking changes.</p>
+
+<ul>
+<li>Standard SQL is now the default syntax.</li>
+<li>Legacy SQL syntax can be enabled by providing <code>legacy_sql: true</code>.</li>
+<li>Several fixes to how data values are formatted when returned from BigQuery.</li>
+<li>Returned data rows are now hashes with Symbol keys instead of String keys.</li>
+<li>Several fixes to how data values are formatted when importing to BigQuery.</li>
+<li>Several improvements to manipulating table schema fields.</li>
+<li>Removal of <code>Schema#fields=</code> and <code>Data#raw</code> methods.</li>
+<li>Removal of <code>fields</code> argument from <code>Dataset#create_table</code> method.</li>
+<li>Dependency on Google API Client has been updated to 0.10.x.</li>
+</ul>
+
+<h3>0.23.0 / 2016-12-8</h3>
+
+<ul>
+<li>Support Query Parameters using <code>params</code> method arguments to <code>query</code> and <code>query_job</code></li>
+<li>Add <code>standard_sql</code>/<code>legacy_sql</code> method arguments to to <code>query</code> and <code>query_job</code></li>
+<li>Add <code>standard_sql?</code>/<code>legacy_sql?</code> attributes to <code>QueryJob</code></li>
+<li>Many documentation improvements</li>
+</ul>
+
+<h3>0.21.0 / 2016-10-20</h3>
+
+<ul>
+<li>New service constructor Google::Cloud::Bigquery.new</li>
+</ul>
+
+<h3>0.20.2 / 2016-09-30</h3>
+
+<ul>
+<li>Add list of projects that the current credentials can access. (remi)</li>
+</ul>
+
+<h3>0.20.1 / 2016-09-02</h3>
+
+<ul>
+<li>Fix for timeout on uploads.</li>
+</ul>
+
+<h3>0.20.0 / 2016-08-26</h3>
+
+<p>This gem contains the Google BigQuery service implementation for the <code>google-cloud</code> gem. The <code>google-cloud</code> gem replaces the old <code>gcloud</code> gem. Legacy code can continue to use the <code>gcloud</code> gem.</p>
+
+<ul>
+<li>Namespace is now <code>Google::Cloud</code></li>
+<li>The <code>google-cloud</code> gem is now an umbrella package for individual gems</li>
+</ul>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

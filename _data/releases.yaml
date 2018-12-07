@@ -54,6 +54,7 @@ google-cloud:
 google-cloud-asset:
 - v0.1.1
 google-cloud-bigquery:
+- v1.10.0
 - v1.9.0
 - v1.8.2
 - v1.8.1
