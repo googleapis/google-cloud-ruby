@@ -41,7 +41,6 @@ module Google
           def project_path project
             self.class.project_path project
           end
-        
         end
       end
     end

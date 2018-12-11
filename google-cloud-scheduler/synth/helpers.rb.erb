@@ -34,7 +34,7 @@ module Google
       ""
     ]
   end
-  helpers.map { |line| '          ' + line }.join("\n")[0...-2]
+  helpers.map { |line| '          ' + line }[0...-1].join("\n")
 %>
         end
       end
