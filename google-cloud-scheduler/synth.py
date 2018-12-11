@@ -83,7 +83,7 @@ for class_method in class_methods:
             '',
             '',
             f'          def {class_method} *args',
-            f'            self.{class_method} *args',
+            f'            self.class.{class_method} *args',
             '          end',
             '        end'
         ])
