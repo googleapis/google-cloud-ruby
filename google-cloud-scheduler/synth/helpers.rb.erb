@@ -30,10 +30,11 @@ module Google
       "# @return [String]",
       "def #{method} #{helper_params}",
       "  self.class.#{method} #{helper_params}",
+      "end",
+      ""
     ]
-    helpers += ["end", ""]
   end
-  helpers.map { |line| '          ' + line }.join("\n")[0...-1]
+  helpers.map { |line| '          ' + line }.join("\n")[0...-2]
 %>
         end
       end
