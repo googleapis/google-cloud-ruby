@@ -35,16 +35,15 @@ v1beta1_library = gapic.ruby_library(
 )
 
 s.copy(v1beta1_library / 'lib')
-s.copy(v1beta1_library / 'acceptance')
 s.copy(v1beta1_library / 'test')
 s.copy(v1beta1_library / 'README.md')
 s.copy(v1beta1_library / 'LICENSE')
 s.copy(v1beta1_library / '.gitignore')
 s.copy(v1beta1_library / '.yardopts')
-s.copy(v1beta1_library / 'google-cloud-vision.gemspec', merge=ruby.merge_gemspec)
+s.copy(v1beta1_library / 'google-cloud-scheduler.gemspec', merge=ruby.merge_gemspec)
 
 s.replace(
-    'google-cloud-vision.gemspec',
+    'google-cloud-scheduler.gemspec',
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.59.2"'
 )
@@ -67,30 +66,21 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby'
 )
 
-# https://github.com/googleapis/gapic-generator-ruby/issues/6
-call('bundle install', shell=True)
-
-class_methods = ''.join(check_output(['bundle', 'exec', 'ruby', '-e', (
-    'require "google/cloud/scheduler/v1beta1";'
-    'print Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.methods(false).join(",")')
-    ]).decode("utf-8")).split(',')
-
-for class_method in class_methods:
-    s.replace(
-        'lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb',
-        '\n        end',
-        '\n'.join([
-            '',
-            '',
-            f'          def {class_method} *args',
-            f'            self.class.{class_method} *args',
-            '          end',
-            '        end'
-        ])
-    )
-
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
     f'lib/google/cloud/scheduler/v1beta1/*_client.rb',
     '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
     '\\1\\2# @private\n\\2\\3')
+
+# Require the helpers file
+s.replace(
+    f'lib/google/cloud/scheduler/v1beta1.rb',
+    f'require "google/cloud/scheduler/v1beta1/cloud_scheduler_client"',
+    '\n'.join([
+        f'require "google/cloud/scheduler/v1beta1/cloud_scheduler_client"',
+        f'require "google/cloud/scheduler/v1beta1/helpers"',
+    ])
+)
+
+# Generate the helper methods
+call('bundle update && bundle exec rake generate_partials', shell=True)

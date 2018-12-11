@@ -602,18 +602,6 @@ module Google
             req = Google::Gax::to_proto(req, Google::Cloud::Scheduler::V1beta1::RunJobRequest)
             @run_job.call(req, options, &block)
           end
-
-          def job_path *args
-            self.class.job_path *args
-          end
-
-          def location_path *args
-            self.class.location_path *args
-          end
-
-          def project_path *args
-            self.class.project_path *args
-          end
         end
       end
     end

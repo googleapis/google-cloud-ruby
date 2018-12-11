@@ -14,6 +14,7 @@
 
 
 require "google/cloud/scheduler/v1beta1/cloud_scheduler_client"
+require "google/cloud/scheduler/v1beta1/helpers"
 
 module Google
   module Cloud

@@ -93,6 +93,24 @@ namespace :ci do
   end
 end
 
+task :generate_partials do
+  require "google/cloud/scheduler"
+  Google::Cloud::Scheduler::AVAILABLE_VERSIONS.each do |version|
+    require "google/cloud/scheduler/#{version}/cloud_scheduler_client"
+    class_methods = Google::Cloud::Scheduler.const_get(version.capitalize)::CloudSchedulerClient.methods false
+    file_path = "./lib/google/cloud/scheduler/#{version}/helpers.rb"
+    File.open(file_path, "w") do |f|
+      config = ERB.new(File.read("./synth/helpers.rb.erb"))
+      f.write(config.result(binding))
+    end
+    file_path = "./test/google/cloud/scheduler/#{version}/helpers_test.rb"
+    File.open(file_path, "w") do |f|
+      config = ERB.new(File.read("./synth/helpers_test.rb.erb"))
+      f.write(config.result(binding))
+    end
+  end
+end
+
 task :default => :test
 
 def header str, token = "#"
