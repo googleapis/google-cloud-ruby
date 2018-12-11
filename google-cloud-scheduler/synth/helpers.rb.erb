@@ -21,7 +21,7 @@ module Google
 <%= 
   helpers = []
   class_methods.each do |method|
-    helpers << "# Alias for Google::Cloud::Scheduler::#{version.capitalize}.#{method}."
+    helpers << "# Alias for Google::Cloud::Scheduler::#{version.capitalize}::CloudSchedulerClient.#{method}."
     params[method].each do |param|
       helpers << "# @param #{param} [String]"
     end
