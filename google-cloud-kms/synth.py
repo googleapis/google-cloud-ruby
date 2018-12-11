@@ -19,6 +19,7 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 import re
+from subprocess import call
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -95,3 +96,16 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.59.2"'
 )
+
+# Require the helpers file
+s.replace(
+    f'lib/google/cloud/kms/v1.rb',
+    f'require "google/cloud/kms/v1/key_management_service_client"',
+    '\n'.join([
+        f'require "google/cloud/kms/v1/key_management_service_client"',
+        f'require "google/cloud/kms/v1/helpers"',
+    ])
+)
+
+# Generate the helper methods
+call('bundle update && bundle exec rake generate_partials', shell=True)

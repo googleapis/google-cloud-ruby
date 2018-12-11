@@ -14,6 +14,7 @@
 
 
 require "google/cloud/kms/v1/key_management_service_client"
+require "google/cloud/kms/v1/helpers"
 require "google/cloud/kms/v1/service_pb"
 
 module Google

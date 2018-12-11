@@ -92,6 +92,29 @@ namespace :ci do
   end
 end
 
+task :generate_partials do
+  require "google/cloud/kms"
+  Google::Cloud::Kms::AVAILABLE_VERSIONS.each do |version|
+    require "google/cloud/kms/#{version}/key_management_service_client"
+    class_methods = Google::Cloud::Kms.const_get(version.capitalize)::KeyManagementServiceClient.methods false
+    file_path = "./lib/google/cloud/kms/#{version}/helpers.rb"
+    params = Hash[class_methods.collect { |method_name| [method_name, ""] } ]
+    params.each do |method_name, _|
+      args = Google::Cloud::Kms.const_get(version.capitalize)::KeyManagementServiceClient.method(method_name).parameters
+      params[method_name] = args.map { |arg| arg.last }
+    end
+    File.open(file_path, "w") do |f|
+      config = ERB.new(File.read("./synth/helpers.rb.erb"))
+      f.write(config.result(binding))
+    end
+    file_path = "./test/google/cloud/kms/#{version}/helpers_test.rb"
+    File.open(file_path, "w") do |f|
+      config = ERB.new(File.read("./synth/helpers_test.rb.erb"))
+      f.write(config.result(binding))
+    end
+  end
+end
+
 task :default => :test
 
 def header str, token = "#"
