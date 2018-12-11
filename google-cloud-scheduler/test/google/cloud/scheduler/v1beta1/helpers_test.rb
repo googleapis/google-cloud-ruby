@@ -28,7 +28,7 @@ class MockSchedulerCredentials_v1beta1 < Google::Cloud::Scheduler::V1beta1::Cred
 
   def updater_proc
     proc do
-      raise "The method was trying to make a grpc request. This should not " \
+      raise "The client was trying to make a grpc request. This should not " \
           "happen since the grpc layer is being mocked."
     end
   end

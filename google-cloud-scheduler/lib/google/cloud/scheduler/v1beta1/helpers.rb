@@ -19,24 +19,27 @@ module Google
         class CloudSchedulerClient
 
           # Alias for Google::Cloud::Scheduler::V1beta1.location_path.
-          # @param args [Array<String>]
+          # @param project [String]
+          # @param location [String]
           # @return [String]
-          def location_path *args
-            self.class.location_path *args
+          def location_path project, location
+            self.class.location_path project, location
           end
           
           # Alias for Google::Cloud::Scheduler::V1beta1.job_path.
-          # @param args [Array<String>]
+          # @param project [String]
+          # @param location [String]
+          # @param job [String]
           # @return [String]
-          def job_path *args
-            self.class.job_path *args
+          def job_path project, location, job
+            self.class.job_path project, location, job
           end
           
           # Alias for Google::Cloud::Scheduler::V1beta1.project_path.
-          # @param args [Array<String>]
+          # @param project [String]
           # @return [String]
-          def project_path *args
-            self.class.project_path *args
+          def project_path project
+            self.class.project_path project
           end
          
         end

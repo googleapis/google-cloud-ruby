@@ -99,6 +99,11 @@ task :generate_partials do
     require "google/cloud/scheduler/#{version}/cloud_scheduler_client"
     class_methods = Google::Cloud::Scheduler.const_get(version.capitalize)::CloudSchedulerClient.methods false
     file_path = "./lib/google/cloud/scheduler/#{version}/helpers.rb"
+    params = Hash[class_methods.collect { |method_name| [method_name, ""] } ]
+    params.each do |method_name, _|
+      args = Google::Cloud::Scheduler.const_get(version.capitalize)::CloudSchedulerClient.method(method_name).parameters
+      params[method_name] = args.map { |arg| arg.last }
+    end
     File.open(file_path, "w") do |f|
       config = ERB.new(File.read("./synth/helpers.rb.erb"))
       f.write(config.result(binding))
