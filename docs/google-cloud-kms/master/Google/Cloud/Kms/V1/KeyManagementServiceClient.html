@@ -82,7 +82,9 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/kms/v1/key_management_service_client.rb</dd>
+    <dd>lib/google/cloud/kms/v1/key_management_service_client.rb<span class="defines">,<br />
+  lib/google/cloud/kms/v1/helpers.rb</span>
+</dd>
   </dl>
   
 </div>
@@ -445,6 +447,75 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#crypto_key_path-instance_method" title="#crypto_key_path (instance method)">#<strong>crypto_key_path</strong>(project, location, key_ring, crypto_key)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#crypto_key_path_path-instance_method" title="#crypto_key_path_path (instance method)">#<strong>crypto_key_path_path</strong>(project, location, key_ring, crypto_key_path)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#crypto_key_version_path-instance_method" title="#crypto_key_version_path (instance method)">#<strong>crypto_key_version_path</strong>(project, location, key_ring, crypto_key, crypto_key_version)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#decrypt-instance_method" title="#decrypt (instance method)">#<strong>decrypt</strong>(name, ciphertext, additional_authenticated_data: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Kms::V1::DecryptResponse </a>
     
 
@@ -654,6 +725,29 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#key_ring_path-instance_method" title="#key_ring_path (instance method)">#<strong>key_ring_path</strong>(project, location, key_ring)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#list_crypto_key_versions-instance_method" title="#list_crypto_key_versions (instance method)">#<strong>list_crypto_key_versions</strong>(parent, page_size: nil, view: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Cloud::Kms::V1::CryptoKeyVersion&gt; </a>
     
 
@@ -715,6 +809,29 @@ this service.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Lists <span class='object_link'><a href="KeyRing.html" title="Google::Cloud::Kms::V1::KeyRing (class)">KeyRings</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#location_path-instance_method" title="#location_path (instance method)">#<strong>location_path</strong>(project, location)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path.</p>
 </div></span>
   
 </li>
@@ -3134,6 +3251,320 @@ retries, etc.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="crypto_key_path-instance_method">
+  
+    #<strong>crypto_key_path</strong>(project, location, key_ring, crypto_key)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_ring</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>crypto_key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/helpers.rb', line 55</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_crypto_key_path'>crypto_key_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key'>crypto_key</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'>crypto_key_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key'>crypto_key</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="crypto_key_path_path-instance_method">
+  
+    #<strong>crypto_key_path_path</strong>(project, location, key_ring, crypto_key_path)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_ring</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>crypto_key_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/helpers.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_crypto_key_path_path'>crypto_key_path_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key_path'>crypto_key_path</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path_path'>crypto_key_path_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key_path'>crypto_key_path</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="crypto_key_version_path-instance_method">
+  
+    #<strong>crypto_key_version_path</strong>(project, location, key_ring, crypto_key, crypto_key_version)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_ring</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>crypto_key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>crypto_key_version</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/helpers.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_crypto_key_version_path'>crypto_key_version_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key'>crypto_key</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_version_path'>crypto_key_version_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key'>crypto_key</span><span class='comma'>,</span> <span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="decrypt-instance_method">
   
     #<strong>decrypt</strong>(name, ciphertext, additional_authenticated_data: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="DecryptResponse.html" title="Google::Cloud::Kms::V1::DecryptResponse (class)">Google::Cloud::Kms::V1::DecryptResponse</a></span></tt> 
@@ -4653,6 +5084,96 @@ retries, etc.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="key_ring_path-instance_method">
+  
+    #<strong>key_ring_path</strong>(project, location, key_ring)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_ring</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/helpers.rb', line 35</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_key_ring_path'>key_ring_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'>key_ring_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span><span class='comma'>,</span> <span class='id identifier rubyid_key_ring'>key_ring</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="list_crypto_key_versions-instance_method">
   
     #<strong>list_crypto_key_versions</strong>(parent, page_size: nil, view: nil, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">Google::Cloud::Kms::V1::CryptoKeyVersion</a></span>&gt;</tt> 
@@ -5335,6 +5856,85 @@ object.</p>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ListKeyRingsRequest.html" title="Google::Cloud::Kms::V1::ListKeyRingsRequest (class)">ListKeyRingsRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@list_key_rings</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="location_path-instance_method">
+  
+    #<strong>location_path</strong>(project, location)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>location</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/kms/v1/helpers.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_location_path'>location_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_location_path'>location_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_location'>location</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
