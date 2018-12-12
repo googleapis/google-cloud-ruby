@@ -143,6 +143,8 @@ end
 task :generate_partials do
   require "google/cloud/vision"
   Google::Cloud::Vision::AVAILABLE_VERSIONS.each do |version|
+
+    # Prepare ImageAnnotator helpers
     require "google/cloud/vision/#{version}/image_annotator_client"
     helper_hash = {}
     Google::Cloud::Vision.const_get(version.capitalize)::Feature::Type.constants.each do |feature_type|
@@ -151,14 +153,34 @@ task :generate_partials do
       method_name += "_detection" unless method_name.include? "detection"
       helper_hash[method_name] = feature_type
     end
+    
+    # Prepare ProductSearch helpers
+    require "google/cloud/vision/#{version}/product_search_client"
+    class_methods = Google::Cloud::Vision.const_get(version.capitalize)::ProductSearchClient.methods false
+    params = Hash[class_methods.collect { |method_name| [method_name, ""] } ]
+    params.each do |method_name, _|
+      args = Google::Cloud::Vision.const_get(version.capitalize)::ProductSearchClient.method(method_name).parameters
+      params[method_name] = args.map { |arg| arg.last }
+    end
+
+    # Generate ImageAnnotator and ProductSearch helpers
     file_path = "./lib/google/cloud/vision/#{version}/helpers.rb"
     File.open(file_path, "w") do |f|
       config = ERB.new(File.read("./synth/helpers.rb.erb"))
       f.write(config.result(binding))
     end
+
+    # Generate ImageAnnotator and ProductSearch tests
     file_path = "./test/google/cloud/vision/#{version}/helpers_test.rb"
     File.open(file_path, "w") do |f|
       config = ERB.new(File.read("./synth/helpers_test.rb.erb"))
+      f.write(config.result(binding))
+    end
+
+    # Generate acceptance tests
+    file_path = "./acceptance/google/cloud/vision/#{version}/helpers_smoke_test.rb"
+    File.open(file_path, "w") do |f|
+      config = ERB.new(File.read("./synth/helpers_smoke_test.rb.erb"))
       f.write(config.result(binding))
     end
   end

@@ -43,6 +43,8 @@ module Google
       "#   Optional. Defaults to 10. When async is true, this specifies the number of input files per output json.",
       "# @param destination [String]",
       "#   Required only if async is true. A Google Cloud Storage location for storing the output.",
+      "# @param image_context [Hash<Any>]",
+      "#   Optional. Image context and/or feature-specific parameters.",
       "# @yield [result, operation] Access the result along with the RPC operation",
       "# @yieldparam result [Google::Cloud::Vision::V1p3beta1::BatchAnnotateImagesResponse]",
       "# @yieldparam operation [GRPC::ActiveCall::Operation]",
@@ -66,6 +68,7 @@ module Google
       "  mime_type: nil,",
       "  batch_size: 10,",
       "  destination: nil,",
+      "  image_context: nil,",
       "  &blk",
       "",
       "  feature = { type: :#{feature_type} }",
@@ -79,10 +82,12 @@ module Google
       "  end",
       "",
       "  requests = formatted_images.map do |img|",
-      "    {",
+      "    request = {",
       "      image: img,",
       "      features: [feature]",
       "    }",
+      "    request[:image_context] = image_context if image_context",
+      "    request",
       "  end",
       "",
       "  if async",
@@ -133,6 +138,27 @@ module Google
             raise TypeError.new("Image must be a filepath, url, or IO object") unless formatted_image
             formatted_image
           end
+        end
+
+        class ProductSearchClient
+<%= 
+  helpers = []
+  class_methods.each do |method|
+    helpers << "# Alias for Google::Cloud::Vision::#{version.capitalize}::ProductSearchClient.#{method}."
+    params[method].each do |param|
+      helpers << "# @param #{param} [String]"
+    end
+    helper_params = params[method].map(&:to_s).join(", ")
+    helpers += [
+      "# @return [String]",
+      "def #{method} #{helper_params}",
+      "  self.class.#{method} #{helper_params}",
+      "end",
+      ""
+    ]
+  end
+  helpers.map { |line| '          ' + line }[0...-1].join("\n")
+%>
         end
       end
     end

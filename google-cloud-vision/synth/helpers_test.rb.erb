@@ -21,8 +21,9 @@ require "google/cloud/vision"
 require "google/cloud/vision/<%= version %>/helpers"
 
 require "google/cloud/vision/<%= version %>/image_annotator_client"
+require "google/cloud/vision/<%= version %>/product_search_client"
 
-class MockImageAnnotatorCredentials_<%= version %> < Google::Cloud::Vision::<%= version.capitalize %>::Credentials
+class HelperMockImageAnnotatorCredentials_<%= version %> < Google::Cloud::Vision::<%= version.capitalize %>::Credentials
   def initialize method_name
     @method_name = method_name
   end
@@ -30,6 +31,18 @@ class MockImageAnnotatorCredentials_<%= version %> < Google::Cloud::Vision::<%= 
   def updater_proc
     proc do
       raise "The method `#{@method_name}` was trying to make a grpc request. This should not " \
+          "happen since the grpc layer is being mocked."
+    end
+  end
+end
+
+class HelperMockProductSearchCredentials_<%= version %> < Google::Cloud::Vision::<%= version.capitalize %>::Credentials
+  def initialize
+  end
+
+  def updater_proc
+    proc do
+      raise "The client was trying to make a grpc request. This should not " \
           "happen since the grpc layer is being mocked."
     end
   end
@@ -48,7 +61,7 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
   end
   let(:image_uri) { "http://example.com/face.jpg" }
   let(:gcs_image_uri) { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
-  let(:mock_credentials) { MockImageAnnotatorCredentials_<%= version %>.new("batch_annotate_images") }
+  let(:mock_credentials) { HelperMockImageAnnotatorCredentials_<%= version %>.new("batch_annotate_images") }
 
   def image_object image
     return { content: image.binmode.read } if image.respond_to? :binmode
@@ -160,5 +173,31 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
   end
   describe_block.pop
   describe_block.map { |line| "  " + line unless line.size == 0 }.join("\n")
+%>
+end
+
+describe Google::Cloud::Vision::<%= version.capitalize %>::ProductSearchClient do
+  let(:mock_credentials) { HelperMockProductSearchCredentials_<%= version %>.new }
+ <%= 
+  describe_block = []
+  class_methods.each do |method_name| 
+    describe_block += ["describe \"the #{method_name} instance method\" do"]
+     describe_block += [
+      "  it \"correctly calls Google::Cloud::Vision::#{version.capitalize}::ProductSearchClient.#{method_name}\" do",
+      "    Google::Cloud::Vision::#{version.capitalize}::Credentials.stub(:default, mock_credentials) do",
+      "      num_args = Google::Cloud::Vision::#{version.capitalize}::ProductSearchClient.method(\"#{method_name}\").arity",
+      "      client = Google::Cloud::Vision::ProductSearch.new version: :#{version}",
+      "      args = (0...num_args).map { \"argument\" }",
+      "      assert_equal(",
+      "        client.#{method_name}(*args),",
+      "        Google::Cloud::Vision::#{version.capitalize}::ProductSearchClient.#{method_name}(*args)",
+      "      )",
+      "    end",
+      "  end",
+      "end",
+      ""
+    ]
+  end
+  describe_block.map { |line| "  " + line unless line.size == 0 }.join("\n")[0...-1]
 %>
 end
