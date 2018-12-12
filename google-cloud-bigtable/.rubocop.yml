@@ -13,6 +13,7 @@ AllCops:
     - "test/**/*"
     - "acceptance/**/*"
     - "samples/**/*"
+  TargetRubyVersion: 2.2
 
 Documentation:
   Enabled: true

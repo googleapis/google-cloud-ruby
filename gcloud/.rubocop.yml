@@ -3,6 +3,7 @@ AllCops:
     - "gcloud.gemspec"
     - "Rakefile"
     - "test/**/*"
+  TargetRubyVersion: 2.2
 
 Documentation:
   Enabled: false

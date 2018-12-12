@@ -10,6 +10,7 @@ AllCops:
     - "lib/google/cloud/vision/v1p3beta1.rb"
     - "lib/google/cloud/vision/v1p3beta1/**/*"
     - "test/**/*"
+  TargetRubyVersion: 2.2
     
 
 Documentation:
