@@ -53,7 +53,7 @@ end
 Google::Cloud::Logging.configure do |config|
   config.project_id = "error-reporting-project"
   config.log_name = "my-app-log"
-  config.google_cloud.labels = {
+  config.labels = {
     "my-static-label" => "static-label-value",
     "my-dynamic-label" => ->(rack_env) { rack_env["HTTP_X_MY_HEADER"] }
   }
