@@ -1,0 +1,360 @@
+---
+layout: yard_main
+title: "Module: Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm";
+  relpath = '../../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span></span>
+     &raquo; 
+    <span class="title">CryptoKeyVersionAlgorithm</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The algorithm of the <span class='object_link'><a href="../CryptoKeyVersion.html" title="Google::Cloud::Kms::V1::CryptoKeyVersion (class)">CryptoKeyVersion</a></span>, indicating what
+parameters must be used for each cryptographic operation.</p>
+
+<p>The
+<span class='object_link'><a href="#GOOGLE_SYMMETRIC_ENCRYPTION-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::GOOGLE_SYMMETRIC_ENCRYPTION (constant)">GOOGLE_SYMMETRIC_ENCRYPTION</a></span>
+algorithm is usable with <span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+<span class='object_link'><a href="../CryptoKey/CryptoKeyPurpose.html#ENCRYPT_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT (constant)">ENCRYPT_DECRYPT</a></span>.</p>
+
+<p>Algorithms beginning with &quot;RSA_SIGN_&quot; are usable with <span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+<span class='object_link'><a href="../CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_SIGN-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN (constant)">ASYMMETRIC_SIGN</a></span>.</p>
+
+<p>The fields in the name after &quot;RSA_SIGN_&quot; correspond to the following
+parameters: padding algorithm, modulus bit length, and digest algorithm.</p>
+
+<p>For PSS, the salt length used is equal to the length of digest
+algorithm. For example,
+<span class='object_link'><a href="#RSA_SIGN_PSS_2048_SHA256-constant" title="Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::RSA_SIGN_PSS_2048_SHA256 (constant)">RSA_SIGN_PSS_2048_SHA256</a></span>
+will use PSS with a salt length of 256 bits or 32 bytes.</p>
+
+<p>Algorithms beginning with &quot;RSA_DECRYPT_&quot; are usable with
+<span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+<span class='object_link'><a href="../CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_DECRYPT-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT (constant)">ASYMMETRIC_DECRYPT</a></span>.</p>
+
+<p>The fields in the name after &quot;RSA_DECRYPT_&quot; correspond to the following
+parameters: padding algorithm, modulus bit length, and digest algorithm.</p>
+
+<p>Algorithms beginning with &quot;EC_SIGN_&quot; are usable with <span class='object_link'><a href="../CryptoKey.html#purpose-instance_method" title="Google::Cloud::Kms::V1::CryptoKey#purpose (method)">CryptoKey#purpose</a></span>
+<span class='object_link'><a href="../CryptoKey/CryptoKeyPurpose.html#ASYMMETRIC_SIGN-constant" title="Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN (constant)">ASYMMETRIC_SIGN</a></span>.</p>
+
+<p>The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
+parameters: elliptic curve, digest algorithm.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED-constant" class="">CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Not specified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="GOOGLE_SYMMETRIC_ENCRYPTION-constant" class="">GOOGLE_SYMMETRIC_ENCRYPTION =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Creates symmetric encryption keys.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
+      
+        <dt id="RSA_SIGN_PSS_2048_SHA256-constant" class="">RSA_SIGN_PSS_2048_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSASSA-PSS 2048 bit key with a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="RSA_SIGN_PSS_3072_SHA256-constant" class="">RSA_SIGN_PSS_3072_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSASSA-PSS 3072 bit key with a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+        <dt id="RSA_SIGN_PSS_4096_SHA256-constant" class="">RSA_SIGN_PSS_4096_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSASSA-PSS 4096 bit key with a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="RSA_SIGN_PKCS1_2048_SHA256-constant" class="">RSA_SIGN_PKCS1_2048_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSASSA-PKCS1-v1_5 with a 2048 bit key and a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span></pre></dd>
+      
+        <dt id="RSA_SIGN_PKCS1_3072_SHA256-constant" class="">RSA_SIGN_PKCS1_3072_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSASSA-PKCS1-v1_5 with a 3072 bit key and a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span></pre></dd>
+      
+        <dt id="RSA_SIGN_PKCS1_4096_SHA256-constant" class="">RSA_SIGN_PKCS1_4096_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSASSA-PKCS1-v1_5 with a 4096 bit key and a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span></pre></dd>
+      
+        <dt id="RSA_DECRYPT_OAEP_2048_SHA256-constant" class="">RSA_DECRYPT_OAEP_2048_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSAES-OAEP 2048 bit key with a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span></pre></dd>
+      
+        <dt id="RSA_DECRYPT_OAEP_3072_SHA256-constant" class="">RSA_DECRYPT_OAEP_3072_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSAES-OAEP 3072 bit key with a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span></pre></dd>
+      
+        <dt id="RSA_DECRYPT_OAEP_4096_SHA256-constant" class="">RSA_DECRYPT_OAEP_4096_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>RSAES-OAEP 4096 bit key with a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+        <dt id="EC_SIGN_P256_SHA256-constant" class="">EC_SIGN_P256_SHA256 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>ECDSA on the NIST P-256 curve with a SHA256 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span></pre></dd>
+      
+        <dt id="EC_SIGN_P384_SHA384-constant" class="">EC_SIGN_P384_SHA384 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>ECDSA on the NIST P-384 curve with a SHA384 digest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
