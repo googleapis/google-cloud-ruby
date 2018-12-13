@@ -709,7 +709,7 @@ Labels</a>.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/snapshot.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_topic'>topic</span>
-  <span class='const'><span class='object_link'><a href="Topic.html" title="Google::Cloud::Pubsub::Topic (class)">Topic</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new_lazy'>new_lazy</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+  <span class='const'><span class='object_link'><a href="Topic.html" title="Google::Cloud::Pubsub::Topic (class)">Topic</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_name'>from_name</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

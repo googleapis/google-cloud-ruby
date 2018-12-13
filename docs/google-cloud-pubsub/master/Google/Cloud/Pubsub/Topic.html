@@ -351,6 +351,52 @@ js:
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#reference%3F-instance_method" title="#reference? (instance method)">#<strong>reference?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines whether the topic object was created without retrieving the resource representation from the Pub/Sub service.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource%3F-instance_method" title="#resource? (instance method)">#<strong>resource?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines whether the topic object was created with a resource representation from the Pub/Sub service.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#subscribe-instance_method" title="#subscribe (instance method)">#<strong>subscribe</strong>(subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil)  &#x21d2; Google::Cloud::Pubsub::Subscription </a>
     
 
@@ -614,14 +660,14 @@ js:
       <pre class="lines">
 
 
-145
-146
-147
 148
-149</pre>
+149
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 148</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -684,23 +730,23 @@ js:
       <pre class="lines">
 
 
-555
-556
-557
-558
-559
 560
 561
 562
 563
-564</pre>
+564
+565
+566
+567
+568
+569</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 555</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 560</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span>
-  <span class='comment'># Always true if the object is not set as lazy
-</span>  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_lazy?'>lazy?</span>
+  <span class='comment'># Always true if the object is not set as reference
+</span>  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id identifier rubyid_reference?'>reference?</span>
   <span class='comment'># If we have a value, return it
 </span>  <span class='kw'>return</span> <span class='ivar'>@exists</span> <span class='kw'>unless</span> <span class='ivar'>@exists</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_ensure_grpc!'>ensure_grpc!</span>
@@ -731,6 +777,9 @@ Labels</a>.</p>
 <p>The returned hash is frozen and changes are not allowed. Use
 <span class='object_link'><a href="#labels=-instance_method" title="Google::Cloud::Pubsub::Topic#labels= (method)">#labels=</a></span> to update the labels for this topic.</p>
 
+<p>Makes an API call to retrieve the labels values when called on a
+reference object. See <span class='object_link'><a href="#reference%3F-instance_method" title="Google::Cloud::Pubsub::Topic#reference? (method)">#reference?</a></span>.</p>
+
 
   </div>
 </div>
@@ -760,14 +809,16 @@ Labels</a>.</p>
       <pre class="lines">
 
 
-106
-107
-108</pre>
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='id identifier rubyid_ensure_grpc!'>ensure_grpc!</span>
   <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -839,27 +890,23 @@ Labels</a>.</p>
       <pre class="lines">
 
 
-122
-123
-124
-125
-126
 127
 128
 129
-130</pre>
+130
+131
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels='>labels=</span> <span class='id identifier rubyid_new_labels'>new_labels</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Value must be a Hash</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_new_labels'>new_labels</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='id identifier rubyid_labels_map'>labels_map</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Protobuf.html" title="Google::Protobuf (module)">Protobuf</a></span></span><span class='op'>::</span><span class='const'>Map</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:string</span><span class='comma'>,</span> <span class='symbol'>:string</span><span class='rparen'>)</span>
-  <span class='const'>Hash</span><span class='lparen'>(</span><span class='id identifier rubyid_new_labels'>new_labels</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_labels_map'>labels_map</span><span class='lbracket'>[</span><span class='const'>String</span><span class='lparen'>(</span><span class='id identifier rubyid_k'>k</span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>String</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_update_grpc'>update_grpc</span> <span class='op'>=</span> <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
-  <span class='id identifier rubyid_update_grpc'>update_grpc</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='id identifier rubyid_labels_map'>labels_map</span>
+  <span class='id identifier rubyid_update_grpc'>update_grpc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub.html" title="Google::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub/V1.html" title="Google::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Pubsub/V1/Topic.html" title="Google::Pubsub::V1::Topic (class)">Topic</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
+    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='id identifier rubyid_new_labels'>new_labels</span>
   <span class='ivar'>@grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_update_topic'>update_topic</span> <span class='id identifier rubyid_update_grpc'>update_grpc</span><span class='comma'>,</span> <span class='symbol'>:labels</span>
-  <span class='ivar'>@lazy</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@resource_name</span> <span class='op'>=</span> <span class='kw'>nil</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -907,12 +954,14 @@ Labels</a>.</p>
 
 92
 93
-94</pre>
+94
+95</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='kw'>return</span> <span class='ivar'>@resource_name</span> <span class='kw'>if</span> <span class='id identifier rubyid_reference?'>reference?</span>
   <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1036,17 +1085,17 @@ topic</p>
       <pre class="lines">
 
 
-458
-459
-460
-461
-462
 463
 464
-465</pre>
+465
+466
+467
+468
+469
+470</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 458</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 463</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_policy'>policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1238,16 +1287,16 @@ block.</p>
       <pre class="lines">
 
 
-358
-359
-360
-361
-362
 363
-364</pre>
+364
+365
+366
+367
+368
+369</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 358</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 363</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_publish'>publish</span> <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1414,21 +1463,165 @@ publish</p>
       <pre class="lines">
 
 
-417
-418
-419
-420
-421
-422</pre>
+422
+423
+424
+425
+426
+427</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 417</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 422</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_publish_async'>publish_async</span> <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
 
   <span class='ivar'>@async_publisher</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="AsyncPublisher.html" title="Google::Cloud::Pubsub::AsyncPublisher (class)">AsyncPublisher</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='ivar'>@async_opts</span><span class='rparen'>)</span>
   <span class='ivar'>@async_publisher</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reference?-instance_method">
+  
+    #<strong>reference?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines whether the topic object was created without retrieving the
+resource representation from the Pub/Sub service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>true</span>
+<span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_reference?'>reference?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when the topic was created without a resource
+representation, <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+586
+587
+588</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 586</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reference?'>reference?</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resource?-instance_method">
+  
+    #<strong>resource?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines whether the topic object was created with a resource
+representation from the Pub/Sub service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_resource?'>resource?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when the topic was created with a resource
+representation, <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+605
+606
+607</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 605</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resource?'>resource?</span>
+  <span class='op'>!</span><span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1621,17 +1814,17 @@ Managing Labels</a>.</p>
       <pre class="lines">
 
 
-205
-206
-207
 208
 209
 210
 211
-212</pre>
+212
+213
+214
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 205</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 208</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscribe'>subscribe</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span><span class='comma'>,</span> <span class='label'>deadline:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>retain_acked:</span> <span class='kw'>false</span><span class='comma'>,</span>
               <span class='label'>retention:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>endpoint:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span>
@@ -1759,21 +1952,25 @@ the subscription does not exist.</p>
       <pre class="lines">
 
 
-249
-250
-251
 252
 253
 254
 255
-256</pre>
+256
+257
+258
+259
+260
+261</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 252</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscription'>subscription</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
-  <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="Subscription.html" title="Google::Cloud::Pubsub::Subscription (class)">Subscription</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new_lazy'>new_lazy</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span> <span class='kw'>if</span> <span class='id identifier rubyid_skip_lookup'>skip_lookup</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_skip_lookup'>skip_lookup</span>
+    <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="Subscription.html" title="Google::Cloud::Pubsub::Subscription (class)">Subscription</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_name'>from_name</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+  <span class='kw'>end</span>
   <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_subscription'>get_subscription</span> <span class='id identifier rubyid_subscription_name'>subscription_name</span>
   <span class='const'><span class='object_link'><a href="Subscription.html" title="Google::Cloud::Pubsub::Subscription (class)">Subscription</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
 <span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>NotFoundError</span>
@@ -1896,15 +2093,15 @@ and that the system should return the next page of data.</p>
       <pre class="lines">
 
 
-292
-293
-294
-295
-296
-297</pre>
+297
+298
+299
+300
+301
+302</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 292</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 297</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subscriptions'>subscriptions</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2015,16 +2212,16 @@ check access for. Permissions with wildcards (such as <code>*</code> or
       <pre class="lines">
 
 
-536
-537
-538
-539
-540
 541
-542</pre>
+542
+543
+544
+545
+546
+547</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 536</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 541</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_permissions'>test_permissions</span> <span class='op'>*</span><span class='id identifier rubyid_permissions'>permissions</span>
   <span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span>
@@ -2134,14 +2331,14 @@ topic</p>
       <pre class="lines">
 
 
-496
-497
-498
-499
-500</pre>
+501
+502
+503
+504
+505</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 496</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/topic.rb', line 501</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_policy'>update_policy</span> <span class='id identifier rubyid_new_policy'>new_policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>

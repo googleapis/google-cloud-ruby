@@ -340,6 +340,41 @@ message is marked for redelivery. (See
 <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> <span class='int'>120</span><span class='comma'>,</span> <span class='id identifier rubyid_received_messages'>received_messages</span>
 </code></pre>
 
+<h2>Minimizing API calls before receiving and acknowledging messages</h2>
+
+<p>A subscription object can be created without making any API calls by providing
+the <code>skip_lookup</code> argument to <span class='object_link'><a href="Google/Cloud/Pubsub/Project.html#subscription-instance_method" title="Google::Cloud::Pubsub::Project#subscription (method)">Project#subscription</a></span> or <span class='object_link'><a href="Google/Cloud/Pubsub/Topic.html#subscription-instance_method" title="Google::Cloud::Pubsub::Topic#subscription (method)">Topic#subscription</a></span>. A subscriber object can also be created without an API call
+by providing the <code>deadline</code> optional argument to
+<span class='object_link'><a href="Google/Cloud/Pubsub/Subscription.html#listen-instance_method" title="Google::Cloud::Pubsub::Subscription#listen (method)">Subscription#listen</a></span>:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='comment'># No API call is made to retrieve the subscription resource.
+</span><span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>skip_lookup:</span> <span class='kw'>true</span>
+
+<span class='comment'># No API call is made to retrieve the subscription deadline.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='label'>deadline:</span> <span class='int'>60</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='comment'># process message
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge!'>acknowledge!</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start background threads that will call block passed to listen.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span>
+</code></pre>
+
+<p>Skipping API calls may be used to avoid <code>Google::Cloud::PermissionDeniedError</code>
+if your account has limited access to the Pub/Sub API. In particular, the role
+<code>roles/pubsub.subscriber</code> does not have the permission
+<code>pubsub.subscriptions.get</code>, which is required to retrieve a subscription
+resource. See <a href="https://cloud.google.com/pubsub/docs/access-control#tbl_roles">Access Control -
+Roles</a> for the
+complete list of Pub/Sub roles and permissions.</p>
+
 <h2>Creating a snapshot and using seek</h2>
 
 <p>You can create a snapshot to retain the existing backlog on a subscription. The
