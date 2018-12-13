@@ -5,6 +5,7 @@ AllCops:
     - "Rakefile"
     - "support/**/*"
     - "test/**/*"
+  TargetRubyVersion: 2.2
 
 Documentation:
   Enabled: false

@@ -11,6 +11,7 @@ AllCops:
     - "support/**/*"
     - "test/**/*"
     - "tmp/**/*"
+  TargetRubyVersion: 2.2
 
 Documentation:
   Enabled: false

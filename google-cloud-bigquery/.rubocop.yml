@@ -6,6 +6,7 @@ AllCops:
     - "google-cloud-bigquery.gemspec"
     - "Rakefile"
     - "test/**/*"
+  TargetRubyVersion: 2.2
 
 Documentation:
   Enabled: false

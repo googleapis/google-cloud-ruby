@@ -4,6 +4,7 @@ AllCops:
     - "Rakefile"
     - "lib/legacy_stackdriver.rb"
     - "test/**/*"
+  TargetRubyVersion: 2.2
 
 Documentation:
   Enabled: false
