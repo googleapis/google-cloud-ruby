@@ -37,9 +37,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
     rec_messages.first.message.data.must_equal rec_message_msg
   end
 
-  describe "lazy subscription object of a subscription that does exist" do
+  describe "reference subscription object of a subscription that does exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
+      Google::Cloud::Pubsub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
@@ -59,9 +59,9 @@ describe Google::Cloud::Pubsub::Subscription, :pull, :mock_pubsub do
     end
   end
 
-  describe "lazy subscription object of a subscription that does not exist" do
+  describe "reference subscription object of a subscription that does not exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
+      Google::Cloud::Pubsub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 

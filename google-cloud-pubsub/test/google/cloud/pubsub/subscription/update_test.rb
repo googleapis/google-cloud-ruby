@@ -17,6 +17,7 @@ require "helper"
 describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
+  let(:sub_path) { subscription_path sub_name }
   let(:labels) { { "foo" => "bar" } }
   let(:new_labels) { { "baz" => "qux" } }
   let(:new_labels_map) do
@@ -34,8 +35,8 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
   it "updates deadline" do
     subscription.deadline.must_equal 60
 
-    update_sub = sub_grpc.dup
-    update_sub.ack_deadline_seconds = 30
+    update_sub = update_sub = Google::Pubsub::V1::Subscription.new \
+      name: sub_path, ack_deadline_seconds: 30
     update_mask = Google::Protobuf::FieldMask.new paths: ["ack_deadline_seconds"]
     mock = Minitest::Mock.new
     mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
@@ -51,8 +52,8 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
   it "updates retain_acked" do
     subscription.retain_acked.must_equal true
 
-    update_sub = sub_grpc.dup
-    update_sub.retain_acked_messages = false
+    update_sub = update_sub = Google::Pubsub::V1::Subscription.new \
+      name: sub_path, retain_acked_messages: false
     update_mask = Google::Protobuf::FieldMask.new paths: ["retain_acked_messages"]
     mock = Minitest::Mock.new
     mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
@@ -68,8 +69,8 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
   it "updates retention" do
     subscription.retention.must_equal 600.9
 
-    update_sub = sub_grpc.dup
-    update_sub.message_retention_duration = Google::Cloud::Pubsub::Convert.number_to_duration 600.2
+    update_sub = Google::Pubsub::V1::Subscription.new \
+      name: sub_path, message_retention_duration: Google::Cloud::Pubsub::Convert.number_to_duration(600.2)
     update_mask = Google::Protobuf::FieldMask.new paths: ["message_retention_duration"]
     mock = Minitest::Mock.new
     mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
@@ -85,8 +86,8 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
   it "updates labels" do
     subscription.labels.must_equal labels
 
-    update_sub = sub_grpc.dup
-    update_sub.labels = new_labels_map
+    update_sub = Google::Pubsub::V1::Subscription.new \
+      name: sub_path, labels: new_labels
     update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
     mock = Minitest::Mock.new
     mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
@@ -102,8 +103,8 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
   it "updates labels to empty hash" do
     subscription.labels.must_equal labels
 
-    update_sub = sub_grpc.dup
-    update_sub.labels = Google::Protobuf::Map.new(:string, :string)
+    update_sub = Google::Pubsub::V1::Subscription.new \
+      name: sub_path, labels: {}
 
     update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
     mock = Minitest::Mock.new
@@ -126,11 +127,12 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
     subscription.labels.must_equal labels
   end
 
-  describe :lazy do
-    let(:subscription) { Google::Cloud::Pubsub::Subscription.new_lazy sub_name, pubsub.service }
+  describe :reference do
+    let(:subscription) { Google::Cloud::Pubsub::Subscription.from_name sub_name, pubsub.service }
 
     it "updates deadline" do
-      subscription.must_be :lazy?
+      subscription.must_be :reference?
+      subscription.wont_be :resource?
 
       update_sub = Google::Pubsub::V1::Subscription.new \
         name: subscription_path(sub_name),
@@ -145,12 +147,14 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
 
       mock.verify
 
-      subscription.wont_be :lazy?
+      subscription.wont_be :reference?
+      subscription.must_be :resource?
       subscription.deadline.must_equal 30
     end
 
     it "updates retain_acked" do
-      subscription.must_be :lazy?
+      subscription.must_be :reference?
+      subscription.wont_be :resource?
 
       update_sub = Google::Pubsub::V1::Subscription.new \
         name: subscription_path(sub_name),
@@ -165,12 +169,14 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
 
       mock.verify
 
-      subscription.wont_be :lazy?
+      subscription.wont_be :reference?
+      subscription.must_be :resource?
       subscription.retain_acked.must_equal true
     end
 
     it "updates retention" do
-      subscription.must_be :lazy?
+      subscription.must_be :reference?
+      subscription.wont_be :resource?
 
       update_sub = Google::Pubsub::V1::Subscription.new \
         name: subscription_path(sub_name),
@@ -185,12 +191,14 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
 
       mock.verify
 
-      subscription.wont_be :lazy?
+      subscription.wont_be :reference?
+      subscription.must_be :resource?
       subscription.retention.must_equal 600.2
     end
 
     it "updates labels" do
-      subscription.must_be :lazy?
+      subscription.must_be :reference?
+      subscription.wont_be :resource?
 
       update_sub = Google::Pubsub::V1::Subscription.new \
         name: subscription_path(sub_name),
@@ -205,7 +213,8 @@ describe Google::Cloud::Pubsub::Subscription, :update, :mock_pubsub do
 
       mock.verify
 
-      subscription.wont_be :lazy?
+      subscription.wont_be :reference?
+      subscription.must_be :resource?
       subscription.labels.must_equal new_labels
     end
   end

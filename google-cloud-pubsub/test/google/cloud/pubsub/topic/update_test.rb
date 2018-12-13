@@ -70,11 +70,12 @@ describe Google::Cloud::Pubsub::Topic, :update, :mock_pubsub do
     topic.labels.must_equal labels
   end
 
-  describe :lazy do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name, pubsub.service }
+  describe :reference do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
     it "updates labels" do
-      topic.must_be :lazy?
+      topic.must_be :reference?
+      topic.wont_be :resource?
 
       update_grpc = Google::Pubsub::V1::Topic.new \
         name: topic_path(topic_name),
@@ -89,7 +90,8 @@ describe Google::Cloud::Pubsub::Topic, :update, :mock_pubsub do
 
       mock.verify
 
-      topic.wont_be :lazy?
+      topic.wont_be :reference?
+      topic.must_be :resource?
       topic.labels.must_equal new_labels
     end
   end

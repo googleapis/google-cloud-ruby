@@ -27,7 +27,8 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
 
   it "knows its topic" do
     subscription.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
-    subscription.topic.must_be :lazy?
+    subscription.topic.must_be :reference?
+    subscription.topic.wont_be :resource?
     subscription.topic.name.must_equal topic_path(topic_name)
   end
 

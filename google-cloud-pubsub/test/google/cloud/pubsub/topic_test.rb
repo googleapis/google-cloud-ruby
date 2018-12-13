@@ -17,8 +17,7 @@ require "helper"
 describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:labels) { { "foo" => "bar" } }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name, labels: labels)),
-                                                pubsub.service }
+  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name, labels: labels)), pubsub.service }
   let(:subscriptions_with_token) do
     response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
     paged_enum_struct response
@@ -211,7 +210,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     sub.wont_be :nil?
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-    sub.wont_be :lazy?
+    sub.wont_be :reference?
+    sub.must_be :resource?
   end
 
   it "gets a subscription with get_subscription alias" do
@@ -228,7 +228,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     sub.wont_be :nil?
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-    sub.wont_be :lazy?
+    sub.wont_be :reference?
+    sub.must_be :resource?
   end
 
   it "gets a subscription with find_subscription alias" do
@@ -245,7 +246,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     sub.wont_be :nil?
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-    sub.wont_be :lazy?
+    sub.wont_be :reference?
+    sub.must_be :resource?
   end
 
   it "lists subscriptions" do
@@ -260,7 +262,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -274,7 +277,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -290,7 +294,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -312,14 +317,16 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     token.must_equal "next_page_token"
     first_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
 
     second_subs.count.must_equal 2
     second_subs.token.must_be :nil?
     second_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -338,7 +345,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     token.must_equal "next_page_token"
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -358,14 +366,16 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     first_subs.next?.must_equal true
     first_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
 
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -385,14 +395,16 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     first_subs.next?.must_equal true
     first_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
 
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -410,7 +422,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     subs.count.must_equal 5
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -428,7 +441,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     subs.count.must_equal 5
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -446,7 +460,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     subs.count.must_equal 5
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
@@ -464,7 +479,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     subs.count.must_equal 6
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 

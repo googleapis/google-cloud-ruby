@@ -117,7 +117,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     mock.verify
 
     topic.name.must_equal topic_path(topic_name)
-    topic.wont_be :lazy?
+    topic.wont_be :reference?
+    topic.must_be :resource?
   end
 
   it "gets a topic with get_topic alias" do
@@ -133,7 +134,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     mock.verify
 
     topic.name.must_equal topic_path(topic_name)
-    topic.wont_be :lazy?
+    topic.wont_be :reference?
+    topic.must_be :resource?
   end
 
   it "gets a topic with find_topic alias" do
@@ -149,7 +151,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     mock.verify
 
     topic.name.must_equal topic_path(topic_name)
-    topic.wont_be :lazy?
+    topic.wont_be :reference?
+    topic.must_be :resource?
   end
 
   it "returns nil when getting an non-existent topic" do
@@ -173,7 +176,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     topic = pubsub.find_topic topic_name, skip_lookup: true
     topic.name.must_equal topic_path(topic_name)
-    topic.must_be :lazy?
+    topic.must_be :reference?
+    topic.wont_be :resource?
   end
 
   it "gets a topic with skip_lookup and project options" do
@@ -182,7 +186,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
 
     topic = pubsub.find_topic topic_name, skip_lookup: true, project: "custom"
     topic.name.must_equal "projects/custom/topics/found-topic"
-    topic.must_be :lazy?
+    topic.must_be :reference?
+    topic.wont_be :resource?
   end
 
   it "lists topics" do
@@ -381,7 +386,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     sub.wont_be :nil?
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
     sub.name.must_equal subscription_path(sub_name)
-    sub.wont_be :lazy?
+    sub.wont_be :reference?
+    sub.must_be :resource?
   end
 
   it "gets a subscription with get_subscription alias" do
@@ -399,7 +405,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     sub.wont_be :nil?
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
     sub.name.must_equal subscription_path(sub_name)
-    sub.wont_be :lazy?
+    sub.wont_be :reference?
+    sub.must_be :resource?
   end
 
   it "gets a subscription with find_subscription alias" do
@@ -417,7 +424,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     sub.wont_be :nil?
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
     sub.name.must_equal subscription_path(sub_name)
-    sub.wont_be :lazy?
+    sub.wont_be :reference?
+    sub.must_be :resource?
   end
 
   it "returns nil when getting an non-existent subscription" do
@@ -443,7 +451,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     sub.wont_be :nil?
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
     sub.name.must_equal subscription_path(sub_name)
-    sub.must_be :lazy?
+    sub.must_be :reference?
+    sub.wont_be :resource?
   end
 
   it "gets a subscription with skip_lookup and project options" do
@@ -454,7 +463,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     sub.wont_be :nil?
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
     sub.name.must_equal "projects/custom/subscriptions/#{sub_name}"
-    sub.must_be :lazy?
+    sub.must_be :reference?
+    sub.wont_be :resource?
   end
 
   it "lists subscriptions" do
@@ -554,14 +564,16 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     first_subs.next?.must_equal true
     first_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.wont_be :lazy?
+      sub.wont_be :reference?
+      sub.must_be :resource?
     end
 
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.wont_be :lazy?
+      sub.wont_be :reference?
+      sub.must_be :resource?
     end
   end
 
@@ -581,14 +593,16 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     first_subs.next?.must_equal true
     first_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.wont_be :lazy?
+      sub.wont_be :reference?
+      sub.must_be :resource?
     end
 
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.wont_be :lazy?
+      sub.wont_be :reference?
+      sub.must_be :resource?
     end
   end
 
@@ -606,7 +620,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     subs.count.must_equal 5
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.wont_be :lazy?
+      sub.wont_be :reference?
+      sub.must_be :resource?
     end
   end
 
@@ -624,7 +639,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     subs.count.must_equal 5
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.wont_be :lazy?
+      sub.wont_be :reference?
+      sub.must_be :resource?
     end
   end
 
@@ -642,7 +658,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     subs.count.must_equal 5
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.wont_be :lazy?
+      sub.wont_be :reference?
+      sub.must_be :resource?
     end
   end
 
@@ -660,7 +677,8 @@ describe Google::Cloud::Pubsub::Project, :mock_pubsub do
     subs.count.must_equal 6
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.wont_be :lazy?
+      sub.wont_be :reference?
+      sub.must_be :resource?
     end
   end
 

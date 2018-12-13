@@ -16,8 +16,7 @@ require "helper"
 
 describe Google::Cloud::Pubsub::Topic, :policy, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.service }
+  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
 
   it "gets the IAM Policy" do
     policy_json = {

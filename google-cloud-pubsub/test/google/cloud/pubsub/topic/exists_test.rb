@@ -16,8 +16,7 @@ require "helper"
 
 describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.service }
+  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
 
   it "knows if it exists when created with an HTTP method" do
     # The absense of a mock means this test will fail
@@ -27,9 +26,8 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
     topic.must_be :exists?
   end
 
-  describe "lazy topic object of a topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
+  describe "reference topic object of a topic that exists" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
     it "checks if the topic exists by making an HTTP call" do
       get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
@@ -45,9 +43,8 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
     end
   end
 
-  describe "lazy topic object of a topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
+  describe "reference topic object of a topic that does not exist" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
     it "checks if the topic exists by making an HTTP call" do
       stub = Object.new

@@ -16,8 +16,7 @@ require "helper"
 
 describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.service }
+  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
   let(:new_sub_name) { "new-sub-#{Time.now.to_i}" }
   let(:labels) { { "foo" => "bar" } }
 
@@ -51,9 +50,8 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
     sub.labels.must_be :frozen?
   end
 
-  describe "lazy topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
+  describe "reference topic that exists" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
     it "creates a subscription when calling subscribe" do
       create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
@@ -70,9 +68,8 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
     end
   end
 
-  describe "lazy topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
+  describe "reference topic that does not exist" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
     it "raises NotFoundError when calling subscribe" do
       stub = Object.new

@@ -22,18 +22,19 @@ describe Google::Cloud::Pubsub::Subscription, :name, :mock_pubsub do
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
   let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
 
-  it "is not lazy when created with an HTTP method" do
-    subscription.wont_be :lazy?
+  it "is not reference when created with an HTTP method" do
+    subscription.wont_be :reference?
+    subscription.must_be :resource?
   end
 
-  describe "lazy subscription" do
+  describe "reference subscription" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
-                                            pubsub.service
+      Google::Cloud::Pubsub::Subscription.from_name sub_name, pubsub.service
     end
 
-    it "is lazy" do
-      subscription.must_be :lazy?
+    it "is reference" do
+      subscription.must_be :reference?
+      subscription.wont_be :resource?
     end
   end
 end

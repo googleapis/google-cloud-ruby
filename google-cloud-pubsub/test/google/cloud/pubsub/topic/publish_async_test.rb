@@ -16,8 +16,7 @@ require "helper"
 
 describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                       pubsub.service }
+  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
 
   it "publishes a message" do
     messages = [
@@ -234,8 +233,8 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
     mock.verify
   end
 
-  describe "lazy topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
+  describe "reference topic that exists" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name,
                                                  pubsub.service,
                                                  autocreate: false }
 
@@ -318,8 +317,8 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
     end
   end
 
-  describe "lazy topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
+  describe "reference topic that does not exist" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name,
                                                  pubsub.service,
                                                  autocreate: false }
     let(:gax_error) do

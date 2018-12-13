@@ -16,8 +16,7 @@ require "helper"
 
 describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.service }
+  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
   let(:subscriptions_with_token) do
     response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
     paged_enum_struct response
@@ -35,13 +34,13 @@ describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
     subs.count.must_equal 3
     subs.each do |sub|
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.must_be :lazy?
+      sub.must_be :reference?
+      sub.wont_be :resource?
     end
   end
 
-  describe "lazy topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
+  describe "reference topic that exists" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
     it "lists subscriptions" do
       mock = Minitest::Mock.new
@@ -55,14 +54,14 @@ describe Google::Cloud::Pubsub::Topic, :subscriptions, :mock_pubsub do
       subs.count.must_equal 3
       subs.each do |sub|
         sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-        sub.must_be :lazy?
+        sub.must_be :reference?
+        sub.wont_be :resource?
       end
     end
   end
 
-  describe "lazy topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
+  describe "reference topic that does not exist" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
     it "lists subscriptions" do
       stub = Object.new

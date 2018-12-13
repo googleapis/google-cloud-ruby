@@ -150,7 +150,7 @@ module Google
         def topic topic_name, project: nil, skip_lookup: nil, async: nil
           ensure_service!
           options = { project: project }
-          return Topic.new_lazy(topic_name, service, options) if skip_lookup
+          return Topic.from_name(topic_name, service, options) if skip_lookup
           grpc = service.get_topic topic_name
           Topic.from_grpc grpc, service, async: async
         rescue Google::Cloud::NotFoundError
@@ -282,7 +282,7 @@ module Google
           ensure_service!
           options = { project: project }
           if skip_lookup
-            return Subscription.new_lazy subscription_name, service, options
+            return Subscription.from_name subscription_name, service, options
           end
           grpc = service.get_subscription subscription_name
           Subscription.from_grpc grpc, service

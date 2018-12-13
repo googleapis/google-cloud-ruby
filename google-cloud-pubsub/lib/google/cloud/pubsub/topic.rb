@@ -52,7 +52,7 @@ module Google
         def initialize
           @service = nil
           @grpc = nil
-          @lazy = nil
+          @resource_name = nil
           @exists = nil
           @async_opts = {}
         end
@@ -90,6 +90,7 @@ module Google
         # @return [String]
         #
         def name
+          return @resource_name if reference?
           @grpc.name
         end
 
@@ -101,9 +102,13 @@ module Google
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to update the labels for this topic.
         #
+        # Makes an API call to retrieve the endpoint value when called on a
+        # reference object. See {#reference?}.
+        #
         # @return [Hash] The frozen labels hash.
         #
         def labels
+          ensure_grpc!
           @grpc.labels.to_h.freeze
         end
 
@@ -121,12 +126,10 @@ module Google
         #
         def labels= new_labels
           raise ArgumentError, "Value must be a Hash" if new_labels.nil?
-          labels_map = Google::Protobuf::Map.new(:string, :string)
-          Hash(new_labels).each { |k, v| labels_map[String(k)] = String(v) }
-          update_grpc = @grpc.dup
-          update_grpc.labels = labels_map
+          update_grpc = Google::Pubsub::V1::Topic.new \
+            name: name, labels: new_labels
           @grpc = service.update_topic update_grpc, :labels
-          @lazy = nil
+          @resource_name = nil
         end
 
         ##
@@ -248,7 +251,9 @@ module Google
         #
         def subscription subscription_name, skip_lookup: nil
           ensure_service!
-          return Subscription.new_lazy subscription_name, service if skip_lookup
+          if skip_lookup
+            return Subscription.from_name subscription_name, service
+          end
           grpc = service.get_subscription subscription_name
           Subscription.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
@@ -553,8 +558,8 @@ module Google
         #   topic.exists? #=> true
         #
         def exists?
-          # Always true if the object is not set as lazy
-          return true unless lazy?
+          # Always true if the object is not set as reference
+          return true unless reference?
           # If we have a value, return it
           return @exists unless @exists.nil?
           ensure_grpc!
@@ -564,8 +569,30 @@ module Google
         end
 
         ##
-        # @private
-        # Determines whether the topic object was created with an HTTP call.
+        # Determines whether the topic object was created without retrieving the
+        # resource representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the topic was created without a resource
+        #   representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   topic = pubsub.topic "my-topic", skip_lookup: true
+        #   topic.reference? #=> true
+        #
+        def reference?
+          @grpc.nil?
+        end
+
+        ##
+        # Determines whether the topic object was created with a resource
+        # representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the topic was created with a resource
+        #   representation, `false` otherwise.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -573,10 +600,10 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   topic = pubsub.topic "my-topic"
-        #   topic.lazy? #=> nil
+        #   topic.resource? #=> true
         #
-        def lazy?
-          @lazy
+        def resource?
+          !@grpc.nil?
         end
 
         ##
@@ -590,12 +617,11 @@ module Google
         end
 
         ##
-        # @private New lazy {Topic} object without making an HTTP request.
-        def self.new_lazy name, service, options = {}
-          lazy_grpc = Google::Pubsub::V1::Topic.new \
-            name: service.topic_path(name, options)
-          from_grpc(lazy_grpc, service).tap do |t|
-            t.instance_variable_set :@lazy, true
+        # @private New reference {Topic} object without making an HTTP request.
+        def self.from_name name, service, options = {}
+          name = service.topic_path name, options
+          from_grpc(nil, service).tap do |t|
+            t.instance_variable_set :@resource_name, name
           end
         end
 
@@ -612,8 +638,8 @@ module Google
         # Ensures a Google::Pubsub::V1::Topic object exists.
         def ensure_grpc!
           ensure_service!
-          @grpc = service.get_topic name if lazy?
-          @lazy = nil
+          @grpc = service.get_topic name if reference?
+          @resource_name = nil
         end
 
         ##

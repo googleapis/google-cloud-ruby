@@ -14,21 +14,21 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Topic, :lazy, :mock_pubsub do
+describe Google::Cloud::Pubsub::Topic, :reference, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.service }
+  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
 
-  it "will not be lazy when created with an HTTP method" do
-    topic.wont_be :lazy?
+  it "will not be reference when created with an HTTP method" do
+    topic.wont_be :reference?
+    topic.must_be :resource?
   end
 
-  describe "lazy topic" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
+  describe "reference topic" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
-    it "will be lazy when created lazily" do
-      topic.must_be :lazy?
+    it "will be reference when created lazily" do
+      topic.must_be :reference?
+      topic.wont_be :resource?
     end
   end
 end

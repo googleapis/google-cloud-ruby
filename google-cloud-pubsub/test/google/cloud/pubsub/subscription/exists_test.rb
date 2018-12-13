@@ -29,9 +29,9 @@ describe Google::Cloud::Pubsub::Subscription, :exists, :mock_pubsub do
     subscription.must_be :exists?
   end
 
-  describe "lazy subscription object of a subscription that exists" do
+  describe "reference subscription object of a subscription that exists" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
+      Google::Cloud::Pubsub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
@@ -50,9 +50,9 @@ describe Google::Cloud::Pubsub::Subscription, :exists, :mock_pubsub do
     end
   end
 
-  describe "lazy subscription object of a subscription that does not exist" do
+  describe "reference subscription object of a subscription that does not exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
+      Google::Cloud::Pubsub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
