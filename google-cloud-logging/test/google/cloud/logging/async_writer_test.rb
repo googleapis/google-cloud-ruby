@@ -78,7 +78,6 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
 
     mock.expect :write_log_entries, write_res, write_req_args(["payload1", "payload2"], labels1)
 
-    async_writer.suspend
     async_writer.write_entries(
       entries("payload1"),
       log_name: log_name,
@@ -91,7 +90,6 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       resource: resource,
       labels: labels1
     )
-    async_writer.resume
     async_writer.stop! 1
 
     mock.verify
@@ -109,7 +107,6 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
 
     mock.expect :write_log_entries, write_res, combined_request
 
-    async_writer.suspend
     async_writer.write_entries(
       entries("payload1", labels1),
       log_name: log_name,
@@ -122,7 +119,6 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       resource: resource,
       labels: labels2
     )
-    async_writer.resume
     async_writer.stop
 
     wait_result = wait_until_true {
