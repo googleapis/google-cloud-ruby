@@ -131,7 +131,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
 
     wait_result.must_equal :completed
 
-    async_writer.stop! 1
+    async_writer.wait! 1
 
     mock.verify
   end

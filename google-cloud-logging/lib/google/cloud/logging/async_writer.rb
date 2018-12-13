@@ -246,12 +246,8 @@ module Google
         alias wait_until_async_stopped wait!
         alias wait_until_stopped wait!
 
-        # rubocop:disable Lint/UnusedMethodArgument
-
         ##
         # Stop this asynchronous writer and block until it has been stopped.
-        #
-        # DEPRECATED. Use #async_stop! instead.
         #
         # @param [Number] timeout Timeout in seconds.
         # @param [Boolean] force If set to true, and the writer hasn't stopped
@@ -265,13 +261,20 @@ module Google
         #     after the timeout, or `:forced` if it was forcibly killed.
         #
         def stop! timeout = nil, force: nil
+          return :stopped if stopped?
+
           stop
           wait! timeout
 
-          # TODO: match the return type
+          if synchronize { @thread_pool.shutdown? }
+            return :waited if timeout
+          elsif force
+            @thread_pool.kill
+            return :forced
+          end
+          :timeout
         end
-
-        # rubocop:enable Lint/UnusedMethodArgument
+        alias async_stop! stop!
 
         ##
         # Forces all entries in the current batch to be published
