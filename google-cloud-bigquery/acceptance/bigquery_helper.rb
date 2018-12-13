@@ -57,6 +57,7 @@ $bucket = safe_gcs_execute { $storage.create_bucket "#{$prefix}_bucket" }
 # variable. This bucket is public, but access may be restricted when tests are
 # run from a VPC project.
 $samples_bucket = ENV["GCLOUD_TEST_SAMPLES_BUCKET"] || "cloud-samples-data"
+$samples_public_table = ENV["GCLOUD_TEST_SAMPLES_BUCKET"] || "bigquery-public-data.samples.shakespeare"
 
 # Allow overriding the KMS key used for tests via an environment variable.
 # These keys are public, but access may be restricted when tests are run from a
@@ -88,6 +89,7 @@ module Acceptance
     attr_accessor :storage
     attr_accessor :bucket
     attr_accessor :samples_bucket
+    attr_accessor :samples_public_table
     attr_accessor :kms_key
     attr_accessor :kms_key_2
 
@@ -99,6 +101,7 @@ module Acceptance
       @storage = $storage
       @bucket = $bucket
       @samples_bucket = $samples_bucket
+      @samples_public_table = $samples_public_table
       @kms_key = $kms_key
       @kms_key_2 = $kms_key_2
 
@@ -107,6 +110,7 @@ module Acceptance
       refute_nil @storage, "You do not have an active storage to run the tests."
       refute_nil @bucket, "You do not have a storage bucket to run the tests."
       refute_nil @samples_bucket, "You do not have a bucket with sample data to run the tests."
+      refute_nil @samples_public_table, "You do not have a table with sample data to run the tests"
       refute_nil @kms_key, "You do not have a kms key to run the tests."
       refute_nil @kms_key_2, "You do not have a second kms key to run the tests."
 
