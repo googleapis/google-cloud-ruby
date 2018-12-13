@@ -1,5 +1,14 @@
 # Release History
 
+### 0.2.5 / 2018-12-13
+
+* Alias the following KeyManagementServiceClient class methods to instance methods.
+  * crypto_key_version_path
+  * key_ring_path
+  * crypto_key_path_path
+  * crypto_key_path
+  * location_path
+
 ### 0.2.4 / 2018-09-20
 
 * Update documentation.
