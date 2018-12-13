@@ -1,0 +1,12 @@
+Gemfile.lock
+coverage/*
+doc/*
+pkg/*
+html/*
+
+# Ignore YARD stuffs
+.yardoc
+
+# IDE settings
+.idea
+*.iml
