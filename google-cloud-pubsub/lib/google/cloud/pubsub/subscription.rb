@@ -812,7 +812,8 @@ module Google
         end
 
         ##
-        # @private New reference {Topic} object without making an HTTP request.
+        # @private New reference {Subscription} object without making an HTTP
+        # request.
         def self.from_name name, service, options = {}
           name = service.subscription_path name, options
           from_grpc(nil, service).tap do |s|

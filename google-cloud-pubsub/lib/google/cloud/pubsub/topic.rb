@@ -102,7 +102,7 @@ module Google
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to update the labels for this topic.
         #
-        # Makes an API call to retrieve the endpoint value when called on a
+        # Makes an API call to retrieve the labels values when called on a
         # reference object. See {#reference?}.
         #
         # @return [Hash] The frozen labels hash.
