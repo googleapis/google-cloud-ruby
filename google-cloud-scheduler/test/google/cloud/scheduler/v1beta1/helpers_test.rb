@@ -22,7 +22,7 @@ require "google/cloud/scheduler/v1beta1/helpers"
 
 require "google/cloud/scheduler/v1beta1/cloud_scheduler_client"
 
-class MockSchedulerCredentials_v1beta1 < Google::Cloud::Scheduler::V1beta1::Credentials
+class HelperMockSchedulerCredentials_v1beta1 < Google::Cloud::Scheduler::V1beta1::Credentials
   def initialize
   end
 
@@ -35,21 +35,7 @@ class MockSchedulerCredentials_v1beta1 < Google::Cloud::Scheduler::V1beta1::Cred
 end
 
 describe Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient do
-  let(:mock_credentials) { MockSchedulerCredentials_v1beta1.new }
-
-  describe "the location_path instance method" do
-    it "correctly calls Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.location_path" do
-      Google::Cloud::Scheduler::V1beta1::Credentials.stub(:default, mock_credentials) do
-        num_args = Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.method("location_path").arity
-        client = Google::Cloud::Scheduler.new version: :v1beta1
-        args = (0...num_args).map { "argument" }
-        assert_equal(
-          client.location_path(*args),
-          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.location_path(*args)
-        )
-      end
-    end
-  end
+  let(:mock_credentials) { HelperMockSchedulerCredentials_v1beta1.new }
 
   describe "the job_path instance method" do
     it "correctly calls Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.job_path" do
@@ -74,6 +60,20 @@ describe Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient do
         assert_equal(
           client.project_path(*args),
           Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.project_path(*args)
+        )
+      end
+    end
+  end
+
+  describe "the location_path instance method" do
+    it "correctly calls Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.location_path" do
+      Google::Cloud::Scheduler::V1beta1::Credentials.stub(:default, mock_credentials) do
+        num_args = Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.method("location_path").arity
+        client = Google::Cloud::Scheduler.new version: :v1beta1
+        args = (0...num_args).map { "argument" }
+        assert_equal(
+          client.location_path(*args),
+          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.location_path(*args)
         )
       end
     end

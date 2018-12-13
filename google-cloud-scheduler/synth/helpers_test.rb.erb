@@ -22,7 +22,7 @@ require "google/cloud/scheduler/<%= version %>/helpers"
 
 require "google/cloud/scheduler/<%= version %>/cloud_scheduler_client"
 
-class MockSchedulerCredentials_<%= version %> < Google::Cloud::Scheduler::<%= version.capitalize %>::Credentials
+class HelperMockSchedulerCredentials_<%= version %> < Google::Cloud::Scheduler::<%= version.capitalize %>::Credentials
   def initialize
   end
 
@@ -35,7 +35,7 @@ class MockSchedulerCredentials_<%= version %> < Google::Cloud::Scheduler::<%= ve
 end
 
 describe Google::Cloud::Scheduler::<%= version.capitalize %>::CloudSchedulerClient do
-  let(:mock_credentials) { MockSchedulerCredentials_<%= version %>.new }
+  let(:mock_credentials) { HelperMockSchedulerCredentials_<%= version %>.new }
 
 <%= 
   describe_block = []
