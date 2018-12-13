@@ -60,18 +60,24 @@ module Google
         def initialize
           @service = nil
           @grpc = nil
-          @lazy = nil
+          @resource_name = nil
           @exists = nil
         end
 
         ##
         # The name of the subscription.
+        #
+        # @return [String]
         def name
+          return @resource_name if reference?
           @grpc.name
         end
 
         ##
         # The {Topic} from which this subscription receives messages.
+        #
+        # Makes an API call to retrieve the topic information when called on a
+        # reference object. See {#reference?}.
         #
         # @return [Topic]
         #
@@ -85,24 +91,36 @@ module Google
         #
         def topic
           ensure_grpc!
-          Topic.new_lazy @grpc.topic, service
+          Topic.from_name @grpc.topic, service
         end
 
         ##
         # This value is the maximum number of seconds after a subscriber
         # receives a message before the subscriber should acknowledge the
         # message.
+        #
+        # Makes an API call to retrieve the deadline value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [Integer]
         def deadline
           ensure_grpc!
           @grpc.ack_deadline_seconds
         end
 
+        ##
+        # Sets the maximum number of seconds after a subscriber
+        # receives a message before the subscriber should acknowledge the
+        # message.
+        #
+        # @param [Integer] new_deadline The new deadline value.
+        #
         def deadline= new_deadline
-          update_grpc = @grpc.dup
-          update_grpc.ack_deadline_seconds = new_deadline
+          update_grpc = Google::Pubsub::V1::Subscription.new \
+            name: name, ack_deadline_seconds: new_deadline
           @grpc = service.update_subscription update_grpc,
                                               :ack_deadline_seconds
-          @lazy = nil
+          @resource_name = nil
         end
 
         ##
@@ -110,6 +128,9 @@ module Google
         # messages are not expunged from the subscription's backlog, even if
         # they are acknowledged, until they fall out of the {#retention} window.
         # Default is `false`.
+        #
+        # Makes an API call to retrieve the retain_acked value when called on a
+        # reference object. See {#reference?}.
         #
         # @return [Boolean] Returns `true` if acknowledged messages are
         #   retained.
@@ -119,12 +140,18 @@ module Google
           @grpc.retain_acked_messages
         end
 
+        ##
+        # Sets whether to retain acknowledged messages.
+        #
+        # @param [Boolean] new_retain_acked The new retain acknowledged messages
+        #   value.
+        #
         def retain_acked= new_retain_acked
-          update_grpc = @grpc.dup
-          update_grpc.retain_acked_messages = !(!new_retain_acked)
+          update_grpc = Google::Pubsub::V1::Subscription.new \
+            name: name, retain_acked_messages: !(!new_retain_acked)
           @grpc = service.update_subscription update_grpc,
                                               :retain_acked_messages
-          @lazy = nil
+          @resource_name = nil
         end
 
         ##
@@ -136,6 +163,9 @@ module Google
         # less than 600 seconds (10 minutes). Default is 604,800 seconds (7
         # days).
         #
+        # Makes an API call to retrieve the retention value when called on a
+        # reference object. See {#reference?}.
+        #
         # @return [Numeric] The message retention duration in seconds.
         #
         def retention
@@ -143,18 +173,29 @@ module Google
           Convert.duration_to_number @grpc.message_retention_duration
         end
 
+        ##
+        # Sets the message retention duration in seconds.
+        #
+        # @param [Numeric] new_retention The new retention value.
+        #
         def retention= new_retention
-          update_grpc = @grpc.dup
-          update_grpc.message_retention_duration = \
-            Convert.number_to_duration new_retention
+          new_retention_duration = Convert.number_to_duration new_retention
+          update_grpc = Google::Pubsub::V1::Subscription.new \
+            name: name, message_retention_duration: new_retention_duration
           @grpc = service.update_subscription update_grpc,
                                               :message_retention_duration
-          @lazy = nil
+          @resource_name = nil
         end
 
         ##
         # Returns the URL locating the endpoint to which messages should be
         # pushed.
+        #
+        # Makes an API call to retrieve the endpoint value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [String]
+        #
         def endpoint
           ensure_grpc!
           @grpc.push_config.push_endpoint if @grpc.push_config
@@ -162,11 +203,14 @@ module Google
 
         ##
         # Sets the URL locating the endpoint to which messages should be pushed.
+        #
+        # @param [String] new_endpoint The new endpoint value.
+        #
         def endpoint= new_endpoint
           ensure_service!
           service.modify_push_config name, new_endpoint, {}
 
-          return unless @grpc
+          return if reference?
 
           @grpc.push_config = Google::Pubsub::V1::PushConfig.new(
             push_endpoint: new_endpoint,
@@ -182,9 +226,13 @@ module Google
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to update the labels for this subscription.
         #
+        # Makes an API call to retrieve the labels value when called on a
+        # reference object. See {#reference?}.
+        #
         # @return [Hash] The frozen labels hash.
         #
         def labels
+          ensure_grpc!
           @grpc.labels.to_h.freeze
         end
 
@@ -202,16 +250,19 @@ module Google
         #
         def labels= new_labels
           raise ArgumentError, "Value must be a Hash" if new_labels.nil?
-          labels_map = Google::Protobuf::Map.new(:string, :string)
-          Hash(new_labels).each { |k, v| labels_map[String(k)] = String(v) }
-          update_grpc = @grpc.dup
-          update_grpc.labels = labels_map
+          update_grpc = Google::Pubsub::V1::Subscription.new \
+            name: name, labels: new_labels
           @grpc = service.update_subscription update_grpc, :labels
-          @lazy = nil
+          @resource_name = nil
         end
 
         ##
         # Determines whether the subscription exists in the Pub/Sub service.
+        #
+        # Makes an API call to determine whether the subscription resource
+        # exists when called on a reference object. See {#reference?}.
+        #
+        # @return [Boolean]
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -222,31 +273,14 @@ module Google
         #   sub.exists? #=> true
         #
         def exists?
-          # Always true if the object is not set as lazy
-          return true unless lazy?
+          # Always true if the object is not set as reference
+          return true unless reference?
           # If we have a value, return it
           return @exists unless @exists.nil?
           ensure_grpc!
           @exists = true
         rescue Google::Cloud::NotFoundError
           @exists = false
-        end
-
-        ##
-        # @private
-        # Determines whether the subscription object was created with an
-        # HTTP call.
-        #
-        # @example
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::Pubsub.new
-        #
-        #   sub = pubsub.get_subscription "my-topic-sub"
-        #   sub.lazy? #=> nil
-        #
-        def lazy?
-          @lazy
         end
 
         ##
@@ -370,6 +404,9 @@ module Google
         #   will hold received messages before modifying the message's ack
         #   deadline. The minimum is 10, the maximum is 600. Default is
         #   {#deadline}. Optional.
+        #
+        #   Makes an API call to retrieve the deadline value when called on a
+        #   reference object. See {#reference?}.
         # @param [Integer] streams The number of concurrent streams to open to
         #   pull messages from the subscription. Default is 4. Optional.
         # @param [Integer] inventory The number of received messages to be
@@ -609,6 +646,44 @@ module Google
         end
 
         ##
+        # Determines whether the subscription object was created without
+        # retrieving the resource representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the subscription was created without a
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   sub = pubsub.get_subscription "my-topic-sub", skip_lookup: true
+        #   sub.reference? #=> true
+        #
+        def reference?
+          @grpc.nil?
+        end
+
+        ##
+        # Determines whether the subscription object was created with a resource
+        # representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the subscription was created with a
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::Pubsub.new
+        #
+        #   sub = pubsub.get_subscription "my-topic-sub"
+        #   sub.resource? #=> true
+        #
+        def resource?
+          !@grpc.nil?
+        end
+
+        ##
         # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
         # policy for this subscription.
         #
@@ -737,12 +812,12 @@ module Google
         end
 
         ##
-        # @private New lazy {Topic} object without making an HTTP request.
-        def self.new_lazy name, service, options = {}
-          lazy_grpc = Google::Pubsub::V1::Subscription.new \
-            name: service.subscription_path(name, options)
-          from_grpc(lazy_grpc, service).tap do |s|
-            s.instance_variable_set :@lazy, true
+        # @private New reference {Subscription} object without making an HTTP
+        # request.
+        def self.from_name name, service, options = {}
+          name = service.subscription_path name, options
+          from_grpc(nil, service).tap do |s|
+            s.instance_variable_set :@resource_name, name
           end
         end
 
@@ -759,8 +834,8 @@ module Google
         # Ensures a Google::Pubsub::V1::Subscription object exists.
         def ensure_grpc!
           ensure_service!
-          @grpc = service.get_subscription name if lazy?
-          @lazy = nil
+          @grpc = service.get_subscription name if reference?
+          @resource_name = nil
         end
 
         ##

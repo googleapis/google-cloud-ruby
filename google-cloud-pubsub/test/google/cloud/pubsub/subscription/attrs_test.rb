@@ -27,7 +27,8 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
   it "gets topic from the Google API object" do
     # No mocked service means no API calls are happening.
     subscription.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
-    subscription.topic.must_be :lazy?
+    subscription.topic.must_be :reference?
+    subscription.topic.wont_be :resource?
     subscription.topic.name.must_equal topic_path(topic_name)
   end
 
@@ -60,9 +61,9 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     mock.verify
   end
 
-  describe "lazy subscription object of a subscription that does exist" do
+  describe "reference subscription object of a subscription that does exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
+      Google::Cloud::Pubsub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
@@ -76,7 +77,8 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
 
       mock.verify
 
-      subscription.topic.must_be :lazy?
+      subscription.topic.must_be :reference?
+      subscription.topic.wont_be :resource?
       subscription.topic.name.must_equal topic_path(topic_name)
     end
 
@@ -127,9 +129,9 @@ describe Google::Cloud::Pubsub::Subscription, :attributes, :mock_pubsub do
     end
   end
 
-  describe "lazy subscription object of a subscription that does not exist" do
+  describe "reference subscription object of a subscription that does not exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
+      Google::Cloud::Pubsub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 

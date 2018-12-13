@@ -167,7 +167,7 @@ module Google
           # Google::Pubsub::V1::ListTopicSubscriptionsResponse object.
           def self.from_topic_grpc grpc_list, service, topic, max = nil
             subs = new(Array(grpc_list.subscriptions).map do |grpc|
-              Subscription.new_lazy grpc, service
+              Subscription.from_name grpc, service
             end)
             token = grpc_list.next_page_token
             token = nil if token == "".freeze

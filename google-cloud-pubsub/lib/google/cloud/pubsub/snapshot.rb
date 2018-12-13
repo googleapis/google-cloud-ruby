@@ -79,7 +79,7 @@ module Google
         #   snapshot.topic.name #=> "projects/my-project/topics/my-topic"
         #
         def topic
-          Topic.new_lazy @grpc.topic, service
+          Topic.from_name @grpc.topic, service
         end
 
         ##

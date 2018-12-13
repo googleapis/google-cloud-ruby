@@ -26,9 +26,9 @@ describe Google::Cloud::Pubsub::Subscription, :name, :mock_pubsub do
     subscription.name.must_equal sub_path
   end
 
-  describe "lazy subscription given the short name" do
+  describe "reference subscription given the short name" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
+      Google::Cloud::Pubsub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
@@ -37,9 +37,9 @@ describe Google::Cloud::Pubsub::Subscription, :name, :mock_pubsub do
     end
   end
 
-  describe "lazy subscription object given the full path" do
+  describe "reference subscription object given the full path" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_path,
+      Google::Cloud::Pubsub::Subscription.from_name sub_path,
                                             pubsub.service
     end
 

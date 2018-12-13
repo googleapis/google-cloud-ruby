@@ -105,9 +105,9 @@ describe Google::Cloud::Pubsub::Subscription, :modify_ack_deadline, :mock_pubsub
     mock.verify
   end
 
-  describe "lazy subscription object of a subscription that does exist" do
+  describe "reference subscription object of a subscription that does exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
+      Google::Cloud::Pubsub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
@@ -189,9 +189,9 @@ describe Google::Cloud::Pubsub::Subscription, :modify_ack_deadline, :mock_pubsub
     end
   end
 
-  describe "lazy subscription object of a subscription that does not exist" do
+  describe "reference subscription object of a subscription that does not exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.new_lazy sub_name,
+      Google::Cloud::Pubsub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 

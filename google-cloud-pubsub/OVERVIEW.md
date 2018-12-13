@@ -316,6 +316,44 @@ received_messages = sub.pull
 sub.modify_ack_deadline 120, received_messages
 ```
 
+## Minimizing API calls before receiving and acknowledging messages
+
+A subscription object can be created without making any API calls by providing
+the `skip_lookup` argument to {Google::Cloud::Pubsub::Project#subscription
+Project#subscription} or {Google::Cloud::Pubsub::Topic#subscription
+Topic#subscription}. A subscriber object can also be created without an API call
+by providing the `deadline` optional argument to
+{Google::Cloud::Pubsub::Subscription#listen Subscription#listen}:
+
+```ruby
+require "google/cloud/pubsub"
+
+pubsub = Google::Cloud::Pubsub.new
+
+# No API call is made to retrieve the subscription resource.
+sub = pubsub.subscription "my-topic-sub", skip_lookup: true
+
+# No API call is made to retrieve the subscription deadline.
+subscriber = sub.listen deadline: 60 do |received_message|
+  # process message
+  received_message.acknowledge!
+end
+
+# Start background threads that will call block passed to listen.
+subscriber.start
+
+# Shut down the subscriber when ready to stop receiving messages.
+subscriber.stop.wait!
+```
+
+Skipping API calls may be used to avoid `Google::Cloud::PermissionDeniedError`
+if your account has limited access to the Pub/Sub API. In particular, the role
+`roles/pubsub.subscriber` does not have the permission
+`pubsub.subscriptions.get`, which is required to retrieve a subscription
+resource. See [Access Control -
+Roles](https://cloud.google.com/pubsub/docs/access-control#tbl_roles) for the
+complete list of Pub/Sub roles and permissions.
+
 ## Creating a snapshot and using seek
 
 You can create a snapshot to retain the existing backlog on a subscription. The

@@ -33,7 +33,8 @@ describe Google::Cloud::Pubsub::Snapshot, :mock_pubsub do
 
   it "knows its topic" do
     snapshot.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
-    snapshot.topic.must_be :lazy?
+    snapshot.topic.must_be :reference?
+    snapshot.topic.wont_be :resource?
     snapshot.topic.name.must_equal topic_path(topic_name)
   end
 

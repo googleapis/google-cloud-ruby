@@ -16,8 +16,7 @@ require "helper"
 
 describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)),
-                                                pubsub.service }
+  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
   let(:found_sub_name) { "found-sub-#{Time.now.to_i}" }
   let(:not_found_sub_name) { "found-sub-#{Time.now.to_i}" }
 
@@ -32,7 +31,8 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
     mock.verify
 
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-    sub.wont_be :lazy?
+    sub.wont_be :reference?
+    sub.must_be :resource?
   end
 
   it "gets an existing subscription with get_subscription alias" do
@@ -46,7 +46,8 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
     mock.verify
 
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-    sub.wont_be :lazy?
+    sub.wont_be :reference?
+    sub.must_be :resource?
   end
 
   it "gets an existing subscription with find_subscription alias" do
@@ -60,7 +61,8 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
     mock.verify
 
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-    sub.wont_be :lazy?
+    sub.wont_be :reference?
+    sub.must_be :resource?
   end
 
   it "returns nil when getting an non-existant subscription" do
@@ -81,12 +83,12 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
 
     sub = topic.find_subscription found_sub_name, skip_lookup: true
     sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-    sub.must_be :lazy?
+    sub.must_be :reference?
+    sub.wont_be :resource?
   end
 
-  describe "lazy topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
+  describe "reference topic that exists" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
     it "gets an existing subscription" do
       get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
@@ -99,7 +101,8 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
       mock.verify
 
       sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
-      sub.wont_be :lazy?
+      sub.wont_be :reference?
+      sub.must_be :resource?
     end
 
     it "returns nil when getting an non-existant subscription" do
@@ -116,9 +119,8 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
     end
   end
 
-  describe "lazy topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.new_lazy topic_name,
-                                                 pubsub.service }
+  describe "reference topic that does not exist" do
+    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
 
     it "returns nil when getting an non-existant subscription" do
       stub = Object.new

@@ -33,7 +33,7 @@ describe Google::Cloud::Pubsub, :pubsub do
 
   let(:new_topic_name)  {  $topic_names[0] }
   let(:topic_names)     {  $topic_names[3..6] }
-  let(:lazy_topic_name) {  $topic_names[7] }
+  let(:reference_topic_name) {  $topic_names[7] }
   let(:labels) { { "foo" => "bar" } }
 
   before do
