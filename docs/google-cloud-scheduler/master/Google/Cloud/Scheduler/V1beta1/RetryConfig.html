@@ -1,0 +1,649 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Scheduler::V1beta1::RetryConfig - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Scheduler::V1beta1::RetryConfig";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Scheduler.html" title="Google::Cloud::Scheduler (module)">Scheduler</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Scheduler::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">RetryConfig</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Scheduler::V1beta1::RetryConfig
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Scheduler::V1beta1::RetryConfig</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Settings that determine the retry behavior.</p>
+
+<p>By default, if a job does not complete successfully (meaning that
+an acknowledgement is not received from the handler, then it will be retried
+with exponential backoff according to the settings in <span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_backoff_duration-instance_method" title="#max_backoff_duration (instance method)">#<strong>max_backoff_duration</strong>  &#x21d2; Google::Protobuf::Duration </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum amount of time to wait before retrying a job after it fails.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_doublings-instance_method" title="#max_doublings (instance method)">#<strong>max_doublings</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time between retries will double <code>max_doublings</code> times.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_retry_duration-instance_method" title="#max_retry_duration (instance method)">#<strong>max_retry_duration</strong>  &#x21d2; Google::Protobuf::Duration </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time limit for retrying a failed job, measured from time when an execution was first attempted.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_backoff_duration-instance_method" title="#min_backoff_duration (instance method)">#<strong>min_backoff_duration</strong>  &#x21d2; Google::Protobuf::Duration </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The minimum amount of time to wait before retrying a job after it fails.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#retry_count-instance_method" title="#retry_count (instance method)">#<strong>retry_count</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The number of attempts that the system will make to run a job using the exponential backoff procedure described by <span class='object_link'><a href="#max_doublings-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_doublings (method)">max_doublings</a></span>.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="max_backoff_duration=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="max_backoff_duration-instance_method">
+  
+    #<strong>max_backoff_duration</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The maximum amount of time to wait before retrying a job after
+it fails.</p>
+
+<p>The default value of this field is 1 hour.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The maximum amount of time to wait before retrying a job after
+it fails.</p>
+
+<p>The default value of this field is 1 hour.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="max_doublings=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="max_doublings-instance_method">
+  
+    #<strong>max_doublings</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The time between retries will double <code>max_doublings</code> times.</p>
+
+<p>A job&#39;s retry interval starts at
+<span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span>, then doubles
+<code>max_doublings</code> times, then increases linearly, and finally
+retries retries at intervals of
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> up to
+<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> times.</p>
+
+<p>For example, if <span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span> is
+10s, <span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> is 300s, and
+<code>max_doublings</code> is 3, then the a job will first be retried in 10s. The
+retry interval will double three times, and then increase linearly by
+2^3 * 10s.  Finally, the job will retry at intervals of
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> until the job has
+been attempted <span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> times. Thus, the
+requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, ....</p>
+
+<p>The default value of this field is 5.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The time between retries will double <code>max_doublings</code> times.</p>
+
+<p>A job&#39;s retry interval starts at
+<span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span>, then doubles
+<code>max_doublings</code> times, then increases linearly, and finally
+retries retries at intervals of
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> up to
+<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> times.</p>
+
+<p>For example, if <span class='object_link'><a href="#min_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#min_backoff_duration (method)">min_backoff_duration</a></span> is
+10s, <span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> is 300s, and
+<code>max_doublings</code> is 3, then the a job will first be retried in 10s. The
+retry interval will double three times, and then increase linearly by
+2^3 * 10s.  Finally, the job will retry at intervals of
+<span class='object_link'><a href="#max_backoff_duration-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_backoff_duration (method)">max_backoff_duration</a></span> until the job has
+been attempted <span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span> times. Thus, the
+requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, ....</p>
+
+<p>The default value of this field is 5.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="max_retry_duration=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="max_retry_duration-instance_method">
+  
+    #<strong>max_retry_duration</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The time limit for retrying a failed job, measured from time when an
+execution was first attempted. If specified with
+<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>, the job will be retried until both limits are
+reached.</p>
+
+<p>The default value for max_retry_duration is zero, which means retry
+duration is unlimited.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The time limit for retrying a failed job, measured from time when an
+execution was first attempted. If specified with
+<span class='object_link'><a href="#retry_count-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#retry_count (method)">retry_count</a></span>, the job will be retried until both limits are
+reached.</p>
+
+<p>The default value for max_retry_duration is zero, which means retry
+duration is unlimited.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="min_backoff_duration=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="min_backoff_duration-instance_method">
+  
+    #<strong>min_backoff_duration</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The minimum amount of time to wait before retrying a job after
+it fails.</p>
+
+<p>The default value of this field is 5 seconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The minimum amount of time to wait before retrying a job after
+it fails.</p>
+
+<p>The default value of this field is 5 seconds.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="retry_count=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="retry_count-instance_method">
+  
+    #<strong>retry_count</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The number of attempts that the system will make to run a job using the
+exponential backoff procedure described by
+<span class='object_link'><a href="#max_doublings-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_doublings (method)">max_doublings</a></span>.</p>
+
+<p>The default value of retry_count is zero.</p>
+
+<p>If retry_count is zero, a job attempt will <em>not</em> be retried if
+it fails. Instead the Cloud Scheduler system will wait for the
+next scheduled execution time.</p>
+
+<p>If retry_count is set to a non-zero number then Cloud Scheduler
+will retry failed attempts, using exponential backoff,
+retry_count times, or until the next scheduled execution time,
+whichever comes first.</p>
+
+<p>Values greater than 5 and negative values are not allowed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of attempts that the system will make to run a job using the
+exponential backoff procedure described by
+<span class='object_link'><a href="#max_doublings-instance_method" title="Google::Cloud::Scheduler::V1beta1::RetryConfig#max_doublings (method)">max_doublings</a></span>.</p>
+
+<p>The default value of retry_count is zero.</p>
+
+<p>If retry_count is zero, a job attempt will <em>not</em> be retried if
+it fails. Instead the Cloud Scheduler system will wait for the
+next scheduled execution time.</p>
+
+<p>If retry_count is set to a non-zero number then Cloud Scheduler
+will retry failed attempts, using exponential backoff,
+retry_count times, or until the next scheduled execution time,
+whichever comes first.</p>
+
+<p>Values greater than 5 and negative values are not allowed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb', line 195</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

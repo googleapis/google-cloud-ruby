@@ -1,0 +1,659 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Scheduler.html" title="Google::Cloud::Scheduler (module)">Scheduler</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Cloud::Scheduler::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">AppEngineHttpTarget</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>App Engine target. The job will be pushed to a job handler by means
+of an HTTP request via an <span class='object_link'><a href="#http_method-instance_method" title="Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget#http_method (method)">http_method</a></span> such
+as HTTP POST, HTTP GET, etc. The job is acknowledged by means of an
+HTTP response code in the range [200 - 299]. Error 503 is
+considered an App Engine system error instead of an application
+error. Requests returning error 503 will be retried regardless of
+retry configuration and not counted against retry counts. Any other
+response code, or a failure to receive a response before the
+deadline, constitutes a failed attempt.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#app_engine_routing-instance_method" title="#app_engine_routing (instance method)">#<strong>app_engine_routing</strong>  &#x21d2; Google::Cloud::Scheduler::V1beta1::AppEngineRouting </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>App Engine Routing setting for the job.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#body-instance_method" title="#body (instance method)">#<strong>body</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Body.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#headers-instance_method" title="#headers (instance method)">#<strong>headers</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>HTTP request headers.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#http_method-instance_method" title="#http_method (instance method)">#<strong>http_method</strong>  &#x21d2; Google::Cloud::Scheduler::V1beta1::HttpMethod </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The HTTP method to use for the request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#relative_uri-instance_method" title="#relative_uri (instance method)">#<strong>relative_uri</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The relative URI.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="app_engine_routing=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="app_engine_routing-instance_method">
+  
+    #<strong>app_engine_routing</strong>  &#x21d2; <tt><span class='object_link'><a href="AppEngineRouting.html" title="Google::Cloud::Scheduler::V1beta1::AppEngineRouting (class)">Google::Cloud::Scheduler::V1beta1::AppEngineRouting</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns App Engine Routing setting for the job.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AppEngineRouting.html" title="Google::Cloud::Scheduler::V1beta1::AppEngineRouting (class)">Google::Cloud::Scheduler::V1beta1::AppEngineRouting</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>App Engine Routing setting for the job.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="body=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="body-instance_method">
+  
+    #<strong>body</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Body.</p>
+
+<p>HTTP request body. A request body is allowed only if the HTTP method is
+POST or PUT. It will result in invalid argument error to set a body on a
+job with an incompatible <span class='object_link'><a href="HttpMethod.html" title="Google::Cloud::Scheduler::V1beta1::HttpMethod (module)">HttpMethod</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Body.</p>
+
+<p>HTTP request body. A request body is allowed only if the HTTP method is
+POST or PUT. It will result in invalid argument error to set a body on a
+job with an incompatible <span class='object_link'><a href="HttpMethod.html" title="Google::Cloud::Scheduler::V1beta1::HttpMethod (module)">HttpMethod</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="headers=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="headers-instance_method">
+  
+    #<strong>headers</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns HTTP request headers.</p>
+
+<p>This map contains the header field names and values. Headers can be set
+when the job is created.</p>
+
+<p>Cloud Scheduler sets some headers to default values:</p>
+
+<ul>
+<li><code>User-Agent</code>: By default, this header is
+<code>&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;</code>.
+This header can be modified, but Cloud Scheduler will append
+<code>&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;</code> to the
+modified <code>User-Agent</code>.</li>
+</ul>
+
+<p>If the job has an <span class='object_link'><a href="#body-instance_method" title="Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget#body (method)">body</a></span>, Cloud Scheduler sets the
+following headers:</p>
+
+<ul>
+<li><code>Content-Type</code>: By default, the <code>Content-Type</code> header is set to
+<code>&quot;application/octet-stream&quot;</code>. The default can be overridden by explictly
+setting <code>Content-Type</code> to a particular media type when the job is
+created.
+For example, <code>Content-Type</code> can be set to <code>&quot;application/json&quot;</code>.</li>
+<li><code>Content-Length</code>: This is computed by Cloud Scheduler. This value is
+output only. It cannot be changed.</li>
+</ul>
+
+<p>The headers below are output only. They cannot be set or overridden:</p>
+
+<ul>
+<li><code>X-Google-*</code>: For Google internal use only.</li>
+<li><code>X-AppEngine-*</code>: For Google internal use only. See
+<a href="https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers">Reading request headers</a>.</li>
+</ul>
+
+<p>In addition, some App Engine headers, which contain
+job-specific information, are also be sent to the job handler; see
+<a href="https://cloud.google.comappengine/docs/standard/python/config/cron#securing_urls_for_cron">request headers</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>HTTP request headers.</p>
+
+<p>This map contains the header field names and values. Headers can be set
+when the job is created.</p>
+
+<p>Cloud Scheduler sets some headers to default values:</p>
+
+<ul>
+<li><code>User-Agent</code>: By default, this header is
+<code>&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;</code>.
+This header can be modified, but Cloud Scheduler will append
+<code>&quot;AppEngine-Google; (+http://code.google.com/appengine)&quot;</code> to the
+modified <code>User-Agent</code>.</li>
+</ul>
+
+<p>If the job has an <span class='object_link'><a href="#body-instance_method" title="Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget#body (method)">body</a></span>, Cloud Scheduler sets the
+following headers:</p>
+
+<ul>
+<li><code>Content-Type</code>: By default, the <code>Content-Type</code> header is set to
+<code>&quot;application/octet-stream&quot;</code>. The default can be overridden by explictly
+setting <code>Content-Type</code> to a particular media type when the job is
+created.
+For example, <code>Content-Type</code> can be set to <code>&quot;application/json&quot;</code>.</li>
+<li><code>Content-Length</code>: This is computed by Cloud Scheduler. This value is
+output only. It cannot be changed.</li>
+</ul>
+
+<p>The headers below are output only. They cannot be set or overridden:</p>
+
+<ul>
+<li><code>X-Google-*</code>: For Google internal use only.</li>
+<li><code>X-AppEngine-*</code>: For Google internal use only. See
+<a href="https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers">Reading request headers</a>.</li>
+</ul>
+
+<p>In addition, some App Engine headers, which contain
+job-specific information, are also be sent to the job handler; see
+<a href="https://cloud.google.comappengine/docs/standard/python/config/cron#securing_urls_for_cron">request headers</a>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="http_method=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="http_method-instance_method">
+  
+    #<strong>http_method</strong>  &#x21d2; <tt><span class='object_link'><a href="HttpMethod.html" title="Google::Cloud::Scheduler::V1beta1::HttpMethod (module)">Google::Cloud::Scheduler::V1beta1::HttpMethod</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The HTTP method to use for the request. PATCH and OPTIONS are not
+permitted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HttpMethod.html" title="Google::Cloud::Scheduler::V1beta1::HttpMethod (module)">Google::Cloud::Scheduler::V1beta1::HttpMethod</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The HTTP method to use for the request. PATCH and OPTIONS are not
+permitted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="relative_uri=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="relative_uri-instance_method">
+  
+    #<strong>relative_uri</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The relative URI.</p>
+
+<p>The relative URL must begin with &quot;/&quot; and must be a valid HTTP relative URL.
+It can contain a path, query string arguments, and <code>#</code> fragments.
+If the relative URL is empty, then the root path &quot;/&quot; will be used.
+No spaces are allowed, and the maximum length allowed is 2083 characters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The relative URI.</p>
+
+<p>The relative URL must begin with &quot;/&quot; and must be a valid HTTP relative URL.
+It can contain a path, query string arguments, and <code>#</code> fragments.
+If the relative URL is empty, then the root path &quot;/&quot; will be used.
+No spaces are allowed, and the maximum length allowed is 2083 characters.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb', line 129</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
