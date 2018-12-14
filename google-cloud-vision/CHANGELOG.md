@@ -2,7 +2,7 @@
 
 ### 0.32.2 / 2018-12-14
 
-* Add image_context as parameter to ImageAnnotatorClient.*_detection helpers
+* Add image_context as optional parameter to ImageAnnotatorClient.*_detection helpers
 * Alias the following KeyManagementServiceClient class methods to instance methods.
   * location_path
   * product_set_path
