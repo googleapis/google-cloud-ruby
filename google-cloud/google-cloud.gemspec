@@ -36,6 +36,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-os_login", "~> 0.1"
   gem.add_dependency "google-cloud-pubsub", "~> 0.30"
   gem.add_dependency "google-cloud-resource_manager", "~> 0.29"
+  gem.add_dependency "google-cloud-scheduler", "~> 0.1"
   gem.add_dependency "google-cloud-spanner", "~> 1.3"
   gem.add_dependency "google-cloud-speech", "~> 0.29"
   gem.add_dependency "google-cloud-storage", "~> 1.10"

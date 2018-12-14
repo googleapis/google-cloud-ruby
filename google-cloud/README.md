@@ -32,6 +32,7 @@ This gem depends on and lazily loads the following google-cloud-* gems:
 - [google-cloud-os_login](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-os_login)
 - [google-cloud-pubsub](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-pubsub)
 - [google-cloud-resource_manager](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-resource_manager)
+- [google-cloud-scheduler](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-scheduler)
 - [google-cloud-spanner](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-spanner)
 - [google-cloud-speech](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-speech)
 - [google-cloud-storage](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-storage)

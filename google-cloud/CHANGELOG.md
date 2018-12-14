@@ -1,5 +1,9 @@
 # Release History
 
+### 0.56.4 / 2018-12-14
+
+* Add Cloud Scheduler
+
 ### 0.56.3 / 2018-09-20
 
 * Update documentation.
