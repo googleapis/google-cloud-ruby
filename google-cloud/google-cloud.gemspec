@@ -18,6 +18,8 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0.0"
 
+  
+  gem.add_dependency "google-cloud-asset", "~> 0.1"
   gem.add_dependency "google-cloud-bigquery", "~> 1.1"
   gem.add_dependency "google-cloud-bigquery-data_transfer", "~> 0.1"
   gem.add_dependency "google-cloud-bigtable", "~> 0.1"
@@ -36,6 +38,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-os_login", "~> 0.1"
   gem.add_dependency "google-cloud-pubsub", "~> 0.30"
   gem.add_dependency "google-cloud-resource_manager", "~> 0.29"
+  gem.add_dependency "google-cloud-redis", "~> 0.2"
+  gem.add_dependency "google-cloud-scheduler", "~> 0.1"
   gem.add_dependency "google-cloud-spanner", "~> 1.3"
   gem.add_dependency "google-cloud-speech", "~> 0.29"
   gem.add_dependency "google-cloud-storage", "~> 1.10"

@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "google-cloud-asset", path: "../google-cloud-asset"
 gem "google-cloud-bigquery", path: "../google-cloud-bigquery"
 gem "google-cloud-bigquery-data_transfer",
     path: "../google-cloud-bigquery-data_transfer"
@@ -24,6 +25,7 @@ gem "google-cloud-os_login", path: "../google-cloud-os_login"
 gem "google-cloud-pubsub", path: "../google-cloud-pubsub"
 gem "google-cloud-redis", path: "../google-cloud-redis"
 gem "google-cloud-resource_manager", path: "../google-cloud-resource_manager"
+gem "google-cloud-scheduler", path: "../google-cloud-scheduler"
 gem "google-cloud-spanner", path: "../google-cloud-spanner"
 gem "google-cloud-speech", path: "../google-cloud-speech"
 gem "google-cloud-storage", path: "../google-cloud-storage"
