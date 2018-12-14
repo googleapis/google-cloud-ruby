@@ -19,8 +19,7 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 from textwrap import dedent
-from os import listdir
-from os.path import isfile, join
+from os.path import join
 from subprocess import call
 
 logging.basicConfig(level=logging.DEBUG)
@@ -107,7 +106,7 @@ for version in ['v1', 'v1p3beta1']:
         '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
         '\\1\\2# @private\n\\2\\3')
 
-    # Add helper methods
+    # Require helper methods
     s.replace(
         f'lib/google/cloud/vision/{version}.rb',
         f'require "google/cloud/vision/{version}/image_annotator_client"',
