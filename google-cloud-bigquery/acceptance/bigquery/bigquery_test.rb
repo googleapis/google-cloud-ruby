@@ -211,12 +211,10 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   it "extracts a readonly table to a GCS url with extract" do
-    public_table_id = "bigquery-public-data.samples.shakespeare"
-
     Tempfile.open "empty_extract_file.csv" do |tmp|
       dest_file_name = random_file_destination_name
       extract_url = "gs://#{bucket.name}/#{dest_file_name}"
-      result = bigquery.extract public_table_id, extract_url do |j|
+      result = bigquery.extract samples_public_table, extract_url do |j|
         j.location = "US"
       end
       result.must_equal true
@@ -228,8 +226,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   it "copies a readonly table to another table with copy" do
-    public_table_id = "bigquery-public-data.samples.shakespeare"
-    result = bigquery.copy public_table_id, "#{dataset_id}.shakespeare_copy", create: :needed, write: :empty do |j|
+    result = bigquery.copy samples_public_table, "#{dataset_id}.shakespeare_copy", create: :needed, write: :empty do |j|
       j.location = "US"
     end
     result.must_equal true
