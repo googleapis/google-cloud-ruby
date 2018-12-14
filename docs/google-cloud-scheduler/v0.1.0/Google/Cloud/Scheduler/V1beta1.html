@@ -1,0 +1,424 @@
+---
+layout: yard_main
+title: "Module: Google::Cloud::Scheduler::V1beta1 - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Scheduler::V1beta1";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Scheduler.html" title="Google::Cloud::Scheduler (module)">Scheduler</a></span></span>
+     &raquo; 
+    <span class="title">V1beta1</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Cloud::Scheduler::V1beta1
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/scheduler/v1beta1.rb<span class="defines">,<br />
+  lib/google/cloud/scheduler/v1beta1/helpers.rb,<br /> lib/google/cloud/scheduler/v1beta1/credentials.rb,<br /> lib/google/cloud/scheduler/v1beta1/cloud_scheduler_client.rb,<br /> lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/job.rb,<br /> lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/target.rb,<br /> lib/google/cloud/scheduler/v1beta1/doc/google/cloud/scheduler/v1beta1/cloudscheduler.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Ruby Client for Cloud Scheduler API (<a href="https://github.com/googleapis/google-cloud-ruby#versioning">Alpha</a>)</h1>
+
+<p><a href="https://cloud.google.com/cloudscheduler">Cloud Scheduler API</a>:
+Creates and manages jobs run on a regular recurring schedule.</p>
+
+<ul>
+<li><a href="https://cloud.google.com/cloudscheduler">Product Documentation</a></li>
+</ul>
+
+<h2>Quick Start</h2>
+
+<p>In order to use this library, you first need to go through the following
+steps:</p>
+
+<ol>
+<li><a href="https://console.cloud.google.com/project">Select or create a Cloud Platform project.</a></li>
+<li><a href="https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project">Enable billing for your project.</a></li>
+<li><a href="https://console.cloud.google.com/apis/library/cloudscheduler.googleapis.com">Enable the Cloud Scheduler API.</a></li>
+<li><a href="https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication">Setup Authentication.</a></li>
+</ol>
+
+<h3>Installation</h3>
+
+<pre class="code ruby"><code class="ruby">$ gem install google-cloud-scheduler
+</code></pre>
+
+<h3>Next Steps</h3>
+
+<ul>
+<li>Read the <a href="https://cloud.google.com/cloudscheduler">Cloud Scheduler API Product documentation</a>
+to learn more about the product and see How-to Guides.</li>
+<li>View this <a href="https://github.com/googleapis/google-cloud-ruby/blob/master/README.md">repository&#39;s main README</a>
+to see the full list of Cloud APIs that we cover.</li>
+</ul>
+
+<h2>Enabling Logging</h2>
+
+<p>To enable logging for this library, set the logger for the underlying <a href="https://github.com/grpc/grpc/tree/master/src/ruby">gRPC</a> library.
+The logger that you set may be a Ruby stdlib <a href="https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a> as shown below,
+or a <a href="https://googleapis.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a>
+that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver Logging</a>. See <a href="https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb">grpc/logconfig.rb</a>
+and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb">spec_helper.rb</a> for additional information.</p>
+
+<p>Configuring a Ruby stdlib logger:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>logger</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='kw'>module</span> <span class='const'>MyLogger</span>
+  <span class='const'>LOGGER</span> <span class='op'>=</span> <span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='gvar'>$stderr</span><span class='comma'>,</span> <span class='label'>level:</span> <span class='const'>Logger</span><span class='op'>::</span><span class='const'>WARN</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span>
+    <span class='const'>LOGGER</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Define a gRPC module-level logger method before grpc/logconfig.rb loads.
+</span><span class='kw'>module</span> <span class='const'>GRPC</span>
+  <span class='id identifier rubyid_extend'>extend</span> <span class='const'>MyLogger</span>
+<span class='kw'>end</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="V1beta1/HttpMethod.html" title="Google::Cloud::Scheduler::V1beta1::HttpMethod (module)">HttpMethod</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="V1beta1/AppEngineHttpTarget.html" title="Google::Cloud::Scheduler::V1beta1::AppEngineHttpTarget (class)">AppEngineHttpTarget</a></span>, <span class='object_link'><a href="V1beta1/AppEngineRouting.html" title="Google::Cloud::Scheduler::V1beta1::AppEngineRouting (class)">AppEngineRouting</a></span>, <span class='object_link'><a href="V1beta1/CloudSchedulerClient.html" title="Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient (class)">CloudSchedulerClient</a></span>, <span class='object_link'><a href="V1beta1/CreateJobRequest.html" title="Google::Cloud::Scheduler::V1beta1::CreateJobRequest (class)">CreateJobRequest</a></span>, <span class='object_link'><a href="V1beta1/Credentials.html" title="Google::Cloud::Scheduler::V1beta1::Credentials (class)">Credentials</a></span>, <span class='object_link'><a href="V1beta1/DeleteJobRequest.html" title="Google::Cloud::Scheduler::V1beta1::DeleteJobRequest (class)">DeleteJobRequest</a></span>, <span class='object_link'><a href="V1beta1/GetJobRequest.html" title="Google::Cloud::Scheduler::V1beta1::GetJobRequest (class)">GetJobRequest</a></span>, <span class='object_link'><a href="V1beta1/HttpTarget.html" title="Google::Cloud::Scheduler::V1beta1::HttpTarget (class)">HttpTarget</a></span>, <span class='object_link'><a href="V1beta1/Job.html" title="Google::Cloud::Scheduler::V1beta1::Job (class)">Job</a></span>, <span class='object_link'><a href="V1beta1/ListJobsRequest.html" title="Google::Cloud::Scheduler::V1beta1::ListJobsRequest (class)">ListJobsRequest</a></span>, <span class='object_link'><a href="V1beta1/ListJobsResponse.html" title="Google::Cloud::Scheduler::V1beta1::ListJobsResponse (class)">ListJobsResponse</a></span>, <span class='object_link'><a href="V1beta1/PauseJobRequest.html" title="Google::Cloud::Scheduler::V1beta1::PauseJobRequest (class)">PauseJobRequest</a></span>, <span class='object_link'><a href="V1beta1/PubsubTarget.html" title="Google::Cloud::Scheduler::V1beta1::PubsubTarget (class)">PubsubTarget</a></span>, <span class='object_link'><a href="V1beta1/ResumeJobRequest.html" title="Google::Cloud::Scheduler::V1beta1::ResumeJobRequest (class)">ResumeJobRequest</a></span>, <span class='object_link'><a href="V1beta1/RetryConfig.html" title="Google::Cloud::Scheduler::V1beta1::RetryConfig (class)">RetryConfig</a></span>, <span class='object_link'><a href="V1beta1/RunJobRequest.html" title="Google::Cloud::Scheduler::V1beta1::RunJobRequest (class)">RunJobRequest</a></span>, <span class='object_link'><a href="V1beta1/UpdateJobRequest.html" title="Google::Cloud::Scheduler::V1beta1::UpdateJobRequest (class)">UpdateJobRequest</a></span>
+    
+  
+</p>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(credentials: nil, scopes: nil, client_config: nil, timeout: nil, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Cloud Scheduler API allows external entities to reliably schedule asynchronous jobs.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="new-class_method">
+  
+    .<strong>new</strong>(credentials: nil, scopes: nil, client_config: nil, timeout: nil, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Cloud Scheduler API allows external entities to reliably
+schedule asynchronous jobs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>credentials</span>
+      
+      
+        <span class='type'>(<tt>Google::Auth::Credentials</tt>, <tt>String</tt>, <tt>Hash</tt>, <tt>GRPC::Core::Channel</tt>, <tt>GRPC::Core::ChannelCredentials</tt>, <tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Provides the means for authenticating requests made by the client. This parameter can
+be many types.
+A <code>Google::Auth::Credentials</code> uses a the properties of its represented keyfile for
+authenticating requests made by this client.
+A <code>String</code> will be treated as the path to the keyfile to be used for the construction of
+credentials for this client.
+A <code>Hash</code> will be treated as the contents of a keyfile to be used for the construction of
+credentials for this client.
+A <code>GRPC::Core::Channel</code> will be used to make calls through.
+A <code>GRPC::Core::ChannelCredentials</code> for the setting up the RPC client. The channel credentials
+should already be composed with a <code>GRPC::Core::CallCredentials</code> object.
+A <code>Proc</code> will be used as an updater_proc for the Grpc channel. The proc transforms the
+metadata for requests, generally, to give OAuth credentials.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scopes</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth scopes for this service. This parameter is ignored if
+an updater_proc is supplied.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Hash for call options for each method. See
+Google::Gax#construct_settings for the structure of
+this data. Falls back to the default config if not specified
+or the specified config is missing data points.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The default timeout, in seconds, for calls made through this client.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>metadata</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default metadata to be sent with each request. This can be overridden on a per call basis.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>exception_transformer</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An optional proc that intercepts any exceptions raised during an API call to inject
+custom error handling.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/scheduler/v1beta1.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
+    <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_version:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_kwargs'>kwargs</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+    <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+    <span class='label'>metadata:</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span><span class='comma'>,</span>
+    <span class='label'>lib_name:</span> <span class='id identifier rubyid_lib_name'>lib_name</span><span class='comma'>,</span>
+    <span class='label'>lib_version:</span> <span class='id identifier rubyid_lib_version'>lib_version</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='rbrace'>}</span>
+  <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Scheduler.html" title="Google::Cloud::Scheduler (module)">Scheduler</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Scheduler::V1beta1 (module)">V1beta1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="V1beta1/CloudSchedulerClient.html" title="Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient (class)">CloudSchedulerClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
