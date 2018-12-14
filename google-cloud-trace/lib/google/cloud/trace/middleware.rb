@@ -93,6 +93,36 @@ module Google
       # end
       # ```
       #
+      # ## Error handling
+      #
+      # An error encountered during the reporting of traces by the middleware
+      # can be handled using a Proc set in the `on_error` configuration. (See
+      # {Google::Cloud::Trace.configure}.) The Proc must take the error object
+      # as the single argument.
+      #
+      # ```ruby
+      # # Configure error handling
+      #
+      # require "sinatra"
+      # require "google/cloud/trace"
+      # require "google/cloud/error_reporting"
+      #
+      # Google::Cloud::Trace.configure do |config|
+      #   config.on_error = lambda do |error|
+      #     Google::Cloud::ErrorReporting.report exception
+      #   end
+      # end
+      #
+      # use Google::Cloud::Trace::Middleware
+      #
+      # get "/" do
+      #   Google::Cloud::Trace.in_span "Sleeping on the job!" do
+      #     sleep rand
+      #   end
+      #   "Hello World!"
+      # end
+      # ```
+      #
       # ## Sampling and blacklisting
       #
       # A sampler makes the decision whether to record a trace for each
@@ -214,13 +244,7 @@ module Google
             begin
               @service.patch_traces trace
             rescue StandardError => ex
-              msg = "Transmit to Stackdriver Trace failed: #{ex.inspect}"
-              logger = env["rack.logger"]
-              if logger
-                logger.error msg
-              else
-                warn msg
-              end
+              handle_error ex, logger: env["rack.logger"]
             end
           end
         end
@@ -389,6 +413,37 @@ module Google
         # @private Get Google::Cloud::Trace.configure
         def configuration
           Google::Cloud::Trace.configure
+        end
+
+        ##
+        # @private Get the error callback from the configuration.
+        # This value is memoized to reduce calls to the configuration.
+        def error_callback
+          if @error_callback.nil?
+            @error_callback = :unset
+            configuration_callback = configuration.on_error
+            @error_callback = configuration_callback if configuration_callback
+          end
+
+          return nil if @error_callback == :unset
+          @error_callback
+        end
+
+        ##
+        # @private Handle errors raised when making patch_traces API calls.
+        def handle_error error, logger: nil
+          # Use on_error from configuration
+          if error_callback
+            error_callback.call error
+          else
+            # log error
+            msg = "Transmit to Stackdriver Trace failed: #{error.inspect}"
+            if logger
+              logger.error msg
+            else
+              warn msg
+            end
+          end
         end
       end
     end
