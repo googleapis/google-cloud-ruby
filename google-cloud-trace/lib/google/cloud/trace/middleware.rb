@@ -109,7 +109,7 @@ module Google
       #
       # Google::Cloud::Trace.configure do |config|
       #   config.on_error = lambda do |error|
-      #     Google::Cloud::ErrorReporting.report exception
+      #     Google::Cloud::ErrorReporting.report error
       #   end
       # end
       #
