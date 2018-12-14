@@ -2,6 +2,8 @@
 
 ### 0.56.4 / 2018-12-14
 
+* Add Cloud Asset
+* Add Cloud Redis
 * Add Cloud Scheduler
 
 ### 0.56.3 / 2018-09-20

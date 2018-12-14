@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "google-cloud-asset", path: "../google-cloud-asset"
 gem "google-cloud-bigquery", path: "../google-cloud-bigquery"
 gem "google-cloud-bigquery-data_transfer",
     path: "../google-cloud-bigquery-data_transfer"
