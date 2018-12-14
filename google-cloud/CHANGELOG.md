@@ -1,6 +1,6 @@
 # Release History
 
-### 0.56.4 / 2018-12-14
+### 0.57.0 / 2018-12-14
 
 * Add Cloud Asset
 * Add Cloud Redis
