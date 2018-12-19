@@ -79,11 +79,48 @@ module Google
           Middleware.logger = logging.logger log_name, resource, labels
           # Set the default Rails logger
           if Logging.configure.set_default_logger_on_rails_init
-            app.config.logger = Middleware.logger
+            set_default_logger
           end
           app.middleware.insert_before Rails::Rack::Logger,
                                        Google::Cloud::Logging::Middleware,
                                        logger: Middleware.logger
+        end
+
+        ##
+        # This should be called once the application determines that it is safe
+        # to start background threads and open gRPC connections. It informs the
+        # middleware system that it is safe to use Google Cloud Logging. This is
+        # called during Rails initialization when the
+        # `set_default_logger_on_rails_init` configuration is set.
+        #
+        # Generally, this matters if the application forks worker processes;
+        # this method should be called only after workers are forked, since
+        # threads and network connections interact badly with fork. For example,
+        # when running Puma in [clustered
+        # mode](https://github.com/puma/puma#clustered-mode), this method should
+        # be called in an `on_worker_boot` block.
+        #
+        # If the application does no forking, this method can be called any time
+        # early in the application initialization process. Or by setting the
+        # `set_default_logger_on_rails_init` configuration.
+        #
+        # If the `set_default_logger_on_rails_init` configuration is not set,
+        # and {Railtie.set_default_logger} is not called in a post-fork hook,
+        # the default Rails logger object will not be set to use the Google
+        # Cloud Logging Logger object. For best results, an application should
+        # call this method at the appropriate time, such as a post-fork hook.
+        #
+        def self.set_default_logger
+          return if Middleware.logger.nil?
+          return if Rails.logger.is_a? Google::Cloud::Logging::Logger
+
+          # configure the Middleware logger to use the same settings as Rails
+          Middleware.logger.level = Rails.logger.level
+          # TODO: are there more settings to be set here?
+
+          # Replace the Rails default logger
+          Rails.app.config.logger = Middleware.logger
+          Rails.logger = Middleware.logger
         end
 
         ##
