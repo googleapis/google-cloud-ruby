@@ -57,9 +57,8 @@ module Google
 
           load_config kwargs
 
-          if logger
-            @logger = logger
-          else
+          logger ||= Middleware.logger
+          logger ||= begin
             log_name = configuration.log_name
             logging = Logging.new project_id: configuration.project_id,
                                   credentials: configuration.credentials
@@ -67,8 +66,10 @@ module Google
               configuration.monitored_resource.type,
               configuration.monitored_resource.labels
             )
-            @logger = logging.logger log_name, resource
+            Middleware.logger = logging.logger log_name, resource
           end
+
+          @logger = logger
         end
 
         ##
@@ -184,6 +185,12 @@ module Google
           else
             default_monitored_resource
           end
+        end
+
+        class << self
+          ##
+          # @private Global logger object
+          attr_accessor :logger
         end
 
         ##
