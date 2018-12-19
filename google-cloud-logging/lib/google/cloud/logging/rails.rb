@@ -78,7 +78,9 @@ module Google
 
           Middleware.logger = logging.logger log_name, resource, labels
           # Set the default Rails logger
-          app.config.logger = Middleware.logger
+          if Logging.configure.set_default_logger_on_rails_init
+            app.config.logger = Middleware.logger
+          end
           app.middleware.insert_before Rails::Rack::Logger,
                                        Google::Cloud::Logging::Middleware,
                                        logger: Middleware.logger
@@ -138,6 +140,10 @@ module Google
               log_config.monitored_resource.type
             config.monitored_resource.labels ||=
               log_config.monitored_resource.labels.to_h
+            if config.set_default_logger_on_rails_init.nil?
+              config.set_default_logger_on_rails_init = \
+                log_config.set_default_logger_on_rails_init
+            end
           end
         end
 
