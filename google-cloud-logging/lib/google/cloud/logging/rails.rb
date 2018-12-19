@@ -76,10 +76,12 @@ module Google
             Logging::Middleware.build_monitored_resource resource_type,
                                                          resource_labels
 
-          app.config.logger = logging.logger log_name, resource, labels
+          Middleware.logger = logging.logger log_name, resource, labels
+          # Set the default Rails logger
+          app.config.logger = Middleware.logger
           app.middleware.insert_before Rails::Rack::Logger,
                                        Google::Cloud::Logging::Middleware,
-                                       logger: app.config.logger
+                                       logger: Middleware.logger
         end
 
         ##
