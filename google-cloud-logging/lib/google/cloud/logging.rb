@@ -136,9 +136,9 @@ module Google
       # * `labels` - (Hash) User defined labels. A `Hash` of label names to
       #   string label values or callables/`Proc` which are functions of the
       #   Rack environment.
-      # * `set_default_logger_on_rails_init` - (Boolean) Whether it is safe for
-      #   the Google Cloud Logging Logger to start background threads and open
-      #   gRPC connections on Rails initialization. This should only be used
+      # * `set_default_logger_on_rails_init` - (Boolean) Whether Google Cloud
+      #   Logging Logger should be allowed to start background threads and open
+      #   gRPC connections during Rails initialization. This should only be used
       #   with a non-forking web server. Web servers such as Puma and Unicorn
       #   should not set this, and instead set the Rails logger to a Google
       #   Cloud Logging Logger object on the worker process by calling
