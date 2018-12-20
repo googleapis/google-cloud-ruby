@@ -81,9 +81,11 @@ module Google
           if Logging.configure.set_default_logger_on_rails_init
             set_default_logger
           end
+          init_callback = -> { set_default_logger }
           app.middleware.insert_before Rails::Rack::Logger,
                                        Google::Cloud::Logging::Middleware,
-                                       logger: Middleware.logger
+                                       logger: Middleware.logger,
+                                       on_init: init_callback
         end
 
         ##

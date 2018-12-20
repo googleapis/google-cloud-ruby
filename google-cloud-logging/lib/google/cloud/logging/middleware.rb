@@ -44,6 +44,8 @@ module Google
         #   to track Stackdriver request trace ID. It also properly sets
         #   env["rack.logger"] to this assigned logger for accessing. If not
         #   specified, a default logger with be used.
+        # @param [Proc] on_init A callback to be invoked when the middleware is
+        #   initialized. The callback takes no arguments. Optional.
         # @param [Hash] kwargs Hash of configuration settings. Used for
         #   backward API compatibility. See the [Configuration
         #   Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
@@ -52,7 +54,7 @@ module Google
         # @return [Google::Cloud::Logging::Middleware] A new
         #   Google::Cloud::Logging::Middleware instance
         #
-        def initialize app, logger: nil, **kwargs
+        def initialize app, logger: nil, on_init: nil, **kwargs
           @app = app
 
           load_config kwargs
@@ -68,6 +70,8 @@ module Google
             )
             Middleware.logger = logging.logger log_name, resource
           end
+
+          on_init.call if on_init
 
           @logger = logger
         end
