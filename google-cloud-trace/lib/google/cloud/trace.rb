@@ -138,6 +138,9 @@ module Google
       #   recorded with ActiveSupport notification events. Rails-only option.
       #   Default:
       #   `Google::Cloud::Trace::Notifications::DEFAULT_MAX_DATA_LENGTH`
+      # * `on_error` - (Proc) A Proc to be run when an error is encountered
+      #   during the reporting of traces by the middleware. The Proc must take
+      #   the error object as the single argument.
       #
       # See the {file:INSTRUMENTATION.md Configuration Guide} for full
       # configuration parameters.

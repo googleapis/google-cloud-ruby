@@ -142,4 +142,5 @@ Google::Cloud.configure.add_config! :trace do |config|
   config.add_field! :span_id_generator, nil, match: Proc
   config.add_field! :notifications, nil, match: Array
   config.add_field! :max_data_length, nil, match: Integer
+  config.add_field! :on_error, nil, match: Proc
 end
