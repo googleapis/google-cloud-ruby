@@ -127,6 +127,9 @@ module Google
       #   behavior of the API client.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to
       #   `ENV["PUBSUB_EMULATOR_HOST"]`
+      # * `on_error` - (Proc) A Proc to be run when an error is encountered
+      #   on a background thread. The Proc must take the error object as the
+      #   single argument. (See {Subscriber.on_error}.)
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Pubsub library uses.
