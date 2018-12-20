@@ -260,6 +260,7 @@ module Google
             @last_error = error
             @error_callbacks
           end
+          error_callbacks = default_error_callbacks if error_callbacks.empty?
           error_callbacks.each { |error_callback| error_callback.call error }
         end
 
@@ -274,6 +275,21 @@ module Google
         # @private
         def inspect
           "#<#{self.class.name} #{self}>"
+        end
+
+        protected
+
+        def default_error_callbacks
+          # This is memoized to reduce calls to the configuration.
+          @default_error_callbacks ||= begin
+            error_callback = Google::Cloud::Pubsub.configuration.on_error
+            error_callback ||= Google::Cloud.configure.on_error
+            if error_callback
+              [error_callback]
+            else
+              []
+            end
+          end
         end
       end
     end
