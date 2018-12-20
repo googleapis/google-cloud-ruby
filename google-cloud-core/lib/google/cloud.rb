@@ -81,6 +81,9 @@ module Google
     #                 when running from GCP environments.
     # * `credentials`: The service account JSON file path. Automatically
     #                  discovered when running from GCP environments.
+    # * `on_error`: A Proc to be run when an error is encountered during on a
+    #               background thread. The Proc must take the error object as
+    #               the single argument.
     #
     # @return [Google::Cloud::Config] The top-level configuration object for
     #     Google::Cloud libraries.
@@ -114,6 +117,7 @@ module Google
         config.add_alias! :project, :project_id
         config.add_field! :credentials, default_creds, match: Object
         config.add_alias! :keyfile, :credentials
+        config.add_field! :on_error, nil, match: Proc
       end
     end
 
