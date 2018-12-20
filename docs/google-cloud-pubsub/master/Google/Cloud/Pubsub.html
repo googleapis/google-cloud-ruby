@@ -221,6 +221,9 @@ error.</li>
 behavior of the API client.</li>
 <li><code>emulator_host</code> - (String) Host name of the emulator. Defaults to
 <code>ENV[&quot;PUBSUB_EMULATOR_HOST&quot;]</code></li>
+<li><code>on_error</code> - (Proc) A Proc to be run when an error is encountered
+on a background thread. The Proc must take the error object as the
+single argument. (See <span class='object_link'><a href="Pubsub/Subscriber.html#on_error-instance_method" title="Google::Cloud::Pubsub::Subscriber#on_error (method)">Google::Cloud::Pubsub::Subscriber#on_error</a></span>.)</li>
 </ul>
 
 
@@ -266,14 +269,14 @@ Google::Cloud::Pubsub library uses.</p>
       <pre class="lines">
 
 
-134
-135
-136
 137
-138</pre>
+138
+139
+140
+141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_pubsub'>pubsub</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
