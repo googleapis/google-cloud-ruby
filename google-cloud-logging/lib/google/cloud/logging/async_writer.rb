@@ -151,7 +151,10 @@ module Google
               @batch.add entry
             end
 
-            init_resources!
+            @thread_pool ||= \
+              Concurrent::CachedThreadPool.new max_threads: @threads,
+                                               max_queue: @max_queue
+            @thread ||= Thread.new { run_background }
 
             publish_batch! if @batch.ready?
 
@@ -159,17 +162,6 @@ module Google
           end
           self
         end
-
-        def noop
-          # do nothing
-        end
-        alias state noop
-        alias async_state noop
-        alias suspend noop
-        alias resume noop
-        alias async_suspend noop
-        alias async_resume noop
-        alias async_suspended? noop
 
         ##
         # Creates a logger instance that is API-compatible with Ruby's standard
@@ -224,7 +216,6 @@ module Google
 
           self
         end
-        alias async_stop stop
 
         ##
         # Blocks until the writer is fully stopped, all pending entries have
@@ -243,15 +234,9 @@ module Google
 
           self
         end
-        alias wait_until_async_stopped wait!
-        alias wait_until_stopped wait!
-
-        # rubocop:disable Lint/UnusedMethodArgument
 
         ##
         # Stop this asynchronous writer and block until it has been stopped.
-        #
-        # DEPRECATED. Use #async_stop! instead.
         #
         # @param [Number] timeout Timeout in seconds.
         # @param [Boolean] force If set to true, and the writer hasn't stopped
@@ -265,13 +250,20 @@ module Google
         #     after the timeout, or `:forced` if it was forcibly killed.
         #
         def stop! timeout = nil, force: nil
+          return :stopped if stopped?
+
           stop
           wait! timeout
 
-          # TODO: match the return type
+          if synchronize { @thread_pool.shutdown? }
+            return :waited if timeout
+          elsif force
+            @thread_pool.kill
+            return :forced
+          end
+          :timeout
         end
-
-        # rubocop:enable Lint/UnusedMethodArgument
+        alias async_stop! stop!
 
         ##
         # Forces all entries in the current batch to be published
@@ -294,10 +286,6 @@ module Google
         def started?
           !stopped?
         end
-        alias running? started?
-        alias writable? started?
-        alias async_running? started?
-        alias async_working? started?
 
         ##
         # Whether the writer has been stopped.
@@ -306,7 +294,6 @@ module Google
         def stopped?
           synchronize { @stopped }
         end
-        alias async_stopped? stopped?
 
         ##
         # Register to be notified of errors when raised.
@@ -380,14 +367,6 @@ module Google
         alias last_exception last_error
 
         protected
-
-        def init_resources!
-          @thread_pool ||= \
-            Concurrent::CachedThreadPool.new max_threads: @threads,
-                                             max_queue: @max_queue
-          @thread ||= Thread.new { run_background }
-          nil # returning nil because of rubocop...
-        end
 
         def run_background
           synchronize do
