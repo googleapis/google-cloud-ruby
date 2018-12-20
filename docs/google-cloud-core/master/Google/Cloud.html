@@ -178,6 +178,9 @@ this object.</p>
             when running from GCP environments.</li>
 <li><code>credentials</code>: The service account JSON file path. Automatically
              discovered when running from GCP environments.</li>
+<li><code>on_error</code>: A Proc to be run when an error is encountered during on a
+          background thread. The Proc must take the error object as
+          the single argument.</li>
 </ul>
 
 
@@ -223,16 +226,16 @@ Google::Cloud libraries.</p>
       <pre class="lines">
 
 
-88
-89
-90
 91
 92
 93
-94</pre>
+94
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='ivar'>@config</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Cloud/Config.html" title="Google::Cloud::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'><span class='object_link'><a href="Cloud/Config.html#create-class_method" title="Google::Cloud::Config.create (method)">create</a></span></span>
