@@ -62,7 +62,7 @@ module Google
         # The log_name is a String that controls the name of the Stackdriver
         # log to write to. If it is nil, the default log_name for this Logger
         # is used.
-        RequestInfo = ::Struct.new :trace_id, :log_name, :env
+        RequestInfo = ::Struct.new :trace_id, :log_name, :env, :trace_sampled
 
         ##
         # The Google Cloud writer object that calls to `#write_entries` are made
@@ -456,8 +456,9 @@ module Google
         # @param [Hash, nil] env The request's Rack environment or `nil` if not
         #     available.
         #
-        def add_request_info info: nil, env: nil, trace_id: nil, log_name: nil
-          info ||= RequestInfo.new trace_id, log_name, env
+        def add_request_info info: nil, env: nil, trace_id: nil, log_name: nil,
+                             trace_sampled: nil
+          info ||= RequestInfo.new trace_id, log_name, env, trace_sampled
 
           @request_info_var.value = info
 
@@ -549,6 +550,7 @@ module Google
             unless info.trace_id.nil? || @project.nil?
               entry.trace = "projects/#{@project}/traces/#{info.trace_id}"
             end
+            entry.trace_sampled = info.trace_sampled if entry.trace_sampled.nil?
           end
 
           writer.write_entries entry, log_name: actual_log_name,
