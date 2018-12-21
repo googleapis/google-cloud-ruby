@@ -125,8 +125,127 @@ on how to configure the Railtie and Middleware.</p>
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_default_logger-class_method" title="set_default_logger (class method)">.<strong>set_default_logger</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
 
   
+    <span class="summary_desc"><div class='inline'><p>This should be called once the application determines that it is safe to start background threads and open gRPC connections.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="set_default_logger-class_method">
+  
+    .<strong>set_default_logger</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This should be called once the application determines that it is safe
+to start background threads and open gRPC connections. It informs the
+middleware system that it is safe to use Google Cloud Logging. This is
+called during Rails initialization when the
+<code>set_default_logger_on_rails_init</code> configuration is set.</p>
+
+<p>Generally, this matters if the application forks worker processes;
+this method should be called only after workers are forked, since
+threads and network connections interact badly with fork. For example,
+when running Puma in <a href="https://github.com/puma/puma#clustered-mode">clustered
+mode</a>, this method should
+be called in an <code>on_worker_boot</code> block.</p>
+
+<p>If the application does no forking, this method can be called any time
+early in the application initialization process. Or by setting the
+<code>set_default_logger_on_rails_init</code> configuration.</p>
+
+<p>If the <code>set_default_logger_on_rails_init</code> configuration is not set,
+and <span class='object_link'><a href="#set_default_logger-class_method" title="Google::Cloud::Logging::Railtie.set_default_logger (method)">set_default_logger</a></span> is not called in a post-fork hook,
+the default Rails logger object will not be set to use the Google
+Cloud Logging Logger object. For best results, an application should
+call this method at the appropriate time, such as a post-fork hook.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/rails.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_default_logger'>set_default_logger</span>
+  <span class='kw'>return</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="Middleware.html" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>return</span> <span class='kw'>if</span> <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span></span>
+
+  <span class='comment'># configure the Middleware logger to use the same settings as Rails
+</span>  <span class='const'><span class='object_link'><a href="Middleware.html" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span> <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span>
+  <span class='comment'># TODO: are there more settings to be set here?
+</span>
+  <span class='comment'># Replace the Rails default logger
+</span>  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_app'>app</span><span class='period'>.</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Middleware.html" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span>
+  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Middleware.html" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 

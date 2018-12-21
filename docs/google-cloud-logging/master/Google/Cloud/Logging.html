@@ -256,6 +256,14 @@ Self discovered on GCP.</li>
 <li><code>labels</code> - (Hash) User defined labels. A <code>Hash</code> of label names to
 string label values or callables/<code>Proc</code> which are functions of the
 Rack environment.</li>
+<li><code>set_default_logger_on_rails_init</code> - (Boolean) Whether Google Cloud
+Logging Logger should be allowed to start background threads and open
+gRPC connections during Rails initialization. This should only be used
+with a non-forking web server. Web servers such as Puma and Unicorn
+should not set this, and instead set the Rails logger to a Google
+Cloud Logging Logger object on the worker process by calling
+<span class='object_link'><a href="Logging/Railtie.html#set_default_logger-class_method" title="Google::Cloud::Logging::Railtie.set_default_logger (method)">Google::Cloud::Logging::Railtie.set_default_logger</a></span> at the appropriate time, such as a
+post-fork hook.</li>
 </ul>
 
 <p>See the <a href="https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION">Configuration
@@ -305,14 +313,14 @@ the Google::Cloud::Logging module uses.</p>
       <pre class="lines">
 
 
-147
-148
-149
-150
-151</pre>
+155
+156
+157
+158
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>

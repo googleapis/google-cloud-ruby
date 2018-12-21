@@ -237,7 +237,7 @@ logs to a separate log name so they don&#39;t spam the main log.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(app, logger: nil, **kwargs)  &#x21d2; Google::Cloud::Logging::Middleware </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(app, logger: nil, on_init: nil, **kwargs)  &#x21d2; Google::Cloud::Logging::Middleware </a>
     
 
     
@@ -268,7 +268,7 @@ logs to a separate log name so they don&#39;t spam the main log.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(app, logger: nil, **kwargs)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Google::Cloud::Logging::Middleware</a></span></tt> 
+    #<strong>initialize</strong>(app, logger: nil, on_init: nil, **kwargs)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Google::Cloud::Logging::Middleware</a></span></tt> 
   
 
   
@@ -321,6 +321,22 @@ specified, a default logger with be used.</p>
   
     <li>
       
+        <span class='name'>on_init</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A callback to be invoked when the middleware is
+initialized. The callback takes no arguments. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>kwargs</span>
       
       
@@ -346,8 +362,6 @@ for the prefered way to set configuration parameters.</p>
       <pre class="lines">
 
 
-55
-56
 57
 58
 59
@@ -363,19 +377,23 @@ for the prefered way to set configuration parameters.</p>
 69
 70
 71
-72</pre>
+72
+73
+74
+75
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 57</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_app'>app</span><span class='comma'>,</span> <span class='label'>logger:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_app'>app</span><span class='comma'>,</span> <span class='label'>logger:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>on_init:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span>
   <span class='ivar'>@app</span> <span class='op'>=</span> <span class='id identifier rubyid_app'>app</span>
 
   <span class='id identifier rubyid_load_config'>load_config</span> <span class='id identifier rubyid_kwargs'>kwargs</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_logger'>logger</span>
-    <span class='ivar'>@logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logger'>logger</span>
-  <span class='kw'>else</span>
+  <span class='id identifier rubyid_logger'>logger</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span>
+  <span class='id identifier rubyid_logger'>logger</span> <span class='op'>||=</span> <span class='kw'>begin</span>
     <span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span>
     <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='label'>project_id:</span> <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
                           <span class='label'>credentials:</span> <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_credentials'>credentials</span>
@@ -383,8 +401,12 @@ for the prefered way to set configuration parameters.</p>
       <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_monitored_resource'>monitored_resource</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span>
       <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_monitored_resource'>monitored_resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span>
     <span class='rparen'>)</span>
-    <span class='ivar'>@logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span>
+    <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span>
   <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_on_init'>on_init</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span> <span class='kw'>if</span> <span class='id identifier rubyid_on_init'>on_init</span>
+
+  <span class='ivar'>@logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logger'>logger</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -590,19 +612,19 @@ type and labels</p>
       <pre class="lines">
 
 
-178
-179
-180
-181
-182
 183
 184
 185
 186
-187</pre>
+187
+188
+189
+190
+191
+192</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_build_monitored_resource'>build_monitored_resource</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_labels'>labels</span>
@@ -690,21 +712,21 @@ trace_id. Untrack the trace_id with this thread upon exiting.</p>
       <pre class="lines">
 
 
-85
-86
-87
-88
-89
 90
 91
 92
 93
 94
 95
-96</pre>
+96
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span> <span class='id identifier rubyid_env'>env</span>
   <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rack.logger</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_logger'>logger</span>
