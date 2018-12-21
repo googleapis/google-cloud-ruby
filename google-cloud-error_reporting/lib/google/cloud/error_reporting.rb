@@ -123,6 +123,13 @@ module Google
       # * `service_version` - (String) Version identifier for the application.
       # * `ignore_classes` - (Array<Exception>) Array of exception types that
       #   should not be reported.
+      # * `on_error` - (Proc) A Proc to be run when an error is encountered
+      #   on a background thread, such as {ErrorReporting.report} or
+      #   {Middleware}. The Proc must take the error object as the single
+      #   argument. If ErrorReporting is being used to report errors using
+      #   `Google::Cloud::cofigure.on_error`, then this `on_error` should be
+      #   configured to report errors raised when reporting through
+      #   ErrorReporting.
       #
       # See the [Configuration
       # Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)

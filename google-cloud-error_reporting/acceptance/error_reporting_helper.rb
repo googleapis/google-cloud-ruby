@@ -23,6 +23,11 @@ require "grpc"
 er_credentials = Google::Cloud::ErrorReporting::Credentials.default
 $error_stats_vtk_client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.new credentials: er_credentials
 
+Google::Cloud::ErrorReporting.configure do |config|
+  error_callback = ->(error) { raise error }
+  config.on_error = error_callback
+end
+
 module Acceptance
   class ErrorReportingTest < Minitest::Test
     ##
