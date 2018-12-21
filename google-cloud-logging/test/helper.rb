@@ -73,14 +73,15 @@ class MockLogging < Minitest::Spec
       "severity"  => :DEFAULT,
       "insert_id" => "abc123",
       "labels" => {
-        "env" => "production",
-        "foo" => "bar"
+        "env"  => "production",
+        "foo"  => "bar"
       },
-      "text_payload" => "payload",
-      "http_request" => random_http_request_hash,
-      "operation"    => random_operation_hash,
-      "trace"        => "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824",
-      "source_location"    => random_source_location_hash
+      "text_payload"    => "payload",
+      "http_request"    => random_http_request_hash,
+      "operation"       => random_operation_hash,
+      "trace"           => "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824",
+      "source_location" => random_source_location_hash,
+      "trace_sampled"   => true
     }
   end
 

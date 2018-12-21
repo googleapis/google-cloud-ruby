@@ -380,6 +380,17 @@ module Google
         attr_reader :source_location
 
         ##
+        # The sampling decision of the trace associated with the log entry.
+        # Optional. A `true` value means that the trace resource name in the
+        # `trace` field was sampled for storage in a trace backend. A `false`
+        # means that the trace was not sampled for storage when this log entry
+        # was written, or the sampling decision was unknown at the time. A
+        # non-sampled `trace` value is still useful as a request correlation
+        # identifier. The default is `false`.
+        # @return [Boolean]
+        attr_accessor :trace_sampled
+
+        ##
         # @private Determines if the Entry has any data.
         def empty?
           log_name.nil? &&
@@ -391,7 +402,8 @@ module Google
             http_request.empty? &&
             operation.empty? &&
             trace.nil? &&
-            source_location.empty?
+            source_location.empty? &&
+            trace_sampled.nil?
         end
 
         ##
@@ -408,7 +420,8 @@ module Google
             http_request: http_request.to_grpc,
             operation: operation.to_grpc,
             trace: trace.to_s,
-            source_location: source_location.to_grpc
+            source_location: source_location.to_grpc,
+            trace_sampled: !(!trace_sampled)
           )
           # Add payload
           append_payload grpc
@@ -437,6 +450,7 @@ module Google
                                     SourceLocation.from_grpc(
                                       grpc.source_location
                                     )
+            e.trace_sampled = grpc.trace_sampled
           end
         end
 
