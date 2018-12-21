@@ -134,10 +134,9 @@ Google::Cloud.configure.add_config! :logging do |config|
     ENV["LOGGING_PROJECT"]
   end
   default_creds = Google::Cloud::Config.deferred do
-    Google::Cloud::Config.credentials_from_env(
+    Google::Cloud::Config.credentials_from_env \
       "LOGGING_CREDENTIALS", "LOGGING_CREDENTIALS_JSON",
       "LOGGING_KEYFILE", "LOGGING_KEYFILE_JSON"
-    )
   end
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
@@ -156,4 +155,5 @@ Google::Cloud.configure.add_config! :logging do |config|
     mrconfig.add_field! :type, nil, match: String
     mrconfig.add_field! :labels, nil, match: Hash
   end
+  config.add_field! :set_default_logger_on_rails_init, nil, enum: [true, false]
 end

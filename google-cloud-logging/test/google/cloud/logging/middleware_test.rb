@@ -78,6 +78,18 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
     it "uses the logger provided if given" do
       middleware.logger.must_equal logger
     end
+
+    it "invokes the on_init callback when provided" do
+      mock = Minitest::Mock.new
+      mock.expect :callback_was_called, nil
+
+      on_init_callback = -> { mock.callback_was_called }
+
+      middleware = Google::Cloud::Logging::Middleware.new \
+        rack_app, logger: logger, on_init: on_init_callback
+
+      mock.verify
+    end
   end
 
   describe "#call" do
