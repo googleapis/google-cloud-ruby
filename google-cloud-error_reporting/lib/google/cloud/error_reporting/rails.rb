@@ -27,7 +27,7 @@ module Google
       # and report them to the Stackdriver Error Reporting service.
       #
       # The Middleware is only added when certain conditions are met. See
-      # {Railtie.use_error_reporting?} for detail.
+      # `Google::Cloud.configure.use_error_reporting` for detail.
       #
       # When loaded, the {Google::Cloud::ErrorReporting::Middleware} will be
       # inserted after ActionDispatch::DebugExceptions or
