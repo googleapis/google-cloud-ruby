@@ -52,7 +52,10 @@ end
 
 def mock_error_reporting
   credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-  Google::Cloud::ErrorReporting.configure.credentials = credentials
+  # Replace configure for the doc tests
+  Google::Cloud::ErrorReporting.send :define_method, :configure do |*args|
+    OpenStruct.new(credentials: credentials)
+  end
   Google::Cloud::ErrorReporting.stub_new do |*args|
     error_reporting = Google::Cloud::ErrorReporting::Project.new(Google::Cloud::ErrorReporting::Service.new("my-project", credentials))
 
