@@ -73,8 +73,8 @@ class MockLogging < Minitest::Spec
       "severity"  => :DEFAULT,
       "insert_id" => "abc123",
       "labels" => {
-        "env"  => "production",
-        "foo"  => "bar"
+        "env" => "production",
+        "foo" => "bar"
       },
       "text_payload"    => "payload",
       "http_request"    => random_http_request_hash,
