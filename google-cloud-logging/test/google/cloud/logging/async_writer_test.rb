@@ -27,7 +27,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
   let(:labels1) { { "env" => "production" } }
   let(:labels2) { { "env" => "staging" } }
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
-  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging, Google::Cloud::Logging::AsyncWriter::DEFAULT_MAX_QUEUE_SIZE, true }
+  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging, partial_success: true }
 
   def entries payload, labels = labels1
     Array(payload).map { |str|
@@ -52,7 +52,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
         labels: labels
       )
     end
-    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, partial_success: true, options: default_options]
+    [entries, log_name: nil, resource: nil, labels: nil, partial_success: true, options: default_options]
   end
 
   it "writes a single entry" do
@@ -78,7 +78,6 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
 
     mock.expect :write_log_entries, write_res, write_req_args(["payload1", "payload2"], labels1)
 
-    async_writer.suspend
     async_writer.write_entries(
       entries("payload1"),
       log_name: log_name,
@@ -91,20 +90,23 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       resource: resource,
       labels: labels1
     )
-    async_writer.resume
     async_writer.stop! 1
 
     mock.verify
   end
 
-  it "separates unrelated entries" do
+  it "combines unrelated entries into a single request" do
     mock = Minitest::Mock.new
     logging.service.mocked_logging = mock
 
-    mock.expect :write_log_entries, write_res, write_req_args(["payload1"], labels1)
-    mock.expect :write_log_entries, write_res, write_req_args("payload2", labels2)
+    payload1_request = write_req_args(["payload1"], labels1)
+    payload2_request = write_req_args("payload2", labels2)
+    combined_request = payload1_request.dup.tap do |req|
+      req.first.concat payload2_request.first
+    end
 
-    async_writer.suspend
+    mock.expect :write_log_entries, write_res, combined_request
+
     async_writer.write_entries(
       entries("payload1", labels1),
       log_name: log_name,
@@ -117,15 +119,15 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       resource: resource,
       labels: labels2
     )
-    async_writer.resume
+    async_writer.stop
 
     wait_result = wait_until_true {
-      async_writer.instance_variable_get(:@queue).size == 0
+      async_writer.instance_variable_get(:@batch).nil?
     }
 
     wait_result.must_equal :completed
 
-    async_writer.stop! 1
+    async_writer.wait! 1
 
     mock.verify
   end

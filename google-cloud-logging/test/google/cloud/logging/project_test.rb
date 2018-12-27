@@ -24,6 +24,15 @@ describe Google::Cloud::Logging::Project, :mock_logging do
     entry = logging.entry
     entry.must_be_kind_of Google::Cloud::Logging::Entry
     entry.resource.must_be_kind_of Google::Cloud::Logging::Resource
+
+    entry.must_be_kind_of Google::Cloud::Logging::Entry
+    entry.log_name.must_be :nil?
+    entry.resource.must_be :empty?
+    entry.timestamp.must_be :nil?
+    entry.severity.must_equal :DEFAULT
+    entry.insert_id.must_be :nil?
+    entry.labels.must_be :empty?
+    entry.payload.must_be :nil?
   end
 
   it "creates an entry with all attributes" do
@@ -46,7 +55,7 @@ describe Google::Cloud::Logging::Project, :mock_logging do
                           payload: payload
 
     entry.must_be_kind_of Google::Cloud::Logging::Entry
-    entry.log_name.must_equal log_name
+    entry.log_name.must_equal "projects/#{project}/logs/#{log_name}"
     entry.resource.must_equal resource
     entry.timestamp.must_equal timestamp
     entry.severity.must_equal severity

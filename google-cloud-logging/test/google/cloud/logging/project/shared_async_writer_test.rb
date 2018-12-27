@@ -19,8 +19,10 @@ describe Google::Cloud::Logging::Project, :shared_async_writer, :mock_logging do
     async1 = logging.shared_async_writer
     async1.must_be_kind_of Google::Cloud::Logging::AsyncWriter
     async1.logging.must_be_same_as logging
-    async1.max_queue_size.must_equal \
-      Google::Cloud::Logging::AsyncWriter::DEFAULT_MAX_QUEUE_SIZE
+    async1.max_count.must_equal 10000
+    async1.max_bytes.must_equal 10000000
+    async1.interval.must_equal 5
+    async1.threads.must_equal 10
     async2 = logging.shared_async_writer
     async2.must_be_same_as async1
   end

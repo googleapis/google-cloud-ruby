@@ -456,6 +456,7 @@ module Google
         # @private Formats the labels so they can be saved to a
         # Google::Logging::V2::LogEntry object.
         def labels_grpc
+          return {} if labels.nil?
           # Coerce symbols to strings
           Hash[labels.map do |k, v|
             v = String(v) if v.is_a? Symbol

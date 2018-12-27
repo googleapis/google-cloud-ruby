@@ -156,4 +156,5 @@ Google::Cloud.configure.add_config! :logging do |config|
     mrconfig.add_field! :labels, nil, match: Hash
   end
   config.add_field! :set_default_logger_on_rails_init, nil, enum: [true, false]
+  config.add_field! :on_error, nil, match: Proc
 end

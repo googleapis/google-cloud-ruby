@@ -281,8 +281,7 @@ describe Google::Cloud::Logging, :logging do
       logger.add :fatal,   "Danger Will Robinson (:fatal)!"
       logger.add :unknown, "Danger Will Robinson (:unknown)!"
 
-      async.stop
-      async.wait_until_stopped 10
+      async.stop! 10
 
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("symbol").map &:payload
@@ -306,8 +305,7 @@ describe Google::Cloud::Logging, :logging do
       logger.add "fatal",   "Danger Will Robinson ('fatal')!"
       logger.add "unknown", "Danger Will Robinson ('unknown')!"
 
-      async.stop
-      async.wait_until_stopped 10
+      async.stop! 10
 
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("string").map &:payload
@@ -331,8 +329,7 @@ describe Google::Cloud::Logging, :logging do
       logger.add ::Logger::FATAL,   "Danger Will Robinson (FATAL)!"
       logger.add ::Logger::UNKNOWN, "Danger Will Robinson (UNKNOWN)!"
 
-      async.stop
-      async.wait_until_stopped 10
+      async.stop! 10
 
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("constant").map &:payload
@@ -356,8 +353,7 @@ describe Google::Cloud::Logging, :logging do
       logger.fatal   "Danger Will Robinson (fatal)!"
       logger.unknown "Danger Will Robinson (unknown)!"
 
-      async.stop
-      async.wait_until_stopped 10
+      async.stop! 10
 
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("method").map &:payload

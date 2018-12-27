@@ -144,6 +144,9 @@ module Google
       #   Cloud Logging Logger object on the worker process by calling
       #   {Railtie.set_default_logger} at the appropriate time, such as a
       #   post-fork hook.
+      # * `on_error` - (Proc) A Proc to be run when an error is encountered
+      #   on a background thread. The Proc must take the error object as the
+      #   single argument. (See {AsyncWriter.on_error}.)
       #
       # See the [Configuration
       # Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)
