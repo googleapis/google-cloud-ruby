@@ -40,8 +40,9 @@ describe Google::Cloud::ErrorReporting::AsyncErrorReporter, :mock_error_reportin
     event1 = Object.new
     event2 = Object.new
 
-    mocked_error_reporting.expect :report, nil, [event1]
-    mocked_error_reporting.expect :report, nil, [event2]
+    # Use class for report arguments, since they can be reported out of order
+    mocked_error_reporting.expect :report, nil, [Object]
+    mocked_error_reporting.expect :report, nil, [Object]
 
     reporter.report event1
     reporter.report event2
