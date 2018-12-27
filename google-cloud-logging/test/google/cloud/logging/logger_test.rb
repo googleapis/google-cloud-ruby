@@ -30,13 +30,14 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
   let(:timestamp) { Time.parse "2016-10-02T15:01:23.045123456Z" }
 
   def write_req_args severity, extra_labels: {}, log_name_override: nil,
-                     trace: nil
+                     trace: nil, trace_sampled: nil
     timestamp_grpc = Google::Protobuf::Timestamp.new seconds: timestamp.to_i,
                                                      nanos: timestamp.nsec
     entry = Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!",
                                               severity: severity,
                                               timestamp: timestamp_grpc)
     entry.trace = trace if trace
+    entry.trace_sampled = trace_sampled unless trace_sampled.nil?
     [
       [entry],
       log_name: "projects/test/logs/#{log_name_override || log_name}",
@@ -172,11 +173,12 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       log_name = "my_app_log"
       args = write_req_args :ERROR, log_name_override: log_name,
                             extra_labels: { "traceId" => trace_id },
-                            trace: "projects/#{project}/traces/#{trace_id}"
+                            trace: "projects/#{project}/traces/#{trace_id}",
+                            trace_sampled: true
       mock.expect :write_log_entries, write_res, args
       logging.service.mocked_logging = mock
 
-      info = Google::Cloud::Logging::Logger::RequestInfo.new trace_id, log_name
+      info = Google::Cloud::Logging::Logger::RequestInfo.new trace_id, log_name, nil, true
       logger.add_request_info info: info
 
       Time.stub :now, timestamp do
