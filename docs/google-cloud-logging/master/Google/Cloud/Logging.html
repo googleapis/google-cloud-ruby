@@ -67,7 +67,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google/cloud/logging.rb<span class="defines">,<br />
-  lib/google/cloud/logging/sink.rb,<br /> lib/google/cloud/logging/entry.rb,<br /> lib/google/cloud/logging/rails.rb,<br /> lib/google/cloud/logging/logger.rb,<br /> lib/google/cloud/logging/metric.rb,<br /> lib/google/cloud/logging/convert.rb,<br /> lib/google/cloud/logging/project.rb,<br /> lib/google/cloud/logging/service.rb,<br /> lib/google/cloud/logging/version.rb,<br /> lib/google/cloud/logging/log/list.rb,<br /> lib/google/cloud/logging/resource.rb,<br /> lib/google/cloud/logging/sink/list.rb,<br /> lib/google/cloud/logging/entry/list.rb,<br /> lib/google/cloud/logging/middleware.rb,<br /> lib/google/cloud/logging/credentials.rb,<br /> lib/google/cloud/logging/metric/list.rb,<br /> lib/google/cloud/logging/async_writer.rb,<br /> lib/google/cloud/logging/v2/credentials.rb,<br /> lib/google/cloud/logging/entry/operation.rb,<br /> lib/google/cloud/logging/entry/http_request.rb,<br /> lib/google/cloud/logging/resource_descriptor.rb,<br /> lib/google/cloud/logging/entry/source_location.rb,<br /> lib/google/cloud/logging/resource_descriptor/list.rb,<br /> lib/google/cloud/logging/v2/config_service_v2_client.rb,<br /> lib/google/cloud/logging/v2/logging_service_v2_client.rb,<br /> lib/google/cloud/logging/v2/metrics_service_v2_client.rb</span>
+  lib/google/cloud/logging/sink.rb,<br /> lib/google/cloud/logging/entry.rb,<br /> lib/google/cloud/logging/rails.rb,<br /> lib/google/cloud/logging/errors.rb,<br /> lib/google/cloud/logging/logger.rb,<br /> lib/google/cloud/logging/metric.rb,<br /> lib/google/cloud/logging/convert.rb,<br /> lib/google/cloud/logging/project.rb,<br /> lib/google/cloud/logging/service.rb,<br /> lib/google/cloud/logging/version.rb,<br /> lib/google/cloud/logging/log/list.rb,<br /> lib/google/cloud/logging/resource.rb,<br /> lib/google/cloud/logging/sink/list.rb,<br /> lib/google/cloud/logging/entry/list.rb,<br /> lib/google/cloud/logging/middleware.rb,<br /> lib/google/cloud/logging/credentials.rb,<br /> lib/google/cloud/logging/metric/list.rb,<br /> lib/google/cloud/logging/async_writer.rb,<br /> lib/google/cloud/logging/v2/credentials.rb,<br /> lib/google/cloud/logging/entry/operation.rb,<br /> lib/google/cloud/logging/entry/http_request.rb,<br /> lib/google/cloud/logging/resource_descriptor.rb,<br /> lib/google/cloud/logging/entry/source_location.rb,<br /> lib/google/cloud/logging/resource_descriptor/list.rb,<br /> lib/google/cloud/logging/v2/config_service_v2_client.rb,<br /> lib/google/cloud/logging/v2/logging_service_v2_client.rb,<br /> lib/google/cloud/logging/v2/metrics_service_v2_client.rb</span>
 </dd>
   </dl>
   
@@ -108,7 +108,7 @@ Logging Documentation</a>.</p>
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Logging/AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span>, <span class='object_link'><a href="Logging/Credentials.html" title="Google::Cloud::Logging::Credentials (class)">Credentials</a></span>, <span class='object_link'><a href="Logging/Entry.html" title="Google::Cloud::Logging::Entry (class)">Entry</a></span>, <span class='object_link'><a href="Logging/Log.html" title="Google::Cloud::Logging::Log (class)">Log</a></span>, <span class='object_link'><a href="Logging/Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span>, <span class='object_link'><a href="Logging/Metric.html" title="Google::Cloud::Logging::Metric (class)">Metric</a></span>, <span class='object_link'><a href="Logging/Middleware.html" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span>, <span class='object_link'><a href="Logging/Project.html" title="Google::Cloud::Logging::Project (class)">Project</a></span>, <span class='object_link'><a href="Logging/Railtie.html" title="Google::Cloud::Logging::Railtie (class)">Railtie</a></span>, <span class='object_link'><a href="Logging/Resource.html" title="Google::Cloud::Logging::Resource (class)">Resource</a></span>, <span class='object_link'><a href="Logging/ResourceDescriptor.html" title="Google::Cloud::Logging::ResourceDescriptor (class)">ResourceDescriptor</a></span>, <span class='object_link'><a href="Logging/Sink.html" title="Google::Cloud::Logging::Sink (class)">Sink</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Logging/AsyncWriteEntriesError.html" title="Google::Cloud::Logging::AsyncWriteEntriesError (class)">AsyncWriteEntriesError</a></span>, <span class='object_link'><a href="Logging/AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span>, <span class='object_link'><a href="Logging/AsyncWriterError.html" title="Google::Cloud::Logging::AsyncWriterError (class)">AsyncWriterError</a></span>, <span class='object_link'><a href="Logging/Credentials.html" title="Google::Cloud::Logging::Credentials (class)">Credentials</a></span>, <span class='object_link'><a href="Logging/Entry.html" title="Google::Cloud::Logging::Entry (class)">Entry</a></span>, <span class='object_link'><a href="Logging/Log.html" title="Google::Cloud::Logging::Log (class)">Log</a></span>, <span class='object_link'><a href="Logging/Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span>, <span class='object_link'><a href="Logging/Metric.html" title="Google::Cloud::Logging::Metric (class)">Metric</a></span>, <span class='object_link'><a href="Logging/Middleware.html" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span>, <span class='object_link'><a href="Logging/Project.html" title="Google::Cloud::Logging::Project (class)">Project</a></span>, <span class='object_link'><a href="Logging/Railtie.html" title="Google::Cloud::Logging::Railtie (class)">Railtie</a></span>, <span class='object_link'><a href="Logging/Resource.html" title="Google::Cloud::Logging::Resource (class)">Resource</a></span>, <span class='object_link'><a href="Logging/ResourceDescriptor.html" title="Google::Cloud::Logging::ResourceDescriptor (class)">ResourceDescriptor</a></span>, <span class='object_link'><a href="Logging/Sink.html" title="Google::Cloud::Logging::Sink (class)">Sink</a></span>
     
   
 </p>
@@ -264,6 +264,9 @@ should not set this, and instead set the Rails logger to a Google
 Cloud Logging Logger object on the worker process by calling
 <span class='object_link'><a href="Logging/Railtie.html#set_default_logger-class_method" title="Google::Cloud::Logging::Railtie.set_default_logger (method)">Google::Cloud::Logging::Railtie.set_default_logger</a></span> at the appropriate time, such as a
 post-fork hook.</li>
+<li><code>on_error</code> - (Proc) A Proc to be run when an error is encountered
+on a background thread. The Proc must take the error object as the
+single argument. (See <span class='object_link'><a href="Logging/AsyncWriter.html#on_error-instance_method" title="Google::Cloud::Logging::AsyncWriter#on_error (method)">Google::Cloud::Logging::AsyncWriter#on_error</a></span>.)</li>
 </ul>
 
 <p>See the <a href="https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION">Configuration
@@ -313,14 +316,14 @@ the Google::Cloud::Logging module uses.</p>
       <pre class="lines">
 
 
-155
-156
-157
 158
-159</pre>
+159
+160
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging.rb', line 158</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>

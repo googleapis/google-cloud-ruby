@@ -77,7 +77,7 @@ js:
   
   <dl>
       <dt>Includes:</dt>
-      <dd>Stackdriver::Core::AsyncActor</dd>
+      <dd>MonitorMixin</dd>
   </dl>
   
   
@@ -96,12 +96,13 @@ js:
   <div class="discussion">
     <h1>AsyncWriter</h1>
 
-<p>An object that batches and transmits log entries asynchronously.</p>
+<p>AsyncWriter buffers, batches, and transmits log entries efficiently.
+Writing log entries is asynchronous and will not block.</p>
 
-<p>Use this object to transmit log entries efficiently. It keeps a queue
-of log entries, and runs a background thread that transmits them to
-the logging service in batches. Generally, adding to the queue will
-not block.</p>
+<p>Batches that cannot be delivered immediately are queued. When the queue
+is full new batch requests will raise errors that can be consumed using
+the <span class='object_link'><a href="#on_error-instance_method" title="Google::Cloud::Logging::AsyncWriter#on_error (method)">#on_error</a></span> callback. This provides back pressure in case the writer
+cannot keep up with requests.</p>
 
 <p>This object is thread-safe; it may accept write requests from
 multiple threads simultaneously, and will serialize them when
@@ -139,67 +140,8 @@ executing in the background thread.</p>
 
 
 </div>
-  
-    <h2>
-      Constant Summary
-      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
-    </h2>
-
-    <dl class="constants">
-      
-        <dt id="DEFAULT_MAX_QUEUE_SIZE-constant" class="">DEFAULT_MAX_QUEUE_SIZE =
-          
-        </dt>
-        <dd><pre class="code"><span class='int'>10000</span></pre></dd>
-      
-        <dt id="CLEANUP_TIMEOUT-constant" class="">CLEANUP_TIMEOUT =
-          
-        </dt>
-        <dd><pre class="code"><span class='const'>Stackdriver</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>AsyncActor</span><span class='op'>::</span><span class='const'>CLEANUP_TIMEOUT</span></pre></dd>
-      
-        <dt id="WAIT_INTERVAL-constant" class="">WAIT_INTERVAL =
-          
-        </dt>
-        <dd><pre class="code"><span class='const'>Stackdriver</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>AsyncActor</span><span class='op'>::</span><span class='const'>WAIT_INTERVAL</span></pre></dd>
-      
-    </dl>
-  
 
 
-
-
-  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#last_exception-instance_method" title="#last_exception (instance method)">#<strong>last_exception</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>The last exception thrown by the background thread, or nil if nothing has been thrown.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
 
 
 
@@ -211,6 +153,54 @@ executing in the background thread.</p>
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush-instance_method" title="#flush (instance method)">#<strong>flush</strong>  &#x21d2; AsyncWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Forces all entries in the current batch to be published immediately.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#last_error-instance_method" title="#last_error (instance method)">#<strong>last_error</strong>  &#x21d2; Exception<sup>?</sup> </a>
+    
+
+    
+      (also: #last_exception)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The most recent unhandled error to occur while transmitting log entries.</p>
+</div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -238,7 +228,7 @@ executing in the background thread.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#stop!-instance_method" title="#stop! (instance method)">#<strong>stop!</strong>(timeout, force: false)  &#x21d2; Symbol </a>
+      <a href="#on_error-instance_method" title="#on_error (instance method)">#<strong>on_error</strong> {|callback| ... } &#x21d2; Object </a>
     
 
     
@@ -252,7 +242,124 @@ executing in the background thread.</p>
   
 
   
+    <span class="summary_desc"><div class='inline'><p>Register to be notified of errors when raised.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#started%3F-instance_method" title="#started? (instance method)">#<strong>started?</strong>  &#x21d2; boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the writer has been started.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop-instance_method" title="#stop (instance method)">#<strong>stop</strong>  &#x21d2; AsyncWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Begins the process of stopping the writer.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop!-instance_method" title="#stop! (instance method)">#<strong>stop!</strong>(timeout = nil, force: nil)  &#x21d2; Symbol </a>
+    
+
+    
+      (also: #async_stop!)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
     <span class="summary_desc"><div class='inline'><p>Stop this asynchronous writer and block until it has been stopped.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stopped%3F-instance_method" title="#stopped? (instance method)">#<strong>stopped?</strong>  &#x21d2; boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the writer has been stopped.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait!-instance_method" title="#wait! (instance method)">#<strong>wait!</strong>(timeout = nil)  &#x21d2; AsyncWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Blocks until the writer is fully stopped, all pending entries have been published, and all callbacks have completed.</p>
 </div></span>
   
 </li>
@@ -286,15 +393,15 @@ executing in the background thread.</p>
 
 
   
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
     
-      
-      <span id=""></span>
       <div class="method_details first">
-  <h3 class="signature first" id="last_exception-instance_method">
+  <h3 class="signature first" id="flush-instance_method">
   
-    #<strong>last_exception</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+    #<strong>flush</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span></tt> 
   
 
   
@@ -302,14 +409,31 @@ executing in the background thread.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The last exception thrown by the background thread, or nil if nothing
-has been thrown.</p>
+    <p>Forces all entries in the current batch to be published
+immediately.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>returns self so calls can be chained.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -317,30 +441,121 @@ has been thrown.</p>
       <pre class="lines">
 
 
-95
-96
-97</pre>
+273
+274
+275
+276
+277
+278
+279
+280</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 273</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_last_exception'>last_exception</span>
-  <span class='ivar'>@last_exception</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_flush'>flush</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_publish_batch!'>publish_batch!</span>
+    <span class='ivar'>@cond</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="last_error-instance_method">
+  
+    #<strong>last_error</strong>  &#x21d2; <tt>Exception</tt><sup>?</sup> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='last_exception-instance_method'>last_exception</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The most recent unhandled error to occur while transmitting log
+entries.</p>
+
+<p>If an unhandled error has occurred the subscriber will attempt to
+recover from the error and resume buffering, batching, and
+transmitting log entries.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>module_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>version_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_async'>async</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_async_writer'>async_writer</span>
+
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_async'>async</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='symbol'>:production</span>
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># If an error was raised, it can be retrieved here:
+</span><span class='id identifier rubyid_async'>async</span><span class='period'>.</span><span class='id identifier rubyid_last_error'>last_error</span> <span class='comment'>#=&gt; nil</span></code></pre>
+    
   </div>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>error The most recent error raised.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
-  <div id="instance_method_details" class="method_details_list">
-    <h2>Instance Method Details</h2>
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
 
+
+364
+365
+366</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 364</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_last_error'>last_error</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@last_error</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
     
-      <div class="method_details first">
-  <h3 class="signature first" id="logger-instance_method">
+      <div class="method_details ">
+  <h3 class="signature " id="logger-instance_method">
   
     #<strong>logger</strong>(log_name, resource, labels = {})  &#x21d2; <tt><span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Google::Cloud::Logging::Logger</a></span></tt> 
   
@@ -458,12 +673,12 @@ used in place of a ruby standard library logger object.</p>
       <pre class="lines">
 
 
-199
-200
-201</pre>
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 196</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='const'><span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span>
@@ -474,9 +689,9 @@ used in place of a ruby standard library logger object.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="stop!-instance_method">
+  <h3 class="signature " id="on_error-instance_method">
   
-    #<strong>stop!</strong>(timeout, force: false)  &#x21d2; <tt>Symbol</tt> 
+    #<strong>on_error</strong> {|callback| ... } &#x21d2; <tt>Object</tt> 
   
 
   
@@ -484,9 +699,258 @@ used in place of a ruby standard library logger object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Stop this asynchronous writer and block until it has been stopped.</p>
+    <p>Register to be notified of errors when raised.</p>
 
-<p>DEPRECATED. Use #async_stop! instead.</p>
+<p>If an unhandled error has occurred the writer will attempt to
+recover from the error and resume buffering, batching, and
+transmitting log entries</p>
+
+<p>Multiple error handlers can be added.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>module_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>version_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_async'>async</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_async_writer'>async_writer</span>
+
+<span class='comment'># Register to be notified when unhandled errors occur.
+</span><span class='id identifier rubyid_async'>async</span><span class='period'>.</span><span class='id identifier rubyid_on_error'>on_error</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_error'>error</span><span class='op'>|</span>
+  <span class='comment'># error can be a AsyncWriterError or AsyncWriteEntriesError
+</span>  <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>ErrorReporting</span><span class='period'>.</span><span class='id identifier rubyid_report'>report</span> <span class='id identifier rubyid_error'>error</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_async'>async</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='symbol'>:production</span>
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>callback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The block to be called when an error is raised.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>error</span>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The error raised.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+331
+332
+333
+334
+335</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 331</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_on_error'>on_error</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='ivar'>@error_callbacks</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="started?-instance_method">
+  
+    #<strong>started?</strong>  &#x21d2; <tt>boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the writer has been started.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when started, <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+286
+287
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 286</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_started?'>started?</span>
+  <span class='op'>!</span><span class='id identifier rubyid_stopped?'>stopped?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop-instance_method">
+  
+    #<strong>stop</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Begins the process of stopping the writer. Entries already in the
+queue will be published, but no new entries can be added. Use <span class='object_link'><a href="#wait!-instance_method" title="Google::Cloud::Logging::AsyncWriter#wait! (method)">#wait!</a></span>
+to block until the writer is fully stopped and all pending entries
+have been published.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>returns self so calls can be chained.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 207</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='kw'>break</span> <span class='kw'>if</span> <span class='ivar'>@stopped</span>
+
+    <span class='ivar'>@stopped</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='id identifier rubyid_publish_batch!'>publish_batch!</span>
+    <span class='ivar'>@cond</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span>
+    <span class='ivar'>@thread_pool</span><span class='period'>.</span><span class='id identifier rubyid_shutdown'>shutdown</span> <span class='kw'>if</span> <span class='ivar'>@thread_pool</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop!-instance_method">
+  
+    #<strong>stop!</strong>(timeout = nil, force: nil)  &#x21d2; <tt>Symbol</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='async_stop!-instance_method'>async_stop!</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stop this asynchronous writer and block until it has been stopped.</p>
 
 
   </div>
@@ -502,6 +966,8 @@ used in place of a ruby standard library logger object.</p>
       
         <span class='type'>(<tt>Number</tt>)</span>
       
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
       
       
         &mdash;
@@ -557,21 +1023,168 @@ after the timeout, or <code>:forced</code> if it was forcibly killed.</p>
       <pre class="lines">
 
 
-308
-309
-310
-311
-312
-313</pre>
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 308</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 252</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_stop!'>stop!</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span> <span class='label'>force:</span> <span class='kw'>false</span>
-  <span class='ivar'>@cleanup_options</span><span class='lbracket'>[</span><span class='symbol'>:timeout</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_timeout'>timeout</span> <span class='kw'>unless</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='ivar'>@cleanup_options</span><span class='lbracket'>[</span><span class='symbol'>:force</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_force'>force</span> <span class='kw'>unless</span> <span class='id identifier rubyid_force'>force</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_stop!'>stop!</span> <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>force:</span> <span class='kw'>nil</span>
+  <span class='kw'>return</span> <span class='symbol'>:stopped</span> <span class='kw'>if</span> <span class='id identifier rubyid_stopped?'>stopped?</span>
 
-  <span class='id identifier rubyid_async_stop!'>async_stop!</span>
+  <span class='id identifier rubyid_stop'>stop</span>
+  <span class='id identifier rubyid_wait!'>wait!</span> <span class='id identifier rubyid_timeout'>timeout</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@thread_pool</span><span class='period'>.</span><span class='id identifier rubyid_shutdown?'>shutdown?</span> <span class='rbrace'>}</span>
+    <span class='kw'>return</span> <span class='symbol'>:waited</span> <span class='kw'>if</span> <span class='id identifier rubyid_timeout'>timeout</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_force'>force</span>
+    <span class='ivar'>@thread_pool</span><span class='period'>.</span><span class='id identifier rubyid_kill'>kill</span>
+    <span class='kw'>return</span> <span class='symbol'>:forced</span>
+  <span class='kw'>end</span>
+  <span class='symbol'>:timeout</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stopped?-instance_method">
+  
+    #<strong>stopped?</strong>  &#x21d2; <tt>boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the writer has been stopped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when stopped, <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+294
+295
+296</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 294</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stopped?'>stopped?</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@stopped</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="wait!-instance_method">
+  
+    #<strong>wait!</strong>(timeout = nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Blocks until the writer is fully stopped, all pending entries have
+been published, and all callbacks have completed. Does not stop the
+writer. To stop the writer, first call <span class='object_link'><a href="#stop-instance_method" title="Google::Cloud::Logging::AsyncWriter#stop (method)">#stop</a></span> and then call <span class='object_link'><a href="#wait!-instance_method" title="Google::Cloud::Logging::AsyncWriter#wait! (method)">#wait!</a></span>
+to block until the writer is stopped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>returns self so calls can be chained.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 227</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_wait!'>wait!</span> <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='kw'>if</span> <span class='ivar'>@thread_pool</span>
+      <span class='ivar'>@thread_pool</span><span class='period'>.</span><span class='id identifier rubyid_shutdown'>shutdown</span>
+      <span class='ivar'>@thread_pool</span><span class='period'>.</span><span class='id identifier rubyid_wait_for_termination'>wait_for_termination</span> <span class='id identifier rubyid_timeout'>timeout</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -718,6 +1331,25 @@ item with the same key. See also <span class='object_link'><a href="Entry.html#l
       <pre class="lines">
 
 
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
 151
 152
 153
@@ -731,28 +1363,41 @@ item with the same key. See also <span class='object_link'><a href="Entry.html#l
 161
 162
 163
-164
-165
-166
-167</pre>
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_write_entries'>write_entries</span> <span class='id identifier rubyid_entries'>entries</span><span class='comma'>,</span> <span class='label'>log_name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>resource:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span>
-  <span class='id identifier rubyid_ensure_thread'>ensure_thread</span>
-  <span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_entries'>entries</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AsyncWriter has been stopped</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_writable?'>writable?</span>
-    <span class='id identifier rubyid_queue_item'>queue_item</span> <span class='op'>=</span> <span class='const'>QueueItem</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_entries'>entries</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span>
-    <span class='kw'>if</span> <span class='ivar'>@queue</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>||</span> <span class='op'>!</span><span class='ivar'>@queue</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='period'>.</span><span class='id identifier rubyid_try_combine'>try_combine</span><span class='lparen'>(</span><span class='id identifier rubyid_queue_item'>queue_item</span><span class='rparen'>)</span>
-      <span class='ivar'>@queue</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='id identifier rubyid_queue_item'>queue_item</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AsyncWriter has been stopped</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@stopped</span>
+
+    <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_entries'>entries</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span>
+      <span class='comment'># Update the entry to have all the data directly on it
+</span>      <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>||=</span> <span class='id identifier rubyid_log_name'>log_name</span>
+      <span class='kw'>if</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+        <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_resource'>resource</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='id identifier rubyid_labels'>labels</span> <span class='kw'>if</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+      <span class='comment'># Add the entry to the batch
+</span>      <span class='ivar'>@batch</span> <span class='op'>||=</span> <span class='const'>Batch</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>self</span>
+      <span class='kw'>next</span> <span class='kw'>if</span> <span class='ivar'>@batch</span><span class='period'>.</span><span class='id identifier rubyid_try_add'>try_add</span> <span class='id identifier rubyid_entry'>entry</span>
+
+      <span class='comment'># If we can&#39;t add to the batch, publish and create a new batch
+</span>      <span class='id identifier rubyid_publish_batch!'>publish_batch!</span>
+      <span class='ivar'>@batch</span> <span class='op'>=</span> <span class='const'>Batch</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>self</span>
+      <span class='ivar'>@batch</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span> <span class='id identifier rubyid_entry'>entry</span>
     <span class='kw'>end</span>
-    <span class='ivar'>@queue_size</span> <span class='op'>+=</span> <span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
-    <span class='ivar'>@queue_resource</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span>
-    <span class='kw'>while</span> <span class='ivar'>@max_queue_size</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@queue_size</span> <span class='op'>&gt;</span> <span class='ivar'>@max_queue_size</span>
-      <span class='ivar'>@queue_resource</span><span class='period'>.</span><span class='id identifier rubyid_wait'>wait</span>
-    <span class='kw'>end</span>
+
+    <span class='ivar'>@thread_pool</span> <span class='op'>||=</span> \
+      <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>CachedThreadPool</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>max_threads:</span> <span class='ivar'>@threads</span><span class='comma'>,</span>
+                                       <span class='label'>max_queue:</span> <span class='ivar'>@max_queue</span>
+    <span class='ivar'>@thread</span> <span class='op'>||=</span> <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_run_background'>run_background</span> <span class='rbrace'>}</span>
+
+    <span class='id identifier rubyid_publish_batch!'>publish_batch!</span> <span class='kw'>if</span> <span class='ivar'>@batch</span><span class='period'>.</span><span class='id identifier rubyid_ready?'>ready?</span>
+
+    <span class='ivar'>@cond</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span>
   <span class='kw'>end</span>
   <span class='kw'>self</span>
 <span class='kw'>end</span></pre>

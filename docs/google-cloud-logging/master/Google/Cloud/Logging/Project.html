@@ -135,7 +135,7 @@ Console</a>. See
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#async_writer-instance_method" title="#async_writer (instance method)">#<strong>async_writer</strong>(max_queue_size: AsyncWriter::DEFAULT_MAX_QUEUE_SIZE)  &#x21d2; Object </a>
+      <a href="#async_writer-instance_method" title="#async_writer (instance method)">#<strong>async_writer</strong>(max_batch_count: 10000, max_batch_bytes: 10000000, max_queue_size: 100, interval: 5, threads: 10, partial_success: false)  &#x21d2; Google::Cloud::Logging::AsyncWriter </a>
     
 
     
@@ -149,7 +149,7 @@ Console</a>. See
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates an object that batches and transmits log entries asynchronously.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates an object that buffers, batches, and transmits log entries efficiently.</p>
 </div></span>
   
 </li>
@@ -559,7 +559,7 @@ Console</a>. See
       <div class="method_details first">
   <h3 class="signature first" id="async_writer-instance_method">
   
-    #<strong>async_writer</strong>(max_queue_size: AsyncWriter::DEFAULT_MAX_QUEUE_SIZE)  &#x21d2; <tt>Object</tt> 
+    #<strong>async_writer</strong>(max_batch_count: 10000, max_batch_bytes: 10000000, max_queue_size: 100, interval: 5, threads: 10, partial_success: false)  &#x21d2; <tt><span class='object_link'><a href="AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">Google::Cloud::Logging::AsyncWriter</a></span></tt> 
   
 
   
@@ -567,13 +567,14 @@ Console</a>. See
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates an object that batches and transmits log entries
-asynchronously.</p>
+    <p>Creates an object that buffers, batches, and transmits log entries
+efficiently. Writing log entries to this object is asynchronous and
+will not block.</p>
 
-<p>Use this object to transmit log entries efficiently. It keeps a queue
-of log entries, and runs a background thread that transmits them to
-the logging service in batches. Generally, adding to the queue will
-not block.</p>
+<p>Batches that cannot be delivered immediately are queued. When the
+queue is full new batch requests will raise errors that can be
+consumed using the <span class='object_link'><a href="AsyncWriter.html#on_error-instance_method" title="Google::Cloud::Logging::AsyncWriter#on_error (method)">AsyncWriter#on_error</a></span> callback. This provides back
+pressure in case the writer cannot keep up with requests.</p>
 
 <p>This object is thread-safe; it may accept write requests from
 multiple threads simultaneously, and will serialize them when
@@ -613,7 +614,7 @@ executing in the background thread.</p>
   
     <li>
       
-        <span class='name'>max_queue_size</span>
+        <span class='name'>max_batch_count</span>
       
       
         <span class='type'>(<tt>Integer</tt>)</span>
@@ -622,15 +623,113 @@ executing in the background thread.</p>
       
         &mdash;
         <div class='inline'><p>The maximum number of log entries
-that may be queued before write requests will begin to block.
-This provides back pressure in case the transmitting thread cannot
-keep up with requests.</p>
+that may be buffered and sent in a batch.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_batch_bytes</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The maximum byte size of log entries
+that may be buffered and sent in a batch.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_queue_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The maximum number of pending
+write_entries requests that may be queued.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interval</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of seconds to buffer log entries
+before a batch is written. Default is 5.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>threads</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of threads used to make
+batched write_entries requests. Default is 10.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>partial_success</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether valid entries should be
+written even if some other entries fail due to <code>INVALID_ARGUMENT</code> or
+<code>PERMISSION_DENIED</code> errors when communicating to the Stackdriver
+Logging API.</p>
 </div>
       
     </li>
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">Google::Cloud::Logging::AsyncWriter</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an AsyncWriter object
+that buffers, batches, and transmits log entries efficiently.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -638,15 +737,29 @@ keep up with requests.</p>
       <pre class="lines">
 
 
-344
-345
-346</pre>
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 344</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 360</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_async_writer'>async_writer</span> <span class='label'>max_queue_size:</span> <span class='const'><span class='object_link'><a href="AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AsyncWriter.html#DEFAULT_MAX_QUEUE_SIZE-constant" title="Google::Cloud::Logging::AsyncWriter::DEFAULT_MAX_QUEUE_SIZE (constant)">DEFAULT_MAX_QUEUE_SIZE</a></span></span>
-  <span class='const'><span class='object_link'><a href="AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_max_queue_size'>max_queue_size</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_async_writer'>async_writer</span> <span class='label'>max_batch_count:</span> <span class='int'>10000</span><span class='comma'>,</span> <span class='label'>max_batch_bytes:</span> <span class='int'>10000000</span><span class='comma'>,</span>
+                 <span class='label'>max_queue_size:</span> <span class='int'>100</span><span class='comma'>,</span> <span class='label'>interval:</span> <span class='int'>5</span><span class='comma'>,</span> <span class='label'>threads:</span> <span class='int'>10</span><span class='comma'>,</span>
+                 <span class='label'>partial_success:</span> <span class='kw'>false</span>
+
+  <span class='const'><span class='object_link'><a href="AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>max_count:</span> <span class='id identifier rubyid_max_batch_count'>max_batch_count</span><span class='comma'>,</span>
+                        <span class='label'>max_bytes:</span> <span class='id identifier rubyid_max_batch_bytes'>max_batch_bytes</span><span class='comma'>,</span>
+                        <span class='label'>max_queue:</span> <span class='id identifier rubyid_max_queue_size'>max_queue_size</span><span class='comma'>,</span>
+                        <span class='label'>interval:</span> <span class='id identifier rubyid_interval'>interval</span><span class='comma'>,</span> <span class='label'>threads:</span> <span class='id identifier rubyid_threads'>threads</span><span class='comma'>,</span>
+                        <span class='label'>partial_success:</span> <span class='id identifier rubyid_partial_success'>partial_success</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -771,14 +884,14 @@ is used in documentation.</p>
       <pre class="lines">
 
 
-775
-776
-777
-778
-779</pre>
+798
+799
+800
+801
+802</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 775</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 798</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_metric'>create_metric</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_filter'>filter</span><span class='comma'>,</span> <span class='label'>description:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -971,29 +1084,29 @@ are required to have dedicated service accounts. Optional.</p>
       <pre class="lines">
 
 
-659
-660
-661
-662
-663
-664
-665
-666
-667
-668
-669
-670
-671
-672
-673
-674
-675
-676
-677
-678</pre>
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 659</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 682</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_sink'>create_sink</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_destination'>destination</span><span class='comma'>,</span> <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                 <span class='label'>unique_writer_identity:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -1098,14 +1211,14 @@ were deleted.</p>
       <pre class="lines">
 
 
-485
-486
-487
-488
-489</pre>
+508
+509
+510
+511
+512</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 485</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 508</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_log'>delete_log</span> <span class='id identifier rubyid_name'>name</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1566,15 +1679,19 @@ also <span class='object_link'><a href="Entry.html#payload-instance_method" titl
 215
 216
 217
-218</pre>
+218
+219
+220</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 207</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_entry'>entry</span> <span class='label'>log_name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>resource:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timestamp:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>severity:</span> <span class='kw'>nil</span><span class='comma'>,</span>
           <span class='label'>insert_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>payload:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+
   <span class='id identifier rubyid_e'>e</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entry.html" title="Google::Cloud::Logging::Entry (class)">Entry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='id identifier rubyid_log_name'>log_name</span> <span class='kw'>if</span> <span class='id identifier rubyid_log_name'>log_name</span>
+  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_log_path'>log_path</span><span class='lparen'>(</span><span class='id identifier rubyid_log_name'>log_name</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_log_name'>log_name</span>
   <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_resource'>resource</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource'>resource</span>
   <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span> <span class='op'>=</span> <span class='id identifier rubyid_timestamp'>timestamp</span> <span class='kw'>if</span> <span class='id identifier rubyid_timestamp'>timestamp</span>
   <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='id identifier rubyid_severity'>severity</span> <span class='kw'>if</span> <span class='id identifier rubyid_severity'>severity</span>
@@ -1724,12 +1841,12 @@ used in place of a ruby standard library logger object.</p>
       <pre class="lines">
 
 
-420
-421
-422</pre>
+443
+444
+445</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 420</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 443</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='const'><span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='id identifier rubyid_shared_async_writer'>shared_async_writer</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span>
@@ -1865,15 +1982,15 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-456
-457
-458
-459
-460
-461</pre>
+479
+480
+481
+482
+483
+484</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 456</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 479</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_logs'>logs</span> <span class='label'>resource:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1972,16 +2089,16 @@ does not exist.</p>
       <pre class="lines">
 
 
-802
-803
-804
-805
-806
-807
-808</pre>
+825
+826
+827
+828
+829
+830
+831</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 802</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 825</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_metric'>metric</span> <span class='id identifier rubyid_name'>name</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2104,14 +2221,14 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-742
-743
-744
-745
-746</pre>
+765
+766
+767
+768
+769</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 742</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 765</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_metrics'>metrics</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2293,15 +2410,15 @@ instances of this monitored resource type.</p>
       <pre class="lines">
 
 
-551
-552
-553
-554
-555
-556</pre>
+574
+575
+576
+577
+578
+579</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 551</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 574</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource'>resource</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='const'><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Resource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>
@@ -2432,14 +2549,14 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-525
-526
-527
-528
-529</pre>
+548
+549
+550
+551
+552</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 525</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 548</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_descriptors'>resource_descriptors</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2502,12 +2619,12 @@ called multiple times, it will return the same object.</p>
       <pre class="lines">
 
 
-372
-373
-374</pre>
+395
+396
+397</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 372</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 395</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_shared_async_writer'>shared_async_writer</span>
   <span class='ivar'>@shared_async_writer</span> <span class='op'>||=</span> <span class='id identifier rubyid_async_writer'>async_writer</span>
@@ -2603,16 +2720,16 @@ does not exist.</p>
       <pre class="lines">
 
 
-703
-704
-705
-706
-707
-708
-709</pre>
+726
+727
+728
+729
+730
+731
+732</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 703</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 726</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sink'>sink</span> <span class='id identifier rubyid_sink_name'>sink_name</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2735,14 +2852,14 @@ part of the larger set of results to view.</p>
       <pre class="lines">
 
 
-588
-589
-590
-591
-592</pre>
+611
+612
+613
+614
+615</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 588</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 611</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sinks'>sinks</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2916,8 +3033,8 @@ item with the same key. See also <span class='object_link'><a href="Entry.html#l
       
         &mdash;
         <div class='inline'><p>Whether valid entries should be
-written even if some other entries fail due to INVALID_ARGUMENT or
-PERMISSION_DENIED errors when communicating to the Stackdriver
+written even if some other entries fail due to <code>INVALID_ARGUMENT</code> or
+<code>PERMISSION_DENIED</code> errors when communicating to the Stackdriver
 Logging API.</p>
 </div>
       
@@ -2949,17 +3066,17 @@ Logging API.</p>
       <pre class="lines">
 
 
-297
-298
 299
 300
 301
 302
 303
-304</pre>
+304
+305
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 297</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/project.rb', line 299</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_write_entries'>write_entries</span> <span class='id identifier rubyid_entries'>entries</span><span class='comma'>,</span> <span class='label'>log_name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>resource:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                   <span class='label'>partial_success:</span> <span class='kw'>nil</span>
