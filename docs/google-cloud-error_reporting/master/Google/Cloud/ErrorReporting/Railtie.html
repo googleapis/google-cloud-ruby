@@ -99,7 +99,7 @@ environment. It will automatically capture Exceptions from the Rails app
 and report them to the Stackdriver Error Reporting service.</p>
 
 <p>The Middleware is only added when certain conditions are met. See
-Railtie.use_error_reporting? for detail.</p>
+<code>Google::Cloud.configure.use_error_reporting</code> for detail.</p>
 
 <p>When loaded, the <span class='object_link'><a href="Middleware.html" title="Google::Cloud::ErrorReporting::Middleware (class)">Middleware</a></span> will be
 inserted after ActionDispatch::DebugExceptions or
