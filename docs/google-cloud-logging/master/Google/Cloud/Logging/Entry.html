@@ -464,6 +464,32 @@ resource in the Stackdriver Logging API.</p>
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#trace_sampled-instance_method" title="#trace_sampled (instance method)">#<strong>trace_sampled</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The sampling decision of the trace associated with the log entry.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -1590,6 +1616,67 @@ Optional.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_trace'>trace</span>
   <span class='ivar'>@trace</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="trace_sampled=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="trace_sampled-instance_method">
+  
+    #<strong>trace_sampled</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The sampling decision of the trace associated with the log entry.
+Optional. A <code>true</code> value means that the trace resource name in the
+<code>trace</code> field was sampled for storage in a trace backend. A <code>false</code>
+means that the trace was not sampled for storage when this log entry
+was written, or the sampling decision was unknown at the time. A
+non-sampled <code>trace</code> value is still useful as a request correlation
+identifier. The default is <code>false</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+391
+392
+393</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 391</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_trace_sampled'>trace_sampled</span>
+  <span class='ivar'>@trace_sampled</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

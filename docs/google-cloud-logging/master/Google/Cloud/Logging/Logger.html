@@ -461,7 +461,7 @@ Stackdriver Logging Service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#add_request_info-instance_method" title="#add_request_info (instance method)">#<strong>add_request_info</strong>(info: nil, env: nil, trace_id: nil, log_name: nil)  &#x21d2; Object </a>
+      <a href="#add_request_info-instance_method" title="#add_request_info (instance method)">#<strong>add_request_info</strong>(info: nil, env: nil, trace_id: nil, log_name: nil, trace_sampled: nil)  &#x21d2; Object </a>
     
 
     
@@ -1762,7 +1762,7 @@ called when the logger is configured to show them.</p>
       <div class="method_details ">
   <h3 class="signature " id="add_request_info-instance_method">
   
-    #<strong>add_request_info</strong>(info: nil, env: nil, trace_id: nil, log_name: nil)  &#x21d2; <tt>Object</tt> 
+    #<strong>add_request_info</strong>(info: nil, env: nil, trace_id: nil, log_name: nil, trace_sampled: nil)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1861,13 +1861,15 @@ available.</p>
 462
 463
 464
-465</pre>
+465
+466</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 459</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_add_request_info'>add_request_info</span> <span class='label'>info:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>trace_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>log_name:</span> <span class='kw'>nil</span>
-  <span class='id identifier rubyid_info'>info</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Logging::Logger#initialize (method)">new</a></span></span> <span class='id identifier rubyid_trace_id'>trace_id</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_env'>env</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_add_request_info'>add_request_info</span> <span class='label'>info:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>trace_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>log_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                     <span class='label'>trace_sampled:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_info'>info</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Logging::Logger#initialize (method)">new</a></span></span> <span class='id identifier rubyid_trace_id'>trace_id</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_env'>env</span><span class='comma'>,</span> <span class='id identifier rubyid_trace_sampled'>trace_sampled</span>
 
   <span class='ivar'>@request_info_var</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_info'>info</span>
 
@@ -2155,12 +2157,12 @@ called when the logger is configured to show them.</p>
       <pre class="lines">
 
 
-482
 483
-484</pre>
+484
+485</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 482</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 483</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_request_info'>delete_request_info</span>
   <span class='ivar'>@request_info_var</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -2484,12 +2486,12 @@ method when used in Rails application.</p>
       <pre class="lines">
 
 
-493
 494
-495</pre>
+495
+496</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 493</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 494</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flush'>flush</span>
   <span class='kw'>self</span>
@@ -2772,12 +2774,12 @@ or <code>nil</code> if there is no data set.</p>
       <pre class="lines">
 
 
-473
 474
-475</pre>
+475
+476</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 473</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 474</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_request_info'>request_info</span>
   <span class='ivar'>@request_info_var</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span>
@@ -2856,7 +2858,6 @@ block. Messages with lower severity will be blocked. Default
       <pre class="lines">
 
 
-519
 520
 521
 522
@@ -2869,10 +2870,11 @@ block. Messages with lower severity will be blocked. Default
 529
 530
 531
-532</pre>
+532
+533</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 519</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 520</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_silence'>silence</span> <span class='id identifier rubyid_temp_level'>temp_level</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>ERROR</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_silencer'>silencer</span>
