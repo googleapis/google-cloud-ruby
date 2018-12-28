@@ -151,16 +151,7 @@ module Google
         #
         def to_h
           raise DuplicateNameError if fields.duplicate_names?
-          hashified_pairs = pairs.map do |key, value|
-            if value.is_a? Data
-              [key, value.to_h]
-            elsif value.is_a? Array
-              [key, value.map { |v| v.is_a?(Data) ? v.to_h : v }]
-            else
-              [key, value]
-            end
-          end
-          Hash[hashified_pairs]
+          Hash[keys.zip to_a]
         end
 
         # @private
