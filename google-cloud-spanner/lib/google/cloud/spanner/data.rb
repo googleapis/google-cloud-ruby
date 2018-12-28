@@ -124,14 +124,23 @@ module Google
         ##
         # Returns the values as an array.
         #
+        # @param [Boolean] skip_dup_check Skip the check for whether nested data
+        #   contains duplicate names. When skipped, the nested hash may lose
+        #   values. Default is `false`. Optional.
+        #
+        # @raise [Google::Cloud::Spanner::DuplicateNameError] if nested data
+        #   contains duplicate names.
+        #
         # @return [Array<Object>] An array containing the values of the data.
         #
-        def to_a
+        def to_a skip_dup_check: nil
           values.map do |value|
             if value.is_a? Data
-              value.to_h
+              value.to_h skip_dup_check: skip_dup_check
             elsif value.is_a? Array
-              value.map { |v| v.is_a?(Data) ? v.to_h : v }
+              value.map do |v|
+                v.is_a?(Data) ? v.to_h(skip_dup_check: skip_dup_check) : v
+              end
             else
               value
             end
@@ -140,8 +149,12 @@ module Google
 
         ##
         # Returns the names or indexes and corresponding values of the data as a
-        # hash. Do not use this method if the data has more than one member with
-        # the same name.
+        # hash. This method will raise or lose values if the data has more than
+        # one member with the same name.
+        #
+        # @param [Boolean] skip_dup_check Skip the check for whether the data
+        #   contains duplicate names. When skipped, the returned hash may lose
+        #   values. Default is `false`. Optional.
         #
         # @raise [Google::Cloud::Spanner::DuplicateNameError] if the data
         #   contains duplicate names.
@@ -149,9 +162,12 @@ module Google
         # @return [Hash<(String,Integer)=>Object>] A hash containing the names
         #   or indexes and corresponding values.
         #
-        def to_h
-          raise DuplicateNameError if fields.duplicate_names?
-          Hash[keys.zip to_a]
+        def to_h skip_dup_check: nil
+          unless skip_dup_check
+            raise DuplicateNameError if fields.duplicate_names?
+          end
+
+          Hash[keys.zip to_a(skip_dup_check: skip_dup_check)]
         end
 
         # @private
