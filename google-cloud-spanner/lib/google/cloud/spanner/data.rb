@@ -122,11 +122,15 @@ module Google
         end
 
         ##
-        # Returns the values as an array.
+        # Returns the values as an array. This method will raise
+        # {DuplicateNameError} if nested data has more than one member with the
+        # same name, unless `skip_dup_check` is set to `true`, in which case it
+        # will lose values.
         #
         # @param [Boolean] skip_dup_check Skip the check for whether nested data
-        #   contains duplicate names. When skipped, the nested hash may lose
-        #   values. Default is `false`. Optional.
+        #   contains duplicate names, which will improve performance. When
+        #   skipped, the nested hash may lose values. Default is `false`.
+        #   Optional.
         #
         # @raise [Google::Cloud::Spanner::DuplicateNameError] if nested data
         #   contains duplicate names.
@@ -149,12 +153,14 @@ module Google
 
         ##
         # Returns the names or indexes and corresponding values of the data as a
-        # hash. This method will raise or lose values if the data has more than
-        # one member with the same name.
+        # hash. This method will raise {DuplicateNameError} if the data has more
+        # than one member with the same name, unless `skip_dup_check` is set to
+        # `true`, in which case it will lose values.
         #
         # @param [Boolean] skip_dup_check Skip the check for whether the data
-        #   contains duplicate names. When skipped, the returned hash may lose
-        #   values. Default is `false`. Optional.
+        #   contains duplicate names, which will improve performance. When
+        #   skipped, the returned hash may lose values. Default is `false`.
+        #   Optional.
         #
         # @raise [Google::Cloud::Spanner::DuplicateNameError] if the data
         #   contains duplicate names.
