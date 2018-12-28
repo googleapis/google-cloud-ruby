@@ -171,7 +171,7 @@ module Google
         # @return [Boolean] Returns `true` if there are duplicate names.
         #
         def duplicate_names?
-          keys.count != keys.uniq.count
+          keys.group_by { |e| e }.select { |_k, v| v.size > 1 }.any?
         end
 
         ##
