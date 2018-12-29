@@ -230,7 +230,7 @@ in cases in which values are unnamed, by zero-based index position
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_a-instance_method" title="#to_a (instance method)">#<strong>to_a</strong>  &#x21d2; Array&lt;Object&gt; </a>
+      <a href="#to_a-instance_method" title="#to_a (instance method)">#<strong>to_a</strong>(skip_dup_check: nil)  &#x21d2; Array&lt;Object&gt; </a>
     
 
     
@@ -253,7 +253,7 @@ in cases in which values are unnamed, by zero-based index position
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_h-instance_method" title="#to_h (instance method)">#<strong>to_h</strong>  &#x21d2; Hash&lt;(String,Integer)=&gt;Object&gt; </a>
+      <a href="#to_h-instance_method" title="#to_h (instance method)">#<strong>to_h</strong>(skip_dup_check: nil)  &#x21d2; Hash&lt;(String,Integer)=&gt;Object&gt; </a>
     
 
     
@@ -623,7 +623,7 @@ pairs.</p>
       <div class="method_details ">
   <h3 class="signature " id="to_a-instance_method">
   
-    #<strong>to_a</strong>  &#x21d2; <tt>Array&lt;Object&gt;</tt> 
+    #<strong>to_a</strong>(skip_dup_check: nil)  &#x21d2; <tt>Array&lt;Object&gt;</tt> 
   
 
   
@@ -631,13 +631,38 @@ pairs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the values as an array.</p>
+    <p>Returns the values as an array. This method will raise
+<span class='object_link'><a href="DuplicateNameError.html" title="Google::Cloud::Spanner::DuplicateNameError (class)">Google::Cloud::Spanner::DuplicateNameError</a></span> if nested data has more than one member with the
+same name, unless <code>skip_dup_check</code> is set to <code>true</code>, in which case it
+will lose values.</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>skip_dup_check</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Skip the check for whether nested data
+contains duplicate names, which will improve performance. When
+skipped, the nested hash may lose values. Default is <code>false</code>.
+Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -655,6 +680,24 @@ pairs.</p>
     </li>
   
 </ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DuplicateNameError.html" title="Google::Cloud::Spanner::DuplicateNameError (class)">Google::Cloud::Spanner::DuplicateNameError</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if nested data
+contains duplicate names.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -662,27 +705,31 @@ pairs.</p>
       <pre class="lines">
 
 
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139</pre>
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/data.rb', line 129</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/data.rb', line 140</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_a'>to_a</span> <span class='label'>skip_dup_check:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Data (class)">Data</a></span></span>
-      <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
+      <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span> <span class='label'>skip_dup_check:</span> <span class='id identifier rubyid_skip_dup_check'>skip_dup_check</span>
     <span class='kw'>elsif</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Array</span>
-      <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Data (class)">Data</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span> <span class='op'>:</span> <span class='id identifier rubyid_v'>v</span> <span class='rbrace'>}</span>
+      <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_v'>v</span><span class='op'>|</span>
+        <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Data (class)">Data</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='lparen'>(</span><span class='label'>skip_dup_check:</span> <span class='id identifier rubyid_skip_dup_check'>skip_dup_check</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_v'>v</span>
+      <span class='kw'>end</span>
     <span class='kw'>else</span>
       <span class='id identifier rubyid_value'>value</span>
     <span class='kw'>end</span>
@@ -696,7 +743,7 @@ pairs.</p>
       <div class="method_details ">
   <h3 class="signature " id="to_h-instance_method">
   
-    #<strong>to_h</strong>  &#x21d2; <tt>Hash&lt;(String,Integer)=&gt;Object&gt;</tt> 
+    #<strong>to_h</strong>(skip_dup_check: nil)  &#x21d2; <tt>Hash&lt;(String,Integer)=&gt;Object&gt;</tt> 
   
 
   
@@ -705,14 +752,37 @@ pairs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the names or indexes and corresponding values of the data as a
-hash. Do not use this method if the data has more than one member with
-the same name.</p>
+hash. This method will raise <span class='object_link'><a href="DuplicateNameError.html" title="Google::Cloud::Spanner::DuplicateNameError (class)">Google::Cloud::Spanner::DuplicateNameError</a></span> if the data has more
+than one member with the same name, unless <code>skip_dup_check</code> is set to
+<code>true</code>, in which case it will lose values.</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>skip_dup_check</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Skip the check for whether the data
+contains duplicate names, which will improve performance. When
+skipped, the returned hash may lose values. Default is <code>false</code>.
+Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -756,35 +826,23 @@ contains duplicate names.</p>
       <pre class="lines">
 
 
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164</pre>
+171
+172
+173
+174
+175
+176
+177</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/data.rb', line 152</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/data.rb', line 171</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="DuplicateNameError.html" title="Google::Cloud::Spanner::DuplicateNameError (class)">DuplicateNameError</a></span></span> <span class='kw'>if</span> <span class='id identifier rubyid_fields'>fields</span><span class='period'>.</span><span class='id identifier rubyid_duplicate_names?'>duplicate_names?</span>
-  <span class='id identifier rubyid_hashified_pairs'>hashified_pairs</span> <span class='op'>=</span> <span class='id identifier rubyid_pairs'>pairs</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Data (class)">Data</a></span></span>
-      <span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='rbracket'>]</span>
-    <span class='kw'>elsif</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Array</span>
-      <span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner::Data (class)">Data</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span> <span class='op'>:</span> <span class='id identifier rubyid_v'>v</span> <span class='rbrace'>}</span><span class='rbracket'>]</span>
-    <span class='kw'>else</span>
-      <span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rbracket'>]</span>
-    <span class='kw'>end</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span> <span class='label'>skip_dup_check:</span> <span class='kw'>nil</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_skip_dup_check'>skip_dup_check</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="DuplicateNameError.html" title="Google::Cloud::Spanner::DuplicateNameError (class)">DuplicateNameError</a></span></span> <span class='kw'>if</span> <span class='id identifier rubyid_fields'>fields</span><span class='period'>.</span><span class='id identifier rubyid_duplicate_names?'>duplicate_names?</span>
   <span class='kw'>end</span>
-  <span class='const'>Hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_hashified_pairs'>hashified_pairs</span><span class='rbracket'>]</span>
+
+  <span class='const'>Hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_zip'>zip</span> <span class='id identifier rubyid_to_a'>to_a</span><span class='lparen'>(</span><span class='label'>skip_dup_check:</span> <span class='id identifier rubyid_skip_dup_check'>skip_dup_check</span><span class='rparen'>)</span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
