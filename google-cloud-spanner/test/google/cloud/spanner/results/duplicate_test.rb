@@ -70,9 +70,11 @@ describe Google::Cloud::Spanner::Results, :duplicate, :mock_spanner do
     assert_raises Google::Cloud::Spanner::DuplicateNameError do
       rows.first.to_h
     end
+    rows.first.to_h skip_dup_check: true # does not raise
     assert_raises Google::Cloud::Spanner::DuplicateNameError do
       rows.last.to_h
     end
+    rows.last.to_h skip_dup_check: true # does not raise
     rows.first.pairs.must_equal [[:num, 1], [:str, 2], [:num, "hello"], [:str, "world"]]
     rows.last.pairs.must_equal [[:num, 3], [:str, 4], [:num, "hola"], [:str, "mundo"]]
   end

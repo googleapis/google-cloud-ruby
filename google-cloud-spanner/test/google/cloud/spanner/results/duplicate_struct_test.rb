@@ -58,8 +58,10 @@ describe Google::Cloud::Spanner::Results, :duplicate_struct, :mock_spanner do
     assert_raises Google::Cloud::Spanner::DuplicateNameError do
       row.to_a
     end
+    row.to_a skip_dup_check: true # does not raise
     assert_raises Google::Cloud::Spanner::DuplicateNameError do
       row.to_h
     end
+    row.to_h skip_dup_check: true # does not raise
   end
 end

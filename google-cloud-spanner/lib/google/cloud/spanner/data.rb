@@ -122,16 +122,29 @@ module Google
         end
 
         ##
-        # Returns the values as an array.
+        # Returns the values as an array. This method will raise
+        # {DuplicateNameError} if nested data has more than one member with the
+        # same name, unless `skip_dup_check` is set to `true`, in which case it
+        # will lose values.
+        #
+        # @param [Boolean] skip_dup_check Skip the check for whether nested data
+        #   contains duplicate names, which will improve performance. When
+        #   skipped, the nested hash may lose values. Default is `false`.
+        #   Optional.
+        #
+        # @raise [Google::Cloud::Spanner::DuplicateNameError] if nested data
+        #   contains duplicate names.
         #
         # @return [Array<Object>] An array containing the values of the data.
         #
-        def to_a
+        def to_a skip_dup_check: nil
           values.map do |value|
             if value.is_a? Data
-              value.to_h
+              value.to_h skip_dup_check: skip_dup_check
             elsif value.is_a? Array
-              value.map { |v| v.is_a?(Data) ? v.to_h : v }
+              value.map do |v|
+                v.is_a?(Data) ? v.to_h(skip_dup_check: skip_dup_check) : v
+              end
             else
               value
             end
@@ -140,8 +153,14 @@ module Google
 
         ##
         # Returns the names or indexes and corresponding values of the data as a
-        # hash. Do not use this method if the data has more than one member with
-        # the same name.
+        # hash. This method will raise {DuplicateNameError} if the data has more
+        # than one member with the same name, unless `skip_dup_check` is set to
+        # `true`, in which case it will lose values.
+        #
+        # @param [Boolean] skip_dup_check Skip the check for whether the data
+        #   contains duplicate names, which will improve performance. When
+        #   skipped, the returned hash may lose values. Default is `false`.
+        #   Optional.
         #
         # @raise [Google::Cloud::Spanner::DuplicateNameError] if the data
         #   contains duplicate names.
@@ -149,18 +168,12 @@ module Google
         # @return [Hash<(String,Integer)=>Object>] A hash containing the names
         #   or indexes and corresponding values.
         #
-        def to_h
-          raise DuplicateNameError if fields.duplicate_names?
-          hashified_pairs = pairs.map do |key, value|
-            if value.is_a? Data
-              [key, value.to_h]
-            elsif value.is_a? Array
-              [key, value.map { |v| v.is_a?(Data) ? v.to_h : v }]
-            else
-              [key, value]
-            end
+        def to_h skip_dup_check: nil
+          unless skip_dup_check
+            raise DuplicateNameError if fields.duplicate_names?
           end
-          Hash[hashified_pairs]
+
+          Hash[keys.zip to_a(skip_dup_check: skip_dup_check)]
         end
 
         # @private
