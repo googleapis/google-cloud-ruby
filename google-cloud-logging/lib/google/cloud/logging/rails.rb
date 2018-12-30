@@ -121,7 +121,7 @@ module Google
           # TODO: are there more settings to be set here?
 
           # Replace the Rails default logger
-          Rails.app.config.logger = Middleware.logger
+          Rails.application.config.logger = Middleware.logger
           Rails.logger = Middleware.logger
         end
 
