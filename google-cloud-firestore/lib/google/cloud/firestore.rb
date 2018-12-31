@@ -55,6 +55,8 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
+      # @param [String] emulator_host Firestore emulator host. Optional.
+      #   If the param is nil, uses the value of the `emulator_host` config.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -67,7 +69,8 @@ module Google
       #   firestore = Google::Cloud::Firestore.new
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, project: nil, keyfile: nil
+                   client_config: nil, emulator_host: nil, project: nil,
+                   keyfile: nil
         project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
@@ -75,6 +78,16 @@ module Google
         scope ||= configure.scope
         timeout ||= configure.timeout
         client_config ||= configure.client_config
+        emulator_host ||= configure.emulator_host
+        if emulator_host
+          return Firestore::Client.new(
+            Firestore::Service.new(
+              project_id, :this_channel_is_insecure,
+              host: emulator_host, timeout: timeout,
+              client_config: client_config
+            )
+          )
+        end
 
         credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
@@ -105,6 +118,8 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `emulator_host` - (String) Host name of the emulator. Defaults to
+      #   `ENV["FIRESTORE_EMULATOR_HOST"]`
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Firestore library uses.

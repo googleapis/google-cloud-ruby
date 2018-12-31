@@ -119,6 +119,9 @@ Google::Cloud.configure.add_config! :firestore do |config|
       "FIRESTORE_KEYFILE", "FIRESTORE_KEYFILE_JSON"
     )
   end
+  default_emulator = Google::Cloud::Config.deferred do
+    ENV["FIRESTORE_EMULATOR_HOST"]
+  end
 
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
@@ -129,4 +132,6 @@ Google::Cloud.configure.add_config! :firestore do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
+  config.add_field! :emulator_host, default_emulator,
+                    match: String, allow_nil: true
 end

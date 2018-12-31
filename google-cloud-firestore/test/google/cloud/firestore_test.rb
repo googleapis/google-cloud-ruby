@@ -213,6 +213,41 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "uses FIRESTORE_EMULATOR_HOST environment variable" do
+      emulator_host = "localhost:4567"
+      emulator_check = ->(name) { (name == "FIRESTORE_EMULATOR_HOST") ? emulator_host : nil }
+      # Clear all environment variables, except FIRESTORE_EMULATOR_HOST
+      ENV.stub :[], emulator_check do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Firestore::Credentials.stub :default, default_credentials do
+            firestore = Google::Cloud::Firestore.new
+            firestore.must_be_kind_of Google::Cloud::Firestore::Client
+            firestore.project_id.must_equal "project-id"
+            firestore.service.credentials.must_equal :this_channel_is_insecure
+            firestore.service.host.must_equal emulator_host
+          end
+        end
+      end
+    end
+
+    it "allows emulator_host to be set" do
+      emulator_host = "localhost:4567"
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          # Google::Cloud::Firestore::Credentials.stub :default, default_credentials do
+            firestore = Google::Cloud::Firestore.new emulator_host: emulator_host
+            firestore.must_be_kind_of Google::Cloud::Firestore::Client
+            firestore.project_id.must_equal "project-id"
+            firestore.service.credentials.must_equal :this_channel_is_insecure
+            firestore.service.host.must_equal emulator_host
+          # end
+        end
+      end
+    end
   end
 
   describe "Firestore.configure" do
@@ -376,6 +411,23 @@ describe Google::Cloud do
             end
           end
         end
+      end
+    end
+
+    it "uses firestore config for emulator_host" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Firestore.configure do |config|
+          config.project_id = "project-id"
+          config.emulator_host = "localhost:4567"
+        end
+
+        firestore = Google::Cloud::Firestore.new
+        firestore.must_be_kind_of Google::Cloud::Firestore::Client
+        firestore.project_id.must_equal "project-id"
+        firestore.service.credentials.must_equal :this_channel_is_insecure
+        firestore.service.host.must_equal "localhost:4567"
       end
     end
   end
