@@ -45,7 +45,7 @@ s.copy(v1beta1_library / 'google-cloud-scheduler.gemspec', merge=ruby.merge_gems
 s.replace(
     'google-cloud-scheduler.gemspec',
     'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.59.2"'
+    'gem.add_development_dependency "rubocop", "~> 0.61.0"'
 )
 
 # https://github.com/googleapis/gapic-generator/issues/2279

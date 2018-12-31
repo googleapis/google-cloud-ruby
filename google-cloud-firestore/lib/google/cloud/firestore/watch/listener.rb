@@ -34,13 +34,13 @@ module Google
             raise ArgumentError if doc_ref.nil?
             raise ArgumentError if callback.nil?
 
+            documents = Google::Firestore::V1beta1::Target::DocumentsTarget.new(
+              documents: [doc_ref.path]
+            )
             init_listen_req = Google::Firestore::V1beta1::ListenRequest.new(
-              database: doc_ref.client.path,
+              database:   doc_ref.client.path,
               add_target: Google::Firestore::V1beta1::Target.new(
-                documents: \
-                  Google::Firestore::V1beta1::Target::DocumentsTarget.new(
-                    documents: [doc_ref.path]
-                  )
+                documents: documents
               )
             )
 
@@ -52,10 +52,10 @@ module Google
             raise ArgumentError if callback.nil?
 
             init_listen_req = Google::Firestore::V1beta1::ListenRequest.new(
-              database: query.client.path,
+              database:   query.client.path,
               add_target: Google::Firestore::V1beta1::Target.new(
                 query: Google::Firestore::V1beta1::Target::QueryTarget.new(
-                  parent: query.parent_path,
+                  parent:           query.parent_path,
                   structured_query: query.query
                 )
               )

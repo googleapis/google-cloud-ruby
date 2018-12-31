@@ -136,7 +136,7 @@ module Google
           execute backoff: true do
             service.list_tables @project, dataset_id,
                                 max_results: options[:max],
-                                page_token: options[:token]
+                                page_token:  options[:token]
           end
         end
 
@@ -197,9 +197,9 @@ module Google
             json_txt = service.list_table_data \
               @project, dataset_id, table_id,
               max_results: options.delete(:max),
-              page_token: options.delete(:token),
+              page_token:  options.delete(:token),
               start_index: options.delete(:start),
-              options: { skip_deserialization: true }
+              options:     { skip_deserialization: true }
             JSON.parse json_txt, symbolize_names: true
           end
         end
@@ -217,14 +217,14 @@ module Google
             insert_id ||= SecureRandom.uuid
             {
               insertId: insert_id,
-              json: json_row
+              json:     json_row
             }
           end
 
           insert_req = {
-            rows: insert_rows,
+            rows:                insert_rows,
             ignoreUnknownValues: options[:ignore_unknown],
-            skipInvalidRows: options[:skip_invalid]
+            skipInvalidRows:     options[:skip_invalid]
           }.to_json
 
           # The insertAll with insertId operation is considered idempotent
@@ -287,13 +287,13 @@ module Google
         def job_query_results job_id, options = {}
           # The get operation is considered idempotent
           execute backoff: true do
-            service.get_job_query_results @project,
-                                          job_id,
-                                          location: options.delete(:location),
-                                          max_results: options.delete(:max),
-                                          page_token: options.delete(:token),
-                                          start_index: options.delete(:start),
-                                          timeout_ms: options.delete(:timeout)
+            service.get_job_query_results \
+              @project, job_id,
+              location:    options.delete(:location),
+              max_results: options.delete(:max),
+              page_token:  options.delete(:token),
+              start_index: options.delete(:start),
+              timeout_ms:  options.delete(:timeout)
           end
         end
 
@@ -371,7 +371,7 @@ module Google
         def list_projects options = {}
           execute backoff: true do
             service.list_projects max_results: options[:max],
-                                  page_token: options[:token]
+                                  page_token:  options[:token]
           end
         end
 
@@ -383,7 +383,7 @@ module Google
           job_id ||= "#{prefix}#{generate_id}"
           job_ref = API::JobReference.new(
             project_id: @project,
-            job_id: job_id
+            job_id:     job_id
           )
           # BigQuery does not allow nil location, but missing is ok.
           job_ref.location = location if location

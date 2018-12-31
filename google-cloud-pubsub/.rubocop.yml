@@ -40,6 +40,9 @@ Layout/EmptyLineAfterGuardClause:
   Enabled: false
 Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
+Layout/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-pubsub.rb"

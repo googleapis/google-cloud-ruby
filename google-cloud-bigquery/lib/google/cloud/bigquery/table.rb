@@ -1071,10 +1071,10 @@ module Google
         # @!group Lifecycle
         #
         def set_query query, standard_sql: nil, legacy_sql: nil, udfs: nil
+          use_legacy_sql = Convert.resolve_legacy_sql standard_sql, legacy_sql
           @gapi.view = Google::Apis::BigqueryV2::ViewDefinition.new \
-            query: query,
-            use_legacy_sql: Convert.resolve_legacy_sql(standard_sql,
-                                                       legacy_sql),
+            query:                           query,
+            use_legacy_sql:                  use_legacy_sql,
             user_defined_function_resources: udfs_gapi(udfs)
           patch_gapi! :view
         end
@@ -1526,10 +1526,10 @@ module Google
         def extract extract_url, format: nil, compression: nil, delimiter: nil,
                     header: nil, &block
           job = extract_job extract_url,
-                            format: format,
+                            format:      format,
                             compression: compression,
-                            delimiter: delimiter,
-                            header: header,
+                            delimiter:   delimiter,
+                            header:      header,
                             &block
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -1998,9 +1998,9 @@ module Google
           rows = [rows] if rows.is_a? Hash
           raise ArgumentError, "No rows provided" if rows.empty?
           ensure_service!
-          options = { skip_invalid: skip_invalid,
+          options = { skip_invalid:   skip_invalid,
                       ignore_unknown: ignore_unknown,
-                      insert_ids: insert_ids }
+                      insert_ids:     insert_ids }
           gapi = service.insert_tabledata dataset_id, table_id, rows, options
           InsertResponse.from_gapi rows, gapi
         end
@@ -2257,7 +2257,7 @@ module Google
             reference_gapi = Google::Apis::BigqueryV2::TableReference.new(
               project_id: project_id,
               dataset_id: dataset_id,
-              table_id: table_id
+              table_id:   table_id
             )
             b.service = service
             b.instance_variable_set :@reference, reference_gapi
@@ -2330,11 +2330,11 @@ module Google
           Google::Apis::BigqueryV2::Job.new(
             job_reference: job_ref,
             configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-              load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+              load:    Google::Apis::BigqueryV2::JobConfigurationLoad.new(
                 destination_table: Google::Apis::BigqueryV2::TableReference.new(
                   project_id: @service.project,
                   dataset_id: dataset_id,
-                  table_id: table_id
+                  table_id:   table_id
                 )
               ),
               dry_run: dryrun
@@ -2369,12 +2369,12 @@ module Google
           job.encoding = encoding unless encoding.nil?
           job.ignore_unknown = ignore_unknown unless ignore_unknown.nil?
           job.max_bad_records = max_bad_records unless max_bad_records.nil?
-          load_job_csv_options! job, jagged_rows: jagged_rows,
+          load_job_csv_options! job, jagged_rows:     jagged_rows,
                                      quoted_newlines: quoted_newlines,
-                                     delimiter: delimiter,
-                                     quote: quote,
-                                     skip_leading: skip_leading,
-                                     null_marker: null_marker
+                                     delimiter:       delimiter,
+                                     quote:           quote,
+                                     skip_leading:    skip_leading,
+                                     null_marker:     null_marker
         end
 
         def load_job_updater format: nil, create: nil,
@@ -2394,17 +2394,17 @@ module Google
             job.schema = schema unless schema.nil?
             job.autodetect = autodetect unless autodetect.nil?
             job.labels = labels unless labels.nil?
-            load_job_file_options! job, format: format,
+            load_job_file_options! job, format:            format,
                                         projection_fields: projection_fields,
-                                        jagged_rows: jagged_rows,
-                                        quoted_newlines: quoted_newlines,
-                                        encoding: encoding,
-                                        delimiter: delimiter,
-                                        ignore_unknown: ignore_unknown,
-                                        max_bad_records: max_bad_records,
-                                        quote: quote,
-                                        skip_leading: skip_leading,
-                                        null_marker: null_marker
+                                        jagged_rows:       jagged_rows,
+                                        quoted_newlines:   quoted_newlines,
+                                        encoding:          encoding,
+                                        delimiter:         delimiter,
+                                        ignore_unknown:    ignore_unknown,
+                                        max_bad_records:   max_bad_records,
+                                        quote:             quote,
+                                        skip_leading:      skip_leading,
+                                        null_marker:       null_marker
           end
         end
 

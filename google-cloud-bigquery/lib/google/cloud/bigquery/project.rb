@@ -266,7 +266,7 @@ module Google
           job = copy_job source_table,
                          destination_table,
                          create: create,
-                         write: write,
+                         write:  write,
                          &block
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -1440,10 +1440,10 @@ module Google
                     delimiter: nil, header: nil, &block
           job = extract_job table,
                             extract_url,
-                            format: format,
+                            format:      format,
                             compression: compression,
-                            delimiter: delimiter,
-                            header: header,
+                            delimiter:   delimiter,
+                            header:      header,
                             &block
           job.wait_until_done!
           ensure_job_succeeded! job

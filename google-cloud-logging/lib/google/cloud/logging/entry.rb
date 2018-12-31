@@ -410,18 +410,18 @@ module Google
         # @private Exports the Entry to a Google::Logging::V2::LogEntry object.
         def to_grpc
           grpc = Google::Logging::V2::LogEntry.new(
-            log_name: log_name.to_s,
-            timestamp: timestamp_grpc,
+            log_name:        log_name.to_s,
+            timestamp:       timestamp_grpc,
             # TODO: verify severity is the correct type?
-            severity: severity,
-            insert_id: insert_id.to_s,
-            labels: labels_grpc,
-            resource: resource.to_grpc,
-            http_request: http_request.to_grpc,
-            operation: operation.to_grpc,
-            trace: trace.to_s,
+            severity:        severity,
+            insert_id:       insert_id.to_s,
+            labels:          labels_grpc,
+            resource:        resource.to_grpc,
+            http_request:    http_request.to_grpc,
+            operation:       operation.to_grpc,
+            trace:           trace.to_s,
             source_location: source_location.to_grpc,
-            trace_sampled: !(!trace_sampled)
+            trace_sampled:   !(!trace_sampled)
           )
           # Add payload
           append_payload grpc
@@ -462,7 +462,7 @@ module Google
           # TODO: ArgumentError if timestamp is not a Time object?
           Google::Protobuf::Timestamp.new(
             seconds: timestamp.to_i,
-            nanos: timestamp.nsec
+            nanos:   timestamp.nsec
           )
         end
 

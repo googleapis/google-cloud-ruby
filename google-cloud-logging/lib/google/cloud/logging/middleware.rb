@@ -29,7 +29,7 @@ module Google
         # logs to a separate log name so they don't spam the main log.
         DEFAULT_LOG_NAME_MAP =
           { "/_ah/health" => "ruby_health_check_log",
-            "/healthz" => "ruby_health_check_log" }.freeze
+            "/healthz"    => "ruby_health_check_log" }.freeze
 
         ##
         # The Google::Cloud::Logging::Logger instance
@@ -62,7 +62,7 @@ module Google
           logger ||= Middleware.logger
           logger ||= begin
             log_name = configuration.log_name
-            logging = Logging.new project_id: configuration.project_id,
+            logging = Logging.new project_id:  configuration.project_id,
                                   credentials: configuration.credentials
             resource = Middleware.build_monitored_resource(
               configuration.monitored_resource.type,
@@ -238,19 +238,20 @@ module Google
           type, labels =
             if Google::Cloud.env.app_engine?
               ["gae_app", {
-                module_id: Google::Cloud.env.app_engine_service_id,
+                module_id:  Google::Cloud.env.app_engine_service_id,
                 version_id: Google::Cloud.env.app_engine_service_version
               }]
             elsif Google::Cloud.env.container_engine?
+              namespace_id = Google::Cloud.env.container_engine_namespace_id
+              namespace_id ||= "default"
               ["container", {
                 cluster_name: Google::Cloud.env.container_engine_cluster_name,
-                namespace_id: \
-                  Google::Cloud.env.container_engine_namespace_id || "default"
+                namespace_id: namespace_id
               }]
             elsif Google::Cloud.env.compute_engine?
               ["gce_instance", {
                 instance_id: Google::Cloud.env.instance_name,
-                zone: Google::Cloud.env.instance_zone
+                zone:        Google::Cloud.env.instance_zone
               }]
             else
               ["global", {}]

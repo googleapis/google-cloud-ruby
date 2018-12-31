@@ -933,8 +933,8 @@ module Google
           # @!group Attributes
           #
           def format= new_format
-            @gapi.configuration.load.update! source_format:
-              Convert.source_format(new_format)
+            @gapi.configuration.load.update! \
+              source_format: Convert.source_format(new_format)
           end
 
           ##
@@ -954,8 +954,8 @@ module Google
           # @!group Attributes
           #
           def create= new_create
-            @gapi.configuration.load.update! create_disposition:
-              Convert.create_disposition(new_create)
+            @gapi.configuration.load.update! \
+              create_disposition: Convert.create_disposition(new_create)
           end
 
           ##
@@ -976,8 +976,8 @@ module Google
           # @!group Attributes
           #
           def write= new_write
-            @gapi.configuration.load.update! write_disposition:
-              Convert.write_disposition(new_write)
+            @gapi.configuration.load.update! \
+              write_disposition: Convert.write_disposition(new_write)
           end
 
           ##
@@ -998,8 +998,8 @@ module Google
             if new_fields.nil?
               @gapi.configuration.load.update! projection_fields: nil
             else
-              @gapi.configuration.load.update! projection_fields:
-                Array(new_fields)
+              @gapi.configuration.load.update! \
+                projection_fields: Array(new_fields)
             end
           end
 

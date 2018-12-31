@@ -278,12 +278,12 @@ module Google
         def self.create_disposition str
           val = {
             "create_if_needed" => "CREATE_IF_NEEDED",
-            "createifneeded" => "CREATE_IF_NEEDED",
-            "if_needed" => "CREATE_IF_NEEDED",
-            "needed" => "CREATE_IF_NEEDED",
-            "create_never" => "CREATE_NEVER",
-            "createnever" => "CREATE_NEVER",
-            "never" => "CREATE_NEVER"
+            "createifneeded"   => "CREATE_IF_NEEDED",
+            "if_needed"        => "CREATE_IF_NEEDED",
+            "needed"           => "CREATE_IF_NEEDED",
+            "create_never"     => "CREATE_NEVER",
+            "createnever"      => "CREATE_NEVER",
+            "never"            => "CREATE_NEVER"
           }[str.to_s.downcase]
           return val unless val.nil?
           str
@@ -298,14 +298,14 @@ module Google
         def self.write_disposition str
           val = {
             "write_truncate" => "WRITE_TRUNCATE",
-            "writetruncate" => "WRITE_TRUNCATE",
-            "truncate" => "WRITE_TRUNCATE",
-            "write_append" => "WRITE_APPEND",
-            "writeappend" => "WRITE_APPEND",
-            "append" => "WRITE_APPEND",
-            "write_empty" => "WRITE_EMPTY",
-            "writeempty" => "WRITE_EMPTY",
-            "empty" => "WRITE_EMPTY"
+            "writetruncate"  => "WRITE_TRUNCATE",
+            "truncate"       => "WRITE_TRUNCATE",
+            "write_append"   => "WRITE_APPEND",
+            "writeappend"    => "WRITE_APPEND",
+            "append"         => "WRITE_APPEND",
+            "write_empty"    => "WRITE_EMPTY",
+            "writeempty"     => "WRITE_EMPTY",
+            "empty"          => "WRITE_EMPTY"
           }[str.to_s.downcase]
           return val unless val.nil?
           str
@@ -319,15 +319,15 @@ module Google
         # @return [String] API representation of source format.
         def self.source_format format
           val = {
-            "csv" => "CSV",
-            "json" => "NEWLINE_DELIMITED_JSON",
+            "csv"                    => "CSV",
+            "json"                   => "NEWLINE_DELIMITED_JSON",
             "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
-            "avro" => "AVRO",
-            "orc" => "ORC",
-            "parquet" => "PARQUET",
-            "datastore" => "DATASTORE_BACKUP",
-            "backup" => "DATASTORE_BACKUP",
-            "datastore_backup" => "DATASTORE_BACKUP"
+            "avro"                   => "AVRO",
+            "orc"                    => "ORC",
+            "parquet"                => "PARQUET",
+            "datastore"              => "DATASTORE_BACKUP",
+            "backup"                 => "DATASTORE_BACKUP",
+            "datastore_backup"       => "DATASTORE_BACKUP"
           }[format.to_s.downcase]
           return val unless val.nil?
           format
@@ -352,12 +352,12 @@ module Google
         #
         # @return [String] API representation of source format.
         def self.derive_source_format path
-          return "CSV" if path.end_with? ".csv"
+          return "CSV"                    if path.end_with? ".csv"
           return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
-          return "AVRO" if path.end_with? ".avro"
-          return "ORC" if path.end_with? ".orc"
-          return "PARQUET" if path.end_with? ".parquet"
-          return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
+          return "AVRO"                   if path.end_with? ".avro"
+          return "ORC"                    if path.end_with? ".orc"
+          return "PARQUET"                if path.end_with? ".parquet"
+          return "DATASTORE_BACKUP"       if path.end_with? ".backup_info"
           nil
         end
       end

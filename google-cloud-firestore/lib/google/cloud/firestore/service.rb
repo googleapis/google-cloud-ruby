@@ -123,7 +123,7 @@ module Google
           execute do
             firestore.begin_transaction database_path,
                                         options_: transaction_opt,
-                                        options: options
+                                        options:  options
           end
         end
 
@@ -166,7 +166,7 @@ module Google
 
         def call_options parent: nil, token: nil
           Google::Gax::CallOptions.new({
-            kwargs: default_headers(parent),
+            kwargs:     default_headers(parent),
             page_token: token
           }.delete_if { |_, v| v.nil? })
         end

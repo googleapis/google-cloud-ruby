@@ -160,20 +160,21 @@ module Google
           #   configuration object for setting copy options.
           def self.from_options service, source, target, options = {}
             job_ref = service.job_ref_from options[:job_id], options[:prefix]
+            copy_cfg = Google::Apis::BigqueryV2::JobConfigurationTableCopy.new(
+              source_table:      source,
+              destination_table: target
+            )
             req = Google::Apis::BigqueryV2::Job.new(
               job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-                copy: Google::Apis::BigqueryV2::JobConfigurationTableCopy.new(
-                  source_table: source,
-                  destination_table: target
-                ),
+                copy:    copy_cfg,
                 dry_run: options[:dryrun]
               )
             )
 
             updater = CopyJob::Updater.new req
             updater.create = options[:create]
-            updater.write = options[:write]
+            updater.write  = options[:write]
             updater.labels = options[:labels] if options[:labels]
             updater
           end
@@ -226,8 +227,8 @@ module Google
           #
           # @!group Attributes
           def create= new_create
-            @gapi.configuration.copy.update! create_disposition:
-              Convert.create_disposition(new_create)
+            @gapi.configuration.copy.update! \
+              create_disposition: Convert.create_disposition(new_create)
           end
 
           ##
@@ -247,8 +248,8 @@ module Google
           #
           # @!group Attributes
           def write= new_write
-            @gapi.configuration.copy.update! write_disposition:
-              Convert.write_disposition(new_write)
+            @gapi.configuration.copy.update! \
+              write_disposition: Convert.write_disposition(new_write)
           end
 
           ##

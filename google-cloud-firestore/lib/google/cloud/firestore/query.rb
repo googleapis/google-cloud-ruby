@@ -309,7 +309,7 @@ module Google
           field = FieldPath.parse field unless field.is_a? FieldPath
 
           new_query.order_by << StructuredQuery::Order.new(
-            field: StructuredQuery::FieldReference.new(
+            field:     StructuredQuery::FieldReference.new(
               field_path: field.formatted_string
             ),
             direction: order_direction(direction)
@@ -949,19 +949,25 @@ module Google
 
             operator = value_nan?(value) ? :IS_NAN : :IS_NULL
 
-            return StructuredQuery::Filter.new(unary_filter:
-              StructuredQuery::UnaryFilter.new(field: field, op: operator))
+            return StructuredQuery::Filter.new(
+              unary_filter: StructuredQuery::UnaryFilter.new(
+                field: field, op: operator
+              )
+            )
           end
 
           value = Convert.raw_to_value value
-          StructuredQuery::Filter.new(field_filter:
-              StructuredQuery::FieldFilter.new(field: field, op: operator,
-                                               value: value))
+          StructuredQuery::Filter.new(
+            field_filter: StructuredQuery::FieldFilter.new(
+              field: field, op: operator, value: value
+            )
+          )
         end
 
         def composite_filter
-          StructuredQuery::Filter.new(composite_filter:
-              StructuredQuery::CompositeFilter.new(op: :AND))
+          StructuredQuery::Filter.new(
+            composite_filter: StructuredQuery::CompositeFilter.new(op: :AND)
+          )
         end
 
         def add_filters_to_query query, filter
@@ -1039,7 +1045,7 @@ module Google
             next if orig_order.include? field_path
 
             query.order_by.unshift StructuredQuery::Order.new(
-              field: StructuredQuery::FieldReference.new(
+              field:     StructuredQuery::FieldReference.new(
                 field_path: field_path
               ),
               direction: :ASCENDING
@@ -1051,7 +1057,7 @@ module Google
           return if order_by_field_paths(query).include? doc_id_path
 
           query.order_by.push StructuredQuery::Order.new(
-            field: StructuredQuery::FieldReference.new(
+            field:     StructuredQuery::FieldReference.new(
               field_path: doc_id_path
             ),
             direction: last_order_direction(query)

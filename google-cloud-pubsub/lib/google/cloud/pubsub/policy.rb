@@ -160,11 +160,11 @@ module Google
         # @private Convert the Policy to a Google::Iam::V1::Policy object.
         def to_grpc
           Google::Iam::V1::Policy.new(
-            etag: etag,
+            etag:     etag,
             bindings: roles.keys.map do |role_name|
               next if roles[role_name].empty?
               Google::Iam::V1::Binding.new(
-                role: role_name,
+                role:    role_name,
                 members: roles[role_name]
               )
             end

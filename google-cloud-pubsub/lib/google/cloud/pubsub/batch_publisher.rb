@@ -90,7 +90,7 @@ module Google
           # Convert attributes to strings to match the protobuf definition
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
 
-          Google::Pubsub::V1::PubsubMessage.new data: data_bytes,
+          Google::Pubsub::V1::PubsubMessage.new data:       data_bytes,
                                                 attributes: attributes
         end
       end

@@ -65,7 +65,7 @@ module Google
     #   bigquery = gcloud.bigquery scope: platform_scope
     #
     def bigquery scope: nil, retries: nil, timeout: nil
-      Google::Cloud.bigquery @project, @keyfile, scope: scope,
+      Google::Cloud.bigquery @project, @keyfile, scope:   scope,
                                                  retries: (retries || @retries),
                                                  timeout: (timeout || @timeout)
     end
@@ -129,7 +129,7 @@ Google::Cloud.configure.add_config! :bigquery do |config|
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds,
-                    match: [String, Hash, Google::Auth::Credentials],
+                    match:     [String, Hash, Google::Auth::Credentials],
                     allow_nil: true
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, nil, match: [String, Array]

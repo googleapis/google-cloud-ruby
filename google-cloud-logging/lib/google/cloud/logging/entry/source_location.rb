@@ -61,9 +61,9 @@ module Google
           def to_grpc
             return nil if empty?
             Google::Logging::V2::LogEntrySourceLocation.new(
-              file:       file.to_s,
-              line:       line,
-              function:   function.to_s
+              file:     file.to_s,
+              line:     line,
+              function: function.to_s
             )
           end
 

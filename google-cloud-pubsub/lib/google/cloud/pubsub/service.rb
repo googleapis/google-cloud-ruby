@@ -62,11 +62,11 @@ module Google
           return mocked_subscriber if mocked_subscriber
           @subscriber ||= begin
             V1::SubscriberClient.new(
-              credentials: channel,
-              timeout: timeout,
+              credentials:   channel,
+              timeout:       timeout,
               client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Pubsub::VERSION
+              lib_name:      "gccl",
+              lib_version:   Google::Cloud::Pubsub::VERSION
             )
           end
         end
@@ -76,11 +76,11 @@ module Google
           return mocked_publisher if mocked_publisher
           @publisher ||= begin
             V1::PublisherClient.new(
-              credentials: channel,
-              timeout: timeout,
+              credentials:   channel,
+              timeout:       timeout,
               client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Pubsub::VERSION
+              lib_name:      "gccl",
+              lib_version:   Google::Cloud::Pubsub::VERSION
             )
           end
         end
@@ -108,14 +108,16 @@ module Google
         def list_topics options = {}
           call_options = default_options
           if (token = options[:token])
-            call_options = Google::Gax::CallOptions.new kwargs: default_headers,
-                                                        page_token: token
+            call_options = Google::Gax::CallOptions.new(
+              kwargs:     default_headers,
+              page_token: token
+            )
           end
 
           execute do
             paged_enum = publisher.list_topics project_path(options),
                                                page_size: options[:max],
-                                               options: call_options
+                                               options:   call_options
 
             paged_enum.page.response
           end
@@ -126,7 +128,7 @@ module Google
         def create_topic topic_name, labels: nil, options: {}
           execute do
             publisher.create_topic topic_path(topic_name, options),
-                                   labels: labels,
+                                   labels:  labels,
                                    options: default_options
           end
         end
@@ -177,15 +179,17 @@ module Google
         def list_topics_subscriptions topic, options = {}
           call_options = default_options
           if (token = options[:token])
-            call_options = Google::Gax::CallOptions.new kwargs: default_headers,
-                                                        page_token: token
+            call_options = Google::Gax::CallOptions.new(
+              kwargs:     default_headers,
+              page_token: token
+            )
           end
 
           execute do
             paged_enum = publisher.list_topic_subscriptions \
               topic_path(topic, options),
               page_size: options[:max],
-              options: call_options
+              options:   call_options
 
             paged_enum.page.response
           end
@@ -196,14 +200,16 @@ module Google
         def list_subscriptions options = {}
           call_options = default_options
           if (token = options[:token])
-            call_options = Google::Gax::CallOptions.new kwargs: default_headers,
-                                                        page_token: token
+            call_options = Google::Gax::CallOptions.new(
+              kwargs:     default_headers,
+              page_token: token
+            )
           end
 
           execute do
             paged_enum = subscriber.list_subscriptions project_path(options),
                                                        page_size: options[:max],
-                                                       options: call_options
+                                                       options:   call_options
 
             paged_enum.page.response
           end
@@ -217,7 +223,7 @@ module Google
           push_config = if options[:endpoint]
                           Google::Pubsub::V1::PushConfig.new \
                             push_endpoint: options[:endpoint],
-                            attributes: (options[:attributes] || {}).to_h
+                            attributes:    (options[:attributes] || {}).to_h
                         end
           deadline = options[:deadline]
           retain_acked = options[:retain_acked]
@@ -225,14 +231,14 @@ module Google
           labels = options[:labels]
 
           execute do
-            subscriber.create_subscription name,
-                                           topic,
-                                           push_config: push_config,
-                                           ack_deadline_seconds: deadline,
-                                           retain_acked_messages: retain_acked,
-                                           message_retention_duration: mrd,
-                                           labels: labels,
-                                           options: default_options
+            subscriber.create_subscription \
+              name, topic,
+              push_config:                push_config,
+              ack_deadline_seconds:       deadline,
+              retain_acked_messages:      retain_acked,
+              message_retention_duration: mrd,
+              labels:                     labels,
+              options:                    default_options
           end
         end
 
@@ -265,7 +271,7 @@ module Google
             subscriber.pull subscription,
                             max_messages,
                             return_immediately: return_immediately,
-                            options: default_options
+                            options:            default_options
           end
         end
 
@@ -292,7 +298,7 @@ module Google
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
           push_config = Google::Pubsub::V1::PushConfig.new(
             push_endpoint: endpoint,
-            attributes: attributes
+            attributes:    attributes
           )
 
           execute do
@@ -316,14 +322,16 @@ module Google
         def list_snapshots options = {}
           call_options = default_options
           if (token = options[:token])
-            call_options = Google::Gax::CallOptions.new kwargs: default_headers,
-                                                        page_token: token
+            call_options = Google::Gax::CallOptions.new(
+              kwargs:     default_headers,
+              page_token: token
+            )
           end
 
           execute do
             paged_enum = subscriber.list_snapshots project_path(options),
                                                    page_size: options[:max],
-                                                   options: call_options
+                                                   options:   call_options
 
             paged_enum.page.response
           end
@@ -336,7 +344,7 @@ module Google
           execute do
             subscriber.create_snapshot name,
                                        subscription_path(subscription),
-                                       labels: labels,
+                                       labels:  labels,
                                        options: default_options
           end
         end
@@ -373,7 +381,7 @@ module Google
               end
               subscriber.seek subscription,
                               snapshot: snapshot_path(time_or_snapshot),
-                              options: default_options
+                              options:  default_options
             end
           end
         end

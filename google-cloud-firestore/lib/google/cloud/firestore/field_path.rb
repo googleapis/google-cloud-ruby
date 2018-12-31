@@ -208,8 +208,8 @@ module Google
 
         protected
 
-        START_FIELD_PATH_CHARS = /\A[a-zA-Z_]/
-        INVALID_FIELD_PATH_CHARS = %r{[\~\*\/\[\]]}
+        START_FIELD_PATH_CHARS = /\A[a-zA-Z_]/.freeze
+        INVALID_FIELD_PATH_CHARS = %r{[\~\*\/\[\]]}.freeze
 
         def escape_field_for_path field
           field = String field

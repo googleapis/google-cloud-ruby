@@ -73,7 +73,7 @@ module Google
             grpc = @service.list_logs token: token, resource: @resource,
                                       max: @max
             self.class.from_grpc grpc, @service, resource: @resource,
-                                                 max: @max
+                                                 max:      @max
           end
 
           ##

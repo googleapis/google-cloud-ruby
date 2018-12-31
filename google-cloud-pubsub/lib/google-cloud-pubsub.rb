@@ -63,8 +63,9 @@ module Google
     #   pubsub = gcloud.pubsub scope: platform_scope
     #
     def pubsub scope: nil, timeout: nil, client_config: nil
-      Google::Cloud.pubsub @project, @keyfile, scope: scope,
-                                               timeout: (timeout || @timeout),
+      timeout ||= @timeout
+      Google::Cloud.pubsub @project, @keyfile, scope:         scope,
+                                               timeout:       timeout,
                                                client_config: client_config
     end
 
@@ -132,7 +133,7 @@ Google::Cloud.configure.add_config! :pubsub do |config|
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds,
-                    match: [String, Hash, Google::Auth::Credentials],
+                    match:     [String, Hash, Google::Auth::Credentials],
                     allow_nil: true
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, nil, match: [String, Array]

@@ -40,11 +40,11 @@ module Google
           return mocked_logging if mocked_logging
           @logging ||= \
             V2::LoggingServiceV2Client.new(
-              credentials: credentials,
-              timeout: timeout,
+              credentials:   credentials,
+              timeout:       timeout,
               client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Logging::VERSION
+              lib_name:      "gccl",
+              lib_version:   Google::Cloud::Logging::VERSION
             )
         end
         attr_accessor :mocked_logging
@@ -53,11 +53,11 @@ module Google
           return mocked_sinks if mocked_sinks
           @sinks ||= \
             V2::ConfigServiceV2Client.new(
-              credentials: credentials,
-              timeout: timeout,
+              credentials:   credentials,
+              timeout:       timeout,
               client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Logging::VERSION
+              lib_name:      "gccl",
+              lib_version:   Google::Cloud::Logging::VERSION
             )
         end
         attr_accessor :mocked_sinks
@@ -66,11 +66,11 @@ module Google
           return mocked_metrics if mocked_metrics
           @metrics ||= \
             V2::MetricsServiceV2Client.new(
-              credentials: credentials,
-              timeout: timeout,
+              credentials:   credentials,
+              timeout:       timeout,
               client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Logging::VERSION
+              lib_name:      "gccl",
+              lib_version:   Google::Cloud::Logging::VERSION
             )
         end
         attr_accessor :mocked_metrics
@@ -83,8 +83,10 @@ module Google
           resource_names = ["projects/#{@project}"] if resource_names.empty?
           call_opts = default_options
           if token
-            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
-                                                     page_token: token)
+            call_opts = Google::Gax::CallOptions.new(
+              kwargs:     default_headers,
+              page_token: token
+            )
           end
 
           execute do
@@ -117,13 +119,15 @@ module Google
           parent = resource || "projects/#{@project}"
           call_opts = default_options
           if token
-            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
-                                                     page_token: token)
+            call_opts = Google::Gax::CallOptions.new(
+              kwargs:     default_headers,
+              page_token: token
+            )
           end
 
           execute do
             paged_enum = logging.list_logs parent, page_size: max,
-                                                   options: call_opts
+                                                   options:   call_opts
             paged_enum.page.response
           end
         end
@@ -137,8 +141,10 @@ module Google
         def list_resource_descriptors token: nil, max: nil
           call_opts = default_options
           if token
-            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
-                                                     page_token: token)
+            call_opts = Google::Gax::CallOptions.new(
+              kwargs:     default_headers,
+              page_token: token
+            )
           end
 
           execute do
@@ -150,8 +156,10 @@ module Google
         def list_sinks token: nil, max: nil
           call_opts = default_options
           if token
-            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
-                                                     page_token: token)
+            call_opts = Google::Gax::CallOptions.new(
+              kwargs:     default_headers,
+              page_token: token
+            )
           end
 
           execute do
@@ -169,7 +177,7 @@ module Google
           execute do
             sinks.create_sink project_path, sink,
                               unique_writer_identity: unique_writer_identity,
-                              options: default_options
+                              options:                default_options
           end
         end
 
@@ -187,7 +195,7 @@ module Google
           execute do
             sinks.update_sink sink_path(name), sink,
                               unique_writer_identity: unique_writer_identity,
-                              options: default_options
+                              options:                default_options
           end
         end
 
@@ -200,8 +208,10 @@ module Google
         def list_metrics token: nil, max: nil
           call_opts = default_options
           if token
-            call_opts = Google::Gax::CallOptions.new(kwargs: default_headers,
-                                                     page_token: token)
+            call_opts = Google::Gax::CallOptions.new(
+              kwargs:     default_headers,
+              page_token: token
+            )
           end
 
           execute do

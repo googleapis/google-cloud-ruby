@@ -30,7 +30,7 @@ module Google
 
             Google::Protobuf::Timestamp.new \
               seconds: time.to_i,
-              nanos: time.nsec
+              nanos:   time.nsec
           end
 
           def timestamp_to_time timestamp
@@ -44,7 +44,7 @@ module Google
 
             Google::Protobuf::Duration.new \
               seconds: number.to_i,
-              nanos: (number.remainder(1) * 1000000000).round
+              nanos:   (number.remainder(1) * 1000000000).round
           end
 
           def duration_to_number duration

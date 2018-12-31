@@ -461,7 +461,7 @@ module Google
           raise ArgumentError, "a block is required" unless block_given?
 
           nested_field = add_field name, :record, description: description,
-                                                  mode: mode
+                                                  mode:        mode
           yield nested_field
           nested_field
         end
@@ -507,11 +507,11 @@ module Google
           frozen_check!
 
           new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
-            name: String(name),
-            type: verify_type(type),
+            name:        String(name),
+            type:        verify_type(type),
             description: description,
-            mode: verify_mode(mode),
-            fields: []
+            mode:        verify_mode(mode),
+            fields:      []
           )
 
           # Remove any existing field of this name
