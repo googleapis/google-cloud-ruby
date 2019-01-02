@@ -93,3 +93,26 @@ s.replace(
     'gem.add_development_dependency "rubocop".*$',
     'gem.add_development_dependency "rubocop", "~> 0.59.2"'
 )
+
+# https://github.com/googleapis/gapic-generator/issues/2492
+s.replace(
+    [
+        'lib/google/cloud/dataproc.rb',
+        'lib/google/cloud/dataproc/v1.rb'
+    ],
+    'module WorkflowTemplate\n',
+    'module WorkflowTemplateService\n'
+)
+s.replace(
+    'lib/google/cloud/dataproc.rb',
+    'WorkflowTemplate\\.new',
+    'WorkflowTemplateService.new'
+)
+s.replace(
+    [
+        'lib/google/cloud/dataproc/v1/workflow_template_service_client.rb',
+        'test/google/cloud/dataproc/v1/workflow_template_service_client_test.rb'
+    ],
+    'WorkflowTemplate\\.new\\(version:',
+    'WorkflowTemplateService.new(version:'
+)
