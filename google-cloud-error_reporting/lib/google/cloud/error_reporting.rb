@@ -206,6 +206,9 @@ module Google
         service_name ||= Project.default_service_name
         service_version ||= Project.default_service_version
 
+        # Ensure the reported exception has a backtrace
+        exception.set_backtrace caller if exception.backtrace.nil?
+
         error_event = ErrorEvent.from_exception(exception).tap do |event|
           event.service_name = service_name
           event.service_version = service_version

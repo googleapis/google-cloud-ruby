@@ -161,6 +161,27 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         Google::Cloud::ErrorReporting.report exception
       end
     end
+
+    it "sets exception backtrace when missing" do
+      Google::Cloud::ErrorReporting.configure do |config|
+        config.service_name = "test-service-name"
+        config.service_version = "test-service-version"
+      end
+      mocked_client = Minitest::Mock.new
+      mocked_client.expect :report, nil do |event|
+        event.service_name.must_equal "test-service-name"
+        event.service_version.must_equal "test-service-version"
+        event.file_path.must_equal "error_reporting.rb"
+        event.line_number.must_equal 123
+        event.function_name.must_equal "report"
+      end
+
+      Google::Cloud::ErrorReporting.stub :default_client, mocked_client do
+        Google::Cloud::ErrorReporting.stub :caller, ["error_reporting.rb:123:in `report'"] do
+          Google::Cloud::ErrorReporting.report exception
+        end
+      end
+    end
   end
 
   describe ".default_client" do
