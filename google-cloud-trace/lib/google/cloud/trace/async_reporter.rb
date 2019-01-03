@@ -246,7 +246,7 @@ module Google
             batch.traces
           )
           # Manually set backtrace so we don't have to raise
-          async_error.set_backtrace backtrace
+          async_error.set_backtrace caller
           error! async_error
         end
 
@@ -258,7 +258,7 @@ module Google
             traces
           )
           # Manually set backtrace so we don't have to raise
-          patch_error.set_backtrace backtrace
+          patch_error.set_backtrace caller
           error! patch_error
         end
 
@@ -268,7 +268,7 @@ module Google
             traces
           )
           # Manually set backtrace so we don't have to raise
-          stopped_error.set_backtrace backtrace
+          stopped_error.set_backtrace caller
           error! stopped_error
         end
 
