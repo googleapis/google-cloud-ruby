@@ -201,7 +201,7 @@ module Google
             error_event
           )
           # Manually set backtrace so we don't have to raise
-          sync_error.set_backtrace backtrace
+          sync_error.set_backtrace caller
           error! sync_error
         end
       end
