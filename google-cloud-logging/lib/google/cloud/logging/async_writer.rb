@@ -431,7 +431,7 @@ module Google
             batch.entries
           )
           # Manually set backtrace so we don't have to raise
-          async_error.set_backtrace backtrace
+          async_error.set_backtrace caller
           error! async_error
         end
 
@@ -443,7 +443,7 @@ module Google
             entries
           )
           # Manually set backtrace so we don't have to raise
-          write_error.set_backtrace backtrace
+          write_error.set_backtrace caller
           error! write_error
         end
 
