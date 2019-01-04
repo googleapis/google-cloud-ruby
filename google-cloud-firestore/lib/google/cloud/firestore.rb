@@ -71,8 +71,7 @@ module Google
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, emulator_host: nil, project: nil,
                    keyfile: nil
-        project_id ||= (project || default_project_id)
-        project_id = project_id.to_s # Always cast to a string
+        project_id = (project_id || project || default_project_id).to_s
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
         scope ||= configure.scope
