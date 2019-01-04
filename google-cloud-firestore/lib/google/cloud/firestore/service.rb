@@ -26,26 +26,44 @@ module Google
       # @private Represents the gRPC Firestore service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :timeout, :client_config
+        attr_accessor :project, :credentials, :timeout, :client_config, :host
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, client_config: nil
+        def initialize project, credentials, host: nil, timeout: nil,
+                       client_config: nil
           @project = project
           @credentials = credentials
+          @host = host || V1beta1::FirestoreClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
+        end
+
+        def channel
+          require "grpc"
+          GRPC::Core::Channel.new host, nil, chan_creds
+        end
+
+        def chan_creds
+          return credentials if insecure?
+          require "grpc"
+          GRPC::Core::ChannelCredentials.new.compose \
+            GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         def firestore
           @firestore ||= \
             V1beta1::FirestoreClient.new(
-              credentials: credentials,
-              timeout: timeout,
+              credentials:   channel,
+              timeout:       timeout,
               client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Firestore::VERSION
+              lib_name:      "gccl",
+              lib_version:   Google::Cloud::Firestore::VERSION
             )
+        end
+
+        def insecure?
+          credentials == :this_channel_is_insecure
         end
 
         def get_documents document_paths, mask: nil, transaction: nil
