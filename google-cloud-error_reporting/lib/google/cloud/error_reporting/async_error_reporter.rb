@@ -38,6 +38,7 @@ module Google
           @error_event = error_event
         end
       end
+
       ##
       # # ErrorReporterError
       #
