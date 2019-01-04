@@ -731,7 +731,10 @@ service.</p>
 214
 215
 216
-217</pre>
+217
+218
+219
+220</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 203</span>
@@ -741,6 +744,9 @@ service.</p>
 
   <span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="ErrorReporting/Project.html" title="Google::Cloud::ErrorReporting::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default_service_name'><span class='object_link'><a href="ErrorReporting/Project.html#default_service_name-class_method" title="Google::Cloud::ErrorReporting::Project.default_service_name (method)">default_service_name</a></span></span>
   <span class='id identifier rubyid_service_version'>service_version</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="ErrorReporting/Project.html" title="Google::Cloud::ErrorReporting::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default_service_version'><span class='object_link'><a href="ErrorReporting/Project.html#default_service_version-class_method" title="Google::Cloud::ErrorReporting::Project.default_service_version (method)">default_service_version</a></span></span>
+
+  <span class='comment'># Ensure the reported exception has a backtrace
+</span>  <span class='id identifier rubyid_exception'>exception</span><span class='period'>.</span><span class='id identifier rubyid_set_backtrace'>set_backtrace</span> <span class='id identifier rubyid_caller'>caller</span> <span class='kw'>if</span> <span class='id identifier rubyid_exception'>exception</span><span class='period'>.</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
 
   <span class='id identifier rubyid_error_event'>error_event</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ErrorReporting/ErrorEvent.html" title="Google::Cloud::ErrorReporting::ErrorEvent (class)">ErrorEvent</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_exception'><span class='object_link'><a href="ErrorReporting/ErrorEvent.html#from_exception-class_method" title="Google::Cloud::ErrorReporting::ErrorEvent.from_exception (method)">from_exception</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_exception'>exception</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_event'>event</span><span class='op'>|</span>
     <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>=</span> <span class='id identifier rubyid_service_name'>service_name</span>
