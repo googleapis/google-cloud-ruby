@@ -23,6 +23,8 @@ Style/MethodDefParentheses:
 Style/HashSyntax:
   Exclude:
     - "lib/google/cloud/trace/v1/**/*"
+Style/NumericLiterals:
+  Enabled: false
 Style/ClassVars:
   Enabled: false
 Style/TrivialAccessors:
