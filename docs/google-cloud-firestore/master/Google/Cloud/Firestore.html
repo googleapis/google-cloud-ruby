@@ -263,14 +263,14 @@ Google::Cloud::Firestore library uses.</p>
       <pre class="lines">
 
 
+126
 127
 128
 129
-130
-131</pre>
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_firestore'>firestore</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -517,8 +517,7 @@ Deprecated.</p>
 99
 100
 101
-102
-103</pre>
+102</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore.rb', line 71</span>
@@ -526,9 +525,8 @@ Deprecated.</p>
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>emulator_host:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>keyfile:</span> <span class='kw'>nil</span>
-  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span> <span class='op'>||</span> <span class='id identifier rubyid_default_project_id'>default_project_id</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
-</span>  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_project'>project</span> <span class='op'>||</span> <span class='id identifier rubyid_default_project_id'>default_project_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
   <span class='id identifier rubyid_scope'>scope</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span>
   <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span>
