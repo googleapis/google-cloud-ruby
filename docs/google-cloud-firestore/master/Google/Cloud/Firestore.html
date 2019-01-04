@@ -160,7 +160,7 @@ describes relationships between data objects.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil, project: nil, keyfile: nil)  &#x21d2; Google::Cloud::Firestore::Client </a>
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil, emulator_host: nil, project: nil, keyfile: nil)  &#x21d2; Google::Cloud::Firestore::Client </a>
     
 
     
@@ -216,6 +216,8 @@ the set of resources and operations that the connection can access.</li>
 <li><code>timeout</code> - (Integer) Default timeout to use in requests.</li>
 <li><code>client_config</code> - (Hash) A hash of values to override the default
 behavior of the API client.</li>
+<li><code>emulator_host</code> - (String) Host name of the emulator. Defaults to
+<code>ENV[&quot;FIRESTORE_EMULATOR_HOST&quot;]</code></li>
 </ul>
 
 
@@ -261,14 +263,14 @@ Google::Cloud::Firestore library uses.</p>
       <pre class="lines">
 
 
-112
-113
-114
-115
-116</pre>
+127
+128
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_firestore'>firestore</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -283,7 +285,7 @@ Google::Cloud::Firestore library uses.</p>
       <div class="method_details ">
   <h3 class="signature " id="new-class_method">
   
-    .<strong>new</strong>(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil, project: nil, keyfile: nil)  &#x21d2; <tt><span class='object_link'><a href="Firestore/Client.html" title="Google::Cloud::Firestore::Client (class)">Google::Cloud::Firestore::Client</a></span></tt> 
+    .<strong>new</strong>(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil, emulator_host: nil, project: nil, keyfile: nil)  &#x21d2; <tt><span class='object_link'><a href="Firestore/Client.html" title="Google::Cloud::Firestore::Client (class)">Google::Cloud::Firestore::Client</a></span></tt> 
   
 
   
@@ -404,6 +406,22 @@ behavior of the API client. Optional.</p>
   
     <li>
       
+        <span class='name'>emulator_host</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Firestore emulator host. Optional.
+If the param is nil, uses the value of the <code>emulator_host</code> config.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>project</span>
       
       
@@ -468,8 +486,6 @@ Deprecated.</p>
       <pre class="lines">
 
 
-69
-70
 71
 72
 73
@@ -489,13 +505,27 @@ Deprecated.</p>
 87
 88
 89
-90</pre>
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-             <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>
+             <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>emulator_host:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+             <span class='label'>keyfile:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span> <span class='op'>||</span> <span class='id identifier rubyid_default_project_id'>default_project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
 </span>  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -503,6 +533,16 @@ Deprecated.</p>
   <span class='id identifier rubyid_scope'>scope</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span>
   <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span>
   <span class='id identifier rubyid_client_config'>client_config</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_client_config'>client_config</span>
+  <span class='id identifier rubyid_emulator_host'>emulator_host</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_emulator_host'>emulator_host</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_emulator_host'>emulator_host</span>
+    <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Firestore/Client.html" title="Google::Cloud::Firestore::Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+        <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='symbol'>:this_channel_is_insecure</span><span class='comma'>,</span>
+        <span class='label'>host:</span> <span class='id identifier rubyid_emulator_host'>emulator_host</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+        <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span>
+      <span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
 
   <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>||</span> <span class='id identifier rubyid_default_credentials'>default_credentials</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span>
