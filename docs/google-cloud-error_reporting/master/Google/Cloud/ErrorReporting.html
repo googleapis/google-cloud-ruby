@@ -245,6 +245,13 @@ behavior of the API client.</li>
 <li><code>service_version</code> - (String) Version identifier for the application.</li>
 <li><code>ignore_classes</code> - (Array<Exception>) Array of exception types that
 should not be reported.</li>
+<li><code>on_error</code> - (Proc) A Proc to be run when an error is encountered
+on a background thread, such as <span class='object_link'><a href="#report-class_method" title="Google::Cloud::ErrorReporting.report (method)">report</a></span> or
+<span class='object_link'><a href="ErrorReporting/Middleware.html" title="Google::Cloud::ErrorReporting::Middleware (class)">Middleware</a></span>. The Proc must take the error object as the single
+argument. If ErrorReporting is being used to report errors using
+<code>Google::Cloud::cofigure.on_error</code>, then this <code>on_error</code> should be
+configured to report errors raised when reporting through
+ErrorReporting.</li>
 </ul>
 
 <p>See the <a href="https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION">Configuration
@@ -317,14 +324,14 @@ the Google::Cloud::ErrorReporting module uses.</p>
       <pre class="lines">
 
 
-152
-153
-154
-155
-156</pre>
+159
+160
+161
+162
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 152</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_error_reporting'>error_reporting</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -717,13 +724,6 @@ service.</p>
       <pre class="lines">
 
 
-203
-204
-205
-206
-207
-208
-209
 210
 211
 212
@@ -734,10 +734,17 @@ service.</p>
 217
 218
 219
-220</pre>
+220
+221
+222
+223
+224
+225
+226
+227</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 203</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/error_reporting.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_report'>report</span> <span class='id identifier rubyid_exception'>exception</span><span class='comma'>,</span> <span class='label'>service_name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>service_version:</span> <span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_use_error_reporting'>use_error_reporting</span> <span class='op'>==</span> <span class='kw'>false</span>
