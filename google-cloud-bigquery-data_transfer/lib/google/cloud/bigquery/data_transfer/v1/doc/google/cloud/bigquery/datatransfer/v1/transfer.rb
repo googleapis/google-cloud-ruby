@@ -174,19 +174,6 @@ module Google
             end
           end
 
-          # DEPRECATED. Represents data transfer type.
-          module TransferType
-            # Invalid or Unknown transfer type placeholder.
-            TRANSFER_TYPE_UNSPECIFIED = 0
-
-            # Batch data transfer.
-            BATCH = 1
-
-            # Streaming data transfer. Streaming data source currently doesn't
-            # support multiple transfer configs per project.
-            STREAMING = 2
-          end
-
           # Represents data transfer run state.
           module TransferState
             # State placeholder.
@@ -207,6 +194,19 @@ module Google
 
             # Data transfer is cancelled.
             CANCELLED = 6
+          end
+
+          # DEPRECATED. Represents data transfer type.
+          module TransferType
+            # Invalid or Unknown transfer type placeholder.
+            TRANSFER_TYPE_UNSPECIFIED = 0
+
+            # Batch data transfer.
+            BATCH = 1
+
+            # Streaming data transfer. Streaming data source currently doesn't
+            # support multiple transfer configs per project.
+            STREAMING = 2
           end
         end
       end
