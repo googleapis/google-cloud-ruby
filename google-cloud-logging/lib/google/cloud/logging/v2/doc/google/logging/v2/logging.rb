@@ -112,17 +112,6 @@ module Google
       # empty
       class WriteLogEntriesResponse; end
 
-      # Error details for WriteLogEntries with partial success.
-      # @!attribute [rw] log_entry_errors
-      #   @return [Hash{Integer => Google::Rpc::Status}]
-      #     When `WriteLogEntriesRequest.partial_success` is true, records the error
-      #     status for entries that were not written due to a permanent error, keyed
-      #     by the entry's zero-based index in `WriteLogEntriesRequest.entries`.
-      #
-      #     Failed requests for which no entries are written will not include
-      #     per-entry errors.
-      class WriteLogEntriesPartialErrors; end
-
       # The parameters to `ListLogEntries`.
       # @!attribute [rw] project_ids
       #   @return [Array<String>]

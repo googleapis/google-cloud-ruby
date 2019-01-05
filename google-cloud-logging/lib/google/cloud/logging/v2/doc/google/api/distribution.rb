@@ -78,15 +78,6 @@ module Google
     #   @return [Array<Google::Api::Distribution::Exemplar>]
     #     Must be in increasing order of `value` field.
     class Distribution
-      # The range of the population values.
-      # @!attribute [rw] min
-      #   @return [Float]
-      #     The minimum of the population values.
-      # @!attribute [rw] max
-      #   @return [Float]
-      #     The maximum of the population values.
-      class Range; end
-
       # `BucketOptions` describes the bucket boundaries used to create a histogram
       # for the distribution. The buckets can be in a linear sequence, an
       # exponential sequence, or each bucket can be specified explicitly.
@@ -168,33 +159,6 @@ module Google
         #     The values must be monotonically increasing.
         class Explicit; end
       end
-
-      # Exemplars are example points that may be used to annotate aggregated
-      # distribution values. They are metadata that gives information about a
-      # particular value added to a Distribution bucket, such as a trace ID that
-      # was active when a value was added. They may contain further information,
-      # such as a example values and timestamps, origin, etc.
-      # @!attribute [rw] value
-      #   @return [Float]
-      #     Value of the exemplar point. This value determines to which bucket the
-      #     exemplar belongs.
-      # @!attribute [rw] timestamp
-      #   @return [Google::Protobuf::Timestamp]
-      #     The observation (sampling) time of the above value.
-      # @!attribute [rw] attachments
-      #   @return [Array<Google::Protobuf::Any>]
-      #     Contextual information about the example value. Examples are:
-      #
-      #       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
-      #
-      #       Literal string: type.googleapis.com/google.protobuf.StringValue
-      #
-      #       Labels dropped during aggregation:
-      #         type.googleapis.com/google.monitoring.v3.DroppedLabels
-      #
-      #     There may be only a single attachment of any given message type in a
-      #     single exemplar, and this is enforced by the system.
-      class Exemplar; end
     end
   end
 end
