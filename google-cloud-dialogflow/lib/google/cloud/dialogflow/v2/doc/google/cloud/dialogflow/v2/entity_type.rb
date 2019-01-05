@@ -55,6 +55,18 @@ module Google
           #     must contain exactly one synonym equal to `value`.
           class Entity; end
 
+          # Represents different entity type expansion modes. Automated expansion
+          # allows an agent to recognize values that have not been explicitly listed in
+          # the entity (for example, new kinds of shopping list items).
+          module AutoExpansionMode
+            # Auto expansion disabled for the entity.
+            AUTO_EXPANSION_MODE_UNSPECIFIED = 0
+
+            # Allows an agent to recognize values that have not been explicitly
+            # listed in the entity.
+            AUTO_EXPANSION_MODE_DEFAULT = 1
+          end
+
           # Represents kinds of entities.
           module Kind
             # Not specified. This value should be never used.
@@ -68,18 +80,6 @@ module Google
             # values. However, list entity types can contain references to other entity
             # types (with or without aliases).
             KIND_LIST = 2
-          end
-
-          # Represents different entity type expansion modes. Automated expansion
-          # allows an agent to recognize values that have not been explicitly listed in
-          # the entity (for example, new kinds of shopping list items).
-          module AutoExpansionMode
-            # Auto expansion disabled for the entity.
-            AUTO_EXPANSION_MODE_UNSPECIFIED = 0
-
-            # Allows an agent to recognize values that have not been explicitly
-            # listed in the entity.
-            AUTO_EXPANSION_MODE_DEFAULT = 1
           end
         end
 
