@@ -1611,8 +1611,8 @@ default value is <code>needed</code>.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/load_job.rb', line 956</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create='>create=</span> <span class='id identifier rubyid_new_create'>new_create</span>
-  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> <span class='label'>create_disposition:</span>
-    <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_create_disposition'>create_disposition</span><span class='lparen'>(</span><span class='id identifier rubyid_new_create'>new_create</span><span class='rparen'>)</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> \
+    <span class='label'>create_disposition:</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_create_disposition'>create_disposition</span><span class='lparen'>(</span><span class='id identifier rubyid_new_create'>new_create</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2216,8 +2216,8 @@ characters.</p>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/load_job.rb', line 935</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_format='>format=</span> <span class='id identifier rubyid_new_format'>new_format</span>
-  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> <span class='label'>source_format:</span>
-    <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span><span class='lparen'>(</span><span class='id identifier rubyid_new_format'>new_format</span><span class='rparen'>)</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> \
+    <span class='label'>source_format:</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_source_format'>source_format</span><span class='lparen'>(</span><span class='id identifier rubyid_new_format'>new_format</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2938,8 +2938,8 @@ returned.</p>
   <span class='kw'>if</span> <span class='id identifier rubyid_new_fields'>new_fields</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
     <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> <span class='label'>projection_fields:</span> <span class='kw'>nil</span>
   <span class='kw'>else</span>
-    <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> <span class='label'>projection_fields:</span>
-      <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_new_fields'>new_fields</span><span class='rparen'>)</span>
+    <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> \
+      <span class='label'>projection_fields:</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_new_fields'>new_fields</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4431,8 +4431,8 @@ data.</li>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/load_job.rb', line 978</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_write='>write=</span> <span class='id identifier rubyid_new_write'>new_write</span>
-  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> <span class='label'>write_disposition:</span>
-    <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_write_disposition'>write_disposition</span><span class='lparen'>(</span><span class='id identifier rubyid_new_write'>new_write</span><span class='rparen'>)</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> \
+    <span class='label'>write_disposition:</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_write_disposition'>write_disposition</span><span class='lparen'>(</span><span class='id identifier rubyid_new_write'>new_write</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

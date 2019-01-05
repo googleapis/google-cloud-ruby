@@ -317,17 +317,17 @@ default value is <code>needed</code>.</p>
       <pre class="lines">
 
 
-228
 229
 230
-231</pre>
+231
+232</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 229</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create='>create=</span> <span class='id identifier rubyid_new_create'>new_create</span>
-  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> <span class='label'>create_disposition:</span>
-    <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_create_disposition'>create_disposition</span><span class='lparen'>(</span><span class='id identifier rubyid_new_create'>new_create</span><span class='rparen'>)</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> \
+    <span class='label'>create_disposition:</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_create_disposition'>create_disposition</span><span class='lparen'>(</span><span class='id identifier rubyid_new_create'>new_create</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -396,14 +396,14 @@ default value is <code>needed</code>.</p>
       <pre class="lines">
 
 
-274
 275
 276
 277
-278</pre>
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 274</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 275</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_encryption='>encryption=</span> <span class='id identifier rubyid_val'>val</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span><span class='lparen'>(</span>
@@ -465,12 +465,12 @@ the list must have a different key.</p>
       <pre class="lines">
 
 
-292
 293
-294</pre>
+294
+295</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 292</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 293</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels='>labels=</span> <span class='id identifier rubyid_value'>value</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> <span class='label'>labels:</span> <span class='id identifier rubyid_value'>value</span>
@@ -546,17 +546,17 @@ except for US and EU.</p>
       <pre class="lines">
 
 
-204
 205
 206
 207
 208
 209
 210
-211</pre>
+211
+212</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 204</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 205</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_location='>location=</span> <span class='id identifier rubyid_value'>value</span>
   <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_job_reference'>job_reference</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
@@ -627,17 +627,17 @@ data.</li>
       <pre class="lines">
 
 
-249
 250
 251
-252</pre>
+252
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 250</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_write='>write=</span> <span class='id identifier rubyid_new_write'>new_write</span>
-  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> <span class='label'>write_disposition:</span>
-    <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_write_disposition'>write_disposition</span><span class='lparen'>(</span><span class='id identifier rubyid_new_write'>new_write</span><span class='rparen'>)</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_update!'>update!</span> \
+    <span class='label'>write_disposition:</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_write_disposition'>write_disposition</span><span class='lparen'>(</span><span class='id identifier rubyid_new_write'>new_write</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
