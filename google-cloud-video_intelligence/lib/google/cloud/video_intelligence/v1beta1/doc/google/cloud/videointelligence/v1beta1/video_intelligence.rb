@@ -262,6 +262,21 @@ module Google
           SAFE_SEARCH_DETECTION = 4
         end
 
+        # Label detection mode.
+        module LabelDetectionMode
+          # Unspecified.
+          LABEL_DETECTION_MODE_UNSPECIFIED = 0
+
+          # Detect shot-level labels.
+          SHOT_MODE = 1
+
+          # Detect frame-level labels.
+          FRAME_MODE = 2
+
+          # Detect both shot-level and frame-level labels.
+          SHOT_AND_FRAME_MODE = 3
+        end
+
         # Label level (scope).
         module LabelLevel
           # Unspecified.
@@ -279,21 +294,6 @@ module Google
 
           # Frame-level. Corresponds to a single video frame.
           FRAME_LEVEL = 4
-        end
-
-        # Label detection mode.
-        module LabelDetectionMode
-          # Unspecified.
-          LABEL_DETECTION_MODE_UNSPECIFIED = 0
-
-          # Detect shot-level labels.
-          SHOT_MODE = 1
-
-          # Detect frame-level labels.
-          FRAME_MODE = 2
-
-          # Detect both shot-level and frame-level labels.
-          SHOT_AND_FRAME_MODE = 3
         end
 
         # Bucketized representation of likelihood.
