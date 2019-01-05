@@ -70,7 +70,7 @@ module Google
           log_name = Logging.configure.log_name
           labels = Logging.configure.labels
 
-          logging = Google::Cloud::Logging.new project_id: project_id,
+          logging = Google::Cloud::Logging.new project_id:  project_id,
                                                credentials: credentials
           resource =
             Logging::Middleware.build_monitored_resource resource_type,
@@ -84,7 +84,7 @@ module Google
           init_callback = -> { set_default_logger }
           app.middleware.insert_before Rails::Rack::Logger,
                                        Google::Cloud::Logging::Middleware,
-                                       logger: Middleware.logger,
+                                       logger:  Middleware.logger,
                                        on_init: init_callback
         end
 

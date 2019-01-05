@@ -143,7 +143,7 @@ module Google
           def create_acknowledge_requests ack_ids
             req = Google::Pubsub::V1::AcknowledgeRequest.new(
               subscription: subscription_name,
-              ack_ids: ack_ids
+              ack_ids:      ack_ids
             )
             addl_to_create = req.to_proto.bytesize / max_bytes
             return [req] if addl_to_create.zero?
@@ -151,15 +151,15 @@ module Google
             ack_ids.each_slice(addl_to_create + 1).map do |sliced_ack_ids|
               Google::Pubsub::V1::AcknowledgeRequest.new(
                 subscription: subscription_name,
-                ack_ids: sliced_ack_ids
+                ack_ids:      sliced_ack_ids
               )
             end
           end
 
           def create_modify_ack_deadline_requests deadline, ack_ids
             req = Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
-              subscription: subscription_name,
-              ack_ids: ack_ids,
+              subscription:         subscription_name,
+              ack_ids:              ack_ids,
               ack_deadline_seconds: deadline
             )
             addl_to_create = req.to_proto.bytesize / max_bytes
@@ -167,8 +167,8 @@ module Google
 
             ack_ids.each_slice(addl_to_create + 1).map do |sliced_ack_ids|
               Google::Pubsub::V1::ModifyAckDeadlineRequest.new(
-                subscription: subscription_name,
-                ack_ids: sliced_ack_ids,
+                subscription:         subscription_name,
+                ack_ids:              sliced_ack_ids,
                 ack_deadline_seconds: deadline
               )
             end

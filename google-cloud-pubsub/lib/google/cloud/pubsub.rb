@@ -101,7 +101,7 @@ module Google
 
         Pubsub::Project.new(
           Pubsub::Service.new(
-            project_id, credentials, timeout: timeout,
+            project_id, credentials, timeout:       timeout,
                                      client_config: client_config
           )
         )

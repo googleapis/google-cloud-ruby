@@ -77,23 +77,26 @@ module Google
 
           ##
           # @private Predefined regex. Saves time during runtime.
-          BYTE_CODE_BLACKLIST_REGEX = /^\d+ #{BYTE_CODE_BLACKLIST.join '|'}/
+          BYTE_CODE_BLACKLIST_REGEX =
+            /^\d+ #{BYTE_CODE_BLACKLIST.join '|'}/.freeze
 
           ##
           # @private Predefined regex. Saves time during runtime.
           FULL_BYTE_CODE_BLACKLIST_REGEX = /^\d+ #{
             [*BYTE_CODE_BLACKLIST, *LOCAL_BYTE_CODE_BLACKLIST].join '|'
-          }/
+          }/.freeze
 
           ##
           # @private Predefined regex. Saves time during runtime.
           FUNC_CALL_FLAG_BLACKLIST_REGEX =
-            /<callinfo!.+#{FUNC_CALL_FLAG_BLACKLIST.join '|'}/
+            /<callinfo!.+#{FUNC_CALL_FLAG_BLACKLIST.join '|'}/.freeze
 
           ##
           # @private Predefined regex. Saves time during runtime.
           CATCH_TABLE_BLACKLIST_REGEX =
-            /catch table.*catch type: #{CATCH_TABLE_TYPE_BLACKLIST.join '|'}/m
+            /catch table.*catch type: #{
+              CATCH_TABLE_TYPE_BLACKLIST.join '|'
+            }/m.freeze
 
           private_constant :BYTE_CODE_BLACKLIST_REGEX,
                            :FULL_BYTE_CODE_BLACKLIST_REGEX,

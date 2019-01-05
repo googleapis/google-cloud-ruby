@@ -123,7 +123,7 @@ module Google
                     push_batch_request!
 
                     @batch = Batch.new max_bytes: @max_bytes,
-                                       max_rows: @max_rows
+                                       max_rows:  @max_rows
                     @batch.insert row, insert_id
                   end
                 end
@@ -250,9 +250,9 @@ module Google
             Concurrent::Future.new(executor: @thread_pool) do
               begin
                 raise ArgumentError, "No rows provided" if json_rows.empty?
-                options = { skip_invalid: @skip_invalid,
+                options = { skip_invalid:   @skip_invalid,
                             ignore_unknown: @ignore_unknown,
-                            insert_ids: insert_ids }
+                            insert_ids:     insert_ids }
                 insert_resp = @table.service.insert_tabledata_json_rows(
                   @table.dataset_id, @table.table_id, json_rows, options
                 )

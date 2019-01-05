@@ -408,7 +408,7 @@ module Google
 
           Google::Apis::Error.new error["message"],
                                   status_code: error_status_code,
-                                  body: error_body
+                                  body:        error_body
         end
 
         ##

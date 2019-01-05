@@ -95,7 +95,7 @@ module Google
 
         Firestore::Client.new(
           Firestore::Service.new(
-            project_id, credentials, timeout: timeout,
+            project_id, credentials, timeout:       timeout,
                                      client_config: client_config
           )
         )

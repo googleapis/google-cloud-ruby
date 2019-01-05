@@ -65,7 +65,7 @@ module Google
         def to_grpc
           return nil if empty?
           Google::Api::MonitoredResource.new(
-            type: type,
+            type:   type,
             labels: Hash[labels.map { |k, v| [String(k), String(v)] }]
           )
         end

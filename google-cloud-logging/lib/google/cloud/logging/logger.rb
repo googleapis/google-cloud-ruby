@@ -555,7 +555,7 @@ module Google
 
           writer.write_entries entry, log_name: actual_log_name,
                                       resource: resource,
-                                      labels: entry_labels(info)
+                                      labels:   entry_labels(info)
         end
 
         ##

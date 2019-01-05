@@ -214,7 +214,7 @@ module Google
 
           @grpc.push_config = Google::Pubsub::V1::PushConfig.new(
             push_endpoint: new_endpoint,
-            attributes: {}
+            attributes:    {}
           )
         end
 

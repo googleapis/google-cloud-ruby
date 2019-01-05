@@ -39,7 +39,7 @@ module Google
             @client = client
             @query = query
             @pending = {
-              add: [],
+              add:    [],
               delete: []
             }
             @current = nil

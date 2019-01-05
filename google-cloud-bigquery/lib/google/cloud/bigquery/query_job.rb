@@ -1165,12 +1165,12 @@ module Google
             Google::Apis::BigqueryV2::TableReference.new(
               project_id: tbl.project_id,
               dataset_id: tbl.dataset_id,
-              table_id: tbl.table_id
+              table_id:   tbl.table_id
             )
           end
 
           def priority_value str
-            { "batch" => "BATCH",
+            { "batch"       => "BATCH",
               "interactive" => "INTERACTIVE" }[str.to_s.downcase]
           end
 
@@ -1348,7 +1348,7 @@ module Google
         def destination_table_gapi
           Google::Apis::BigqueryV2::Table.new \
             table_reference: @gapi.configuration.query.destination_table,
-            schema: destination_schema
+            schema:          destination_schema
         end
       end
     end

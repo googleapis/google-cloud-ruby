@@ -94,7 +94,7 @@ s.replace(
 s.replace(
     'google-cloud-kms.gemspec',
     'gem.add_development_dependency "rubocop".*$',
-    'gem.add_development_dependency "rubocop", "~> 0.59.2"'
+    'gem.add_development_dependency "rubocop", "~> 0.61.0"'
 )
 
 # Require the helpers file

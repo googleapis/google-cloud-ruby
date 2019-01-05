@@ -184,7 +184,7 @@ module Google
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
                 extract: Google::Apis::BigqueryV2::JobConfigurationExtract.new(
                   destination_uris: Array(storage_urls),
-                  source_table: table
+                  source_table:     table
                 ),
                 dry_run: options[:dryrun]
               )
@@ -268,8 +268,8 @@ module Google
           # @!group Attributes
           #
           def format= new_format
-            @gapi.configuration.extract.update! destination_format:
-              Convert.source_format(new_format)
+            @gapi.configuration.extract.update! \
+              destination_format: Convert.source_format(new_format)
           end
 
           ##
