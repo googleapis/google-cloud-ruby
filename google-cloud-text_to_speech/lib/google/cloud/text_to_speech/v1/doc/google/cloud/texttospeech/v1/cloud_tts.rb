@@ -151,26 +151,6 @@ module Google
         #     whereas JSON representations use base64.
         class SynthesizeSpeechResponse; end
 
-        # Gender of the voice as described in
-        # [SSML voice element](https://www.w3.org/TR/speech-synthesis11/#edef_voice).
-        module SsmlVoiceGender
-          # An unspecified gender.
-          # In VoiceSelectionParams, this means that the client doesn't care which
-          # gender the selected voice will have. In the Voice field of
-          # ListVoicesResponse, this may mean that the voice doesn't fit any of the
-          # other categories in this enum, or that the gender of the voice isn't known.
-          SSML_VOICE_GENDER_UNSPECIFIED = 0
-
-          # A male voice.
-          MALE = 1
-
-          # A female voice.
-          FEMALE = 2
-
-          # A gender-neutral voice.
-          NEUTRAL = 3
-        end
-
         # Configuration to set up audio encoder. The encoding determines the output
         # audio format that we'd like.
         module AudioEncoding
@@ -189,6 +169,26 @@ module Google
           # Chrome and Firefox). The quality of the encoding is considerably higher
           # than MP3 while using approximately the same bitrate.
           OGG_OPUS = 3
+        end
+
+        # Gender of the voice as described in
+        # [SSML voice element](https://www.w3.org/TR/speech-synthesis11/#edef_voice).
+        module SsmlVoiceGender
+          # An unspecified gender.
+          # In VoiceSelectionParams, this means that the client doesn't care which
+          # gender the selected voice will have. In the Voice field of
+          # ListVoicesResponse, this may mean that the voice doesn't fit any of the
+          # other categories in this enum, or that the gender of the voice isn't known.
+          SSML_VOICE_GENDER_UNSPECIFIED = 0
+
+          # A male voice.
+          MALE = 1
+
+          # A female voice.
+          FEMALE = 2
+
+          # A gender-neutral voice.
+          NEUTRAL = 3
         end
       end
     end
