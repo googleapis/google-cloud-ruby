@@ -211,18 +211,6 @@ module Google
       #     `TimeSeries` value must fully specify a unique time series by supplying
       #     all label values for the metric and the monitored resource.
       class CreateTimeSeriesRequest; end
-
-      # Describes the result of a failed request to write data to a time series.
-      # @!attribute [rw] time_series
-      #   @return [Google::Monitoring::V3::TimeSeries]
-      #     The time series, including the `Metric`, `MonitoredResource`,
-      #     and `Point`s (including timestamp and value) that resulted
-      #     in the error. This field provides all of the context that
-      #     would be needed to retry the operation.
-      # @!attribute [rw] status
-      #   @return [Google::Rpc::Status]
-      #     The status of the requested write operation.
-      class CreateTimeSeriesError; end
     end
   end
 end
