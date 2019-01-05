@@ -1392,7 +1392,7 @@ item with the same key. See also <span class='object_link'><a href="Entry.html#l
 
     <span class='ivar'>@thread_pool</span> <span class='op'>||=</span> \
       <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>CachedThreadPool</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>max_threads:</span> <span class='ivar'>@threads</span><span class='comma'>,</span>
-                                       <span class='label'>max_queue:</span> <span class='ivar'>@max_queue</span>
+                                       <span class='label'>max_queue:</span>   <span class='ivar'>@max_queue</span>
     <span class='ivar'>@thread</span> <span class='op'>||=</span> <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_run_background'>run_background</span> <span class='rbrace'>}</span>
 
     <span class='id identifier rubyid_publish_batch!'>publish_batch!</span> <span class='kw'>if</span> <span class='ivar'>@batch</span><span class='period'>.</span><span class='id identifier rubyid_ready?'>ready?</span>
