@@ -163,4 +163,5 @@ Google::Cloud.configure.add_config! :error_reporting do |config|
   config.add_field! :service_version, default_version,
                     match: String, allow_nil: true
   config.add_field! :ignore_classes, nil, match: Array
+  config.add_field! :on_error, nil, match: Proc
 end

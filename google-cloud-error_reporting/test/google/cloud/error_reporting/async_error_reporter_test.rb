@@ -16,51 +16,38 @@
 require "helper"
 
 describe Google::Cloud::ErrorReporting::AsyncErrorReporter, :mock_error_reporting do
-  let(:reporter) {
-    Google::Cloud::ErrorReporting::AsyncErrorReporter.new error_reporting
-  }
+  let(:mocked_error_reporting) { Minitest::Mock.new }
+  let(:reporter) { Google::Cloud::ErrorReporting::AsyncErrorReporter.new mocked_error_reporting }
 
-  describe "report" do
-    let(:queue) { reporter.instance_variable_get :@queue }
-    let(:queue_resource) { reporter.instance_variable_get :@queue_resource }
-
-    it "puts the error event on queue" do
-      event = Object.new
-
-      reporter.async_suspend
-
-      reporter.report event
-      queue.pop.must_equal event
+  before do
+    reporter.on_error do |error|
+      raise error.inspect
     end
+  end
 
-    it "doesn't exceed max_queue_size" do
-      max_queue_size = 3
-      reporter.max_queue_size = max_queue_size
-      reporter.async_suspend
+  it "reports a single error" do
+    event = Object.new
 
-      max_queue_size.times do |i|
-        reporter.report i
-      end
+    mocked_error_reporting.expect :report, nil, [event]
 
-      reporter.report nil
+    reporter.report event
+    reporter.stop! 10
 
-      queue.size.must_equal max_queue_size
-    end
+    mocked_error_reporting.verify
+  end
 
-    it "wakes up the child thread to dequeue the events" do
-      event = Object.new
-      mocked_error_reporting = Minitest::Mock.new
-      mocked_error_reporting.expect :report, nil, [event]
+  it "reports multiple errors" do
+    event1 = Object.new
+    event2 = Object.new
 
-      reporter = Google::Cloud::ErrorReporting::AsyncErrorReporter.new mocked_error_reporting
+    # Use class for report arguments, since they can be reported out of order
+    mocked_error_reporting.expect :report, nil, [Object]
+    mocked_error_reporting.expect :report, nil, [Object]
 
-      reporter.report event
+    reporter.report event1
+    reporter.report event2
+    reporter.stop! 10
 
-      wait_until_true do
-        reporter.instance_variable_get(:@queue).size == 0
-      end
-
-      mocked_error_reporting.verify
-    end
+    mocked_error_reporting.verify
   end
 end
