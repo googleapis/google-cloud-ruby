@@ -90,7 +90,7 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>Specifies the type and number of accelerator cards attached to the instances
-of an instance group (see <a href="https://cloud.google.com/compute/docs/gpus/">GPUs on Compute Engine</a>).</p>
+of an instance. See <a href="https://cloud.google.com/compute/docs/gpus/">GPUs on Compute Engine</a>.</p>
 
 
   </div>
@@ -210,10 +210,10 @@ of an instance group (see <a href="https://cloud.google.com/compute/docs/gpus/">
       <pre class="lines">
 
 
-255</pre>
+276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 255</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 276</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::AcceleratorConfig (class)">AcceleratorConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -235,15 +235,21 @@ of an instance group (see <a href="https://cloud.google.com/compute/docs/gpus/">
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Full URL, partial URI, or short name of the accelerator type resource to
-expose to this instance. See <a href="/compute/docs/reference/beta/acceleratorTypes">Google Compute Engine AcceleratorTypes</a></p>
+expose to this instance. See
+<a href="https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes">Compute Engine AcceleratorTypes</a>.</p>
 
-<p>Examples</p>
+<p>Examples:</p>
 
 <ul>
 <li><code>https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80</code></li>
 <li><code>projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80</code></li>
 <li><code>nvidia-tesla-k80</code></li>
 </ul>
+
+<p><strong>Auto Zone Exception</strong>: If you are using the Cloud Dataproc
+<a href="https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement">Auto Zone Placement</a>
+feature, you must use the short name of the accelerator type
+resource, for example, <code>nvidia-tesla-k80</code>.</p>
 
 
   </div>
@@ -262,15 +268,21 @@ expose to this instance. See <a href="/compute/docs/reference/beta/acceleratorTy
       
         &mdash;
         <div class='inline'><p>Full URL, partial URI, or short name of the accelerator type resource to
-expose to this instance. See <a href="/compute/docs/reference/beta/acceleratorTypes">Google Compute Engine AcceleratorTypes</a></p>
+expose to this instance. See
+<a href="https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes">Compute Engine AcceleratorTypes</a>.</p>
 
-<p>Examples</p>
+<p>Examples:</p>
 
 <ul>
 <li><code>https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80</code></li>
 <li><code>projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80</code></li>
 <li><code>nvidia-tesla-k80</code></li>
 </ul>
+
+<p><strong>Auto Zone Exception</strong>: If you are using the Cloud Dataproc
+<a href="https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement">Auto Zone Placement</a>
+feature, you must use the short name of the accelerator type
+resource, for example, <code>nvidia-tesla-k80</code>.</p>
 </div>
       
     </li>
@@ -283,10 +295,10 @@ expose to this instance. See <a href="/compute/docs/reference/beta/acceleratorTy
       <pre class="lines">
 
 
-255</pre>
+276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 255</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 276</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::AcceleratorConfig (class)">AcceleratorConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

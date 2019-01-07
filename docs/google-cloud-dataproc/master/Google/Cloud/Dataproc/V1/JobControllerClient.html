@@ -311,7 +311,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#submit_job-instance_method" title="#submit_job (instance method)">#<strong>submit_job</strong>(project_id, region, job, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Dataproc::V1::Job </a>
+      <a href="#submit_job-instance_method" title="#submit_job (instance method)">#<strong>submit_job</strong>(project_id, region, job, request_id: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Dataproc::V1::Job </a>
     
 
     
@@ -909,23 +909,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-501
-502
-503
-504
-505
-506
-507
-508
-509
-510
-511
-512
-513
-514</pre>
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 501</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 515</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_job'>cancel_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1122,24 +1122,24 @@ retries, etc.</p>
       <pre class="lines">
 
 
-548
-549
-550
-551
-552
-553
-554
-555
-556
-557
-558
-559
-560
-561
-562</pre>
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 548</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 562</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_job'>delete_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1345,23 +1345,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301</pre>
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 288</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 302</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_job'>get_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1648,29 +1648,29 @@ object.</p>
       <pre class="lines">
 
 
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
 389
 390
 391
 392
 393
-394</pre>
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 375</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 389</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_jobs'>list_jobs</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1700,7 +1700,7 @@ object.</p>
       <div class="method_details ">
   <h3 class="signature " id="submit_job-instance_method">
   
-    #<strong>submit_job</strong>(project_id, region, job, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="Job.html" title="Google::Cloud::Dataproc::V1::Job (class)">Google::Cloud::Dataproc::V1::Job</a></span></tt> 
+    #<strong>submit_job</strong>(project_id, region, job, request_id: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="Job.html" title="Google::Cloud::Dataproc::V1::Job (class)">Google::Cloud::Dataproc::V1::Job</a></span></tt> 
   
 
   
@@ -1781,6 +1781,31 @@ belongs to.</p>
         <div class='inline'><p>Required. The job resource.
 A hash of the same form as <code>Google::Cloud::Dataproc::V1::Job</code>
 can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>request_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. A unique id used to identify the request. If the server
+receives two <span class='object_link'><a href="SubmitJobRequest.html" title="Google::Cloud::Dataproc::V1::SubmitJobRequest (class)">SubmitJobRequest</a></span> requests  with the same
+id, then the second request will be ignored and the
+first <span class='object_link'><a href="Job.html" title="Google::Cloud::Dataproc::V1::Job (class)">Job</a></span> created and stored in the backend
+is returned.</p>
+
+<p>It is recommended to always set this value to a
+<a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.</p>
+
+<p>The id must contain only letters (a-z, A-Z), numbers (0-9),
+underscores (_), and hyphens (-). The maximum length is 40 characters.</p>
 </div>
       
     </li>
@@ -1883,34 +1908,38 @@ retries, etc.</p>
       <pre class="lines">
 
 
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
 253
-254</pre>
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 241</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 253</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_submit_job'>submit_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
     <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span>
     <span class='id identifier rubyid_job'>job</span><span class='comma'>,</span>
+    <span class='label'>request_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
     <span class='label'>region:</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span>
-    <span class='label'>job:</span> <span class='id identifier rubyid_job'>job</span>
+    <span class='label'>job:</span> <span class='id identifier rubyid_job'>job</span><span class='comma'>,</span>
+    <span class='label'>request_id:</span> <span class='id identifier rubyid_request_id'>request_id</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Dataproc::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="SubmitJobRequest.html" title="Google::Cloud::Dataproc::V1::SubmitJobRequest (class)">SubmitJobRequest</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@submit_job</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2149,27 +2178,27 @@ retries, etc.</p>
       <pre class="lines">
 
 
-447
-448
-449
-450
-451
-452
-453
-454
-455
-456
-457
-458
-459
-460
 461
 462
 463
-464</pre>
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 447</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/job_controller_client.rb', line 461</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_job'>update_job</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>

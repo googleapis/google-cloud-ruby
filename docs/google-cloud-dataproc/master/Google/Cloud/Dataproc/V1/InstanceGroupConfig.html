@@ -89,7 +89,7 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Optional. The config settings for Google Compute Engine resources in
+    <p>Optional. The config settings for Compute Engine resources in
 an instance group, such as a master or worker group.</p>
 
 
@@ -177,7 +177,7 @@ an instance group, such as a master or worker group.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
 </div></span>
   
 </li>
@@ -203,7 +203,7 @@ an instance group, such as a master or worker group.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -281,7 +281,7 @@ an instance group, such as a master or worker group.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -335,7 +335,7 @@ an instance group, such as a master or worker group.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. The Google Compute Engine accelerator configuration for these
+    <p>Returns Optional. The Compute Engine accelerator configuration for these
 instances.</p>
 
 <p><strong>Beta Feature</strong>: This feature is still under development. It may be
@@ -357,7 +357,7 @@ changed before final release.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The Google Compute Engine accelerator configuration for these
+        <div class='inline'><p>Optional. The Compute Engine accelerator configuration for these
 instances.</p>
 
 <p><strong>Beta Feature</strong>: This feature is still under development. It may be
@@ -374,10 +374,10 @@ changed before final release.</p>
       <pre class="lines">
 
 
-228</pre>
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 243</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::InstanceGroupConfig (class)">InstanceGroupConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -429,10 +429,10 @@ changed before final release.</p>
       <pre class="lines">
 
 
-228</pre>
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 243</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::InstanceGroupConfig (class)">InstanceGroupConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -453,8 +453,9 @@ changed before final release.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. The Google Compute Engine image resource used for cluster
-instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
+    <p>Returns Optional. The Compute Engine image resource used for cluster
+instances. It can be specified or may be inferred from
+<code>SoftwareConfig.image_version</code>.</p>
 
 
   </div>
@@ -472,8 +473,9 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output-only. The Google Compute Engine image resource used for cluster
-instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
+        <div class='inline'><p>Optional. The Compute Engine image resource used for cluster
+instances. It can be specified or may be inferred from
+<code>SoftwareConfig.image_version</code>.</p>
 </div>
       
     </li>
@@ -486,10 +488,10 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
       <pre class="lines">
 
 
-228</pre>
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 243</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::InstanceGroupConfig (class)">InstanceGroupConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -510,9 +512,8 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. The list of instance names. Cloud Dataproc derives the names from
-<code>cluster_name</code>, <code>num_instances</code>, and the instance group if not set by user
-(recommended practice is to let Cloud Dataproc derive the name).</p>
+    <p>Returns Output only. The list of instance names. Cloud Dataproc derives the names
+from <code>cluster_name</code>, <code>num_instances</code>, and the instance group.</p>
 
 
   </div>
@@ -530,9 +531,8 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The list of instance names. Cloud Dataproc derives the names from
-<code>cluster_name</code>, <code>num_instances</code>, and the instance group if not set by user
-(recommended practice is to let Cloud Dataproc derive the name).</p>
+        <div class='inline'><p>Output only. The list of instance names. Cloud Dataproc derives the names
+from <code>cluster_name</code>, <code>num_instances</code>, and the instance group.</p>
 </div>
       
     </li>
@@ -545,10 +545,10 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
       <pre class="lines">
 
 
-228</pre>
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 243</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::InstanceGroupConfig (class)">InstanceGroupConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -600,10 +600,10 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
       <pre class="lines">
 
 
-228</pre>
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 243</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::InstanceGroupConfig (class)">InstanceGroupConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -624,7 +624,7 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. The Google Compute Engine machine type used for cluster instances.</p>
+    <p>Returns Optional. The Compute Engine machine type used for cluster instances.</p>
 
 <p>A full URL, partial URI, or short name are valid. Examples:</p>
 
@@ -633,6 +633,11 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
 <li><code>projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2</code></li>
 <li><code>n1-standard-2</code></li>
 </ul>
+
+<p><strong>Auto Zone Exception</strong>: If you are using the Cloud Dataproc
+<a href="https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement">Auto Zone Placement</a>
+feature, you must use the short name of the machine type
+resource, for example, <code>n1-standard-2</code>.</p>
 
 
   </div>
@@ -650,7 +655,7 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. The Google Compute Engine machine type used for cluster instances.</p>
+        <div class='inline'><p>Optional. The Compute Engine machine type used for cluster instances.</p>
 
 <p>A full URL, partial URI, or short name are valid. Examples:</p>
 
@@ -659,6 +664,11 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
 <li><code>projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2</code></li>
 <li><code>n1-standard-2</code></li>
 </ul>
+
+<p><strong>Auto Zone Exception</strong>: If you are using the Cloud Dataproc
+<a href="https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement">Auto Zone Placement</a>
+feature, you must use the short name of the machine type
+resource, for example, <code>n1-standard-2</code>.</p>
 </div>
       
     </li>
@@ -671,10 +681,10 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
       <pre class="lines">
 
 
-228</pre>
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 243</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::InstanceGroupConfig (class)">InstanceGroupConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -695,7 +705,7 @@ instances. Inferred from <code>SoftwareConfig.image_version</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. The config for Google Compute Engine Instance Group
+    <p>Returns Output only. The config for Compute Engine Instance Group
 Manager that manages this group.
 This is only used for preemptible instance groups.</p>
 
@@ -715,7 +725,7 @@ This is only used for preemptible instance groups.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output-only. The config for Google Compute Engine Instance Group
+        <div class='inline'><p>Output only. The config for Compute Engine Instance Group
 Manager that manages this group.
 This is only used for preemptible instance groups.</p>
 </div>
@@ -730,10 +740,10 @@ This is only used for preemptible instance groups.</p>
       <pre class="lines">
 
 
-228</pre>
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 243</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::InstanceGroupConfig (class)">InstanceGroupConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -787,10 +797,10 @@ For master instance groups, must be set to 1.</p>
       <pre class="lines">
 
 
-228</pre>
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 228</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 243</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::InstanceGroupConfig (class)">InstanceGroupConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

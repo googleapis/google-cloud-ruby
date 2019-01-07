@@ -134,7 +134,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -160,7 +160,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -186,7 +186,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -212,7 +212,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -240,7 +240,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. Optional job state details, such as an error
+    <p>Returns Output only. Optional job state details, such as an error
 description if the state is <code>ERROR</code>.</p>
 
 
@@ -259,7 +259,7 @@ description if the state is <code>ERROR</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output-only. Optional job state details, such as an error
+        <div class='inline'><p>Output only. Optional job state details, such as an error
 description if the state is <code>ERROR</code>.</p>
 </div>
       
@@ -334,7 +334,9 @@ description if the state is <code>ERROR</code>.</p>
 372
 373
 374
-375</pre>
+375
+376
+377</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 314</span>
@@ -378,8 +380,10 @@ description if the state is <code>ERROR</code>.</p>
 </span>    <span class='const'>ATTEMPT_FAILURE</span> <span class='op'>=</span> <span class='int'>9</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="JobStatus/Substate.html" title="Google::Cloud::Dataproc::V1::JobStatus::Substate (module)">Substate</a></span></span>
-    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='comment'># The job substate.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="JobStatus/Substate.html" title="Google::Cloud::Dataproc::V1::JobStatus::Substate (module)">Substate</a></span></span>
+    <span class='comment'># The job substate is unknown.
+</span>    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The Job is submitted to the agent.
 </span>    <span class='comment'>#
@@ -419,7 +423,7 @@ description if the state is <code>ERROR</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. A state message specifying the overall job state.</p>
+    <p>Returns Output only. A state message specifying the overall job state.</p>
 
 
   </div>
@@ -437,7 +441,7 @@ description if the state is <code>ERROR</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output-only. A state message specifying the overall job state.</p>
+        <div class='inline'><p>Output only. A state message specifying the overall job state.</p>
 </div>
       
     </li>
@@ -511,7 +515,9 @@ description if the state is <code>ERROR</code>.</p>
 372
 373
 374
-375</pre>
+375
+376
+377</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 314</span>
@@ -555,8 +561,10 @@ description if the state is <code>ERROR</code>.</p>
 </span>    <span class='const'>ATTEMPT_FAILURE</span> <span class='op'>=</span> <span class='int'>9</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="JobStatus/Substate.html" title="Google::Cloud::Dataproc::V1::JobStatus::Substate (module)">Substate</a></span></span>
-    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='comment'># The job substate.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="JobStatus/Substate.html" title="Google::Cloud::Dataproc::V1::JobStatus::Substate (module)">Substate</a></span></span>
+    <span class='comment'># The job substate is unknown.
+</span>    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The Job is submitted to the agent.
 </span>    <span class='comment'>#
@@ -596,7 +604,7 @@ description if the state is <code>ERROR</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. The time when this state was entered.</p>
+    <p>Returns Output only. The time when this state was entered.</p>
 
 
   </div>
@@ -614,7 +622,7 @@ description if the state is <code>ERROR</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output-only. The time when this state was entered.</p>
+        <div class='inline'><p>Output only. The time when this state was entered.</p>
 </div>
       
     </li>
@@ -688,7 +696,9 @@ description if the state is <code>ERROR</code>.</p>
 372
 373
 374
-375</pre>
+375
+376
+377</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 314</span>
@@ -732,8 +742,10 @@ description if the state is <code>ERROR</code>.</p>
 </span>    <span class='const'>ATTEMPT_FAILURE</span> <span class='op'>=</span> <span class='int'>9</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="JobStatus/Substate.html" title="Google::Cloud::Dataproc::V1::JobStatus::Substate (module)">Substate</a></span></span>
-    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='comment'># The job substate.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="JobStatus/Substate.html" title="Google::Cloud::Dataproc::V1::JobStatus::Substate (module)">Substate</a></span></span>
+    <span class='comment'># The job substate is unknown.
+</span>    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The Job is submitted to the agent.
 </span>    <span class='comment'>#
@@ -773,7 +785,7 @@ description if the state is <code>ERROR</code>.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. Additional state information, which includes
+    <p>Returns Output only. Additional state information, which includes
 status reported by the agent.</p>
 
 
@@ -792,7 +804,7 @@ status reported by the agent.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output-only. Additional state information, which includes
+        <div class='inline'><p>Output only. Additional state information, which includes
 status reported by the agent.</p>
 </div>
       
@@ -867,7 +879,9 @@ status reported by the agent.</p>
 372
 373
 374
-375</pre>
+375
+376
+377</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/jobs.rb', line 314</span>
@@ -911,8 +925,10 @@ status reported by the agent.</p>
 </span>    <span class='const'>ATTEMPT_FAILURE</span> <span class='op'>=</span> <span class='int'>9</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="JobStatus/Substate.html" title="Google::Cloud::Dataproc::V1::JobStatus::Substate (module)">Substate</a></span></span>
-    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='comment'># The job substate.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="JobStatus/Substate.html" title="Google::Cloud::Dataproc::V1::JobStatus::Substate (module)">Substate</a></span></span>
+    <span class='comment'># The job substate is unknown.
+</span>    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The Job is submitted to the agent.
 </span>    <span class='comment'>#

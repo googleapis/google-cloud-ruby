@@ -134,7 +134,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -160,7 +160,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -186,7 +186,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -212,7 +212,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Output-only.</p>
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
 </div></span>
   
 </li>
@@ -240,7 +240,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. Optional details of cluster&#39;s state.</p>
+    <p>Returns Output only. Optional details of cluster&#39;s state.</p>
 
 
   </div>
@@ -258,7 +258,7 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>Output-only. Optional details of cluster&#39;s state.</p>
+        <div class='inline'><p>Output only. Optional details of cluster&#39;s state.</p>
 </div>
       
     </li>
@@ -271,32 +271,6 @@ js:
       <pre class="lines">
 
 
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
 324
 325
 326
@@ -309,10 +283,38 @@ js:
 333
 334
 335
-336</pre>
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 298</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 324</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterStatus (class)">ClusterStatus</a></span></span>
   <span class='comment'># The cluster state.
@@ -336,8 +338,10 @@ js:
 </span>    <span class='const'>UPDATING</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ClusterStatus/Substate.html" title="Google::Cloud::Dataproc::V1::ClusterStatus::Substate (module)">Substate</a></span></span>
-    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='comment'># The cluster substate.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ClusterStatus/Substate.html" title="Google::Cloud::Dataproc::V1::ClusterStatus::Substate (module)">Substate</a></span></span>
+    <span class='comment'># The cluster substate is unknown.
+</span>    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The cluster is known to be in an unhealthy state
 </span>    <span class='comment'># (for example, critical daemons are not running or HDFS capacity is
@@ -371,7 +375,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. The cluster&#39;s state.</p>
+    <p>Returns Output only. The cluster&#39;s state.</p>
 
 
   </div>
@@ -389,7 +393,7 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>Output-only. The cluster&#39;s state.</p>
+        <div class='inline'><p>Output only. The cluster&#39;s state.</p>
 </div>
       
     </li>
@@ -402,32 +406,6 @@ js:
       <pre class="lines">
 
 
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
 324
 325
 326
@@ -440,10 +418,38 @@ js:
 333
 334
 335
-336</pre>
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 298</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 324</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterStatus (class)">ClusterStatus</a></span></span>
   <span class='comment'># The cluster state.
@@ -467,8 +473,10 @@ js:
 </span>    <span class='const'>UPDATING</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ClusterStatus/Substate.html" title="Google::Cloud::Dataproc::V1::ClusterStatus::Substate (module)">Substate</a></span></span>
-    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='comment'># The cluster substate.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ClusterStatus/Substate.html" title="Google::Cloud::Dataproc::V1::ClusterStatus::Substate (module)">Substate</a></span></span>
+    <span class='comment'># The cluster substate is unknown.
+</span>    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The cluster is known to be in an unhealthy state
 </span>    <span class='comment'># (for example, critical daemons are not running or HDFS capacity is
@@ -502,7 +510,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. Time when this state was entered.</p>
+    <p>Returns Output only. Time when this state was entered.</p>
 
 
   </div>
@@ -520,7 +528,7 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>Output-only. Time when this state was entered.</p>
+        <div class='inline'><p>Output only. Time when this state was entered.</p>
 </div>
       
     </li>
@@ -533,32 +541,6 @@ js:
       <pre class="lines">
 
 
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
 324
 325
 326
@@ -571,10 +553,38 @@ js:
 333
 334
 335
-336</pre>
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 298</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 324</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterStatus (class)">ClusterStatus</a></span></span>
   <span class='comment'># The cluster state.
@@ -598,8 +608,10 @@ js:
 </span>    <span class='const'>UPDATING</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ClusterStatus/Substate.html" title="Google::Cloud::Dataproc::V1::ClusterStatus::Substate (module)">Substate</a></span></span>
-    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='comment'># The cluster substate.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ClusterStatus/Substate.html" title="Google::Cloud::Dataproc::V1::ClusterStatus::Substate (module)">Substate</a></span></span>
+    <span class='comment'># The cluster substate is unknown.
+</span>    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The cluster is known to be in an unhealthy state
 </span>    <span class='comment'># (for example, critical daemons are not running or HDFS capacity is
@@ -633,7 +645,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Output-only. Additional state information that includes
+    <p>Returns Output only. Additional state information that includes
 status reported by the agent.</p>
 
 
@@ -652,7 +664,7 @@ status reported by the agent.</p>
       
       
         &mdash;
-        <div class='inline'><p>Output-only. Additional state information that includes
+        <div class='inline'><p>Output only. Additional state information that includes
 status reported by the agent.</p>
 </div>
       
@@ -666,32 +678,6 @@ status reported by the agent.</p>
       <pre class="lines">
 
 
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-320
-321
-322
-323
 324
 325
 326
@@ -704,10 +690,38 @@ status reported by the agent.</p>
 333
 334
 335
-336</pre>
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 298</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb', line 324</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterStatus (class)">ClusterStatus</a></span></span>
   <span class='comment'># The cluster state.
@@ -731,8 +745,10 @@ status reported by the agent.</p>
 </span>    <span class='const'>UPDATING</span> <span class='op'>=</span> <span class='int'>5</span>
   <span class='kw'>end</span>
 
-  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ClusterStatus/Substate.html" title="Google::Cloud::Dataproc::V1::ClusterStatus::Substate (module)">Substate</a></span></span>
-    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='comment'># The cluster substate.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="ClusterStatus/Substate.html" title="Google::Cloud::Dataproc::V1::ClusterStatus::Substate (module)">Substate</a></span></span>
+    <span class='comment'># The cluster substate is unknown.
+</span>    <span class='const'>UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
     <span class='comment'># The cluster is known to be in an unhealthy state
 </span>    <span class='comment'># (for example, critical daemons are not running or HDFS capacity is

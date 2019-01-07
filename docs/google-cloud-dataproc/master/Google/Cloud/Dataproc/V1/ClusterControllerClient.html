@@ -90,7 +90,7 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The ClusterControllerService provides methods to manage clusters
-of Google Compute Engine instances.</p>
+of Compute Engine instances.</p>
 
 
   </div>
@@ -195,7 +195,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_cluster-instance_method" title="#create_cluster (instance method)">#<strong>create_cluster</strong>(project_id, region, cluster, options: nil)  &#x21d2; Google::Gax::Operation </a>
+      <a href="#create_cluster-instance_method" title="#create_cluster (instance method)">#<strong>create_cluster</strong>(project_id, region, cluster, request_id: nil, options: nil)  &#x21d2; Google::Gax::Operation </a>
     
 
     
@@ -218,7 +218,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#delete_cluster-instance_method" title="#delete_cluster (instance method)">#<strong>delete_cluster</strong>(project_id, region, cluster_name, options: nil)  &#x21d2; Google::Gax::Operation </a>
+      <a href="#delete_cluster-instance_method" title="#delete_cluster (instance method)">#<strong>delete_cluster</strong>(project_id, region, cluster_name, cluster_uuid: nil, request_id: nil, options: nil)  &#x21d2; Google::Gax::Operation </a>
     
 
     
@@ -335,7 +335,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#update_cluster-instance_method" title="#update_cluster (instance method)">#<strong>update_cluster</strong>(project_id, region, cluster_name, cluster, update_mask, options: nil)  &#x21d2; Google::Gax::Operation </a>
+      <a href="#update_cluster-instance_method" title="#update_cluster (instance method)">#<strong>update_cluster</strong>(project_id, region, cluster_name, cluster, update_mask, graceful_decommission_timeout: nil, request_id: nil, options: nil)  &#x21d2; Google::Gax::Operation </a>
     
 
     
@@ -744,7 +744,7 @@ custom error handling.</p>
       <div class="method_details first">
   <h3 class="signature first" id="create_cluster-instance_method">
   
-    #<strong>create_cluster</strong>(project_id, region, cluster, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
+    #<strong>create_cluster</strong>(project_id, region, cluster, request_id: nil, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
   
 
   
@@ -857,6 +857,31 @@ can also be provided.</p>
   
     <li>
       
+        <span class='name'>request_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. A unique id used to identify the request. If the server
+receives two <span class='object_link'><a href="CreateClusterRequest.html" title="Google::Cloud::Dataproc::V1::CreateClusterRequest (class)">CreateClusterRequest</a></span> requests  with the same
+id, then the second request will be ignored and the
+first <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> created and stored in the backend
+is returned.</p>
+
+<p>It is recommended to always set this value to a
+<a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.</p>
+
+<p>The id must contain only letters (a-z, A-Z), numbers (0-9),
+underscores (_), and hyphens (-). The maximum length is 40 characters.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>options</span>
       
       
@@ -910,18 +935,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
 293
 294
 295
@@ -930,20 +943,36 @@ retries, etc.</p>
 298
 299
 300
-301</pre>
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 281</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 293</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_cluster'>create_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
     <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span>
     <span class='id identifier rubyid_cluster'>cluster</span><span class='comma'>,</span>
+    <span class='label'>request_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
     <span class='label'>region:</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span>
-    <span class='label'>cluster:</span> <span class='id identifier rubyid_cluster'>cluster</span>
+    <span class='label'>cluster:</span> <span class='id identifier rubyid_cluster'>cluster</span><span class='comma'>,</span>
+    <span class='label'>request_id:</span> <span class='id identifier rubyid_request_id'>request_id</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Dataproc::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="CreateClusterRequest.html" title="Google::Cloud::Dataproc::V1::CreateClusterRequest (class)">CreateClusterRequest</a></span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Operation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -964,7 +993,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="delete_cluster-instance_method">
   
-    #<strong>delete_cluster</strong>(project_id, region, cluster_name, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
+    #<strong>delete_cluster</strong>(project_id, region, cluster_name, cluster_uuid: nil, request_id: nil, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
   
 
   
@@ -1075,6 +1104,47 @@ belongs to.</p>
   
     <li>
       
+        <span class='name'>cluster_uuid</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Specifying the <code>cluster_uuid</code> means the RPC should fail
+(with error NOT_FOUND) if cluster with specified UUID does not exist.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>request_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. A unique id used to identify the request. If the server
+receives two <span class='object_link'><a href="DeleteClusterRequest.html" title="Google::Cloud::Dataproc::V1::DeleteClusterRequest (class)">DeleteClusterRequest</a></span> requests  with the same
+id, then the second request will be ignored and the
+first <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> created and stored in the
+backend is returned.</p>
+
+<p>It is recommended to always set this value to a
+<a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.</p>
+
+<p>The id must contain only letters (a-z, A-Z), numbers (0-9),
+underscores (_), and hyphens (-). The maximum length is 40 characters.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>options</span>
       
       
@@ -1128,40 +1198,48 @@ retries, etc.</p>
       <pre class="lines">
 
 
-499
-500
-501
-502
-503
-504
-505
-506
-507
-508
-509
-510
-511
-512
-513
-514
-515
-516
-517
-518
-519</pre>
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 499</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 555</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_cluster'>delete_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
     <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span>
     <span class='id identifier rubyid_cluster_name'>cluster_name</span><span class='comma'>,</span>
+    <span class='label'>cluster_uuid:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>request_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
     <span class='label'>region:</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span>
-    <span class='label'>cluster_name:</span> <span class='id identifier rubyid_cluster_name'>cluster_name</span>
+    <span class='label'>cluster_name:</span> <span class='id identifier rubyid_cluster_name'>cluster_name</span><span class='comma'>,</span>
+    <span class='label'>cluster_uuid:</span> <span class='id identifier rubyid_cluster_uuid'>cluster_uuid</span><span class='comma'>,</span>
+    <span class='label'>request_id:</span> <span class='id identifier rubyid_request_id'>request_id</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Dataproc::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="DeleteClusterRequest.html" title="Google::Cloud::Dataproc::V1::DeleteClusterRequest (class)">DeleteClusterRequest</a></span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Operation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -1348,30 +1426,30 @@ retries, etc.</p>
       <pre class="lines">
 
 
-711
-712
-713
-714
-715
-716
-717
-718
-719
-720
-721
-722
-723
-724
-725
-726
-727
-728
-729
-730
-731</pre>
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 711</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 771</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_diagnose_cluster'>diagnose_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1583,23 +1661,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-553
-554
-555
-556
-557
-558
-559
-560
-561
-562
-563
-564
-565
-566</pre>
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 553</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 613</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_cluster'>get_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1857,25 +1935,25 @@ object.</p>
       <pre class="lines">
 
 
-637
-638
-639
-640
-641
-642
-643
-644
-645
-646
-647
-648
-649
-650
-651
-652</pre>
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 637</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 697</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_clusters'>list_clusters</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -1901,7 +1979,7 @@ object.</p>
       <div class="method_details ">
   <h3 class="signature " id="update_cluster-instance_method">
   
-    #<strong>update_cluster</strong>(project_id, region, cluster_name, cluster, update_mask, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
+    #<strong>update_cluster</strong>(project_id, region, cluster_name, cluster, update_mask, graceful_decommission_timeout: nil, request_id: nil, options: nil)  &#x21d2; <tt>Google::Gax::Operation</tt> 
   
 
   
@@ -2102,6 +2180,55 @@ can also be provided.</p>
   
     <li>
       
+        <span class='name'>graceful_decommission_timeout</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. Timeout for graceful YARN decomissioning. Graceful
+decommissioning allows removing nodes from the cluster without
+interrupting jobs in progress. Timeout specifies how long to wait for jobs
+in progress to finish before forcefully removing nodes (and potentially
+interrupting jobs). Default timeout is 0 (for forceful decommission), and
+the maximum allowed timeout is 1 day.</p>
+
+<p>Only supported on Dataproc image versions 1.2 and higher.
+A hash of the same form as <code>Google::Protobuf::Duration</code>
+can also be provided.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>request_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. A unique id used to identify the request. If the server
+receives two <span class='object_link'><a href="UpdateClusterRequest.html" title="Google::Cloud::Dataproc::V1::UpdateClusterRequest (class)">UpdateClusterRequest</a></span> requests  with the same
+id, then the second request will be ignored and the
+first <span class='object_link'><a href="../../../Longrunning/Operation.html" title="Google::Longrunning::Operation (class)">Longrunning::Operation</a></span> created and stored in the
+backend is returned.</p>
+
+<p>It is recommended to always set this value to a
+<a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>.</p>
+
+<p>The id must contain only letters (a-z, A-Z), numbers (0-9),
+underscores (_), and hyphens (-). The maximum length is 40 characters.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>options</span>
       
       
@@ -2155,34 +2282,38 @@ retries, etc.</p>
       <pre class="lines">
 
 
-418
-419
-420
-421
-422
-423
-424
-425
-426
-427
-428
-429
-430
-431
-432
-433
-434
-435
-436
-437
-438
-439
-440
-441
-442</pre>
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 418</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 455</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_cluster'>update_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -2190,13 +2321,17 @@ retries, etc.</p>
     <span class='id identifier rubyid_cluster_name'>cluster_name</span><span class='comma'>,</span>
     <span class='id identifier rubyid_cluster'>cluster</span><span class='comma'>,</span>
     <span class='id identifier rubyid_update_mask'>update_mask</span><span class='comma'>,</span>
+    <span class='label'>graceful_decommission_timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>request_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
     <span class='label'>region:</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span>
     <span class='label'>cluster_name:</span> <span class='id identifier rubyid_cluster_name'>cluster_name</span><span class='comma'>,</span>
     <span class='label'>cluster:</span> <span class='id identifier rubyid_cluster'>cluster</span><span class='comma'>,</span>
-    <span class='label'>update_mask:</span> <span class='id identifier rubyid_update_mask'>update_mask</span>
+    <span class='label'>update_mask:</span> <span class='id identifier rubyid_update_mask'>update_mask</span><span class='comma'>,</span>
+    <span class='label'>graceful_decommission_timeout:</span> <span class='id identifier rubyid_graceful_decommission_timeout'>graceful_decommission_timeout</span><span class='comma'>,</span>
+    <span class='label'>request_id:</span> <span class='id identifier rubyid_request_id'>request_id</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Dataproc::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="UpdateClusterRequest.html" title="Google::Cloud::Dataproc::V1::UpdateClusterRequest (class)">UpdateClusterRequest</a></span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_operation'>operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Operation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
