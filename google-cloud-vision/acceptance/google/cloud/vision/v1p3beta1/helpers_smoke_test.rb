@@ -34,11 +34,6 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
     }
   end
 
-  it "can successfully make crop_hints_detection requests" do
-    response = image_annotator_client.crop_hints_detection image: gs_image
-    refute_empty(response.responses)
-  end
-  
   it "can successfully make web_detection requests" do
     response = image_annotator_client.web_detection image: gs_image
     refute_empty(response.responses)
@@ -91,6 +86,11 @@ describe Google::Cloud::Vision::V1p3beta1::ImageAnnotatorClient do
   
   it "can successfully make image_properties_detection requests" do
     response = image_annotator_client.image_properties_detection image: gs_image
+    refute_empty(response.responses)
+  end
+  
+  it "can successfully make crop_hints_detection requests" do
+    response = image_annotator_client.crop_hints_detection image: gs_image
     refute_empty(response.responses)
   end
   
