@@ -196,51 +196,6 @@ module Google
         #   @return [Google::Cloud::Language::V1beta2::PartOfSpeech::Voice]
         #     The grammatical voice.
         class PartOfSpeech
-          # The part of speech tags enum.
-          module Tag
-            # Unknown
-            UNKNOWN = 0
-
-            # Adjective
-            ADJ = 1
-
-            # Adposition (preposition and postposition)
-            ADP = 2
-
-            # Adverb
-            ADV = 3
-
-            # Conjunction
-            CONJ = 4
-
-            # Determiner
-            DET = 5
-
-            # Noun (common and proper)
-            NOUN = 6
-
-            # Cardinal number
-            NUM = 7
-
-            # Pronoun
-            PRON = 8
-
-            # Particle or other function word
-            PRT = 9
-
-            # Punctuation
-            PUNCT = 10
-
-            # Verb (all tenses and modes)
-            VERB = 11
-
-            # Other: foreign words, typos, abbreviations
-            X = 12
-
-            # Affix
-            AFFIX = 13
-          end
-
           # The characteristic of a verb that expresses time flow during an event.
           module Aspect
             # Aspect is not applicable in the analyzed language or is not predicted.
@@ -443,6 +398,51 @@ module Google
 
             # Non-reciprocal
             NON_RECIPROCAL = 2
+          end
+
+          # The part of speech tags enum.
+          module Tag
+            # Unknown
+            UNKNOWN = 0
+
+            # Adjective
+            ADJ = 1
+
+            # Adposition (preposition and postposition)
+            ADP = 2
+
+            # Adverb
+            ADV = 3
+
+            # Conjunction
+            CONJ = 4
+
+            # Determiner
+            DET = 5
+
+            # Noun (common and proper)
+            NOUN = 6
+
+            # Cardinal number
+            NUM = 7
+
+            # Pronoun
+            PRON = 8
+
+            # Particle or other function word
+            PRT = 9
+
+            # Punctuation
+            PUNCT = 10
+
+            # Verb (all tenses and modes)
+            VERB = 11
+
+            # Other: foreign words, typos, abbreviations
+            X = 12
+
+            # Affix
+            AFFIX = 13
           end
 
           # Time reference.
