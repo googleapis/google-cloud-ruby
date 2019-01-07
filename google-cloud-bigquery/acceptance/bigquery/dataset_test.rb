@@ -149,7 +149,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     fresh.description = "Description 1"
     stale.etag.wont_equal fresh.etag
     err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
-    err.message.must_equal "conditionNotMet: Precondition Failed"
+    err.message.must_equal "failedPrecondition: Precondition check failed."
   end
 
   it "create dataset returns valid etag equal to get dataset" do
