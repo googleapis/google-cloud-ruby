@@ -189,17 +189,5 @@ module Google
         MONEY = 6
       end
     end
-
-    # A specific metric, identified by specifying values for all of the
-    # labels of a {Google::Api::MetricDescriptor `MetricDescriptor`}.
-    # @!attribute [rw] type
-    #   @return [String]
-    #     An existing metric type, see {Google::Api::MetricDescriptor}.
-    #     For example, `custom.googleapis.com/invoice/paid/amount`.
-    # @!attribute [rw] labels
-    #   @return [Hash{String => String}]
-    #     The set of label values that uniquely identify this metric. All
-    #     labels listed in the `MetricDescriptor` must be assigned values.
-    class Metric; end
   end
 end
