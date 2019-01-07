@@ -98,6 +98,7 @@ task :generate_partials do
   Google::Cloud::Scheduler::AVAILABLE_VERSIONS.each do |version|
     require "google/cloud/scheduler/#{version}/cloud_scheduler_client"
     class_methods = Google::Cloud::Scheduler.const_get(version.capitalize)::CloudSchedulerClient.methods false
+    class_methods.sort!
     file_path = "./lib/google/cloud/scheduler/#{version}/helpers.rb"
     params = Hash[class_methods.collect { |method_name| [method_name, ""] } ]
     params.each do |method_name, _|

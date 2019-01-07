@@ -40,26 +40,11 @@ describe Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient do
   describe "the job_path instance method" do
     it "correctly calls Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.job_path" do
       Google::Cloud::Scheduler::V1beta1::Credentials.stub(:default, mock_credentials) do
-        num_args = Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.method("job_path").arity
+        parameters = Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.method("job_path").parameters.map { |arg| arg.last.to_s }
         client = Google::Cloud::Scheduler.new version: :v1beta1
-        args = (0...num_args).map { "argument" }
         assert_equal(
-          client.job_path(*args),
-          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.job_path(*args)
-        )
-      end
-    end
-  end
-
-  describe "the project_path instance method" do
-    it "correctly calls Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.project_path" do
-      Google::Cloud::Scheduler::V1beta1::Credentials.stub(:default, mock_credentials) do
-        num_args = Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.method("project_path").arity
-        client = Google::Cloud::Scheduler.new version: :v1beta1
-        args = (0...num_args).map { "argument" }
-        assert_equal(
-          client.project_path(*args),
-          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.project_path(*args)
+          client.job_path(*parameters),
+          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.job_path(*parameters)
         )
       end
     end
@@ -68,12 +53,24 @@ describe Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient do
   describe "the location_path instance method" do
     it "correctly calls Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.location_path" do
       Google::Cloud::Scheduler::V1beta1::Credentials.stub(:default, mock_credentials) do
-        num_args = Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.method("location_path").arity
+        parameters = Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.method("location_path").parameters.map { |arg| arg.last.to_s }
         client = Google::Cloud::Scheduler.new version: :v1beta1
-        args = (0...num_args).map { "argument" }
         assert_equal(
-          client.location_path(*args),
-          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.location_path(*args)
+          client.location_path(*parameters),
+          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.location_path(*parameters)
+        )
+      end
+    end
+  end
+
+  describe "the project_path instance method" do
+    it "correctly calls Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.project_path" do
+      Google::Cloud::Scheduler::V1beta1::Credentials.stub(:default, mock_credentials) do
+        parameters = Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.method("project_path").parameters.map { |arg| arg.last.to_s }
+        client = Google::Cloud::Scheduler.new version: :v1beta1
+        assert_equal(
+          client.project_path(*parameters),
+          Google::Cloud::Scheduler::V1beta1::CloudSchedulerClient.project_path(*parameters)
         )
       end
     end

@@ -157,6 +157,7 @@ task :generate_partials do
     # Prepare ProductSearch helpers
     require "google/cloud/vision/#{version}/product_search_client"
     class_methods = Google::Cloud::Vision.const_get(version.capitalize)::ProductSearchClient.methods false
+    class_methods.sort!
     params = Hash[class_methods.collect { |method_name| [method_name, ""] } ]
     params.each do |method_name, _|
       args = Google::Cloud::Vision.const_get(version.capitalize)::ProductSearchClient.method(method_name).parameters

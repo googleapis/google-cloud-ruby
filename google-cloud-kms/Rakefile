@@ -97,6 +97,7 @@ task :generate_partials do
   Google::Cloud::Kms::AVAILABLE_VERSIONS.each do |version|
     require "google/cloud/kms/#{version}/key_management_service_client"
     class_methods = Google::Cloud::Kms.const_get(version.capitalize)::KeyManagementServiceClient.methods false
+    class_methods.sort!
     file_path = "./lib/google/cloud/kms/#{version}/helpers.rb"
     params = Hash[class_methods.collect { |method_name| [method_name, ""] } ]
     params.each do |method_name, _|

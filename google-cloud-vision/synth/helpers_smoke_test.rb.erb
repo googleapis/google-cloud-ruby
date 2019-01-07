@@ -36,7 +36,7 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
 
 <%=
   describe_contents = []
-  helper_hash.each do |method_name, _|
+  helper_hash.sort.each do |method_name, _|
     describe_contents += [
       "it \"can successfully make #{method_name} requests\" do",
       "  response = image_annotator_client.#{method_name} image: gs_image",

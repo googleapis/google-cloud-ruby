@@ -117,12 +117,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
   end
 
   describe "crop_hints_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :CROP_HINTS
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :CROP_HINTS
         client.stub(:batch_annotate_images, stub) do
-          client.crop_hints_detection image: File.new("acceptance/data/face.jpg", "r")
+          client.crop_hints_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
         end
       end
     end
@@ -137,52 +137,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :CROP_HINTS
-        client.stub(:batch_annotate_images, stub) do
-          client.crop_hints_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :CROP_HINTS
-        client.stub(:batch_annotate_images, stub) do
-          client.crop_hints_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :CROP_HINTS
-        client.stub(:batch_annotate_images, stub) do
-          client.crop_hints_detection image: "acceptance/data/face.jpg"
-        end
-      end
-    end
-
     it "correctly calls batch_annotate_images when given a list of image paths" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
         stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :CROP_HINTS
         client.stub(:batch_annotate_images, stub) do
           client.crop_hints_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :CROP_HINTS
-        client.stub(:batch_annotate_images, stub) do
-          client.crop_hints_detection image: "http://example.com/face.jpg"
         end
       end
     end
@@ -197,6 +157,16 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :CROP_HINTS
+        client.stub(:batch_annotate_images, stub) do
+          client.crop_hints_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single gcs image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
@@ -207,12 +177,42 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+    it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :CROP_HINTS
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :CROP_HINTS
         client.stub(:batch_annotate_images, stub) do
-          client.crop_hints_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+          client.crop_hints_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :CROP_HINTS
+        client.stub(:batch_annotate_images, stub) do
+          client.crop_hints_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :CROP_HINTS
+        client.stub(:batch_annotate_images, stub) do
+          client.crop_hints_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :CROP_HINTS
+        client.stub(:batch_annotate_images, stub) do
+          client.crop_hints_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
         end
       end
     end
@@ -233,13 +233,13 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     end
   end
 
-  describe "web_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
+  describe "document_text_detection" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :WEB_DETECTION
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :DOCUMENT_TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.web_detection image: File.new("acceptance/data/face.jpg", "r")
+          client.document_text_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
         end
       end
     end
@@ -247,39 +247,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image files" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :WEB_DETECTION
+        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :DOCUMENT_TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.web_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :WEB_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.web_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :WEB_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.web_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :WEB_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.web_detection image: "acceptance/data/face.jpg"
+          client.document_text_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
         end
       end
     end
@@ -287,19 +257,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image paths" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :WEB_DETECTION
+        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :DOCUMENT_TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.web_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :WEB_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.web_detection image: "http://example.com/face.jpg"
+          client.document_text_detection images: (0..1).map { "acceptance/data/face.jpg" }
         end
       end
     end
@@ -307,9 +267,19 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :WEB_DETECTION
+        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :DOCUMENT_TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.web_detection images: (0..1).map { "http://example.com/face.jpg" }
+          client.document_text_detection images: (0..1).map { "http://example.com/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :DOCUMENT_TEXT_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.document_text_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end
@@ -317,76 +287,19 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a single gcs image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :WEB_DETECTION
+        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :DOCUMENT_TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.web_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
+          client.document_text_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
         end
       end
     end
 
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :WEB_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.web_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls async_batch_annotate_files when async is true" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = async_annotate_stub gcs_image_uri, :WEB_DETECTION, "gs://my-bucket"
-        client.stub(:async_batch_annotate_files, stub) do
-         client.web_detection(
-            image: gcs_image_uri,
-            destination: "gs://my-bucket",
-            async: true,
-            mime_type: "application/pdf"
-          )
-        end
-      end
-    end
-  end
-
-  describe "product_search_detection" do
     it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :PRODUCT_SEARCH
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :DOCUMENT_TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection image: File.new("acceptance/data/face.jpg", "r")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of image files" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :PRODUCT_SEARCH
-        client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :PRODUCT_SEARCH
-        client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :PRODUCT_SEARCH
-        client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+          client.document_text_detection image: File.new("acceptance/data/face.jpg", "r")
         end
       end
     end
@@ -394,19 +307,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a single image path" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :PRODUCT_SEARCH
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :DOCUMENT_TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection image: "acceptance/data/face.jpg"
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of image paths" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :PRODUCT_SEARCH
-        client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection images: (0..1).map { "acceptance/data/face.jpg" }
+          client.document_text_detection image: "acceptance/data/face.jpg"
         end
       end
     end
@@ -414,76 +317,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a single image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :PRODUCT_SEARCH
+        stub = batch_annotate_stub "http://example.com/face.jpg", :DOCUMENT_TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection image: "http://example.com/face.jpg"
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of image uri's" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :PRODUCT_SEARCH
-        client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection images: (0..1).map { "http://example.com/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single gcs image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :PRODUCT_SEARCH
-        client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :PRODUCT_SEARCH
-        client.stub(:batch_annotate_images, stub) do
-          client.product_search_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls async_batch_annotate_files when async is true" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = async_annotate_stub gcs_image_uri, :PRODUCT_SEARCH, "gs://my-bucket"
-        client.stub(:async_batch_annotate_files, stub) do
-         client.product_search_detection(
-            image: gcs_image_uri,
-            destination: "gs://my-bucket",
-            async: true,
-            mime_type: "application/pdf"
-          )
-        end
-      end
-    end
-  end
-
-  describe "object_localization_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :OBJECT_LOCALIZATION
-        client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection image: File.new("acceptance/data/face.jpg", "r")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of image files" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :OBJECT_LOCALIZATION
-        client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+          client.document_text_detection image: "http://example.com/face.jpg"
         end
       end
     end
@@ -491,79 +327,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a single io object" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :OBJECT_LOCALIZATION
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :DOCUMENT_TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :OBJECT_LOCALIZATION
-        client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :OBJECT_LOCALIZATION
-        client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection image: "acceptance/data/face.jpg"
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of image paths" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :OBJECT_LOCALIZATION
-        client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :OBJECT_LOCALIZATION
-        client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection image: "http://example.com/face.jpg"
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of image uri's" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :OBJECT_LOCALIZATION
-        client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection images: (0..1).map { "http://example.com/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single gcs image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :OBJECT_LOCALIZATION
-        client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :OBJECT_LOCALIZATION
-        client.stub(:batch_annotate_images, stub) do
-          client.object_localization_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+          client.document_text_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
         end
       end
     end
@@ -571,126 +337,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls async_batch_annotate_files when async is true" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = async_annotate_stub gcs_image_uri, :OBJECT_LOCALIZATION, "gs://my-bucket"
+        stub = async_annotate_stub gcs_image_uri, :DOCUMENT_TEXT_DETECTION, "gs://my-bucket"
         client.stub(:async_batch_annotate_files, stub) do
-         client.object_localization_detection(
-            image: gcs_image_uri,
-            destination: "gs://my-bucket",
-            async: true,
-            mime_type: "application/pdf"
-          )
-        end
-      end
-    end
-  end
-
-  describe "label_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection image: File.new("acceptance/data/face.jpg", "r")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of image files" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection image: "acceptance/data/face.jpg"
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of image paths" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection image: "http://example.com/face.jpg"
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of image uri's" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection images: (0..1).map { "http://example.com/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single gcs image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :LABEL_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.label_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls async_batch_annotate_files when async is true" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = async_annotate_stub gcs_image_uri, :LABEL_DETECTION, "gs://my-bucket"
-        client.stub(:async_batch_annotate_files, stub) do
-         client.label_detection(
+         client.document_text_detection(
             image: gcs_image_uri,
             destination: "gs://my-bucket",
             async: true,
@@ -702,12 +351,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
   end
 
   describe "face_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :FACE_DETECTION
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :FACE_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.face_detection image: File.new("acceptance/data/face.jpg", "r")
+          client.face_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
         end
       end
     end
@@ -722,52 +371,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :FACE_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.face_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :FACE_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.face_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :FACE_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.face_detection image: "acceptance/data/face.jpg"
-        end
-      end
-    end
-
     it "correctly calls batch_annotate_images when given a list of image paths" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
         stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :FACE_DETECTION
         client.stub(:batch_annotate_images, stub) do
           client.face_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :FACE_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.face_detection image: "http://example.com/face.jpg"
         end
       end
     end
@@ -782,6 +391,16 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :FACE_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.face_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single gcs image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
@@ -792,12 +411,42 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+    it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :FACE_DETECTION
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :FACE_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.face_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+          client.face_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :FACE_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.face_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :FACE_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.face_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :FACE_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.face_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
         end
       end
     end
@@ -818,13 +467,247 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     end
   end
 
-  describe "landmark_detection" do
+  describe "image_properties_detection" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of image files" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of image paths" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection images: (0..1).map { "acceptance/data/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of image uri's" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection images: (0..1).map { "http://example.com/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single gcs image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :LANDMARK_DETECTION
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :IMAGE_PROPERTIES
         client.stub(:batch_annotate_images, stub) do
-          client.landmark_detection image: File.new("acceptance/data/face.jpg", "r")
+          client.image_properties_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :IMAGE_PROPERTIES
+        client.stub(:batch_annotate_images, stub) do
+          client.image_properties_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls async_batch_annotate_files when async is true" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = async_annotate_stub gcs_image_uri, :IMAGE_PROPERTIES, "gs://my-bucket"
+        client.stub(:async_batch_annotate_files, stub) do
+         client.image_properties_detection(
+            image: gcs_image_uri,
+            destination: "gs://my-bucket",
+            async: true,
+            mime_type: "application/pdf"
+          )
+        end
+      end
+    end
+  end
+
+  describe "label_detection" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of image files" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of image paths" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection images: (0..1).map { "acceptance/data/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of image uri's" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection images: (0..1).map { "http://example.com/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single gcs image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image file" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :LABEL_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.label_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls async_batch_annotate_files when async is true" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = async_annotate_stub gcs_image_uri, :LABEL_DETECTION, "gs://my-bucket"
+        client.stub(:async_batch_annotate_files, stub) do
+         client.label_detection(
+            image: gcs_image_uri,
+            destination: "gs://my-bucket",
+            async: true,
+            mime_type: "application/pdf"
+          )
+        end
+      end
+    end
+  end
+
+  describe "landmark_detection" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :LANDMARK_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.landmark_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
         end
       end
     end
@@ -839,52 +722,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :LANDMARK_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.landmark_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :LANDMARK_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.landmark_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :LANDMARK_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.landmark_detection image: "acceptance/data/face.jpg"
-        end
-      end
-    end
-
     it "correctly calls batch_annotate_images when given a list of image paths" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
         stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :LANDMARK_DETECTION
         client.stub(:batch_annotate_images, stub) do
           client.landmark_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :LANDMARK_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.landmark_detection image: "http://example.com/face.jpg"
         end
       end
     end
@@ -899,6 +742,16 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :LANDMARK_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.landmark_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single gcs image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
@@ -909,12 +762,42 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+    it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :LANDMARK_DETECTION
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :LANDMARK_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.landmark_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+          client.landmark_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :LANDMARK_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.landmark_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :LANDMARK_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.landmark_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :LANDMARK_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.landmark_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
         end
       end
     end
@@ -936,12 +819,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
   end
 
   describe "logo_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :LOGO_DETECTION
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :LOGO_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.logo_detection image: File.new("acceptance/data/face.jpg", "r")
+          client.logo_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
         end
       end
     end
@@ -956,52 +839,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :LOGO_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.logo_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :LOGO_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.logo_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :LOGO_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.logo_detection image: "acceptance/data/face.jpg"
-        end
-      end
-    end
-
     it "correctly calls batch_annotate_images when given a list of image paths" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
         stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :LOGO_DETECTION
         client.stub(:batch_annotate_images, stub) do
           client.logo_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :LOGO_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.logo_detection image: "http://example.com/face.jpg"
         end
       end
     end
@@ -1016,6 +859,16 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :LOGO_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.logo_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single gcs image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
@@ -1026,12 +879,42 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+    it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :LOGO_DETECTION
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :LOGO_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.logo_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+          client.logo_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :LOGO_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.logo_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :LOGO_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.logo_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :LOGO_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.logo_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
         end
       end
     end
@@ -1052,13 +935,13 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     end
   end
 
-  describe "text_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
+  describe "object_localization_detection" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :TEXT_DETECTION
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :OBJECT_LOCALIZATION
         client.stub(:batch_annotate_images, stub) do
-          client.text_detection image: File.new("acceptance/data/face.jpg", "r")
+          client.object_localization_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
         end
       end
     end
@@ -1066,39 +949,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image files" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :TEXT_DETECTION
+        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :OBJECT_LOCALIZATION
         client.stub(:batch_annotate_images, stub) do
-          client.text_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :TEXT_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.text_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :TEXT_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.text_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :TEXT_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.text_detection image: "acceptance/data/face.jpg"
+          client.object_localization_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
         end
       end
     end
@@ -1106,19 +959,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image paths" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :TEXT_DETECTION
+        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :OBJECT_LOCALIZATION
         client.stub(:batch_annotate_images, stub) do
-          client.text_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :TEXT_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.text_detection image: "http://example.com/face.jpg"
+          client.object_localization_detection images: (0..1).map { "acceptance/data/face.jpg" }
         end
       end
     end
@@ -1126,9 +969,19 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :TEXT_DETECTION
+        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :OBJECT_LOCALIZATION
         client.stub(:batch_annotate_images, stub) do
-          client.text_detection images: (0..1).map { "http://example.com/face.jpg" }
+          client.object_localization_detection images: (0..1).map { "http://example.com/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :OBJECT_LOCALIZATION
+        client.stub(:batch_annotate_images, stub) do
+          client.object_localization_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end
@@ -1136,19 +989,49 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a single gcs image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :TEXT_DETECTION
+        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :OBJECT_LOCALIZATION
         client.stub(:batch_annotate_images, stub) do
-          client.text_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
+          client.object_localization_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
         end
       end
     end
 
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+    it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :TEXT_DETECTION
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :OBJECT_LOCALIZATION
         client.stub(:batch_annotate_images, stub) do
-          client.text_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+          client.object_localization_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :OBJECT_LOCALIZATION
+        client.stub(:batch_annotate_images, stub) do
+          client.object_localization_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :OBJECT_LOCALIZATION
+        client.stub(:batch_annotate_images, stub) do
+          client.object_localization_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :OBJECT_LOCALIZATION
+        client.stub(:batch_annotate_images, stub) do
+          client.object_localization_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
         end
       end
     end
@@ -1156,9 +1039,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls async_batch_annotate_files when async is true" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = async_annotate_stub gcs_image_uri, :TEXT_DETECTION, "gs://my-bucket"
+        stub = async_annotate_stub gcs_image_uri, :OBJECT_LOCALIZATION, "gs://my-bucket"
         client.stub(:async_batch_annotate_files, stub) do
-         client.text_detection(
+         client.object_localization_detection(
             image: gcs_image_uri,
             destination: "gs://my-bucket",
             async: true,
@@ -1169,13 +1052,13 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     end
   end
 
-  describe "document_text_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
+  describe "product_search_detection" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :DOCUMENT_TEXT_DETECTION
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :PRODUCT_SEARCH
         client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection image: File.new("acceptance/data/face.jpg", "r")
+          client.product_search_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
         end
       end
     end
@@ -1183,39 +1066,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image files" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :DOCUMENT_TEXT_DETECTION
+        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :PRODUCT_SEARCH
         client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :DOCUMENT_TEXT_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :DOCUMENT_TEXT_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :DOCUMENT_TEXT_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection image: "acceptance/data/face.jpg"
+          client.product_search_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
         end
       end
     end
@@ -1223,19 +1076,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image paths" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :DOCUMENT_TEXT_DETECTION
+        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :PRODUCT_SEARCH
         client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :DOCUMENT_TEXT_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection image: "http://example.com/face.jpg"
+          client.product_search_detection images: (0..1).map { "acceptance/data/face.jpg" }
         end
       end
     end
@@ -1243,9 +1086,19 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :DOCUMENT_TEXT_DETECTION
+        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :PRODUCT_SEARCH
         client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection images: (0..1).map { "http://example.com/face.jpg" }
+          client.product_search_detection images: (0..1).map { "http://example.com/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :PRODUCT_SEARCH
+        client.stub(:batch_annotate_images, stub) do
+          client.product_search_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end
@@ -1253,19 +1106,49 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a single gcs image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :DOCUMENT_TEXT_DETECTION
+        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :PRODUCT_SEARCH
         client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
+          client.product_search_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
         end
       end
     end
 
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+    it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :DOCUMENT_TEXT_DETECTION
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :PRODUCT_SEARCH
         client.stub(:batch_annotate_images, stub) do
-          client.document_text_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+          client.product_search_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :PRODUCT_SEARCH
+        client.stub(:batch_annotate_images, stub) do
+          client.product_search_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :PRODUCT_SEARCH
+        client.stub(:batch_annotate_images, stub) do
+          client.product_search_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :PRODUCT_SEARCH
+        client.stub(:batch_annotate_images, stub) do
+          client.product_search_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
         end
       end
     end
@@ -1273,9 +1156,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls async_batch_annotate_files when async is true" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = async_annotate_stub gcs_image_uri, :DOCUMENT_TEXT_DETECTION, "gs://my-bucket"
+        stub = async_annotate_stub gcs_image_uri, :PRODUCT_SEARCH, "gs://my-bucket"
         client.stub(:async_batch_annotate_files, stub) do
-         client.document_text_detection(
+         client.product_search_detection(
             image: gcs_image_uri,
             destination: "gs://my-bucket",
             async: true,
@@ -1287,12 +1170,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
   end
 
   describe "safe_search_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :SAFE_SEARCH_DETECTION
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :SAFE_SEARCH_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.safe_search_detection image: File.new("acceptance/data/face.jpg", "r")
+          client.safe_search_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
         end
       end
     end
@@ -1307,52 +1190,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :SAFE_SEARCH_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.safe_search_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :SAFE_SEARCH_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.safe_search_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :SAFE_SEARCH_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.safe_search_detection image: "acceptance/data/face.jpg"
-        end
-      end
-    end
-
     it "correctly calls batch_annotate_images when given a list of image paths" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
         stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :SAFE_SEARCH_DETECTION
         client.stub(:batch_annotate_images, stub) do
           client.safe_search_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :SAFE_SEARCH_DETECTION
-        client.stub(:batch_annotate_images, stub) do
-          client.safe_search_detection image: "http://example.com/face.jpg"
         end
       end
     end
@@ -1367,6 +1210,16 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :SAFE_SEARCH_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.safe_search_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
     it "correctly calls batch_annotate_images when given a single gcs image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
@@ -1377,12 +1230,42 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       end
     end
 
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+    it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :SAFE_SEARCH_DETECTION
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :SAFE_SEARCH_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.safe_search_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+          client.safe_search_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :SAFE_SEARCH_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.safe_search_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :SAFE_SEARCH_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.safe_search_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :SAFE_SEARCH_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.safe_search_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
         end
       end
     end
@@ -1403,13 +1286,13 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     end
   end
 
-  describe "image_properties_detection" do
-    it "correctly calls batch_annotate_images when given a single image file" do
+  describe "text_detection" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :IMAGE_PROPERTIES
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection image: File.new("acceptance/data/face.jpg", "r")
+          client.text_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
         end
       end
     end
@@ -1417,39 +1300,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image files" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :IMAGE_PROPERTIES
+        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single io object" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :IMAGE_PROPERTIES
-        client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a list of io objects" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :IMAGE_PROPERTIES
-        client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "acceptance/data/face.jpg", :IMAGE_PROPERTIES
-        client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection image: "acceptance/data/face.jpg"
+          client.text_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
         end
       end
     end
@@ -1457,19 +1310,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image paths" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :IMAGE_PROPERTIES
+        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection images: (0..1).map { "acceptance/data/face.jpg" }
-        end
-      end
-    end
-
-    it "correctly calls batch_annotate_images when given a single image uri" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "http://example.com/face.jpg", :IMAGE_PROPERTIES
-        client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection image: "http://example.com/face.jpg"
+          client.text_detection images: (0..1).map { "acceptance/data/face.jpg" }
         end
       end
     end
@@ -1477,9 +1320,19 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a list of image uri's" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :IMAGE_PROPERTIES
+        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection images: (0..1).map { "http://example.com/face.jpg" }
+          client.text_detection images: (0..1).map { "http://example.com/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :TEXT_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.text_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
         end
       end
     end
@@ -1487,19 +1340,49 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls batch_annotate_images when given a single gcs image uri" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :IMAGE_PROPERTIES
+        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
+          client.text_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
         end
       end
     end
 
-    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+    it "correctly calls batch_annotate_images when given a single image file" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :IMAGE_PROPERTIES
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :TEXT_DETECTION
         client.stub(:batch_annotate_images, stub) do
-          client.image_properties_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+          client.text_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :TEXT_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.text_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :TEXT_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.text_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :TEXT_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.text_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
         end
       end
     end
@@ -1507,9 +1390,126 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
     it "correctly calls async_batch_annotate_files when async is true" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
-        stub = async_annotate_stub gcs_image_uri, :IMAGE_PROPERTIES, "gs://my-bucket"
+        stub = async_annotate_stub gcs_image_uri, :TEXT_DETECTION, "gs://my-bucket"
         client.stub(:async_batch_annotate_files, stub) do
-         client.image_properties_detection(
+         client.text_detection(
+            image: gcs_image_uri,
+            destination: "gs://my-bucket",
+            async: true,
+            mime_type: "application/pdf"
+          )
+        end
+      end
+    end
+  end
+
+  describe "web_detection" do
+    it "correctly calls batch_annotate_images when given a list of gcs image uri's" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }, :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection images: (0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of image files" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { File.new("acceptance/data/face.jpg", "r") }, :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection images: (0..1).map { File.new("acceptance/data/face.jpg", "r") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of image paths" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "acceptance/data/face.jpg" }, :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection images: (0..1).map { "acceptance/data/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of image uri's" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { "http://example.com/face.jpg" }, :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection images: (0..1).map { "http://example.com/face.jpg" }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a list of io objects" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }, :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection images: (0..1).map { IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb") }
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single gcs image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "gs://gapic-toolkit/President_Barack_Obama.jpg", :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection image: "gs://gapic-toolkit/President_Barack_Obama.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image file" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub File.new("acceptance/data/face.jpg", "r"), :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection image: File.new("acceptance/data/face.jpg", "r")
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "acceptance/data/face.jpg", :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection image: "acceptance/data/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single image uri" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub "http://example.com/face.jpg", :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection image: "http://example.com/face.jpg"
+        end
+      end
+    end
+
+    it "correctly calls batch_annotate_images when given a single io object" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = batch_annotate_stub IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb"), :WEB_DETECTION
+        client.stub(:batch_annotate_images, stub) do
+          client.web_detection image: IO.new((IO.sysopen("acceptance/data/face.jpg", "r")), "rb")
+        end
+      end
+    end
+
+    it "correctly calls async_batch_annotate_files when async is true" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::Vision::ImageAnnotator.new version: :v1
+        stub = async_annotate_stub gcs_image_uri, :WEB_DETECTION, "gs://my-bucket"
+        client.stub(:async_batch_annotate_files, stub) do
+         client.web_detection(
             image: gcs_image_uri,
             destination: "gs://my-bucket",
             async: true,
@@ -1523,15 +1523,14 @@ end
 
 describe Google::Cloud::Vision::V1::ProductSearchClient do
   let(:mock_credentials) { HelperMockProductSearchCredentials_v1.new }
-   describe "the product_set_path instance method" do
-    it "correctly calls Google::Cloud::Vision::V1::ProductSearchClient.product_set_path" do
+   describe "the location_path instance method" do
+    it "correctly calls Google::Cloud::Vision::V1::ProductSearchClient.location_path" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        num_args = Google::Cloud::Vision::V1::ProductSearchClient.method("product_set_path").arity
+        parameters = Google::Cloud::Vision::V1::ProductSearchClient.method("location_path").parameters.map { |arg| arg.last.to_s }
         client = Google::Cloud::Vision::ProductSearch.new version: :v1
-        args = (0...num_args).map { "argument" }
         assert_equal(
-          client.product_set_path(*args),
-          Google::Cloud::Vision::V1::ProductSearchClient.product_set_path(*args)
+          client.location_path(*parameters),
+          Google::Cloud::Vision::V1::ProductSearchClient.location_path(*parameters)
         )
       end
     end
@@ -1540,12 +1539,24 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
   describe "the product_path instance method" do
     it "correctly calls Google::Cloud::Vision::V1::ProductSearchClient.product_path" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        num_args = Google::Cloud::Vision::V1::ProductSearchClient.method("product_path").arity
+        parameters = Google::Cloud::Vision::V1::ProductSearchClient.method("product_path").parameters.map { |arg| arg.last.to_s }
         client = Google::Cloud::Vision::ProductSearch.new version: :v1
-        args = (0...num_args).map { "argument" }
         assert_equal(
-          client.product_path(*args),
-          Google::Cloud::Vision::V1::ProductSearchClient.product_path(*args)
+          client.product_path(*parameters),
+          Google::Cloud::Vision::V1::ProductSearchClient.product_path(*parameters)
+        )
+      end
+    end
+  end
+
+  describe "the product_set_path instance method" do
+    it "correctly calls Google::Cloud::Vision::V1::ProductSearchClient.product_set_path" do
+      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
+        parameters = Google::Cloud::Vision::V1::ProductSearchClient.method("product_set_path").parameters.map { |arg| arg.last.to_s }
+        client = Google::Cloud::Vision::ProductSearch.new version: :v1
+        assert_equal(
+          client.product_set_path(*parameters),
+          Google::Cloud::Vision::V1::ProductSearchClient.product_set_path(*parameters)
         )
       end
     end
@@ -1554,26 +1565,11 @@ describe Google::Cloud::Vision::V1::ProductSearchClient do
   describe "the reference_image_path instance method" do
     it "correctly calls Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path" do
       Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        num_args = Google::Cloud::Vision::V1::ProductSearchClient.method("reference_image_path").arity
+        parameters = Google::Cloud::Vision::V1::ProductSearchClient.method("reference_image_path").parameters.map { |arg| arg.last.to_s }
         client = Google::Cloud::Vision::ProductSearch.new version: :v1
-        args = (0...num_args).map { "argument" }
         assert_equal(
-          client.reference_image_path(*args),
-          Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path(*args)
-        )
-      end
-    end
-  end
-
-  describe "the location_path instance method" do
-    it "correctly calls Google::Cloud::Vision::V1::ProductSearchClient.location_path" do
-      Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
-        num_args = Google::Cloud::Vision::V1::ProductSearchClient.method("location_path").arity
-        client = Google::Cloud::Vision::ProductSearch.new version: :v1
-        args = (0...num_args).map { "argument" }
-        assert_equal(
-          client.location_path(*args),
-          Google::Cloud::Vision::V1::ProductSearchClient.location_path(*args)
+          client.reference_image_path(*parameters),
+          Google::Cloud::Vision::V1::ProductSearchClient.reference_image_path(*parameters)
         )
       end
     end

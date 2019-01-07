@@ -22,7 +22,7 @@ module Google
         class ImageAnnotatorClient
 
 <%=
-  helper_hash.map do |method_name, feature_type|
+  helper_hash.sort.map do |method_name, feature_type|
 
     [
       "# @param images [Array<String>, Array<File>]",
