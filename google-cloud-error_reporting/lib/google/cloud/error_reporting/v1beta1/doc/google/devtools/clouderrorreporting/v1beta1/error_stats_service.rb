@@ -267,6 +267,25 @@ module Google
         # Response message for deleting error events.
         class DeleteEventsResponse; end
 
+        # A sorting order of error groups.
+        module ErrorGroupOrder
+          # No group order specified.
+          GROUP_ORDER_UNSPECIFIED = 0
+
+          # Total count of errors in the given time window in descending order.
+          COUNT_DESC = 1
+
+          # Timestamp when the group was last seen in the given time window
+          # in descending order.
+          LAST_SEEN_DESC = 2
+
+          # Timestamp when the group was created in descending order.
+          CREATED_DESC = 3
+
+          # Number of affected users in the given time window in descending order.
+          AFFECTED_USERS_DESC = 4
+        end
+
         # Specifies how the time periods of error group counts are aligned.
         module TimedCountAlignment
           # No alignment specified.
@@ -287,25 +306,6 @@ module Google
           # period. This can result in a different size of the
           # first time period.
           ALIGNMENT_EQUAL_AT_END = 2
-        end
-
-        # A sorting order of error groups.
-        module ErrorGroupOrder
-          # No group order specified.
-          GROUP_ORDER_UNSPECIFIED = 0
-
-          # Total count of errors in the given time window in descending order.
-          COUNT_DESC = 1
-
-          # Timestamp when the group was last seen in the given time window
-          # in descending order.
-          LAST_SEEN_DESC = 2
-
-          # Timestamp when the group was created in descending order.
-          CREATED_DESC = 3
-
-          # Number of affected users in the given time window in descending order.
-          AFFECTED_USERS_DESC = 4
         end
       end
     end
