@@ -2499,6 +2499,28 @@ module Google
           CONTENT_IMAGE = 2
         end
 
+        # An enum to represent the various type of DLP jobs.
+        module DlpJobType
+          DLP_JOB_TYPE_UNSPECIFIED = 0
+
+          # The job inspected Google Cloud for sensitive data.
+          INSPECT_JOB = 1
+
+          # The job executed a Risk Analysis computation.
+          RISK_ANALYSIS_JOB = 2
+        end
+
+        # Parts of the APIs which use certain infoTypes.
+        module InfoTypeSupportedBy
+          ENUM_TYPE_UNSPECIFIED = 0
+
+          # Supported by the inspect operations.
+          INSPECT = 1
+
+          # Supported by the risk analysis operations.
+          RISK_ANALYSIS = 2
+        end
+
         # Type of the match which can be applied to different ways of matching, like
         # Dictionary, regular expression and intersecting with findings of another
         # info type.
@@ -2528,17 +2550,6 @@ module Google
           MATCHING_TYPE_INVERSE_MATCH = 3
         end
 
-        # Parts of the APIs which use certain infoTypes.
-        module InfoTypeSupportedBy
-          ENUM_TYPE_UNSPECIFIED = 0
-
-          # Supported by the inspect operations.
-          INSPECT = 1
-
-          # Supported by the risk analysis operations.
-          RISK_ANALYSIS = 2
-        end
-
         # Operators available for comparing the value of fields.
         module RelationalOperator
           RELATIONAL_OPERATOR_UNSPECIFIED = 0
@@ -2563,17 +2574,6 @@ module Google
 
           # Exists
           EXISTS = 7
-        end
-
-        # An enum to represent the various type of DLP jobs.
-        module DlpJobType
-          DLP_JOB_TYPE_UNSPECIFIED = 0
-
-          # The job inspected Google Cloud for sensitive data.
-          INSPECT_JOB = 1
-
-          # The job executed a Risk Analysis computation.
-          RISK_ANALYSIS_JOB = 2
         end
 
         # State of a StoredInfoType version.
