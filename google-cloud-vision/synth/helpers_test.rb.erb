@@ -118,7 +118,7 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
 
 <%= 
   describe_block = []
-  helper_hash.each do |method_name, feature_type| 
+  helper_hash.sort.each do |method_name, feature_type|
     describe_block += ["describe \"#{method_name}\" do"]
     {
       "single image file": 'File.new("acceptance/data/face.jpg", "r")',
@@ -131,7 +131,7 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ImageAnnotatorClient 
       "list of image uri's": '(0..1).map { "http://example.com/face.jpg" }',
       "single gcs image uri": '"gs://gapic-toolkit/President_Barack_Obama.jpg"',
       "list of gcs image uri's": '(0..1).map { "gs://gapic-toolkit/President_Barack_Obama.jpg" }'
-    }.each do |description, image|
+    }.sort.each do |description, image|
       describe_block += [
         "  it \"correctly calls batch_annotate_images when given a #{description}\" do",
         "    Google::Cloud::Vision::#{version.capitalize}::Credentials.stub(:default, mock_credentials) do",
@@ -185,12 +185,11 @@ describe Google::Cloud::Vision::<%= version.capitalize %>::ProductSearchClient d
      describe_block += [
       "  it \"correctly calls Google::Cloud::Vision::#{version.capitalize}::ProductSearchClient.#{method_name}\" do",
       "    Google::Cloud::Vision::#{version.capitalize}::Credentials.stub(:default, mock_credentials) do",
-      "      num_args = Google::Cloud::Vision::#{version.capitalize}::ProductSearchClient.method(\"#{method_name}\").arity",
+      "      parameters = Google::Cloud::Vision::#{version.capitalize}::ProductSearchClient.method(\"#{method_name}\").parameters.map { |arg| arg.last.to_s }",
       "      client = Google::Cloud::Vision::ProductSearch.new version: :#{version}",
-      "      args = (0...num_args).map { \"argument\" }",
       "      assert_equal(",
-      "        client.#{method_name}(*args),",
-      "        Google::Cloud::Vision::#{version.capitalize}::ProductSearchClient.#{method_name}(*args)",
+      "        client.#{method_name}(*parameters),",
+      "        Google::Cloud::Vision::#{version.capitalize}::ProductSearchClient.#{method_name}(*parameters)",
       "      )",
       "    end",
       "  end",
