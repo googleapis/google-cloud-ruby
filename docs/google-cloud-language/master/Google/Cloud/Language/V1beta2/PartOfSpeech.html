@@ -774,51 +774,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -1021,6 +976,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -1407,51 +1407,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -1654,6 +1609,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -2040,51 +2040,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -2287,6 +2242,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -2673,51 +2673,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -2920,6 +2875,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -3306,51 +3306,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -3553,6 +3508,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -3939,51 +3939,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -4186,6 +4141,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -4572,51 +4572,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -4819,6 +4774,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -5205,51 +5205,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -5452,6 +5407,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -5838,51 +5838,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -6085,6 +6040,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -6471,51 +6471,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -6718,6 +6673,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -7104,51 +7104,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -7351,6 +7306,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
@@ -7737,51 +7737,6 @@ js:
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1beta2/doc/google/cloud/language/v1beta2/language_service.rb', line 198</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Language::V1beta2::PartOfSpeech (class)">PartOfSpeech</a></span></span>
-  <span class='comment'># The part of speech tags enum.
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
-    <span class='comment'># Unknown
-</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Adjective
-</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
-
-    <span class='comment'># Adposition (preposition and postposition)
-</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
-
-    <span class='comment'># Adverb
-</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
-
-    <span class='comment'># Conjunction
-</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
-
-    <span class='comment'># Determiner
-</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
-
-    <span class='comment'># Noun (common and proper)
-</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
-
-    <span class='comment'># Cardinal number
-</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
-
-    <span class='comment'># Pronoun
-</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
-
-    <span class='comment'># Particle or other function word
-</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
-
-    <span class='comment'># Punctuation
-</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
-
-    <span class='comment'># Verb (all tenses and modes)
-</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
-
-    <span class='comment'># Other: foreign words, typos, abbreviations
-</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
-
-    <span class='comment'># Affix
-</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
-  <span class='kw'>end</span>
-
   <span class='comment'># The characteristic of a verb that expresses time flow during an event.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Aspect.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Aspect (module)">Aspect</a></span></span>
     <span class='comment'># Aspect is not applicable in the analyzed language or is not predicted.
@@ -7984,6 +7939,51 @@ js:
 
     <span class='comment'># Non-reciprocal
 </span>    <span class='const'>NON_RECIPROCAL</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># The part of speech tags enum.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="PartOfSpeech/Tag.html" title="Google::Cloud::Language::V1beta2::PartOfSpeech::Tag (module)">Tag</a></span></span>
+    <span class='comment'># Unknown
+</span>    <span class='const'>UNKNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Adjective
+</span>    <span class='const'>ADJ</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Adposition (preposition and postposition)
+</span>    <span class='const'>ADP</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Adverb
+</span>    <span class='const'>ADV</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Conjunction
+</span>    <span class='const'>CONJ</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Determiner
+</span>    <span class='const'>DET</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Noun (common and proper)
+</span>    <span class='const'>NOUN</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Cardinal number
+</span>    <span class='const'>NUM</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Pronoun
+</span>    <span class='const'>PRON</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Particle or other function word
+</span>    <span class='const'>PRT</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Punctuation
+</span>    <span class='const'>PUNCT</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Verb (all tenses and modes)
+</span>    <span class='const'>VERB</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Other: foreign words, typos, abbreviations
+</span>    <span class='const'>X</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Affix
+</span>    <span class='const'>AFFIX</span> <span class='op'>=</span> <span class='int'>13</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Time reference.
