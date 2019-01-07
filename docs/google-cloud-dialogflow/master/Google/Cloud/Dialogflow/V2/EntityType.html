@@ -366,6 +366,18 @@ expanded.</p>
 </span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Represents different entity type expansion modes. Automated expansion
+</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
+</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
+    <span class='comment'># Auto expansion disabled for the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Allows an agent to recognize values that have not been explicitly
+</span>    <span class='comment'># listed in the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Represents kinds of entities.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/Kind.html" title="Google::Cloud::Dialogflow::V2::EntityType::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified. This value should be never used.
@@ -379,18 +391,6 @@ expanded.</p>
 </span>    <span class='comment'># values. However, list entity types can contain references to other entity
 </span>    <span class='comment'># types (with or without aliases).
 </span>    <span class='const'>KIND_LIST</span> <span class='op'>=</span> <span class='int'>2</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Represents different entity type expansion modes. Automated expansion
-</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
-</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
-    <span class='comment'># Auto expansion disabled for the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Allows an agent to recognize values that have not been explicitly
-</span>    <span class='comment'># listed in the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -505,6 +505,18 @@ expanded.</p>
 </span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Represents different entity type expansion modes. Automated expansion
+</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
+</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
+    <span class='comment'># Auto expansion disabled for the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Allows an agent to recognize values that have not been explicitly
+</span>    <span class='comment'># listed in the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Represents kinds of entities.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/Kind.html" title="Google::Cloud::Dialogflow::V2::EntityType::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified. This value should be never used.
@@ -518,18 +530,6 @@ expanded.</p>
 </span>    <span class='comment'># values. However, list entity types can contain references to other entity
 </span>    <span class='comment'># types (with or without aliases).
 </span>    <span class='const'>KIND_LIST</span> <span class='op'>=</span> <span class='int'>2</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Represents different entity type expansion modes. Automated expansion
-</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
-</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
-    <span class='comment'># Auto expansion disabled for the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Allows an agent to recognize values that have not been explicitly
-</span>    <span class='comment'># listed in the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -644,6 +644,18 @@ expanded.</p>
 </span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Represents different entity type expansion modes. Automated expansion
+</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
+</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
+    <span class='comment'># Auto expansion disabled for the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Allows an agent to recognize values that have not been explicitly
+</span>    <span class='comment'># listed in the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Represents kinds of entities.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/Kind.html" title="Google::Cloud::Dialogflow::V2::EntityType::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified. This value should be never used.
@@ -657,18 +669,6 @@ expanded.</p>
 </span>    <span class='comment'># values. However, list entity types can contain references to other entity
 </span>    <span class='comment'># types (with or without aliases).
 </span>    <span class='const'>KIND_LIST</span> <span class='op'>=</span> <span class='int'>2</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Represents different entity type expansion modes. Automated expansion
-</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
-</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
-    <span class='comment'># Auto expansion disabled for the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Allows an agent to recognize values that have not been explicitly
-</span>    <span class='comment'># listed in the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -783,6 +783,18 @@ expanded.</p>
 </span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Represents different entity type expansion modes. Automated expansion
+</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
+</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
+    <span class='comment'># Auto expansion disabled for the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Allows an agent to recognize values that have not been explicitly
+</span>    <span class='comment'># listed in the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Represents kinds of entities.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/Kind.html" title="Google::Cloud::Dialogflow::V2::EntityType::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified. This value should be never used.
@@ -796,18 +808,6 @@ expanded.</p>
 </span>    <span class='comment'># values. However, list entity types can contain references to other entity
 </span>    <span class='comment'># types (with or without aliases).
 </span>    <span class='const'>KIND_LIST</span> <span class='op'>=</span> <span class='int'>2</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Represents different entity type expansion modes. Automated expansion
-</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
-</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
-    <span class='comment'># Auto expansion disabled for the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Allows an agent to recognize values that have not been explicitly
-</span>    <span class='comment'># listed in the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -928,6 +928,18 @@ The unique identifier of the entity type. Format:
 </span>  <span class='comment'>#     must contain exactly one synonym equal to `value`.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="EntityType/Entity.html" title="Google::Cloud::Dialogflow::V2::EntityType::Entity (class)">Entity</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 
+  <span class='comment'># Represents different entity type expansion modes. Automated expansion
+</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
+</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
+    <span class='comment'># Auto expansion disabled for the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Allows an agent to recognize values that have not been explicitly
+</span>    <span class='comment'># listed in the entity.
+</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
   <span class='comment'># Represents kinds of entities.
 </span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/Kind.html" title="Google::Cloud::Dialogflow::V2::EntityType::Kind (module)">Kind</a></span></span>
     <span class='comment'># Not specified. This value should be never used.
@@ -941,18 +953,6 @@ The unique identifier of the entity type. Format:
 </span>    <span class='comment'># values. However, list entity types can contain references to other entity
 </span>    <span class='comment'># types (with or without aliases).
 </span>    <span class='const'>KIND_LIST</span> <span class='op'>=</span> <span class='int'>2</span>
-  <span class='kw'>end</span>
-
-  <span class='comment'># Represents different entity type expansion modes. Automated expansion
-</span>  <span class='comment'># allows an agent to recognize values that have not been explicitly listed in
-</span>  <span class='comment'># the entity (for example, new kinds of shopping list items).
-</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="EntityType/AutoExpansionMode.html" title="Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode (module)">AutoExpansionMode</a></span></span>
-    <span class='comment'># Auto expansion disabled for the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
-
-    <span class='comment'># Allows an agent to recognize values that have not been explicitly
-</span>    <span class='comment'># listed in the entity.
-</span>    <span class='const'>AUTO_EXPANSION_MODE_DEFAULT</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
