@@ -335,7 +335,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a snapshot from the requested subscription.<br><br> <b>ALPHA:</b> This feature is part of an alpha release.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a snapshot from the requested subscription.</p>
 </div></span>
   
 </li>
@@ -344,7 +344,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_subscription-instance_method" title="#create_subscription (instance method)">#<strong>create_subscription</strong>(name, topic, push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Pubsub::V1::Subscription </a>
+      <a href="#create_subscription-instance_method" title="#create_subscription (instance method)">#<strong>create_subscription</strong>(name, topic, push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, expiration_policy: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Pubsub::V1::Subscription </a>
     
 
     
@@ -498,7 +498,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Lists the existing snapshots.<br><br> <b>ALPHA:</b> This feature is part of an alpha release.</p>
+    <span class="summary_desc"><div class='inline'><p>Lists the existing snapshots.</p>
 </div></span>
   
 </li>
@@ -613,7 +613,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Seeks an existing subscription to a point in time or to a given snapshot, whichever is provided in the request.<br><br> <b>ALPHA:</b> This feature is part of an alpha release.</p>
+    <span class="summary_desc"><div class='inline'><p>Seeks an existing subscription to a point in time or to a given snapshot, whichever is provided in the request.</p>
 </div></span>
   
 </li>
@@ -705,7 +705,7 @@ this service.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Updates an existing snapshot.<br><br> <b>ALPHA:</b> This feature is part of an alpha release.</p>
+    <span class="summary_desc"><div class='inline'><p>Updates an existing snapshot.</p>
 </div></span>
   
 </li>
@@ -1739,22 +1739,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-717
-718
-719
-720
-721
-722
-723
-724
-725
-726
-727
-728
-729</pre>
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 717</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 737</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_acknowledge'>acknowledge</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -1785,10 +1785,16 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a snapshot from the requested subscription.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+    <p>Creates a snapshot from the requested subscription. Snapshots are used in
+<a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+operations, which allow
+you to manage message acknowledgments in bulk. That is, you can set the
+acknowledgment state of messages in an existing subscription to the state
+captured by a snapshot.
+<br><br>
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
-use. It is not subject to any SLA or deprecation policy.
+use. It is not subject to any SLA or deprecation policy.<br><br>
 If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
 If the requested subscription doesn&#39;t exist, returns <code>NOT_FOUND</code>.
 If the backlog in the subscription is too old -- and the resulting snapshot
@@ -1796,10 +1802,10 @@ would expire in less than 1 hour -- then <code>FAILED_PRECONDITION</code> is ret
 See also the <code>Snapshot.expire_time</code> field. If the name is not provided in
 the request, the server will assign a random
 name for this snapshot on the same project as the subscription, conforming
-to the <a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
-The generated
-name is populated in the returned Snapshot object. Note that for REST API
-requests, you must specify a name in the request.</p>
+to the
+<a href="https://cloud.google.com/pubsub/docs/admin#resource_names">resource name format</a>.
+The generated name is populated in the returned Snapshot object. Note that
+for REST API requests, you must specify a name in the request.</p>
 
 
   </div>
@@ -1834,7 +1840,9 @@ requests, you must specify a name in the request.</p>
         <div class='inline'><p>Optional user-provided name for this snapshot.
 If the name is not provided in the request, the server will assign a random
 name for this snapshot on the same project as the subscription.
-Note that for REST API requests, you must specify a name.
+Note that for REST API requests, you must specify a name.  See the
+<a href="https://cloud.google.com/pubsub/docs/admin#resource_names">
+resource name rules</a>.
 Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
 </div>
       
@@ -1873,7 +1881,8 @@ Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>User labels.</p>
+        <div class='inline'><p>See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
+managing labels</a>.</p>
 </div>
       
     </li>
@@ -1976,23 +1985,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-984
-985
-986
-987
-988
-989
-990
-991
-992
-993
-994
-995
-996
-997</pre>
+1015
+1016
+1017
+1018
+1019
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027
+1028</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 984</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1015</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_snapshot'>create_snapshot</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2016,7 +2025,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="create_subscription-instance_method">
   
-    #<strong>create_subscription</strong>(name, topic, push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Pubsub/V1/Subscription.html" title="Google::Pubsub::V1::Subscription (class)">Google::Pubsub::V1::Subscription</a></span></tt> 
+    #<strong>create_subscription</strong>(name, topic, push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, expiration_policy: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Pubsub/V1/Subscription.html" title="Google::Pubsub::V1::Subscription (class)">Google::Pubsub::V1::Subscription</a></span></tt> 
   
 
   
@@ -2025,14 +2034,15 @@ retries, etc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a subscription to a given topic. See the
-<a href="/pubsub/docs/admin#resource_names"> resource name rules</a>.
+<a href="https://cloud.google.com/pubsub/docs/admin#resource_names">
+resource name rules</a>.
 If the subscription already exists, returns <code>ALREADY_EXISTS</code>.
 If the corresponding topic doesn&#39;t exist, returns <code>NOT_FOUND</code>.</p>
 
 <p>If the name is not provided in the request, the server will assign a random
 name for this subscription on the same project as the topic, conforming
 to the
-<a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
+<a href="https://cloud.google.com/pubsub/docs/admin#resource_names">resource name format</a>.
 The generated name is populated in the returned Subscription object.
 Note that for REST API requests, you must specify a name in the request.</p>
 
@@ -2123,11 +2133,11 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>This value is the maximum time after a subscriber receives a message
-before the subscriber should acknowledge the message. After message
-delivery but before the ack deadline expires and before the message is
-acknowledged, it is an outstanding message and will not be delivered
-again during that time (on a best-effort basis).</p>
+        <div class='inline'><p>The approximate amount of time (on a best-effort basis) Pub/Sub waits for
+the subscriber to acknowledge receipt before resending the message. In the
+interval after the message is delivered and before it is acknowledged, it
+is considered to be <i>outstanding</i>. During that time period, the
+message will not be redelivered (on a best-effort basis).</p>
 
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
@@ -2160,8 +2170,11 @@ system will eventually redeliver the message.</p>
         <div class='inline'><p>Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&#39;s backlog, even if they are
 acknowledged, until they fall out of the <code>message_retention_duration</code>
-window.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+window. This must be true if you would like to
+<a href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
+Seek to a timestamp</a>.
+<br><br>
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
 </div>
@@ -2184,7 +2197,7 @@ If <code>retain_acked_messages</code> is true, then this also configures the ret
 of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
 minutes.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.
 A hash of the same form as <code>Google::Protobuf::Duration</code>
@@ -2203,7 +2216,33 @@ can also be provided.</p>
       
       
         &mdash;
-        <div class='inline'><p>User labels.</p>
+        <div class='inline'><p>See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
+managing labels</a>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>expiration_policy</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Pubsub/V1/ExpirationPolicy.html" title="Google::Pubsub::V1::ExpirationPolicy (class)">Google::Pubsub::V1::ExpirationPolicy</a></span> | Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A policy that specifies the conditions for this subscription&#39;s expiration.
+A subscription is considered active as long as any connected subscriber is
+successfully consuming messages from the subscription or is issuing
+operations on the subscription. If <code>expiration_policy</code> is not set, a
+<em>default policy</em> with <code>ttl</code> of 31 days will be used. The minimum allowed
+value for <code>expiration_policy.ttl</code> is 1 day.
+<b>BETA:</b> This feature is part of a beta release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+A hash of the same form as <code>Google::Pubsub::V1::ExpirationPolicy</code>
+can also be provided.</p>
 </div>
       
     </li>
@@ -2306,31 +2345,33 @@ retries, etc.</p>
       <pre class="lines">
 
 
-443
-444
-445
-446
-447
-448
-449
-450
-451
-452
-453
-454
-455
-456
-457
-458
-459
 460
 461
 462
 463
-464</pre>
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 443</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 460</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_subscription'>create_subscription</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2340,6 +2381,7 @@ retries, etc.</p>
     <span class='label'>retain_acked_messages:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>message_retention_duration:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>labels:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>expiration_policy:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
@@ -2349,7 +2391,8 @@ retries, etc.</p>
     <span class='label'>ack_deadline_seconds:</span> <span class='id identifier rubyid_ack_deadline_seconds'>ack_deadline_seconds</span><span class='comma'>,</span>
     <span class='label'>retain_acked_messages:</span> <span class='id identifier rubyid_retain_acked_messages'>retain_acked_messages</span><span class='comma'>,</span>
     <span class='label'>message_retention_duration:</span> <span class='id identifier rubyid_message_retention_duration'>message_retention_duration</span><span class='comma'>,</span>
-    <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span>
+    <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span><span class='comma'>,</span>
+    <span class='label'>expiration_policy:</span> <span class='id identifier rubyid_expiration_policy'>expiration_policy</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Pubsub.html" title="Google::Pubsub (module)">Pubsub</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Pubsub/V1.html" title="Google::Pubsub::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Pubsub/V1/Subscription.html" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='rparen'>)</span>
   <span class='ivar'>@create_subscription</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2370,8 +2413,13 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes an existing snapshot. <br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+    <p>Removes an existing snapshot. Snapshots are used in
+<a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+operations, which allow
+you to manage message acknowledgments in bulk. That is, you can set the
+acknowledgment state of messages in an existing subscription to the state
+captured by a snapshot.<br><br>
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.
 When the snapshot is deleted, all messages retained in the snapshot
@@ -2503,20 +2551,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1073
-1074
-1075
-1076
-1077
-1078
-1079
-1080
-1081
-1082
-1083</pre>
+1114
+1115
+1116
+1117
+1118
+1119
+1120
+1121
+1122
+1123
+1124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1073</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_snapshot'>delete_snapshot</span> \
     <span class='id identifier rubyid_snapshot'>snapshot</span><span class='comma'>,</span>
@@ -2675,20 +2723,20 @@ retries, etc.</p>
       <pre class="lines">
 
 
-619
-620
-621
-622
-623
-624
-625
-626
-627
-628
-629</pre>
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 619</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 638</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_subscription'>delete_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -2709,7 +2757,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="get_iam_policy-instance_method">
   
-    #<strong>get_iam_policy</strong>(resource, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt> 
+    #<strong>get_iam_policy</strong>(resource, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Iam::V1::Policy</tt> 
   
 
   
@@ -2800,7 +2848,7 @@ retries, etc.</p>
         <span class='name'>result</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt>)</span>
+        <span class='type'>(<tt>Google::Iam::V1::Policy</tt>)</span>
       
       
       
@@ -2824,7 +2872,7 @@ retries, etc.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt>)</span>
+        <span class='type'>(<tt>Google::Iam::V1::Policy</tt>)</span>
       
       
       
@@ -2855,19 +2903,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1209
-1210
-1211
-1212
-1213
-1214
-1215
-1216
-1217
-1218</pre>
+1256
+1257
+1258
+1259
+1260
+1261
+1262
+1263
+1264
+1265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1209</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1256</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -2876,7 +2924,7 @@ retries, etc.</p>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1/GetIamPolicyRequest.html" title="Google::Iam::V1::GetIamPolicyRequest (class)">GetIamPolicyRequest</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>GetIamPolicyRequest</span><span class='rparen'>)</span>
   <span class='ivar'>@get_iam_policy</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3030,19 +3078,19 @@ retries, etc.</p>
       <pre class="lines">
 
 
-486
-487
-488
-489
-490
-491
-492
-493
-494
-495</pre>
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 486</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 505</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_subscription'>get_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -3070,8 +3118,13 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Lists the existing snapshots.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+    <p>Lists the existing snapshots. Snapshots are used in
+<a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+operations, which allow
+you to manage message acknowledgments in bulk. That is, you can set the
+acknowledgment state of messages in an existing subscription to the state
+captured by a snapshot.<br><br>
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
 
@@ -3116,8 +3169,8 @@ use. It is not subject to any SLA or deprecation policy.</p>
       
       
         &mdash;
-        <div class='inline'><p>The name of the cloud project that snapshots belong to.
-Format is <code>projects/{project}</code>.</p>
+        <div class='inline'><p>The name of the project in which to list snapshots.
+Format is <code>projects/{project-id}</code>.</p>
 </div>
       
     </li>
@@ -3246,21 +3299,21 @@ object.</p>
       <pre class="lines">
 
 
-921
-922
-923
-924
-925
-926
-927
-928
-929
-930
-931
-932</pre>
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 921</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 943</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_snapshots'>list_snapshots</span> \
     <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
@@ -3333,8 +3386,8 @@ object.</p>
       
       
         &mdash;
-        <div class='inline'><p>The name of the cloud project that subscriptions belong to.
-Format is <code>projects/{project}</code>.</p>
+        <div class='inline'><p>The name of the project in which to list subscriptions.
+Format is <code>projects/{project-id}</code>.</p>
 </div>
       
     </li>
@@ -3463,21 +3516,21 @@ object.</p>
       <pre class="lines">
 
 
-583
-584
-585
-586
-587
-588
-589
-590
-591
-592
-593
-594</pre>
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 583</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 602</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_subscriptions'>list_subscriptions</span> \
     <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span>
@@ -3582,8 +3635,9 @@ Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
         <div class='inline'><p>The new ack deadline with respect to the time this request was sent to
 the Pub/Sub system. For example, if the value is 10, the new
 ack deadline will expire 10 seconds after the <code>ModifyAckDeadline</code> call
-was made. Specifying zero may immediately make the message available for
-another pull request.
+was made. Specifying zero might immediately make the message available for
+delivery to another subscriber client. This typically results in an
+increase in the rate of message redeliveries (that is, duplicates).
 The minimum deadline you can specify is 0 seconds.
 The maximum deadline you can specify is 600 seconds (10 minutes).</p>
 </div>
@@ -3679,24 +3733,24 @@ retries, etc.</p>
       <pre class="lines">
 
 
-670
-671
-672
-673
-674
-675
-676
-677
-678
-679
-680
-681
-682
-683
-684</pre>
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 670</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 690</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_ack_deadline'>modify_ack_deadline</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -3885,22 +3939,22 @@ retries, etc.</p>
       <pre class="lines">
 
 
-862
-863
-864
-865
-866
-867
-868
-869
-870
-871
-872
-873
-874</pre>
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 862</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 879</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_push_config'>modify_push_config</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -3931,8 +3985,7 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Pulls messages from the server. Returns an empty list if there are no
-messages available in the backlog. The server may return <code>UNAVAILABLE</code> if
+    <p>Pulls messages from the server. The server may return <code>UNAVAILABLE</code> if
 there are too many concurrent pull requests pending for the given
 subscription.</p>
 
@@ -4003,9 +4056,7 @@ system may return fewer than the number specified.</p>
         <div class='inline'><p>If this field set to true, the system will respond immediately even if
 it there are no messages available to return in the <code>Pull</code> response.
 Otherwise, the system may wait (for a bounded amount of time) until at
-least one message is available, rather than returning no messages. The
-client may cancel the request if it does not wish to wait any longer for
-the response.</p>
+least one message is available, rather than returning no messages.</p>
 </div>
       
     </li>
@@ -4108,23 +4159,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-767
-768
-769
-770
-771
-772
-773
-774
-775
-776
-777
-778
-779
-780</pre>
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 767</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 784</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pull'>pull</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4157,8 +4208,14 @@ retries, etc.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Seeks an existing subscription to a point in time or to a given snapshot,
-whichever is provided in the request.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+whichever is provided in the request. Snapshots are used in
+<a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+operations, which allow
+you to manage message acknowledgments in bulk. That is, you can set the
+acknowledgment state of messages in an existing subscription to the state
+captured by a snapshot. Note that both the subscription and the snapshot
+must be on the same topic.<br><br>
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
 
@@ -4338,23 +4395,23 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1126
-1127
-1128
-1129
-1130
-1131
-1132
-1133
-1134
-1135
-1136
-1137
-1138
-1139</pre>
+1173
+1174
+1175
+1176
+1177
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185
+1186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1126</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1173</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_seek'>seek</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>
@@ -4378,7 +4435,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="set_iam_policy-instance_method">
   
-    #<strong>set_iam_policy</strong>(resource, policy, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt> 
+    #<strong>set_iam_policy</strong>(resource, policy, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Iam::V1::Policy</tt> 
   
 
   
@@ -4433,7 +4490,7 @@ resource is specified as <code>projects/{project}</code>.</p>
         <span class='name'>policy</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span> | Hash</tt>)</span>
+        <span class='type'>(<tt>Google::Iam::V1::Policy | Hash</tt>)</span>
       
       
       
@@ -4491,7 +4548,7 @@ retries, etc.</p>
         <span class='name'>result</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt>)</span>
+        <span class='type'>(<tt>Google::Iam::V1::Policy</tt>)</span>
       
       
       
@@ -4515,7 +4572,7 @@ retries, etc.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Iam/V1/Policy.html" title="Google::Iam::V1::Policy (class)">Google::Iam::V1::Policy</a></span></tt>)</span>
+        <span class='type'>(<tt>Google::Iam::V1::Policy</tt>)</span>
       
       
       
@@ -4546,21 +4603,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1173
-1174
-1175
-1176
-1177
-1178
-1179
-1180
-1181
-1182
-1183
-1184</pre>
+1220
+1221
+1222
+1223
+1224
+1225
+1226
+1227
+1228
+1229
+1230
+1231</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1173</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1220</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -4571,7 +4628,7 @@ retries, etc.</p>
     <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
     <span class='label'>policy:</span> <span class='id identifier rubyid_policy'>policy</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1/SetIamPolicyRequest.html" title="Google::Iam::V1::SetIamPolicyRequest (class)">SetIamPolicyRequest</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>SetIamPolicyRequest</span><span class='rparen'>)</span>
   <span class='ivar'>@set_iam_policy</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4707,15 +4764,15 @@ retries, etc.</p>
       <pre class="lines">
 
 
-819
-820
-821
-822
-823
-824</pre>
+836
+837
+838
+839
+840
+841</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 819</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 836</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_streaming_pull'>streaming_pull</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='comma'>,</span> <span class='label'>options:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_request_protos'>request_protos</span> <span class='op'>=</span> <span class='id identifier rubyid_reqs'>reqs</span><span class='period'>.</span><span class='id identifier rubyid_lazy'>lazy</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_req'>req</span><span class='op'>|</span>
@@ -4731,7 +4788,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="test_iam_permissions-instance_method">
   
-    #<strong>test_iam_permissions</strong>(resource, permissions, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Iam/V1/TestIamPermissionsResponse.html" title="Google::Iam::V1::TestIamPermissionsResponse (class)">Google::Iam::V1::TestIamPermissionsResponse</a></span></tt> 
+    #<strong>test_iam_permissions</strong>(resource, permissions, options: nil) {|result, operation| ... } &#x21d2; <tt>Google::Iam::V1::TestIamPermissionsResponse</tt> 
   
 
   
@@ -4843,7 +4900,7 @@ retries, etc.</p>
         <span class='name'>result</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Iam/V1/TestIamPermissionsResponse.html" title="Google::Iam::V1::TestIamPermissionsResponse (class)">Google::Iam::V1::TestIamPermissionsResponse</a></span></tt>)</span>
+        <span class='type'>(<tt>Google::Iam::V1::TestIamPermissionsResponse</tt>)</span>
       
       
       
@@ -4867,7 +4924,7 @@ retries, etc.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../../../Iam/V1/TestIamPermissionsResponse.html" title="Google::Iam::V1::TestIamPermissionsResponse (class)">Google::Iam::V1::TestIamPermissionsResponse</a></span></tt>)</span>
+        <span class='type'>(<tt>Google::Iam::V1::TestIamPermissionsResponse</tt>)</span>
       
       
       
@@ -4898,21 +4955,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1251
-1252
-1253
-1254
-1255
-1256
-1257
-1258
-1259
-1260
-1261
-1262</pre>
+1298
+1299
+1300
+1301
+1302
+1303
+1304
+1305
+1306
+1307
+1308
+1309</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1251</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1298</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -4923,7 +4980,7 @@ retries, etc.</p>
     <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
     <span class='label'>permissions:</span> <span class='id identifier rubyid_permissions'>permissions</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1/TestIamPermissionsRequest.html" title="Google::Iam::V1::TestIamPermissionsRequest (class)">TestIamPermissionsRequest</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam.html" title="Google::Iam (module)">Iam</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Iam/V1.html" title="Google::Iam::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>TestIamPermissionsRequest</span><span class='rparen'>)</span>
   <span class='ivar'>@test_iam_permissions</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -4942,8 +4999,13 @@ retries, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Updates an existing snapshot.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+    <p>Updates an existing snapshot. Snapshots are used in
+<a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+operations, which allow
+you to manage message acknowledgments in bulk. That is, you can set the
+acknowledgment state of messages in an existing subscription to the state
+captured by a snapshot.<br><br>
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.
 Note that certain properties of a snapshot are not modifiable.</p>
@@ -5105,21 +5167,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-1034
-1035
-1036
-1037
-1038
-1039
-1040
-1041
-1042
-1043
-1044
-1045</pre>
+1070
+1071
+1072
+1073
+1074
+1075
+1076
+1077
+1078
+1079
+1080
+1081</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1034</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 1070</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_snapshot'>update_snapshot</span> \
     <span class='id identifier rubyid_snapshot'>snapshot</span><span class='comma'>,</span>
@@ -5308,21 +5370,21 @@ retries, etc.</p>
       <pre class="lines">
 
 
-528
-529
-530
-531
-532
-533
-534
-535
-536
-537
-538
-539</pre>
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 528</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/subscriber_client.rb', line 547</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_subscription'>update_subscription</span> \
     <span class='id identifier rubyid_subscription'>subscription</span><span class='comma'>,</span>

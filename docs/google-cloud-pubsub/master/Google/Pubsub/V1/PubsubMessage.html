@@ -89,8 +89,14 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A message data and its attributes. The message payload must not be empty;
-it must contain either a non-empty data field, or at least one attribute.</p>
+    <p>A message that is published by publishers and consumed by subscribers. The
+message must contain either a non-empty data field or at least one attribute.
+Note that client libraries represent this object differently
+depending on the language. See the corresponding
+<a href="https://cloud.google.com/pubsub/docs/reference/libraries">client
+library documentation</a> for more information. See
+<a href="https://cloud.google.com/pubsub/quotas">Quotas and limits</a>
+for more information about message limits.</p>
 
 
   </div>
@@ -151,7 +157,7 @@ it must contain either a non-empty data field, or at least one attribute.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The message payload.</p>
+    <span class="summary_desc"><div class='inline'><p>The message data field.</p>
 </div></span>
   
 </li>
@@ -262,10 +268,10 @@ it must contain either a non-empty data field, or at least one attribute.</p>
       <pre class="lines">
 
 
-70</pre>
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 78</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::PubsubMessage (class)">PubsubMessage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -286,7 +292,8 @@ it must contain either a non-empty data field, or at least one attribute.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The message payload.</p>
+    <p>Returns The message data field. If this field is empty, the message must contain
+at least one attribute.</p>
 
 
   </div>
@@ -304,7 +311,8 @@ it must contain either a non-empty data field, or at least one attribute.</p>
       
       
         &mdash;
-        <div class='inline'><p>The message payload.</p>
+        <div class='inline'><p>The message data field. If this field is empty, the message must contain
+at least one attribute.</p>
 </div>
       
     </li>
@@ -317,10 +325,10 @@ it must contain either a non-empty data field, or at least one attribute.</p>
       <pre class="lines">
 
 
-70</pre>
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 78</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::PubsubMessage (class)">PubsubMessage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -378,10 +386,10 @@ delivery. It must not be populated by the publisher in a <code>Publish</code> ca
       <pre class="lines">
 
 
-70</pre>
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 78</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::PubsubMessage (class)">PubsubMessage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -437,10 +445,10 @@ publisher in a <code>Publish</code> call.</p>
       <pre class="lines">
 
 
-70</pre>
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 78</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::PubsubMessage (class)">PubsubMessage</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

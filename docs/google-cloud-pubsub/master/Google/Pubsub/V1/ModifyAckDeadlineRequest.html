@@ -207,8 +207,9 @@ js:
     <p>Returns The new ack deadline with respect to the time this request was sent to
 the Pub/Sub system. For example, if the value is 10, the new
 ack deadline will expire 10 seconds after the <code>ModifyAckDeadline</code> call
-was made. Specifying zero may immediately make the message available for
-another pull request.
+was made. Specifying zero might immediately make the message available for
+delivery to another subscriber client. This typically results in an
+increase in the rate of message redeliveries (that is, duplicates).
 The minimum deadline you can specify is 0 seconds.
 The maximum deadline you can specify is 600 seconds (10 minutes).</p>
 
@@ -231,8 +232,9 @@ The maximum deadline you can specify is 600 seconds (10 minutes).</p>
         <div class='inline'><p>The new ack deadline with respect to the time this request was sent to
 the Pub/Sub system. For example, if the value is 10, the new
 ack deadline will expire 10 seconds after the <code>ModifyAckDeadline</code> call
-was made. Specifying zero may immediately make the message available for
-another pull request.
+was made. Specifying zero might immediately make the message available for
+delivery to another subscriber client. This typically results in an
+increase in the rate of message redeliveries (that is, duplicates).
 The minimum deadline you can specify is 0 seconds.
 The maximum deadline you can specify is 600 seconds (10 minutes).</p>
 </div>
@@ -247,10 +249,10 @@ The maximum deadline you can specify is 600 seconds (10 minutes).</p>
       <pre class="lines">
 
 
-416</pre>
+450</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 416</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 450</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::ModifyAckDeadlineRequest (class)">ModifyAckDeadlineRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -302,10 +304,10 @@ The maximum deadline you can specify is 600 seconds (10 minutes).</p>
       <pre class="lines">
 
 
-416</pre>
+450</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 416</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 450</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::ModifyAckDeadlineRequest (class)">ModifyAckDeadlineRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -359,10 +361,10 @@ Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
       <pre class="lines">
 
 
-416</pre>
+450</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 416</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 450</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::ModifyAckDeadlineRequest (class)">ModifyAckDeadlineRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

@@ -124,7 +124,33 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This value is the maximum time after a subscriber receives a message before the subscriber should acknowledge the message.</p>
+    <span class="summary_desc"><div class='inline'><p>The approximate amount of time (on a best-effort basis) Pub/Sub waits for the subscriber to acknowledge receipt before resending the message.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#expiration_policy-instance_method" title="#expiration_policy (instance method)">#<strong>expiration_policy</strong>  &#x21d2; Google::Pubsub::V1::ExpirationPolicy </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A policy that specifies the conditions for this subscription&#39;s expiration.</p>
 </div></span>
   
 </li>
@@ -150,7 +176,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>User labels.</p>
+    <span class="summary_desc"><div class='inline'><p>See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and managing labels</a>.</p>
 </div></span>
   
 </li>
@@ -308,11 +334,11 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns This value is the maximum time after a subscriber receives a message
-before the subscriber should acknowledge the message. After message
-delivery but before the ack deadline expires and before the message is
-acknowledged, it is an outstanding message and will not be delivered
-again during that time (on a best-effort basis).</p>
+    <p>Returns The approximate amount of time (on a best-effort basis) Pub/Sub waits for
+the subscriber to acknowledge receipt before resending the message. In the
+interval after the message is delivered and before it is acknowledged, it
+is considered to be <i>outstanding</i>. During that time period, the
+message will not be redelivered (on a best-effort basis).</p>
 
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
@@ -345,11 +371,11 @@ system will eventually redeliver the message.</p>
       
       
         &mdash;
-        <div class='inline'><p>This value is the maximum time after a subscriber receives a message
-before the subscriber should acknowledge the message. After message
-delivery but before the ack deadline expires and before the message is
-acknowledged, it is an outstanding message and will not be delivered
-again during that time (on a best-effort basis).</p>
+        <div class='inline'><p>The approximate amount of time (on a best-effort basis) Pub/Sub waits for
+the subscriber to acknowledge receipt before resending the message. In the
+interval after the message is delivered and before it is acknowledged, it
+is considered to be <i>outstanding</i>. During that time period, the
+message will not be redelivered (on a best-effort basis).</p>
 
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
@@ -377,10 +403,81 @@ system will eventually redeliver the message.</p>
       <pre class="lines">
 
 
-265</pre>
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 288</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="expiration_policy=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="expiration_policy-instance_method">
+  
+    #<strong>expiration_policy</strong>  &#x21d2; <tt><span class='object_link'><a href="ExpirationPolicy.html" title="Google::Pubsub::V1::ExpirationPolicy (class)">Google::Pubsub::V1::ExpirationPolicy</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A policy that specifies the conditions for this subscription&#39;s expiration.
+A subscription is considered active as long as any connected subscriber is
+successfully consuming messages from the subscription or is issuing
+operations on the subscription. If <code>expiration_policy</code> is not set, a
+<em>default policy</em> with <code>ttl</code> of 31 days will be used. The minimum allowed
+value for <code>expiration_policy.ttl</code> is 1 day.
+<b>BETA:</b> This feature is part of a beta release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ExpirationPolicy.html" title="Google::Pubsub::V1::ExpirationPolicy (class)">Google::Pubsub::V1::ExpirationPolicy</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A policy that specifies the conditions for this subscription&#39;s expiration.
+A subscription is considered active as long as any connected subscriber is
+successfully consuming messages from the subscription or is issuing
+operations on the subscription. If <code>expiration_policy</code> is not set, a
+<em>default policy</em> with <code>ttl</code> of 31 days will be used. The minimum allowed
+value for <code>expiration_policy.ttl</code> is 1 day.
+<b>BETA:</b> This feature is part of a beta release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 288</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -401,7 +498,8 @@ system will eventually redeliver the message.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns User labels.</p>
+    <p>Returns See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
+managing labels</a>.</p>
 
 
   </div>
@@ -419,7 +517,8 @@ system will eventually redeliver the message.</p>
       
       
         &mdash;
-        <div class='inline'><p>User labels.</p>
+        <div class='inline'><p>See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
+managing labels</a>.</p>
 </div>
       
     </li>
@@ -432,10 +531,10 @@ system will eventually redeliver the message.</p>
       <pre class="lines">
 
 
-265</pre>
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 288</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -462,7 +561,7 @@ If <code>retain_acked_messages</code> is true, then this also configures the ret
 of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
 minutes.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
 
@@ -488,7 +587,7 @@ If <code>retain_acked_messages</code> is true, then this also configures the ret
 of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
 minutes.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
 </div>
@@ -503,10 +602,10 @@ use. It is not subject to any SLA or deprecation policy.</p>
       <pre class="lines">
 
 
-265</pre>
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 288</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -568,10 +667,10 @@ in length, and it must not start with <code>&quot;goog&quot;</code></p>
       <pre class="lines">
 
 
-265</pre>
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 288</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -627,10 +726,10 @@ will pull and ack messages using API methods.</p>
       <pre class="lines">
 
 
-265</pre>
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 288</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -654,8 +753,11 @@ will pull and ack messages using API methods.</p>
     <p>Returns Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&#39;s backlog, even if they are
 acknowledged, until they fall out of the <code>message_retention_duration</code>
-window.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+window. This must be true if you would like to
+<a href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
+Seek to a timestamp</a>.
+<br><br>
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
 
@@ -678,8 +780,11 @@ use. It is not subject to any SLA or deprecation policy.</p>
         <div class='inline'><p>Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&#39;s backlog, even if they are
 acknowledged, until they fall out of the <code>message_retention_duration</code>
-window.<br><br>
-<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+window. This must be true if you would like to
+<a href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
+Seek to a timestamp</a>.
+<br><br>
+<b>BETA:</b> This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
 </div>
@@ -694,10 +799,10 @@ use. It is not subject to any SLA or deprecation policy.</p>
       <pre class="lines">
 
 
-265</pre>
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 288</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -755,10 +860,10 @@ deleted.</p>
       <pre class="lines">
 
 
-265</pre>
+288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 288</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

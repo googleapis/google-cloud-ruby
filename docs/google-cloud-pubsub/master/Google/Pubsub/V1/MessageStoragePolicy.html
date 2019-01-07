@@ -114,7 +114,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The list of GCP regions where messages that are published to the topic may be persisted in storage.</p>
+    <span class="summary_desc"><div class='inline'><p>The list of GCP region IDs where messages that are published to the topic may be persisted in storage.</p>
 </div></span>
   
 </li>
@@ -142,8 +142,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The list of GCP regions where messages that are published to the topic may
-be persisted in storage. Messages published by publishers running in
+    <p>Returns The list of GCP region IDs where messages that are published to the topic
+may be persisted in storage. Messages published by publishers running in
 non-allowed GCP regions (or running outside of GCP altogether) will be
 routed for storage in one of the allowed regions. An empty list indicates a
 misconfiguration at the project or organization level, which will result in
@@ -165,8 +165,8 @@ all Publish operations failing.</p>
       
       
         &mdash;
-        <div class='inline'><p>The list of GCP regions where messages that are published to the topic may
-be persisted in storage. Messages published by publishers running in
+        <div class='inline'><p>The list of GCP region IDs where messages that are published to the topic
+may be persisted in storage. Messages published by publishers running in
 non-allowed GCP regions (or running outside of GCP altogether) will be
 routed for storage in one of the allowed regions. An empty list indicates a
 misconfiguration at the project or organization level, which will result in

@@ -152,10 +152,10 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Received Pub/Sub messages. The Pub/Sub system will return zero messages if
-there are no more available in the backlog. The Pub/Sub system may return
-fewer than the <code>maxMessages</code> requested even if there are more messages
-available in the backlog.</p>
+    <p>Returns Received Pub/Sub messages. The list will be empty if there are no more
+messages available in the backlog. For JSON, the response can be entirely
+empty. The Pub/Sub system may return fewer than the <code>maxMessages</code> requested
+even if there are more messages available in the backlog.</p>
 
 
   </div>
@@ -173,10 +173,10 @@ available in the backlog.</p>
       
       
         &mdash;
-        <div class='inline'><p>Received Pub/Sub messages. The Pub/Sub system will return zero messages if
-there are no more available in the backlog. The Pub/Sub system may return
-fewer than the <code>maxMessages</code> requested even if there are more messages
-available in the backlog.</p>
+        <div class='inline'><p>Received Pub/Sub messages. The list will be empty if there are no more
+messages available in the backlog. For JSON, the response can be entirely
+empty. The Pub/Sub system may return fewer than the <code>maxMessages</code> requested
+even if there are more messages available in the backlog.</p>
 </div>
       
     </li>
@@ -189,10 +189,10 @@ available in the backlog.</p>
       <pre class="lines">
 
 
-397</pre>
+430</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 397</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 430</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::PullResponse (class)">PullResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
