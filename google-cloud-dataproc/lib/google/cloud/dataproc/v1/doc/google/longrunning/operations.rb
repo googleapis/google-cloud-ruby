@@ -47,47 +47,5 @@ module Google
     #     is `TakeSnapshot()`, the inferred response type is
     #     `TakeSnapshotResponse`.
     class Operation; end
-
-    # The request message for {Google::Longrunning::Operations::GetOperation Operations::GetOperation}.
-    # @!attribute [rw] name
-    #   @return [String]
-    #     The name of the operation resource.
-    class GetOperationRequest; end
-
-    # The request message for {Google::Longrunning::Operations::ListOperations Operations::ListOperations}.
-    # @!attribute [rw] name
-    #   @return [String]
-    #     The name of the operation collection.
-    # @!attribute [rw] filter
-    #   @return [String]
-    #     The standard list filter.
-    # @!attribute [rw] page_size
-    #   @return [Integer]
-    #     The standard list page size.
-    # @!attribute [rw] page_token
-    #   @return [String]
-    #     The standard list page token.
-    class ListOperationsRequest; end
-
-    # The response message for {Google::Longrunning::Operations::ListOperations Operations::ListOperations}.
-    # @!attribute [rw] operations
-    #   @return [Array<Google::Longrunning::Operation>]
-    #     A list of operations that matches the specified filter in the request.
-    # @!attribute [rw] next_page_token
-    #   @return [String]
-    #     The standard List next-page token.
-    class ListOperationsResponse; end
-
-    # The request message for {Google::Longrunning::Operations::CancelOperation Operations::CancelOperation}.
-    # @!attribute [rw] name
-    #   @return [String]
-    #     The name of the operation resource to be cancelled.
-    class CancelOperationRequest; end
-
-    # The request message for {Google::Longrunning::Operations::DeleteOperation Operations::DeleteOperation}.
-    # @!attribute [rw] name
-    #   @return [String]
-    #     The name of the operation resource to be deleted.
-    class DeleteOperationRequest; end
   end
 end
