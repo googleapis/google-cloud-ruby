@@ -116,7 +116,7 @@ will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fiel
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span>, <span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span>, <span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">BucketOptions</a></span>
     
   
 </p>
@@ -472,57 +472,12 @@ counts for the finite buckets (number 1 through N-2). The N&#39;th value in
 159
 160
 161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198</pre>
+162</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
-  <span class='comment'># The range of the population values.
-</span>  <span class='comment'># @!attribute [rw] min
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The minimum of the population values.
-</span>  <span class='comment'># @!attribute [rw] max
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The maximum of the population values.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
   <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
 </span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
 </span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
@@ -604,33 +559,6 @@ counts for the finite buckets (number 1 through N-2). The N&#39;th value in
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
-
-  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
-</span>  <span class='comment'># distribution values. They are metadata that gives information about a
-</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
-</span>  <span class='comment'># was active when a value was added. They may contain further information,
-</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
-</span>  <span class='comment'># @!attribute [rw] value
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
-</span>  <span class='comment'>#     exemplar belongs.
-</span>  <span class='comment'># @!attribute [rw] timestamp
-</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     The observation (sampling) time of the above value.
-</span>  <span class='comment'># @!attribute [rw] attachments
-</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
-</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Labels dropped during aggregation:
-</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
-</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -765,57 +693,12 @@ contain a histogram, then omit this field.</p>
 159
 160
 161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198</pre>
+162</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
-  <span class='comment'># The range of the population values.
-</span>  <span class='comment'># @!attribute [rw] min
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The minimum of the population values.
-</span>  <span class='comment'># @!attribute [rw] max
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The maximum of the population values.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
   <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
 </span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
 </span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
@@ -897,33 +780,6 @@ contain a histogram, then omit this field.</p>
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
-
-  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
-</span>  <span class='comment'># distribution values. They are metadata that gives information about a
-</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
-</span>  <span class='comment'># was active when a value was added. They may contain further information,
-</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
-</span>  <span class='comment'># @!attribute [rw] value
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
-</span>  <span class='comment'>#     exemplar belongs.
-</span>  <span class='comment'># @!attribute [rw] timestamp
-</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     The observation (sampling) time of the above value.
-</span>  <span class='comment'># @!attribute [rw] attachments
-</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
-</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Labels dropped during aggregation:
-</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
-</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1060,57 +916,12 @@ provided.</p>
 159
 160
 161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198</pre>
+162</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
-  <span class='comment'># The range of the population values.
-</span>  <span class='comment'># @!attribute [rw] min
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The minimum of the population values.
-</span>  <span class='comment'># @!attribute [rw] max
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The maximum of the population values.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
   <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
 </span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
 </span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
@@ -1192,33 +1003,6 @@ provided.</p>
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
-
-  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
-</span>  <span class='comment'># distribution values. They are metadata that gives information about a
-</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
-</span>  <span class='comment'># was active when a value was added. They may contain further information,
-</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
-</span>  <span class='comment'># @!attribute [rw] value
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
-</span>  <span class='comment'>#     exemplar belongs.
-</span>  <span class='comment'># @!attribute [rw] timestamp
-</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     The observation (sampling) time of the above value.
-</span>  <span class='comment'># @!attribute [rw] attachments
-</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
-</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Labels dropped during aggregation:
-</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
-</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1230,7 +1014,7 @@ provided.</p>
       <div class="method_details ">
   <h3 class="signature " id="exemplars-instance_method">
   
-    #<strong>exemplars</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Google::Api::Distribution::Exemplar</a></span>&gt;</tt> 
+    #<strong>exemplars</strong>  &#x21d2; <tt>Array&lt;Google::Api::Distribution::Exemplar&gt;</tt> 
   
 
   
@@ -1251,7 +1035,7 @@ provided.</p>
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Google::Api::Distribution::Exemplar</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Google::Api::Distribution::Exemplar&gt;</tt>)</span>
       
       
       
@@ -1351,57 +1135,12 @@ provided.</p>
 159
 160
 161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198</pre>
+162</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
-  <span class='comment'># The range of the population values.
-</span>  <span class='comment'># @!attribute [rw] min
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The minimum of the population values.
-</span>  <span class='comment'># @!attribute [rw] max
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The maximum of the population values.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
   <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
 </span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
 </span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
@@ -1483,33 +1222,6 @@ provided.</p>
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
-
-  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
-</span>  <span class='comment'># distribution values. They are metadata that gives information about a
-</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
-</span>  <span class='comment'># was active when a value was added. They may contain further information,
-</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
-</span>  <span class='comment'># @!attribute [rw] value
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
-</span>  <span class='comment'>#     exemplar belongs.
-</span>  <span class='comment'># @!attribute [rw] timestamp
-</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     The observation (sampling) time of the above value.
-</span>  <span class='comment'># @!attribute [rw] attachments
-</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
-</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Labels dropped during aggregation:
-</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
-</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1644,57 +1356,12 @@ then this field must be zero.</p>
 159
 160
 161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198</pre>
+162</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
-  <span class='comment'># The range of the population values.
-</span>  <span class='comment'># @!attribute [rw] min
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The minimum of the population values.
-</span>  <span class='comment'># @!attribute [rw] max
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The maximum of the population values.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
   <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
 </span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
 </span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
@@ -1776,33 +1443,6 @@ then this field must be zero.</p>
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
-
-  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
-</span>  <span class='comment'># distribution values. They are metadata that gives information about a
-</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
-</span>  <span class='comment'># was active when a value was added. They may contain further information,
-</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
-</span>  <span class='comment'># @!attribute [rw] value
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
-</span>  <span class='comment'>#     exemplar belongs.
-</span>  <span class='comment'># @!attribute [rw] timestamp
-</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     The observation (sampling) time of the above value.
-</span>  <span class='comment'># @!attribute [rw] attachments
-</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
-</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Labels dropped during aggregation:
-</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
-</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1814,7 +1454,7 @@ then this field must be zero.</p>
       <div class="method_details ">
   <h3 class="signature " id="range-instance_method">
   
-    #<strong>range</strong>  &#x21d2; <tt><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Google::Api::Distribution::Range</a></span></tt> 
+    #<strong>range</strong>  &#x21d2; <tt>Google::Api::Distribution::Range</tt> 
   
 
   
@@ -1836,7 +1476,7 @@ must not be present if the <code>count</code> is zero.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Google::Api::Distribution::Range</a></span></tt>)</span>
+        <span class='type'>(<tt>Google::Api::Distribution::Range</tt>)</span>
       
       
       
@@ -1937,57 +1577,12 @@ must not be present if the <code>count</code> is zero.</p>
 159
 160
 161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198</pre>
+162</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
-  <span class='comment'># The range of the population values.
-</span>  <span class='comment'># @!attribute [rw] min
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The minimum of the population values.
-</span>  <span class='comment'># @!attribute [rw] max
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The maximum of the population values.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
   <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
 </span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
 </span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
@@ -2069,33 +1664,6 @@ must not be present if the <code>count</code> is zero.</p>
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
-
-  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
-</span>  <span class='comment'># distribution values. They are metadata that gives information about a
-</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
-</span>  <span class='comment'># was active when a value was added. They may contain further information,
-</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
-</span>  <span class='comment'># @!attribute [rw] value
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
-</span>  <span class='comment'>#     exemplar belongs.
-</span>  <span class='comment'># @!attribute [rw] timestamp
-</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     The observation (sampling) time of the above value.
-</span>  <span class='comment'># @!attribute [rw] attachments
-</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
-</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Labels dropped during aggregation:
-</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
-</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2246,57 +1814,12 @@ describes Welford&#39;s method for accumulating this sum in one pass.</p>
 159
 160
 161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198</pre>
+162</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/api/distribution.rb', line 80</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Api::Distribution (class)">Distribution</a></span></span>
-  <span class='comment'># The range of the population values.
-</span>  <span class='comment'># @!attribute [rw] min
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The minimum of the population values.
-</span>  <span class='comment'># @!attribute [rw] max
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     The maximum of the population values.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Range.html" title="Google::Api::Distribution::Range (class)">Range</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
   <span class='comment'># `BucketOptions` describes the bucket boundaries used to create a histogram
 </span>  <span class='comment'># for the distribution. The buckets can be in a linear sequence, an
 </span>  <span class='comment'># exponential sequence, or each bucket can be specified explicitly.
@@ -2378,33 +1901,6 @@ describes Welford&#39;s method for accumulating this sum in one pass.</p>
 </span>    <span class='comment'>#     The values must be monotonically increasing.
 </span>    <span class='kw'>class</span> <span class='const'>Explicit</span><span class='semicolon'>;</span> <span class='kw'>end</span>
   <span class='kw'>end</span>
-
-  <span class='comment'># Exemplars are example points that may be used to annotate aggregated
-</span>  <span class='comment'># distribution values. They are metadata that gives information about a
-</span>  <span class='comment'># particular value added to a Distribution bucket, such as a trace ID that
-</span>  <span class='comment'># was active when a value was added. They may contain further information,
-</span>  <span class='comment'># such as a example values and timestamps, origin, etc.
-</span>  <span class='comment'># @!attribute [rw] value
-</span>  <span class='comment'>#   @return [Float]
-</span>  <span class='comment'>#     Value of the exemplar point. This value determines to which bucket the
-</span>  <span class='comment'>#     exemplar belongs.
-</span>  <span class='comment'># @!attribute [rw] timestamp
-</span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     The observation (sampling) time of the above value.
-</span>  <span class='comment'># @!attribute [rw] attachments
-</span>  <span class='comment'>#   @return [Array&lt;Google::Protobuf::Any&gt;]
-</span>  <span class='comment'>#     Contextual information about the example value. Examples are:
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Literal string: type.googleapis.com/google.protobuf.StringValue
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#       Labels dropped during aggregation:
-</span>  <span class='comment'>#         type.googleapis.com/google.monitoring.v3.DroppedLabels
-</span>  <span class='comment'>#
-</span>  <span class='comment'>#     There may be only a single attachment of any given message type in a
-</span>  <span class='comment'>#     single exemplar, and this is enforced by the system.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Distribution/Exemplar.html" title="Google::Api::Distribution::Exemplar (class)">Exemplar</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
