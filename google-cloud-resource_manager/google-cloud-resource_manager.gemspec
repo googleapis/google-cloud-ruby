@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 1.2"
   gem.add_dependency "google-api-client", "~> 0.23"
-  gem.add_dependency "googleauth", "~> 0.6.2"
+  gem.add_dependency "googleauth", ">= 0.6.2", "< 0.8.0"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
