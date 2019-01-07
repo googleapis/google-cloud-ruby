@@ -37,20 +37,6 @@ end
 describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   let(:mock_credentials) { HelperMockKmsCredentials_v1.new }
 
-  describe "the crypto_key_version_path instance method" do
-    it "correctly calls Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path" do
-      Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
-        num_args = Google::Cloud::Kms::V1::KeyManagementServiceClient.method("crypto_key_version_path").arity
-        client = Google::Cloud::Kms.new version: :v1
-        args = (0...num_args).map { "argument" }
-        assert_equal(
-          client.crypto_key_version_path(*args),
-          Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path(*args)
-        )
-      end
-    end
-  end
-
   describe "the key_ring_path instance method" do
     it "correctly calls Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path" do
       Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -102,6 +88,20 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(
           client.location_path(*args),
           Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path(*args)
+        )
+      end
+    end
+  end
+
+  describe "the crypto_key_version_path instance method" do
+    it "correctly calls Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path" do
+      Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
+        num_args = Google::Cloud::Kms::V1::KeyManagementServiceClient.method("crypto_key_version_path").arity
+        client = Google::Cloud::Kms.new version: :v1
+        args = (0...num_args).map { "argument" }
+        assert_equal(
+          client.crypto_key_version_path(*args),
+          Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path(*args)
         )
       end
     end
