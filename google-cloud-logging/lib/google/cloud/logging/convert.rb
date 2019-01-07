@@ -32,7 +32,7 @@ module Google
         def self.array_to_list array
           # TODO: ArgumentError if array is not an Array
           Google::Protobuf::ListValue.new \
-            values: array.map { |o| object_to_value(o) }
+            values: array.map { |o| object_to_value o }
         end
 
         ##

@@ -488,7 +488,7 @@ module Google
           return {} if labels.nil?
           # Coerce symbols to strings
           Hash[labels.map do |k, v|
-            v = String(v) if v.is_a? Symbol
+            v = String v if v.is_a? Symbol
             [String(k), v]
           end]
         end

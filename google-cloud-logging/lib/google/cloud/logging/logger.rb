@@ -621,8 +621,8 @@ module Google
         # @private Compute individual label value.
         # Value can be a Proc (function of the request env) or a static value.
         def compute_label_value request_env, value_or_proc
-          if value_or_proc.respond_to?(:call)
-            value_or_proc.call(request_env)
+          if value_or_proc.respond_to? :call
+            value_or_proc.call request_env
           else
             value_or_proc
           end

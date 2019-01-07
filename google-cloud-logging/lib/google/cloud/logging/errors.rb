@@ -53,7 +53,7 @@ module Google
         attr_reader :entries
 
         def initialize message, entries = nil
-          super(message)
+          super message
           @entries = entries if entries
         end
       end
@@ -92,7 +92,7 @@ module Google
         attr_reader :entries
 
         def initialize message, entries = nil
-          super(message)
+          super message
           @entries = entries if entries
         end
       end
