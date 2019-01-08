@@ -94,9 +94,6 @@ module Google
         #   * {Fields} - Nested Structs are specified by providing a Fields
         #     object.
         #
-        # @return [Integer] The current number of statements in the batch
-        #   update.
-        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -138,7 +135,7 @@ module Google
         #
         def add sql, params: nil, types: nil
           @statements << Statement.new(sql, params: params, types: types)
-          @statements.count
+          true
         end
 
         # @private
