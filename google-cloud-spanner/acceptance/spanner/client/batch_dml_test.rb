@@ -44,9 +44,9 @@ describe "Spanner Client", :batch_dml, :spanner do
       tx.transaction_id.wont_be :nil?
 
       results = tx.batch_update do |b|
-        b.add insert_dml, params: insert_params
-        b.add update_dml, params: update_params
-        b.add delete_dml, params: delete_params
+        b.batch_update insert_dml, params: insert_params
+        b.batch_update update_dml, params: update_params
+        b.batch_update delete_dml, params: delete_params
       end
 
       results.wont_be :failed?
@@ -92,9 +92,9 @@ describe "Spanner Client", :batch_dml, :spanner do
       tx.transaction_id.wont_be :nil?
 
       results = tx.batch_update do |b|
-        b.add insert_dml, params: insert_params
-        b.add update_dml_syntax_error, params: update_params
-        b.add delete_dml, params: delete_params
+        b.batch_update insert_dml, params: insert_params
+        b.batch_update update_dml_syntax_error, params: update_params
+        b.batch_update delete_dml, params: delete_params
       end
 
       results.must_be :failed?
@@ -123,8 +123,8 @@ describe "Spanner Client", :batch_dml, :spanner do
       tx.transaction_id.wont_be :nil?
 
       results = tx.batch_update do |b|
-        b.add insert_dml, params: insert_params
-        b.add update_dml, params: update_params
+        b.batch_update insert_dml, params: insert_params
+        b.batch_update update_dml, params: update_params
       end
 
       results.wont_be :failed?

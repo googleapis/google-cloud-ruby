@@ -102,7 +102,7 @@ module Google
         #
         #   db.transaction do |tx|
         #     results = tx.batch_update do |b|
-        #       statement_count = b.add(
+        #       statement_count = b.batch_update(
         #         "UPDATE users SET name = 'Charlie' WHERE id = 1"
         #       )
         #     end
@@ -121,7 +121,7 @@ module Google
         #
         #   db.transaction do |tx|
         #     results = tx.batch_update do |b|
-        #       statement_count = b.add(
+        #       statement_count = b.batch_update(
         #         "UPDATE users SET name = 'Charlie' WHERE id = 1",
         #         params: { id: 1, name: "Charlie" }
         #       )
@@ -133,7 +133,7 @@ module Google
         #     end
         #   end
         #
-        def add sql, params: nil, types: nil
+        def batch_update sql, params: nil, types: nil
           @statements << Statement.new(sql, params: params, types: types)
           true
         end

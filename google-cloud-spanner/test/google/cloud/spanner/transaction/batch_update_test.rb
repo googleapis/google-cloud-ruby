@@ -35,7 +35,7 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
     session.service.mocked_service = mock
 
     results = transaction.batch_update do |b|
-      b.add "UPDATE users SET active = true"
+      b.batch_update "UPDATE users SET active = true"
     end
 
     mock.verify
@@ -61,15 +61,15 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
     session.service.mocked_service = mock
 
     results = transaction.batch_update do |b|
-      b.add "UPDATE users SET active = @active", params: { active: true }
-      b.add "UPDATE users SET age = @age", params: { age: 29 }
-      b.add "UPDATE users SET score = @score", params: { score: 0.9 }
-      b.add "UPDATE users SET updated_at = @updated_at", params: { updated_at: timestamp }
-      b.add "UPDATE users SET birthday = @birthday", params: { birthday: date }
-      b.add "UPDATE users SET name = @name", params: { name: "Charlie" }
-      b.add "UPDATE users SET avatar = @avatar", params: { avatar: file }
-      b.add "UPDATE users SET project_ids = @list", params: { list: [1,2,3] }
-      b.add "UPDATE users SET settings = @dict", params: { dict: { env: :production } }
+      b.batch_update "UPDATE users SET active = @active", params: { active: true }
+      b.batch_update "UPDATE users SET age = @age", params: { age: 29 }
+      b.batch_update "UPDATE users SET score = @score", params: { score: 0.9 }
+      b.batch_update "UPDATE users SET updated_at = @updated_at", params: { updated_at: timestamp }
+      b.batch_update "UPDATE users SET birthday = @birthday", params: { birthday: date }
+      b.batch_update "UPDATE users SET name = @name", params: { name: "Charlie" }
+      b.batch_update "UPDATE users SET avatar = @avatar", params: { avatar: file }
+      b.batch_update "UPDATE users SET project_ids = @list", params: { list: [1,2,3] }
+      b.batch_update "UPDATE users SET settings = @dict", params: { dict: { env: :production } }
     end
 
     mock.verify
@@ -116,7 +116,7 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
 
       transaction.execute_update "UPDATE users SET active = true"
       transaction.batch_update do |b|
-        b.add "UPDATE users SET age = @age", params: { age: 29 }
+        b.batch_update "UPDATE users SET age = @age", params: { age: 29 }
       end
       transaction.execute_update "UPDATE users SET active = false"
 
