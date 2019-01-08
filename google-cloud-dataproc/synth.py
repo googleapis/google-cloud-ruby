@@ -19,7 +19,6 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 import re
-from textwrap import dedent
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -46,32 +45,6 @@ s.copy(v1beta2 / 'lib/google/cloud/dataproc/v1beta2')
 s.copy(v1beta2 / 'lib/google/cloud/dataproc/v1beta2.rb')
 s.copy(v1beta2 / 'acceptance/google/cloud/dataproc/v1beta2')
 s.copy(v1beta2 / 'test/google/cloud/dataproc/v1beta2')
-
-for version in ['v1', 'v1beta2']:
-    # https://github.com/googleapis/gapic-generator/issues/2232
-    s.replace(
-        f'lib/google/cloud/dataproc/{version}/cluster_controller_client.rb',
-        '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
-        '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
-
-    # https://github.com/googleapis/gapic-generator/issues/2492
-    s.replace(
-        [
-            'lib/google/cloud/dataproc.rb',
-            f'lib/google/cloud/dataproc/{version}.rb'
-        ],
-        'module WorkflowTemplate\n',
-        'module WorkflowTemplateService\n'
-    )
-
-    s.replace(
-        [
-            f'lib/google/cloud/dataproc/{version}/workflow_template_service_client.rb',
-            f'test/google/cloud/dataproc/{version}/workflow_template_service_client_test.rb'
-        ],
-        'WorkflowTemplate\\.new\\(version:',
-        'WorkflowTemplateService.new(version:'
-    )
 
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):
@@ -127,4 +100,30 @@ s.replace(
     'lib/google/cloud/dataproc.rb',
     'WorkflowTemplate\\.new',
     'WorkflowTemplateService.new'
+)
+
+s.replace(
+    [
+        'lib/google/cloud/dataproc/v*/workflow_template_service_client.rb',
+        'test/google/cloud/dataproc/v*/workflow_template_service_client_test.rb'
+    ],
+    'WorkflowTemplate\\.new\\(version:',
+    'WorkflowTemplateService.new(version:'
+)
+
+# https://github.com/googleapis/gapic-generator/issues/2492
+s.replace(
+    [
+        'lib/google/cloud/dataproc.rb',
+        'lib/google/cloud/dataproc/v*.rb'
+    ],
+    'module WorkflowTemplate\n',
+    'module WorkflowTemplateService\n'
+)
+
+# https://github.com/googleapis/gapic-generator/issues/2232
+s.replace(
+    'lib/google/cloud/dataproc/v*/cluster_controller_client.rb',
+    '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
+    '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient'
 )
