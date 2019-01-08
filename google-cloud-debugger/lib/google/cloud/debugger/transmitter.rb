@@ -13,34 +13,46 @@
 # limitations under the License.
 
 
-require "stackdriver/core/async_actor"
+require "concurrent"
+require "google/cloud/errors"
 
 module Google
   module Cloud
     module Debugger
       ##
+      # # TransmitterError
+      #
+      # Used to indicate a problem submitting breakpoints. This can occur when
+      # there are not enough resources allocated for the amount of usage, or
+      # when the calling the API returns an error.
+      #
+      class TransmitterError < Google::Cloud::Error
+        # @!attribute [r] breakpoint
+        #   @return [Array<Google::Cloud::Debugger::Breakpoint>] The
+        #   individual error event that was not submitted to Stackdriver
+        #   Debugger service.
+        attr_reader :breakpoint
+
+        def initialize message, breakpoint = nil
+          super(message)
+          @breakpoint = breakpoint
+        end
+      end
+
+      ##
       # # Transmitter
       #
       # Responsible for submit evaluated breakpoints back to Stackdriver
-      # Debugger service asynchronously. It has it's own dedicated child thread,
-      # so it doesn't interfere with main Ruby application threads or the
-      # debugger agent's thread.
+      # Debugger service asynchronously. It maintains a thread pool.
       #
       # The transmitter is controlled by the debugger agent it belongs to.
-      # Debugger agent submits evaluated breakpoint into a thread safe queue,
-      # and the transmitter operates directly on the queue along with minimal
-      # interaction with the rest debugger agent components
+      # Debugger agent submits evaluated breakpoint asynchronously, and the
+      # transmitter submits the breakpoints to Stackdriver Debugger service.
       #
       class Transmitter
-        include Stackdriver::Core::AsyncActor
-
         ##
-        # @private Default maximum backlog size for the job queue
-        DEFAULT_MAX_QUEUE_SIZE = 1000
-
-        ##
-        # @private The gRPC Service object.
-        attr_accessor :service
+        # @private The gRPC Service object and thread pool.
+        attr_reader :service, :thread_pool
 
         ##
         # The debugger agent this transmiter belongs to
@@ -48,92 +60,137 @@ module Google
         attr_accessor :agent
 
         ##
-        # Maxium backlog size for this transmitter's queue
-        attr_accessor :max_queue_size
+        # Maximum backlog size for this transmitter's queue
+        attr_accessor :max_queue
+        alias max_queue_size  max_queue
+        alias max_queue_size= max_queue=
 
         ##
-        # @private Construct a new instance of Tramsnitter
-        def initialize agent, service, max_queue_size = DEFAULT_MAX_QUEUE_SIZE
-          super()
+        # Maximum threads used in the thread pool
+        attr_accessor :threads
+
+        ##
+        # @private Creates a new Transmitter instance.
+        def initialize agent, service, max_queue: 1000, threads: 10
+          @agent   = agent
           @service = service
-          @agent = agent
-          @max_queue_size = max_queue_size
-          @queue = []
-          @queue_resource = new_cond
-        end
 
-        ##
-        # Starts the transmitter and its worker thread
-        def start
-          async_start
-        end
+          @max_queue = max_queue
+          @threads   = threads
 
-        ##
-        # Stops the transmitter and its worker thread. Once stopped, cannot be
-        # started again.
-        def stop
-          async_stop
+          @thread_pool = Concurrent::CachedThreadPool.new max_threads: @threads,
+                                                          max_queue: @max_queue
+
+          @error_callbacks = []
+
+          # Make sure all queued calls are completed when process exits.
+          # at_exit { stop }
         end
 
         ##
         # Enqueue an evaluated breakpoints to be submitted by the transmitter.
-        #
-        # @param [Google::Cloud::Debugger::Breakpoint] breakpoint The evaluated
-        #   breakpoint to be submitted
+        # This will raise if there are no resources available to make the API
+        # call.
         def submit breakpoint
-          synchronize do
-            @queue.push breakpoint
-            @queue_resource.broadcast
-            # Discard old entries if queue gets too large
-            @queue.pop while @queue.size > @max_queue_size
+          Concurrent::Promises.future_on(@thread_pool, breakpoint) do |bp|
+            submit_sync bp
           end
+        rescue Concurrent::RejectedExecutionError => e
+          raise TransmitterError.new(
+            "Error asynchronously submitting breakpoint: #{e.message}",
+            breakpoint
+          )
         end
 
         ##
-        # @private Callback fucntion for AsyncActor module to run the async
-        # job in a loop
-        def run_backgrounder
-          breakpoint = wait_next_item
-          return if breakpoint.nil?
-          begin
-            service.update_active_breakpoint agent.debuggee.id, breakpoint
-          rescue StandardError => e
-            warn ["#{e.class}: #{e.message}", e.backtrace].join("\n\t")
-            @last_exception = e
-          end
+        # Starts the transmitter and its thread pool.
+        #
+        # @return [Transmitter] returns self so calls can be chained.
+        def start
+          # no-op
+          self
         end
 
         ##
-        # @private Callback function when the async actor thread state changes
-        def on_async_state_change
-          synchronize do
-            @queue_resource.broadcast
+        # Stops the transmitter and its thread pool. Once stopped, cannot be
+        # started again.
+        #
+        # @return [Transmitter] returns self so calls can be chained.
+        def stop timeout = nil
+          if @thread_pool
+            @thread_pool.shutdown
+            @thread_pool.wait_for_termination timeout
           end
+
+          self
         end
 
-        private
+        ##
+        # Whether the transmitter has been started.
+        #
+        # @return [boolean] `true` when started, `false` otherwise.
+        #
+        def started?
+          @thread_pool.running? if @thread_pool
+        end
 
         ##
-        # @private The the next item from the transmitter queue. If there are
-        # no more item, it blocks the transmitter thread until an item is
-        # enqueued
-        def wait_next_item
-          synchronize do
-            @queue_resource.wait_while do
-              async_suspended? || (async_running? && @queue.empty?)
+        # Whether the transmitter has been stopped.
+        #
+        # @return [boolean] `true` when stopped, `false` otherwise.
+        #
+        def stopped?
+          !started?
+        end
+
+        ##
+        # Register to be notified of errors when raised.
+        #
+        # If an unhandled error has occurred the transmitter will attempt to
+        # recover from the error and resume submitting breakpoints.
+        #
+        # Multiple error handlers can be added.
+        #
+        # @yield [callback] The block to be called when an error is raised.
+        # @yieldparam [Exception] error The error raised.
+        #
+        def on_error &block
+          @error_callbacks << block
+        end
+
+        protected
+
+        # Calls all error callbacks.
+        def error! error
+          error_callbacks = @error_callbacks
+          error_callbacks = default_error_callbacks if error_callbacks.empty?
+          error_callbacks.each { |error_callback| error_callback.call error }
+        end
+
+        def default_error_callbacks
+          # This is memoized to reduce calls to the configuration.
+          @default_error_callbacks ||= begin
+            error_cb = Google::Cloud::Debugger.configuration.on_error
+            error_cb ||= Google::Cloud.configure.on_error
+            if error_cb
+              [error_cb]
+            else
+              []
             end
-            @queue.pop
           end
         end
 
-        ##
-        # @private Override the #backgrounder_stoppable? method from AsyncActor
-        # module. The actor can be gracefully stopped when queue is
-        # empty.
-        def backgrounder_stoppable?
-          synchronize do
-            @queue.empty?
-          end
+        def submit_sync breakpoint
+          service.update_active_breakpoint agent.debuggee.id, breakpoint
+        rescue StandardError => e
+          sync_error = TransmitterError.new(
+            "Error asynchronously transmitting breakpoint: #{e.message}",
+            breakpoint
+          )
+          # Manually set backtrace so we don't have to raise
+          sync_error.set_backtrace caller
+
+          error! sync_error
         end
       end
     end

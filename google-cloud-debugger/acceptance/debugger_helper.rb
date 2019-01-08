@@ -16,15 +16,14 @@ gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
+
+require "concurrent"
+
+# Disable exit handlers because it messes with minitest/autorun
+Concurrent.disable_at_exit_handlers!
+
 require "google/cloud/debugger"
 require "grpc"
-
-# Create shared debugger clients so we don't create new for each test
-$debugger = Google::Cloud::Debugger.new
-debugger_credentials = $debugger.service.credentials
-debugger_channel_cred = GRPC::Core::ChannelCredentials.new.compose \
-  GRPC::Core::CallCredentials.new debugger_credentials.client.updater_proc
-$vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger2Client.new credentials: debugger_channel_cred
 
 module Acceptance
   class DebuggerTest < Minitest::Test
@@ -36,15 +35,22 @@ module Acceptance
     ##
     # Setup project based on available ENV variables
     def setup
-      $debugger.start
+      # Each debugger test has its own debugger instance.
+      @debugger = Google::Cloud::Debugger.new
+      debugger_credentials = @debugger.service.credentials
+      debugger_channel_cred = GRPC::Core::ChannelCredentials.new.compose \
+        GRPC::Core::CallCredentials.new debugger_credentials.client.updater_proc
+      @vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger2Client.new credentials: debugger_channel_cred
 
-      @debugger = $debugger
-      @agent_version = @debugger.agent.debuggee.send :agent_version
-      @vtk_debugger_client = $vtk_debugger_client
+      @debugger.start
 
       refute_nil @debugger, "You do not have an active debugger to run the tests."
       refute_nil @vtk_debugger_client, "You do not have an active debugger vtk client to run the tests."
       super
+    end
+
+    def teardown
+      @debugger.stop
     end
 
     ##
@@ -151,10 +157,4 @@ module Acceptance
       addl.include? :debugger
     end
   end
-end
-
-##
-# Stop the debugger after the whole test suite is finished.
-Minitest.after_run do
-  $debugger.stop
 end

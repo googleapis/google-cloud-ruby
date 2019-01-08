@@ -17,62 +17,32 @@ require "helper"
 
 describe Google::Cloud::Debugger::Transmitter, :mock_debugger do
   describe "#submit" do
-    let(:queue) { transmitter.instance_variable_get(:@queue) }
-    let(:queue_resource) { transmitter.instance_variable_get(:@queue_resource) }
+    let(:mocked_service) { Minitest::Mock.new }
 
-    it "puts the breakpoint on queue" do
-      breakpoint = OpenStruct.new
+    let(:breakpoint_hash) { random_breakpoint_hash }
+    let(:breakpoint_json) { breakpoint_hash.to_json }
+    let(:breakpoint_grpc) { Google::Devtools::Clouddebugger::V2::Breakpoint.decode_json breakpoint_json }
+    let(:breakpoint) { Google::Cloud::Debugger::Breakpoint.from_grpc breakpoint_grpc }
 
-      transmitter.submit breakpoint
-      queue.pop.must_equal breakpoint
+    before do
+      service.mocked_transmitter = mocked_service
+      transmitter.on_error do |error|
+        raise error.inspect
+      end
+      transmitter.start
     end
 
-    it "doesn't exceeds max_queue_size" do
-      max_queue_size = 3
-      transmitter.max_queue_size = max_queue_size
-      transmitter.instance_variable_set :@queue_resource, OpenStruct.new(broadcast: nil)
-
-      max_queue_size.times do |i|
-        transmitter.submit i
-      end
-
-      wait_until_true do
-        queue.size == max_queue_size
-      end
-
-      transmitter.submit nil
-
-      wait_until_true do
-        queue.size == max_queue_size
-      end
-
-      queue.size.must_equal max_queue_size
-
-      transmitter.instance_variable_set :@queue_resource, nil
+    after do
+      transmitter.stop
+      mocked_service.verify
     end
 
-    it "wakes up the child queue to dequeue the breakpoints" do
-      breakpoint = OpenStruct.new
-      mocked_service = Minitest::Mock.new
-      mocked_service.expect :update_active_breakpoint, nil, [nil, breakpoint]
+    it "submits a breakpoint to the API" do
+      mocked_service.expect :update_active_breakpoint, nil, ["", breakpoint_grpc, Hash]
 
       transmitter.start
-
-      transmitter.stub :service, mocked_service do
-        transmitter.submit breakpoint
-
-        wait_result = wait_until_true do
-          queue.size == 0
-        end
-        wait_result.must_equal :completed
-      end
-
-      mocked_service.verify
-
-      transmitter.stop
-      transmitter.synchronize do
-        queue_resource.broadcast
-      end
+      transmitter.submit breakpoint
+      transmitter.stop 10
     end
   end
 end
