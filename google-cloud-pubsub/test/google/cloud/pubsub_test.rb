@@ -248,6 +248,38 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "gets project_id from credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        OpenStruct.new project_id: "project-id"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_be_kind_of OpenStruct
+        credentials.project_id.must_equal "project-id"
+        timeout.must_be :nil?
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
+                pubsub = Google::Cloud::Pubsub.new credentials: "path/to/keyfile.json"
+                pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+                pubsub.project.must_equal "project-id"
+                pubsub.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
   end
 
   describe "Pubsub.configure" do

@@ -39,6 +39,8 @@ module Google
     # See {file:OVERVIEW.md Translation Overview}.
     #
     module Translate
+      # rubocop:disable Metrics/AbcSize
+
       ##
       # Creates a new object for connecting to Cloud Translation API. Each call
       # creates a new connection.
@@ -108,26 +110,30 @@ module Google
       def self.new project_id: nil, credentials: nil, key: nil, scope: nil,
                    retries: nil, timeout: nil, project: nil, keyfile: nil
         project_id ||= (project || default_project_id)
-        project_id = project_id.to_s # Always cast to a string
+        key        ||= configure.key
 
-        key ||= configure.key
         if key
           return Google::Cloud::Translate::Api.new(
             Google::Cloud::Translate::Service.new(
-              project_id, nil, retries: retries, timeout: timeout, key: key
+              project_id.to_s, nil, retries: retries, timeout: timeout, key: key
             )
           )
         end
 
-        raise ArgumentError, "project_id is missing" if project_id.empty?
-
-        scope ||= configure.scope
-        retries ||= configure.retries
-        timeout ||= configure.timeout
+        scope       ||= configure.scope
+        retries     ||= configure.retries
+        timeout     ||= configure.timeout
         credentials ||= keyfile || default_credentials(scope: scope)
+
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Translate::Credentials.new credentials, scope: scope
         end
+
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         Translate::Api.new(
           Translate::Service.new(
@@ -135,6 +141,8 @@ module Google
           )
         )
       end
+
+      # rubocop:enable Metrics/AbcSize
 
       ##
       # Configure the Google Cloud Translate library.

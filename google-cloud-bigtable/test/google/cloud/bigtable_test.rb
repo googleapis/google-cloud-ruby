@@ -253,6 +253,38 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "gets project_id from credentials" do
+      stubbed_credentials = lambda { |keyfile, scope: nil|
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        OpenStruct.new project_id: "project-id"
+      }
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, client_config: nil|
+        project_id.must_equal "project-id"
+        credentials.must_be_kind_of OpenStruct
+        credentials.project_id.must_equal "project-id"
+        timeout.must_be :nil?
+        client_config.must_be :nil?
+        OpenStruct.new project_id: project_id
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Bigtable::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Bigtable::Service.stub :new, stubbed_service do
+                bigtable = Google::Cloud::Bigtable.new credentials: "path/to/keyfile.json"
+                bigtable.must_be_kind_of Google::Cloud::Bigtable::Project
+                bigtable.project_id.must_equal "project-id"
+                bigtable.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
   end
 
   describe "bigtable.configure" do

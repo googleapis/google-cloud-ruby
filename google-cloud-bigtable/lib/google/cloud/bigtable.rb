@@ -75,14 +75,16 @@ module Google
           scope: nil,
           client_config: nil,
           timeout: nil
-        project_id = (project_id || default_project_id).to_s
-        raise ArgumentError, "project_id is required" if project_id.empty?
-
-        scope ||= configure.scope
-        timeout ||= configure.timeout
+        project_id    ||= default_project_id
+        scope         ||= configure.scope
+        timeout       ||= configure.timeout
         client_config ||= configure.client_config
         emulator_host ||= configure.emulator_host
+
         if emulator_host
+          project_id = project_id.to_s # Always cast to a string
+          raise ArgumentError, "project_id is missing" if project_id.empty?
+
           return Bigtable::Project.new(
             Bigtable::Service.new(
               project_id, :this_channel_is_insecure,
@@ -96,6 +98,12 @@ module Google
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Bigtable::Credentials.new credentials, scope: scope
         end
+
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         service = Bigtable::Service.new(
           project_id,

@@ -33,6 +33,8 @@ module Google
     # See {file:OVERVIEW.md Google Cloud Pub/Sub Overview}.
     #
     module Pubsub
+      # rubocop:disable Metrics/AbcSize
+
       ##
       # Creates a new object for connecting to the Pub/Sub service.
       # Each call creates a new connection.
@@ -76,15 +78,16 @@ module Google
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, emulator_host: nil, project: nil,
                    keyfile: nil
-        project_id ||= (project || default_project_id)
-        project_id = project_id.to_s # Always cast to a string
-        raise ArgumentError, "project_id is missing" if project_id.empty?
-
-        scope ||= configure.scope
-        timeout ||= configure.timeout
+        project_id    ||= (project || default_project_id)
+        scope         ||= configure.scope
+        timeout       ||= configure.timeout
         client_config ||= configure.client_config
         emulator_host ||= configure.emulator_host
+
         if emulator_host
+          project_id = project_id.to_s # Always cast to a string
+          raise ArgumentError, "project_id is missing" if project_id.empty?
+
           return Pubsub::Project.new(
             Pubsub::Service.new(
               project_id, :this_channel_is_insecure,
@@ -99,6 +102,12 @@ module Google
           credentials = Pubsub::Credentials.new credentials, scope: scope
         end
 
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
+
         Pubsub::Project.new(
           Pubsub::Service.new(
             project_id, credentials, timeout:       timeout,
@@ -106,6 +115,8 @@ module Google
           )
         )
       end
+
+      # rubocop:enable Metrics/AbcSize
 
       ##
       # Configure the Google Cloud Pubsub library.

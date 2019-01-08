@@ -86,18 +86,21 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, project: nil, keyfile: nil
-        project_id ||= (project || default_project_id)
-        project_id = project_id.to_s # Always cast to a string
-        raise ArgumentError, "project_id is missing" if project_id.empty?
-
-        scope ||= configure.scope
-        timeout ||= configure.timeout
+        project_id    ||= (project || default_project_id)
+        scope         ||= configure.scope
+        timeout       ||= configure.timeout
         client_config ||= configure.client_config
+        credentials   ||= (keyfile || default_credentials(scope: scope))
 
-        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Trace::Credentials.new credentials, scope: scope
         end
+
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         Trace::Project.new(
           Trace::Service.new(

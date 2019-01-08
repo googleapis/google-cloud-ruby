@@ -362,6 +362,40 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "gets project_id from credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        OpenStruct.new project_id: "project-id"
+      }
+      stubbed_service = ->(project, credentials, scope: nil, key: nil, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_be_kind_of OpenStruct
+        credentials.project_id.must_equal "project-id"
+        scope.must_be :nil?
+        key.must_be :nil?
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+                translate = Google::Cloud::Translate.new credentials: "path/to/keyfile.json"
+                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.project_id.must_equal "project-id"
+                translate.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
   end
 
   describe "Translate.configure" do

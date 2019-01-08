@@ -248,6 +248,38 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "gets project_id from credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        OpenStruct.new project_id: "project-id"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_be_kind_of OpenStruct
+        credentials.project_id.must_equal "project-id"
+        timeout.must_be :nil?
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Datastore::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Datastore::Service.stub :new, stubbed_service do
+                datastore = Google::Cloud::Datastore.new credentials: "path/to/keyfile.json"
+                datastore.must_be_kind_of Google::Cloud::Datastore::Dataset
+                datastore.project.must_equal "project-id"
+                datastore.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
   end
 
   describe "Datastore.configure" do

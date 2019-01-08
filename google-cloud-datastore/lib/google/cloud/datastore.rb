@@ -46,6 +46,7 @@ module Google
     #   datastore.save task
     #
     module Datastore
+      # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/MethodLength
 
       ##
@@ -99,15 +100,16 @@ module Google
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, emulator_host: nil, project: nil,
                    keyfile: nil
-        project_id ||= (project || default_project_id)
-        project_id = project_id.to_s # Always cast to a string
-        raise ArgumentError, "project_id is missing" if project_id.empty?
-
-        scope ||= configure.scope
-        timeout ||= configure.timeout
+        project_id    ||= (project || default_project_id)
+        scope         ||= configure.scope
+        timeout       ||= configure.timeout
         client_config ||= configure.client_config
         emulator_host ||= configure.emulator_host
+
         if emulator_host
+          project_id = project_id.to_s # Always cast to a string
+          raise ArgumentError, "project_id is missing" if project_id.empty?
+
           return Datastore::Dataset.new(
             Datastore::Service.new(
               project_id, :this_channel_is_insecure,
@@ -122,6 +124,12 @@ module Google
           credentials = Datastore::Credentials.new credentials, scope: scope
         end
 
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
+
         Datastore::Dataset.new(
           Datastore::Service.new(
             project_id, credentials,
@@ -130,6 +138,7 @@ module Google
         )
       end
 
+      # rubocop:enable Metrics/AbcSize
       # rubocop:enable Metrics/MethodLength
 
       ##
