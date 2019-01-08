@@ -21,7 +21,7 @@ module Google
       class Sink
         ##
         # Sink::List is a special case Array with additional values.
-        class List < DelegateClass ::Array
+        class List < DelegateClass(::Array)
           ##
           # If not empty, indicates that there are more records that match
           # the request and this value should be passed to continue.
