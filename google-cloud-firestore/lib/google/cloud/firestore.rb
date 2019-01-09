@@ -32,6 +32,9 @@ module Google
     # See {file:OVERVIEW.md Firestore Overview}.
     #
     module Firestore
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/MethodLength
+
       ##
       # Creates a new object for connecting to the Firestore service.
       # Each call creates a new connection.
@@ -71,14 +74,16 @@ module Google
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, emulator_host: nil, project: nil,
                    keyfile: nil
-        project_id = (project_id || project || default_project_id).to_s
-        raise ArgumentError, "project_id is missing" if project_id.empty?
-
-        scope ||= configure.scope
-        timeout ||= configure.timeout
+        project_id    ||= (project || default_project_id)
+        scope         ||= configure.scope
+        timeout       ||= configure.timeout
         client_config ||= configure.client_config
         emulator_host ||= configure.emulator_host
+
         if emulator_host
+          project_id = project_id.to_s
+          raise ArgumentError, "project_id is missing" if project_id.empty?
+
           return Firestore::Client.new(
             Firestore::Service.new(
               project_id, :this_channel_is_insecure,
@@ -93,6 +98,12 @@ module Google
           credentials = Firestore::Credentials.new credentials, scope: scope
         end
 
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id = project_id.to_s
+        raise ArgumentError, "project_id is missing" if project_id.empty?
+
         Firestore::Client.new(
           Firestore::Service.new(
             project_id, credentials, timeout:       timeout,
@@ -100,6 +111,9 @@ module Google
           )
         )
       end
+
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Configure the Google Cloud Firestore library.

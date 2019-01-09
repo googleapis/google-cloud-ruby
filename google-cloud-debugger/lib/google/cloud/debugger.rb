@@ -85,29 +85,31 @@ module Google
       def self.new project_id: nil, credentials: nil, service_name: nil,
                    service_version: nil, scope: nil, timeout: nil,
                    client_config: nil, project: nil, keyfile: nil
-        project_id ||= (project || default_project_id)
-        project_id = project_id.to_s # Always cast to a string
-
-        service_name ||= default_service_name
-        service_name = service_name.to_s
-
+        project_id      ||= (project || default_project_id)
+        service_name    ||= default_service_name
         service_version ||= default_service_version
-        service_version = service_version.to_s
+        scope           ||= configure.scope
+        timeout         ||= configure.timeout
+        client_config   ||= configure.client_config
 
-        raise ArgumentError, "project_id is missing" if project_id.empty?
+        service_name = service_name.to_s
         raise ArgumentError, "service_name is missing" if service_name.empty?
+
+        service_version = service_version.to_s
         if service_version.nil?
           raise ArgumentError, "service_version is missing"
         end
-
-        scope ||= configure.scope
-        timeout ||= configure.timeout
-        client_config ||= configure.client_config
 
         credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Debugger::Credentials.new credentials, scope: scope
         end
+
+        if credentials.respond_to? :project_id
+          project_id ||= credentials.project_id
+        end
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         Debugger::Project.new(
           Debugger::Service.new(project_id, credentials,

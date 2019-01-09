@@ -208,6 +208,41 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "gets project_id from credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be_nil
+        OpenStruct.new project_id: "project-id"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_be_kind_of OpenStruct
+        credentials.project_id.must_equal "project-id"
+        timeout.must_be_nil
+        client_config.must_be_nil
+        OpenStruct.new project: project
+      }
+      empty_env = OpenStruct.new
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud.stub :env, empty_env do
+          File.stub :file?, true, ["path/to/keyfile.json"] do
+            File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+              Google::Cloud::Logging::Credentials.stub :new, stubbed_credentials do
+                Google::Cloud::Logging::Service.stub :new, stubbed_service do
+                  logging = Google::Cloud::Logging.new credentials: "path/to/keyfile.json"
+                  logging.must_be_kind_of Google::Cloud::Logging::Project
+                  logging.project.must_equal "project-id"
+                  logging.service.must_be_kind_of OpenStruct
+                end
+              end
+            end
+          end
+        end
+      end
+    end
   end
 
   describe "Logging.configure" do
