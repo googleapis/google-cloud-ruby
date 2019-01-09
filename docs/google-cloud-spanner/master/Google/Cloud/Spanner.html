@@ -263,14 +263,14 @@ Google::Cloud::Spanner library uses.</p>
       <pre class="lines">
 
 
-115
-116
-117
-118
-119</pre>
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_spanner'>spanner</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -492,24 +492,32 @@ Deprecated.</p>
 90
 91
 92
-93</pre>
+93
+94
+95
+96
+97</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>
-  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span> <span class='op'>||</span> <span class='id identifier rubyid_default_project_id'>default_project_id</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
-</span>  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-
-  <span class='id identifier rubyid_scope'>scope</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span>
-  <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span>
+  <span class='id identifier rubyid_project_id'>project_id</span>    <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span> <span class='op'>||</span> <span class='id identifier rubyid_default_project_id'>default_project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_scope'>scope</span>         <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span>
+  <span class='id identifier rubyid_timeout'>timeout</span>       <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span>
   <span class='id identifier rubyid_client_config'>client_config</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_client_config'>client_config</span>
-  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>||</span> <span class='id identifier rubyid_default_credentials'>default_credentials</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_credentials'>credentials</span>   <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>||</span> <span class='id identifier rubyid_default_credentials'>default_credentials</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span><span class='rparen'>)</span>
+
   <span class='kw'>unless</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span>
     <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Spanner/Credentials.html" title="Google::Cloud::Spanner::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span>
   <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:project_id</span>
+    <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
+</span>  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
   <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Spanner/Project.html" title="Google::Cloud::Spanner::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
