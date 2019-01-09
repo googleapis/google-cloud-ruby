@@ -289,16 +289,16 @@ want to disable the side effect checker globally for your app.</p>
       <pre class="lines">
 
 
-236
-237
 238
 239
 240
 241
-242</pre>
+242
+243
+244</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 236</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 238</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_allow_mutating_methods!'>allow_mutating_methods!</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_evaluator'>evaluator</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Debugger/Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Breakpoint/Evaluator.html" title="Google::Cloud::Debugger::Breakpoint::Evaluator (class)">Evaluator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span>
@@ -400,14 +400,14 @@ Google::Cloud::Debugger module uses.</p>
       <pre class="lines">
 
 
-158
-159
 160
 161
-162</pre>
+162
+163
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 158</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 160</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
   <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_debugger'>debugger</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -677,7 +677,9 @@ either the JSON data or the path to a readable file.</p>
 115
 116
 117
-118</pre>
+118
+119
+120</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 85</span>
@@ -685,29 +687,31 @@ either the JSON data or the path to a readable file.</p>
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>service_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>service_version:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
              <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span>
-  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span> <span class='op'>||</span> <span class='id identifier rubyid_default_project_id'>default_project_id</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
-</span>
-  <span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>||=</span> <span class='id identifier rubyid_default_service_name'>default_service_name</span>
-  <span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>=</span> <span class='id identifier rubyid_service_name'>service_name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
-
+  <span class='id identifier rubyid_project_id'>project_id</span>      <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span> <span class='op'>||</span> <span class='id identifier rubyid_default_project_id'>default_project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_service_name'>service_name</span>    <span class='op'>||=</span> <span class='id identifier rubyid_default_service_name'>default_service_name</span>
   <span class='id identifier rubyid_service_version'>service_version</span> <span class='op'>||=</span> <span class='id identifier rubyid_default_service_version'>default_service_version</span>
-  <span class='id identifier rubyid_service_version'>service_version</span> <span class='op'>=</span> <span class='id identifier rubyid_service_version'>service_version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_scope'>scope</span>           <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span>
+  <span class='id identifier rubyid_timeout'>timeout</span>         <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span>
+  <span class='id identifier rubyid_client_config'>client_config</span>   <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_client_config'>client_config</span>
 
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>=</span> <span class='id identifier rubyid_service_name'>service_name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service_name is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_service_name'>service_name</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_service_version'>service_version</span> <span class='op'>=</span> <span class='id identifier rubyid_service_version'>service_version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_service_version'>service_version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
     <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service_version is missing</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
-
-  <span class='id identifier rubyid_scope'>scope</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_scope'>scope</span>
-  <span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span>
-  <span class='id identifier rubyid_client_config'>client_config</span> <span class='op'>||=</span> <span class='id identifier rubyid_configure'>configure</span><span class='period'>.</span><span class='id identifier rubyid_client_config'>client_config</span>
 
   <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>||</span> <span class='id identifier rubyid_default_credentials'>default_credentials</span><span class='lparen'>(</span><span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span><span class='rparen'>)</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Auth</span><span class='op'>::</span><span class='const'>Credentials</span>
     <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Credentials.html" title="Google::Cloud::Debugger::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span>
   <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:project_id</span>
+    <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
+</span>  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_id is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
   <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Project.html" title="Google::Cloud::Debugger::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
