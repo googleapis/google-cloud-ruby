@@ -84,7 +84,7 @@ module Google
           @error_callbacks = []
 
           # Make sure all queued calls are completed when process exits.
-          # at_exit { stop }
+          at_exit { stop }
         end
 
         ##
