@@ -147,6 +147,9 @@ module Google
       #   state. Defaults to false.
       # * `evaluation_time_limit` - (Numeric) Time limit in seconds for
       #   expression evaluation. Defaults to 0.05.
+      # * `on_error` - (Proc) A Proc to be run when an error is encountered
+      #   on a background thread. The Proc must take the error object as the
+      #   single argument.
       #
       # See the [Configuration
       # Guide](https://googleapis.github.io/google-cloud-ruby/docs/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION)

@@ -178,4 +178,5 @@ Google::Cloud.configure.add_config! :debugger do |config|
   config.add_field! :client_config, nil, match: Hash
   config.add_field! :allow_mutating_methods, false
   config.add_field! :evaluation_time_limit, 0.05, match: Numeric
+  config.add_field! :on_error, nil, match: Proc
 end
