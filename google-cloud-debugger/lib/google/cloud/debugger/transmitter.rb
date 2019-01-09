@@ -88,9 +88,10 @@ module Google
         end
 
         ##
-        # Enqueue an evaluated breakpoints to be submitted by the transmitter.
-        # This will raise if there are no resources available to make the API
-        # call.
+        # Enqueue an evaluated breakpoint to be submitted by the transmitter.
+        #
+        # @raise [TransmitterError] if there are no resources available to make
+        #   queue the API call on the thread pool.
         def submit breakpoint
           Concurrent::Promises.future_on(@thread_pool, breakpoint) do |bp|
             submit_sync bp
