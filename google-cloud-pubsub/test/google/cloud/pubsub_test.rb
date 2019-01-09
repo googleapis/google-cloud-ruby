@@ -263,17 +263,20 @@ describe Google::Cloud do
         client_config.must_be :nil?
         OpenStruct.new project: project
       }
+      empty_env = OpenStruct.new
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        File.stub :file?, true, ["path/to/keyfile.json"] do
-          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
-                pubsub = Google::Cloud::Pubsub.new credentials: "path/to/keyfile.json"
-                pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
-                pubsub.project.must_equal "project-id"
-                pubsub.service.must_be_kind_of OpenStruct
+        Google::Cloud.stub :env, empty_env do
+          File.stub :file?, true, ["path/to/keyfile.json"] do
+            File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+              Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
+                Google::Cloud::Pubsub::Service.stub :new, stubbed_service do
+                  pubsub = Google::Cloud::Pubsub.new credentials: "path/to/keyfile.json"
+                  pubsub.must_be_kind_of Google::Cloud::Pubsub::Project
+                  pubsub.project.must_equal "project-id"
+                  pubsub.service.must_be_kind_of OpenStruct
+                end
               end
             end
           end

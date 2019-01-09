@@ -224,17 +224,20 @@ describe Google::Cloud do
         timeout.must_be :nil?
         OpenStruct.new project: project
       }
+      empty_env = OpenStruct.new
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        File.stub :file?, true, ["path/to/keyfile.json"] do
-          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Dns::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Dns::Service.stub :new, stubbed_service do
-                dns = Google::Cloud::Dns.new credentials: "path/to/keyfile.json"
-                dns.must_be_kind_of Google::Cloud::Dns::Project
-                dns.project.must_equal "project-id"
-                dns.service.must_be_kind_of OpenStruct
+        Google::Cloud.stub :env, empty_env do
+          File.stub :file?, true, ["path/to/keyfile.json"] do
+            File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+              Google::Cloud::Dns::Credentials.stub :new, stubbed_credentials do
+                Google::Cloud::Dns::Service.stub :new, stubbed_service do
+                  dns = Google::Cloud::Dns.new credentials: "path/to/keyfile.json"
+                  dns.must_be_kind_of Google::Cloud::Dns::Project
+                  dns.project.must_equal "project-id"
+                  dns.service.must_be_kind_of OpenStruct
+                end
               end
             end
           end

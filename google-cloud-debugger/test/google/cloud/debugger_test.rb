@@ -272,16 +272,18 @@ describe Google::Cloud do
         client_config.must_be_nil
         OpenStruct.new project: project
       }
-
+      empty_env = OpenStruct.new
       ENV.stub :[], nil do
-        File.stub :file?, true, ["path/to/keyfile.json"] do
-          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Debugger::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Debugger::Service.stub :new, stubbed_service do
-                debugger = Google::Cloud::Debugger.new credentials: "path/to/keyfile.json"
-                debugger.must_be_kind_of Google::Cloud::Debugger::Project
-                debugger.project.must_equal "project-id"
-                debugger.service.must_be_kind_of OpenStruct
+        Google::Cloud.stub :env, empty_env do
+          File.stub :file?, true, ["path/to/keyfile.json"] do
+            File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+              Google::Cloud::Debugger::Credentials.stub :new, stubbed_credentials do
+                Google::Cloud::Debugger::Service.stub :new, stubbed_service do
+                  debugger = Google::Cloud::Debugger.new credentials: "path/to/keyfile.json"
+                  debugger.must_be_kind_of Google::Cloud::Debugger::Project
+                  debugger.project.must_equal "project-id"
+                  debugger.service.must_be_kind_of OpenStruct
+                end
               end
             end
           end
