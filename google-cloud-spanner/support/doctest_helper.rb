@@ -299,21 +299,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  # BatchUpdateResults
-
-  doctest.before "Google::Cloud::Spanner::BatchUpdateResults" do
-    mock_spanner do |mock, mock_instances, mock_databases|
-      20.times do
-        mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
-      end
-      5.times do
-        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      end
-      mock.expect :execute_batch_dml, batch_response_grpc, ["session-name", Array, Hash]
-      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
-    end
-  end
-
   # Partition
 
   doctest.before "Google::Cloud::Spanner::Partition" do

@@ -101,15 +101,16 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     results = tx.batch_update do |b|
-        #       statement_count = b.batch_update(
-        #         "UPDATE users SET name = 'Charlie' WHERE id = 1"
-        #       )
-        #     end
-        #     if results.failed?
-        #       puts results.error.inspect
-        #     else
-        #       puts results.row_counts.first
+        #     begin
+        #       row_counts = tx.batch_update do |b|
+        #         statement_count = b.batch_update(
+        #           "UPDATE users SET name = 'Charlie' WHERE id = 1"
+        #         )
+        #       end
+        #       puts row_counts.inspect
+        #     rescue Google::Cloud::Spanner::BatchUpdateError => err
+        #       puts err.cause.message
+        #       puts err.row_counts.inspect
         #     end
         #   end
         #
@@ -120,16 +121,17 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.transaction do |tx|
-        #     results = tx.batch_update do |b|
-        #       statement_count = b.batch_update(
-        #         "UPDATE users SET name = 'Charlie' WHERE id = 1",
-        #         params: { id: 1, name: "Charlie" }
-        #       )
-        #     end
-        #     if results.failed?
-        #       puts results.error.inspect
-        #     else
-        #       puts results.row_counts.first
+        #     begin
+        #       row_counts = tx.batch_update do |b|
+        #         statement_count = b.batch_update(
+        #           "UPDATE users SET name = 'Charlie' WHERE id = 1",
+        #           params: { id: 1, name: "Charlie" }
+        #         )
+        #       end
+        #       puts row_counts.inspect
+        #     rescue Google::Cloud::Spanner::BatchUpdateError => err
+        #       puts err.cause.message
+        #       puts err.row_counts.inspect
         #     end
         #   end
         #

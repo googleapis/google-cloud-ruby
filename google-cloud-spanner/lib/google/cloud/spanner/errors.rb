@@ -68,6 +68,33 @@ module Google
       # The client is closed and can no longer be used.
       class ClientClosedError < Google::Cloud::Error
       end
+
+      ##
+      # # BatchUpdateError
+      #
+      # Includes the cause and the partial result set of row counts from a
+      # failed batch DML operation. Contains a cause error that provides service
+      # error type and message, and a list with the exact number of rows that
+      # were modified for each successful statement before the error.
+      #
+      # See {Google::Cloud::Spanner::Transaction#batch_update}.
+      #
+      # @attr_reader [Array<Integer>] row_counts A list with the exact number of
+      #   rows that were modified for each successful statement.
+      class BatchUpdateError < Google::Cloud::Error
+        attr_reader :row_counts
+
+        ##
+        # @private New Status from a Google::Rpc::Status object.
+        def self.from_grpc grpc
+          row_counts = grpc.result_sets.map do |rs|
+            rs.stats.row_count_exact
+          end
+          new.tap do |result|
+            result.instance_variable_set :@row_counts, row_counts
+          end
+        end
+      end
     end
   end
 end

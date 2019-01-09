@@ -15,7 +15,7 @@
 require "spanner_helper"
 require "concurrent"
 
-describe "Spanner Client", :batch_dml, :spanner do
+describe "Spanner Client", :batch_update, :spanner do
   let(:db) { spanner_client }
   let(:insert_dml) { "INSERT INTO accounts (account_id, username, active, reputation) VALUES (@account_id, @username, @active, @reputation)" }
   let(:update_dml) { "UPDATE accounts SET username = @username, active = @active WHERE account_id = @account_id" }
@@ -43,18 +43,12 @@ describe "Spanner Client", :batch_dml, :spanner do
     timestamp = db.transaction do |tx|
       tx.transaction_id.wont_be :nil?
 
-      results = tx.batch_update do |b|
+      row_counts = tx.batch_update do |b|
         b.batch_update insert_dml, params: insert_params
         b.batch_update update_dml, params: update_params
         b.batch_update delete_dml, params: delete_params
       end
 
-      results.wont_be :failed?
-      results.status.code.must_equal 0
-      results.status.message.must_equal ""
-      results.status.description.must_equal "OK"
-
-      row_counts = results.row_counts
       row_counts.must_be_kind_of Array
       row_counts.count.must_equal 3
       row_counts[0].must_equal 1
@@ -90,23 +84,21 @@ describe "Spanner Client", :batch_dml, :spanner do
 
     timestamp = db.transaction do |tx|
       tx.transaction_id.wont_be :nil?
+      begin
+        tx.batch_update do |b|
+          b.batch_update insert_dml, params: insert_params
+          b.batch_update update_dml_syntax_error, params: update_params
+          b.batch_update delete_dml, params: delete_params
+        end
+      rescue Google::Cloud::Spanner::BatchUpdateError => batch_update_error
+        batch_update_error.cause.must_be_kind_of Google::Cloud::InvalidArgumentError
+        batch_update_error.cause.message.must_equal "Statement 1: 'UPDDDD accounts' is not valid DML."
 
-      results = tx.batch_update do |b|
-        b.batch_update insert_dml, params: insert_params
-        b.batch_update update_dml_syntax_error, params: update_params
-        b.batch_update delete_dml, params: delete_params
+        row_counts = batch_update_error.row_counts
+        row_counts.must_be_kind_of Array
+        row_counts.count.must_equal 1
+        row_counts[0].must_equal 1
       end
-
-      results.must_be :failed?
-      results.status.code.must_equal 3
-      results.status.message.must_equal "Statement 1: 'UPDDDD accounts' is not valid DML."
-      results.status.description.must_equal "INVALID_ARGUMENT"
-
-      row_counts = results.row_counts
-      row_counts.must_be_kind_of Array
-      row_counts.count.must_equal 1
-      row_counts[0].must_equal 1
-
       update_results = tx.execute_sql \
         "SELECT username FROM accounts WHERE account_id = @account_id",
         params: { account_id: 4 }
@@ -122,13 +114,11 @@ describe "Spanner Client", :batch_dml, :spanner do
     timestamp = db.transaction do |tx|
       tx.transaction_id.wont_be :nil?
 
-      results = tx.batch_update do |b|
+      row_counts = tx.batch_update do |b|
         b.batch_update insert_dml, params: insert_params
         b.batch_update update_dml, params: update_params
       end
 
-      results.wont_be :failed?
-      row_counts = results.row_counts
       row_counts.must_be_kind_of Array
       row_counts.count.must_equal 2
       row_counts[0].must_equal 1

@@ -34,15 +34,14 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
     mock.expect :execute_batch_dml, batch_response_grpc, [session_grpc.name, [statement_grpc("UPDATE users SET active = true")], transaction: tx_selector, seqno: 1, options: default_options]
     session.service.mocked_service = mock
 
-    results = transaction.batch_update do |b|
+    row_counts = transaction.batch_update do |b|
       b.batch_update "UPDATE users SET active = true"
     end
 
     mock.verify
 
-    assert_status results
-    results.row_counts.count.must_equal 1
-    results.row_counts.first.must_equal 1
+    row_counts.count.must_equal 1
+    row_counts.first.must_equal 1
   end
 
   it "can execute a DML query with multiple statements and param types" do
@@ -60,7 +59,7 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
     mock.expect :execute_batch_dml, batch_response_grpc(9), [session_grpc.name, statements, transaction: tx_selector, seqno: 1, options: default_options]
     session.service.mocked_service = mock
 
-    results = transaction.batch_update do |b|
+    row_counts = transaction.batch_update do |b|
       b.batch_update "UPDATE users SET active = @active", params: { active: true }
       b.batch_update "UPDATE users SET age = @age", params: { age: 29 }
       b.batch_update "UPDATE users SET score = @score", params: { score: 0.9 }
@@ -74,10 +73,9 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
 
     mock.verify
 
-    assert_status results
-    results.row_counts.count.must_equal 9
-    results.row_counts.first.must_equal 1
-    results.row_counts.last.must_equal 1
+    row_counts.count.must_equal 9
+    row_counts.first.must_equal 1
+    row_counts.last.must_equal 1
   end
 
   it "raises ArgumentError if no block is provided" do
@@ -144,13 +142,5 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
       result_sets: batch_result_sets_grpc(count),
       status: Google::Rpc::Status.new(code: 0)
     )
-  end
-
-  def assert_status results
-    results.wont_be :failed?
-    results.status.code.must_equal 0
-    results.status.message.must_equal ""
-    results.status.description.must_equal "OK"
-    results.status.details.must_equal []
   end
 end

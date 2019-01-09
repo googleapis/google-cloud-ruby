@@ -17,7 +17,6 @@ require "google/cloud/spanner/data"
 require "google/cloud/spanner/results"
 require "google/cloud/spanner/commit"
 require "google/cloud/spanner/batch_update"
-require "google/cloud/spanner/batch_update_results"
 
 module Google
   module Cloud
@@ -281,10 +280,14 @@ module Google
         #   update object accepting DML statements and optional parameters and
         #   types of the parameters.
         #
-        # @return [Google::Cloud::Spanner::BatchUpdateResults] A result object
-        #   containing a status object with an error if one occurred, and a list
-        #   with the exact number of rows that were modified for each successful
-        #   DML statement.
+        # @raise [Google::Cloud::Spanner::BatchUpdateError] If an error occurred
+        #   while executing a statement. The error object contains a cause error
+        #   with the service error type and message, and a list with the exact
+        #   number of rows that were modified for each successful statement
+        #   before the error.
+        #
+        # @return [Array<Integer>] A list with the exact number of rows that
+        #   were modified for each DML statement.
         #
         def batch_update transaction, seqno
           ensure_service!
@@ -296,9 +299,8 @@ module Google
 
           results = service.execute_batch_dml path, batch.statements,
                                               transaction, seqno
-
           @last_updated_at = Time.now
-          BatchUpdateResults.from_grpc results
+          results
         end
 
         ##
