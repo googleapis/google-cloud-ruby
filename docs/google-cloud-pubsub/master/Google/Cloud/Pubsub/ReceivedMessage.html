@@ -287,8 +287,6 @@ js:
     
 
     
-      (also: #delay!)
-    
   </span>
   
   
@@ -650,10 +648,6 @@ time. Guaranteed to be unique within the topic.</p>
   
 
   
-    <span class="aliases">Also known as:
-    <span class="names"><span id='delay!-instance_method'>delay!</span></span>
-    </span>
-  
 
   
 </h3><div class="docstring">
@@ -839,15 +833,15 @@ it.</p>
       <pre class="lines">
 
 
+189
 190
-191
-192</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/received_message.rb', line 190</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/received_message.rb', line 189</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reject!'>reject!</span>
-  <span class='id identifier rubyid_delay!'>delay!</span> <span class='int'>0</span>
+  <span class='id identifier rubyid_modify_ack_deadline!'>modify_ack_deadline!</span> <span class='int'>0</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

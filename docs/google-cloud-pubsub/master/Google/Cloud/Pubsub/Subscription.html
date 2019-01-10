@@ -413,8 +413,6 @@ specific <span class='object_link'><a href="Topic.html" title="Google::Cloud::Pu
     
 
     
-      (also: #delay)
-    
   </span>
   
   
@@ -985,14 +983,14 @@ Managing Labels</a>.</p>
       <pre class="lines">
 
 
+588
 589
 590
 591
-592
-593</pre>
+592</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 589</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 588</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_snapshot'>create_snapshot</span> <span class='id identifier rubyid_snapshot_name'>snapshot_name</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -1714,9 +1712,9 @@ concurrent calls by each stream opened by the subscriber. Optional.</p>
 <li><code>:callback</code> (Integer) The number of threads used to handle the
 received messages. Default is 8.</li>
 <li><code>:push</code> (Integer) The number of threads to handle
-acknowledgement (<span class='object_link'><a href="ReceivedMessage.html#ack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#ack! (method)">ReceivedMessage#ack!</a></span>) and delay messages
-(<span class='object_link'><a href="ReceivedMessage.html#nack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#nack! (method)">ReceivedMessage#nack!</a></span>, <span class='object_link'><a href="ReceivedMessage.html#delay!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#delay! (method)">ReceivedMessage#delay!</a></span>). Default is
-4.</li>
+acknowledgement (<span class='object_link'><a href="ReceivedMessage.html#ack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#ack! (method)">ReceivedMessage#ack!</a></span>) and modify ack deadline
+messages (<span class='object_link'><a href="ReceivedMessage.html#nack!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#nack! (method)">ReceivedMessage#nack!</a></span>,
+<span class='object_link'><a href="ReceivedMessage.html#modify_ack_deadline!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline! (method)">ReceivedMessage#modify_ack_deadline!</a></span>). Default is 4.</li>
 </ul>
 </div>
       
@@ -1815,10 +1813,6 @@ message</p>
   
 
   
-    <span class="aliases">Also known as:
-    <span class="names"><span id='delay-instance_method'>delay</span></span>
-    </span>
-  
 
   
 </h3><div class="docstring">
@@ -1829,7 +1823,7 @@ message</p>
 make the messages available for redelivery if the processing was
 interrupted.</p>
 
-<p>See also <span class='object_link'><a href="ReceivedMessage.html#delay!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#delay! (method)">ReceivedMessage#delay!</a></span>.</p>
+<p>See also <span class='object_link'><a href="ReceivedMessage.html#modify_ack_deadline!-instance_method" title="Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline! (method)">ReceivedMessage#modify_ack_deadline!</a></span>.</p>
 
 
   </div>
@@ -2088,17 +2082,17 @@ subscription</p>
       <pre class="lines">
 
 
+719
 720
 721
 722
 723
 724
 725
-726
-727</pre>
+726</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 720</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 719</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_policy'>policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2326,12 +2320,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
+662
 663
-664
-665</pre>
+664</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 663</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 662</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reference?'>reference?</span>
   <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2398,12 +2392,12 @@ resource representation, <code>false</code> otherwise.</p>
       <pre class="lines">
 
 
+681
 682
-683
-684</pre>
+683</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 682</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 681</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource?'>resource?</span>
   <span class='op'>!</span><span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2795,14 +2789,14 @@ not be restored.</p>
       <pre class="lines">
 
 
+641
 642
 643
 644
-645
-646</pre>
+645</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 642</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 641</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_seek'>seek</span> <span class='id identifier rubyid_snapshot'>snapshot</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
@@ -2911,15 +2905,15 @@ check access for. Permissions with wildcards (such as <code>*</code> or
       <pre class="lines">
 
 
+796
 797
 798
 799
 800
-801
-802</pre>
+801</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 797</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 796</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_permissions'>test_permissions</span> <span class='op'>*</span><span class='id identifier rubyid_permissions'>permissions</span>
   <span class='id identifier rubyid_permissions'>permissions</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_permissions'>permissions</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span>
@@ -3099,14 +3093,14 @@ subscription</p>
       <pre class="lines">
 
 
+757
 758
 759
 760
-761
-762</pre>
+761</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 758</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscription.rb', line 757</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_policy'>update_policy</span> <span class='id identifier rubyid_new_policy'>new_policy</span>
   <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
