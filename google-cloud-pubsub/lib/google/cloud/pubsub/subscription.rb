@@ -419,9 +419,9 @@ module Google
         #     * `:callback` (Integer) The number of threads used to handle the
         #       received messages. Default is 8.
         #     * `:push` (Integer) The number of threads to handle
-        #       acknowledgement ({ReceivedMessage#ack!}) and delay messages
-        #       ({ReceivedMessage#nack!}, {ReceivedMessage#delay!}). Default is
-        #       4.
+        #       acknowledgement ({ReceivedMessage#ack!}) and modify ack deadline
+        #       messages ({ReceivedMessage#nack!},
+        #       {ReceivedMessage#modify_ack_deadline!}). Default is 4.
         #
         # @yield [received_message] a block for processing new messages
         # @yieldparam [ReceivedMessage] received_message the newly received
@@ -511,7 +511,7 @@ module Google
         # make the messages available for redelivery if the processing was
         # interrupted.
         #
-        # See also {ReceivedMessage#delay!}.
+        # See also {ReceivedMessage#modify_ack_deadline!}.
         #
         # @param [Integer] new_deadline The new ack deadline in seconds from the
         #   time this request is sent to the Pub/Sub system. Must be >= 0. For
@@ -536,7 +536,6 @@ module Google
           service.modify_ack_deadline name, ack_ids, new_deadline
           true
         end
-        alias delay modify_ack_deadline
 
         ##
         # Creates a new {Snapshot} from the subscription. The created snapshot

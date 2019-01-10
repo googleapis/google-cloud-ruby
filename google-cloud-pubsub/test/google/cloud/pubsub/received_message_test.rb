@@ -91,14 +91,14 @@ describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
     mock.verify
   end
 
-  it "can delay" do
+  it "can modify_ack_deadline" do
     new_deadline = 42
     mad_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_ack_deadline, mad_res, [subscription_path(subscription_name), [rec_message.ack_id], new_deadline, options: default_options]
     subscription.service.mocked_subscriber = mock
 
-    rec_message.delay! new_deadline
+    rec_message.modify_ack_deadline! new_deadline
 
     mock.verify
   end
