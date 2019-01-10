@@ -160,7 +160,6 @@ module Google
           ensure_subscription!
           subscription.modify_ack_deadline new_deadline, ack_id
         end
-        alias delay! modify_ack_deadline!
 
         ##
         # Resets the acknowledge deadline for the message without acknowledging
@@ -188,7 +187,7 @@ module Google
         #   subscriber.stop.wait!
         #
         def reject!
-          delay! 0
+          modify_ack_deadline! 0
         end
         alias nack! reject!
         alias ignore! reject!
