@@ -34,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.speech.v1.RecognitionConfig" do
     optional :encoding, :enum, 1, "google.cloud.speech.v1.RecognitionConfig.AudioEncoding"
     optional :sample_rate_hertz, :int32, 2
+    optional :enable_separate_recognition_per_channel, :bool, 12
     optional :language_code, :string, 3
     optional :max_alternatives, :int32, 4
     optional :profanity_filter, :bool, 5
@@ -86,9 +87,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :alternatives, :message, 1, "google.cloud.speech.v1.SpeechRecognitionAlternative"
     optional :is_final, :bool, 2
     optional :stability, :float, 3
+    optional :channel_tag, :int32, 5
   end
   add_message "google.cloud.speech.v1.SpeechRecognitionResult" do
     repeated :alternatives, :message, 1, "google.cloud.speech.v1.SpeechRecognitionAlternative"
+    optional :channel_tag, :int32, 2
   end
   add_message "google.cloud.speech.v1.SpeechRecognitionAlternative" do
     optional :transcript, :string, 1

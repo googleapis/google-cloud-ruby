@@ -103,6 +103,14 @@ module Google
         #     the audio source (instead of re-sampling).
         #     This field is optional for `FLAC` and `WAV` audio files and required
         #     for all other audio formats. For details, see {Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        # @!attribute [rw] enable_separate_recognition_per_channel
+        #   @return [true, false]
+        #     This needs to be set to `true` explicitly and `audio_channel_count` > 1
+        #     to get each channel recognized separately. The recognition result will
+        #     contain a `channel_tag` field to state which channel that result belongs
+        #     to. If this is not true, we will only recognize the first channel. The
+        #     request is billed cumulatively for all channels recognized:
+        #     `audio_channel_count` multiplied by the length of the audio.
         # @!attribute [rw] language_code
         #   @return [String]
         #     *Required* The language of the supplied audio as a
@@ -181,16 +189,20 @@ module Google
         # @!attribute [rw] use_enhanced
         #   @return [true, false]
         #     *Optional* Set to true to use an enhanced model for speech recognition.
-        #     You must also set the `model` field to a valid, enhanced model. If
-        #     `use_enhanced` is set to true and the `model` field is not set, then
-        #     `use_enhanced` is ignored. If `use_enhanced` is true and an enhanced
-        #     version of the specified model does not exist, then the speech is
-        #     recognized using the standard version of the specified model.
+        #     If `use_enhanced` is set to true and the `model` field is not set, then
+        #     an appropriate enhanced model is chosen if:
+        #     1. project is eligible for requesting enhanced models
+        #     2. an enhanced model exists for the audio
+        #
+        #     If `use_enhanced` is true and an enhanced version of the specified model
+        #     does not exist, then the speech is recognized using the standard version
+        #     of the specified model.
         #
         #     Enhanced speech models require that you opt-in to data logging using
-        #     instructions in the [documentation](https://cloud.google.com/speech-to-text/enable-data-logging).
-        #     If you set `use_enhanced` to true and you have not enabled audio logging,
-        #     then you will receive an error.
+        #     instructions in the
+        #     [documentation](https://cloud.google.com/speech-to-text/docs/enable-data-logging). If you set
+        #     `use_enhanced` to true and you have not enabled audio logging, then you
+        #     will receive an error.
         class RecognitionConfig
           # The encoding of the audio data sent in the request.
           #
@@ -426,6 +438,11 @@ module Google
         #     (completely unstable) to 1.0 (completely stable).
         #     This field is only provided for interim results (`is_final=false`).
         #     The default of 0.0 is a sentinel value indicating `stability` was not set.
+        # @!attribute [rw] channel_tag
+        #   @return [Integer]
+        #     For multi-channel audio, this is the channel number corresponding to the
+        #     recognized result for the audio from that channel.
+        #     For audio_channel_count = N, its output values can range from '1' to 'N'.
         class StreamingRecognitionResult; end
 
         # A speech recognition result corresponding to a portion of the audio.
@@ -435,6 +452,11 @@ module Google
         #     maximum specified in `max_alternatives`).
         #     These alternatives are ordered in terms of accuracy, with the top (first)
         #     alternative being the most probable, as ranked by the recognizer.
+        # @!attribute [rw] channel_tag
+        #   @return [Integer]
+        #     For multi-channel audio, this is the channel number corresponding to the
+        #     recognized result for the audio from that channel.
+        #     For audio_channel_count = N, its output values can range from '1' to 'N'.
         class SpeechRecognitionResult; end
 
         # Alternative hypotheses (a.k.a. n-best list).
@@ -453,6 +475,8 @@ module Google
         # @!attribute [rw] words
         #   @return [Array<Google::Cloud::Speech::V1::WordInfo>]
         #     Output only. A list of word-specific information for each recognized word.
+        #     Note: When `enable_speaker_diarization` is true, you will see all the words
+        #     from the beginning of the audio.
         class SpeechRecognitionAlternative; end
 
         # Word-specific information for recognized words.
