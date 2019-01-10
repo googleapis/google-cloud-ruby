@@ -15,6 +15,7 @@
 
 require "google/cloud/speech/v1/speech_client"
 require "google/cloud/speech/v1/helpers"
+require "google/cloud/speech/v1/cloud_speech_pb"
 
 module Google
   module Cloud
