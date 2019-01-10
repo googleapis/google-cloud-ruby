@@ -144,6 +144,32 @@ request.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#enable_separate_recognition_per_channel-instance_method" title="#enable_separate_recognition_per_channel (instance method)">#<strong>enable_separate_recognition_per_channel</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This needs to be set to <code>true</code> explicitly and <code>audio_channel_count</code> &gt; 1 to get each channel recognized separately.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#enable_word_time_offsets-instance_method" title="#enable_word_time_offsets (instance method)">#<strong>enable_word_time_offsets</strong>  &#x21d2; true, false </a>
     
 
@@ -440,18 +466,6 @@ premium feature.</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -505,10 +519,217 @@ premium feature.</p>
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
+  <span class='comment'># The encoding of the audio data sent in the request.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All encodings support only 1 channel (mono) audio.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For best results, the audio source should be captured and transmitted using
+</span>  <span class='comment'># a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
+</span>  <span class='comment'># recognition can be reduced if lossy codecs are used to capture or transmit
+</span>  <span class='comment'># audio, particularly if background noise is present. Lossy codecs include
+</span>  <span class='comment'># `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The `FLAC` and `WAV` audio file formats include a header that describes the
+</span>  <span class='comment'># included audio content. You can request recognition for `WAV` files that
+</span>  <span class='comment'># contain either `LINEAR16` or `MULAW` encoded audio.
+</span>  <span class='comment'># If you send `FLAC` or `WAV` audio file format in
+</span>  <span class='comment'># your request, you do not need to specify an `AudioEncoding`; the audio
+</span>  <span class='comment'># encoding format is determined from the file header. If you specify
+</span>  <span class='comment'># an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
+</span>  <span class='comment'># encoding configuration must match the encoding described in the audio
+</span>  <span class='comment'># header; otherwise the request returns an
+</span>  <span class='comment'># {Google::Rpc::Code::INVALID_ARGUMENT} error code.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="RecognitionConfig/AudioEncoding.html" title="Google::Cloud::Speech::V1::RecognitionConfig::AudioEncoding (module)">AudioEncoding</a></span></span>
+    <span class='comment'># Not specified.
+</span>    <span class='const'>ENCODING_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Uncompressed 16-bit signed little-endian samples (Linear PCM).
+</span>    <span class='const'>LINEAR16</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># `FLAC` (Free Lossless Audio
+</span>    <span class='comment'># Codec) is the recommended encoding because it is
+</span>    <span class='comment'># lossless--therefore recognition is not compromised--and
+</span>    <span class='comment'># requires only about half the bandwidth of `LINEAR16`. `FLAC` stream
+</span>    <span class='comment'># encoding supports 16-bit and 24-bit samples, however, not all fields in
+</span>    <span class='comment'># `STREAMINFO` are supported.
+</span>    <span class='const'>FLAC</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
+</span>    <span class='const'>MULAW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
+</span>    <span class='const'>AMR</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
+</span>    <span class='const'>AMR_WB</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Opus encoded audio frames in Ogg container
+</span>    <span class='comment'># ([OggOpus](https://wiki.xiph.org/OggOpus)).
+</span>    <span class='comment'># `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
+</span>    <span class='const'>OGG_OPUS</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Although the use of lossy encodings is not recommended, if a very low
+</span>    <span class='comment'># bitrate encoding is required, `OGG_OPUS` is highly preferred over
+</span>    <span class='comment'># Speex encoding. The [Speex](https://speex.org/)  encoding supported by
+</span>    <span class='comment'># Cloud Speech API has a header byte in each block, as in MIME type
+</span>    <span class='comment'># `audio/x-speex-with-header-byte`.
+</span>    <span class='comment'># It is a variant of the RTP Speex encoding defined in
+</span>    <span class='comment'># [RFC 5574](https://tools.ietf.org/html/rfc5574).
+</span>    <span class='comment'># The stream is a sequence of blocks, one block per RTP packet. Each block
+</span>    <span class='comment'># starts with a byte containing the length of the block, in bytes, followed
+</span>    <span class='comment'># by one or more frames of Speex data, padded to an integral number of
+</span>    <span class='comment'># bytes (octets) as specified in RFC 5574. In other words, each RTP header
+</span>    <span class='comment'># is replaced with a single byte containing the block length. Only Speex
+</span>    <span class='comment'># wideband is supported. `sample_rate_hertz` must be 16000.
+</span>    <span class='const'>SPEEX_WITH_HEADER_BYTE</span> <span class='op'>=</span> <span class='int'>7</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="enable_separate_recognition_per_channel=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="enable_separate_recognition_per_channel-instance_method">
+  
+    #<strong>enable_separate_recognition_per_channel</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns This needs to be set to <code>true</code> explicitly and <code>audio_channel_count</code> &gt; 1
+to get each channel recognized separately. The recognition result will
+contain a <code>channel_tag</code> field to state which channel that result belongs
+to. If this is not true, we will only recognize the first channel. The
+request is billed cumulatively for all channels recognized:
+<code>audio_channel_count</code> multiplied by the length of the audio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>This needs to be set to <code>true</code> explicitly and <code>audio_channel_count</code> &gt; 1
+to get each channel recognized separately. The recognition result will
+contain a <code>channel_tag</code> field to state which channel that result belongs
+to. If this is not true, we will only recognize the first channel. The
+request is billed cumulatively for all channels recognized:
+<code>audio_channel_count</code> multiplied by the length of the audio.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
@@ -631,18 +852,6 @@ the start and end time offsets (timestamps) for those words. If
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -696,10 +905,22 @@ the start and end time offsets (timestamps) for those words. If
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
@@ -820,18 +1041,6 @@ for all other audio formats. For details, see <span class='object_link'><a href=
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -885,10 +1094,22 @@ for all other audio formats. For details, see <span class='object_link'><a href=
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
@@ -1013,18 +1234,6 @@ for a list of the currently supported language codes.</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -1078,10 +1287,22 @@ for a list of the currently supported language codes.</p>
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
@@ -1208,18 +1429,6 @@ one. If omitted, will return a maximum of one.</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -1273,10 +1482,22 @@ one. If omitted, will return a maximum of one.</p>
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
@@ -1457,18 +1678,6 @@ in the RecognitionConfig.</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -1522,10 +1731,22 @@ in the RecognitionConfig.</p>
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
@@ -1648,18 +1869,6 @@ won&#39;t be filtered out.</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -1713,10 +1922,22 @@ won&#39;t be filtered out.</p>
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
@@ -1845,18 +2066,6 @@ for all other audio formats. For details, see <span class='object_link'><a href=
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -1910,10 +2119,22 @@ for all other audio formats. For details, see <span class='object_link'><a href=
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
@@ -2034,18 +2255,6 @@ information, see <a href="https://cloud.google.com/speech-to-text/docs/basics#ph
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -2099,10 +2308,22 @@ information, see <a href="https://cloud.google.com/speech-to-text/docs/basics#ph
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
@@ -2189,16 +2410,23 @@ information, see <a href="https://cloud.google.com/speech-to-text/docs/basics#ph
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns <em>Optional</em> Set to true to use an enhanced model for speech recognition.
-You must also set the <code>model</code> field to a valid, enhanced model. If
-<code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
-<code>use_enhanced</code> is ignored. If <code>use_enhanced</code> is true and an enhanced
-version of the specified model does not exist, then the speech is
-recognized using the standard version of the specified model.</p>
+If <code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
+an appropriate enhanced model is chosen if:</p>
+
+<ol>
+<li>project is eligible for requesting enhanced models</li>
+<li>an enhanced model exists for the audio</li>
+</ol>
+
+<p>If <code>use_enhanced</code> is true and an enhanced version of the specified model
+does not exist, then the speech is recognized using the standard version
+of the specified model.</p>
 
 <p>Enhanced speech models require that you opt-in to data logging using
-instructions in the <a href="https://cloud.google.com/speech-to-text/enable-data-logging">documentation</a>.
-If you set <code>use_enhanced</code> to true and you have not enabled audio logging,
-then you will receive an error.</p>
+instructions in the
+<a href="https://cloud.google.com/speech-to-text/docs/enable-data-logging">documentation</a>. If you set
+<code>use_enhanced</code> to true and you have not enabled audio logging, then you
+will receive an error.</p>
 
 
   </div>
@@ -2217,16 +2445,23 @@ then you will receive an error.</p>
       
         &mdash;
         <div class='inline'><p><em>Optional</em> Set to true to use an enhanced model for speech recognition.
-You must also set the <code>model</code> field to a valid, enhanced model. If
-<code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
-<code>use_enhanced</code> is ignored. If <code>use_enhanced</code> is true and an enhanced
-version of the specified model does not exist, then the speech is
-recognized using the standard version of the specified model.</p>
+If <code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
+an appropriate enhanced model is chosen if:</p>
+
+<ol>
+<li>project is eligible for requesting enhanced models</li>
+<li>an enhanced model exists for the audio</li>
+</ol>
+
+<p>If <code>use_enhanced</code> is true and an enhanced version of the specified model
+does not exist, then the speech is recognized using the standard version
+of the specified model.</p>
 
 <p>Enhanced speech models require that you opt-in to data logging using
-instructions in the <a href="https://cloud.google.com/speech-to-text/enable-data-logging">documentation</a>.
-If you set <code>use_enhanced</code> to true and you have not enabled audio logging,
-then you will receive an error.</p>
+instructions in the
+<a href="https://cloud.google.com/speech-to-text/docs/enable-data-logging">documentation</a>. If you set
+<code>use_enhanced</code> to true and you have not enabled audio logging, then you
+will receive an error.</p>
 </div>
       
     </li>
@@ -2239,18 +2474,6 @@ then you will receive an error.</p>
       <pre class="lines">
 
 
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
 206
 207
 208
@@ -2304,10 +2527,22 @@ then you will receive an error.</p>
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb', line 206</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::RecognitionConfig (class)">RecognitionConfig</a></span></span>
   <span class='comment'># The encoding of the audio data sent in the request.
