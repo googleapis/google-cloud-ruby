@@ -347,7 +347,7 @@ module Google
             is_final_state: is_final_state,
             create_time: timestamp_to_grpc(create_time),
             final_time: timestamp_to_grpc(final_time),
-            user_email: user_email,
+            user_email: user_email.to_s,
             stack_frames: stack_frames_to_grpc,
             evaluated_expressions: evaluated_expressions_to_grpc,
             status: status_to_grpc,

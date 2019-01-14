@@ -81,7 +81,7 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
       breakpoint_manager.service.stub :list_active_breakpoints, mocked_response do
         Google::Cloud::Debugger::Breakpoint.stub :from_grpc, breakpoint1 do
           app_root = "my/app/path"
-          breakpoint_manager.agent.app_root =app_root
+          breakpoint_manager.agent.app_root = app_root
           breakpoint_manager.sync_active_breakpoints(nil).must_equal true
 
           breakpoint1.full_path.must_match app_root
