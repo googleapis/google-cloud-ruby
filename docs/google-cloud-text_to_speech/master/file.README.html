@@ -73,6 +73,22 @@ steps:</p>
 <pre class="code ruby"><code class="ruby">$ gem install google-cloud-text_to_speech
 </code></pre>
 
+<h3>Preview</h3>
+
+<h4>TextToSpeechClient</h4>
+
+<pre class="code rb"><code class="rb">require &quot;google/cloud/text_to_speech&quot;
+
+text_to_speech_client = Google::Cloud::TextToSpeech.new
+text = &quot;test&quot;
+input = { text: text }
+language_code = &quot;en-US&quot;
+voice = { language_code: language_code }
+audio_encoding = :MP3
+audio_config = { audio_encoding: audio_encoding }
+response = text_to_speech_client.synthesize_speech(input, voice, audio_config)
+</code></pre>
+
 <h3>Next Steps</h3>
 
 <ul>

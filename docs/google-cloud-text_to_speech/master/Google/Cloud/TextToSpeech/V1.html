@@ -102,6 +102,22 @@ steps:</p>
 <pre class="code ruby"><code class="ruby">$ gem install google-cloud-text_to_speech
 </code></pre>
 
+<h3>Preview</h3>
+
+<h4>TextToSpeechClient</h4>
+
+<pre class="code rb"><code class="rb">require &quot;google/cloud/text_to_speech&quot;
+
+text_to_speech_client = Google::Cloud::TextToSpeech.new(version: :v1)
+text = &quot;test&quot;
+input = { text: text }
+language_code = &quot;en-US&quot;
+voice = { language_code: language_code }
+audio_encoding = :MP3
+audio_config = { audio_encoding: audio_encoding }
+response = text_to_speech_client.synthesize_speech(input, voice, audio_config)
+</code></pre>
+
 <h3>Next Steps</h3>
 
 <ul>
@@ -335,30 +351,30 @@ custom error handling.</p>
       <pre class="lines">
 
 
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
 129
 130
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
