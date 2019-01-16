@@ -29,7 +29,7 @@ function set_failed_status {
 }
 
 if [ "$PACKAGE" = "post" ]; then
-    rbenv global "2.5.3"
+    rbenv global ${RUBY_VERSIONS[-1]}
     (bundle update && bundle exec rake kokoro:post) || set_failed_status
 elif [ "$JOB_TYPE" = "nightly" ]; then
     for version in "${RUBY_VERSIONS[@]}"; do
@@ -42,6 +42,11 @@ elif [ "$JOB_TYPE" = "continuous" ]; then
         rbenv global "$version"
         (bundle update && bundle exec rake kokoro:continuous) || set_failed_status
     done
+elif [ "$JOB_TYPE" = "release" ]; then
+    rbenv global ${RUBY_VERSIONS[-1]}
+    python3 -m pip install gcp-releasetool
+    python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
+    (bundle update && bundle exec rake kokoro:release) || set_failed_status
 else
     for version in "${RUBY_VERSIONS[@]}"; do
         rbenv global "$version"

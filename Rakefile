@@ -611,8 +611,7 @@ namespace :kokoro do
         sh "bundle update"
         command = "bundle exec rake ci"
         command += ":acceptance" if updated
-        exit_status = run_command_with_timeout command, 3600
-        exit exit_status
+        exit run_command_with_timeout(command, 3600)
       end
     end
   end
@@ -625,8 +624,26 @@ namespace :kokoro do
         header "Using Ruby - #{RUBY_VERSION}"
         Rake::Task["kokoro:windows_acceptance_fix"].invoke
         sh "bundle update"
-        exit_status = run_command_with_timeout "bundle exec rake ci:acceptance", 3600
-        exit exit_status
+        exit run_command_with_timeout("bundle exec rake ci:acceptance", 3600)
+      end
+    end
+  end
+
+  task :release do
+    header_2 ENV["JOB_TYPE"]
+    Dir.chdir ENV["PACKAGE"] do
+      Bundler.with_clean_env do
+        Rake::Task["kokoro:load_env_vars"].invoke
+        header "Using Ruby - #{RUBY_VERSION}"
+        sh "bundle update"
+        sh "bundle exec rake build"
+        gem = Dir.entries("pkg").select { |entry| File.file? "pkg/#{entry}" }.first
+        path = FileUtils.mkdir_p(File.expand_path("~") + "/.gem")
+        File.open("#{path}/credentials", "w") do |f|
+          f.puts "---"
+          f.puts ":rubygems_api_key: #{ENV["RUBYGEMS_API_TOKEN"]}"
+        end
+        sh "gem push pkg/#{gem}"
       end
     end
   end
@@ -639,15 +656,15 @@ namespace :kokoro do
   end
 
   task :load_env_vars do
-    service_account = "#{ENV['KOKORO_GFILE_DIR']}/service-account.json"
-    ENV['GOOGLE_APPLICATION_CREDENTIALS'] = service_account
-    filename = "#{ENV['KOKORO_GFILE_DIR']}/env_vars.json"
+    service_account = "#{ENV["KOKORO_GFILE_DIR"]}/service-account.json"
+    ENV["GOOGLE_APPLICATION_CREDENTIALS"] = service_account
+    filename = "#{ENV["KOKORO_GFILE_DIR"]}/env_vars.json"
     env_vars = JSON.parse(File.read(filename))
     env_vars.each { |k, v| ENV[k] = v }
   end
 
   task :windows_acceptance_fix do
-    if ENV['OS'] == 'windows'
+    if ENV["OS"] == "windows"
       FileUtils.mkdir_p "acceptance"
       if File.file? "acceptance/data"
         FileUtils.rm_f "acceptance/data"
@@ -676,12 +693,27 @@ def generate_kokoro_configs
     name = gem.split('google-cloud-').last
     [:linux, :windows, :osx].each do |os_version|
       [:presubmit, :continuous, :nightly].each do |build_type|
+        # Generate build
         file_path = "./.kokoro/#{build_type}/#{os_version}/#{name}.cfg"
         File.open(file_path, "w") do |f|
           config = ERB.new(File.read("./.kokoro/templates/#{os_version}.cfg.erb"))
           f.write(config.result(binding))
         end
+
+        # Generate job
+        file_path = "./.kokoro/job_configs/#{build_type}/#{os_version}/#{name}.cfg"
+        File.open(file_path, "w") do |f|
+          config = ERB.new(File.read("./.kokoro/templates/#{os_version}.cfg.erb"))
+          f.write(config.result(binding))
+        end
+
+        cloud-devrel/client-libraries/google-cloud-ruby/nightly-linux
       end
+    end
+    file_path = "./.kokoro/release/#{name}.cfg"
+    File.open(file_path, "w") do |f|
+      config = ERB.new(File.read("./.kokoro/templates/release.cfg.erb"))
+      f.write(config.result(binding))
     end
   end
 
