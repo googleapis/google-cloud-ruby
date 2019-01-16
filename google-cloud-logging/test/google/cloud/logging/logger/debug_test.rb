@@ -25,6 +25,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     end
   end
   let(:labels) { { "env" => "production" } }
+  let(:insert_id) { "abc-123" }
   let(:logger) { Google::Cloud::Logging::Logger.new logging, log_name, resource, labels }
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
   let(:timestamp) { Time.parse "2016-10-02T15:01:23.045123456Z" }
@@ -32,10 +33,19 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
   def write_req_args severity
     timestamp_grpc = Google::Protobuf::Timestamp.new seconds: timestamp.to_i,
                                                      nanos: timestamp.nsec
-    entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!",
+    entries = [Google::Logging::V2::LogEntry.new(insert_id: insert_id,
+                                                 text_payload: "Danger Will Robinson!",
                                                  severity: severity,
                                                  timestamp: timestamp_grpc)]
     [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels, partial_success: nil, options: default_options]
+  end
+
+  def apply_stubs
+    Time.stub :now, timestamp do
+      SecureRandom.stub :uuid, insert_id do
+        yield
+      end
+    end
   end
 
   before do
@@ -55,7 +65,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:DEBUG)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.debug "Danger Will Robinson!"
 
       mock.verify
@@ -67,7 +77,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:INFO)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.info "Danger Will Robinson!"
 
       mock.verify
@@ -79,7 +89,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:WARNING)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.warn "Danger Will Robinson!"
 
       mock.verify
@@ -91,7 +101,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:ERROR)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.error "Danger Will Robinson!"
 
       mock.verify
@@ -103,7 +113,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:CRITICAL)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.fatal "Danger Will Robinson!"
 
       mock.verify
@@ -115,7 +125,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:DEFAULT)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.unknown "Danger Will Robinson!"
 
       mock.verify
@@ -127,7 +137,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:DEBUG)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.debug { "Danger Will Robinson!" }
 
       mock.verify
@@ -139,7 +149,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:INFO)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.info { "Danger Will Robinson!" }
 
       mock.verify
@@ -151,7 +161,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:WARNING)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.warn { "Danger Will Robinson!" }
 
       mock.verify
@@ -163,7 +173,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:ERROR)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.error { "Danger Will Robinson!" }
 
       mock.verify
@@ -175,7 +185,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:CRITICAL)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.fatal { "Danger Will Robinson!" }
 
       mock.verify
@@ -187,7 +197,7 @@ describe Google::Cloud::Logging::Logger, :debug, :mock_logging do
     mock.expect :write_log_entries, write_res, write_req_args(:DEFAULT)
     logging.service.mocked_logging = mock
 
-    Time.stub :now, timestamp do
+    apply_stubs do
       logger.unknown { "Danger Will Robinson!" }
 
       mock.verify

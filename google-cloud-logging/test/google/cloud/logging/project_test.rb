@@ -21,7 +21,10 @@ describe Google::Cloud::Logging::Project, :mock_logging do
   end
 
   it "creates an empty entry" do
-    entry = logging.entry
+    entry = nil
+    SecureRandom.stub :uuid, "abc-123" do
+      entry = logging.entry
+    end
     entry.must_be_kind_of Google::Cloud::Logging::Entry
     entry.resource.must_be_kind_of Google::Cloud::Logging::Resource
 
@@ -30,7 +33,7 @@ describe Google::Cloud::Logging::Project, :mock_logging do
     entry.resource.must_be :empty?
     entry.timestamp.must_be :nil?
     entry.severity.must_equal :DEFAULT
-    entry.insert_id.must_be :nil?
+    entry.insert_id.must_equal "abc-123"
     entry.labels.must_be :empty?
     entry.payload.must_be :nil?
   end

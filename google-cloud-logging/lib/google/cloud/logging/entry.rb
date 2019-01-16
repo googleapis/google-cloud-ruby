@@ -19,6 +19,7 @@ require "google/cloud/logging/entry/http_request"
 require "google/cloud/logging/entry/operation"
 require "google/cloud/logging/entry/source_location"
 require "google/cloud/logging/entry/list"
+require "securerandom"
 
 module Google
   module Cloud
@@ -82,6 +83,7 @@ module Google
           @operation = Operation.new
           @severity = :DEFAULT
           @source_location = SourceLocation.new
+          @insert_id = SecureRandom.uuid
         end
 
         ##
@@ -395,7 +397,6 @@ module Google
         def empty?
           log_name.nil? &&
             timestamp.nil? &&
-            insert_id.nil? &&
             (labels.nil? || labels.empty?) &&
             payload.nil? &&
             resource.empty? &&
