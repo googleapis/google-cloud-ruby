@@ -178,4 +178,12 @@ class MockStorage < Minitest::Spec
       )
     )
   end
+
+  def iam_configuration_gapi policy_only: false
+    Google::Apis::StorageV1::Bucket::IamConfiguration.new(
+      bucket_policy_only: Google::Apis::StorageV1::Bucket::IamConfiguration::BucketPolicyOnly.new(
+        enabled: policy_only
+      )
+    )
+  end
 end

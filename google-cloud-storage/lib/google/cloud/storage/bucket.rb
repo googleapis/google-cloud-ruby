@@ -43,6 +43,10 @@ module Google
       class Bucket
         include Convert
         ##
+        # @private Alias to the Google Client API module
+        API = Google::Apis::StorageV1
+
+        ##
         # @private The Service object.
         attr_accessor :service
 
@@ -82,7 +86,7 @@ module Google
         # @private Create an empty Bucket object.
         def initialize
           @service = nil
-          @gapi = Google::Apis::StorageV1::Bucket.new
+          @gapi = API::Bucket.new
           @user_project = nil
         end
 
@@ -300,7 +304,7 @@ module Google
         # @param [String] logging_bucket The bucket to hold the logging output
         #
         def logging_bucket= logging_bucket
-          @gapi.logging ||= Google::Apis::StorageV1::Bucket::Logging.new
+          @gapi.logging ||= API::Bucket::Logging.new
           @gapi.logging.log_bucket = logging_bucket
           patch_gapi! :logging
         end
@@ -329,7 +333,7 @@ module Google
         # @param [String] logging_prefix The logging object prefix.
         #
         def logging_prefix= logging_prefix
-          @gapi.logging ||= Google::Apis::StorageV1::Bucket::Logging.new
+          @gapi.logging ||= API::Bucket::Logging.new
           @gapi.logging.log_object_prefix = logging_prefix
           patch_gapi! :logging
         end
@@ -381,7 +385,7 @@ module Google
         #   for the bucket.
         #
         def versioning= new_versioning
-          @gapi.versioning ||= Google::Apis::StorageV1::Bucket::Versioning.new
+          @gapi.versioning ||= API::Bucket::Versioning.new
           @gapi.versioning.enabled = new_versioning
           patch_gapi! :versioning
         end
@@ -411,7 +415,7 @@ module Google
         # @param [String] website_main The main page suffix.
         #
         def website_main= website_main
-          @gapi.website ||= Google::Apis::StorageV1::Bucket::Website.new
+          @gapi.website ||= API::Bucket::Website.new
           @gapi.website.main_page_suffix = website_main
           patch_gapi! :website
         end
@@ -459,7 +463,7 @@ module Google
         #   How to Host a Static Website
         #
         def website_404= website_404
-          @gapi.website ||= Google::Apis::StorageV1::Bucket::Website.new
+          @gapi.website ||= API::Bucket::Website.new
           @gapi.website.not_found_page = website_404
           patch_gapi! :website
         end
@@ -501,7 +505,7 @@ module Google
         #   # Project#bucket or Project#buckets to access this bucket.
         #
         def requester_pays= new_requester_pays
-          @gapi.billing ||= Google::Apis::StorageV1::Bucket::Billing.new
+          @gapi.billing ||= API::Bucket::Billing.new
           @gapi.billing.requester_pays = new_requester_pays
           patch_gapi! :billing
         end
@@ -549,7 +553,7 @@ module Google
         #   bucket.default_kms_key = kms_key_name
         #
         def default_kms_key= new_default_kms_key
-          @gapi.encryption = Google::Apis::StorageV1::Bucket::Encryption.new \
+          @gapi.encryption = API::Bucket::Encryption.new \
             default_kms_key_name: new_default_kms_key
           patch_gapi! :encryption
         end
@@ -604,8 +608,7 @@ module Google
           if new_retention_period.nil?
             @gapi.retention_policy = nil
           else
-            @gapi.retention_policy ||= \
-              Google::Apis::StorageV1::Bucket::RetentionPolicy.new
+            @gapi.retention_policy ||= API::Bucket::RetentionPolicy.new
             @gapi.retention_policy.retention_period = new_retention_period
           end
 
@@ -755,6 +758,71 @@ module Google
           @gapi = service.lock_bucket_retention_policy \
             name, metageneration, user_project: user_project
           true
+        end
+
+        ##
+        # Whether the bucket's file IAM configuration enables Bucket Policy
+        # Only. The default is false. This value can be modified by calling
+        # {Bucket#policy_only=}.
+        #
+        # If true, access checks only use bucket-level IAM policies or above,
+        # all object ACLs within the bucket are no longer evaluated, and
+        # access-control is configured solely through the bucket's IAM policy.
+        # Any requests which attempt to use the ACL API to view or manipulate
+        # ACLs will fail with 400 errors.
+        #
+        # @return [Boolean] Returns `false` if the bucket has no IAM
+        #   configuration or if Bucket Policy Only is not enabled in the IAM
+        #   configuration. Returns `true` if Bucket Policy Only is enabled in
+        #   the IAM configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.policy_only = true
+        #   bucket.policy_only? # true
+        #
+        #   bucket.default_acl.public! # Google::Cloud::InvalidArgumentError
+        #
+        def policy_only?
+          return false unless @gapi.iam_configuration &&
+                              @gapi.iam_configuration.bucket_policy_only
+          !@gapi.iam_configuration.bucket_policy_only.enabled.nil? &&
+            @gapi.iam_configuration.bucket_policy_only.enabled
+        end
+
+        ##
+        # If enabled, access checks only use bucket-level IAM policies or above,
+        # all object ACLs within the bucket are no longer evaluated, and
+        # access-control is configured solely through the bucket's IAM policy.
+        # Any requests which attempt to use the ACL API to view or manipulate
+        # ACLs will fail with 400 errors.
+        #
+        # @param [Boolean] new_policy_only When set to `true`, Bucket Policy
+        #   Only is enabled in the bucket's IAM configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.policy_only = true
+        #   bucket.policy_only? # true
+        #
+        #   bucket.default_acl.public! # Google::Cloud::InvalidArgumentError
+        #
+        def policy_only= new_policy_only
+          @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new \
+            bucket_policy_only: \
+              API::Bucket::IamConfiguration::BucketPolicyOnly.new
+          @gapi.iam_configuration.bucket_policy_only.enabled = new_policy_only
+          patch_gapi! :iam_configuration
         end
 
         ##
@@ -1243,7 +1311,7 @@ module Google
                       user_project: user_project }
           destination_gapi = nil
           if block_given?
-            destination_gapi = Google::Apis::StorageV1::Object.new
+            destination_gapi = API::Object.new
             updater = File::Updater.new destination_gapi
             yield updater
             updater.check_for_changed_metadata!
@@ -1910,7 +1978,7 @@ module Google
           patch_args = Hash[attributes.map do |attr|
             [attr, @gapi.send(attr)]
           end]
-          patch_gapi = Google::Apis::StorageV1::Bucket.new patch_args
+          patch_gapi = API::Bucket.new patch_args
           @gapi = service.patch_bucket name, patch_gapi,
                                        user_project: user_project
           @lazy = nil
