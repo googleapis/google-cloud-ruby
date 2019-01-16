@@ -17,7 +17,7 @@ require "delegate"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       class Subscription
         ##
         # Subscription::List is a special case Array with additional values.
@@ -25,7 +25,7 @@ module Google
           ##
           # If not empty, indicates that there are more subscriptions
           # that match the request and this value should be passed to
-          # the next {Google::Cloud::Pubsub::Topic#subscriptions} to continue.
+          # the next {Google::Cloud::PubSub::Topic#subscriptions} to continue.
           attr_accessor :token
 
           ##
@@ -46,7 +46,7 @@ module Google
           # @example
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   if subscriptions.next?
@@ -65,7 +65,7 @@ module Google
           # @example
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   if subscriptions.next?
@@ -103,7 +103,7 @@ module Google
           # @example Iterating each subscription by passing a block:
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   subscriptions.all do |subscription|
@@ -113,7 +113,7 @@ module Google
           # @example Using the enumerator by not passing a block:
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   all_names = subscriptions.all.map do |subscription|
@@ -123,7 +123,7 @@ module Google
           # @example Limit the number of API calls made:
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   subscriptions = pubsub.subscriptions
           #   subscriptions.all(request_limit: 10) do |subscription|
@@ -149,7 +149,7 @@ module Google
 
           ##
           # @private New Subscriptions::List from a
-          # Google::Pubsub::V1::ListSubscriptionsRequest object.
+          # Google::Cloud::PubSub::V1::ListSubscriptionsRequest object.
           def self.from_grpc grpc_list, service, max = nil
             subs = new(Array(grpc_list.subscriptions).map do |grpc|
               Subscription.from_grpc grpc, service
@@ -164,7 +164,7 @@ module Google
 
           ##
           # @private New Subscriptions::List from a
-          # Google::Pubsub::V1::ListTopicSubscriptionsResponse object.
+          # Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse object.
           def self.from_topic_grpc grpc_list, service, topic, max = nil
             subs = new(Array(grpc_list.subscriptions).map do |grpc|
               Subscription.from_name grpc, service

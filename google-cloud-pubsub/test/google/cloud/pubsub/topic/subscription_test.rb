@@ -14,14 +14,14 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
+describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
   let(:found_sub_name) { "found-sub-#{Time.now.to_i}" }
   let(:not_found_sub_name) { "found-sub-#{Time.now.to_i}" }
 
   it "gets an existing subscription" do
-    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -30,13 +30,13 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.wont_be :reference?
     sub.must_be :resource?
   end
 
   it "gets an existing subscription with get_subscription alias" do
-    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -45,13 +45,13 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.wont_be :reference?
     sub.must_be :resource?
   end
 
   it "gets an existing subscription with find_subscription alias" do
-    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -60,7 +60,7 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.wont_be :reference?
     sub.must_be :resource?
   end
@@ -82,16 +82,16 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
     # No HTTP mock needed, since the lookup is not made
 
     sub = topic.find_subscription found_sub_name, skip_lookup: true
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.must_be :reference?
     sub.wont_be :resource?
   end
 
   describe "reference topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "gets an existing subscription" do
-      get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
+      get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, found_sub_name)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, [subscription_path(found_sub_name), options: default_options]
       topic.service.mocked_subscriber = mock
@@ -100,7 +100,7 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
 
       mock.verify
 
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.wont_be :reference?
       sub.must_be :resource?
     end
@@ -120,7 +120,7 @@ describe Google::Cloud::Pubsub::Topic, :subscription, :mock_pubsub do
   end
 
   describe "reference topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "returns nil when getting an non-existant subscription" do
       stub = Object.new

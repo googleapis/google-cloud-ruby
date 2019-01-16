@@ -23,7 +23,7 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ```ruby
 require "google/cloud/pubsub"
 
-pubsub = Google::Cloud::Pubsub.new(
+pubsub = Google::Cloud::PubSub.new(
   project_id: "my-project",
   credentials: "/path/to/keyfile.json"
 )

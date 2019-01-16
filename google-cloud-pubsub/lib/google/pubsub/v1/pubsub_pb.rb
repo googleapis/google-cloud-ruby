@@ -181,47 +181,50 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
 end
 
 module Google
-  module Pubsub
-    module V1
-      MessageStoragePolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.MessageStoragePolicy").msgclass
-      Topic = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Topic").msgclass
-      PubsubMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PubsubMessage").msgclass
-      GetTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetTopicRequest").msgclass
-      UpdateTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateTopicRequest").msgclass
-      PublishRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PublishRequest").msgclass
-      PublishResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PublishResponse").msgclass
-      ListTopicsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicsRequest").msgclass
-      ListTopicsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicsResponse").msgclass
-      ListTopicSubscriptionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSubscriptionsRequest").msgclass
-      ListTopicSubscriptionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSubscriptionsResponse").msgclass
-      ListTopicSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsRequest").msgclass
-      ListTopicSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsResponse").msgclass
-      DeleteTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteTopicRequest").msgclass
-      Subscription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Subscription").msgclass
-      ExpirationPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ExpirationPolicy").msgclass
-      PushConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig").msgclass
-      ReceivedMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ReceivedMessage").msgclass
-      GetSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSubscriptionRequest").msgclass
-      UpdateSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSubscriptionRequest").msgclass
-      ListSubscriptionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSubscriptionsRequest").msgclass
-      ListSubscriptionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSubscriptionsResponse").msgclass
-      DeleteSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteSubscriptionRequest").msgclass
-      ModifyPushConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ModifyPushConfigRequest").msgclass
-      PullRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PullRequest").msgclass
-      PullResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PullResponse").msgclass
-      ModifyAckDeadlineRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ModifyAckDeadlineRequest").msgclass
-      AcknowledgeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.AcknowledgeRequest").msgclass
-      StreamingPullRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullRequest").msgclass
-      StreamingPullResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullResponse").msgclass
-      CreateSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CreateSnapshotRequest").msgclass
-      UpdateSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSnapshotRequest").msgclass
-      Snapshot = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Snapshot").msgclass
-      GetSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSnapshotRequest").msgclass
-      ListSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSnapshotsRequest").msgclass
-      ListSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSnapshotsResponse").msgclass
-      DeleteSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteSnapshotRequest").msgclass
-      SeekRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.SeekRequest").msgclass
-      SeekResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.SeekResponse").msgclass
+  module Cloud
+    module PubSub
     end
   end
+  Pubsub = Cloud::PubSub unless const_defined? :Pubsub
+end
+module Google::Cloud::PubSub::V1
+  MessageStoragePolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.MessageStoragePolicy").msgclass
+  Topic = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Topic").msgclass
+  PubsubMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PubsubMessage").msgclass
+  GetTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetTopicRequest").msgclass
+  UpdateTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateTopicRequest").msgclass
+  PublishRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PublishRequest").msgclass
+  PublishResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PublishResponse").msgclass
+  ListTopicsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicsRequest").msgclass
+  ListTopicsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicsResponse").msgclass
+  ListTopicSubscriptionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSubscriptionsRequest").msgclass
+  ListTopicSubscriptionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSubscriptionsResponse").msgclass
+  ListTopicSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsRequest").msgclass
+  ListTopicSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsResponse").msgclass
+  DeleteTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteTopicRequest").msgclass
+  Subscription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Subscription").msgclass
+  ExpirationPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ExpirationPolicy").msgclass
+  PushConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig").msgclass
+  ReceivedMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ReceivedMessage").msgclass
+  GetSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSubscriptionRequest").msgclass
+  UpdateSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSubscriptionRequest").msgclass
+  ListSubscriptionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSubscriptionsRequest").msgclass
+  ListSubscriptionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSubscriptionsResponse").msgclass
+  DeleteSubscriptionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteSubscriptionRequest").msgclass
+  ModifyPushConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ModifyPushConfigRequest").msgclass
+  PullRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PullRequest").msgclass
+  PullResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PullResponse").msgclass
+  ModifyAckDeadlineRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ModifyAckDeadlineRequest").msgclass
+  AcknowledgeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.AcknowledgeRequest").msgclass
+  StreamingPullRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullRequest").msgclass
+  StreamingPullResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullResponse").msgclass
+  CreateSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CreateSnapshotRequest").msgclass
+  UpdateSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSnapshotRequest").msgclass
+  Snapshot = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Snapshot").msgclass
+  GetSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSnapshotRequest").msgclass
+  ListSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSnapshotsRequest").msgclass
+  ListSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSnapshotsResponse").msgclass
+  DeleteSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteSnapshotRequest").msgclass
+  SeekRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.SeekRequest").msgclass
+  SeekResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.SeekResponse").msgclass
 end

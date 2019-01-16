@@ -17,7 +17,7 @@ require "time"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # @private Helper module for converting Pub/Sub values.
       module Convert

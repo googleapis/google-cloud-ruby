@@ -14,20 +14,20 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
+describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:labels) { { "foo" => "bar" } }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name, labels: labels)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name, labels: labels)), pubsub.service }
   let(:subscriptions_with_token) do
-    response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
     paged_enum_struct response
   end
   let(:subscriptions_without_token) do
-    response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(2)
+    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(2)
     paged_enum_struct response
   end
   let(:subscriptions_with_token_2) do
-    response = Google::Pubsub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
+    response = Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.decode_json topic_subscriptions_json(3, "next_page_token")
     paged_enum_struct response
   end
 
@@ -53,7 +53,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
   it "creates a subscription" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -63,12 +63,12 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with create_subscription alias" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -78,12 +78,12 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with new_subscription alias" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -93,13 +93,13 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with a deadline" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     deadline = 42
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: 42, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -109,12 +109,12 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with retain_acked and retention" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
 
     duration = Google::Protobuf::Duration.new seconds: 600, nanos: 0
     mock = Minitest::Mock.new
@@ -126,14 +126,14 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with a push endpoint" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
     endpoint = "http://foo.bar/baz"
-    push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: endpoint)
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: endpoint)
+    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: push_config, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -143,12 +143,12 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with labels" do
     new_sub_name = "new-sub-#{Time.now.to_i}"
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name, labels: labels)
+    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name, labels: labels)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: labels, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -158,7 +158,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.labels.must_equal labels
     sub.labels.must_be :frozen?
   end
@@ -199,7 +199,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
   it "gets a subscription" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -209,7 +209,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.wont_be :reference?
     sub.must_be :resource?
   end
@@ -217,7 +217,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
   it "gets a subscription with get_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -227,7 +227,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.wont_be :reference?
     sub.must_be :resource?
   end
@@ -235,7 +235,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
   it "gets a subscription with find_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
-    get_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
+    get_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, sub_name)
     mock = Minitest::Mock.new
     mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
     topic.service.mocked_subscriber = mock
@@ -245,7 +245,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.wont_be :reference?
     sub.must_be :resource?
   end
@@ -261,7 +261,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     subs.count.must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -276,7 +276,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     subs.count.must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -293,7 +293,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     subs.count.must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -316,7 +316,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     token.wont_be :nil?
     token.must_equal "next_page_token"
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -324,7 +324,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     second_subs.count.must_equal 2
     second_subs.token.must_be :nil?
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -344,7 +344,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     token.wont_be :nil?
     token.must_equal "next_page_token"
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -365,7 +365,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     first_subs.count.must_equal 3
     first_subs.next?.must_equal true
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -373,7 +373,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -394,7 +394,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     first_subs.count.must_equal 3
     first_subs.next?.must_equal true
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -402,7 +402,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     second_subs.count.must_equal 2
     second_subs.next?.must_equal false
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -421,7 +421,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     subs.count.must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -440,7 +440,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     subs.count.must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -459,7 +459,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     subs.count.must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -478,7 +478,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     subs.count.must_equal 6
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.must_be :reference?
       sub.wont_be :resource?
     end
@@ -488,9 +488,9 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     message = "new-message-here"
     encoded_msg = message.encode(Encoding::ASCII_8BIT)
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg)
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg)
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -499,7 +499,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     mock.verify
 
-    msg.must_be_kind_of Google::Cloud::Pubsub::Message
+    msg.must_be_kind_of Google::Cloud::PubSub::Message
     msg.message_id.must_equal "msg1"
   end
 
@@ -507,9 +507,9 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     message = "new-message-here"
     encoded_msg = message.encode(Encoding::ASCII_8BIT)
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg, attributes: { "format" => "text" })
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg, attributes: { "format" => "text" })
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -518,7 +518,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
     mock.verify
 
-    msg.must_be_kind_of Google::Cloud::Pubsub::Message
+    msg.must_be_kind_of Google::Cloud::PubSub::Message
     msg.message_id.must_equal "msg1"
     msg.attributes["format"].must_equal "text"
   end
@@ -529,10 +529,10 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     encoded_msg1 = message1.encode(Encoding::ASCII_8BIT)
     encoded_msg2 = message2.encode(Encoding::ASCII_8BIT)
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg1),
-      Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg2, attributes: { "format" => "none" })
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg1),
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg2, attributes: { "format" => "none" })
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1", "msg2"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -545,9 +545,9 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
     mock.verify
 
     msgs.count.must_equal 2
-    msgs.first.must_be_kind_of Google::Cloud::Pubsub::Message
+    msgs.first.must_be_kind_of Google::Cloud::PubSub::Message
     msgs.first.message_id.must_equal "msg1"
-    msgs.last.must_be_kind_of Google::Cloud::Pubsub::Message
+    msgs.last.must_be_kind_of Google::Cloud::PubSub::Message
     msgs.last.message_id.must_equal "msg2"
     msgs.last.attributes["format"].must_equal "none"
   end

@@ -17,7 +17,7 @@ require "delegate"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       class Snapshot
         ##
         # Snapshot::List is a special case Array with additional values.
@@ -25,7 +25,7 @@ module Google
           ##
           # If not empty, indicates that there are more snapshots
           # that match the request and this value should be passed to
-          # the next {Google::Cloud::Pubsub::Project#snapshots} to continue.
+          # the next {Google::Cloud::PubSub::Project#snapshots} to continue.
           attr_accessor :token
 
           ##
@@ -45,7 +45,7 @@ module Google
           # @example
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   snapshots = pubsub.snapshots
           #   if snapshots.next?
@@ -64,7 +64,7 @@ module Google
           # @example
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   snapshots = pubsub.snapshots
           #   if snapshots.next?
@@ -98,7 +98,7 @@ module Google
           # @example Iterating each snapshot by passing a block:
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   snapshots = pubsub.snapshots
           #   snapshots.all do |snapshot|
@@ -108,7 +108,7 @@ module Google
           # @example Using the enumerator by not passing a block:
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   snapshots = pubsub.snapshots
           #   all_names = snapshots.all.map do |snapshot|
@@ -118,7 +118,7 @@ module Google
           # @example Limit the number of API calls made:
           #   require "google/cloud/pubsub"
           #
-          #   pubsub = Google::Cloud::Pubsub.new
+          #   pubsub = Google::Cloud::PubSub.new
           #
           #   snapshots = pubsub.snapshots
           #   snapshots.all(request_limit: 10) do |snapshot|
@@ -144,7 +144,7 @@ module Google
 
           ##
           # @private New Snapshots::List from a
-          # Google::Pubsub::V1::ListSnapshotsRequest object.
+          # Google::Cloud::PubSub::V1::ListSnapshotsRequest object.
           def self.from_grpc grpc_list, service, max = nil
             subs = new(Array(grpc_list.snapshots).map do |grpc|
               Snapshot.from_grpc grpc, service

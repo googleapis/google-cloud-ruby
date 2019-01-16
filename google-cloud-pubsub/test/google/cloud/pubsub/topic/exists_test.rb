@@ -14,9 +14,9 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
+describe Google::Cloud::PubSub::Topic, :exists, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
 
   it "knows if it exists when created with an HTTP method" do
     # The absense of a mock means this test will fail
@@ -27,10 +27,10 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
   end
 
   describe "reference topic object of a topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "checks if the topic exists by making an HTTP call" do
-      get_res = Google::Pubsub::V1::Topic.decode_json topic_json(topic_name)
+      get_res = Google::Cloud::PubSub::V1::Topic.decode_json topic_json(topic_name)
       mock = Minitest::Mock.new
       mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
       topic.service.mocked_publisher = mock
@@ -44,7 +44,7 @@ describe Google::Cloud::Pubsub::Topic, :exists, :mock_pubsub do
   end
 
   describe "reference topic object of a topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "checks if the topic exists by making an HTTP call" do
       stub = Object.new

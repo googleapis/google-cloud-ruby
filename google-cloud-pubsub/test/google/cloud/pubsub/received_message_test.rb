@@ -14,18 +14,18 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
+describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
   let(:subscription_name) { "subscription-name-goes-here" }
-  let(:subscription_grpc) { Google::Pubsub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc subscription_grpc, pubsub.service }
+  let(:subscription_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc subscription_grpc, pubsub.service }
   let(:rec_message_name) { "rec_message-name-goes-here" }
   let(:rec_message_msg)  { "rec_message-msg-goes-here" }
   let(:rec_message_json_full)  { rec_message_json(rec_message_msg) }
   let(:rec_message_data)  { JSON.parse rec_message_json_full }
-  let(:rec_message_grpc)  { Google::Pubsub::V1::ReceivedMessage.decode_json rec_message_json_full }
-  let(:rec_message) { Google::Cloud::Pubsub::ReceivedMessage.from_grpc rec_message_grpc, subscription }
+  let(:rec_message_grpc)  { Google::Cloud::PubSub::V1::ReceivedMessage.decode_json rec_message_json_full }
+  let(:rec_message) { Google::Cloud::PubSub::ReceivedMessage.from_grpc rec_message_grpc, subscription }
 
   it "knows its subscription" do
     rec_message.subscription.wont_be :nil?
@@ -63,7 +63,7 @@ describe Google::Cloud::Pubsub::ReceivedMessage, :mock_pubsub do
     rec_message.publish_time.must_be :nil?
 
     publish_time = Time.now
-    rec_message_grpc.message.publish_time = Google::Cloud::Pubsub::Convert.time_to_timestamp publish_time
+    rec_message_grpc.message.publish_time = Google::Cloud::PubSub::Convert.time_to_timestamp publish_time
 
     rec_message.published_at.must_equal publish_time
     rec_message.publish_time.must_equal publish_time

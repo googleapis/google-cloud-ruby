@@ -20,15 +20,15 @@ require "monitor"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # Subscriber object used to stream and process messages from a
-      # Subscription. See {Google::Cloud::Pubsub::Subscription#listen}
+      # Subscription. See {Google::Cloud::PubSub::Subscription#listen}
       #
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #
@@ -193,7 +193,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #
@@ -232,7 +232,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #
@@ -282,7 +282,7 @@ module Google
         def default_error_callbacks
           # This is memoized to reduce calls to the configuration.
           @default_error_callbacks ||= begin
-            error_callback = Google::Cloud::Pubsub.configuration.on_error
+            error_callback = Google::Cloud::PubSub.configuration.on_error
             error_callback ||= Google::Cloud.configure.on_error
             if error_callback
               [error_callback]

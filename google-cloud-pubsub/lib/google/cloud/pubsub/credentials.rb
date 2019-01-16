@@ -18,7 +18,7 @@ require "google/cloud/pubsub/v1/credentials.rb"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # # Credentials
       #
@@ -29,16 +29,16 @@ module Google
       #   require "google/cloud/pubsub"
       #
       #   keyfile = "/path/to/keyfile.json"
-      #   creds = Google::Cloud::Pubsub::Credentials.new keyfile
+      #   creds = Google::Cloud::PubSub::Credentials.new keyfile
       #
-      #   pubsub = Google::Cloud::Pubsub.new(
+      #   pubsub = Google::Cloud::PubSub.new(
       #     project_id: "my-project",
       #     credentials: creds
       #   )
       #
       #   pubsub.project_id #=> "my-project"
       #
-      class Credentials < Google::Cloud::Pubsub::V1::Credentials
+      class Credentials < Google::Cloud::PubSub::V1::Credentials
       end
     end
   end

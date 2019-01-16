@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # # PublishResult
       #

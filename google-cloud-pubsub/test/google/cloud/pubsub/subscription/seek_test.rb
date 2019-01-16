@@ -14,15 +14,15 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscription, :seek, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscription, :seek, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
   let(:snapshot_name) { "my-snapshot" }
-  let(:snapshot_grpc) { Google::Pubsub::V1::Snapshot.decode_json(snapshot_json(topic_name, snapshot_name)) }
-  let(:snapshot) { Google::Cloud::Pubsub::Snapshot.from_grpc snapshot_grpc, pubsub.service }
+  let(:snapshot_grpc) { Google::Cloud::PubSub::V1::Snapshot.decode_json(snapshot_json(topic_name, snapshot_name)) }
+  let(:snapshot) { Google::Cloud::PubSub::Snapshot.from_grpc snapshot_grpc, pubsub.service }
 
   it "can seek using a time" do
     time = Time.now
@@ -57,7 +57,7 @@ describe Google::Cloud::Pubsub::Subscription, :seek, :mock_pubsub do
 
   describe "reference subscription object of a subscription that does exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Pubsub::Subscription, :seek, :mock_pubsub do
 
   describe "reference subscription object of a subscription that does not exist" do
     let :subscription do
-      Google::Cloud::Pubsub::Subscription.from_name sub_name,
+      Google::Cloud::PubSub::Subscription.from_name sub_name,
                                             pubsub.service
     end
 

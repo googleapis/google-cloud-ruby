@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # Topic Batch Publisher object used to publish multiple messages at
       # once.
@@ -23,7 +23,7 @@ module Google
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #
       #   topic = pubsub.topic "my-topic"
       #   msgs = topic.publish do |t|
@@ -49,7 +49,7 @@ module Google
         ##
         # Add a message to the batch to be published to the topic.
         # All messages added to the batch will be published at once.
-        # See {Google::Cloud::Pubsub::Topic#publish}
+        # See {Google::Cloud::PubSub::Topic#publish}
         def publish data, attributes = {}
           @messages << create_pubsub_message(data, attributes)
         end
@@ -90,8 +90,8 @@ module Google
           # Convert attributes to strings to match the protobuf definition
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
 
-          Google::Pubsub::V1::PubsubMessage.new data:       data_bytes,
-                                                attributes: attributes
+          Google::Cloud::PubSub::V1::PubsubMessage.new data:       data_bytes,
+                                                       attributes: attributes
         end
       end
     end

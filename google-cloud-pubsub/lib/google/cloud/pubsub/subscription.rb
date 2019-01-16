@@ -22,7 +22,7 @@ require "google/cloud/pubsub/subscriber"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # # Subscription
       #
@@ -32,7 +32,7 @@ module Google
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   subscriber = sub.listen do |received_message|
@@ -52,7 +52,7 @@ module Google
         attr_accessor :service
 
         ##
-        # @private The gRPC Google::Pubsub::V1::Subscription object.
+        # @private The gRPC Google::Cloud::PubSub::V1::Subscription object.
         attr_accessor :grpc
 
         ##
@@ -84,7 +84,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.topic.name #=> "projects/my-project/topics/my-topic"
@@ -116,7 +116,7 @@ module Google
         # @param [Integer] new_deadline The new deadline value.
         #
         def deadline= new_deadline
-          update_grpc = Google::Pubsub::V1::Subscription.new \
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
             name: name, ack_deadline_seconds: new_deadline
           @grpc = service.update_subscription update_grpc,
                                               :ack_deadline_seconds
@@ -147,7 +147,7 @@ module Google
         #   value.
         #
         def retain_acked= new_retain_acked
-          update_grpc = Google::Pubsub::V1::Subscription.new \
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
             name: name, retain_acked_messages: !(!new_retain_acked)
           @grpc = service.update_subscription update_grpc,
                                               :retain_acked_messages
@@ -180,7 +180,7 @@ module Google
         #
         def retention= new_retention
           new_retention_duration = Convert.number_to_duration new_retention
-          update_grpc = Google::Pubsub::V1::Subscription.new \
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
             name: name, message_retention_duration: new_retention_duration
           @grpc = service.update_subscription update_grpc,
                                               :message_retention_duration
@@ -212,7 +212,7 @@ module Google
 
           return if reference?
 
-          @grpc.push_config = Google::Pubsub::V1::PushConfig.new(
+          @grpc.push_config = Google::Cloud::PubSub::V1::PushConfig.new(
             push_endpoint: new_endpoint,
             attributes:    {}
           )
@@ -250,7 +250,7 @@ module Google
         #
         def labels= new_labels
           raise ArgumentError, "Value must be a Hash" if new_labels.nil?
-          update_grpc = Google::Pubsub::V1::Subscription.new \
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new \
             name: name, labels: new_labels
           @grpc = service.update_subscription update_grpc, :labels
           @resource_name = nil
@@ -267,7 +267,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.exists? #=> true
@@ -292,7 +292,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.delete
@@ -324,12 +324,12 @@ module Google
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
         #
-        # @return [Array<Google::Cloud::Pubsub::ReceivedMessage>]
+        # @return [Array<Google::Cloud::PubSub::ReceivedMessage>]
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.pull.each { |received_message| received_message.acknowledge! }
@@ -337,7 +337,7 @@ module Google
         # @example A maximum number of messages returned can also be specified:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   sub.pull(max: 10).each do |received_message|
@@ -347,7 +347,7 @@ module Google
         # @example The call can block until messages are available:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   received_messages = sub.pull immediate: false
@@ -379,12 +379,12 @@ module Google
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
         #
-        # @return [Array<Google::Cloud::Pubsub::ReceivedMessage>]
+        # @return [Array<Google::Cloud::PubSub::ReceivedMessage>]
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   received_messages = sub.wait_for_messages
@@ -432,7 +432,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #
@@ -450,7 +450,7 @@ module Google
         # @example Configuring to increase concurrent callbacks:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #
@@ -489,7 +489,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   received_messages = sub.pull
@@ -524,7 +524,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   received_messages = sub.pull
@@ -565,12 +565,12 @@ module Google
         #   label in the list must have a different key. See [Creating and
         #   Managing Labels](https://cloud.google.com/pubsub/docs/labels).
         #
-        # @return [Google::Cloud::Pubsub::Snapshot]
+        # @return [Google::Cloud::PubSub::Snapshot]
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-sub"
         #
         #   snapshot = sub.create_snapshot "my-snapshot"
@@ -579,7 +579,7 @@ module Google
         # @example Without providing a name:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-sub"
         #
         #   snapshot = sub.create_snapshot
@@ -615,7 +615,7 @@ module Google
         # @example Using a snapshot
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-sub"
         #
         #   snapshot = sub.create_snapshot
@@ -628,7 +628,7 @@ module Google
         # @example Using a time:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-sub"
         #
         #   time = Time.now
@@ -654,7 +654,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.get_subscription "my-topic-sub", skip_lookup: true
         #   sub.reference? #=> true
@@ -673,7 +673,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.get_subscription "my-topic-sub"
         #   sub.resource? #=> true
@@ -701,7 +701,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-subscription"
         #
         #   policy = sub.policy
@@ -709,7 +709,7 @@ module Google
         # @example Update the policy by passing a block:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-subscription"
         #
         #   sub.policy do |p|
@@ -728,7 +728,7 @@ module Google
         ##
         # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
         # policy for this subscription. The policy should be read from
-        # {#policy}. See {Google::Cloud::Pubsub::Policy} for an explanation of
+        # {#policy}. See {Google::Cloud::PubSub::Policy} for an explanation of
         # the policy `etag` property and how to modify policies.
         #
         # You can also update the policy by passing a block to {#policy}, which
@@ -745,7 +745,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-subscription"
         #
         #   policy = sub.policy # API call
@@ -786,7 +786,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   sub = pubsub.subscription "my-subscription"
         #   perms = sub.test_permissions "pubsub.subscriptions.get",
         #                                "pubsub.subscriptions.consume"
@@ -801,7 +801,8 @@ module Google
         end
 
         ##
-        # @private New Subscription from a Google::Pubsub::V1::Subscription
+        # @private
+        # New Subscription from a Google::Cloud::PubSub::V1::Subscription
         # object.
         def self.from_grpc grpc, service
           new.tap do |f|
@@ -830,7 +831,7 @@ module Google
         end
 
         ##
-        # Ensures a Google::Pubsub::V1::Subscription object exists.
+        # Ensures a Google::Cloud::PubSub::V1::Subscription object exists.
         def ensure_grpc!
           ensure_service!
           @grpc = service.get_subscription name if reference?

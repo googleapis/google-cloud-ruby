@@ -14,10 +14,10 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Policy, :mock_pubsub do
+describe Google::Cloud::PubSub::Policy, :mock_pubsub do
   let(:etag)       { "etag-1" }
   let(:roles) { { "roles/viewer" => ["allUsers"] } }
-  let(:policy)    { Google::Cloud::Pubsub::Policy.new etag, roles }
+  let(:policy)    { Google::Cloud::PubSub::Policy.new etag, roles }
 
   it "knows its etag" do
     policy.roles.must_equal roles

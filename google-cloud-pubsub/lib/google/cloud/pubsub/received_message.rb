@@ -18,7 +18,7 @@ require "google/cloud/pubsub/message"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # # ReceivedMessage
       #
@@ -27,7 +27,7 @@ module Google
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #   subscriber = sub.listen do |received_message|
@@ -47,14 +47,14 @@ module Google
         attr_accessor :subscription
 
         ##
-        # @private The gRPC Google::Pubsub::V1::ReceivedMessage object.
+        # @private The gRPC Google::Cloud::PubSub::V1::ReceivedMessage object.
         attr_accessor :grpc
 
         ##
         # @private Create an empty {Subscription} object.
         def initialize
           @subscription = nil
-          @grpc = Google::Pubsub::V1::ReceivedMessage.new
+          @grpc = Google::Cloud::PubSub::V1::ReceivedMessage.new
         end
 
         ##
@@ -104,7 +104,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   subscriber = sub.listen do |received_message|
@@ -140,7 +140,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   subscriber = sub.listen do |received_message|
@@ -170,7 +170,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   subscriber = sub.listen do |received_message|
@@ -194,7 +194,7 @@ module Google
 
         ##
         # @private New ReceivedMessage from a
-        # Google::Pubsub::V1::ReceivedMessage object.
+        # Google::Cloud::PubSub::V1::ReceivedMessage object.
         def self.from_grpc grpc, subscription
           new.tap do |rm|
             rm.grpc         = grpc

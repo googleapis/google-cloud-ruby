@@ -14,19 +14,19 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscription, :listen, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
-  let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(sub_json) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "will create a Subscriber" do
     subscriber = subscription.listen do |msg|
       puts msg.msg_id
     end
-    subscriber.must_be_kind_of Google::Cloud::Pubsub::Subscriber
+    subscriber.must_be_kind_of Google::Cloud::PubSub::Subscriber
     subscriber.subscription_name.must_equal subscription.name
     subscriber.deadline.must_equal 60
     subscriber.streams.must_equal 4
@@ -36,7 +36,7 @@ describe Google::Cloud::Pubsub::Subscription, :listen, :mock_pubsub do
     subscriber = subscription.listen deadline: 120 do |msg|
       puts msg.msg_id
     end
-    subscriber.must_be_kind_of Google::Cloud::Pubsub::Subscriber
+    subscriber.must_be_kind_of Google::Cloud::PubSub::Subscriber
     subscriber.subscription_name.must_equal subscription.name
     subscriber.deadline.must_equal 120
     subscriber.streams.must_equal 4
@@ -46,7 +46,7 @@ describe Google::Cloud::Pubsub::Subscription, :listen, :mock_pubsub do
     subscriber = subscription.listen streams: 2 do |msg|
       puts msg.msg_id
     end
-    subscriber.must_be_kind_of Google::Cloud::Pubsub::Subscriber
+    subscriber.must_be_kind_of Google::Cloud::PubSub::Subscriber
     subscriber.subscription_name.must_equal subscription.name
     subscriber.deadline.must_equal 60
     subscriber.streams.must_equal 2

@@ -14,11 +14,11 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
+describe Google::Cloud::PubSub::Subscription, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:subscription_name) { "subscription-name-goes-here" }
-  let(:subscription_grpc) { Google::Pubsub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
-  let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc subscription_grpc, pubsub.service }
+  let(:subscription_grpc) { Google::Cloud::PubSub::V1::Subscription.decode_json(subscription_json(topic_name, subscription_name)) }
+  let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc subscription_grpc, pubsub.service }
   let(:labels) { { "foo" => "bar" } }
 
   it "knows its name" do
@@ -26,7 +26,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
   end
 
   it "knows its topic" do
-    subscription.topic.must_be_kind_of Google::Cloud::Pubsub::Topic
+    subscription.topic.must_be_kind_of Google::Cloud::PubSub::Topic
     subscription.topic.must_be :reference?
     subscription.topic.wont_be :resource?
     subscription.topic.name.must_equal topic_path(topic_name)
@@ -50,7 +50,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
 
   it "can update the endpoint" do
     new_push_endpoint = "https://foo.bar/baz"
-    push_config = Google::Pubsub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
+    push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
     mpc_res = nil
     mock = Minitest::Mock.new
     mock.expect :modify_push_config, mpc_res, [subscription_path(subscription_name), push_config, options: default_options]
@@ -74,7 +74,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
 
   it "can pull a message" do
     rec_message_msg = "pulled-message"
-    pull_res = Google::Pubsub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
+    pull_res = Google::Cloud::PubSub::V1::PullResponse.decode_json rec_messages_json(rec_message_msg)
     mock = Minitest::Mock.new
     mock.expect :pull, pull_res, [subscription_path(subscription_name), 100, return_immediately: true, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -122,7 +122,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
 
   it "creates a snapshot" do
     new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
-    create_res = Google::Pubsub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name)
+    create_res = Google::Cloud::PubSub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name)
     mock = Minitest::Mock.new
     mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), labels: nil, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -132,12 +132,12 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
     mock.verify
 
     snapshot.wont_be :nil?
-    snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+    snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
   end
 
   it "creates a snapshot with new_snapshot alias" do
     new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
-    create_res = Google::Pubsub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name)
+    create_res = Google::Cloud::PubSub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name)
     mock = Minitest::Mock.new
     mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), labels: nil, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -147,12 +147,12 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
     mock.verify
 
     snapshot.wont_be :nil?
-    snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+    snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
   end
 
   it "creates a snapshot with labels" do
     new_snapshot_name = "new-snapshot-#{Time.now.to_i}"
-    create_res = Google::Pubsub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name, labels: labels)
+    create_res = Google::Cloud::PubSub::V1::Snapshot.decode_json snapshot_json(subscription_name, new_snapshot_name, labels: labels)
     mock = Minitest::Mock.new
     mock.expect :create_snapshot, create_res, [snapshot_path(new_snapshot_name), subscription_path(subscription_name), labels: labels, options: default_options]
     subscription.service.mocked_subscriber = mock
@@ -162,7 +162,7 @@ describe Google::Cloud::Pubsub::Subscription, :mock_pubsub do
     mock.verify
 
     snapshot.wont_be :nil?
-    snapshot.must_be_kind_of Google::Cloud::Pubsub::Snapshot
+    snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
     snapshot.labels.must_equal labels
     snapshot.labels.must_be :frozen?
   end

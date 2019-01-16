@@ -22,7 +22,7 @@ require "google/cloud/pubsub/policy"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # # Topic
       #
@@ -33,7 +33,7 @@ module Google
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
@@ -44,7 +44,7 @@ module Google
         attr_accessor :service
 
         ##
-        # @private The Google::Pubsub::V1::Topic object.
+        # @private The Google::Cloud::PubSub::V1::Topic object.
         attr_accessor :grpc
 
         ##
@@ -66,7 +66,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   topic.publish_async "task completed" do |result|
@@ -126,7 +126,7 @@ module Google
         #
         def labels= new_labels
           raise ArgumentError, "Value must be a Hash" if new_labels.nil?
-          update_grpc = Google::Pubsub::V1::Topic.new \
+          update_grpc = Google::Cloud::PubSub::V1::Topic.new \
             name: name, labels: new_labels
           @grpc = service.update_topic update_grpc, :labels
           @resource_name = nil
@@ -140,7 +140,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   topic.delete
@@ -184,12 +184,12 @@ module Google
         #   label in the list must have a different key. See [Creating and
         #   Managing Labels](https://cloud.google.com/pubsub/docs/labels).
         #
-        # @return [Google::Cloud::Pubsub::Subscription]
+        # @return [Google::Cloud::PubSub::Subscription]
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   sub = topic.subscribe "my-topic-sub"
@@ -198,7 +198,7 @@ module Google
         # @example Wait 2 minutes for acknowledgement and push all to endpoint:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   sub = topic.subscribe "my-topic-sub",
@@ -225,13 +225,13 @@ module Google
         #   service. Calls made on this object will raise errors if the service
         #   resource does not exist. Default is `false`.
         #
-        # @return [Google::Cloud::Pubsub::Subscription, nil] Returns `nil` if
+        # @return [Google::Cloud::PubSub::Subscription, nil] Returns `nil` if
         #   the subscription does not exist.
         #
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #
@@ -241,7 +241,7 @@ module Google
         # @example Skip the lookup against the service with `skip_lookup`:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #
@@ -275,7 +275,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   subscriptions = topic.subscriptions
@@ -286,7 +286,7 @@ module Google
         # @example Retrieve all subscriptions: (See {Subscription::List#all})
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   subscriptions = topic.subscriptions
@@ -324,7 +324,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   msg = topic.publish "task completed"
@@ -332,7 +332,7 @@ module Google
         # @example A message can be published using a File object:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   file = File.open "message.txt", mode: "rb"
@@ -341,7 +341,7 @@ module Google
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   msg = topic.publish "task completed",
@@ -351,7 +351,7 @@ module Google
         # @example Multiple messages can be sent at the same time using a block:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   msgs = topic.publish do |t|
@@ -384,7 +384,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   topic.publish_async "task completed" do |result|
@@ -400,7 +400,7 @@ module Google
         # @example A message can be published using a File object:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   file = File.open "message.txt", mode: "rb"
@@ -411,7 +411,7 @@ module Google
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   topic.publish_async "task completed",
@@ -445,7 +445,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   policy = topic.policy
@@ -453,7 +453,7 @@ module Google
         # @example Update the policy by passing a block:
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   topic.policy do |p|
@@ -472,7 +472,7 @@ module Google
         ##
         # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
         # policy for this topic. The policy should be read from {#policy}. See
-        # {Google::Cloud::Pubsub::Policy} for an explanation of the policy
+        # {Google::Cloud::PubSub::Policy} for an explanation of the policy
         # `etag` property and how to modify policies.
         #
         # You can also update the policy by passing a block to {#policy}, which
@@ -489,7 +489,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   policy = topic.policy # API call
@@ -531,7 +531,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "my-topic"
         #   perms = topic.test_permissions "pubsub.topics.get",
         #                                  "pubsub.topics.publish"
@@ -552,7 +552,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   topic.exists? #=> true
@@ -578,7 +578,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic", skip_lookup: true
         #   topic.reference? #=> true
@@ -597,7 +597,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #
         #   topic = pubsub.topic "my-topic"
         #   topic.resource? #=> true
@@ -607,7 +607,7 @@ module Google
         end
 
         ##
-        # @private New Topic from a Google::Pubsub::V1::Topic object.
+        # @private New Topic from a Google::Cloud::PubSub::V1::Topic object.
         def self.from_grpc grpc, service, async: nil
           new.tap do |t|
             t.grpc = grpc
@@ -635,7 +635,7 @@ module Google
         end
 
         ##
-        # Ensures a Google::Pubsub::V1::Topic object exists.
+        # Ensures a Google::Cloud::PubSub::V1::Topic object exists.
         def ensure_grpc!
           ensure_service!
           @grpc = service.get_topic name if reference?

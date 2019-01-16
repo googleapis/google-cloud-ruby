@@ -14,14 +14,14 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
+describe Google::Cloud::PubSub::Topic, :subscribe, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
   let(:new_sub_name) { "new-sub-#{Time.now.to_i}" }
   let(:labels) { { "foo" => "bar" } }
 
   it "creates a subscription when calling subscribe" do
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -30,12 +30,12 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
   end
 
   it "creates a subscription with labels" do
-    create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name, labels: labels)
+    create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name, labels: labels)
     mock = Minitest::Mock.new
     mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: labels, options: default_options]
     topic.service.mocked_subscriber = mock
@@ -44,17 +44,17 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
     sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
     sub.labels.must_equal labels
     sub.labels.must_be :frozen?
   end
 
   describe "reference topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "creates a subscription when calling subscribe" do
-      create_res = Google::Pubsub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
+      create_res = Google::Cloud::PubSub::V1::Subscription.decode_json subscription_json(topic_name, new_sub_name)
       mock = Minitest::Mock.new
       mock.expect :create_subscription, create_res, [subscription_path(new_sub_name), topic_path(topic_name), push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: false, message_retention_duration: nil, labels: nil, options: default_options]
       topic.service.mocked_subscriber = mock
@@ -63,13 +63,13 @@ describe Google::Cloud::Pubsub::Topic, :subscribe, :mock_pubsub do
 
       mock.verify
 
-      sub.must_be_kind_of Google::Cloud::Pubsub::Subscription
+      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
       sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
     end
   end
 
   describe "reference topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name, pubsub.service }
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "raises NotFoundError when calling subscribe" do
       stub = Object.new

@@ -17,7 +17,7 @@ require "google/cloud/errors"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # # Policy
       #
@@ -27,7 +27,7 @@ module Google
       # is to read the current data from the service, update the data locally,
       # and then send the modified data for writing. This pattern may result in
       # a conflict if two or more processes attempt the sequence simultaneously.
-      # IAM solves this problem with the {Google::Cloud::Pubsub::Policy#etag}
+      # IAM solves this problem with the {Google::Cloud::PubSub::Policy#etag}
       # property, which is used to verify whether the policy has changed since
       # the last request. When you make a request to with an `etag` value, Cloud
       # IAM compares the `etag` value in the request with the existing `etag`
@@ -37,8 +37,8 @@ module Google
       # When you update a policy, first read the policy (and its current `etag`)
       # from the service, then modify the policy locally, and then write the
       # modified policy to the service. See
-      # {Google::Cloud::Pubsub::Topic#policy} and
-      # {Google::Cloud::Pubsub::Topic#policy=}.
+      # {Google::Cloud::PubSub::Topic#policy} and
+      # {Google::Cloud::PubSub::Topic#policy=}.
       #
       # @see https://cloud.google.com/iam/docs/managing-policies Managing
       #   policies
@@ -58,7 +58,7 @@ module Google
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #   topic = pubsub.topic "my-topic"
       #
       #   topic.policy do |p|
@@ -93,7 +93,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   topic.policy do |p|
@@ -120,7 +120,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   topic.policy do |p|
@@ -145,7 +145,7 @@ module Google
         # @example
         #   require "google/cloud/pubsub"
         #
-        #   pubsub = Google::Cloud::Pubsub.new
+        #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.topic "my-topic"
         #
         #   topic.policy do |p|

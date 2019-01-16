@@ -20,15 +20,15 @@ require "google/cloud/pubsub/service"
 
 module Google
   module Cloud
-    module Pubsub
+    module PubSub
       ##
       # Used to publish multiple messages in batches to a topic. See
-      # {Google::Cloud::Pubsub::Topic#async_publisher}
+      # {Google::Cloud::PubSub::Topic#async_publisher}
       #
       # @example
       #   require "google/cloud/pubsub"
       #
-      #   pubsub = Google::Cloud::Pubsub.new
+      #   pubsub = Google::Cloud::PubSub.new
       #
       #   topic = pubsub.topic "my-topic"
       #   topic.publish_async "task completed" do |result|
@@ -88,7 +88,7 @@ module Google
         ##
         # Add a message to the async publisher to be published to the topic.
         # Messages will be collected in batches and published together.
-        # See {Google::Cloud::Pubsub::Topic#publish_async}
+        # See {Google::Cloud::PubSub::Topic#publish_async}
         def publish data = nil, attributes = {}, &block
           msg = create_pubsub_message data, attributes
 
@@ -281,8 +281,8 @@ module Google
           # Convert attributes to strings to match the protobuf definition
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
 
-          Google::Pubsub::V1::PubsubMessage.new data:       data_bytes,
-                                                attributes: attributes
+          Google::Cloud::PubSub::V1::PubsubMessage.new data:       data_bytes,
+                                                       attributes: attributes
         end
 
         ##

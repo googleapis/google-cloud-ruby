@@ -14,15 +14,15 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
+describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::Pubsub::Topic.from_grpc Google::Pubsub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.decode_json(topic_json(topic_name)), pubsub.service }
 
   it "publishes a message" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -53,9 +53,9 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
   it "publishes a message with a callback" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -65,7 +65,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
     callback_called = false
 
     topic.publish_async "async-message" do |result|
-      assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+      assert_kind_of Google::Cloud::PubSub::PublishResult, result
       assert result.succeeded?
       assert_equal "msg1", result.msg_id
       callback_called = true
@@ -96,9 +96,9 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
   it "publishes a message with multibyte characters" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -108,7 +108,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
     callback_called = false
 
     topic.publish_async "あ" do |result|
-      assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+      assert_kind_of Google::Cloud::PubSub::PublishResult, result
       assert result.succeeded?
       assert_equal "msg1", result.msg_id
       assert_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), result.data
@@ -140,9 +140,9 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
   it "publishes a message using an IO-ish object" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -157,7 +157,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
       tmpfile.rewind
 
       topic.publish_async tmpfile do |result|
-        assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+        assert_kind_of Google::Cloud::PubSub::PublishResult, result
         assert result.succeeded?
         assert_equal "msg1", result.msg_id
         assert_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), result.data
@@ -190,9 +190,9 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
   it "publishes a message with attributes" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: {"format" => "text"})
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: {"format" => "text"})
     ]
-    publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
     mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
     topic.service.mocked_publisher = mock
@@ -202,7 +202,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
     callback_called = false
 
     topic.publish_async "async-message", format: :text do |result|
-      assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+      assert_kind_of Google::Cloud::PubSub::PublishResult, result
       assert result.succeeded?
       assert_equal "msg1", result.msg_id
       assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
@@ -234,15 +234,15 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
   end
 
   describe "reference topic that exists" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name,
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name,
                                                  pubsub.service,
                                                  autocreate: false }
 
     it "publishes a message" do
       messages = [
-        Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
       ]
-      publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+      publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
       mock = Minitest::Mock.new
       mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
       topic.service.mocked_publisher = mock
@@ -273,9 +273,9 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
     it "publishes a message with attributes" do
       messages = [
-        Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: { "format" => "text" })
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: { "format" => "text" })
       ]
-      publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
+      publish_res = Google::Cloud::PubSub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
       mock = Minitest::Mock.new
       mock.expect :publish, publish_res, [topic_path(topic_name), messages, options: default_options]
       topic.service.mocked_publisher = mock
@@ -285,7 +285,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
       callback_called = false
 
       topic.publish_async "async-message", format: :text do |result|
-        assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+        assert_kind_of Google::Cloud::PubSub::PublishResult, result
         assert result.succeeded?
         assert_equal "msg1", result.msg_id
         assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
@@ -318,7 +318,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
   end
 
   describe "reference topic that does not exist" do
-    let(:topic) { Google::Cloud::Pubsub::Topic.from_name topic_name,
+    let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name,
                                                  pubsub.service,
                                                  autocreate: false }
     let(:gax_error) do
@@ -329,7 +329,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
     it "publishes a message" do
       messages = [
-        Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
+        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
       ]
 
       stub = Object.new
@@ -346,7 +346,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
       callback_called = false
 
       topic.publish_async "async-message" do |result|
-        assert_kind_of Google::Cloud::Pubsub::PublishResult, result
+        assert_kind_of Google::Cloud::PubSub::PublishResult, result
         refute result.succeeded?
         assert result.failed?
         assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
