@@ -265,7 +265,47 @@ js:
 104
 105
 106
-107</pre>
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 61</span>
@@ -279,6 +319,46 @@ js:
 </span>  <span class='comment'># @!attribute [rw] set_to_server_value
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::DocumentTransform::FieldTransform::ServerValue]
 </span>  <span class='comment'>#     Sets the field to the given server value.
+</span>  <span class='comment'># @!attribute [rw] increment
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::Value]
+</span>  <span class='comment'>#     Adds the given value to the field&#39;s current value.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     This must be an integer or a double value.
+</span>  <span class='comment'>#     If the field is not an integer or double, or if the field does not yet
+</span>  <span class='comment'>#     exist, the transformation will set the field to the given value.
+</span>  <span class='comment'>#     If either of the given value or the current field value are doubles,
+</span>  <span class='comment'>#     both values will be interpreted as doubles. Double arithmetic and
+</span>  <span class='comment'>#     representation of double values follow IEEE 754 semantics.
+</span>  <span class='comment'>#     If there is positive/negative integer overflow, the field is resolved
+</span>  <span class='comment'>#     to the largest magnitude positive/negative integer.
+</span>  <span class='comment'># @!attribute [rw] maximum
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::Value]
+</span>  <span class='comment'>#     Sets the field to the maximum of its current value and the given value.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     This must be an integer or a double value.
+</span>  <span class='comment'>#     If the field is not an integer or double, or if the field does not yet
+</span>  <span class='comment'>#     exist, the transformation will set the field to the given value.
+</span>  <span class='comment'>#     If a maximum operation is applied where the field and the input value
+</span>  <span class='comment'>#     are of mixed types (that is - one is an integer and one is a double)
+</span>  <span class='comment'>#     the field takes on the type of the larger operand. If the operands are
+</span>  <span class='comment'>#     equivalent (e.g. 3 and 3.0), the field does not change.
+</span>  <span class='comment'>#     0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and
+</span>  <span class='comment'>#     zero input value is always the stored value.
+</span>  <span class='comment'>#     The maximum of any numeric value x and NaN is NaN.
+</span>  <span class='comment'># @!attribute [rw] minimum
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::Value]
+</span>  <span class='comment'>#     Sets the field to the minimum of its current value and the given value.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     This must be an integer or a double value.
+</span>  <span class='comment'>#     If the field is not an integer or double, or if the field does not yet
+</span>  <span class='comment'>#     exist, the transformation will set the field to the input value.
+</span>  <span class='comment'>#     If a minimum operation is applied where the field and the input value
+</span>  <span class='comment'>#     are of mixed types (that is - one is an integer and one is a double)
+</span>  <span class='comment'>#     the field takes on the type of the smaller operand. If the operands are
+</span>  <span class='comment'>#     equivalent (e.g. 3 and 3.0), the field does not change.
+</span>  <span class='comment'>#     0, 0.0, and -0.0 are all zero. The minimum of a zero stored value and
+</span>  <span class='comment'>#     zero input value is always the stored value.
+</span>  <span class='comment'>#     The minimum of any numeric value x and NaN is NaN.
 </span>  <span class='comment'># @!attribute [rw] append_missing_elements
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::ArrayValue]
 </span>  <span class='comment'>#     Append the given elements in order if they are not already present in
@@ -416,7 +496,47 @@ This must not be empty.</p>
 104
 105
 106
-107</pre>
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 61</span>
@@ -430,6 +550,46 @@ This must not be empty.</p>
 </span>  <span class='comment'># @!attribute [rw] set_to_server_value
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::DocumentTransform::FieldTransform::ServerValue]
 </span>  <span class='comment'>#     Sets the field to the given server value.
+</span>  <span class='comment'># @!attribute [rw] increment
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::Value]
+</span>  <span class='comment'>#     Adds the given value to the field&#39;s current value.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     This must be an integer or a double value.
+</span>  <span class='comment'>#     If the field is not an integer or double, or if the field does not yet
+</span>  <span class='comment'>#     exist, the transformation will set the field to the given value.
+</span>  <span class='comment'>#     If either of the given value or the current field value are doubles,
+</span>  <span class='comment'>#     both values will be interpreted as doubles. Double arithmetic and
+</span>  <span class='comment'>#     representation of double values follow IEEE 754 semantics.
+</span>  <span class='comment'>#     If there is positive/negative integer overflow, the field is resolved
+</span>  <span class='comment'>#     to the largest magnitude positive/negative integer.
+</span>  <span class='comment'># @!attribute [rw] maximum
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::Value]
+</span>  <span class='comment'>#     Sets the field to the maximum of its current value and the given value.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     This must be an integer or a double value.
+</span>  <span class='comment'>#     If the field is not an integer or double, or if the field does not yet
+</span>  <span class='comment'>#     exist, the transformation will set the field to the given value.
+</span>  <span class='comment'>#     If a maximum operation is applied where the field and the input value
+</span>  <span class='comment'>#     are of mixed types (that is - one is an integer and one is a double)
+</span>  <span class='comment'>#     the field takes on the type of the larger operand. If the operands are
+</span>  <span class='comment'>#     equivalent (e.g. 3 and 3.0), the field does not change.
+</span>  <span class='comment'>#     0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and
+</span>  <span class='comment'>#     zero input value is always the stored value.
+</span>  <span class='comment'>#     The maximum of any numeric value x and NaN is NaN.
+</span>  <span class='comment'># @!attribute [rw] minimum
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::Value]
+</span>  <span class='comment'>#     Sets the field to the minimum of its current value and the given value.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     This must be an integer or a double value.
+</span>  <span class='comment'>#     If the field is not an integer or double, or if the field does not yet
+</span>  <span class='comment'>#     exist, the transformation will set the field to the input value.
+</span>  <span class='comment'>#     If a minimum operation is applied where the field and the input value
+</span>  <span class='comment'>#     are of mixed types (that is - one is an integer and one is a double)
+</span>  <span class='comment'>#     the field takes on the type of the smaller operand. If the operands are
+</span>  <span class='comment'>#     equivalent (e.g. 3 and 3.0), the field does not change.
+</span>  <span class='comment'>#     0, 0.0, and -0.0 are all zero. The minimum of a zero stored value and
+</span>  <span class='comment'>#     zero input value is always the stored value.
+</span>  <span class='comment'>#     The minimum of any numeric value x and NaN is NaN.
 </span>  <span class='comment'># @!attribute [rw] append_missing_elements
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::ArrayValue]
 </span>  <span class='comment'>#     Append the given elements in order if they are not already present in
