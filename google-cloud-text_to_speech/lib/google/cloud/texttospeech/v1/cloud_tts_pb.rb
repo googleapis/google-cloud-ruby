@@ -40,6 +40,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :pitch, :double, 3
     optional :volume_gain_db, :double, 4
     optional :sample_rate_hertz, :int32, 5
+    repeated :effects_profile_id, :string, 6
   end
   add_message "google.cloud.texttospeech.v1.SynthesizeSpeechResponse" do
     optional :audio_content, :bytes, 1

@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -140,6 +140,16 @@ module Google
         #     result in worse audio quality), unless the specified sample rate is not
         #     supported for the encoding chosen, in which case it will fail the request
         #     and return {Google::Rpc::Code::INVALID_ARGUMENT}.
+        # @!attribute [rw] effects_profile_id
+        #   @return [Array<String>]
+        #     An identifier which selects 'audio effects' profiles that are applied on
+        #     (post synthesized) text to speech.
+        #     Effects are applied on top of each other in the order they are given.
+        #     See
+        #
+        #     [audio-profiles](https:
+        #     //cloud.google.com/text-to-speech/docs/audio-profiles)
+        #     for current supported profile ids.
         class AudioConfig; end
 
         # The message returned to the client by the `SynthesizeSpeech` method.
