@@ -39,10 +39,12 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :storage do
 
   it "sets policy_only true and is unable to modify file ACL rules" do
     refute bucket.policy_only?
+    bucket.policy_only_locked_at.must_be :nil?
     file = bucket.create_file local_file, "ReaderTest.png"
 
     bucket.policy_only = true
     assert bucket.policy_only?
+    bucket.policy_only_locked_at.must_be_kind_of DateTime
 
     err = expect do
       file.acl.add_reader user_val
@@ -108,7 +110,11 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :storage do
 
     bucket.policy_only = true
     assert bucket.policy_only?
+    bucket.policy_only_locked_at.must_be_kind_of DateTime
     bucket.policy_only = false
+
+    refute bucket.policy_only?
+    bucket.policy_only_locked_at.must_be :nil?
 
     file_default_acl.reload!
     file_default_acl.acl.readers.must_equal ["allUsers"]

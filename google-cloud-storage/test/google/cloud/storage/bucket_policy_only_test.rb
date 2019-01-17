@@ -21,13 +21,14 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :mock_storage do
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
   let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
 
-  it "knows its policy_only?" do
+  it "knows its policy_only attrs" do
     bucket.policy_only?.must_equal false
+    bucket.policy_only_locked_at.must_be :nil?
   end
 
   it "updates its policy_only" do
     mock = Minitest::Mock.new
-    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, policy_only: true),
+    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, policy_only: true, locked_time: true),
                 [bucket_name, patch_bucket_gapi(policy_only: true), predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
     bucket.service.mocked_service = mock
 
@@ -36,13 +37,14 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :mock_storage do
     bucket.policy_only = true
 
     bucket.policy_only?.must_equal true
+    bucket.policy_only_locked_at.must_be_kind_of DateTime
 
     mock.verify
   end
 
   it "updates its policy_only with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, policy_only: true),
+    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, policy_only: true, locked_time: true),
                 [bucket_name, patch_bucket_gapi(policy_only: true), predefined_acl: nil, predefined_default_object_acl: nil, user_project: "test"]
 
     bucket_user_project.service.mocked_service = mock
@@ -52,17 +54,20 @@ describe Google::Cloud::Storage::Bucket, :policy_only, :mock_storage do
     bucket_user_project.policy_only = true
 
     bucket_user_project.policy_only?.must_equal true
+    bucket_user_project.policy_only_locked_at.must_be_kind_of DateTime
 
     mock.verify
   end
 
   def patch_bucket_gapi policy_only: true
-    Google::Apis::StorageV1::Bucket.new iam_configuration: iam_configuration_gapi(policy_only: policy_only)
+    Google::Apis::StorageV1::Bucket.new(
+      iam_configuration: iam_configuration_gapi(policy_only: policy_only)
+    )
   end
 
-  def resp_bucket_gapi bucket_hash, policy_only: true
+  def resp_bucket_gapi bucket_hash, policy_only: true, locked_time: false
     b = Google::Apis::StorageV1::Bucket.from_json bucket_hash.to_json
-    b.iam_configuration = iam_configuration_gapi policy_only: policy_only
+    b.iam_configuration = iam_configuration_gapi policy_only: policy_only, locked_time: locked_time
     b
   end
 end

@@ -826,6 +826,22 @@ module Google
         end
 
         ##
+        # The deadline time for disabling Bucket Policy Only by calling
+        # {Bucket#policy_only=}. After the locked time the Bucket Policy Only
+        # setting cannot be changed from true to false. Corresponds to the
+        # property `locked_time`.
+        #
+        # @return [DateTime, nil] The deadline time for changing
+        #   {Bucket#policy_only=} from true to false, or `nil` if
+        #   {Bucket#policy_only?} is false.
+        #
+        def policy_only_locked_at
+          return nil unless @gapi.iam_configuration &&
+                            @gapi.iam_configuration.bucket_policy_only
+          @gapi.iam_configuration.bucket_policy_only.locked_time
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
