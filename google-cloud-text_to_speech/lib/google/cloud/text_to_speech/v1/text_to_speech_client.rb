@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -174,8 +174,7 @@ module Google
 
           # Service calls
 
-          # Returns a list of {Google::Cloud::Texttospeech::V1::Voice Voice}
-          # supported for synthesis.
+          # Returns a list of Voice supported for synthesis.
           #
           # @param language_code [String]
           #   Optional (but recommended)
