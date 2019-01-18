@@ -497,6 +497,38 @@ resource in the Stackdriver Logging API.</p>
 
   
     <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_id-class_method" title="insert_id (class method)">.<strong>insert_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Generate a pseudo-random, 16-character ID suitable for use as the log entry&#39;s <span class='object_link'><a href="#insert_id-instance_method" title="Google::Cloud::Logging::Entry#insert_id (method)">#insert_id</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
       Instance Method Summary
       <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
@@ -975,17 +1007,18 @@ See also <span class='object_link'><a href="Project.html#entry-instance_method" 
       <pre class="lines">
 
 
-78
-79
-80
-81
-82
-83
-84
-85</pre>
+93
+94
+95
+96
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='ivar'>@labels</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -994,6 +1027,7 @@ See also <span class='object_link'><a href="Project.html#entry-instance_method" 
   <span class='ivar'>@operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entry/Operation.html" title="Google::Cloud::Logging::Entry::Operation (class)">Operation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
   <span class='ivar'>@severity</span> <span class='op'>=</span> <span class='symbol'>:DEFAULT</span>
   <span class='ivar'>@source_location</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entry/SourceLocation.html" title="Google::Cloud::Logging::Entry::SourceLocation (class)">SourceLocation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@insert_id</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Entry (class)">Entry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_insert_id'><span class='object_link'><a href="#insert_id-class_method" title="Google::Cloud::Logging::Entry.insert_id (method)">insert_id</a></span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1046,12 +1080,12 @@ applicable.</p>
       <pre class="lines">
 
 
-359
-360
-361</pre>
+375
+376
+377</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 359</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 375</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_http_request'>http_request</span>
   <span class='ivar'>@http_request</span>
@@ -1104,12 +1138,12 @@ will generate a unique ID for this log entry.</p>
       <pre class="lines">
 
 
-341
-342
-343</pre>
+357
+358
+359</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 357</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_insert_id'>insert_id</span>
   <span class='ivar'>@insert_id</span>
@@ -1160,12 +1194,12 @@ the log entry.</p>
       <pre class="lines">
 
 
-347
-348
-349</pre>
+363
+364
+365</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 347</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 363</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
   <span class='ivar'>@labels</span>
@@ -1211,12 +1245,12 @@ Forward-slash (<code>/</code>) characters in the log ID must be URL-encoded.</p>
       <pre class="lines">
 
 
-98
-99
-100</pre>
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_log_name'>log_name</span>
   <span class='ivar'>@log_name</span>
@@ -1267,12 +1301,12 @@ applicable.</p>
       <pre class="lines">
 
 
-365
-366
-367</pre>
+381
+382
+383</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 365</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 381</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_operation'>operation</span>
   <span class='ivar'>@operation</span>
@@ -1323,12 +1357,12 @@ or a hash (protocol buffer).</p>
       <pre class="lines">
 
 
-353
-354
-355</pre>
+369
+370
+371</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 353</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 369</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_payload'>payload</span>
   <span class='ivar'>@payload</span>
@@ -1381,12 +1415,12 @@ the error.</p>
       <pre class="lines">
 
 
-106
-107
-108</pre>
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource'>resource</span>
   <span class='ivar'>@resource</span>
@@ -1436,12 +1470,12 @@ the error.</p>
       <pre class="lines">
 
 
-117
-118
-119</pre>
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_severity'>severity</span>
   <span class='ivar'>@severity</span>
@@ -1492,12 +1526,12 @@ any.</p>
       <pre class="lines">
 
 
-380
-381
-382</pre>
+396
+397
+398</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 380</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 396</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_source_location'>source_location</span>
   <span class='ivar'>@source_location</span>
@@ -1548,12 +1582,12 @@ Stackdriver Logging will use the time the log entry is written.</p>
       <pre class="lines">
 
 
-112
-113
-114</pre>
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_timestamp'>timestamp</span>
   <span class='ivar'>@timestamp</span>
@@ -1607,12 +1641,12 @@ Optional.</p>
       <pre class="lines">
 
 
-374
-375
-376</pre>
+390
+391
+392</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 374</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 390</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_trace'>trace</span>
   <span class='ivar'>@trace</span>
@@ -1668,12 +1702,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-391
-392
-393</pre>
+407
+408
+409</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 391</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 407</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_trace_sampled'>trace_sampled</span>
   <span class='ivar'>@trace_sampled</span>
@@ -1685,6 +1719,76 @@ identifier. The default is <code>false</code>.</p>
     
   </div>
 
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="insert_id-class_method">
+  
+    .<strong>insert_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Generate a pseudo-random, 16-character ID suitable for use as the log
+entry&#39;s <span class='object_link'><a href="#insert_id-instance_method" title="Google::Cloud::Logging::Entry#insert_id (method)">#insert_id</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_insert_id'>insert_id</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Entry (class)">Entry</a></span></span><span class='period'>.</span><span class='id identifier rubyid_insert_id'>insert_id</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_insert_id'>insert_id</span>
+  <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>36</span><span class='op'>**</span><span class='int'>16</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='int'>36</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
@@ -1731,12 +1835,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-307
-308
-309</pre>
+323
+324
+325</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 307</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 323</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_alert!'>alert!</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:ALERT</span>
@@ -1784,12 +1888,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-289
-290
-291</pre>
+305
+306
+307</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 289</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 305</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_alert?'>alert?</span>
   <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:ALERT</span>
@@ -1840,12 +1944,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-283
-284
-285</pre>
+299
+300
+301</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 283</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 299</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_critical!'>critical!</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:CRITICAL</span>
@@ -1893,12 +1997,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-265
-266
-267</pre>
+281
+282
+283</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 281</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_critical?'>critical?</span>
   <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:CRITICAL</span>
@@ -1949,12 +2053,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-163
-164
-165</pre>
+179
+180
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 163</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 179</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_debug!'>debug!</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:DEBUG</span>
@@ -2002,12 +2106,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-145
-146
-147</pre>
+161
+162
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_debug?'>debug?</span>
   <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:DEBUG</span>
@@ -2058,12 +2162,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-139
-140
-141</pre>
+155
+156
+157</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_default!'>default!</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:DEFAULT</span>
@@ -2111,12 +2215,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-121
-122
-123</pre>
+137
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_default?'>default?</span>
   <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:DEFAULT</span>
@@ -2167,12 +2271,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-331
-332
-333</pre>
+347
+348
+349</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 347</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_emergency!'>emergency!</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:EMERGENCY</span>
@@ -2220,12 +2324,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-313
-314
-315</pre>
+329
+330
+331</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 313</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 329</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_emergency?'>emergency?</span>
   <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:EMERGENCY</span>
@@ -2276,12 +2380,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-259
-260
-261</pre>
+275
+276
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 259</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 275</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error!'>error!</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:ERROR</span>
@@ -2329,12 +2433,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-241
-242
-243</pre>
+257
+258
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 241</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 257</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_error?'>error?</span>
   <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:ERROR</span>
@@ -2385,12 +2489,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-187
-188
-189</pre>
+203
+204
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 203</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_info!'>info!</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:INFO</span>
@@ -2438,12 +2542,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-169
-170
-171</pre>
+185
+186
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 169</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 185</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_info?'>info?</span>
   <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:INFO</span>
@@ -2494,12 +2598,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-211
-212
-213</pre>
+227
+228
+229</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 211</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 227</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_notice!'>notice!</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:NOTICE</span>
@@ -2547,12 +2651,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-193
-194
-195</pre>
+209
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_notice?'>notice?</span>
   <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:NOTICE</span>
@@ -2603,12 +2707,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-235
-236
-237</pre>
+251
+252
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 235</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 251</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_warning!'>warning!</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:WARNING</span>
@@ -2656,12 +2760,12 @@ identifier. The default is <code>false</code>.</p>
       <pre class="lines">
 
 
-217
-218
-219</pre>
+233
+234
+235</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 233</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_warning?'>warning?</span>
   <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:WARNING</span>
