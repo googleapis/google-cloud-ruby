@@ -19,7 +19,6 @@ require "google/cloud/logging/entry/http_request"
 require "google/cloud/logging/entry/operation"
 require "google/cloud/logging/entry/source_location"
 require "google/cloud/logging/entry/list"
-require "securerandom"
 
 module Google
   module Cloud
@@ -73,6 +72,20 @@ module Google
       #
       class Entry
         ##
+        # Generate a unique ID that can be used as the log entry's {#insert_id}.
+        #
+        # @return [String]
+        #
+        # @example
+        #   require "google/cloud/logging"
+        #
+        #   insert_id = Google::Cloud::Logging::Entry.insert_id
+        #
+        def self.insert_id
+          rand(36**16).to_s 36
+        end
+
+        ##
         # Create a new Entry instance. The {#resource} attribute is
         # pre-populated with a new {Google::Cloud::Logging::Resource} instance.
         # See also {Google::Cloud::Logging::Project#entry}.
@@ -83,7 +96,7 @@ module Google
           @operation = Operation.new
           @severity = :DEFAULT
           @source_location = SourceLocation.new
-          @insert_id = SecureRandom.uuid
+          @insert_id = Entry.insert_id
         end
 
         ##

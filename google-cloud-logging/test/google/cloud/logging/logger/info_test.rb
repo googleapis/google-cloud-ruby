@@ -42,7 +42,7 @@ describe Google::Cloud::Logging::Logger, :info, :mock_logging do
 
   def apply_stubs
     Time.stub :now, timestamp do
-      SecureRandom.stub :uuid, insert_id do
+      Google::Cloud::Logging::Entry.stub :insert_id, insert_id do
         yield
       end
     end

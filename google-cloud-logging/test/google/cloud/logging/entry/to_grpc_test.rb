@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
   let(:default_insert_id) { "abc-123" }
   let :entry do
-    SecureRandom.stub :uuid, default_insert_id do
+    Google::Cloud::Logging::Entry.stub :insert_id, default_insert_id do
       Google::Cloud::Logging::Entry.new
     end
   end

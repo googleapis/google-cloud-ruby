@@ -22,7 +22,7 @@ describe Google::Cloud::Logging::Project, :mock_logging do
 
   it "creates an empty entry" do
     entry = nil
-    SecureRandom.stub :uuid, "abc-123" do
+    Google::Cloud::Logging::Entry.stub :insert_id, "abc-123" do
       entry = logging.entry
     end
     entry.must_be_kind_of Google::Cloud::Logging::Entry
