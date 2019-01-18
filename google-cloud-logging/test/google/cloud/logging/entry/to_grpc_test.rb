@@ -15,10 +15,17 @@
 require "helper"
 
 describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
-  let(:entry) { Google::Cloud::Logging::Entry.new }
+  let(:default_insert_id) { "abc-123" }
+  let :entry do
+    Google::Cloud::Logging::Entry.stub :insert_id, default_insert_id do
+      Google::Cloud::Logging::Entry.new
+    end
+  end
 
   it "returns the correct data when empty" do
     entry.must_be :empty?
+    # empty even though insert_id has a value
+    entry.insert_id.must_equal default_insert_id
 
     grpc = entry.to_grpc
 
@@ -26,7 +33,7 @@ describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
     grpc.resource.must_be :nil?
     grpc.severity.must_equal :DEFAULT
     grpc.timestamp.must_be :nil?
-    grpc.insert_id.must_be :empty?
+    grpc.insert_id.must_equal default_insert_id
     Google::Cloud::Logging::Convert.map_to_hash(grpc.labels).must_be :empty?
     grpc.text_payload.must_be :empty?
     grpc.json_payload.must_be :nil?

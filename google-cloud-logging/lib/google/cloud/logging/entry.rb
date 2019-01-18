@@ -72,6 +72,21 @@ module Google
       #
       class Entry
         ##
+        # Generate a pseudo-random, 16-character ID suitable for use as the log
+        # entry's {#insert_id}.
+        #
+        # @return [String]
+        #
+        # @example
+        #   require "google/cloud/logging"
+        #
+        #   insert_id = Google::Cloud::Logging::Entry.insert_id
+        #
+        def self.insert_id
+          rand(36**16).to_s 36
+        end
+
+        ##
         # Create a new Entry instance. The {#resource} attribute is
         # pre-populated with a new {Google::Cloud::Logging::Resource} instance.
         # See also {Google::Cloud::Logging::Project#entry}.
@@ -82,6 +97,7 @@ module Google
           @operation = Operation.new
           @severity = :DEFAULT
           @source_location = SourceLocation.new
+          @insert_id = Entry.insert_id
         end
 
         ##
@@ -395,7 +411,6 @@ module Google
         def empty?
           log_name.nil? &&
             timestamp.nil? &&
-            insert_id.nil? &&
             (labels.nil? || labels.empty?) &&
             payload.nil? &&
             resource.empty? &&

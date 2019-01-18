@@ -25,6 +25,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
   end
   let(:labels) { { "env" => "production" } }
+  let(:insert_id) { "abc-123" }
   let(:logger) { Google::Cloud::Logging::Logger.new logging, log_name, resource, labels }
   let(:severity) { :DEBUG }
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
@@ -34,10 +35,19 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     timestamp_grpc = Google::Protobuf::Timestamp.new seconds: timestamp.to_i,
                                                      nanos: timestamp.nsec
 
-    entries = [Google::Logging::V2::LogEntry.new(text_payload: "Danger Will Robinson!",
+    entries = [Google::Logging::V2::LogEntry.new(insert_id: insert_id,
+                                                 text_payload: "Danger Will Robinson!",
                                                  severity: severity,
                                                  timestamp: timestamp_grpc)]
     [entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels, partial_success: nil, options: default_options]
+  end
+
+  def apply_stubs
+    Time.stub :now, timestamp do
+      Google::Cloud::Logging::Entry.stub :insert_id, insert_id do
+        yield
+      end
+    end
   end
 
   before do
@@ -52,25 +62,25 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
 
   describe :debug do
     it "creates a log entry using :debug" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :debug, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using 'debug'" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "debug", "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using Logger::DEBUG" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::DEBUG, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using :debug with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :debug do
           "Danger Will Robinson!"
         end
@@ -78,7 +88,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using 'debug' with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "debug" do
           "Danger Will Robinson!"
         end
@@ -86,7 +96,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using Logger::DEBUG with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::DEBUG do
           "Danger Will Robinson!"
         end
@@ -98,25 +108,25 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     let(:severity) { :INFO }
 
     it "creates a log entry using :info" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :info, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using 'info'" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "info", "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using Logger::INFO" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::INFO, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using :info with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :info do
           "Danger Will Robinson!"
         end
@@ -124,7 +134,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using 'info' with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "info" do
           "Danger Will Robinson!"
         end
@@ -132,7 +142,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using Logger::INFO with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::INFO do
           "Danger Will Robinson!"
         end
@@ -144,25 +154,25 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     let(:severity) { :WARNING }
 
     it "creates a log entry using :warn" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :warn, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using 'warn'" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "warn", "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using Logger::WARN" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::WARN, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using :warn with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :warn do
           "Danger Will Robinson!"
         end
@@ -170,7 +180,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using 'warn' with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "warn" do
           "Danger Will Robinson!"
         end
@@ -178,7 +188,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using Logger::WARN with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::WARN do
           "Danger Will Robinson!"
         end
@@ -190,25 +200,25 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     let(:severity) { :ERROR }
 
     it "creates a log entry using :error" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :error, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using 'error'" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "error", "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using Logger::ERROR" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::ERROR, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using :error with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :error do
           "Danger Will Robinson!"
         end
@@ -216,7 +226,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using 'error' with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "error" do
           "Danger Will Robinson!"
         end
@@ -224,7 +234,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using Logger::ERROR with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::ERROR do
           "Danger Will Robinson!"
         end
@@ -236,25 +246,25 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     let(:severity) { :CRITICAL }
 
     it "creates a log entry using :fatal" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :fatal, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using 'fatal'" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "fatal", "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using Logger::FATAL" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::FATAL, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using :fatal with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :fatal do
           "Danger Will Robinson!"
         end
@@ -262,7 +272,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using 'fatal' with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "fatal" do
           "Danger Will Robinson!"
         end
@@ -270,7 +280,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using Logger::FATAL with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::FATAL do
           "Danger Will Robinson!"
         end
@@ -282,25 +292,25 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     let(:severity) { :DEFAULT }
 
     it "creates a log entry using :unknown" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :unknown, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using 'unknown'" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "unknown", "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using Logger::UNKNOWN" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::UNKNOWN, "Danger Will Robinson!"
       end
     end
 
     it "creates a log entry using :unknown with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add :unknown do
           "Danger Will Robinson!"
         end
@@ -308,7 +318,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using 'unknown' with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add "unknown" do
           "Danger Will Robinson!"
         end
@@ -316,7 +326,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
     end
 
     it "creates a log entry using Logger::UNKNOWN with a block" do
-      Time.stub :now, timestamp do
+      apply_stubs do
         logger.add ::Logger::UNKNOWN do
           "Danger Will Robinson!"
         end

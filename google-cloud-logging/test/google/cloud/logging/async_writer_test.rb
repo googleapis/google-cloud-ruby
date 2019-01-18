@@ -32,6 +32,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
   def entries payload, labels = labels1
     Array(payload).map { |str|
       logging.entry(
+        insert_id: "insert_#{str}_id",
         log_name: log_name,
         resource: resource,
         severity: :INFO,
@@ -45,6 +46,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     full_log_name = "projects/test/logs/#{log_name}"
     entries = Array(payload).map do |str|
       Google::Logging::V2::LogEntry.new(
+        insert_id: "insert_#{str}_id",
         text_payload: str,
         severity: :INFO,
         resource: resource.to_grpc,
