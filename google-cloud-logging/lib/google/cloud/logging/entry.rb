@@ -72,7 +72,8 @@ module Google
       #
       class Entry
         ##
-        # Generate a unique ID that can be used as the log entry's {#insert_id}.
+        # Generate a pseudo-random, 16-character ID suitable for use as the log
+        # entry's {#insert_id}.
         #
         # @return [String]
         #
