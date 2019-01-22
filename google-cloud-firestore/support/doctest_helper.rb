@@ -131,6 +131,7 @@ YARD::Doctest.configure do |doctest|
   end
   # Skip aliased methods
   doctest.skip "Google::Cloud::Firestore::Client#collections"
+  doctest.skip "Google::Cloud::Firestore::Client#list_collections"
 
   doctest.before "Google::Cloud::Firestore::Client#docs" do
     mock_firestore do |mock|
@@ -320,6 +321,7 @@ YARD::Doctest.configure do |doctest|
   end
   # Skip aliased methods
   doctest.skip "Google::Cloud::Firestore::DocumentReference#collections"
+  doctest.skip "Google::Cloud::Firestore::DocumentReference#list_collections"
 
   doctest.before "Google::Cloud::Firestore::DocumentReference#get" do
     mock_firestore do |mock|
