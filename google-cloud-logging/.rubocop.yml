@@ -20,10 +20,7 @@ Style/MethodCallWithArgsParentheses:
   Enabled: true
   EnforcedStyle: omit_parentheses
   AllowParenthesesInMultilineCall: true
-  IgnoredMethods:
-    - "Array"
-    - "DelegateClass"
-    - "String"
+  AllowParenthesesInCamelCaseMethod: true
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
 Style/NumericLiterals:
