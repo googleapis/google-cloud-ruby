@@ -1,5 +1,25 @@
 # Release History
 
+### 1.6.0 / 2019-01-22
+
+- Add default insert_id value for Entry (#2799)
+- Re-generate google-cloud-logging files (#2814)
+- Remove auto-load of minitest-reporters (#2798)
+- Make use of Credentials#project_id (#2779)
+- Re-generated google-cloud-logging (no significant changes)
+- Upgrade Rubocop to 0.61 (#2743)
+- Fix backtrace (#2747)
+- Fix NoMethodError on Rails object (#2742)
+- Add Logging trace_sampled (#2740)
+- AsyncWriter buffer entries and make batch API calls (#2734)
+- Changes to Rails default Logger (#2733)
+- Update .rubocop.yml in all gems (#2721)
+- Fix remaining Logging documentation warnings (#2704)
+- Direct logs for "/healthz" requests to the health check log (#2608)
+- Use minitest/reporters to generate JUnit format test reports (#2695)
+- Update google-cloud-logging generated files (#2650)
+- Update google-cloud-logging generated files (#2626)
+
 ### 1.5.7 / 2018-11-15
 
 * Add Google::Logging::V2::LogEntry#trace_sampled.
