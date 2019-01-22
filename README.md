@@ -30,8 +30,9 @@ This client supports the following Google Cloud Platform services at a
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Firestore](#cloud-firestore-beta) (Beta)
-* [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
+* [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
+* [Cloud Speech API](#cloud-speech-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an
@@ -49,7 +50,6 @@ This client supports the following Google Cloud Platform services at an
 * [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Scheduler](#cloud-scheduler-alpha) (Alpha)
-* [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Tasks API](#cloud-tasks-api-alpha) (Alpha)
 * [Cloud Text-To-Speech API](#cloud-text-to-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
@@ -715,7 +715,7 @@ db.transaction do |tx|
 end
 ```
 
-### Cloud Speech API (Alpha)
+### Cloud Speech API (Beta)
 
 - [google-cloud-speech README](google-cloud-speech/README.md)
 - [google-cloud-speech API documentation](https://googleapis.github.io/google-cloud-ruby/docs/google-cloud-speech/latest)
