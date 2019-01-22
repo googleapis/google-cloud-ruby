@@ -786,8 +786,6 @@ module Google
         #   bucket.policy_only = true
         #   bucket.policy_only? # true
         #
-        #   bucket.default_acl.public! # Google::Cloud::InvalidArgumentError
-        #
         def policy_only?
           return false unless @gapi.iam_configuration &&
                               @gapi.iam_configuration.bucket_policy_only
@@ -817,6 +815,9 @@ module Google
         #
         #   bucket.default_acl.public! # Google::Cloud::InvalidArgumentError
         #
+        #   # The deadline for disabling Bucket Policy Only.
+        #   puts bucket.policy_only_locked_at
+        #
         def policy_only= new_policy_only
           @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new \
             bucket_policy_only: \
@@ -834,6 +835,18 @@ module Google
         # @return [DateTime, nil] The deadline time for changing
         #   {Bucket#policy_only=} from true to false, or `nil` if
         #   {Bucket#policy_only?} is false.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.policy_only = true
+        #
+        #   # The deadline for disabling Bucket Policy Only.
+        #   puts bucket.policy_only_locked_at
         #
         def policy_only_locked_at
           return nil unless @gapi.iam_configuration &&
