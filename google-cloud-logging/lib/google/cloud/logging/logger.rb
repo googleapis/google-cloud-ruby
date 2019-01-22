@@ -539,7 +539,7 @@ module Google
         def write_entry severity, message
           entry = Entry.new.tap do |e|
             e.timestamp = Time.now
-            e.severity = gcloud_severity(severity)
+            e.severity = gcloud_severity severity
             e.payload = message
           end
 
@@ -572,7 +572,7 @@ module Google
 
           request_env = info && info.env || {}
 
-          compute_labels(request_env).merge(merged_labels)
+          compute_labels(request_env).merge merged_labels
         end
 
         ##
