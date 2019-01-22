@@ -2,23 +2,15 @@
 
 ### 1.6.0 / 2019-01-22
 
-- Add default insert_id value for Entry (#2799)
-- Re-generate google-cloud-logging files (#2814)
-- Remove auto-load of minitest-reporters (#2798)
-- Make use of Credentials#project_id (#2779)
-- Re-generated google-cloud-logging (no significant changes)
-- Upgrade Rubocop to 0.61 (#2743)
-- Fix backtrace (#2747)
+- Default `::Logging::Entry#insert_id` to pseudo-random value (#2799)
+- `::Logging.new` will attempt to pull `project_id` from `::Credentials#project_id` if none was provided (#2779)
+- Fix issue with async backtrace (#2747)
 - Fix NoMethodError on Rails object (#2742)
-- Add Logging trace_sampled (#2740)
-- AsyncWriter buffer entries and make batch API calls (#2734)
+- Add `::Logging::Entry#trace_sampled` and `::Logging::Logger::RequestInfo#trace_sampled` (#2740)
+- Update AsyncWriter to buffer log entries and batch API calls. (#2734)
 - Changes to Rails default Logger (#2733)
-- Update .rubocop.yml in all gems (#2721)
-- Fix remaining Logging documentation warnings (#2704)
 - Direct logs for "/healthz" requests to the health check log (#2608)
-- Use minitest/reporters to generate JUnit format test reports (#2695)
-- Update google-cloud-logging generated files (#2650)
-- Update google-cloud-logging generated files (#2626)
+- Add `::Logging.configure.set_default_logger_on_rails_init` for use on forking web servers with Rails (#2733)
 
 ### 1.5.7 / 2018-11-15
 
