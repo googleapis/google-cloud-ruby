@@ -173,6 +173,17 @@ module Google
         # @param [String, DocumentReference, Array<String|DocumentReference>]
         #   docs One or more strings representing the path of the document, or
         #   document reference objects.
+        # @param [Array<String|FieldPath>] field_mask One or more field path
+        #   values, representing the fields of the document to be returned. If a
+        #   document has a field that is not present in this mask, that field
+        #   will not be returned in the response. All fields are returned when
+        #   the mask is not set.
+        #
+        #   A field path can either be a {FieldPath} object, or a dotted string
+        #   representing the nested fields. In other words the string represents
+        #   individual fields joined by ".". Fields containing `~`, `*`, `/`,
+        #   `[`, `]`, and `.` cannot be in a dotted string, and should provided
+        #   using a {FieldPath} object instead. (See {#field_path}.)
         #
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.
@@ -190,16 +201,37 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def get_all *docs
+        # @example Get docs using a field mask:
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get and print city documents
+        #   cities = ["cities/NYC", "cities/SF", "cities/LA"]
+        #   firestore.get_all(cities, field_mask: [:population]).each do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def get_all *docs, field_mask: nil
           ensure_service!
 
-          return enum_for(:get_all, docs) unless block_given?
+          unless block_given?
+            return enum_for(:get_all, docs, field_mask: field_mask)
+          end
 
           doc_paths = Array(docs).flatten.map do |doc_path|
             coalesce_doc_path_argument doc_path
           end
+          mask = Array(field_mask).map do |field_path|
+            if field_path.is_a? FieldPath
+              field_path.formatted_string
+            else
+              FieldPath.parse(field_path).formatted_string
+            end
+          end
+          mask = nil if mask.empty?
 
-          results = service.get_documents doc_paths
+          results = service.get_documents doc_paths, mask: mask
           results.each do |result|
             next if result.result.nil?
             yield DocumentSnapshot.from_batch_result(result, self)

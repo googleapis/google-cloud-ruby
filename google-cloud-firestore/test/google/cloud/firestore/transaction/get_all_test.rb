@@ -131,6 +131,90 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
     docs.first.read_at.must_equal read_time
   end
 
+  describe :field_mask do
+    let(:field_mask) { Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["name"]) }
+
+    it "gets multiple docs using splat (string)" do
+      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
+
+      docs_enum = transaction.get_all "users/mike", "users/tad", "users/chris", field_mask: [:name]
+
+      assert_docs_enum docs_enum
+    end
+
+    it "gets multiple docs using array (string)" do
+      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
+
+      docs_enum = transaction.get_all ["users/mike", "users/tad", "users/chris"], field_mask: :name
+
+      assert_docs_enum docs_enum
+    end
+
+    it "gets multiple docs using splat (doc ref)" do
+      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
+
+      docs_enum = transaction.get_all firestore.doc("users/mike"), firestore.doc("users/tad"), firestore.doc("users/chris"), field_mask: ["name"]
+
+      assert_docs_enum docs_enum
+    end
+
+    it "gets multiple docs using array (doc ref)" do
+      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
+
+      docs_enum = transaction.get_all [firestore.doc("users/mike"), firestore.doc("users/tad"), firestore.doc("users/chris")], field_mask: "name"
+
+      assert_docs_enum docs_enum
+    end
+
+    it "gets a single doc (string)" do
+      firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, [full_doc_paths.first], mask: field_mask, transaction: transaction_id, options: default_options]
+
+      docs_enum = transaction.get_all "users/mike", field_mask: firestore.field_path(:name)
+
+      docs_enum.must_be_kind_of Enumerator
+
+      docs = docs_enum.to_a
+      docs.count.must_equal 1
+
+      docs.first.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+
+      docs.first.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      docs.first.parent.collection_id.must_equal "users"
+      docs.first.parent.collection_path.must_equal "users"
+      docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+
+      docs.first.data.must_be_kind_of Hash
+      docs.first.data.must_equal({ name: "Mike" })
+      docs.first.created_at.must_equal read_time
+      docs.first.updated_at.must_equal read_time
+      docs.first.read_at.must_equal read_time
+    end
+
+    it "gets a single doc (doc ref)" do
+      firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, [full_doc_paths.first], mask: field_mask, transaction: transaction_id, options: default_options]
+
+      docs_enum = transaction.get_all firestore.doc("users/mike"), field_mask: [firestore.field_path(:name)]
+
+      docs_enum.must_be_kind_of Enumerator
+
+      docs = docs_enum.to_a
+      docs.count.must_equal 1
+
+      docs.first.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+
+      docs.first.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      docs.first.parent.collection_id.must_equal "users"
+      docs.first.parent.collection_path.must_equal "users"
+      docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+
+      docs.first.data.must_be_kind_of Hash
+      docs.first.data.must_equal({ name: "Mike" })
+      docs.first.created_at.must_equal read_time
+      docs.first.updated_at.must_equal read_time
+      docs.first.read_at.must_equal read_time
+    end
+  end
+
   def assert_docs_enum enum
     enum.must_be_kind_of Enumerator
 

@@ -56,4 +56,17 @@ describe "Firestore", :firestore_acceptance do
     docs = firestore.get_all doc1, doc2
     docs.to_a.count.must_equal 2
   end
+
+  it "has get_all method with field_mask argument" do
+    get_all_col = firestore.col "#{root_path}/get_all/#{SecureRandom.hex(4)}"
+
+    doc1 = get_all_col.doc "doc1"
+    doc2 = get_all_col.doc "doc2"
+
+    doc1.create foo: :a
+    doc2.create foo: :b
+
+    docs = firestore.get_all doc1, doc2, field_mask: :foo
+    docs.to_a.count.must_equal 2
+  end
 end
