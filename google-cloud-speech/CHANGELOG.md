@@ -1,5 +1,15 @@
 # Release History
 
+### 0.32.1 / 2019-01-22
+
+- Re-generate google-cloud-speech files (#2819)
+- Re-generate google-cloud-speech files
+- Re-generated google-cloud-speech (no significant changes)
+- Upgrade Rubocop to 0.61 (#2743)
+- Update .rubocop.yml in all gems (#2721)
+- Update google-cloud-speech generated files (#2654)
+- Update google-cloud-speech generated files (#2630)
+
 ### 0.32.0 / 2018-11-15
 
 * Add StreamingRecognitionResult#result_end_time value.
