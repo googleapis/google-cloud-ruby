@@ -47,6 +47,63 @@ js:
 
   <div id="content"><div id='filecontents'><h1>Release History</h1>
 
+<h3>1.6.0 / 2019-01-22</h3>
+
+<ul>
+<li>AsyncWriter buffer entries and make batch API calls
+
+<ul>
+<li>Update AsyncWriter to buffer log entries and batch API calls.</li>
+<li>Maintain backwards compatibility with the previous AsyncWriter&#39;s public API,
+although the implementation is changed.</li>
+<li>Back pressure is applied by limiting the number of queued API calls.
+Errors will now be raised when there are not enough resources.</li>
+<li>Errors are reported using the AsyncWriter#on_error callback.</li>
+<li>Pending log entries are sent before the process closes using at_exit.</li>
+<li>Add Logging on_error configuration.</li>
+</ul></li>
+<li>Add default insert_id value for Entry
+
+<ul>
+<li>Add Entry.insert_id</li>
+<li>Add default insert_id value for Entry
+An Entry object is assigned an insert_id when created so that if the
+Entry object gets persisted multiple times it would know its insert_id
+value and not attempt to generate a new one for each persist attempt.
+An Entry object will still be considered empty if the only value it has
+is the insert_id.</li>
+<li>(This change does not use SecureRandom for performance reasons.)</li>
+</ul></li>
+<li>Add Logging trace_sampled
+
+<ul>
+<li>Add Entry#trace_sampled attribute</li>
+<li>Add trace_sampled to Logger::RequestInfo</li>
+</ul></li>
+<li>Changes to Rails default Logger
+
+<ul>
+<li>Delay updating the Rails default logger until the first web request.</li>
+<li>This will avoid issues with forking processes and gRPC resources.</li>
+<li>This is accomplished by adding the on_init argument to middleware.</li>
+<li>Add Railtie.set_default_logger</li>
+<li>This method can be called post-fork to update the Rails default logger.<br></li>
+</ul></li>
+<li>Make use of Credentials#project_id
+
+<ul>
+<li>Use Credentials#project_id
+If a project_id is not provided, use the value on the Credentials object.
+This value was added in googleauth 0.7.0.</li>
+<li>Loosen googleauth dependency
+Allow for new releases up to 0.10.
+The googleauth devs have committed to maintanining the current API
+and will not make backwards compatible changes before 0.10.</li>
+</ul></li>
+<li>Direct logs for &quot;/healthz&quot; requests to the health check log.</li>
+<li>Update documentation.</li>
+</ul>
+
 <h3>1.5.7 / 2018-11-15</h3>
 
 <ul>
