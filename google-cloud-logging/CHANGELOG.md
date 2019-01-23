@@ -2,15 +2,43 @@
 
 ### 1.6.0 / 2019-01-22
 
-- Default `::Logging::Entry#insert_id` to pseudo-random value (#2799)
-- `::Logging.new` will attempt to pull `project_id` from `::Credentials#project_id` if none was provided (#2779)
-- Fix issue with async backtrace (#2747)
-- Fix NoMethodError on Rails object (#2742)
-- Add `::Logging::Entry#trace_sampled` and `::Logging::Logger::RequestInfo#trace_sampled` (#2740)
-- Update AsyncWriter to buffer log entries and batch API calls. (#2734)
-- Changes to Rails default Logger (#2733)
-- Direct logs for "/healthz" requests to the health check log (#2608)
-- Add `::Logging.configure.set_default_logger_on_rails_init` for use on forking web servers with Rails (#2733)
+* AsyncWriter buffer entries and make batch API calls
+  * Update AsyncWriter to buffer log entries and batch API calls.
+  * Maintain backwards compatibility with the previous AsyncWriter's public API,
+    although the implementation is changed.
+  * Back pressure is applied by limiting the number of queued API calls.
+    Errors will now be raised when there are not enough resources.
+  * Errors are reported using the AsyncWriter#on_error callback.
+  * Pending log entries are sent before the process closes using at_exit.
+  * Add Logging on_error configuration.
+* Add default insert_id value for Entry
+  * Add Entry.insert_id
+  * Add default insert_id value for Entry
+    An Entry object is assigned an insert_id when created so that if the
+    Entry object gets persisted multiple times it would know its insert_id
+    value and not attempt to generate a new one for each persist attempt.
+    An Entry object will still be considered empty if the only value it has
+    is the insert_id.
+  * (This change does not use SecureRandom for performance reasons.)
+* Add Logging trace_sampled
+  * Add Entry#trace_sampled attribute
+  * Add trace_sampled to Logger::RequestInfo
+* Changes to Rails default Logger
+  * Delay updating the Rails default logger until the first web request.
+    * This will avoid issues with forking processes and gRPC resources.
+    * This is accomplished by adding the on_init argument to middleware.
+  * Add Railtie.set_default_logger
+    * This method can be called post-fork to update the Rails default logger.  
+* Make use of Credentials#project_id
+  * Use Credentials#project_id
+    If a project_id is not provided, use the value on the Credentials object.
+    This value was added in googleauth 0.7.0.
+  * Loosen googleauth dependency
+    Allow for new releases up to 0.10.
+    The googleauth devs have committed to maintanining the current API
+    and will not make backwards compatible changes before 0.10.
+* Direct logs for "/healthz" requests to the health check log.
+* Update documentation.
 
 ### 1.5.7 / 2018-11-15
 
