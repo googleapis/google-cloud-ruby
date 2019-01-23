@@ -480,7 +480,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   table = dataset.create_table "my_table" do |t|
-        #     t.name = "My Table",
+        #     t.name = "My Table"
         #     t.description = "A description of my table."
         #     t.schema do |s|
         #       s.string "first_name", mode: :required
