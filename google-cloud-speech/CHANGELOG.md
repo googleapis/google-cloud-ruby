@@ -1,5 +1,13 @@
 # Release History
 
+### 0.33.0 / 2019-01-24
+
+* Add the following attributes to the Google::Cloud::Speech::V1 namespace:
+  * RecognitionConfig#enable_separate_recognition_per_channel
+  * StreamingRecognitionResult#channel_tag
+  * SpeechRecognitionResult#channel_tag
+* Update documentation.
+
 ### 0.32.0 / 2018-11-15
 
 * Add StreamingRecognitionResult#result_end_time value.
