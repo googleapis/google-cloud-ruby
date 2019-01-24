@@ -639,7 +639,7 @@ namespace :kokoro do
         sh "bundle exec rake build"
         gem = Dir.entries("pkg").select { |entry| File.file? "pkg/#{entry}" }.first
         path = FileUtils.mkdir_p(File.expand_path("~") + "/.gem")
-        File.open("#{path}/credentials", "w") do |f|
+        File.open("#{path.first}/credentials", "w") do |f|
           f.puts "---"
           f.puts ":rubygems_api_key: #{ENV["RUBYGEMS_API_TOKEN"]}"
         end
