@@ -699,15 +699,6 @@ def generate_kokoro_configs
           config = ERB.new(File.read("./.kokoro/templates/#{os_version}.cfg.erb"))
           f.write(config.result(binding))
         end
-
-        # Generate job
-        file_path = "./.kokoro/job_configs/#{build_type}/#{os_version}/#{name}.cfg"
-        File.open(file_path, "w") do |f|
-          config = ERB.new(File.read("./.kokoro/templates/#{os_version}.cfg.erb"))
-          f.write(config.result(binding))
-        end
-
-        cloud-devrel/client-libraries/google-cloud-ruby/nightly-linux
       end
     end
     file_path = "./.kokoro/release/#{name}.cfg"
