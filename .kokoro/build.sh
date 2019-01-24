@@ -43,8 +43,7 @@ elif [ "$JOB_TYPE" = "continuous" ]; then
         (bundle update && bundle exec rake kokoro:continuous) || set_failed_status
     done
 elif [ "$JOB_TYPE" = "release" ]; then
-    rbenv global ${RUBY_VERSIONS[-1]}
-    python3 -m pip install gcp-releasetool
+    python3 -m pip install git+https://github.com/googleapis/releasetool
     python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
     (bundle update && bundle exec rake kokoro:release) || set_failed_status
 else
