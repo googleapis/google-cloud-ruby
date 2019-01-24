@@ -169,6 +169,6 @@ module Google
     end
 
     ## Legacy namespace
-    Pubsub = PubSub
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

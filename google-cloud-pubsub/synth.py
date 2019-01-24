@@ -39,13 +39,20 @@ s.copy(v1_library / 'lib/google/pubsub/v1')
 
 # Permanent: Rename pub_sub file paths to pubsub
 s.replace(
-    'lib/google/cloud/**/*.rb',
+    'lib/google/cloud/pubsub/v1/*.rb',
     'require "google/cloud/pub_sub',
     'require "google/cloud/pubsub')
 s.replace(
-    'lib/google/cloud/**/*.rb',
+    'lib/google/cloud/pubsub/v1/*.rb',
     'google-cloud-pub_sub',
     'google-cloud-pubsub')
+
+# Permanent: Alias Google::Cloud::Pubsub to Google::Cloud::PubSub
+s.replace(
+    'lib/google/cloud/pubsub/v1/*.rb',
+    '\n    end\n  end\nend',
+    '\n    end\n\n    Pubsub = PubSub unless const_defined? :Pubsub\n  end\nend'
+)
 
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(

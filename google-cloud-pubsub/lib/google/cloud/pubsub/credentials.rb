@@ -41,5 +41,7 @@ module Google
       class Credentials < Google::Cloud::PubSub::V1::Credentials
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end

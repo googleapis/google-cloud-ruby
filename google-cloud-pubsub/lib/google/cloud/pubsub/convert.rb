@@ -59,5 +59,7 @@ module Google
         extend ClassMethods
       end
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
 end
