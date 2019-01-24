@@ -643,6 +643,7 @@ namespace :kokoro do
           f.puts "---"
           f.puts ":rubygems_api_key: #{ENV["RUBYGEMS_API_TOKEN"]}"
         end
+        sh "chmod 0600 #{path.first}/credentials"
         sh "gem push pkg/#{gem}"
       end
     end
