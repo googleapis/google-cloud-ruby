@@ -30,13 +30,13 @@ module Google
         #     Asset.
         class TemporalAsset; end
 
-        # A time window of [start_time, end_time).
+        # A time window of (start_time, end_time].
         # @!attribute [rw] start_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Start time of the time window (inclusive).
+        #     Start time of the time window (exclusive).
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Timestamp]
-        #     End time of the time window (exclusive).
+        #     End time of the time window (inclusive).
         #     Current timestamp if not specified.
         class TimeWindow; end
 
@@ -49,7 +49,7 @@ module Google
         #     for more information.
         # @!attribute [rw] asset_type
         #   @return [String]
-        #     Type of the asset. Example: "google.compute.disk".
+        #     Type of the asset. Example: "google.compute.Disk".
         # @!attribute [rw] resource
         #   @return [Google::Cloud::Asset::V1beta1::Resource]
         #     Representation of the resource.

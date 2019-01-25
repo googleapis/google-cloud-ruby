@@ -35,7 +35,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
   end
   add_message "google.cloud.asset.v1beta1.GcsDestination" do
-    optional :uri, :string, 1
+    oneof :object_uri do
+      optional :uri, :string, 1
+    end
   end
   add_enum "google.cloud.asset.v1beta1.ContentType" do
     value :CONTENT_TYPE_UNSPECIFIED, 0
