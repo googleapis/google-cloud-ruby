@@ -1,0 +1,681 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Irm::V1alpha2::SearchIncidentsRequest - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/yard-main.css
+js: 
+  - /docs/js/app.js
+  - /js/yard-main.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Irm::V1alpha2::SearchIncidentsRequest";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Irm.html" title="Google::Cloud::Irm (module)">Irm</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1alpha2.html" title="Google::Cloud::Irm::V1alpha2 (module)">V1alpha2</a></span></span>
+     &raquo; 
+    <span class="title">SearchIncidentsRequest</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Irm::V1alpha2::SearchIncidentsRequest
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Irm::V1alpha2::SearchIncidentsRequest</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Request for the SearchIncidents method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#page_size-instance_method" title="#page_size (instance method)">#<strong>page_size</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Number of incidents to return.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#page_token-instance_method" title="#page_token (instance method)">#<strong>page_token</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Page token from an earlier query, as returned in <code>next_page_token</code>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parent-instance_method" title="#parent (instance method)">#<strong>parent</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The resource name of the hosting Stackdriver project which requested incidents belong to.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query-instance_method" title="#query (instance method)">#<strong>query</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>An expression that defines which incidents to return.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#time_zone-instance_method" title="#time_zone (instance method)">#<strong>time_zone</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time zone name.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="page_size=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="page_size-instance_method">
+  
+    #<strong>page_size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Number of incidents to return.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Number of incidents to return.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 288</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::SearchIncidentsRequest (class)">SearchIncidentsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="page_token=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="page_token-instance_method">
+  
+    #<strong>page_token</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Page token from an earlier query, as returned in <code>next_page_token</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Page token from an earlier query, as returned in <code>next_page_token</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 288</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::SearchIncidentsRequest (class)">SearchIncidentsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="parent=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="parent-instance_method">
+  
+    #<strong>parent</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The resource name of the hosting Stackdriver project which requested
+incidents belong to.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The resource name of the hosting Stackdriver project which requested
+incidents belong to.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 288</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::SearchIncidentsRequest (class)">SearchIncidentsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="query=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="query-instance_method">
+  
+    #<strong>query</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns An expression that defines which incidents to return.</p>
+
+<p>Search atoms can be used to match certain specific fields.  Otherwise,
+plain text will match text fields in the incident.</p>
+
+<p>Search atoms:</p>
+
+<ul>
+<li><code>start</code> - (timestamp) The time the incident started.</li>
+<li><code>stage</code> - The stage of the incident, one of detected, triaged, mitigated,
+resolved, documented, or duplicate (which correspond to values in the
+Incident.Stage enum). These are ordered, so <code>stage&lt;resolved</code> is
+equivalent to <code>stage:detected OR stage:triaged OR stage:mitigated</code>.</li>
+<li><code>severity</code> - (Incident.Severity) The severity of the incident.
+
+<ul>
+<li>Supports matching on a specific severity (e.g., <code>severity:major</code>) or
+on a range (e.g., <code>severity&gt;medium</code>, <code>severity&lt;=minor</code>, etc.).</li>
+</ul></li>
+</ul>
+
+<p>Timestamp formats:</p>
+
+<ul>
+<li>yyyy-MM-dd - an absolute date, treated as a calendar-day-wide window.
+In other words, the &quot;&lt;&quot; operator will match dates before that date, the
+&quot;&gt;&quot; operator will match dates after that date, and the &quot;:&quot; or &quot;=&quot;
+operators will match the entire day.</li>
+<li>Nd (e.g. 7d) - a relative number of days ago, treated as a moment in time
+(as opposed to a day-wide span) a multiple of 24 hours ago (as opposed to
+calendar days).  In the case of daylight savings time, it will apply the
+current timezone to both ends of the range.  Note that exact matching
+(e.g. <code>start:7d</code>) is unlikely to be useful because that would only match
+incidents created precisely at a particular instant in time.</li>
+</ul>
+
+<p>Examples:</p>
+
+<ul>
+<li><code>foo</code> - matches incidents containing the word &quot;foo&quot;</li>
+<li><code>&quot;foo bar&quot;</code> - matches incidents containing the phrase &quot;foo bar&quot;</li>
+<li><code>foo bar</code> or <code>foo AND bar</code> - matches incidents containing the words &quot;foo&quot;
+and &quot;bar&quot;</li>
+<li><code>foo -bar</code> or <code>foo AND NOT bar</code> - matches incidents containing the word
+&quot;foo&quot; but not the word &quot;bar&quot;</li>
+<li><code>foo OR bar</code> - matches incidents containing the word &quot;foo&quot; or the word
+&quot;bar&quot;</li>
+<li><code>start&gt;2018-11-28</code> - matches incidents which started after November 11,
+2018.</li>
+<li><code>start&lt;=2018-11-28</code> - matches incidents which started on or before
+November 11, 2018.</li>
+<li><code>start:2018-11-28</code> - matches incidents which started on November 11,
+2018.</li>
+<li><code>start&gt;7d</code> - matches incidents which started after the point in time 7*24
+hours ago</li>
+<li><code>start&gt;180d</code> - similar to 7d, but likely to cross the daylight savings
+time boundary, so the end time will be 1 hour different from &quot;now.&quot;</li>
+<li><code>foo AND start&gt;90d AND stage&lt;resolved</code> - unresolved incidents from the
+past 90 days containing the word &quot;foo&quot;</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An expression that defines which incidents to return.</p>
+
+<p>Search atoms can be used to match certain specific fields.  Otherwise,
+plain text will match text fields in the incident.</p>
+
+<p>Search atoms:</p>
+
+<ul>
+<li><code>start</code> - (timestamp) The time the incident started.</li>
+<li><code>stage</code> - The stage of the incident, one of detected, triaged, mitigated,
+resolved, documented, or duplicate (which correspond to values in the
+Incident.Stage enum). These are ordered, so <code>stage&lt;resolved</code> is
+equivalent to <code>stage:detected OR stage:triaged OR stage:mitigated</code>.</li>
+<li><code>severity</code> - (Incident.Severity) The severity of the incident.
+
+<ul>
+<li>Supports matching on a specific severity (e.g., <code>severity:major</code>) or
+on a range (e.g., <code>severity&gt;medium</code>, <code>severity&lt;=minor</code>, etc.).</li>
+</ul></li>
+</ul>
+
+<p>Timestamp formats:</p>
+
+<ul>
+<li>yyyy-MM-dd - an absolute date, treated as a calendar-day-wide window.
+In other words, the &quot;&lt;&quot; operator will match dates before that date, the
+&quot;&gt;&quot; operator will match dates after that date, and the &quot;:&quot; or &quot;=&quot;
+operators will match the entire day.</li>
+<li>Nd (e.g. 7d) - a relative number of days ago, treated as a moment in time
+(as opposed to a day-wide span) a multiple of 24 hours ago (as opposed to
+calendar days).  In the case of daylight savings time, it will apply the
+current timezone to both ends of the range.  Note that exact matching
+(e.g. <code>start:7d</code>) is unlikely to be useful because that would only match
+incidents created precisely at a particular instant in time.</li>
+</ul>
+
+<p>Examples:</p>
+
+<ul>
+<li><code>foo</code> - matches incidents containing the word &quot;foo&quot;</li>
+<li><code>&quot;foo bar&quot;</code> - matches incidents containing the phrase &quot;foo bar&quot;</li>
+<li><code>foo bar</code> or <code>foo AND bar</code> - matches incidents containing the words &quot;foo&quot;
+and &quot;bar&quot;</li>
+<li><code>foo -bar</code> or <code>foo AND NOT bar</code> - matches incidents containing the word
+&quot;foo&quot; but not the word &quot;bar&quot;</li>
+<li><code>foo OR bar</code> - matches incidents containing the word &quot;foo&quot; or the word
+&quot;bar&quot;</li>
+<li><code>start&gt;2018-11-28</code> - matches incidents which started after November 11,
+2018.</li>
+<li><code>start&lt;=2018-11-28</code> - matches incidents which started on or before
+November 11, 2018.</li>
+<li><code>start:2018-11-28</code> - matches incidents which started on November 11,
+2018.</li>
+<li><code>start&gt;7d</code> - matches incidents which started after the point in time 7*24
+hours ago</li>
+<li><code>start&gt;180d</code> - similar to 7d, but likely to cross the daylight savings
+time boundary, so the end time will be 1 hour different from &quot;now.&quot;</li>
+<li><code>foo AND start&gt;90d AND stage&lt;resolved</code> - unresolved incidents from the
+past 90 days containing the word &quot;foo&quot;</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 288</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::SearchIncidentsRequest (class)">SearchIncidentsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="time_zone=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="time_zone-instance_method">
+  
+    #<strong>time_zone</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The time zone name. It should be an IANA TZ name, such as
+&quot;America/Los_Angeles&quot;. For more information,
+see <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a>.
+If no time zone is specified, the default is UTC.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The time zone name. It should be an IANA TZ name, such as
+&quot;America/Los_Angeles&quot;. For more information,
+see <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a>.
+If no time zone is specified, the default is UTC.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/irm/v1alpha2/doc/google/cloud/irm/v1alpha2/incidents_service.rb', line 288</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Irm::V1alpha2::SearchIncidentsRequest (class)">SearchIncidentsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
